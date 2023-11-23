@@ -12,6 +12,16 @@ Simple wrapper for goja.Runtime with extended abilities.
 
 Simple wrapper for goja.Program
 
+### Naming
+
+1. use struct tag `js:"name"` to mapping fields to js property
+2. use struct tag `js:"-"` to ignore export field
+3. default strategy for both functions methods and fields
+   + `UUUlllUll` => `uuUllUll`
+   + `UlllUll` => `ullUll`
+   + `XlllUll` => `llUll`
+   + `XUllUll` => `UllUll`
+
 ### Resolver with `require`
 
 Simple support for CommonJs, ES script also compiled as CJS script, inspire by k6
@@ -51,7 +61,7 @@ sqlx with `pgx` `mysql` and `sqlite` driver
 
 ### Excelize
 
-excel reading or generate 
+excel reading or generate
 
 [excelize](https://github.com/xuri/excelize/)
 

@@ -1,6 +1,7 @@
 package engine
 
 import (
+	"fmt"
 	"github.com/ZenLiuCN/fn"
 	. "github.com/dop251/goja"
 )
@@ -29,7 +30,29 @@ func (s *Engine) Free() {
 
 }
 
-//region Override
+// CallFunction invoke a function (without this)
+func (s *Engine) CallFunction(fn Value, values ...any) (Value, error) {
+	if f, ok := AssertFunction(fn); ok {
+		v := make([]Value, len(values))
+		for i, value := range values {
+			v[i] = s.ToValue(value)
+		}
+		return f(Undefined(), v...)
+	}
+	return nil, fmt.Errorf("%s not a function", fn)
+}
+
+// CallMethod invoke a method (with this)
+func (s *Engine) CallMethod(fn Value, self Value, values ...any) (Value, error) {
+	if f, ok := AssertFunction(fn); ok {
+		v := make([]Value, len(values))
+		for i, value := range values {
+			v[i] = s.ToValue(value)
+		}
+		return f(self, v...)
+	}
+	return nil, fmt.Errorf("%s not a function", fn)
+}
 
 // RunTypeScript execute typescript code
 func (s *Engine) RunTypeScript(src string) (Value, error) {
@@ -47,11 +70,9 @@ func (s *Engine) RunScript(src string) (Value, error) {
 }
 
 // Execute execute compiled code
-func (s *Engine) Execute(prog *Code) (Value, error) {
-	return s.Runtime.RunProgram(prog.Program)
+func (s *Engine) Execute(code *Code) (Value, error) {
+	return s.Runtime.RunProgram(code.Program)
 }
-
-//endregion
 
 func NewEngine(modules ...Module) (r *Engine) {
 	r = &Engine{Runtime: New()}

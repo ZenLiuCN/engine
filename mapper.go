@@ -35,7 +35,7 @@ func FieldName(_ reflect.Type, f reflect.StructField) string {
 	return toLowerCase(f.Name)
 }
 
-// MethodName Returns the JS name for an exported method. The first letter of the method's name is
+// MethodName Returns the JS name for an exported method.
 func MethodName(_ reflect.Type, m reflect.Method) string {
 	if m.Name[0] == 'X' {
 		return m.Name[1:]
