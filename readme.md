@@ -24,7 +24,7 @@ Simple wrapper for goja.Program
 
 ### Resolver with `require`
 
-Simple support for CommonJs, ES script also compiled as CJS script, inspire by k6
+Simple support for CommonJs, ES script and TypeScript also compiled as CJS script, inspire by k6
 
 ### Module System
 
