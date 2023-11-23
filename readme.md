@@ -36,8 +36,8 @@ Simple support for CommonJs, ES script also compiled as CJS script, inspire by k
 ### compiler module
 
 built-in compiler for both typescript and javascript
-
-[esbuild](https://github.com/evanw/esbuild)
+**components**
++ [esbuild](https://github.com/evanw/esbuild)
 
 ### console
 
@@ -54,16 +54,16 @@ Operating system api with environment control and simple file api
 ### sqlx
 
 sqlx with `pgx` `mysql` and `sqlite` driver
-
-[sqlx](https://github.com/jmoiron/sqlx),
-[sqlite](https://github.com/glebarez/go-sqlite)
-[mysql](https://github.com/go-sql-driver/mysql) *port*
+**components**
++ [sqlx](https://github.com/jmoiron/sqlx),
++ [sqlite](https://github.com/glebarez/go-sqlite)
++ [mysql](https://github.com/go-sql-driver/mysql) *modified* see source at `sqlx/mysql`
 
 ### Excelize
 
 excel reading or generate
-
-[excelize](https://github.com/xuri/excelize/)
+**components**
++ [excelize](https://github.com/xuri/excelize/)
 
 ### crypto
 
