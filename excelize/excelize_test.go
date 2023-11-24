@@ -1,7 +1,7 @@
 package excelize
 
 import (
-	"agency/agency/engine"
+	"github.com/ZenLiuCN/engine"
 	"github.com/ZenLiuCN/fn"
 	"github.com/dop251/goja"
 	"os"

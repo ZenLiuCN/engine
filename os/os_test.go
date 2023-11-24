@@ -1,7 +1,7 @@
 package os
 
 import (
-	"agency/agency/engine"
+	"github.com/ZenLiuCN/engine"
 	"github.com/ZenLiuCN/fn"
 	"testing"
 )
@@ -15,6 +15,7 @@ func TestConstant(t *testing.T) {
 			`
 f=()=>1
 console.log(os.root)
+console.log(os.ls())
 f()
 `)).Export().(int64) == 1)
 
