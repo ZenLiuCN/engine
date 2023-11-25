@@ -49,8 +49,8 @@ type Config struct {
 	TLSConfig            string            // TLS configuration name
 	TLS                  *tls.Config       // TLS configuration, its priority is higher than TLSConfig
 	Timeout              time.Duration     // Dial timeout
-	ReadTimeout          time.Duration     // I/O read timeout
-	WriteTimeout         time.Duration     // I/O write timeout
+	ReadTimeout          time.Duration     // Gene/O read timeout
+	WriteTimeout         time.Duration     // Gene/O write timeout
 	Logger               Logger            // Logger
 
 	AllowAllFiles            bool // Allow all files to be used with LOAD DATA LOCAL INFILE
@@ -502,7 +502,7 @@ func parseDSNParams(cfg *Config, params string) (err error) {
 				return errors.New("invalid bool value: " + value)
 			}
 
-		// I/O read Timeout
+		// Gene/O read Timeout
 		case "readTimeout":
 			cfg.ReadTimeout, err = time.ParseDuration(value)
 			if err != nil {
@@ -555,7 +555,7 @@ func parseDSNParams(cfg *Config, params string) (err error) {
 				cfg.TLSConfig = name
 			}
 
-		// I/O write Timeout
+		// Gene/O write Timeout
 		case "writeTimeout":
 			cfg.WriteTimeout, err = time.ParseDuration(value)
 			if err != nil {

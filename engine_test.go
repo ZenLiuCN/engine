@@ -2,6 +2,7 @@ package engine
 
 import (
 	"github.com/ZenLiuCN/fn"
+	"os"
 	"testing"
 )
 
@@ -20,6 +21,10 @@ func TestSimple(t *testing.T) {
 
 }
 func TestSimpleRequire(t *testing.T) {
+	fn.Panic(os.WriteFile("simple.js", []byte(`
+export function some() {
+return 1
+}`), os.ModePerm))
 	e := Get()
 	defer e.Free()
 	println(IsNullish(fn.Panic1(e.RunTypeScript(`
@@ -32,5 +37,6 @@ func TestSimpleRequire(t *testing.T) {
 	console.log(typeof some)
 	console.log(some())
 `))))
+	_ = os.Remove("simple.js")
 
 }

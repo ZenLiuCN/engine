@@ -13,7 +13,7 @@ import (
 
 var (
 	//go:embed crypto.d.ts
-	d []byte
+	cryptoDefine []byte
 )
 
 type Crypto struct {
@@ -21,7 +21,7 @@ type Crypto struct {
 }
 
 func (c *Crypto) TypeDefine() []byte {
-	return d
+	return cryptoDefine
 }
 func (c *Crypto) Name() string {
 	return "crypto"

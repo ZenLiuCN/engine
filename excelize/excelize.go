@@ -1,17 +1,15 @@
 package excelize
 
 import (
-	"bytes"
 	_ "embed"
 	"github.com/ZenLiuCN/engine"
 	"github.com/ZenLiuCN/fn"
 	"github.com/xuri/excelize/v2"
-	"sync"
 )
 
 var (
 	//go:embed excel.d.ts
-	d []byte
+	excelizeDefine []byte
 )
 
 func init() {
@@ -31,7 +29,7 @@ func (e Excel) Initialize(engine *engine.Engine) engine.Module {
 }
 
 func (e Excel) TypeDefine() []byte {
-	return d
+	return excelizeDefine
 }
 
 func (e Excel) Open(path string, opt *excelize.Options) *ExcelFile {
@@ -75,15 +73,3 @@ func (e Excel) SplitCellName(cell string) map[string]any {
 	col, row := fn.Panic2(excelize.SplitCellName(cell))
 	return map[string]any{"col": col, "row": row}
 }
-func (e Excel) Buffer() *bytes.Buffer {
-	b := buffers.Get().(*bytes.Buffer)
-	b.Reset()
-	return b
-}
-
-var (
-	buffers = sync.Pool{New: func() any {
-		buf := &bytes.Buffer{}
-		return buf
-	}}
-)

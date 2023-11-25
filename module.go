@@ -27,6 +27,10 @@ func init() {
 	Register(NewConsole(slog.Default()))
 	Register(&Compiler{})
 	Register(&Require{})
+	Register(BufferModule{})
+	Register(EngineModule{})
+	Register(CryptoModule{})
+	Register(HasherInstance)
 }
 
 // Register a module , returns false if already exists
@@ -67,6 +71,7 @@ func TypeDefines() []byte {
 	var b bytes.Buffer
 	for _, module := range registry {
 		if d, ok := module.(TypeDefined); ok {
+			b.WriteRune('\n')
 			b.Write(d.TypeDefine())
 		}
 	}

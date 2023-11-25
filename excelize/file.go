@@ -49,7 +49,7 @@ func (s *ExcelFile) Write(w *bytes.Buffer, opt *excelize.Options) {
 }
 
 func (s *ExcelFile) WriteToBuffer(opt *excelize.Options) goja.Value {
-	buf := buffers.Get().(*bytes.Buffer)
+	buf := engine.GetBytesBuffer()
 	buf.Reset()
 	if opt != nil {
 		fn.Panic(s.File.Write(buf, *opt))

@@ -41,7 +41,7 @@ func init() {
 
 var (
 	//go:embed os.d.ts
-	d []byte
+	osDefine []byte
 )
 
 type Os struct {
@@ -55,7 +55,7 @@ type Os struct {
 }
 
 func (o *Os) TypeDefine() []byte {
-	return d
+	return osDefine
 }
 
 func (o *Os) Name() string {

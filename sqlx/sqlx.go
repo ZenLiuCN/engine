@@ -38,9 +38,7 @@ func (s *SQLx) Register(engine *engine.Engine) {
 	fn.Panic(engine.Runtime.Set("SQLX", func(call goja.ConstructorCall) *goja.Object {
 		db := fn.Panic1(sqlx.Connect(call.Argument(0).ToString().String(), call.Argument(1).ToString().String()))
 		i := &SQLx{DB: db, Engine: engine}
-		o := engine.ToValue(i).(*goja.Object)
-		fn.Panic(o.SetPrototype(call.This.Prototype()))
-		return o
+		return engine.ToInstance(i, call)
 	}))
 }
 

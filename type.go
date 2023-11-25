@@ -1,7 +1,6 @@
 package engine
 
 import (
-	"github.com/ZenLiuCN/fn"
 	"github.com/dop251/goja"
 )
 
@@ -15,16 +14,9 @@ func (i JsType[T]) Name() string {
 }
 
 func (i JsType[T]) Register(engine *Engine) {
-	fn.Panic(engine.Set(i.TypeName, func(call goja.ConstructorCall) *goja.Object {
-		is := i.Ctor(engine, call.Arguments)
-		v, ok := engine.ToValue(is).(*goja.Object)
-		if ok {
-			fn.Panic(v.SetPrototype(call.This.Prototype()))
-			return v
-		}
-		return nil
-
-	}))
+	engine.RegisterType(i.TypeName, func(v []goja.Value) any {
+		return i.Ctor(engine, v)
+	})
 }
 
 type JsTypeDefined[T any] struct {
@@ -33,22 +25,15 @@ type JsTypeDefined[T any] struct {
 	Defined  []byte
 }
 
-func (j JsTypeDefined[T]) TypeDefine() []byte {
-	return j.Defined
+func (i JsTypeDefined[T]) TypeDefine() []byte {
+	return i.Defined
 }
 func (i JsTypeDefined[T]) Name() string {
 	return i.TypeName
 }
 
 func (i JsTypeDefined[T]) Register(engine *Engine) {
-	fn.Panic(engine.Set(i.TypeName, func(call goja.ConstructorCall) *goja.Object {
-		is := i.Ctor(engine, call.Arguments)
-		v, ok := engine.ToValue(is).(*goja.Object)
-		if ok {
-			fn.Panic(v.SetPrototype(call.This.Prototype()))
-			return v
-		}
-		return nil
-
-	}))
+	engine.RegisterType(i.TypeName, func(v []goja.Value) any {
+		return i.Ctor(engine, v)
+	})
 }

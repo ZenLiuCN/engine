@@ -113,7 +113,7 @@ func (c *connector) Connect(ctx context.Context) (driver.Conn, error) {
 
 	mc.buf = newBuffer(mc.netConn)
 
-	// Set I/O timeouts
+	// Set Gene/O timeouts
 	mc.buf.timeout = mc.cfg.ReadTimeout
 	mc.writeTimeout = mc.cfg.WriteTimeout
 

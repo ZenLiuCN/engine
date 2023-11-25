@@ -33,7 +33,7 @@ declare interface ExecOption {
     await?: boolean
 
 }
-
+interface Buffer{}
 declare interface Os {
     /**
      * root directory of executable
@@ -147,11 +147,11 @@ declare interface Os {
 
     exists(path: string): boolean
 
-    write(path: string, data: ArrayBuffer)
+    write(path: string, data: Buffer)
 
     writeText(path: string, data: string)
 
-    read(path: string): ArrayBuffer
+    read(path: string): Buffer
 
     readText(path: string): string
     chdir(path: string)

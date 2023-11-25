@@ -3,6 +3,7 @@ package engine
 import (
 	"bytes"
 	"context"
+	"fmt"
 	"github.com/dop251/goja"
 	"log/slog"
 	"strings"
@@ -19,7 +20,12 @@ func NewConsole(logger *slog.Logger) *Console {
 func (s Console) Name() string {
 	return "console"
 }
-
+func (s Console) Assert(cond bool, args ...goja.Value) {
+	if !cond {
+		s.Error(args...)
+		panic(fmt.Errorf("%#v", args))
+	}
+}
 func (s Console) log(level slog.Level, args ...goja.Value) {
 	var msg strings.Builder
 	for i := 0; i < len(args); i++ {
@@ -55,6 +61,12 @@ type BufferConsole struct {
 	*bytes.Buffer
 }
 
+func NewBufferConsoleOf(buf *bytes.Buffer) *BufferConsole {
+	return &BufferConsole{buf}
+}
+func NewBufferConsole() *BufferConsole {
+	return &BufferConsole{GetBytesBuffer()}
+}
 func (s *BufferConsole) Name() string {
 	return "console"
 }
@@ -72,7 +84,12 @@ func (s *BufferConsole) log(level slog.Level, args ...goja.Value) {
 	s.Buffer.WriteRune('\n')
 
 }
-
+func (s *BufferConsole) Assert(cond bool, args ...goja.Value) {
+	if !cond {
+		s.Error(args...)
+		panic(fmt.Errorf("%#v", args))
+	}
+}
 func (s *BufferConsole) Log(args ...goja.Value) {
 	s.Info(args...)
 }
