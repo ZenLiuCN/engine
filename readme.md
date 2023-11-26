@@ -60,7 +60,7 @@ golang codec and hash functions
 
 golang crypto
 
-**dev**
+**almost done**
 
 ## Modules
 
@@ -85,10 +85,6 @@ excel reading or generate
 **components**
 
 + [excelize](https://github.com/xuri/excelize/)
-
-### crypto
-
-dev
 
 ### pdf
 
