@@ -77,6 +77,9 @@ func (b BufferModule) Register(engine *Engine) {
 	engine.Function("binLen", func(c goja.FunctionCall) goja.Value {
 		return engine.ToValue(len(c.Arguments[0].Export().([]byte)))
 	})
+	engine.Function("binToString", func(c goja.FunctionCall) goja.Value {
+		return engine.ToValue(string(c.Arguments[0].Export().([]byte)))
+	})
 	engine.Function("binGet", func(c goja.FunctionCall) goja.Value {
 		return engine.ToValue(c.Arguments[0].Export().([]byte)[c.Arguments[1].Export().(int64)])
 	})

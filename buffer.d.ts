@@ -99,6 +99,7 @@ declare function binSlice(bin: BinaryData, from, to: number): BinaryData
 declare function binAppend(bin: BinaryData, v: number): BinaryData
 
 declare function binAppends(bin: BinaryData, tail: BinaryData): BinaryData
+declare function binToString(bin: BinaryData): string
 
 declare function binEach(bin: BinaryData, act: (v, i: number) => boolean)
 

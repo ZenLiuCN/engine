@@ -5,6 +5,7 @@ go 1.21
 require (
 	github.com/ZenLiuCN/fn v0.1.14
 	github.com/dop251/goja v0.0.0-20231027120936-b396bb4c349d
+	github.com/ecies/go/v2 v2.0.7
 	github.com/evanw/esbuild v0.19.7
 	github.com/glebarez/go-sqlite v1.21.2
 	github.com/google/uuid v1.4.0
@@ -17,8 +18,10 @@ require (
 )
 
 require (
+	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.2.0 // indirect
 	github.com/dlclark/regexp2 v1.10.0 // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
+	github.com/ethereum/go-ethereum v1.12.0 // indirect
 	github.com/go-sourcemap/sourcemap v2.1.3+incompatible // indirect
 	github.com/google/pprof v0.0.0-20231101202521-4ca4178f5c7a // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
