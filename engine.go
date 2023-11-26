@@ -8,6 +8,7 @@ import (
 
 type Engine struct {
 	*Runtime
+	*EventLoop
 }
 
 // Register register modules
@@ -27,7 +28,7 @@ func (s *Engine) Register(modules ...Module) {
 
 // Free recycle this engine
 func (s *Engine) Free() {
-
+	s.EventLoop.StopEventLoopNoWait()
 }
 
 //region Value helper
@@ -67,21 +68,25 @@ func (s *Engine) CallMethod(fn Value, self Value, values ...any) (Value, error) 
 
 // RunTypeScript execute typescript code
 func (s *Engine) RunTypeScript(src string) (Value, error) {
+	s.StartEventLoopWhenNotStarted()
 	return s.Runtime.RunString(CompileTs(src))
 }
 
 // RunJavaScript execute javascript code
 func (s *Engine) RunJavaScript(src string) (Value, error) {
+	s.StartEventLoopWhenNotStarted()
 	return s.Runtime.RunString(CompileJs(src))
 }
 
 // RunScript execute javascript (es5|es6 without import) code
 func (s *Engine) RunScript(src string) (Value, error) {
+	s.StartEventLoopWhenNotStarted()
 	return s.Runtime.RunString(src)
 }
 
 // Execute execute compiled code
 func (s *Engine) Execute(code *Code) (Value, error) {
+	s.StartEventLoopWhenNotStarted()
 	return s.Runtime.RunProgram(code.Program)
 }
 
@@ -140,81 +145,28 @@ func (s *Engine) PosInf() Value {
 func (s *Engine) NegInf() Value {
 	return NegativeInf()
 }
+func (s *Engine) NewPromise() (promise *Promise, resolve func(any), reject func(any)) {
+	p, resolveFunc, rejectFunc := s.Runtime.NewPromise()
+	callback := s.EventLoop.registerCallback()
+	resolve = func(result any) {
+		callback(func() {
+			resolveFunc(result)
+		})
+	}
+	reject = func(reason any) {
+		callback(func() {
+			rejectFunc(reason)
+		})
+	}
+	return p, resolve, reject
+}
 
 //endregion
-
-//region For nest execute
-
-func (s *Engine) RunPromise(src string) *Promise {
-	p, a, j := s.NewPromise()
-	go func() {
-		defer func() {
-			if r := recover(); r != nil {
-				j(r)
-			}
-		}()
-		v, err := s.RunScript(src)
-		if err != nil {
-			j(err)
-		}
-		a(v)
-	}()
-	return p
-}
-func (s *Engine) RunPromiseCode(src *Code) *Promise {
-	p, a, j := s.NewPromise()
-	go func() {
-		defer func() {
-			if r := recover(); r != nil {
-				j(r)
-			}
-		}()
-		v, err := s.Execute(src)
-		if err != nil {
-			j(err)
-		}
-		a(v)
-	}()
-	return p
-}
-func (s *Engine) RunPromiseJavaScript(src string) *Promise {
-	p, a, j := s.NewPromise()
-	go func() {
-		defer func() {
-			if r := recover(); r != nil {
-				j(r)
-			}
-		}()
-		v, err := s.RunJavaScript(src)
-		if err != nil {
-			j(err)
-		}
-		a(v)
-	}()
-	return p
-}
-func (s *Engine) RunPromiseTypeScript(src string) *Promise {
-	p, a, j := s.NewPromise()
-	go func() {
-		defer func() {
-			if r := recover(); r != nil {
-				j(r)
-			}
-		}()
-		v, err := s.RunTypeScript(src)
-		if err != nil {
-			j(err)
-		}
-		a(v)
-	}()
-	return p
-}
-
-// endregion
 
 func NewEngine(modules ...Module) (r *Engine) {
 	r = &Engine{Runtime: New()}
 	r.Runtime.SetFieldNameMapper(EngineFieldMapper{})
+	r.EventLoop = NewEventLoop(r)
 	r.Register(Modules()...)
 	r.Register(modules...)
 	return
@@ -222,6 +174,7 @@ func NewEngine(modules ...Module) (r *Engine) {
 func NewRawEngine(modules ...Module) (r *Engine) {
 	r = &Engine{Runtime: New()}
 	r.Runtime.SetFieldNameMapper(EngineFieldMapper{})
+	r.EventLoop = NewEventLoop(r)
 	r.Register(modules...)
 	return
 }

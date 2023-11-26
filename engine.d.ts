@@ -19,11 +19,6 @@ declare class Engine {
 
     execute(code: Code): any
 
-    runPromise(src:string):Promise<any>
-    runPromiseCode(src:Code):Promise<any>
-    runPromiseJavaScript(src:string):Promise<any>
-    runPromiseTypeScript(src:string):Promise<any>
-
     free()
 }
 
