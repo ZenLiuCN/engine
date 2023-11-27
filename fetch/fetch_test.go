@@ -1,6 +1,7 @@
 package fetch
 
 import (
+	"fmt"
 	"github.com/ZenLiuCN/engine"
 	"github.com/ZenLiuCN/fn"
 	"testing"
@@ -17,8 +18,8 @@ fetch("https://163.com/")
 .then(r=>r.text())
 .then(t=>console.log('<<<\n',t,'\n>>>'))
 `))
-	if vm.StopEventLoopWait() > 0 {
-		panic("should complete async task")
+	if n := vm.StopEventLoopWait(); n > 0 {
+		panic(fmt.Sprintf("should complete async task: %d", n))
 	}
 }
 func TestFetch_Fetch_timeout(t *testing.T) {
@@ -31,7 +32,7 @@ fetch("https://163.com/")
 .then(r=>r.text())
 .then(t=>console.log('<<<\n',t,'\n>>>'))
 `))
-	if vm.StopEventLoopTimeout(time.Millisecond*1) <= 0 {
-		panic("should not complete async task")
+	if n := vm.StopEventLoopTimeout(time.Millisecond * 1); n != 2 {
+		panic(fmt.Sprintf("should not complete async task: %d", n))
 	}
 }

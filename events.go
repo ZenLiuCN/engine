@@ -289,7 +289,7 @@ func (s *EventLoop) StopEventLoopWait() int {
 	return int(s.jobCount)
 }
 
-// StopEventLoopTimeout all job done in limit duration, the returning value may not exactly the pending job count,for no lock to wait
+// StopEventLoopTimeout all job done in a limit duration, the returning value may not exactly the pending job count,for no lock to wait
 func (s *EventLoop) StopEventLoopTimeout(duration time.Duration) int {
 	tick := time.Tick(duration)
 	for s.running {
@@ -301,10 +301,13 @@ func (s *EventLoop) StopEventLoopTimeout(duration time.Duration) int {
 			s.wakeup()
 		}
 	}
+	s.stopLock.Lock()
+	s.stopCond.Wait()
+	s.stopLock.Unlock()
 	return int(s.jobCount)
 }
 
-// StopEventLoop event loop, returns job not executed
+// StopEventLoop wait background execution quit , returns job not executed
 func (s *EventLoop) StopEventLoop() int {
 	s.stopLock.Lock()
 	for s.running {
@@ -316,6 +319,7 @@ func (s *EventLoop) StopEventLoop() int {
 	return int(s.jobCount)
 }
 
+// StopEventLoopNoWait without wait for background execution finish
 func (s *EventLoop) StopEventLoopNoWait() {
 	s.stopLock.Lock()
 	if s.running {
