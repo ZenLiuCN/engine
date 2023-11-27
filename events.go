@@ -4,6 +4,7 @@ package engine
 must code port from https://github.com/dop251/goja_nodejs
 */
 import (
+	"context"
 	"fmt"
 	"github.com/ZenLiuCN/fn"
 	"github.com/dop251/goja"
@@ -226,6 +227,57 @@ func (s *EventLoop) StartEventLoopWhenNotStarted() {
 	}
 	s.setRunning()
 	go s.run(true)
+}
+
+// StopEventLoopContext stop with context for a cancelable or with deadline context
+func (s *EventLoop) StopEventLoopContext(ctx context.Context) {
+	dead, ok := ctx.Deadline()
+	if ok {
+		go func() {
+			tick := time.Tick(dead.Sub(time.Now()))
+			for s.running {
+				select {
+				case <-tick:
+					s.StopEventLoopNoWait()
+					return
+				default:
+					atomic.StoreInt32(&s.canRun, 2) //stop when no task , not use lock
+					s.wakeup()
+				}
+			}
+		}()
+	} else {
+		go func() {
+			for s.running {
+				select {
+				case <-ctx.Done():
+					s.StopEventLoopNoWait()
+				default:
+					atomic.StoreInt32(&s.canRun, 2) //stop when no task , not use lock
+					s.wakeup()
+				}
+			}
+		}()
+	}
+
+}
+
+// StopEventLoopForContext stop with notify a context
+func (s *EventLoop) StopEventLoopForContext() context.Context {
+	ctx, cc := context.WithCancel(context.Background())
+	go func() {
+		for s.running {
+			select {
+			case <-ctx.Done():
+				s.StopEventLoopNoWait()
+			default:
+				atomic.StoreInt32(&s.canRun, 2) //stop when no task , not use lock
+				s.wakeup()
+			}
+		}
+		cc()
+	}()
+	return ctx
 }
 
 // StopEventLoopWait all job done
