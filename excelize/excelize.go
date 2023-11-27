@@ -2,6 +2,7 @@ package excelize
 
 import (
 	_ "embed"
+
 	"github.com/ZenLiuCN/engine"
 	"github.com/ZenLiuCN/fn"
 	"github.com/xuri/excelize/v2"
@@ -56,9 +57,9 @@ func (e Excel) ThemeColor(baseColor string, tint float64) string {
 func (e Excel) CoordinatesToCellName(col, row int, absCol bool, absRow bool) string {
 	return fn.Panic1(excelize.CoordinatesToCellName(col, row, absCol, absRow))
 }
-func (e Excel) CellNameToCoordinates(cell string) map[string]int {
+func (e Excel) CellNameToCoordinates(cell string) Coordinate {
 	col, row := fn.Panic2(excelize.CellNameToCoordinates(cell))
-	return map[string]int{"col": col, "row": row}
+	return Coordinate{col, row}
 }
 func (e Excel) ColumnNameToNumber(name string) int {
 	return fn.Panic1(excelize.ColumnNameToNumber(name))
@@ -69,7 +70,17 @@ func (e Excel) ColumnNumberToName(num int) string {
 func (e Excel) JoinCellName(col string, num int) string {
 	return fn.Panic1(excelize.JoinCellName(col, num))
 }
-func (e Excel) SplitCellName(cell string) map[string]any {
+func (e Excel) SplitCellName(cell string) Cell {
 	col, row := fn.Panic2(excelize.SplitCellName(cell))
-	return map[string]any{"col": col, "row": row}
+	return Cell{Col: col, Row: row}
 }
+
+type (
+	Coordinate struct {
+		Col, Row int
+	}
+	Cell struct {
+		Col string
+		Row int
+	}
+)

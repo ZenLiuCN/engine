@@ -163,6 +163,7 @@ func (s *ExcelFile) AutoFilter(sheet, ranged string, opt ...excelize.AutoFilterO
 
 // endregion
 // region calc
+
 func (s *ExcelFile) CalcCellValue(sheet, cell string, opt *excelize.Options) string {
 	if opt != nil {
 		return fn.Panic1(s.File.CalcCellValue(sheet, cell, *opt))
@@ -464,6 +465,7 @@ func (s *ExcelFile) DeleteDataValidation(sheet string, sqref ...string) {
 
 // endregion
 // region properties
+
 func (s *ExcelFile) SetAppProps(prop *excelize.AppProperties) {
 	fn.Panic(s.File.SetAppProps(prop))
 }
@@ -482,6 +484,7 @@ func (s *ExcelFile) GetDocProps() *excelize.DocProperties {
 
 // endregion
 // region cells
+
 func (s *ExcelFile) GetCellValue(sheet, cell string, opt *excelize.Options) string {
 	if opt != nil {
 		return fn.Panic1(s.File.GetCellValue(sheet, cell, *opt))
@@ -598,12 +601,14 @@ func (s *ExcelFile) GetPictures(sheet, cell string) []excelize.Picture {
 
 // endregion
 // region pivot table
+
 func (s *ExcelFile) AddPivotTable(opt *excelize.PivotTableOptions) {
 	fn.Panic(s.File.AddPivotTable(opt))
 }
 
 // endregion
 // region work book
+
 func (s *ExcelFile) SetWorkbookProps(opt *excelize.WorkbookPropsOptions) {
 	fn.Panic(s.File.SetWorkbookProps(opt))
 }

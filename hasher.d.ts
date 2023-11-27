@@ -37,34 +37,34 @@ declare interface Hash {
 }
 
 declare interface Codec {
-    base64UrlEncode(b: BinaryData): string
+    base64UrlEncode(b: Uint8Array): string
 
-    base64UrlDecode(b: string): BinaryData
+    base64UrlDecode(b: string): Uint8Array
 
 
-    base64StdEncode(b: BinaryData): string
+    base64StdEncode(b: Uint8Array): string
 
-    base64StdDecode(b: string): BinaryData
+    base64StdDecode(b: string): Uint8Array
 
-    base64RawStdEncode(b: BinaryData): string
+    base64RawStdEncode(b: Uint8Array): string
 
-    base64RawStdDecode(b: string): BinaryData
+    base64RawStdDecode(b: string): Uint8Array
 
-    base64RawUrlEncode(b: BinaryData): string
+    base64RawUrlEncode(b: Uint8Array): string
 
-    base64RawUrlDecode(b: string): BinaryData
+    base64RawUrlDecode(b: string): Uint8Array
 
-    hexEncode(b: BinaryData): string
+    hexEncode(b: Uint8Array): string
 
-    hexDecode(b: string): BinaryData
+    hexDecode(b: string): Uint8Array
 
-    base32StdEncode(b: BinaryData): string
+    base32StdEncode(b: Uint8Array): string
 
-    base32StdDecode(b: string): BinaryData
+    base32StdDecode(b: string): Uint8Array
 
-    base32HexEncode(b: BinaryData): string
+    base32HexEncode(b: Uint8Array): string
 
-    base32HexDecode(b: string): BinaryData
+    base32HexDecode(b: string): Uint8Array
 }
 
 declare const hasher: Hasher

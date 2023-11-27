@@ -8,7 +8,6 @@ require (
 	github.com/ecies/go/v2 v2.0.7
 	github.com/evanw/esbuild v0.19.7
 	github.com/glebarez/go-sqlite v1.21.2
-	github.com/google/uuid v1.4.0
 	github.com/jackc/pgx/v5 v5.5.0
 	github.com/jmoiron/sqlx v1.3.5
 	github.com/xuri/excelize/v2 v2.8.0
@@ -24,6 +23,7 @@ require (
 	github.com/ethereum/go-ethereum v1.12.0 // indirect
 	github.com/go-sourcemap/sourcemap v2.1.3+incompatible // indirect
 	github.com/google/pprof v0.0.0-20231101202521-4ca4178f5c7a // indirect
+	github.com/google/uuid v1.4.0 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20221227161230-091c0ba34f0a // indirect
 	github.com/jackc/puddle/v2 v2.2.1 // indirect

@@ -36,6 +36,7 @@ func (s *Compiler) CompileJs(js string) string {
 func (s *Compiler) CompileTs(ts string) string {
 	return CompileTs(ts)
 }
+
 func CompileJs(js string) string {
 	format := api.FormatDefault
 	if strings.Contains(js, "import") {

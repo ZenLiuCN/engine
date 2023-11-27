@@ -21,12 +21,12 @@ declare interface PrivateKey {
     /**
      * serialize to pem bytes
      */
-    bytes(): BinaryData
+    bytes(): Uint8Array
 
     /**
      * deserialize from pem bytes
      */
-    load(bin: BinaryData)
+    load(bin: Uint8Array)
 
     public(): PublicKey
 
@@ -49,28 +49,28 @@ declare interface PublicKey {
     /**
      * serialize to pem bytes
      */
-    bytes(): BinaryData
+    bytes(): Uint8Array
 
     /**
      * deserialize from pem bytes
      */
-    load(bin: BinaryData)
+    load(bin: Uint8Array)
 
     equal(pk: PublicKey): boolean
 }
 
 declare interface Cipher {
-    crypto(key,src: BinaryData): BinaryData
+    crypto(key,src: Uint8Array): Uint8Array
 }
 
 declare const Symmetric: {
     aes(): CipherAlg
     des(): CipherAlg
-    cbc(iv:BinaryData,encrypt:boolean): BlockMode
+    cbc(iv:Uint8Array,encrypt:boolean): BlockMode
     ecb(encrypt:boolean): BlockMode
-    cfb(iv:BinaryData,encrypt:boolean): StreamMode
-    ctr(iv:BinaryData): StreamMode
-    ofb(iv:BinaryData): StreamMode
+    cfb(iv:Uint8Array,encrypt:boolean): StreamMode
+    ctr(iv:Uint8Array): StreamMode
+    ofb(iv:Uint8Array): StreamMode
     gcm(): AEADMode
     pkcs7(): PaddingMode
     pkcs5(): PaddingMode
@@ -81,8 +81,8 @@ declare const Symmetric: {
         stream?:  StreamMode
         padding?: PaddingMode
         aead?   : AEADMode
-        nonce?  : BinaryData
-        label?  : BinaryData
+        nonce?  : Uint8Array
+        label?  : Uint8Array
     }):Cipher
 }
 declare const Asymmetric: {
@@ -97,8 +97,8 @@ declare const Asymmetric: {
         //for ECC, X25519 only for ecdh , P224 only for ECDSA
         curve?: 'P256' | 'P384' | 'P521' | 'X25519' | 'P224'
     }): PrivateKey
-    parsePrivateKey(pem: BinaryData): PrivateKey
-    parsePublicKey(pem: BinaryData): PublicKey
+    parsePrivateKey(pem: Uint8Array): PrivateKey
+    parsePublicKey(pem: Uint8Array): PublicKey
     /**
      * signature for data
      * @param key the private key
@@ -107,11 +107,11 @@ declare const Asymmetric: {
      * @param opt use PSS alg when opt presents, otherwise use PKCS1v15, optional for RSA
      * @returns binary signature
      */
-    sign(key: PrivateKey, data: BinaryData, hash?: Hash, opt?: {
+    sign(key: PrivateKey, data: Uint8Array, hash?: Hash, opt?: {
         //-1: length equal hash  0: auto, default  positive: salt length
         saltLength?: number
         hash: Hash
-    }): BinaryData
+    }): Uint8Array
     /**
      * verify a signature
      * @param key the public key
@@ -121,7 +121,7 @@ declare const Asymmetric: {
      * @param opt use PSS alg when opt presents, otherwise use PKCS1v15, optional for RSA
      * @returns valid or not
      */
-    verify(key: PublicKey, data, sign: BinaryData, hash?: Hash, opt?: {
+    verify(key: PublicKey, data, sign: Uint8Array, hash?: Hash, opt?: {
         //-1: length equal hash  0: auto, default  positive: salt length
         saltLength?: number
         hash: Hash
@@ -132,12 +132,12 @@ declare const Asymmetric: {
      * @param data the plain data
      * @param hash the HashFunc for RSA OAEP encrypt
      */
-    encrypt(key: PublicKey, data: BinaryData, hash?: HashFunc): BinaryData
+    encrypt(key: PublicKey, data: Uint8Array, hash?: HashFunc): Uint8Array
     /**
      *
      * @param key support ECDSA and RSA
      * @param secret the encrypted data
      * @param hash the HashFunc for RSA OAEP decrypt
      */
-    decrypt(key: PrivateKey, secret: BinaryData, hash?: HashFunc): BinaryData
+    decrypt(key: PrivateKey, secret: Uint8Array, hash?: HashFunc): Uint8Array
 }

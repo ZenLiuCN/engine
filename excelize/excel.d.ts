@@ -7,13 +7,13 @@ declare interface Excel {
 
     coordinatesToCellName(col, row: number, absCol, absRow: boolean): string
 
-    cellNameToCoordinates(cell: string): { col: number, row: number }
+    cellNameToCoordinates(cell: string): { readonly col: number, readonly row: number }
 
     columnNameToNumber(name: string): number
 
     columnNumberToName(num: number): string
 
-    splitCellName(cell: number): { col: string, row: number }
+    splitCellName(cell: number): { readonly col: string, readonly row: number }
 
     joinCellName(col: string, row: number): string
 

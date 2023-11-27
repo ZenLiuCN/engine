@@ -27,7 +27,7 @@ new Buffer("123456")
 `))
 	if buf, ok := v.Export().(*Buffer); !ok {
 		panic("not a buffer")
-	} else if buf.String() != "123456" {
+	} else if buf.ToString() != "123456" {
 		panic("bad buffer")
 	}
 }
@@ -45,58 +45,17 @@ new Buffer("123456").arrayBuffer()
 		panic("bad buffer")
 	}
 }
-func TestBuffer_EachChar(t *testing.T) {
-	vm := Get()
-	defer vm.Free()
-	fn.Panic1(vm.RunScript(
-		//language=javascript
-		`
-new Buffer("123456").eachChar(u=>{
-    console.log(u)
-    return true
-})
-`))
-
-}
-func TestBuffer_MapChar(t *testing.T) {
+func TestBuffer_Bytes(t *testing.T) {
 	vm := Get()
 	defer vm.Free()
 	v := fn.Panic1(vm.RunScript(
 		//language=javascript
 		`
-new Buffer("123456汉").mapChar(u=>{
-    console.log(u)
-    return true
-})
+new Buffer("123456").bytes()
 `))
-	if x, ok := v.Export().([]any); !ok {
-		t.Fatal(v.String())
-	} else if len(x) != 7 {
-		t.Fatal(x...)
-	} else {
-		t.Log(x...)
+	if _, ok := v.Export().([]byte); !ok {
+		t.Fatal("not bytes")
 	}
-
-}
-func TestBuffer_MapU8(t *testing.T) {
-	vm := Get()
-	defer vm.Free()
-	v := fn.Panic1(vm.RunScript(
-		//language=javascript
-		`
-new Buffer("123456中").mapU8(u=>{
-    console.log(u)
-    return true
-})
-`))
-	if x, ok := v.Export().([]any); !ok {
-		t.Fatal(v.String())
-	} else if len(x) != 9 {
-		t.Fatal(x...)
-	} else {
-		t.Log(x...)
-	}
-
 }
 func TestBuffer_Binary(t *testing.T) {
 	vm := Get()
@@ -104,140 +63,95 @@ func TestBuffer_Binary(t *testing.T) {
 	v := fn.Panic1(vm.RunScript(
 		//language=javascript
 		`
-new Buffer("123456中").binary().map(v=>v.toString(10))
+new Buffer("123456").binary()
 `))
-	if x, ok := v.Export().([]any); !ok {
-		t.Fatal(v.String())
-	} else if len(x) != 9 {
-		t.Fatal(x)
-	} else {
-		t.Log(x)
+	if _, ok := v.Export().(Bytes); !ok {
+		t.Fatal("not bytes")
 	}
 }
-func TestBuffer_Binary2(t *testing.T) {
+func TestBytes_Get(t *testing.T) {
 	vm := Get()
 	defer vm.Free()
 	v := fn.Panic1(vm.RunScript(
 		//language=javascript
 		`
-new Buffer("123456中").binary().map(v=>v)
-`))
-	if x, ok := v.Export().([]any); !ok {
-		t.Fatal(v.String())
-	} else if len(x) != 9 {
-		t.Fatal(x)
-	} else {
-		t.Log(x)
-	}
-}
-func TestBuffer_Bytes(t *testing.T) {
-	vm := Get()
-	defer vm.Free()
-	v := fn.Panic1(vm.RunScript(
-		//language=javascript
-		`
-new Buffer("123456中").bytes().map(v=>v)
-`))
-	if x, ok := v.Export().([]any); !ok {
-		t.Fatal(v.String())
-	} else if len(x) != 9 {
-		t.Fatal(x)
-	} else {
-		t.Log(x)
-	}
-}
-func TestBuffer_toBinary(t *testing.T) {
-	vm := Get()
-	defer vm.Free()
-	v := fn.Panic1(vm.RunScript(
-		//language=javascript
-		`
- binFrom(1,2,3,4,5,6)
-`))
-	if x, ok := v.Export().([]byte); !ok {
-		t.Fatal(v.String())
-	} else if len(x) != 6 {
-		t.Fatal(x)
-	} else {
-		t.Log(x)
-	}
-}
-func TestBuffer_toBinary2(t *testing.T) {
-	vm := Get()
-	defer vm.Free()
-	v := fn.Panic1(vm.RunScript(
-		//language=javascript
-		`
- binFrom([1,2,3,4,5,6])
-`))
-	if x, ok := v.Export().([]byte); !ok {
-		t.Fatal(v.String())
-	} else if len(x) != 6 {
-		t.Fatal(x)
-	} else {
-		t.Log(x)
-	}
-}
-func TestBuffer_LengthBinary(t *testing.T) {
-	vm := Get()
-	defer vm.Free()
-	v := fn.Panic1(vm.RunScript(
-		//language=javascript
-		`
- binLen(binFrom([1,2,3,4,5,6]))
+const bytes=new Buffer("123456").binary()
+console.log(bytes instanceof Bytes)
+bytes[0]
 `))
 	if x, ok := v.Export().(int64); !ok {
-		t.Fatal(v.String())
-	} else if x != 6 {
-		t.Fatal(x)
+		t.Fatal("not number", v)
+	} else if x != '1' {
+		t.Fatal("not equal", x)
 	}
 }
-func TestBuffer_AtBinary(t *testing.T) {
+func TestBytes_Set(t *testing.T) {
 	vm := Get()
 	defer vm.Free()
 	v := fn.Panic1(vm.RunScript(
 		//language=javascript
 		`
- binAt(binFrom([1,2,3,4,5,6]),2)
+const bytes=new Buffer("123456").binary()
+console.log(bytes instanceof Bytes)
+bytes[1]=2
+bytes
+`))
+	if b, ok := v.Export().(*Bytes); !ok {
+		t.Fatal("not Bytes", v)
+	} else if b.b[1] != 2 {
+		t.Fatal("not equal", b)
+	}
+}
+func TestBytes_Clone(t *testing.T) {
+	vm := Get()
+	defer vm.Free()
+	v := fn.Panic1(vm.RunScript(
+		//language=javascript
+		`
+const bytes=new Buffer("123456").binary()
+console.log(bytes instanceof Bytes)
+const b2=bytes.clone()
+const out=()=>b2[1]
+bytes[1]=3
+out()
 `))
 	if x, ok := v.Export().(int64); !ok {
-		t.Fatal(v.String())
-	} else if x != 3 {
-		t.Fatal(x)
+		t.Fatal("not number", v)
+	} else if x != '2' {
+		t.Fatal("not equal", x)
 	}
 }
-func TestBuffer_SliceBinary(t *testing.T) {
+func TestBytes_ToString(t *testing.T) {
 	vm := Get()
 	defer vm.Free()
 	v := fn.Panic1(vm.RunScript(
 		//language=javascript
 		`
- binSlice(binFrom([1,2,3,4,5,6]),2,3)
+const bytes=new Buffer("123456").binary()
+console.log(bytes instanceof Bytes)
+bytes.text()
 `))
-	if x, ok := v.Export().([]byte); !ok {
-		t.Fatal(v.String())
-	} else if len(x) != 1 {
-		t.Fatal(x)
-	} else if x[0] != 3 {
-		t.Fatal(x)
+	if b, ok := v.Export().(string); !ok {
+		t.Fatal("not string", v)
+	} else if b != "123456" {
+		t.Fatal("not equal", b)
 	}
 }
-func TestBuffer_MapBinary(t *testing.T) {
+func BenchmarkDyn(b *testing.B) {
 	vm := Get()
 	defer vm.Free()
-	v := fn.Panic1(vm.RunScript(
+	b.ReportAllocs()
+	code := vm.Compile(
 		//language=javascript
 		`
- binMap(binFrom([1,2,3,4,5,6]),(v,i)=>({val:v,index:i}))
-`))
-	if x, ok := v.Export().([]any); !ok {
-		t.Fatal(v.String())
-	} else if len(x) != 6 {
-		t.Fatal(x)
-	} else {
-		var val []map[string]any
-		fn.Panic(vm.ExportTo(v, &val))
-		t.Logf("%#v", val)
+bytes=new Buffer("123456").binary()
+bytes[0]=33
+bytes.text()
+`, false)
+	for i := 0; i < b.N; i++ {
+		txt := fn.Panic1(vm.Execute(code)).Export().(string)
+		if txt != "!23456" {
+			panic("not equals " + txt)
+		}
 	}
-
 }

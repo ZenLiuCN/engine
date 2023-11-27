@@ -4,7 +4,9 @@
 declare class Buffer {
     constructor()
     constructor(text: string)
-    constructor(bin: BinaryData)
+    constructor(bin: Uint8Array)
+    constructor(bin: Bytes)
+    constructor(reader: IoReader)
 
     readonly detached: boolean
 
@@ -15,7 +17,7 @@ declare class Buffer {
 
     available(): number
 
-    len(): number
+    length(): number
 
     cap(): number
 
@@ -23,47 +25,55 @@ declare class Buffer {
 
     grow(n: number)
 
-    slice(from, to: number): Buffer
-
-    chars(): Array<String>
-
-    binary(): Array<number>
-
-    eachU8(act: (u: number) => boolean)
-
-    mapU8<T>(map: (u: number) => T): Array<T>
-
-    eachChar(act: (u: string) => boolean)
-
-    mapChar<T>(map: (u: string) => T): Array<T>
-
     /**
      * clean the buffer
      */
     reset()
 
+    slice(from, to: number): Buffer
+
+    runes(): Array<String>
+
+    bytes(): Uint8Array
+
+    binary(): Bytes
+
+    eachByte(act: (u: number) => boolean)
+
+    mapByte<T>(map: (u: number) => T): Array<T>
+
+    eachRune(act: (u: string) => boolean)
+
+    mapRune<T>(map: (u: string) => T): Array<T>
+
     toString(): string
-
-    writeBuffer(buf: ArrayBuffer): number
-
-    writeText(v: string): number
 
     /**
      * read string until find delimiter
-     * @param delimiter
-     * @returns string end with delimiter
+     * @param delimiter one ascii character string
+     * @returns string end with delimiter, or empty string when reach EOF
      */
     readString(delimiter: string): string
 
-    readChar(): string
-
-    readU8(): number
-
-    arrayBuffer(): ArrayBuffer
+    writeString(v: string): number
 
     readByte(): number
 
-    writeU8(v: number)
+    writeByte(v: number)
+
+    readRune(): string
+
+    /**
+     *
+     * @param r a string contains one rune
+     */
+    writeRune(r: string)
+
+    arrayBuffer(): ArrayBuffer
+
+    writeBuffer(buf: ArrayBuffer): number
+
+    saveTo(path: string)
 
     /**
      * clean and load file into buffer
@@ -77,46 +87,43 @@ declare class Buffer {
      */
     mergeFile(path: string)
 
-    saveTo(path: string)
-
-    bytes(): BinaryData
-
     toWriter(): IoWriter
+
+    toReader(): IoReader
 }
 
-declare function binFrom(num: Array<number>): BinaryData
-declare function binFrom(text: string): BinaryData
-declare function binFrom(...num: Array<number>): BinaryData
-
-declare function binLen(bin: BinaryData): number
-
-declare function binGet(bin: BinaryData, index: number): number
-
-declare function binSet(bin: BinaryData, index, value: number)
-
-declare function binSlice(bin: BinaryData, from, to: number): BinaryData
-
-declare function binAppend(bin: BinaryData, v: number): BinaryData
-
-declare function binAppends(bin: BinaryData, tail: BinaryData): BinaryData
-declare function binToString(bin: BinaryData): string
-
-declare function binEach(bin: BinaryData, act: (v, i: number) => boolean)
-
-declare function binEquals(bin1, bin2: BinaryData): boolean
-
-declare function binMap<T>(bin: BinaryData, act: (v, i: number) => T): Array<T>
-
-declare function binToArrayBuffer(bin: BinaryData): ArrayBuffer
-
-declare function binToReader(bin: BinaryData): IoReader
-
-declare function binFrom(reader: IoReader): BinaryData
 /**
  * the golang []byte
  */
 // @ts-ignore
-declare interface BinaryData {
+declare class Bytes extends Array<number> {
+    constructor()
+    constructor(reader: IoReader)
+    constructor(text: string)
+    /**
+     * clone
+     */
+    constructor(bin: Bytes)
+    constructor(bin: ArrayBuffer)
+    constructor(bin: Uint8Array)
+    constructor(bin: Buffer)
+    /**
+     * @param values array of uint8
+     */
+    constructor(...values: number[])
+
+    bytes(): Uint8Array
+
+    append(v: Uint8Array): Bytes
+    append(v: ArrayBuffer): Bytes
+    append(v: string): Bytes
+    append(v: Bytes): Bytes
+    append(v: Buffer): Bytes
+
+    slice(from, to: number): Bytes
+    toText():string
+    clone(): Bytes
+    toReader():IoReader
 }
 
 declare interface IoReader {

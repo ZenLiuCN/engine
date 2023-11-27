@@ -63,6 +63,16 @@ func (s *Engine) CallMethod(fn Value, self Value, values ...any) (Value, error) 
 	}
 	return nil, fmt.Errorf("%s not a function", fn)
 }
+func (s *Engine) Construct(name string, args ...any) *Object {
+	return fn.Panic1(s.New(s.Get(name), s.ToValues(args...)...))
+}
+func (s *Engine) ToValues(args ...any) []Value {
+	n := make([]Value, len(args))
+	for i, arg := range args {
+		n[i] = s.ToValue(arg)
+	}
+	return n
+}
 
 //endregion
 
