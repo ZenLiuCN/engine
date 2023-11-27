@@ -1,4 +1,20 @@
-declare interface ExecOption {
+declare interface ExecOption extends ProcOption {
+    /**
+     * sleep after execute, when with use await, sleep after execute finished.
+     */
+    sleep?: string
+    /**
+     * optional execute
+     */
+    optional?: boolean
+    /**
+     * await execute finish
+     */
+    await?: boolean
+
+}
+
+declare interface ProcOption {
     /**
      * command, can be empty when use with sleep to just do a sleep.
      */
@@ -19,21 +35,123 @@ declare interface ExecOption {
      * expand paths in args
      */
     pathPath?: boolean
-    /**
-     * sleep after execute, when with use await, sleep after execute finished.
-     */
-    sleep?: string
-    /**
-     * optional execute
-     */
-    optional?: boolean
-    /**
-     * await execute finish
-     */
-    await?: boolean
+
 
 }
-interface Buffer{}
+
+declare interface SubProc {
+    /**
+     * start and not wait process exit
+     * @returns error or empty string
+     */
+    start(): string
+
+    /**
+     * wait started process exit
+     * @returns error or empty string
+     */
+    wait(): string
+
+    /**
+     * release process resources, when not use wait()
+     * free() also called
+     * @returns error or empty string
+     */
+    release(): string
+
+    /**
+     * run process and wait for exit
+     * @returns error or empty string
+     */
+    run(): string
+
+    /**
+     * run and fetch process output
+     * @returns  console encoding binary data and error string
+     */
+    output(): { data: Uint8Array, error: string }
+
+    /**
+     * run and fetch process output include stdError
+     * @returns  console encoding binary data and error string
+     */
+    combinedOutput(): { data: Uint8Array, error: string }
+
+    /**
+     * use with start|run method to read from stdout
+     * ,call once before invoke  start|run
+     * @returns  console encoding binary data and error string
+     */
+    readStdout(): { data: Uint8Array, error: string }
+
+    /**
+     * use with start|run method to read from stderr
+     * ,call once before invoke  start|run
+     * @returns  console encoding binary data and error string
+     */
+    readStderr(): { data: Uint8Array, error: string }
+
+    /**
+     * use with start|run method to write to stdin
+     * ,call once with null before invoke  start|run
+     * @returns  written bytes count or error string
+     */
+    writeStdin(data: Uint8Array | null): { write: number, error: string }
+
+    /**
+     * false if not stated yet
+     */
+    exited(): boolean
+
+    /**
+     * false if not stated yet
+     */
+    success(): boolean
+
+    /**
+     * -1 if not stated yet
+     */
+    sysTime(): number
+
+    /**
+     * -1 if not stated yet
+     */
+    userTime(): number
+
+    /**
+     * -1 if not stated yet
+     */
+    sysNanoTime(): number
+
+    /**
+     * -1 if not stated yet
+     */
+    userNanoTime(): number
+
+    /**
+     * kill the process
+     * @returns error or empty string
+     */
+    kill(): string
+
+    /**
+     * free all used pipes for stdout stderr and stdin
+     */
+    free()
+
+    /**
+     * convert local console encoding buf data to utf8 encode data
+     * @param buf
+     */
+    fromConsole(buf: Uint8Array): Uint8Array
+
+    /**
+     * convert utf8 buf data to local console encoding
+     * @param buf
+     */
+    toConsole(buf: Uint8Array): Uint8Array
+}
+
 declare interface Os {
     /**
      * root directory of executable
@@ -141,22 +259,27 @@ declare interface Os {
 
     exec(option: ExecOption)
 
+    proc(option: ProcOption): SubProc
+
     mkdir(path: string)
 
     mkdirAll(path: string)
 
     exists(path: string): boolean
 
-    write(path: string, data: Buffer)
+    write(path: string, data: Uint8Array)
 
     writeText(path: string, data: string)
 
-    read(path: string): Buffer
+    read(path: string): Uint8Array
 
     readText(path: string): string
+
     chdir(path: string)
-    pwd():string
-    ls(path?:string):Array<{dir:boolean,name:string,mode:string,size:number,modified:Date}>
+
+    pwd(): string
+
+    ls(path?: string): Array<{ dir: boolean, name: string, mode: string, size: number, modified: string }>
 }
 
 declare const os: Os

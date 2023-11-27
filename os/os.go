@@ -5,36 +5,13 @@ import (
 	"github.com/ZenLiuCN/engine"
 	"github.com/ZenLiuCN/fn"
 	"github.com/dop251/goja"
+	"io"
 	"os"
 	"path/filepath"
 	"strings"
 )
 
-var (
-	execPath   string
-	root       string
-	executable string
-	ext        string
-	name       string
-
-	pathSeparator     = string(os.PathSeparator)
-	pathListSeparator = string(os.PathListSeparator)
-)
-
 func init() {
-	var err error
-	execPath, err = os.Executable()
-	if err != nil {
-		execPath, _ = filepath.Abs(os.Args[0])
-	}
-	execPath, err = filepath.EvalSymlinks(execPath)
-	if err != nil {
-		execPath, _ = filepath.Abs(os.Args[0])
-	}
-	root = filepath.Dir(execPath)
-	_, executable = filepath.Split(execPath)
-	ext = filepath.Ext(execPath)
-	name = strings.Replace(executable, ext, "", -1)
 
 	engine.Register(&Os{})
 }
@@ -62,20 +39,20 @@ func (o *Os) Name() string {
 	return "os"
 }
 
-func (o *Os) Initialize(engine *engine.Engine) engine.Module {
+func (o *Os) Initialize(e *engine.Engine) engine.Module {
 	return &Os{
-		Engine:            engine,
-		Root:              root,
-		SimpleName:        name,
-		Ext:               ext,
-		Executable:        executable,
-		PathSeparator:     pathSeparator,
-		PathListSeparator: pathListSeparator,
+		Engine:            e,
+		Root:              engine.GetRoot(),
+		SimpleName:        engine.GetName(),
+		Ext:               engine.GetExt(),
+		Executable:        engine.GetExecutable(),
+		PathSeparator:     engine.GetPathSeparator(),
+		PathListSeparator: engine.GetPathListSeparator(),
 	}
 }
 func expand(path string) string {
 	if strings.HasPrefix(path, "@") {
-		return fixPath(os.ExpandEnv(filepath.Join(root, strings.TrimPrefix(path, "@"))))
+		return fixPath(os.ExpandEnv(filepath.Join(engine.GetRoot(), strings.TrimPrefix(path, "@"))))
 	}
 	p, e := filepath.Abs(path)
 	if e != nil {
@@ -90,7 +67,7 @@ func (o *Os) Pre(key string, value ...string) {
 	src := os.Getenv(key)
 	tar := fn.SliceJoinRune(value, os.PathListSeparator, fn.Identity[string])
 	if len(src) != 0 {
-		tar = tar + pathListSeparator + src
+		tar = tar + o.PathListSeparator + src
 	}
 	fn.Panic(os.Setenv(key, tar))
 }
@@ -98,7 +75,7 @@ func (o *Os) Prep(key string, value ...string) {
 	src := os.Getenv(key)
 	tar := fn.SliceJoinRune(value, os.PathListSeparator, o.Expand)
 	if len(src) != 0 {
-		tar = tar + pathListSeparator + src
+		tar = tar + o.PathListSeparator + src
 	}
 	fn.Panic(os.Setenv(key, tar))
 }
@@ -106,7 +83,7 @@ func (o *Os) Ap(key string, value ...string) {
 	src := os.Getenv(key)
 	tar := fn.SliceJoinRune(value, os.PathListSeparator, fn.Identity[string])
 	if len(src) != 0 {
-		tar = src + pathListSeparator + tar
+		tar = src + o.PathListSeparator + tar
 	}
 	fn.Panic(os.Setenv(key, tar))
 }
@@ -114,7 +91,7 @@ func (o *Os) App(key string, value ...string) {
 	src := os.Getenv(key)
 	tar := fn.SliceJoinRune(value, os.PathListSeparator, o.Expand)
 	if len(src) != 0 {
-		tar = src + pathListSeparator + tar
+		tar = src + o.PathListSeparator + tar
 	}
 	fn.Panic(os.Setenv(key, tar))
 }
@@ -155,6 +132,9 @@ func (o *Os) EvalFiles(paths ...string) (r []goja.Value) {
 func (o *Os) Exec(option *ExecOption) {
 	fn.Panic(Execute(option))
 }
+func (o *Os) Proc(option *ProcOption) SubProc {
+	return SubProc{s: OpenProc(option)}
+}
 func (o *Os) Mkdir(path string) {
 	pt := o.Expand(path)
 	if o.Exists(pt) {
@@ -179,9 +159,8 @@ func (o *Os) Write(path string, data goja.ArrayBuffer) {
 func (o *Os) WriteText(path string, data string) {
 	fn.Panic(os.WriteFile(o.Expand(path), []byte(data), os.ModePerm))
 }
-func (o *Os) Read(path string) goja.ArrayBuffer {
-	ar := o.Engine.NewArrayBuffer(fn.Panic1(os.ReadFile(o.Expand(path))))
-	return ar
+func (o *Os) Read(path string) []byte {
+	return fn.Panic1(os.ReadFile(o.Expand(path)))
 }
 func (o *Os) ReadText(path string) string {
 	return string(fn.Panic1(os.ReadFile(o.Expand(path))))
@@ -207,8 +186,239 @@ func (o *Os) Ls(path string) (r []map[string]any) {
 			"name":     entry.Name(),
 			"mode":     entry.Type().String(),
 			"size":     info.Size(),
-			"modified": info.ModTime(),
+			"modified": info.ModTime().Format("2006-01-02 15:04:05.000"),
 		})
 	}
 	return
+}
+
+type SubProc struct {
+	s   *SubProcess
+	out io.ReadCloser
+	err io.ReadCloser
+	in  io.WriteCloser
+	buf []byte
+}
+
+func (s SubProc) FromConsole(data []byte) []byte {
+	buf := engine.GetBytesBuffer()
+	defer engine.PutBytesBuffer(buf)
+	defer buf.Reset()
+	buf.Write(data)
+	fn.Panic(FromNativeConsole(buf))
+	return buf.Bytes()
+}
+func (s SubProc) ToConsole(data []byte) []byte {
+	buf := engine.GetBytesBuffer()
+	defer engine.PutBytesBuffer(buf)
+	defer buf.Reset()
+	buf.Write(data)
+	fn.Panic(ToNativeConsole(buf))
+	return buf.Bytes()
+}
+func (s SubProc) Run() string {
+	err := s.s.Run()
+	if err != nil {
+		return err.Error()
+	}
+	return ""
+}
+func (s SubProc) Wait() string {
+	err := s.s.Wait()
+	if err != nil {
+		return err.Error()
+	}
+	return ""
+}
+func (s SubProc) ReadStdout() BinaryError {
+	var e error
+	if s.out == nil {
+		s.out, e = s.s.StderrPipe()
+		if e != nil {
+			return BinaryError{
+				Data:  nil,
+				Error: e.Error(),
+			}
+		}
+	}
+	if s.buf == nil {
+		s.buf = make([]byte, 512)
+	}
+	n, e := s.out.Read(s.buf)
+	if e != nil {
+		return BinaryError{
+			Data:  nil,
+			Error: e.Error(),
+		}
+	}
+	return BinaryError{
+		Data:  s.buf[:n],
+		Error: "",
+	}
+}
+func (s SubProc) ReadStderr() BinaryError {
+	var e error
+	if s.err == nil {
+		s.err, e = s.s.StderrPipe()
+		if e != nil {
+			return BinaryError{
+				Data:  nil,
+				Error: e.Error(),
+			}
+		}
+	}
+	if s.buf == nil {
+		s.buf = make([]byte, 512)
+	}
+	n, e := s.err.Read(s.buf)
+	if e != nil {
+		return BinaryError{
+			Data:  nil,
+			Error: e.Error(),
+		}
+	}
+	return BinaryError{
+		Data:  s.buf[:n],
+		Error: "",
+	}
+}
+func (s SubProc) WriteStdin(data []byte) WriteError {
+	var e error
+	if s.in == nil {
+		s.in, e = s.s.StdinPipe()
+		if e != nil {
+			return WriteError{
+				Write: 0,
+				Error: e.Error(),
+			}
+		}
+	}
+	if data == nil {
+		return WriteError{
+			Write: 0,
+			Error: "",
+		}
+	}
+	if s.buf == nil {
+		s.buf = make([]byte, 512)
+	}
+	n, e := s.in.Write(data)
+	if e != nil {
+		return WriteError{
+			Write: 0,
+			Error: e.Error(),
+		}
+	}
+	return WriteError{
+		Write: n,
+		Error: "",
+	}
+}
+func (s SubProc) Start() string {
+	err := s.s.Start()
+	if err != nil {
+		return err.Error()
+	}
+	return ""
+}
+func (s SubProc) Exited() bool {
+	if s.s.ProcessState == nil {
+		return false
+	}
+	return s.s.ProcessState.Exited()
+}
+func (s SubProc) Success() bool {
+	if s.s.ProcessState == nil {
+		return false
+	}
+	return s.s.ProcessState.Exited()
+}
+func (s SubProc) SysTime() int64 {
+	if s.s.ProcessState == nil {
+		return -1
+	}
+	return s.s.ProcessState.SystemTime().Milliseconds()
+}
+func (s SubProc) UserTime() int64 {
+	if s.s.ProcessState == nil {
+		return -1
+	}
+	return s.s.ProcessState.UserTime().Milliseconds()
+}
+func (s SubProc) SysNanoTime() int64 {
+	if s.s.ProcessState == nil {
+		return -1
+	}
+	return s.s.ProcessState.SystemTime().Nanoseconds()
+}
+func (s SubProc) UserNanoTime() int64 {
+	if s.s.ProcessState == nil {
+		return -1
+	}
+	return s.s.ProcessState.UserTime().Nanoseconds()
+}
+func (s SubProc) Kill() string {
+	err := s.s.Process.Kill()
+	if err != nil {
+		return err.Error()
+	}
+	return ""
+}
+func (s SubProc) Release() string {
+	s.Free()
+	err := s.s.Process.Release()
+	if err != nil {
+		return err.Error()
+	}
+	return ""
+}
+func (s SubProc) Output() BinaryError {
+	b, e := s.s.Output()
+	if e != nil {
+		return BinaryError{
+			Data:  nil,
+			Error: e.Error(),
+		}
+	}
+	return BinaryError{
+		Data:  b,
+		Error: "",
+	}
+}
+func (s SubProc) CombinedOutput() BinaryError {
+	b, e := s.s.CombinedOutput()
+	if e != nil {
+		return BinaryError{
+			Data:  nil,
+			Error: e.Error(),
+		}
+	}
+	return BinaryError{
+		Data:  b,
+		Error: "",
+	}
+}
+func (s SubProc) Free() {
+	if s.out != nil {
+		_ = s.out.Close()
+		s.out = nil
+	}
+	if s.in != nil {
+		_ = s.in.Close()
+		s.in = nil
+	}
+	if s.err != nil {
+		_ = s.err.Close()
+		s.err = nil
+	}
+	s.buf = nil
+}
+
+type BinaryError struct {
+	Data  []byte
+	Error string
+}
+type WriteError struct {
+	Write int
+	Error string
 }

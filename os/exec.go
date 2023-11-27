@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
+	"github.com/ZenLiuCN/engine"
 	"golang.org/x/text/encoding"
-	"io"
 	"os/exec"
 	"path"
 	"strings"
@@ -13,7 +13,7 @@ import (
 )
 
 func fixPath(p string) string {
-	return path.Join(strings.Split(p, pathSeparator)...)
+	return path.Join(strings.Split(p, engine.GetPathSeparator())...)
 }
 
 type ExecOption struct {
@@ -31,9 +31,6 @@ type ProcOption struct {
 }
 type SubProcess struct {
 	*exec.Cmd
-	ProcStdout io.Reader
-	ProcStderr io.Reader
-	ProcStdin  io.Writer
 }
 
 func Lookup(cmd string) (p string, err error) {
@@ -117,17 +114,8 @@ func OpenProc(opt *ProcOption) (proc *SubProcess) {
 	if err != nil {
 		panic(err)
 	}
-	errOut := new(bytes.Buffer)
-	stdOut := new(bytes.Buffer)
-	stdIn := new(bytes.Buffer)
-	cmd.Stderr = errOut
-	cmd.Stdout = stdOut
-	cmd.Stdin = stdIn
 	return &SubProcess{
-		Cmd:        cmd,
-		ProcStdout: stdOut,
-		ProcStderr: errOut,
-		ProcStdin:  stdIn,
+		Cmd: cmd,
 	}
 }
 func BuildCommand(opt *ProcOption) (cmd *exec.Cmd, err error) {
