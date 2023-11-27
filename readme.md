@@ -95,8 +95,7 @@ dev
 draft
 
 ### fetch
-
-draft
+base function done, improve for compact with browser fetch.
 
 ### http
 
