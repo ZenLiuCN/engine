@@ -4,6 +4,7 @@ package engine
 must code port from https://github.com/dop251/goja_nodejs
 */
 import (
+	"fmt"
 	"github.com/ZenLiuCN/fn"
 	"github.com/dop251/goja"
 	"sync"
@@ -31,6 +32,13 @@ type Immediate struct {
 	job
 }
 
+// EventLoop process all async events and also  as The AsyncContextTracker
+// there will be a background goroutine to monitor the async tasks as call StartEventLoop,
+// or call StartEventLoopWhenNotStarted for not sure current EventLoop have been started.
+// use StopEventLoopWait to await all async tasks are finished.
+// use StopEventLoopTimeout to waiting for a fixed duration.
+// use StopEventLoopNoWait to immediate shutdown EventLoop without wait tasks execution.
+// use StopEventLoop wait EventLoop after current tasks execution.
 type EventLoop struct {
 	engine   *Engine
 	jobChan  chan func()
@@ -45,6 +53,61 @@ type EventLoop struct {
 	stopLock sync.Mutex
 	stopCond *sync.Cond
 	running  bool
+
+	async        *AsyncContext
+	asyncResumed bool
+	asyncRefs    int
+}
+type AsyncContext struct {
+	ref int
+}
+
+func (s *AsyncContext) String() string {
+	return fmt.Sprintf("async<%p>[%d]", s, s.ref)
+}
+func (s *EventLoop) Grab() (trackingObject any) {
+	ctx := s.async
+	if ctx != nil {
+		ctx.ref++
+	} else {
+		ctx = &AsyncContext{ref: 1}
+		s.asyncRefs++
+	}
+	s.jobCount++
+	//println("grab", ctx.String(), s.jobCount)
+	return ctx
+}
+
+func (s *EventLoop) Resumed(trackingObject any) {
+	//println("resumed", trackingObject, s.jobCount)
+	if s.asyncResumed {
+		panic("nested async context resumed calls")
+	}
+	s.async = trackingObject.(*AsyncContext)
+	s.asyncResumed = true
+
+}
+func (s *EventLoop) asyncRelease() {
+	s.async.ref--
+	if s.async.ref < 0 {
+		panic("async context reference negative")
+	}
+	if s.async.ref == 0 {
+		s.asyncRefs--
+		if s.asyncRefs < 0 {
+			panic("async context refs negative")
+		}
+		s.jobCount--
+		//println("release context", s.async, s.jobCount)
+	}
+}
+func (s *EventLoop) Exited() {
+	//println("exited", s.async, s.jobCount)
+	if s.async != nil {
+		s.asyncRelease()
+		s.async = nil
+	}
+	s.asyncResumed = false
 }
 
 func NewEventLoop(engine *Engine) *EventLoop {
@@ -60,6 +123,7 @@ func NewEventLoop(engine *Engine) *EventLoop {
 	engine.Set("clearTimeout", loop.clearTimeout)
 	engine.Set("clearInterval", loop.clearInterval)
 	engine.Set("clearImmediate", loop.clearImmediate)
+	engine.Runtime.SetAsyncContextTracker(loop)
 	return loop
 }
 
