@@ -38,4 +38,4 @@ declare interface FetchResponse {
     text(): Promise<string>
 }
 
-declare function fetch(url: string, opt?: FetchOptions): Promise<FetchResponse>
+declare function fetcher(url: string, opt?: FetchOptions): Promise<FetchResponse>

@@ -31,7 +31,7 @@ type Fetch struct {
 
 func (f *Fetch) Register(engine *engine.Engine) {
 	x := &Fetch{Engine: engine}
-	engine.Set("fetch", x.Fetch)
+	engine.Set("fetcher", x.Fetch)
 }
 
 func (f *Fetch) TypeDefine() []byte {
