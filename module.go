@@ -26,8 +26,9 @@ var (
 func init() {
 	Register(NewConsole(slog.Default()))
 	Register(&Require{})
-	Register(BufferModule{})
 
+	RegisterModule(BufferModule{})
+	RegisterModule(&IoModule{})
 	RegisterModule(&EngineModule{})
 	RegisterModule(&CryptoModule{})
 	RegisterModule(&HashModule{})

@@ -105,15 +105,12 @@ func (s *Engine) Execute(code *Code) (Value, error) {
 func (s *Engine) Set(name string, value any) {
 	fn.Panic(s.Runtime.Set(name, value))
 }
-func (s *Engine) Constructor(name string, ctor func(c ConstructorCall) *Object) {
-	fn.Panic(s.Runtime.Set(name, ctor))
-}
 
 func (s *Engine) Function(name string, ctor func(c FunctionCall) Value) {
 	fn.Panic(s.Runtime.Set(name, ctor))
 }
 func (s *Engine) RegisterType(name string, ctor func(v []Value) any) {
-	s.Constructor(name, s.ToConstructor(ctor))
+	s.Set(name, s.ToConstructor(ctor))
 }
 func (s *Engine) ToInstance(v any, c ConstructorCall) *Object {
 	o := s.ToValue(v).(*Object)

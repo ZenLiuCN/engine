@@ -20,92 +20,96 @@ var (
 type BufferModule struct {
 }
 
+func (b BufferModule) Exports() map[string]any {
+	return nil
+}
+
+func (b BufferModule) ExportsWithEngine(engine *Engine) map[string]any {
+	return map[string]any{
+		"Buffer": engine.ToConstructor(func(v []goja.Value) any {
+			var buf *Buffer
+			if len(v) == 0 {
+				buf = GetBuffer()
+			} else if len(v) == 1 {
+				switch t := v[0].Export().(type) {
+				case string:
+					buf = &Buffer{
+						e:      engine,
+						Buffer: bytes.NewBufferString(t),
+					}
+				case []byte:
+					buf = &Buffer{
+						e:      engine,
+						Buffer: bytes.NewBuffer(t),
+					}
+				case *bytes.Buffer:
+					buf = &Buffer{
+						e:      engine,
+						Buffer: t,
+					}
+				case *Bytes:
+					buf = &Buffer{
+						e:      engine,
+						Buffer: bytes.NewBuffer(t.b),
+					}
+				case io.Reader:
+					buf = GetBuffer()
+					fn.Panic1(io.Copy(buf.Buffer, t))
+					buf.e = engine
+				default:
+					panic("bad parameter type")
+				}
+			} else {
+				panic("bad parameters ")
+			}
+			return buf
+		}),
+		"Bytes": func(c goja.ConstructorCall) *goja.Object {
+			v := c.Arguments
+			var bin []byte
+			if len(v) == 0 {
+
+			} else if len(v) == 1 {
+				switch t := v[0].Export().(type) {
+				case string:
+					bin = []byte(t)
+				case []byte:
+					bin = bytes.Clone(t)
+				case goja.ArrayBuffer:
+					bin = bytes.Clone(t.Bytes())
+				case *Buffer:
+					bin = bytes.Clone(t.Bytes())
+				case *Bytes:
+					bin = bytes.Clone(t.b)
+				case io.Reader:
+					bin = fn.Panic1(io.ReadAll(t))
+				default:
+					panic("bad parameter type")
+				}
+			} else {
+				for _, value := range v {
+					bin = append(bin, byte(value.ToNumber().Export().(int64)))
+				}
+			}
+			o := &Bytes{
+				Engine: engine,
+				b:      bin,
+			}
+			da := engine.NewDynamicArray(o)
+			do := engine.ToValue(o).(*goja.Object)
+			_ = do.SetPrototype(c.This.Prototype())
+			_ = da.Prototype().SetPrototype(do)
+			return da
+		},
+	}
+}
+
 func (b BufferModule) TypeDefine() []byte {
 	return bufDefine
 }
 
-func (b BufferModule) Register(engine *Engine) {
-	engine.RegisterType("Buffer", func(v []goja.Value) any {
-		var buf *Buffer
-		if len(v) == 0 {
-			buf = GetBuffer()
-		} else if len(v) == 1 {
-			switch t := v[0].Export().(type) {
-			case string:
-				buf = &Buffer{
-					e:      engine,
-					Buffer: bytes.NewBufferString(t),
-				}
-			case []byte:
-				buf = &Buffer{
-					e:      engine,
-					Buffer: bytes.NewBuffer(t),
-				}
-			case *bytes.Buffer:
-				buf = &Buffer{
-					e:      engine,
-					Buffer: t,
-				}
-			case *Bytes:
-				buf = &Buffer{
-					e:      engine,
-					Buffer: bytes.NewBuffer(t.b),
-				}
-			case io.Reader:
-				buf = GetBuffer()
-				fn.Panic1(io.Copy(buf.Buffer, t))
-				buf.e = engine
-			default:
-				panic("bad parameter type")
-			}
-		} else {
-			panic("bad parameters ")
-		}
-		return buf
-	})
-	engine.Constructor("Bytes", func(c goja.ConstructorCall) *goja.Object {
-		v := c.Arguments
-		var bin []byte
-		if len(v) == 0 {
-
-		} else if len(v) == 1 {
-			switch t := v[0].Export().(type) {
-			case string:
-				bin = []byte(t)
-			case []byte:
-				bin = bytes.Clone(t)
-			case goja.ArrayBuffer:
-				bin = bytes.Clone(t.Bytes())
-			case *Buffer:
-				bin = bytes.Clone(t.Bytes())
-			case *Bytes:
-				bin = bytes.Clone(t.b)
-			case io.Reader:
-				bin = fn.Panic1(io.ReadAll(t))
-			default:
-				panic("bad parameter type")
-			}
-		} else {
-			for _, value := range v {
-				bin = append(bin, byte(value.ToNumber().Export().(int64)))
-			}
-		}
-		o := &Bytes{
-			Engine: engine,
-			b:      bin,
-		}
-		da := engine.NewDynamicArray(o)
-		do := engine.ToValue(o).(*goja.Object)
-		_ = do.SetPrototype(c.This.Prototype())
-		_ = da.Prototype().SetPrototype(do)
-
-		return da
-	})
-
-}
-
-func (b BufferModule) Name() string {
-	return "buffer"
+func (b BufferModule) Identity() string {
+	return "go/buffer"
 }
 
 type Buffer struct {

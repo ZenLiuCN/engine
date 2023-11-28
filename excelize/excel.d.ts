@@ -1,5 +1,6 @@
 declare module "go/execl" {
-
+    // @ts-ignore
+    import {Buffer} from "go/buffer"
     export function open(path?: string, option?: Option): ExcelFile
 
     export function themeColor(baseColor: string, tint: number): string
