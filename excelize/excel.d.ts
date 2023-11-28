@@ -17,13 +17,7 @@ declare interface Excel {
 
     joinCellName(col: string, row: number): string
 
-    buffer(): ByteBuffer
 }
-
-declare interface ByteBuffer {
-
-}
-
 declare interface Option {
     maxCalcIterations?: number
     password?: string
