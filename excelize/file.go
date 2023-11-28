@@ -1,7 +1,6 @@
 package excelize
 
 import (
-	"bytes"
 	"github.com/ZenLiuCN/engine"
 	"github.com/ZenLiuCN/fn"
 	"github.com/dop251/goja"
@@ -40,11 +39,11 @@ func (s *ExcelFile) SaveAs(name string, opt *excelize.Options) {
 	}
 }
 
-func (s *ExcelFile) Write(w *bytes.Buffer, opt *excelize.Options) {
+func (s *ExcelFile) Write(w *engine.Buffer, opt *excelize.Options) {
 	if opt != nil {
-		fn.Panic(s.File.Write(w, *opt))
+		fn.Panic(s.File.Write(w.Buffer, *opt))
 	} else {
-		fn.Panic(s.File.Write(w))
+		fn.Panic(s.File.Write(w.Buffer))
 	}
 }
 

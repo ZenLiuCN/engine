@@ -48,7 +48,7 @@ declare interface ExcelFile {
 
     saveAs(name: string, opt?: Option)
 
-    write(w: ByteBuffer, opt?: Option)
+    write(w: Buffer, opt?: Option)
 
     writeToBuffer(opt?: Option): ArrayBuffer
 
