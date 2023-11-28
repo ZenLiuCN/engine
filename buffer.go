@@ -101,6 +101,7 @@ func (b BufferModule) Register(engine *Engine) {
 
 		return da
 	})
+
 }
 
 func (b BufferModule) Name() string {
@@ -326,7 +327,18 @@ func (b *Bytes) SetLen(i int) bool {
 func (b *Bytes) Slice(from, to int) *goja.Object {
 	return b.Engine.Construct("Bytes", b.b[from:to])
 }
-
+func (b *Bytes) Equals(v goja.Value) bool {
+	switch t := v.Export().(type) {
+	case string:
+		return bytes.Equal(b.b, []byte(t))
+	case []byte:
+		return bytes.Equal(b.b, t)
+	case *Bytes:
+		return bytes.Equal(b.b, t.b)
+	default:
+		return false
+	}
+}
 func (b *Bytes) Clone() *goja.Object {
 	return b.Engine.Construct("Bytes", bytes.Clone(b.b))
 }

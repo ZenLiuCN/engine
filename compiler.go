@@ -15,26 +15,30 @@ var (
 )
 
 type Compiler struct {
-	*Engine
+	m map[string]any
 }
 
 func (s *Compiler) TypeDefine() []byte {
 	return compilerDefine
 }
 
-func (s *Compiler) Name() string {
-	return "compiler"
+func (s *Compiler) Identity() string {
+	return "go/compiler"
 }
 
-func (s *Compiler) Initialize(engine *Engine) Module {
-	return &Compiler{engine}
-}
-
-func (s *Compiler) CompileJs(js string) string {
-	return CompileJs(js)
-}
-func (s *Compiler) CompileTs(ts string) string {
-	return CompileTs(ts)
+func (s *Compiler) Exports() map[string]any {
+	if s.m == nil {
+		s.m = map[string]any{}
+		s.m["compileJs"] = CompileJs
+		s.m["compileTs"] = CompileTs
+		s.m["compileTsCode"] = func(src string) *Code {
+			return CompileSource(src, true)
+		}
+		s.m["compileJsCode"] = func(src string) *Code {
+			return CompileSource(src, false)
+		}
+	}
+	return s.m
 }
 
 func CompileJs(js string) string {

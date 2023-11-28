@@ -21,25 +21,43 @@ var (
 )
 
 func init() {
-	engine.Register(&Fetch{})
+
+	engine.RegisterModule(&Fetch{})
 }
 
 type Fetch struct {
-	*engine.Engine
-	jar *cookiejar.Jar
 }
 
-func (f *Fetch) Register(engine *engine.Engine) {
-	x := &Fetch{Engine: engine}
-	engine.Set("fetcher", x.Fetch)
+func (f Fetch) Exports() map[string]any {
+	return nil
+}
+func (f Fetch) ExportsWithEngine(e *engine.Engine) map[string]any {
+	return map[string]any{
+		"fetch": func(url string, option *Option) *goja.Promise {
+			jar := new(cookiejar.Jar)
+			if option != nil {
+				return option.Request(e, jar, url)
+			}
+			p, ack, rj := e.NewPromise()
+			go func() {
+				res, err := http.Get(url)
+				if err != nil {
+					rj(err)
+					return
+				}
+				ack(parse(e, res))
+			}()
+			return p
+		},
+	}
 }
 
-func (f *Fetch) TypeDefine() []byte {
+func (f Fetch) TypeDefine() []byte {
 	return fetchDefine
 }
 
-func (f *Fetch) Name() string {
-	return "fetch"
+func (f Fetch) Identity() string {
+	return "go/fetch"
 }
 
 type Response struct {
@@ -268,25 +286,6 @@ func (o *Option) Request(e *engine.Engine, jar *cookiejar.Jar, uri string) *goja
 			return
 		}
 		ack(parse(e, res))
-	}()
-	return p
-}
-
-func (f *Fetch) Fetch(url string, option *Option) *goja.Promise {
-	if f.jar == nil {
-		f.jar = new(cookiejar.Jar)
-	}
-	if option != nil {
-		return option.Request(f.Engine, f.jar, url)
-	}
-	p, ack, rj := f.Engine.NewPromise()
-	go func() {
-		res, err := http.Get(url)
-		if err != nil {
-			rj(err)
-			return
-		}
-		ack(parse(f.Engine, res))
 	}()
 	return p
 }

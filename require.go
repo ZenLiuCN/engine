@@ -29,6 +29,9 @@ func (r *Require) Register(engine *Engine) {
 }
 
 func (r *Require) Require(specifier string) (*goja.Object, error) {
+	if gom := resolveGoModule(specifier); gom != nil {
+		return instanceGoModule(r.engine, gom)
+	}
 	current := r.pwd
 	defer func() {
 		r.pwd = current

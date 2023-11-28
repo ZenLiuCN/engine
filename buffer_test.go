@@ -65,7 +65,7 @@ func TestBuffer_Binary(t *testing.T) {
 		`
 new Buffer("123456").binary()
 `))
-	if _, ok := v.Export().(Bytes); !ok {
+	if _, ok := v.Export().(*Bytes); !ok {
 		t.Fatal("not bytes")
 	}
 }
@@ -129,7 +129,7 @@ func TestBytes_ToString(t *testing.T) {
 		`
 const bytes=new Buffer("123456").binary()
 console.log(bytes instanceof Bytes)
-bytes.text()
+bytes.toText()
 `))
 	if b, ok := v.Export().(string); !ok {
 		t.Fatal("not string", v)
@@ -146,7 +146,7 @@ func BenchmarkDyn(b *testing.B) {
 		`
 bytes=new Buffer("123456").binary()
 bytes[0]=33
-bytes.text()
+bytes.toText()
 `, false)
 	for i := 0; i < b.N; i++ {
 		txt := fn.Panic1(vm.Execute(code)).Export().(string)

@@ -14,32 +14,40 @@ import (
 
 var (
 	//go:embed sqlx.d.ts
-	d []byte
+	sqlxDefine []byte
 )
 
 func init() {
-	engine.Register(&SQLx{})
+	engine.RegisterModule(SQLXModule{})
+}
+
+type SQLXModule struct {
+}
+
+func (S SQLXModule) Identity() string {
+	return "go/sqlx"
+}
+
+func (S SQLXModule) TypeDefine() []byte {
+	return sqlxDefine
+}
+
+func (S SQLXModule) Exports() map[string]any {
+	return nil
+}
+
+func (S SQLXModule) ExportsWithEngine(engine *engine.Engine) map[string]any {
+	return map[string]any{
+		"SQLX": engine.ToConstructor(func(v []goja.Value) any {
+			db := fn.Panic1(sqlx.Connect(v[0].ToString().String(), v[1].ToString().String()))
+			return &SQLx{DB: db, Engine: engine}
+		}),
+	}
 }
 
 type SQLx struct {
 	*sqlx.DB
 	*engine.Engine
-}
-
-func (s *SQLx) TypeDefine() []byte {
-	return d
-}
-
-func (s *SQLx) Name() string {
-	return "SQLX"
-}
-
-func (s *SQLx) Register(engine *engine.Engine) {
-	fn.Panic(engine.Runtime.Set("SQLX", func(call goja.ConstructorCall) *goja.Object {
-		db := fn.Panic1(sqlx.Connect(call.Argument(0).ToString().String(), call.Argument(1).ToString().String()))
-		i := &SQLx{DB: db, Engine: engine}
-		return engine.ToInstance(i, call)
-	}))
 }
 
 func (s *SQLx) Close() {

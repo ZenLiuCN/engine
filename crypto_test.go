@@ -8,15 +8,18 @@ import (
 func TestCryptoSimple(t *testing.T) {
 	vm := Get()
 	defer vm.Free()
-	fn.Panic1(vm.RunScript(
+	fn.Panic1(vm.RunJavaScript(
 		//language=javascript
-		`const enc = Symmetric.cipher({
-        cipher: Symmetric.aes(),
-        padding: Symmetric.pkcs5(),
-        block:Symmetric.ecb(true),
+		`
+import {cipher,aes,pkcs5,cbc} from "go/crypto"
+import {base64StdEncode} from "go/codec"
+const enc = cipher({
+        cipher: aes(),
+        padding: pkcs5(),
+        block:cbc(new Bytes("1234567812345678").bytes(),true),
         encrypt: true
     }
-).crypto(binFrom("1234567812345678"), binFrom("12345678901234"))
-console.log(codec.hexEncode(enc))
+).crypto(new Bytes("1234567812345678").bytes(), new Bytes("12345678901234").bytes())
+console.log(base64StdEncode(enc))
 `))
 }

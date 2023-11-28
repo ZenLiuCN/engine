@@ -120,10 +120,17 @@ declare class Bytes extends Array<number> {
     append(v: Bytes): Bytes
     append(v: Buffer): Bytes
 
+    equals(v: Uint8Array): boolean
+    equals(v: Bytes): boolean
+    equals(v: string): boolean
+
     slice(from, to: number): Bytes
-    toText():string
+
+    toText(): string
+
     clone(): Bytes
-    toReader():IoReader
+
+    toReader(): IoReader
 }
 
 declare interface IoReader {

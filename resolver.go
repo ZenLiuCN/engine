@@ -219,20 +219,19 @@ func (c *cjs) Instance(engine *Engine) Modular {
 	}
 }
 func (c *cjsModule) Execute() error {
-	rt := c.Engine.Runtime
-	exports := rt.NewObject()
-	c.obj = rt.NewObject()
+	exports := c.Engine.NewObject()
+	c.obj = c.Engine.NewObject()
 	err := c.obj.Set("exports", exports)
 	if err != nil {
 		return fmt.Errorf("error prepare import commonJS, couldn't set exports property of module: %w",
 			err)
 	}
-	err = rt.Set("module", c.obj)
+	err = c.Engine.Runtime.Set("module", c.obj)
 	if err != nil {
 		return fmt.Errorf("error prepare import commonJS, couldn't set module: %w",
 			err)
 	}
-	f, err := rt.RunProgram(c.mod.prg)
+	f, err := c.Engine.RunProgram(c.mod.prg)
 	if err != nil {
 		return err
 	}
@@ -241,7 +240,7 @@ func (c *cjsModule) Execute() error {
 			return err
 		}
 	}
-	err = rt.Set("module", nil)
+	err = c.Engine.Runtime.Set("module", nil)
 	if err != nil {
 		return fmt.Errorf("error after import commonJS, couldn't remove module: %w",
 			err)

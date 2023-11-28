@@ -1,26 +1,28 @@
-declare class Engine {
-    constructor()
-    /**
-     * specificity modules
-     * @param exclude or includes
-     * @param modules names of modules
-     */
-    constructor(exclude: boolean, ...modules: string[])
+declare module "go/engine"{
+    export class Engine {
+        constructor()
+        /**
+         * specificity modules
+         * @param exclude or includes
+         * @param modules names of modules
+         */
+        constructor(exclude: boolean, ...modules: string[])
 
-    runScript(sc: string): any
+        runScript(sc: string): any
 
-    runJavaScript(sc: string): any
+        runJavaScript(sc: string): any
 
-    runTypeScript(sc: string): any
+        runTypeScript(sc: string): any
 
-    compile(src: string, ts: boolean): Code
+        compile(src: string, ts: boolean): Code
 
-    set(name: string, value: any)
+        set(name: string, value: any)
 
-    execute(code: Code): any
+        execute(code: Code): any
 
-    free()
-}
+        free()
+    }
 
-declare interface Code {
+    export interface Code {
+    }
 }

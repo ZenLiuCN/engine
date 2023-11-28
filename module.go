@@ -6,6 +6,7 @@ import (
 	"log/slog"
 )
 
+// Module is a top level objects that not required to import
 type Module interface {
 	Name() string
 }
@@ -19,18 +20,19 @@ type TopModule interface {
 }
 
 var (
-	registry map[string]Module
+	registry = map[string]Module{}
 )
 
 func init() {
-	registry = make(map[string]Module)
 	Register(NewConsole(slog.Default()))
-	Register(&Compiler{})
 	Register(&Require{})
 	Register(BufferModule{})
-	Register(EngineModule{})
-	Register(CryptoModule{})
-	Register(HasherInstance)
+
+	RegisterModule(&EngineModule{})
+	RegisterModule(&CryptoModule{})
+	RegisterModule(&HashModule{})
+	RegisterModule(&CodecModule{})
+	RegisterModule(&Compiler{})
 }
 
 // Register a module , returns false if already exists

@@ -2,7 +2,6 @@ package excelize
 
 import (
 	_ "embed"
-
 	"github.com/ZenLiuCN/engine"
 	"github.com/ZenLiuCN/fn"
 	"github.com/xuri/excelize/v2"
@@ -14,65 +13,65 @@ var (
 )
 
 func init() {
-	engine.Register(&Excel{})
+	m := map[string]any{}
+
+	m["open"] = func(path string, opt *excelize.Options) *ExcelFile {
+		if path == "" {
+			if opt == nil {
+				return &ExcelFile{excelize.NewFile()}
+			}
+			return &ExcelFile{excelize.NewFile(*opt)}
+		}
+		if opt == nil {
+			return &ExcelFile{
+				File: fn.Panic1(excelize.OpenFile(path)),
+			}
+		}
+		return &ExcelFile{
+			File: fn.Panic1(excelize.OpenFile(path, *opt)),
+		}
+	}
+	m["themeColor"] = func(baseColor string, tint float64) string {
+		return excelize.ThemeColor(baseColor, tint)
+	}
+	m["coordinatesToCellName"] = func(col, row int, absCol bool, absRow bool) string {
+		return fn.Panic1(excelize.CoordinatesToCellName(col, row, absCol, absRow))
+	}
+	m["cellNameToCoordinates"] = func(cell string) Coordinate {
+		col, row := fn.Panic2(excelize.CellNameToCoordinates(cell))
+		return Coordinate{col, row}
+	}
+	m["columnNameToNumber"] = func(name string) int {
+		return fn.Panic1(excelize.ColumnNameToNumber(name))
+	}
+	m["columnNumberToName"] = func(num int) string {
+		return fn.Panic1(excelize.ColumnNumberToName(num))
+	}
+	m["joinCellName"] = func(col string, num int) string {
+		return fn.Panic1(excelize.JoinCellName(col, num))
+	}
+	m["splitCellName"] = func(cell string) Cell {
+		col, row := fn.Panic2(excelize.SplitCellName(cell))
+		return Cell{Col: col, Row: row}
+	}
+
+	engine.RegisterModule(Excel{m})
 }
 
 type Excel struct {
-	*engine.Engine
+	m map[string]any
 }
 
-func (e Excel) Name() string {
-	return "excel"
+func (x Excel) Identity() string {
+	return "go/excel"
 }
 
-func (e Excel) Initialize(engine *engine.Engine) engine.Module {
-	return Excel{Engine: engine}
+func (x Excel) Exports() map[string]any {
+	return x.m
 }
 
-func (e Excel) TypeDefine() []byte {
+func (x Excel) TypeDefine() []byte {
 	return excelizeDefine
-}
-
-func (e Excel) Open(path string, opt *excelize.Options) *ExcelFile {
-	if path == "" {
-		if opt == nil {
-			return &ExcelFile{excelize.NewFile(), e.Engine}
-		}
-		return &ExcelFile{excelize.NewFile(*opt), e.Engine}
-	}
-	if opt == nil {
-		return &ExcelFile{
-			File:   fn.Panic1(excelize.OpenFile(path)),
-			Engine: e.Engine,
-		}
-	}
-	return &ExcelFile{
-		File:   fn.Panic1(excelize.OpenFile(path, *opt)),
-		Engine: e.Engine,
-	}
-}
-func (e Excel) ThemeColor(baseColor string, tint float64) string {
-	return excelize.ThemeColor(baseColor, tint)
-}
-func (e Excel) CoordinatesToCellName(col, row int, absCol bool, absRow bool) string {
-	return fn.Panic1(excelize.CoordinatesToCellName(col, row, absCol, absRow))
-}
-func (e Excel) CellNameToCoordinates(cell string) Coordinate {
-	col, row := fn.Panic2(excelize.CellNameToCoordinates(cell))
-	return Coordinate{col, row}
-}
-func (e Excel) ColumnNameToNumber(name string) int {
-	return fn.Panic1(excelize.ColumnNameToNumber(name))
-}
-func (e Excel) ColumnNumberToName(num int) string {
-	return fn.Panic1(excelize.ColumnNumberToName(num))
-}
-func (e Excel) JoinCellName(col string, num int) string {
-	return fn.Panic1(excelize.JoinCellName(col, num))
-}
-func (e Excel) SplitCellName(cell string) Cell {
-	col, row := fn.Panic2(excelize.SplitCellName(cell))
-	return Cell{Col: col, Row: row}
 }
 
 type (

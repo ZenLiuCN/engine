@@ -9,7 +9,6 @@ import (
 
 type ExcelFile struct {
 	*excelize.File
-	*engine.Engine
 }
 
 func (s *ExcelFile) Close() {
@@ -47,15 +46,16 @@ func (s *ExcelFile) Write(w *engine.Buffer, opt *excelize.Options) {
 	}
 }
 
-func (s *ExcelFile) WriteToBuffer(opt *excelize.Options) goja.Value {
+func (s *ExcelFile) WriteBinary(opt *excelize.Options) []byte {
 	buf := engine.GetBytesBuffer()
+	defer engine.PutBytesBuffer(buf)
 	buf.Reset()
 	if opt != nil {
 		fn.Panic(s.File.Write(buf, *opt))
 	} else {
 		fn.Panic(s.File.Write(buf))
 	}
-	return s.Engine.ToValue(s.Engine.NewArrayBuffer(buf.Bytes()))
+	return buf.Bytes()
 }
 
 func (s *ExcelFile) NewStreamWriter(sheet string) *excelize.StreamWriter {

@@ -1,104 +1,128 @@
+declare module "go/crypto" {
+    // @ts-ignore
+    import {Hash, HashFunc} from "go/hash"
 
-declare interface CipherAlg{}
-declare interface BlockMode{}
-declare interface StreamMode{}
-declare interface AEADMode{}
-declare interface PaddingMode{}
-declare interface PrivateKey {
-    /**
-     * 0: empty
-     *
-     * 1: RSA
-     *
-     * 2: ECDH
-     *
-     * 3: ECDSA
-     *
-     * 4: ED25519
-     */
-    readonly Alg: 0 | 1 | 2 | 3 | 4
+    export interface CipherAlg {
+    }
 
-    /**
-     * serialize to pem bytes
-     */
-    bytes(): Uint8Array
+    export interface BlockMode {
+    }
 
-    /**
-     * deserialize from pem bytes
-     */
-    load(bin: Uint8Array)
+    export interface StreamMode {
+    }
 
-    public(): PublicKey
+    export interface AEADMode {
+    }
 
-    equal(pk: PrivateKey): boolean
-}
-declare interface PublicKey {
-    /**
-     * 0: empty
-     *
-     * 1: RSA
-     *
-     * 2: ECDH
-     *
-     * 3: ECDSA
-     *
-     * 4: ED25519
-     */
-    readonly Alg: 0 | 1 | 2 | 3 | 4
+    export interface PaddingMode {
+    }
 
-    /**
-     * serialize to pem bytes
-     */
-    bytes(): Uint8Array
+    export interface PrivateKey {
+        /**
+         * 0: empty
+         *
+         * 1: RSA
+         *
+         * 2: ECDH
+         *
+         * 3: ECDSA
+         *
+         * 4: ED25519
+         */
+        readonly Alg: 0 | 1 | 2 | 3 | 4
 
-    /**
-     * deserialize from pem bytes
-     */
-    load(bin: Uint8Array)
+        /**
+         * serialize to pem bytes
+         */
+        bytes(): Uint8Array
 
-    equal(pk: PublicKey): boolean
-}
+        /**
+         * deserialize from pem bytes
+         */
+        load(bin: Uint8Array)
 
-declare interface Cipher {
-    crypto(key,src: Uint8Array): Uint8Array
-}
+        public(): PublicKey
 
-declare const Symmetric: {
-    aes(): CipherAlg
-    des(): CipherAlg
-    cbc(iv:Uint8Array,encrypt:boolean): BlockMode
-    ecb(encrypt:boolean): BlockMode
-    cfb(iv:Uint8Array,encrypt:boolean): StreamMode
-    ctr(iv:Uint8Array): StreamMode
-    ofb(iv:Uint8Array): StreamMode
-    gcm(): AEADMode
-    pkcs7(): PaddingMode
-    pkcs5(): PaddingMode
-    cipher(conf:{
-        cipher:  CipherAlg
+        equal(pk: PrivateKey): boolean
+    }
+
+    export interface PublicKey {
+        /**
+         * 0: empty
+         *
+         * 1: RSA
+         *
+         * 2: ECDH
+         *
+         * 3: ECDSA
+         *
+         * 4: ED25519
+         */
+        readonly Alg: 0 | 1 | 2 | 3 | 4
+
+        /**
+         * serialize to pem bytes
+         */
+        bytes(): Uint8Array
+
+        /**
+         * deserialize from pem bytes
+         */
+        load(bin: Uint8Array)
+
+        equal(pk: PublicKey): boolean
+    }
+
+    export interface Cipher {
+        crypto(key, src: Uint8Array): Uint8Array
+    }
+
+    export function aes(): CipherAlg
+
+    export function des(): CipherAlg
+
+    export function cbc(iv: Uint8Array, encrypt: boolean): BlockMode
+
+    export function ecb(encrypt: boolean): BlockMode
+
+    export function cfb(iv: Uint8Array, encrypt: boolean): StreamMode
+
+    export function ctr(iv: Uint8Array): StreamMode
+
+    export function ofb(iv: Uint8Array): StreamMode
+
+    export function gcm(): AEADMode
+
+    export function pkcs7(): PaddingMode
+
+    export function pkcs5(): PaddingMode
+
+    export function cipher(conf: {
+        cipher: CipherAlg
         encrypt: boolean
-        block?:   BlockMode
-        stream?:  StreamMode
+        block?: BlockMode
+        stream?: StreamMode
         padding?: PaddingMode
-        aead?   : AEADMode
-        nonce?  : Uint8Array
-        label?  : Uint8Array
-    }):Cipher
-}
-declare const Asymmetric: {
+        aead?: AEADMode
+        nonce?: Uint8Array
+        label?: Uint8Array
+    }): Cipher
 
     /**
      * @param mode 1:RSA 2: ECDH 3: ECDSA 4: ED25519
      * @param opt
      */
-    generateKey(mode: 1 | 2 | 3 | 4, opt: {
+    export function generateKey(mode: 1 | 2 | 3 | 4, opt: {
         //for rsa
         bits?: number
         //for ECC, X25519 only for ecdh , P224 only for ECDSA
         curve?: 'P256' | 'P384' | 'P521' | 'X25519' | 'P224'
     }): PrivateKey
-    parsePrivateKey(pem: Uint8Array): PrivateKey
-    parsePublicKey(pem: Uint8Array): PublicKey
+
+    export function parsePrivateKey(pem: Uint8Array): PrivateKey
+
+    export function parsePublicKey(pem: Uint8Array): PublicKey
+
     /**
      * signature for data
      * @param key the private key
@@ -107,11 +131,12 @@ declare const Asymmetric: {
      * @param opt use PSS alg when opt presents, otherwise use PKCS1v15, optional for RSA
      * @returns binary signature
      */
-    sign(key: PrivateKey, data: Uint8Array, hash?: Hash, opt?: {
+    export function sign(key: PrivateKey, data: Uint8Array, hash?: Hash, opt?: {
         //-1: length equal hash  0: auto, default  positive: salt length
         saltLength?: number
         hash: Hash
     }): Uint8Array
+
     /**
      * verify a signature
      * @param key the public key
@@ -121,23 +146,26 @@ declare const Asymmetric: {
      * @param opt use PSS alg when opt presents, otherwise use PKCS1v15, optional for RSA
      * @returns valid or not
      */
-    verify(key: PublicKey, data, sign: Uint8Array, hash?: Hash, opt?: {
+    export function verify(key: PublicKey, data, sign: Uint8Array, hash?: Hash, opt?: {
         //-1: length equal hash  0: auto, default  positive: salt length
         saltLength?: number
         hash: Hash
     }): boolean
+
     /**
      *
      * @param key support ECDSA and RSA
      * @param data the plain data
      * @param hash the HashFunc for RSA OAEP encrypt
      */
-    encrypt(key: PublicKey, data: Uint8Array, hash?: HashFunc): Uint8Array
+    export function encrypt(key: PublicKey, data: Uint8Array, hash?: HashFunc): Uint8Array
+
     /**
      *
      * @param key support ECDSA and RSA
      * @param secret the encrypted data
      * @param hash the HashFunc for RSA OAEP decrypt
      */
-    decrypt(key: PrivateKey, secret: Uint8Array, hash?: HashFunc): Uint8Array
+    export function decrypt(key: PrivateKey, secret: Uint8Array, hash?: HashFunc): Uint8Array
+
 }
