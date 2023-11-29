@@ -1,19 +1,19 @@
-package os
+package engine
 
 import (
 	"bytes"
 	"errors"
 	"fmt"
-	"github.com/ZenLiuCN/engine"
 	"golang.org/x/text/encoding"
 	"os/exec"
 	"path"
+	"path/filepath"
 	"strings"
 	"time"
 )
 
 func fixPath(p string) string {
-	return path.Join(strings.Split(p, engine.GetPathSeparator())...)
+	return path.Clean(filepath.ToSlash(p))
 }
 
 type ExecOption struct {

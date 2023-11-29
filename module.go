@@ -28,6 +28,7 @@ func init() {
 	Register(&Require{})
 
 	RegisterModule(BufferModule{})
+	RegisterModule(&Os{})
 	RegisterModule(&IoModule{})
 	RegisterModule(&EngineModule{})
 	RegisterModule(&CryptoModule{})

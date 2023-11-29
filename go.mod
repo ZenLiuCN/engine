@@ -11,8 +11,8 @@ require (
 	github.com/jackc/pgx/v5 v5.5.0
 	github.com/jmoiron/sqlx v1.3.5
 	github.com/xuri/excelize/v2 v2.8.0
-	golang.org/x/crypto v0.15.0
-	golang.org/x/sys v0.14.0
+	golang.org/x/crypto v0.16.0
+	golang.org/x/sys v0.15.0
 	golang.org/x/text v0.14.0
 )
 
@@ -22,7 +22,7 @@ require (
 	github.com/dustin/go-humanize v1.0.1 // indirect
 	github.com/ethereum/go-ethereum v1.13.5 // indirect
 	github.com/go-sourcemap/sourcemap v2.1.3+incompatible // indirect
-	github.com/google/pprof v0.0.0-20231101202521-4ca4178f5c7a // indirect
+	github.com/google/pprof v0.0.0-20231127191134-f3a68a39ae15 // indirect
 	github.com/google/uuid v1.4.0 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20221227161230-091c0ba34f0a // indirect
@@ -35,7 +35,7 @@ require (
 	github.com/xuri/efp v0.0.0-20231025114914-d1ff6096ae53 // indirect
 	github.com/xuri/nfp v0.0.0-20230919160717-d98342af3f05 // indirect
 	golang.org/x/image v0.12.0 // indirect
-	golang.org/x/net v0.18.0 // indirect
+	golang.org/x/net v0.19.0 // indirect
 	golang.org/x/sync v0.5.0 // indirect
 	modernc.org/libc v1.34.11 // indirect
 	modernc.org/mathutil v1.6.0 // indirect

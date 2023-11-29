@@ -68,7 +68,7 @@ func instanceGoModule(engine *Engine, module GoModule) (*goja.Object, error) {
 
 // DumpDefines to path, global.d.ts contains top level types , pkg_name.d.ts contains go modules
 func DumpDefines(path string) {
-	_ = os.WriteFile(filepath.Join(path, "global.d.ts"), TypeDefines(), os.ModePerm)
+	_ = os.WriteFile(filepath.Join(path, "globals.d.ts"), TypeDefines(), os.ModePerm)
 	for name, bytes := range GoModuleDefines() {
 		_ = os.WriteFile(filepath.Join(path, name+".d.ts"), bytes, os.ModePerm)
 	}

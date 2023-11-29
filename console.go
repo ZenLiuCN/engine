@@ -3,14 +3,24 @@ package engine
 import (
 	"bytes"
 	"context"
+	_ "embed"
 	"fmt"
 	"github.com/dop251/goja"
 	"log/slog"
 	"strings"
 )
 
+var (
+	//go:embed globals.d.ts
+	globalsDefine []byte
+)
+
 type Console struct {
 	*slog.Logger
+}
+
+func (s Console) TypeDefine() []byte {
+	return globalsDefine
 }
 
 func NewConsole(logger *slog.Logger) *Console {
@@ -70,6 +80,9 @@ func NewBufferConsole() *BufferConsole {
 func (s *BufferConsole) Name() string {
 	return "console"
 }
+func (s *BufferConsole) TypeDefine() []byte {
+	return globalsDefine
+}
 func (s *BufferConsole) log(level slog.Level, args ...goja.Value) {
 	s.Buffer.WriteRune('[')
 	s.Buffer.WriteString(level.String())
@@ -84,6 +97,7 @@ func (s *BufferConsole) log(level slog.Level, args ...goja.Value) {
 	s.Buffer.WriteRune('\n')
 
 }
+
 func (s *BufferConsole) Assert(cond bool, args ...goja.Value) {
 	if !cond {
 		s.Error(args...)

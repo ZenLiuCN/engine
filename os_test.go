@@ -1,13 +1,12 @@
-package os
+package engine
 
 import (
-	"github.com/ZenLiuCN/engine"
 	"github.com/ZenLiuCN/fn"
 	"testing"
 )
 
 func TestConstant(t *testing.T) {
-	vm := engine.Get()
+	vm := Get()
 	defer vm.Free()
 	println(fn.Panic1(
 		vm.RunJavaScript(

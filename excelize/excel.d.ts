@@ -1,4 +1,4 @@
-declare module "go/execl" {
+declare module "go/excel" {
     // @ts-ignore
     import {Buffer} from "go/buffer"
     export function open(path?: string, option?: Option): ExcelFile

@@ -1,8 +1,7 @@
-package os
+package engine
 
 import (
 	_ "embed"
-	"github.com/ZenLiuCN/engine"
 	"github.com/ZenLiuCN/fn"
 	"github.com/dop251/goja"
 	"io"
@@ -10,10 +9,6 @@ import (
 	"path/filepath"
 	"strings"
 )
-
-func init() {
-	engine.RegisterModule(&Os{})
-}
 
 var (
 	//go:embed os.d.ts
@@ -31,14 +26,14 @@ func (o *Os) Exports() map[string]any {
 	return nil
 }
 
-func (o *Os) ExportsWithEngine(e *engine.Engine) map[string]any {
+func (o *Os) ExportsWithEngine(e *Engine) map[string]any {
 	m := map[string]any{}
-	m["root"] = engine.GetRoot()
-	m["simpleName"] = engine.GetName()
-	m["ext"] = engine.GetExt()
-	m["executable"] = engine.GetExecutable()
-	m["pathSeparator"] = engine.GetPathSeparator()
-	m["pathListSeparator"] = engine.GetPathListSeparator()
+	m["root"] = root
+	m["simpleName"] = name
+	m["ext"] = ext
+	m["executable"] = executable
+	m["pathSeparator"] = pathSeparator
+	m["pathListSeparator"] = pathListSeparator
 
 	m["expand"] = func(path string) string {
 		return expand(path)
@@ -47,7 +42,7 @@ func (o *Os) ExportsWithEngine(e *engine.Engine) map[string]any {
 		src := os.Getenv(key)
 		tar := fn.SliceJoinRune(value, os.PathListSeparator, fn.Identity[string])
 		if len(src) != 0 {
-			tar = tar + engine.GetPathListSeparator() + src
+			tar = tar + pathListSeparator + src
 		}
 		fn.Panic(os.Setenv(key, tar))
 	}
@@ -55,7 +50,7 @@ func (o *Os) ExportsWithEngine(e *engine.Engine) map[string]any {
 		src := os.Getenv(key)
 		tar := fn.SliceJoinRune(value, os.PathListSeparator, expand)
 		if len(src) != 0 {
-			tar = tar + engine.GetPathListSeparator() + src
+			tar = tar + pathListSeparator + src
 		}
 		fn.Panic(os.Setenv(key, tar))
 	}
@@ -63,7 +58,7 @@ func (o *Os) ExportsWithEngine(e *engine.Engine) map[string]any {
 		src := os.Getenv(key)
 		tar := fn.SliceJoinRune(value, os.PathListSeparator, fn.Identity[string])
 		if len(src) != 0 {
-			tar = src + engine.GetPathListSeparator() + tar
+			tar = src + pathListSeparator + tar
 		}
 		fn.Panic(os.Setenv(key, tar))
 	}
@@ -71,7 +66,7 @@ func (o *Os) ExportsWithEngine(e *engine.Engine) map[string]any {
 		src := os.Getenv(key)
 		tar := fn.SliceJoinRune(value, os.PathListSeparator, expand)
 		if len(src) != 0 {
-			tar = src + engine.GetPathListSeparator() + tar
+			tar = src + pathListSeparator + tar
 		}
 		fn.Panic(os.Setenv(key, tar))
 	}
@@ -101,11 +96,11 @@ func (o *Os) ExportsWithEngine(e *engine.Engine) map[string]any {
 		return os.Getenv(key)
 	}
 	m["evalFile"] = func(path string) any {
-		return fn.Panic1(e.Execute(engine.CompileFile(expand(path)))).Export()
+		return fn.Panic1(e.Execute(CompileFile(expand(path)))).Export()
 	}
 	m["evalFiles"] = func(paths ...string) (r []any) {
 		for _, s := range paths {
-			r = append(r, fn.Panic1(e.Execute(engine.CompileFile(expand(s)))).Export())
+			r = append(r, fn.Panic1(e.Execute(CompileFile(expand(s)))).Export())
 		}
 		return
 	}
@@ -142,7 +137,6 @@ func (o *Os) ExportsWithEngine(e *engine.Engine) map[string]any {
 	m["readText"] = func(path string) string {
 		return string(fn.Panic1(os.ReadFile(expand(path))))
 	}
-
 	m["chdir"] = func(path string) {
 		fn.Panic(os.Chdir(expand(path)))
 	}
@@ -182,7 +176,7 @@ func exists(path string) bool {
 }
 func expand(path string) string {
 	if strings.HasPrefix(path, "@") {
-		return fixPath(os.ExpandEnv(filepath.Join(engine.GetRoot(), strings.TrimPrefix(path, "@"))))
+		return fixPath(os.ExpandEnv(filepath.Join(root, strings.TrimPrefix(path, "@"))))
 	}
 	p, e := filepath.Abs(path)
 	if e != nil {
@@ -200,16 +194,16 @@ type SubProc struct {
 }
 
 func (s SubProc) FromConsole(data []byte) []byte {
-	buf := engine.GetBytesBuffer()
-	defer engine.PutBytesBuffer(buf)
+	buf := GetBytesBuffer()
+	defer PutBytesBuffer(buf)
 	defer buf.Reset()
 	buf.Write(data)
 	fn.Panic(FromNativeConsole(buf))
 	return buf.Bytes()
 }
 func (s SubProc) ToConsole(data []byte) []byte {
-	buf := engine.GetBytesBuffer()
-	defer engine.PutBytesBuffer(buf)
+	buf := GetBytesBuffer()
+	defer PutBytesBuffer(buf)
 	defer buf.Reset()
 	buf.Write(data)
 	fn.Panic(ToNativeConsole(buf))
