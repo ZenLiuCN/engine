@@ -8,7 +8,6 @@ import (
 	_ "github.com/ZenLiuCN/engine/os"
 	_ "github.com/ZenLiuCN/engine/sqlx"
 	"github.com/ZenLiuCN/fn"
-	"os"
 )
 
 var (
@@ -20,12 +19,12 @@ var (
 func main() {
 	flag.BoolVar(&typed, "t", false, "use typescript source")
 	flag.BoolVar(&source, "s", false, "use script source,default false")
-	flag.BoolVar(&define, "d", false, "export define to file,default false")
+	flag.BoolVar(&define, "d", false, "export defines to files,default false")
 	flag.Parse()
 	args := flag.Args()
 	switch {
-	case len(args) == 1 && define:
-		_ = os.WriteFile(args[0], engine.TypeDefines(), os.ModePerm)
+	case define:
+		engine.DumpDefines(".")
 	case len(args) == 1 && !source:
 		vm := engine.Get()
 		defer vm.Free()
