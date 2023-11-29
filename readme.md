@@ -2,6 +2,13 @@
 
 A javascript Engine base on [Goja](https://github.com/dop251/goja) inspired by [k6](https://github.com/grafana/k6)
 
+## Limitations and modifications
+
++ Top level async/await not supported by Goja
++ ES6+ partially implemented by Goja
++ Async operations should wait for ends with `engine.StopEventLoopXXX`
++ Module includes remote/local/GoModule support by translate to CommonJs (EsBuild)
+
 ## Extensions
 
 ### Engine
@@ -32,47 +39,54 @@ Simple support for CommonJs, ES script and TypeScript also compiled as CJS scrip
 2. InitializeModule:  a module instanced when register to an Engine
 3. TopModule: a module register some top level function or objects
 4. TypeDefined: a module contains `d.ts` data
+5. GoModule: a module for expose golang into js (use by import module)
 
 ### compiler module
 
-built-in compiler for both typescript and javascript
++ `go/compiler` built-in compiler for both typescript and javascript
++ `go/esbuild` expose esbuild to js
+
 **components**
 
 + [esbuild](https://github.com/evanw/esbuild)
 
 ### engine module
 
-use engine in scripts, _maybe not to use too many russian dolls_
++ `go/engine`: use engine in scripts, _maybe not to use too many russian dolls_
 
 ### console module
 
-slog console or byte buffer console
++ global : slog console or byte buffer console
 
 ### buffer module
 
-golang byte slice and bytes.Buffer
++ `go/buffer`: golang byte slice and bytes.Buffer
 
-### hasher module
+### hash module
 
-golang codec and hash functions
++ `go/hash`:golang hash functions
++ `go/codec`:golang codec functions, include base64 ...
 
 ### crypto module
 
-golang crypto
++ `go/crypto` : golang crypto
 
-**almost done**
+### os module
+
++ `go/os` : golang os , not full functions
+
+### io module
+
++ `go/io` : golang io module
 
 ## Modules
 
 pluggable modules
 
-### Os
-
-Operating system api with environment control and simple file api
-
 ### sqlx
 
-sqlx with `pgx` `mysql` and `sqlite` driver
++ `go/sqlx`: sqlx with `pgx` `mysql` and `sqlite` driver
+
 **components**
 
 + [sqlx](https://github.com/jmoiron/sqlx),
@@ -81,10 +95,31 @@ sqlx with `pgx` `mysql` and `sqlite` driver
 
 ### Excelize
 
-excel reading or generate
++ `go/excel`: excel reading or generate
+
 **components**
 
 + [excelize](https://github.com/xuri/excelize/)
+
+### fetch
+
++ `go/fetch`: base function done, improve for compact with browser fetch.
+
+### pug
+
++ `go/pug`: jade(pug) compiler
+
+ **components**
+
++ [jade](https://github.com/Joker/jade)
+
+### minify
+
++ `go/minify`: file minify
+
+**components**
+
++ [minify](https://github.com/tdewolff/minify)
 
 ### pdf
 
@@ -93,9 +128,6 @@ dev
 ### jose
 
 draft
-
-### fetch
-base function done, improve for compact with browser fetch.
 
 ### http
 
