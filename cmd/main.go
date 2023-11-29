@@ -5,6 +5,8 @@ import (
 	"github.com/ZenLiuCN/engine"
 	_ "github.com/ZenLiuCN/engine/excelize"
 	_ "github.com/ZenLiuCN/engine/fetch"
+	_ "github.com/ZenLiuCN/engine/minify"
+	_ "github.com/ZenLiuCN/engine/pug"
 	_ "github.com/ZenLiuCN/engine/sqlx"
 	"github.com/ZenLiuCN/fn"
 )
