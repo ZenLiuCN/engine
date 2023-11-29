@@ -13,7 +13,7 @@ type Code struct {
 }
 
 func CompileFile(path string) *Code {
-	if len(path) > 3 && strings.EqualFold(path[len(path)-3:], ".js") {
+	if len(path) > 3 && (strings.EqualFold(path[len(path)-3:], ".js") || strings.EqualFold(path[len(path)-3:], ".cjs") || strings.EqualFold(path[len(path)-3:], ".mjs")) {
 		data := string(fn.Panic1(os.ReadFile(path)))
 		return &Code{fn.Panic1(goja.CompileAST(fn.Panic1(goja.Parse(path, CompileJs(data))), false))}
 	}

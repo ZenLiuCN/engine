@@ -52,55 +52,55 @@ declare module "go/esbuild" {
     }
 
     export interface TransformOptions {
-        color: StderrColor // Documentation: https://esbuild.github.io/api/#color
-        logLevel: LogLevel // Documentation: https://esbuild.github.io/api/#log-level
-        logLimit: number // Documentation: https://esbuild.github.io/api/#log-limit
-        logOverride: { [key: string]: LogLevel } // Documentation: https://esbuild.github.io/api/#log-override
+        color?: StderrColor // Documentation: https://esbuild.github.io/api/#color
+        logLevel?: LogLevel // Documentation: https://esbuild.github.io/api/#log-level
+        logLimit?: number // Documentation: https://esbuild.github.io/api/#log-limit
+        logOverride?: { [key: string]: LogLevel } // Documentation: https://esbuild.github.io/api/#log-override
 
-        sourcemap: SourceMap // Documentation: https://esbuild.github.io/api/#sourcemap
-        sourceRoot: string // Documentation: https://esbuild.github.io/api/#source-root
-        sourcesContent: SourcesContent // Documentation: https://esbuild.github.io/api/#sources-content
+        sourcemap?: SourceMap // Documentation: https://esbuild.github.io/api/#sourcemap
+        sourceRoot?: string // Documentation: https://esbuild.github.io/api/#source-root
+        sourcesContent?: SourcesContent // Documentation: https://esbuild.github.io/api/#sources-content
 
-        target: Target // Documentation: https://esbuild.github.io/api/#target
-        Engines: Engine[]        // Documentation: https://esbuild.github.io/api/#target
-        Supported: { [key: string]: boolean } // Documentation: https://esbuild.github.io/api/#supported
+        target?: Target // Documentation: https://esbuild.github.io/api/#target
+        engines?: Engine[]        // Documentation: https://esbuild.github.io/api/#target
+        supported?: { [key: string]: boolean } // Documentation: https://esbuild.github.io/api/#supported
 
-        platform: Platform // Documentation: https://esbuild.github.io/api/#platform
-        format: Format // Documentation: https://esbuild.github.io/api/#format
-        globalName: string // Documentation: https://esbuild.github.io/api/#global-name
+        platform?: Platform // Documentation: https://esbuild.github.io/api/#platform
+        format?: Format // Documentation: https://esbuild.github.io/api/#format
+        globalName?: string // Documentation: https://esbuild.github.io/api/#global-name
 
-        mangleProps: string // Documentation: https://esbuild.github.io/api/#mangle-props
-        reserveProps: string // Documentation: https://esbuild.github.io/api/#mangle-props
-        mangleQuoted: MangleQuoted // Documentation: https://esbuild.github.io/api/#mangle-props
-        MangleCache: { [key: string]: any }// Documentation: https://esbuild.github.io/api/#mangle-props
-        drop: Drop // Documentation: https://esbuild.github.io/api/#drop
-        dropLabels: string[]               // Documentation: https://esbuild.github.io/api/#drop-labels
-        minifyWhitespace: boolean // Documentation: https://esbuild.github.io/api/#minify
-        minifyIdentifiers: boolean // Documentation: https://esbuild.github.io/api/#minify
-        minifySyntax: boolean // Documentation: https://esbuild.github.io/api/#minify
-        lineLimit: number //int // Documentation: https://esbuild.github.io/api/#line-limit
-        charset: Charset // Documentation: https://esbuild.github.io/api/#charset
-        treeShaking: TreeShaking // Documentation: https://esbuild.github.io/api/#tree-shaking
-        ignoreAnnotations: boolean // Documentation: https://esbuild.github.io/api/#ignore-annotations
-        legalComments: LegalComments // Documentation: https://esbuild.github.io/api/#legal-comments
+        mangleProps?: string // Documentation: https://esbuild.github.io/api/#mangle-props
+        reserveProps?: string // Documentation: https://esbuild.github.io/api/#mangle-props
+        mangleQuoted?: MangleQuoted // Documentation: https://esbuild.github.io/api/#mangle-props
+        mangleCache?: Record<string, any>// Documentation: https://esbuild.github.io/api/#mangle-props
+        drop?: Drop // Documentation: https://esbuild.github.io/api/#drop
+        dropLabels?: string[]               // Documentation: https://esbuild.github.io/api/#drop-labels
+        minifyWhitespace?: boolean // Documentation: https://esbuild.github.io/api/#minify
+        minifyIdentifiers?: boolean // Documentation: https://esbuild.github.io/api/#minify
+        minifySyntax?: boolean // Documentation: https://esbuild.github.io/api/#minify
+        lineLimit?: number //int // Documentation: https://esbuild.github.io/api/#line-limit
+        charset?: Charset // Documentation: https://esbuild.github.io/api/#charset
+        treeShaking?: TreeShaking // Documentation: https://esbuild.github.io/api/#tree-shaking
+        ignoreAnnotations?: boolean // Documentation: https://esbuild.github.io/api/#ignore-annotations
+        legalComments?: LegalComments // Documentation: https://esbuild.github.io/api/#legal-comments
 
-        jSX: JSX // Documentation: https://esbuild.github.io/api/#jsx
-        jSXFactory: string // Documentation: https://esbuild.github.io/api/#jsx-factory
-        jSXFragment: string // Documentation: https://esbuild.github.io/api/#jsx-fragment
-        jSXImportSource: string // Documentation: https://esbuild.github.io/api/#jsx-import-source
-        jSXDev: boolean // Documentation: https://esbuild.github.io/api/#jsx-dev
-        jSXSideEffects: boolean // Documentation: https://esbuild.github.io/api/#jsx-side-effects
+        jsx?: JSX // Documentation: https://esbuild.github.io/api/#jsx
+        jsxFactory?: string // Documentation: https://esbuild.github.io/api/#jsx-factory
+        jsxFragment?: string // Documentation: https://esbuild.github.io/api/#jsx-fragment
+        jsxImportSource?: string // Documentation: https://esbuild.github.io/api/#jsx-import-source
+        jsxDev?: boolean // Documentation: https://esbuild.github.io/api/#jsx-dev
+        jsxSideEffects?: boolean // Documentation: https://esbuild.github.io/api/#jsx-side-effects
 
-        tsconfigRaw: string // Documentation: https://esbuild.github.io/api/#tsconfig-raw
-        banner: string // Documentation: https://esbuild.github.io/api/#banner
-        footer: string // Documentation: https://esbuild.github.io/api/#footer
+        tsconfigRaw?: string // Documentation: https://esbuild.github.io/api/#tsconfig-raw
+        banner?: string // Documentation: https://esbuild.github.io/api/#banner
+        footer?: string // Documentation: https://esbuild.github.io/api/#footer
 
-        define: Record<string, string>// Documentation: https://esbuild.github.io/api/#define
-        pure: string[] // Documentation: https://esbuild.github.io/api/#pure
-        keepNames: boolean // Documentation: https://esbuild.github.io/api/#keep-names
+        define?: Record<string, string>// Documentation: https://esbuild.github.io/api/#define
+        pure?: string[] // Documentation: https://esbuild.github.io/api/#pure
+        keepNames?: boolean // Documentation: https://esbuild.github.io/api/#keep-names
 
-        sourcefile: string // Documentation: https://esbuild.github.io/api/#sourcefile
-        loader: Loader // Documentation: https://esbuild.github.io/api/#loader
+        sourcefile?: string // Documentation: https://esbuild.github.io/api/#sourcefile
+        loader?: Loader // Documentation: https://esbuild.github.io/api/#loader
     }
 
     export interface TransformResult {
@@ -144,83 +144,83 @@ declare module "go/esbuild" {
     }
 
     export interface BuildOptions {
-        color: StderrColor // Documentation: https://esbuild.github.io/api/#color
-        logLevel: LogLevel // Documentation: https://esbuild.github.io/api/#log-level
-        logLimit: number // Documentation: https://esbuild.github.io/api/#log-limit
-        logOverride: Record<string, LogLevel> // Documentation: https://esbuild.github.io/api/#log-override
+        color?: StderrColor // Documentation: https://esbuild.github.io/api/#color
+        logLevel?: LogLevel // Documentation: https://esbuild.github.io/api/#log-level
+        logLimit?: number // Documentation: https://esbuild.github.io/api/#log-limit
+        logOverride?: Record<string, LogLevel> // Documentation: https://esbuild.github.io/api/#log-override
 
-        sourcemap: SourceMap // Documentation: https://esbuild.github.io/api/#sourcemap
-        sourceRoot: string // Documentation: https://esbuild.github.io/api/#source-root
-        sourcesContent: SourcesContent // Documentation: https://esbuild.github.io/api/#sources-content
+        sourcemap?: SourceMap // Documentation: https://esbuild.github.io/api/#sourcemap
+        sourceRoot?: string // Documentation: https://esbuild.github.io/api/#source-root
+        sourcesContent?: SourcesContent // Documentation: https://esbuild.github.io/api/#sources-content
 
-        target: Target // Documentation: https://esbuild.github.io/api/#target
-        engines: Engine[]        // Documentation: https://esbuild.github.io/api/#target
-        supported: Record<string, boolean> // Documentation: https://esbuild.github.io/api/#supported
+        target?: Target // Documentation: https://esbuild.github.io/api/#target
+        engines?: Engine[]        // Documentation: https://esbuild.github.io/api/#target
+        supported?: Record<string, boolean> // Documentation: https://esbuild.github.io/api/#supported
 
-        mangleProps: string // Documentation: https://esbuild.github.io/api/#mangle-props
-        reserveProps: string // Documentation: https://esbuild.github.io/api/#mangle-props
-        mangleQuoted: MangleQuoted // Documentation: https://esbuild.github.io/api/#mangle-props
-        mangleCache: Record<string, any> // Documentation: https://esbuild.github.io/api/#mangle-props
-        drop: Drop // Documentation: https://esbuild.github.io/api/#drop
-        dropLabels: string[]               // Documentation: https://esbuild.github.io/api/#drop-labels
-        minifyWhitespace: boolean // Documentation: https://esbuild.github.io/api/#minify
-        minifyIdentifiers: boolean // Documentation: https://esbuild.github.io/api/#minify
-        minifySyntax: boolean // Documentation: https://esbuild.github.io/api/#minify
-        lineLimit: number // Documentation: https://esbuild.github.io/api/#line-limit
-        charset: Charset // Documentation: https://esbuild.github.io/api/#charset
-        treeShaking: TreeShaking // Documentation: https://esbuild.github.io/api/#tree-shaking
-        ignoreAnnotations: boolean // Documentation: https://esbuild.github.io/api/#ignore-annotations
-        legalComments: LegalComments // Documentation: https://esbuild.github.io/api/#legal-comments
+        mangleProps?: string // Documentation: https://esbuild.github.io/api/#mangle-props
+        reserveProps?: string // Documentation: https://esbuild.github.io/api/#mangle-props
+        mangleQuoted?: MangleQuoted // Documentation: https://esbuild.github.io/api/#mangle-props
+        mangleCache?: Record<string, any> // Documentation: https://esbuild.github.io/api/#mangle-props
+        drop?: Drop // Documentation: https://esbuild.github.io/api/#drop
+        dropLabels?: string[]               // Documentation: https://esbuild.github.io/api/#drop-labels
+        minifyWhitespace?: boolean // Documentation: https://esbuild.github.io/api/#minify
+        minifyIdentifiers?: boolean // Documentation: https://esbuild.github.io/api/#minify
+        minifySyntax?: boolean // Documentation: https://esbuild.github.io/api/#minify
+        lineLimit?: number // Documentation: https://esbuild.github.io/api/#line-limit
+        charset?: Charset // Documentation: https://esbuild.github.io/api/#charset
+        treeShaking?: TreeShaking // Documentation: https://esbuild.github.io/api/#tree-shaking
+        ignoreAnnotations?: boolean // Documentation: https://esbuild.github.io/api/#ignore-annotations
+        legalComments?: LegalComments // Documentation: https://esbuild.github.io/api/#legal-comments
 
-        jSX: JSX // Documentation: https://esbuild.github.io/api/#jsx-mode
-        jSXFactory: string // Documentation: https://esbuild.github.io/api/#jsx-factory
-        jSXFragment: string // Documentation: https://esbuild.github.io/api/#jsx-fragment
-        jSXImportSource: string // Documentation: https://esbuild.github.io/api/#jsx-import-source
-        jSXDev: boolean // Documentation: https://esbuild.github.io/api/#jsx-dev
-        jSXSideEffects: boolean // Documentation: https://esbuild.github.io/api/#jsx-side-effects
+        jsx?: JSX // Documentation: https://esbuild.github.io/api/#jsx-mode
+        jsxFactory?: string // Documentation: https://esbuild.github.io/api/#jsx-factory
+        jsxFragment?: string // Documentation: https://esbuild.github.io/api/#jsx-fragment
+        jsxImportSource?: string // Documentation: https://esbuild.github.io/api/#jsx-import-source
+        jsxDev?: boolean // Documentation: https://esbuild.github.io/api/#jsx-dev
+        jsxSideEffects?: boolean // Documentation: https://esbuild.github.io/api/#jsx-side-effects
 
-        define: Record<string, string> // Documentation: https://esbuild.github.io/api/#define
-        pure: string[]          // Documentation: https://esbuild.github.io/api/#pure
-        keepNames: boolean // Documentation: https://esbuild.github.io/api/#keep-names
+        define?: Record<string, string> // Documentation: https://esbuild.github.io/api/#define
+        pure?: string[]          // Documentation: https://esbuild.github.io/api/#pure
+        keepNames?: boolean // Documentation: https://esbuild.github.io/api/#keep-names
 
-        globalName: string // Documentation: https://esbuild.github.io/api/#global-name
-        bundle: boolean // Documentation: https://esbuild.github.io/api/#bundle
-        preserveSymlinks: boolean // Documentation: https://esbuild.github.io/api/#preserve-symlinks
-        splitting: boolean // Documentation: https://esbuild.github.io/api/#splitting
-        outfile: string // Documentation: https://esbuild.github.io/api/#outfile
-        metafile: boolean // Documentation: https://esbuild.github.io/api/#metafile
-        outdir: string // Documentation: https://esbuild.github.io/api/#outdir
-        outbase: string // Documentation: https://esbuild.github.io/api/#outbase
-        absWorkingDir: string // Documentation: https://esbuild.github.io/api/#working-directory
-        platform: Platform // Documentation: https://esbuild.github.io/api/#platform
-        format: Format // Documentation: https://esbuild.github.io/api/#format
-        external: string[]          // Documentation: https://esbuild.github.io/api/#external
-        packages: Packages // Documentation: https://esbuild.github.io/api/#packages
-        alias: Record<string, string> // Documentation: https://esbuild.github.io/api/#alias
-        mainFields: string[]          // Documentation: https://esbuild.github.io/api/#main-fields
-        conditions: string[]          // Documentation: https://esbuild.github.io/api/#conditions
-        loader: Record<string, Loader> // Documentation: https://esbuild.github.io/api/#loader
-        resolveExtensions: string[]          // Documentation: https://esbuild.github.io/api/#resolve-extensions
-        tsconfig: string // Documentation: https://esbuild.github.io/api/#tsconfig
-        tsconfigRaw: string // Documentation: https://esbuild.github.io/api/#tsconfig-raw
-        outExtension: Record<string, string> // Documentation: https://esbuild.github.io/api/#out-extension
-        publicPath: string // Documentation: https://esbuild.github.io/api/#public-path
-        inject: string[]          // Documentation: https://esbuild.github.io/api/#inject
-        banner: Record<string, string> // Documentation: https://esbuild.github.io/api/#banner
-        footer: Record<string, string> // Documentation: https://esbuild.github.io/api/#footer
-        nodePaths: string[]          // Documentation: https://esbuild.github.io/api/#node-paths
+        globalName?: string // Documentation: https://esbuild.github.io/api/#global-name
+        bundle?: boolean // Documentation: https://esbuild.github.io/api/#bundle
+        preserveSymlinks?: boolean // Documentation: https://esbuild.github.io/api/#preserve-symlinks
+        splitting?: boolean // Documentation: https://esbuild.github.io/api/#splitting
+        outfile?: string // Documentation: https://esbuild.github.io/api/#outfile
+        metafile?: boolean // Documentation: https://esbuild.github.io/api/#metafile
+        outdir?: string // Documentation: https://esbuild.github.io/api/#outdir
+        outbase?: string // Documentation: https://esbuild.github.io/api/#outbase
+        absWorkingDir?: string // Documentation: https://esbuild.github.io/api/#working-directory
+        platform?: Platform // Documentation: https://esbuild.github.io/api/#platform
+        format?: Format // Documentation: https://esbuild.github.io/api/#format
+        external?: string[]          // Documentation: https://esbuild.github.io/api/#external
+        packages?: Packages // Documentation: https://esbuild.github.io/api/#packages
+        alias?: Record<string, string> // Documentation: https://esbuild.github.io/api/#alias
+        mainFields?: string[]          // Documentation: https://esbuild.github.io/api/#main-fields
+        conditions?: string[]          // Documentation: https://esbuild.github.io/api/#conditions
+        loader?: Record<string, Loader> // Documentation: https://esbuild.github.io/api/#loader
+        resolveExtensions?: string[]          // Documentation: https://esbuild.github.io/api/#resolve-extensions
+        tsconfig?: string // Documentation: https://esbuild.github.io/api/#tsconfig
+        tsconfigRaw?: string // Documentation: https://esbuild.github.io/api/#tsconfig-raw
+        outExtension?: Record<string, string> // Documentation: https://esbuild.github.io/api/#out-extension
+        publicPath?: string // Documentation: https://esbuild.github.io/api/#public-path
+        inject?: string[]          // Documentation: https://esbuild.github.io/api/#inject
+        banner?: Record<string, string> // Documentation: https://esbuild.github.io/api/#banner
+        footer?: Record<string, string> // Documentation: https://esbuild.github.io/api/#footer
+        nodePaths?: string[]          // Documentation: https://esbuild.github.io/api/#node-paths
 
-        entryNames: string // Documentation: https://esbuild.github.io/api/#entry-names
-        chunkNames: string // Documentation: https://esbuild.github.io/api/#chunk-names
-        assetNames: string // Documentation: https://esbuild.github.io/api/#asset-names
+        entryNames?: string // Documentation: https://esbuild.github.io/api/#entry-names
+        chunkNames?: string // Documentation: https://esbuild.github.io/api/#chunk-names
+        assetNames?: string // Documentation: https://esbuild.github.io/api/#asset-names
 
-        entryPoints: string[]     // Documentation: https://esbuild.github.io/api/#entry-points
-        entryPointsAdvanced: EntryPoint[] // Documentation: https://esbuild.github.io/api/#entry-points
+        entryPoints?: string[]     // Documentation: https://esbuild.github.io/api/#entry-points
+        entryPointsAdvanced?: EntryPoint[] // Documentation: https://esbuild.github.io/api/#entry-points
 
         stdin?: StdinOptions // Documentation: https://esbuild.github.io/api/#stdin
-        write: boolean // Documentation: https://esbuild.github.io/api/#write
-        allowOverwrite: boolean // Documentation: https://esbuild.github.io/api/#allow-overwrite
-        plugins: Plugin[]      // Documentation: https://esbuild.github.io/plugins/
+        write?: boolean // Documentation: https://esbuild.github.io/api/#write
+        allowOverwrite?: boolean // Documentation: https://esbuild.github.io/api/#allow-overwrite
+        //plugins?: Plugin[]      // Documentation: https://esbuild.github.io/plugins/
     }
 
     export function build(options: BuildOptions): BuildResult
@@ -260,10 +260,10 @@ declare module "go/esbuild" {
         rebuild(): BuildResult
 
         // Documentation: https://esbuild.github.io/api/#watch
-        watch(options: WatchOptions):Err
+        watch(options: WatchOptions): Err
 
         // Documentation: https://esbuild.github.io/api/#serve
-        serve(options: ServeOptions): {result:ServeResult,err:Err}
+        serve(options: ServeOptions): { result: ServeResult, err: Err }
 
         cancel()
 

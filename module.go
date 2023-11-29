@@ -32,6 +32,7 @@ func init() {
 	RegisterModule(&IoModule{})
 	RegisterModule(&EngineModule{})
 	RegisterModule(&CryptoModule{})
+	RegisterModule(&EsBuild{})
 	RegisterModule(&HashModule{})
 	RegisterModule(&CodecModule{})
 	RegisterModule(&Compiler{})

@@ -12,7 +12,8 @@ func TestConstant(t *testing.T) {
 		vm.RunJavaScript(
 			//language=javascript
 			`
-f=()=>1
+import os from "go/os"
+const f=()=>1
 console.log(os.root)
 console.log(os.ls())
 f()

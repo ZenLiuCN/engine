@@ -43,9 +43,11 @@ func (s *Compiler) Exports() map[string]any {
 
 func CompileJs(js string) string {
 	format := api.FormatDefault
-	if strings.Contains(js, "import") {
+	if strings.Contains(js, "import ") {
 		format = api.FormatCommonJS
-	} else if strings.Contains(js, "export") {
+	} else if strings.Contains(js, "export ") {
+		format = api.FormatCommonJS
+	} else if strings.Contains(js, "require ") {
 		format = api.FormatCommonJS
 	}
 	res := api.Transform(js, api.TransformOptions{
@@ -56,7 +58,7 @@ func CompileJs(js string) string {
 		KeepNames:   true,
 		TreeShaking: api.TreeShakingTrue,
 
-		Target:   api.ES2015,
+		Target:   api.ES2022,
 		Platform: api.PlatformBrowser,
 		Format:   format,
 
@@ -71,9 +73,11 @@ func CompileJs(js string) string {
 }
 func CompileTs(ts string) string {
 	format := api.FormatDefault
-	if strings.Contains(ts, "import") {
+	if strings.Contains(ts, "import ") {
 		format = api.FormatCommonJS
-	} else if strings.Contains(ts, "export") {
+	} else if strings.Contains(ts, "export ") {
+		format = api.FormatCommonJS
+	} else if strings.Contains(ts, "require ") {
 		format = api.FormatCommonJS
 	}
 	res := api.Transform(ts, api.TransformOptions{
@@ -84,7 +88,7 @@ func CompileTs(ts string) string {
 		KeepNames:   true,
 		TreeShaking: api.TreeShakingTrue,
 
-		Target:   api.ES2015,
+		Target:   api.ES2022,
 		Platform: api.PlatformBrowser,
 		Format:   format,
 
