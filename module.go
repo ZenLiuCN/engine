@@ -36,6 +36,7 @@ func init() {
 	RegisterModule(&HashModule{})
 	RegisterModule(&CodecModule{})
 	RegisterModule(&Compiler{})
+	RegisterModule(&ChannelModule{})
 }
 
 // Register a module , returns false if already exists

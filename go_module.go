@@ -73,3 +73,7 @@ func DumpDefines(path string) {
 		_ = os.WriteFile(filepath.Join(path, name+".d.ts"), bytes, os.ModePerm)
 	}
 }
+
+var (
+	EMPTY = map[string]any{}
+)
