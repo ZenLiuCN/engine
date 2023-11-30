@@ -38,24 +38,24 @@ type (
 		Closed() bool
 		Close()
 	}
-	SendChan[T any] interface {
+	WriteChan[T any] interface {
 		Send(v T)
 		Closed() bool
 		Close()
 	}
 )
-type Channel[T any] struct {
+type rwch[T any] struct {
 	e      *Engine
 	ch     chan T
 	closer chan<- struct{}
 	closed atomic.Bool
 }
 
-func NewChannel[T any](ch chan T, e *Engine) *Channel[T] {
-	return &Channel[T]{e: e, ch: ch, closed: atomic.Bool{}}
+func NewChan[T any](ch chan T, e *Engine) Chan[T] {
+	return &rwch[T]{e: e, ch: ch, closed: atomic.Bool{}}
 }
 
-func (c *Channel[T]) Recv(f func(T)) *goja.Promise {
+func (c *rwch[T]) Recv(f func(T)) *goja.Promise {
 	p, r, j := c.e.NewPromise()
 	if c.closer != nil {
 		j("already have receiver")
@@ -83,10 +83,10 @@ func (c *Channel[T]) Recv(f func(T)) *goja.Promise {
 	return p
 }
 
-func (c *Channel[T]) Send(v T) {
+func (c *rwch[T]) Send(v T) {
 	c.ch <- v
 }
-func (c *Channel[T]) Close() {
+func (c *rwch[T]) Close() {
 	if c.closed.Load() {
 		return
 	}
@@ -100,21 +100,21 @@ func (c *Channel[T]) Close() {
 		c.closer = nil
 	}
 }
-func (c *Channel[T]) Closed() bool {
+func (c *rwch[T]) Closed() bool {
 	return c.closed.Load()
 }
 
-type ReadOnlyChannel[T any] struct {
+type roch[T any] struct {
 	e      *Engine
 	ch     <-chan T
 	closer chan<- struct{}
 	closed atomic.Bool
 }
 
-func NewReadOnlyChannel[T any](ch chan T, e *Engine) *ReadOnlyChannel[T] {
-	return &ReadOnlyChannel[T]{e: e, ch: ch, closed: atomic.Bool{}}
+func NewChanReadOnly[T any](ch chan T, e *Engine) ReadChan[T] {
+	return &roch[T]{e: e, ch: ch, closed: atomic.Bool{}}
 }
-func (c *ReadOnlyChannel[T]) Recv(f func(T)) *goja.Promise {
+func (c *roch[T]) Recv(f func(T)) *goja.Promise {
 	p, r, j := c.e.NewPromise()
 	if c.closer != nil {
 		j("already have receiver")
@@ -141,7 +141,7 @@ func (c *ReadOnlyChannel[T]) Recv(f func(T)) *goja.Promise {
 	}()
 	return p
 }
-func (c *ReadOnlyChannel[T]) Close() {
+func (c *roch[T]) Close() {
 	if c.closed.Load() {
 		return
 	}
@@ -154,22 +154,22 @@ func (c *ReadOnlyChannel[T]) Close() {
 		c.closer = nil
 	}
 }
-func (c *ReadOnlyChannel[T]) Closed() bool {
+func (c *roch[T]) Closed() bool {
 	return c.closed.Load()
 }
 
-type WriteOnlyChannel[T any] struct {
+type wch[T any] struct {
 	ch     chan<- T
 	closed atomic.Bool
 }
 
-func NewWriteOnlyChannel[T any](ch chan T) *WriteOnlyChannel[T] {
-	return &WriteOnlyChannel[T]{ch: ch, closed: atomic.Bool{}}
+func NewChanWriteOnly[T any](ch chan T) WriteChan[T] {
+	return &wch[T]{ch: ch, closed: atomic.Bool{}}
 }
-func (c *WriteOnlyChannel[T]) Send(v T) {
+func (c *wch[T]) Send(v T) {
 	c.ch <- v
 }
-func (c *WriteOnlyChannel[T]) Close() {
+func (c *wch[T]) Close() {
 	if c.closed.Load() {
 		return
 	}
@@ -177,6 +177,6 @@ func (c *WriteOnlyChannel[T]) Close() {
 	close(c.ch)
 
 }
-func (c *WriteOnlyChannel[T]) Closed() bool {
+func (c *wch[T]) Closed() bool {
 	return c.closed.Load()
 }

@@ -10,7 +10,7 @@ func TestChannel_bi(t *testing.T) {
 	vm := Get()
 	defer vm.Free()
 	ch := make(chan int)
-	vm.Set("ch", NewChannel(ch, vm))
+	vm.Set("ch", NewChan(ch, vm))
 	fn.Panic1(vm.RunJavaScript(
 		//language=javascript
 		`
@@ -39,7 +39,7 @@ func TestChannel_out(t *testing.T) {
 	vm := Get()
 	defer vm.Free()
 	ch := make(chan int)
-	vm.Set("ch", NewWriteOnlyChannel(ch))
+	vm.Set("ch", NewChanWriteOnly(ch))
 	fn.Panic1(vm.RunJavaScript(
 		//language=javascript
 		`
@@ -70,7 +70,7 @@ func TestChannel_in(t *testing.T) {
 	vm := Get()
 	defer vm.Free()
 	ch := make(chan int)
-	vm.Set("ch", NewReadOnlyChannel(ch, vm))
+	vm.Set("ch", NewChanReadOnly(ch, vm))
 	fn.Panic1(vm.RunJavaScript(
 		//language=javascript
 		`
