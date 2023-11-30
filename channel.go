@@ -111,7 +111,7 @@ type roch[T any] struct {
 	closed atomic.Bool
 }
 
-func NewChanReadOnly[T any](ch chan T, e *Engine) ReadChan[T] {
+func NewChanReadOnly[T any](ch <-chan T, e *Engine) ReadChan[T] {
 	return &roch[T]{e: e, ch: ch, closed: atomic.Bool{}}
 }
 func (c *roch[T]) Recv(f func(T)) *goja.Promise {
@@ -163,7 +163,7 @@ type wch[T any] struct {
 	closed atomic.Bool
 }
 
-func NewChanWriteOnly[T any](ch chan T) WriteChan[T] {
+func NewChanWriteOnly[T any](ch chan<- T) WriteChan[T] {
 	return &wch[T]{ch: ch, closed: atomic.Bool{}}
 }
 func (c *wch[T]) Send(v T) {
