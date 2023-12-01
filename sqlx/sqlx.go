@@ -7,9 +7,9 @@ import (
 	_ "github.com/ZenLiuCN/engine/sqlx/mysql"
 	"github.com/ZenLiuCN/fn"
 	"github.com/dop251/goja"
-	_ "github.com/glebarez/go-sqlite"
 	_ "github.com/jackc/pgx/v5/stdlib"
 	"github.com/jmoiron/sqlx"
+	_ "modernc.org/sqlite"
 )
 
 var (
