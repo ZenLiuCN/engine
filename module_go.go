@@ -2,28 +2,46 @@ package engine
 
 import (
 	_ "embed"
+	"errors"
 	"github.com/dop251/goja"
 	"sync/atomic"
 )
 
+type GoError struct {
+	Err error
+}
+
+func (g *GoError) String() string {
+	if g == nil || g.Err == nil {
+		return "<nil>"
+	}
+	return g.Err.Error()
+}
+func (g *GoError) Same(err GoError) bool {
+	return errors.Is(g.Err, err.Err)
+}
+func (g *GoError) Error() string {
+	return g.String()
+}
+
 var (
-	//go:embed chan.d.ts
-	chanDefine []byte
+	//go:embed module_go.d.ts
+	goDefine []byte
 )
 
-type ChannelModule struct {
+type GoModule struct {
 }
 
-func (c ChannelModule) Identity() string {
-	return "go/chan"
+func (c GoModule) Identity() string {
+	return "go"
 }
 
-func (c ChannelModule) TypeDefine() []byte {
-	return chanDefine
+func (c GoModule) TypeDefine() []byte {
+	return goDefine
 }
 
-func (c ChannelModule) Exports() map[string]any {
-	return EMPTY
+func (c GoModule) Exports() map[string]any {
+	return EmptyMap
 }
 
 type (

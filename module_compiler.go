@@ -10,7 +10,7 @@ import (
 )
 
 var (
-	//go:embed compiler.d.ts
+	//go:embed module_compiler.d.ts
 	compilerDefine []byte
 )
 

@@ -6,7 +6,7 @@ import (
 	"slices"
 )
 
-//go:embed engine.d.ts
+//go:embed module_engine.d.ts
 var engineDefine []byte
 
 type EngineModule struct {
@@ -22,8 +22,8 @@ func (e *EngineModule) ExportsWithEngine(engine *Engine) map[string]any {
 			ex := v[0].ToBoolean()
 			ms := v[1].Export().([]string)
 			if ex {
-				m := Modules()
-				var mm []Module
+				m := Mods()
+				var mm []Mod
 				for _, module := range m {
 					if !slices.Contains(ms, module.Name()) {
 						mm = append(mm, module)
@@ -31,8 +31,8 @@ func (e *EngineModule) ExportsWithEngine(engine *Engine) map[string]any {
 				}
 				r = NewRawEngine(mm...)
 			} else {
-				m := Modules()
-				var mm []Module
+				m := Mods()
+				var mm []Mod
 				for _, module := range m {
 					if slices.Contains(ms, module.Name()) {
 						mm = append(mm, module)

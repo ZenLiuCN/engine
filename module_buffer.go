@@ -13,7 +13,7 @@ import (
 )
 
 var (
-	//go:embed buffer.d.ts
+	//go:embed module_buffer.d.ts
 	bufDefine []byte
 )
 
@@ -25,6 +25,7 @@ func (b BufferModule) Exports() map[string]any {
 }
 
 func (b BufferModule) ExportsWithEngine(engine *Engine) map[string]any {
+
 	return map[string]any{
 		"Buffer": engine.ToConstructor(func(v []goja.Value) any {
 			var buf *Buffer
@@ -64,11 +65,10 @@ func (b BufferModule) ExportsWithEngine(engine *Engine) map[string]any {
 			}
 			return buf
 		}),
-		"Bytes": func(c goja.ConstructorCall) *goja.Object {
+		"Bytes": engine.ToSelfReferRawConstructor(func(ctor goja.Value, c goja.ConstructorCall) *goja.Object {
 			v := c.Arguments
 			var bin []byte
 			if len(v) == 0 {
-
 			} else if len(v) == 1 {
 				switch t := v[0].Export().(type) {
 				case string:
@@ -92,6 +92,7 @@ func (b BufferModule) ExportsWithEngine(engine *Engine) map[string]any {
 				}
 			}
 			o := &Bytes{
+				ctor:   ctor,
 				Engine: engine,
 				b:      bin,
 			}
@@ -100,7 +101,7 @@ func (b BufferModule) ExportsWithEngine(engine *Engine) map[string]any {
 			_ = do.SetPrototype(c.This.Prototype())
 			_ = da.Prototype().SetPrototype(do)
 			return da
-		},
+		}),
 	}
 }
 
@@ -163,9 +164,6 @@ func (b *Buffer) Runes() (r []string) {
 }
 func (b *Buffer) Bytes() []byte {
 	return b.Buffer.Bytes()
-}
-func (b *Buffer) Binary() (r *goja.Object) {
-	return fn.Panic1(b.e.Runtime.New(b.e.Get("Bytes"), b.e.ToValue(b.Buffer.Bytes())))
 }
 func (b *Buffer) EachByte(v goja.Value) {
 	if f, ok := goja.AssertFunction(v); ok {
@@ -301,6 +299,7 @@ func GetBuffer() *Buffer {
 
 type Bytes struct {
 	*Engine
+	ctor   goja.Value
 	b      []byte
 	Length int
 }
@@ -329,7 +328,7 @@ func (b *Bytes) SetLen(i int) bool {
 }
 
 func (b *Bytes) Slice(from, to int) *goja.Object {
-	return b.Engine.Construct("Bytes", b.b[from:to])
+	return fn.Panic1(b.Engine.CallConstruct(b.ctor, b.b[from:to]))
 }
 func (b *Bytes) Equals(v goja.Value) bool {
 	switch t := v.Export().(type) {
@@ -344,7 +343,7 @@ func (b *Bytes) Equals(v goja.Value) bool {
 	}
 }
 func (b *Bytes) Clone() *goja.Object {
-	return b.Engine.Construct("Bytes", bytes.Clone(b.b))
+	return fn.Panic1(b.Engine.CallConstruct(b.ctor, bytes.Clone(b.b)))
 }
 func (b *Bytes) Bytes() []byte {
 	return b.b
@@ -365,7 +364,7 @@ func (b *Bytes) Append(v goja.Value) *goja.Object {
 	default:
 		panic(fmt.Errorf("bad argument type of: %#v", v))
 	}
-	return b.Engine.Construct("Bytes", append(b.b, bin...))
+	return fn.Panic1(b.Engine.CallConstruct(b.ctor, append(b.b, bin...)))
 }
 func (b *Bytes) ToText() string {
 	return string(b.b)

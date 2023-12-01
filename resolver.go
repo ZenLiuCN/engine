@@ -193,10 +193,10 @@ func (s *BaseResolver) Resolve(pwd *url.URL, specifier string) (*url.URL, error)
 }
 
 type (
-	Mod interface {
-		Instance(engine *Engine) Modular
+	JsModule interface {
+		Instance(engine *Engine) JsModuleInstance
 	}
-	Modular interface {
+	JsModuleInstance interface {
 		Execute() error
 		Exports() *goja.Object
 	}
@@ -211,7 +211,7 @@ type (
 	}
 )
 
-func (c *cjs) Instance(engine *Engine) Modular {
+func (c *cjs) Instance(engine *Engine) JsModuleInstance {
 	return &cjsModule{
 		mod:    c,
 		obj:    nil,
@@ -258,11 +258,11 @@ func (c *cjsModule) Exports() *goja.Object {
 
 type (
 	ModCache struct {
-		mod Mod
+		mod JsModule
 		err error
 	}
 	ModResolver interface {
-		Resolve(basePWD *url.URL, arg string) (Mod, error)
+		Resolve(basePWD *url.URL, arg string) (JsModule, error)
 	}
 	BaseModResolver struct {
 		cache map[string]ModCache
@@ -273,7 +273,7 @@ var (
 	ModLoader ModResolver = &BaseModResolver{cache: map[string]ModCache{}}
 )
 
-func (s *BaseModResolver) Resolve(basePWD *url.URL, arg string) (Mod, error) {
+func (s *BaseModResolver) Resolve(basePWD *url.URL, arg string) (JsModule, error) {
 	if cached, ok := s.cache[arg]; ok {
 		return cached.mod, cached.err
 	}
@@ -295,7 +295,7 @@ func (s *BaseModResolver) Resolve(basePWD *url.URL, arg string) (Mod, error) {
 	return mod, err
 }
 
-func CompileCJS(data *Source) (m Mod, err error) {
+func CompileCJS(data *Source) (m JsModule, err error) {
 	if strings.HasSuffix(data.URL.String(), ".ts") {
 		m, err = compileTs(data)
 		if err == nil {
@@ -304,7 +304,7 @@ func CompileCJS(data *Source) (m Mod, err error) {
 	}
 	return compileJs(data)
 }
-func compileTs(data *Source) (m Mod, err error) {
+func compileTs(data *Source) (m JsModule, err error) {
 	defer func() {
 		if r := recover(); r != nil {
 			switch er := r.(type) {
@@ -323,7 +323,7 @@ func compileTs(data *Source) (m Mod, err error) {
 		url: data.URL,
 	}, nil
 }
-func compileJs(data *Source) (m Mod, err error) {
+func compileJs(data *Source) (m JsModule, err error) {
 	defer func() {
 		if r := recover(); r != nil {
 			switch er := r.(type) {

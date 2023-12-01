@@ -3,7 +3,6 @@ package engine
 import (
 	"fmt"
 	"strings"
-	"testing"
 )
 
 type builder struct {
@@ -50,7 +49,7 @@ func (b *builder) Reset() {
 func (b *builder) String() string {
 	return b.b.String()
 }
-func TestTransformGen(t *testing.T) {
+func TransformGen() {
 	b := &builder{strings.Builder{}}
 
 	for i := 0; i < 5; i++ {
@@ -61,7 +60,7 @@ func TestTransformGen(t *testing.T) {
 		return func(`).q(i, "a%[1]d A%[1]d").o(i > 0, ',').s(`)(C,*GoError){
 		`).s("c,err:=t(f(").q(i, "a%[1]d").s(`))
 		if err!=nil{
-			return c,&GoError{Error: err}
+			return c,&GoError{Err: err}
 		}
 		return c,nil
 	}

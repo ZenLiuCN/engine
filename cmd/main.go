@@ -30,7 +30,7 @@ func main() {
 		vm := engine.Get()
 		defer vm.Free()
 		v := fn.Panic1(vm.Execute(engine.CompileFile(args[0])))
-		vm.StopEventLoopWait()
+		vm.Await()
 		if !engine.IsNullish(v) {
 			println(v.String())
 		}
@@ -38,7 +38,7 @@ func main() {
 		vm := engine.Get()
 		defer vm.Free()
 		v := fn.Panic1(vm.Execute(engine.CompileSource(fn.SliceJoinRune(args, '\n', fn.Identity[string]), typed)))
-		vm.StopEventLoopWait()
+		vm.Await()
 		if !engine.IsNullish(v) {
 			println(v.String())
 		}

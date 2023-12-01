@@ -6,7 +6,7 @@ import (
 )
 
 var (
-	//go:embed esbuild.d.ts
+	//go:embed module_esbuild.d.ts
 	esbuildDefine []byte
 )
 
@@ -55,7 +55,7 @@ func (c *Context) Rebuild() api.BuildResult {
 func (c *Context) Watch(options api.WatchOptions) *GoError {
 	err := c.c.Watch(options)
 	if err != nil {
-		return &GoError{Error: err}
+		return &GoError{Err: err}
 	}
 	return nil
 }
@@ -70,7 +70,7 @@ func (c *Context) Serve(options api.ServeOptions) *ServeOut {
 	if err != nil {
 		return &ServeOut{
 			Result: r,
-			Err:    &GoError{Error: err},
+			Err:    &GoError{Err: err},
 		}
 	}
 	return &ServeOut{

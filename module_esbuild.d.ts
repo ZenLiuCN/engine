@@ -1,4 +1,7 @@
 declare module "go/esbuild" {
+    // @ts-ignore
+    import {Err} from 'go'
+
     type StderrColor = 0 | 1 | 2
     type LogLevel = 0 | 1 | 2 | 3 | 4 | 5
     type Charset = 0 | 1 | 2

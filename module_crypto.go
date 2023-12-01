@@ -21,7 +21,7 @@ import (
 	"hash"
 )
 
-//go:embed crypto.d.ts
+//go:embed module_crypto.d.ts
 var cryptoDefine []byte
 
 type CryptoModule struct {

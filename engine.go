@@ -11,13 +11,13 @@ type Engine struct {
 	*EventLoop
 }
 
-// Register register modules
-func (s *Engine) Register(modules ...Module) {
-	for _, module := range modules {
-		if im, ok := module.(InitializeModule); ok {
+// Register register mods
+func (s *Engine) Register(mods ...Mod) {
+	for _, module := range mods {
+		if im, ok := module.(InitializeMod); ok {
 			m := im.Initialize(s)
 			fn.Panic(s.Runtime.Set(m.Name(), m))
-		} else if tm, ok := module.(TopModule); ok {
+		} else if tm, ok := module.(TopMod); ok {
 			tm.Register(s)
 		} else {
 			fn.Panic(s.Runtime.Set(module.Name(), module))
@@ -31,10 +31,37 @@ func (s *Engine) Free() {
 	s.EventLoop.StopEventLoopNoWait()
 }
 
-//region Value helper
+// region Value helper
+func (s *Engine) parse(r any) (err error) {
+	switch e := r.(type) {
+	case *Exception:
+		err = &ScriptError{Err: e, Stack: nil}
+	case error:
+		stack := s.CaptureCallStack(20, nil)
+		b := GetBytesBuffer()
+		for _, s := range stack {
+			s.Write(b)
+		}
+		err = &ScriptError{Err: fmt.Errorf("%w", e), Stack: b}
+	default:
+		stack := s.CaptureCallStack(20, nil)
+		b := GetBytesBuffer()
+		for _, s := range stack {
+			s.Write(b)
+		}
+		err = &ScriptError{Err: fmt.Errorf("%s", e), Stack: b}
+	}
+	return
+}
 
 // CallFunction invoke a function (without this)
-func (s *Engine) CallFunction(fn Value, values ...any) (Value, error) {
+func (s *Engine) CallFunction(fn Value, values ...any) (v Value, err error) {
+	s.StartEventLoopWhenNotStarted()
+	defer func() {
+		if r := recover(); r != nil {
+			err = s.parse(r)
+		}
+	}()
 	if f, ok := AssertFunction(fn); ok {
 		v := make([]Value, len(values))
 		for i, value := range values {
@@ -53,7 +80,13 @@ func (s *Engine) Callable(fn Value) Callable {
 }
 
 // CallMethod invoke a method (with this)
-func (s *Engine) CallMethod(fn Value, self Value, values ...any) (Value, error) {
+func (s *Engine) CallMethod(fn Value, self Value, values ...any) (v Value, err error) {
+	s.StartEventLoopWhenNotStarted()
+	defer func() {
+		if r := recover(); r != nil {
+			err = s.parse(r)
+		}
+	}()
 	if f, ok := AssertFunction(fn); ok {
 		v := make([]Value, len(values))
 		for i, value := range values {
@@ -63,8 +96,16 @@ func (s *Engine) CallMethod(fn Value, self Value, values ...any) (Value, error) 
 	}
 	return nil, fmt.Errorf("%s not a function", fn)
 }
-func (s *Engine) Construct(name string, args ...any) *Object {
-	return fn.Panic1(s.New(s.Get(name), s.ToValues(args...)...))
+func (s *Engine) CallConstruct(fn Value, values ...any) (*Object, error) {
+	s.StartEventLoopWhenNotStarted()
+	if f, ok := AssertConstructor(fn); ok {
+		v := make([]Value, len(values))
+		for i, value := range values {
+			v[i] = s.ToValue(value)
+		}
+		return f(nil, v...)
+	}
+	return nil, fmt.Errorf("%s not a Constructor", fn)
 }
 func (s *Engine) ToValues(args ...any) []Value {
 	n := make([]Value, len(args))
@@ -77,41 +118,67 @@ func (s *Engine) ToValues(args ...any) []Value {
 //endregion
 
 // RunTypeScript execute typescript code
-func (s *Engine) RunTypeScript(src string) (Value, error) {
+func (s *Engine) RunTypeScript(src string) (v Value, err error) {
 	s.StartEventLoopWhenNotStarted()
+	defer func() {
+		if r := recover(); r != nil {
+			err = s.parse(r)
+		}
+	}()
 	return s.Runtime.RunString(CompileTs(src))
 }
 
 // RunJavaScript execute javascript code
-func (s *Engine) RunJavaScript(src string) (Value, error) {
+func (s *Engine) RunJavaScript(src string) (v Value, err error) {
 	s.StartEventLoopWhenNotStarted()
+	defer func() {
+		if r := recover(); r != nil {
+			err = s.parse(r)
+		}
+	}()
 	return s.Runtime.RunString(CompileJs(src))
 }
 
 // RunScript execute javascript (es5|es6 without import) code
-func (s *Engine) RunScript(src string) (Value, error) {
+func (s *Engine) RunScript(src string) (v Value, err error) {
 	s.StartEventLoopWhenNotStarted()
+	defer func() {
+		if r := recover(); r != nil {
+			err = s.parse(r)
+		}
+	}()
 	return s.Runtime.RunString(src)
 }
 
 // Execute execute compiled code
-func (s *Engine) Execute(code *Code) (Value, error) {
+func (s *Engine) Execute(code *Code) (v Value, err error) {
 	s.StartEventLoopWhenNotStarted()
+	defer func() {
+		if r := recover(); r != nil {
+			err = s.parse(r)
+		}
+	}()
 	return s.Runtime.RunProgram(code.Program)
 }
 
-//region Register helper
+//region RegisterMod helper
 
+// Set create global value
 func (s *Engine) Set(name string, value any) {
 	fn.Panic(s.Runtime.Set(name, value))
 }
 
-func (s *Engine) Function(name string, ctor func(c FunctionCall) Value) {
+// RegisterFunction create global function
+func (s *Engine) RegisterFunction(name string, ctor func(c FunctionCall) Value) {
 	fn.Panic(s.Runtime.Set(name, ctor))
 }
+
+// RegisterType create global simple type
 func (s *Engine) RegisterType(name string, ctor func(v []Value) any) {
 	s.Set(name, s.ToConstructor(ctor))
 }
+
+// ToInstance create instance of a value with simple prototype, use for constructor only.
 func (s *Engine) ToInstance(v any, c ConstructorCall) *Object {
 	o := s.ToValue(v).(*Object)
 	fn.Panic(o.SetPrototype(c.This.Prototype()))
@@ -127,10 +194,33 @@ func (s *Engine) ToConstructor(ct func(v []Value) any) func(ConstructorCall) *Ob
 	}
 }
 
+// ToSelfReferConstructor create a Constructor which require use itself. see [ Bytes ]
+func (s *Engine) ToSelfReferConstructor(ct func(ctor Value, v []Value) any) Value {
+	var ctor Value
+	ctor = s.ToValue(func(c ConstructorCall) *Object {
+		val := ct(ctor, c.Arguments)
+		if val != nil {
+			return s.ToInstance(val, c)
+		}
+		panic("can't construct type: " + c.This.ClassName())
+	})
+	return ctor
+}
+
+// ToSelfReferRawConstructor create a Constructor which require use itself. see [ Bytes ]
+func (s *Engine) ToSelfReferRawConstructor(ct func(ctor Value, call ConstructorCall) *Object) Value {
+	var ctor Value
+	ctor = s.ToValue(func(c ConstructorCall) *Object {
+		return ct(ctor, c)
+	})
+	return ctor
+}
+
 //endregion
 
 //region Const and helper
 
+// IsNullish check if value is null or undefined
 func (s *Engine) IsNullish(v Value) bool {
 	return IsNullish(v)
 }
@@ -152,6 +242,8 @@ func (s *Engine) PosInf() Value {
 func (s *Engine) NegInf() Value {
 	return NegativeInf()
 }
+
+// NewPromise create new Promise, must use StopEventBusAwait
 func (s *Engine) NewPromise() (promise *Promise, resolve func(any), reject func(any)) {
 	p, resolveFunc, rejectFunc := s.Runtime.NewPromise()
 	callback := s.EventLoop.registerCallback()
@@ -170,15 +262,15 @@ func (s *Engine) NewPromise() (promise *Promise, resolve func(any), reject func(
 
 //endregion
 
-func NewEngine(modules ...Module) (r *Engine) {
+func NewEngine(modules ...Mod) (r *Engine) {
 	r = &Engine{Runtime: New()}
 	r.Runtime.SetFieldNameMapper(EngineFieldMapper{})
 	r.EventLoop = NewEventLoop(r)
-	r.Register(Modules()...)
+	r.Register(Mods()...)
 	r.Register(modules...)
 	return
 }
-func NewRawEngine(modules ...Module) (r *Engine) {
+func NewRawEngine(modules ...Mod) (r *Engine) {
 	r = &Engine{Runtime: New()}
 	r.Runtime.SetFieldNameMapper(EngineFieldMapper{})
 	r.EventLoop = NewEventLoop(r)

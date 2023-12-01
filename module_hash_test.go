@@ -11,6 +11,7 @@ func TestHash_Hash(t *testing.T) {
 	fn.Panic1(vm.RunJavaScript(
 		//language=javascript
 		`
+import {Bytes} from 'go/buffer'
 import codec from 'go/codec'
 import hash from 'go/hash'
 const bin=new Bytes(1,2,3,4,5,6)

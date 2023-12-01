@@ -6,7 +6,7 @@ import (
 )
 
 var (
-	//go:embed io.d.ts
+	//go:embed module_io.d.ts
 	ioDefine []byte
 )
 

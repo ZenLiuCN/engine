@@ -54,7 +54,7 @@ func Execute(opt *ExecOption) (err error) {
 	}
 	var pth = opt.Cmd
 	if strings.ContainsAny(pth, "@%$") {
-		pth = expand(pth)
+		pth = EnvExpand(pth)
 	}
 	pth, err = Locate(pth)
 	if opt.Optional && err != nil {
@@ -65,7 +65,7 @@ func Execute(opt *ExecOption) (err error) {
 	if opt.PathPatch && opt.Args != nil {
 		for i, p := range opt.Args {
 			if strings.ContainsAny(p, "@%$") {
-				opt.Args[i] = expand(p)
+				opt.Args[i] = EnvExpand(p)
 			}
 		}
 	}
@@ -121,7 +121,7 @@ func OpenProc(opt *ProcOption) (proc *SubProcess) {
 func BuildCommand(opt *ProcOption) (cmd *exec.Cmd, err error) {
 	var pth = opt.Cmd
 	if strings.ContainsAny(pth, "@%$") {
-		pth = expand(pth)
+		pth = EnvExpand(pth)
 	}
 	if pth, err = Locate(pth); err != nil {
 		return
@@ -129,7 +129,7 @@ func BuildCommand(opt *ProcOption) (cmd *exec.Cmd, err error) {
 	if opt.PathPatch && opt.Args != nil {
 		for i, p := range opt.Args {
 			if strings.ContainsAny(p, "@%$") {
-				opt.Args[i] = expand(p)
+				opt.Args[i] = EnvExpand(p)
 			}
 		}
 	}

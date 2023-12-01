@@ -40,8 +40,6 @@ declare module "go/buffer" {
 
         bytes(): Uint8Array
 
-        binary(): Bytes
-
         eachByte(act: (u: number) => boolean)
 
         mapByte<T>(map: (u: number) => T): Array<T>

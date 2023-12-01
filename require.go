@@ -11,7 +11,7 @@ import (
 
 type Require struct {
 	pwd   *url.URL
-	cache map[Mod]Modular
+	cache map[JsModule]JsModuleInstance
 	*Engine
 }
 
@@ -22,15 +22,15 @@ func (r *Require) Name() string {
 func (r *Require) Register(engine *Engine) {
 	x := &Require{
 		pwd:    WdToUrl(),
-		cache:  make(map[Mod]Modular),
+		cache:  make(map[JsModule]JsModuleInstance),
 		Engine: engine,
 	}
 	fn.Panic(engine.Runtime.Set("require", x.Require))
 }
 
 func (r *Require) Require(specifier string) (*goja.Object, error) {
-	if gom := resolveGoModule(specifier); gom != nil {
-		return instanceGoModule(r.engine, gom)
+	if gom := resolveModule(specifier); gom != nil {
+		return instanceModule(r.engine, gom)
 	}
 	current := r.pwd
 	defer func() {

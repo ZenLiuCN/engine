@@ -12,6 +12,7 @@ func TestCodecModule_RawStdDecode(t *testing.T) {
 		//language=javascript
 		`
 import {base64RawStdEncode} from 'go/codec'
+import {Bytes} from "go/buffer"
 console.assert(base64RawStdEncode(new Bytes(1,2,3,4,5,6).bytes())==="AQIDBAUG")
 
 `))
@@ -23,6 +24,7 @@ func TestCodecModule_Base64(t *testing.T) {
 	fn.Panic1(vm.RunJavaScript(
 		//language=javascript
 		`
+import {Bytes} from "go/buffer"
 import codec from 'go/codec'
 const bin=new Bytes(1,2,3,4,5,6)
 const b64="AQIDBAUG"

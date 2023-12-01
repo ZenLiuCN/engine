@@ -9,7 +9,7 @@ import (
 )
 
 var (
-	//go:embed codec.d.ts
+	//go:embed module_codec.d.ts
 	codecDefine []byte
 )
 

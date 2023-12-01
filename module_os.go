@@ -2,6 +2,7 @@ package engine
 
 import (
 	_ "embed"
+	"errors"
 	"github.com/ZenLiuCN/fn"
 	"io"
 	"os"
@@ -10,85 +11,86 @@ import (
 )
 
 var (
-	//go:embed os.d.ts
+	//go:embed module_os.d.ts
 	osDefine []byte
 )
 
 type Os struct {
 }
 
-func (o *Os) Identity() string {
+func (o Os) Identity() string {
 	return "go/os"
 }
 
-func (o *Os) Exports() map[string]any {
+func (o Os) Exports() map[string]any {
 	return nil
 }
-func (o *Os) TypeDefine() []byte {
+func (o Os) TypeDefine() []byte {
 	return osDefine
 }
-func (o *Os) ExportsWithEngine(e *Engine) map[string]any {
-	m := map[string]any{}
-	m["root"] = root
-	m["simpleName"] = name
-	m["ext"] = ext
-	m["executable"] = executable
-	m["pathSeparator"] = pathSeparator
-	m["pathListSeparator"] = pathListSeparator
+func (o Os) ExportsWithEngine(e *Engine) map[string]any {
+	return map[string]any{
+		"root":              root,
+		"simpleName":        name,
+		"ext":               ext,
+		"executable":        executable,
+		"pathSeparator":     pathSeparator,
+		"pathListSeparator": pathListSeparator,
+		"expand":            EnvExpand,
+		"pre":               EnvPrepend,
+		"prep":              EnvPrependPath,
+		"ap":                EnvAppend,
+		"app":               EnvAppendPath,
+		"set":               EnvSet,
+		"setp":              EnvSetPath,
+		"put":               EnvPut,
+		"putp":              EnvPutPath,
+		"variable":          EnvVar,
+		"evalFile": func(p string) any {
+			return EvalFile(e, p)
+		},
+		"evalFiles": func(paths ...string) (r []any) {
+			return EvalFiles(e, paths...)
+		},
+		"exec": func(option *ExecOption) {
+			fn.Panic(Execute(option))
+		},
+		"proc": func(option *ProcOption) SubProc {
+			return SubProc{s: OpenProc(option)}
+		},
+		"mkdir":     Mkdir,
+		"mkdirAll":  MkdirAll,
+		"exists":    FileExists,
+		"write":     WriteBinaryFile,
+		"writeText": WriteTextFile,
+		"read":      ReadBinaryFile,
+		"readText":  ReadTextFile,
+		"chdir":     Chdir,
+		"pwd":       Pwd,
+		"ls": func(path string) (r []map[string]any) {
+			if path == "" {
+				path = Pwd()
+			}
+			f := fn.Panic1(os.Open(EnvExpand(path)))
+			defer fn.IgnoreClose(f)
+			dir := fn.Panic1(f.ReadDir(0))
+			for _, entry := range dir {
+				info := fn.Panic1(entry.Info())
+				r = append(r, map[string]any{
+					"dir":      entry.IsDir(),
+					"name":     entry.Name(),
+					"mode":     entry.Type().String(),
+					"size":     info.Size(),
+					"modified": info.ModTime().Format("2006-01-02 15:04:05.000"),
+				})
+			}
+			return
+		},
+		"stat": Stat,
+	}
 
-	m["expand"] = EnvExpand
-	m["pre"] = EnvPrepend
-	m["prep"] = EnvPrependPath
-	m["ap"] = EnvAppend
-	m["app"] = EnvAppendPath
-	m["set"] = EnvSet
-	m["setp"] = EnvSetPath
-	m["put"] = EnvPut
-	m["putp"] = EnvPutPath
-	m["variable"] = EnvVar
-	m["evalFile"] = func(p string) any {
-		return EvalFile(e, p)
-	}
-	m["evalFiles"] = func(paths ...string) (r []any) {
-		return EvalFiles(e, paths...)
-	}
-	m["exec"] = func(option *ExecOption) {
-		fn.Panic(Execute(option))
-	}
-	m["proc"] = func(option *ProcOption) SubProc {
-		return SubProc{s: OpenProc(option)}
-	}
-	m["mkdir"] = Mkdir
-	m["mkdirAll"] = MkdirAll
-	m["exists"] = FileExists
-	m["write"] = WriteBinaryFile
-	m["writeText"] = WriteTextFile
-	m["read"] = ReadBinaryFile
-	m["readText"] = ReadTextFile
-	m["chdir"] = Chdir
-	m["pwd"] = Pwd
-	m["ls"] = func(path string) (r []map[string]any) {
-		if path == "" {
-			path = Pwd()
-		}
-		f := fn.Panic1(os.Open(EnvExpand(path)))
-		defer fn.IgnoreClose(f)
-		dir := fn.Panic1(f.ReadDir(0))
-		for _, entry := range dir {
-			info := fn.Panic1(entry.Info())
-			r = append(r, map[string]any{
-				"dir":      entry.IsDir(),
-				"name":     entry.Name(),
-				"mode":     entry.Type().String(),
-				"size":     info.Size(),
-				"modified": info.ModTime().Format("2006-01-02 15:04:05.000"),
-			})
-		}
-		return
-	}
-
-	return m
 }
+
 func EnvPutPath(key string, value ...string) {
 	src := os.Getenv(key)
 	if len(src) != 0 {
@@ -201,6 +203,13 @@ func EnvExpand(path string) string {
 		return fixPath(os.ExpandEnv(path))
 	}
 	return fixPath(os.ExpandEnv(p))
+}
+func Stat(path string) os.FileInfo {
+	info, err := os.Stat(path)
+	if errors.Is(err, os.ErrNotExist) {
+		return nil
+	}
+	return info
 }
 
 type SubProc struct {

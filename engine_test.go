@@ -4,6 +4,7 @@ import (
 	"github.com/ZenLiuCN/fn"
 	"os"
 	"testing"
+	"time"
 )
 
 func TestSimple(t *testing.T) {
@@ -40,7 +41,7 @@ console.log(Math.sign(1.2))
 console.log({[x+"b"]:1})
 console.log(new A(1))
 `))))
-	e.StopEventLoopWait()
+	e.Await()
 }
 func TestEs2016(t *testing.T) {
 	e := NewEngine()
@@ -71,7 +72,7 @@ console.log(str.padStart(10))
 console.log(str.padEnd(10))
 
 `))))
-	e.StopEventLoopWait()
+	e.Await()
 }
 func TestEs2018(t *testing.T) {
 	e := NewEngine()
@@ -102,9 +103,14 @@ const a = { age: 182 }
 const person = { ...n, ...a }
 console.log(person)
 const syn=()=>new Promise((r,j)=>r(1))
-syn().then(v=>console.log(v)).finally(()=>console.log("finally"))
+syn()
+.then(v=>console.log(v))
+.finally(()=>{
+    console.log("finally will never end")
+    return new Promise((r,j)=>r())
+})
 `))))
-	e.StopEventLoopWait()
+	e.AwaitTimeout(time.Second)
 }
 
 func TestEs2019(t *testing.T) {
@@ -117,7 +123,7 @@ const a=()=>console.log(1)
 console.log(Object.fromEntries( [["a",1],["b",2]]))
 console.log(a.toString())
 `))))
-	e.StopEventLoopWait()
+	e.Await()
 }
 func TestEs2020(t *testing.T) {
 	e := NewEngine()
@@ -133,7 +139,7 @@ console.log(false ?? 10)
 const a={b:{c:'c'}}
 console.log(a.b?.b?.c)
 `))))
-	e.StopEventLoopWait()
+	e.Await()
 }
 func TestEs2021(t *testing.T) {
 	e := NewEngine()
@@ -146,7 +152,7 @@ console.log(newStr)
 // console.log(1_0000_0000) 
 
 `))))
-	e.StopEventLoopWait()
+	e.Await()
 }
 func TestEs2022(t *testing.T) {
 	e := NewEngine()
@@ -178,7 +184,7 @@ console.log(Object.hasOwn(new C1(),'#dsdf'))
 console.log(Object.hasOwn(new C1(),'myName'))
 console.log([1,2,3].at(-1))
 `))))
-	e.StopEventLoopWait()
+	e.Await()
 }
 func TestSimpleRequire(t *testing.T) {
 	fn.Panic(os.WriteFile("simple.js", []byte(`

@@ -36,8 +36,8 @@ type Immediate struct {
 // EventLoop process all async events and also  as The AsyncContextTracker
 // there will be a background goroutine to monitor the async tasks as call StartEventLoop,
 // or call StartEventLoopWhenNotStarted for not sure current EventLoop have been started.
-// use StopEventLoopWait to await all async tasks are finished.
-// use StopEventLoopTimeout to waiting for a fixed duration.
+// use Await to await all async tasks are finished.
+// use AwaitTimeout to waiting for a fixed duration.
 // use StopEventLoopNoWait to immediate shutdown EventLoop without wait tasks execution.
 // use StopEventLoop wait EventLoop after current tasks execution.
 type EventLoop struct {
@@ -207,20 +207,27 @@ func (s *EventLoop) ClearInterval(i *Interval) {
 func (s *EventLoop) Running() bool {
 	return s.running
 }
-func (s *EventLoop) Run(fn func(engine *Engine)) {
-	s.setRunning()
-	fn(s.engine)
-	s.run(false)
-}
+
+/*
+	func (s *EventLoop) Run(fn func(engine *Engine)) {
+		s.setRunning()
+		fn(s.engine)
+		s.run(false)
+	}
+*/
 func (s *EventLoop) registerCallback() func(func()) {
 	return func(f func()) {
 		s.addAuxJob(f)
 	}
 }
+
+// StartEventLoop fail if already started
 func (s *EventLoop) StartEventLoop() {
 	s.setRunning()
 	go s.run(true)
 }
+
+// StartEventLoopWhenNotStarted no effect if already started
 func (s *EventLoop) StartEventLoopWhenNotStarted() {
 	if s.running {
 		return
@@ -229,8 +236,17 @@ func (s *EventLoop) StartEventLoopWhenNotStarted() {
 	go s.run(true)
 }
 
-// StopEventLoopContext stop with context for a cancelable or with deadline context
-func (s *EventLoop) StopEventLoopContext(ctx context.Context) {
+// Await all job done, see also AwaitContext, AwaitTimeout and AwaitWithContext .
+func (s *EventLoop) Await() int {
+	for s.running {
+		atomic.StoreInt32(&s.canRun, 2) //stop when no task , not use lock
+		s.wakeup()
+	}
+	return int(s.jobCount)
+}
+
+// AwaitWithContext stop with context for a cancelable or with deadline context, see also Await, AwaitTimeout and AwaitContext.
+func (s *EventLoop) AwaitWithContext(ctx context.Context) {
 	dead, ok := ctx.Deadline()
 	if ok {
 		go func() {
@@ -262,8 +278,8 @@ func (s *EventLoop) StopEventLoopContext(ctx context.Context) {
 
 }
 
-// StopEventLoopForContext stop with notify a context
-func (s *EventLoop) StopEventLoopForContext() context.Context {
+// AwaitContext await async execution with context, see also Await, AwaitTimeout and AwaitWithContext.
+func (s *EventLoop) AwaitContext() context.Context {
 	ctx, cc := context.WithCancel(context.Background())
 	go func() {
 		for s.running {
@@ -280,17 +296,9 @@ func (s *EventLoop) StopEventLoopForContext() context.Context {
 	return ctx
 }
 
-// StopEventLoopWait all job done
-func (s *EventLoop) StopEventLoopWait() int {
-	for s.running {
-		atomic.StoreInt32(&s.canRun, 2) //stop when no task , not use lock
-		s.wakeup()
-	}
-	return int(s.jobCount)
-}
-
-// StopEventLoopTimeout all job done in a limit duration, the returning value may not exactly the pending job count,for no lock to wait
-func (s *EventLoop) StopEventLoopTimeout(duration time.Duration) int {
+// AwaitTimeout all job done in a limit duration, the returning value may not exactly the pending job count,for no lock to wait
+// see also Await, AwaitWithContext and AwaitContext.
+func (s *EventLoop) AwaitTimeout(duration time.Duration) int {
 	tick := time.Tick(duration)
 	for s.running {
 		atomic.StoreInt32(&s.canRun, 2) //stop when no task
@@ -307,7 +315,7 @@ func (s *EventLoop) StopEventLoopTimeout(duration time.Duration) int {
 	return int(s.jobCount)
 }
 
-// StopEventLoop wait background execution quit , returns job not executed
+// StopEventLoop wait background execution quit (not all tasks) , returns job not executed
 func (s *EventLoop) StopEventLoop() int {
 	s.stopLock.Lock()
 	for s.running {
@@ -329,6 +337,7 @@ func (s *EventLoop) StopEventLoopNoWait() {
 	s.stopLock.Unlock()
 }
 
+// RunOnLoop  run function on event loop
 func (s *EventLoop) RunOnLoop(fn func(*Engine)) {
 	s.addAuxJob(func() { fn(s.engine) })
 }

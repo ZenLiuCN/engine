@@ -12,7 +12,7 @@ require (
 	github.com/glebarez/go-sqlite v1.21.2
 	github.com/jackc/pgx/v5 v5.5.0
 	github.com/jmoiron/sqlx v1.3.5
-	github.com/tdewolff/minify/v2 v2.20.7
+	github.com/tdewolff/minify/v2 v2.20.8
 	github.com/xuri/excelize/v2 v2.8.0
 	golang.org/x/crypto v0.16.0
 	golang.org/x/sys v0.15.0
@@ -35,13 +35,13 @@ require (
 	github.com/remyoudompheng/bigfft v0.0.0-20230129092748-24d4a6f8daec // indirect
 	github.com/richardlehane/mscfb v1.0.4 // indirect
 	github.com/richardlehane/msoleps v1.0.3 // indirect
-	github.com/tdewolff/parse/v2 v2.7.5 // indirect
+	github.com/tdewolff/parse/v2 v2.7.6 // indirect
 	github.com/xuri/efp v0.0.0-20231025114914-d1ff6096ae53 // indirect
 	github.com/xuri/nfp v0.0.0-20230919160717-d98342af3f05 // indirect
 	golang.org/x/image v0.12.0 // indirect
 	golang.org/x/net v0.19.0 // indirect
 	golang.org/x/sync v0.5.0 // indirect
-	modernc.org/libc v1.34.11 // indirect
+	modernc.org/libc v1.35.0 // indirect
 	modernc.org/mathutil v1.6.0 // indirect
 	modernc.org/memory v1.7.2 // indirect
 	modernc.org/sqlite v1.27.0 // indirect

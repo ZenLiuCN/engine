@@ -20,9 +20,10 @@ func TestPut(t *testing.T) {
 func TestEngineBuffer(t *testing.T) {
 	vm := Get()
 	defer vm.Free()
-	v := fn.Panic1(vm.RunScript(
+	v := fn.Panic1(vm.RunJavaScript(
 		//language=javascript
 		`
+import {Buffer} from 'go/buffer'
 new Buffer("123456")
 `))
 	if buf, ok := v.Export().(*Buffer); !ok {
@@ -34,9 +35,10 @@ new Buffer("123456")
 func TestBuffer_ArrayBuffer(t *testing.T) {
 	vm := Get()
 	defer vm.Free()
-	v := fn.Panic1(vm.RunScript(
+	v := fn.Panic1(vm.RunJavaScript(
 		//language=javascript
 		`
+import {Buffer} from 'go/buffer'
 new Buffer("123456").arrayBuffer()
 `))
 	if buf, ok := v.Export().(goja.ArrayBuffer); !ok {
@@ -48,34 +50,25 @@ new Buffer("123456").arrayBuffer()
 func TestBuffer_Bytes(t *testing.T) {
 	vm := Get()
 	defer vm.Free()
-	v := fn.Panic1(vm.RunScript(
+	v := fn.Panic1(vm.RunJavaScript(
 		//language=javascript
 		`
+import {Buffer} from 'go/buffer'
 new Buffer("123456").bytes()
 `))
 	if _, ok := v.Export().([]byte); !ok {
 		t.Fatal("not bytes")
 	}
 }
-func TestBuffer_Binary(t *testing.T) {
-	vm := Get()
-	defer vm.Free()
-	v := fn.Panic1(vm.RunScript(
-		//language=javascript
-		`
-new Buffer("123456").binary()
-`))
-	if _, ok := v.Export().(*Bytes); !ok {
-		t.Fatal("not bytes")
-	}
-}
+
 func TestBytes_Get(t *testing.T) {
 	vm := Get()
 	defer vm.Free()
-	v := fn.Panic1(vm.RunScript(
+	v := fn.Panic1(vm.RunJavaScript(
 		//language=javascript
 		`
-const bytes=new Buffer("123456").binary()
+import {Bytes} from 'go/buffer'
+const bytes=new Bytes("123456")
 console.log(bytes instanceof Bytes)
 bytes[0]
 `))
@@ -88,13 +81,15 @@ bytes[0]
 func TestBytes_Set(t *testing.T) {
 	vm := Get()
 	defer vm.Free()
-	v := fn.Panic1(vm.RunScript(
+	v := fn.Panic1(vm.RunJavaScript(
 		//language=javascript
 		`
-const bytes=new Buffer("123456").binary()
+import {Bytes} from 'go/buffer'
+const bytes=new Bytes("123456")
+const cap=()=>bytes
 console.log(bytes instanceof Bytes)
 bytes[1]=2
-bytes
+cap()
 `))
 	if b, ok := v.Export().(*Bytes); !ok {
 		t.Fatal("not Bytes", v)
@@ -105,12 +100,14 @@ bytes
 func TestBytes_Clone(t *testing.T) {
 	vm := Get()
 	defer vm.Free()
-	v := fn.Panic1(vm.RunScript(
+	v := fn.Panic1(vm.RunJavaScript(
 		//language=javascript
 		`
-const bytes=new Buffer("123456").binary()
+import {Bytes} from 'go/buffer'
+const bytes=new Bytes("123456")
 console.log(bytes instanceof Bytes)
 const b2=bytes.clone()
+console.log(b2 instanceof Bytes)
 const out=()=>b2[1]
 bytes[1]=3
 out()
@@ -124,10 +121,11 @@ out()
 func TestBytes_ToString(t *testing.T) {
 	vm := Get()
 	defer vm.Free()
-	v := fn.Panic1(vm.RunScript(
+	v := fn.Panic1(vm.RunJavaScript(
 		//language=javascript
 		`
-const bytes=new Buffer("123456").binary()
+import {Bytes} from 'go/buffer'
+const bytes=new Bytes("123456")
 console.log(bytes instanceof Bytes)
 bytes.toText()
 `))
@@ -144,7 +142,8 @@ func BenchmarkDyn(b *testing.B) {
 	code := vm.Compile(
 		//language=javascript
 		`
-bytes=new Buffer("123456").binary()
+import {Bytes} from 'go/buffer'
+const bytes=new Bytes("123456")
 bytes[0]=33
 bytes.toText()
 `, false)

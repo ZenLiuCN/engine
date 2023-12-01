@@ -27,6 +27,6 @@ func TestEngineTTL(t *testing.T) {
 	setTimeout(()=>console.log("done"),100)
 	console.log(typeof setTimeout)
 	`))
-	//println(vm.StopEventLoopTimeout(time.Millisecond * 200))
-	println(vm.StopEventLoopWait())
+	//println(vm.AwaitTimeout(time.Millisecond * 200))
+	println(vm.Await())
 }

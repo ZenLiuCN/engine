@@ -18,7 +18,7 @@ fetch("https://163.com/")
 .then(r=>r.text())
 .then(t=>console.log('<<<\n',t,'\n>>>'))
 `))
-	if n := vm.StopEventLoopWait(); n > 0 {
+	if n := vm.Await(); n > 0 {
 		panic(fmt.Sprintf("should complete async task: %d", n))
 	}
 }
@@ -32,7 +32,7 @@ fetch("https://163.com/")
 .then(r=>r.text())
 .then(t=>console.log('<<<\n',t,'\n>>>'))
 `))
-	if n := vm.StopEventLoopTimeout(time.Millisecond * 1); n != 2 {
+	if n := vm.AwaitTimeout(time.Millisecond * 1); n != 2 {
 		panic(fmt.Sprintf("should not complete async task: %d", n))
 	}
 }

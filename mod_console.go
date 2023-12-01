@@ -10,17 +10,12 @@ import (
 	"strings"
 )
 
-var (
-	//go:embed globals.d.ts
-	globalsDefine []byte
-)
-
 type Console struct {
 	*slog.Logger
 }
 
 func (s Console) TypeDefine() []byte {
-	return globalsDefine
+	return nil
 }
 
 func NewConsole(logger *slog.Logger) *Console {
@@ -81,7 +76,7 @@ func (s *BufferConsole) Name() string {
 	return "console"
 }
 func (s *BufferConsole) TypeDefine() []byte {
-	return globalsDefine
+	return nil
 }
 func (s *BufferConsole) log(level slog.Level, args ...goja.Value) {
 	s.Buffer.WriteRune('[')

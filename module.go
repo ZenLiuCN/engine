@@ -1,85 +1,79 @@
 package engine
 
 import (
-	"bytes"
-	"github.com/ZenLiuCN/fn"
-	"log/slog"
+	"fmt"
+	"github.com/dop251/goja"
+	"os"
+	"path/filepath"
+	"strings"
 )
 
-// Module is a top level objects that not required to import
-type Module interface {
-	Name() string
+// Module support for import by require, not a global instance as Module
+type (
+	Module interface {
+		TypeDefined
+		Identity() string // Identity the full module identity
+		Exports() map[string]any
+	}
+	InitializeModule interface {
+		Module
+		ExportsWithEngine(eng *Engine) map[string]any
+	}
+)
+
+var (
+	goRegistry = map[string]Module{}
+)
+
+func RegisterModule(module Module) bool {
+	if _, ok := goRegistry[module.Identity()]; ok {
+		return false
+	}
+	goRegistry[module.Identity()] = module
+	return true
 }
-type InitializeModule interface {
-	Module
-	Initialize(engine *Engine) Module // create copy of module with new Engine
+func RemoveModule(module string) {
+	delete(goRegistry, module)
 }
-type TopModule interface {
-	Module
-	Register(engine *Engine)
+
+func ModuleDefines() map[string][]byte {
+	m := make(map[string][]byte)
+	for s, module := range goRegistry {
+		m[strings.ReplaceAll(s, "/", "_")] = module.TypeDefine()
+	}
+	return m
+}
+func resolveModule(specifier string) Module {
+	if m, ok := goRegistry[specifier]; ok {
+		return m
+	}
+	return nil
+}
+func instanceModule(engine *Engine, module Module) (*goja.Object, error) {
+	exports := engine.NewObject()
+	var elements map[string]any
+	if igm, ok := module.(InitializeModule); ok {
+		elements = igm.ExportsWithEngine(engine)
+	} else {
+		elements = module.Exports()
+	}
+	for name, value := range elements {
+		err := exports.Set(name, value)
+		if err != nil {
+			return nil, fmt.Errorf("error prepare import Module, couldn't set exports: %w", err)
+		}
+	}
+	return exports, nil
+}
+
+// DumpDefines to path, global.d.ts contains top level types , pkg_name.d.ts contains go modules
+func DumpDefines(path string) {
+	_ = os.WriteFile(filepath.Join(path, "globals.d.ts"), ModDefines(), os.ModePerm)
+	for name, bytes := range ModuleDefines() {
+		_ = os.WriteFile(filepath.Join(path, name+".d.ts"), bytes, os.ModePerm)
+	}
 }
 
 var (
-	registry = map[string]Module{}
+	EmptyMap = map[string]any{}
 )
-
-func init() {
-	Register(NewConsole(slog.Default()))
-	Register(&Require{})
-
-	RegisterModule(BufferModule{})
-	RegisterModule(&Os{})
-	RegisterModule(&IoModule{})
-	RegisterModule(&EngineModule{})
-	RegisterModule(&CryptoModule{})
-	RegisterModule(&EsBuild{})
-	RegisterModule(&HashModule{})
-	RegisterModule(&CodecModule{})
-	RegisterModule(&Compiler{})
-	RegisterModule(&ChannelModule{})
-}
-
-// Register a module , returns false if already exists
-func Register(module Module) bool {
-	if _, ok := registry[module.Name()]; ok {
-		return false
-	}
-	registry[module.Name()] = module
-	return true
-}
-
-// ForceRegister a new Module, replace old one if exists.
-func ForceRegister(module Module) {
-	registry[module.Name()] = module
-}
-
-// Modules of global registered
-func Modules() []Module {
-	return fn.MapValues(registry)
-}
-
-// Registry the global module registry
-func Registry() map[string]Module {
-	return registry
-}
-
-// Remove preloaded module
-func Remove(module string) {
-	delete(registry, module)
-}
-
-type TypeDefined interface {
-	TypeDefine() []byte
-}
-
-// TypeDefines dump all possible type define (d.ts format) in registry
-func TypeDefines() []byte {
-	var b bytes.Buffer
-	for _, module := range registry {
-		if d, ok := module.(TypeDefined); ok {
-			b.WriteRune('\n')
-			b.Write(d.TypeDefine())
-		}
-	}
-	return b.Bytes()
-}

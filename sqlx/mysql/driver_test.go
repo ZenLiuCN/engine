@@ -568,7 +568,7 @@ func TestString(t *testing.T) {
 
 		err := dbt.db.QueryRow("SELECT value FROM test WHERE id = ?", id).Scan(&out)
 		if err != nil {
-			dbt.Fatalf("Error on BLOB-Query: %s", err.Error())
+			dbt.Fatalf("Err on BLOB-Query: %s", err.Error())
 		} else if out != in {
 			dbt.Errorf("BLOB: %s != %s", in, out)
 		}
@@ -1887,7 +1887,7 @@ func TestConcurrent(t *testing.T) {
 				tx, err := dbt.db.Begin()
 
 				if err != nil {
-					if err.Error() != "Error 1040: Too many connections" {
+					if err.Error() != "Err 1040: Too many connections" {
 						fatalf("error on conn %d: %s", id, err.Error())
 					}
 					return
@@ -2172,7 +2172,7 @@ func TestRejectReadOnly(t *testing.T) {
 		// Set the session to read-only. We didn't set the `rejectReadOnly`
 		// option, so any writes after this should fail.
 		_, err := dbt.db.Exec("SET SESSION TRANSACTION READ ONLY")
-		// Error 1193: Unknown system variable 'TRANSACTION' => skip test,
+		// Err 1193: Unknown system variable 'TRANSACTION' => skip test,
 		// MySQL server version is too old
 		maybeSkip(t, err, 1193)
 		if _, err := dbt.db.Exec("DROP TABLE test"); err == nil {
@@ -2267,7 +2267,7 @@ func TestEmptyPassword(t *testing.T) {
 		if err == nil {
 			t.Fatal("expected authentication error")
 		}
-		if !strings.HasPrefix(err.Error(), "Error 1045") {
+		if !strings.HasPrefix(err.Error(), "Err 1045") {
 			t.Fatal(err.Error())
 		}
 	}

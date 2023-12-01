@@ -12,7 +12,7 @@ import (
 )
 
 var (
-	//go:embed hash.d.ts
+	//go:embed module_hash.d.ts
 	hashDefine []byte
 )
 

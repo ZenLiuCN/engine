@@ -505,7 +505,7 @@ func (mc *mysqlConn) readAuthResult() ([]byte, string, error) {
 		authData := data[pluginEndIndex+1:]
 		return authData, plugin, nil
 
-	default: // Error otherwise
+	default: // Err otherwise
 		return nil, "", mc.handleErrorPacket(data)
 	}
 }
@@ -552,7 +552,7 @@ func (mc *okHandler) readResultSetHeaderPacket() (int, error) {
 	return 0, err
 }
 
-// Error Packet
+// Err Packet
 // http://dev.mysql.com/doc/internals/en/generic-response-packets.html#packet-ERR_Packet
 func (mc *mysqlConn) handleErrorPacket(data []byte) error {
 	if data[0] != iERR {
@@ -561,7 +561,7 @@ func (mc *mysqlConn) handleErrorPacket(data []byte) error {
 
 	// 0xff [1 byte]
 
-	// Error Number [16 bit uint]
+	// Err Number [16 bit uint]
 	errno := binary.LittleEndian.Uint16(data[1:3])
 
 	// 1792: ER_CANT_EXECUTE_IN_READ_ONLY_TRANSACTION
@@ -590,7 +590,7 @@ func (mc *mysqlConn) handleErrorPacket(data []byte) error {
 		pos = 9
 	}
 
-	// Error Message [string]
+	// Err Message [string]
 	me.Message = string(data[pos:])
 
 	return me
@@ -667,7 +667,7 @@ func (mc *okHandler) handleOkPacket(data []byte) error {
 	return nil
 }
 
-// Read Packets as Field Packets until EOF-Packet or an Error appears
+// Read Packets as Field Packets until EOF-Packet or an Err appears
 // http://dev.mysql.com/doc/internals/en/com-query-response.html#packet-Protocol::ColumnDefinition41
 func (mc *mysqlConn) readColumns(count int) ([]mysqlField, error) {
 	columns := make([]mysqlField, count)
@@ -767,7 +767,7 @@ func (mc *mysqlConn) readColumns(count int) ([]mysqlField, error) {
 	}
 }
 
-// Read Packets as Field Packets until EOF-Packet or an Error appears
+// Read Packets as Field Packets until EOF-Packet or an Err appears
 // http://dev.mysql.com/doc/internals/en/com-query-response.html#packet-ProtocolText::ResultsetRow
 func (rows *textRows) readRow(dest []driver.Value) error {
 	mc := rows.mc
@@ -864,7 +864,7 @@ func (rows *textRows) readRow(dest []driver.Value) error {
 	return nil
 }
 
-// Reads Packets until EOF-Packet or an Error appears. Returns count of Packets read
+// Reads Packets until EOF-Packet or an Err appears. Returns count of Packets read
 func (mc *mysqlConn) readUntilEOF() error {
 	for {
 		data, err := mc.readPacket()
@@ -1256,7 +1256,7 @@ func (rows *binaryRows) readRow(dest []driver.Value) error {
 		mc := rows.mc
 		rows.mc = nil
 
-		// Error otherwise
+		// Err otherwise
 		return mc.handleErrorPacket(data)
 	}
 

@@ -14,7 +14,7 @@ func TestChannel_bi(t *testing.T) {
 	fn.Panic1(vm.RunJavaScript(
 		//language=javascript
 		`
-	import {Chan} from 'go/chan'
+	import {Chan} from 'go'
 	/** @type {Chan<number>}*/
 	const cc=ch
 	cc.recv((v)=>console.log(v)).then(()=>console.log("closed"))
@@ -33,7 +33,7 @@ func TestChannel_bi(t *testing.T) {
 			}
 		}
 	}()
-	vm.StopEventLoopWait()
+	vm.Await()
 }
 func TestChannel_out(t *testing.T) {
 	vm := Get()
@@ -43,7 +43,7 @@ func TestChannel_out(t *testing.T) {
 	fn.Panic1(vm.RunJavaScript(
 		//language=javascript
 		`
-	import {WriteOnlyChan} from 'go/chan'
+	import {WriteOnlyChan} from 'go'
 	/** @type {WriteOnlyChan<number>}*/
 	const cc=ch
 	const i=setInterval(()=>cc.send(1),10)
@@ -64,7 +64,7 @@ func TestChannel_out(t *testing.T) {
 			}
 		}
 	}()
-	vm.StopEventLoopWait()
+	vm.Await()
 }
 func TestChannel_in(t *testing.T) {
 	vm := Get()
@@ -74,7 +74,7 @@ func TestChannel_in(t *testing.T) {
 	fn.Panic1(vm.RunJavaScript(
 		//language=javascript
 		`
-	import {ReadOnlyChan} from 'go/chan'
+	import {ReadOnlyChan} from 'go'
 	/** @type {ReadOnlyChan<number>}*/
 	const cc=ch
 	cc.recv((v)=>console.log(v)).then(()=>console.log("closed"))
@@ -93,5 +93,5 @@ func TestChannel_in(t *testing.T) {
 			}
 		}
 	}()
-	vm.StopEventLoopWait()
+	vm.Await()
 }

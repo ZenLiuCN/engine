@@ -4,7 +4,7 @@ func TransformErr01[B0, C any](f func() (B0, error), t func(B0, error) (C, error
 	return func() (C, *GoError) {
 		c, err := t(f())
 		if err != nil {
-			return c, &GoError{Error: err}
+			return c, &GoError{Err: err}
 		}
 		return c, nil
 	}
@@ -20,7 +20,7 @@ func TransformErr02[B0, B1, C any](f func() (B0, B1, error), t func(B0, B1, erro
 	return func() (C, *GoError) {
 		c, err := t(f())
 		if err != nil {
-			return c, &GoError{Error: err}
+			return c, &GoError{Err: err}
 		}
 		return c, nil
 	}
@@ -36,7 +36,7 @@ func TransformErr03[B0, B1, B2, C any](f func() (B0, B1, B2, error), t func(B0, 
 	return func() (C, *GoError) {
 		c, err := t(f())
 		if err != nil {
-			return c, &GoError{Error: err}
+			return c, &GoError{Err: err}
 		}
 		return c, nil
 	}
@@ -52,7 +52,7 @@ func TransformErr04[B0, B1, B2, B3, C any](f func() (B0, B1, B2, B3, error), t f
 	return func() (C, *GoError) {
 		c, err := t(f())
 		if err != nil {
-			return c, &GoError{Error: err}
+			return c, &GoError{Err: err}
 		}
 		return c, nil
 	}
@@ -68,7 +68,7 @@ func TransformErr11[A0, B0, C any](f func(A0) (B0, error), t func(B0, error) (C,
 	return func(a0 A0) (C, *GoError) {
 		c, err := t(f(a0))
 		if err != nil {
-			return c, &GoError{Error: err}
+			return c, &GoError{Err: err}
 		}
 		return c, nil
 	}
@@ -84,7 +84,7 @@ func TransformErr12[A0, B0, B1, C any](f func(A0) (B0, B1, error), t func(B0, B1
 	return func(a0 A0) (C, *GoError) {
 		c, err := t(f(a0))
 		if err != nil {
-			return c, &GoError{Error: err}
+			return c, &GoError{Err: err}
 		}
 		return c, nil
 	}
@@ -100,7 +100,7 @@ func TransformErr13[A0, B0, B1, B2, C any](f func(A0) (B0, B1, B2, error), t fun
 	return func(a0 A0) (C, *GoError) {
 		c, err := t(f(a0))
 		if err != nil {
-			return c, &GoError{Error: err}
+			return c, &GoError{Err: err}
 		}
 		return c, nil
 	}
@@ -116,7 +116,7 @@ func TransformErr14[A0, B0, B1, B2, B3, C any](f func(A0) (B0, B1, B2, B3, error
 	return func(a0 A0) (C, *GoError) {
 		c, err := t(f(a0))
 		if err != nil {
-			return c, &GoError{Error: err}
+			return c, &GoError{Err: err}
 		}
 		return c, nil
 	}
@@ -132,7 +132,7 @@ func TransformErr21[A0, A1, B0, C any](f func(A0, A1) (B0, error), t func(B0, er
 	return func(a0 A0, a1 A1) (C, *GoError) {
 		c, err := t(f(a0, a1))
 		if err != nil {
-			return c, &GoError{Error: err}
+			return c, &GoError{Err: err}
 		}
 		return c, nil
 	}
@@ -148,7 +148,7 @@ func TransformErr22[A0, A1, B0, B1, C any](f func(A0, A1) (B0, B1, error), t fun
 	return func(a0 A0, a1 A1) (C, *GoError) {
 		c, err := t(f(a0, a1))
 		if err != nil {
-			return c, &GoError{Error: err}
+			return c, &GoError{Err: err}
 		}
 		return c, nil
 	}
@@ -164,7 +164,7 @@ func TransformErr23[A0, A1, B0, B1, B2, C any](f func(A0, A1) (B0, B1, B2, error
 	return func(a0 A0, a1 A1) (C, *GoError) {
 		c, err := t(f(a0, a1))
 		if err != nil {
-			return c, &GoError{Error: err}
+			return c, &GoError{Err: err}
 		}
 		return c, nil
 	}
@@ -181,7 +181,7 @@ func TransformErr24[A0, A1, B0, B1, B2, B3, C any](f func(A0, A1) (B0, B1, B2, B
 	return func(a0 A0, a1 A1) (C, *GoError) {
 		c, err := t(f(a0, a1))
 		if err != nil {
-			return c, &GoError{Error: err}
+			return c, &GoError{Err: err}
 		}
 		return c, nil
 	}
@@ -197,7 +197,7 @@ func TransformErr31[A0, A1, A2, B0, C any](f func(A0, A1, A2) (B0, error), t fun
 	return func(a0 A0, a1 A1, a2 A2) (C, *GoError) {
 		c, err := t(f(a0, a1, a2))
 		if err != nil {
-			return c, &GoError{Error: err}
+			return c, &GoError{Err: err}
 		}
 		return c, nil
 	}
@@ -213,7 +213,7 @@ func TransformErr32[A0, A1, A2, B0, B1, C any](f func(A0, A1, A2) (B0, B1, error
 	return func(a0 A0, a1 A1, a2 A2) (C, *GoError) {
 		c, err := t(f(a0, a1, a2))
 		if err != nil {
-			return c, &GoError{Error: err}
+			return c, &GoError{Err: err}
 		}
 		return c, nil
 	}
@@ -230,7 +230,7 @@ func TransformErr33[A0, A1, A2, B0, B1, B2, C any](f func(A0, A1, A2) (B0, B1, B
 	return func(a0 A0, a1 A1, a2 A2) (C, *GoError) {
 		c, err := t(f(a0, a1, a2))
 		if err != nil {
-			return c, &GoError{Error: err}
+			return c, &GoError{Err: err}
 		}
 		return c, nil
 	}
@@ -246,7 +246,7 @@ func TransformErr34[A0, A1, A2, B0, B1, B2, B3, C any](f func(A0, A1, A2) (B0, B
 	return func(a0 A0, a1 A1, a2 A2) (C, *GoError) {
 		c, err := t(f(a0, a1, a2))
 		if err != nil {
-			return c, &GoError{Error: err}
+			return c, &GoError{Err: err}
 		}
 		return c, nil
 	}
@@ -262,7 +262,7 @@ func TransformErr41[A0, A1, A2, A3, B0, C any](f func(A0, A1, A2, A3) (B0, error
 	return func(a0 A0, a1 A1, a2 A2, a3 A3) (C, *GoError) {
 		c, err := t(f(a0, a1, a2, a3))
 		if err != nil {
-			return c, &GoError{Error: err}
+			return c, &GoError{Err: err}
 		}
 		return c, nil
 	}
@@ -279,7 +279,7 @@ func TransformErr42[A0, A1, A2, A3, B0, B1, C any](f func(A0, A1, A2, A3) (B0, B
 	return func(a0 A0, a1 A1, a2 A2, a3 A3) (C, *GoError) {
 		c, err := t(f(a0, a1, a2, a3))
 		if err != nil {
-			return c, &GoError{Error: err}
+			return c, &GoError{Err: err}
 		}
 		return c, nil
 	}
@@ -295,7 +295,7 @@ func TransformErr43[A0, A1, A2, A3, B0, B1, B2, C any](f func(A0, A1, A2, A3) (B
 	return func(a0 A0, a1 A1, a2 A2, a3 A3) (C, *GoError) {
 		c, err := t(f(a0, a1, a2, a3))
 		if err != nil {
-			return c, &GoError{Error: err}
+			return c, &GoError{Err: err}
 		}
 		return c, nil
 	}
@@ -311,7 +311,7 @@ func TransformErr44[A0, A1, A2, A3, B0, B1, B2, B3, C any](f func(A0, A1, A2, A3
 	return func(a0 A0, a1 A1, a2 A2, a3 A3) (C, *GoError) {
 		c, err := t(f(a0, a1, a2, a3))
 		if err != nil {
-			return c, &GoError{Error: err}
+			return c, &GoError{Err: err}
 		}
 		return c, nil
 	}

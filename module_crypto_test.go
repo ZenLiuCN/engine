@@ -11,6 +11,7 @@ func TestCryptoSimple(t *testing.T) {
 	fn.Panic1(vm.RunJavaScript(
 		//language=javascript
 		`
+import {Bytes} from "go/buffer"
 import {cipher,aes,pkcs5,cbc} from "go/crypto"
 import {base64StdEncode} from "go/codec"
 const enc = cipher({

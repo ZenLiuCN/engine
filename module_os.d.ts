@@ -281,5 +281,16 @@ declare module "go/os" {
 
     export function ls(path?: string): Array<{ dir: boolean, name: string, mode: string, size: number, modified: string }>
 
+    export function stat(path: string): undefined | Stat
+    // @ts-ignore
+    import {Time} from 'go/time'
+    export interface Stat {
+        name():string
+        size():number
+        mode():number
+        modTime():Time
+        isDir():boolean
+
+    }
 
 }
