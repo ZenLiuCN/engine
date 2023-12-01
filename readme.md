@@ -78,6 +78,9 @@ Simple support for CommonJs, ES script and TypeScript also compiled as CJS scrip
 ### io module
 
 + `go/io` : golang io module
+### chan module
+
++ `go/chan` : golang chan type only
 
 ## Modules
 
