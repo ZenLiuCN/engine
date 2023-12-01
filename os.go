@@ -3,7 +3,6 @@ package engine
 import (
 	_ "embed"
 	"github.com/ZenLiuCN/fn"
-	"github.com/dop251/goja"
 	"io"
 	"os"
 	"path/filepath"
@@ -25,7 +24,9 @@ func (o *Os) Identity() string {
 func (o *Os) Exports() map[string]any {
 	return nil
 }
-
+func (o *Os) TypeDefine() []byte {
+	return osDefine
+}
 func (o *Os) ExportsWithEngine(e *Engine) map[string]any {
 	m := map[string]any{}
 	m["root"] = root
@@ -35,74 +36,21 @@ func (o *Os) ExportsWithEngine(e *Engine) map[string]any {
 	m["pathSeparator"] = pathSeparator
 	m["pathListSeparator"] = pathListSeparator
 
-	m["expand"] = func(path string) string {
-		return expand(path)
-	}
-	m["pre"] = func(key string, value ...string) {
-		src := os.Getenv(key)
-		tar := fn.SliceJoinRune(value, os.PathListSeparator, fn.Identity[string])
-		if len(src) != 0 {
-			tar = tar + pathListSeparator + src
-		}
-		fn.Panic(os.Setenv(key, tar))
-	}
-	m["prep"] = func(key string, value ...string) {
-		src := os.Getenv(key)
-		tar := fn.SliceJoinRune(value, os.PathListSeparator, expand)
-		if len(src) != 0 {
-			tar = tar + pathListSeparator + src
-		}
-		fn.Panic(os.Setenv(key, tar))
-	}
-	m["ap"] = func(key string, value ...string) {
-		src := os.Getenv(key)
-		tar := fn.SliceJoinRune(value, os.PathListSeparator, fn.Identity[string])
-		if len(src) != 0 {
-			tar = src + pathListSeparator + tar
-		}
-		fn.Panic(os.Setenv(key, tar))
-	}
-	m["app"] = func(key string, value ...string) {
-		src := os.Getenv(key)
-		tar := fn.SliceJoinRune(value, os.PathListSeparator, expand)
-		if len(src) != 0 {
-			tar = src + pathListSeparator + tar
-		}
-		fn.Panic(os.Setenv(key, tar))
-	}
-	m["set"] = func(key string, value ...string) {
-		tar := fn.SliceJoinRune(value, os.PathListSeparator, fn.Identity[string])
-		fn.Panic(os.Setenv(key, tar))
-	}
-	m["setp"] = func(key string, value ...string) {
-		tar := fn.SliceJoinRune(value, os.PathListSeparator, expand)
-		fn.Panic(os.Setenv(key, tar))
-	}
-	m["put"] = func(key string, value ...string) {
-		src := os.Getenv(key)
-		if len(src) != 0 {
-			return
-		}
-		fn.Panic(os.Setenv(key, fn.SliceJoinRune(value, os.PathListSeparator, fn.Identity[string])))
-	}
-	m["putp"] = func(key string, value ...string) {
-		src := os.Getenv(key)
-		if len(src) != 0 {
-			return
-		}
-		fn.Panic(os.Setenv(key, fn.SliceJoinRune(value, os.PathListSeparator, expand)))
-	}
-	m["variable"] = func(key string) string {
-		return os.Getenv(key)
-	}
-	m["evalFile"] = func(path string) any {
-		return fn.Panic1(e.Execute(CompileFile(expand(path)))).Export()
+	m["expand"] = EnvExpand
+	m["pre"] = EnvPrepend
+	m["prep"] = EnvPrependPath
+	m["ap"] = EnvAppend
+	m["app"] = EnvAppendPath
+	m["set"] = EnvSet
+	m["setp"] = EnvSetPath
+	m["put"] = EnvPut
+	m["putp"] = EnvPutPath
+	m["variable"] = EnvVar
+	m["evalFile"] = func(p string) any {
+		return EvalFile(e, p)
 	}
 	m["evalFiles"] = func(paths ...string) (r []any) {
-		for _, s := range paths {
-			r = append(r, fn.Panic1(e.Execute(CompileFile(expand(s)))).Export())
-		}
-		return
+		return EvalFiles(e, paths...)
 	}
 	m["exec"] = func(option *ExecOption) {
 		fn.Panic(Execute(option))
@@ -110,42 +58,20 @@ func (o *Os) ExportsWithEngine(e *Engine) map[string]any {
 	m["proc"] = func(option *ProcOption) SubProc {
 		return SubProc{s: OpenProc(option)}
 	}
-	m["mkdir"] = func(path string) {
-		pt := expand(path)
-		if exists(pt) {
-			return
-		}
-		fn.Panic(os.Mkdir(pt, os.ModePerm))
-	}
-	m["mkdirAll"] = func(path string) {
-		pt := expand(path)
-		if exists(pt) {
-			return
-		}
-		fn.Panic(os.MkdirAll(pt, os.ModePerm))
-	}
-	m["exists"] = exists
-	m["write"] = func(path string, data goja.ArrayBuffer) {
-		fn.Panic(os.WriteFile(expand(path), data.Bytes(), os.ModePerm))
-	}
-	m["writeText"] = func(path string, data string) {
-		fn.Panic(os.WriteFile(expand(path), []byte(data), os.ModePerm))
-	}
-	m["read"] = func(path string) []byte {
-		return fn.Panic1(os.ReadFile(expand(path)))
-	}
-	m["readText"] = func(path string) string {
-		return string(fn.Panic1(os.ReadFile(expand(path))))
-	}
-	m["chdir"] = func(path string) {
-		fn.Panic(os.Chdir(expand(path)))
-	}
-	m["pwd"] = pwd
+	m["mkdir"] = Mkdir
+	m["mkdirAll"] = MkdirAll
+	m["exists"] = FileExists
+	m["write"] = WriteBinaryFile
+	m["writeText"] = WriteTextFile
+	m["read"] = ReadBinaryFile
+	m["readText"] = ReadTextFile
+	m["chdir"] = Chdir
+	m["pwd"] = Pwd
 	m["ls"] = func(path string) (r []map[string]any) {
 		if path == "" {
-			path = pwd()
+			path = Pwd()
 		}
-		f := fn.Panic1(os.Open(expand(path)))
+		f := fn.Panic1(os.Open(EnvExpand(path)))
 		defer fn.IgnoreClose(f)
 		dir := fn.Panic1(f.ReadDir(0))
 		for _, entry := range dir {
@@ -163,18 +89,110 @@ func (o *Os) ExportsWithEngine(e *Engine) map[string]any {
 
 	return m
 }
-
-func (o *Os) TypeDefine() []byte {
-	return osDefine
+func EnvPutPath(key string, value ...string) {
+	src := os.Getenv(key)
+	if len(src) != 0 {
+		return
+	}
+	fn.Panic(os.Setenv(key, fn.SliceJoinRune(value, os.PathListSeparator, EnvExpand)))
 }
-func pwd() string {
+func EnvVar(key string) string {
+	return os.Getenv(key)
+}
+func EvalFile(e *Engine, path string) any {
+	return fn.Panic1(e.Execute(CompileFile(EnvExpand(path)))).Export()
+}
+func EvalFiles(e *Engine, paths ...string) (r []any) {
+	for _, s := range paths {
+		r = append(r, fn.Panic1(e.Execute(CompileFile(EnvExpand(s)))).Export())
+	}
+	return
+}
+func Mkdir(path string) {
+	pt := EnvExpand(path)
+	if FileExists(pt) {
+		return
+	}
+	fn.Panic(os.Mkdir(pt, os.ModePerm))
+}
+func MkdirAll(path string) {
+	pt := EnvExpand(path)
+	if FileExists(pt) {
+		return
+	}
+	fn.Panic(os.MkdirAll(pt, os.ModePerm))
+}
+func WriteBinaryFile(path string, data []byte) {
+	fn.Panic(os.WriteFile(EnvExpand(path), data, os.ModePerm))
+}
+func WriteTextFile(path string, data string) {
+	fn.Panic(os.WriteFile(EnvExpand(path), []byte(data), os.ModePerm))
+}
+func ReadBinaryFile(path string) []byte {
+	return fn.Panic1(os.ReadFile(EnvExpand(path)))
+}
+func ReadTextFile(path string) string {
+	return string(fn.Panic1(os.ReadFile(EnvExpand(path))))
+}
+func Chdir(path string) {
+	fn.Panic(os.Chdir(EnvExpand(path)))
+}
+func EnvPut(key string, value ...string) {
+	src := os.Getenv(key)
+	if len(src) != 0 {
+		return
+	}
+	fn.Panic(os.Setenv(key, fn.SliceJoinRune(value, os.PathListSeparator, fn.Identity[string])))
+}
+func EnvSetPath(key string, value ...string) {
+	tar := fn.SliceJoinRune(value, os.PathListSeparator, EnvExpand)
+	fn.Panic(os.Setenv(key, tar))
+}
+func EnvSet(key string, value ...string) {
+	tar := fn.SliceJoinRune(value, os.PathListSeparator, fn.Identity[string])
+	fn.Panic(os.Setenv(key, tar))
+}
+func EnvPrepend(key string, value ...string) {
+	src := os.Getenv(key)
+	tar := fn.SliceJoinRune(value, os.PathListSeparator, fn.Identity[string])
+	if len(src) != 0 {
+		tar = tar + pathListSeparator + src
+	}
+	fn.Panic(os.Setenv(key, tar))
+}
+func EnvAppendPath(key string, value ...string) {
+	src := os.Getenv(key)
+	tar := fn.SliceJoinRune(value, os.PathListSeparator, EnvExpand)
+	if len(src) != 0 {
+		tar = src + pathListSeparator + tar
+	}
+	fn.Panic(os.Setenv(key, tar))
+}
+func EnvAppend(key string, value ...string) {
+	src := os.Getenv(key)
+	tar := fn.SliceJoinRune(value, os.PathListSeparator, fn.Identity[string])
+	if len(src) != 0 {
+		tar = src + pathListSeparator + tar
+	}
+	fn.Panic(os.Setenv(key, tar))
+}
+func EnvPrependPath(key string, value ...string) {
+	src := os.Getenv(key)
+	tar := fn.SliceJoinRune(value, os.PathListSeparator, EnvExpand)
+	if len(src) != 0 {
+		tar = tar + pathListSeparator + src
+	}
+	fn.Panic(os.Setenv(key, tar))
+}
+
+func Pwd() string {
 	return fn.Panic1(os.Getwd())
 }
-func exists(path string) bool {
-	_, err := os.Stat(expand(path))
+func FileExists(path string) bool {
+	_, err := os.Stat(EnvExpand(path))
 	return err == nil || !os.IsNotExist(err)
 }
-func expand(path string) string {
+func EnvExpand(path string) string {
 	if strings.HasPrefix(path, "@") {
 		return fixPath(os.ExpandEnv(filepath.Join(root, strings.TrimPrefix(path, "@"))))
 	}
