@@ -7,28 +7,43 @@ import (
 	"net/url"
 	"os"
 	"path/filepath"
+	"slices"
 )
 
 type Require struct {
-	pwd   *url.URL
-	cache map[JsModule]JsModuleInstance
+	pwd      *url.URL
+	cache    map[JsModule]JsModuleInstance
+	disables []string
 	*Engine
 }
 
-func (r *Require) Name() string {
+func (r Require) Name() string {
 	return "Require"
 }
-
-func (r *Require) Register(engine *Engine) {
+func (r *Require) AddDisabled(spec ...string) {
+	r.disables = append(r.disables, spec...)
+}
+func (r *Require) GetDisabled() []string {
+	return r.disables
+}
+func (r Require) Register(engine *Engine) {
 	x := &Require{
 		pwd:    WdToUrl(),
 		cache:  make(map[JsModule]JsModuleInstance),
 		Engine: engine,
 	}
-	fn.Panic(engine.Runtime.Set("require", x.Require))
+	engine.Set("require", x.Require)
+	engine.Set("_$require", x)
 }
 
+var (
+	ErrDisabled = errors.New("required module is disabled")
+)
+
 func (r *Require) Require(specifier string) (*goja.Object, error) {
+	if slices.Index(r.disables, specifier) >= 0 {
+		return nil, ErrDisabled
+	}
 	if gom := resolveModule(specifier); gom != nil {
 		return instanceModule(r.engine, gom)
 	}

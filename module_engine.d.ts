@@ -7,7 +7,7 @@ declare module "go/engine"{
          * @param modules names of modules
          */
         constructor(exclude: boolean, ...modules: string[])
-
+        disableModules(...modules:string[]):boolean
         runString(sc: string): Value
 
         runJs(sc: string): Value

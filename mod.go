@@ -25,7 +25,7 @@ var (
 
 func init() {
 	RegisterMod(NewConsole(slog.Default()))
-	RegisterMod(&Require{})
+	RegisterMod(Require{})
 
 	RegisterModule(&GoModule{})
 	RegisterModule(BufferModule{})

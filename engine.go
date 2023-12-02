@@ -30,6 +30,18 @@ func (s *Engine) Register(mods ...Mod) {
 	}
 }
 
+// DisableModules disable load modules for current engine, modules are the full import path
+func (s *Engine) DisableModules(modules ...string) bool {
+	r := s.Get("_$require")
+	if !s.IsNullish(r) {
+		if x, ok := r.Export().(*Require); ok {
+			x.AddDisabled(modules...)
+			return true
+		}
+	}
+	return false
+}
+
 // Free recycle this engine
 func (s *Engine) Free() {
 	s.EventLoop.StopEventLoopNoWait()
