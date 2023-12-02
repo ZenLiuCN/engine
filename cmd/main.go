@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"github.com/ZenLiuCN/engine"
 	_ "github.com/ZenLiuCN/engine/excelize"
@@ -29,19 +30,23 @@ func main() {
 	case len(args) == 1 && !source:
 		vm := engine.Get()
 		defer vm.Free()
-		v := fn.Panic1(vm.RunCode(engine.CompileFile(args[0])))
-		vm.Await()
-		if !engine.IsNullish(v) {
-			println(v.String())
-		}
+		cc := fn.WithSignal(func(ctx context.Context) {
+			v := fn.Panic1(vm.RunCodeContext(engine.CompileFile(args[0]), ctx))
+			if !engine.IsNullish(v) {
+				println(v.String())
+			}
+		})
+		defer cc()
 	case len(args) > 0:
 		vm := engine.Get()
 		defer vm.Free()
-		v := fn.Panic1(vm.RunCode(engine.CompileSource(fn.SliceJoinRune(args, '\n', fn.Identity[string]), typed)))
-		vm.Await()
-		if !engine.IsNullish(v) {
-			println(v.String())
-		}
+		cc := fn.WithSignal(func(ctx context.Context) {
+			v := fn.Panic1(vm.RunCodeContext(engine.CompileSource(fn.SliceJoinRune(args, '\n', fn.Identity[string]), typed), ctx))
+			if !engine.IsNullish(v) {
+				println(v.String())
+			}
+		})
+		defer cc()
 	default:
 		println("usage: " + engine.GetExecutable() + " [FLAG] source|file")
 		flag.Usage()
