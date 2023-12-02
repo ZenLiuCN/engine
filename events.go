@@ -300,6 +300,7 @@ func (s *EventLoop) AwaitContext() context.Context {
 // see also Await, AwaitWithContext and AwaitContext.
 func (s *EventLoop) AwaitTimeout(duration time.Duration) int {
 	tick := time.Tick(duration)
+	s.stopLock.Lock()
 	for s.running {
 		atomic.StoreInt32(&s.canRun, 2) //stop when no task
 		select {
@@ -308,9 +309,8 @@ func (s *EventLoop) AwaitTimeout(duration time.Duration) int {
 		default:
 			s.wakeup()
 		}
+		s.stopCond.Wait()
 	}
-	s.stopLock.Lock()
-	s.stopCond.Wait()
 	s.stopLock.Unlock()
 	return int(s.jobCount)
 }
