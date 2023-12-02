@@ -8,21 +8,23 @@ declare module "go/engine"{
          */
         constructor(exclude: boolean, ...modules: string[])
 
-        runScript(sc: string): any
+        runString(sc: string): Value
 
-        runJavaScript(sc: string): any
+        runJs(sc: string): Value
 
-        runTypeScript(sc: string): any
+        runTs(sc: string): Value
 
         compile(src: string, ts: boolean): Code
 
         set(name: string, value: any)
 
-        execute(code: Code): any
+        execute(code: Code): Value
 
         free()
     }
-
+    export interface Value{
+        export():any
+    }
     export interface Code {
     }
 }
