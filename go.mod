@@ -4,7 +4,7 @@ go 1.21
 
 require (
 	github.com/Joker/jade v1.1.3
-	github.com/ZenLiuCN/fn v0.1.16
+	github.com/ZenLiuCN/fn v0.1.17
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.2.0
 	github.com/dop251/goja v0.0.0-20231027120936-b396bb4c349d
 	github.com/evanw/esbuild v0.19.8
