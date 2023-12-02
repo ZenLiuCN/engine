@@ -10,7 +10,7 @@ func TestEsBuild(t *testing.T) {
 	vm := Get()
 	defer vm.Free()
 	v := fn.Panic1(
-		vm.RunJavaScript(
+		vm.RunJs(
 			//language=javascript
 			`
 import es from 'go/esbuild'

@@ -29,7 +29,7 @@ func main() {
 	case len(args) == 1 && !source:
 		vm := engine.Get()
 		defer vm.Free()
-		v := fn.Panic1(vm.Execute(engine.CompileFile(args[0])))
+		v := fn.Panic1(vm.RunCode(engine.CompileFile(args[0])))
 		vm.Await()
 		if !engine.IsNullish(v) {
 			println(v.String())
@@ -37,7 +37,7 @@ func main() {
 	case len(args) > 0:
 		vm := engine.Get()
 		defer vm.Free()
-		v := fn.Panic1(vm.Execute(engine.CompileSource(fn.SliceJoinRune(args, '\n', fn.Identity[string]), typed)))
+		v := fn.Panic1(vm.RunCode(engine.CompileSource(fn.SliceJoinRune(args, '\n', fn.Identity[string]), typed)))
 		vm.Await()
 		if !engine.IsNullish(v) {
 			println(v.String())

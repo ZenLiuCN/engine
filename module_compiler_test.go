@@ -8,7 +8,7 @@ import (
 func TestCompileSimple(t *testing.T) {
 	vm := Get()
 	defer vm.Free()
-	fn.Panic1(vm.RunJavaScript(
+	fn.Panic1(vm.RunJs(
 		//language=javascript
 		`
 import cm from 'go/compiler'

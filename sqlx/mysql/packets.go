@@ -968,7 +968,7 @@ func (stmt *mysqlStmt) writeCommandLongData(paramID int, arg []byte) error {
 	return nil
 }
 
-// Execute Prepared Statement
+// RunCode Prepared Statement
 // http://dev.mysql.com/doc/internals/en/com-stmt-execute.html
 func (stmt *mysqlStmt) writeExecutePacket(args []driver.Value) error {
 	if len(args) != stmt.paramCount {

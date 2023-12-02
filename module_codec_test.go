@@ -8,7 +8,7 @@ import (
 func TestCodecModule_RawStdDecode(t *testing.T) {
 	vm := Get()
 	defer vm.Free()
-	_ = fn.Panic1(vm.RunJavaScript(
+	_ = fn.Panic1(vm.RunJs(
 		//language=javascript
 		`
 import {base64RawStdEncode} from 'go/codec'
@@ -21,7 +21,7 @@ console.assert(base64RawStdEncode(new Bytes(1,2,3,4,5,6).bytes())==="AQIDBAUG")
 func TestCodecModule_Base64(t *testing.T) {
 	vm := Get()
 	defer vm.Free()
-	fn.Panic1(vm.RunJavaScript(
+	fn.Panic1(vm.RunJs(
 		//language=javascript
 		`
 import {Bytes} from "go/buffer"

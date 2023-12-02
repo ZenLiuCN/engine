@@ -11,7 +11,7 @@ import (
 func TestFetch_Fetch(t *testing.T) {
 	vm := engine.Get()
 	defer vm.Free()
-	fn.Panic1(vm.RunScript(
+	fn.Panic1(vm.RunString(
 		//language=javascript
 		`
 fetch("https://163.com/")
@@ -25,7 +25,7 @@ fetch("https://163.com/")
 func TestFetch_Fetch_timeout(t *testing.T) {
 	vm := engine.Get()
 	defer vm.Free()
-	fn.Panic1(vm.RunScript(
+	fn.Panic1(vm.RunString(
 		//language=javascript
 		`
 fetch("https://163.com/")

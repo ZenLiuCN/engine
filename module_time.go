@@ -84,6 +84,7 @@ func (t *TimeModule) Exports() map[string]any {
 			"unix":        time.Unix,
 			"unixMilli":   time.UnixMilli,
 			"unixMicro":   time.UnixMicro,
+			"sleep":       time.Sleep,
 		}
 	}
 	return t.m

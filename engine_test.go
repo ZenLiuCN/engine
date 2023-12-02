@@ -1,6 +1,7 @@
 package engine
 
 import (
+	"context"
 	"github.com/ZenLiuCN/fn"
 	"os"
 	"testing"
@@ -9,8 +10,8 @@ import (
 
 func TestSimple(t *testing.T) {
 	e := NewEngine()
-	println(IsNullish(fn.Panic1(e.RunJavaScript("console.log('123'+'2324')"))))
-	println(IsNullish(fn.Panic1(e.RunTypeScript(`
+	println(IsNullish(fn.Panic1(e.RunJs("console.log('123'+'2324')"))))
+	println(IsNullish(fn.Panic1(e.RunTs(`
 	const adder=(i:number)=>i+1
 	const added=(u:number)=>{let x=u;return (i:number)=>x+i}
 	console.log(adder(1234))
@@ -23,7 +24,7 @@ func TestSimple(t *testing.T) {
 }
 func TestEs2015(t *testing.T) {
 	e := NewEngine()
-	println(IsNullish(fn.Panic1(e.RunScript(
+	println(IsNullish(fn.Panic1(e.RunString(
 		//language=javascript
 		`
 	class A {
@@ -45,7 +46,7 @@ console.log(new A(1))
 }
 func TestEs2016(t *testing.T) {
 	e := NewEngine()
-	println(IsNullish(fn.Panic1(e.RunScript(
+	println(IsNullish(fn.Panic1(e.RunString(
 		//language=javascript
 		`
 	console.log(2**12)
@@ -55,7 +56,7 @@ func TestEs2016(t *testing.T) {
 }
 func TestEs2017(t *testing.T) {
 	e := NewEngine()
-	println(IsNullish(fn.Panic1(e.RunScript(
+	println(IsNullish(fn.Panic1(e.RunString(
 		//language=javascript
 		`
 const b=()=>new Promise((r,j)=>r(1))
@@ -76,7 +77,7 @@ console.log(str.padEnd(10))
 }
 func TestEs2018(t *testing.T) {
 	e := NewEngine()
-	println(IsNullish(fn.Panic1(e.RunScript(
+	println(IsNullish(fn.Panic1(e.RunString(
 		//language=javascript
 		`
 /*const asyncIterable = {
@@ -115,7 +116,7 @@ syn()
 
 func TestEs2019(t *testing.T) {
 	e := NewEngine()
-	println(IsNullish(fn.Panic1(e.RunScript(
+	println(IsNullish(fn.Panic1(e.RunString(
 		//language=javascript
 		`
 console.log([1,2,3,[4,5,6]].flat())
@@ -127,7 +128,7 @@ console.log(a.toString())
 }
 func TestEs2020(t *testing.T) {
 	e := NewEngine()
-	println(IsNullish(fn.Panic1(e.RunScript(
+	println(IsNullish(fn.Panic1(e.RunString(
 		//language=javascript
 		`
 console.log(globalThis)
@@ -143,7 +144,7 @@ console.log(a.b?.b?.c)
 }
 func TestEs2021(t *testing.T) {
 	e := NewEngine()
-	println(IsNullish(fn.Panic1(e.RunScript(
+	println(IsNullish(fn.Panic1(e.RunString(
 		//language=javascript
 		`
 const str = 'sdfoooodbb'
@@ -156,7 +157,7 @@ console.log(newStr)
 }
 func TestEs2022(t *testing.T) {
 	e := NewEngine()
-	println(IsNullish(fn.Panic1(e.RunScript(
+	println(IsNullish(fn.Panic1(e.RunString(
 		//language=javascript
 		`
 class C1 {
@@ -193,16 +194,228 @@ return 1
 }`), os.ModePerm))
 	e := Get()
 	defer e.Free()
-	println(IsNullish(fn.Panic1(e.RunTypeScript(`
+	println(IsNullish(fn.Panic1(e.RunTs(`
 	import {some} from './simple.js'
 	console.log(typeof some)
 	console.log(some())
 `))))
-	println(IsNullish(fn.Panic1(e.RunJavaScript(`
+	println(IsNullish(fn.Panic1(e.RunJs(`
 	import {some} from './simple.js'
 	console.log(typeof some)
 	console.log(some())
 `))))
 	_ = os.Remove("simple.js")
+
+}
+func TestTimeout(t *testing.T) {
+	e := Get()
+	defer e.Free()
+
+	go func() {
+		println(IsNullish(fn.Panic1(e.RunJs(
+			//language=javascript
+			`import {Second, sleep} from 'go/time'
+
+new Promise((r, j) => {
+    sleep(Second)
+    r(1)
+}).then(v => {
+    console.log(v)
+    return new Promise((r, j) => {
+        sleep(Second)
+        r(v+1)
+    })
+}).then(v => {
+    console.log(v)
+    return new Promise((r, j) => {
+        sleep(Second)
+        r(v+1)
+    })
+}).then(v => {
+    console.log(v)
+    return new Promise((r, j) => {
+        sleep(Second*2)
+        r(v+1)
+    })
+}).then(v => {
+    console.log(v)
+    return new Promise((r, j) => {
+        sleep(Second*2)
+        r(v+1)
+    })
+})
+`))))
+	}()
+
+	t.Log(e.AwaitTimeout(time.Second*3) == 3) //2 task with 1 for background
+	e.Interrupt(nil)
+	time.Sleep(time.Second * 3)
+
+}
+
+func TestTimeoutJsSuccess(t *testing.T) {
+	e := Get()
+	defer e.Free()
+	t.Log(fn.Panic1(e.RunJsTimeout(
+		//language=javascript
+		`import {Second, sleep} from 'go/time'
+
+new Promise((r, j) => {
+    sleep(Second)
+    r(1)
+}).then(v => {
+    console.log(v)
+    return new Promise((r, j) => {
+        sleep(Second)
+        r(v+1)
+    })
+}).then(v => {
+    console.log(v)
+    return new Promise((r, j) => {
+        sleep(Second)
+        r(v+1)
+    })
+}).then(v => {
+    console.log(v)
+    return new Promise((r, j) => {
+        sleep(Second*2)
+        r(v+1)
+    })
+}).then(v => {
+    console.log(v)
+    return new Promise((r, j) => {
+        sleep(Second*2)
+        r(v+1)
+    })
+})
+`, time.Second*8)))
+
+}
+func TestTimeoutJs(t *testing.T) {
+	e := Get()
+	defer e.Free()
+	v, err := e.RunJsTimeout(
+		//language=javascript
+		`import {Second, sleep} from 'go/time'
+
+new Promise((r, j) => {
+    sleep(Second)
+    r(1)
+}).then(v => {
+    console.log(v)
+    return new Promise((r, j) => {
+        sleep(Second)
+        r(v+1)
+    })
+}).then(v => {
+    console.log(v)
+    return new Promise((r, j) => {
+        sleep(Second)
+        r(v+1)
+    })
+}).then(v => {
+    console.log(v)
+    return new Promise((r, j) => {
+        sleep(Second*2)
+        r(v+1)
+    })
+}).then(v => {
+    console.log(v)
+    return new Promise((r, j) => {
+        sleep(Second*2)
+        r(v+1)
+    })
+})
+`, time.Second*3)
+	if err == nil {
+		panic("should not success " + v.String())
+	} else {
+		t.Log(v, err)
+	}
+
+}
+func TestContextJs(t *testing.T) {
+	e := Get()
+	defer e.Free()
+	ctx, cc := context.WithTimeout(context.Background(), time.Second*3)
+	defer cc()
+	v, err := e.RunJsContext(
+		//language=javascript
+		`import {Second, sleep} from 'go/time'
+
+new Promise((r, j) => {
+    sleep(Second)
+    r(1)
+}).then(v => {
+    console.log(v)
+    return new Promise((r, j) => {
+        sleep(Second)
+        r(v+1)
+    })
+}).then(v => {
+    console.log(v)
+    return new Promise((r, j) => {
+        sleep(Second)
+        r(v+1)
+    })
+}).then(v => {
+    console.log(v)
+    return new Promise((r, j) => {
+        sleep(Second*2)
+        r(v+1)
+    })
+}).then(v => {
+    console.log(v)
+    return new Promise((r, j) => {
+        sleep(Second*2)
+        r(v+1)
+    })
+})
+`, ctx)
+	if err == nil {
+		panic("should not success " + v.String())
+	} else {
+		t.Log(v, err)
+	}
+
+}
+func TestContextJsSuccess(t *testing.T) {
+	e := Get()
+	defer e.Free()
+	ctx, cc := context.WithTimeout(context.Background(), time.Second*8)
+	defer cc()
+	t.Log(fn.Panic1(e.RunJsContext(
+		//language=javascript
+		`import {Second, sleep} from 'go/time'
+
+new Promise((r, j) => {
+    sleep(Second)
+    r(1)
+}).then(v => {
+    console.log(v)
+    return new Promise((r, j) => {
+        sleep(Second)
+        r(v+1)
+    })
+}).then(v => {
+    console.log(v)
+    return new Promise((r, j) => {
+        sleep(Second)
+        r(v+1)
+    })
+}).then(v => {
+    console.log(v)
+    return new Promise((r, j) => {
+        sleep(Second*2)
+        r(v+1)
+    })
+}).then(v => {
+    console.log(v)
+    return new Promise((r, j) => {
+        sleep(Second*2)
+        r(v+1)
+    })
+})
+`, ctx)))
 
 }

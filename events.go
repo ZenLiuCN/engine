@@ -54,10 +54,7 @@ type EventLoop struct {
 	stopLock sync.Mutex
 	stopCond *sync.Cond
 	running  bool
-
-	async        *AsyncContext
-	asyncResumed bool
-	asyncRefs    int
+	tracker  *AsyncTracker
 }
 type AsyncContext struct {
 	ref int
@@ -66,7 +63,16 @@ type AsyncContext struct {
 func (s *AsyncContext) String() string {
 	return fmt.Sprintf("async<%p>[%d]", s, s.ref)
 }
-func (s *EventLoop) Grab() (trackingObject any) {
+
+type AsyncTracker struct {
+	async        *AsyncContext
+	asyncResumed bool
+	asyncRefs    int
+	jobDec       func()
+	jobInc       func()
+}
+
+func (s *AsyncTracker) Grab() (trackingObject any) {
 	ctx := s.async
 	if ctx != nil {
 		ctx.ref++
@@ -74,12 +80,12 @@ func (s *EventLoop) Grab() (trackingObject any) {
 		ctx = &AsyncContext{ref: 1}
 		s.asyncRefs++
 	}
-	s.jobCount++
+	s.jobInc()
 	//println("grab", ctx.String(), s.jobCount)
 	return ctx
 }
 
-func (s *EventLoop) Resumed(trackingObject any) {
+func (s *AsyncTracker) Resumed(trackingObject any) {
 	//println("resumed", trackingObject, s.jobCount)
 	if s.asyncResumed {
 		panic("nested async context resumed calls")
@@ -88,7 +94,7 @@ func (s *EventLoop) Resumed(trackingObject any) {
 	s.asyncResumed = true
 
 }
-func (s *EventLoop) asyncRelease() {
+func (s *AsyncTracker) asyncRelease() {
 	s.async.ref--
 	if s.async.ref < 0 {
 		panic("async context reference negative")
@@ -98,11 +104,11 @@ func (s *EventLoop) asyncRelease() {
 		if s.asyncRefs < 0 {
 			panic("async context refs negative")
 		}
-		s.jobCount--
+		s.jobDec()
 		//println("release context", s.async, s.jobCount)
 	}
 }
-func (s *EventLoop) Exited() {
+func (s *AsyncTracker) Exited() {
 	//println("exited", s.async, s.jobCount)
 	if s.async != nil {
 		s.asyncRelease()
@@ -118,13 +124,20 @@ func NewEventLoop(engine *Engine) *EventLoop {
 		wakeupChan: make(chan struct{}, 1),
 	}
 	loop.stopCond = sync.NewCond(&loop.stopLock)
+	loop.tracker = new(AsyncTracker)
+	loop.tracker.jobInc = func() {
+		loop.jobCount++
+	}
+	loop.tracker.jobDec = func() {
+		loop.jobCount--
+	}
 	engine.Set("setTimeout", loop.setTimeout)
 	engine.Set("setInterval", loop.setInterval)
 	engine.Set("setImmediate", loop.setImmediate)
 	engine.Set("clearTimeout", loop.clearTimeout)
 	engine.Set("clearInterval", loop.clearInterval)
 	engine.Set("clearImmediate", loop.clearImmediate)
-	engine.Runtime.SetAsyncContextTracker(loop)
+	engine.Runtime.SetAsyncContextTracker(loop.tracker)
 	return loop
 }
 
@@ -246,70 +259,44 @@ func (s *EventLoop) Await() int {
 }
 
 // AwaitWithContext stop with context for a cancelable or with deadline context, see also Await, AwaitTimeout and AwaitContext.
-func (s *EventLoop) AwaitWithContext(ctx context.Context) {
-	dead, ok := ctx.Deadline()
-	if ok {
-		go func() {
-			tick := time.Tick(dead.Sub(time.Now()))
-			for s.running {
-				select {
-				case <-tick:
-					s.StopEventLoopNoWait()
-					return
-				default:
-					atomic.StoreInt32(&s.canRun, 2) //stop when no task , not use lock
-					s.wakeup()
-				}
-			}
-		}()
-	} else {
-		go func() {
-			for s.running {
-				select {
-				case <-ctx.Done():
-					s.StopEventLoopNoWait()
-				default:
-					atomic.StoreInt32(&s.canRun, 2) //stop when no task , not use lock
-					s.wakeup()
-				}
-			}
-		}()
-	}
-
-}
-
-// AwaitContext await async execution with context, see also Await, AwaitTimeout and AwaitWithContext.
-func (s *EventLoop) AwaitContext() context.Context {
-	ctx, cc := context.WithCancel(context.Background())
-	go func() {
-		for s.running {
-			select {
-			case <-ctx.Done():
-				s.StopEventLoopNoWait()
-			default:
-				atomic.StoreInt32(&s.canRun, 2) //stop when no task , not use lock
-				s.wakeup()
-			}
+// should use goroutine to execute script to avoid blocking current thread
+func (s *EventLoop) AwaitWithContext(ctx context.Context) int {
+	s.stopLock.Lock()
+	atomic.StoreInt32(&s.canRun, 2) //stop when no task , not use lock
+F:
+	for s.running {
+		select {
+		case <-ctx.Done():
+			atomic.StoreInt32(&s.canRun, 0) //stop now
+			s.wakeup()
+			break F
+		default:
+			s.wakeup()
 		}
-		cc()
-	}()
-	return ctx
+	}
+	s.stopLock.Unlock()
+	return int(s.jobCount)
+
 }
 
 // AwaitTimeout all job done in a limit duration, the returning value may not exactly the pending job count,for no lock to wait
 // see also Await, AwaitWithContext and AwaitContext.
+// should use goroutine to execute script to avoid blocking current thread
 func (s *EventLoop) AwaitTimeout(duration time.Duration) int {
-	tick := time.Tick(duration)
+	tick := time.NewTicker(duration)
 	s.stopLock.Lock()
+F:
 	for s.running {
 		atomic.StoreInt32(&s.canRun, 2) //stop when no task
 		select {
-		case <-tick:
-			return s.StopEventLoop()
+		case <-tick.C:
+			tick.Stop()
+			atomic.StoreInt32(&s.canRun, 0) //stop now
+			s.wakeup()
+			break F
 		default:
 			s.wakeup()
 		}
-		s.stopCond.Wait()
 	}
 	s.stopLock.Unlock()
 	return int(s.jobCount)

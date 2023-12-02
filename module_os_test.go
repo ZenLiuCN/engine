@@ -9,7 +9,7 @@ func TestConstant(t *testing.T) {
 	vm := Get()
 	defer vm.Free()
 	println(fn.Panic1(
-		vm.RunJavaScript(
+		vm.RunJs(
 			//language=javascript
 			`
 import os from "go/os"

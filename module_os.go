@@ -102,11 +102,11 @@ func EnvVar(key string) string {
 	return os.Getenv(key)
 }
 func EvalFile(e *Engine, path string) any {
-	return fn.Panic1(e.Execute(CompileFile(EnvExpand(path)))).Export()
+	return fn.Panic1(e.RunCode(CompileFile(EnvExpand(path)))).Export()
 }
 func EvalFiles(e *Engine, paths ...string) (r []any) {
 	for _, s := range paths {
-		r = append(r, fn.Panic1(e.Execute(CompileFile(EnvExpand(s)))).Export())
+		r = append(r, fn.Panic1(e.RunCode(CompileFile(EnvExpand(s)))).Export())
 	}
 	return
 }

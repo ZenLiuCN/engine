@@ -8,7 +8,7 @@ import (
 func TestEngineModuleSimple(t *testing.T) {
 	vm := Get()
 	defer vm.Free()
-	fn.Panic1(vm.RunJavaScript(
+	fn.Panic1(vm.RunJs(
 		//language=javascript
 		`
 import {Engine} from 'go/engine'
@@ -21,7 +21,7 @@ const e=new Engine()
 func TestEngineTTL(t *testing.T) {
 	vm := Get()
 	defer vm.Free()
-	fn.Panic1(vm.RunJavaScript(
+	fn.Panic1(vm.RunJs(
 		//language=javascript
 		`
 	setTimeout(()=>console.log("done"),100)

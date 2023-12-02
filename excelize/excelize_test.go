@@ -12,7 +12,7 @@ func TestExcel(t *testing.T) {
 	vm := engine.Get()
 	defer vm.Free()
 	buf := fn.Panic1(
-		vm.RunJavaScript(
+		vm.RunJs(
 			//language=javascript
 			`
 	const xls=excel.open()

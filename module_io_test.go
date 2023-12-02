@@ -8,7 +8,7 @@ import (
 func TestIoModule(t *testing.T) {
 	vm := Get()
 	defer vm.Free()
-	fn.Panic1(vm.RunJavaScript(
+	fn.Panic1(vm.RunJs(
 		//language=javascript
 		`
 import io from 'go/io'
