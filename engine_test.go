@@ -4,217 +4,68 @@ import (
 	"context"
 	"fmt"
 	"github.com/ZenLiuCN/fn"
-	"os"
 	"testing"
 	"time"
 )
 
-func TestSimple(t *testing.T) {
-	e := NewEngine()
-	println(IsNullish(fn.Panic1(e.RunJs("console.log('123'+'2324')"))))
-	println(IsNullish(fn.Panic1(e.RunTs(`
-	const adder=(i:number)=>i+1
-	const added=(u:number)=>{let x=u;return (i:number)=>x+i}
-	console.log(adder(1234))
-	const add=added(5)
-	console.log(add(1))
-	console.log(add(2))
-	console.log(add(3))
-`))))
-
-}
-func TestEs2015(t *testing.T) {
-	e := NewEngine()
-	println(IsNullish(fn.Panic1(e.RunString(
-		//language=javascript
-		`
-	class A {
-    constructor(age){
-        this.age=age
-    }
-	}
-console.log(typeof A)
-const x=1
-console.log(Number.EPSILON)
-console.log(Number.MIN_SAFE_INTEGER)
-console.log(Number.MAX_SAFE_INTEGER)
-console.log(Math.trunc(1.2))
-console.log(Math.sign(1.2))
-console.log({[x+"b"]:1})
-console.log(new A(1))
-`))))
-	e.Await()
-}
-func TestEs2016(t *testing.T) {
-	e := NewEngine()
-	println(IsNullish(fn.Panic1(e.RunString(
-		//language=javascript
-		`
-	console.log(2**12)
-	console.log([1,2].includes(1))
-`))))
-
-}
-func TestEs2017(t *testing.T) {
-	e := NewEngine()
-	println(IsNullish(fn.Panic1(e.RunString(
-		//language=javascript
-		`
-const b=()=>new Promise((r,j)=>r(1))
-const c= async ()=> await b()
-console.log(typeof b)
-console.log(b.name)
-c().then(v=>console.log('future',v))
-// console.log(await c()) TOP Level not supported yet
-console.log(Object.values({a:1,b:2}))
-console.log(Object.entries({a:1,b:2}))
-console.log(Object.getOwnPropertyDescriptors({a:1,b:2}))
-const str = 'adata'
-console.log(str.padStart(10))
-console.log(str.padEnd(10))
-
-`))))
-	e.Await()
-}
-func TestEs2018(t *testing.T) {
-	e := NewEngine()
-	println(IsNullish(fn.Panic1(e.RunString(
-		//language=javascript
-		`
-/*const asyncIterable = {
-  [Symbol.asyncIterator]() {
-    return {
-      i: 0,
-      next() {
-        if (this.i < 3) {
-          return Promise.resolve({ value: this.i++, done: false })
-        }
-        return Promise.resolve({ done: true })
-      }
-    }
-  }
-}
-(async function () {
-  for await (num of asyncIterable) {
-    console.log(num)
-  }
-})()*/
-console.log("asyncIterable not supported yet")
-const n = { name: 'som' }
-const a = { age: 182 }
-const person = { ...n, ...a }
-console.log(person)
-const syn=()=>new Promise((r,j)=>r(1))
-syn()
-.then(v=>console.log(v))
-.finally(()=>{
-    console.log("finally will never end")
-    return new Promise((r,j)=>r())
-})
-`))))
-	e.AwaitTimeout(time.Second)
-}
-
-func TestEs2019(t *testing.T) {
-	e := NewEngine()
-	println(IsNullish(fn.Panic1(e.RunString(
-		//language=javascript
-		`
-console.log([1,2,3,[4,5,6]].flat())
-const a=()=>console.log(1)
-console.log(Object.fromEntries( [["a",1],["b",2]]))
-console.log(a.toString())
-`))))
-	e.Await()
-}
-func TestEs2020(t *testing.T) {
-	e := NewEngine()
-	println(IsNullish(fn.Panic1(e.RunString(
-		//language=javascript
-		`
-console.log(globalThis)
-// import('./promise.js').then(r=>console.log("supported"))
-// console.log(BigInt("0x1fffffffffffff"))
-console.log(null ?? 10) 
-console.log(undefined ?? 10) 
-console.log(false ?? 10) 
-const a={b:{c:'c'}}
-console.log(a.b?.b?.c)
-`))))
-	e.Await()
-}
-func TestEs2021(t *testing.T) {
-	e := NewEngine()
-	println(IsNullish(fn.Panic1(e.RunString(
-		//language=javascript
-		`
-const str = 'sdfoooodbb'
-const newStr = str.replaceAll('o', 'z')
-console.log(newStr)
-// console.log(1_0000_0000) 
-
-`))))
-	e.Await()
-}
-func TestEs2022(t *testing.T) {
-	e := NewEngine()
-	println(IsNullish(fn.Panic1(e.RunString(
-		//language=javascript
-		`
-class C1 {
-  myName = '11一碗'
-  #dsdf='123'
-  get x(){
-      return this.#dsdf
-  }
-}
-class C2 {
-  constructor() {
-    this.myName = "fdafzhah汉族"
-  }
-}
-console.log(new C1(),new C2())
-console.log(new C1().x)
-//TOP level await not supported yet
-const b=()=>new Promise((r,j)=>r(1))
-const c= async ()=> await b()
-console.log(typeof b)
-console.log(b.name)
-c().then(v=>console.log('future',v))
-// console.log(await c()) TOP Level not supported yet
-console.log(Object.hasOwn(new C1(),'#dsdf'))
-console.log(Object.hasOwn(new C1(),'myName'))
-console.log([1,2,3].at(-1))
-`))))
-	e.Await()
-}
-func TestSimpleRequire(t *testing.T) {
-	fn.Panic(os.WriteFile("simple.js", []byte(`
-export function some() {
-return 1
-}`), os.ModePerm))
-	e := Get()
-	defer e.Free()
-	println(IsNullish(fn.Panic1(e.RunTs(`
-	import {some} from './simple.js'
-	console.log(typeof some)
-	console.log(some())
-`))))
-	println(IsNullish(fn.Panic1(e.RunJs(`
-	import {some} from './simple.js'
-	console.log(typeof some)
-	console.log(some())
-`))))
-	_ = os.Remove("simple.js")
-
-}
-func TestTimeout(t *testing.T) {
-	e := Get()
-	defer e.Free()
-	v, err := e.RunJs(
-		//language=javascript
-		`
+const jsFullTimeoutAsync =
+// language=javascript
+`
 console.log("Begin "+"For timeout")
+const newCounter=()=>{
+    let cnt=0
+    return {
+        inc:function (){
+            cnt++
+            console.log(cnt)
+        },
+        cnt:function (){
+            console.log('get',cnt)
+           return  cnt
+        },
+        toString:()=>cnt
+    }
+}
+const counter=newCounter()
+const out=()=>counter
+new Promise((r, j) => {
+    console.log("job 0")
+    counter.inc()
+    setTimeout(()=>r(1),1000)
+}).then(v => {
+    console.log("job",v)
+       counter.inc()
+    return new Promise((r, j) => {
+        setTimeout(()=>r(v+1),1000)
+    })}).then(v => {
+    console.log("job",v)
+       counter.inc()
+    return new Promise((r, j) => {
+        setTimeout(()=>r(v+1),1000)
+    })
+}).then(v => {
+    console.log("job",v)
+      counter.inc()
+    return new Promise((r, j) => {
+       setTimeout(()=>r(v+1),2000)
+    })
+}).then(v => {
+    console.log("job",v)
+        counter.inc()
+    return new Promise((r, j) => {
+       r(counter.cnt())
+    })
+})
+out()
+`
+const jsPartlyTimeoutAsync =
+// language=javascript
+`
+let n=0
+for(var i = 0; i < 100; i++) {
+  n+=i
+}
+console.log("Begin "+"For timeout with "+n)
 new Promise((r, j) => {
     console.log("job 0")
     setTimeout(()=>r(1),1000)
@@ -237,7 +88,12 @@ new Promise((r, j) => {
     return new Promise((r, j) => {
        setTimeout(()=>r(v+1),2000)
     })
-})`)
+})`
+
+func TestTimeout(t *testing.T) {
+	e := Get()
+	defer e.Free()
+	v, err := e.RunJs(jsFullTimeoutAsync)
 	if err != nil {
 		t.Log(err)
 	}
@@ -253,33 +109,7 @@ new Promise((r, j) => {
 func TestAsyncDone(t *testing.T) {
 	e := Get()
 	defer e.Free()
-	v, err := e.RunJs(
-		//language=javascript
-		`
-console.log("Begin "+"For timeout")
-new Promise((r, j) => {
-    console.log("job 0")
-    setTimeout(()=>r(1),1000)
-}).then(v => {
-    console.log("job",v)
-    return new Promise((r, j) => {
-        setTimeout(()=>r(v+1),1000)
-    })}).then(v => {
-    console.log("job",v)
-    return new Promise((r, j) => {
-        setTimeout(()=>r(v+1),1000)
-    })
-}).then(v => {
-    console.log("job",v)
-    return new Promise((r, j) => {
-       setTimeout(()=>r(v+1),2000)
-    })
-}).then(v => {
-    console.log("job",v)
-    return new Promise((r, j) => {
-       setTimeout(()=>r(v+1),2000)
-    })
-})`)
+	v, err := e.RunJs(jsFullTimeoutAsync)
 	if err != nil {
 		t.Log(err)
 	}
@@ -289,86 +119,19 @@ new Promise((r, j) => {
 	}
 	t.Log(v)
 }
-func TestTimeoutJsSuccess(t *testing.T) {
+func TestTimeoutDelayJsSuccess(t *testing.T) {
 	e := Get()
 	defer e.Free()
-	t.Log(fn.Panic1(e.RunJsTimeout(
-		//language=javascript
-		`import {Second, sleep} from 'go/time'
-
-new Promise((r, j) => {
-    sleep(Second)
-    r(1)
-}).then(v => {
-    console.log(v)
-    return new Promise((r, j) => {
-        sleep(Second)
-        r(v+1)
-    })
-}).then(v => {
-    console.log(v)
-    return new Promise((r, j) => {
-        sleep(Second)
-        r(v+1)
-    })
-}).then(v => {
-    console.log(v)
-    return new Promise((r, j) => {
-        sleep(Second*2)
-        r(v+1)
-    })
-}).then(v => {
-    console.log(v)
-    return new Promise((r, j) => {
-        sleep(Second*2)
-        r(v+1)
-    })
-})
-`, time.Second*8)))
+	v := fn.Panic1(e.RunJsTimeoutDelay(jsFullTimeoutAsync, time.Microsecond*500, time.Second*8)).String()
+	if v != "5" {
+		panic("not real done")
+	}
 
 }
-func TestTimeoutJs(t *testing.T) {
+func TestTimeoutDelayJsFailure(t *testing.T) {
 	e := Get()
 	defer e.Free()
-	v, err := e.RunJsTimeout(
-		//language=javascript
-		`import {Second, sleep} from 'go/time'
-
-new Promise((r, j) => {
-    sleep(Second)
-    r(1)
-}).then(v => {
-    console.log(v)//1
-    return new Promise((r, j) => {
-        sleep(Second)
-        r(v+1)
-    })
-}).then(v => {
-    console.log(v) //2
-    return new Promise((r, j) => {
-        sleep(Second)
-        r(v+1)
-    })
-}).then(v => {
-    console.log(v) //3
-    return new Promise((r, j) => {
-        sleep(Second*2)
-        r(v+1)
-    })
-}).then(v => {
-    console.log(v) //4
-    return new Promise((r, j) => {
-        sleep(Second*2)
-        r(v+1)
-    })
-}).then(v => {
-    console.log(v) //4
-    return new Promise((r, j) => {
-        sleep(Second*2)
-        r(v+1)
-    })
-})
-`, time.Second*2)
+	v, err := e.RunJsTimeoutDelay(jsFullTimeoutAsync, time.Microsecond*10, time.Second*5)
 	if err == nil {
 		panic("should not success " + v.String())
 	} else {
@@ -381,39 +144,7 @@ func TestContextJs(t *testing.T) {
 	defer e.Free()
 	ctx, cc := context.WithTimeout(context.Background(), time.Second*5)
 	defer cc()
-	v, err := e.RunJsContext(
-		//language=javascript
-		`import {Second, sleep} from 'go/time'
-
-new Promise((r, j) => {
-    sleep(Second)
-    r(1)
-}).then(v => {
-    console.log(v)
-    return new Promise((r, j) => {
-        sleep(Second)
-        r(v+1)
-    })
-}).then(v => {
-    console.log(v)
-    return new Promise((r, j) => {
-        sleep(Second)
-        r(v+1)
-    })
-}).then(v => {
-    console.log(v)
-    return new Promise((r, j) => {
-        sleep(Second*2)
-        r(v+1)
-    })
-}).then(v => {
-    console.log(v)
-    return new Promise((r, j) => {
-        sleep(Second*2)
-        r(v+1)
-    })
-})
-`, ctx)
+	v, err := e.RunJsContext(jsFullTimeoutAsync, ctx)
 	if err == nil {
 		panic("should not success " + v.String())
 	} else {
@@ -426,38 +157,6 @@ func TestContextJsSuccess(t *testing.T) {
 	defer e.Free()
 	ctx, cc := context.WithTimeout(context.Background(), time.Second*8)
 	defer cc()
-	t.Log(fn.Panic1(e.RunJsContext(
-		//language=javascript
-		`import {Second, sleep} from 'go/time'
-
-new Promise((r, j) => {
-    sleep(Second)
-    r(1)
-}).then(v => {
-    console.log(v)
-    return new Promise((r, j) => {
-        sleep(Second)
-        r(v+1)
-    })
-}).then(v => {
-    console.log(v)
-    return new Promise((r, j) => {
-        sleep(Second)
-        r(v+1)
-    })
-}).then(v => {
-    console.log(v)
-    return new Promise((r, j) => {
-        sleep(Second*2)
-        r(v+1)
-    })
-}).then(v => {
-    console.log(v)
-    return new Promise((r, j) => {
-        sleep(Second*2)
-        r(v+1)
-    })
-})
-`, ctx)))
+	t.Log(fn.Panic1(e.RunJsContext(jsFullTimeoutAsync, ctx)))
 
 }
