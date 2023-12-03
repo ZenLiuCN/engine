@@ -29,7 +29,7 @@ type console interface {
 	Group(label string)
 	GroupCollapsed(label string)
 	GroupEnd()
-	Table(value goja.Value, columns ...string)
+	Table(value goja.Value, columns []string)
 }
 type sharedConsole struct {
 	counter map[string]int
@@ -96,18 +96,19 @@ func (s *sharedConsole) GroupCollapsed(label string) {
 func (s *sharedConsole) GroupEnd() {
 	s.group = s.group[:len(s.group)-1]
 }
-func (s *sharedConsole) Table(value goja.Value, columns ...string) {
-	s.log(dumpColumns(value, columns...))
+func (s *sharedConsole) Table(value goja.Value, columns []string) {
+	s.log(dumpColumns(value, columns))
 }
-func dumpColumns(v goja.Value, col ...string) string {
+func dumpColumns(v goja.Value, col []string) string {
 	m := strings.Builder{}
-	m.WriteString("(index)")
+	m.WriteString("\n(index)")
 	haveCol := len(col) > 0
 	if len(col) > 0 {
 		for _, column := range col {
 			m.WriteString("\t")
 			m.WriteString(column)
 		}
+		m.WriteString("\n")
 	}
 	switch t := v.Export().(type) {
 	case []any:
@@ -119,22 +120,26 @@ func dumpColumns(v goja.Value, col ...string) string {
 					m.WriteString("\t")
 					m.WriteString(s)
 				}
+				m.WriteRune('\n')
 			}
 			for i, a := range t {
-				m.WriteString(fmt.Sprintf("%d\t", i))
+				m.WriteString(fmt.Sprintf("%d", i))
 				for s, a2 := range a.(map[string]any) {
 					if haveCol && slices.Index(col, s) >= 0 {
-						m.WriteString(fmt.Sprintf("%s\t", dumpOne(a2)))
+						m.WriteString(fmt.Sprintf("\t%s", dumpOne(a2)))
 					} else if !haveCol {
-						m.WriteString(fmt.Sprintf("%s\t", dumpOne(a2)))
+						m.WriteString(fmt.Sprintf("\t%s", dumpOne(a2)))
 					}
 				}
 				m.WriteRune('\n')
 			}
 		default:
+			if !haveCol {
+				m.WriteString("\tValue\n")
+			}
 			for i, a := range t {
 				m.WriteString(fmt.Sprintf("%d\t", i))
-				m.WriteString(fmt.Sprintf("%s\t", dumpOne(a)))
+				m.WriteString(fmt.Sprintf("%s", dumpOne(a)))
 				m.WriteRune('\n')
 			}
 		}
@@ -151,22 +156,26 @@ func dumpColumns(v goja.Value, col ...string) string {
 					m.WriteString("\t")
 					m.WriteString(s)
 				}
+				m.WriteRune('\n')
 			}
 			for i, a := range t {
-				m.WriteString(fmt.Sprintf("%s\t", i))
+				m.WriteString(fmt.Sprintf("%s", i))
 				for s, a2 := range a.(map[string]any) {
 					if haveCol && slices.Index(col, s) >= 0 {
-						m.WriteString(fmt.Sprintf("%s\t", dumpOne(a2)))
+						m.WriteString(fmt.Sprintf("\t%s", dumpOne(a2)))
 					} else if !haveCol {
-						m.WriteString(fmt.Sprintf("%s\t", dumpOne(a2)))
+						m.WriteString(fmt.Sprintf("\t%s", dumpOne(a2)))
 					}
 				}
 				m.WriteRune('\n')
 			}
 		default:
+			if !haveCol {
+				m.WriteString("\tValue\n")
+			}
 			for i, a := range t {
 				m.WriteString(fmt.Sprintf("%s\t", i))
-				m.WriteString(fmt.Sprintf("%s\t", dumpOne(a)))
+				m.WriteString(fmt.Sprintf("%s", dumpOne(a)))
 				m.WriteRune('\n')
 			}
 		}
@@ -184,7 +193,7 @@ func dump(v ...any) string {
 		if val, ok := v[i].(goja.Value); ok {
 			msg.WriteString(ValueString(val))
 		} else {
-			msg.WriteString(fmt.Sprintf("%v", val))
+			msg.WriteString(fmt.Sprintf("%s", v[i]))
 		}
 	}
 	return msg.String()
@@ -193,7 +202,7 @@ func dumpOne(v any) string {
 	if val, ok := v.(goja.Value); ok {
 		return ValueString(val)
 	} else {
-		return fmt.Sprintf("%v", val)
+		return fmt.Sprintf("%v", v)
 	}
 
 }
