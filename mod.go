@@ -3,7 +3,6 @@ package engine
 import (
 	"bytes"
 	"github.com/ZenLiuCN/fn"
-	"log/slog"
 )
 
 // Mod is a top level objects that not required to import
@@ -12,35 +11,16 @@ type Mod interface {
 }
 type InitializeMod interface {
 	Mod
-	Initialize(engine *Engine) Mod // create copy of module with new Engine
+	Initialize(e *Engine) Mod // create copy of module with new Engine
 }
 type TopMod interface {
 	Mod
-	Register(engine *Engine)
+	Register(e *Engine)
 }
 
 var (
 	registry = map[string]Mod{}
 )
-
-func init() {
-	RegisterMod(NewConsole(slog.Default()))
-	RegisterMod(Require{})
-
-	RegisterModule(&GoModule{})
-	RegisterModule(BufferModule{})
-	RegisterModule(Os{})
-
-	RegisterModule(&IoModule{})
-	RegisterModule(&EngineModule{})
-	RegisterModule(&CryptoModule{})
-	RegisterModule(&EsBuild{})
-	RegisterModule(&HashModule{})
-	RegisterModule(&CodecModule{})
-	RegisterModule(&Compiler{})
-	RegisterModule(&TimeModule{})
-
-}
 
 // RegisterMod a module , returns false if already exists
 func RegisterMod(module Mod) bool {

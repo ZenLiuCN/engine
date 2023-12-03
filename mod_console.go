@@ -8,69 +8,189 @@ import (
 	"github.com/dop251/goja"
 	"log/slog"
 	"strings"
+	"time"
 )
 
+type console interface {
+	Assert(cond bool, args ...goja.Value)
+	Log(args ...goja.Value)
+	Debug(args ...goja.Value)
+	Info(args ...goja.Value)
+	Warn(args ...goja.Value)
+	Error(args ...goja.Value)
+	Clear()
+	Count(label string)
+	CountReset(label string)
+	Dir(v goja.Value)
+	Time(label string)
+	TimeEnd(label string)
+	TimeLog(label string, args ...goja.Value)
+	Group(label string)
+	GroupCollapsed(label string)
+	GroupEnd()
+}
+type sharedConsole struct {
+	counter map[string]int
+	time    map[string]time.Time
+	log     func(...any)
+	group   []string
+}
+
+func newSharedConsole(log func(...any)) *sharedConsole {
+	return &sharedConsole{
+		log:     log,
+		counter: map[string]int{},
+		time:    map[string]time.Time{},
+	}
+}
+func (s *sharedConsole) Count(label string) {
+	var n int = 0
+	if label == "" {
+		label = "default"
+	}
+	n, _ = s.counter[label]
+	n++
+	s.counter[label] = n
+	s.log(fmt.Sprintf("%s %d", label, n))
+}
+func (s *sharedConsole) CountReset(label string) {
+	if label == "" {
+		label = "default"
+	}
+	s.counter[label] = 0
+}
+func (s *sharedConsole) Dir(v goja.Value) {
+	s.log(v)
+}
+func (s *sharedConsole) Time(label string) {
+	if label == "" {
+		label = "default"
+	}
+	s.time[label] = time.Now()
+}
+func (s *sharedConsole) TimeEnd(label string) {
+	if label == "" {
+		label = "default"
+	}
+	delete(s.time, label)
+}
+func (s *sharedConsole) TimeLog(label string, val ...goja.Value) {
+	if label == "" {
+		label = "default"
+	}
+	t, ok := s.time[label]
+	if !ok {
+		t = time.Now()
+	}
+	v := time.Now().Sub(t).String()
+	s.log(append([]any{v}, toAny(val)...))
+}
+func (s *sharedConsole) Group(label string) {
+	s.group = append(s.group, label)
+}
+func (s *sharedConsole) GroupCollapsed(label string) {
+	s.group = append(s.group, label)
+}
+func (s *sharedConsole) GroupEnd() {
+	s.group = s.group[:len(s.group)-1]
+}
+func dump(v ...any) string {
+	var msg strings.Builder
+	for i := 0; i < len(v); i++ {
+		if i > 0 {
+			msg.WriteString(" ")
+		}
+		if val, ok := v[i].(goja.Value); ok {
+			msg.WriteString(ValueString(val))
+		} else {
+			msg.WriteString(fmt.Sprintf("%v", val))
+		}
+	}
+	return msg.String()
+}
+func toAny[T any](v []T) []any {
+	x := make([]any, len(v))
+	for i, t := range v {
+		x[i] = t
+	}
+	return x
+}
+
 type Console struct {
+	*sharedConsole
 	*slog.Logger
 }
 
-func (s Console) TypeDefine() []byte {
+func (s *Console) TypeDefine() []byte {
 	return nil
+}
+func (s *Console) Name() string {
+	return "console"
 }
 
 func NewConsole(logger *slog.Logger) *Console {
-	return &Console{Logger: logger}
+	s := &Console{Logger: logger}
+	s.sharedConsole = newSharedConsole(s.Print)
+	return s
+}
+func (s *Console) Print(v ...any) {
+	msg := dump(v...)
+	s.Logger.Info(msg)
+}
+func (s *Console) log(level slog.Level, args ...goja.Value) {
+	msg := dump(toAny(args)...)
+	msg = strings.Repeat("\t", len(s.group)) + msg
+	s.Logger.Log(context.Background(), level, msg)
 }
 
-func (s Console) Name() string {
-	return "console"
-}
-func (s Console) Assert(cond bool, args ...goja.Value) {
+func (s *Console) Assert(cond bool, args ...goja.Value) {
 	if !cond {
 		s.Error(args...)
 		panic(fmt.Errorf("%#v", args))
 	}
 }
-func (s Console) log(level slog.Level, args ...goja.Value) {
-	var msg strings.Builder
-	for i := 0; i < len(args); i++ {
-		if i > 0 {
-			msg.WriteString(" ")
-		}
-		msg.WriteString(ValueString(args[i]))
-	}
-	s.Logger.Log(context.Background(), level, msg.String())
-}
 
-func (s Console) Log(args ...goja.Value) {
-	s.Info(args...)
+func (s *Console) Log(args ...goja.Value) {
+	s.log(slog.LevelInfo, args...)
 }
-
-func (s Console) Debug(args ...goja.Value) {
+func (s *Console) Trace(args ...goja.Value) {
 	s.log(slog.LevelDebug, args...)
 }
 
-func (s Console) Info(args ...goja.Value) {
+func (s *Console) Debug(args ...goja.Value) {
+	s.log(slog.LevelDebug, args...)
+}
+
+func (s *Console) Info(args ...goja.Value) {
 	s.log(slog.LevelInfo, args...)
 }
 
-func (s Console) Warn(args ...goja.Value) {
+func (s *Console) Warn(args ...goja.Value) {
 	s.log(slog.LevelWarn, args...)
 }
 
-func (s Console) Error(args ...goja.Value) {
+func (s *Console) Error(args ...goja.Value) {
 	s.log(slog.LevelError, args...)
 }
 
+func (s *Console) Clear() {
+
+}
+
 type BufferConsole struct {
+	*sharedConsole
 	*bytes.Buffer
 }
 
 func NewBufferConsoleOf(buf *bytes.Buffer) *BufferConsole {
-	return &BufferConsole{buf}
+	s := &BufferConsole{Buffer: buf}
+	s.sharedConsole = newSharedConsole(s.Print)
+	return s
 }
 func NewBufferConsole() *BufferConsole {
-	return &BufferConsole{GetBytesBuffer()}
+	s := &BufferConsole{Buffer: GetBytesBuffer()}
+	s.sharedConsole = newSharedConsole(s.Print)
+	return s
 }
 func (s *BufferConsole) Name() string {
 	return "console"
@@ -78,17 +198,15 @@ func (s *BufferConsole) Name() string {
 func (s *BufferConsole) TypeDefine() []byte {
 	return nil
 }
-func (s *BufferConsole) log(level slog.Level, args ...goja.Value) {
-	s.Buffer.WriteRune('[')
-	s.Buffer.WriteString(level.String())
-	s.Buffer.WriteRune(']')
-	s.Buffer.WriteRune('\t')
-	for i := 0; i < len(args); i++ {
-		if i > 0 {
-			s.Buffer.WriteRune(' ')
-		}
-		s.Buffer.WriteString(ValueString(args[i]))
+func (s *BufferConsole) log(level string, args ...goja.Value) {
+	if level != "" {
+		s.Buffer.WriteRune('[')
+		s.Buffer.WriteString(level)
+		s.Buffer.WriteRune(']')
+		s.Buffer.WriteRune('\t')
 	}
+	s.Buffer.WriteString(strings.Repeat("\t", len(s.group)))
+	s.Buffer.WriteString(dump(toAny(args)...))
 	s.Buffer.WriteRune('\n')
 
 }
@@ -102,19 +220,28 @@ func (s *BufferConsole) Assert(cond bool, args ...goja.Value) {
 func (s *BufferConsole) Log(args ...goja.Value) {
 	s.Info(args...)
 }
-
+func (s *BufferConsole) Trace(args ...goja.Value) {
+	s.log("Trace", args...)
+}
 func (s *BufferConsole) Debug(args ...goja.Value) {
-	s.log(slog.LevelDebug, args...)
+	s.log("Debug", args...)
 }
 
 func (s *BufferConsole) Info(args ...goja.Value) {
-	s.log(slog.LevelInfo, args...)
+	s.log("Info", args...)
 }
 
 func (s *BufferConsole) Warn(args ...goja.Value) {
-	s.log(slog.LevelWarn, args...)
+	s.log("Warn", args...)
 }
 
 func (s *BufferConsole) Error(args ...goja.Value) {
-	s.log(slog.LevelError, args...)
+	s.log("Error", args...)
+}
+func (s *BufferConsole) Clear() {
+	s.Buffer.Reset()
+}
+func (s *BufferConsole) Print(v ...any) {
+	s.Buffer.WriteString(dump(v...))
+	s.Buffer.WriteRune('\n')
 }
