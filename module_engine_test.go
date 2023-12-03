@@ -13,7 +13,7 @@ func TestEngineModuleSimple(t *testing.T) {
 		`
 import {Engine} from 'go/engine'
 const e=new Engine()
-	console.log(e.runScript('1'))
+	console.log(e.runString('1'))
 	e.free()
 	`))
 
@@ -27,6 +27,5 @@ func TestEngineTTL(t *testing.T) {
 	setTimeout(()=>console.log("done"),100)
 	console.log(typeof setTimeout)
 	`))
-	//println(vm.AwaitTimeout(time.Millisecond * 200))
-	println(vm.Await())
+	vm.Await()
 }

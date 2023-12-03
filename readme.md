@@ -8,7 +8,153 @@ A javascript Engine base on [Goja](https://github.com/dop251/goja) inspired by [
 + ES6+ partially implemented by Goja
 + Async operations should wait for ends with `engine.StopEventLoopXXX`
 + Module includes remote/local/GoModule support by translate to CommonJs (EsBuild)
+## Sample
+### no time limit
+```go
 
+package main
+
+import (
+   "github.com/ZenLiuCN/engine"
+)
+func main() {
+   vm := engine.Get()
+   defer vm.Free()
+   v, err := vm.RunJs(
+      `
+console.log("Begin "+"For timeout")
+new Promise((r, j) => {
+    console.log("job 0")
+    setTimeout(()=>r(1),1000)
+}).then(v => {
+    console.log("job",v)
+    return new Promise((r, j) => {
+        setTimeout(()=>r(v+1),1000)
+    })}).then(v => {
+    console.log("job",v)
+    return new Promise((r, j) => {
+        setTimeout(()=>r(v+1),1000)
+    })
+}).then(v => {
+    console.log("job",v)
+    return new Promise((r, j) => {
+       setTimeout(()=>r(v+1),2000)
+    })
+}).then(v => {
+    console.log("job",v)
+    return new Promise((r, j) => {
+       setTimeout(()=>r(v+1),2000)
+    })
+})`)
+   halts := vm.Await() //manual await task done
+   if !halts.IsZero(){
+	   panic("task not done")
+   }
+   if err!=nil{
+      panic(err)
+   }
+   println(v)
+}
+```
+### manual
+```go
+package main
+
+import (
+   "github.com/ZenLiuCN/engine"
+   "time"
+)
+func main() {
+   vm := engine.Get()
+   defer vm.Free()
+   v, err := vm.RunJs(
+      `
+console.log("Begin "+"For timeout")
+new Promise((r, j) => {
+    console.log("job 0")
+    setTimeout(()=>r(1),1000)
+}).then(v => {
+    console.log("job",v)
+    return new Promise((r, j) => {
+        setTimeout(()=>r(v+1),1000)
+    })}).then(v => {
+    console.log("job",v)
+    return new Promise((r, j) => {
+        setTimeout(()=>r(v+1),1000)
+    })
+}).then(v => {
+    console.log("job",v)
+    return new Promise((r, j) => {
+       setTimeout(()=>r(v+1),2000)
+    })
+}).then(v => {
+    console.log("job",v)
+    return new Promise((r, j) => {
+       setTimeout(()=>r(v+1),2000)
+    })
+})`)
+   halts := vm.AwaitTimeout(time.Second * 5) //manual await task done for limited time
+   if !halts.IsZero(){
+	   panic("task not done within 5 seconds")
+   }
+   if err!=nil{
+      panic(err)
+   }
+   println(v)
+}
+
+```
+### automatic
+
+```go
+package main
+
+import (
+	"github.com/ZenLiuCN/engine"
+	"time"
+)
+
+func main() {
+	vm := engine.Get()
+	defer vm.Free()
+	v, err := vm.RunJsTimeout(`import {Second, sleep} from 'go/time'
+
+new Promise((r, j) => {
+    sleep(Second)
+    r(1)
+}).then(v => {
+    console.log(v)
+    return new Promise((r, j) => {
+        sleep(Second)
+        r(v+1)
+    })
+}).then(v => {
+    console.log(v)
+    return new Promise((r, j) => {
+        sleep(Second)
+        r(v+1)
+    })
+}).then(v => {
+    console.log(v)
+    return new Promise((r, j) => {
+        sleep(Second*2)
+        r(v+1)
+    })
+}).then(v => {
+    console.log(v)
+    return new Promise((r, j) => {
+        sleep(Second*2)
+        r(v+1)
+    })
+})
+`, time.Second*8)
+	if err != nil {
+		panic(err) // if error is ErrTimeout, the value is HaltJobs
+	}
+	println(v)
+}
+
+```
 ## Extensions
 
 ### Engine

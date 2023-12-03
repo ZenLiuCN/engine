@@ -45,7 +45,7 @@ func (r *Require) Require(specifier string) (*goja.Object, error) {
 		return nil, ErrDisabled
 	}
 	if gom := resolveModule(specifier); gom != nil {
-		return instanceModule(r.engine, gom)
+		return instanceModule(r.Engine, gom)
 	}
 	current := r.pwd
 	defer func() {

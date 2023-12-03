@@ -2,6 +2,7 @@ package engine
 
 import (
 	"context"
+	"fmt"
 	"github.com/ZenLiuCN/fn"
 	"os"
 	"testing"
@@ -210,49 +211,84 @@ return 1
 func TestTimeout(t *testing.T) {
 	e := Get()
 	defer e.Free()
-
-	go func() {
-		println(IsNullish(fn.Panic1(e.RunJs(
-			//language=javascript
-			`import {Second, sleep} from 'go/time'
-
+	v, err := e.RunJs(
+		//language=javascript
+		`
+console.log("Begin "+"For timeout")
 new Promise((r, j) => {
-    sleep(Second)
-    r(1)
+    console.log("job 0")
+    setTimeout(()=>r(1),1000)
 }).then(v => {
-    console.log(v)
+    console.log("job",v)
     return new Promise((r, j) => {
-        sleep(Second)
-        r(v+1)
+        setTimeout(()=>r(v+1),1000)
+    })}).then(v => {
+    console.log("job",v)
+    return new Promise((r, j) => {
+        setTimeout(()=>r(v+1),1000)
     })
 }).then(v => {
-    console.log(v)
+    console.log("job",v)
     return new Promise((r, j) => {
-        sleep(Second)
-        r(v+1)
+       setTimeout(()=>r(v+1),2000)
     })
 }).then(v => {
-    console.log(v)
+    console.log("job",v)
     return new Promise((r, j) => {
-        sleep(Second*2)
-        r(v+1)
+       setTimeout(()=>r(v+1),2000)
     })
-}).then(v => {
-    console.log(v)
-    return new Promise((r, j) => {
-        sleep(Second*2)
-        r(v+1)
-    })
-})
-`))))
-	}()
-
-	t.Log(e.AwaitTimeout(time.Second*3) == 3) //2 task with 1 for background
-	e.Interrupt(nil)
-	time.Sleep(time.Second * 3)
-
+})`)
+	if err != nil {
+		t.Log(err)
+	}
+	halts := e.AwaitTimeout(time.Second * 5)
+	if !halts.IsZero() {
+		e.Interrupt("shutdown for timeout")
+	}
+	if halts.IsZero() {
+		panic(fmt.Errorf("should not done:%s,%#v ", halts.String(), e.EventLoop))
+	}
+	t.Log(v)
 }
-
+func TestAsyncDone(t *testing.T) {
+	e := Get()
+	defer e.Free()
+	v, err := e.RunJs(
+		//language=javascript
+		`
+console.log("Begin "+"For timeout")
+new Promise((r, j) => {
+    console.log("job 0")
+    setTimeout(()=>r(1),1000)
+}).then(v => {
+    console.log("job",v)
+    return new Promise((r, j) => {
+        setTimeout(()=>r(v+1),1000)
+    })}).then(v => {
+    console.log("job",v)
+    return new Promise((r, j) => {
+        setTimeout(()=>r(v+1),1000)
+    })
+}).then(v => {
+    console.log("job",v)
+    return new Promise((r, j) => {
+       setTimeout(()=>r(v+1),2000)
+    })
+}).then(v => {
+    console.log("job",v)
+    return new Promise((r, j) => {
+       setTimeout(()=>r(v+1),2000)
+    })
+})`)
+	if err != nil {
+		t.Log(err)
+	}
+	halts := e.Await()
+	if !halts.IsZero() {
+		panic(fmt.Errorf("should done:%s,%#v ", halts.String(), e.EventLoop))
+	}
+	t.Log(v)
+}
 func TestTimeoutJsSuccess(t *testing.T) {
 	e := Get()
 	defer e.Free()
@@ -302,31 +338,37 @@ new Promise((r, j) => {
     sleep(Second)
     r(1)
 }).then(v => {
-    console.log(v)
+    console.log(v)//1
     return new Promise((r, j) => {
         sleep(Second)
         r(v+1)
     })
 }).then(v => {
-    console.log(v)
+    console.log(v) //2
     return new Promise((r, j) => {
         sleep(Second)
         r(v+1)
     })
 }).then(v => {
-    console.log(v)
+    console.log(v) //3
     return new Promise((r, j) => {
         sleep(Second*2)
         r(v+1)
     })
 }).then(v => {
-    console.log(v)
+    console.log(v) //4
+    return new Promise((r, j) => {
+        sleep(Second*2)
+        r(v+1)
+    })
+}).then(v => {
+    console.log(v) //4
     return new Promise((r, j) => {
         sleep(Second*2)
         r(v+1)
     })
 })
-`, time.Second*3)
+`, time.Second*2)
 	if err == nil {
 		panic("should not success " + v.String())
 	} else {
@@ -337,7 +379,7 @@ new Promise((r, j) => {
 func TestContextJs(t *testing.T) {
 	e := Get()
 	defer e.Free()
-	ctx, cc := context.WithTimeout(context.Background(), time.Second*3)
+	ctx, cc := context.WithTimeout(context.Background(), time.Second*5)
 	defer cc()
 	v, err := e.RunJsContext(
 		//language=javascript

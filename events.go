@@ -35,7 +35,7 @@ type Immediate struct {
 
 // EventLoop process all async events and also  as The AsyncContextTracker
 // there will be a background goroutine to monitor the async tasks as call StartEventLoop,
-// or call StartEventLoopWhenNotStarted for not sure current EventLoop have been started.
+// or call TryStartEventLoop for not sure current EventLoop have been started.
 // use Await to await all async tasks are finished.
 // use AwaitTimeout to waiting for a fixed duration.
 // use StopEventLoopNoWait to immediate shutdown EventLoop without wait tasks execution.
@@ -43,7 +43,7 @@ type Immediate struct {
 type EventLoop struct {
 	engine   *Engine
 	jobChan  chan func()
-	jobCount int32
+	jobCount int32 // include real job and AsyncTracker task
 	canRun   int32 // 1 can run ,2. stop wait all jobs 0. stop immediate.
 
 	auxJobsLock sync.Mutex
@@ -51,11 +51,21 @@ type EventLoop struct {
 
 	auxJobsSpare, auxJobs []func()
 
-	stopLock sync.Mutex
-	stopCond *sync.Cond
+	stopCond sync.Cond
 	running  bool
 	tracker  *AsyncTracker
 }
+
+func (e *EventLoop) jobInc() {
+	//log.Print("inc ", e.jobCount, fn.CallerN(1))
+	e.jobCount++
+}
+func (e *EventLoop) jobDec() {
+	//log.Print("dec ", e.jobCount, fn.CallerN(1))
+	e.jobCount--
+	e.stopCond.Signal() //avoid deadlock
+}
+
 type AsyncContext struct {
 	ref int
 }
@@ -65,11 +75,11 @@ func (s *AsyncContext) String() string {
 }
 
 type AsyncTracker struct {
-	async        *AsyncContext
-	asyncResumed bool
-	asyncRefs    int
-	jobDec       func()
-	jobInc       func()
+	async         *AsyncContext
+	asyncResumed  bool
+	asyncContexts int
+	jobDec        func()
+	jobInc        func()
 }
 
 func (s *AsyncTracker) Grab() (trackingObject any) {
@@ -78,7 +88,7 @@ func (s *AsyncTracker) Grab() (trackingObject any) {
 		ctx.ref++
 	} else {
 		ctx = &AsyncContext{ref: 1}
-		s.asyncRefs++
+		s.asyncContexts++
 	}
 	s.jobInc()
 	//println("grab", ctx.String(), s.jobCount)
@@ -100,8 +110,8 @@ func (s *AsyncTracker) asyncRelease() {
 		panic("async context reference negative")
 	}
 	if s.async.ref == 0 {
-		s.asyncRefs--
-		if s.asyncRefs < 0 {
+		s.asyncContexts--
+		if s.asyncContexts < 0 {
 			panic("async context refs negative")
 		}
 		s.jobDec()
@@ -123,14 +133,11 @@ func NewEventLoop(engine *Engine) *EventLoop {
 		jobChan:    make(chan func()),
 		wakeupChan: make(chan struct{}, 1),
 	}
-	loop.stopCond = sync.NewCond(&loop.stopLock)
+	loop.stopCond = sync.Cond{L: new(sync.Mutex)}
 	loop.tracker = new(AsyncTracker)
-	loop.tracker.jobInc = func() {
-		loop.jobCount++
-	}
-	loop.tracker.jobDec = func() {
-		loop.jobCount--
-	}
+	loop.tracker.jobInc = loop.jobInc
+	loop.tracker.jobDec = loop.jobDec
+
 	engine.Set("setTimeout", loop.setTimeout)
 	engine.Set("setInterval", loop.setInterval)
 	engine.Set("setImmediate", loop.setImmediate)
@@ -141,7 +148,7 @@ func NewEventLoop(engine *Engine) *EventLoop {
 	return loop
 }
 
-func (s *EventLoop) schedule(call goja.FunctionCall, repeating bool) goja.Value {
+func (e *EventLoop) schedule(call goja.FunctionCall, repeating bool) goja.Value {
 	if ff, ok := goja.AssertFunction(call.Argument(0)); ok {
 		delay := call.Argument(1).ToInteger()
 		var args []goja.Value
@@ -149,76 +156,76 @@ func (s *EventLoop) schedule(call goja.FunctionCall, repeating bool) goja.Value 
 			args = append(args, call.Arguments[2:]...)
 		}
 		f := func() { fn.Panic1(ff(nil, args...)) }
-		s.jobCount++
+		e.jobInc()
 		if repeating {
-			return s.engine.ToValue(s.addInterval(f, time.Duration(delay)*time.Millisecond))
+			return e.engine.ToValue(e.addInterval(f, time.Duration(delay)*time.Millisecond))
 		} else {
-			return s.engine.ToValue(s.addTimeout(f, time.Duration(delay)*time.Millisecond))
+			return e.engine.ToValue(e.addTimeout(f, time.Duration(delay)*time.Millisecond))
 		}
 	}
 	return nil
 }
 
-func (s *EventLoop) setTimeout(call goja.FunctionCall) goja.Value {
-	return s.schedule(call, false)
+func (e *EventLoop) setTimeout(call goja.FunctionCall) goja.Value {
+	return e.schedule(call, false)
 }
 
-func (s *EventLoop) setInterval(call goja.FunctionCall) goja.Value {
-	return s.schedule(call, true)
+func (e *EventLoop) setInterval(call goja.FunctionCall) goja.Value {
+	return e.schedule(call, true)
 }
 
-func (s *EventLoop) setImmediate(call goja.FunctionCall) goja.Value {
+func (e *EventLoop) setImmediate(call goja.FunctionCall) goja.Value {
 	if ff, ok := goja.AssertFunction(call.Argument(0)); ok {
 		var args []goja.Value
 		if len(call.Arguments) > 1 {
 			args = append(args, call.Arguments[1:]...)
 		}
 		f := func() { fn.Panic1(ff(nil, args...)) }
-		s.jobCount++
-		return s.engine.ToValue(s.addImmediate(f))
+		e.jobInc()
+		return e.engine.ToValue(e.addImmediate(f))
 	}
 	return nil
 }
 
-func (s *EventLoop) setRunning() {
-	s.stopLock.Lock()
-	defer s.stopLock.Unlock()
-	if s.running {
+func (e *EventLoop) setRunning() {
+	e.stopCond.L.Lock()
+	defer e.stopCond.L.Unlock()
+	if e.running {
 		panic("Loop is already started")
 	}
-	s.running = true
-	atomic.StoreInt32(&s.canRun, 1)
+	e.running = true
+	atomic.StoreInt32(&e.canRun, 1)
 }
 
-func (s *EventLoop) SetTimeout(fn func(engine *Engine), timeout time.Duration) *Timer {
-	t := s.addTimeout(func() { fn(s.engine) }, timeout)
-	s.addAuxJob(func() {
-		s.jobCount++
+func (e *EventLoop) SetTimeout(fn func(engine *Engine), timeout time.Duration) *Timer {
+	t := e.addTimeout(func() { fn(e.engine) }, timeout)
+	e.addAuxJob(func() {
+		e.jobInc()
 	})
 	return t
 }
 
-func (s *EventLoop) ClearTimeout(t *Timer) {
-	s.addAuxJob(func() {
-		s.clearTimeout(t)
+func (e *EventLoop) ClearTimeout(t *Timer) {
+	e.addAuxJob(func() {
+		e.clearTimeout(t)
 	})
 }
 
-func (s *EventLoop) SetInterval(fn func(engine *Engine), timeout time.Duration) *Interval {
-	i := s.addInterval(func() { fn(s.engine) }, timeout)
-	s.addAuxJob(func() {
-		s.jobCount++
+func (e *EventLoop) SetInterval(fn func(engine *Engine), timeout time.Duration) *Interval {
+	i := e.addInterval(func() { fn(e.engine) }, timeout)
+	e.addAuxJob(func() {
+		e.jobInc()
 	})
 	return i
 }
 
-func (s *EventLoop) ClearInterval(i *Interval) {
-	s.addAuxJob(func() {
-		s.clearInterval(i)
+func (e *EventLoop) ClearInterval(i *Interval) {
+	e.addAuxJob(func() {
+		e.clearInterval(i)
 	})
 }
-func (s *EventLoop) Running() bool {
-	return s.running
+func (e *EventLoop) Running() bool {
+	return e.running
 }
 
 /*
@@ -228,178 +235,223 @@ func (s *EventLoop) Running() bool {
 		s.run(false)
 	}
 */
-func (s *EventLoop) registerCallback() func(func()) {
+func (e *EventLoop) registerCallback() func(func()) {
 	return func(f func()) {
-		s.addAuxJob(f)
+		e.addAuxJob(f)
 	}
 }
 
 // StartEventLoop fail if already started
-func (s *EventLoop) StartEventLoop() {
-	s.setRunning()
-	go s.run(true)
+func (e *EventLoop) StartEventLoop() {
+	e.setRunning()
+	go e.run(true)
 }
 
-// StartEventLoopWhenNotStarted no effect if already started
-func (s *EventLoop) StartEventLoopWhenNotStarted() {
-	if s.running {
+// TryStartEventLoop no effect if already started
+func (e *EventLoop) TryStartEventLoop() {
+	e.stopCond.L.Lock()
+	if e.running {
+		//println("e Running", e.running, fn.CallerN(1))
+		e.stopCond.L.Unlock()
 		return
 	}
-	s.setRunning()
-	go s.run(true)
+	e.stopCond.L.Unlock()
+	//println("e start Running", e.running, fn.CallerN(1))
+	e.setRunning()
+	go e.run(true)
+}
+
+type HaltJobs struct {
+	Job       int // Job remains after execution, include async task
+	AsyncTask int // AsyncTask remains after execution
+}
+
+// IsZero dose all job are done
+func (s HaltJobs) IsZero() bool {
+	return s.Job == 0
+}
+
+// RealJob real job in queue
+func (s HaltJobs) RealJob() int {
+	return s.Job - s.AsyncTask
+}
+func (s HaltJobs) String() string {
+	return fmt.Sprintf("HaltJobs{jobs:%d,asyncTask:%d}", s.Job, s.AsyncTask)
+}
+func (e *EventLoop) DumpJobs() HaltJobs {
+	e.stopCond.L.Lock()
+	defer e.stopCond.L.Unlock()
+	return HaltJobs{int(e.jobCount), e.tracker.asyncContexts}
 }
 
 // Await all job done, see also AwaitContext, AwaitTimeout and AwaitWithContext .
-func (s *EventLoop) Await() int {
-	for s.running {
-		atomic.StoreInt32(&s.canRun, 2) //stop when no task , not use lock
-		s.wakeup()
+func (e *EventLoop) Await() HaltJobs {
+	e.stopCond.L.Lock()
+	for e.running {
+		//println(e.jobCount, e.tracker.asyncContexts, len(e.auxJobs))
+		atomic.StoreInt32(&e.canRun, 2) //stop when no task , not use lock
+		e.wakeup()
+		//println(e.jobCount, e.tracker.asyncContexts, len(e.auxJobs))
+		e.stopCond.Wait()
 	}
-	return int(s.jobCount)
+	e.stopCond.L.Unlock()
+	return HaltJobs{int(e.jobCount), e.tracker.asyncContexts}
 }
 
 // AwaitWithContext stop with context for a cancelable or with deadline context, see also Await, AwaitTimeout and AwaitContext.
 // should use goroutine to execute script to avoid blocking current thread
-func (s *EventLoop) AwaitWithContext(ctx context.Context) int {
-	s.stopLock.Lock()
-	atomic.StoreInt32(&s.canRun, 2) //stop when no task , not use lock
-F:
-	for s.running {
-		select {
-		case <-ctx.Done():
-			atomic.StoreInt32(&s.canRun, 0) //stop now
-			s.wakeup()
-			break F
-		default:
-			s.wakeup()
+func (e *EventLoop) AwaitWithContext(ctx context.Context) HaltJobs {
+	atomic.StoreInt32(&e.canRun, 2) //stop when no task
+	e.stopCond.L.Lock()
+	defer e.stopCond.L.Unlock()
+	//println("await for ", ctx, e.running)
+	err := waitCond(ctx, &e.stopCond, func() {
+		atomic.StoreInt32(&e.canRun, 2)
+		e.wakeup()
+	}, func() bool {
+		return !e.running
+	})
+	//println("done wait for ", ctx, e.running)
+	if err != nil {
+		//wait shutdown task routine
+		atomic.StoreInt32(&e.canRun, 0)
+		for e.running {
+			e.wakeup()
+			e.stopCond.Wait()
 		}
 	}
-	s.stopLock.Unlock()
-	return int(s.jobCount)
-
+	return HaltJobs{int(e.jobCount), e.tracker.asyncContexts}
 }
 
 // AwaitTimeout all job done in a limit duration, the returning value may not exactly the pending job count,for no lock to wait
 // see also Await, AwaitWithContext and AwaitContext.
 // should use goroutine to execute script to avoid blocking current thread
-func (s *EventLoop) AwaitTimeout(duration time.Duration) int {
-	tick := time.NewTicker(duration)
-	s.stopLock.Lock()
-F:
-	for s.running {
-		atomic.StoreInt32(&s.canRun, 2) //stop when no task
-		select {
-		case <-tick.C:
-			tick.Stop()
-			atomic.StoreInt32(&s.canRun, 0) //stop now
-			s.wakeup()
-			break F
-		default:
-			s.wakeup()
+func (e *EventLoop) AwaitTimeout(duration time.Duration) HaltJobs {
+	ctx, cc := context.WithTimeout(context.Background(), duration)
+	defer cc()
+	return e.AwaitWithContext(ctx)
+}
+
+// waitCond https://pkg.go.dev/context#example-AfterFunc-Cond
+func waitCond(ctx context.Context, cond *sync.Cond, waitJob func(), condition func() bool) error {
+	df := context.AfterFunc(ctx, func() {
+		cond.L.Lock()
+		defer cond.L.Unlock()
+		cond.Broadcast()
+	})
+	defer df()
+	for !condition() {
+		cond.Wait()
+		if ctx.Err() != nil {
+			return ctx.Err()
 		}
+		waitJob() //the order is important
 	}
-	s.stopLock.Unlock()
-	return int(s.jobCount)
+	return nil
 }
 
 // StopEventLoop wait background execution quit (not all tasks) , returns job not executed
-func (s *EventLoop) StopEventLoop() int {
-	s.stopLock.Lock()
-	for s.running {
-		atomic.StoreInt32(&s.canRun, 0)
-		s.wakeup()
-		s.stopCond.Wait()
+func (e *EventLoop) StopEventLoop() HaltJobs {
+	e.stopCond.L.Lock()
+	for e.running {
+		atomic.StoreInt32(&e.canRun, 0)
+		e.wakeup()
+		e.stopCond.Wait()
 	}
-	s.stopLock.Unlock()
-	return int(s.jobCount)
+	e.stopCond.L.Unlock()
+	return HaltJobs{int(e.jobCount), e.tracker.asyncContexts}
 }
 
-// StopEventLoopNoWait without wait for background execution finish
-func (s *EventLoop) StopEventLoopNoWait() {
-	s.stopLock.Lock()
-	if s.running {
-		atomic.StoreInt32(&s.canRun, 0)
-		s.wakeup()
+// StopEventLoopNoWait without wait for background execution finish,
+// the result may not accuracy values
+func (e *EventLoop) StopEventLoopNoWait() HaltJobs {
+	e.stopCond.L.Lock()
+	if e.running {
+		atomic.StoreInt32(&e.canRun, 0)
+		e.wakeup()
 	}
-	s.stopLock.Unlock()
+	e.stopCond.L.Unlock()
+	return HaltJobs{int(e.jobCount), e.tracker.asyncContexts}
 }
 
 // RunOnLoop  run function on event loop
-func (s *EventLoop) RunOnLoop(fn func(*Engine)) {
-	s.addAuxJob(func() { fn(s.engine) })
+func (e *EventLoop) RunOnLoop(fn func(*Engine)) {
+	e.addAuxJob(func() { fn(e.engine) })
 }
 
-func (s *EventLoop) runAux() {
-	s.auxJobsLock.Lock()
-	jobs := s.auxJobs
-	s.auxJobs = s.auxJobsSpare
-	s.auxJobsLock.Unlock()
+func (e *EventLoop) runAux() {
+	e.auxJobsLock.Lock()
+	jobs := e.auxJobs
+	e.auxJobs = e.auxJobsSpare
+	e.auxJobsLock.Unlock()
 	for i, job := range jobs {
 		job()
 		jobs[i] = nil
 	}
-	s.auxJobsSpare = jobs[:0]
+	e.auxJobsSpare = jobs[:0]
 }
 
-func (s *EventLoop) run(inBackground bool) {
-	s.runAux()
-	e := int32(0)
+func (e *EventLoop) run(inBackground bool) {
+	e.runAux()
+	be := int32(0)
 	if inBackground {
-		s.jobCount++
-		e++
+		e.jobInc()
+		be++
 	}
 
 LOOP:
-	for s.jobCount > 0 {
+	for e.jobCount > 0 {
 		select {
-		case job := <-s.jobChan:
+		case job := <-e.jobChan:
 			job()
-		case <-s.wakeupChan:
-			s.runAux()
-			v := atomic.LoadInt32(&s.canRun)
-			if v == 0 || (v == 2 && s.jobCount == e) {
+		case <-e.wakeupChan:
+
+			e.runAux()
+			v := atomic.LoadInt32(&e.canRun)
+			//log.Print("wakeup ", v, e.jobCount, be)
+			if v == 0 || (v == 2 && e.jobCount == be) {
 				break LOOP
 			}
 		}
 	}
 	if inBackground {
-		s.jobCount--
+		e.jobCount--
 	}
 
-	s.stopLock.Lock()
-	s.running = false
-	s.stopLock.Unlock()
-	s.stopCond.Broadcast()
+	e.stopCond.L.Lock()
+	e.running = false
+	e.stopCond.L.Unlock()
+	e.stopCond.Broadcast()
 }
 
-func (s *EventLoop) wakeup() {
+func (e *EventLoop) wakeup() {
 	select {
-	case s.wakeupChan <- struct{}{}:
+	case e.wakeupChan <- struct{}{}:
 	default:
 	}
 }
 
-func (s *EventLoop) addAuxJob(fn func()) {
-	s.auxJobsLock.Lock()
-	s.auxJobs = append(s.auxJobs, fn)
-	s.auxJobsLock.Unlock()
-	s.wakeup()
+func (e *EventLoop) addAuxJob(fn func()) {
+	e.auxJobsLock.Lock()
+	e.auxJobs = append(e.auxJobs, fn)
+	e.auxJobsLock.Unlock()
+	e.wakeup()
 }
 
-func (s *EventLoop) addTimeout(f func(), timeout time.Duration) *Timer {
+func (e *EventLoop) addTimeout(f func(), timeout time.Duration) *Timer {
 	t := &Timer{
 		job: job{fn: f},
 	}
 	t.timer = time.AfterFunc(timeout, func() {
-		s.jobChan <- func() {
-			s.doTimeout(t)
+		e.jobChan <- func() {
+			e.doTimeout(t)
 		}
 	})
 
 	return t
 }
 
-func (s *EventLoop) addInterval(f func(), timeout time.Duration) *Interval {
+func (e *EventLoop) addInterval(f func(), timeout time.Duration) *Interval {
 	// https://nodejs.org/api/timers.html#timers_setinterval_callback_delay_args
 	if timeout <= 0 {
 		timeout = time.Millisecond
@@ -411,62 +463,62 @@ func (s *EventLoop) addInterval(f func(), timeout time.Duration) *Interval {
 		stopChan: make(chan struct{}),
 	}
 
-	go i.run(s)
+	go i.run(e)
 	return i
 }
 
-func (s *EventLoop) addImmediate(f func()) *Immediate {
+func (e *EventLoop) addImmediate(f func()) *Immediate {
 	i := &Immediate{
 		job: job{fn: f},
 	}
-	s.addAuxJob(func() {
-		s.doImmediate(i)
+	e.addAuxJob(func() {
+		e.doImmediate(i)
 	})
 	return i
 }
 
-func (s *EventLoop) doTimeout(t *Timer) {
+func (e *EventLoop) doTimeout(t *Timer) {
 	if !t.cancelled {
 		t.fn()
 		t.cancelled = true
-		s.jobCount--
+		e.jobDec()
 	}
 }
 
-func (s *EventLoop) doInterval(i *Interval) {
+func (e *EventLoop) doInterval(i *Interval) {
 	if !i.cancelled {
 		i.fn()
 	}
 }
 
-func (s *EventLoop) doImmediate(i *Immediate) {
+func (e *EventLoop) doImmediate(i *Immediate) {
 	if !i.cancelled {
 		i.fn()
 		i.cancelled = true
-		s.jobCount--
+		e.jobDec()
 	}
 }
 
-func (s *EventLoop) clearTimeout(t *Timer) {
+func (e *EventLoop) clearTimeout(t *Timer) {
 	if t != nil && !t.cancelled {
 		t.timer.Stop()
 		t.cancelled = true
-		s.jobCount--
+		e.jobDec()
 	}
 }
 
-func (s *EventLoop) clearInterval(i *Interval) {
+func (e *EventLoop) clearInterval(i *Interval) {
 	if i != nil && !i.cancelled {
 		i.cancelled = true
 		close(i.stopChan)
-		s.jobCount--
+		e.jobDec()
 	}
 }
 
-func (s *EventLoop) clearImmediate(i *Immediate) {
+func (e *EventLoop) clearImmediate(i *Immediate) {
 	if i != nil && !i.cancelled {
 		i.cancelled = true
-		s.jobCount--
+		e.jobDec()
 	}
 }
 

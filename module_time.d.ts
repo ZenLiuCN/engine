@@ -196,5 +196,5 @@ declare module "go/time" {
     export function since(t: Time): Duration
 
     export function until(t: Time): Duration
-    export function sleep(t: Duration)
+
 }

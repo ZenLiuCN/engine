@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"github.com/ZenLiuCN/fn"
 	. "github.com/dop251/goja"
-	"strings"
 	"time"
 )
 
@@ -72,7 +71,7 @@ func (s *Engine) parse(r any) (err error) {
 
 // CallFunction invoke a function (without this)
 func (s *Engine) CallFunction(fn Value, values ...any) (v Value, err error) {
-	s.StartEventLoopWhenNotStarted()
+	s.TryStartEventLoop()
 	defer func() {
 		if r := recover(); r != nil {
 			err = s.parse(r)
@@ -97,7 +96,7 @@ func (s *Engine) Callable(fn Value) Callable {
 
 // CallMethod invoke a method (with this)
 func (s *Engine) CallMethod(fn Value, self Value, values ...any) (v Value, err error) {
-	s.StartEventLoopWhenNotStarted()
+	s.TryStartEventLoop()
 	defer func() {
 		if r := recover(); r != nil {
 			err = s.parse(r)
@@ -113,7 +112,7 @@ func (s *Engine) CallMethod(fn Value, self Value, values ...any) (v Value, err e
 	return nil, fmt.Errorf("%s not a function", fn)
 }
 func (s *Engine) CallConstruct(fn Value, values ...any) (*Object, error) {
-	s.StartEventLoopWhenNotStarted()
+	s.TryStartEventLoop()
 	if f, ok := AssertConstructor(fn); ok {
 		v := make([]Value, len(values))
 		for i, value := range values {
@@ -136,7 +135,7 @@ func (s *Engine) ToValues(args ...any) []Value {
 // RunString execute raw javascript (es5|es6 without import) code.
 // this not support import and some polyfill features.
 func (s *Engine) RunString(src string) (v Value, err error) {
-	s.StartEventLoopWhenNotStarted()
+	s.TryStartEventLoop()
 	defer func() {
 		if r := recover(); r != nil {
 			err = s.parse(r)
@@ -147,7 +146,7 @@ func (s *Engine) RunString(src string) (v Value, err error) {
 
 // RunTs execute typescript code. Should manual control the execution, for a automatic timeout control see  RunTsTimeout.
 func (s *Engine) RunTs(src string) (v Value, err error) {
-	s.StartEventLoopWhenNotStarted()
+	s.TryStartEventLoop()
 	defer func() {
 		if r := recover(); r != nil {
 			err = s.parse(r)
@@ -158,7 +157,7 @@ func (s *Engine) RunTs(src string) (v Value, err error) {
 
 // RunJs execute javascript code. Should manual control the execution, for a automatic timeout control see  RunJsTimeout.
 func (s *Engine) RunJs(src string) (v Value, err error) {
-	s.StartEventLoopWhenNotStarted()
+	s.TryStartEventLoop()
 	defer func() {
 		if r := recover(); r != nil {
 			err = s.parse(r)
@@ -169,7 +168,7 @@ func (s *Engine) RunJs(src string) (v Value, err error) {
 
 // RunCode execute compiled code. The execution time should control manually, for an automatic timeout control see  RunCodeTimeout.
 func (s *Engine) RunCode(code *Code) (v Value, err error) {
-	s.StartEventLoopWhenNotStarted()
+	s.TryStartEventLoop()
 	defer func() {
 		if r := recover(); r != nil {
 			err = s.parse(r)
@@ -178,113 +177,100 @@ func (s *Engine) RunCode(code *Code) (v Value, err error) {
 	return s.Runtime.RunProgram(code.Program)
 }
 
-// RunCodeTimeout run code with limit time. if timeout, The value will be async job halts, the error will be ErrTimeout.
+// RunCodeTimeout run code with limit time. if timeout, The value will be HaltJobs, the error will be ErrTimeout.
 func (s *Engine) RunCodeTimeout(code *Code, timeout time.Duration) (v Value, err error) {
-	return s.timeout(func() (Value, error) {
-		return s.RunCode(code)
-	}, timeout)
+	return s.timeout(code.Program, timeout)
 }
 
-// RunJsTimeout run js source with limit time. if timeout, The value will be async job halts, the error will be ErrTimeout.
+// RunJsTimeout run js source with limit time. if timeout, The value will be HaltJobs, the error will be ErrTimeout.
 func (s *Engine) RunJsTimeout(src string, timeout time.Duration) (v Value, err error) {
-	return s.timeout(func() (Value, error) {
-		return s.RunJs(src)
-	}, timeout)
+	return s.timeout(CompileSource(src, false).Program, timeout)
 }
 
-// RunTsTimeout run Ts source with limit time. if timeout, the value will be async job halts, the error will be ErrTimeout.
+// RunTsTimeout run Ts source with limit time. if timeout, the value will be HaltJobs, the error will be ErrTimeout.
 func (s *Engine) RunTsTimeout(src string, timeout time.Duration) (v Value, err error) {
-	return s.timeout(func() (Value, error) {
-		return s.RunTs(src)
-	}, timeout)
+	return s.timeout(CompileSource(src, true).Program, timeout)
 }
 
-// RunCodeContext run code with context. if context closed early, the value will be nil, the error will be ErrTimeout.
+// RunCodeContext run code with context. if context closed early, the value will be HaltJobs, the error will be ErrTimeout.
 func (s *Engine) RunCodeContext(code *Code, ctx cx.Context) (v Value, err error) {
-	return s.contextual(func() (Value, error) {
-		return s.RunCode(code)
-	}, ctx)
+	return s.contextual(code.Program, ctx)
 }
 
-// RunJsContext run js source with context. if context closed early, the value will be nil, the error will be ErrTimeout.
+// RunJsContext run js source with context. if context closed early, the value will be HaltJobs, the error will be ErrTimeout.
 func (s *Engine) RunJsContext(src string, ctx cx.Context) (v Value, err error) {
-	return s.contextual(func() (Value, error) {
-		return s.RunJs(src)
-	}, ctx)
+	return s.contextual(CompileSource(src, false).Program, ctx)
 }
 
-// RunTsContext run Ts source with context. if context closed early, the value will be nil, the error will be ErrTimeout.
+// RunTsContext run Ts source with context. if context closed early, the value will be HaltJobs, the error will be ErrTimeout.
 func (s *Engine) RunTsContext(src string, ctx cx.Context) (v Value, err error) {
-	return s.contextual(func() (Value, error) {
-		return s.RunTs(src)
-	}, ctx)
+	return s.contextual(CompileSource(src, true).Program, ctx)
 }
-func (s *Engine) timeout(act func() (Value, error), timeout time.Duration) (v Value, err error) {
-	s.StartEventLoopWhenNotStarted()
+func (s *Engine) timeout(act *Program, timeout time.Duration) (v Value, err error) {
+	s.TryStartEventLoop()
 	defer func() {
 		s.ClearInterrupt()
 		if r := recover(); r != nil {
 			err = s.parse(r)
 		}
 	}()
-	ch := make(chan result)
+	ch := make(chan Maybe[Value])
+	defer close(ch)
 	go func() {
 		defer func() {
 			if r := recover(); r != nil {
 				er := s.parse(r)
-				ch <- result{nil, er}
+				ch <- Maybe[Value]{Error: er}
 			}
 		}()
-		rr, er := act()
-		ch <- result{rr, er}
+		rr, er := s.Runtime.RunProgram(act)
+		ch <- Maybe[Value]{Value: rr, Error: er}
 	}()
-	n := s.AwaitTimeout(timeout)
-	s.Interrupt(ErrTimeout)
-	r := <-ch
-	if r.e != nil && strings.HasPrefix(r.e.Error(), ErrTimeout.Error()) {
-		return s.ToValue(n - 1), ErrTimeout
-	}
-	return r.v, r.e
-}
-func (s *Engine) contextual(act func() (Value, error), ctx cx.Context) (v Value, err error) {
-	s.StartEventLoopWhenNotStarted()
-	defer func() {
-		s.ClearInterrupt()
-		if r := recover(); r != nil {
-			err = s.parse(r)
-		}
-	}()
-	ch := make(chan result)
-	go func() {
-		defer func() {
-			if r := recover(); r != nil {
-				er := s.parse(r)
-				ch <- result{nil, er}
-			}
-		}()
-		rr, er := act()
-		ch <- result{rr, er}
-	}()
-	var n int
-	go func(x *int) {
-		*x = s.AwaitWithContext(ctx)
+	var rk HaltJobs
+	rk = s.AwaitTimeout(timeout)
+	if !rk.IsZero() {
 		s.Interrupt(ErrTimeout)
-	}(&n)
-	r := <-ch
-	if r.e != nil && strings.HasPrefix(r.e.Error(), ErrTimeout.Error()) {
-		return s.ToValue(n), ErrTimeout
 	}
-	return r.v, r.e
+	r := <-ch
+	if !rk.IsZero() {
+		return s.ToValue(rk), ErrTimeout
+	}
+	return r.Value, r.Error
+}
+func (s *Engine) contextual(act *Program, ctx cx.Context) (v Value, err error) {
+	s.TryStartEventLoop()
+	defer func() {
+		s.ClearInterrupt()
+		if r := recover(); r != nil {
+			err = s.parse(r)
+		}
+	}()
+	ch := make(chan Maybe[Value])
+	defer close(ch)
+	go func() {
+		defer func() {
+			if r := recover(); r != nil {
+				er := s.parse(r)
+				ch <- Maybe[Value]{Error: er}
+			}
+		}()
+		rr, er := s.Runtime.RunProgram(act)
+		ch <- Maybe[Value]{Value: rr, Error: er}
+	}()
+	j := s.AwaitWithContext(ctx)
+	if !j.IsZero() {
+		s.Interrupt(ErrTimeout)
+	}
+	r := <-ch
+	if !j.IsZero() {
+		return s.ToValue(j), ErrTimeout
+	}
+	return r.Value, r.Error
 }
 
 var (
 	ErrTimeout = errors.New("execution timeout")
 )
-
-type result struct {
-	v Value
-	e error
-}
 
 //region RegisterMod helper
 
