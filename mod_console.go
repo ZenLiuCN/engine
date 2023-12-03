@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"github.com/dop251/goja"
 	"log/slog"
+	"slices"
 	"strings"
 	"time"
 )
@@ -28,6 +29,7 @@ type console interface {
 	Group(label string)
 	GroupCollapsed(label string)
 	GroupEnd()
+	Table(value goja.Value, columns ...string)
 }
 type sharedConsole struct {
 	counter map[string]int
@@ -94,6 +96,85 @@ func (s *sharedConsole) GroupCollapsed(label string) {
 func (s *sharedConsole) GroupEnd() {
 	s.group = s.group[:len(s.group)-1]
 }
+func (s *sharedConsole) Table(value goja.Value, columns ...string) {
+	s.log(dumpColumns(value, columns...))
+}
+func dumpColumns(v goja.Value, col ...string) string {
+	m := strings.Builder{}
+	m.WriteString("(index)")
+	haveCol := len(col) > 0
+	if len(col) > 0 {
+		for _, column := range col {
+			m.WriteString("\t")
+			m.WriteString(column)
+		}
+	}
+	switch t := v.Export().(type) {
+	case []any:
+		f := t[0]
+		switch fv := f.(type) {
+		case map[string]any:
+			if !haveCol {
+				for s := range fv {
+					m.WriteString("\t")
+					m.WriteString(s)
+				}
+			}
+			for i, a := range t {
+				m.WriteString(fmt.Sprintf("%d\t", i))
+				for s, a2 := range a.(map[string]any) {
+					if haveCol && slices.Index(col, s) >= 0 {
+						m.WriteString(fmt.Sprintf("%s\t", dumpOne(a2)))
+					} else if !haveCol {
+						m.WriteString(fmt.Sprintf("%s\t", dumpOne(a2)))
+					}
+				}
+				m.WriteRune('\n')
+			}
+		default:
+			for i, a := range t {
+				m.WriteString(fmt.Sprintf("%d\t", i))
+				m.WriteString(fmt.Sprintf("%s\t", dumpOne(a)))
+				m.WriteRune('\n')
+			}
+		}
+	case map[string]any:
+		var x any
+		for _, a := range t {
+			x = a
+			break
+		}
+		switch f := x.(type) {
+		case map[string]any:
+			if !haveCol {
+				for s := range f {
+					m.WriteString("\t")
+					m.WriteString(s)
+				}
+			}
+			for i, a := range t {
+				m.WriteString(fmt.Sprintf("%s\t", i))
+				for s, a2 := range a.(map[string]any) {
+					if haveCol && slices.Index(col, s) >= 0 {
+						m.WriteString(fmt.Sprintf("%s\t", dumpOne(a2)))
+					} else if !haveCol {
+						m.WriteString(fmt.Sprintf("%s\t", dumpOne(a2)))
+					}
+				}
+				m.WriteRune('\n')
+			}
+		default:
+			for i, a := range t {
+				m.WriteString(fmt.Sprintf("%s\t", i))
+				m.WriteString(fmt.Sprintf("%s\t", dumpOne(a)))
+				m.WriteRune('\n')
+			}
+		}
+	default:
+		return fmt.Sprintf("%v", t)
+	}
+	return m.String()
+}
 func dump(v ...any) string {
 	var msg strings.Builder
 	for i := 0; i < len(v); i++ {
@@ -107,6 +188,14 @@ func dump(v ...any) string {
 		}
 	}
 	return msg.String()
+}
+func dumpOne(v any) string {
+	if val, ok := v.(goja.Value); ok {
+		return ValueString(val)
+	} else {
+		return fmt.Sprintf("%v", val)
+	}
+
 }
 func toAny[T any](v []T) []any {
 	x := make([]any, len(v))
