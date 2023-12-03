@@ -9,7 +9,6 @@ import (
 	"github.com/dop251/goja"
 	"io"
 	"os"
-	"sync"
 )
 
 var (
@@ -285,12 +284,6 @@ func (b *Buffer) ToReader() io.Reader {
 	return b.Buffer
 }
 
-func GetBytesBuffer() *bytes.Buffer {
-	return buffers.Get().(*bytes.Buffer)
-}
-func PutBytesBuffer(buf *bytes.Buffer) {
-	buffers.Put(buf)
-}
 func GetBuffer() *Buffer {
 	return &Buffer{
 		Buffer: buffers.Get().(*bytes.Buffer),
@@ -372,10 +365,3 @@ func (b *Bytes) ToText() string {
 func (b *Bytes) ToReader() io.Reader {
 	return bytes.NewReader(b.b)
 }
-
-var (
-	buffers = sync.Pool{New: func() any {
-		buf := &bytes.Buffer{}
-		return buf
-	}}
-)
