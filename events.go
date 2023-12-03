@@ -184,14 +184,6 @@ func (e *EventLoop) AwaitWithContext(ctx context.Context) HaltJobs {
 	return HaltJobs{int(e.jobCount), e.tracker.asyncContexts}
 }
 
-// AwaitTimeout all job done in a limit duration, the returning value may not exactly the pending job count,for no lock to wait
-// see also Await, AwaitWithContext and AwaitContext.
-// should use goroutine to execute script to avoid blocking current thread
-func (e *EventLoop) AwaitTimeout(duration time.Duration) HaltJobs {
-	ctx, cc := context.WithTimeout(context.Background(), duration)
-	defer cc()
-	return e.AwaitWithContext(ctx)
-}
 func (e *EventLoop) registerCallback() func(func()) {
 	return func(f func()) {
 		e.addAuxJob(f)

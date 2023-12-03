@@ -1,4 +1,4 @@
-//go:build event_trace
+//go:build trace
 
 package engine
 

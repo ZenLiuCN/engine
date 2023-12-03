@@ -1,6 +1,7 @@
 package engine
 
 import (
+	"context"
 	"github.com/ZenLiuCN/fn"
 	"os"
 	"testing"
@@ -110,7 +111,10 @@ syn()
     return new Promise((r,j)=>r())
 })
 `))))
-	e.AwaitTimeout(time.Second)
+
+	ctx, cc := context.WithTimeout(context.Background(), time.Second)
+	defer cc()
+	e.AwaitWithContext(ctx)
 }
 
 func TestEs2019(t *testing.T) {

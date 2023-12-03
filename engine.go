@@ -133,7 +133,7 @@ func (s *Engine) ToValues(args ...any) []Value {
 
 //endregion
 
-// region direct execute
+// region direct
 
 // RunString execute raw javascript (es5|es6 without import) code.
 // this not support import and some polyfill features.
@@ -182,114 +182,40 @@ func (s *Engine) RunCode(code *Code) (v Value, err error) {
 
 //endregion
 
-//region execute timeout
-
-// RunCodeTimeout run code
-// with limit time.
-// When timeout, the value will be HaltJobs, the error will be ErrTimeout.
-func (s *Engine) RunCodeTimeout(code *Code, timeout time.Duration) (v Value, err error) {
-	return s.timeout(code.Program, timeout)
-}
-
-// RunJsTimeout run js source
-// with limit time.
-// When timeout, the value will be HaltJobs, the error will be ErrTimeout.
-func (s *Engine) RunJsTimeout(src string, timeout time.Duration) (v Value, err error) {
-	return s.timeout(CompileSource(src, false).Program, timeout)
-}
-
-// RunTsTimeout run Ts source
-// with limit time.
-// When timeout, the value will be HaltJobs, the error will be ErrTimeout.
-func (s *Engine) RunTsTimeout(src string, timeout time.Duration) (v Value, err error) {
-	return s.timeout(CompileSource(src, true).Program, timeout)
-}
-
-//endregion
-
-//region execute timeout Delay
-
-// RunCodeTimeoutDelay  run code
-// with limit time, and a little warmup delay. This method use for full async actions
-// If timeout, the value will be HaltJobs, the error will be ErrTimeout.
-func (s *Engine) RunCodeTimeoutDelay(code *Code, delay, timeout time.Duration) (v Value, err error) {
-	return s.timeoutDelay(code.Program, delay, timeout)
-}
-
-// RunJsTimeoutDelay  run js source
-// with limit time, and a little warmup delay. This method use for full async actions
-// If timeout, the value will be HaltJobs, the error will be ErrTimeout.
-func (s *Engine) RunJsTimeoutDelay(src string, delay, timeout time.Duration) (v Value, err error) {
-	return s.timeoutDelay(CompileSource(src, false).Program, delay, timeout)
-}
-
-// RunTsTimeoutDelay  run Ts source
-// with limit time, and a little warmup delay. This method use for full async actions
-// If timeout, the value will be HaltJobs, the error will be ErrTimeout.
-func (s *Engine) RunTsTimeoutDelay(src string, delay, timeout time.Duration) (v Value, err error) {
-	return s.timeoutDelay(CompileSource(src, true).Program, delay, timeout)
-}
-
-//endregion
-
 //region context
 
 // RunCodeContext run code
 // with context. If context closed early, the value will be HaltJobs, the error will be ErrTimeout.
-func (s *Engine) RunCodeContext(code *Code, ctx cx.Context) (v Value, err error) {
-	return s.contextual(code.Program, ctx)
+func (s *Engine) RunCodeContext(code *Code, warm time.Duration, ctx cx.Context) (v Value, err error) {
+	return s.awaiting(code.Program, warm, ctx)
 }
 
 // RunJsContext run js source
 // with context. If context closed early, the value will be HaltJobs, the error will be ErrTimeout.
-func (s *Engine) RunJsContext(src string, ctx cx.Context) (v Value, err error) {
-	return s.contextual(CompileSource(src, false).Program, ctx)
+func (s *Engine) RunJsContext(src string, warm time.Duration, ctx cx.Context) (v Value, err error) {
+	return s.awaiting(CompileSource(src, false).Program, warm, ctx)
 }
 
 // RunTsContext run Ts source
 // with context. If context closed early, the value will be HaltJobs, the error will be ErrTimeout.
-func (s *Engine) RunTsContext(src string, ctx cx.Context) (v Value, err error) {
-	return s.contextual(CompileSource(src, true).Program, ctx)
+func (s *Engine) RunTsContext(src string, warm time.Duration, ctx cx.Context) (v Value, err error) {
+	return s.awaiting(CompileSource(src, true).Program, warm, ctx)
 }
 
 //endregion
 
-//region context delay
-
-// RunCodeContextDelay run code
-// with context and a warmup delay. This use for full async actions.
-// If context closed early, the value will be HaltJobs, the error will be ErrTimeout.
-func (s *Engine) RunCodeContextDelay(code *Code, delay time.Duration, ctx cx.Context) (v Value, err error) {
-	return s.contextualDelay(code.Program, delay, ctx)
-}
-
-// RunJsContextDelay run js source
-// with context and a warmup delay. This use for full async actions.
-// If context closed early, the value will be HaltJobs, the error will be ErrTimeout.
-func (s *Engine) RunJsContextDelay(src string, delay time.Duration, ctx cx.Context) (v Value, err error) {
-	return s.contextualDelay(CompileSource(src, false).Program, delay, ctx)
-}
-
-// RunTsContextDelay run Ts source
-// with context and a warmup delay. This use for full async actions.
-// If context closed early, the value will be HaltJobs, the error will be ErrTimeout.
-func (s *Engine) RunTsContextDelay(src string, delay time.Duration, ctx cx.Context) (v Value, err error) {
-	return s.contextualDelay(CompileSource(src, true).Program, delay, ctx)
-}
-
-//endregion
-
-func execute(s *Engine, code *Program, ch chan<- Maybe[Value]) {
+func execute(e *Engine, ch chan<- Maybe[Value], act *Program) {
 	defer func() {
 		if r := recover(); r != nil {
-			er := s.parse(r)
+			er := e.parse(r)
 			ch <- Maybe[Value]{Error: er}
 		}
 	}()
-	rr, er := s.Runtime.RunProgram(code)
+	rr, er := e.Runtime.RunProgram(act)
 	ch <- Maybe[Value]{Value: rr, Error: er}
 }
-func (s *Engine) timeout(act *Program, timeout time.Duration) (v Value, err error) {
+
+func (s *Engine) awaiting(act *Program, warm time.Duration, ctx cx.Context) (v Value, err error) {
 	s.TryStartEventLoop()
 	defer func() {
 		s.ClearInterrupt()
@@ -299,78 +225,8 @@ func (s *Engine) timeout(act *Program, timeout time.Duration) (v Value, err erro
 	}()
 	ch := make(chan Maybe[Value])
 	defer close(ch)
-	execute(s, act, ch)
-	var rk HaltJobs
-	rk = s.AwaitTimeout(timeout)
-	if !rk.IsZero() {
-		s.Interrupt(ErrTimeout)
-	}
-	r := <-ch
-	if !rk.IsZero() {
-		return s.ToValue(rk), ErrTimeout
-	}
-	return r.Value, r.Error
-}
-func (s *Engine) timeoutDelay(act *Program, delay, timeout time.Duration) (v Value, err error) {
-	s.TryStartEventLoop()
-	defer func() {
-		s.ClearInterrupt()
-		if r := recover(); r != nil {
-			err = s.parse(r)
-		}
-	}()
-	ch := make(chan Maybe[Value])
-	defer close(ch)
-	ctx, cc := cx.WithTimeout(cx.Background(), delay)
-	defer cc()
-	go execute(s, act, ch)
-	<-ctx.Done()
-	var rk HaltJobs
-	rk = s.AwaitTimeout(timeout)
-	if !rk.IsZero() {
-		s.Interrupt(ErrTimeout)
-	}
-	r := <-ch
-	if !rk.IsZero() {
-		return s.ToValue(rk), ErrTimeout
-	}
-	return r.Value, r.Error
-}
-func (s *Engine) contextual(act *Program, ctx cx.Context) (v Value, err error) {
-	s.TryStartEventLoop()
-	defer func() {
-		s.ClearInterrupt()
-		if r := recover(); r != nil {
-			err = s.parse(r)
-		}
-	}()
-	ch := make(chan Maybe[Value])
-	defer close(ch)
-	execute(s, act, ch)
-	j := s.AwaitWithContext(ctx)
-	if !j.IsZero() {
-		s.Interrupt(ErrTimeout)
-	}
-	r := <-ch
-	if !j.IsZero() {
-		return s.ToValue(j), ErrTimeout
-	}
-	return r.Value, r.Error
-}
-func (s *Engine) contextualDelay(act *Program, delay time.Duration, ctx cx.Context) (v Value, err error) {
-	s.TryStartEventLoop()
-	defer func() {
-		s.ClearInterrupt()
-		if r := recover(); r != nil {
-			err = s.parse(r)
-		}
-	}()
-	ch := make(chan Maybe[Value])
-	defer close(ch)
-	delayCtx, cc := cx.WithTimeout(cx.Background(), delay)
-	defer cc()
-	go execute(s, act, ch)
-	<-delayCtx.Done()
+	go execute(s, ch, act)
+	time.Sleep(warm)
 	j := s.AwaitWithContext(ctx)
 	if !j.IsZero() {
 		s.Interrupt(ErrTimeout)

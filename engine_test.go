@@ -31,26 +31,26 @@ const out=()=>counter
 new Promise((r, j) => {
     console.log("job 0")
     counter.inc()
-    setTimeout(()=>r(1),1000)
+    setTimeout(()=>r(1),500)
 }).then(v => {
-    console.log("job",v)
+    console.log("job 1")
        counter.inc()
     return new Promise((r, j) => {
-        setTimeout(()=>r(v+1),1000)
+        setTimeout(()=>r(v+1),500)
     })}).then(v => {
-    console.log("job",v)
+    console.log("job 2")
        counter.inc()
     return new Promise((r, j) => {
-        setTimeout(()=>r(v+1),1000)
+        setTimeout(()=>r(v+1),500)
     })
 }).then(v => {
-    console.log("job",v)
+    console.log("job 3")
       counter.inc()
     return new Promise((r, j) => {
-       setTimeout(()=>r(v+1),2000)
+       setTimeout(()=>r(v+1),500)
     })
 }).then(v => {
-    console.log("job",v)
+    console.log("job 4")
         counter.inc()
     return new Promise((r, j) => {
        r(counter.cnt())
@@ -58,37 +58,6 @@ new Promise((r, j) => {
 })
 out()
 `
-const jsPartlyTimeoutAsync =
-// language=javascript
-`
-let n=0
-for(var i = 0; i < 100; i++) {
-  n+=i
-}
-console.log("Begin "+"For timeout with "+n)
-new Promise((r, j) => {
-    console.log("job 0")
-    setTimeout(()=>r(1),1000)
-}).then(v => {
-    console.log("job",v)
-    return new Promise((r, j) => {
-        setTimeout(()=>r(v+1),1000)
-    })}).then(v => {
-    console.log("job",v)
-    return new Promise((r, j) => {
-        setTimeout(()=>r(v+1),1000)
-    })
-}).then(v => {
-    console.log("job",v)
-    return new Promise((r, j) => {
-       setTimeout(()=>r(v+1),2000)
-    })
-}).then(v => {
-    console.log("job",v)
-    return new Promise((r, j) => {
-       setTimeout(()=>r(v+1),2000)
-    })
-})`
 
 func TestTimeout(t *testing.T) {
 	e := Get()
@@ -97,7 +66,9 @@ func TestTimeout(t *testing.T) {
 	if err != nil {
 		t.Log(err)
 	}
-	halts := e.AwaitTimeout(time.Second * 5)
+	ctx, cc := context.WithTimeout(context.Background(), time.Second)
+	defer cc()
+	halts := e.AwaitWithContext(ctx)
 	if !halts.IsZero() {
 		e.Interrupt("shutdown for timeout")
 	}
@@ -106,7 +77,7 @@ func TestTimeout(t *testing.T) {
 	}
 	t.Log(v)
 }
-func TestAsyncDone(t *testing.T) {
+func TestAwait(t *testing.T) {
 	e := Get()
 	defer e.Free()
 	v, err := e.RunJs(jsFullTimeoutAsync)
@@ -119,44 +90,27 @@ func TestAsyncDone(t *testing.T) {
 	}
 	t.Log(v)
 }
-func TestTimeoutDelayJsSuccess(t *testing.T) {
+func TestContextJsSuccess(t *testing.T) {
 	e := Get()
 	defer e.Free()
-	v := fn.Panic1(e.RunJsTimeoutDelay(jsFullTimeoutAsync, time.Microsecond*500, time.Second*8)).String()
+	ctx, cc := context.WithTimeout(context.Background(), time.Second*3)
+	defer cc()
+	v := fn.Panic1(e.RunJsContext(jsFullTimeoutAsync, time.Millisecond, ctx)).String()
 	if v != "5" {
 		panic("not real done")
 	}
 
 }
-func TestTimeoutDelayJsFailure(t *testing.T) {
+func TestContextJsFailure(t *testing.T) {
 	e := Get()
 	defer e.Free()
-	v, err := e.RunJsTimeoutDelay(jsFullTimeoutAsync, time.Microsecond*10, time.Second*5)
+	ctx, cc := context.WithTimeout(context.Background(), time.Second*2)
+	defer cc()
+	v, err := e.RunJsContext(jsFullTimeoutAsync, time.Millisecond, ctx)
 	if err == nil {
 		panic("should not success " + v.String())
 	} else {
 		t.Log(v, err)
 	}
-
-}
-func TestContextJs(t *testing.T) {
-	e := Get()
-	defer e.Free()
-	ctx, cc := context.WithTimeout(context.Background(), time.Second*5)
-	defer cc()
-	v, err := e.RunJsContext(jsFullTimeoutAsync, ctx)
-	if err == nil {
-		panic("should not success " + v.String())
-	} else {
-		t.Log(v, err)
-	}
-
-}
-func TestContextJsSuccess(t *testing.T) {
-	e := Get()
-	defer e.Free()
-	ctx, cc := context.WithTimeout(context.Background(), time.Second*8)
-	defer cc()
-	t.Log(fn.Panic1(e.RunJsContext(jsFullTimeoutAsync, ctx)))
 
 }
