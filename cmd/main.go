@@ -10,6 +10,7 @@ import (
 	_ "github.com/ZenLiuCN/engine/pug"
 	_ "github.com/ZenLiuCN/engine/sqlx"
 	"github.com/ZenLiuCN/fn"
+	"time"
 )
 
 var (
@@ -31,7 +32,7 @@ func main() {
 		vm := engine.Get()
 		defer vm.Free()
 		cc := fn.WithSignal(func(ctx context.Context) {
-			v := fn.Panic1(vm.RunCodeContext(engine.CompileFile(args[0]), ctx))
+			v := fn.Panic1(vm.RunCodeContext(engine.CompileFile(args[0]), time.Millisecond*10, ctx))
 			if !engine.IsNullish(v) {
 				println(v.String())
 			}
@@ -41,7 +42,7 @@ func main() {
 		vm := engine.Get()
 		defer vm.Free()
 		cc := fn.WithSignal(func(ctx context.Context) {
-			v := fn.Panic1(vm.RunCodeContext(engine.CompileSource(fn.SliceJoinRune(args, '\n', fn.Identity[string]), typed), ctx))
+			v := fn.Panic1(vm.RunCodeContext(engine.CompileSource(fn.SliceJoinRune(args, '\n', fn.Identity[string]), typed), time.Millisecond*10, ctx))
 			if !engine.IsNullish(v) {
 				println(v.String())
 			}
