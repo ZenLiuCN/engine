@@ -10,6 +10,7 @@ import (
 	_ "github.com/ZenLiuCN/engine/pug"
 	_ "github.com/ZenLiuCN/engine/sqlx"
 	"github.com/ZenLiuCN/fn"
+	"os"
 	"sync"
 	"time"
 )
@@ -29,13 +30,14 @@ func main() {
 	switch {
 	case define:
 		engine.DumpDefines(".")
-	case len(args) == 1 && !source:
+	case len(args) >= 1 && !source:
 		vm := engine.Get()
 		defer vm.Free()
 		wg := &sync.WaitGroup{}
 		wg.Add(1)
 		cc := fn.WithSignal(func(ctx context.Context) {
 			defer wg.Done()
+			vm.Set("args", os.Args[1:])
 			v := fn.Panic1(vm.RunCodeContext(engine.CompileFile(args[0]), time.Millisecond*100, ctx))
 			if !engine.IsNullish(v) {
 				println(v.String())
