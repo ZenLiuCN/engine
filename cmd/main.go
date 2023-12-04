@@ -37,7 +37,11 @@ func main() {
 		wg.Add(1)
 		cc := fn.WithSignal(func(ctx context.Context) {
 			defer wg.Done()
-			vm.Set("args", os.Args[1:])
+			if len(args) > 1 {
+				vm.Set("args", os.Args[2:])
+			} else {
+				vm.Set("args", []string{})
+			}
 			v := fn.Panic1(vm.RunCodeContext(engine.CompileFile(args[0]), time.Millisecond*100, ctx))
 			if !engine.IsNullish(v) {
 				println(v.String())
