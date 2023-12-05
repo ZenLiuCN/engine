@@ -36,10 +36,11 @@ func RemoveModule(module string) {
 	delete(goRegistry, module)
 }
 
+// ModuleDefines exports Module define as moduleName=>ModuleTypeDefine
 func ModuleDefines() map[string][]byte {
 	m := make(map[string][]byte)
 	for s, module := range goRegistry {
-		m[strings.ReplaceAll(s, "/", "_")] = module.TypeDefine()
+		m[s] = module.TypeDefine()
 	}
 	return m
 }
@@ -66,11 +67,11 @@ func instanceModule(engine *Engine, module Module) (*goja.Object, error) {
 	return exports, nil
 }
 
-// DumpDefines to path, global.d.ts contains top level types , pkg_name.d.ts contains go modules
+// DumpDefines to path, global.d.ts contains top level types , pkg/name.d.ts contains go modules
 func DumpDefines(path string) {
 	_ = os.WriteFile(filepath.Join(path, "globals.d.ts"), ModDefines(), os.ModePerm)
 	for name, bytes := range ModuleDefines() {
-		_ = os.WriteFile(filepath.Join(path, name+".d.ts"), bytes, os.ModePerm)
+		_ = os.WriteFile(filepath.Join(path, strings.ReplaceAll(name, "go_", "go/")+".d.ts"), bytes, os.ModePerm)
 	}
 }
 
