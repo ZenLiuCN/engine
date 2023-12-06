@@ -37,4 +37,9 @@ declare module "go" {
 
         close()
     }
+
+    export interface Maybe<V> {
+        Value?: V
+        Error?: GoError
+    }
 }

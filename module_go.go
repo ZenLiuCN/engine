@@ -11,6 +11,12 @@ type GoError struct {
 	Err error
 }
 
+func GoErrorOf(err error) *GoError {
+	if err != nil {
+		return &GoError{err}
+	}
+	return nil
+}
 func (g *GoError) String() string {
 	if g == nil || g.Err == nil {
 		return "<nil>"
