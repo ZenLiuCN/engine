@@ -204,3 +204,27 @@ func (c *wch[T]) Close() {
 func (c *wch[T]) Closed() bool {
 	return c.closed.Load()
 }
+
+type Maybe[T any] struct {
+	Value T
+	Error error
+}
+
+func MaybeOk[T any](v T) Maybe[T] {
+	return Maybe[T]{Value: v}
+}
+func MaybeError[T any](e error) Maybe[T] {
+	return Maybe[T]{Error: e}
+}
+func MaybeBoth[T any](v T, e error) Maybe[T] {
+	if e == nil {
+		return Maybe[T]{Value: v}
+	}
+	return Maybe[T]{Value: v, Error: e}
+}
+func MaybeMap[T, R any](v T, e error, f func(T) R) Maybe[R] {
+	if e == nil {
+		return Maybe[R]{Value: f(v)}
+	}
+	return Maybe[R]{Error: e}
+}
