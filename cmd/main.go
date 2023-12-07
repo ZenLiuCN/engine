@@ -4,6 +4,7 @@ import (
 	"context"
 	"flag"
 	"github.com/ZenLiuCN/engine"
+	_ "github.com/ZenLiuCN/engine/chrome"
 	_ "github.com/ZenLiuCN/engine/excelize"
 	_ "github.com/ZenLiuCN/engine/fetch"
 	_ "github.com/ZenLiuCN/engine/minify"
