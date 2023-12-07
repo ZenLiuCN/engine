@@ -7,6 +7,7 @@ import (
 	"github.com/chromedp/cdproto/css"
 	"github.com/chromedp/cdproto/dom"
 	"github.com/chromedp/cdproto/page"
+	"github.com/chromedp/cdproto/target"
 	cd "github.com/chromedp/chromedp"
 	"github.com/dop251/goja"
 )
@@ -37,7 +38,34 @@ func (c ModuleChrome) Exports() map[string]any {
 
 func (c ModuleChrome) ExportsWithEngine(eng *engine.Engine) map[string]any {
 	return map[string]any{
-		//option
+		//convert
+		"toBrowserContextID": func(id string) cdp.BrowserContextID {
+			return cdp.BrowserContextID(id)
+		},
+		"toTargetID": func(id string) target.ID {
+			return target.ID(id)
+		},
+		"toFrameID": func(id string) cdp.FrameID {
+			return cdp.FrameID(id)
+		},
+		"toTargetSessionID": func(id string) target.SessionID {
+			return target.SessionID(id)
+		},
+		"toNodeID": func(id int64) cdp.NodeID {
+			return cdp.NodeID(id)
+		},
+		"fromNodeID": func(id cdp.NodeID) int64 {
+			return int64(id)
+		},
+		//context option
+		"withTargetID":               cd.WithTargetID,
+		"withExistingBrowserContext": cd.WithExistingBrowserContext,
+		"withBrowserOption":          cd.WithBrowserOption,
+		//"withNewBrowserContext": cd.WithNewBrowserContext,
+
+		//browser option
+		"withDialTimeout": cd.WithDialTimeout,
+		//exec option
 		"execPath":         cd.ExecPath,
 		"flag":             cd.Flag,
 		"env":              cd.Env,
@@ -57,22 +85,67 @@ func (c ModuleChrome) ExportsWithEngine(eng *engine.Engine) map[string]any {
 		"Chrome": eng.ToConstructor(func(v []goja.Value) any {
 			if len(v) == 0 {
 				return NewChromeDefault()
-			} else if len(v) == 1 {
-				if id, ok := v[0].Export().(string); ok {
-					return NewChromeTarget(id)
-				}
 			}
-
-			var opt []cd.ExecAllocatorOption
-			for _, value := range v {
-				if o, ok := value.Export().(cd.ExecAllocatorOption); ok {
-					opt = append(opt, o)
+			v0 := v[0]
+			if url, ok := v0.Export().(string); ok {
+				if len(v) == 1 {
+					return NewChromeUrl(url, nil)
+				}
+				if ar, ok := v[1].Export().([]any); !ok {
+					panic("not an array of RemoteOption")
 				} else {
-					panic("not an Option")
+					var remotes []cd.RemoteAllocatorOption
+					for _, value := range ar {
+						switch t := value.(type) {
+						case cd.RemoteAllocatorOption:
+							remotes = append(remotes, t)
+						default:
+							panic("not a RemoteOption")
+						}
+					}
+					var opt []cd.ContextOption
+					for i, value := range v {
+						if i == 0 || i == 1 {
+							continue
+						}
+						if o, ok := value.Export().(cd.ContextOption); ok {
+							opt = append(opt, o)
+						} else {
+							panic("not an ContextOption")
+						}
+					}
+					return NewChromeUrl(url, remotes, opt...)
 				}
 			}
-			return NewChromeOptions(opt...)
-
+			if o0, ok := v0.Export().(cd.ContextOption); ok {
+				opt := []cd.ContextOption{o0}
+				for i, value := range v {
+					if i == 0 {
+						continue
+					}
+					if o, ok := value.Export().(cd.ContextOption); ok {
+						opt = append(opt, o)
+					} else {
+						panic("not an ContextOption")
+					}
+				}
+				return NewChromeDefault(opt...)
+			}
+			if eao, ok := v0.Export().([]cd.ExecAllocatorOption); ok {
+				var opt []cd.ContextOption
+				for i, value := range v {
+					if i == 0 {
+						continue
+					}
+					if o, ok := value.Export().(cd.ContextOption); ok {
+						opt = append(opt, o)
+					} else {
+						panic("not an ContextOption")
+					}
+				}
+				return NewChromeOptions(eao, opt...)
+			}
+			panic("invalid arguments")
 		}),
 		//navigate
 		"navigate":        cd.Navigate,

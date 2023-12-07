@@ -25,6 +25,9 @@ type Chrome struct {
 func (c *Chrome) Close() *GoError {
 	return GoErrorOf(cd.Cancel(c.ctx))
 }
+func (c *Chrome) Targets() Maybe[[]*target.Info] {
+	return MaybeBoth(cd.Targets(c.ctx))
+}
 
 // Shutdown close chrome without await for full close
 func (c *Chrome) Shutdown() {
@@ -42,18 +45,20 @@ func (c *Chrome) CreateBrowser(url string, opts ...cd.BrowserOption) Maybe[*Brow
 	}
 
 }
-func NewChromeDefault() *Chrome {
-	ctx, cc := cd.NewContext(context.Background())
-	return &Chrome{ctx, cc}
-}
-func NewChromeTarget(targetId string) *Chrome {
-	ctx, cc := cd.NewContext(context.Background(), cd.WithTargetID(target.ID(targetId)))
+func NewChromeDefault(opt ...cd.ContextOption) *Chrome {
+	ctx, cc := cd.NewContext(context.Background(), opt...)
 	return &Chrome{ctx, cc}
 }
 
-func NewChromeOptions(options ...cd.ExecAllocatorOption) *Chrome {
-	ctx, cc := cd.NewExecAllocator(context.Background(), options...)
-	return &Chrome{ctx, cc}
+func NewChromeUrl(url string, remotes []cd.RemoteAllocatorOption, opt ...cd.ContextOption) *Chrome {
+	ctx, cc := cd.NewRemoteAllocator(context.Background(), url, remotes...)
+	ctx1, _ := cd.NewContext(ctx, opt...)
+	return &Chrome{ctx1, cc}
+}
+func NewChromeOptions(execOption []cd.ExecAllocatorOption, opt ...cd.ContextOption) *Chrome {
+	ctx, cc := cd.NewExecAllocator(context.Background(), execOption...)
+	ctx1, _ := cd.NewContext(ctx, opt...)
+	return &Chrome{ctx1, cc}
 }
 
 type Browser struct {

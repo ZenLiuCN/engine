@@ -1,10 +1,28 @@
 declare module 'go/chrome' {
     // @ts-ignore
-    import {Err,Maybe} from 'go'
+    import {Err,Maybe,Stringer} from 'go'
     // @ts-ignore
     import {Writer} from 'go/io'
     // @ts-ignore
     import {Duration} from 'go/time'
+
+    export interface TargetID extends Stringer{}
+    export function toTargetID(id:string):TargetID
+    export interface BrowserContextID extends Stringer{}
+    export function toBrowserContextID(id:string):BrowserContextID
+    export interface FrameID extends Stringer{
+
+    }
+
+    export function toFrameID(id:string):FrameID
+    export interface TargetSessionID extends Stringer{
+
+    }
+    export function toTargetSessionID(id:string):TargetSessionID
+    export interface NodeID {}
+    export function toNodeID(id:number):NodeID
+    export function fromNodeID(id:NodeID):number
+
 
     export interface Action {
     }
@@ -18,53 +36,81 @@ declare module 'go/chrome' {
     }
     export interface Browser{
 
-    } export interface BrowserOption{
+    }
+    export interface BrowserOption{
 
     }
-    export class Chrome {
-        constructor()
-        constructor(targetId: string)
-        constructor(...options: Option[])
+    export function withDialTimeout(dur:Duration):BrowserOption
 
+    export interface TargetInfo{
+        targetID:TargetID
+        type:string
+        title:string
+        url:string
+        attached:boolean
+        openerID?:TargetID
+        canAccessOpener?:boolean
+        openerFrameID?:FrameID
+        browserContextID?:BrowserContextID
+        subtype?:string
+    }
+    export class Chrome {
+        constructor(execOptions:ExecOption[],...options: ContextOption[])
+        /**
+         *
+         * @param url root websocket url, eg: ws://127.0.0.1:65533
+         * @param remoteOptions
+         * @param opts
+         */
+        constructor(url: string,remoteOptions?:RemoteOption[],...opts:ContextOption[])
+        constructor(...options: ContextOption[])
+        targets():Maybe<TargetInfo>
         submit(...act: Action[]): Err
         // createBrowser(url:string,...opt:BrowserOption[]):Maybe<Browser>
         close(): Err
 
         shutdown()
     }
+    export interface ContextOption{}
+    export function withTargetID(targetId:TargetID):ContextOption
+    export function withExistingBrowserContext(browserId:BrowserContextID):ContextOption
+    export function withBrowserOption(...browserOptions:BrowserOption[]):ContextOption
+    export interface RemoteOption{}
 
-    export interface Option {
+    //region exec options
+    export interface ExecOption {
     }
 
-    export function execPath(path: string): Option
+    export function execPath(path: string): ExecOption
 
-    export function flag(flag: string, val: string | boolean): Option
+    export function flag(flag: string, val: string | boolean): ExecOption
 
-    export function env(...pairs: string[]): Option
+    export function env(...pairs: string[]): ExecOption
 
-    export function userDataDir(path: string): Option
+    export function userDataDir(path: string): ExecOption
 
-    export function proxyServer(proxy: string): Option
+    export function proxyServer(proxy: string): ExecOption
 
-    export function ignoreCertErrors(): Option
+    export function ignoreCertErrors(): ExecOption
 
-    export function windowSize(width, height: number): Option
+    export function windowSize(width, height: number): ExecOption
 
-    export function userAgent(userAgent: string): Option
+    export function userAgent(userAgent: string): ExecOption
 
-    export const noSandbox: Option
+    export const noSandbox: ExecOption
 
-    export const noFirstRun: Option
+    export const noFirstRun: ExecOption
 
-    export const headless: Option
+    export const headless: ExecOption
 
-    export const disableGPU: Option
+    export const disableGPU: ExecOption
 
-    export const noModifyURL: Option
+    export const noModifyURL: RemoteOption
 
-    export function combinedOutput(writer: Writer): Option
+    export function combinedOutput(writer: Writer): ExecOption
 
-    export function wsUrlReadTimeout(duration: Duration): Option
+    export function wsUrlReadTimeout(duration: Duration): ExecOption
+    //endregion
 
     export function navigate(url: string): Action
 
@@ -299,6 +345,11 @@ declare module 'go/chrome' {
 
     export function innerHTML(sel: string, ...options: QueryOption[]): ValuedAction<string>
 
+    /**
+     * fetch dom node's javascript value
+     * @param sel selector
+     * @param options options
+     */
     export function value(sel: string, ...options: QueryOption[]): ValuedAction<string>
 
     export function text(sel: string, ...options: QueryOption[]): ValuedAction<string>

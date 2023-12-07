@@ -9,7 +9,7 @@ import (
 
 var (
 	//go:embed excel.d.ts
-	excelizeDefine []byte
+	excelDefine []byte
 )
 
 func init() {
@@ -71,7 +71,7 @@ func (x Excel) Exports() map[string]any {
 }
 
 func (x Excel) TypeDefine() []byte {
-	return excelizeDefine
+	return excelDefine
 }
 
 type (
