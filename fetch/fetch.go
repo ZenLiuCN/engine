@@ -263,6 +263,8 @@ func (o *Option) Request(e *engine.Engine, jar *cookiejar.Jar, uri string) *goja
 		}
 	}
 	switch {
+	case engine.IsNullish(o.Body):
+
 	case strings.EqualFold(contentType, "application/json"):
 		req.Body = io.NopCloser(strings.NewReader(o.Body.ToString().String()))
 	case contentType == "":
