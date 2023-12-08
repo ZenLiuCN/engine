@@ -7,17 +7,18 @@ func init() {
 	RegisterMod(Require{})
 	RegisterMod(TextEncoders{})
 
-	RegisterModule(&GoModule{})
+	RegisterModule(GoModule{})
 	RegisterModule(BufferModule{})
 	RegisterModule(Os{})
 
-	RegisterModule(&IoModule{})
-	RegisterModule(&EngineModule{})
-	RegisterModule(&CryptoModule{})
-	RegisterModule(&EsBuild{})
-	RegisterModule(&HashModule{})
-	RegisterModule(&CodecModule{})
-	RegisterModule(&Compiler{})
-	RegisterModule(&TimeModule{})
+	RegisterModule(IoModule{})
+	RegisterModule(ContextModule{})
+	RegisterModule(EngineModule{})
+	RegisterModule(CryptoModule{})
+	RegisterModule(EsBuild{})
+	RegisterModule(HashModule{})
+	RegisterModule(CodecModule{})
+	RegisterModule(Compiler{})
+	RegisterModule(TimeModule{})
 
 }

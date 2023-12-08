@@ -12,33 +12,32 @@ import (
 var (
 	//go:embed module_compiler.d.ts
 	compilerDefine []byte
+	compilerMap    = map[string]any{
+		"compileJs": CompileJs,
+		"compileTs": CompileTs,
+		"compileTsCode": func(src string) *Code {
+			return CompileSource(src, true)
+		},
+		"compileJsCode": func(src string) *Code {
+			return CompileSource(src, false)
+		},
+	}
 )
 
 type Compiler struct {
-	m map[string]any
 }
 
-func (s *Compiler) TypeDefine() []byte {
+func (s Compiler) TypeDefine() []byte {
 	return compilerDefine
 }
 
-func (s *Compiler) Identity() string {
+func (s Compiler) Identity() string {
 	return "go/compiler"
 }
 
-func (s *Compiler) Exports() map[string]any {
-	if s.m == nil {
-		s.m = map[string]any{}
-		s.m["compileJs"] = CompileJs
-		s.m["compileTs"] = CompileTs
-		s.m["compileTsCode"] = func(src string) *Code {
-			return CompileSource(src, true)
-		}
-		s.m["compileJsCode"] = func(src string) *Code {
-			return CompileSource(src, false)
-		}
-	}
-	return s.m
+func (s Compiler) Exports() map[string]any {
+
+	return compilerMap
 }
 
 func CompileJs(js string) string {

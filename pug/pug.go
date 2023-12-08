@@ -10,6 +10,17 @@ import (
 var (
 	//go:embed pug.d.ts
 	pugDefine []byte
+	pugMap    = map[string]any{
+		"parse": jade.Parse,
+		"parseText": func(name, code string) (string, error) {
+			return jade.Parse(name, []byte(code))
+		},
+		"parseFile": jade.ParseFile,
+		"config":    jade.Config,
+		"template": func(name, code string) (*template.Template, error) {
+			return template.New(name).Parse(code)
+		},
+	}
 )
 
 func init() {
@@ -29,18 +40,6 @@ func (p *Pug) TypeDefine() []byte {
 }
 
 func (p *Pug) Exports() map[string]any {
-	if p.m == nil {
-		p.m = map[string]any{
-			"parse": jade.Parse,
-			"parseText": func(name, code string) (string, error) {
-				return jade.Parse(name, []byte(code))
-			},
-			"parseFile": jade.ParseFile,
-			"config":    jade.Config,
-			"template": func(name, code string) (*template.Template, error) {
-				return template.New(name).Parse(code)
-			},
-		}
-	}
-	return p.m
+
+	return pugMap
 }

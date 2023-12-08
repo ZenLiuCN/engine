@@ -12,7 +12,7 @@ var engineDefine []byte
 type EngineModule struct {
 }
 
-func (e *EngineModule) ExportsWithEngine(engine *Engine) map[string]any {
+func (e EngineModule) ExportsWithEngine(engine *Engine) map[string]any {
 	m := make(map[string]any)
 	m["Engine"] = engine.ToConstructor(func(v []goja.Value) any {
 		var r *Engine
@@ -46,14 +46,14 @@ func (e *EngineModule) ExportsWithEngine(engine *Engine) map[string]any {
 	return m
 }
 
-func (e *EngineModule) Identity() string {
+func (e EngineModule) Identity() string {
 	return "go/engine"
 }
 
-func (e *EngineModule) Exports() map[string]any {
+func (e EngineModule) Exports() map[string]any {
 	return nil
 }
 
-func (e *EngineModule) TypeDefine() []byte {
+func (e EngineModule) TypeDefine() []byte {
 	return engineDefine
 }

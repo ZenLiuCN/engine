@@ -8,36 +8,34 @@ import (
 var (
 	//go:embed module_esbuild.d.ts
 	esbuildDefine []byte
+	esbuildMap    = map[string]any{
+		"analyzeMetafile": api.AnalyzeMetafile,
+		"formatMessages":  api.FormatMessages,
+		"transform":       api.Transform,
+		"build":           api.Build,
+		"context": Transform12(api.Context, func(bc api.BuildContext, be *api.ContextError) *ContextResult {
+			return &ContextResult{
+				Context: &Context{bc},
+				Err:     be,
+			}
+		}),
+	}
 )
 
 type EsBuild struct {
-	m map[string]any
 }
 
-func (e *EsBuild) Identity() string {
+func (e EsBuild) Identity() string {
 	return "go/esbuild"
 }
 
-func (e *EsBuild) TypeDefine() []byte {
+func (e EsBuild) TypeDefine() []byte {
 	return esbuildDefine
 }
 
-func (e *EsBuild) Exports() map[string]any {
-	if e.m == nil {
-		e.m = map[string]any{
-			"analyzeMetafile": api.AnalyzeMetafile,
-			"formatMessages":  api.FormatMessages,
-			"transform":       api.Transform,
-			"build":           api.Build,
-			"context": Transform12(api.Context, func(bc api.BuildContext, be *api.ContextError) *ContextResult {
-				return &ContextResult{
-					Context: &Context{bc},
-					Err:     be,
-				}
-			}),
-		}
-	}
-	return e.m
+func (e EsBuild) Exports() map[string]any {
+
+	return esbuildMap
 }
 
 type ContextResult struct {

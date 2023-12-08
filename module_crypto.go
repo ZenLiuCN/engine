@@ -23,243 +23,240 @@ import (
 
 //go:embed module_crypto.d.ts
 var cryptoDefine []byte
+var cryptoMap = map[string]any{
+	"aes": func() CipherFunc {
+		return func(bytes []byte) cipher.Block {
+			return fn.Panic1(aes.NewCipher(bytes))
+		}
+	},
+	"des": func() CipherFunc {
+		return func(bytes []byte) cipher.Block {
+			return fn.Panic1(des.NewCipher(bytes))
+		}
+	},
+	"ecb": func(encrypt bool) BlockModeFunc {
+		if encrypt {
+			return func(block cipher.Block) cipher.BlockMode {
+				return NewECBEncrypter(block)
+			}
+		} else {
+			return func(block cipher.Block) cipher.BlockMode {
+				return NewECBDecrypter(block)
+			}
+		}
 
-type CryptoModule struct {
-	m map[string]any
+	},
+	"cbc": func(iv []byte, encrypt bool) BlockModeFunc {
+		if encrypt {
+			return func(block cipher.Block) cipher.BlockMode {
+				return cipher.NewCBCEncrypter(block, iv)
+			}
+		} else {
+			return func(block cipher.Block) cipher.BlockMode {
+				return cipher.NewCBCDecrypter(block, iv)
+			}
+		}
+
+	},
+	"cfb": func(iv []byte, encrypt bool) StreamFunc {
+		if encrypt {
+			return func(block cipher.Block) cipher.Stream {
+				return cipher.NewCFBEncrypter(block, iv)
+			}
+		} else {
+			return func(block cipher.Block) cipher.Stream {
+				return cipher.NewCFBDecrypter(block, iv)
+			}
+		}
+
+	},
+	"ctr": func(iv []byte) StreamFunc {
+		return func(block cipher.Block) cipher.Stream {
+			return cipher.NewCTR(block, iv)
+		}
+	},
+	"ofb": func(iv []byte) StreamFunc {
+		return func(block cipher.Block) cipher.Stream {
+			return cipher.NewOFB(block, iv)
+		}
+	},
+	"gcm": func() AEADFunc {
+		return func(block cipher.Block) cipher.AEAD {
+			return fn.Panic1(cipher.NewGCM(block))
+		}
+	},
+	"pkcs7": func() BlockPadding {
+		return PKCS7(0)
+	},
+	"pkcs5": func() BlockPadding {
+		return PKCS5(0)
+	},
+	"cipher": func(cipher *Cipher) *Cipher {
+		return cipher
+	},
+
+	"generateKey": func(algorithm Algorithm, option Option) *AsymmetricPrivateKey {
+		switch algorithm {
+		case algRSA:
+			return &AsymmetricPrivateKey{
+				Alg: algorithm,
+				key: fn.Panic1(rsa.GenerateKey(rand.Reader, option.Bits)),
+			}
+		case algECDH:
+			switch option.Curve {
+			case "P256":
+				return &AsymmetricPrivateKey{
+					Alg: algorithm,
+					key: fn.Panic1(ecdh.P256().GenerateKey(rand.Reader)),
+				}
+			case "P384":
+				return &AsymmetricPrivateKey{
+					Alg: algorithm,
+					key: fn.Panic1(ecdh.P384().GenerateKey(rand.Reader)),
+				}
+			case "P521":
+				return &AsymmetricPrivateKey{
+					Alg: algorithm,
+					key: fn.Panic1(ecdh.P521().GenerateKey(rand.Reader)),
+				}
+			case "X25519":
+				return &AsymmetricPrivateKey{
+					Alg: algorithm,
+					key: fn.Panic1(ecdh.X25519().GenerateKey(rand.Reader)),
+				}
+			default:
+				panic(fmt.Errorf("unknown ECDH curve type : %s", option.Curve))
+			}
+		case algECDSA:
+			switch option.Curve {
+			case "P256":
+				return &AsymmetricPrivateKey{
+					Alg: algorithm,
+					key: fn.Panic1(ecdsa.GenerateKey(elliptic.P256(), rand.Reader)),
+				}
+			case "P384":
+				return &AsymmetricPrivateKey{
+					Alg: algorithm,
+					key: fn.Panic1(ecdsa.GenerateKey(elliptic.P384(), rand.Reader)),
+				}
+			case "P521":
+				return &AsymmetricPrivateKey{
+					Alg: algorithm,
+					key: fn.Panic1(ecdsa.GenerateKey(elliptic.P521(), rand.Reader)),
+				}
+			case "P224":
+				return &AsymmetricPrivateKey{
+					Alg: algorithm,
+					key: fn.Panic1(ecdsa.GenerateKey(elliptic.P224(), rand.Reader)),
+				}
+			default:
+				panic(fmt.Errorf("unknown ECDSA curve type : %s", option.Curve))
+			}
+		case algED25519:
+			pk, puk := fn.Panic2(ed25519.GenerateKey(rand.Reader))
+			return &AsymmetricPrivateKey{
+				Alg:    algorithm,
+				key:    pk,
+				pubKey: puk,
+			}
+		default:
+			panic(fmt.Errorf("unknown algorithm type : %d", algorithm))
+		}
+	},
+	"parsePrivateKey": func(pem []byte) *AsymmetricPrivateKey {
+		p := new(AsymmetricPrivateKey)
+		p.Load(pem)
+		return p
+	},
+	"parsePublicKey": func(pem []byte) *AsymmetricPublicKey {
+		p := new(AsymmetricPublicKey)
+		p.Load(pem)
+		return p
+	},
+	"sign": func(key *AsymmetricPrivateKey, data []byte, hash crypto.Hash, opt *rsa.PSSOptions) []byte {
+		switch key.Alg {
+		case algRSA:
+			if opt == nil {
+				return fn.Panic1(rsa.SignPKCS1v15(rand.Reader, key.mustRSA(), hash, data))
+			} else {
+				return fn.Panic1(rsa.SignPSS(rand.Reader, key.mustRSA(), hash, data, opt))
+			}
+		case algECDSA:
+			return fn.Panic1(ecdsa.SignASN1(rand.Reader, key.mustECDSA(), data))
+		case algED25519:
+			return ed25519.Sign(key.mustED25519(), data)
+		default:
+			panic(fmt.Errorf("unsupported algorithm for sign: %d", key.Alg))
+		}
+	},
+	"verify": func(key *AsymmetricPublicKey, data, sign []byte, hash crypto.Hash, opt *rsa.PSSOptions) bool {
+		switch key.Alg {
+		case algRSA:
+			if opt == nil {
+				err := rsa.VerifyPKCS1v15(key.mustRSA(), hash, data, sign)
+				if err != nil {
+					if errors.Is(err, rsa.ErrVerification) {
+						return false
+					} else {
+						panic(err)
+					}
+				} else {
+					return true
+				}
+			} else {
+				err := rsa.VerifyPSS(key.mustRSA(), hash, data, sign, opt)
+				if err != nil {
+					if errors.Is(err, rsa.ErrVerification) {
+						return false
+					} else {
+						panic(err)
+					}
+				} else {
+					return true
+				}
+			}
+		case algECDSA:
+			return ecdsa.VerifyASN1(key.mustECDSA(), data, sign)
+		case algED25519:
+			return ed25519.Verify(key.mustED25519(), data, sign)
+		default:
+			panic(fmt.Errorf("unsupported algorithm for sign: %d", key.Alg))
+		}
+	},
+	"encrypt": func(key *AsymmetricPublicKey, data []byte, hasher hash.Hash) []byte {
+		switch key.Alg {
+		case algRSA:
+			return fn.Panic1(rsa.EncryptOAEP(hasher, rand.Reader, key.mustRSA(), data, nil))
+		case algECDSA:
+			return fn.Panic1(eciesgo.Encrypt(key.mustECISE(), data))
+		default:
+			panic(fmt.Errorf("unsupported algorithm for sign: %d", key.Alg))
+		}
+	},
+	"decrypt": func(key *AsymmetricPrivateKey, secret []byte, hasher hash.Hash) []byte {
+		switch key.Alg {
+		case algRSA:
+			return fn.Panic1(rsa.DecryptOAEP(hasher, rand.Reader, key.mustRSA(), secret, nil))
+		case algECDSA:
+			return fn.Panic1(eciesgo.Decrypt(key.mustECISE(), secret))
+		default:
+			panic(fmt.Errorf("unsupported algorithm for sign: %d", key.Alg))
+		}
+	},
 }
 
-func (s *CryptoModule) Identity() string {
+type CryptoModule struct {
+}
+
+func (s CryptoModule) Identity() string {
 	return "go/crypto"
 }
 
-func (s *CryptoModule) Exports() map[string]any {
-	if s.m == nil {
-		s.m = map[string]any{}
-		s.m["aes"] = func() CipherFunc {
-			return func(bytes []byte) cipher.Block {
-				return fn.Panic1(aes.NewCipher(bytes))
-			}
-		}
-		s.m["des"] = func() CipherFunc {
-			return func(bytes []byte) cipher.Block {
-				return fn.Panic1(des.NewCipher(bytes))
-			}
-		}
-		s.m["ecb"] = func(encrypt bool) BlockModeFunc {
-			if encrypt {
-				return func(block cipher.Block) cipher.BlockMode {
-					return NewECBEncrypter(block)
-				}
-			} else {
-				return func(block cipher.Block) cipher.BlockMode {
-					return NewECBDecrypter(block)
-				}
-			}
-
-		}
-		s.m["cbc"] = func(iv []byte, encrypt bool) BlockModeFunc {
-			if encrypt {
-				return func(block cipher.Block) cipher.BlockMode {
-					return cipher.NewCBCEncrypter(block, iv)
-				}
-			} else {
-				return func(block cipher.Block) cipher.BlockMode {
-					return cipher.NewCBCDecrypter(block, iv)
-				}
-			}
-
-		}
-		s.m["cfb"] = func(iv []byte, encrypt bool) StreamFunc {
-			if encrypt {
-				return func(block cipher.Block) cipher.Stream {
-					return cipher.NewCFBEncrypter(block, iv)
-				}
-			} else {
-				return func(block cipher.Block) cipher.Stream {
-					return cipher.NewCFBDecrypter(block, iv)
-				}
-			}
-
-		}
-		s.m["ctr"] = func(iv []byte) StreamFunc {
-			return func(block cipher.Block) cipher.Stream {
-				return cipher.NewCTR(block, iv)
-			}
-		}
-		s.m["ofb"] = func(iv []byte) StreamFunc {
-			return func(block cipher.Block) cipher.Stream {
-				return cipher.NewOFB(block, iv)
-			}
-		}
-		s.m["gcm"] = func() AEADFunc {
-			return func(block cipher.Block) cipher.AEAD {
-				return fn.Panic1(cipher.NewGCM(block))
-			}
-		}
-		s.m["pkcs7"] = func() BlockPadding {
-			return PKCS7(0)
-		}
-		s.m["pkcs5"] = func() BlockPadding {
-			return PKCS5(0)
-		}
-		s.m["cipher"] = func(cipher *Cipher) *Cipher {
-			return cipher
-		}
-
-		s.m["generateKey"] = func(algorithm Algorithm, option Option) *AsymmetricPrivateKey {
-			switch algorithm {
-			case algRSA:
-				return &AsymmetricPrivateKey{
-					Alg: algorithm,
-					key: fn.Panic1(rsa.GenerateKey(rand.Reader, option.Bits)),
-				}
-			case algECDH:
-				switch option.Curve {
-				case "P256":
-					return &AsymmetricPrivateKey{
-						Alg: algorithm,
-						key: fn.Panic1(ecdh.P256().GenerateKey(rand.Reader)),
-					}
-				case "P384":
-					return &AsymmetricPrivateKey{
-						Alg: algorithm,
-						key: fn.Panic1(ecdh.P384().GenerateKey(rand.Reader)),
-					}
-				case "P521":
-					return &AsymmetricPrivateKey{
-						Alg: algorithm,
-						key: fn.Panic1(ecdh.P521().GenerateKey(rand.Reader)),
-					}
-				case "X25519":
-					return &AsymmetricPrivateKey{
-						Alg: algorithm,
-						key: fn.Panic1(ecdh.X25519().GenerateKey(rand.Reader)),
-					}
-				default:
-					panic(fmt.Errorf("unknown ECDH curve type : %s", option.Curve))
-				}
-			case algECDSA:
-				switch option.Curve {
-				case "P256":
-					return &AsymmetricPrivateKey{
-						Alg: algorithm,
-						key: fn.Panic1(ecdsa.GenerateKey(elliptic.P256(), rand.Reader)),
-					}
-				case "P384":
-					return &AsymmetricPrivateKey{
-						Alg: algorithm,
-						key: fn.Panic1(ecdsa.GenerateKey(elliptic.P384(), rand.Reader)),
-					}
-				case "P521":
-					return &AsymmetricPrivateKey{
-						Alg: algorithm,
-						key: fn.Panic1(ecdsa.GenerateKey(elliptic.P521(), rand.Reader)),
-					}
-				case "P224":
-					return &AsymmetricPrivateKey{
-						Alg: algorithm,
-						key: fn.Panic1(ecdsa.GenerateKey(elliptic.P224(), rand.Reader)),
-					}
-				default:
-					panic(fmt.Errorf("unknown ECDSA curve type : %s", option.Curve))
-				}
-			case algED25519:
-				pk, puk := fn.Panic2(ed25519.GenerateKey(rand.Reader))
-				return &AsymmetricPrivateKey{
-					Alg:    algorithm,
-					key:    pk,
-					pubKey: puk,
-				}
-			default:
-				panic(fmt.Errorf("unknown algorithm type : %d", algorithm))
-			}
-		}
-		s.m["parsePrivateKey"] = func(pem []byte) *AsymmetricPrivateKey {
-			p := new(AsymmetricPrivateKey)
-			p.Load(pem)
-			return p
-		}
-		s.m["parsePublicKey"] = func(pem []byte) *AsymmetricPublicKey {
-			p := new(AsymmetricPublicKey)
-			p.Load(pem)
-			return p
-		}
-		s.m["sign"] = func(key *AsymmetricPrivateKey, data []byte, hash crypto.Hash, opt *rsa.PSSOptions) []byte {
-			switch key.Alg {
-			case algRSA:
-				if opt == nil {
-					return fn.Panic1(rsa.SignPKCS1v15(rand.Reader, key.mustRSA(), hash, data))
-				} else {
-					return fn.Panic1(rsa.SignPSS(rand.Reader, key.mustRSA(), hash, data, opt))
-				}
-			case algECDSA:
-				return fn.Panic1(ecdsa.SignASN1(rand.Reader, key.mustECDSA(), data))
-			case algED25519:
-				return ed25519.Sign(key.mustED25519(), data)
-			default:
-				panic(fmt.Errorf("unsupported algorithm for sign: %d", key.Alg))
-			}
-		}
-		s.m["verify"] = func(key *AsymmetricPublicKey, data, sign []byte, hash crypto.Hash, opt *rsa.PSSOptions) bool {
-			switch key.Alg {
-			case algRSA:
-				if opt == nil {
-					err := rsa.VerifyPKCS1v15(key.mustRSA(), hash, data, sign)
-					if err != nil {
-						if errors.Is(err, rsa.ErrVerification) {
-							return false
-						} else {
-							panic(err)
-						}
-					} else {
-						return true
-					}
-				} else {
-					err := rsa.VerifyPSS(key.mustRSA(), hash, data, sign, opt)
-					if err != nil {
-						if errors.Is(err, rsa.ErrVerification) {
-							return false
-						} else {
-							panic(err)
-						}
-					} else {
-						return true
-					}
-				}
-			case algECDSA:
-				return ecdsa.VerifyASN1(key.mustECDSA(), data, sign)
-			case algED25519:
-				return ed25519.Verify(key.mustED25519(), data, sign)
-			default:
-				panic(fmt.Errorf("unsupported algorithm for sign: %d", key.Alg))
-			}
-		}
-		s.m["encrypt"] = func(key *AsymmetricPublicKey, data []byte, hasher hash.Hash) []byte {
-			switch key.Alg {
-			case algRSA:
-				return fn.Panic1(rsa.EncryptOAEP(hasher, rand.Reader, key.mustRSA(), data, nil))
-			case algECDSA:
-				return fn.Panic1(eciesgo.Encrypt(key.mustECISE(), data))
-			default:
-				panic(fmt.Errorf("unsupported algorithm for sign: %d", key.Alg))
-			}
-		}
-		s.m["decrypt"] = func(key *AsymmetricPrivateKey, secret []byte, hasher hash.Hash) []byte {
-			switch key.Alg {
-			case algRSA:
-				return fn.Panic1(rsa.DecryptOAEP(hasher, rand.Reader, key.mustRSA(), secret, nil))
-			case algECDSA:
-				return fn.Panic1(eciesgo.Decrypt(key.mustECISE(), secret))
-			default:
-				panic(fmt.Errorf("unsupported algorithm for sign: %d", key.Alg))
-			}
-		}
-
-	}
-	return s.m
+func (s CryptoModule) Exports() map[string]any {
+	return cryptoMap
 }
 
-func (s *CryptoModule) TypeDefine() []byte {
+func (s CryptoModule) TypeDefine() []byte {
 	return cryptoDefine
 }
 

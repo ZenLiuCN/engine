@@ -1,4 +1,7 @@
-declare module "go/sqlx"{
+declare module "go/sqlx" {
+    // @ts-ignore
+    import {Duration} from "go/time"
+
     export class SQLX {
         constructor(driver: string, dsn: string)
 
@@ -11,6 +14,28 @@ declare module "go/sqlx"{
         begin(): TX
 
         close()
+
+        setMaxIdleConns(n: number)
+
+        setMaxOpenConns(n: number)
+
+        setConnMaxIdleTime(n: Duration)
+
+        setConnMaxLifetime(n: Duration)
+
+        stats(): DBStats
+    }
+
+    export interface DBStats {
+      readonly maxOpenConnections: number
+      readonly openConnections: number
+      readonly inUse: number
+      readonly idle: number
+      readonly waitCount: number
+      readonly waitDuration: Duration
+      readonly maxIdleClosed: number
+      readonly maxIdleTimeClosed: number
+      readonly maxLifetimeClosed: number
     }
 
     export interface TX {

@@ -13,7 +13,6 @@ import (
 	"github.com/tdewolff/minify/v2/json"
 	"github.com/tdewolff/minify/v2/svg"
 	"github.com/tdewolff/minify/v2/xml"
-	"html/template"
 	"io/fs"
 	"log"
 	"os"
@@ -25,38 +24,48 @@ import (
 var (
 	//go:embed minify.d.ts
 	minifyDefine []byte
+	minifyMap    = map[string]any{
+		"setESVersion": ESVersion,
+		"minifier":     Get,
+		"fileToFile": func(in, out, mime string) error {
+			if mime == "" {
+				return GuessFileToFile(in, out)
+			}
+			return FileToFile(in, out, mime)
+		},
+		"fileToFolder": func(in, out, mime string) error {
+			if mime == "" {
+				return GuessFileToFolder(in, out)
+			}
+			return FileToFolder(in, out, mime)
+		},
+		"folderToFolder": func(in, out, mime string) error {
+			if mime == "" {
+				return GuessFolderToFolder(in, out)
+			}
+			return FolderToFolder(in, out, mime)
+		},
+	}
 )
 
 func init() {
-	engine.RegisterModule(&Minify{})
+	engine.RegisterModule(Minify{})
 }
 
 type Minify struct {
-	m map[string]any
 }
 
-func (p *Minify) Identity() string {
+func (p Minify) Identity() string {
 	return "go/minify"
 }
 
-func (p *Minify) TypeDefine() []byte {
+func (p Minify) TypeDefine() []byte {
 	return minifyDefine
 }
 
-func (p *Minify) Exports() map[string]any {
-	if p.m == nil {
-		p.m = map[string]any{
-			"setESVersion":   ESVersion,
-			"minifier":       Get,
-			"fileToFile":     GuessFileToFile,
-			"fileToFolder":   GuessFileToFolder,
-			"folderToFolder": GuessFolderToFolder,
-			"template": func(name, code string) (*template.Template, error) {
-				return template.New(name).Parse(code)
-			},
-		}
-	}
-	return p.m
+func (p Minify) Exports() map[string]any {
+
+	return minifyMap
 }
 
 var (
