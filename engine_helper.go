@@ -82,8 +82,8 @@ func (s *Engine) ToSelfReferRawConstructor(ct func(ctor Value, call ConstructorC
 func (s *Engine) IsNullish(v Value) bool {
 	return IsNullish(v)
 }
-func (s *Engine) Compile(src string, ts bool) *Code {
-	return CompileSource(src, ts)
+func (s *Engine) Compile(src string, ts, entry bool) *Code {
+	return CompileSource(src, ts, entry)
 }
 func (s *Engine) Undefined() Value {
 	return Undefined()

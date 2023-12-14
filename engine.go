@@ -68,7 +68,7 @@ func (s *Engine) RunTs(src string) (v Value, err error) {
 			err = s.parse(r)
 		}
 	}()
-	return s.Runtime.RunString(CompileTs(src))
+	return s.Runtime.RunString(CompileTs(src, true))
 }
 
 // RunJs execute javascript code. Should manual control the execution, for a automatic timeout control see  RunJsTimeout.
@@ -79,7 +79,7 @@ func (s *Engine) RunJs(src string) (v Value, err error) {
 			err = s.parse(r)
 		}
 	}()
-	return s.Runtime.RunString(CompileJs(src))
+	return s.Runtime.RunString(CompileJs(src, true))
 }
 
 // RunCode execute compiled code. The execution time should control manually, for an automatic timeout control see  RunCodeTimeout.
@@ -106,13 +106,13 @@ func (s *Engine) RunCodeContext(code *Code, warm time.Duration, ctx cx.Context) 
 // RunJsContext run js source
 // with context. If context closed early, the value will be HaltJobs, the error will be ErrTimeout.
 func (s *Engine) RunJsContext(src string, warm time.Duration, ctx cx.Context) (v Value, err error) {
-	return s.awaiting(CompileSource(src, false).Program, warm, ctx)
+	return s.awaiting(CompileSource(src, false, true).Program, warm, ctx)
 }
 
 // RunTsContext run Ts source
 // with context. If context closed early, the value will be HaltJobs, the error will be ErrTimeout.
 func (s *Engine) RunTsContext(src string, warm time.Duration, ctx cx.Context) (v Value, err error) {
-	return s.awaiting(CompileSource(src, true).Program, warm, ctx)
+	return s.awaiting(CompileSource(src, true, true).Program, warm, ctx)
 }
 
 //endregion

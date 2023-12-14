@@ -2,13 +2,13 @@ declare module "go/compiler" {
     //@ts-ignore
     import {Code} from "go/engine"
 
-    export function compileJs(src: string): string
+    export function compileJs(src: string,entry:boolean): string
 
-    export function compileJsCode(src: string): Code
+    export function compileJsCode(src: string,entry:boolean): Code
 
-    export function compileTs(src: string): string
+    export function compileTs(src: string,entry:boolean): string
 
-    export function compileTsCode(src: string): Code
+    export function compileTsCode(src: string,entry:boolean): Code
 }
 
 

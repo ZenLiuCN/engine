@@ -210,3 +210,28 @@ return 1
 	_ = os.Remove("simple.js")
 
 }
+
+func TestSimpleRequire2(t *testing.T) {
+	fn.Panic(os.WriteFile("simple.js", []byte(`
+export function some() {
+return 1
+}`), os.ModePerm))
+	e := Get()
+	defer e.Free()
+	println(IsNullish(fn.Panic1(e.RunTs(`
+	import {some} from './simple.js'
+ 	export const a=1
+	console.log(typeof some)
+	console.log(some())
+	console.log(a)
+`))))
+	println(IsNullish(fn.Panic1(e.RunTs(`
+	import {some} from './simple.js'
+ 	export const b=1
+	console.log(typeof some)
+	console.log(some())
+	console.log(b)
+`))))
+	_ = os.Remove("simple.js")
+
+}

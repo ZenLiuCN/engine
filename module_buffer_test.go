@@ -146,7 +146,7 @@ import {Bytes} from 'go/buffer'
 const bytes=new Bytes("123456")
 bytes[0]=33
 bytes.toText()
-`, false)
+`, false, true)
 	for i := 0; i < b.N; i++ {
 		txt := fn.Panic1(vm.RunCode(code)).Export().(string)
 		if txt != "!23456" {

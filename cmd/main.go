@@ -43,7 +43,7 @@ func main() {
 			} else {
 				vm.Set("args", []string{})
 			}
-			v := fn.Panic1(vm.RunCodeContext(engine.CompileFile(args[0]), time.Millisecond*100, ctx))
+			v := fn.Panic1(vm.RunCodeContext(engine.CompileFile(args[0], true), time.Millisecond*100, ctx))
 			if !engine.IsNullish(v) {
 				println(v.String())
 			}
@@ -57,7 +57,7 @@ func main() {
 		wg.Add(1)
 		cc := fn.WithSignal(func(ctx context.Context) {
 			defer wg.Done()
-			v := fn.Panic1(vm.RunCodeContext(engine.CompileSource(fn.SliceJoinRune(args, '\n', fn.Identity[string]), typed), time.Millisecond*100, ctx))
+			v := fn.Panic1(vm.RunCodeContext(engine.CompileSource(fn.SliceJoinRune(args, '\n', fn.Identity[string]), typed, true), time.Millisecond*100, ctx))
 			if !engine.IsNullish(v) {
 				println(v.String())
 			}

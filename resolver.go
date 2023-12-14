@@ -317,7 +317,7 @@ func compileTs(data *Source) (m JsModule, err error) {
 			}
 		}
 	}()
-	p := CompileSource(string(data.Data), true)
+	p := CompileSource(string(data.Data), true, false)
 	return &cjs{
 		prg: p.Program,
 		url: data.URL,
@@ -336,7 +336,7 @@ func compileJs(data *Source) (m JsModule, err error) {
 			}
 		}
 	}()
-	p := CompileSource(string(data.Data), false)
+	p := CompileSource(string(data.Data), false, false)
 	return &cjs{
 		prg: p.Program,
 		url: data.URL,

@@ -1,6 +1,7 @@
 package engine
 
 import (
+	"bytes"
 	_ "embed"
 	"errors"
 	"fmt"
@@ -15,11 +16,11 @@ var (
 	compilerMap    = map[string]any{
 		"compileJs": CompileJs,
 		"compileTs": CompileTs,
-		"compileTsCode": func(src string) *Code {
-			return CompileSource(src, true)
+		"compileTsCode": func(src string, entry bool) *Code {
+			return CompileSource(src, true, entry)
 		},
-		"compileJsCode": func(src string) *Code {
-			return CompileSource(src, false)
+		"compileJsCode": func(src string, entry bool) *Code {
+			return CompileSource(src, false, entry)
 		},
 	}
 )
@@ -40,7 +41,7 @@ func (s Compiler) Exports() map[string]any {
 	return compilerMap
 }
 
-func CompileJs(js string) string {
+func CompileJs(js string, entry bool) string {
 	format := api.FormatDefault
 	if strings.Contains(js, "import ") {
 		format = api.FormatCommonJS
@@ -49,6 +50,7 @@ func CompileJs(js string) string {
 	} else if strings.Contains(js, "require ") {
 		format = api.FormatCommonJS
 	}
+
 	res := api.Transform(js, api.TransformOptions{
 		MinifyWhitespace:  true,
 		MinifyIdentifiers: false,
@@ -68,9 +70,16 @@ func CompileJs(js string) string {
 			return fmt.Sprintf(`%s: %s`, m.Location.LineText, m.Text)
 		})))
 	}
+	if entry && format == api.FormatCommonJS {
+		idx := bytes.Index(res.Code, []byte("module.exports=__toCommonJS(stdin_exports);"))
+		if idx >= 0 {
+			return string(res.Code[idx+43:])
+		}
+		return string(res.Code)
+	}
 	return string(res.Code)
 }
-func CompileTs(ts string) string {
+func CompileTs(ts string, entry bool) string {
 	format := api.FormatDefault
 	if strings.Contains(ts, "import ") {
 		format = api.FormatCommonJS
@@ -97,6 +106,13 @@ func CompileTs(ts string) string {
 		panic(errors.New("Compile TS error\n" + fn.SliceJoinRune(res.Errors, '\n', func(m api.Message) string {
 			return fmt.Sprintf(`%s: %s`, m.Location.LineText, m.Text)
 		})))
+	}
+	if entry && format == api.FormatCommonJS {
+		idx := bytes.Index(res.Code, []byte("module.exports=__toCommonJS(stdin_exports);"))
+		if idx >= 0 {
+			return string(res.Code[idx+43:])
+		}
+		return string(res.Code)
 	}
 	return string(res.Code)
 }
