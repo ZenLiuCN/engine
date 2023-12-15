@@ -70,7 +70,12 @@ func instanceModule(engine *Engine, module Module) (*goja.Object, error) {
 func DumpDefines(path string) {
 	_ = os.WriteFile(filepath.Join(path, "globals.d.ts"), ModDefines(), os.ModePerm)
 	for name, bytes := range ModuleDefines() {
-		_ = os.WriteFile(filepath.Join(path, name+".d.ts"), bytes, os.ModePerm)
+		if name == "go" {
+			name = "go/index"
+		}
+		p := filepath.Join(path, name+".d.ts")
+		_ = os.MkdirAll(filepath.Dir(p), os.ModePerm)
+		_ = os.WriteFile(p, bytes, os.ModePerm)
 	}
 }
 
