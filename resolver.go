@@ -231,15 +231,17 @@ func (c *cjsModule) Execute() error {
 		return fmt.Errorf("error prepare import commonJS, couldn't set module: %w",
 			err)
 	}
-	f, err := c.Engine.RunProgram(c.mod.prg)
+	_, err = c.Engine.RunProgram(c.mod.prg)
 	if err != nil {
 		return err
 	}
-	if call, ok := goja.AssertFunction(f); ok {
+	//!! CJS convert by export function should not process final value
+
+	/*	if call, ok := goja.AssertFunction(f); ok {
 		if _, err = call(exports, c.obj, exports); err != nil {
 			return err
 		}
-	}
+	}*/
 	err = c.Engine.Runtime.Set("module", nil)
 	if err != nil {
 		return fmt.Errorf("error after import commonJS, couldn't remove module: %w",
