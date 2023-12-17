@@ -2,6 +2,7 @@ package sqlx
 
 import (
 	"context"
+	"database/sql"
 	_ "embed"
 	"github.com/ZenLiuCN/engine"
 	_ "github.com/ZenLiuCN/engine/sqlx/mysql"
@@ -56,7 +57,12 @@ func (s *SQLx) Close() {
 }
 
 func (s *SQLx) Query(query string, args map[string]any) goja.Value {
-	r := fn.Panic1(s.DB.NamedQuery(query, args))
+	var r *sqlx.Rows
+	if args != nil && len(args) > 0 {
+		r = fn.Panic1(s.DB.NamedQuery(query, args))
+	} else {
+		r = fn.Panic1(s.DB.Queryx(query))
+	}
 	defer r.Close()
 	var g []any
 	for r.Next() {
@@ -67,7 +73,13 @@ func (s *SQLx) Query(query string, args map[string]any) goja.Value {
 	return s.Engine.NewArray(g...)
 }
 func (s *SQLx) Exec(query string, args map[string]any) map[string]int64 {
-	r := fn.Panic1(s.DB.NamedExec(query, args))
+
+	var r sql.Result
+	if args != nil && len(args) > 0 {
+		r = fn.Panic1(s.DB.NamedExec(query, args))
+	} else {
+		r = fn.Panic1(s.DB.Exec(query))
+	}
 	v, err := r.RowsAffected()
 	if err != nil {
 		v = 0
