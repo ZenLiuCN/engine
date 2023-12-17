@@ -5,6 +5,7 @@ go 1.21
 require (
 	github.com/Joker/jade v1.1.3
 	github.com/ZenLiuCN/fn v0.1.17
+	github.com/chromedp/cdproto v0.0.0-20230802225258-3cf4e6d46a89
 	github.com/chromedp/chromedp v0.9.2
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.2.0
 	github.com/dop251/goja v0.0.0-20231027120936-b396bb4c349d
@@ -19,9 +20,9 @@ require (
 	golang.org/x/text v0.14.0
 	modernc.org/sqlite v1.27.0
 )
-
+require 	github.com/marcboeker/go-duckdb v1.5.4
+replace 	github.com/marcboeker/go-duckdb v1.5.4 => ./sqlx/duckdb/go-duckdb
 require (
-	github.com/chromedp/cdproto v0.0.0-20230802225258-3cf4e6d46a89 // indirect
 	github.com/chromedp/sysutil v1.0.0 // indirect
 	github.com/dlclark/regexp2 v1.10.0 // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
@@ -38,6 +39,7 @@ require (
 	github.com/kballard/go-shellquote v0.0.0-20180428030007-95032a82bc51 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
+	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826 // indirect
 	github.com/remyoudompheng/bigfft v0.0.0-20230129092748-24d4a6f8daec // indirect
 	github.com/richardlehane/mscfb v1.0.4 // indirect
