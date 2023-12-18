@@ -115,8 +115,13 @@ func dumpColumns(v goja.Value, col []string) string {
 		f := t[0]
 		switch fv := f.(type) {
 		case map[string]any:
+			var cols []string
 			if !haveCol {
 				for s := range fv {
+					cols = append(cols, s)
+				}
+				slices.Sort(cols)
+				for _, s := range cols {
 					m.WriteString("\t")
 					m.WriteString(s)
 				}
@@ -124,11 +129,16 @@ func dumpColumns(v goja.Value, col []string) string {
 			}
 			for i, a := range t {
 				m.WriteString(fmt.Sprintf("%d", i))
-				for s, a2 := range a.(map[string]any) {
-					if haveCol && slices.Index(col, s) >= 0 {
-						m.WriteString(fmt.Sprintf("\t%s", dumpOne(a2)))
-					} else if !haveCol {
-						m.WriteString(fmt.Sprintf("\t%s", dumpOne(a2)))
+				mp := a.(map[string]any)
+				if haveCol {
+					for s, a2 := range mp {
+						if haveCol && slices.Index(col, s) >= 0 {
+							m.WriteString(fmt.Sprintf("\t%s", dumpOne(a2)))
+						}
+					}
+				} else {
+					for _, s := range cols {
+						m.WriteString(fmt.Sprintf("\t%s", dumpOne(mp[s])))
 					}
 				}
 				m.WriteRune('\n')
@@ -151,8 +161,13 @@ func dumpColumns(v goja.Value, col []string) string {
 		}
 		switch f := x.(type) {
 		case map[string]any:
+			var cols []string
 			if !haveCol {
 				for s := range f {
+					cols = append(cols, s)
+				}
+				slices.Sort(cols)
+				for _, s := range cols {
 					m.WriteString("\t")
 					m.WriteString(s)
 				}
@@ -160,11 +175,16 @@ func dumpColumns(v goja.Value, col []string) string {
 			}
 			for i, a := range t {
 				m.WriteString(fmt.Sprintf("%s", i))
-				for s, a2 := range a.(map[string]any) {
-					if haveCol && slices.Index(col, s) >= 0 {
-						m.WriteString(fmt.Sprintf("\t%s", dumpOne(a2)))
-					} else if !haveCol {
-						m.WriteString(fmt.Sprintf("\t%s", dumpOne(a2)))
+				mp := a.(map[string]any)
+				if haveCol {
+					for s, a2 := range mp {
+						if haveCol && slices.Index(col, s) >= 0 {
+							m.WriteString(fmt.Sprintf("\t%s", dumpOne(a2)))
+						}
+					}
+				} else {
+					for _, s := range cols {
+						m.WriteString(fmt.Sprintf("\t%s", dumpOne(mp[s])))
 					}
 				}
 				m.WriteRune('\n')

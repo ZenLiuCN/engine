@@ -42,18 +42,30 @@ declare module "go" {
         Value?: V
         Error?: GoError
     }
-    export function toRaw(v:any):any
 
     /**
-     * extract bigint from object
+     * convert int64 inside object to string, fail if any property is not an int64
      * @param v object
-     * @param key the key of big integer
+     * @param keys the keys of big integer
      */
-    export function bigint(v:Record<string, any>,key:string):string
+    export function intToString(v:Record<string, any>,keys:string[]):Record<string, any>
+
     /**
-     * extract bigint from object
-     * @param v object array
-     * @param key the key of big integer
+     * convert string inside object to int64, fail if any property is not an int64
+     * @param v object
+     * @param keys the keys of big integer
      */
-    export function bigintOf(v:Record<string, any>[],key:string):string[]
+    export function intFromString(v:Record<string, any>,keys:string[]):Record<string, any>
+    /**
+     * convert bigint in objects to string, fail if any property is not an int64
+     * @param v object array
+     * @param keys the keys of big integer properties
+     */
+    export function intToStringArray(v:Record<string, any>[],keys:string[]):Record<string, any>[]
+    /**
+     * convert bigint in objects to string, fail if any property is not an int64
+     * @param v object array
+     * @param keys the keys of big integer properties
+     */
+    export function intFromStringArray(v:Record<string, any>[],keys:string[]):Record<string, any>[]
 }

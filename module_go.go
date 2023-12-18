@@ -3,6 +3,7 @@ package engine
 import (
 	_ "embed"
 	"errors"
+	"github.com/ZenLiuCN/fn"
 	"github.com/dop251/goja"
 	"strconv"
 	"sync/atomic"
@@ -51,28 +52,42 @@ func (c GoModule) Exports() map[string]any {
 	return goMap
 }
 
-type BigInt struct {
-	v int64
-}
-
 var (
 	goMap = map[string]any{
-		"toRaw": func(value goja.Value) any {
-			return value.Export()
+		"intToString": func(value goja.Value, v []string) map[string]any {
+			m := value.Export().(map[string]any)
+			for _, s := range v {
+				m[s] = strconv.FormatInt(m[s].(int64), 10)
+			}
+			return m
 		},
-		"bigint": func(value goja.Value, v string) string {
-			return strconv.FormatInt(value.Export().(map[string]any)[v].(int64), 10)
+		"intFromString": func(value goja.Value, v []string) map[string]any {
+			m := value.Export().(map[string]any)
+			for _, s := range v {
+				m[s] = fn.Panic1(strconv.ParseInt(m[s].(string), 0, 64))
+			}
+			return m
 		},
-		"bigintOf": func(value goja.Value, v string) (r []string) {
-			for _, a := range value.Export().([]any) {
-				switch val := a.(map[string]any)[v].(type) {
-				case int64:
-					r = append(r, strconv.FormatInt(val, 10))
-				default:
-					panic("not a bigint")
+		"intToStringArray": func(value goja.Value, v []string) []any {
+			vx := value.Export().([]any)
+			for _, a := range vx {
+				m := a.(map[string]any)
+				for _, s := range v {
+					m[s] = strconv.FormatInt(m[s].(int64), 10)
+
 				}
 			}
-			return
+			return vx
+		},
+		"intFromStringArray": func(value goja.Value, v []string) []any {
+			vx := value.Export().([]any)
+			for _, a := range vx {
+				m := a.(map[string]any)
+				for _, s := range v {
+					m[s] = fn.Panic1(strconv.ParseInt(m[s].(string), 0, 64))
+				}
+			}
+			return vx
 		},
 	}
 )
