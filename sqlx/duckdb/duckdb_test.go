@@ -3,6 +3,7 @@ package duckdb
 import (
 	"github.com/ZenLiuCN/engine"
 	_ "github.com/ZenLiuCN/engine/sqlx"
+
 	"github.com/ZenLiuCN/fn"
 	"testing"
 )
@@ -27,19 +28,20 @@ db.close()
 `))
 }
 func TestPgFWD(t *testing.T) {
-	//runtime.LockOSThread()
+	CheckDll()
 	vm := engine.Get()
 	defer vm.Free()
 	fn.Panic1(vm.RunJs(
 		//language=javascript
 		`
 import {SQLX} from "go/sqlx"
-const db=new SQLX("duckdb","?access_mode=READ_WRITE&allow_unsigned_extensions=true")
+const db=new SQLX("duckdb","?allow_unsigned_extensions=true")
 console.log(db)
 console.log(db.query("SELECT current_setting('access_mode')"))
-console.log(db.exec("INSTALL postgres"))  //FROM 'http://extensions.duckdb.org/v0.9.2/windows_amd64/postgres_scanner.duckdb_extension.gz'
+console.log(db.exec("SET extension_directory= './extensions'"))  
+console.log(db.exec("INSTALL postgres"))  
 console.log("install done")
-console.log(db.exec("ATTACH 'dbname=profits user=postgres password=12345678' AS pg (TYPE postgres)"))
+console.log(db.exec("ATTACH 'dbname=profit user=postgres password=12345678' AS pg (TYPE postgres)"))
 console.log("attach done")
 console.log(db.exec("USE pg"))
 console.log("use done")
