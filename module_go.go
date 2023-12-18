@@ -4,6 +4,7 @@ import (
 	_ "embed"
 	"errors"
 	"github.com/dop251/goja"
+	"strconv"
 	"sync/atomic"
 )
 
@@ -47,8 +48,34 @@ func (c GoModule) TypeDefine() []byte {
 }
 
 func (c GoModule) Exports() map[string]any {
-	return EmptyMap
+	return goMap
 }
+
+type BigInt struct {
+	v int64
+}
+
+var (
+	goMap = map[string]any{
+		"toRaw": func(value goja.Value) any {
+			return value.Export()
+		},
+		"bigint": func(value goja.Value, v string) string {
+			return strconv.FormatInt(value.Export().(map[string]any)[v].(int64), 10)
+		},
+		"bigintOf": func(value goja.Value, v string) (r []string) {
+			for _, a := range value.Export().([]any) {
+				switch val := a.(map[string]any)[v].(type) {
+				case int64:
+					r = append(r, strconv.FormatInt(val, 10))
+				default:
+					panic("not a bigint")
+				}
+			}
+			return
+		},
+	}
+)
 
 type (
 	Chan[T any] interface {
