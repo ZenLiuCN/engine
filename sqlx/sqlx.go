@@ -72,8 +72,7 @@ func (s *SQLx) Query(query string, args map[string]any) goja.Value {
 	}
 	return s.Engine.NewArray(g...)
 }
-func (s *SQLx) Exec(query string, args map[string]any) map[string]int64 {
-
+func (s *SQLx) Exec(query string, args map[string]any) Result {
 	var r sql.Result
 	if args != nil && len(args) > 0 {
 		r = fn.Panic1(s.DB.NamedExec(query, args))
@@ -88,9 +87,31 @@ func (s *SQLx) Exec(query string, args map[string]any) map[string]int64 {
 	if err != nil {
 		i = 0
 	}
-	return map[string]int64{
-		"lastInsertId": i,
-		"rowsAffected": v,
+	return Result{
+		LastInsertId: i,
+		RowsAffected: v,
+	}
+}
+
+type Result struct {
+	LastInsertId int64
+	RowsAffected int64
+}
+
+func (s *SQLx) Batch(query string, args []map[string]any) Result {
+	var r sql.Result
+	r = fn.Panic1(s.DB.NamedExec(query, args))
+	v, err := r.RowsAffected()
+	if err != nil {
+		v = 0
+	}
+	i, err := r.LastInsertId()
+	if err != nil {
+		i = 0
+	}
+	return Result{
+		LastInsertId: i,
+		RowsAffected: v,
 	}
 }
 func (s *SQLx) Prepare(query string) *Stmt {

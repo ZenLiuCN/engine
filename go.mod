@@ -20,8 +20,11 @@ require (
 	golang.org/x/text v0.14.0
 	modernc.org/sqlite v1.27.0
 )
-require 	github.com/marcboeker/go-duckdb v1.5.4
-replace 	github.com/marcboeker/go-duckdb v1.5.4 => ./sqlx/duckdb/go-duckdb
+
+require github.com/marcboeker/go-duckdb v1.5.4
+
+replace github.com/marcboeker/go-duckdb v1.5.4 => ./sqlx/duckdb/go-duckdb
+
 require (
 	github.com/chromedp/sysutil v1.0.0 // indirect
 	github.com/dlclark/regexp2 v1.10.0 // indirect

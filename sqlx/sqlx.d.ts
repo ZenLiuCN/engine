@@ -9,6 +9,13 @@ declare module "go/sqlx" {
 
         exec(qry: string, args?: Record<string, any>): Result
 
+        /**
+         * do batch insert
+         * @param qry a insert query with columns (must with columns) and value (only one line needed)
+         * @param args array of object of args
+         */
+        batch(qry: string, args: Record<string, any>[]): Result
+
         prepare(qry: string): Stmt
 
         begin(): TX
