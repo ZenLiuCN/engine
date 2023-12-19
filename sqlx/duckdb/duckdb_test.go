@@ -28,7 +28,7 @@ db.close()
 `))
 }
 func TestPgFWD(t *testing.T) {
-	CheckDll()
+	//CheckDll()
 	vm := engine.Get()
 	defer vm.Free()
 	fn.Panic1(vm.RunJs(
