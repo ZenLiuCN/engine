@@ -27,30 +27,8 @@ console.log(db.query('	SELECT name, age, height, awesome, bday	FROM users	WHERE 
 db.close()
 `))
 }
-func TestPgFWD(t *testing.T) {
-	//CheckDll()
-	vm := engine.Get()
-	defer vm.Free()
-	fn.Panic1(vm.RunJs(
-		//language=javascript
-		`
-import {SQLX} from "go/sqlx"
-const db=new SQLX("duckdb","?allow_unsigned_extensions=true")
-console.log(db)
-console.log(db.query("SELECT current_setting('access_mode')"))
-console.log(db.exec("SET extension_directory= './extensions'"))  
-console.log(db.exec("INSTALL postgres"))  
-console.log("install done")
-console.log(db.exec("ATTACH 'dbname=profit user=postgres password=12345678' AS pg (TYPE postgres)"))
-console.log("attach done")
-console.log(db.exec("USE pg"))
-console.log("use done")
-console.log(db.query("select * from pg.fact_profit limit 1"))
-db.close()
-`))
-}
+
 func TestJson(t *testing.T) {
-	CheckDll()
 	vm := engine.Get()
 	defer vm.Free()
 	fn.Panic1(vm.RunJs(
@@ -64,7 +42,6 @@ db.close()
 `))
 }
 func TestExcel(t *testing.T) {
-	CheckDll()
 	vm := engine.Get()
 	defer vm.Free()
 	fn.Panic1(vm.RunJs(
@@ -78,7 +55,6 @@ db.close()
 `))
 }
 func TestFTS(t *testing.T) {
-	CheckDll()
 	vm := engine.Get()
 	defer vm.Free()
 	fn.Panic1(vm.RunJs(
@@ -96,7 +72,6 @@ db.close()
 `))
 }
 func TestINET(t *testing.T) {
-	CheckDll()
 	vm := engine.Get()
 	defer vm.Free()
 	fn.Panic1(vm.RunJs(
@@ -114,7 +89,6 @@ db.close()
 `))
 }
 func TestICU(t *testing.T) {
-	CheckDll()
 	vm := engine.Get()
 	defer vm.Free()
 	fn.Panic1(vm.RunJs(
@@ -131,3 +105,47 @@ console.table(db.query("SELECT name,abbrev from pg_timezone_names() ORDER BY nam
 db.close()
 `))
 }
+func TestPgFWD(t *testing.T) {
+	//CheckDll()
+	vm := engine.Get()
+	defer vm.Free()
+	fn.Panic1(vm.RunJs(
+		//language=javascript
+		`
+import {SQLX} from "go/sqlx"
+const db=new SQLX("duckdb","?allow_unsigned_extensions=true")
+console.log(db)
+console.log(db.query("SELECT current_setting('access_mode')"))
+console.log(db.exec("SET extension_directory= './extensions'"))  
+console.log(db.exec("INSTALL postgres"))  
+console.log("install done")
+console.log(db.exec("ATTACH 'dbname=profits user=medtree password=medtree2345678 host=192.168.8.94 port=65433' AS pg (TYPE postgres)"))
+console.log("attach done")
+console.log(db.exec("USE pg"))
+console.log("use done")
+console.log(db.query("select * from pg.fact_profit limit 1"))
+db.close()
+`))
+}
+
+/*func TestMySQLFWD(t *testing.T) {
+	vm := engine.Get()
+	defer vm.Free()
+	fn.Panic1(vm.RunJs(
+		//language=javascript
+		`
+import {SQLX} from "go/sqlx"
+const db=new SQLX("duckdb","?allow_unsigned_extensions=true")
+console.log(db)
+console.log(db.query("SELECT current_setting('access_mode')"))
+console.log(db.exec("SET extension_directory= './extensions'"))
+console.log(db.exec("INSTALL mysql"))
+console.log("install done")
+console.log(db.exec("ATTACH 'dbname=cias_prd_2 user=root host=192.168.8.94 port=3336 password=12345678' AS ms (TYPE mysql)"))
+console.log("attach done")
+console.log(db.exec("USE ms"))
+console.log("use done")
+console.log(db.query("select * from ms.disease limit 1"))
+db.close()
+`))
+}*/

@@ -10,6 +10,7 @@ import (
 	_ "github.com/ZenLiuCN/engine/minify"
 	_ "github.com/ZenLiuCN/engine/pug"
 	_ "github.com/ZenLiuCN/engine/sqlx"
+	_ "github.com/ZenLiuCN/engine/sqlx/duckdb"
 	"github.com/ZenLiuCN/fn"
 	"os"
 	"sync"
