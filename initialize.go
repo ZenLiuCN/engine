@@ -20,5 +20,6 @@ func init() {
 	RegisterModule(CodecModule{})
 	RegisterModule(Compiler{})
 	RegisterModule(TimeModule{})
+	RegisterModule(HttpModule{})
 
 }
