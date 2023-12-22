@@ -5,11 +5,12 @@ import (
 	"database/sql"
 	_ "embed"
 	"github.com/ZenLiuCN/engine"
-	_ "github.com/ZenLiuCN/engine/sqlx/mysql"
 	"github.com/ZenLiuCN/fn"
 	"github.com/dop251/goja"
+	_ "github.com/go-sql-driver/mysql"
 	_ "github.com/jackc/pgx/v5/stdlib"
 	"github.com/jmoiron/sqlx"
+	"math/big"
 	_ "modernc.org/sqlite"
 )
 
@@ -40,8 +41,16 @@ func (S SQLXModule) Exports() map[string]any {
 func (S SQLXModule) ExportsWithEngine(engine *engine.Engine) map[string]any {
 	return map[string]any{
 		"SQLX": engine.ToConstructor(func(v []goja.Value) any {
+			bigint := false
+			if len(v) == 3 {
+				opt := v[2].Export().(map[string]any)
+				x := opt["bigint"]
+				if x != nil && x.(bool) {
+					bigint = true
+				}
+			}
 			db := fn.Panic1(sqlx.Connect(v[0].ToString().String(), v[1].ToString().String()))
-			return &SQLx{DB: db, Engine: engine}
+			return &SQLx{DB: db, Engine: engine, BigInt: bigint}
 		}),
 	}
 }
@@ -49,6 +58,7 @@ func (S SQLXModule) ExportsWithEngine(engine *engine.Engine) map[string]any {
 type SQLx struct {
 	*sqlx.DB
 	*engine.Engine
+	BigInt bool
 }
 
 func (s *SQLx) Close() {
@@ -59,6 +69,13 @@ func (s *SQLx) Close() {
 func (s *SQLx) Query(query string, args map[string]any) goja.Value {
 	var r *sqlx.Rows
 	if args != nil && len(args) > 0 {
+		if s.BigInt {
+			for k, v := range args {
+				if b, ok := v.(*big.Int); ok {
+					args[k] = b.Int64()
+				}
+			}
+		}
 		r = fn.Panic1(s.DB.NamedQuery(query, args))
 	} else {
 		r = fn.Panic1(s.DB.Queryx(query))
@@ -68,6 +85,13 @@ func (s *SQLx) Query(query string, args map[string]any) goja.Value {
 	for r.Next() {
 		v := make(map[string]any)
 		fn.Panic(r.MapScan(v))
+		if s.BigInt {
+			for k, val := range v {
+				if t, ok := val.(int64); ok {
+					v[k] = big.NewInt(t)
+				}
+			}
+		}
 		g = append(g, v)
 	}
 	return s.Engine.NewArray(g...)
@@ -75,6 +99,13 @@ func (s *SQLx) Query(query string, args map[string]any) goja.Value {
 func (s *SQLx) Exec(query string, args map[string]any) Result {
 	var r sql.Result
 	if args != nil && len(args) > 0 {
+		if s.BigInt {
+			for k, v := range args {
+				if b, ok := v.(*big.Int); ok {
+					args[k] = b.Int64()
+				}
+			}
+		}
 		r = fn.Panic1(s.DB.NamedExec(query, args))
 	} else {
 		r = fn.Panic1(s.DB.Exec(query))
@@ -100,6 +131,15 @@ type Result struct {
 
 func (s *SQLx) Batch(query string, args []map[string]any) Result {
 	var r sql.Result
+	if s.BigInt {
+		for i, arg := range args {
+			for k, v := range arg {
+				if b, ok := v.(*big.Int); ok {
+					args[i][k] = b.Int64()
+				}
+			}
+		}
+	}
 	r = fn.Panic1(s.DB.NamedExec(query, args))
 	v, err := r.RowsAffected()
 	if err != nil {
@@ -116,7 +156,7 @@ func (s *SQLx) Batch(query string, args []map[string]any) Result {
 }
 func (s *SQLx) Prepare(query string) *Stmt {
 	r := fn.Panic1(s.DB.PrepareNamed(query))
-	i := &Stmt{r, s.Engine}
+	i := &Stmt{r, s.Engine, s.BigInt}
 	return i
 }
 func (s *SQLx) Begin() *TX {
@@ -128,6 +168,7 @@ func (s *SQLx) Begin() *TX {
 type TX struct {
 	*sqlx.Tx
 	*engine.Engine
+	BigInt bool
 }
 
 func (s *TX) Commit() {
@@ -138,26 +179,47 @@ func (s *TX) Rollback() {
 }
 func (s *TX) Prepare(qry string) *Stmt {
 	r := fn.Panic1(s.Tx.PrepareNamed(qry))
-	i := &Stmt{r, s.Engine}
+	i := &Stmt{r, s.Engine, s.BigInt}
 	return i
 }
 func (s *TX) Stmt(stmt *Stmt) *Stmt {
 	r := s.Tx.NamedStmt(stmt.NamedStmt)
-	i := &Stmt{r, s.Engine}
+	i := &Stmt{r, s.Engine, s.BigInt}
 	return i
 }
 func (s *TX) Query(query string, args map[string]any) goja.Value {
+	if s.BigInt {
+		for k, v := range args {
+			if b, ok := v.(*big.Int); ok {
+				args[k] = b.Int64()
+			}
+		}
+	}
 	r := fn.Panic1(s.NamedQuery(query, args))
 	defer r.Close()
 	var g []any
 	for r.Next() {
 		v := make(map[string]any)
 		fn.Panic(r.MapScan(v))
+		if s.BigInt {
+			for k, val := range v {
+				if t, ok := val.(int64); ok {
+					v[k] = big.NewInt(t)
+				}
+			}
+		}
 		g = append(g, v)
 	}
 	return s.Engine.NewArray(g...)
 }
-func (s *TX) Exec(query string, args map[string]any) map[string]int64 {
+func (s *TX) Exec(query string, args map[string]any) Result {
+	if s.BigInt {
+		for k, v := range args {
+			if b, ok := v.(*big.Int); ok {
+				args[k] = b.Int64()
+			}
+		}
+	}
 	r := fn.Panic1(s.NamedExec(query, args))
 	v, err := r.RowsAffected()
 	if err != nil {
@@ -167,29 +229,51 @@ func (s *TX) Exec(query string, args map[string]any) map[string]int64 {
 	if err != nil {
 		i = 0
 	}
-	return map[string]int64{
-		"lastInsertId": i,
-		"rowsAffected": v,
+	return Result{
+		LastInsertId: i,
+		RowsAffected: v,
 	}
 }
 
 type Stmt struct {
 	*sqlx.NamedStmt
 	*engine.Engine
+	BigInt bool
 }
 
 func (s *Stmt) Query(args map[string]any) goja.Value {
+	if s.BigInt {
+		for k, v := range args {
+			if b, ok := v.(*big.Int); ok {
+				args[k] = b.Int64()
+			}
+		}
+	}
 	r := fn.Panic1(s.NamedStmt.Queryx(args))
 	defer r.Close()
 	var g []any
 	for r.Next() {
 		v := make(map[string]any)
 		fn.Panic(r.MapScan(v))
+		if s.BigInt {
+			for k, val := range v {
+				if t, ok := val.(int64); ok {
+					v[k] = big.NewInt(t)
+				}
+			}
+		}
 		g = append(g, v)
 	}
 	return s.Engine.NewArray(g...)
 }
-func (s *Stmt) Exec(args map[string]any) map[string]int64 {
+func (s *Stmt) Exec(args map[string]any) Result {
+	if s.BigInt {
+		for k, v := range args {
+			if b, ok := v.(*big.Int); ok {
+				args[k] = b.Int64()
+			}
+		}
+	}
 	r := s.NamedStmt.MustExec(args)
 	v, err := r.RowsAffected()
 	if err != nil {
@@ -199,9 +283,9 @@ func (s *Stmt) Exec(args map[string]any) map[string]int64 {
 	if err != nil {
 		i = 0
 	}
-	return map[string]int64{
-		"lastInsertId": i,
-		"rowsAffected": v,
+	return Result{
+		LastInsertId: i,
+		RowsAffected: v,
 	}
 }
 func (s *Stmt) Close() {

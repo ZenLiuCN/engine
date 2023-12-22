@@ -184,14 +184,14 @@ func TestAtomicError(t *testing.T) {
 		if v == nil {
 			t.Fatal("Value is still nil")
 		}
-		t.Fatal("Err did not match")
+		t.Fatal("Error did not match")
 	}
 	ae.Set(ErrPktSync)
 	if ae.Value() == ErrMalformPkt {
-		t.Fatal("Err still matches old error")
+		t.Fatal("Error still matches old error")
 	}
 	if v := ae.Value(); v != ErrPktSync {
-		t.Fatal("Err did not match")
+		t.Fatal("Error did not match")
 	}
 }
 

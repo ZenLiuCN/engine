@@ -21,5 +21,6 @@ func init() {
 	RegisterModule(Compiler{})
 	RegisterModule(TimeModule{})
 	RegisterModule(HttpModule{})
+	RegisterModule(BigModule{})
 
 }

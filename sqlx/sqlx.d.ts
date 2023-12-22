@@ -3,7 +3,17 @@ declare module "go/sqlx" {
     import {Duration} from "go/time"
 
     export class SQLX {
-        constructor(driver: string, dsn: string)
+        /**
+         * whether support auto convert int64 to big.Int
+         */
+        readonly BigInt:boolean
+        /**
+         *
+         * @param driver the driver name
+         * @param dsn the dsn for driver
+         * @param conf with bigint=true  convert 64bit integer to big.Int
+         */
+        constructor(driver: string, dsn: string,conf?:{bigint:boolean})
 
         query(qry: string, args?: Record<string, any>): Array<any>
 
@@ -46,6 +56,7 @@ declare module "go/sqlx" {
     }
 
     export interface TX {
+        readonly BigInt:boolean
         commit()
 
         rollback()
@@ -60,6 +71,7 @@ declare module "go/sqlx" {
     }
 
     export interface Stmt {
+        readonly BigInt:boolean
         query(args?: Record<string, any>): Array<any>
 
         exec(args?: Record<string, any>): Array<any>

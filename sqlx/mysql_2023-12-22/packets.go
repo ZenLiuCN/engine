@@ -292,15 +292,14 @@ func (mc *mysqlConn) writeHandshakeResponsePacket(authResp []byte, plugin string
 		pktLen += n + 1
 	}
 
-	// 1 byte to store length of all key-values
-	// NOTE: Actually, this is length encoded integer.
-	// But we support only len(connAttrBuf) < 251 for now because takeSmallBuffer
-	// doesn't support buffer size more than 4096 bytes.
-	// TODO(methane): Rewrite buffer management.
-	pktLen += 1 + len(mc.connector.encodedAttributes)
+	// encode length of the connection attributes
+	var connAttrsLEIBuf [9]byte
+	connAttrsLen := len(mc.connector.encodedAttributes)
+	connAttrsLEI := appendLengthEncodedInteger(connAttrsLEIBuf[:0], uint64(connAttrsLen))
+	pktLen += len(connAttrsLEI) + len(mc.connector.encodedAttributes)
 
 	// Calculate packet length and get buffer with that size
-	data, err := mc.buf.takeSmallBuffer(pktLen + 4)
+	data, err := mc.buf.takeBuffer(pktLen + 4)
 	if err != nil {
 		// cannot take the buffer. Something must be wrong with the connection
 		mc.cfg.Logger.Print(err)
@@ -380,8 +379,7 @@ func (mc *mysqlConn) writeHandshakeResponsePacket(authResp []byte, plugin string
 	pos++
 
 	// Connection Attributes
-	data[pos] = byte(len(mc.connector.encodedAttributes))
-	pos++
+	pos += copy(data[pos:], connAttrsLEI)
 	pos += copy(data[pos:], []byte(mc.connector.encodedAttributes))
 
 	// Send Auth packet
@@ -505,7 +503,7 @@ func (mc *mysqlConn) readAuthResult() ([]byte, string, error) {
 		authData := data[pluginEndIndex+1:]
 		return authData, plugin, nil
 
-	default: // Err otherwise
+	default: // Error otherwise
 		return nil, "", mc.handleErrorPacket(data)
 	}
 }
@@ -552,7 +550,7 @@ func (mc *okHandler) readResultSetHeaderPacket() (int, error) {
 	return 0, err
 }
 
-// Err Packet
+// Error Packet
 // http://dev.mysql.com/doc/internals/en/generic-response-packets.html#packet-ERR_Packet
 func (mc *mysqlConn) handleErrorPacket(data []byte) error {
 	if data[0] != iERR {
@@ -561,7 +559,7 @@ func (mc *mysqlConn) handleErrorPacket(data []byte) error {
 
 	// 0xff [1 byte]
 
-	// Err Number [16 bit uint]
+	// Error Number [16 bit uint]
 	errno := binary.LittleEndian.Uint16(data[1:3])
 
 	// 1792: ER_CANT_EXECUTE_IN_READ_ONLY_TRANSACTION
@@ -590,7 +588,7 @@ func (mc *mysqlConn) handleErrorPacket(data []byte) error {
 		pos = 9
 	}
 
-	// Err Message [string]
+	// Error Message [string]
 	me.Message = string(data[pos:])
 
 	return me
@@ -667,7 +665,7 @@ func (mc *okHandler) handleOkPacket(data []byte) error {
 	return nil
 }
 
-// Read Packets as Field Packets until EOF-Packet or an Err appears
+// Read Packets as Field Packets until EOF-Packet or an Error appears
 // http://dev.mysql.com/doc/internals/en/com-query-response.html#packet-Protocol::ColumnDefinition41
 func (mc *mysqlConn) readColumns(count int) ([]mysqlField, error) {
 	columns := make([]mysqlField, count)
@@ -767,7 +765,7 @@ func (mc *mysqlConn) readColumns(count int) ([]mysqlField, error) {
 	}
 }
 
-// Read Packets as Field Packets until EOF-Packet or an Err appears
+// Read Packets as Field Packets until EOF-Packet or an Error appears
 // http://dev.mysql.com/doc/internals/en/com-query-response.html#packet-ProtocolText::ResultsetRow
 func (rows *textRows) readRow(dest []driver.Value) error {
 	mc := rows.mc
@@ -846,13 +844,23 @@ func (rows *textRows) readRow(dest []driver.Value) error {
 
 		case fieldTypeDouble:
 			dest[i], err = strconv.ParseFloat(string(buf), 64)
-
-		case fieldTypeBit: //!! add for common process
-			dest[i] = buf[0] != 0
-		case fieldTypeDecimal, fieldTypeVarChar, fieldTypeNewDecimal, fieldTypeString, fieldTypeVarString: //!! add for common process
+		//!! @patch by ZEN
+		case fieldTypeBit:
+			if len(buf) == 1 {
+				dest[i] = buf[0] != 0
+			} else {
+				dest[i] = buf
+			}
+		case
+			fieldTypeDecimal,
+			fieldTypeNewDecimal,
+			fieldTypeVarChar,
+			fieldTypeString,
+			fieldTypeVarString:
 			dest[i] = string(buf)
-		case fieldTypeJSON: //!! add for common process
+		case fieldTypeJSON:
 			dest[i] = string(buf)
+			//!! @end_patch by ZEN
 		default:
 			dest[i] = buf
 		}
@@ -864,7 +872,7 @@ func (rows *textRows) readRow(dest []driver.Value) error {
 	return nil
 }
 
-// Reads Packets until EOF-Packet or an Err appears. Returns count of Packets read
+// Reads Packets until EOF-Packet or an Error appears. Returns count of Packets read
 func (mc *mysqlConn) readUntilEOF() error {
 	for {
 		data, err := mc.readPacket()
@@ -968,7 +976,7 @@ func (stmt *mysqlStmt) writeCommandLongData(paramID int, arg []byte) error {
 	return nil
 }
 
-// RunCode Prepared Statement
+// Execute Prepared Statement
 // http://dev.mysql.com/doc/internals/en/com-stmt-execute.html
 func (stmt *mysqlStmt) writeExecutePacket(args []driver.Value) error {
 	if len(args) != stmt.paramCount {
@@ -1256,7 +1264,7 @@ func (rows *binaryRows) readRow(dest []driver.Value) error {
 		mc := rows.mc
 		rows.mc = nil
 
-		// Err otherwise
+		// Error otherwise
 		return mc.handleErrorPacket(data)
 	}
 
@@ -1331,18 +1339,29 @@ func (rows *binaryRows) readRow(dest []driver.Value) error {
 			continue
 
 		// Length coded Binary Strings
-		case fieldTypeDecimal,
-			fieldTypeNewDecimal,
-			fieldTypeVarChar,
-			fieldTypeVarString,
-			fieldTypeString:
+		case fieldTypeDecimal, fieldTypeNewDecimal, fieldTypeVarChar,
+			fieldTypeBit, fieldTypeEnum, fieldTypeSet, fieldTypeTinyBLOB,
+			fieldTypeMediumBLOB, fieldTypeLongBLOB, fieldTypeBLOB,
+			fieldTypeVarString, fieldTypeString, fieldTypeGeometry, fieldTypeJSON:
 			var isNull bool
 			var n int
 			dest[i], isNull, n, err = readLengthEncodedString(data[pos:])
 			pos += n
-			if err == nil { //!! decode as string
+			if err == nil {
 				if !isNull {
-					dest[i] = string(dest[i].([]byte))
+					//!! @patch zen
+					switch rows.rs.columns[i].fieldType {
+					case fieldTypeDecimal, fieldTypeNewDecimal, fieldTypeVarChar,
+						fieldTypeJSON,
+						fieldTypeVarString, fieldTypeString:
+						dest[i] = string(dest[i].([]byte))
+					case fieldTypeBit:
+						b := dest[i].([]byte)
+						if len(b) == 1 {
+							dest[i] = b[0] != 0
+						}
+					}
+					//!! @endPatch
 					continue
 				} else {
 					dest[i] = nil
@@ -1351,57 +1370,6 @@ func (rows *binaryRows) readRow(dest []driver.Value) error {
 			}
 			return err
 
-		case fieldTypeJSON: //!! added decode
-			var isNull bool
-			var n int
-			dest[i], isNull, n, err = readLengthEncodedString(data[pos:])
-			pos += n
-			if err == nil {
-				if !isNull {
-					dest[i] = string(dest[i].([]byte))
-					continue
-				} else {
-					dest[i] = nil
-					continue
-				}
-			}
-			return err
-
-		case fieldTypeEnum,
-			fieldTypeSet,
-			fieldTypeTinyBLOB,
-			fieldTypeMediumBLOB,
-			fieldTypeLongBLOB,
-			fieldTypeGeometry,
-			fieldTypeBLOB:
-			var isNull bool
-			var n int
-			dest[i], isNull, n, err = readLengthEncodedString(data[pos:])
-			pos += n
-			if err == nil {
-				if !isNull {
-					continue
-				} else {
-					dest[i] = nil
-					continue
-				}
-			}
-			return err
-		case fieldTypeBit: // !! TO BOOLEAN
-			var isNull bool
-			var n int
-			dest[i], isNull, n, err = readLengthEncodedString(data[pos:])
-			pos += n
-			if err == nil {
-				if !isNull {
-					dest[i] = dest[i].([]byte)[0] != 0
-					continue
-				} else {
-					dest[i] = nil
-					continue
-				}
-			}
-			return err
 		case
 			fieldTypeDate, fieldTypeNewDate, // Date YYYY-MM-DD
 			fieldTypeTime,                         // Time [-][H]HH:MM:SS[.fractal]
