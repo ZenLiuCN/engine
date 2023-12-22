@@ -4,7 +4,9 @@ declare module 'go/big' {
     export function oneRat(): Rat
 
     export function equals(a, b: Int): boolean
+
     export function bigger(a, b: Int): boolean
+
     export function smaller(a, b: Int): boolean
 
     export class Int {
@@ -60,15 +62,19 @@ declare module 'go/big' {
         quoRem(x, y, r: Int): Int
 
         text(base: number): string
+
+        string(): string
+
+        bytes(): Uint8Array
     }
 
     export class Rat {
         /**
          *
-         * @param a  integer or float
+         * @param a  integer or float or string
          * @param b  optional denom, must integer
          */
-        constructor(a, b?: number)
+        constructor(a: number | string, b?: number)
 
         sign(): -1 | 0 | 1
 
@@ -117,5 +123,9 @@ declare module 'go/big' {
         cmp(y: Rat): -1 | 0 | 1
 
         cmpAbs(y: Rat): -1 | 0 | 1
+
+        ratString():string
+        string():string
+        floatString(precision:number):string
     }
 }

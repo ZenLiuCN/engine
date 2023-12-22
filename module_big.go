@@ -49,6 +49,9 @@ func (c BigModule) ExportsWithEngine(eng *Engine) map[string]any {
 				return big.NewRat(t, 1)
 			case float64:
 				return big.NewRat(0, 1).SetFloat64(t)
+			case string:
+				r, _ := big.NewRat(0, 1).SetString(t)
+				return r
 			default:
 				panic("only number accepted")
 			}
