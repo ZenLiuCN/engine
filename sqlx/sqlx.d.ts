@@ -6,14 +6,15 @@ declare module "go/sqlx" {
         /**
          * whether support auto convert int64 to big.Int
          */
-        readonly BigInt:boolean
+        readonly BigInt: boolean
+
         /**
          *
          * @param driver the driver name
          * @param dsn the dsn for driver
          * @param conf with bigint=true  convert 64bit integer to big.Int
          */
-        constructor(driver: string, dsn: string,conf?:{bigint:boolean})
+        constructor(driver: string, dsn: string, conf?: { bigint: boolean })
 
         query(qry: string, args?: Record<string, any>): Array<any>
 
@@ -32,6 +33,7 @@ declare module "go/sqlx" {
 
         close()
 
+        /** set max idle connections */
         setMaxIdleConns(n: number)
 
         setMaxOpenConns(n: number)
@@ -44,19 +46,20 @@ declare module "go/sqlx" {
     }
 
     export interface DBStats {
-      readonly maxOpenConnections: number
-      readonly openConnections: number
-      readonly inUse: number
-      readonly idle: number
-      readonly waitCount: number
-      readonly waitDuration: Duration
-      readonly maxIdleClosed: number
-      readonly maxIdleTimeClosed: number
-      readonly maxLifetimeClosed: number
+        readonly maxOpenConnections: number
+        readonly openConnections: number
+        readonly inUse: number
+        readonly idle: number
+        readonly waitCount: number
+        readonly waitDuration: Duration
+        readonly maxIdleClosed: number
+        readonly maxIdleTimeClosed: number
+        readonly maxLifetimeClosed: number
     }
 
     export interface TX {
-        readonly BigInt:boolean
+        readonly BigInt: boolean
+
         commit()
 
         rollback()
@@ -71,7 +74,8 @@ declare module "go/sqlx" {
     }
 
     export interface Stmt {
-        readonly BigInt:boolean
+        readonly BigInt: boolean
+
         query(args?: Record<string, any>): Array<any>
 
         exec(args?: Record<string, any>): Array<any>
