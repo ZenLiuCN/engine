@@ -1,0 +1,6 @@
+
+use (
+	.
+	sqlx/mysql_2023-12-22
+	sqlx/duckdb/go-duckdb
+)
