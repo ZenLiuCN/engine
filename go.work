@@ -1,9 +1,0 @@
-go 1.21
-
-
-
-use (
-	.
-	sqlx/duckdb/go-duckdb
-	sqlx/mysql_2023-12-22
-)
