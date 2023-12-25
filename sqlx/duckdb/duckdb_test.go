@@ -80,9 +80,6 @@ func TestINET(t *testing.T) {
 import {SQLX} from "go/sqlx"
 const db=new SQLX("duckdb","?allow_unsigned_extensions=true")
 console.log(db)
-console.log(db.exec("SET extension_directory= './extensions'"))
-console.log(db.exec("INSTALL inet"))
-console.log(db.exec("LOAD inet"))
 console.table(db.query("FROM duckdb_extensions()"))
 console.log(db.query("SELECT '127.0.0.1'::INET AS addr"))
 db.close()
@@ -97,9 +94,6 @@ func TestICU(t *testing.T) {
 import {SQLX} from "go/sqlx"
 const db=new SQLX("duckdb","?allow_unsigned_extensions=true")
 console.log(db)
-console.log(db.exec("SET extension_directory= './extensions'"))
-console.log(db.exec("install icu"))
-console.log(db.exec("LOAD icu"))
 console.table(db.query("FROM duckdb_extensions()"))
 console.table(db.query("SELECT name,abbrev from pg_timezone_names() ORDER BY name"))
 db.close()
@@ -127,25 +121,3 @@ console.log(db.query("select * from pg.fact_profit limit 1"))
 db.close()
 `))
 }
-
-/*func TestMySQLFWD(t *testing.T) {
-	vm := engine.Get()
-	defer vm.Free()
-	fn.Panic1(vm.RunJs(
-		//language=javascript
-		`
-import {SQLX} from "go/sqlx"
-const db=new SQLX("duckdb","?allow_unsigned_extensions=true")
-console.log(db)
-console.log(db.query("SELECT current_setting('access_mode')"))
-console.log(db.exec("SET extension_directory= './extensions'"))
-console.log(db.exec("INSTALL mysql"))
-console.log("install done")
-console.log(db.exec("ATTACH 'dbname=cias_prd_2 user=root host=192.168.8.94 port=3336 password=12345678' AS ms (TYPE mysql)"))
-console.log("attach done")
-console.log(db.exec("USE ms"))
-console.log("use done")
-console.log(db.query("select * from ms.disease limit 1"))
-db.close()
-`))
-}*/
