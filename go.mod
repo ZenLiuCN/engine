@@ -21,16 +21,6 @@ require (
 	modernc.org/sqlite v1.27.0
 )
 
-//require (
-//	github.com/go-sql-driver/mysql v1.7.1
-//	github.com/marcboeker/go-duckdb v1.5.4
-//)
-//
-//replace (
-//	github.com/go-sql-driver/mysql v1.7.1 => ./sqlx/mysql_2023-12-22
-//	github.com/marcboeker/go-duckdb v1.5.4 => ./sqlx/duckdb/go-duckdb
-//)
-
 require (
 	filippo.io/edwards25519 v1.1.0 // indirect
 	github.com/chromedp/sysutil v1.0.0 // indirect
