@@ -1,6 +1,6 @@
 module github.com/ZenLiuCN/engine
 
-go 1.18
+go 1.21
 
 require (
 	github.com/Joker/jade v1.1.3
