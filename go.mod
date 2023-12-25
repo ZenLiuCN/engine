@@ -27,8 +27,8 @@ require (
 )
 
 replace (
-	github.com/go-sql-driver/mysql v1.7.1 => ./sqlx/mysql_2023-12-22
-	github.com/marcboeker/go-duckdb v1.5.4 => ./sqlx/duckdb/go-duckdb
+	github.com/go-sql-driver/mysql v1.7.1 => github.com/ZenLiuCN/engine/sqlx/mysql_2023-12-22
+	github.com/marcboeker/go-duckdb v1.5.4 => github.com/ZenLiuCN/engine/sqlx/duckdb/go-duckdb
 )
 
 require (
