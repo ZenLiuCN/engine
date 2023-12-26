@@ -53,7 +53,47 @@ func (S SQLXModule) ExportsWithEngine(engine *engine.Engine) map[string]any {
 			db := fn.Panic1(sqlx.Connect(v[0].ToString().String(), v[1].ToString().String()))
 			return &SQLx{DB: db, Engine: engine, BigInt: bigint}
 		}),
+		"bitToBool": func(row []map[string]any, key ...string) []map[string]any {
+			return mapAll(func(v []byte) any {
+				if len(v) == 1 {
+					return v[0] != 0
+				} else {
+					return v
+				}
+			}, row, key...)
+		},
+		"boolToBit": func(row []map[string]any, key ...string) []map[string]any {
+			return mapAll(func(v bool) any {
+				if v {
+					return []byte{1}
+				} else {
+					return []byte{0}
+				}
+			}, row, key...)
+		},
+		"bytesToString": func(row []map[string]any, key ...string) []map[string]any {
+			return mapAll(func(v []byte) any {
+				return string(v)
+			}, row, key...)
+		},
+		"stringToBytes": func(row []map[string]any, key ...string) []map[string]any {
+			return mapAll(func(v string) any {
+				return []byte(v)
+			}, row, key...)
+		},
 	}
+}
+
+func mapAll[T any](fn func(T) any, row []map[string]any, key ...string) []map[string]any {
+	for _, m := range row {
+		for _, k := range key {
+			v := m[k]
+			if val, ok := v.(T); ok {
+				m[k] = fn(val)
+			}
+		}
+	}
+	return row
 }
 
 type SQLx struct {

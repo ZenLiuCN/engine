@@ -1,4 +1,31 @@
 declare module "go/sqlx" {
+    /**
+     * convert bit[1] to boolean value
+     * @param rows row data
+     * @param keys the property keys
+     */
+    export function bitToBool(rows:Record<string, any>[],... keys:string[]):Record<string, any>[]
+    /**
+     * convert boolean to bit[1] value
+     * @param rows row data
+     * @param keys the property keys
+     */
+    export function boolToBit(rows:Record<string, any>[],... keys:string[]):Record<string, any>[]
+
+
+    /**
+     * convert binary string to string value
+     * @param rows row data
+     * @param keys the property keys
+     */
+    export function bytesToString(rows:Record<string, any>[],... keys:string[]):Record<string, any>[]
+    /**
+     * convert string to binary string value
+     * @param rows row data
+     * @param keys the property keys
+     */
+    export function stringToBytes(rows:Record<string, any>[],... keys:string[]):Record<string, any>[]
+
     // @ts-ignore
     import {Duration} from "go/time"
 
