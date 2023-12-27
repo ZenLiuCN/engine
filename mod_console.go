@@ -9,6 +9,7 @@ import (
 	"log/slog"
 	"slices"
 	"strings"
+	"text/tabwriter"
 	"time"
 )
 
@@ -101,14 +102,18 @@ func (s *sharedConsole) Table(value goja.Value, columns []string) {
 }
 func dumpColumns(v goja.Value, col []string) string {
 	m := strings.Builder{}
-	m.WriteString("\n(index)")
+	w := tabwriter.NewWriter(&m, 8, 0, 1, ' ', tabwriter.TabIndent)
+	m.WriteString("\n")
+	bf := strings.Builder{}
+	bf.WriteString("(index)")
 	haveCol := len(col) > 0
 	if len(col) > 0 {
 		for _, column := range col {
-			m.WriteString("\t")
-			m.WriteString(column)
+			bf.WriteString("\t")
+			bf.WriteString(column)
 		}
-		m.WriteString("\n")
+		_, _ = fmt.Fprintln(w, bf.String())
+		bf.Reset()
 	}
 	switch t := v.Export().(type) {
 	case []any:
@@ -122,35 +127,40 @@ func dumpColumns(v goja.Value, col []string) string {
 				}
 				slices.Sort(cols)
 				for _, s := range cols {
-					m.WriteString("\t")
-					m.WriteString(s)
+					bf.WriteString("\t")
+					bf.WriteString(s)
 				}
-				m.WriteRune('\n')
+				_, _ = fmt.Fprintln(w, bf.String())
+				bf.Reset()
 			}
 			for i, a := range t {
-				m.WriteString(fmt.Sprintf("%d", i))
+				bf.WriteString(fmt.Sprintf("%d", i))
 				mp := a.(map[string]any)
 				if haveCol {
 					for s, a2 := range mp {
 						if haveCol && slices.Index(col, s) >= 0 {
-							m.WriteString(fmt.Sprintf("\t%s", dumpOne(a2)))
+							bf.WriteString(fmt.Sprintf("\t%s", dumpOne(a2)))
 						}
 					}
 				} else {
 					for _, s := range cols {
-						m.WriteString(fmt.Sprintf("\t%s", dumpOne(mp[s])))
+						bf.WriteString(fmt.Sprintf("\t%s", dumpOne(mp[s])))
 					}
 				}
-				m.WriteRune('\n')
+				_, _ = fmt.Fprintln(w, bf.String())
+				bf.Reset()
 			}
 		default:
 			if !haveCol {
-				m.WriteString("\tValue\n")
+				bf.WriteString("\tValue")
+				_, _ = fmt.Fprintln(w, bf.String())
+				bf.Reset()
 			}
 			for i, a := range t {
-				m.WriteString(fmt.Sprintf("%d\t", i))
-				m.WriteString(fmt.Sprintf("%s", dumpOne(a)))
-				m.WriteRune('\n')
+				bf.WriteString(fmt.Sprintf("%d\t", i))
+				bf.WriteString(fmt.Sprintf("%s", dumpOne(a)))
+				_, _ = fmt.Fprintln(w, bf.String())
+				bf.Reset()
 			}
 		}
 	case map[string]any:
@@ -168,40 +178,46 @@ func dumpColumns(v goja.Value, col []string) string {
 				}
 				slices.Sort(cols)
 				for _, s := range cols {
-					m.WriteString("\t")
-					m.WriteString(s)
+					bf.WriteString("\t")
+					bf.WriteString(s)
 				}
-				m.WriteRune('\n')
+				_, _ = fmt.Fprintln(w, bf.String())
+				bf.Reset()
 			}
 			for i, a := range t {
-				m.WriteString(fmt.Sprintf("%s", i))
+				bf.WriteString(fmt.Sprintf("%s", i))
 				mp := a.(map[string]any)
 				if haveCol {
 					for s, a2 := range mp {
 						if haveCol && slices.Index(col, s) >= 0 {
-							m.WriteString(fmt.Sprintf("\t%s", dumpOne(a2)))
+							bf.WriteString(fmt.Sprintf("\t%s", dumpOne(a2)))
 						}
 					}
 				} else {
 					for _, s := range cols {
-						m.WriteString(fmt.Sprintf("\t%s", dumpOne(mp[s])))
+						bf.WriteString(fmt.Sprintf("\t%s", dumpOne(mp[s])))
 					}
 				}
-				m.WriteRune('\n')
+				_, _ = fmt.Fprintln(w, bf.String())
+				bf.Reset()
 			}
 		default:
 			if !haveCol {
-				m.WriteString("\tValue\n")
+				bf.WriteString("\tValue")
+				_, _ = fmt.Fprintln(w, bf.String())
+				bf.Reset()
 			}
 			for i, a := range t {
-				m.WriteString(fmt.Sprintf("%s\t", i))
-				m.WriteString(fmt.Sprintf("%s", dumpOne(a)))
-				m.WriteRune('\n')
+				bf.WriteString(fmt.Sprintf("%s\t", i))
+				bf.WriteString(fmt.Sprintf("%s", dumpOne(a)))
+				_, _ = fmt.Fprintln(w, bf.String())
+				bf.Reset()
 			}
 		}
 	default:
 		return fmt.Sprintf("%v", t)
 	}
+	_ = w.Flush()
 	return m.String()
 }
 func dump(v ...any) string {
