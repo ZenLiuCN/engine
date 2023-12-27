@@ -9,7 +9,7 @@ import (
 )
 
 var (
-	//go:embed module_go.d.ts
+	//go:embed module_big.d.ts
 	bigDefine []byte
 )
 
