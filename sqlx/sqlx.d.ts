@@ -12,7 +12,6 @@ declare module "go/sqlx" {
      */
     export function boolToBit(rows:Record<string, any>[],... keys:string[]):Record<string, any>[]
 
-
     /**
      * convert binary string to string value
      * @param rows row data
@@ -26,6 +25,33 @@ declare module "go/sqlx" {
      */
     export function stringToBytes(rows:Record<string, any>[],... keys:string[]):Record<string, any>[]
 
+    /**
+     * convert bigint to string value
+     * @param rows row data
+     * @param keys the property keys
+     */
+    export function int64ToString(rows:Record<string, any>[],... keys:string[]):Record<string, any>[]
+    /**
+     * convert string to int64 value
+     * @param rows row data
+     * @param keys the property keys
+     */
+    export function stringToInt64(rows:Record<string, any>[],... keys:string[]):Record<string, any>[]
+    /**
+     *
+     * @param rows the data rows
+     * @param layout go time format layout
+     * @param keys property key
+     */
+    export function parseTime(rows:Record<string, any>[],layout:string,... keys:string[]):Record<string, any>[]
+
+    /**
+     *
+     * @param rows the data rows
+     * @param layout go time format layout
+     * @param keys property key
+     */
+    export function formatTime(rows:Record<string, any>[],layout:string,... keys:string[]):Record<string, any>[]
     // @ts-ignore
     import {Duration} from "go/time"
 

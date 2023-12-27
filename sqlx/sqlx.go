@@ -7,6 +7,9 @@ import (
 	"github.com/ZenLiuCN/engine"
 	"github.com/ZenLiuCN/fn"
 	"github.com/dop251/goja"
+	"strconv"
+	"time"
+
 	//_ "github.com/go-sql-driver/mysql"
 	_ "github.com/ZenLiuCN/engine/sqlx/mysql_2023-12-22"
 	_ "github.com/jackc/pgx/v5/stdlib"
@@ -79,6 +82,26 @@ func (S SQLXModule) ExportsWithEngine(engine *engine.Engine) map[string]any {
 		"stringToBytes": func(row []map[string]any, key ...string) []map[string]any {
 			return mapAll(func(v string) any {
 				return []byte(v)
+			}, row, key...)
+		},
+		"int64ToString": func(row []map[string]any, key ...string) []map[string]any {
+			return mapAll(func(v int64) any {
+				return strconv.FormatInt(v, 10)
+			}, row, key...)
+		},
+		"stringToInt64": func(row []map[string]any, key ...string) []map[string]any {
+			return mapAll(func(v string) any {
+				return fn.Panic1(strconv.ParseInt(v, 0, 64))
+			}, row, key...)
+		},
+		"formatTime": func(row []map[string]any, format string, key ...string) []map[string]any {
+			return mapAll(func(v time.Time) any {
+				return v.Format(format)
+			}, row, key...)
+		},
+		"parseTime": func(row []map[string]any, format string, key ...string) []map[string]any {
+			return mapAll(func(v string) any {
+				return fn.Panic1(time.Parse(format, v))
 			}, row, key...)
 		},
 	}
