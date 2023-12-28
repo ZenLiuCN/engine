@@ -62,7 +62,7 @@ func toLowerCase(name string) string {
 	runes := []rune(name)
 	n := 0
 	for i := 0; i < len(runes); i++ {
-		if !unicode.IsUpper(runes[i]) {
+		if !unicode.IsUpper(runes[i]) && !unicode.IsDigit(runes[i]) {
 			if i > 1 {
 				n = i - 1
 			} else {
