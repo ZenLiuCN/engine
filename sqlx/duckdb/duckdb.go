@@ -75,16 +75,16 @@ type Conn struct {
 }
 
 func (c *Conn) ToSQLX() *sqlx.SQLx {
-	return &sqlx.SQLx{
+	return engine.RegisterResource(c.e, &sqlx.SQLx{
 		DB:     sqlx2.NewDb(sql.OpenDB(c.c), "duckdb"),
 		Engine: c.e,
 		BigInt: false,
-	}
+	})
 }
 
 func (c *Conn) ToAppender(schema, table string) *Appender {
 	conn := fn.Panic1(c.c.Connect(context.Background()))
-	appender := fn.Panic1(duckdb.NewAppenderFromConn(conn, schema, table))
+	appender := engine.RegisterResource(c.e, fn.Panic1(duckdb.NewAppenderFromConn(conn, schema, table)))
 	return &Appender{
 		a: appender,
 		e: c.e,
@@ -107,6 +107,7 @@ func (a *Appender) Flush() *engine.GoError {
 }
 
 func (a *Appender) Close() *engine.GoError {
+	a.e.RemoveResources(a.a)
 	defer fn.IgnoreClose(a.c)
 	return engine.GoErrorOf(a.a.Close())
 }

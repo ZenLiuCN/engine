@@ -78,7 +78,3 @@ func DumpDefines(path string) {
 		_ = os.WriteFile(p, bytes, os.ModePerm)
 	}
 }
-
-var (
-	EmptyMap = map[string]any{}
-)

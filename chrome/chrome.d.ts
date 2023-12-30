@@ -2,7 +2,7 @@ declare module 'go/chrome' {
     // @ts-ignore
     import {Err,Maybe,Stringer} from 'go'
     // @ts-ignore
-    import {Writer} from 'go/io'
+    import {Writer,Closer} from 'go/io'
     // @ts-ignore
     import {Duration} from 'go/time'
 
@@ -54,7 +54,7 @@ declare module 'go/chrome' {
         browserContextID?:BrowserContextID
         subtype?:string
     }
-    export class Chrome {
+    export class Chrome  extends Closer{
         constructor(execOptions:ExecOption[],...options: ContextOption[])
         /**
          *
@@ -67,7 +67,6 @@ declare module 'go/chrome' {
         targets():Maybe<TargetInfo>
         submit(...act: Action[]): Err
         // createBrowser(url:string,...opt:BrowserOption[]):Maybe<Browser>
-        close(): Err
 
         shutdown()
     }

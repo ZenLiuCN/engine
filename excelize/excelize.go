@@ -10,23 +10,33 @@ import (
 var (
 	//go:embed excel.d.ts
 	excelDefine []byte
-	excelMap    = map[string]any{
+)
+
+func init() {
+	engine.RegisterModule(Excel{})
+}
+
+type Excel struct {
+}
+
+func (x Excel) ExportsWithEngine(eng *engine.Engine) map[string]any {
+	return map[string]any{
 
 		"open": func(path string, opt *excelize.Options) *ExcelFile {
 			if path == "" {
 				if opt == nil {
-					return &ExcelFile{excelize.NewFile()}
+					return engine.RegisterResource(eng, &ExcelFile{excelize.NewFile()})
 				}
-				return &ExcelFile{excelize.NewFile(*opt)}
+				return engine.RegisterResource(eng, &ExcelFile{excelize.NewFile(*opt)})
 			}
 			if opt == nil {
-				return &ExcelFile{
+				return engine.RegisterResource(eng, &ExcelFile{
 					File: fn.Panic1(excelize.OpenFile(path)),
-				}
+				})
 			}
-			return &ExcelFile{
+			return engine.RegisterResource(eng, &ExcelFile{
 				File: fn.Panic1(excelize.OpenFile(path, *opt)),
-			}
+			})
 		},
 		"themeColor": func(baseColor string, tint float64) string {
 			return excelize.ThemeColor(baseColor, tint)
@@ -52,13 +62,6 @@ var (
 			return Cell{Col: col, Row: row}
 		},
 	}
-)
-
-func init() {
-	engine.RegisterModule(Excel{})
-}
-
-type Excel struct {
 }
 
 func (x Excel) Identity() string {
@@ -66,7 +69,7 @@ func (x Excel) Identity() string {
 }
 
 func (x Excel) Exports() map[string]any {
-	return excelMap
+	return nil
 }
 
 func (x Excel) TypeDefine() []byte {

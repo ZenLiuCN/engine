@@ -163,6 +163,37 @@ func dumpColumns(v goja.Value, col []string) string {
 				bf.Reset()
 			}
 		}
+	case []map[string]any:
+		f := t[0]
+		var cols []string
+		if !haveCol {
+			for s := range f {
+				cols = append(cols, s)
+			}
+			slices.Sort(cols)
+			for _, s := range cols {
+				bf.WriteString("\t")
+				bf.WriteString(s)
+			}
+			_, _ = fmt.Fprintln(w, bf.String())
+			bf.Reset()
+		}
+		for i, mp := range t {
+			bf.WriteString(fmt.Sprintf("%d", i))
+			if haveCol {
+				for s, a2 := range mp {
+					if haveCol && slices.Index(col, s) >= 0 {
+						bf.WriteString(fmt.Sprintf("\t%s", dumpOne(a2)))
+					}
+				}
+			} else {
+				for _, s := range cols {
+					bf.WriteString(fmt.Sprintf("\t%s", dumpOne(mp[s])))
+				}
+			}
+			_, _ = fmt.Fprintln(w, bf.String())
+			bf.Reset()
+		}
 	case map[string]any:
 		var x any
 		for _, a := range t {
@@ -255,9 +286,6 @@ type Console struct {
 	*slog.Logger
 }
 
-func (s *Console) TypeDefine() []byte {
-	return nil
-}
 func (s *Console) Name() string {
 	return "console"
 }
@@ -328,9 +356,6 @@ func NewBufferConsole() *BufferConsole {
 }
 func (s *BufferConsole) Name() string {
 	return "console"
-}
-func (s *BufferConsole) TypeDefine() []byte {
-	return nil
 }
 func (s *BufferConsole) log(level string, args ...goja.Value) {
 	if level != "" {

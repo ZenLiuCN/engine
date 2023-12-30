@@ -42,9 +42,9 @@ func (S SQLXModule) Exports() map[string]any {
 	return nil
 }
 
-func (S SQLXModule) ExportsWithEngine(engine *engine.Engine) map[string]any {
+func (S SQLXModule) ExportsWithEngine(eng *engine.Engine) map[string]any {
 	return map[string]any{
-		"SQLX": engine.ToConstructor(func(v []goja.Value) any {
+		"SQLX": eng.ToConstructor(func(v []goja.Value) any {
 			bigint := false
 			if len(v) == 3 {
 				opt := v[2].Export().(map[string]any)
@@ -54,7 +54,7 @@ func (S SQLXModule) ExportsWithEngine(engine *engine.Engine) map[string]any {
 				}
 			}
 			db := fn.Panic1(sqlx.Connect(v[0].ToString().String(), v[1].ToString().String()))
-			return &SQLx{DB: db, Engine: engine, BigInt: bigint}
+			return engine.RegisterResource(eng, &SQLx{DB: db, Engine: eng, BigInt: bigint})
 		}),
 		"bitToBool": func(row []map[string]any, key ...string) []map[string]any {
 			return mapAll(func(v []byte) any {
@@ -125,9 +125,15 @@ type SQLx struct {
 	BigInt bool
 }
 
-func (s *SQLx) Close() {
-	fn.Panic(s.DB.Close())
-	s.DB = nil
+func (s *SQLx) Close() error {
+	if s.DB == nil {
+		return nil
+	}
+	s.Engine.RemoveResources(s)
+	defer func() {
+		s.DB = nil
+	}()
+	return s.DB.Close()
 }
 
 func (s *SQLx) Query(query string, args map[string]any) goja.Value {
@@ -144,7 +150,7 @@ func (s *SQLx) Query(query string, args map[string]any) goja.Value {
 	} else {
 		r = fn.Panic1(s.DB.Queryx(query))
 	}
-	defer r.Close()
+	defer fn.IgnoreClose(r)
 	var g []any
 	for r.Next() {
 		v := make(map[string]any)
@@ -352,6 +358,7 @@ func (s *Stmt) Exec(args map[string]any) Result {
 		RowsAffected: v,
 	}
 }
-func (s *Stmt) Close() {
-	fn.Panic(s.NamedStmt.Close())
+func (s *Stmt) Close() error {
+	s.Engine.RemoveResources(s.NamedStmt)
+	return s.NamedStmt.Close()
 }

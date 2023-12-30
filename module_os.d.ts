@@ -281,16 +281,95 @@ declare module "go/os" {
 
     export function ls(path?: string): Array<{ dir: boolean, name: string, mode: string, size: number, modified: string }>
 
-    export function stat(path: string): undefined | Stat
-    // @ts-ignore
-    import {Time} from 'go/time'
-    export interface Stat {
-        name():string
-        size():number
-        mode():number
-        modTime():Time
-        isDir():boolean
+    export function stat(path: string): undefined | FileInfo
 
+    // @ts-ignore
+    import * as time from 'go/time'
+    // @ts-ignore
+    import * as io from 'go/io'
+
+
+    export interface File extends io.ReadSeekCloser,
+        io.ReadFrom,
+        io.Writer,
+        io.WriterAt,
+        io.StringWriter {
+        name(): string
+
+        chdir()
+
+        fd(): number
+
+        readdirnames(n: number): string[]
+
+        setDeadline(t: time.Time)
+
+        setReadDeadline(t: time.Time)
+
+        setWriteDeadline(t: time.Time)
+
+        sync()
+
+        truncate(size: number)
+
+        stat(): FileInfo
+
+        readdir(): FileInfo[]
+
+        readDir(): DirEntry[]
+
+        chown(uid, gid: number)
+
+        chmod(mod: number)
     }
+
+    export interface FileInfo {
+        name(): string
+
+        size(): number
+
+        mode(): number
+
+        modTime(): time.Time
+
+        isDir(): boolean
+    }
+
+    export interface DirEntry {
+        name(): string
+
+        isDir(): boolean
+
+        type(): number
+
+        info(): FileInfo
+    }
+
+    export function open(path: string): File
+
+    export function chown(path: string, uid, gid: number)
+
+    export function getUID(): number
+
+    export function getGID(): number
+
+    export function getPagesize(): number
+
+    export function getPid(): number
+
+    export function mkdirAll(path: string, perm: number)
+
+    export function rename(path, newPath: string)
+
+    export function userCacheDir(): string
+
+    export function userConfigDir(): string
+
+    export function userHomeDir(): string
+    export function writeFile(name:string,data:Uint8Array,perm:number)
+    export function remove(name:string)
+    export function removeAll(name:string)
+    export function hostname():string
+    export function tempDir():string
 
 }

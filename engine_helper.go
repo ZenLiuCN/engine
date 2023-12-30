@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/ZenLiuCN/fn"
 	. "github.com/dop251/goja"
+	"io"
 	"log/slog"
 )
 
@@ -205,3 +206,32 @@ func (s *Engine) ToValues(args ...any) []Value {
 }
 
 //endregion
+
+func (s *Engine) RegisterResources(r io.Closer) {
+	if r != nil {
+		if _, ok := s.Resources[r]; !ok {
+			s.Resources[r] = resHolder
+		}
+	}
+	return
+}
+func (s *Engine) RemoveResources(r io.Closer) {
+	if r != nil {
+		if _, ok := s.Resources[r]; ok {
+			delete(s.Resources, r)
+		}
+	}
+	return
+}
+func RegisterResource[T io.Closer](e *Engine, v T) T {
+	e.RegisterResources(v)
+	return v
+}
+func RemoveResource[T io.Closer](e *Engine, v T) T {
+	e.RemoveResources(v)
+	return v
+}
+
+var (
+	resHolder = struct{}{}
+)

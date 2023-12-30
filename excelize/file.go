@@ -11,8 +11,8 @@ type ExcelFile struct {
 	*excelize.File
 }
 
-func (s *ExcelFile) Close() {
-	fn.Panic(s.File.Close())
+func (s *ExcelFile) Close() error {
+	return s.File.Close()
 }
 func (s *ExcelFile) UpdateLinkedValue() {
 	fn.Panic(s.File.UpdateLinkedValue())

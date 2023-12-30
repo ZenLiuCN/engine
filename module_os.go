@@ -87,6 +87,40 @@ func (o Os) ExportsWithEngine(e *Engine) map[string]any {
 			return
 		},
 		"stat": Stat,
+		//std
+		"open": func(path string) (f *os.File) {
+			return RegisterResource(e, fn.Panic1(os.Open(EnvExpand(path))))
+		},
+		"chown": func(path string, uid, gid int) {
+			fn.Panic(os.Chown(EnvExpand(path), uid, gid))
+		},
+		"chmod": func(path string, mod os.FileMode) {
+			fn.Panic(os.Chmod(EnvExpand(path), mod))
+		},
+		"getGID":      os.Geteuid,
+		"getUID":      os.Geteuid,
+		"getPagesize": os.Getpagesize,
+		"getPid":      os.Getpid,
+		"mkdirALL": func(path string, perm os.FileMode) error {
+			return os.MkdirAll(EnvExpand(path), perm)
+		},
+		"rename": func(path, new string) error {
+			return os.Rename(EnvExpand(path), EnvExpand(new))
+		},
+		"userCacheDir":  os.UserCacheDir,
+		"userConfigDir": os.UserConfigDir,
+		"userHomeDir":   os.UserHomeDir,
+		"writeFile": func(path string, data []byte, perm os.FileMode) error {
+			return os.WriteFile(EnvExpand(path), data, perm)
+		},
+		"remove": func(path string) error {
+			return os.Remove(EnvExpand(path))
+		},
+		"removeAll": func(path string) error {
+			return os.RemoveAll(EnvExpand(path))
+		},
+		"hostname": os.Hostname,
+		"tempDir":  os.TempDir,
 	}
 
 }

@@ -5,12 +5,14 @@ import (
 	"errors"
 	"github.com/ZenLiuCN/fn"
 	. "github.com/dop251/goja"
+	"io"
 	"time"
 )
 
 type Engine struct {
 	*Runtime
 	*EventLoop
+	Resources map[io.Closer]struct{}
 }
 
 // Register register mods
@@ -44,6 +46,14 @@ func (s *Engine) DisableModules(modules ...string) bool {
 func (s *Engine) Free() {
 	debug("free engine,stop event loop")
 	s.EventLoop.StopEventLoopNoWait()
+	if s.Resources != nil && len(s.Resources) > 0 {
+		for resource := range s.Resources {
+			if resource != nil {
+				_ = resource.Close()
+			}
+		}
+		s.Resources = nil
+	}
 }
 
 // region direct
@@ -156,17 +166,29 @@ var (
 )
 
 func NewEngine(modules ...Mod) (r *Engine) {
-	r = &Engine{Runtime: New()}
+	r = &Engine{Runtime: New(), Resources: make(map[io.Closer]struct{})}
 	r.Runtime.SetFieldNameMapper(EngineFieldMapper{})
 	r.EventLoop = NewEventLoop(r)
 	r.Register(Mods()...)
 	r.Register(modules...)
+	r.Set("registerResource", func(closer io.Closer) io.Closer {
+		r.RegisterResources(closer)
+		return closer
+	})
+	r.Set("removeResource", func(closer io.Closer) io.Closer {
+		r.RemoveResources(closer)
+		return closer
+	})
 	return
 }
 func NewRawEngine(modules ...Mod) (r *Engine) {
-	r = &Engine{Runtime: New()}
+	r = &Engine{Runtime: New(), Resources: make(map[io.Closer]struct{})}
 	r.Runtime.SetFieldNameMapper(EngineFieldMapper{})
 	r.EventLoop = NewEventLoop(r)
 	r.Register(modules...)
+	r.Set("autoClose", func(closer io.Closer) io.Closer {
+		r.RegisterResources(closer)
+		return closer
+	})
 	return
 }

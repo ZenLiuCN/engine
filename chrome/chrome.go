@@ -22,7 +22,7 @@ type Chrome struct {
 }
 
 // Close the chrome application
-func (c *Chrome) Close() *GoError {
+func (c *Chrome) Close() error {
 	return GoErrorOf(cd.Cancel(c.ctx))
 }
 func (c *Chrome) Targets() Maybe[[]*target.Info] {

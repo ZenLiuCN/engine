@@ -114,3 +114,16 @@ func TestContextJsFailure(t *testing.T) {
 	}
 
 }
+func TestAutoClose(t *testing.T) {
+	e := Get()
+	defer e.Free()
+	fn.Panic1(e.RunJs(
+		//language=javascript
+		`
+	import os from 'go/os'
+	console.log(os)
+	const f=autoClose(os.open('engine.go'))
+	console.log(f.name())
+`))
+
+}

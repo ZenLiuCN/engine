@@ -77,24 +77,26 @@ func (c *ConnPool) Configure() *Config {
 	return c.cf.Config
 }
 
-func (c *ConnPool) Close() {
-
+func (c *ConnPool) Close() error {
+	c.e.RemoveResources(c)
 	c.c.Close()
+	return nil
 }
 func (c *ConnPool) Acquire() *PoolConn {
 	ctx, cc := context.WithCancel(context.Background())
-	return &PoolConn{
+	return engine.RegisterResource(c.e, &PoolConn{
 		cf: c.Configure(),
 		c:  fn.Panic1(c.c.Acquire(ctx)),
 		e:  c.e,
 		cc: cc,
-	}
+	})
 }
 func (c *ConnPool) Query(qry string, args map[string]any) *Rows {
 	if args != nil {
-		return &Rows{c: c.Configure(), r: fn.Panic1(c.c.Query(context.Background(), qry, pgx.NamedArgs(args)))}
+		return engine.RegisterResource(c.e, &Rows{c: c.Configure(), r: fn.Panic1(c.c.Query(context.Background(), qry, pgx.NamedArgs(args)))})
 	}
-	return &Rows{c: c.Configure(), r: fn.Panic1(c.c.Query(context.Background(), qry))}
+
+	return engine.RegisterResource(c.e, &Rows{c: c.Configure(), r: fn.Panic1(c.c.Query(context.Background(), qry))})
 }
 func (c *ConnPool) Exec(qry string, args map[string]any) pgconn.CommandTag {
 	if args != nil {
@@ -113,17 +115,19 @@ type PoolConn struct {
 func (c *PoolConn) Configure() *Config {
 	return c.cf
 }
-func (c *PoolConn) Close() {
+func (c *PoolConn) Close() error {
 	if c.cc != nil {
 		c.cc()
 	}
+	c.e.RemoveResources(c)
 	c.c.Release()
+	return nil
 }
 func (c *PoolConn) Query(qry string, args map[string]any) *Rows {
 	if args != nil {
-		return &Rows{c: c.cf, r: fn.Panic1(c.c.Query(context.Background(), qry, pgx.NamedArgs(args)))}
+		return engine.RegisterResource(c.e, &Rows{c: c.cf, r: fn.Panic1(c.c.Query(context.Background(), qry, pgx.NamedArgs(args)))})
 	}
-	return &Rows{c: c.cf, r: fn.Panic1(c.c.Query(context.Background(), qry))}
+	return engine.RegisterResource(c.e, &Rows{c: c.cf, r: fn.Panic1(c.c.Query(context.Background(), qry))})
 }
 func (c *PoolConn) Exec(qry string, args map[string]any) pgconn.CommandTag {
 	if args != nil {
@@ -255,11 +259,13 @@ func (c *Conn) IsClosed() bool {
 func (c *Conn) IsBusy() bool {
 	return c.c.PgConn().IsBusy()
 }
-func (c *Conn) Close() {
+func (c *Conn) Close() error {
 	if c.cc != nil {
 		c.cc()
 	}
+	c.e.RemoveResources(c)
 	fn.Panic(c.c.Close(context.Background()))
+	return nil
 }
 func (c *Conn) Query(qry string, args map[string]any) *Rows {
 	if args != nil {
@@ -309,11 +315,15 @@ type Rows struct {
 	Closed bool
 }
 
-func (c *Rows) Close() {
+func (c *Rows) Close() error {
+	if c.Closed {
+		return nil
+	}
 	defer func() {
 		c.Closed = true
 	}()
 	c.r.Close()
+	return nil
 }
 func (c *Rows) Parse() []any {
 	defer func() {

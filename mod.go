@@ -2,6 +2,7 @@ package engine
 
 import (
 	"bytes"
+	_ "embed"
 	"github.com/ZenLiuCN/fn"
 )
 
@@ -19,7 +20,9 @@ type TopMod interface {
 }
 
 var (
-	registry = map[string]Mod{}
+	//go:embed global.d.ts
+	globalDefine []byte
+	registry     = map[string]Mod{}
 )
 
 // RegisterMod a module , returns false if already exists
@@ -49,6 +52,7 @@ type TypeDefined interface {
 // ModDefines dump all possible type define (d.ts format) in registry
 func ModDefines() []byte {
 	var b bytes.Buffer
+	b.Write(globalDefine)
 	for _, module := range registry {
 		if d, ok := module.(TypeDefined); ok {
 			b.WriteRune('\n')

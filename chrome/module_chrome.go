@@ -84,12 +84,12 @@ func (c ModuleChrome) ExportsWithEngine(eng *engine.Engine) map[string]any {
 		//Chrome
 		"Chrome": eng.ToConstructor(func(v []goja.Value) any {
 			if len(v) == 0 {
-				return NewChromeDefault()
+				return engine.RegisterResource(eng, NewChromeDefault())
 			}
 			v0 := v[0]
 			if url, ok := v0.Export().(string); ok {
 				if len(v) == 1 {
-					return NewChromeUrl(url, nil)
+					return engine.RegisterResource(eng, NewChromeUrl(url, nil))
 				}
 				if ar, ok := v[1].Export().([]any); !ok {
 					panic("not an array of RemoteOption")
@@ -114,7 +114,7 @@ func (c ModuleChrome) ExportsWithEngine(eng *engine.Engine) map[string]any {
 							panic("not an ContextOption")
 						}
 					}
-					return NewChromeUrl(url, remotes, opt...)
+					return engine.RegisterResource(eng, NewChromeUrl(url, remotes, opt...))
 				}
 			}
 			if o0, ok := v0.Export().(cd.ContextOption); ok {
@@ -129,7 +129,7 @@ func (c ModuleChrome) ExportsWithEngine(eng *engine.Engine) map[string]any {
 						panic("not an ContextOption")
 					}
 				}
-				return NewChromeDefault(opt...)
+				return engine.RegisterResource(eng, NewChromeDefault(opt...))
 			}
 			if eao, ok := v0.Export().([]cd.ExecAllocatorOption); ok {
 				var opt []cd.ContextOption
@@ -143,7 +143,7 @@ func (c ModuleChrome) ExportsWithEngine(eng *engine.Engine) map[string]any {
 						panic("not an ContextOption")
 					}
 				}
-				return NewChromeOptions(eao, opt...)
+				return engine.RegisterResource(eng, NewChromeOptions(eao, opt...))
 			}
 			panic("invalid arguments")
 		}),
