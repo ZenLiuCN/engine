@@ -2,7 +2,7 @@ declare module 'go/chrome' {
     // @ts-ignore
     import {Err,Maybe,Stringer} from 'go'
     // @ts-ignore
-    import {Writer,Closer} from 'go/io'
+    import io from 'go/io'
     // @ts-ignore
     import {Duration} from 'go/time'
 
@@ -54,7 +54,7 @@ declare module 'go/chrome' {
         browserContextID?:BrowserContextID
         subtype?:string
     }
-    export class Chrome  extends Closer{
+    export class Chrome  implements io.Closer{
         constructor(execOptions:ExecOption[],...options: ContextOption[])
         /**
          *
@@ -69,6 +69,7 @@ declare module 'go/chrome' {
         // createBrowser(url:string,...opt:BrowserOption[]):Maybe<Browser>
 
         shutdown()
+        close()
     }
     export interface ContextOption{}
     export function withTargetID(targetId:TargetID):ContextOption
@@ -106,7 +107,7 @@ declare module 'go/chrome' {
 
     export const noModifyURL: RemoteOption
 
-    export function combinedOutput(writer: Writer): ExecOption
+    export function combinedOutput(writer: io.Writer): ExecOption
 
     export function wsUrlReadTimeout(duration: Duration): ExecOption
     //endregion
