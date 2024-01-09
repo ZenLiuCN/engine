@@ -26,7 +26,7 @@ func (b BufferModule) Exports() map[string]any {
 func (b BufferModule) ExportsWithEngine(engine *Engine) map[string]any {
 
 	return map[string]any{
-		"Buffer": engine.ToConstructor(func(v []goja.Value) any {
+		"Buffer": engine.ToConstructor(func(v []goja.Value) (any, error) {
 			var buf *Buffer
 			if len(v) == 0 {
 				buf = GetBuffer()
@@ -57,12 +57,12 @@ func (b BufferModule) ExportsWithEngine(engine *Engine) map[string]any {
 					fn.Panic1(io.Copy(buf.Buffer, t))
 					buf.e = engine
 				default:
-					panic("bad parameter type")
+					return nil, fmt.Errorf("bad parameter type")
 				}
 			} else {
-				panic("bad parameters ")
+				return nil, fmt.Errorf("bad parameters ")
 			}
-			return buf
+			return buf, nil
 		}),
 		"Bytes": engine.ToSelfReferRawConstructor(func(ctor goja.Value, c goja.ConstructorCall) *goja.Object {
 			v := c.Arguments

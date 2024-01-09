@@ -14,7 +14,7 @@ type EngineModule struct {
 
 func (e EngineModule) ExportsWithEngine(engine *Engine) map[string]any {
 	m := make(map[string]any)
-	m["Engine"] = engine.ToConstructor(func(v []goja.Value) any {
+	m["Engine"] = engine.ToConstructor(func(v []goja.Value) (any, error) {
 		var r *Engine
 		if len(v) == 0 {
 			r = Get()
@@ -41,7 +41,7 @@ func (e EngineModule) ExportsWithEngine(engine *Engine) map[string]any {
 				r = NewRawEngine(mm...)
 			}
 		}
-		return r
+		return r, nil
 	})
 	return m
 }

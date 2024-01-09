@@ -2,35 +2,11 @@ package engine
 
 import (
 	_ "embed"
-	"errors"
 	"github.com/ZenLiuCN/fn"
 	"github.com/dop251/goja"
 	"strconv"
 	"sync/atomic"
 )
-
-type GoError struct {
-	Err error
-}
-
-func GoErrorOf(err error) *GoError {
-	if err != nil {
-		return &GoError{err}
-	}
-	return nil
-}
-func (g *GoError) String() string {
-	if g == nil || g.Err == nil {
-		return "<nil>"
-	}
-	return g.Err.Error()
-}
-func (g *GoError) Same(err GoError) bool {
-	return errors.Is(g.Err, err.Err)
-}
-func (g *GoError) Error() string {
-	return g.String()
-}
 
 var (
 	//go:embed module_go.d.ts

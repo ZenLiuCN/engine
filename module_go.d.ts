@@ -7,13 +7,7 @@ declare module "go" {
         goString(): string
     }
 
-    export interface GoError extends Stringer {
-        error(): string
 
-        same(error: GoError): boolean
-    }
-
-    export type Err = GoError | null
 
     export interface Chan<T> extends ReadOnlyChan<T>, WriteOnlyChan<T> {
 
@@ -40,7 +34,7 @@ declare module "go" {
 
     export interface Maybe<V> {
         Value?: V
-        Error?: GoError
+        Error?: Error
     }
 
     /**

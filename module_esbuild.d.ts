@@ -1,6 +1,5 @@
 declare module "go/esbuild" {
-    // @ts-ignore
-    import {Err} from 'go'
+
 
     type StderrColor = 0 | 1 | 2
     type LogLevel = 0 | 1 | 2 | 3 | 4 | 5
@@ -263,10 +262,10 @@ declare module "go/esbuild" {
         rebuild(): BuildResult
 
         // Documentation: https://esbuild.github.io/api/#watch
-        watch(options: WatchOptions): Err
+        watch(options: WatchOptions)
 
         // Documentation: https://esbuild.github.io/api/#serve
-        serve(options: ServeOptions): { result: ServeResult, err: Err }
+        serve(options: ServeOptions): ServeResult
 
         cancel()
 

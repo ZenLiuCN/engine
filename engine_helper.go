@@ -33,7 +33,7 @@ func (s *Engine) RegisterFunction(name string, ctor func(c FunctionCall) Value) 
 }
 
 // RegisterType create global simple type
-func (s *Engine) RegisterType(name string, ctor func(v []Value) any) {
+func (s *Engine) RegisterType(name string, ctor func(v []Value) (any, error)) {
 	s.Set(name, s.ToConstructor(ctor))
 }
 
@@ -43,9 +43,12 @@ func (s *Engine) ToInstance(v any, c ConstructorCall) *Object {
 	fn.Panic(o.SetPrototype(c.This.Prototype()))
 	return o
 }
-func (s *Engine) ToConstructor(ct func(v []Value) any) func(ConstructorCall) *Object {
+func (s *Engine) ToConstructor(ct func(v []Value) (any, error)) func(ConstructorCall) *Object {
 	return func(c ConstructorCall) *Object {
-		val := ct(c.Arguments)
+		val, err := ct(c.Arguments)
+		if err != nil {
+			panic(s.NewGoError(err))
+		}
 		if val != nil {
 			return s.ToInstance(val, c)
 		}
@@ -54,10 +57,13 @@ func (s *Engine) ToConstructor(ct func(v []Value) any) func(ConstructorCall) *Ob
 }
 
 // ToSelfReferConstructor create a Constructor which require use itself. see [ Bytes ]
-func (s *Engine) ToSelfReferConstructor(ct func(ctor Value, v []Value) any) Value {
+func (s *Engine) ToSelfReferConstructor(ct func(ctor Value, v []Value) (any, error)) Value {
 	var ctor Value
 	ctor = s.ToValue(func(c ConstructorCall) *Object {
-		val := ct(ctor, c.Arguments)
+		val, err := ct(ctor, c.Arguments)
+		if err != nil {
+			panic(s.NewGoError(err))
+		}
 		if val != nil {
 			return s.ToInstance(val, c)
 		}

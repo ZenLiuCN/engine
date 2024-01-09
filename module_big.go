@@ -2,6 +2,7 @@ package engine
 
 import (
 	_ "embed"
+	"fmt"
 	"github.com/ZenLiuCN/fn"
 	"github.com/dop251/goja"
 	"math/big"
@@ -29,48 +30,48 @@ func (c BigModule) Exports() map[string]any {
 }
 
 func (c BigModule) ExportsWithEngine(eng *Engine) map[string]any {
-	ic := eng.ToValue(eng.ToConstructor(func(v []goja.Value) any {
+	ic := eng.ToValue(eng.ToConstructor(func(v []goja.Value) (any, error) {
 		switch t := v[0].Export().(type) {
 		case int64:
-			return big.NewInt(t)
+			return big.NewInt(t), nil
 		case float64:
-			return big.NewInt(int64(t))
+			return big.NewInt(int64(t)), nil
 		case string:
-			return big.NewInt(fn.Panic1(strconv.ParseInt(t, 0, 64)))
+			return big.NewInt(fn.Panic1(strconv.ParseInt(t, 0, 64))), nil
 		default:
-			panic("only number accepted")
+			return nil, fmt.Errorf("only number accepted")
 		}
 	}))
-	rc := eng.ToValue(eng.ToConstructor(func(v []goja.Value) any {
+	rc := eng.ToValue(eng.ToConstructor(func(v []goja.Value) (any, error) {
 		switch len(v) {
 		case 1:
 			switch t := v[0].Export().(type) {
 			case int64:
-				return big.NewRat(t, 1)
+				return big.NewRat(t, 1), nil
 			case float64:
-				return big.NewRat(0, 1).SetFloat64(t)
+				return big.NewRat(0, 1).SetFloat64(t), nil
 			case string:
 				r, _ := big.NewRat(0, 1).SetString(t)
-				return r
+				return r, nil
 			default:
-				panic("only number accepted")
+				return nil, fmt.Errorf("only number accepted")
 			}
 		case 2:
 			switch a := v[0].Export().(type) {
 			case int64:
 				switch b := v[1].Export().(type) {
 				case int64:
-					return big.NewRat(a, b)
+					return big.NewRat(a, b), nil
 				default:
-					panic("only integer with integer accepted")
+					return nil, fmt.Errorf("only integer with integer accepted")
 				}
 			case float64:
-				return big.NewRat(0, 1).SetFloat64(a)
+				return big.NewRat(0, 1).SetFloat64(a), nil
 			default:
-				panic("only number accepted")
+				return nil, fmt.Errorf("only number accepted")
 			}
 		default:
-			panic("bad arguments")
+			return nil, fmt.Errorf("bad arguments")
 		}
 
 	}))

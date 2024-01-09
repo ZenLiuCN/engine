@@ -50,31 +50,12 @@ func (c *Context) Rebuild() api.BuildResult {
 	return c.c.Rebuild()
 }
 
-func (c *Context) Watch(options api.WatchOptions) *GoError {
-	err := c.c.Watch(options)
-	if err != nil {
-		return &GoError{Err: err}
-	}
-	return nil
+func (c *Context) Watch(options api.WatchOptions) error {
+	return c.c.Watch(options)
 }
 
-type ServeOut struct {
-	Result api.ServeResult
-	Err    *GoError
-}
-
-func (c *Context) Serve(options api.ServeOptions) *ServeOut {
-	r, err := c.c.Serve(options)
-	if err != nil {
-		return &ServeOut{
-			Result: r,
-			Err:    &GoError{Err: err},
-		}
-	}
-	return &ServeOut{
-		Result: r,
-		Err:    nil,
-	}
+func (c *Context) Serve(options api.ServeOptions) (api.ServeResult, error) {
+	return c.c.Serve(options)
 }
 
 func (c *Context) Cancel() {

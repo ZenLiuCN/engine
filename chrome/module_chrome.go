@@ -2,6 +2,7 @@ package chrome
 
 import (
 	_ "embed"
+	"fmt"
 	"github.com/ZenLiuCN/engine"
 	"github.com/chromedp/cdproto/cdp"
 	"github.com/chromedp/cdproto/css"
@@ -82,17 +83,17 @@ func (c ModuleChrome) ExportsWithEngine(eng *engine.Engine) map[string]any {
 		"combinedOutput":   cd.CombinedOutput,
 		"wsUrlReadTimeout": cd.WSURLReadTimeout,
 		//Chrome
-		"Chrome": eng.ToConstructor(func(v []goja.Value) any {
+		"Chrome": eng.ToConstructor(func(v []goja.Value) (any, error) {
 			if len(v) == 0 {
-				return engine.RegisterResource(eng, NewChromeDefault())
+				return engine.RegisterResource(eng, NewChromeDefault()), nil
 			}
 			v0 := v[0]
 			if url, ok := v0.Export().(string); ok {
 				if len(v) == 1 {
-					return engine.RegisterResource(eng, NewChromeUrl(url, nil))
+					return engine.RegisterResource(eng, NewChromeUrl(url, nil)), nil
 				}
 				if ar, ok := v[1].Export().([]any); !ok {
-					panic("not an array of RemoteOption")
+					return nil, fmt.Errorf("not an array of RemoteOption")
 				} else {
 					var remotes []cd.RemoteAllocatorOption
 					for _, value := range ar {
@@ -100,7 +101,7 @@ func (c ModuleChrome) ExportsWithEngine(eng *engine.Engine) map[string]any {
 						case cd.RemoteAllocatorOption:
 							remotes = append(remotes, t)
 						default:
-							panic("not a RemoteOption")
+							return nil, fmt.Errorf("not an ContextOption")
 						}
 					}
 					var opt []cd.ContextOption
@@ -111,10 +112,10 @@ func (c ModuleChrome) ExportsWithEngine(eng *engine.Engine) map[string]any {
 						if o, ok := value.Export().(cd.ContextOption); ok {
 							opt = append(opt, o)
 						} else {
-							panic("not an ContextOption")
+							return nil, fmt.Errorf("not an ContextOption")
 						}
 					}
-					return engine.RegisterResource(eng, NewChromeUrl(url, remotes, opt...))
+					return engine.RegisterResource(eng, NewChromeUrl(url, remotes, opt...)), nil
 				}
 			}
 			if o0, ok := v0.Export().(cd.ContextOption); ok {
@@ -126,10 +127,10 @@ func (c ModuleChrome) ExportsWithEngine(eng *engine.Engine) map[string]any {
 					if o, ok := value.Export().(cd.ContextOption); ok {
 						opt = append(opt, o)
 					} else {
-						panic("not an ContextOption")
+						return nil, fmt.Errorf("not an ContextOption")
 					}
 				}
-				return engine.RegisterResource(eng, NewChromeDefault(opt...))
+				return engine.RegisterResource(eng, NewChromeDefault(opt...)), nil
 			}
 			if eao, ok := v0.Export().([]cd.ExecAllocatorOption); ok {
 				var opt []cd.ContextOption
@@ -140,10 +141,10 @@ func (c ModuleChrome) ExportsWithEngine(eng *engine.Engine) map[string]any {
 					if o, ok := value.Export().(cd.ContextOption); ok {
 						opt = append(opt, o)
 					} else {
-						panic("not an ContextOption")
+						return nil, fmt.Errorf("not an ContextOption")
 					}
 				}
-				return engine.RegisterResource(eng, NewChromeOptions(eao, opt...))
+				return engine.RegisterResource(eng, NewChromeOptions(eao, opt...)), nil
 			}
 			panic("invalid arguments")
 		}),

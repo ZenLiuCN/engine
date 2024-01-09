@@ -44,7 +44,7 @@ func (S SQLXModule) Exports() map[string]any {
 
 func (S SQLXModule) ExportsWithEngine(eng *engine.Engine) map[string]any {
 	return map[string]any{
-		"SQLX": eng.ToConstructor(func(v []goja.Value) any {
+		"SQLX": eng.ToConstructor(func(v []goja.Value) (any, error) {
 			bigint := false
 			if len(v) == 3 {
 				opt := v[2].Export().(map[string]any)
@@ -53,70 +53,77 @@ func (S SQLXModule) ExportsWithEngine(eng *engine.Engine) map[string]any {
 					bigint = true
 				}
 			}
-			db := fn.Panic1(sqlx.Connect(v[0].ToString().String(), v[1].ToString().String()))
-			return engine.RegisterResource(eng, &SQLx{DB: db, Engine: eng, BigInt: bigint})
+			db, err := sqlx.Connect(v[0].ToString().String(), v[1].ToString().String())
+			if err != nil {
+				return nil, err
+			}
+			return engine.RegisterResource(eng, &SQLx{DB: db, Engine: eng, BigInt: bigint}), nil
 		}),
-		"bitToBool": func(row []map[string]any, key ...string) []map[string]any {
-			return mapAll(func(v []byte) any {
+		"bitToBool": func(row []map[string]any, key ...string) ([]map[string]any, error) {
+			return mapAll(func(v []byte) (any, error) {
 				if len(v) == 1 {
-					return v[0] != 0
+					return v[0] != 0, nil
 				} else {
-					return v
+					return v, nil
 				}
 			}, row, key...)
 		},
-		"boolToBit": func(row []map[string]any, key ...string) []map[string]any {
-			return mapAll(func(v bool) any {
+		"boolToBit": func(row []map[string]any, key ...string) ([]map[string]any, error) {
+			return mapAll(func(v bool) (any, error) {
 				if v {
-					return []byte{1}
+					return []byte{1}, nil
 				} else {
-					return []byte{0}
+					return []byte{0}, nil
 				}
 			}, row, key...)
 		},
-		"bytesToString": func(row []map[string]any, key ...string) []map[string]any {
-			return mapAll(func(v []byte) any {
-				return string(v)
+		"bytesToString": func(row []map[string]any, key ...string) ([]map[string]any, error) {
+			return mapAll(func(v []byte) (any, error) {
+				return string(v), nil
 			}, row, key...)
 		},
-		"stringToBytes": func(row []map[string]any, key ...string) []map[string]any {
-			return mapAll(func(v string) any {
-				return []byte(v)
+		"stringToBytes": func(row []map[string]any, key ...string) ([]map[string]any, error) {
+			return mapAll(func(v string) (any, error) {
+				return []byte(v), nil
 			}, row, key...)
 		},
-		"int64ToString": func(row []map[string]any, key ...string) []map[string]any {
-			return mapAll(func(v int64) any {
-				return strconv.FormatInt(v, 10)
+		"int64ToString": func(row []map[string]any, key ...string) ([]map[string]any, error) {
+			return mapAll(func(v int64) (any, error) {
+				return strconv.FormatInt(v, 10), nil
 			}, row, key...)
 		},
-		"stringToInt64": func(row []map[string]any, key ...string) []map[string]any {
-			return mapAll(func(v string) any {
-				return fn.Panic1(strconv.ParseInt(v, 0, 64))
+		"stringToInt64": func(row []map[string]any, key ...string) ([]map[string]any, error) {
+			return mapAll(func(v string) (any, error) {
+				return strconv.ParseInt(v, 0, 64)
 			}, row, key...)
 		},
-		"formatTime": func(row []map[string]any, format string, key ...string) []map[string]any {
-			return mapAll(func(v time.Time) any {
-				return v.Format(format)
+		"formatTime": func(row []map[string]any, format string, key ...string) ([]map[string]any, error) {
+			return mapAll(func(v time.Time) (any, error) {
+				return v.Format(format), nil
 			}, row, key...)
 		},
-		"parseTime": func(row []map[string]any, format string, key ...string) []map[string]any {
-			return mapAll(func(v string) any {
-				return fn.Panic1(time.Parse(format, v))
+		"parseTime": func(row []map[string]any, format string, key ...string) ([]map[string]any, error) {
+			return mapAll(func(v string) (any, error) {
+				return time.Parse(format, v)
 			}, row, key...)
 		},
 	}
 }
 
-func mapAll[T any](fn func(T) any, row []map[string]any, key ...string) []map[string]any {
+func mapAll[T any](fn func(T) (any, error), row []map[string]any, key ...string) ([]map[string]any, error) {
+	var err error
 	for _, m := range row {
 		for _, k := range key {
 			v := m[k]
 			if val, ok := v.(T); ok {
-				m[k] = fn(val)
+				m[k], err = fn(val)
+				if err != nil {
+					return nil, err
+				}
 			}
 		}
 	}
-	return row
+	return row, nil
 }
 
 type SQLx struct {
@@ -136,8 +143,9 @@ func (s *SQLx) Close() error {
 	return s.DB.Close()
 }
 
-func (s *SQLx) Query(query string, args map[string]any) goja.Value {
+func (s *SQLx) Query(query string, args map[string]any) (goja.Value, error) {
 	var r *sqlx.Rows
+	var err error
 	if args != nil && len(args) > 0 {
 		if s.BigInt {
 			for k, v := range args {
@@ -146,15 +154,24 @@ func (s *SQLx) Query(query string, args map[string]any) goja.Value {
 				}
 			}
 		}
-		r = fn.Panic1(s.DB.NamedQuery(query, args))
+		r, err = s.DB.NamedQuery(query, args)
+		if err != nil {
+			return nil, err
+		}
 	} else {
-		r = fn.Panic1(s.DB.Queryx(query))
+		r, err = s.DB.Queryx(query)
+		if err != nil {
+			return nil, err
+		}
 	}
 	defer fn.IgnoreClose(r)
 	var g []any
 	for r.Next() {
 		v := make(map[string]any)
-		fn.Panic(r.MapScan(v))
+		err = r.MapScan(v)
+		if err != nil {
+			return nil, err
+		}
 		if s.BigInt {
 			for k, val := range v {
 				if t, ok := val.(int64); ok {
@@ -164,10 +181,11 @@ func (s *SQLx) Query(query string, args map[string]any) goja.Value {
 		}
 		g = append(g, v)
 	}
-	return s.Engine.NewArray(g...)
+	return s.Engine.NewArray(g...), nil
 }
-func (s *SQLx) Exec(query string, args map[string]any) Result {
+func (s *SQLx) Exec(query string, args map[string]any) (res Result, err error) {
 	var r sql.Result
+
 	if args != nil && len(args) > 0 {
 		if s.BigInt {
 			for k, v := range args {
@@ -176,22 +194,19 @@ func (s *SQLx) Exec(query string, args map[string]any) Result {
 				}
 			}
 		}
-		r = fn.Panic1(s.DB.NamedExec(query, args))
+		r, err = s.DB.NamedExec(query, args)
+		if err != nil {
+			return Result{}, err
+		}
 	} else {
-		r = fn.Panic1(s.DB.Exec(query))
+		r, err = s.DB.Exec(query)
+		if err != nil {
+			return
+		}
 	}
-	v, err := r.RowsAffected()
-	if err != nil {
-		v = 0
-	}
-	i, err := r.LastInsertId()
-	if err != nil {
-		i = 0
-	}
-	return Result{
-		LastInsertId: i,
-		RowsAffected: v,
-	}
+	res.RowsAffected, err = r.RowsAffected()
+	res.LastInsertId, err = r.LastInsertId()
+	return
 }
 
 type Result struct {
@@ -199,7 +214,7 @@ type Result struct {
 	RowsAffected int64
 }
 
-func (s *SQLx) Batch(query string, args []map[string]any) Result {
+func (s *SQLx) Batch(query string, args []map[string]any) (res Result, err error) {
 	var r sql.Result
 	if s.BigInt {
 		for i, arg := range args {
@@ -210,29 +225,30 @@ func (s *SQLx) Batch(query string, args []map[string]any) Result {
 			}
 		}
 	}
-	r = fn.Panic1(s.DB.NamedExec(query, args))
-	v, err := r.RowsAffected()
+	r, err = s.DB.NamedExec(query, args)
 	if err != nil {
-		v = 0
+		return
 	}
-	i, err := r.LastInsertId()
-	if err != nil {
-		i = 0
-	}
-	return Result{
-		LastInsertId: i,
-		RowsAffected: v,
-	}
+	res.RowsAffected, err = r.RowsAffected()
+
+	res.LastInsertId, err = r.LastInsertId()
+	return
 }
-func (s *SQLx) Prepare(query string) *Stmt {
-	r := fn.Panic1(s.DB.PrepareNamed(query))
+func (s *SQLx) Prepare(query string) (*Stmt, error) {
+	r, err := s.DB.PrepareNamed(query)
+	if err != nil {
+		return nil, err
+	}
 	i := &Stmt{r, s.Engine, s.BigInt}
-	return i
+	return i, nil
 }
-func (s *SQLx) Begin() *TX {
-	r := fn.Panic1(s.DB.BeginTxx(context.Background(), nil))
+func (s *SQLx) Begin() (*TX, error) {
+	r, err := s.DB.BeginTxx(context.Background(), nil)
+	if err != nil {
+		return nil, err
+	}
 	i := &TX{Tx: r, Engine: s.Engine}
-	return i
+	return i, nil
 }
 
 type TX struct {
@@ -241,23 +257,26 @@ type TX struct {
 	BigInt bool
 }
 
-func (s *TX) Commit() {
-	fn.Panic(s.Tx.Commit())
+func (s *TX) Commit() error {
+	return s.Tx.Commit()
 }
-func (s *TX) Rollback() {
-	fn.Panic(s.Tx.Rollback())
+func (s *TX) Rollback() error {
+	return s.Tx.Rollback()
 }
-func (s *TX) Prepare(qry string) *Stmt {
-	r := fn.Panic1(s.Tx.PrepareNamed(qry))
+func (s *TX) Prepare(qry string) (*Stmt, error) {
+	r, err := s.Tx.PrepareNamed(qry)
+	if err != nil {
+		return nil, err
+	}
 	i := &Stmt{r, s.Engine, s.BigInt}
-	return i
+	return i, nil
 }
 func (s *TX) Stmt(stmt *Stmt) *Stmt {
 	r := s.Tx.NamedStmt(stmt.NamedStmt)
 	i := &Stmt{r, s.Engine, s.BigInt}
 	return i
 }
-func (s *TX) Query(query string, args map[string]any) goja.Value {
+func (s *TX) Query(query string, args map[string]any) (goja.Value, error) {
 	if s.BigInt {
 		for k, v := range args {
 			if b, ok := v.(*big.Int); ok {
@@ -265,12 +284,18 @@ func (s *TX) Query(query string, args map[string]any) goja.Value {
 			}
 		}
 	}
-	r := fn.Panic1(s.NamedQuery(query, args))
+	r, err := s.NamedQuery(query, args)
+	if err != nil {
+		return nil, err
+	}
 	defer r.Close()
 	var g []any
 	for r.Next() {
 		v := make(map[string]any)
-		fn.Panic(r.MapScan(v))
+		err = r.MapScan(v)
+		if err != nil {
+			return nil, err
+		}
 		if s.BigInt {
 			for k, val := range v {
 				if t, ok := val.(int64); ok {
@@ -280,9 +305,9 @@ func (s *TX) Query(query string, args map[string]any) goja.Value {
 		}
 		g = append(g, v)
 	}
-	return s.Engine.NewArray(g...)
+	return s.Engine.NewArray(g...), nil
 }
-func (s *TX) Exec(query string, args map[string]any) Result {
+func (s *TX) Exec(query string, args map[string]any) (Result, error) {
 	if s.BigInt {
 		for k, v := range args {
 			if b, ok := v.(*big.Int); ok {
@@ -290,7 +315,10 @@ func (s *TX) Exec(query string, args map[string]any) Result {
 			}
 		}
 	}
-	r := fn.Panic1(s.NamedExec(query, args))
+	r, err := s.NamedExec(query, args)
+	if err != nil {
+		return Result{}, err
+	}
 	v, err := r.RowsAffected()
 	if err != nil {
 		v = 0
@@ -302,7 +330,7 @@ func (s *TX) Exec(query string, args map[string]any) Result {
 	return Result{
 		LastInsertId: i,
 		RowsAffected: v,
-	}
+	}, nil
 }
 
 type Stmt struct {
@@ -311,7 +339,7 @@ type Stmt struct {
 	BigInt bool
 }
 
-func (s *Stmt) Query(args map[string]any) goja.Value {
+func (s *Stmt) Query(args map[string]any) (goja.Value, error) {
 	if s.BigInt {
 		for k, v := range args {
 			if b, ok := v.(*big.Int); ok {
@@ -319,12 +347,18 @@ func (s *Stmt) Query(args map[string]any) goja.Value {
 			}
 		}
 	}
-	r := fn.Panic1(s.NamedStmt.Queryx(args))
+	r, err := s.NamedStmt.Queryx(args)
+	if err != nil {
+		return nil, err
+	}
 	defer r.Close()
 	var g []any
 	for r.Next() {
 		v := make(map[string]any)
-		fn.Panic(r.MapScan(v))
+		err = r.MapScan(v)
+		if err != nil {
+			return nil, err
+		}
 		if s.BigInt {
 			for k, val := range v {
 				if t, ok := val.(int64); ok {
@@ -334,9 +368,9 @@ func (s *Stmt) Query(args map[string]any) goja.Value {
 		}
 		g = append(g, v)
 	}
-	return s.Engine.NewArray(g...)
+	return s.Engine.NewArray(g...), nil
 }
-func (s *Stmt) Exec(args map[string]any) Result {
+func (s *Stmt) Exec(args map[string]any) (Result, error) {
 	if s.BigInt {
 		for k, v := range args {
 			if b, ok := v.(*big.Int); ok {
@@ -344,7 +378,10 @@ func (s *Stmt) Exec(args map[string]any) Result {
 			}
 		}
 	}
-	r := s.NamedStmt.MustExec(args)
+	r, err := s.NamedStmt.Exec(args)
+	if err != nil {
+		return Result{}, err
+	}
 	v, err := r.RowsAffected()
 	if err != nil {
 		v = 0
@@ -356,7 +393,7 @@ func (s *Stmt) Exec(args map[string]any) Result {
 	return Result{
 		LastInsertId: i,
 		RowsAffected: v,
-	}
+	}, nil
 }
 func (s *Stmt) Close() error {
 	s.Engine.RemoveResources(s.NamedStmt)
