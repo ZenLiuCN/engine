@@ -23,7 +23,7 @@ type Chrome struct {
 
 // Close the chrome application
 func (c *Chrome) Close() error {
-	return GoErrorOf(cd.Cancel(c.ctx))
+	return cd.Cancel(c.ctx)
 }
 func (c *Chrome) Targets() Maybe[[]*target.Info] {
 	return MaybeBoth(cd.Targets(c.ctx))
@@ -34,8 +34,8 @@ func (c *Chrome) Shutdown() {
 	c.cc()
 }
 
-func (c *Chrome) Submit(act ...cd.Action) *GoError {
-	return GoErrorOf(cd.Run(c.ctx, act...))
+func (c *Chrome) Submit(act ...cd.Action) error {
+	return cd.Run(c.ctx, act...)
 }
 func (c *Chrome) CreateBrowser(url string, opts ...cd.BrowserOption) Maybe[*Browser] {
 	if v, e := cd.NewBrowser(c.ctx, url, opts...); e != nil {

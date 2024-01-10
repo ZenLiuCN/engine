@@ -114,7 +114,7 @@ func TestContextJsFailure(t *testing.T) {
 	}
 
 }
-func TestAutoClose(t *testing.T) {
+func TestRegisterResource(t *testing.T) {
 	e := Get()
 	defer e.Free()
 	fn.Panic1(e.RunJs(
@@ -122,7 +122,7 @@ func TestAutoClose(t *testing.T) {
 		`
 	import os from 'go/os'
 	console.log(os)
-	const f=autoClose(os.open('engine.go'))
+	const f=registerResource(os.open('engine.go'))
 	console.log(f.name())
 `))
 

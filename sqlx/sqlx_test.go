@@ -26,3 +26,39 @@ console.log(db.query('	SELECT name, age, height, awesome, bday	FROM users	WHERE 
 db.close()
 `))
 }
+func TestConnectError(t *testing.T) {
+	vm := engine.Get()
+	defer vm.Free()
+	fn.Panic1(vm.RunJs(
+		//language=javascript
+		`
+import {SQLX} from "go/sqlx"
+
+let now = new Date();
+now.setDate(now.getDate() - 1);
+const oneDayAgo = now.toISOString().split('T')[0];
+const offSetTo = oneDayAgo+" 16:00:00";
+now.setDate(now.getDate() - 1);
+const twoDaysAgo = now.toISOString().split('T')[0];
+const offSetFrom = twoDaysAgo+" 16:00:00";
+let prd = null;
+let agency_pg = null;
+
+try{
+    agency_pg = new SQLX('pgx', 'postgres://medtree:medtree2345678@192.168.8.94:65433/dw?search_path=test');
+    let v=agency_pg.query("SELECT * FROM SOME_TABLE LIMIT 1")
+    prd = new SQLX('mysql', 'root:123456@tcp(127.0.0.1:330)/test1?parseTime=true');
+}catch (error){
+    console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+    console.log("sync error: ",error);
+
+}finally {
+    if (prd != null){
+        prd.close();
+    }
+    if (agency_pg != null){
+        agency_pg.close();
+    }
+}
+`))
+}

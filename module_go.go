@@ -2,6 +2,7 @@ package engine
 
 import (
 	_ "embed"
+	"fmt"
 	"github.com/ZenLiuCN/fn"
 	"github.com/dop251/goja"
 	"strconv"
@@ -55,7 +56,17 @@ var (
 			}
 			return vx
 		},
-		"intFromStringArray": func(value goja.Value, v []string) []any {
+		"intFromStringArray": func(value goja.Value, v []string) (r []any, err error) {
+			defer func() {
+				if r := recover(); r != nil {
+					switch v := r.(type) {
+					case error:
+						err = v
+					default:
+						err = fmt.Errorf("%s", v)
+					}
+				}
+			}()
 			vx := value.Export().([]any)
 			for _, a := range vx {
 				m := a.(map[string]any)
@@ -63,7 +74,7 @@ var (
 					m[s] = fn.Panic1(strconv.ParseInt(m[s].(string), 0, 64))
 				}
 			}
-			return vx
+			return vx, nil
 		},
 	}
 )

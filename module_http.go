@@ -4,10 +4,11 @@ import (
 	"bytes"
 	_ "embed"
 	"encoding/json"
+	"fmt"
 	"github.com/ZenLiuCN/fn"
 	"github.com/dop251/goja"
 	"io"
-	"net/http"
+	http "net/http"
 	"net/url"
 	"strings"
 )
@@ -71,16 +72,26 @@ var (
 		"request": func(req *http.Request) *HttpResponse {
 			return newResponse(http.DefaultClient.Do(req))
 		},
-		"requestOf": func(m, u string, b goja.Value) *http.Request {
+		"requestOf": func(m, u string, b goja.Value) (r *http.Request, err error) {
+			defer func() {
+				if r := recover(); r != nil {
+					switch v := r.(type) {
+					case error:
+						err = v
+					default:
+						err = fmt.Errorf("%s", v)
+					}
+				}
+			}()
 			switch v := b.Export().(type) {
 			case string:
-				return fn.Panic1(http.NewRequest(m, u, strings.NewReader(v)))
+				return http.NewRequest(m, u, strings.NewReader(v))
 			case []byte:
-				return fn.Panic1(http.NewRequest(m, u, bytes.NewReader(v)))
+				return http.NewRequest(m, u, bytes.NewReader(v))
 			case io.Reader:
-				return fn.Panic1(http.NewRequest(m, u, v))
+				return http.NewRequest(m, u, v)
 			default:
-				return fn.Panic1(http.NewRequest(m, u, bytes.NewReader(fn.Panic1(json.Marshal(v)))))
+				return http.NewRequest(m, u, bytes.NewReader(fn.Panic1(json.Marshal(v))))
 			}
 		},
 	}
@@ -100,14 +111,24 @@ func (s *HttpResponse) Close() {
 func (s *HttpResponse) HasError() bool {
 	return s.err != nil
 }
-func (s *HttpResponse) Error() string {
+func (s *HttpResponse) GetError() error {
 	if s.err != nil {
-		return s.err.Error()
+		return s.err
 	}
-	return ""
+	return nil
 }
 
-func (s *HttpResponse) Json() any {
+func (s *HttpResponse) Json() (r any, err error) {
+	defer func() {
+		if r := recover(); r != nil {
+			switch v := r.(type) {
+			case error:
+				err = v
+			default:
+				err = fmt.Errorf("%s", v)
+			}
+		}
+	}()
 	defer fn.IgnoreClose(s.Body)
 	s.closed = true
 	bin, err := io.ReadAll(s.Body)
@@ -117,33 +138,43 @@ func (s *HttpResponse) Json() any {
 	if bin[0] == '[' {
 		v := make([]any, 0)
 		fn.Panic(json.Unmarshal(bin, &v))
-		return v
+		return v, nil
 	} else if bin[0] == '{' {
 		v := make(map[string]any)
 		fn.Panic(json.Unmarshal(bin, &v))
-		return v
+		return v, nil
 	} else if bin[0] == '"' {
 		v := ""
 		fn.Panic(json.Unmarshal(bin, &v))
-		return v
+		return v, nil
 	} else if bin[0] == 't' || bin[0] == 'f' {
 		v := true
 		fn.Panic(json.Unmarshal(bin, &v))
-		return v
+		return v, nil
 	} else {
 		v := 0.0
 		fn.Panic(json.Unmarshal(bin, &v))
-		return v
+		return v, nil
 	}
 }
-func (s *HttpResponse) Text() string {
+func (s *HttpResponse) Text() (r string, err error) {
+	defer func() {
+		if r := recover(); r != nil {
+			switch v := r.(type) {
+			case error:
+				err = v
+			default:
+				err = fmt.Errorf("%s", v)
+			}
+		}
+	}()
 	defer fn.IgnoreClose(s.Body)
 	s.closed = true
 	bin, err := io.ReadAll(s.Body)
 	if err != nil {
 		panic(err)
 	}
-	return string(bin)
+	return string(bin), nil
 }
 func (s *HttpResponse) Binary() []byte {
 	defer fn.IgnoreClose(s.Body)

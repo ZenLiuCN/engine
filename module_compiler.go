@@ -14,13 +14,57 @@ var (
 	//go:embed module_compiler.d.ts
 	compilerDefine []byte
 	compilerMap    = map[string]any{
-		"compileJs": CompileJs,
-		"compileTs": CompileTs,
-		"compileTsCode": func(src string, entry bool) *Code {
-			return CompileSource(src, true, entry)
+		"compileJs": func(js string, entry bool) (s string, err error) {
+			defer func() {
+				if r := recover(); r != nil {
+					switch v := r.(type) {
+					case error:
+						err = v
+					default:
+						err = fmt.Errorf("%s", v)
+					}
+				}
+			}()
+			return CompileJs(js, entry), nil
 		},
-		"compileJsCode": func(src string, entry bool) *Code {
-			return CompileSource(src, false, entry)
+		"compileTs": func(js string, entry bool) (s string, err error) {
+			defer func() {
+				if r := recover(); r != nil {
+					switch v := r.(type) {
+					case error:
+						err = v
+					default:
+						err = fmt.Errorf("%s", v)
+					}
+				}
+			}()
+			return CompileTs(js, entry), nil
+		},
+		"compileTsCode": func(src string, entry bool) (c *Code, err error) {
+			defer func() {
+				if r := recover(); r != nil {
+					switch v := r.(type) {
+					case error:
+						err = v
+					default:
+						err = fmt.Errorf("%s", v)
+					}
+				}
+			}()
+			return CompileSource(src, true, entry), nil
+		},
+		"compileJsCode": func(src string, entry bool) (c *Code, err error) {
+			defer func() {
+				if r := recover(); r != nil {
+					switch v := r.(type) {
+					case error:
+						err = v
+					default:
+						err = fmt.Errorf("%s", v)
+					}
+				}
+			}()
+			return CompileSource(src, false, entry), nil
 		},
 	}
 )

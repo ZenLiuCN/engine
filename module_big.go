@@ -2,7 +2,6 @@ package engine
 
 import (
 	_ "embed"
-	"fmt"
 	"github.com/ZenLiuCN/fn"
 	"github.com/dop251/goja"
 	"math/big"
@@ -30,57 +29,57 @@ func (c BigModule) Exports() map[string]any {
 }
 
 func (c BigModule) ExportsWithEngine(eng *Engine) map[string]any {
-	ic := eng.ToValue(eng.ToConstructor(func(v []goja.Value) (any, error) {
+	ic := eng.ToValue(eng.ToConstructorRecover(func(v []goja.Value) any {
 		switch t := v[0].Export().(type) {
 		case int64:
-			return big.NewInt(t), nil
+			return big.NewInt(t)
 		case float64:
-			return big.NewInt(int64(t)), nil
+			return big.NewInt(int64(t))
 		case string:
-			return big.NewInt(fn.Panic1(strconv.ParseInt(t, 0, 64))), nil
+			return big.NewInt(fn.Panic1(strconv.ParseInt(t, 0, 64)))
 		default:
-			return nil, fmt.Errorf("only number accepted")
+			panic("only number accepted")
 		}
 	}))
-	rc := eng.ToValue(eng.ToConstructor(func(v []goja.Value) (any, error) {
+	rc := eng.ToValue(eng.ToConstructorRecover(func(v []goja.Value) any {
 		switch len(v) {
 		case 1:
 			switch t := v[0].Export().(type) {
 			case int64:
-				return big.NewRat(t, 1), nil
+				return big.NewRat(t, 1)
 			case float64:
-				return big.NewRat(0, 1).SetFloat64(t), nil
+				return big.NewRat(0, 1).SetFloat64(t)
 			case string:
 				r, _ := big.NewRat(0, 1).SetString(t)
-				return r, nil
+				return r
 			default:
-				return nil, fmt.Errorf("only number accepted")
+				panic("only number accepted")
 			}
 		case 2:
 			switch a := v[0].Export().(type) {
 			case int64:
 				switch b := v[1].Export().(type) {
 				case int64:
-					return big.NewRat(a, b), nil
+					return big.NewRat(a, b)
 				default:
-					return nil, fmt.Errorf("only integer with integer accepted")
+					panic("only integer with integer accepted")
 				}
 			case float64:
-				return big.NewRat(0, 1).SetFloat64(a), nil
+				return big.NewRat(0, 1).SetFloat64(a)
 			default:
-				return nil, fmt.Errorf("only number accepted")
+				panic("only number accepted")
 			}
 		default:
-			return nil, fmt.Errorf("bad arguments")
+			panic("bad arguments")
 		}
 
 	}))
 	return map[string]any{
-		"zeroInt": func() goja.Value {
-			return fn.Panic1(eng.CallConstruct(ic, 0))
+		"zeroInt": func() (goja.Value, error) {
+			return eng.CallConstruct(ic, 0)
 		},
-		"oneRat": func() goja.Value {
-			return fn.Panic1(eng.CallConstruct(rc, 1))
+		"oneRat": func() (goja.Value, error) {
+			return eng.CallConstruct(rc, 1)
 		},
 		"equals": func(a, b *big.Int) bool {
 			return a.Cmp(b) == 0

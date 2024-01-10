@@ -143,20 +143,21 @@ func (b *Buffer) Grow(n int) {
 func (b *Buffer) Reset() {
 	b.Buffer.Reset()
 }
-func (b *Buffer) Slice(from, to int) *goja.Object {
+func (b *Buffer) Slice(from, to int) (*goja.Object, error) {
 	if from < 0 || from >= to || to > b.Buffer.Len() {
 		panic("index overflow")
 	}
-	return fn.Panic1(b.e.New(b.e.Get("Buffer"), b.e.ToValue(b.Buffer.Bytes()[from:to])))
+	return b.e.New(b.e.Get("Buffer"), b.e.ToValue(b.Buffer.Bytes()[from:to]))
 }
-func (b *Buffer) Runes() (r []string) {
+func (b *Buffer) Runes() (r []string, err error) {
+	var u rune
 	for {
-		if u, _, err := b.Buffer.ReadRune(); err == nil {
+		if u, _, err = b.Buffer.ReadRune(); err == nil {
 			r = append(r, string(u))
 		} else if errors.Is(err, io.EOF) {
 			break
 		} else {
-			panic(err)
+			return
 		}
 	}
 	return
@@ -164,7 +165,17 @@ func (b *Buffer) Runes() (r []string) {
 func (b *Buffer) Bytes() []byte {
 	return b.Buffer.Bytes()
 }
-func (b *Buffer) EachByte(v goja.Value) {
+func (b *Buffer) EachByte(v goja.Value, err error) {
+	defer func() {
+		if r := recover(); r != nil {
+			switch v := r.(type) {
+			case error:
+				err = v
+			default:
+				err = fmt.Errorf("%s", v)
+			}
+		}
+	}()
 	if f, ok := goja.AssertFunction(v); ok {
 		for {
 			if u, err := b.Buffer.ReadByte(); err == nil {
@@ -179,7 +190,17 @@ func (b *Buffer) EachByte(v goja.Value) {
 		}
 	}
 }
-func (b *Buffer) MapByte(v goja.Value) *goja.Object {
+func (b *Buffer) MapByte(v goja.Value) (r *goja.Object, err error) {
+	defer func() {
+		if r := recover(); r != nil {
+			switch v := r.(type) {
+			case error:
+				err = v
+			default:
+				err = fmt.Errorf("%s", v)
+			}
+		}
+	}()
 	if f, ok := goja.AssertFunction(v); ok {
 		var ar []any
 		for {
@@ -191,11 +212,21 @@ func (b *Buffer) MapByte(v goja.Value) *goja.Object {
 				panic(err)
 			}
 		}
-		return b.e.NewArray(ar...)
+		return b.e.NewArray(ar...), nil
 	}
-	return nil
+	return nil, nil
 }
-func (b *Buffer) EachRune(v goja.Value) {
+func (b *Buffer) EachRune(v goja.Value, err error) {
+	defer func() {
+		if r := recover(); r != nil {
+			switch v := r.(type) {
+			case error:
+				err = v
+			default:
+				err = fmt.Errorf("%s", v)
+			}
+		}
+	}()
 	if f, ok := goja.AssertFunction(v); ok {
 		for {
 			if u, _, err := b.Buffer.ReadRune(); err == nil {
@@ -210,7 +241,17 @@ func (b *Buffer) EachRune(v goja.Value) {
 		}
 	}
 }
-func (b *Buffer) MapRune(v goja.Value) *goja.Object {
+func (b *Buffer) MapRune(v goja.Value) (r *goja.Object, err error) {
+	defer func() {
+		if r := recover(); r != nil {
+			switch v := r.(type) {
+			case error:
+				err = v
+			default:
+				err = fmt.Errorf("%s", v)
+			}
+		}
+	}()
 	if f, ok := goja.AssertFunction(v); ok {
 		var ar []any
 		for {
@@ -222,34 +263,48 @@ func (b *Buffer) MapRune(v goja.Value) *goja.Object {
 				panic(err)
 			}
 		}
-		return b.e.NewArray(ar...)
+		return b.e.NewArray(ar...), nil
 	}
-	return nil
+	return nil, nil
 }
 func (b *Buffer) ToString() string {
 	return b.Buffer.String()
 }
-func (b *Buffer) ReadString(delimiter string) string {
-	s, err := b.Buffer.ReadString([]byte(delimiter)[0])
+func (b *Buffer) ReadString(delimiter string) (s string, err error) {
+	defer func() {
+		if r := recover(); r != nil {
+			switch v := r.(type) {
+			case error:
+				err = v
+			default:
+				err = fmt.Errorf("%s", v)
+			}
+		}
+	}()
+
+	s, err = b.Buffer.ReadString([]byte(delimiter)[0])
 	if err != nil && errors.Is(err, io.EOF) {
-		return ""
+		return "", nil
 	} else if err != nil {
 		panic(err)
 	}
-	return s
+	return s, nil
 }
-func (b *Buffer) WriteString(c string) int {
-	return fn.Panic1(b.Buffer.WriteString(c))
+func (b *Buffer) WriteString(c string) (int, error) {
+	return b.Buffer.WriteString(c)
 }
-func (b *Buffer) ReadByte() byte {
-	return fn.Panic1(b.Buffer.ReadByte())
+func (b *Buffer) ReadByte() (byte, error) {
+	return b.Buffer.ReadByte()
 }
-func (b *Buffer) WriteByte(c uint8) {
-	fn.Panic(b.Buffer.WriteByte(c))
+func (b *Buffer) WriteByte(c uint8) error {
+	return b.Buffer.WriteByte(c)
 }
-func (b *Buffer) ReadRune() string {
-	r, _ := fn.Panic2(b.Buffer.ReadRune())
-	return string(r)
+func (b *Buffer) ReadRune() (string, error) {
+	r, _, err := b.Buffer.ReadRune()
+	if err != nil {
+		return "", err
+	}
+	return string(r), nil
 }
 func (b *Buffer) WriteRune(r string) {
 	b.Buffer.WriteRune([]rune(r)[0])
@@ -263,18 +318,51 @@ func (b *Buffer) WriteBuffer(buf goja.ArrayBuffer) int {
 	return fn.Panic1(b.Buffer.Write(buf.Bytes()))
 }
 
-func (b *Buffer) SaveTo(path string) {
+func (b *Buffer) SaveTo(path string) (err error) {
+	defer func() {
+		if r := recover(); r != nil {
+			switch v := r.(type) {
+			case error:
+				err = v
+			default:
+				err = fmt.Errorf("%s", v)
+			}
+		}
+	}()
 	f := fn.Panic1(os.OpenFile(path, os.O_CREATE|os.O_TRUNC, os.ModePerm))
 	defer fn.IgnoreClose(f)
 	fn.Panic1(io.Copy(f, b.Buffer))
+	return
 }
 
-func (b *Buffer) LoadFile(p string) {
+func (b *Buffer) LoadFile(p string) (err error) {
+	defer func() {
+		if r := recover(); r != nil {
+			switch v := r.(type) {
+			case error:
+				err = v
+			default:
+				err = fmt.Errorf("%s", v)
+			}
+		}
+	}()
 	b.Buffer.Reset()
 	b.Buffer.Write(fn.Panic1(os.ReadFile(p)))
+	return
 }
-func (b *Buffer) MergeFile(p string) {
+func (b *Buffer) MergeFile(p string) (err error) {
+	defer func() {
+		if r := recover(); r != nil {
+			switch v := r.(type) {
+			case error:
+				err = v
+			default:
+				err = fmt.Errorf("%s", v)
+			}
+		}
+	}()
 	b.Buffer.Write(fn.Panic1(os.ReadFile(p)))
+	return
 }
 
 func (b *Buffer) ToWriter() io.Writer {
@@ -320,8 +408,18 @@ func (b *Bytes) SetLen(i int) bool {
 	return true
 }
 
-func (b *Bytes) Slice(from, to int) *goja.Object {
-	return fn.Panic1(b.Engine.CallConstruct(b.ctor, b.b[from:to]))
+func (b *Bytes) Slice(from, to int) (r *goja.Object, err error) {
+	defer func() {
+		if r := recover(); r != nil {
+			switch v := r.(type) {
+			case error:
+				err = v
+			default:
+				err = fmt.Errorf("%s", v)
+			}
+		}
+	}()
+	return fn.Panic1(b.Engine.CallConstruct(b.ctor, b.b[from:to])), nil
 }
 func (b *Bytes) Equals(v goja.Value) bool {
 	switch t := v.Export().(type) {
@@ -335,13 +433,23 @@ func (b *Bytes) Equals(v goja.Value) bool {
 		return false
 	}
 }
-func (b *Bytes) Clone() *goja.Object {
-	return fn.Panic1(b.Engine.CallConstruct(b.ctor, bytes.Clone(b.b)))
+func (b *Bytes) Clone() (*goja.Object, error) {
+	return b.Engine.CallConstruct(b.ctor, bytes.Clone(b.b))
 }
 func (b *Bytes) Bytes() []byte {
 	return b.b
 }
-func (b *Bytes) Append(v goja.Value) *goja.Object {
+func (b *Bytes) Append(v goja.Value) (r *goja.Object, err error) {
+	defer func() {
+		if r := recover(); r != nil {
+			switch v := r.(type) {
+			case error:
+				err = v
+			default:
+				err = fmt.Errorf("%s", v)
+			}
+		}
+	}()
 	var bin []byte
 	switch t := v.Export().(type) {
 	case []byte:
@@ -357,7 +465,7 @@ func (b *Bytes) Append(v goja.Value) *goja.Object {
 	default:
 		panic(fmt.Errorf("bad argument type of: %#v", v))
 	}
-	return fn.Panic1(b.Engine.CallConstruct(b.ctor, append(b.b, bin...)))
+	return fn.Panic1(b.Engine.CallConstruct(b.ctor, append(b.b, bin...))), nil
 }
 func (b *Bytes) ToText() string {
 	return string(b.b)

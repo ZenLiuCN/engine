@@ -36,9 +36,24 @@ func (s *Engine) RegisterFunction(name string, ctor func(c FunctionCall) Value) 
 func (s *Engine) RegisterType(name string, ctor func(v []Value) (any, error)) {
 	s.Set(name, s.ToConstructor(ctor))
 }
+func (s *Engine) RegisterTypeRecover(name string, ctor func(v []Value) any) {
+	s.Set(name, s.ToConstructorRecover(ctor))
+}
 
 // ToInstance create instance of a value with simple prototype, use for constructor only.
 func (s *Engine) ToInstance(v any, c ConstructorCall) *Object {
+	defer func() {
+		if r := recover(); r != nil {
+			switch v := r.(type) {
+			case *Object:
+				panic(v)
+			case error:
+				panic(s.NewGoError(v))
+			default:
+				panic(s.NewGoError(fmt.Errorf("%s", v)))
+			}
+		}
+	}()
 	o := s.ToValue(v).(*Object)
 	fn.Panic(o.SetPrototype(c.This.Prototype()))
 	return o
@@ -49,6 +64,27 @@ func (s *Engine) ToConstructor(ct func(v []Value) (any, error)) func(Constructor
 		if err != nil {
 			panic(s.NewGoError(err))
 		}
+		if val != nil {
+			return s.ToInstance(val, c)
+		}
+		panic("can't construct type: " + c.This.ClassName())
+	}
+}
+func (s *Engine) ToConstructorRecover(ct func(v []Value) any) func(ConstructorCall) *Object {
+	return func(c ConstructorCall) *Object {
+		defer func() {
+			if r := recover(); r != nil {
+				switch v := r.(type) {
+				case *Object:
+					panic(v)
+				case error:
+					panic(s.NewGoError(v))
+				default:
+					panic(s.NewGoError(fmt.Errorf("%s", v)))
+				}
+			}
+		}()
+		val := ct(c.Arguments)
 		if val != nil {
 			return s.ToInstance(val, c)
 		}
@@ -76,6 +112,18 @@ func (s *Engine) ToSelfReferConstructor(ct func(ctor Value, v []Value) (any, err
 func (s *Engine) ToSelfReferRawConstructor(ct func(ctor Value, call ConstructorCall) *Object) Value {
 	var ctor Value
 	ctor = s.ToValue(func(c ConstructorCall) *Object {
+		defer func() {
+			if r := recover(); r != nil {
+				switch v := r.(type) {
+				case *Object:
+					panic(v)
+				case error:
+					panic(s.NewGoError(v))
+				default:
+					panic(s.NewGoError(fmt.Errorf("%s", v)))
+				}
+			}
+		}()
 		return ct(ctor, c)
 	})
 	return ctor

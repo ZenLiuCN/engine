@@ -276,7 +276,11 @@ func (o *Option) Request(e *engine.Engine, jar *cookiejar.Jar, uri string) *goja
 		case []byte:
 			req.Body = io.NopCloser(bytes.NewReader(v))
 		case goja.JsonEncodable:
-			req.Body = io.NopCloser(bytes.NewReader(fn.Panic1(json.Marshal(v.JsonEncodable()))))
+			b, err := json.Marshal(v.JsonEncodable())
+			if err != nil {
+				rj(err)
+			}
+			req.Body = io.NopCloser(bytes.NewReader(b))
 		default:
 			req.Body = io.NopCloser(strings.NewReader(fmt.Sprintf("%s", v)))
 		}

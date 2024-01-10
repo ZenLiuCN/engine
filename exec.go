@@ -42,6 +42,16 @@ func Lookup(cmd string) (p string, err error) {
 	return
 }
 func Execute(opt *ExecOption) (err error) {
+	defer func() {
+		if r := recover(); r != nil {
+			switch v := r.(type) {
+			case error:
+				err = v
+			default:
+				err = fmt.Errorf("%s", v)
+			}
+		}
+	}()
 	if len(opt.Cmd) == 0 {
 		if opt.Sleep > 0 {
 			time.Sleep(opt.Sleep)
@@ -106,7 +116,17 @@ func Execute(opt *ExecOption) (err error) {
 	}
 	return nil
 }
-func OpenProc(opt *ProcOption) (proc *SubProcess) {
+func OpenProc(opt *ProcOption) (proc *SubProcess, err error) {
+	defer func() {
+		if r := recover(); r != nil {
+			switch v := r.(type) {
+			case error:
+				err = v
+			default:
+				err = fmt.Errorf("%s", v)
+			}
+		}
+	}()
 	if len(opt.Cmd) == 0 {
 		return
 	}
@@ -116,7 +136,7 @@ func OpenProc(opt *ProcOption) (proc *SubProcess) {
 	}
 	return &SubProcess{
 		Cmd: cmd,
-	}
+	}, nil
 }
 func BuildCommand(opt *ProcOption) (cmd *exec.Cmd, err error) {
 	var pth = opt.Cmd

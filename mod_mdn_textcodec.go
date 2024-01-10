@@ -10,11 +10,11 @@ func (t TextEncoders) Name() string {
 }
 
 func (t TextEncoders) Register(e *Engine) {
-	e.RegisterType("TextEncoder", func(v []goja.Value) (any, error) {
-		return TextEncoder, nil
+	e.RegisterTypeRecover("TextEncoder", func(v []goja.Value) any {
+		return TextEncoder
 	})
-	e.RegisterType("TextDecoder", func(v []goja.Value) (any, error) {
-		return TextDecoder, nil
+	e.RegisterTypeRecover("TextDecoder", func(v []goja.Value) any {
+		return TextDecoder
 	})
 }
 

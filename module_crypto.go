@@ -95,35 +95,45 @@ var cryptoMap = map[string]any{
 		return cipher
 	},
 
-	"generateKey": func(algorithm Algorithm, option Option) *AsymmetricPrivateKey {
+	"generateKey": func(algorithm Algorithm, option Option) (v *AsymmetricPrivateKey, err error) {
+		defer func() {
+			if r := recover(); r != nil {
+				switch v := r.(type) {
+				case error:
+					err = v
+				default:
+					err = fmt.Errorf("%s", v)
+				}
+			}
+		}()
 		switch algorithm {
 		case algRSA:
 			return &AsymmetricPrivateKey{
 				Alg: algorithm,
 				key: fn.Panic1(rsa.GenerateKey(rand.Reader, option.Bits)),
-			}
+			}, nil
 		case algECDH:
 			switch option.Curve {
 			case "P256":
 				return &AsymmetricPrivateKey{
 					Alg: algorithm,
 					key: fn.Panic1(ecdh.P256().GenerateKey(rand.Reader)),
-				}
+				}, nil
 			case "P384":
 				return &AsymmetricPrivateKey{
 					Alg: algorithm,
 					key: fn.Panic1(ecdh.P384().GenerateKey(rand.Reader)),
-				}
+				}, nil
 			case "P521":
 				return &AsymmetricPrivateKey{
 					Alg: algorithm,
 					key: fn.Panic1(ecdh.P521().GenerateKey(rand.Reader)),
-				}
+				}, nil
 			case "X25519":
 				return &AsymmetricPrivateKey{
 					Alg: algorithm,
 					key: fn.Panic1(ecdh.X25519().GenerateKey(rand.Reader)),
-				}
+				}, nil
 			default:
 				panic(fmt.Errorf("unknown ECDH curve type : %s", option.Curve))
 			}
@@ -133,22 +143,22 @@ var cryptoMap = map[string]any{
 				return &AsymmetricPrivateKey{
 					Alg: algorithm,
 					key: fn.Panic1(ecdsa.GenerateKey(elliptic.P256(), rand.Reader)),
-				}
+				}, nil
 			case "P384":
 				return &AsymmetricPrivateKey{
 					Alg: algorithm,
 					key: fn.Panic1(ecdsa.GenerateKey(elliptic.P384(), rand.Reader)),
-				}
+				}, nil
 			case "P521":
 				return &AsymmetricPrivateKey{
 					Alg: algorithm,
 					key: fn.Panic1(ecdsa.GenerateKey(elliptic.P521(), rand.Reader)),
-				}
+				}, nil
 			case "P224":
 				return &AsymmetricPrivateKey{
 					Alg: algorithm,
 					key: fn.Panic1(ecdsa.GenerateKey(elliptic.P224(), rand.Reader)),
-				}
+				}, nil
 			default:
 				panic(fmt.Errorf("unknown ECDSA curve type : %s", option.Curve))
 			}
@@ -158,7 +168,7 @@ var cryptoMap = map[string]any{
 				Alg:    algorithm,
 				key:    pk,
 				pubKey: puk,
-			}
+			}, nil
 		default:
 			panic(fmt.Errorf("unknown algorithm type : %d", algorithm))
 		}
@@ -173,72 +183,112 @@ var cryptoMap = map[string]any{
 		p.Load(pem)
 		return p
 	},
-	"sign": func(key *AsymmetricPrivateKey, data []byte, hash crypto.Hash, opt *rsa.PSSOptions) []byte {
+	"sign": func(key *AsymmetricPrivateKey, data []byte, hash crypto.Hash, opt *rsa.PSSOptions) (r []byte, err error) {
+		defer func() {
+			if r := recover(); r != nil {
+				switch v := r.(type) {
+				case error:
+					err = v
+				default:
+					err = fmt.Errorf("%s", v)
+				}
+			}
+		}()
 		switch key.Alg {
 		case algRSA:
 			if opt == nil {
-				return fn.Panic1(rsa.SignPKCS1v15(rand.Reader, key.mustRSA(), hash, data))
+				return fn.Panic1(rsa.SignPKCS1v15(rand.Reader, key.mustRSA(), hash, data)), nil
 			} else {
-				return fn.Panic1(rsa.SignPSS(rand.Reader, key.mustRSA(), hash, data, opt))
+				return fn.Panic1(rsa.SignPSS(rand.Reader, key.mustRSA(), hash, data, opt)), nil
 			}
 		case algECDSA:
-			return fn.Panic1(ecdsa.SignASN1(rand.Reader, key.mustECDSA(), data))
+			return fn.Panic1(ecdsa.SignASN1(rand.Reader, key.mustECDSA(), data)), nil
 		case algED25519:
-			return ed25519.Sign(key.mustED25519(), data)
+			return ed25519.Sign(key.mustED25519(), data), nil
 		default:
 			panic(fmt.Errorf("unsupported algorithm for sign: %d", key.Alg))
 		}
 	},
-	"verify": func(key *AsymmetricPublicKey, data, sign []byte, hash crypto.Hash, opt *rsa.PSSOptions) bool {
+	"verify": func(key *AsymmetricPublicKey, data, sign []byte, hash crypto.Hash, opt *rsa.PSSOptions) (v bool, err error) {
+		defer func() {
+			if r := recover(); r != nil {
+				switch v := r.(type) {
+				case error:
+					err = v
+				default:
+					err = fmt.Errorf("%s", v)
+				}
+			}
+		}()
 		switch key.Alg {
 		case algRSA:
 			if opt == nil {
 				err := rsa.VerifyPKCS1v15(key.mustRSA(), hash, data, sign)
 				if err != nil {
 					if errors.Is(err, rsa.ErrVerification) {
-						return false
+						return false, nil
 					} else {
 						panic(err)
 					}
 				} else {
-					return true
+					return true, nil
 				}
 			} else {
 				err := rsa.VerifyPSS(key.mustRSA(), hash, data, sign, opt)
 				if err != nil {
 					if errors.Is(err, rsa.ErrVerification) {
-						return false
+						return false, nil
 					} else {
 						panic(err)
 					}
 				} else {
-					return true
+					return true, nil
 				}
 			}
 		case algECDSA:
-			return ecdsa.VerifyASN1(key.mustECDSA(), data, sign)
+			return ecdsa.VerifyASN1(key.mustECDSA(), data, sign), nil
 		case algED25519:
-			return ed25519.Verify(key.mustED25519(), data, sign)
+			return ed25519.Verify(key.mustED25519(), data, sign), nil
 		default:
 			panic(fmt.Errorf("unsupported algorithm for sign: %d", key.Alg))
 		}
 	},
-	"encrypt": func(key *AsymmetricPublicKey, data []byte, hasher hash.Hash) []byte {
+	"encrypt": func(key *AsymmetricPublicKey, data []byte, hasher hash.Hash) (r []byte, err error) {
+		defer func() {
+			if r := recover(); r != nil {
+				switch v := r.(type) {
+				case error:
+					err = v
+				default:
+					err = fmt.Errorf("%s", v)
+				}
+			}
+		}()
 		switch key.Alg {
 		case algRSA:
-			return fn.Panic1(rsa.EncryptOAEP(hasher, rand.Reader, key.mustRSA(), data, nil))
+			return fn.Panic1(rsa.EncryptOAEP(hasher, rand.Reader, key.mustRSA(), data, nil)), nil
 		case algECDSA:
-			return fn.Panic1(eciesgo.Encrypt(key.mustECISE(), data))
+			return fn.Panic1(eciesgo.Encrypt(key.mustECISE(), data)), nil
 		default:
 			panic(fmt.Errorf("unsupported algorithm for sign: %d", key.Alg))
 		}
 	},
-	"decrypt": func(key *AsymmetricPrivateKey, secret []byte, hasher hash.Hash) []byte {
+	"decrypt": func(key *AsymmetricPrivateKey, secret []byte, hasher hash.Hash) (r []byte, err error) {
+		defer func() {
+			if r := recover(); r != nil {
+				switch v := r.(type) {
+				case error:
+					err = v
+				default:
+					err = fmt.Errorf("%s", v)
+				}
+			}
+		}()
 		switch key.Alg {
 		case algRSA:
-			return fn.Panic1(rsa.DecryptOAEP(hasher, rand.Reader, key.mustRSA(), secret, nil))
+			return fn.Panic1(rsa.DecryptOAEP(hasher, rand.Reader, key.mustRSA(), secret, nil)), nil
 		case algECDSA:
-			return fn.Panic1(eciesgo.Decrypt(key.mustECISE(), secret))
+			return fn.Panic1(eciesgo.Decrypt(key.mustECISE(), secret)), nil
 		default:
 			panic(fmt.Errorf("unsupported algorithm for sign: %d", key.Alg))
 		}

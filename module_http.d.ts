@@ -101,7 +101,7 @@ declare module 'go/http' {
 
         hasError(): boolean
 
-        error(): string
+        getError(): Error | undefined
 
 
         hasBody(): boolean

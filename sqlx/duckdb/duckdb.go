@@ -6,6 +6,7 @@ import (
 	"database/sql"
 	"database/sql/driver"
 	_ "embed"
+	"fmt"
 	"github.com/ZenLiuCN/engine"
 	"github.com/ZenLiuCN/engine/sqlx"
 	"github.com/ZenLiuCN/fn"
@@ -40,17 +41,29 @@ func (d DuckDBModule) Exports() map[string]any {
 }
 
 func (d DuckDBModule) ExportsWithEngine(eng *engine.Engine) map[string]any {
-	ci := eng.ToValue(eng.ToConstructor(func(v []goja.Value) any {
+	ci := eng.ToValue(eng.ToConstructor(func(v []goja.Value) (rx any, err error) {
+		defer func() {
+			if r := recover(); r != nil {
+				switch v := r.(type) {
+				case error:
+					err = v
+				default:
+					err = fmt.Errorf("%s", v)
+				}
+				rx = nil
+			}
+		}()
 		dsn := v[0].Export().(string)
 		if len(v) == 1 {
-			return &Conn{
+			rx = &Conn{
 				c: fn.Panic1(duckdb.NewConnector(dsn, nil)),
 				e: eng,
 			}
+			return
 		} else {
 			var q []string
 			fn.Panic(eng.ExportTo(v[1], &q))
-			return &Conn{
+			rx = &Conn{
 				c: fn.Panic1(duckdb.NewConnector(dsn, func(execer driver.ExecerContext) error {
 					for _, qry := range q {
 						_, err := execer.ExecContext(context.Background(), qry, nil)
@@ -62,6 +75,7 @@ func (d DuckDBModule) ExportsWithEngine(eng *engine.Engine) map[string]any {
 				})),
 				e: eng,
 			}
+			return
 		}
 	}))
 	return map[string]any{
@@ -82,14 +96,21 @@ func (c *Conn) ToSQLX() *sqlx.SQLx {
 	})
 }
 
-func (c *Conn) ToAppender(schema, table string) *Appender {
-	conn := fn.Panic1(c.c.Connect(context.Background()))
-	appender := engine.RegisterResource(c.e, fn.Panic1(duckdb.NewAppenderFromConn(conn, schema, table)))
+func (c *Conn) ToAppender(schema, table string) (*Appender, error) {
+	conn, err := c.c.Connect(context.Background())
+	if err != nil {
+		return nil, err
+	}
+	app, err := duckdb.NewAppenderFromConn(conn, schema, table)
+	if err != nil {
+		return nil, err
+	}
+	appender := engine.RegisterResource(c.e, app)
 	return &Appender{
 		a: appender,
 		e: c.e,
 		c: conn,
-	}
+	}, nil
 }
 
 type Appender struct {
@@ -98,21 +119,21 @@ type Appender struct {
 	c driver.Conn
 }
 
-func (a *Appender) Error() *engine.GoError {
-	return engine.GoErrorOf(a.a.Error())
+func (a *Appender) Error() error {
+	return a.a.Error()
 }
 
-func (a *Appender) Flush() *engine.GoError {
-	return engine.GoErrorOf(a.a.Flush())
+func (a *Appender) Flush() error {
+	return a.a.Flush()
 }
 
-func (a *Appender) Close() *engine.GoError {
+func (a *Appender) Close() error {
 	a.e.RemoveResources(a.a)
 	defer fn.IgnoreClose(a.c)
-	return engine.GoErrorOf(a.a.Close())
+	return a.a.Close()
 }
 
 // AppendRow loads a row of values into the appender. The values are provided as separate arguments.
-func (a *Appender) AppendRow(args ...driver.Value) *engine.GoError {
-	return engine.GoErrorOf(a.a.AppendRow(args...))
+func (a *Appender) AppendRow(args ...driver.Value) error {
+	return a.a.AppendRow(args...)
 }

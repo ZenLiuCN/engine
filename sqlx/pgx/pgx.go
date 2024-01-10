@@ -41,19 +41,24 @@ func (d PgxModule) Exports() map[string]any {
 }
 
 func (d PgxModule) ExportsWithEngine(eng *engine.Engine) map[string]any {
-	ci := eng.ToValue(eng.ToConstructor(func(v []goja.Value) any {
+	ci := eng.ToValue(eng.ToConstructor(func(v []goja.Value) (any, error) {
 		dsn := v[0].Export().(string)
 		ctx, cc := context.WithCancel(context.Background())
 		cf := new(Config)
 		if len(v) > 1 {
 			fn.Panic(eng.ExportTo(v[1], cf))
 		}
+		ccx, err := pgx.Connect(ctx, dsn)
+		if err != nil {
+			cc()
+			return nil, err
+		}
 		return &Conn{
 			cf: cf,
-			c:  fn.Panic1(pgx.Connect(ctx, dsn)),
+			c:  ccx,
 			e:  eng,
 			cc: cc,
-		}
+		}, nil
 	}))
 	return map[string]any{
 		"Connection": ci,
@@ -82,27 +87,57 @@ func (c *ConnPool) Close() error {
 	c.c.Close()
 	return nil
 }
-func (c *ConnPool) Acquire() *PoolConn {
+func (c *ConnPool) Acquire() (p *PoolConn, err error) {
+	defer func() {
+		if r := recover(); r != nil {
+			switch v := r.(type) {
+			case error:
+				err = v
+			default:
+				err = fmt.Errorf("%s", v)
+			}
+		}
+	}()
 	ctx, cc := context.WithCancel(context.Background())
 	return engine.RegisterResource(c.e, &PoolConn{
 		cf: c.Configure(),
 		c:  fn.Panic1(c.c.Acquire(ctx)),
 		e:  c.e,
 		cc: cc,
-	})
+	}), nil
 }
-func (c *ConnPool) Query(qry string, args map[string]any) *Rows {
+func (c *ConnPool) Query(qry string, args map[string]any) (rx *Rows, err error) {
+	defer func() {
+		if r := recover(); r != nil {
+			switch v := r.(type) {
+			case error:
+				err = v
+			default:
+				err = fmt.Errorf("%s", v)
+			}
+		}
+	}()
 	if args != nil {
-		return engine.RegisterResource(c.e, &Rows{c: c.Configure(), r: fn.Panic1(c.c.Query(context.Background(), qry, pgx.NamedArgs(args)))})
+		return engine.RegisterResource(c.e, &Rows{c: c.Configure(), r: fn.Panic1(c.c.Query(context.Background(), qry, pgx.NamedArgs(args)))}), nil
 	}
 
-	return engine.RegisterResource(c.e, &Rows{c: c.Configure(), r: fn.Panic1(c.c.Query(context.Background(), qry))})
+	return engine.RegisterResource(c.e, &Rows{c: c.Configure(), r: fn.Panic1(c.c.Query(context.Background(), qry))}), nil
 }
-func (c *ConnPool) Exec(qry string, args map[string]any) pgconn.CommandTag {
+func (c *ConnPool) Exec(qry string, args map[string]any) (r pgconn.CommandTag, err error) {
+	defer func() {
+		if r := recover(); r != nil {
+			switch v := r.(type) {
+			case error:
+				err = v
+			default:
+				err = fmt.Errorf("%s", v)
+			}
+		}
+	}()
 	if args != nil {
-		return fn.Panic1(c.c.Exec(context.Background(), qry, pgx.NamedArgs(args)))
+		return fn.Panic1(c.c.Exec(context.Background(), qry, pgx.NamedArgs(args))), nil
 	}
-	return fn.Panic1(c.c.Exec(context.Background(), qry))
+	return fn.Panic1(c.c.Exec(context.Background(), qry)), nil
 }
 
 type PoolConn struct {
@@ -123,20 +158,40 @@ func (c *PoolConn) Close() error {
 	c.c.Release()
 	return nil
 }
-func (c *PoolConn) Query(qry string, args map[string]any) *Rows {
+func (c *PoolConn) Query(qry string, args map[string]any) (r *Rows, err error) {
+	defer func() {
+		if r := recover(); r != nil {
+			switch v := r.(type) {
+			case error:
+				err = v
+			default:
+				err = fmt.Errorf("%s", v)
+			}
+		}
+	}()
 	if args != nil {
-		return engine.RegisterResource(c.e, &Rows{c: c.cf, r: fn.Panic1(c.c.Query(context.Background(), qry, pgx.NamedArgs(args)))})
+		return engine.RegisterResource(c.e, &Rows{c: c.cf, r: fn.Panic1(c.c.Query(context.Background(), qry, pgx.NamedArgs(args)))}), err
 	}
-	return engine.RegisterResource(c.e, &Rows{c: c.cf, r: fn.Panic1(c.c.Query(context.Background(), qry))})
+	return engine.RegisterResource(c.e, &Rows{c: c.cf, r: fn.Panic1(c.c.Query(context.Background(), qry))}), err
 }
-func (c *PoolConn) Exec(qry string, args map[string]any) pgconn.CommandTag {
+func (c *PoolConn) Exec(qry string, args map[string]any) (r pgconn.CommandTag, err error) {
+	defer func() {
+		if r := recover(); r != nil {
+			switch v := r.(type) {
+			case error:
+				err = v
+			default:
+				err = fmt.Errorf("%s", v)
+			}
+		}
+	}()
 	if args != nil {
-		return fn.Panic1(c.c.Exec(context.Background(), qry, pgx.NamedArgs(args)))
+		return fn.Panic1(c.c.Exec(context.Background(), qry, pgx.NamedArgs(args))), nil
 	}
-	return fn.Panic1(c.c.Exec(context.Background(), qry))
+	return fn.Panic1(c.c.Exec(context.Background(), qry)), nil
 }
-func (c *PoolConn) Prepare(qry, name string) *pgconn.StatementDescription {
-	return fn.Panic1(c.c.Conn().Prepare(context.Background(), name, qry))
+func (c *PoolConn) Prepare(qry, name string) (*pgconn.StatementDescription, error) {
+	return c.c.Conn().Prepare(context.Background(), name, qry)
 }
 
 type Config struct {
@@ -146,10 +201,20 @@ type Config struct {
 	TextJson    bool
 }
 
-func (c *Config) Convert(v map[string]any) map[string]any {
+func (c *Config) Convert(v map[string]any) (r map[string]any, err error) {
 	if c == nil || (c == emc) {
-		return v
+		return v, nil
 	}
+	defer func() {
+		if r := recover(); r != nil {
+			switch v := r.(type) {
+			case error:
+				err = v
+			default:
+				err = fmt.Errorf("%s", v)
+			}
+		}
+	}()
 	for s, a := range v {
 		if c.TextNumeric {
 			if x, ok := a.(pgtype.Numeric); ok {
@@ -180,12 +245,22 @@ func (c *Config) Convert(v map[string]any) map[string]any {
 			}
 		}
 	}
-	return v
+	return v, nil
 }
-func (c *Config) Parse(v map[string]any, key ...string) map[string]any {
+func (c *Config) Parse(v map[string]any, key ...string) (r map[string]any, err error) {
 	if c == nil || (!c.TextNumeric && !c.TextBigInt && !c.RFC3339Time) {
-		return v
+		return v, nil
 	}
+	defer func() {
+		if r := recover(); r != nil {
+			switch v := r.(type) {
+			case error:
+				err = v
+			default:
+				err = fmt.Errorf("%s", v)
+			}
+		}
+	}()
 	for _, s := range key {
 		a := v[s]
 		if a == nil {
@@ -195,7 +270,6 @@ func (c *Config) Parse(v map[string]any, key ...string) map[string]any {
 			if x == "" {
 				continue
 			}
-			var err error
 			if c.TextNumeric {
 				n := pgtype.Numeric{}
 				err = (&n).Scan(x)
@@ -240,7 +314,7 @@ func (c *Config) Parse(v map[string]any, key ...string) map[string]any {
 		}
 
 	}
-	return v
+	return v, nil
 }
 
 type Conn struct {
@@ -264,25 +338,54 @@ func (c *Conn) Close() error {
 		c.cc()
 	}
 	c.e.RemoveResources(c)
-	fn.Panic(c.c.Close(context.Background()))
-	return nil
+	return c.c.Close(context.Background())
 }
-func (c *Conn) Query(qry string, args map[string]any) *Rows {
+func (c *Conn) Query(qry string, args map[string]any) (r *Rows, err error) {
+	defer func() {
+		if r := recover(); r != nil {
+			switch v := r.(type) {
+			case error:
+				err = v
+			default:
+				err = fmt.Errorf("%s", v)
+			}
+		}
+	}()
 	if args != nil {
-		return &Rows{c: c.cf, r: fn.Panic1(c.c.Query(context.Background(), qry, pgx.NamedArgs(args)))}
+		return &Rows{c: c.cf, r: fn.Panic1(c.c.Query(context.Background(), qry, pgx.NamedArgs(args)))}, nil
 	}
-	return &Rows{c: c.cf, r: fn.Panic1(c.c.Query(context.Background(), qry))}
+	return &Rows{c: c.cf, r: fn.Panic1(c.c.Query(context.Background(), qry))}, nil
 }
-func (c *Conn) Exec(qry string, args map[string]any) pgconn.CommandTag {
+func (c *Conn) Exec(qry string, args map[string]any) (r pgconn.CommandTag, err error) {
+	defer func() {
+		if r := recover(); r != nil {
+			switch v := r.(type) {
+			case error:
+				err = v
+			default:
+				err = fmt.Errorf("%s", v)
+			}
+		}
+	}()
 	if args != nil {
-		return fn.Panic1(c.c.Exec(context.Background(), qry, pgx.NamedArgs(args)))
+		return fn.Panic1(c.c.Exec(context.Background(), qry, pgx.NamedArgs(args))), nil
 	}
-	return fn.Panic1(c.c.Exec(context.Background(), qry))
+	return fn.Panic1(c.c.Exec(context.Background(), qry)), nil
 }
-func (c *Conn) Prepare(qry, name string) *pgconn.StatementDescription {
-	return fn.Panic1(c.c.Prepare(context.Background(), name, qry))
+func (c *Conn) Prepare(qry, name string) (*pgconn.StatementDescription, error) {
+	return c.c.Prepare(context.Background(), name, qry)
 }
-func parseRows(r pgx.Rows, c *Config) (o []any) {
+func parseRows(r pgx.Rows, c *Config) (o []any, err error) {
+	defer func() {
+		if r := recover(); r != nil {
+			switch v := r.(type) {
+			case error:
+				err = v
+			default:
+				err = fmt.Errorf("%s", v)
+			}
+		}
+	}()
 	defer r.Close()
 	var cols []string
 	for _, description := range r.FieldDescriptions() {
@@ -302,11 +405,14 @@ func parseRows(r pgx.Rows, c *Config) (o []any) {
 				}
 				pnt = true
 			}
-			m = c.Convert(m)
+			m, err = c.Convert(m)
+			if err != nil {
+				return nil, err
+			}
 		}
 		o = append(o, m)
 	}
-	return o
+	return o, nil
 }
 
 type Rows struct {
@@ -325,7 +431,7 @@ func (c *Rows) Close() error {
 	c.r.Close()
 	return nil
 }
-func (c *Rows) Parse() []any {
+func (c *Rows) Parse() ([]any, error) {
 	defer func() {
 		c.Closed = true
 	}()

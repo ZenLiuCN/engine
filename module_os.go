@@ -3,6 +3,7 @@ package engine
 import (
 	_ "embed"
 	"errors"
+	"fmt"
 	"github.com/ZenLiuCN/fn"
 	"io"
 	"os"
@@ -52,11 +53,15 @@ func (o Os) ExportsWithEngine(e *Engine) map[string]any {
 		"evalFiles": func(paths ...string) (r []any) {
 			return EvalFiles(e, paths...)
 		},
-		"exec": func(option *ExecOption) {
-			fn.Panic(Execute(option))
+		"exec": func(option *ExecOption) error {
+			return Execute(option)
 		},
-		"proc": func(option *ProcOption) SubProc {
-			return SubProc{s: OpenProc(option)}
+		"proc": func(option *ProcOption) (r *SubProc, err error) {
+			s, err := OpenProc(option)
+			if err != nil {
+				return nil, err
+			}
+			return &SubProc{s: s}, nil
 		},
 		"mkdir":     Mkdir,
 		"mkdirAll":  MkdirAll,
@@ -67,9 +72,19 @@ func (o Os) ExportsWithEngine(e *Engine) map[string]any {
 		"readText":  ReadTextFile,
 		"chdir":     Chdir,
 		"pwd":       Pwd,
-		"ls": func(path string) (r []map[string]any) {
+		"ls": func(path string) (r []map[string]any, err error) {
+			defer func() {
+				if r := recover(); r != nil {
+					switch v := r.(type) {
+					case error:
+						err = v
+					default:
+						err = fmt.Errorf("%s", v)
+					}
+				}
+			}()
 			if path == "" {
-				path = Pwd()
+				path, _ = Pwd()
 			}
 			f := fn.Panic1(os.Open(EnvExpand(path)))
 			defer fn.IgnoreClose(f)
@@ -88,14 +103,24 @@ func (o Os) ExportsWithEngine(e *Engine) map[string]any {
 		},
 		"stat": Stat,
 		//std
-		"open": func(path string) (f *os.File) {
-			return RegisterResource(e, fn.Panic1(os.Open(EnvExpand(path))))
+		"open": func(path string) (f *os.File, err error) {
+			defer func() {
+				if r := recover(); r != nil {
+					switch v := r.(type) {
+					case error:
+						err = v
+					default:
+						err = fmt.Errorf("%s", v)
+					}
+				}
+			}()
+			return RegisterResource(e, fn.Panic1(os.Open(EnvExpand(path)))), nil
 		},
-		"chown": func(path string, uid, gid int) {
-			fn.Panic(os.Chown(EnvExpand(path), uid, gid))
+		"chown": func(path string, uid, gid int) error {
+			return os.Chown(EnvExpand(path), uid, gid)
 		},
-		"chmod": func(path string, mod os.FileMode) {
-			fn.Panic(os.Chmod(EnvExpand(path), mod))
+		"chmod": func(path string, mod os.FileMode) error {
+			return os.Chmod(EnvExpand(path), mod)
 		},
 		"getGID":      os.Geteuid,
 		"getUID":      os.Geteuid,
@@ -170,59 +195,59 @@ func ReadBinaryFile(path string) []byte {
 func ReadTextFile(path string) string {
 	return string(fn.Panic1(os.ReadFile(EnvExpand(path))))
 }
-func Chdir(path string) {
-	fn.Panic(os.Chdir(EnvExpand(path)))
+func Chdir(path string) error {
+	return os.Chdir(EnvExpand(path))
 }
-func EnvPut(key string, value ...string) {
+func EnvPut(key string, value ...string) error {
 	src := os.Getenv(key)
 	if len(src) != 0 {
-		return
+		return nil
 	}
-	fn.Panic(os.Setenv(key, fn.SliceJoinRune(value, os.PathListSeparator, fn.Identity[string])))
+	return os.Setenv(key, fn.SliceJoinRune(value, os.PathListSeparator, fn.Identity[string]))
 }
-func EnvSetPath(key string, value ...string) {
+func EnvSetPath(key string, value ...string) error {
 	tar := fn.SliceJoinRune(value, os.PathListSeparator, EnvExpand)
-	fn.Panic(os.Setenv(key, tar))
+	return os.Setenv(key, tar)
 }
-func EnvSet(key string, value ...string) {
+func EnvSet(key string, value ...string) error {
 	tar := fn.SliceJoinRune(value, os.PathListSeparator, fn.Identity[string])
-	fn.Panic(os.Setenv(key, tar))
+	return os.Setenv(key, tar)
 }
-func EnvPrepend(key string, value ...string) {
+func EnvPrepend(key string, value ...string) error {
 	src := os.Getenv(key)
 	tar := fn.SliceJoinRune(value, os.PathListSeparator, fn.Identity[string])
 	if len(src) != 0 {
 		tar = tar + pathListSeparator + src
 	}
-	fn.Panic(os.Setenv(key, tar))
+	return os.Setenv(key, tar)
 }
-func EnvAppendPath(key string, value ...string) {
+func EnvAppendPath(key string, value ...string) error {
 	src := os.Getenv(key)
 	tar := fn.SliceJoinRune(value, os.PathListSeparator, EnvExpand)
 	if len(src) != 0 {
 		tar = src + pathListSeparator + tar
 	}
-	fn.Panic(os.Setenv(key, tar))
+	return os.Setenv(key, tar)
 }
-func EnvAppend(key string, value ...string) {
+func EnvAppend(key string, value ...string) error {
 	src := os.Getenv(key)
 	tar := fn.SliceJoinRune(value, os.PathListSeparator, fn.Identity[string])
 	if len(src) != 0 {
 		tar = src + pathListSeparator + tar
 	}
-	fn.Panic(os.Setenv(key, tar))
+	return os.Setenv(key, tar)
 }
-func EnvPrependPath(key string, value ...string) {
+func EnvPrependPath(key string, value ...string) error {
 	src := os.Getenv(key)
 	tar := fn.SliceJoinRune(value, os.PathListSeparator, EnvExpand)
 	if len(src) != 0 {
 		tar = tar + pathListSeparator + src
 	}
-	fn.Panic(os.Setenv(key, tar))
+	return os.Setenv(key, tar)
 }
 
-func Pwd() string {
-	return fn.Panic1(os.Getwd())
+func Pwd() (string, error) {
+	return os.Getwd()
 }
 func FileExists(path string) bool {
 	_, err := os.Stat(EnvExpand(path))
