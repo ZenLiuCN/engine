@@ -205,7 +205,13 @@ func (s *SQLx) Exec(query string, args map[string]any) (res Result, err error) {
 		}
 	}
 	res.RowsAffected, err = r.RowsAffected()
+	if err != nil {
+		err = nil
+	}
 	res.LastInsertId, err = r.LastInsertId()
+	if err != nil {
+		err = nil
+	}
 	return
 }
 
@@ -230,8 +236,13 @@ func (s *SQLx) Batch(query string, args []map[string]any) (res Result, err error
 		return
 	}
 	res.RowsAffected, err = r.RowsAffected()
-
+	if err != nil {
+		err = nil
+	}
 	res.LastInsertId, err = r.LastInsertId()
+	if err != nil {
+		err = nil
+	}
 	return
 }
 func (s *SQLx) Prepare(query string) (*Stmt, error) {
