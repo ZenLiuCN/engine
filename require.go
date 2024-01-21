@@ -32,6 +32,13 @@ func (r Require) Register(engine *Engine) {
 		cache:  make(map[JsModule]JsModuleInstance),
 		Engine: engine,
 	}
+	engine.scriptRootHandler = func(p string) {
+		if p == "" {
+			x.pwd = WdToUrl()
+		} else {
+			x.pwd = PathToUrl(filepath.ToSlash(p))
+		}
+	}
 	engine.Set("require", x.Require)
 	engine.Set("_$require", x)
 }
@@ -59,7 +66,7 @@ func (r *Require) Require(specifier string) (*goja.Object, error) {
 	if specifier == "" {
 		return nil, errors.New("require() can't be used with an empty specifier")
 	}
-	m, err := ModLoader.Resolve(current, specifier)
+	m, err := ModLoader.Resolve(r.pwd, specifier)
 	if err != nil {
 		return nil, err
 	}

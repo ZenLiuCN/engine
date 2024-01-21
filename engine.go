@@ -6,13 +6,15 @@ import (
 	"github.com/ZenLiuCN/fn"
 	. "github.com/dop251/goja"
 	"io"
+	"path"
 	"time"
 )
 
 type Engine struct {
 	*Runtime
 	*EventLoop
-	Resources map[io.Closer]struct{}
+	Resources         map[io.Closer]struct{}
+	scriptRootHandler func(p string)
 }
 
 // Register register mods
@@ -58,6 +60,12 @@ func (s *Engine) Free() {
 
 // region direct
 
+func (s *Engine) SetScriptPath(p string) {
+	if s.scriptRootHandler != nil {
+		s.scriptRootHandler(p)
+	}
+}
+
 // RunString execute raw javascript (es5|es6 without import) code.
 // this not support import and some polyfill features.
 func (s *Engine) RunString(src string) (v Value, err error) {
@@ -94,6 +102,7 @@ func (s *Engine) RunJs(src string) (v Value, err error) {
 
 // RunCode execute compiled code. The execution time should control manually, for an automatic timeout control see  RunCodeTimeout.
 func (s *Engine) RunCode(code *Code) (v Value, err error) {
+	s.SetScriptPath(path.Dir(code.Path))
 	s.TryStartEventLoop()
 	defer func() {
 		if r := recover(); r != nil {
@@ -110,6 +119,7 @@ func (s *Engine) RunCode(code *Code) (v Value, err error) {
 // RunCodeContext run code
 // with context. If context closed early, the value will be HaltJobs, the error will be ErrTimeout.
 func (s *Engine) RunCodeContext(code *Code, warm time.Duration, ctx cx.Context) (v Value, err error) {
+	s.SetScriptPath(path.Dir(code.Path))
 	return s.awaiting(code.Program, warm, ctx)
 }
 

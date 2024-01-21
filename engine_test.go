@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/ZenLiuCN/fn"
+	"os"
 	"testing"
 	"time"
 )
@@ -125,5 +126,26 @@ func TestRegisterResource(t *testing.T) {
 	const f=registerResource(os.open('engine.go'))
 	console.log(f.name())
 `))
+
+}
+func TestNestRequire(t *testing.T) {
+	e := Get()
+	defer e.Free()
+	defer func() {
+		_ = os.RemoveAll("scripts")
+	}()
+	_ = os.MkdirAll("scripts", os.ModePerm)
+	_ = os.WriteFile("scripts/index.js", []byte(`
+import {fn} from "./func.js"
+console.log(fn())
+`), os.ModePerm)
+	_ = os.WriteFile("scripts/func.js", []byte(`
+export const fn=()=>{
+console.log('from module')
+return '123'
+}
+`), os.ModePerm)
+
+	fn.Panic1(e.RunCode(CompileFile("./scripts/index.js", true)))
 
 }
