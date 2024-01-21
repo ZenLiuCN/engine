@@ -136,7 +136,7 @@ func TestNestRequire(t *testing.T) {
 	}()
 	_ = os.MkdirAll("scripts/info", os.ModePerm)
 	_ = os.WriteFile("scripts/index.js", []byte(`
-import {fn} from "./info/func.js"
+import {fn} from "./info/func"
 console.log(fn())
 `), os.ModePerm)
 	_ = os.WriteFile("scripts/info/func.js", []byte(`

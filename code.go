@@ -34,3 +34,10 @@ func CompileSource(source string, ts, entry bool) *Code {
 		return &Code{Path: "", Program: fn.Panic1(goja.Compile("", CompileTs(source, entry), false))}
 	}
 }
+func CompileFileSource(path, source string, ts, entry bool) *Code {
+	if !ts {
+		return &Code{Path: path, Program: fn.Panic1(goja.Compile("", CompileJs(source, entry), false))}
+	} else {
+		return &Code{Path: path, Program: fn.Panic1(goja.Compile("", CompileTs(source, entry), false))}
+	}
+}

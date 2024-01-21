@@ -12,10 +12,12 @@ import (
 
 type Require struct {
 	pwd      *url.URL
-	cache    map[JsModule]JsModuleInstance
+	cache    map[JsModule]JsModuleInstance // module instance cache
 	disables []string
 	*Engine
 }
+
+const ModuleRequireConstKey = "_$require"
 
 func (r Require) Name() string {
 	return "Require"
@@ -32,6 +34,7 @@ func (r Require) Register(engine *Engine) {
 		cache:  make(map[JsModule]JsModuleInstance),
 		Engine: engine,
 	}
+	engine.require = x
 	engine.scriptRootHandler = func(p string) {
 		if p == "" {
 			x.pwd = WdToUrl()
@@ -40,7 +43,7 @@ func (r Require) Register(engine *Engine) {
 		}
 	}
 	engine.Set("require", x.Require)
-	engine.Set("_$require", x)
+	engine.Set(ModuleRequireConstKey, x)
 }
 
 var (

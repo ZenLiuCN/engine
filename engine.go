@@ -14,6 +14,7 @@ type Engine struct {
 	*Runtime
 	*EventLoop
 	Resources         map[io.Closer]struct{}
+	require           *Require
 	scriptRootHandler func(p string)
 }
 
