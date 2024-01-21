@@ -66,7 +66,7 @@ func (r *Require) Require(specifier string) (*goja.Object, error) {
 	if specifier == "" {
 		return nil, errors.New("require() can't be used with an empty specifier")
 	}
-	m, err := ModLoader.Resolve(r.pwd, specifier)
+	m, err := ModLoader.Resolve(current, specifier)
 	if err != nil {
 		return nil, err
 	}

@@ -24,6 +24,7 @@ var (
 type (
 	Source struct {
 		Data []byte
+		Path string
 		URL  *url.URL
 	}
 	Resolver interface {
@@ -101,6 +102,17 @@ func (s *BaseResolver) ResolveFilePath(pwd *url.URL, moduleSpecifier string) (*u
 	}
 	return finalPwd.Parse(moduleSpecifier)
 }
+
+var (
+	guessExts = map[string][]string{
+		"":     {".js", ".ts", ".cjs", ".mjs"},
+		".js":  {".ts", ".cjs", ".mjs"},
+		".ts":  {".js", ".cjs", ".mjs"},
+		".cjs": {".js", ".ts", ".mjs"},
+		".mjs": {".js", ".ts", ".cjs"},
+	}
+)
+
 func (s *BaseResolver) LoadFile(u *url.URL) (*Source, error) {
 	if c, ok := s.cache[u]; ok {
 		return c.Src, c.Err
@@ -122,9 +134,23 @@ func (s *BaseResolver) LoadFile(u *url.URL) (*Source, error) {
 	if err != nil {
 		return nil, err
 	}
+	exts := guessExts[path.Ext(pathOnFs)]
+	n := 0
+load:
 	data, err := os.ReadFile(pathOnFs)
+	if exts != nil && errors.Is(err, os.ErrNotExist) {
+		ex := path.Ext(pathOnFs)
+		if n >= len(exts) {
+			pathOnFs = strings.TrimSuffix(pathOnFs, ex)
+		} else {
+			n++
+			pathOnFs = strings.TrimSuffix(pathOnFs, ex) + exts[n-1]
+			goto load
+		}
+
+	}
 	if err == nil {
-		src := &Source{URL: u, Data: data}
+		src := &Source{URL: u, Path: pathOnFs, Data: data}
 		s.cache[u] = &CacheSource{
 			Src: src,
 			Err: nil,
@@ -298,7 +324,7 @@ func (s *BaseModResolver) Resolve(basePWD *url.URL, arg string) (JsModule, error
 }
 
 func CompileCJS(data *Source) (m JsModule, err error) {
-	if strings.HasSuffix(data.URL.String(), ".ts") {
+	if strings.HasSuffix(data.URL.String(), ".ts") || strings.HasSuffix(data.Path, ".ts") {
 		m, err = compileTs(data)
 		if err == nil {
 			return
