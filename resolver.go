@@ -23,8 +23,10 @@ var (
 
 type (
 	Source struct {
-		Data []byte
-		URL  *url.URL
+		Data     []byte
+		Path     string
+		URL      *url.URL
+		resolved string
 	}
 	Resolver interface {
 		Dir(old *url.URL) *url.URL
@@ -39,6 +41,29 @@ type (
 		Err error
 	}
 )
+
+func (s *Source) ResolvePath() (pth string) {
+	if s.resolved == "-" {
+		return
+	} else if s.resolved != "" {
+		return s.resolved
+	} else if s.Path != "" {
+		s.resolved = s.Path
+	} else if s.URL != nil {
+		if s.URL.Scheme == "file" {
+			s.resolved = s.URL.Opaque
+		} else {
+			s.resolved = s.URL.String()
+		}
+		if s.URL.Scheme != "file" && strings.Contains(pth, "://") {
+			s.resolved = ""
+		}
+	}
+	if s.resolved == "" {
+		s.resolved = "-"
+	}
+	return s.resolved
+}
 
 func (s *BaseResolver) Fetch(u *url.URL) (*Source, error) {
 	if c, ok := s.cache[u]; ok {
@@ -101,6 +126,7 @@ func (s *BaseResolver) ResolveFilePath(pwd *url.URL, moduleSpecifier string) (*u
 	}
 	return finalPwd.Parse(moduleSpecifier)
 }
+
 func (s *BaseResolver) LoadFile(u *url.URL) (*Source, error) {
 	if c, ok := s.cache[u]; ok {
 		return c.Src, c.Err
@@ -122,9 +148,26 @@ func (s *BaseResolver) LoadFile(u *url.URL) (*Source, error) {
 	if err != nil {
 		return nil, err
 	}
+	var extensions []string
+	if path.Ext(pathOnFs) == "" {
+		extensions = []string{".js", ".ts", ".cjs", ".mjs"}
+	}
+	n := 0
+load:
 	data, err := os.ReadFile(pathOnFs)
+	if extensions != nil && errors.Is(err, os.ErrNotExist) {
+		ex := path.Ext(pathOnFs)
+		if n >= len(extensions) {
+			pathOnFs = strings.TrimSuffix(pathOnFs, ex)
+		} else {
+			n++
+			pathOnFs = strings.TrimSuffix(pathOnFs, ex) + extensions[n-1]
+			goto load
+		}
+
+	}
 	if err == nil {
-		src := &Source{URL: u, Data: data}
+		src := &Source{URL: u, Path: pathOnFs, Data: data}
 		s.cache[u] = &CacheSource{
 			Src: src,
 			Err: nil,
@@ -201,13 +244,13 @@ type (
 		Exports() *goja.Object
 	}
 	cjs struct {
-		prg *goja.Program
+		prg *Code
 		url *url.URL
 	}
 	cjsModule struct {
-		mod *cjs
-		obj *goja.Object
-		*Engine
+		mod    *cjs
+		obj    *goja.Object
+		Engine *Engine
 	}
 )
 
@@ -226,12 +269,21 @@ func (c *cjsModule) Execute() error {
 		return fmt.Errorf("error prepare import commonJS, couldn't set exports property of module: %w",
 			err)
 	}
+	//!! restore root script path
+	pwd := c.Engine.require.pwd
+	defer func() {
+		c.Engine.require.pwd = pwd
+	}()
+	if c.mod.prg.Path != "" {
+		c.Engine.SetScriptPath(path.Dir(c.mod.prg.Path))
+	}
+
 	err = c.Engine.Runtime.Set("module", c.obj)
 	if err != nil {
 		return fmt.Errorf("error prepare import commonJS, couldn't set module: %w",
 			err)
 	}
-	_, err = c.Engine.RunProgram(c.mod.prg)
+	_, err = c.Engine.RunProgram(c.mod.prg.Program)
 	if err != nil {
 		return err
 	}
@@ -298,7 +350,7 @@ func (s *BaseModResolver) Resolve(basePWD *url.URL, arg string) (JsModule, error
 }
 
 func CompileCJS(data *Source) (m JsModule, err error) {
-	if strings.HasSuffix(data.URL.String(), ".ts") {
+	if strings.HasSuffix(data.Path, ".ts") || strings.HasSuffix(data.URL.String(), ".ts") {
 		m, err = compileTs(data)
 		if err == nil {
 			return
@@ -319,9 +371,9 @@ func compileTs(data *Source) (m JsModule, err error) {
 			}
 		}
 	}()
-	p := CompileSource(string(data.Data), true, false)
+	p := CompileFileSource(data.ResolvePath(), string(data.Data), true, false)
 	return &cjs{
-		prg: p.Program,
+		prg: p,
 		url: data.URL,
 	}, nil
 }
@@ -338,9 +390,9 @@ func compileJs(data *Source) (m JsModule, err error) {
 			}
 		}
 	}()
-	p := CompileSource(string(data.Data), false, false)
+	p := CompileFileSource(data.ResolvePath(), string(data.Data), false, false)
 	return &cjs{
-		prg: p.Program,
+		prg: p,
 		url: data.URL,
 	}, nil
 }
