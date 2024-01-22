@@ -10,6 +10,9 @@ type ScriptError struct {
 	Stack *bytes.Buffer
 }
 
+func (s ScriptError) Unwrap() error {
+	return s.Err
+}
 func (s ScriptError) Error() string {
 	if s.Err == nil {
 		return "<ni>"

@@ -362,7 +362,7 @@ func (s *ExcelFile) GetActiveSheetIndex() int {
 //region rows
 
 func (s *ExcelFile) GetRows(sheet string, opt *excelize.Options) ([][]string, error) {
-	if opt == nil {
+	if opt != nil {
 		return s.File.GetRows(sheet, *opt)
 	} else {
 		return s.File.GetRows(sheet)
