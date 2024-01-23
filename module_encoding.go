@@ -58,6 +58,13 @@ var (
 		"UTF32_BOM_LE": &CharsetEncoding{utf32.UTF32(utf32.LittleEndian, utf32.ExpectBOM)},
 		"UTF32_BE":     &CharsetEncoding{utf32.UTF32(utf32.BigEndian, utf32.IgnoreBOM)},
 		"UTF32_LE":     &CharsetEncoding{utf32.UTF32(utf32.LittleEndian, utf32.IgnoreBOM)},
+
+		"toText": func(u string) []byte {
+			return []byte(u)
+		},
+		"fromText": func(u []byte) string {
+			return string(u)
+		},
 	}
 )
 
@@ -65,12 +72,6 @@ type CharsetEncoding struct {
 	enc encoding.Encoding
 }
 
-func (e *CharsetEncoding) ToText(u string) []byte {
-	return []byte(u)
-}
-func (e *CharsetEncoding) FromText(u []byte) string {
-	return string(u)
-}
 func (e *CharsetEncoding) Encode(u []byte) ([]byte, error) {
 	return io.ReadAll(transform.NewReader(bytes.NewReader(u), e.enc.NewEncoder()))
 }
