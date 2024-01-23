@@ -5,14 +5,14 @@ declare module 'go/encoding' {
          */
         encode(u: Uint8Array): Uint8Array
 
-        encodeText(u: string): Uint8Array
+        encodeText(u: string): string
 
         /**
          * encode encoding text array to utf8
          */
         decode(u: Uint8Array): Uint8Array
 
-        decodeText(u: string): Uint8Array
+        decodeText(u: string): string
 
 
     }

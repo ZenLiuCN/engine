@@ -1,7 +1,6 @@
 package engine
 
 import (
-	"bytes"
 	_ "embed"
 	"golang.org/x/text/encoding"
 	"golang.org/x/text/encoding/charmap"
@@ -11,9 +10,6 @@ import (
 	"golang.org/x/text/encoding/traditionalchinese"
 	"golang.org/x/text/encoding/unicode"
 	"golang.org/x/text/encoding/unicode/utf32"
-	"golang.org/x/text/transform"
-	"io"
-	"strings"
 )
 
 var (
@@ -73,14 +69,14 @@ type CharsetEncoding struct {
 }
 
 func (e *CharsetEncoding) Encode(u []byte) ([]byte, error) {
-	return io.ReadAll(transform.NewReader(bytes.NewReader(u), e.enc.NewEncoder()))
+	return e.enc.NewEncoder().Bytes(u)
 }
-func (e *CharsetEncoding) EncodeText(u string) ([]byte, error) {
-	return io.ReadAll(transform.NewReader(strings.NewReader(u), e.enc.NewEncoder()))
+func (e *CharsetEncoding) EncodeText(u string) (string, error) {
+	return e.enc.NewEncoder().String(u)
 }
 func (e *CharsetEncoding) Decode(u []byte) ([]byte, error) {
-	return io.ReadAll(transform.NewReader(bytes.NewReader(u), e.enc.NewDecoder()))
+	return e.enc.NewDecoder().Bytes(u)
 }
-func (e *CharsetEncoding) DecodeText(u string) ([]byte, error) {
-	return io.ReadAll(transform.NewReader(strings.NewReader(u), e.enc.NewDecoder()))
+func (e *CharsetEncoding) DecodeText(u string) (string, error) {
+	return e.enc.NewDecoder().String(u)
 }
