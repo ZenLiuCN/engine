@@ -13,6 +13,7 @@ import (
 	"golang.org/x/text/encoding/unicode/utf32"
 	"golang.org/x/text/transform"
 	"io"
+	"strings"
 )
 
 var (
@@ -64,10 +65,21 @@ type CharsetEncoding struct {
 	enc encoding.Encoding
 }
 
+func (e *CharsetEncoding) ToText(u string) []byte {
+	return []byte(u)
+}
+func (e *CharsetEncoding) FromText(u []byte) string {
+	return string(u)
+}
 func (e *CharsetEncoding) Encode(u []byte) ([]byte, error) {
 	return io.ReadAll(transform.NewReader(bytes.NewReader(u), e.enc.NewEncoder()))
 }
-
+func (e *CharsetEncoding) EncodeText(u string) ([]byte, error) {
+	return io.ReadAll(transform.NewReader(strings.NewReader(u), e.enc.NewEncoder()))
+}
 func (e *CharsetEncoding) Decode(u []byte) ([]byte, error) {
 	return io.ReadAll(transform.NewReader(bytes.NewReader(u), e.enc.NewDecoder()))
+}
+func (e *CharsetEncoding) DecodeText(u string) ([]byte, error) {
+	return io.ReadAll(transform.NewReader(strings.NewReader(u), e.enc.NewDecoder()))
 }

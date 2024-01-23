@@ -4,11 +4,17 @@ declare module 'go/encoding' {
          * encode utf8 text array to encoding
          */
         encode(u: Uint8Array): Uint8Array
+        encodeText(u: string): Uint8Array
 
         /**
          * encode encoding text array to utf8
          */
         decode(u: Uint8Array): Uint8Array
+
+        decodeText(u: string): Uint8Array
+
+        toText(u:Uint8Array):string
+        fromText(u:string):Uint8Array
     }
 
     export const GBK: Encoding
