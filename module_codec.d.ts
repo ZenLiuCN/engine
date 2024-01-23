@@ -1,31 +1,23 @@
 declare module "go/codec" {
-    export function base64UrlEncode(b: Uint8Array): string
+    interface Codec{
+        encodeToString(src:Uint8Array):string
+        decodeString(src:string):Uint8Array
 
-    export function base64UrlDecode(b: string): Uint8Array
+    }
+    interface BinCodec {
+        decode(dst:Uint8Array,src:Uint8Array):number
+        encode(dst:Uint8Array,src:Uint8Array):number
+        encodedLen(n:number):number
+        decodedLen(n:number):number
+    }
+    export const Base64Std:Codec&BinCodec
+    export const Base64Url:Codec&BinCodec
+    export const Base64RawStd:Codec&BinCodec
+    export const Base64RawUrl:Codec&BinCodec
+    export const Base32Hex:Codec&BinCodec
+    export const Base32Std:Codec&BinCodec
+    export const Hex:Codec&BinCodec
+    export const Utf8:Codec
 
-
-    export function base64StdEncode(b: Uint8Array): string
-
-    export function base64StdDecode(b: string): Uint8Array
-
-    export function base64RawStdEncode(b: Uint8Array): string
-
-    export function base64RawStdDecode(b: string): Uint8Array
-
-    export function base64RawUrlEncode(b: Uint8Array): string
-
-    export function base64RawUrlDecode(b: string): Uint8Array
-
-    export function hexEncode(b: Uint8Array): string
-
-    export function hexDecode(b: string): Uint8Array
-
-    export function base32StdEncode(b: Uint8Array): string
-
-    export function base32StdDecode(b: string): Uint8Array
-
-    export function base32HexEncode(b: Uint8Array): string
-
-    export function base32HexDecode(b: string): Uint8Array
 }
 

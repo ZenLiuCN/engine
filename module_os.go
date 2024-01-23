@@ -116,6 +116,32 @@ func (o Os) ExportsWithEngine(e *Engine) map[string]any {
 			}()
 			return RegisterResource(e, fn.Panic1(os.Open(EnvExpand(path)))), nil
 		},
+		"O_CREATE": os.O_CREATE,
+		"O_TRUNC":  os.O_TRUNC,
+		"O_APPEND": os.O_APPEND,
+		"O_RDONLY": os.O_RDONLY,
+		"O_WRONLY": os.O_WRONLY,
+		"O_SYNC":   os.O_SYNC,
+		"O_EXCL":   os.O_EXCL,
+		"flags": func(v ...int) (r int) {
+			for _, i := range v {
+				r |= i
+			}
+			return
+		},
+		"openFile": func(path string, flag int) (f *os.File, err error) {
+			defer func() {
+				if r := recover(); r != nil {
+					switch v := r.(type) {
+					case error:
+						err = v
+					default:
+						err = fmt.Errorf("%s", v)
+					}
+				}
+			}()
+			return RegisterResource(e, fn.Panic1(os.OpenFile(EnvExpand(path), flag, os.ModePerm))), nil
+		},
 		"chown": func(path string, uid, gid int) error {
 			return os.Chown(EnvExpand(path), uid, gid)
 		},

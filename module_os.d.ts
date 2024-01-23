@@ -347,6 +347,18 @@ declare module "go/os" {
 
     export function open(path: string): File
 
+    type Flag = number
+    export const O_CREATE:Flag
+    export const O_TRUNC:Flag
+    export const O_APPEND:Flag
+    export const O_RDONLY:Flag
+    export const O_WRONLY:Flag
+    export const O_SYNC:Flag
+    export const O_EXCL:Flag
+    export function flags(...flag: Flag[]): Flag
+
+    export function openFile(path: string, flag: Flag): File
+
     export function chown(path: string, uid, gid: number)
 
     export function getUID(): number
@@ -366,10 +378,15 @@ declare module "go/os" {
     export function userConfigDir(): string
 
     export function userHomeDir(): string
-    export function writeFile(name:string,data:Uint8Array,perm:number)
-    export function remove(name:string)
-    export function removeAll(name:string)
-    export function hostname():string
-    export function tempDir():string
+
+    export function writeFile(name: string, data: Uint8Array, perm: number)
+
+    export function remove(name: string)
+
+    export function removeAll(name: string)
+
+    export function hostname(): string
+
+    export function tempDir(): string
 
 }
