@@ -90,9 +90,9 @@ type Conn struct {
 
 func (c *Conn) ToSQLX() *sqlx.SQLx {
 	return engine.RegisterResource(c.e, &sqlx.SQLx{
-		DB:     sqlx2.NewDb(sql.OpenDB(c.c), "duckdb"),
-		Engine: c.e,
-		BigInt: false,
+		DB:              sqlx2.NewDb(sql.OpenDB(c.c), "duckdb"),
+		Engine:          c.e,
+		BigIntProcessor: &sqlx.BigIntProcessor{},
 	})
 }
 

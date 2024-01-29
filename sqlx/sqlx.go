@@ -72,7 +72,7 @@ func (S SQLXModule) ExportsWithEngine(eng *engine.Engine) map[string]any {
 			if err != nil {
 				return nil, err
 			}
-			return engine.RegisterResource(eng, &SQLx{DB: db, Engine: eng, bigIntProcessor: &bigIntProcessor{
+			return engine.RegisterResource(eng, &SQLx{DB: db, Engine: eng, BigIntProcessor: &BigIntProcessor{
 				bigInt:       bigint,
 				bigIntText:   bigintText,
 				bigIntFields: bigintFields,
@@ -145,35 +145,35 @@ func mapAll[T any](fn func(T) (any, error), row []map[string]any, key ...string)
 	return row, nil
 }
 
-type bigIntProcessor struct {
+type BigIntProcessor struct {
 	bigInt       bool
 	bigIntText   bool
 	bigIntFields []string
 }
 
-func (s *bigIntProcessor) SetBigInt(v bool) {
+func (s *BigIntProcessor) SetBigInt(v bool) {
 	s.bigInt = v
 
 }
-func (s *bigIntProcessor) SetBigIntText(v bool) {
+func (s *BigIntProcessor) SetBigIntText(v bool) {
 	s.bigIntText = v
 
 }
 
-func (s *bigIntProcessor) BigInt() bool {
+func (s *BigIntProcessor) BigInt() bool {
 	return s.bigInt
 }
-func (s *bigIntProcessor) BigIntText() bool {
+func (s *BigIntProcessor) BigIntText() bool {
 	return s.bigIntText
 }
-func (s *bigIntProcessor) BigIntFields() []string {
+func (s *BigIntProcessor) BigIntFields() []string {
 	return s.bigIntFields
 }
-func (s *bigIntProcessor) SetBigIntFields(f ...string) {
+func (s *BigIntProcessor) SetBigIntFields(f ...string) {
 	s.bigIntFields = s.bigIntFields[:0]
 	s.bigIntFields = append(s.bigIntFields, f...)
 }
-func (s *bigIntProcessor) processArgs(args map[string]any) {
+func (s *BigIntProcessor) processArgs(args map[string]any) {
 	if s.bigInt && len(s.bigIntFields) == 0 {
 		for k, v := range args {
 			if b, ok := v.(*big.Int); ok {
@@ -194,7 +194,7 @@ func (s *bigIntProcessor) processArgs(args map[string]any) {
 		}
 	}
 }
-func (s *bigIntProcessor) processArgsSlice(args []map[string]any) {
+func (s *BigIntProcessor) processArgsSlice(args []map[string]any) {
 	if s.bigInt && len(s.bigIntFields) == 0 {
 		for _, arg := range args {
 			for k, v := range arg {
@@ -221,7 +221,7 @@ func (s *bigIntProcessor) processArgsSlice(args []map[string]any) {
 		}
 	}
 }
-func (s *bigIntProcessor) processResultRow(v map[string]any) {
+func (s *BigIntProcessor) processResultRow(v map[string]any) {
 	if s.bigInt && len(s.bigIntFields) == 0 {
 		for k, val := range v {
 			if t, ok := val.(int64); ok {
@@ -248,8 +248,8 @@ func (s *bigIntProcessor) processResultRow(v map[string]any) {
 		}
 	}
 }
-func (s *bigIntProcessor) copyProcessor() *bigIntProcessor {
-	return &bigIntProcessor{
+func (s *BigIntProcessor) copyProcessor() *BigIntProcessor {
+	return &BigIntProcessor{
 		bigInt:       s.bigInt,
 		bigIntText:   s.bigIntText,
 		bigIntFields: append([]string{}, s.bigIntFields...),
@@ -259,7 +259,7 @@ func (s *bigIntProcessor) copyProcessor() *bigIntProcessor {
 type SQLx struct {
 	*sqlx.DB
 	*engine.Engine
-	*bigIntProcessor
+	*BigIntProcessor
 }
 
 func (s *SQLx) Close() error {
@@ -371,7 +371,7 @@ func (s *SQLx) Begin() (*TX, error) {
 type TX struct {
 	*sqlx.Tx
 	*engine.Engine
-	*bigIntProcessor
+	*BigIntProcessor
 }
 
 func (s *TX) Commit() error {
@@ -439,7 +439,7 @@ func (s *TX) Exec(query string, args map[string]any) (Result, error) {
 type Stmt struct {
 	*sqlx.NamedStmt
 	*engine.Engine
-	*bigIntProcessor
+	*BigIntProcessor
 }
 
 func (s *Stmt) Query(args map[string]any) (goja.Value, error) {
