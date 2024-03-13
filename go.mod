@@ -13,6 +13,7 @@ require (
 	github.com/dop251/goja v0.0.0-20231027120936-b396bb4c349d
 	github.com/evanw/esbuild v0.19.10
 	github.com/gabriel-vasile/mimetype v1.4.3
+	github.com/go-ego/gse v0.80.2
 	github.com/jackc/pgx/v5 v5.5.1
 	github.com/jmoiron/sqlx v1.3.5
 	github.com/tdewolff/minify/v2 v2.20.10
@@ -47,6 +48,7 @@ require (
 	github.com/richardlehane/msoleps v1.0.3 // indirect
 	github.com/stretchr/testify v1.8.4 // indirect
 	github.com/tdewolff/parse/v2 v2.7.7 // indirect
+	github.com/vcaesar/cedar v0.20.1 // indirect
 	github.com/xuri/efp v0.0.0-20231025114914-d1ff6096ae53 // indirect
 	github.com/xuri/nfp v0.0.0-20230919160717-d98342af3f05 // indirect
 	golang.org/x/image v0.12.0 // indirect

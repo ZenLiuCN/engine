@@ -23,8 +23,7 @@ func (P PDF) Name() string {
 }
 
 func (P PDF) Register(engine *engine.Engine) {
-	engine.Constructor("PDFWriter", func(c goja.ConstructorCall) *goja.Object {
-
-		return nil
+	engine.ToConstructor(func(v []goja.Value) (any, error) {
+		return nil, nil
 	})
 }
