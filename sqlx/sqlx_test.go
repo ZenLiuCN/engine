@@ -62,3 +62,19 @@ try{
 }
 `))
 }
+func TestBigInt(t *testing.T) {
+	vm := engine.Get()
+	defer vm.Free()
+	fn.Panic1(vm.RunJs(
+		//language=javascript
+		`
+import {SQLX} from "go/sqlx"
+const db=new SQLX('mysql', 'root:12345678@tcp(192.168.8.94:3326)/shop_medicine?parseTime=true',{bigintText:true,bigintFields:['id']})
+const data=db.query('SELECT * FROM shop_medicine_rec_pharma limit 5')
+data.forEach(v=>console.log(typeof v.id))
+console.table(data)
+console.log(db.bigInt())
+console.log(db.bigIntText())
+console.log(db.bigIntFields())
+`))
+}

@@ -46,18 +46,37 @@ func (S SQLXModule) ExportsWithEngine(eng *engine.Engine) map[string]any {
 	return map[string]any{
 		"SQLX": eng.ToConstructor(func(v []goja.Value) (any, error) {
 			bigint := false
+			bigintText := false
+			bigintFields := []string(nil)
 			if len(v) == 3 {
 				opt := v[2].Export().(map[string]any)
 				x := opt["bigint"]
 				if x != nil && x.(bool) {
 					bigint = true
 				}
+				x = opt["bigintText"]
+				if x != nil && x.(bool) {
+					bigintText = true
+				}
+				x = opt["bigintFields"]
+				if x != nil {
+					if v, ok := x.([]any); ok {
+						for _, vx := range v {
+							bigintFields = append(bigintFields, vx.(string))
+						}
+					}
+
+				}
 			}
 			db, err := sqlx.Connect(v[0].ToString().String(), v[1].ToString().String())
 			if err != nil {
 				return nil, err
 			}
-			return engine.RegisterResource(eng, &SQLx{DB: db, Engine: eng, BigInt: bigint}), nil
+			return engine.RegisterResource(eng, &SQLx{DB: db, Engine: eng, BigIntProcessor: &BigIntProcessor{
+				bigInt:       bigint,
+				bigIntText:   bigintText,
+				bigIntFields: bigintFields,
+			}}), nil
 		}),
 		"bitToBool": func(row []map[string]any, key ...string) ([]map[string]any, error) {
 			return mapAll(func(v []byte) (any, error) {
@@ -126,10 +145,121 @@ func mapAll[T any](fn func(T) (any, error), row []map[string]any, key ...string)
 	return row, nil
 }
 
+type BigIntProcessor struct {
+	bigInt       bool
+	bigIntText   bool
+	bigIntFields []string
+}
+
+func (s *BigIntProcessor) SetBigInt(v bool) {
+	s.bigInt = v
+
+}
+func (s *BigIntProcessor) SetBigIntText(v bool) {
+	s.bigIntText = v
+
+}
+
+func (s *BigIntProcessor) BigInt() bool {
+	return s.bigInt
+}
+func (s *BigIntProcessor) BigIntText() bool {
+	return s.bigIntText
+}
+func (s *BigIntProcessor) BigIntFields() []string {
+	return s.bigIntFields
+}
+func (s *BigIntProcessor) SetBigIntFields(f ...string) {
+	s.bigIntFields = s.bigIntFields[:0]
+	s.bigIntFields = append(s.bigIntFields, f...)
+}
+func (s *BigIntProcessor) processArgs(args map[string]any) {
+	if s.bigInt && len(s.bigIntFields) == 0 {
+		for k, v := range args {
+			if b, ok := v.(*big.Int); ok {
+				args[k] = b.Int64()
+			}
+		}
+	} else if s.bigInt && len(s.bigIntFields) > 0 {
+		for _, v := range s.bigIntFields {
+			if b, ok := args[v].(*big.Int); ok {
+				args[v] = b.Int64()
+			}
+		}
+	} else if s.bigIntText && len(s.bigIntFields) > 0 {
+		for _, v := range s.bigIntFields {
+			if b, ok := args[v].(string); ok {
+				args[v] = fn.Panic1(strconv.ParseInt(b, 0, 64))
+			}
+		}
+	}
+}
+func (s *BigIntProcessor) processArgsSlice(args []map[string]any) {
+	if s.bigInt && len(s.bigIntFields) == 0 {
+		for _, arg := range args {
+			for k, v := range arg {
+				if b, ok := v.(*big.Int); ok {
+					arg[k] = b.Int64()
+				}
+			}
+		}
+	} else if s.bigInt && len(s.bigIntFields) > 0 {
+		for _, arg := range args {
+			for _, v := range s.bigIntFields {
+				if b, ok := arg[v].(*big.Int); ok {
+					arg[v] = b.Int64()
+				}
+			}
+		}
+	} else if s.bigIntText && len(s.bigIntFields) > 0 {
+		for _, arg := range args {
+			for _, v := range s.bigIntFields {
+				if b, ok := arg[v].(string); ok {
+					arg[v] = fn.Panic1(strconv.ParseInt(b, 0, 64))
+				}
+			}
+		}
+	}
+}
+func (s *BigIntProcessor) processResultRow(v map[string]any) {
+	if s.bigInt && len(s.bigIntFields) == 0 {
+		for k, val := range v {
+			if t, ok := val.(int64); ok {
+				v[k] = big.NewInt(t)
+			}
+		}
+	} else if s.bigInt && len(s.bigIntFields) > 0 {
+		for _, k := range s.bigIntFields {
+			if b, ok := v[k].(int64); ok {
+				v[k] = big.NewInt(b)
+			}
+		}
+	} else if s.bigIntText && len(s.bigIntFields) == 0 {
+		for k, val := range v {
+			if t, ok := val.(int64); ok {
+				v[k] = strconv.FormatInt(t, 10)
+			}
+		}
+	} else if s.bigIntText && len(s.bigIntFields) > 0 {
+		for _, k := range s.bigIntFields {
+			if b, ok := v[k].(int64); ok {
+				v[k] = strconv.FormatInt(b, 10)
+			}
+		}
+	}
+}
+func (s *BigIntProcessor) copyProcessor() *BigIntProcessor {
+	return &BigIntProcessor{
+		bigInt:       s.bigInt,
+		bigIntText:   s.bigIntText,
+		bigIntFields: append([]string{}, s.bigIntFields...),
+	}
+}
+
 type SQLx struct {
 	*sqlx.DB
 	*engine.Engine
-	BigInt bool
+	*BigIntProcessor
 }
 
 func (s *SQLx) Close() error {
@@ -147,13 +277,7 @@ func (s *SQLx) Query(query string, args map[string]any) (goja.Value, error) {
 	var r *sqlx.Rows
 	var err error
 	if args != nil && len(args) > 0 {
-		if s.BigInt {
-			for k, v := range args {
-				if b, ok := v.(*big.Int); ok {
-					args[k] = b.Int64()
-				}
-			}
-		}
+		s.processArgs(args)
 		r, err = s.DB.NamedQuery(query, args)
 		if err != nil {
 			return nil, err
@@ -172,13 +296,7 @@ func (s *SQLx) Query(query string, args map[string]any) (goja.Value, error) {
 		if err != nil {
 			return nil, err
 		}
-		if s.BigInt {
-			for k, val := range v {
-				if t, ok := val.(int64); ok {
-					v[k] = big.NewInt(t)
-				}
-			}
-		}
+		s.processResultRow(v)
 		g = append(g, v)
 	}
 	return s.Engine.NewArray(g...), nil
@@ -187,13 +305,7 @@ func (s *SQLx) Exec(query string, args map[string]any) (res Result, err error) {
 	var r sql.Result
 
 	if args != nil && len(args) > 0 {
-		if s.BigInt {
-			for k, v := range args {
-				if b, ok := v.(*big.Int); ok {
-					args[k] = b.Int64()
-				}
-			}
-		}
+		s.processArgs(args)
 		r, err = s.DB.NamedExec(query, args)
 		if err != nil {
 			return Result{}, err
@@ -222,14 +334,8 @@ type Result struct {
 
 func (s *SQLx) Batch(query string, args []map[string]any) (res Result, err error) {
 	var r sql.Result
-	if s.BigInt {
-		for i, arg := range args {
-			for k, v := range arg {
-				if b, ok := v.(*big.Int); ok {
-					args[i][k] = b.Int64()
-				}
-			}
-		}
+	if len(args) > 0 {
+		s.processArgsSlice(args)
 	}
 	r, err = s.DB.NamedExec(query, args)
 	if err != nil {
@@ -250,7 +356,7 @@ func (s *SQLx) Prepare(query string) (*Stmt, error) {
 	if err != nil {
 		return nil, err
 	}
-	i := &Stmt{r, s.Engine, s.BigInt}
+	i := &Stmt{r, s.Engine, s.copyProcessor()}
 	return i, nil
 }
 func (s *SQLx) Begin() (*TX, error) {
@@ -265,7 +371,7 @@ func (s *SQLx) Begin() (*TX, error) {
 type TX struct {
 	*sqlx.Tx
 	*engine.Engine
-	BigInt bool
+	*BigIntProcessor
 }
 
 func (s *TX) Commit() error {
@@ -279,21 +385,17 @@ func (s *TX) Prepare(qry string) (*Stmt, error) {
 	if err != nil {
 		return nil, err
 	}
-	i := &Stmt{r, s.Engine, s.BigInt}
+	i := &Stmt{r, s.Engine, s.copyProcessor()}
 	return i, nil
 }
 func (s *TX) Stmt(stmt *Stmt) *Stmt {
 	r := s.Tx.NamedStmt(stmt.NamedStmt)
-	i := &Stmt{r, s.Engine, s.BigInt}
+	i := &Stmt{r, s.Engine, s.copyProcessor()}
 	return i
 }
 func (s *TX) Query(query string, args map[string]any) (goja.Value, error) {
-	if s.BigInt {
-		for k, v := range args {
-			if b, ok := v.(*big.Int); ok {
-				args[k] = b.Int64()
-			}
-		}
+	if len(args) > 0 {
+		s.processArgs(args)
 	}
 	r, err := s.NamedQuery(query, args)
 	if err != nil {
@@ -307,24 +409,14 @@ func (s *TX) Query(query string, args map[string]any) (goja.Value, error) {
 		if err != nil {
 			return nil, err
 		}
-		if s.BigInt {
-			for k, val := range v {
-				if t, ok := val.(int64); ok {
-					v[k] = big.NewInt(t)
-				}
-			}
-		}
+		s.processResultRow(v)
 		g = append(g, v)
 	}
 	return s.Engine.NewArray(g...), nil
 }
 func (s *TX) Exec(query string, args map[string]any) (Result, error) {
-	if s.BigInt {
-		for k, v := range args {
-			if b, ok := v.(*big.Int); ok {
-				args[k] = b.Int64()
-			}
-		}
+	if len(args) > 0 {
+		s.processArgs(args)
 	}
 	r, err := s.NamedExec(query, args)
 	if err != nil {
@@ -347,16 +439,12 @@ func (s *TX) Exec(query string, args map[string]any) (Result, error) {
 type Stmt struct {
 	*sqlx.NamedStmt
 	*engine.Engine
-	BigInt bool
+	*BigIntProcessor
 }
 
 func (s *Stmt) Query(args map[string]any) (goja.Value, error) {
-	if s.BigInt {
-		for k, v := range args {
-			if b, ok := v.(*big.Int); ok {
-				args[k] = b.Int64()
-			}
-		}
+	if len(args) > 0 {
+		s.processArgs(args)
 	}
 	r, err := s.NamedStmt.Queryx(args)
 	if err != nil {
@@ -370,24 +458,14 @@ func (s *Stmt) Query(args map[string]any) (goja.Value, error) {
 		if err != nil {
 			return nil, err
 		}
-		if s.BigInt {
-			for k, val := range v {
-				if t, ok := val.(int64); ok {
-					v[k] = big.NewInt(t)
-				}
-			}
-		}
+		s.processResultRow(v)
 		g = append(g, v)
 	}
 	return s.Engine.NewArray(g...), nil
 }
 func (s *Stmt) Exec(args map[string]any) (Result, error) {
-	if s.BigInt {
-		for k, v := range args {
-			if b, ok := v.(*big.Int); ok {
-				args[k] = b.Int64()
-			}
-		}
+	if len(args) > 0 {
+		s.processArgs(args)
 	}
 	r, err := s.NamedStmt.Exec(args)
 	if err != nil {
