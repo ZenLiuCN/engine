@@ -322,8 +322,29 @@ declare module "go/gse" {
     }
 
     export interface TagSegment {
-        text(): string
+        readonly text: string
 
-        weight(): number
+        readonly  weight: number
+
+        string(): string
+    }
+
+    export class PosTokenizer implements WithTokenizer {
+        constructor()
+
+        withGse(seg: Tokenizer);
+
+
+        loadDict(...file: string[])
+
+        cut(text: string, hmm?: boolean): SegPos[]
+
+        trimPunct(ps: SegPos[]): SegPos[]
+
+        trim(ps: SegPos[]): SegPos[]
+
+        trimWithPose(ps: SegPos[], ...pos: string[]): SegPos[]
+
+
     }
 }

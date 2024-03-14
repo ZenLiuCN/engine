@@ -18,15 +18,17 @@ func TestTokenizer(t *testing.T) {
 	fn.Panic1(vm.RunJs(
 		//language=javascript
 		`
-import {Tokenizer}from 'go/gse'
+import {Tokenizer,TagExtractor}from 'go/gse'
 const t=new Tokenizer()
 t.alphaNum=true
 t.skipLog=true
 console.log(t)
-
 t.loadDict()
 console.log(t.load)
-
 console.log(t.cut("特伦特·奥唐纳导演负责制作",true))
+const tag=new TagExtractor()
+tag.withGse(t)
+tag.loadIdf()
+console.log(tag.extractTags("特伦特·奥唐纳导演负责制作",5).map(v=>v.string()).join("/"))
 `))
 }

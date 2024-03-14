@@ -2,10 +2,12 @@ package gse
 
 import (
 	_ "embed"
+	"fmt"
 	"github.com/ZenLiuCN/engine"
 	"github.com/dop251/goja"
 	"github.com/go-ego/gse"
 	"github.com/go-ego/gse/hmm/idf"
+	"github.com/go-ego/gse/hmm/pos"
 	"regexp"
 )
 
@@ -75,6 +77,10 @@ func (S TokenizerModule) ExportsWithEngine(eng *engine.Engine) map[string]any {
 			seg := new(idf.TextRanker)
 			return seg, nil
 		}),
+		"PosTokenizer": eng.ToConstructor(func(v []goja.Value) (any, error) {
+			seg := &PosTokenizer{new(pos.Segmenter)}
+			return seg, nil
+		}),
 	}
 }
 
@@ -116,6 +122,35 @@ type Value struct {
 
 //endregion
 
+//region TagExtractor
+
 type TagExtractor struct {
 	*idf.TagExtracter
+}
+
+func (s *TagExtractor) ExtractTags(txt string, topK int) (r []*Seg) {
+	v := s.TagExtracter.ExtractTags(txt, topK)
+	for _, segment := range v {
+		r = append(r, &Seg{
+			segment.Text(),
+			segment.Weight(),
+		})
+	}
+	return
+
+}
+
+type Seg struct {
+	Text   string
+	Weight float64
+}
+
+func (s Seg) String() string {
+	return fmt.Sprintf(`{"text":"%s","weight":%f}`, s.Text, s.Weight)
+}
+
+//endregion
+
+type PosTokenizer struct {
+	*pos.Segmenter
 }
