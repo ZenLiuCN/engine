@@ -146,7 +146,7 @@ func (e NotifyEvent) IsRenamed() bool {
 	return e.Has(fsnotify.Rename)
 }
 func (e NotifyEvent) IsRemoved() bool {
-	return e.Has(fsnotify.Rename)
+	return e.Has(fsnotify.Remove)
 }
 func (e NotifyEvent) IsAttributeChanged() bool {
 	return e.Has(fsnotify.Chmod)
