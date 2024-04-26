@@ -55,7 +55,7 @@ func main() {
 					defer wg.Done()
 					v := fn.Panic1(vm.RunCodeContext(engine.CompileSource(fn.SliceJoinRune(c.Args().Slice(), '\n', fn.Identity[string]), ts, true), warm, ctx))
 					if !engine.IsNullish(v) {
-						println(v.String())
+						println(v.Export())
 					}
 				})
 				wg.Wait()
@@ -79,7 +79,7 @@ func main() {
 				}
 				v := fn.Panic1(vm.RunCodeContext(engine.CompileFile(args[0], true), warm, ctx))
 				if !engine.IsNullish(v) {
-					println(v.String())
+					println(v.Export())
 				}
 			})
 			wg.Wait()

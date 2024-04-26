@@ -1,13 +1,14 @@
 declare module "go/esbuild" {
 
-
+    // ifTerminal,never,always
     type StderrColor = 0 | 1 | 2
+    // silent,verbose,debug,info,warning,error
     type LogLevel = 0 | 1 | 2 | 3 | 4 | 5
+    //0: default, 1: ASCII 2: UTF8
     type Charset = 0 | 1 | 2
+    //default,false,true
     type TreeShaking = 0 | 1 | 2
-    /**
-     * Include,Exclude
-     */
+    //Include,Exclude
     type SourcesContent = 0 | 1
     /**
      * Default,None,Inline,EndOfFile,Linked,External
@@ -17,6 +18,7 @@ declare module "go/esbuild" {
      * Transform, Preserve, Automatic
      */
     type JSX = 0 | 1 | 2
+    //console,debugger
     type Drop = 1 | 2
     /**
      *    Default,ESNext,ES5,ES2015,ES2016,ES2017,ES2018,ES2019,ES2020,ES2021,ES2022
@@ -30,6 +32,7 @@ declare module "go/esbuild" {
      * LoaderNone , LoaderBase64, LoaderBinary, LoaderCopy, LoaderCSS, LoaderDataURL, LoaderDefault, LoaderEmpty, LoaderFile, LoaderGlobalCSS, LoaderJS, LoaderJSON, LoaderJSX, LoaderLocalCSS, LoaderText, LoaderTS, LoaderTSX
      */
     type Loader = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
+    //false,true
     type MangleQuoted = 0 | 1
     /**
      * Default,Browser,Node,Neutral
