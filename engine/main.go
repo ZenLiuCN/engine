@@ -7,6 +7,7 @@ import (
 	_ "github.com/ZenLiuCN/engine/chrome"
 	_ "github.com/ZenLiuCN/engine/excelize"
 	_ "github.com/ZenLiuCN/engine/fetch"
+	_ "github.com/ZenLiuCN/engine/fsnotifier"
 	_ "github.com/ZenLiuCN/engine/gse"
 	_ "github.com/ZenLiuCN/engine/minify"
 	_ "github.com/ZenLiuCN/engine/pug"
