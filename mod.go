@@ -25,7 +25,7 @@ var (
 	registry     = map[string]Mod{}
 )
 
-// RegisterMod a module , returns false if already exists
+// RegisterMod a default global module , returns false if already exists
 func RegisterMod(module Mod) bool {
 	if _, ok := registry[module.Name()]; ok {
 		return false
@@ -52,12 +52,14 @@ type TypeDefined interface {
 // ModDefines dump all possible type define (d.ts format) in registry
 func ModDefines() []byte {
 	var b bytes.Buffer
+	b.WriteString("declare global{\n")
 	b.Write(globalDefine)
 	for _, module := range registry {
 		if d, ok := module.(TypeDefined); ok {
 			b.WriteRune('\n')
-			b.Write(d.TypeDefine())
+			b.Write(bytes.ReplaceAll(d.TypeDefine(), []byte("declare "), []byte("export ")))
 		}
 	}
+	b.WriteString("}\n")
 	return b.Bytes()
 }

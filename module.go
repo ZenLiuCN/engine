@@ -24,6 +24,7 @@ var (
 	goRegistry = map[string]Module{}
 )
 
+// RegisterModule as import able module
 func RegisterModule(module Module) bool {
 	if _, ok := goRegistry[module.Identity()]; ok {
 		return false

@@ -12,6 +12,7 @@ require (
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.2.0
 	github.com/dop251/goja v0.0.0-20231027120936-b396bb4c349d
 	github.com/evanw/esbuild v0.19.10
+	github.com/fsnotify/fsnotify v1.7.0
 	github.com/gabriel-vasile/mimetype v1.4.3
 	github.com/go-ego/gse v0.80.2
 	github.com/jackc/pgx/v5 v5.5.1
