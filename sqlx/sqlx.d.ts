@@ -1,4 +1,46 @@
 declare module "go/sqlx" {
+    // @ts-ignore
+    import {Time} from "go/time"
+    export interface NullString {
+        string: string
+        valid: boolean
+    }
+    export interface NullBoolean {
+        bool: boolean
+        valid: boolean
+    }
+    export interface NullBoolean {
+        bool: boolean
+        valid: boolean
+    }
+    export interface NullInt64 {
+        int64: number
+        valid: boolean
+    }
+    export interface NullInt32 {
+        int32: number
+        valid: boolean
+    }
+    export interface NullInt16 {
+        int16: number
+        valid: boolean
+    }
+    export interface NullByte {
+        byte: number
+        valid: boolean
+    }
+    export interface NullFloat64 {
+        float64: number
+        valid: boolean
+    }
+    export interface NullFloat32 {
+        float32: number
+        valid: boolean
+    }
+    export interface NullTime {
+        time: Time
+        valid: boolean
+    }
     /**
      * convert bit[1] to boolean value
      * @param rows row data
@@ -70,8 +112,11 @@ declare module "go/sqlx" {
 
 
         bigIntText(): boolean
+
         setBigIntText(v: boolean)
+
         bigIntFields(): string[]
+
         setBigIntFields(...fields: string[])
 
         /**
