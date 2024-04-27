@@ -1,34 +1,37 @@
 declare module 'go/http' {
+    // @ts-ignore
     import {Time} from 'go/time'
+    // @ts-ignore
     import {Reader} from 'go/io'
 
     export interface Values {
         [key: string]: string[]
-
+        // @ts-ignore
         get(key: string): string
-
+        // @ts-ignore
         set(key, value: string)
-
+        // @ts-ignore
         add(key, value: string)
-
+        // @ts-ignore
         del(key: string)
-
+        // @ts-ignore
         has(key: string): boolean
     }
 
     export interface Header {
         [key: string]: string[]
 
+        // @ts-ignore
         add(key, value: string)
-
+        // @ts-ignore
         set(key, value: string)
-
+        // @ts-ignore
         get(key: string): string
-
+        // @ts-ignore
         values(key: string): string[]
-
+        // @ts-ignore
         del(key: string)
-
+        // @ts-ignore
         clone(): Header
     }
 

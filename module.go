@@ -2,6 +2,7 @@ package engine
 
 import (
 	"fmt"
+	"github.com/ZenLiuCN/fn"
 	"github.com/dop251/goja"
 	"os"
 	"path/filepath"
@@ -34,6 +35,9 @@ func RegisterModule(module Module) bool {
 }
 func RemoveModule(module string) {
 	delete(goRegistry, module)
+}
+func ModuleNames() []string {
+	return fn.MapKeys(goRegistry)
 }
 
 // ModuleDefines exports Module define as moduleName=>ModuleTypeDefine

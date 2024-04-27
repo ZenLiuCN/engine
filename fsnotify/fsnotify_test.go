@@ -1,4 +1,4 @@
-package fsnotifier
+package fsnotify
 
 import (
 	"github.com/ZenLiuCN/engine"

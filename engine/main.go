@@ -4,19 +4,11 @@ import (
 	"context"
 	"fmt"
 	"github.com/ZenLiuCN/engine"
-	_ "github.com/ZenLiuCN/engine/chrome"
-	_ "github.com/ZenLiuCN/engine/excelize"
-	_ "github.com/ZenLiuCN/engine/fetch"
-	_ "github.com/ZenLiuCN/engine/fsnotifier"
-	_ "github.com/ZenLiuCN/engine/gse"
-	_ "github.com/ZenLiuCN/engine/minify"
-	_ "github.com/ZenLiuCN/engine/pug"
-	_ "github.com/ZenLiuCN/engine/sqlx"
-	_ "github.com/ZenLiuCN/engine/sqlx/duckdb"
 	"github.com/ZenLiuCN/fn"
 	"github.com/dop251/goja"
 	. "github.com/urfave/cli/v2"
 	"os"
+	"strings"
 	"sync"
 	"time"
 )
@@ -33,8 +25,13 @@ func main() {
 			&BoolFlag{Name: "source", Aliases: []string{"s"}, Usage: "execute source from commandline, this mode not support commandline args for script."},
 			&DurationFlag{Name: "warmup", Aliases: []string{"w"}, Usage: "warmup time before time limit", DefaultText: "1s", Value: time.Second},
 			&DurationFlag{Name: "timeout", Aliases: []string{"i"}, Usage: "limit execute time"},
+			&BoolFlag{Name: "modules", Aliases: []string{"m"}, Usage: "print modules"},
 		},
 		Action: func(c *Context) error {
+			if c.Bool("m") {
+				println(strings.Join(engine.ModuleNames(), ","))
+				return nil
+			}
 			if c.Bool("define") {
 				p := c.Args().First()
 				if p == "" {

@@ -1,4 +1,4 @@
-package fsnotifier
+package fsnotify
 
 import (
 	_ "embed"
@@ -11,7 +11,7 @@ import (
 )
 
 var (
-	//go:embed fsNotifier.d.ts
+	//go:embed fs-notify.d.ts
 	define []byte
 )
 
