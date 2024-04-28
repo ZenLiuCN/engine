@@ -6,7 +6,8 @@ import (
 	"go/token"
 )
 
-//go:generate stringer -type TypeKind,FieldKind
+//go:generate go install golang.org/x/tools/cmd/stringer
+//go:generate stringer -type=TypeKind,FieldKind
 type TypeKind int
 
 const (
