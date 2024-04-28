@@ -129,6 +129,21 @@ declare module "go/time" {
         milliseconds(): number
     }
 
+    /**
+     *
+     * @param n amount must integer
+     * @param u unit duration
+     */
+    export function toDuration(n :number,u:Duration):Duration
+
+    /**
+     *
+     * @param n duration
+     * @param u unit duration
+     * @return amount of integer in unit
+     */
+    export function fromDuration(n ,u:Duration):number
+
     export function unix(sec, nsec: number): Time
 
     export function unixMilli(msec: number): Time

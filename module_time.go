@@ -43,7 +43,12 @@ var (
 		"numberWeekday": func(m int) time.Weekday {
 			return time.Weekday(m)
 		},
-
+		"toDuration": func(n int, u time.Duration) time.Duration {
+			return time.Duration(n) * u
+		},
+		"fromDuration": func(n, u time.Duration) int {
+			return int(n / u)
+		},
 		"since":    time.Since,
 		"duration": time.ParseDuration,
 		"now":      time.Now,
