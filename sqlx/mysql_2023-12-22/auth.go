@@ -42,7 +42,7 @@ var (
 //	}
 //
 //	block, _ := pem.Decode(data)
-//	if block == nil || block.Type != "PUBLIC KEY" {
+//	if block == nil || block.AstType != "PUBLIC KEY" {
 //		log.Fatal("failed to decode PEM block containing public key")
 //	}
 //

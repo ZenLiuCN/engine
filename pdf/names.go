@@ -82,7 +82,7 @@ const (
 	encoding        = "Encoding"
 	descendantFonts = "DescendantFonts"
 
-	typeName = "Type"
+	typeName = "AstType"
 
 	length = "Length"
 )

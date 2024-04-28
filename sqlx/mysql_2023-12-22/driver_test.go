@@ -2660,7 +2660,7 @@ func TestContextCancelExec(t *testing.T) {
 			dbt.Skipf("[WARN] expected val to be 1, got %d", v)
 		}
 
-		// Context is already canceled, so error should come before execution.
+		// SpecContext is already canceled, so error should come before execution.
 		if _, err := dbt.db.ExecContext(ctx, "INSERT INTO "+tbl+" VALUES (1)"); err == nil {
 			dbt.Error("expected error")
 		} else if err.Error() != "context canceled" {
@@ -2706,7 +2706,7 @@ func TestContextCancelQuery(t *testing.T) {
 			dbt.Skipf("[WARN] expected val to be 1, got %d", v)
 		}
 
-		// Context is already canceled, so error should come before execution.
+		// SpecContext is already canceled, so error should come before execution.
 		if _, err := dbt.db.QueryContext(ctx, "INSERT INTO "+tbl+" VALUES (1)"); err != context.Canceled {
 			dbt.Errorf("expected context.Canceled, got %v", err)
 		}
@@ -3218,7 +3218,7 @@ func TestValuerWithValueReceiverGivenNilValue(t *testing.T) {
 // is canceled while a user is calling rows.Scan. This is a more stringent test than the one
 // proposed in https://github.com/golang/go/issues/23519. Here we're explicitly using
 // `sql.RawBytes` to check the contents of our internal buffers are not modified after an implicit
-// call to `Rows.Close`, so Context cancellation should **not** invalidate the backing buffers.
+// call to `Rows.Close`, so SpecContext cancellation should **not** invalidate the backing buffers.
 func TestRawBytesAreNotModified(t *testing.T) {
 	const blob = "abcdefghijklmnop"
 	const contextRaceIterations = 20

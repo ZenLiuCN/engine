@@ -20,7 +20,7 @@ const maxCachedBufSize = 256 * 1024
 // A buffer which is used for both reading and writing.
 // This is possible since communication on each connection is synchronous.
 // In other words, we can't write and read simultaneously on the same connection.
-// The buffer is similar to bufio.Reader / Writer but zero-copy-ish
+// The buffer is similar to bufio.Reader / SpecWriter but zero-copy-ish
 // Also highly optimized for this particular use case.
 // This buffer is backed by two byte slices in a double-buffering scheme
 type buffer struct {

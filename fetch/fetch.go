@@ -258,7 +258,7 @@ func (o *Option) Request(e *engine.Engine, jar *cookiejar.Jar, uri string) *goja
 	contentType := ""
 	for s, s2 := range o.Headers {
 		req.Header.Add(s, s2)
-		if strings.EqualFold(s, "Content-Type") {
+		if strings.EqualFold(s, "Content-AstType") {
 			contentType = s2
 		}
 	}
