@@ -10,12 +10,13 @@ import (
 type TypeKind int
 
 const (
-	KindStruct TypeKind = iota + 1
-	KindArray
-	KindInterface
-	KindMap
-	KindFunc
-	KindIdent
+	TypeKindStruct TypeKind = iota + 1
+	TypeKindArray
+	TypeKindInterface
+	TypeKindMap
+	TypeKindFunc
+	TypeKindIdent
+	TypeKindSelector
 )
 
 type SpecType struct {
@@ -27,17 +28,17 @@ type SpecType struct {
 
 func (s *SpecType) Resolve() *SpecResolveType {
 	switch s.Kind {
-	case KindStruct:
+	case TypeKindStruct:
 		return resolveStructType(s, s.AstType.(*ast.StructType))
-	case KindArray:
+	case TypeKindArray:
 		return resolveArrayType(s, s.AstType.(*ast.ArrayType))
-	case KindInterface:
+	case TypeKindInterface:
 		return resolveInterfaceType(s, s.AstType.(*ast.InterfaceType))
-	case KindMap:
+	case TypeKindMap:
 		return resolveMapType(s, s.AstType.(*ast.MapType))
-	case KindFunc:
+	case TypeKindFunc:
 		return resolveFuncType(s, s.AstType.(*ast.FuncType))
-	case KindIdent:
+	case TypeKindIdent:
 		return resolveIdentType(s, s.AstType.(*ast.Ident))
 	default:
 		panic(fmt.Errorf("kind %s of %#+v unknown", s.Kind, s))
@@ -93,42 +94,42 @@ func FindTypeSpec(f *SpecFile, export bool, on func(*SpecType)) func(node ast.No
 				switch t := ts.Type.(type) {
 				case *ast.StructType:
 					on(&SpecType{
-						Kind:        KindStruct,
+						Kind:        TypeKindStruct,
 						SpecFile:    f,
 						AstType:     t,
 						AstTypeSpec: ts,
 					})
 				case *ast.ArrayType:
 					on(&SpecType{
-						Kind:        KindArray,
+						Kind:        TypeKindArray,
 						SpecFile:    f,
 						AstType:     t,
 						AstTypeSpec: ts,
 					})
 				case *ast.InterfaceType:
 					on(&SpecType{
-						Kind:        KindInterface,
+						Kind:        TypeKindInterface,
 						SpecFile:    f,
 						AstType:     t,
 						AstTypeSpec: ts,
 					})
 				case *ast.MapType:
 					on(&SpecType{
-						Kind:        KindMap,
+						Kind:        TypeKindMap,
 						SpecFile:    f,
 						AstType:     t,
 						AstTypeSpec: ts,
 					})
 				case *ast.FuncType:
 					on(&SpecType{
-						Kind:        KindFunc,
+						Kind:        TypeKindFunc,
 						SpecFile:    f,
 						AstType:     t,
 						AstTypeSpec: ts,
 					})
 				case *ast.Ident:
 					on(&SpecType{
-						Kind:        KindIdent,
+						Kind:        TypeKindIdent,
 						SpecFile:    f,
 						AstType:     t,
 						AstTypeSpec: ts,
@@ -153,13 +154,16 @@ type FieldKind int
 const (
 	FieldKindIdent FieldKind = iota + 1
 	FieldKindStar
+	FieldKindMap
 )
 
 type SpecField struct {
 	Embedded bool
 	Kind     FieldKind
 	AstType  ast.Expr
-	Refer    *SpecReferType
+	Star     *SpecReferType
+	Key      *SpecReferType
+	Value    *SpecReferType
 	TypeName string
 }
 
@@ -170,10 +174,15 @@ func resolveField(s *SpecType, t *ast.StructType, field *ast.Field) (r *SpecFiel
 	switch x := field.Type.(type) {
 	case *ast.StarExpr:
 		r.Kind = FieldKindStar
-		r.Refer = ResolveType(s.SpecFile, x.X)
+		r.Star = ResolveType(s.SpecFile, x.X)
 	case *ast.Ident:
 		r.Kind = FieldKindIdent
 		r.TypeName = x.Name
+	case *ast.MapType:
+		r.Kind = FieldKindMap
+		r.TypeName = "map"
+		r.Key = ResolveType(s.SpecFile, x.Key)
+		r.Value = ResolveType(s.SpecFile, x.Value)
 	default:
 		fmt.Printf("field type %#+v\n", x)
 	}
@@ -181,7 +190,9 @@ func resolveField(s *SpecType, t *ast.StructType, field *ast.Field) (r *SpecFiel
 }
 
 type SpecReferType struct {
+	Kind     TypeKind
 	SpecFile *SpecFile
+	Type     ast.Expr
 	Select   ast.Expr
 	Name     string
 }
@@ -189,10 +200,17 @@ type SpecReferType struct {
 func ResolveType(f *SpecFile, t ast.Expr) (r *SpecReferType) {
 	r = new(SpecReferType)
 	r.SpecFile = f
+	r.Type = t
 	switch x := t.(type) {
+	case *ast.Ident:
+		r.Kind = TypeKindIdent
+		r.Name = x.Name
 	case *ast.SelectorExpr:
+		r.Kind = TypeKindSelector
 		r.Select = x.X
 		r.Name = x.Sel.Name
+	case *ast.FuncType:
+
 	default:
 		fmt.Printf("refer type %#+v\n", x)
 	}
