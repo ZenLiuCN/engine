@@ -47,6 +47,7 @@ type DeclCases interface {
 	FuncTypeSpec(s *ast.TypeSpec, t *ast.FuncType)
 	MethodDeclStarRecv(d *ast.FuncDecl, r *ast.Field, t *ast.StarExpr)
 	MethodDeclIdentRecv(d *ast.FuncDecl, r *ast.Field, t *ast.Ident)
+	ChanTypeSpec(s *ast.TypeSpec, t *ast.ChanType)
 }
 
 //region ExportedDeclCases
@@ -122,6 +123,12 @@ func (e ExportedDeclCases) FuncTypeSpec(s *ast.TypeSpec, t *ast.FuncType) {
 	}
 	e.Inner.FuncTypeSpec(s, t)
 }
+func (e ExportedDeclCases) ChanTypeSpec(s *ast.TypeSpec, t *ast.ChanType) {
+	if !ast.IsExported(s.Name.Name) {
+		return
+	}
+	e.Inner.ChanTypeSpec(s, t)
+}
 
 //endregion
 
@@ -131,6 +138,9 @@ type BaseDeclCases struct {
 }
 
 func (b BaseDeclCases) FuncDecl(decl *ast.FuncDecl) {
+
+}
+func (b BaseDeclCases) ChanTypeSpec(s *ast.TypeSpec, t *ast.ChanType) {
 
 }
 
@@ -204,8 +214,10 @@ func CaseDecl(file *ast.File, w DeclCases) {
 							w.FuncTypeSpec(s, t)
 						case *ast.ArrayType:
 							w.ArrayTypeSpec(s, t)
+						case *ast.ChanType:
+							w.ChanTypeSpec(s, t)
 						default:
-							fmt.Printf("miss %#+v\n", t)
+							fmt.Printf("miss decl %#+v\n", t)
 						}
 					}
 				}

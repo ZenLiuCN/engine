@@ -102,6 +102,7 @@ const (
 	InterfaceType
 	ArrayType
 	AliasType
+	ChanType
 	FuncType
 	MethodDecl
 	FuncDecl
@@ -125,6 +126,7 @@ type Type struct {
 	Recv       *ast.Field
 	MethodDecl *ast.FuncDecl
 	StarRecv   *ast.StarExpr
+	ChanType   *ast.ChanType
 }
 
 const glob = "global"
@@ -144,7 +146,13 @@ func (w WalkDecl) FuncDecl(d *ast.FuncDecl) {
 		Type:     FuncDecl,
 	})
 }
-
+func (w WalkDecl) ChanTypeSpec(s *ast.TypeSpec, t *ast.ChanType) {
+	w.set(glob, &Type{
+		Spec:     s,
+		ChanType: t,
+		Type:     ChanType,
+	})
+}
 func (w WalkDecl) MethodDecl(d *ast.FuncDecl, r *ast.Field) bool {
 	return true
 }
@@ -245,32 +253,38 @@ func (g *Generator) generate() {
 	pkg := p[0]
 	ts := map[string][]*Type{}
 	for _, file := range pkg.Syntax {
-		w := &ExportedDeclCases{&WalkDecl{func(s string, t *Type) {
+		CaseDecl(file, &ExportedDeclCases{&WalkDecl{func(s string, t *Type) {
 			t.File = file
 			v := ts[s]
 			v = append(v, t)
 			ts[s] = v
-		}}}
-		CaseDecl(file, w)
-
+		}}})
 	}
 	//!! write d.ts
 	imported := fn.NewHashSet[string]()
-	gw := NewWriter()
-	gw.F("declare module 'go/%s' {\n", pkg.Name)
+	fw := NewWriter() //file
+	fw.F("declare module 'go/%s' {\n", pkg.Name)
 	iw := NewWriter()
-	dw := NewWriter()
-	tw := NewWriter()
+	dw := NewWriter() // declare
+	ew := NewWriter() // elements
+	tw := NewWriter() // element
 	for name, types := range ts {
 		slices.SortFunc(types, func(a, b *Type) int {
 			return int(a.Type - b.Type)
 		})
-		zero := types[0]
-		closure := false
-		switch zero.Type {
-		case InterfaceType, StructType, MapType, ArrayType:
-			dw.F("\n\texport interface %s {\n", name)
-			closure = true
+		closure := name != glob
+		closed := false
+		if closure {
+			switch types[0].Type {
+			case MapType, StructType, InterfaceType:
+				dw.F("\t export interface %s", name)
+				closed = true
+			default:
+				if len(types) > 1 && !(types[1].Type == MethodDecl && types[1].MethodDecl.Name.Name == "string") { //!! exclude alias with only Stringer
+					dw.F("\t export interface %s", name)
+					closed = true
+				}
+			}
 		}
 		for _, t := range types {
 			if closure {
@@ -311,7 +325,11 @@ func (g *Generator) generate() {
 					if i > 0 {
 						tw.F(",")
 					}
-					tw.F("%s:", pa.Names[0].Name)
+					if _, ok := pa.Type.(*ast.Ellipsis); ok {
+						tw.F("...%s:", pa.Names[0].Name)
+					} else {
+						tw.F("%s:", pa.Names[0].Name)
+					}
 					TypeResolve(imported, pkg, t.File, pa.Type, tw, false)
 				}
 				tw.F(")")
@@ -333,13 +351,13 @@ func (g *Generator) generate() {
 				tw.F("\n")
 			case FuncType:
 				d := t.Spec.Type.(*ast.FuncType)
-				tw.F("\texport function %s(", GoFuncToJsFunc(t.Spec.Name.Name))
+				tw.F("\texport type %s(", GoFuncToJsFunc(t.Spec.Name.Name))
 				for i, pa := range d.Params.List {
 					if i > 0 {
 						tw.F(",")
 					}
 					if len(pa.Names) == 0 {
-						tw.F("v:")
+						tw.F("v%d:", i)
 					} else {
 						for i, n := range pa.Names {
 							if i > 0 {
@@ -422,23 +440,28 @@ func (g *Generator) generate() {
 			default:
 				println(fmt.Sprintf("miss %#+v", t))
 			}
-			dw.Append(tw)
+			ew.Append(tw)
 			tw.Reset()
 		}
-		if closure {
+		if closed {
+			dw.F("{\n")
+			dw.Append(ew)
+			ew.Reset()
 			dw.F("\n\t}\n")
 		} else {
+			dw.Append(ew)
+			ew.Reset()
 			dw.F("\n")
 		}
 		iw.Append(dw)
 		dw.Reset()
 	}
 	for k := range imported {
-		gw.F("\timport * as %[1]s from 'go/%[1]s'\n", k)
+		fw.F("\timport * as %[1]s from 'go/%[1]s'\n", k)
 	}
-	gw.Append(iw)
-	gw.F("\n}")
-	fmt.Println(gw.String())
+	fw.Append(iw)
+	fw.F("\n}")
+	fmt.Println(fw.String())
 }
 
 func GoFuncToJsFunc(n string) string {
@@ -483,7 +506,7 @@ func TypeResolve(imported fn.HashSet[string], pkg *packages.Package, file *ast.F
 		DepthTypeCases: &DepthTypeCases{},
 	}
 	ca.u = []TypeCases{ca.DepthTypeCases, ca}
-	CaseType(pkg, typ, ca)
+	CaseType(pkg, typ, ca.u)
 	l, _ := ca.Last()
 	return l.Node
 }
@@ -493,31 +516,31 @@ func GoIdentToTs(s string, array bool) string {
 		if array {
 			return fmt.Sprintf("U%sArray", s[1:])
 		} else {
-			return "number/*positive*/"
+			return fmt.Sprintf("/*%s*/number", s)
 		}
 	case "int8", "int16", "int32":
 		if array {
 			return fmt.Sprintf("I%sArray", s[1:])
 		} else {
-			return "number/*int*/"
+			return fmt.Sprintf("/*%s*/number", s)
 		}
 	case "rune":
 		if array {
-			return "string"
+			return "/*rune[]*/string"
 		} else {
-			return "number/*rune*/"
+			return "/*rune*/number"
 		}
 	case "int", "int64":
 		if array {
-			return "number[]/*int*/"
+			return fmt.Sprintf("/*%s*/number[]", s)
 		} else {
-			return "number/*int*/"
+			return fmt.Sprintf("/*%s*/number", s)
 		}
 	case "uint64", "uint":
 		if array {
-			return "number[]/*uint*/"
+			return fmt.Sprintf("/*%s*/number[]", s)
 		} else {
-			return "number/*uint*/"
+			return fmt.Sprintf("/*%s*/number", s)
 		}
 	case "bool":
 		if array {
@@ -525,6 +548,11 @@ func GoIdentToTs(s string, array bool) string {
 		} else {
 			return "boolean"
 		}
+	case "error":
+		if array {
+			return "Error[]"
+		}
+		return "Error"
 	default:
 		if array {
 			return s + "[]"
@@ -578,6 +606,7 @@ func (w *WalkWriter) FuncType(t *ast.FuncType) {
 			if i > 0 {
 				w.F(",")
 			}
+			w.F("v%d:", i)
 			CaseType(w.pkg, f.Type, w.u)
 			w.Pop()
 		}
@@ -667,21 +696,35 @@ func (w *WalkWriter) StructType(t *ast.StructType) {
 			}
 		}
 	} else {
+		if t.Fields.NumFields() == 0 {
+			w.F("/*struct{}{}*/void")
+			w.Pop()
+			return
+		}
 		panic(fmt.Sprintf("should not access structType: %#+v", w))
 	}
 }
 
 func (w *WalkWriter) ChanType(t *ast.ChanType) {
-	//TODO implement me
-	panic("implement me")
+	log.Printf("chan type found: %#+v\n", t)
+	w.Imported.Add("chan")
+	if t.Dir == ast.RECV {
+		w.F("chan.ChanRecv<")
+	} else if t.Dir == ast.SEND {
+		w.F("chan.ChanSend<")
+	} else {
+		w.F("chan.Chan<")
+	}
+	CaseType(w.pkg, t.Value, w.u)
+	w.Pop()
+	w.F(">")
 }
 func (w *WalkWriter) Ellipsis(t *ast.Ellipsis) {
 	if w.field {
 		panic(fmt.Errorf("found ellipsis in field: %#+v", w))
 	}
-	l, ok := w.Last()
 	CaseType(w.pkg, t.Elt, w.u)
-	l, ok = w.Pop()
+	l, ok := w.Pop()
 	if ok && l.Node != AstIdent {
 		w.F("[]")
 	}
