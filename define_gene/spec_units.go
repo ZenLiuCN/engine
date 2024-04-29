@@ -265,9 +265,10 @@ func (b BaseTypeCases) ChanType(t *ast.ChanType) {
 
 }
 
-//endregion
-//region DepthTypeCases
-
+// endregion
+// region DepthTypeCases
+//
+//go:generate stringer -type=AstNode
 const (
 	AstNothing AstNode = iota
 	AstIdent

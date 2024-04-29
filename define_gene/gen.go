@@ -129,6 +129,8 @@ type Type struct {
 
 const glob = "global"
 
+//region Declare
+
 type WalkDecl struct {
 	found func(string, *Type)
 }
@@ -228,6 +230,8 @@ func (w WalkDecl) MethodDeclIdentRecv(d *ast.FuncDecl, r *ast.Field, t *ast.Iden
 		Type:       MethodDecl,
 	})
 }
+
+//endregion
 
 func (g *Generator) generate() {
 	var flags []string
@@ -531,6 +535,8 @@ func GoIdentToTs(s string, array bool) string {
 	}
 }
 
+//region Writer
+
 type WalkWriter struct {
 	Imported fn.HashSet[string]
 	pkg      *packages.Package
@@ -680,3 +686,5 @@ func (w *WalkWriter) Ellipsis(t *ast.Ellipsis) {
 		w.F("[]")
 	}
 }
+
+//endregion
