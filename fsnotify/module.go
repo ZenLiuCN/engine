@@ -55,8 +55,9 @@ func (p Notifier) ExportsWithEngine(eng *engine.Engine) map[string]any {
 type Notify struct {
 	e *engine.Engine
 	*fsnotify.Watcher
-	closer chan struct{}
-	tree   []string
+	closer  chan struct{}
+	tree    []string
+	running bool
 }
 
 func (n *Notify) AddTree(p string) error {
@@ -88,7 +89,11 @@ func (n *Notify) RemoveTree(p string) error {
 	})
 }
 func (n *Notify) OnEvent(fn goja.Value) {
-	n.e.RunOnLoop(func(e *engine.Engine) {
+	if n.running {
+		return
+	}
+	n.running = true
+	go func(e *engine.Engine) {
 		defer func() {
 			n.closer <- struct{}{}
 		}()
@@ -106,11 +111,11 @@ func (n *Notify) OnEvent(fn goja.Value) {
 				_, _ = e.CallFunction(fn, NotifyEvent{ev}, e.Undefined())
 			}
 		}
-	})
+	}(n.e)
 }
 func (n *Notify) Await() {
 	<-n.closer
-
+	n.running = false
 }
 
 func (n *Notify) Close() error {
