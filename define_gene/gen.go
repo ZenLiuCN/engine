@@ -7,12 +7,13 @@ import (
 	"github.com/ZenLiuCN/fn"
 	"github.com/urfave/cli/v2"
 	"go/ast"
-	"go/token"
+	"go/types"
 	"golang.org/x/tools/go/packages"
 	"log"
 	"os"
 	"path/filepath"
 	"slices"
+	"strings"
 	"unicode"
 )
 
@@ -104,142 +105,150 @@ const (
 	FuncType
 	MethodDecl
 	FuncDecl
+	IdentTypeFunc
+	IdentType
 )
 
 type Type struct {
-	File   *ast.File
-	Decl   ast.Decl
-	Object *ast.Object
-	Spec   *ast.TypeSpec
-	Type   Kind
+	File *ast.File
+	Type Kind
+
+	Spec       *ast.TypeSpec
+	Interface  *ast.InterfaceType
+	Ident      *ast.Ident
+	Struct     *ast.StructType
+	Map        *ast.MapType
+	Array      *ast.ArrayType
+	Func       *ast.FuncType
+	FuncDecl   *ast.FuncDecl
+	IdentRecv  *ast.Ident
+	Recv       *ast.Field
+	MethodDecl *ast.FuncDecl
+	StarRecv   *ast.StarExpr
 }
 
 const glob = "global"
 
+type WalkDecl struct {
+	found func(string, *Type)
+}
+
+func (w WalkDecl) set(name string, t *Type) {
+	w.found(name, t)
+}
+func (w WalkDecl) FuncDecl(d *ast.FuncDecl) {
+	w.set(glob, &Type{
+		FuncDecl: d,
+		Type:     FuncDecl,
+	})
+}
+
+func (w WalkDecl) MethodDecl(d *ast.FuncDecl, r *ast.Field) bool {
+	return true
+}
+
+func (w WalkDecl) IdentTypeSpec(s *ast.TypeSpec, t *ast.Ident) {
+	if t.Obj != nil {
+		switch t.Obj.Kind {
+		case ast.Fun:
+			w.set(t.Name, &Type{
+				Ident: t,
+				Type:  IdentTypeFunc,
+			})
+		case ast.Typ:
+			w.set(t.Name, &Type{
+				Spec:  s,
+				Ident: t,
+				Type:  AliasType,
+			})
+		}
+	} else {
+		w.set(s.Name.Name, &Type{
+			Spec:  s,
+			Ident: t,
+			Type:  PrimitiveType,
+		})
+	}
+}
+
+func (w WalkDecl) StructTypeSpec(s *ast.TypeSpec, t *ast.StructType) {
+	w.set(s.Name.Name, &Type{
+		Struct: t,
+		Spec:   s,
+		Type:   StructType,
+	})
+}
+
+func (w WalkDecl) InterfaceTypeSpec(s *ast.TypeSpec, t *ast.InterfaceType) {
+	w.set(s.Name.Name, &Type{
+		Interface: t,
+		Spec:      s,
+		Type:      InterfaceType,
+	})
+}
+
+func (w WalkDecl) MapTypeSpec(s *ast.TypeSpec, t *ast.MapType) {
+	w.set(s.Name.Name, &Type{
+		Map:  t,
+		Spec: s,
+		Type: MapType,
+	})
+}
+
+func (w WalkDecl) ArrayTypeSpec(s *ast.TypeSpec, t *ast.ArrayType) {
+	w.set(s.Name.Name, &Type{
+		Array: t,
+		Spec:  s,
+		Type:  ArrayType,
+	})
+}
+
+func (w WalkDecl) FuncTypeSpec(s *ast.TypeSpec, t *ast.FuncType) {
+	w.set(s.Name.Name, &Type{
+		Func: t,
+		Spec: s,
+		Type: FuncType,
+	})
+}
+
+func (w WalkDecl) MethodDeclStarRecv(d *ast.FuncDecl, r *ast.Field, t *ast.StarExpr) {
+	w.set(t.X.(*ast.Ident).Name, &Type{
+		MethodDecl: d,
+		Recv:       r,
+		StarRecv:   t,
+		Type:       MethodDecl,
+	})
+}
+
+func (w WalkDecl) MethodDeclIdentRecv(d *ast.FuncDecl, r *ast.Field, t *ast.Ident) {
+	w.set(t.Name, &Type{
+		MethodDecl: d,
+		Recv:       r,
+		IdentRecv:  t,
+		Type:       MethodDecl,
+	})
+}
+
 func (g *Generator) generate() {
-	p := Parse(g.tags, g.files, g.log)
+	var flags []string
+	if len(g.tags) > 0 {
+		flags = append(flags, fmt.Sprintf("-tags=%s", strings.Join(g.tags, " ")))
+	}
+	p := ParseTypeInfo(flags, g.files, g.log)
 	if len(p) > 1 {
 		panic("only one package each time")
 	}
 	pkg := p[0]
 	ts := map[string][]*Type{}
 	for _, file := range pkg.Syntax {
-		for _, decl := range file.Decls {
-			set := func(name string, typ *Type) {
-				v := ts[name]
-				typ.Decl = decl
-				typ.File = file
-				ts[name] = append(v, typ)
-			}
-			switch d := decl.(type) {
-			case *ast.FuncDecl:
-				if !ast.IsExported(d.Name.Name) {
-					continue
-				}
-				if d.Recv == nil {
-					set(glob, &Type{
-						Object: d.Name.Obj,
-						Type:   FuncDecl,
-					})
-				} else if d.Recv.NumFields() != 1 {
-					panic(fmt.Errorf("more than one reciver: %#+v", d))
-				} else {
-					r := d.Recv.List[0]
-					if len(r.Names) == 0 && !ast.IsExported(r.Type.(*ast.Ident).Name) {
-						//!! Unexported Type's Exported method
-						continue
-					}
-					switch x := r.Type.(type) {
-					case *ast.Ident:
-						if ast.IsExported(x.Name) {
-							set(x.Name, &Type{
-								Object: d.Name.Obj,
-								Type:   MethodDecl,
-							})
-						}
-					case *ast.StarExpr:
-						n := x.X.(*ast.Ident).Name
-						if ast.IsExported(n) {
-							set(n, &Type{
-								Object: d.Name.Obj,
-								Type:   MethodDecl,
-							})
-						}
-					default:
-						fmt.Printf("missing %#+v", x)
-					}
+		w := &ExportedDeclCases{&WalkDecl{func(s string, t *Type) {
+			t.File = file
+			v := ts[s]
+			v = append(v, t)
+			ts[s] = v
+		}}}
+		CaseDecl(file, w)
 
-				}
-			case *ast.GenDecl:
-				switch d.Tok {
-				case token.TYPE:
-					for _, spec := range d.Specs {
-						if s, ok := spec.(*ast.TypeSpec); ok {
-							if !ast.IsExported(s.Name.Name) {
-								continue
-							}
-							switch t := s.Type.(type) {
-							case *ast.Ident:
-								if t.Obj != nil {
-									switch t.Obj.Kind {
-									case ast.Fun:
-										set(t.Name, &Type{
-											Object: t.Obj,
-											Type:   FuncType,
-										})
-									case ast.Typ:
-										set(t.Name, &Type{
-											Object: t.Obj,
-											Type:   AliasType,
-										})
-									}
-								} else {
-									set(s.Name.Name, &Type{
-										Spec:   s,
-										Object: s.Name.Obj,
-										Type:   PrimitiveType,
-									})
-								}
-							case *ast.StructType:
-								set(s.Name.Name, &Type{
-									Object: s.Name.Obj,
-									Spec:   s,
-									Type:   StructType,
-								})
-							case *ast.InterfaceType:
-								set(s.Name.Name, &Type{
-									Object: s.Name.Obj,
-									Spec:   s,
-									Type:   InterfaceType,
-								})
-							case *ast.MapType:
-								set(s.Name.Name, &Type{
-									Object: s.Name.Obj,
-									Spec:   s,
-									Type:   MapType,
-								})
-							case *ast.FuncType:
-								set(s.Name.Name, &Type{
-									Object: s.Name.Obj,
-									Spec:   s,
-									Type:   FuncType,
-								})
-							case *ast.ArrayType:
-								set(s.Name.Name, &Type{
-									Object: s.Name.Obj,
-									Spec:   s,
-									Type:   ArrayType,
-								})
-							default:
-								fmt.Printf("miss %#+v\n", t)
-							}
-						}
-					}
-				default:
-					continue
-				}
-			}
-		}
 	}
 	//!! write d.ts
 	imported := fn.NewHashSet[string]()
@@ -265,7 +274,7 @@ func (g *Generator) generate() {
 			}
 			switch t.Type {
 			case FuncDecl:
-				d := t.Decl.(*ast.FuncDecl)
+				d := t.FuncDecl
 				tw.F("\texport function %s(", GoFuncToJsFunc(d.Name.Name))
 				for i, pa := range d.Type.Params.List {
 					if i > 0 {
@@ -292,7 +301,7 @@ func (g *Generator) generate() {
 				}
 				tw.F("\n")
 			case MethodDecl:
-				d := t.Decl.(*ast.FuncDecl)
+				d := t.MethodDecl
 				tw.F("\t%s(", GoFuncToJsFunc(d.Name.Name))
 				for i, pa := range d.Type.Params.List {
 					if i > 0 {
@@ -406,6 +415,8 @@ func (g *Generator) generate() {
 				fmt.Printf("Array %s \n", t.Spec.Name)
 			case AliasType:
 				fmt.Printf("Alias %s %s \n", t.Spec.Name, t.Spec.Type.(*ast.Ident))
+			default:
+				println(fmt.Sprintf("miss %#+v", t))
 			}
 			dw.Append(tw)
 			tw.Reset()
@@ -459,140 +470,18 @@ func GoFuncToJsFunc(n string) string {
 
 	return buf.String()
 }
-func TypeResolve(imported fn.HashSet[string], pkg *packages.Package, file *ast.File, typ ast.Expr, w *SpecWriter, field bool) {
-	kd, obj, pg := LookupType(pkg, file, typ)
-	n := len(kd) - 1
-	if n < 0 {
-		panic(fmt.Errorf("unresolved type: %#+v", typ))
+func TypeResolve(imported fn.HashSet[string], pkg *packages.Package, file *ast.File, typ ast.Expr, w *SpecWriter, field bool) AstNode {
+	ca := &WalkWriter{
+		Imported:       imported,
+		pkg:            pkg,
+		field:          field,
+		SpecWriter:     w,
+		DepthTypeCases: &DepthTypeCases{},
 	}
-	switch kd[n] {
-	case TypeKindFunc:
-		switch {
-		case n == 0:
-			w.F("((")
-			if typ.(*ast.FuncType).Params.NumFields() != 0 {
-				for i, field := range typ.(*ast.FuncType).Params.List {
-					if i > 0 {
-						w.F(",")
-					}
-					TypeResolve(imported, pkg, file, field.Type, w, false)
-				}
-			}
-			w.F(")")
-			w.F("=>")
-			if typ.(*ast.FuncType).Results.NumFields() > 1 {
-				w.F("(")
-				for i, field := range typ.(*ast.FuncType).Results.List {
-					if i > 0 {
-						w.F("|")
-					}
-					TypeResolve(imported, pkg, file, field.Type, w, false)
-				}
-				w.F(")[]")
-			} else if typ.(*ast.FuncType).Results.NumFields() == 1 {
-				TypeResolve(imported, pkg, file, typ.(*ast.FuncType).Results.List[0].Type, w, false)
-			} else {
-				w.F("void")
-			}
-			w.F(")")
-		default:
-			fmt.Printf("\nmissing func: %#+v , %#+v , %#+v for %#+v \n", kd, obj, pkg, typ)
-		}
-	case TypeKindArray:
-		switch {
-		case n == 0:
-			w.F("%s[]", obj)
-		default:
-			fmt.Printf("\nmissing array: %#+v , %#+v , %#+v for %#+v \n", kd, obj, pkg, typ)
-		}
-	case TypeKindSelector:
-		switch {
-		case n == 0:
-			imported[pg.Name()] = fn.Nothing
-			w.F("%s.%s", pg.Name(), obj.Name())
-		case n == 1 && kd[n-1] == TypeKindStar:
-			imported[pg.Name()] = fn.Nothing
-			w.F("%s.%s/*Pointer*/", pg.Name(), obj.Name())
-		default:
-			fmt.Printf("\nmissing selector: %#+v , %#+v , %#+v for %#+v \n", kd, obj, pkg, typ)
-		}
-	case TypeKindIdent:
-		switch {
-		case n == 0:
-			w.F("%s", GoIdentToTs(typ.(*ast.Ident).Name, false))
-		case n == 1 && kd[n-1] == TypeKindStar:
-			w.F("%s/*pointer*/", GoIdentToTs(typ.(*ast.StarExpr).X.(*ast.Ident).Name, false))
-		case n == 1 && kd[n-1] == TypeKindArray:
-			w.F("%s", GoIdentToTs(typ.(*ast.ArrayType).Elt.(*ast.Ident).Name, true))
-		case n == 2 && kd[n-1] == TypeKindStar && kd[n-2] == TypeKindArray:
-			w.F("%s", GoIdentToTs(typ.(*ast.ArrayType).Elt.(*ast.StarExpr).X.(*ast.Ident).Name, true))
-		case n == 2 && kd[0] == TypeKindMap && kd[n-1] == TypeKindIdent:
-			m := typ.(*ast.MapType)
-			k := m.Key.(*ast.Ident)
-			v := m.Value.(*ast.Ident)
-			if field {
-				w.F("[key:%s]:%s", GoIdentToTs(k.Name, false), GoIdentToTs(v.Name, false))
-			} else {
-				w.F("Record<%s,%s>", GoIdentToTs(k.Name, false), GoIdentToTs(v.Name, false))
-			}
-		case n == 3 && kd[0] == TypeKindMap && kd[1] == TypeKindIdent && kd[2] == TypeKindArray:
-			m := typ.(*ast.MapType)
-			k := m.Key.(*ast.Ident)
-			v := m.Value.(*ast.ArrayType).Elt.(*ast.Ident)
-			if field {
-				w.F("[key:%s]:%s", GoIdentToTs(k.Name, false), GoIdentToTs(v.Name, true))
-			} else {
-				w.F("Record<%s,%s>", GoIdentToTs(k.Name, false), GoIdentToTs(v.Name, true))
-			}
-		default:
-			fmt.Printf("\nmissing gen ident: %#+v , %#+v , %#+v for %#+v \n", kd, obj, pkg, typ)
-		}
-	case TypeKindStruct:
-		switch {
-		case n == 0:
-			t := typ.(*ast.StructType)
-			if field {
-				if t.Fields.NumFields() != 0 {
-					for i, f := range t.Fields.List {
-						if len(f.Names) == 0 {
-							TypeResolve(imported, pkg, file, f.Type, w, true)
-						} else {
-							x := -1
-							for _, name := range f.Names {
-								if ast.IsExported(name.Name) {
-									x++
-								}
-							}
-							if x >= 0 {
-								if i > 0 {
-									w.F("\t\t")
-								}
-								x = -1
-								for _, name := range f.Names {
-									if !ast.IsExported(name.Name) {
-										continue
-									}
-									x++
-									if x > 0 {
-										w.F(",")
-									}
-									w.F("%s", GoFuncToJsFunc(name.Name))
-								}
-							}
-						}
-					}
-				}
-			} else {
-
-			}
-		case n == 1 && kd[0] == TypeKindStar:
-		default:
-			fmt.Printf("\nfound struct %#+v , %#+v , %#+v for %#+v \n", kd, obj, pkg, typ)
-		}
-
-	default:
-		fmt.Printf("\nmissing %#+v , %#+v , %#+v for %#+v \n", kd, obj, pkg, typ)
-	}
+	ca.u = []TypeCases{ca.DepthTypeCases, ca}
+	CaseType(pkg, typ, ca)
+	l, _ := ca.Last()
+	return l.Node
 }
 func GoIdentToTs(s string, array bool) string {
 	switch s {
@@ -639,5 +528,155 @@ func GoIdentToTs(s string, array bool) string {
 			return s
 		}
 
+	}
+}
+
+type WalkWriter struct {
+	Imported fn.HashSet[string]
+	pkg      *packages.Package
+	field    bool
+	decl     *SpecWriter
+	*SpecWriter
+	*DepthTypeCases
+	u UnionTypeCases
+}
+
+func (w *WalkWriter) isArray() bool {
+	d, ok := w.Last()
+	if !ok {
+		return false
+	}
+	return d.Node == AstArrayType
+}
+func (w *WalkWriter) IdentType(t *ast.Ident) {
+	w.F("%s", GoIdentToTs(t.Name, w.isArray()))
+}
+
+func (w *WalkWriter) SelectorType(t *ast.SelectorExpr, target types.Object) {
+	w.Imported.Add(target.Pkg().Name())
+	w.F("%s.%s", target.Pkg().Name(), target.Name())
+
+}
+
+func (w *WalkWriter) StarType(t *ast.StarExpr) {
+	w.F("/*Pointer*/")
+	CaseType(w.pkg, t.X, w.u)
+	w.Pop()
+
+}
+
+func (w *WalkWriter) FuncType(t *ast.FuncType) {
+	w.F("((")
+	if t.Params.NumFields() != 0 {
+		for i, f := range t.Params.List {
+			if i > 0 {
+				w.F(",")
+			}
+			CaseType(w.pkg, f.Type, w.u)
+			w.Pop()
+		}
+	}
+	w.F(")")
+	w.F("=>")
+	if t.Results.NumFields() > 1 {
+		w.F("(")
+		for i, f := range t.Results.List {
+			if i > 0 {
+				w.F("|")
+			}
+			CaseType(w.pkg, f.Type, w.u)
+			w.Pop()
+		}
+		w.F(")[]")
+	} else if t.Results.NumFields() == 1 {
+		CaseType(w.pkg, t.Results.List[0].Type, w.u)
+		w.Pop()
+	} else {
+		w.F("void")
+	}
+	w.F(")")
+}
+
+func (w *WalkWriter) ArrayType(t *ast.ArrayType) {
+	CaseType(w.pkg, t.Elt, w.u)
+	l, ok := w.Pop()
+	if ok && l.Node != AstIdent {
+		w.F("[]")
+	}
+}
+
+func (w *WalkWriter) MapType(t *ast.MapType) {
+	if w.field {
+		//w.F("[key:%s]:%s", GoIdentToTs(k.Name, false), GoIdentToTs(v.Name, false))
+		w.F("[key:")
+		CaseType(w.pkg, t.Key, w.u)
+		w.Pop()
+		w.F("]:")
+		CaseType(w.pkg, t.Value, w.u)
+		w.Pop()
+	} else {
+		//w.F("Record<%s,%s>", GoIdentToTs(k.Name, false), GoIdentToTs(v.Name, false))
+		w.F("Record<")
+		CaseType(w.pkg, t.Key, w.u)
+		w.Pop()
+		w.F(",")
+		CaseType(w.pkg, t.Value, w.u)
+		w.Pop()
+		w.F(">")
+	}
+}
+
+func (w *WalkWriter) StructType(t *ast.StructType) {
+	if w.field {
+		if t.Fields.NumFields() != 0 {
+			for i, f := range t.Fields.List {
+				if len(f.Names) == 0 {
+					//TODO embedded
+				} else {
+					x := -1
+					for _, name := range f.Names {
+						if ast.IsExported(name.Name) {
+							x++
+						}
+					}
+					if x >= 0 {
+						if i > 0 {
+							w.F("\t\t")
+						}
+						x = -1
+						for _, name := range f.Names {
+							if !ast.IsExported(name.Name) {
+								continue
+							}
+							x++
+							if x > 0 {
+								w.F(",")
+							}
+							w.F("%s", GoFuncToJsFunc(name.Name))
+						}
+						CaseType(w.pkg, f.Type, w.u)
+						w.Pop()
+					}
+				}
+			}
+		}
+	} else {
+		panic(fmt.Sprintf("should not access structType: %#+v", w))
+	}
+}
+
+func (w *WalkWriter) ChanType(t *ast.ChanType) {
+	//TODO implement me
+	panic("implement me")
+}
+func (w *WalkWriter) Ellipsis(t *ast.Ellipsis) {
+	if w.field {
+		panic(fmt.Errorf("found ellipsis in field: %#+v", w))
+	}
+	l, ok := w.Last()
+	CaseType(w.pkg, t.Elt, w.u)
+	l, ok = w.Pop()
+	if ok && l.Node != AstIdent {
+		w.F("[]")
 	}
 }
