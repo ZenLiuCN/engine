@@ -5,6 +5,7 @@ import (
 	"github.com/ZenLiuCN/fn"
 	"go/ast"
 	"go/token"
+	"go/types"
 	"golang.org/x/tools/go/packages"
 	"log"
 	"os"
@@ -80,4 +81,113 @@ func DeclsWalk(file *ast.File, w DeclaredWalk) {
 			}
 		}
 	}
+}
+
+//go:generate go install golang.org/x/tools/cmd/stringer
+//go:generate stringer -type=TypeKind,FieldKind
+type TypeKind int
+
+const (
+	TypeKindStruct TypeKind = iota + 1
+	TypeKindArray
+	TypeKindInterface
+	TypeKindMap
+	TypeKindFunc
+	TypeKindIdent
+	TypeKindSelector
+	TypeKindStar
+	TypeKindChan
+	TypeKindChanSend
+	TypeKindChanRecv
+)
+
+func LookupType(pkg *packages.Package, file *ast.File, typ ast.Expr) (kind []TypeKind, ty types.Object, pk *types.Package) {
+	switch t := typ.(type) {
+	case *ast.Ident:
+		kind = append(kind, TypeKindIdent)
+		return
+	case *ast.SelectorExpr:
+		var ok bool
+		ty, ok = pkg.TypesInfo.Uses[t.Sel]
+		if ok {
+			pk = ty.Pkg()
+			kind = append(kind, TypeKindSelector)
+		} else {
+			fmt.Printf("\nmissing selector %#+v\n", t)
+		}
+		return
+	case *ast.StarExpr:
+		return LookupTypeInner(pkg, file, t.X, append(kind, TypeKindStar))
+	case *ast.FuncType:
+		kind = append(kind, TypeKindFunc)
+		return
+	case *ast.ArrayType:
+		kind = append(kind, TypeKindArray)
+		kind, ty, pk = LookupTypeInner(pkg, file, t.Elt, kind)
+		return
+	case *ast.MapType:
+		kind = append(kind, TypeKindMap)
+		kind, ty, pk = LookupTypeInner(pkg, file, t.Key, kind)
+		kind, ty, pk = LookupTypeInner(pkg, file, t.Value, kind)
+		return
+	case *ast.StructType:
+		kind = append(kind, TypeKindStruct)
+	case *ast.ChanType:
+		switch {
+		case ast.RECV == t.Dir:
+			return LookupTypeInner(pkg, file, t.Value, append(kind, TypeKindChanRecv))
+		case ast.SEND == t.Dir:
+			return LookupTypeInner(pkg, file, t.Value, append(kind, TypeKindChanSend))
+		default:
+			return LookupTypeInner(pkg, file, t.Value, append(kind, TypeKindChan))
+		}
+	default:
+		fmt.Printf("\nmissing type %#+v\n", t)
+	}
+	return
+}
+func LookupTypeInner(pkg *packages.Package, file *ast.File, typ ast.Expr, k []TypeKind) (kind []TypeKind, ty types.Object, pk *types.Package) {
+	switch t := typ.(type) {
+	case *ast.Ident:
+		kind = append(k, TypeKindIdent)
+		return
+	case *ast.SelectorExpr:
+		var ok bool
+		ty, ok = pkg.TypesInfo.Uses[t.Sel]
+		if ok {
+			pk = ty.Pkg()
+			kind = append(k, TypeKindSelector)
+		} else {
+			fmt.Printf("\nmissing selector %#+v\n", t)
+		}
+		return
+	case *ast.StarExpr:
+		return LookupTypeInner(pkg, file, t.X, append(k, TypeKindStar))
+	case *ast.FuncType:
+		kind = append(k, TypeKindFunc)
+		return
+	case *ast.ArrayType:
+		kind = append(k, TypeKindArray)
+		kind, ty, pk = LookupTypeInner(pkg, file, t.Elt, kind)
+		return
+	case *ast.MapType:
+		kind = append(k, TypeKindMap)
+		kind, ty, pk = LookupTypeInner(pkg, file, t.Key, kind)
+		kind, ty, pk = LookupTypeInner(pkg, file, t.Value, kind)
+		return
+	case *ast.StructType:
+		kind = append(k, TypeKindStruct)
+	case *ast.ChanType:
+		switch {
+		case ast.RECV == t.Dir:
+			return LookupTypeInner(pkg, file, t.Value, append(kind, TypeKindChanRecv))
+		case ast.SEND == t.Dir:
+			return LookupTypeInner(pkg, file, t.Value, append(kind, TypeKindChanSend))
+		default:
+			return LookupTypeInner(pkg, file, t.Value, append(kind, TypeKindChan))
+		}
+	default:
+		fmt.Printf("\nmissing type %#+v\n", t)
+	}
+	return
 }

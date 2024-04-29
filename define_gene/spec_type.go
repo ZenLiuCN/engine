@@ -6,20 +6,6 @@ import (
 	"go/token"
 )
 
-//go:generate go install golang.org/x/tools/cmd/stringer
-//go:generate stringer -type=TypeKind,FieldKind
-type TypeKind int
-
-const (
-	TypeKindStruct TypeKind = iota + 1
-	TypeKindArray
-	TypeKindInterface
-	TypeKindMap
-	TypeKindFunc
-	TypeKindIdent
-	TypeKindSelector
-)
-
 type SpecType struct {
 	Kind        TypeKind
 	SpecFile    *SpecFile
