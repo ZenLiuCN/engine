@@ -173,7 +173,7 @@ func (s *BigIntProcessor) SetBigIntFields(f ...string) {
 	s.bigIntFields = append(s.bigIntFields, f...)
 }
 func (s *BigIntProcessor) processArgs(args map[string]any) {
-	if len(args) == 0 {
+	if len(args) == 0 || s == nil {
 		return
 	}
 	if s.bigInt && len(s.bigIntFields) == 0 {
@@ -197,7 +197,7 @@ func (s *BigIntProcessor) processArgs(args map[string]any) {
 	}
 }
 func (s *BigIntProcessor) processArgsSlice(args []map[string]any) {
-	if len(args) == 0 {
+	if len(args) == 0 || s == nil {
 		return
 	}
 	if s.bigInt && len(s.bigIntFields) == 0 {
@@ -227,7 +227,7 @@ func (s *BigIntProcessor) processArgsSlice(args []map[string]any) {
 	}
 }
 func (s *BigIntProcessor) processResultRow(v map[string]any) {
-	if len(v) == 0 {
+	if len(v) == 0 || s == nil {
 		return
 	}
 	if s.bigInt && len(s.bigIntFields) == 0 {
@@ -257,6 +257,9 @@ func (s *BigIntProcessor) processResultRow(v map[string]any) {
 	}
 }
 func (s *BigIntProcessor) copyProcessor() *BigIntProcessor {
+	if s == nil {
+		return nil
+	}
 	return &BigIntProcessor{
 		bigInt:       s.bigInt,
 		bigIntText:   s.bigIntText,
