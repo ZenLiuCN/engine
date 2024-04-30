@@ -4,43 +4,87 @@ import (
 	"bytes"
 	"fmt"
 	"github.com/ZenLiuCN/fn"
+	"io"
 )
 
-type SpecWriter struct {
-	Package string
-	Imports fn.HashSet[string]
-	*bytes.Buffer
+type (
+	Writer interface {
+		Imports() fn.HashSet[string]
+		BytesBuffer() *bytes.Buffer
+
+		WriteGoGenerated(extra string) Writer
+		F(format string, args ...any) Writer
+		Append(w Writer) Writer
+		Import(path string) Writer
+
+		Bytes() []byte
+		AvailableBuffer() []byte
+		Len() int
+		Cap() int
+		Available() int
+		Truncate(n int)
+		Reset()
+		Grow(n int)
+		Next(n int) []byte
+		ReadBytes(delim byte) (line []byte, err error)
+		ReadString(delim byte) (line string, err error)
+
+		fmt.Stringer
+		io.Writer
+		io.StringWriter
+		io.ReadWriter
+		io.WriterTo
+		io.RuneScanner
+		io.ByteScanner
+		io.ReaderFrom
+	}
+	SpecWriter struct {
+		imports fn.HashSet[string]
+		*bytes.Buffer
+	}
+)
+
+func (s *SpecWriter) Imports() fn.HashSet[string] {
+	if s.imports == nil {
+		s.imports = fn.NewHashSet[string]()
+	}
+	return s.imports
 }
 
-func WriterOf(buf *bytes.Buffer) *SpecWriter {
-	return &SpecWriter{Buffer: buf}
+func (s *SpecWriter) BytesBuffer() *bytes.Buffer {
+	return s.Buffer
 }
-func NewWriter() *SpecWriter {
-	return &SpecWriter{Buffer: new(bytes.Buffer)}
+func (s *SpecWriter) WriteGoGenerated(extra string) Writer {
+	s.Buffer.WriteString(fmt.Sprintf("\n// Code generated %s; DO NOT EDIT.\n", extra))
+	return s
 }
-
-func (s *SpecWriter) F(format string, args ...any) *SpecWriter {
+func (s *SpecWriter) F(format string, args ...any) Writer {
 	if s.Buffer == nil {
 		s.Buffer = new(bytes.Buffer)
 	}
 	_, _ = fmt.Fprintf(s.Buffer, format, args...)
 	return s
 }
-func (s *SpecWriter) Append(w *SpecWriter) *SpecWriter {
-	if s.Imports == nil {
-		s.Imports = fn.NewHashSet[string]()
+func (s *SpecWriter) Append(w Writer) Writer {
+	if s.imports == nil {
+		s.imports = fn.NewHashSet[string]()
 	}
-	for s2 := range w.Imports {
-		s.Imports.Put(s2)
+	for s2 := range w.Imports() {
+		s.imports.Add(s2)
 	}
-	s.Buffer.Write(w.Buffer.Bytes())
+	s.Buffer.Write(w.Bytes())
 	return s
 }
-
-func (s *SpecWriter) Import(path string) *SpecWriter {
-	if s.Imports == nil {
-		s.Imports = fn.NewHashSet[string]()
+func (s *SpecWriter) Import(path string) Writer {
+	if s.imports == nil {
+		s.imports = fn.NewHashSet[string]()
 	}
-	s.Imports.Put(path)
+	s.imports.Add(path)
 	return s
+}
+func WriterOf(buf *bytes.Buffer) *SpecWriter {
+	return &SpecWriter{Buffer: buf}
+}
+func NewWriter() *SpecWriter {
+	return &SpecWriter{Buffer: new(bytes.Buffer)}
 }

@@ -16,13 +16,15 @@ func _() {
 	_ = x[AstArrayType-5]
 	_ = x[AstMapType-6]
 	_ = x[AstStructType-7]
-	_ = x[AstChanType-8]
-	_ = x[AstEllipsis-9]
+	_ = x[AstInterfaceType-8]
+	_ = x[AstChanType-9]
+	_ = x[AstEllipsis-10]
+	_ = x[AstNodeBuiltInMax-11]
 }
 
-const _AstNode_name = "AstNothingAstIdentAstSelectorExprAstStarExprAstFuncTypeAstArrayTypeAstMapTypeAstStructTypeAstChanTypeAstEllipsis"
+const _AstNode_name = "AstNothingAstIdentAstSelectorExprAstStarExprAstFuncTypeAstArrayTypeAstMapTypeAstStructTypeAstInterfaceTypeAstChanTypeAstEllipsisAstNodeBuiltInMax"
 
-var _AstNode_index = [...]uint8{0, 10, 18, 33, 44, 55, 67, 77, 90, 101, 112}
+var _AstNode_index = [...]uint8{0, 10, 18, 33, 44, 55, 67, 77, 90, 106, 117, 128, 145}
 
 func (i AstNode) String() string {
 	if i < 0 || i >= AstNode(len(_AstNode_index)-1) {

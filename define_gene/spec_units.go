@@ -11,11 +11,9 @@ import (
 	"os"
 )
 
-/*
-
-^// Code generated .* DO NOT EDIT\.$
-
-*/
+var (
+	IdentityLoadMode = fn.Identity[packages.LoadMode]
+)
 
 func IsDir(name string) bool {
 	if info, err := os.Stat(name); err != nil {
@@ -27,9 +25,13 @@ func IsDir(name string) bool {
 }
 
 // ParseTypeInfo files to packages with tags
-func ParseTypeInfo(flags, files []string, log func(format string, args ...any)) []*packages.Package {
+// flags: optional compile flags;
+// files: required file targets;
+// mode: required mode rewriter;
+// log: optional debug output;
+func ParseTypeInfo(flags, files []string, mode func(packages.LoadMode) packages.LoadMode, log func(format string, args ...any)) []*packages.Package {
 	return fn.Panic1(packages.Load(&packages.Config{
-		Mode:       packages.NeedName | packages.NeedTypes | packages.NeedTypesInfo | packages.NeedSyntax,
+		Mode:       mode(packages.NeedName | packages.NeedTypes | packages.NeedTypesInfo | packages.NeedSyntax),
 		BuildFlags: flags,
 		Tests:      false,
 		Logf:       log,
@@ -238,6 +240,7 @@ type TypeCases interface {
 	StructType(t *ast.StructType)
 	ChanType(t *ast.ChanType)
 	Ellipsis(t *ast.Ellipsis)
+	InterfaceType(t *ast.InterfaceType)
 }
 
 //region BaseTypeCases
@@ -290,8 +293,10 @@ const (
 	AstArrayType
 	AstMapType
 	AstStructType
+	AstInterfaceType
 	AstChanType
 	AstEllipsis
+	AstNodeBuiltInMax
 )
 
 type (
@@ -307,6 +312,7 @@ type (
 		MapType        *ast.MapType
 		StructType     *ast.StructType
 		ChanType       *ast.ChanType
+		InterfaceType  *ast.InterfaceType
 		Ellipsis       *ast.Ellipsis
 	}
 	DepthTypeCases struct {
@@ -314,6 +320,31 @@ type (
 	}
 )
 
+func (d *DepthTypeCases) Append(x *DepthTypeCases) {
+	d.Stack = append(d.Stack, x.Stack...)
+}
+func (d *DepthTypeCases) ReplaceLast(l0 Layer) (l Layer, ok bool) {
+	l, ok = d.Last()
+	if ok {
+		d.Stack[len(d.Stack)-1] = l0
+	}
+	return
+}
+func (d *DepthTypeCases) LastType() (l Layer, ok bool) {
+	n := len(d.Stack)
+	if n == 0 {
+		return Layer{}, false
+	}
+	for i := n - 1; i >= 0; i-- {
+		l = d.Stack[i]
+		switch l.Node {
+		case AstStructType:
+			return l, true
+		}
+	}
+
+	return
+}
 func (d *DepthTypeCases) Pop() (l Layer, ok bool) {
 	l, ok = d.Last()
 	if ok {
@@ -332,6 +363,9 @@ func (d *DepthTypeCases) Last() (Layer, bool) {
 }
 func (d *DepthTypeCases) IdentType(t *ast.Ident) {
 	d.Stack = append(d.Stack, Layer{Node: AstIdent, Ident: t})
+}
+func (d *DepthTypeCases) InterfaceType(t *ast.InterfaceType) {
+	d.Stack = append(d.Stack, Layer{Node: AstInterfaceType, InterfaceType: t})
 }
 
 func (d *DepthTypeCases) SelectorType(t *ast.SelectorExpr, target types.Object) {
@@ -400,6 +434,11 @@ func (u UnionTypeCases) IdentType(t *ast.Ident) {
 		walker.IdentType(t)
 	}
 }
+func (u UnionTypeCases) InterfaceType(t *ast.InterfaceType) {
+	for _, walker := range u {
+		walker.InterfaceType(t)
+	}
+}
 
 func (u UnionTypeCases) SelectorType(t *ast.SelectorExpr, target types.Object) {
 	for _, walker := range u {
@@ -461,6 +500,14 @@ func (u UnionStopTypeCases) IdentType(t *ast.Ident) {
 	}()
 	for _, walker := range u {
 		walker.IdentType(t)
+	}
+}
+func (u UnionStopTypeCases) InterfaceType(t *ast.InterfaceType) {
+	defer func() {
+		_ = recover()
+	}()
+	for _, walker := range u {
+		walker.InterfaceType(t)
 	}
 }
 
@@ -558,6 +605,8 @@ func CaseType(pkg *packages.Package, typ ast.Expr, w TypeCases) {
 		w.ChanType(t)
 	case *ast.Ellipsis:
 		w.Ellipsis(t)
+	case *ast.InterfaceType:
+		w.InterfaceType(t)
 	default:
 		fmt.Printf("\nmissing type %#+v\n", t)
 	}
