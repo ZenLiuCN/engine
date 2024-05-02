@@ -154,6 +154,15 @@ func (d *DepthTypeCases) Last() (Layer, bool) {
 	}
 	return d.Stack[len(d.Stack)-1], true
 }
+func (d *DepthTypeCases) LastN(n int) ([]Layer, bool) {
+	if len(d.Stack) == 0 {
+		return nil, false
+	}
+	if len(d.Stack) < n {
+		return d.Stack, true
+	}
+	return d.Stack[len(d.Stack)-n:], true
+}
 func (d *DepthTypeCases) IdentType(t *ast.Ident) {
 	d.Stack = append(d.Stack, Layer{Node: AstIdent, Ident: t})
 }

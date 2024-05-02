@@ -480,10 +480,7 @@ var(
 					}
 				}
 			case ArrayType:
-				if closure {
-					tw.F("\t")
-				}
-				fmt.Printf("Array %s \n", t.Spec.Name)
+				ArrayTypeWrite(t.Array, NewWalkWriter(pkg, true, exw, tw, nil))
 			case AliasType:
 				switch x := t.Spec.Type.(type) {
 				case *ast.Ident:
@@ -626,7 +623,13 @@ func TypeResolve(pkg *packages.Package, typ ast.Expr, w Writer, d Writer, field 
 }
 func GoIdentToTs(s string, array bool) string {
 	switch s {
-	case "byte", "uint8", "uint16", "uint32":
+	case "byte", "uint8":
+		if array {
+			return "Uint8Array"
+		} else {
+			return fmt.Sprintf("/*%s*/number", s)
+		}
+	case "uint16", "uint32":
 		if array {
 			return fmt.Sprintf("U%sArray", s[1:])
 		} else {
@@ -707,11 +710,16 @@ func NewWalkWriter(pkg *packages.Package, field bool, decl Writer, writer Writer
 }
 
 func (w *WalkWriter) isArray() bool {
-	d, ok := w.Last()
+	d, ok := w.LastN(2)
 	if !ok {
 		return false
 	}
-	return d.Node == AstArrayType
+	for _, layer := range d {
+		if layer.Node == AstArrayType {
+			return true
+		}
+	}
+	return false
 }
 func (w *WalkWriter) IdentType(t *ast.Ident) {
 	if t.Name == "error" {
@@ -788,6 +796,23 @@ func (w *WalkWriter) FuncType(t *ast.FuncType) {
 }
 
 func (w *WalkWriter) ArrayType(t *ast.ArrayType) {
+	if w.field {
+		switch x := t.Elt.(type) {
+		case *ast.Ident:
+			w.decl.F("%s", GoIdentToTs(x.Name, true))
+		case *ast.ArrayType:
+			temp := GetWriter()
+			old := w.decl
+			w.decl = temp
+			CaseType(w.pkg, t.Elt, w.u)
+			w.decl.F("Array<%s>", temp.String())
+			old.MergeImports(temp.Imports())
+			w.decl = old
+			FreeWriter(temp)
+		default:
+			fmt.Printf("miss array type of field: %#+v\n", t)
+		}
+	}
 	CaseType(w.pkg, t.Elt, w.u)
 	l, ok := w.Pop()
 	if ok && l.Node != AstIdent {
@@ -1145,6 +1170,9 @@ func StructTypeWrite(st *ast.StructType, w *WalkWriter) {
 	}
 }
 func MapTypeWrite(st *ast.MapType, w *WalkWriter) {
+	_, _ = TypeResolve(w.pkg, st, nil, nil, w.field, w)
+}
+func ArrayTypeWrite(st *ast.ArrayType, w *WalkWriter) {
 	_, _ = TypeResolve(w.pkg, st, nil, nil, w.field, w)
 }
 func Exists(p string) bool {
