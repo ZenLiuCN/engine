@@ -1,235 +1,24 @@
-package main
+package spec
 
 import (
 	"fmt"
-	"github.com/ZenLiuCN/fn"
 	"go/ast"
-	"go/token"
 	"go/types"
 	"golang.org/x/tools/go/packages"
-	"log"
-	"os"
 )
 
-var (
-	IdentityLoadMode = fn.Identity[packages.LoadMode]
+type (
+	FnIdentType     = func(t *ast.Ident)
+	FnSelectorType  = func(t *ast.SelectorExpr, target types.Object)
+	FnStarType      = func(t *ast.StarExpr)
+	FnFuncType      = func(t *ast.FuncType)
+	FnArrayType     = func(t *ast.ArrayType)
+	FnMapType       = func(t *ast.MapType)
+	FnStructType    = func(t *ast.StructType)
+	FnChanType      = func(t *ast.ChanType)
+	FnEllipsis      = func(t *ast.Ellipsis)
+	FnInterfaceType = func(t *ast.InterfaceType)
 )
-
-func IsDir(name string) bool {
-	if info, err := os.Stat(name); err != nil {
-		log.Fatal(err)
-	} else {
-		return info.IsDir()
-	}
-	return false
-}
-
-// ParseTypeInfo files to packages with tags
-// flags: optional compile flags;
-// files: required file targets;
-// mode: required mode rewriter;
-// log: optional debug output;
-func ParseTypeInfo(flags, files []string, mode func(packages.LoadMode) packages.LoadMode, log func(format string, args ...any)) []*packages.Package {
-	return fn.Panic1(packages.Load(&packages.Config{
-		Mode:       mode(packages.NeedName | packages.NeedTypes | packages.NeedTypesInfo | packages.NeedSyntax),
-		BuildFlags: flags,
-		Tests:      false,
-		Logf:       log,
-	}, files...))
-}
-
-type DeclCases interface {
-	FuncDecl(d *ast.FuncDecl)
-	MethodDecl(d *ast.FuncDecl, r *ast.Field) bool //return ture to walk for receivers
-	IdentTypeSpec(s *ast.TypeSpec, t *ast.Ident)
-	StructTypeSpec(s *ast.TypeSpec, t *ast.StructType)
-	InterfaceTypeSpec(s *ast.TypeSpec, t *ast.InterfaceType)
-	MapTypeSpec(s *ast.TypeSpec, t *ast.MapType)
-	ArrayTypeSpec(s *ast.TypeSpec, t *ast.ArrayType)
-	FuncTypeSpec(s *ast.TypeSpec, t *ast.FuncType)
-	MethodDeclStarRecv(d *ast.FuncDecl, r *ast.Field, t *ast.StarExpr)
-	MethodDeclIdentRecv(d *ast.FuncDecl, r *ast.Field, t *ast.Ident)
-	ChanTypeSpec(s *ast.TypeSpec, t *ast.ChanType)
-}
-
-//region ExportedDeclCases
-
-type ExportedDeclCases struct {
-	Inner DeclCases
-}
-
-func (e ExportedDeclCases) MethodDeclStarRecv(d *ast.FuncDecl, r *ast.Field, t *ast.StarExpr) {
-	if t.X.(*ast.Ident).IsExported() {
-		e.Inner.MethodDeclStarRecv(d, r, t)
-	}
-}
-
-func (e ExportedDeclCases) MethodDeclIdentRecv(d *ast.FuncDecl, r *ast.Field, t *ast.Ident) {
-	if t.IsExported() {
-		e.Inner.MethodDeclIdentRecv(d, r, t)
-	}
-
-}
-
-func (e ExportedDeclCases) FuncDecl(d *ast.FuncDecl) {
-	if !ast.IsExported(d.Name.Name) {
-		return
-	}
-	e.Inner.FuncDecl(d)
-}
-
-func (e ExportedDeclCases) MethodDecl(d *ast.FuncDecl, r *ast.Field) bool {
-	if !ast.IsExported(d.Name.Name) {
-		return false
-	}
-	return e.Inner.MethodDecl(d, r)
-}
-
-func (e ExportedDeclCases) IdentTypeSpec(s *ast.TypeSpec, t *ast.Ident) {
-	if ast.IsExported(s.Name.Name) {
-		e.Inner.IdentTypeSpec(s, t)
-	}
-}
-
-func (e ExportedDeclCases) StructTypeSpec(s *ast.TypeSpec, t *ast.StructType) {
-	if !ast.IsExported(s.Name.Name) {
-		return
-	}
-	e.Inner.StructTypeSpec(s, t)
-}
-
-func (e ExportedDeclCases) InterfaceTypeSpec(s *ast.TypeSpec, t *ast.InterfaceType) {
-	if !ast.IsExported(s.Name.Name) {
-		return
-	}
-	e.Inner.InterfaceTypeSpec(s, t)
-}
-
-func (e ExportedDeclCases) MapTypeSpec(s *ast.TypeSpec, t *ast.MapType) {
-	if !ast.IsExported(s.Name.Name) {
-		return
-	}
-	e.Inner.MapTypeSpec(s, t)
-}
-
-func (e ExportedDeclCases) ArrayTypeSpec(s *ast.TypeSpec, t *ast.ArrayType) {
-	if !ast.IsExported(s.Name.Name) {
-		return
-	}
-	e.Inner.ArrayTypeSpec(s, t)
-}
-
-func (e ExportedDeclCases) FuncTypeSpec(s *ast.TypeSpec, t *ast.FuncType) {
-	if !ast.IsExported(s.Name.Name) {
-		return
-	}
-	e.Inner.FuncTypeSpec(s, t)
-}
-func (e ExportedDeclCases) ChanTypeSpec(s *ast.TypeSpec, t *ast.ChanType) {
-	if !ast.IsExported(s.Name.Name) {
-		return
-	}
-	e.Inner.ChanTypeSpec(s, t)
-}
-
-//endregion
-
-//region BaseDeclCases
-
-type BaseDeclCases struct {
-}
-
-func (b BaseDeclCases) FuncDecl(decl *ast.FuncDecl) {
-
-}
-func (b BaseDeclCases) ChanTypeSpec(s *ast.TypeSpec, t *ast.ChanType) {
-
-}
-
-func (b BaseDeclCases) MethodDecl(d *ast.FuncDecl, field *ast.Field) {
-
-}
-
-func (b BaseDeclCases) IdentTypeSpec(s *ast.TypeSpec, t *ast.Ident) {
-
-}
-
-func (b BaseDeclCases) StructTypeSpec(s *ast.TypeSpec, t *ast.StructType) {
-
-}
-
-func (b BaseDeclCases) InterfaceTypeSpec(s *ast.TypeSpec, t *ast.InterfaceType) {
-
-}
-
-func (b BaseDeclCases) MapTypeSpec(s *ast.TypeSpec, t *ast.MapType) {
-
-}
-
-func (b BaseDeclCases) ArrayTypeSpec(s *ast.TypeSpec, t *ast.ArrayType) {
-
-}
-
-func (b BaseDeclCases) FuncTypeSpec(s *ast.TypeSpec, t *ast.FuncType) {
-
-}
-
-//endregion
-
-func CaseDecl(file *ast.File, w DeclCases) {
-	for _, decl := range file.Decls {
-		switch d := decl.(type) {
-		case *ast.FuncDecl:
-			if d.Recv == nil {
-				w.FuncDecl(d)
-			} else if d.Recv.NumFields() != 1 {
-				panic(fmt.Errorf("more than one reciver: %#+v", d))
-			} else {
-				r := d.Recv.List[0]
-				if w.MethodDecl(d, r) {
-					switch t := r.Type.(type) {
-					case *ast.StarExpr:
-						w.MethodDeclStarRecv(d, r, t)
-					case *ast.Ident:
-						w.MethodDeclIdentRecv(d, r, t)
-					default:
-						log.Printf("miss method reciver type: %#+v \n", t)
-					}
-				}
-
-			}
-		case *ast.GenDecl:
-			switch d.Tok {
-			case token.TYPE:
-				for _, spec := range d.Specs {
-					if s, ok := spec.(*ast.TypeSpec); ok {
-						switch t := s.Type.(type) {
-						case *ast.Ident:
-							w.IdentTypeSpec(s, t)
-						case *ast.StructType:
-							w.StructTypeSpec(s, t)
-						case *ast.InterfaceType:
-							w.InterfaceTypeSpec(s, t)
-						case *ast.MapType:
-							w.MapTypeSpec(s, t)
-						case *ast.FuncType:
-							w.FuncTypeSpec(s, t)
-						case *ast.ArrayType:
-							w.ArrayTypeSpec(s, t)
-						case *ast.ChanType:
-							w.ChanTypeSpec(s, t)
-						default:
-							fmt.Printf("miss decl %#+v\n", t)
-						}
-					}
-				}
-			default:
-				continue
-			}
-		}
-	}
-}
-
 type TypeCases interface {
 	IdentType(t *ast.Ident)
 	SelectorType(t *ast.SelectorExpr, target types.Object)
@@ -286,6 +75,10 @@ func (b BaseTypeCases) ChanType(t *ast.ChanType) {
 //go:generate stringer -type=AstNode
 const (
 	AstNothing AstNode = iota
+	AstMethodDecl
+	AstMethodStarDecl
+	AstMethodIdentDecl
+	AstFuncDecl
 	AstIdent
 	AstSelectorExpr
 	AstStarExpr

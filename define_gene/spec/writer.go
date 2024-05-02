@@ -1,4 +1,4 @@
-package main
+package spec
 
 import (
 	"bytes"
@@ -16,6 +16,7 @@ type (
 		F(format string, args ...any) Writer
 		Append(w Writer) Writer
 		Import(path string) Writer
+		MergeImports(path fn.HashSet[string]) Writer
 
 		Bytes() []byte
 		AvailableBuffer() []byte
@@ -44,13 +45,25 @@ type (
 	}
 )
 
+func (s *SpecWriter) MergeImports(v fn.HashSet[string]) Writer {
+	if s.imports == nil {
+		s.imports = fn.NewHashSet[string]()
+	}
+	for s2, _ := range v {
+		s.imports.Add(s2)
+	}
+	return s
+}
 func (s *SpecWriter) Imports() fn.HashSet[string] {
 	if s.imports == nil {
 		s.imports = fn.NewHashSet[string]()
 	}
 	return s.imports
 }
-
+func (s *SpecWriter) Reset() {
+	s.Buffer.Reset()
+	s.imports.Clear()
+}
 func (s *SpecWriter) BytesBuffer() *bytes.Buffer {
 	return s.Buffer
 }

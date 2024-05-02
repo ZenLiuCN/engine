@@ -3,85 +3,23 @@ package main
 //https://cs.opensource.google/go/x/tools/+/master:cmd/stringer/stringer.go;drc=daf94608b5e2caf763ba634b84e7a5ba7970e155;l=382
 import (
 	"bytes"
+	"errors"
 	"fmt"
-	"github.com/urfave/cli/v2"
+	. "github.com/ZenLiuCN/engine/define_gene/spec"
+	"github.com/ZenLiuCN/fn"
 	"go/ast"
+	"go/token"
 	"go/types"
 	"golang.org/x/tools/go/packages"
 	"log"
 	"os"
 	"path/filepath"
 	"slices"
+	"strconv"
 	"strings"
 	"sync"
 	"unicode"
 )
-
-func main() {
-	cli.VersionFlag = &cli.BoolFlag{
-		Name:    "version",
-		Usage:   "show version",
-		Aliases: []string{"v"},
-	}
-	err := (&cli.App{
-		UseShortOptionHandling: true,
-		Name:                   "Define Generator",
-		Version:                "v0.0.1",
-		Usage:                  "Generate engine define from go source",
-		Flags: []cli.Flag{
-			&cli.StringSliceFlag{
-				Name:    "type",
-				Usage:   "type names of current file or directory",
-				Aliases: []string{"t"},
-			},
-			&cli.BoolFlag{
-				Name:    "debug",
-				Usage:   "debug generator",
-				Aliases: []string{"d"},
-			},
-			&cli.StringSliceFlag{
-				Name:    "tags",
-				Usage:   "tags to apply",
-				Aliases: []string{"g"},
-			},
-		},
-		Suggest:              true,
-		EnableBashCompletion: true,
-		Action: func(c *cli.Context) error {
-			var file []string
-			if c.Args().Len() == 0 {
-				file = append(file, ".")
-			} else {
-				file = append(file, c.Args().Slice()...)
-			}
-			tags := c.StringSlice("tags")
-			var dir string
-			if len(file) == 1 && IsDir(file[0]) {
-				dir = file[0]
-			} else if len(tags) != 0 {
-				log.Fatal("--tags can only applies with directory")
-			} else {
-				dir = filepath.Dir(file[0])
-			}
-			g := new(Generator)
-			{
-				g.dir = dir
-				g.tags = tags
-				g.files = file
-				g.types = c.StringSlice("type")
-				g.out = c.String("out")
-				if c.Bool("debug") {
-					g.log = log.Printf
-				}
-			}
-			g.generate()
-			return nil
-		},
-	}).Run(os.Args)
-	if err != nil {
-		panic(err)
-	}
-}
 
 type Generator struct {
 	dir   string
@@ -90,6 +28,7 @@ type Generator struct {
 	types []string
 	out   string
 	log   func(format string, a ...any)
+	over  bool
 }
 
 //go:generate stringer -type=Kind
@@ -110,6 +49,12 @@ const (
 	IdentType
 )
 
+type Value struct {
+	name      string
+	identType *ast.Ident
+	spec      *ast.ValueSpec
+	decl      *ast.GenDecl
+}
 type Type struct {
 	File *ast.File
 	Type Kind
@@ -127,14 +72,60 @@ type Type struct {
 	MethodDecl *ast.FuncDecl
 	StarRecv   *ast.StarExpr
 	ChanType   *ast.ChanType
+	Select     *ast.SelectorExpr
+	Star       *ast.StarExpr
 }
 
 const glob = "global"
 
-//region Declare
+// region Declare
+type ConstWalker struct {
+	found func(*Value)
+}
+
+func (c *ConstWalker) IdentConstSpec(d *ast.GenDecl, s *ast.ValueSpec, t *ast.Ident) {
+	for _, name := range s.Names {
+		if ast.IsExported(name.Name) {
+			c.found(&Value{
+				name:      name.Name,
+				identType: t,
+				decl:      d,
+				spec:      s,
+			})
+		}
+	}
+}
+
+func (c *ConstWalker) NilConstSpec(d *ast.GenDecl, s *ast.ValueSpec) {
+	for _, name := range s.Names {
+		if ast.IsExported(name.Name) {
+			c.found(&Value{
+				name: name.Name,
+				decl: d,
+				spec: s,
+			})
+		}
+	}
+}
 
 type WalkDecl struct {
 	found func(string, *Type)
+}
+
+func (w WalkDecl) StarExprSpec(s *ast.TypeSpec, t *ast.StarExpr) {
+	w.set(s.Name.Name, &Type{
+		Type: AliasType,
+		Spec: s,
+		Star: t,
+	})
+}
+func (w WalkDecl) SelectorTypeSpec(s *ast.TypeSpec, t *ast.SelectorExpr) {
+	w.set(s.Name.Name, &Type{
+
+		Type:   AliasType,
+		Spec:   s,
+		Select: t,
+	})
 }
 
 func (w WalkDecl) set(name string, t *Type) {
@@ -251,23 +242,78 @@ func (g *Generator) generate() {
 		panic("only one package each time")
 	}
 	pkg := p[0]
+	if pkg.Name == "" {
+		return
+	}
 	ts := map[string][]*Type{}
+	var cs []*Value
 	for _, file := range pkg.Syntax {
-		CaseDecl(file, &ExportedDeclCases{&WalkDecl{func(s string, t *Type) {
+		CaseTypeDecl(file, &ExportedTypeDeclCases{&WalkDecl{func(s string, t *Type) {
 			t.File = file
 			v := ts[s]
 			v = append(v, t)
 			ts[s] = v
 		}}})
+		CaseConstDecl(file, &ExportedConstDeclCases{
+			&ConstWalker{func(value *Value) {
+				cs = append(cs, value)
+			}},
+		})
 	}
+	mw := NewWriter()
+	dts := "go_" + pkg.Name + ".d.ts"
+	mn := "go" + string(unicode.ToUpper(rune(pkg.Name[0]))) + pkg.Name[1:]
+	mw.F(`package golang
+import ( 
+	_ "embed"
+	"github.com/ZenLiuCN/engine"
+	"%[1]s"
+)
+var(
+	//go:embed %[2]s
+	%[3]sDefine []byte
+	%[3]sDeclared=map[string]any{
+
+`, pkg.PkgPath, dts, mn)
 	//!! write d.ts
 	fw := NewWriter() //file
-	fw.F("declare module 'go/%s' {\n", pkg.Name)
+	fw.F("declare module 'golang/%s' {\n", pkg.Name)
 	iw := NewWriter()
 	dw := NewWriter()  // declared
 	exw := NewWriter() // extend
 	ew := NewWriter()  // elements of declared
 	tw := NewWriter()  // element
+	lookupValues := func(name string, t *Type) []*Value {
+		var values []*Value
+		prefix := name
+		for _, c := range cs {
+			if strings.HasPrefix(c.name, prefix) {
+				values = append(values, c)
+			} else if c.identType != nil && c.identType.Name == name {
+				for i := 1; i < len(c.name); i++ {
+					if unicode.IsUpper(rune(c.name[i])) {
+						prefix = c.name[:i]
+						break
+					}
+				}
+				for _, c := range cs {
+					if strings.HasPrefix(c.name, prefix) {
+						values = append(values, c)
+					}
+				}
+				if len(values) == 0 {
+					decl := c.decl
+					for _, c := range cs {
+						if c.decl == decl {
+							values = append(values, c)
+						}
+					}
+				}
+				break
+			}
+		}
+		return values
+	}
 	for name, types := range ts {
 		slices.SortFunc(types, func(a, b *Type) int {
 			return int(a.Type - b.Type)
@@ -277,12 +323,14 @@ func (g *Generator) generate() {
 		if closure {
 			switch types[0].Type {
 			case MapType, StructType, InterfaceType:
-				dw.F("\t export interface /*%s*/ %s", types[0].Type, name)
+				dw.F("\t /*%s*/ export interface  %s", types[0].Type, name)
 				closed = true
 			default:
-				if len(types) > 1 && !(types[1].Type == MethodDecl && types[1].MethodDecl.Name.Name == "string") { //!! exclude alias with only Stringer
+				if len(types) > 1 && !(types[1].Type == MethodDecl && types[1].MethodDecl.Name.Name == "String") { //!! exclude alias with only Stringer
 					dw.F("\t export interface %s", name)
 					closed = true
+				} else if len(types) == 2 && (types[1].Type == MethodDecl && types[1].MethodDecl.Name.Name == "String") {
+					types = types[:1]
 				}
 			}
 		}
@@ -293,12 +341,16 @@ func (g *Generator) generate() {
 				tw.F("\texport function %s ", GoFuncToJsFunc(d.Name.Name))
 				FuncDeclWrite(d.Type, NewWalkWriter(pkg, false, exw, tw, nil))
 				tw.F("\n")
+				mw.F("\"%s\":%s.%s ,\n", GoFuncToJsFunc(d.Name.Name), pkg.Name, d.Name.Name)
 			case MethodDecl:
 				if closure {
 					tw.F("\t")
 				}
 				d := t.MethodDecl
-				tw.F("\t %s ", GoFuncToJsFunc(d.Name.Name))
+				if types[0].Type == MapType {
+					tw.F("\t\t // @ts-ignore\n")
+				}
+				tw.F("\t\t %s ", GoFuncToJsFunc(d.Name.Name))
 				FuncDeclWrite(d.Type, NewWalkWriter(pkg, false, exw, tw, nil))
 				tw.F("\n")
 			case FuncType:
@@ -321,24 +373,96 @@ func (g *Generator) generate() {
 				MapTypeWrite(t.Map, NewWalkWriter(pkg, true, exw, tw, nil))
 				tw.F("\n")
 			case PrimitiveType:
-				if closure {
-					tw.F("\t")
+				if dw.Len() == 0 {
+					values := lookupValues(name, t)
+					if len(values) == 0 {
+						dw.F("/*miss values for %v */\n", t)
+						continue
+					}
+					decl := values[0]
+					n := 0
+					var inc func()
+					if decl.identType == nil {
+						dw.F("\texport type %s =", name)
+						for i, value := range values {
+							if i > 0 {
+								dw.F("|")
+							}
+							dw.F("/*%s*/%d", value.name, value.spec.Names[0].Obj.Data)
+						}
+						dw.F("\n")
+					} else {
+						if expr, ok := decl.spec.Values[0].(*ast.BinaryExpr); ok {
+							var inv int
+							if lit, ok := expr.Y.(*ast.BasicLit); ok {
+								inv = fn.Panic1(strconv.Atoi(lit.Value))
+							} else {
+								inv = fn.Panic1(strconv.Atoi(expr.X.(*ast.BasicLit).Value))
+							}
+							switch expr.Op {
+							case token.ADD:
+								inc = func() {
+									n += inv
+								}
+							case token.SHL:
+								inc = func() {
+									n = inv
+								}
+							}
+						} else if _, ok := decl.spec.Values[0].(*ast.Ident); ok {
+							n = 0
+							inc = func() {
+								n++
+							}
+						}
+						if inc != nil {
+							dw.F("\texport type %s =", name)
+							for i, value := range values {
+								if i > 0 {
+									inc()
+									dw.F("|")
+								}
+								dw.F("/*%s*/%d", value.name, n)
+							}
+
+						} else {
+							for _, value := range values {
+								dw.F("\texport const %s :%s\n", value.name, name)
+								mw.F("\"%s\":%s.%s,\n", value.name, pkg.Name, value.name)
+							}
+							dw.F("export interface %s \n", name)
+							closed = true
+						}
+					}
+					break
+				} else {
+					values := lookupValues(name, t)
+					if len(values) > 0 {
+						for _, value := range values {
+							iw.F("\t\texport const %s:%s \n", value.name, name)
+						}
+					} else if strings.HasSuffix(name, "Error") {
+
+					} else {
+						fmt.Printf("miss values for alias: %s \n", name)
+					}
 				}
-				fmt.Printf("Primitive %s %s \n", t.Spec.Name, t.Spec.Type.(*ast.Ident))
 			case InterfaceType:
-				if closure {
-					tw.F("\t")
-				}
 				switch t.Interface.Methods.NumFields() {
 				case 0:
 				default:
 					for _, field := range t.Interface.Methods.List {
 						if len(field.Names) > 0 {
-							for i, ident := range field.Names {
-								if i > 0 {
-									tw.F(",")
+							switch len(field.Names) {
+							case 1:
+								tw.F("%s", GoFuncToJsFunc(field.Names[0].Name))
+							default:
+								for i, ident := range field.Names {
+									if i > 0 {
+										tw.F(",")
+									}
+									tw.F("%s", GoFuncToJsFunc(ident.Name))
 								}
-								tw.F("%s", GoFuncToJsFunc(ident.Name))
 							}
 							switch t := field.Type.(type) {
 							case *ast.SelectorExpr:
@@ -348,12 +472,12 @@ func (g *Generator) generate() {
 							default:
 								panic(fmt.Errorf("miss %#+v", t))
 							}
-
+							tw.F("\n")
 						} else {
-							TypeResolve(pkg, field.Type, tw, exw, true, nil)
+							tw.F("/* TODO miss %+v */\n", field)
+							//TypeResolve(pkg, field.Type, tw, exw, true, nil)
 						}
 					}
-
 				}
 			case ArrayType:
 				if closure {
@@ -361,10 +485,16 @@ func (g *Generator) generate() {
 				}
 				fmt.Printf("Array %s \n", t.Spec.Name)
 			case AliasType:
-				if closure {
-					tw.F("\t")
+				switch x := t.Spec.Type.(type) {
+				case *ast.Ident:
+					dw.F("\texport type %s = %s", name, x.Name)
+				case *ast.SelectorExpr:
+					dw.Import(x.X.(*ast.Ident).Name)
+					dw.F("\texport type %s = %s.%s", name, x.X.(*ast.Ident).Name, x.Sel.Name)
+				default:
+					fmt.Printf("Alias %s \n", t.Spec.Name)
 				}
-				fmt.Printf("Alias %s %s \n", t.Spec.Name, t.Spec.Type.(*ast.Ident))
+
 			default:
 				println(fmt.Sprintf("miss %#+v", t))
 			}
@@ -373,6 +503,7 @@ func (g *Generator) generate() {
 		}
 		if exw.Len() > 0 {
 			dw.F(" extends %s", exw.String())
+			exw.Reset()
 		}
 		if closed {
 			dw.F("{\n")
@@ -388,14 +519,43 @@ func (g *Generator) generate() {
 		dw.Reset()
 	}
 	for k := range iw.Imports() {
-		fw.F("\timport * as %[1]s from 'go/%[1]s'\n", k)
+		fw.F("\t//@ts-ignore\n\timport * as %[1]s from 'golang/%[1]s'\n", k)
 	}
 	fw.Append(iw)
 	fw.F("\n}")
-	fmt.Println(fw.String())
+	pDTS := filepath.Join(g.out, dts)
+	if !g.over && Exists(pDTS) {
+		panic(fmt.Errorf("%s exists for %s", pDTS, pkg.PkgPath))
+	}
+	_ = os.WriteFile(pDTS, fw.Bytes(), os.ModePerm)
+	mw.F(`
+	}
+)
+func init() {
+	engine.RegisterModule(%[1]sModule{})
+}
+type %[1]sModule struct{}
+func (S %[1]sModule) Identity() string {
+	return "golang/%[2]s"
+}
+func (S %[1]sModule) TypeDefine() []byte {
+	return %[1]sDefine
+}
+func (S %[1]sModule) Exports() map[string]any {
+	return %[1]sDeclared
+}
+`, mn, pkg.Name)
+	pDG := filepath.Join(g.out, strings.Replace(dts, ".d.ts", ".go", 1))
+	if !g.over && Exists(pDG) {
+		panic(fmt.Errorf("%s exists for %s", pDG, pkg.PkgPath))
+	}
+	_ = os.WriteFile(pDG, mw.Bytes(), os.ModePerm)
 }
 
 func GoFuncToJsFunc(n string) string {
+	if n == "New" {
+		return n
+	}
 	buf := new(bytes.Buffer)
 	u0 := false
 	u := false
@@ -484,7 +644,7 @@ func GoIdentToTs(s string, array bool) string {
 		} else {
 			return "/*rune*/number"
 		}
-	case "int", "int64":
+	case "int", "int64", "float64", "float32":
 		if array {
 			return fmt.Sprintf("/*%s*/number[]", s)
 		} else {
@@ -507,6 +667,11 @@ func GoIdentToTs(s string, array bool) string {
 			return "Error[]"
 		}
 		return "Error"
+	case "uintptr":
+		if array {
+			return "number/*uintptr*/[]"
+		}
+		return "number/*uintptr*/"
 	default:
 		if array {
 			return s + "[]"
@@ -736,9 +901,7 @@ func FreeWriter(w Writer) {
 }
 func FuncTypeWrite(d *ast.FuncType, w *WalkWriter) {
 	temp := GetWriter()
-	defer func() {
-		FreeWriter(temp)
-	}()
+	defer FreeWriter(temp)
 	w.F("((")
 	if d.Params.NumFields() > 0 {
 		for i, pa := range d.Params.List {
@@ -789,6 +952,7 @@ func FuncTypeWrite(d *ast.FuncType, w *WalkWriter) {
 				}
 			}
 			w.Pop()
+			w.MergeImports(temp.Imports())
 			temp.Reset()
 		}
 	}
@@ -806,6 +970,7 @@ func FuncTypeWrite(d *ast.FuncType, w *WalkWriter) {
 			w.F("%s", temp.String())
 		}
 		w.Pop()
+		w.MergeImports(temp.Imports())
 		temp.Reset()
 	default:
 		w.F("=>(")
@@ -821,6 +986,7 @@ func FuncTypeWrite(d *ast.FuncType, w *WalkWriter) {
 				w.F("%s", temp.String())
 			}
 			w.Pop()
+			w.MergeImports(temp.Imports())
 			temp.Reset()
 		}
 		w.F(")[]")
@@ -829,9 +995,7 @@ func FuncTypeWrite(d *ast.FuncType, w *WalkWriter) {
 }
 func FuncDeclWrite(d *ast.FuncType, w *WalkWriter) {
 	temp := GetWriter()
-	defer func() {
-		FreeWriter(temp)
-	}()
+	defer FreeWriter(temp)
 	w.F("(")
 	if d.Params.NumFields() > 0 {
 		for i, pa := range d.Params.List {
@@ -881,6 +1045,7 @@ func FuncDeclWrite(d *ast.FuncType, w *WalkWriter) {
 				}
 			}
 			w.Pop()
+			w.MergeImports(temp.Imports())
 			temp.Reset()
 		}
 	}
@@ -898,6 +1063,7 @@ func FuncDeclWrite(d *ast.FuncType, w *WalkWriter) {
 			w.F("%s", temp.String())
 		}
 		w.Pop()
+		w.MergeImports(temp.Imports())
 		temp.Reset()
 	default:
 		w.F(":(")
@@ -913,10 +1079,12 @@ func FuncDeclWrite(d *ast.FuncType, w *WalkWriter) {
 				w.F("%s", temp.String())
 			}
 			w.Pop()
+			w.MergeImports(temp.Imports())
 			temp.Reset()
 		}
 		w.F(")[]")
 	}
+
 }
 func StructTypeWrite(st *ast.StructType, w *WalkWriter) {
 	temp := GetWriter()
@@ -968,12 +1136,22 @@ func StructTypeWrite(st *ast.StructType, w *WalkWriter) {
 						}
 						w.F(":%s", temp.String())
 					}
+					w.MergeImports(temp.Imports())
 					temp.Reset()
 				}
 			}
 		}
+
 	}
 }
 func MapTypeWrite(st *ast.MapType, w *WalkWriter) {
 	_, _ = TypeResolve(w.pkg, st, nil, nil, w.field, w)
+}
+func Exists(p string) bool {
+	if _, err := os.Stat(p); errors.Is(err, os.ErrNotExist) {
+		return false
+	} else if err != nil {
+		panic(err)
+	}
+	return true
 }
