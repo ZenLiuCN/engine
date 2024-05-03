@@ -9,26 +9,23 @@ func _() {
 	// Re-run the stringer command to generate them again.
 	var x [1]struct{}
 	_ = x[AstNothing-0]
-	_ = x[AstMethodDecl-1]
-	_ = x[AstMethodStarDecl-2]
-	_ = x[AstMethodIdentDecl-3]
-	_ = x[AstFuncDecl-4]
-	_ = x[AstIdent-5]
-	_ = x[AstSelectorExpr-6]
-	_ = x[AstStarExpr-7]
-	_ = x[AstFuncType-8]
-	_ = x[AstArrayType-9]
-	_ = x[AstMapType-10]
-	_ = x[AstStructType-11]
-	_ = x[AstInterfaceType-12]
-	_ = x[AstChanType-13]
-	_ = x[AstEllipsis-14]
-	_ = x[AstNodeBuiltInMax-15]
+	_ = x[AstFuncDecl-1]
+	_ = x[AstIdent-2]
+	_ = x[AstSelectorExpr-3]
+	_ = x[AstStarExpr-4]
+	_ = x[AstFuncType-5]
+	_ = x[AstArrayType-6]
+	_ = x[AstMapType-7]
+	_ = x[AstStructType-8]
+	_ = x[AstInterfaceType-9]
+	_ = x[AstChanType-10]
+	_ = x[AstEllipsis-11]
+	_ = x[AstNodeBuiltInMax-12]
 }
 
-const _AstNode_name = "AstNothingAstMethodDeclAstMethodStarDeclAstMethodIdentDeclAstFuncDeclAstIdentAstSelectorExprAstStarExprAstFuncTypeAstArrayTypeAstMapTypeAstStructTypeAstInterfaceTypeAstChanTypeAstEllipsisAstNodeBuiltInMax"
+const _AstNode_name = "AstNothingAstFuncDeclAstIdentAstSelectorExprAstStarExprAstFuncTypeAstArrayTypeAstMapTypeAstStructTypeAstInterfaceTypeAstChanTypeAstEllipsisAstNodeBuiltInMax"
 
-var _AstNode_index = [...]uint8{0, 10, 23, 40, 58, 69, 77, 92, 103, 114, 126, 136, 149, 165, 176, 187, 204}
+var _AstNode_index = [...]uint8{0, 10, 21, 29, 44, 55, 66, 78, 88, 101, 117, 128, 139, 156}
 
 func (i AstNode) String() string {
 	if i < 0 || i >= AstNode(len(_AstNode_index)-1) {

@@ -11,6 +11,7 @@ require (
 	github.com/chromedp/chromedp v0.9.5
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.3.0
 	github.com/dop251/goja v0.0.0-20240220182346-e401ed450204
+	github.com/dslipak/pdf v0.0.2
 	github.com/evanw/esbuild v0.20.2
 	github.com/fsnotify/fsnotify v1.7.0
 	github.com/gabriel-vasile/mimetype v1.4.3

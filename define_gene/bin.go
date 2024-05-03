@@ -12,6 +12,7 @@ import (
 )
 
 func main() {
+	log.SetFlags(log.Ltime | log.Lshortfile)
 	cli.VersionFlag = &cli.BoolFlag{
 		Name:    "version",
 		Usage:   "show version",
@@ -140,3 +141,7 @@ func action(c *cli.Context) error {
 	}
 	return nil
 }
+
+var (
+	debug = false
+)

@@ -75,9 +75,6 @@ func (b BaseTypeCases) ChanType(t *ast.ChanType) {
 //go:generate stringer -type=AstNode
 const (
 	AstNothing AstNode = iota
-	AstMethodDecl
-	AstMethodStarDecl
-	AstMethodIdentDecl
 	AstFuncDecl
 	AstIdent
 	AstSelectorExpr

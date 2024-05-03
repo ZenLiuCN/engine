@@ -76,6 +76,24 @@ var (
 			}
 			return vx, nil
 		},
+		"complex32": func(r, i float32) complex64 {
+			return complex(r, i)
+		},
+		"complex64": func(r, i float64) complex128 {
+			return complex(r, i)
+		},
+		"real32": func(c complex64) float32 {
+			return real(c)
+		},
+		"real364": func(c complex128) float64 {
+			return real(c)
+		},
+		"imag32": func(c complex64) float32 {
+			return real(c)
+		},
+		"imag64": func(c complex128) float64 {
+			return real(c)
+		},
 	}
 )
 

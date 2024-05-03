@@ -1,9 +1,9 @@
 package spec
 
 import (
-	"fmt"
 	"go/ast"
 	"go/token"
+	"log"
 )
 
 type VarDeclCases interface {
@@ -37,7 +37,7 @@ func CaseVarDecl(file *ast.File, w VarDeclCases) {
 						case nil:
 							w.NilVarSpec(d, s)
 						default:
-							fmt.Printf("miss var decl %#+v\n", t)
+							log.Printf("miss var decl %#+v\n", t)
 						}
 					}
 				}

@@ -1,9 +1,9 @@
 package spec
 
 import (
-	"fmt"
 	"go/ast"
 	"go/token"
+	"log"
 )
 
 type ConstDeclCases interface {
@@ -51,7 +51,7 @@ func CaseConstDecl(file *ast.File, w ConstDeclCases) {
 						case nil:
 							w.NilConstSpec(d, s)
 						default:
-							fmt.Printf("miss const decl %#+v\n", t)
+							log.Printf("miss const decl %#+v\n", t)
 						}
 					}
 				}

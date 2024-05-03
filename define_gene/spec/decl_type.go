@@ -47,7 +47,7 @@ func (e ExportedTypeDeclCases) MethodDeclStarRecv(d *ast.FuncDecl, r *ast.Field,
 			e.Inner.MethodDeclStarRecv(d, r, t)
 		}
 	} else {
-		fmt.Printf("miss method decl of starExpr: %s %#+v \n", d.Name, t)
+		log.Printf("miss method decl of starExpr: %s %#+v \n", d.Name, t)
 	}
 }
 
@@ -168,7 +168,7 @@ func CaseTypeDecl(file *ast.File, w TypeDeclCases) {
 						case *ast.StarExpr:
 							w.StarExprSpec(s, t)
 						default:
-							fmt.Printf("miss decl %#+v\n", t)
+							log.Printf("miss decl %#+v\n", t)
 						}
 					}
 				}

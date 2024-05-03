@@ -3,12 +3,14 @@ package spec
 import "go/ast"
 
 type (
-	FnIdentVarSpec    = func(d *ast.GenDecl, s *ast.ValueSpec, t *ast.Ident)
-	FnNilVarSpec      = func(d *ast.GenDecl, s *ast.ValueSpec)
-	FnFuncVarSpec     = func(d *ast.GenDecl, s *ast.ValueSpec, t *ast.FuncType)
-	FnSelectorVarSpec = func(d *ast.GenDecl, s *ast.ValueSpec, t *ast.SelectorExpr)
-	FnMapVarSpec      = func(d *ast.GenDecl, s *ast.ValueSpec, t *ast.MapType)
-	FnStarVarSpec     = func(d *ast.GenDecl, s *ast.ValueSpec, t *ast.StarExpr)
+	FnIdentVarSpec     = func(d *ast.GenDecl, s *ast.ValueSpec, t *ast.Ident)
+	FnNilVarSpec       = func(d *ast.GenDecl, s *ast.ValueSpec)
+	FnFuncVarSpec      = func(d *ast.GenDecl, s *ast.ValueSpec, t *ast.FuncType)
+	FnSelectorVarSpec  = func(d *ast.GenDecl, s *ast.ValueSpec, t *ast.SelectorExpr)
+	FnMapVarSpec       = func(d *ast.GenDecl, s *ast.ValueSpec, t *ast.MapType)
+	FnArrayVarSpec     = func(d *ast.GenDecl, s *ast.ValueSpec, t *ast.ArrayType)
+	FnInterfaceVarSpec = func(d *ast.GenDecl, s *ast.ValueSpec, t *ast.InterfaceType)
+	FnStarVarSpec      = func(d *ast.GenDecl, s *ast.ValueSpec, t *ast.StarExpr)
 )
 
 func ExportedFnIdentVarSpec(fn FnIdentVarSpec) FnIdentVarSpec {

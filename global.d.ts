@@ -11,3 +11,4 @@ declare function registerResource<T extends io.Closer>(closer:T):T
  * @param closer
  */
 declare function removeResource<T extends io.Closer>(closer:T):T
+
