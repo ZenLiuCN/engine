@@ -2,14 +2,10 @@ declare module "golang/mime" {
 	// @ts-ignore
 	import * as io from 'golang/io'
 	// @ts-ignore
-	import type {Struct,error,Alias} from 'go'
+	import type {error,Alias,byte,Struct} from 'go'
 
 
-	export function extensionsByType(typ:string):[string[],error]
-	export function addExtensionType(ext,typ:string):error
-	export const BEncoding=98
-	export const QEncoding=113
-	export interface WordEncoder extends Alias<WordEncoder>{
+	export interface WordEncoder extends Alias<byte>{
 		encode(charset,s:string):string
 
 	}
@@ -22,5 +18,9 @@ declare module "golang/mime" {
 	export function formatMediaType(t:string,param:Record<string,string>):string
 	export function parseMediaType(v:string):[string,Record<string,string>,error]
 	export function typeByExtension(ext:string):string
+	export function extensionsByType(typ:string):[string[],error]
+	export function addExtensionType(ext,typ:string):error
+	export const BEncoding=0
+	export const QEncoding=1
 
 }

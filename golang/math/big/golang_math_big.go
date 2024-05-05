@@ -2,10 +2,10 @@ package big
 
 import (
 	_ "embed"
-
-	"github.com/ZenLiuCN/engine"
 	_ "github.com/ZenLiuCN/engine/golang/fmt"
 	_ "github.com/ZenLiuCN/engine/golang/math/rand"
+
+	"github.com/ZenLiuCN/engine"
 	"math/big"
 )
 
@@ -13,17 +13,17 @@ var (
 	//go:embed golang_math_big.d.ts
 	MathBigDefine   []byte
 	MathBigDeclared = map[string]any{
-		"jacobi":        big.Jacobi,
-		"newInt":        big.NewInt,
+		"newRat":        big.NewRat,
+		"newFloat":      big.NewFloat,
 		"parseFloat":    big.ParseFloat,
+		"newInt":        big.NewInt,
+		"jacobi":        big.Jacobi,
 		"ToNearestAway": big.ToNearestAway,
 		"ToNearestEven": big.ToNearestEven,
 		"ToZero":        big.ToZero,
 		"AwayFromZero":  big.AwayFromZero,
 		"ToNegativeInf": big.ToNegativeInf,
 		"ToPositiveInf": big.ToPositiveInf,
-		"newFloat":      big.NewFloat,
-		"newRat":        big.NewRat,
 	}
 )
 

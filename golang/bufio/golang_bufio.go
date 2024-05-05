@@ -2,26 +2,26 @@ package bufio
 
 import (
 	_ "embed"
+	_ "github.com/ZenLiuCN/engine/golang/io"
 
 	"bufio"
 	"github.com/ZenLiuCN/engine"
-	_ "github.com/ZenLiuCN/engine/golang/io"
 )
 
 var (
 	//go:embed golang_bufio.d.ts
 	BufioDefine   []byte
 	BufioDeclared = map[string]any{
-		"scanRunes":     bufio.ScanRunes,
-		"scanLines":     bufio.ScanLines,
-		"scanWords":     bufio.ScanWords,
 		"newScanner":    bufio.NewScanner,
-		"newReader":     bufio.NewReader,
+		"scanWords":     bufio.ScanWords,
+		"newReadWriter": bufio.NewReadWriter,
 		"scanBytes":     bufio.ScanBytes,
 		"newReaderSize": bufio.NewReaderSize,
-		"newWriterSize": bufio.NewWriterSize,
+		"newReader":     bufio.NewReader,
 		"newWriter":     bufio.NewWriter,
-		"newReadWriter": bufio.NewReadWriter,
+		"scanRunes":     bufio.ScanRunes,
+		"newWriterSize": bufio.NewWriterSize,
+		"scanLines":     bufio.ScanLines,
 	}
 )
 

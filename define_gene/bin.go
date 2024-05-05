@@ -1,14 +1,13 @@
 package main
 
 import (
-	"github.com/ZenLiuCN/engine/define_gene/spec"
+	"errors"
+	"fmt"
 	"github.com/ZenLiuCN/fn"
 	"github.com/urfave/cli/v2"
-	"io/fs"
 	"log"
 	"os"
 	"path/filepath"
-	"strings"
 )
 
 func main() {
@@ -24,20 +23,30 @@ func main() {
 	app.Version = "v0.0.1"
 	app.Usage = "Generate engine define from go source"
 	app.Flags = []cli.Flag{
-		&cli.StringSliceFlag{
-			Name:    "type",
-			Usage:   "type names of current file or directory",
-			Aliases: []string{"t"},
-		},
 		&cli.BoolFlag{
 			Name:    "debug",
 			Usage:   "debug generator",
 			Aliases: []string{"d"},
 		},
 		&cli.BoolFlag{
-			Name:    "override",
-			Usage:   "override exist file",
+			Name:    "test",
+			Usage:   "rewrite any exists test file",
+			Aliases: []string{"t"},
+		},
+		&cli.BoolFlag{
+			Name:    "rewrite",
+			Usage:   "rewrite exist file",
 			Aliases: []string{"r"},
+		},
+		&cli.BoolFlag{
+			Name:    "print",
+			Usage:   "print generate results only",
+			Aliases: []string{"p"},
+		},
+		&cli.BoolFlag{
+			Name:   "trace",
+			Usage:  "trace",
+			Hidden: true,
 		},
 		&cli.StringSliceFlag{
 			Name:    "tags",
@@ -48,11 +57,6 @@ func main() {
 			Name:    "out",
 			Usage:   "output path or current path",
 			Aliases: []string{"o"},
-		},
-		&cli.StringFlag{
-			Name:    "go",
-			Usage:   "go root to walk all embed types",
-			Aliases: []string{"x"},
 		},
 	}
 	app.Suggest = true
@@ -69,79 +73,53 @@ func action(c *cli.Context) error {
 		file = append(file, c.Args().Slice()...)
 	}
 	tags := c.StringSlice("tags")
-	if c.String("go") == "" {
-		var dir string
-		if len(file) == 1 && spec.IsDir(file[0]) {
-			dir = file[0]
-		} else if len(tags) != 0 {
-			log.Fatal("--tags can only applies with directory")
-		} else {
-			dir = filepath.Dir(file[0])
-		}
-		g := new(Generator)
-		{
-			g.dir = dir
-			g.over = c.Bool("r")
-			g.tags = tags
-			g.files = file
-			g.types = c.StringSlice("type")
-			g.out = c.String("out")
-			if c.Bool("debug") {
-				g.log = log.Printf
-			}
-		}
-		g.generate()
+	var dir string
+	if len(file) == 1 && IsDir(file[0]) {
+		dir = file[0]
+	} else if len(tags) != 0 {
+		log.Fatal("--tags can only applies with directory")
 	} else {
-		root := filepath.Join(c.String("go"), "src")
-		return filepath.Walk(root, func(path string, info fs.FileInfo, err error) error {
-			if !info.IsDir() || root == path {
-				return nil
-			}
-			if strings.HasSuffix(path, "builtin") ||
-				strings.HasSuffix(path, "go") ||
-				strings.HasSuffix(path, "internal") ||
-				strings.HasSuffix(path, "debug") ||
-				strings.HasSuffix(path, "embed") ||
-				strings.HasSuffix(path, "runtime") ||
-				strings.HasSuffix(path, "vendor") ||
-				strings.HasSuffix(path, "heap") ||
-				strings.HasSuffix(path, "unsafe") ||
-				strings.HasSuffix(path, "testing") ||
-				strings.HasSuffix(path, "testdata") ||
-				strings.HasSuffix(path, "reflect") ||
-				strings.HasSuffix(path, "plugin") ||
-				strings.HasSuffix(path, "cmd") ||
-				strings.HasSuffix(path, "sync") ||
-				strings.HasSuffix(path, "syscall") ||
-				strings.HasSuffix(path, "pprof") ||
-				strings.HasSuffix(path, "flag") ||
-				strings.HasSuffix(path, "text") ||
-				strings.HasSuffix(path, "log") ||
-				strings.HasSuffix(path, "cmp") ||
-				strings.HasSuffix(path, "cgi") ||
-				strings.HasSuffix(path, "fcgi") ||
-				strings.HasSuffix(path, "database") ||
-				strings.HasSuffix(path, "crypto") {
-				log.Printf("ignore: %s", path)
-				return filepath.SkipDir
-			}
-			log.Printf("generate: %s", path)
-			g := new(Generator)
-			g.tags = tags
-			g.files = []string{path}
-			g.types = c.StringSlice("type")
-			g.out = c.String("out")
-			g.over = c.Bool("r")
-			if c.Bool("debug") {
-				g.log = log.Printf
-			}
-			g.generate()
-			return nil
-		})
+		dir = filepath.Dir(file[0])
 	}
-	return nil
+	g := new(Generator)
+	{
+		g.dir = dir
+		g.tags = tags
+		g.files = file
+		g.out = c.String("out")
+		g.over = c.Bool("rewrite")
+		g.overTest = c.Bool("test")
+		g.print = c.Bool("print")
+		g.trace = c.Bool("trace")
+		if c.Bool("debug") {
+			g.log = log.Printf
+		}
+	}
+	return g.generate()
+}
+
+func IsDir(s string) bool {
+	i, err := os.Stat(s)
+	if err != nil && !errors.Is(err, os.ErrNotExist) {
+		panic(err)
+	}
+	if err != nil {
+		return false
+	}
+	return i.IsDir()
 }
 
 var (
 	debug = false
 )
+
+func debugf(format string, args ...any) {
+	if debug {
+		_ = log.Output(2, "[DEBUG] "+fmt.Sprintf(format, args...))
+	}
+}
+func tracef(n int, format string, args ...any) {
+	if debug {
+		_ = log.Output(n+2, "[TRACE] "+fmt.Sprintf(format, args...))
+	}
+}

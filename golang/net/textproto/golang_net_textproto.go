@@ -13,13 +13,13 @@ var (
 	//go:embed golang_net_textproto.d.ts
 	NetTextprotoDefine   []byte
 	NetTextprotoDeclared = map[string]any{
-		"trimBytes":              textproto.TrimBytes,
-		"newReader":              textproto.NewReader,
-		"newWriter":              textproto.NewWriter,
-		"trimString":             textproto.TrimString,
 		"canonicalMimeHeaderKey": textproto.CanonicalMIMEHeaderKey,
+		"trimBytes":              textproto.TrimBytes,
 		"newConn":                textproto.NewConn,
 		"dial":                   textproto.Dial,
+		"newReader":              textproto.NewReader,
+		"trimString":             textproto.TrimString,
+		"newWriter":              textproto.NewWriter,
 	}
 )
 

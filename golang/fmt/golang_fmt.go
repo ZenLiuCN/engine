@@ -2,38 +2,38 @@ package fmt
 
 import (
 	_ "embed"
+	_ "github.com/ZenLiuCN/engine/golang/io"
 
 	"fmt"
 	"github.com/ZenLiuCN/engine"
-	_ "github.com/ZenLiuCN/engine/golang/io"
 )
 
 var (
 	//go:embed golang_fmt.d.ts
 	FmtDefine   []byte
 	FmtDeclared = map[string]any{
-		"formatString": fmt.FormatString,
-		"println":      fmt.Println,
-		"scan":         fmt.Scan,
-		"fscanln":      fmt.Fscanln,
-		"scanf":        fmt.Scanf,
 		"fscanf":       fmt.Fscanf,
-		"printf":       fmt.Printf,
-		"appendf":      fmt.Appendf,
-		"sprint":       fmt.Sprint,
+		"fprint":       fmt.Fprint,
+		"appendln":     fmt.Appendln,
+		"scanf":        fmt.Scanf,
+		"println":      fmt.Println,
+		"scanln":       fmt.Scanln,
+		"sscanf":       fmt.Sscanf,
 		"fprintln":     fmt.Fprintln,
-		"sprintln":     fmt.Sprintln,
-		"sscanln":      fmt.Sscanln,
+		"scan":         fmt.Scan,
+		"printf":       fmt.Printf,
+		"fscanln":      fmt.Fscanln,
+		"formatString": fmt.FormatString,
+		"fprintf":      fmt.Fprintf,
+		"append":       fmt.Append,
 		"errorf":       fmt.Errorf,
 		"sprintf":      fmt.Sprintf,
-		"append":       fmt.Append,
-		"sscan":        fmt.Sscan,
-		"sscanf":       fmt.Sscanf,
+		"sprint":       fmt.Sprint,
+		"sprintln":     fmt.Sprintln,
+		"sscanln":      fmt.Sscanln,
+		"appendf":      fmt.Appendf,
 		"print":        fmt.Print,
-		"appendln":     fmt.Appendln,
-		"scanln":       fmt.Scanln,
-		"fprintf":      fmt.Fprintf,
-		"fprint":       fmt.Fprint,
+		"sscan":        fmt.Sscan,
 		"fscan":        fmt.Fscan,
 	}
 )

@@ -24,6 +24,8 @@ declare module "go" {
     export type Proto<T> = T
     //A go struct of type T
     export type Struct<T> = T
+    //A go empty anonymous struct
+    export type Nothing = Struct<void>
 
 
 
@@ -59,9 +61,9 @@ declare module "go" {
 
         recv(handle: (t: T) => void): Promise<void>
 
-        closed(): boolean
+        closed(): bool
 
-        close()
+        close() :error
     }
 
     export interface ChanSend<T> {
@@ -70,7 +72,7 @@ declare module "go" {
 
         closed(): boolean
 
-        close()
+        close():error
     }
 
     export interface Maybe<V> {

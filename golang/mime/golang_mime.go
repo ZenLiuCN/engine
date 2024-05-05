@@ -12,11 +12,11 @@ var (
 	//go:embed golang_mime.d.ts
 	MimeDefine   []byte
 	MimeDeclared = map[string]any{
-		"extensionsByType": mime.ExtensionsByType,
-		"addExtensionType": mime.AddExtensionType,
 		"formatMediaType":  mime.FormatMediaType,
 		"parseMediaType":   mime.ParseMediaType,
 		"typeByExtension":  mime.TypeByExtension,
+		"extensionsByType": mime.ExtensionsByType,
+		"addExtensionType": mime.AddExtensionType,
 	}
 )
 

@@ -13,8 +13,8 @@ var (
 	//go:embed golang_mime_multipart.d.ts
 	MimeMultipartDefine   []byte
 	MimeMultipartDeclared = map[string]any{
-		"newWriter": multipart.NewWriter,
 		"newReader": multipart.NewReader,
+		"newWriter": multipart.NewWriter,
 	}
 )
 
