@@ -1,24 +1,26 @@
 package engine
 
 import (
-	"bytes"
 	"fmt"
 )
 
 type ScriptError struct {
 	Err   error
-	Stack *bytes.Buffer
+	Stack string
 }
 
 func (s ScriptError) Unwrap() error {
-	return s.Err
+	if s.Stack == "" {
+		return s.Err
+	}
+	return fmt.Errorf("script error: %s\nstack: %s", s.Err.Error(), s.Stack)
 }
 func (s ScriptError) Error() string {
 	if s.Err == nil {
 		return "<ni>"
 	}
-	if s.Stack == nil {
+	if s.Stack == "" {
 		return s.Err.Error()
 	}
-	return fmt.Sprintf("script error: %s\nscript stack: %s", s.Err.Error(), s.Stack.String())
+	return fmt.Sprintf("script error: %s\nstack: %s", s.Err.Error(), s.Stack)
 }

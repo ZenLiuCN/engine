@@ -41,3 +41,36 @@ func CompileFileSource(path, source string, ts, entry bool) *Code {
 		return &Code{Path: path, Program: fn.Panic1(goja.Compile("", CompileTs(source, entry), false))}
 	}
 }
+
+func CompileFileWithMapping(path string, entry bool) (*Code, SourceMapping) {
+	if len(path) > 3 && (strings.EqualFold(path[len(path)-3:], ".js") || strings.EqualFold(path[len(path)-3:], ".cjs") || strings.EqualFold(path[len(path)-3:], ".mjs")) {
+		data := string(fn.Panic1(os.ReadFile(path)))
+		s, m := CompileJsWithMapping(data, entry)
+		return &Code{Path: path, Program: fn.Panic1(goja.Compile(path, s, true))}, m
+	}
+	if len(path) > 3 && strings.EqualFold(path[len(path)-3:], ".ts") {
+		data := string(fn.Panic1(os.ReadFile(path)))
+		s, m := CompileTsWithMapping(data, entry)
+		return &Code{Path: path, Program: fn.Panic1(goja.Compile(path, s, true))}, m
+	}
+	panic(fmt.Errorf(`unsupported file %s`, path))
+}
+
+func CompileSourceWithMapping(source string, ts, entry bool) (*Code, SourceMapping) {
+	if !ts {
+		s, m := CompileJsWithMapping(source, entry)
+		return &Code{Path: "", Program: fn.Panic1(goja.Compile("", s, false))}, m
+	} else {
+		s, m := CompileTsWithMapping(source, entry)
+		return &Code{Path: "", Program: fn.Panic1(goja.Compile("", s, false))}, m
+	}
+}
+func CompileFileSourceWithMapping(path, source string, ts, entry bool) (*Code, SourceMapping) {
+	if !ts {
+		s, m := CompileJsWithMapping(source, entry)
+		return &Code{Path: path, Program: fn.Panic1(goja.Compile(path, s, false))}, m
+	} else {
+		s, m := CompileTsWithMapping(source, entry)
+		return &Code{Path: path, Program: fn.Panic1(goja.Compile(path, s, false))}, m
+	}
+}

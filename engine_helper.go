@@ -179,21 +179,74 @@ func (s *Engine) NewPromise() (promise *Promise, resolve func(any), reject func(
 func (s *Engine) parse(r any) (err error) {
 	switch e := r.(type) {
 	case *Exception:
-		err = &ScriptError{Err: e, Stack: nil}
+		b := GetBytesBuffer()
+		if s.SourceMap != nil {
+			stack := s.CaptureCallStack(5, nil)
+			for _, k := range stack {
+				if o, ok := s.SourceMap[Location{k.Position().Line, k.Position().Column}]; ok {
+					b.WriteString(o.Source)
+					b.WriteString("\n\t")
+					b.WriteString(o.Content)
+				} else {
+					b.WriteByte('\n')
+					k.Write(b)
+					b.WriteByte('\n')
+				}
+			}
+		} else {
+			stack := s.CaptureCallStack(5, nil)
+			for _, s := range stack {
+				s.Write(b)
+				b.WriteByte('\n')
+			}
+		}
+		err = &ScriptError{Err: e, Stack: b.String()}
 	case error:
-		stack := s.CaptureCallStack(20, nil)
 		b := GetBytesBuffer()
-		for _, s := range stack {
-			s.Write(b)
+		if s.SourceMap != nil {
+			stack := s.CaptureCallStack(5, nil)
+			for _, k := range stack {
+				if o, ok := s.SourceMap[Location{k.Position().Line, k.Position().Column}]; ok {
+					b.WriteString(o.Source)
+					b.WriteString("\n\t")
+					b.WriteString(o.Content)
+				} else {
+					b.WriteByte('\n')
+					k.Write(b)
+					b.WriteByte('\n')
+				}
+			}
+		} else {
+			stack := s.CaptureCallStack(5, nil)
+			for _, s := range stack {
+				s.Write(b)
+				b.WriteByte('\n')
+			}
 		}
-		err = &ScriptError{Err: fmt.Errorf("%w", e), Stack: b}
+		err = &ScriptError{Err: fmt.Errorf("%w", e), Stack: b.String()}
 	default:
-		stack := s.CaptureCallStack(20, nil)
 		b := GetBytesBuffer()
-		for _, s := range stack {
-			s.Write(b)
+		if s.SourceMap != nil {
+			stack := s.CaptureCallStack(5, nil)
+			for _, k := range stack {
+				if o, ok := s.SourceMap[Location{k.Position().Line, k.Position().Column}]; ok {
+					b.WriteString(o.Source)
+					b.WriteString("\n\t")
+					b.WriteString(o.Content)
+				} else {
+					b.WriteByte('\n')
+					k.Write(b)
+					b.WriteByte('\n')
+				}
+			}
+		} else {
+			stack := s.CaptureCallStack(5, nil)
+			for _, s := range stack {
+				s.Write(b)
+				b.WriteByte('\n')
+			}
 		}
-		err = &ScriptError{Err: fmt.Errorf("%s", e), Stack: b}
+		err = &ScriptError{Err: fmt.Errorf("%#+v", e), Stack: b.String()}
 	}
 	return
 }

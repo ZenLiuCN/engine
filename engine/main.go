@@ -26,8 +26,10 @@ func main() {
 			&DurationFlag{Name: "warmup", Aliases: []string{"w"}, Usage: "warmup time before time limit", DefaultText: "1s", Value: time.Second},
 			&DurationFlag{Name: "timeout", Aliases: []string{"i"}, Usage: "limit execute time"},
 			&BoolFlag{Name: "modules", Aliases: []string{"m"}, Usage: "print modules"},
+			&BoolFlag{Name: "debug", Aliases: []string{"x"}, Usage: "print debug info for error"},
 		},
 		Action: func(c *Context) error {
+			dbg := c.Bool("x")
 			if c.Bool("m") {
 				println(strings.Join(engine.ModuleNames(), ","))
 				return nil
@@ -66,9 +68,25 @@ func main() {
 				if withTimeout {
 					cx, cc := context.WithTimeout(ctx, timeout)
 					defer cc()
-					v = fn.Panic1(vm.RunCodeContext(engine.CompileFile(args[0], true), warm, cx))
+					if dbg {
+						c, m := engine.CompileFileWithMapping(args[0], true)
+						vm.Debug = true
+						vm.SourceMap = m
+						v = fn.Panic1(vm.RunCodeContext(c, warm, cx))
+					} else {
+						v = fn.Panic1(vm.RunCodeContext(engine.CompileFile(args[0], true), warm, cx))
+					}
+
 				} else {
-					v = fn.Panic1(vm.RunCodeContext(engine.CompileFile(args[0], true), warm, ctx))
+					if dbg {
+						c, m := engine.CompileFileWithMapping(args[0], true)
+						vm.Debug = true
+						vm.SourceMap = m
+						v = fn.Panic1(vm.RunCodeContext(c, warm, ctx))
+					} else {
+						v = fn.Panic1(vm.RunCodeContext(engine.CompileFile(args[0], true), warm, ctx))
+					}
+
 				}
 				if !engine.IsNullish(v) {
 					fmt.Printf("%v\n", v.Export())
@@ -93,6 +111,7 @@ func executeStdIn(c *Context, ts bool, warm time.Duration, timeout time.Duration
 	if !c.Args().Present() {
 		return fmt.Errorf("missing script source, use engine -h to show helps")
 	}
+	dbg := c.Bool("x")
 	vm := engine.Get()
 	defer vm.Free()
 	wg := &sync.WaitGroup{}
@@ -100,12 +119,28 @@ func executeStdIn(c *Context, ts bool, warm time.Duration, timeout time.Duration
 	cc := fn.WithSignal(func(ctx context.Context) {
 		defer wg.Done()
 		var v goja.Value
+		src := fn.SliceJoinRune(c.Args().Slice(), '\n', fn.Identity[string])
 		if withTimeout {
 			cx, cc := context.WithTimeout(ctx, timeout)
 			defer cc()
-			v = fn.Panic1(vm.RunCodeContext(engine.CompileSource(fn.SliceJoinRune(c.Args().Slice(), '\n', fn.Identity[string]), ts, true), warm, cx))
+			if dbg {
+				c, m := engine.CompileSourceWithMapping(src, ts, true)
+				vm.Debug = true
+				vm.SourceMap = m
+				v = fn.Panic1(vm.RunCodeContext(c, warm, cx))
+			} else {
+				v = fn.Panic1(vm.RunCodeContext(engine.CompileSource(src, ts, true), warm, cx))
+			}
+
 		} else {
-			v = fn.Panic1(vm.RunCodeContext(engine.CompileSource(fn.SliceJoinRune(c.Args().Slice(), '\n', fn.Identity[string]), ts, true), warm, ctx))
+			if dbg {
+				c, m := engine.CompileSourceWithMapping(src, ts, true)
+				vm.Debug = true
+				vm.SourceMap = m
+				v = fn.Panic1(vm.RunCodeContext(c, warm, ctx))
+			} else {
+				v = fn.Panic1(vm.RunCodeContext(engine.CompileSource(src, ts, true), warm, ctx))
+			}
 		}
 		if !engine.IsNullish(v) {
 			fmt.Printf("%v\n", v.Export())
