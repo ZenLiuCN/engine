@@ -1,5 +1,5 @@
 #!/bin/sh
-#go run . -r -g=wasm -o ../golang "${GOROOT}/src/syscall"
+#go run . -g=wasm -ro ../golang "${GOROOT}/src/syscall"
 goRun(){
   go run . -rt  -o ../golang ${GOROOT}/src/$*
 }

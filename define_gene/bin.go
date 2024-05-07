@@ -23,30 +23,21 @@ func main() {
 	app.Version = "v0.0.1"
 	app.Usage = "Generate engine define from go source"
 	app.Flags = []cli.Flag{
+
+		&cli.StringFlag{
+			Name:    "cond",
+			Usage:   "condition and suffix for module",
+			Aliases: []string{"c"},
+		},
 		&cli.BoolFlag{
 			Name:    "debug",
 			Usage:   "debug generator",
 			Aliases: []string{"d"},
 		},
-		&cli.BoolFlag{
-			Name:    "test",
-			Usage:   "rewrite any exists test file",
-			Aliases: []string{"t"},
-		},
-		&cli.BoolFlag{
-			Name:    "rewrite",
-			Usage:   "rewrite exist file",
-			Aliases: []string{"r"},
-		},
-		&cli.BoolFlag{
-			Name:    "print",
-			Usage:   "print generate results only",
-			Aliases: []string{"p"},
-		},
-		&cli.BoolFlag{
-			Name:   "trace",
-			Usage:  "trace",
-			Hidden: true,
+		&cli.StringSliceFlag{
+			Name:    "env",
+			Usage:   "envs to apply",
+			Aliases: []string{"e"},
 		},
 		&cli.StringSliceFlag{
 			Name:    "tags",
@@ -57,6 +48,27 @@ func main() {
 			Name:    "out",
 			Usage:   "output path or current path",
 			Aliases: []string{"o"},
+		},
+		&cli.BoolFlag{
+			Name:    "print",
+			Usage:   "print generate results only",
+			Aliases: []string{"p"},
+		},
+		&cli.BoolFlag{
+			Name:    "rewrite",
+			Usage:   "rewrite exist file",
+			Aliases: []string{"r"},
+		},
+		&cli.BoolFlag{
+			Name:    "test",
+			Usage:   "rewrite any exists test file",
+			Aliases: []string{"t"},
+		},
+
+		&cli.BoolFlag{
+			Name:   "trace",
+			Usage:  "trace",
+			Hidden: true,
 		},
 	}
 	app.Suggest = true
@@ -91,6 +103,8 @@ func action(c *cli.Context) error {
 		g.overTest = c.Bool("test")
 		g.print = c.Bool("print")
 		g.trace = c.Bool("trace")
+		g.suffix = c.String("cond")
+		g.env = c.StringSlice("env")
 		if c.Bool("debug") {
 			g.log = log.Printf
 		}

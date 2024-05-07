@@ -3,7 +3,7 @@ package internal
 //go:generate stringer -type=Mod
 type (
 	Mod  uint
-	Mods []Mod
+	Mods = Stack[Mod]
 )
 
 //go:generate stringer -type=Dir
@@ -14,22 +14,6 @@ const (
 	ENT
 	EXT
 )
-
-func (m Mods) Len() int {
-	return len(m)
-}
-func (m Mods) Nth(i int) Mod {
-	if len(m) > i {
-		return m[i]
-	}
-	return 0
-}
-func (m Mods) LNth(i int) Mod {
-	if len(m) >= i {
-		return m[len(m)-i]
-	}
-	return 0
-}
 
 func (m Mod) IsPointerElt() bool {
 	return m == ModPointerElt

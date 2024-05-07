@@ -40,6 +40,8 @@ type (
 		NotEmpty() bool
 		LF() Writer
 		Indent(n int) Writer
+		Bytes() []byte
+		fmt.Stringer
 	}
 	writer struct {
 		buf  *bytes.Buffer
@@ -47,6 +49,12 @@ type (
 	}
 )
 
+func (s *writer) Bytes() []byte {
+	return s.buf.Bytes()
+}
+func (s *writer) String() string {
+	return s.buf.String()
+}
 func (s *writer) NotEmpty() bool {
 	return s.buf.Len() > 0
 }

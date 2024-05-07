@@ -1,10 +1,10 @@
 package internal
 
-import "go/types"
+import (
+	"go/types"
+)
 
-
-
-type Types []types.Type
+type Types Stack[types.Type]
 
 func (t Types) IsEmpty() bool {
 	return len(t) == 0
@@ -154,186 +154,186 @@ func (t Types) LNthNamed(n int) (v *types.Named) {
 }
 
 type (
-	TypeRootVisitor[I Inspector, T types.Object]      func(i I, d Dir, name string, e T) bool
-	TypeElementTypeVisitor[I Inspector, T types.Type] func(i I, d Dir, o types.Object, x T, mods Mods, seen Types) bool
-	TypeElementVisitor[I Inspector, T types.Object]   func(i I, d Dir, o types.Object, x T, mods Mods, seen Types) bool
-	TypeVisitor[I Inspector]                          interface {
-		VisitConst(i I, d Dir, name string, e *types.Const) bool
-		VisitFunc(i I, d Dir, name string, e *types.Func) bool
-		VisitTypeName(i I, d Dir, name string, e *types.TypeName) bool
-		VisitVar(i I, d Dir, name string, e *types.Var) bool
+	TypeRootVisitor[I Inspector, T types.Object, X any]      func(i I, d Dir, name string, e T, cx X) bool
+	TypeElementTypeVisitor[I Inspector, T types.Type, X any] func(i I, d Dir, o types.Object, x T, mods Mods, seen Types, cx X) bool
+	TypeElementVisitor[I Inspector, T types.Object, X any]   func(i I, d Dir, o types.Object, x T, mods Mods, seen Types, cx X) bool
+	TypeVisitor[I Inspector, X any]                          interface {
+		VisitConst(i I, d Dir, name string, e *types.Const, cx X) bool
+		VisitFunc(i I, d Dir, name string, e *types.Func, cx X) bool
+		VisitTypeName(i I, d Dir, name string, e *types.TypeName, cx X) bool
+		VisitVar(i I, d Dir, name string, e *types.Var, cx X) bool
 
-		VisitTypeVar(i I, d Dir, o types.Object, x *types.Var, mods Mods, seen Types) bool
-		VisitTypeFunc(i I, d Dir, o types.Object, x *types.Func, mods Mods, seen Types) bool
+		VisitTypeVar(i I, d Dir, o types.Object, x *types.Var, mods Mods, seen Types, cx X) bool
+		VisitTypeFunc(i I, d Dir, o types.Object, x *types.Func, mods Mods, seen Types, cx X) bool
 
-		VisitTypeBasic(i I, d Dir, o types.Object, x *types.Basic, mods Mods, seen Types) bool
-		VisitTypeMap(i I, d Dir, o types.Object, x *types.Map, mods Mods, seen Types) bool
-		VisitTypeArray(i I, d Dir, o types.Object, x *types.Array, mods Mods, seen Types) bool
-		VisitTypeStruct(i I, d Dir, o types.Object, x *types.Struct, mods Mods, seen Types) bool
-		VisitTypeTuple(i I, d Dir, o types.Object, x *types.Tuple, mods Mods, seen Types) bool
-		VisitTypeUnion(i I, d Dir, o types.Object, x *types.Union, mods Mods, seen Types) bool
-		VisitTypeSignature(i I, d Dir, o types.Object, x *types.Signature, mods Mods, seen Types) bool
-		VisitTypeParam(i I, d Dir, o types.Object, x *types.TypeParam, mods Mods, seen Types) bool
-		VisitTypePointer(i I, d Dir, o types.Object, x *types.Pointer, mods Mods, seen Types) bool
-		VisitTypeSlice(i I, d Dir, o types.Object, x *types.Slice, mods Mods, seen Types) bool
-		VisitTypeInterface(i I, d Dir, o types.Object, x *types.Interface, mods Mods, seen Types) bool
-		VisitTypeChan(i I, d Dir, o types.Object, x *types.Chan, mods Mods, seen Types) bool
-		VisitTypeNamed(i I, d Dir, o types.Object, x *types.Named, mods Mods, seen Types) bool
+		VisitTypeBasic(i I, d Dir, o types.Object, x *types.Basic, mods Mods, seen Types, cx X) bool
+		VisitTypeMap(i I, d Dir, o types.Object, x *types.Map, mods Mods, seen Types, cx X) bool
+		VisitTypeArray(i I, d Dir, o types.Object, x *types.Array, mods Mods, seen Types, cx X) bool
+		VisitTypeStruct(i I, d Dir, o types.Object, x *types.Struct, mods Mods, seen Types, cx X) bool
+		VisitTypeTuple(i I, d Dir, o types.Object, x *types.Tuple, mods Mods, seen Types, cx X) bool
+		VisitTypeUnion(i I, d Dir, o types.Object, x *types.Union, mods Mods, seen Types, cx X) bool
+		VisitTypeSignature(i I, d Dir, o types.Object, x *types.Signature, mods Mods, seen Types, cx X) bool
+		VisitTypeParam(i I, d Dir, o types.Object, x *types.TypeParam, mods Mods, seen Types, cx X) bool
+		VisitTypePointer(i I, d Dir, o types.Object, x *types.Pointer, mods Mods, seen Types, cx X) bool
+		VisitTypeSlice(i I, d Dir, o types.Object, x *types.Slice, mods Mods, seen Types, cx X) bool
+		VisitTypeInterface(i I, d Dir, o types.Object, x *types.Interface, mods Mods, seen Types, cx X) bool
+		VisitTypeChan(i I, d Dir, o types.Object, x *types.Chan, mods Mods, seen Types, cx X) bool
+		VisitTypeNamed(i I, d Dir, o types.Object, x *types.Named, mods Mods, seen Types, cx X) bool
 	}
-	FnTypeVisitor[I Inspector] struct {
-		FnVisitConst    TypeRootVisitor[I, *types.Const]
-		FnVisitFunc     TypeRootVisitor[I, *types.Func]
-		FnVisitTypeName TypeRootVisitor[I, *types.TypeName]
-		FnVisitVar      TypeRootVisitor[I, *types.Var]
+	FnTypeVisitor[I Inspector, X any] struct {
+		FnVisitConst    TypeRootVisitor[I, *types.Const, X]
+		FnVisitFunc     TypeRootVisitor[I, *types.Func, X]
+		FnVisitTypeName TypeRootVisitor[I, *types.TypeName, X]
+		FnVisitVar      TypeRootVisitor[I, *types.Var, X]
 
-		FnVisitTypeVar  TypeElementVisitor[I, *types.Var]
-		FnVisitTypeFunc TypeElementVisitor[I, *types.Func]
+		FnVisitTypeVar  TypeElementVisitor[I, *types.Var, X]
+		FnVisitTypeFunc TypeElementVisitor[I, *types.Func, X]
 
-		FnVisitTypeBasic     TypeElementTypeVisitor[I, *types.Basic]
-		FnVisitTypeMap       TypeElementTypeVisitor[I, *types.Map]
-		FnVisitTypeArray     TypeElementTypeVisitor[I, *types.Array]
-		FnVisitTypeStruct    TypeElementTypeVisitor[I, *types.Struct]
-		FnVisitTypeTuple     TypeElementTypeVisitor[I, *types.Tuple]
-		FnVisitTypeUnion     TypeElementTypeVisitor[I, *types.Union]
-		FnVisitTypeSignature TypeElementTypeVisitor[I, *types.Signature]
-		FnVisitTypeParam     TypeElementTypeVisitor[I, *types.TypeParam]
-		FnVisitTypePointer   TypeElementTypeVisitor[I, *types.Pointer]
-		FnVisitTypeSlice     TypeElementTypeVisitor[I, *types.Slice]
-		FnVisitTypeInterface TypeElementTypeVisitor[I, *types.Interface]
-		FnVisitTypeChan      TypeElementTypeVisitor[I, *types.Chan]
-		FnVisitTypeNamed     TypeElementTypeVisitor[I, *types.Named]
+		FnVisitTypeBasic     TypeElementTypeVisitor[I, *types.Basic, X]
+		FnVisitTypeMap       TypeElementTypeVisitor[I, *types.Map, X]
+		FnVisitTypeArray     TypeElementTypeVisitor[I, *types.Array, X]
+		FnVisitTypeStruct    TypeElementTypeVisitor[I, *types.Struct, X]
+		FnVisitTypeTuple     TypeElementTypeVisitor[I, *types.Tuple, X]
+		FnVisitTypeUnion     TypeElementTypeVisitor[I, *types.Union, X]
+		FnVisitTypeSignature TypeElementTypeVisitor[I, *types.Signature, X]
+		FnVisitTypeParam     TypeElementTypeVisitor[I, *types.TypeParam, X]
+		FnVisitTypePointer   TypeElementTypeVisitor[I, *types.Pointer, X]
+		FnVisitTypeSlice     TypeElementTypeVisitor[I, *types.Slice, X]
+		FnVisitTypeInterface TypeElementTypeVisitor[I, *types.Interface, X]
+		FnVisitTypeChan      TypeElementTypeVisitor[I, *types.Chan, X]
+		FnVisitTypeNamed     TypeElementTypeVisitor[I, *types.Named, X]
 	}
 )
 
-func (t FnTypeVisitor[I]) VisitConst(i I, d Dir, name string, e *types.Const) bool {
+func (t FnTypeVisitor[I, X]) VisitConst(i I, d Dir, name string, e *types.Const, cx X) bool {
 	if t.FnVisitConst != nil {
-		return t.FnVisitConst(i, d, name, e)
+		return t.FnVisitConst(i, d, name, e, cx)
 	}
 	return false
 }
 
-func (t FnTypeVisitor[I]) VisitFunc(i I, d Dir, name string, e *types.Func) bool {
+func (t FnTypeVisitor[I, X]) VisitFunc(i I, d Dir, name string, e *types.Func, cx X) bool {
 	if t.FnVisitFunc != nil {
-		return t.FnVisitFunc(i, d, name, e)
+		return t.FnVisitFunc(i, d, name, e, cx)
 	}
 	return false
 }
 
-func (t FnTypeVisitor[I]) VisitTypeName(i I, d Dir, name string, e *types.TypeName) bool {
+func (t FnTypeVisitor[I, X]) VisitTypeName(i I, d Dir, name string, e *types.TypeName, cx X) bool {
 	if t.FnVisitTypeName != nil {
-		return t.FnVisitTypeName(i, d, name, e)
+		return t.FnVisitTypeName(i, d, name, e, cx)
 	}
 	return false
 }
 
-func (t FnTypeVisitor[I]) VisitVar(i I, d Dir, name string, e *types.Var) bool {
+func (t FnTypeVisitor[I, X]) VisitVar(i I, d Dir, name string, e *types.Var, cx X) bool {
 	if t.FnVisitVar != nil {
-		return t.FnVisitVar(i, d, name, e)
+		return t.FnVisitVar(i, d, name, e, cx)
 	}
 	return false
 }
 
-func (t FnTypeVisitor[I]) VisitTypeVar(i I, d Dir, o types.Object, x *types.Var, mods Mods, seen Types) bool {
+func (t FnTypeVisitor[I, X]) VisitTypeVar(i I, d Dir, o types.Object, x *types.Var, mods Mods, seen Types, cx X) bool {
 	if t.FnVisitTypeVar != nil {
-		return t.FnVisitTypeVar(i, d, o, x, mods, seen)
+		return t.FnVisitTypeVar(i, d, o, x, mods, seen, cx)
 	}
 	return false
 }
 
-func (t FnTypeVisitor[I]) VisitTypeFunc(i I, d Dir, o types.Object, x *types.Func, mods Mods, seen Types) bool {
+func (t FnTypeVisitor[I, X]) VisitTypeFunc(i I, d Dir, o types.Object, x *types.Func, mods Mods, seen Types, cx X) bool {
 	if t.FnVisitTypeFunc != nil {
-		return t.FnVisitTypeFunc(i, d, o, x, mods, seen)
+		return t.FnVisitTypeFunc(i, d, o, x, mods, seen, cx)
 	}
 	return false
 }
 
-func (t FnTypeVisitor[I]) VisitTypeBasic(i I, d Dir, o types.Object, x *types.Basic, mods Mods, seen Types) bool {
+func (t FnTypeVisitor[I, X]) VisitTypeBasic(i I, d Dir, o types.Object, x *types.Basic, mods Mods, seen Types, cx X) bool {
 	if t.FnVisitTypeBasic != nil {
-		return t.FnVisitTypeBasic(i, d, o, x, mods, seen)
+		return t.FnVisitTypeBasic(i, d, o, x, mods, seen, cx)
 	}
 	return false
 }
 
-func (t FnTypeVisitor[I]) VisitTypeMap(i I, d Dir, o types.Object, x *types.Map, mods Mods, seen Types) bool {
+func (t FnTypeVisitor[I, X]) VisitTypeMap(i I, d Dir, o types.Object, x *types.Map, mods Mods, seen Types, cx X) bool {
 	if t.FnVisitTypeMap != nil {
-		return t.FnVisitTypeMap(i, d, o, x, mods, seen)
+		return t.FnVisitTypeMap(i, d, o, x, mods, seen, cx)
 	}
 	return false
 }
 
-func (t FnTypeVisitor[I]) VisitTypeArray(i I, d Dir, o types.Object, x *types.Array, mods Mods, seen Types) bool {
+func (t FnTypeVisitor[I, X]) VisitTypeArray(i I, d Dir, o types.Object, x *types.Array, mods Mods, seen Types, cx X) bool {
 	if t.FnVisitTypeArray != nil {
-		return t.FnVisitTypeArray(i, d, o, x, mods, seen)
+		return t.FnVisitTypeArray(i, d, o, x, mods, seen, cx)
 	}
 	return false
 }
 
-func (t FnTypeVisitor[I]) VisitTypeStruct(i I, d Dir, o types.Object, x *types.Struct, mods Mods, seen Types) bool {
+func (t FnTypeVisitor[I, X]) VisitTypeStruct(i I, d Dir, o types.Object, x *types.Struct, mods Mods, seen Types, cx X) bool {
 	if t.FnVisitTypeStruct != nil {
-		return t.FnVisitTypeStruct(i, d, o, x, mods, seen)
+		return t.FnVisitTypeStruct(i, d, o, x, mods, seen, cx)
 	}
 	return false
 }
 
-func (t FnTypeVisitor[I]) VisitTypeTuple(i I, d Dir, o types.Object, x *types.Tuple, mods Mods, seen Types) bool {
+func (t FnTypeVisitor[I, X]) VisitTypeTuple(i I, d Dir, o types.Object, x *types.Tuple, mods Mods, seen Types, cx X) bool {
 	if t.FnVisitTypeTuple != nil {
-		return t.FnVisitTypeTuple(i, d, o, x, mods, seen)
+		return t.FnVisitTypeTuple(i, d, o, x, mods, seen, cx)
 	}
 	return false
 }
 
-func (t FnTypeVisitor[I]) VisitTypeUnion(i I, d Dir, o types.Object, x *types.Union, mods Mods, seen Types) bool {
+func (t FnTypeVisitor[I, X]) VisitTypeUnion(i I, d Dir, o types.Object, x *types.Union, mods Mods, seen Types, cx X) bool {
 	if t.FnVisitTypeUnion != nil {
-		return t.FnVisitTypeUnion(i, d, o, x, mods, seen)
+		return t.FnVisitTypeUnion(i, d, o, x, mods, seen, cx)
 	}
 	return false
 }
 
-func (t FnTypeVisitor[I]) VisitTypeSignature(i I, d Dir, o types.Object, x *types.Signature, mods Mods, seen Types) bool {
+func (t FnTypeVisitor[I, X]) VisitTypeSignature(i I, d Dir, o types.Object, x *types.Signature, mods Mods, seen Types, cx X) bool {
 	if t.FnVisitTypeSignature != nil {
-		return t.FnVisitTypeSignature(i, d, o, x, mods, seen)
+		return t.FnVisitTypeSignature(i, d, o, x, mods, seen, cx)
 	}
 	return false
 }
 
-func (t FnTypeVisitor[I]) VisitTypeParam(i I, d Dir, o types.Object, x *types.TypeParam, mods Mods, seen Types) bool {
+func (t FnTypeVisitor[I, X]) VisitTypeParam(i I, d Dir, o types.Object, x *types.TypeParam, mods Mods, seen Types, cx X) bool {
 	if t.FnVisitTypeParam != nil {
-		return t.FnVisitTypeParam(i, d, o, x, mods, seen)
+		return t.FnVisitTypeParam(i, d, o, x, mods, seen, cx)
 	}
 	return false
 }
 
-func (t FnTypeVisitor[I]) VisitTypePointer(i I, d Dir, o types.Object, x *types.Pointer, mods Mods, seen Types) bool {
+func (t FnTypeVisitor[I, X]) VisitTypePointer(i I, d Dir, o types.Object, x *types.Pointer, mods Mods, seen Types, cx X) bool {
 	if t.FnVisitTypePointer != nil {
-		return t.FnVisitTypePointer(i, d, o, x, mods, seen)
+		return t.FnVisitTypePointer(i, d, o, x, mods, seen, cx)
 	}
 	return false
 }
 
-func (t FnTypeVisitor[I]) VisitTypeSlice(i I, d Dir, o types.Object, x *types.Slice, mods Mods, seen Types) bool {
+func (t FnTypeVisitor[I, X]) VisitTypeSlice(i I, d Dir, o types.Object, x *types.Slice, mods Mods, seen Types, cx X) bool {
 	if t.FnVisitTypeSlice != nil {
-		return t.FnVisitTypeSlice(i, d, o, x, mods, seen)
+		return t.FnVisitTypeSlice(i, d, o, x, mods, seen, cx)
 	}
 	return false
 }
 
-func (t FnTypeVisitor[I]) VisitTypeInterface(i I, d Dir, o types.Object, x *types.Interface, mods Mods, seen Types) bool {
+func (t FnTypeVisitor[I, X]) VisitTypeInterface(i I, d Dir, o types.Object, x *types.Interface, mods Mods, seen Types, cx X) bool {
 	if t.FnVisitTypeInterface != nil {
-		return t.FnVisitTypeInterface(i, d, o, x, mods, seen)
+		return t.FnVisitTypeInterface(i, d, o, x, mods, seen, cx)
 	}
 	return false
 }
 
-func (t FnTypeVisitor[I]) VisitTypeChan(i I, d Dir, o types.Object, x *types.Chan, mods Mods, seen Types) bool {
+func (t FnTypeVisitor[I, X]) VisitTypeChan(i I, d Dir, o types.Object, x *types.Chan, mods Mods, seen Types, cx X) bool {
 	if t.FnVisitTypeChan != nil {
-		return t.FnVisitTypeChan(i, d, o, x, mods, seen)
+		return t.FnVisitTypeChan(i, d, o, x, mods, seen, cx)
 	}
 	return false
 }
 
-func (t FnTypeVisitor[I]) VisitTypeNamed(i I, d Dir, o types.Object, x *types.Named, mods Mods, seen Types) bool {
+func (t FnTypeVisitor[I, X]) VisitTypeNamed(i I, d Dir, o types.Object, x *types.Named, mods Mods, seen Types, cx X) bool {
 	if t.FnVisitTypeNamed != nil {
-		return t.FnVisitTypeNamed(i, d, o, x, mods, seen)
+		return t.FnVisitTypeNamed(i, d, o, x, mods, seen, cx)
 	}
 	return false
 }
