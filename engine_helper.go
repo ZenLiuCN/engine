@@ -206,7 +206,7 @@ var (
 )
 
 func dumpMappingFrame(stacks []StackFrame, m SourceMapping, b *bytes.Buffer) {
-	if len(stacks) >= 2 {
+	if len(stacks) >= DumpFrameLastN {
 		n := len(stacks)
 		stacks = stacks[n-DumpFrameLastN : n]
 	}
