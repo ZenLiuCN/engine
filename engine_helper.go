@@ -186,18 +186,7 @@ func (s *Engine) parse(r any) (err error) {
 		b := GetBytesBuffer()
 		stack := fetchStackFrame(e)
 		if s.SourceMap != nil {
-			for _, k := range stack {
-				loc := k.Position()
-				if o, ok := s.SourceMap[Location{loc.Line - 1, loc.Column - 1}]; ok {
-					b.WriteString(o.Source)
-					b.WriteString("\n\t")
-					b.WriteString(o.Content)
-				} else {
-					b.WriteByte('\n')
-					k.Write(b)
-					b.WriteByte('\n')
-				}
-			}
+			dumpMappingFrame(stack, s.SourceMap, b)
 		} else {
 			for _, s := range stack {
 				s.Write(b)
@@ -209,18 +198,7 @@ func (s *Engine) parse(r any) (err error) {
 		b := GetBytesBuffer()
 		if s.SourceMap != nil {
 			stack := s.CaptureCallStack(5, nil)
-			for _, k := range stack {
-				loc := k.Position()
-				if o, ok := s.SourceMap[Location{loc.Line - 1, loc.Column - 1}]; ok {
-					b.WriteString(o.Source)
-					b.WriteString("\n\t")
-					b.WriteString(o.Content)
-				} else {
-					b.WriteByte('\n')
-					k.Write(b)
-					b.WriteByte('\n')
-				}
-			}
+			dumpMappingFrame(stack, s.SourceMap, b)
 		} else {
 			stack := s.CaptureCallStack(5, nil)
 			for _, s := range stack {
@@ -231,22 +209,10 @@ func (s *Engine) parse(r any) (err error) {
 		err = &ScriptError{Err: fmt.Errorf("%w", e), Stack: b.String()}
 	default:
 		b := GetBytesBuffer()
+		stack := s.CaptureCallStack(5, nil)
 		if s.SourceMap != nil {
-			stack := s.CaptureCallStack(5, nil)
-			for _, k := range stack {
-				loc := k.Position()
-				if o, ok := s.SourceMap[Location{loc.Line - 1, loc.Column - 1}]; ok {
-					b.WriteString(o.Source)
-					b.WriteString("\n\t")
-					b.WriteString(o.Content)
-				} else {
-					b.WriteByte('\n')
-					k.Write(b)
-					b.WriteByte('\n')
-				}
-			}
+			dumpMappingFrame(stack, s.SourceMap, b)
 		} else {
-			stack := s.CaptureCallStack(5, nil)
 			for _, s := range stack {
 				s.Write(b)
 				b.WriteByte('\n')
@@ -255,6 +221,32 @@ func (s *Engine) parse(r any) (err error) {
 		err = &ScriptError{Err: fmt.Errorf("%#+v", e), Stack: b.String()}
 	}
 	return
+}
+func dumpMappingFrame(stacks []StackFrame, m SourceMapping, b *bytes.Buffer) {
+	for _, stack := range stacks {
+		loc := stack.Position()
+		if o, ok := m[Location{loc.Line - 1, loc.Column - 1}]; ok {
+			b.WriteString(o.Source)
+			b.WriteString("\n\t")
+			b.WriteString(o.Content)
+		} else if o, ok = m[Location{loc.Line - 1, loc.Column}]; ok {
+			b.WriteString(o.Source)
+			b.WriteString("\n\t")
+			b.WriteString(o.Content)
+		} else if o, ok = m[Location{loc.Line, loc.Column}]; ok {
+			b.WriteString(o.Source)
+			b.WriteString("\n\t")
+			b.WriteString(o.Content)
+		} else if o, ok = m[Location{loc.Line, loc.Column - 1}]; ok {
+			b.WriteString(o.Source)
+			b.WriteString("\n\t")
+			b.WriteString(o.Content)
+		} else {
+			b.WriteByte('\n')
+			stack.Write(b)
+			b.WriteByte('\n')
+		}
+	}
 }
 
 // CallFunction invoke a function (without this)
