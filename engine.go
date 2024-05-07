@@ -6,7 +6,8 @@ import (
 	"github.com/ZenLiuCN/fn"
 	. "github.com/dop251/goja"
 	"io"
-	"path"
+	"path/filepath"
+	"strings"
 	"time"
 )
 
@@ -63,6 +64,7 @@ func (s *Engine) Free() {
 
 // region direct
 
+// SetScriptPath define current script path to use for imports
 func (s *Engine) SetScriptPath(p string) {
 	if s.scriptRootHandler != nil {
 		s.scriptRootHandler(p)
@@ -131,7 +133,7 @@ func (s *Engine) RunJs(src string) (v Value, err error) {
 
 // RunCode execute compiled code. The execution time should control manually, for an automatic timeout control see  RunCodeTimeout.
 func (s *Engine) RunCode(code *Code) (v Value, err error) {
-	s.SetScriptPath(path.Dir(code.Path))
+	s.SetScriptPath(computeCodeDir(code.Path))
 	s.TryStartEventLoop()
 	defer func() {
 		if r := recover(); r != nil {
@@ -145,7 +147,7 @@ func (s *Engine) RunCode(code *Code) (v Value, err error) {
 	return
 }
 func (s *Engine) RunCodeWithMapping(code *Code, mapping SourceMapping) (v Value, err error) {
-	s.SetScriptPath(path.Dir(code.Path))
+	s.SetScriptPath(computeCodeDir(code.Path))
 	s.TryStartEventLoop()
 	defer func() {
 		if r := recover(); r != nil {
@@ -168,21 +170,37 @@ func (s *Engine) RunCodeWithMapping(code *Code, mapping SourceMapping) (v Value,
 // RunCodeContext run code
 // with context. If context closed early, the value will be HaltJobs, the error will be ErrTimeout.
 func (s *Engine) RunCodeContext(code *Code, warm time.Duration, ctx cx.Context) (v Value, err error) {
-	s.SetScriptPath(path.Dir(code.Path))
+	s.SetScriptPath(computeCodeDir(code.Path))
 	return s.awaiting(code.Program, warm, ctx)
 }
 
-/*// RunJsContext run js source
+// RunJsContext run js source
 // with context. If context closed early, the value will be HaltJobs, the error will be ErrTimeout.
 func (s *Engine) RunJsContext(src string, warm time.Duration, ctx cx.Context) (v Value, err error) {
-	return s.awaiting(CompileSource(src, false, true).Program, warm, ctx)
+	if s.Debug {
+		code, mapping := CompileSourceWithMapping(src, false, true)
+		s.SetScriptPath(computeCodeDir(code.Path))
+		s.SourceMap = mapping
+		return s.awaiting(code.Program, warm, ctx)
+	}
+	code := CompileSource(src, false, true)
+	s.SetScriptPath(computeCodeDir(code.Path))
+	return s.awaiting(code.Program, warm, ctx)
 }
 
 // RunTsContext run Ts source
 // with context. If context closed early, the value will be HaltJobs, the error will be ErrTimeout.
 func (s *Engine) RunTsContext(src string, warm time.Duration, ctx cx.Context) (v Value, err error) {
-	return s.awaiting(CompileSource(src, true, true).Program, warm, ctx)
-}*/
+	if s.Debug {
+		code, mapping := CompileSourceWithMapping(src, true, true)
+		s.SetScriptPath(computeCodeDir(code.Path))
+		s.SourceMap = mapping
+		return s.awaiting(code.Program, warm, ctx)
+	}
+	code := CompileSource(src, true, true)
+	s.SetScriptPath(computeCodeDir(code.Path))
+	return s.awaiting(code.Program, warm, ctx)
+}
 
 //endregion
 
@@ -224,6 +242,16 @@ func (s *Engine) awaiting(act *Program, warm time.Duration, ctx cx.Context) (v V
 		panic(r.Error)
 	}
 	return r.Value, r.Error
+}
+func computeCodeDir(s string) string {
+	if s == "" {
+		return ""
+	}
+	b := filepath.Base(s)
+	if strings.LastIndexByte(b, '.') > 0 {
+		return filepath.Dir(s)
+	}
+	return b
 }
 
 var (

@@ -27,6 +27,7 @@ func main() {
 			&DurationFlag{Name: "timeout", Aliases: []string{"i"}, Usage: "limit execute time"},
 			&BoolFlag{Name: "modules", Aliases: []string{"m"}, Usage: "print modules"},
 			&BoolFlag{Name: "debug", Aliases: []string{"x"}, Usage: "print debug info for error"},
+			&UintFlag{Name: "stack", Aliases: []string{"k"}, Usage: "stack dump max length"},
 		},
 		Action: func(c *Context) error {
 			dbg := c.Bool("x")
@@ -45,6 +46,10 @@ func main() {
 			ts := c.Bool("typescript")
 			warm := c.Duration("warmup")
 			timeout := c.Duration("timeout")
+			stack := c.Uint("stack")
+			if stack > 0 {
+				engine.DumpFrameLastN = int(stack)
+			}
 			withTimeout := timeout == 0
 			if c.Bool("source") {
 				return executeStdIn(c, ts, warm, timeout, withTimeout)
