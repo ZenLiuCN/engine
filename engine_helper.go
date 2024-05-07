@@ -185,44 +185,37 @@ func (s *Engine) parse(r any) (err error) {
 	case *Exception:
 		b := GetBytesBuffer()
 		stack := fetchStackFrame(e)
-		if s.SourceMap != nil {
-			dumpMappingFrame(stack, s.SourceMap, b)
-		} else {
-			for _, s := range stack {
-				s.Write(b)
-				b.WriteByte('\n')
-			}
-		}
+		dumpMappingFrame(stack, s.SourceMap, b)
 		err = &ScriptError{Err: e, Stack: b.String()}
 	case error:
 		b := GetBytesBuffer()
-		if s.SourceMap != nil {
-			stack := s.CaptureCallStack(5, nil)
-			dumpMappingFrame(stack, s.SourceMap, b)
-		} else {
-			stack := s.CaptureCallStack(5, nil)
-			for _, s := range stack {
-				s.Write(b)
-				b.WriteByte('\n')
-			}
-		}
+		stack := s.CaptureCallStack(DumpFrameLastN, nil)
+		dumpMappingFrame(stack, s.SourceMap, b)
 		err = &ScriptError{Err: fmt.Errorf("%w", e), Stack: b.String()}
 	default:
 		b := GetBytesBuffer()
-		stack := s.CaptureCallStack(5, nil)
-		if s.SourceMap != nil {
-			dumpMappingFrame(stack, s.SourceMap, b)
-		} else {
-			for _, s := range stack {
-				s.Write(b)
-				b.WriteByte('\n')
-			}
-		}
+		stack := s.CaptureCallStack(DumpFrameLastN, nil)
+		dumpMappingFrame(stack, s.SourceMap, b)
 		err = &ScriptError{Err: fmt.Errorf("%#+v", e), Stack: b.String()}
 	}
 	return
 }
+
+var (
+	DumpFrameLastN = 5
+)
+
 func dumpMappingFrame(stacks []StackFrame, m SourceMapping, b *bytes.Buffer) {
+	if len(stacks) >= 2 {
+		n := len(stacks)
+		stacks = stacks[n-DumpFrameLastN : n]
+	}
+	if m == nil {
+		for _, stack := range stacks {
+			b.WriteRune('\n')
+			stack.Write(b)
+		}
+	}
 	for _, stack := range stacks {
 		loc := stack.Position()
 		if o, ok := m[Location{loc.Line - 1, loc.Column - 1}]; ok {
