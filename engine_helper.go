@@ -226,25 +226,28 @@ func dumpMappingFrame(stacks []StackFrame, m SourceMapping, b *bytes.Buffer) {
 	for _, stack := range stacks {
 		loc := stack.Position()
 		if o, ok := m[Location{loc.Line - 1, loc.Column - 1}]; ok {
+			b.WriteString("\n")
 			b.WriteString(o.Source)
-			b.WriteString("\n\t")
+			b.WriteString("\t")
 			b.WriteString(o.Content)
 		} else if o, ok = m[Location{loc.Line - 1, loc.Column}]; ok {
+			b.WriteString("\n")
 			b.WriteString(o.Source)
-			b.WriteString("\n\t")
+			b.WriteString("\t")
 			b.WriteString(o.Content)
 		} else if o, ok = m[Location{loc.Line, loc.Column}]; ok {
+			b.WriteString("\n")
 			b.WriteString(o.Source)
-			b.WriteString("\n\t")
+			b.WriteString("\t")
 			b.WriteString(o.Content)
 		} else if o, ok = m[Location{loc.Line, loc.Column - 1}]; ok {
+			b.WriteString("\n")
 			b.WriteString(o.Source)
-			b.WriteString("\n\t")
+			b.WriteString("\t")
 			b.WriteString(o.Content)
 		} else {
 			b.WriteByte('\n')
 			stack.Write(b)
-			b.WriteByte('\n')
 		}
 	}
 }
