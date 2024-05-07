@@ -25,7 +25,7 @@ declare module "go" {
     //A go struct of type T
     export type Struct<T> = T
     //A go empty anonymous struct
-    export type Nothing = Struct<void>
+    export type Nothing = Struct<{}>
 
 
 

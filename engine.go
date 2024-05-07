@@ -78,7 +78,11 @@ func (s *Engine) RunString(src string) (v Value, err error) {
 			err = s.parse(r)
 		}
 	}()
-	return s.Runtime.RunString(src)
+	v, err = s.Runtime.RunString(src)
+	if err != nil {
+		panic(err)
+	}
+	return
 }
 
 // RunTs execute typescript code. Should manual control the execution, for a automatic timeout control see  RunTsTimeout.
@@ -93,10 +97,14 @@ func (s *Engine) RunTs(src string) (v Value, err error) {
 	if s.Debug {
 		var src string
 		src, s.SourceMap = CompileTsWithMapping(src, true)
-		return s.Runtime.RunString(src)
+		v, err = s.Runtime.RunString(src)
 	} else {
-		return s.Runtime.RunString(CompileTs(src, true))
+		v, err = s.Runtime.RunString(CompileTs(src, true))
 	}
+	if err != nil {
+		panic(err)
+	}
+	return
 }
 
 // RunJs execute javascript code. Should manual control the execution, for a automatic timeout control see  RunJsTimeout.
@@ -111,10 +119,14 @@ func (s *Engine) RunJs(src string) (v Value, err error) {
 	if s.Debug {
 		var src string
 		src, s.SourceMap = CompileJsWithMapping(src, true)
-		return s.Runtime.RunString(src)
+		v, err = s.Runtime.RunString(src)
 	} else {
-		return s.Runtime.RunString(CompileJs(src, true))
+		v, err = s.Runtime.RunString(CompileJs(src, true))
 	}
+	if err != nil {
+		panic(err)
+	}
+	return
 }
 
 // RunCode execute compiled code. The execution time should control manually, for an automatic timeout control see  RunCodeTimeout.
@@ -126,7 +138,11 @@ func (s *Engine) RunCode(code *Code) (v Value, err error) {
 			err = s.parse(r)
 		}
 	}()
-	return s.Runtime.RunProgram(code.Program)
+	v, err = s.Runtime.RunProgram(code.Program)
+	if err != nil {
+		panic(err)
+	}
+	return
 }
 func (s *Engine) RunCodeWithMapping(code *Code, mapping SourceMapping) (v Value, err error) {
 	s.SetScriptPath(path.Dir(code.Path))
@@ -138,7 +154,11 @@ func (s *Engine) RunCodeWithMapping(code *Code, mapping SourceMapping) (v Value,
 		s.SourceMap = nil
 	}()
 	s.SourceMap = mapping
-	return s.Runtime.RunProgram(code.Program)
+	v, err = s.Runtime.RunProgram(code.Program)
+	if err != nil {
+		panic(err)
+	}
+	return
 }
 
 //endregion
