@@ -13,7 +13,7 @@ func (s ScriptError) Unwrap() error {
 	if s.Stack == "" {
 		return s.Err
 	}
-	return fmt.Errorf("script error: %s\nstack: %s", s.Err.Error(), s.Stack)
+	return fmt.Errorf("script error: %s\nLocate: %s", s.Err.Error(), s.Stack)
 }
 func (s ScriptError) Error() string {
 	if s.Err == nil {
@@ -22,5 +22,5 @@ func (s ScriptError) Error() string {
 	if s.Stack == "" {
 		return s.Err.Error()
 	}
-	return fmt.Sprintf("script error: %s\nstack: %s", s.Err.Error(), s.Stack)
+	return fmt.Sprintf("script error: %s\nLocate: %s", s.Err.Error(), s.Stack)
 }

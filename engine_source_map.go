@@ -8,6 +8,11 @@ import (
 	"strings"
 )
 
+var (
+	SingularLine = true
+	ColumnMarker = '♦'
+)
+
 type SourceMapping map[Location]Sources
 type Location [2]int
 type Sources struct {
@@ -32,50 +37,10 @@ func (s *SourceMap) sliceSource(si, line, col int) string {
 	}
 read:
 	if lines, ok := s.buf[si]; ok {
-		n := len(lines)
-		if line >= n {
-			return ""
-		} else if line == 0 {
-			n := lines[0]
-			b := new(strings.Builder)
-			b.Grow(len(n) + 25 + len(lines[1]))
-			b.WriteString(fmt.Sprintf("%d →", 0))
-			b.WriteString(n[:col])
-			b.WriteRune('☆')
-			b.WriteString(n[col:])
-			b.WriteRune('\n')
-			b.WriteString(lines[1])
-			return b.String()
-		} else if line == n-1 {
-			ls := lines[n-1]
-			b := new(strings.Builder)
-			b.Grow(len(ls) + 25 + len(lines[n-2]))
-			b.WriteString(lines[n-2])
-			b.WriteRune('\n')
-			b.WriteString(fmt.Sprintf("%d →", 0))
-			b.WriteString(ls[:col])
-			b.WriteRune('☆')
-			b.WriteString(ls[col:])
-			return b.String()
-		} else {
-			ls := lines[line-1 : line+2]
-			x := 0
-			for _, l := range ls {
-				x += len(l)
-			}
-			x += 25
-			b := new(strings.Builder)
-			b.Grow(x)
-			b.WriteString(ls[0])
-			b.WriteRune('\n')
-			b.WriteString(fmt.Sprintf("%d →", 0))
-			b.WriteString(ls[1][:col])
-			b.WriteRune('☆')
-			b.WriteString(ls[1][col:])
-			b.WriteRune('\n')
-			b.WriteString(ls[2])
-			return b.String()
+		if SingularLine {
+			return dumpOneLine(lines, line, col)
 		}
+		return dumpTwoLines(lines, line, col)
 
 	}
 	var v []string
@@ -86,6 +51,76 @@ read:
 	}
 	s.buf[si] = v
 	goto read
+}
+func dumpOneLine(lines []string, line int, col int) string {
+	n := len(lines)
+	if line >= n {
+		return ""
+	} else if line == 0 {
+		n := lines[0]
+		b := new(strings.Builder)
+		b.Grow(len(n) + 25)
+		b.WriteString("0 →")
+		b.WriteString(n[:col])
+		b.WriteRune(ColumnMarker)
+		b.WriteString(n[col:])
+		return b.String()
+	} else {
+		ls := lines[line]
+		b := new(strings.Builder)
+		b.Grow(len(ls) + 25)
+		b.WriteString(fmt.Sprintf("%d →", line))
+		b.WriteString(ls[:col])
+		b.WriteRune(ColumnMarker)
+		b.WriteString(ls[col:])
+		return b.String()
+	}
+}
+func dumpTwoLines(lines []string, line int, col int) string {
+	n := len(lines)
+	if line >= n {
+		return ""
+	} else if line == 0 {
+		n := lines[0]
+		b := new(strings.Builder)
+		b.Grow(len(n) + 25 + len(lines[1]))
+		b.WriteString(fmt.Sprintf("%d →", 0))
+		b.WriteString(n[:col])
+		b.WriteRune(ColumnMarker)
+		b.WriteString(n[col:])
+		b.WriteRune('\n')
+		b.WriteString(lines[1])
+		return b.String()
+	} else if line == n-1 {
+		ls := lines[n-1]
+		b := new(strings.Builder)
+		b.Grow(len(ls) + 25 + len(lines[n-2]))
+		b.WriteString(lines[n-2])
+		b.WriteRune('\n')
+		b.WriteString(fmt.Sprintf("%d →", 0))
+		b.WriteString(ls[:col])
+		b.WriteRune(ColumnMarker)
+		b.WriteString(ls[col:])
+		return b.String()
+	} else {
+		ls := lines[line-1 : line+2]
+		x := 0
+		for _, l := range ls {
+			x += len(l)
+		}
+		x += 25
+		b := new(strings.Builder)
+		b.Grow(x)
+		b.WriteString(ls[0])
+		b.WriteRune('\n')
+		b.WriteString(fmt.Sprintf("%d →", 0))
+		b.WriteString(ls[1][:col])
+		b.WriteRune('☆')
+		b.WriteString(ls[1][col:])
+		b.WriteRune('\n')
+		b.WriteString(ls[2])
+		return b.String()
+	}
 }
 func NewSourceMap(bin []byte) (v SourceMapping) {
 	defer func() {

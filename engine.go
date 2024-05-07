@@ -173,8 +173,11 @@ func execute(e *Engine, ch chan<- Maybe[Value], act *Program) {
 			ch <- Maybe[Value]{Error: er}
 		}
 	}()
-	rr, er := e.Runtime.RunProgram(act)
-	ch <- Maybe[Value]{Value: rr, Error: er}
+	rr, err := e.Runtime.RunProgram(act)
+	if err != nil {
+		panic(err)
+	}
+	ch <- Maybe[Value]{Value: rr}
 }
 
 func (s *Engine) awaiting(act *Program, warm time.Duration, ctx cx.Context) (v Value, err error) {
@@ -196,6 +199,9 @@ func (s *Engine) awaiting(act *Program, warm time.Duration, ctx cx.Context) (v V
 	r := <-ch
 	if !j.IsZero() {
 		return s.ToValue(j), ErrTimeout
+	}
+	if r.Error != nil {
+		panic(r.Error)
 	}
 	return r.Value, r.Error
 }

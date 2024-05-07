@@ -7,6 +7,8 @@ import (
 	. "github.com/dop251/goja"
 	"io"
 	"log/slog"
+	"reflect"
+	"unsafe"
 )
 
 //region Register  helper
@@ -178,12 +180,15 @@ func (s *Engine) NewPromise() (promise *Promise, resolve func(any), reject func(
 // region Value helper
 func (s *Engine) parse(r any) (err error) {
 	switch e := r.(type) {
+	case *ScriptError:
+		return e
 	case *Exception:
 		b := GetBytesBuffer()
+		stack := fetchStackFrame(e)
 		if s.SourceMap != nil {
-			stack := s.CaptureCallStack(5, nil)
 			for _, k := range stack {
-				if o, ok := s.SourceMap[Location{k.Position().Line, k.Position().Column}]; ok {
+				loc := k.Position()
+				if o, ok := s.SourceMap[Location{loc.Line - 1, loc.Column - 1}]; ok {
 					b.WriteString(o.Source)
 					b.WriteString("\n\t")
 					b.WriteString(o.Content)
@@ -194,7 +199,6 @@ func (s *Engine) parse(r any) (err error) {
 				}
 			}
 		} else {
-			stack := s.CaptureCallStack(5, nil)
 			for _, s := range stack {
 				s.Write(b)
 				b.WriteByte('\n')
@@ -206,7 +210,8 @@ func (s *Engine) parse(r any) (err error) {
 		if s.SourceMap != nil {
 			stack := s.CaptureCallStack(5, nil)
 			for _, k := range stack {
-				if o, ok := s.SourceMap[Location{k.Position().Line, k.Position().Column}]; ok {
+				loc := k.Position()
+				if o, ok := s.SourceMap[Location{loc.Line - 1, loc.Column - 1}]; ok {
 					b.WriteString(o.Source)
 					b.WriteString("\n\t")
 					b.WriteString(o.Content)
@@ -229,7 +234,8 @@ func (s *Engine) parse(r any) (err error) {
 		if s.SourceMap != nil {
 			stack := s.CaptureCallStack(5, nil)
 			for _, k := range stack {
-				if o, ok := s.SourceMap[Location{k.Position().Line, k.Position().Column}]; ok {
+				loc := k.Position()
+				if o, ok := s.SourceMap[Location{loc.Line - 1, loc.Column - 1}]; ok {
 					b.WriteString(o.Source)
 					b.WriteString("\n\t")
 					b.WriteString(o.Content)
@@ -342,3 +348,12 @@ func RemoveResource[T io.Closer](e *Engine, v T) T {
 var (
 	resHolder = struct{}{}
 )
+
+func fetchStackFrame(e *Exception) []StackFrame {
+	v := reflect.ValueOf(e).Elem()
+	f := v.Field(1)
+	rf := reflect.NewAt(f.Type(), unsafe.Pointer(f.UnsafeAddr())).Elem()
+	return rf.Interface().([]StackFrame)
+	//rf = reflect.NewAt(rf.Type(), unsafe.Pointer(rf.UnsafeAddr())).Elem()
+
+}
