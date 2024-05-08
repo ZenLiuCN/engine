@@ -7,8 +7,6 @@ import (
 	. "github.com/dop251/goja"
 	"io"
 	"log/slog"
-	"reflect"
-	"unsafe"
 )
 
 //region Register  helper
@@ -392,14 +390,6 @@ func RemoveResource[T io.Closer](e *Engine, v T) T {
 }
 
 var (
-	resHolder = struct{}{}
+	resHolder       = struct{}{}
+	fetchStackFrame = Reader[Exception, []StackFrame](1)
 )
-
-func fetchStackFrame(e *Exception) []StackFrame {
-	v := reflect.ValueOf(e).Elem()
-	f := v.Field(1)
-	rf := reflect.NewAt(f.Type(), unsafe.Pointer(f.UnsafeAddr())).Elem()
-	return rf.Interface().([]StackFrame)
-	//rf = reflect.NewAt(rf.Type(), unsafe.Pointer(rf.UnsafeAddr())).Elem()
-
-}

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/ZenLiuCN/fn"
 	"github.com/dop251/goja"
+	"maps"
 	"strconv"
 	"sync/atomic"
 )
@@ -27,6 +28,31 @@ func (c GoModule) TypeDefine() []byte {
 
 func (c GoModule) Exports() map[string]any {
 	return goMap
+}
+func (c GoModule) ExportsWithEngine(e *Engine) map[string]any {
+	m := maps.Clone(goMap)
+	ctor := e.ToConstructorRecover(func(v []goja.Value) any {
+		n := len(v)
+		if n == 0 {
+			return Text("")
+		} else if n != 1 {
+			panic("bad argument")
+		}
+		switch x := v[0].Export().(type) {
+		case string:
+			return Text(x)
+		case []byte:
+			return Text(x)
+		case *goja.ArrayBuffer:
+			return Text(x.Bytes())
+		case []rune:
+			return Text(x)
+		default:
+			panic("bad argument")
+		}
+	})
+	m["Text"] = ctor
+	return m
 }
 
 var (
@@ -94,8 +120,37 @@ var (
 		"imag64": func(c complex128) float64 {
 			return real(c)
 		},
+		"bytesFromString": func(v string) []byte { return []byte(v) },
+		"runesFromString": func(v string) []rune { return []rune(v) },
+		"stringFromBytes": func(v []byte) string { return string(v) },
+		"stringFromRunes": func(v []rune) string { return string(v) },
+		"toInt8":          func(v float64) int8 { return int8(v) },
+		"toInt16":         func(v float64) int16 { return int16(v) },
+		"toInt32":         func(v float64) int32 { return int32(v) },
+		"toInt64":         func(v float64) int64 { return int64(v) },
+		"toUint8":         func(v float64) uint8 { return uint8(v) },
+		"toUint16":        func(v float64) uint16 { return uint16(v) },
+		"toUint32":        func(v float64) uint32 { return uint32(v) },
+		"toUint64":        func(v float64) uint64 { return uint64(v) },
+		"typeOf":          TypeOf,
+		"usage":           TypeUsage,
 	}
 )
+
+type Text string
+
+func (t Text) Bytes() []byte {
+	return []byte(t)
+}
+func (t Text) Runes() []rune {
+	return []rune(t)
+}
+func (t Text) ToString() string {
+	return string(t)
+}
+func (t Text) String() string {
+	return string(t)
+}
 
 type (
 	Chan[T any] interface {
@@ -257,6 +312,9 @@ type Maybe[T any] struct {
 	Error error
 }
 
+func (m Maybe[T]) Result() (T, error) {
+	return m.Value, m.Error
+}
 func MaybeOk[T any](v T) Maybe[T] {
 	return Maybe[T]{Value: v}
 }

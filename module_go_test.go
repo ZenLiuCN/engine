@@ -95,3 +95,32 @@ func TestChannel_in(t *testing.T) {
 	}()
 	vm.Await()
 }
+
+func TestConvert(t *testing.T) {
+	vm := Get()
+	defer vm.Free()
+	fn.Panic1(vm.RunTs(
+		//language=typescript
+		`
+					
+		import {runesFromString, stringFromRunes, typeOf, usage} from 'go'
+		import type {rune} from 'go'
+					const r=runesFromString("123ABCΔ")
+					console.log(r);
+					console.log(stringFromRunes(r))
+					r.push(49)
+					console.log(stringFromRunes(r))
+					console.log(typeOf(r))
+					const slice:rune[]=usage(typeOf(r)).slice(2)
+					console.log(slice )
+					slice[0]=49
+					slice[1]=49
+					console.log(slice)
+					console.log(typeOf(slice),typeof slice)
+					console.log(stringFromRunes(slice))
+					console.log(slice.map(v=>v))
+					console.log(typeOf(slice.map(v=>v)))
+				`))
+
+	vm.Await()
+}
