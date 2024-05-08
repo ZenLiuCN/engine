@@ -2,13 +2,9 @@ package engine
 
 import "log/slog"
 
-var (
-	GlobalRequire = Require{cache: map[JsModule]JsModuleInstance{}}
-)
-
 func init() {
 	RegisterMod(NewConsole(slog.Default()))
-	RegisterMod(&GlobalRequire)
+	RegisterMod(Require{})
 	RegisterMod(TextEncoders{})
 
 	RegisterModule(GoModule{})

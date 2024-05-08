@@ -4,7 +4,6 @@ import (
 	"errors"
 	"github.com/ZenLiuCN/fn"
 	"github.com/dop251/goja"
-	"golang.org/x/exp/maps"
 	"net/url"
 	"os"
 	"path/filepath"
@@ -20,9 +19,6 @@ type Require struct {
 
 const ModuleRequireConstKey = "_$require"
 
-func (r Require) CleanCache() {
-	maps.Clear(r.cache)
-}
 func (r Require) Name() string {
 	return "Require"
 }
@@ -35,7 +31,7 @@ func (r *Require) GetDisabled() []string {
 func (r Require) Register(engine *Engine) {
 	x := &Require{
 		pwd:    WdToUrl(),
-		cache:  r.cache,
+		cache:  make(map[JsModule]JsModuleInstance),
 		Engine: engine,
 	}
 	engine.require = x

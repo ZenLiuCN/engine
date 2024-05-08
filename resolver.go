@@ -18,7 +18,8 @@ import (
 )
 
 var (
-	Loader Resolver = &BaseResolver{cache: make(map[*url.URL]*CacheSource)}
+	GlobalRequiredCache          = make(map[*url.URL]*CacheSource)
+	Loader              Resolver = &BaseResolver{cache: GlobalRequiredCache}
 )
 
 type (
