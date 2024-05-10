@@ -7,7 +7,7 @@ require (
 	github.com/Joker/jade v1.1.3
 	github.com/ZenLiuCN/fn v0.1.22
 	github.com/ZenLiuCN/go-duckdb v0.0.0-20231225150847-e53c10997fd2
-	github.com/ZenLiuCN/go-inspect v0.0.0-20240510081952-1eeb4fb2e174
+	github.com/ZenLiuCN/go-inspect v0.0.0-20240510095801-8a9bafaf4238
 	github.com/chromedp/cdproto v0.0.0-20240421230201-ab917191657d
 	github.com/chromedp/chromedp v0.9.5
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.3.0
