@@ -1,6 +1,6 @@
 package internal
 
-type Stack[T any] []T
+type Stack[T comparable] []T
 
 func (s Stack[T]) First() (v T) {
 	if s.Empty() {
@@ -27,6 +27,18 @@ func (s Stack[T]) Last() (v T) {
 		return
 	}
 	return s[s.Len()-1]
+}
+func (s Stack[T]) LastIndex(v T) int {
+	if s.Empty() {
+		return -1
+	}
+	n := s.Len()
+	for i := n - 1; i >= 0; i-- {
+		if s[i] == v {
+			return i
+		}
+	}
+	return -1
 }
 func (s Stack[T]) Len() int {
 	return len(s)

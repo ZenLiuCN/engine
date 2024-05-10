@@ -6,6 +6,7 @@ import (
 	"github.com/ZenLiuCN/fn"
 	"github.com/dop251/goja"
 	"maps"
+	"reflect"
 	"strconv"
 	"sync/atomic"
 )
@@ -120,20 +121,48 @@ var (
 		"imag64": func(c complex128) float64 {
 			return real(c)
 		},
-		"bytesFromString": func(v string) []byte { return []byte(v) },
-		"runesFromString": func(v string) []rune { return []rune(v) },
-		"stringFromBytes": func(v []byte) string { return string(v) },
-		"stringFromRunes": func(v []rune) string { return string(v) },
-		"toInt8":          func(v float64) int8 { return int8(v) },
-		"toInt16":         func(v float64) int16 { return int16(v) },
-		"toInt32":         func(v float64) int32 { return int32(v) },
-		"toInt64":         func(v float64) int64 { return int64(v) },
-		"toUint8":         func(v float64) uint8 { return uint8(v) },
-		"toUint16":        func(v float64) uint16 { return uint16(v) },
-		"toUint32":        func(v float64) uint32 { return uint32(v) },
-		"toUint64":        func(v float64) uint64 { return uint64(v) },
-		"typeOf":          TypeOf,
-		"usage":           TypeUsage,
+		"bytesFromString":       func(v string) []byte { return []byte(v) },
+		"runesFromString":       func(v string) []rune { return []rune(v) },
+		"stringFromBytes":       func(v []byte) string { return string(v) },
+		"stringFromRunes":       func(v []rune) string { return string(v) },
+		"toInt8":                func(v float64) int8 { return int8(v) },
+		"toInt16":               func(v float64) int16 { return int16(v) },
+		"toInt32":               func(v float64) int32 { return int32(v) },
+		"toInt64":               func(v float64) int64 { return int64(v) },
+		"toUint8":               func(v float64) uint8 { return uint8(v) },
+		"toUint16":              func(v float64) uint16 { return uint16(v) },
+		"toUint32":              func(v float64) uint32 { return uint32(v) },
+		"toUint64":              func(v float64) uint64 { return uint64(v) },
+		"typeOf":                TypeOf,
+		"usageOf":               TypeUsage,
+		"elementOf":             ElementOf,
+		"TypeKindInvalid":       reflect.Invalid,
+		"TypeKindBool":          reflect.Bool,
+		"TypeKindInt":           reflect.Int,
+		"TypeKindInt8":          reflect.Int8,
+		"TypeKindInt16":         reflect.Int16,
+		"TypeKindInt32":         reflect.Int32,
+		"TypeKindInt64":         reflect.Int64,
+		"TypeKindUint":          reflect.Uint,
+		"TypeKindUint8":         reflect.Uint8,
+		"TypeKindUint16":        reflect.Uint16,
+		"TypeKindUint32":        reflect.Uint32,
+		"TypeKindUint64":        reflect.Uint64,
+		"TypeKindUintptr":       reflect.Uintptr,
+		"TypeKindFloat32":       reflect.Float32,
+		"TypeKindFloat64":       reflect.Float64,
+		"TypeKindComplex64":     reflect.Complex64,
+		"TypeKindComplex128":    reflect.Complex128,
+		"TypeKindArray":         reflect.Array,
+		"TypeKindChan":          reflect.Chan,
+		"TypeKindFunc":          reflect.Func,
+		"TypeKindInterface":     reflect.Interface,
+		"TypeKindMap":           reflect.Map,
+		"TypeKindPointer":       reflect.Pointer,
+		"TypeKindSlice":         reflect.Slice,
+		"TypeKindString":        reflect.String,
+		"TypeKindStruct":        reflect.Struct,
+		"TypeKindUnsafePointer": reflect.UnsafePointer,
 	}
 )
 

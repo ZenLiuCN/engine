@@ -12,17 +12,18 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"slices"
 	"strings"
 	"unicode"
 )
 
 func safe(s string, then func(string) string) string {
 	switch s {
-	case "New":
+	case "New", "In", "Default", "Do", "For":
 		return s
 	case "new":
 		return "New"
-	case "class":
+	case "class", "Class":
 		return "clazz"
 	default:
 		return then(s)
@@ -44,11 +45,15 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 		case EXT:
 			defer c.Exit(KTConst, nil, nil)
 			if c.generic {
+				//TODO handle generic Const
 				c.reset()
 				return false
 			}
 			if !c.typeAlias {
 				c.mi(1).mf("//%s", e.Val().String()).mn()
+				c.Constants[name] = e.String()
+			} else {
+				c.Alias[name] = c.d.String()
 			}
 			c.mi(1).mf("export const %s:", name)
 			c.declared()
@@ -62,13 +67,16 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 		case ENT:
 			defer c.Enter(KTFunc, nil, nil)
 			c.name = name
-			c.mi(1).mf("export function %s", Camel(name))
+
 		case EXT:
 			defer c.Exit(KTFunc, nil, nil)
 			if c.generic {
+				//TODO handle generic function
 				c.reset()
 				return false
 			}
+			c.mi(1).mf("export function %s", Camel(name))
+			c.Functions[name] = e.String()
 			c.declared().mn()
 			c.addEntry(Camel(name), "%s.%s", c.pkg.Types.Name(), name)
 			c.reset()
@@ -83,13 +91,20 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 		case EXT:
 			defer c.Exit(KTType, nil, nil)
 			if c.generic {
+				//TODO handle generic
 				c.reset()
 				return false
 			}
 			if c.typeAlias {
+				c.Alias[name] = c.d.String()
 				c.mi(1).mf("export type %s=%s", name, c.d.String()).mn()
 			} else {
 				c.mi(1).mf("export interface %s", name)
+				if c.isStruct {
+					c.Structs[name] = ""
+				} else {
+					c.Interfaces[name] = ""
+				}
 				c.faceIntercept()
 				if len(c.extended) > 0 {
 					c.mf(" extends %s", strings.Join(c.extended.Values(), ","))
@@ -109,11 +124,13 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 			c.name = name
 
 		case EXT:
+			defer c.Exit(KTVar, nil, nil)
 			if c.generic {
+				//TODO handle generic Const
 				c.reset()
 				return false
 			}
-			defer c.Exit(KTVar, nil, nil)
+			c.Variables[name] = c.d.String()
 			c.mi(1).mf("export const %s:", name)
 			c.declared().mn()
 			c.addEntry(name, "%s.%s", c.pkg.Types.Name(), name)
@@ -165,10 +182,12 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 		switch d {
 		case ENT:
 			defer c.Enter(KVar, mods, seen)
-			if c.path.First() == KTType && mods.LNth(1).IsField() {
-				c.di(2).df("%s:", Camel(x.Name()))
+			switch {
+			case c.path.First() == KTType && mods.LNth(1).IsField():
 				c.field = x.Name()
-			} else {
+				c.tmp = c.d
+				c.d = GetWriter()
+			default:
 				switch m := mods.LNth(2); true {
 				case m.IsParam() || m.IsResult():
 					if m.IsParam() {
@@ -191,14 +210,26 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 					c.field = x.Name()
 				}
 			}
-
 		case EXT:
 			defer c.Exit(KVar, mods, seen)
-			defer func() { (&c.path).PopSitu() }() //!! remove TVar itself
-			if c.path.First() == KTType && mods.LNth(1).IsField() {
-				c.dn()
+			defer c.resetArrayed()
+			switch {
+			case c.path.First() == KTType && mods.LNth(1).IsField():
+				if c.d.Buffer().Len() > 0 { //!! only expose field type should write
+					t := c.d
+					c.d = c.tmp
+					c.tmp = nil
+					c.di(2).df("%s:%s", Camel(c.field), t.String())
+					t.Free()
+					c.dn()
+				} else {
+					t := c.d
+					c.d = c.tmp
+					c.tmp = nil
+					t.Free()
+				}
 				c.field = ""
-			} else {
+			default:
 				switch m := mods.LNth(2); true {
 				case m.IsParam() || m.IsResult():
 					if c.pc.Last() > 1 {
@@ -206,9 +237,9 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 					}
 					c.param = ""
 					c.pcsub()
-					if c.pc.Last() == 0 && m.IsParam() && c.variadic.Last() {
-						c.df("[]")
-					}
+					/*			if c.pc.Last() == 0 && m.IsParam() && c.variadic.Last() && c.arrayed == 0 {
+								c.df("[]")
+							}*/
 				case m.IsField():
 					c.field = ""
 					c.dn()
@@ -228,7 +259,9 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 			defer c.Exit(KFunc, mods, seen)
 			c.dn()
 			c.method = ""
-
+			if c.arrayed >= c.path.Len() {
+				c.arrayed = 0
+			}
 		}
 		return true
 	},
@@ -236,30 +269,59 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 		switch d {
 		case ENT:
 			defer c.Enter(KBasic, mods, seen)
-			arr := 0
-			for {
-				n := c.path.LNth(arr + 1)
-				if n == KArray || n == KSlice {
-					arr++
-				} else {
-					break
-				}
-			}
+			arr := c.arrayLen.Len()
+			//!! is type embedded
 			if c.isTypeDefine(KBasic, mods, seen) && !c.IsConstOrVar() {
 				if arr == 1 || arr == 0 {
-					c.extends("%s", c.identType(x.Name(), arr > 0))
+					if c.arrayLen.Last() == -1 || arr == 0 {
+						c.extends("%s", c.identType(x.Name(), arr > 0, true))
+					} else {
+						c.extends("%s/*%d*/", c.identType(x.Name(), arr > 0, true), c.arrayLen.Last())
+					}
 				} else {
+
+					b := GetWriter()
+					for _, i := range c.arrayLen[:arr-1] {
+						if i == -1 {
+							b.Format("Array<")
+						} else {
+							b.Format("Array</*%d*/", i)
+						}
+					}
+					lst := c.arrayLen.Last()
+					s := ""
+					if lst > 0 {
+						s = fmt.Sprintf("/*%d*/", lst)
+					}
 					arr--
-					c.extends("%s%s%s", strings.Repeat("Array<", arr), c.identType(x.Name(), true), strings.Repeat(">", arr))
+					c.extends("%s%s%s%s", b.String(), c.identType(x.Name(), true, true), s, strings.Repeat(">", arr))
+					b.Free()
+
 				}
+				c.arrayed = c.path.Len() + 1 //!! KBasic push after process
 				return true
 			}
 			if arr == 1 || arr == 0 {
-				c.df("%s", c.identType(x.Name(), arr > 0))
+				if c.arrayLen.Last() == -1 || arr == 0 {
+					c.df("%s", c.identType(x.Name(), arr > 0, false))
+				} else {
+					c.df("%s/*%d*/", c.identType(x.Name(), arr > 0, false), c.arrayLen.Last())
+				}
 			} else {
+
+				b := GetWriter()
+				for _, i := range c.arrayLen[:arr-1] {
+					if i == -1 {
+						b.Format("Array<")
+					} else {
+						b.Format("Array</*%d*/", i)
+					}
+				}
 				arr--
-				c.df("%s%s%s", strings.Repeat("Array<", arr), c.identType(x.Name(), true), strings.Repeat(">", arr))
+				c.df("%s%s%s", b.String(), c.identType(x.Name(), true, false), strings.Repeat(">", arr))
+				b.Free()
 			}
+			c.arrayed = c.path.Len() + 1 //!! KBasic push after process
 		case EXT:
 			defer c.Exit(KBasic, mods, seen)
 			if mods.LNth(1).IsMapKey() {
@@ -280,6 +342,7 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 
 		case EXT:
 			defer c.Exit(KMap, mods, seen)
+			defer c.resetArrayed()
 			if c.mapAlias {
 				c.mapAlias = false
 				c.extends("Record<%s>", c.d.Buffer().String())
@@ -295,22 +358,14 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 		switch d {
 		case ENT:
 			defer c.Enter(KArray, mods, seen)
-			if c.isTypeDefine(KArray, mods, seen) {
-
-			} else {
-
-			}
+			(&c.arrayLen).PushSitu(x.Len())
 		case EXT:
 			defer c.Exit(KArray, mods, seen)
-			if c.path.Last() == KBasic {
+			(&c.arrayLen).PopSitu()
+			if c.arrayed > 0 && c.arrayed >= c.path.Len() {
 				return true
 			}
-			if c.isTypeDefine(KArray, mods, seen) && c.path.Len() == 3 {
-				c.extends("Array<%s>", c.d.String())
-				c.d.Reset()
-			} else {
-				c.df("[]")
-			}
+			c.df("[/*%d*/]", x.Len())
 
 		}
 		return true
@@ -334,15 +389,17 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 		case EXT:
 			defer c.Exit(KStruct, mods, seen)
 			switch {
-			case c.isTypeDefine(KStruct, mods, seen):
+			case c.isTypeDefineExit(KStruct, mods, seen):
 				switch {
 				case strings.Contains(c.name, "Err"):
 					c.use("Struct")
 					c.extends("Struct<%s>", c.name)
 					c.extends("Error")
+					c.isStruct = true
 				default:
 					c.use("Struct")
 					c.extends("Struct<%s>", c.name)
+					c.isStruct = true
 					for _, face := range I.Implements(o.Type()) {
 						if face.Pkg == c.pkg.Types {
 							if !c.extended.Exists(face.Name) {
@@ -422,6 +479,7 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 
 		case EXT:
 			defer c.Exit(KPointer, mods, seen)
+			defer c.resetArrayed()
 			c.df(">")
 			if c.isTypeDefine(KPointer, mods, seen) && !c.IsConstOrVar() {
 				c.extends(c.d.Buffer().String())
@@ -435,13 +493,14 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 		switch d {
 		case ENT:
 			defer c.Enter(KSlice, mods, seen)
-
+			(&c.arrayLen).PushSitu(-1)
 		case EXT:
 			defer c.Exit(KSlice, mods, seen)
-			if c.path.Last() == KBasic {
+			(&c.arrayLen).PopSitu()
+			if c.arrayed > 0 && (c.arrayed >= c.path.Len() || c.path.Last() == KBasic) {
 				return true
 			}
-			if c.isTypeDefine(KSlice, mods, seen) {
+			if c.isTypeDefineExit(KSlice, mods, seen) {
 				c.extends("Array<%s>", c.d.String())
 				c.d.Reset()
 			} else {
@@ -457,11 +516,16 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 			defer c.Enter(KInterface, mods, seen)
 			switch {
 			case c.isTypeDefine(KInterface, mods, seen):
+				return true
+			case c.isTypeExtend(KInterface, mods, seen):
 				c.use("Proto")
 				c.extends("Proto<%s>", c.name)
 				return false
 			default:
-				c.df("any") //!! any == interface{}
+				if x.NumMethods() == 0 {
+					c.df("any") //!! any == interface{}
+				}
+
 			}
 		case EXT:
 			defer c.Exit(KInterface, mods, seen)
@@ -484,6 +548,7 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 
 		case EXT:
 			defer c.Exit(KChan, mods, seen)
+			defer c.resetArrayed()
 			c.df(">")
 
 		}
@@ -492,23 +557,25 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 	FnVisitTypeNamed: func(I InspectorX, d Dir, o types.Object, x *types.Named, mods Mods, seen Types, c *context) bool {
 		switch d {
 		case ENT:
+			name := x.Obj().Name()
 			defer c.Enter(KNamed, mods, seen)
 			switch {
-			case c.path.Len() == 1 && c.name == x.Obj().Name() && x.Obj().Pkg() == c.pkg.Types:
+			case c.path.Len() == 1 && c.name == name && x.Obj().Pkg() == c.pkg.Types: //!! typeDefine
 				return true
 			case c.path.Len() == 1: //!! first alias
 				c.typeAlias = true
-				c.decodeNamed(x, c.df)
+				c.decodeNamed(I, x, c.df)
 				return false
 			case c.IsType() && mods.LNth(1).IsEmbedded(): //!! embedded for interface
-				c.decodeNamed(x, c.extends)
+				c.decodeNamed(I, x, c.extends)
 				return false
 			default:
-				c.decodeNamed(x, c.df)
+				c.decodeNamed(I, x, c.df)
 				return false
 			}
 		case EXT:
 			defer c.Exit(KNamed, mods, seen)
+			defer c.resetArrayed()
 			if mods.LNth(1).IsMapKey() {
 				c.df(",")
 			}
@@ -549,6 +616,7 @@ const (
 
 type Bool = Stack[bool]
 type Int = Stack[int]
+type Int64 = Stack[int64]
 type state struct {
 	name   string
 	method string
@@ -559,10 +627,13 @@ type state struct {
 	funcAlias bool
 	mapAlias  bool
 	generic   bool
-
-	path     Path
-	variadic Bool
-	pc       Int
+	isStruct  bool
+	arrayed   int
+	arrayLen  Int64
+	path      Path
+	variadic  Bool
+	pc        Int
+	tmp       Writer
 }
 
 func (s *state) reset() {
@@ -575,11 +646,18 @@ func (s *state) reset() {
 	s.funcAlias = false
 	s.mapAlias = false
 	s.generic = false
+	s.arrayed = 0
+	s.arrayLen = s.arrayLen.Clean()
 
 	s.pc = s.pc.Clean()
 	s.path = s.path.Clean()
 	s.variadic = s.variadic.Clean()
 
+}
+func (s *state) resetArrayed() {
+	if s.arrayed >= s.path.Len() {
+		s.arrayed = 0
+	}
 }
 func (s *state) pcsub() {
 	if s.pc.Empty() {
@@ -605,11 +683,55 @@ func (s *state) IsType() bool {
 }
 func (s *state) isTypeDefine(k Kind, mods Mods, seen Types) bool {
 	return s.IsType() &&
-		((k == KNamed && s.path.Last() == k && mods.Empty()) ||
-			(mods.Len() == 1 && len(seen) == 1 && mods.Last().IseNamedElt()))
+		((k == KNamed && s.path.Len() == 2) ||
+			(k == KStruct && s.path.Len() == 2) ||
+			(k == KInterface && s.path.Len() == 2) ||
+			(s.path.Len() == 2 && s.path.Last() == KNamed) ||
+			(k == KBasic && s.path.Len() > 2 && !slices.ContainsFunc(s.path[2:], func(kind Kind) bool {
+				return kind != KSlice && kind != KArray
+			})))
+}
+func (s *state) isTypeExtend(k Kind, mods Mods, seen Types) bool {
+	return s.IsType() &&
+		((k == KNamed && s.path.Len() == 3) ||
+			(k == KStruct && s.path.Len() == 3) ||
+			(k == KInterface && s.path.Len() == 3))
+}
+func (s *state) isTypeDefineExit(k Kind, mods Mods, seen Types) bool {
+	return s.IsType() &&
+		((k == KNamed && s.path.Len() == 2) ||
+			(k == KSlice && s.path.Len() == 3) ||
+			(k == KStruct && s.path.Len() == 3))
+
+}
+func (s *state) Enter(k Kind, mods Mods, seen Types) {
+	if debug {
+		log.Printf("ENTER[%s]\t%s:%s[%d]\tΔ%s\tΔ%s", k, s.name, anyOf(s.field, s.method, s.param), s.pc.Last(), mods, s.path)
+	}
+
+	(&s.path).PushSitu(k)
+
+}
+func (s *state) Exit(k Kind, mods Mods, seen Types) {
+	if debug {
+		log.Printf("EXIT[%s]\t%s:%s[%d]\tΔ%s\tΔ%s", k, s.name, anyOf(s.field, s.method, s.param), s.pc.Last(), mods, s.path)
+	}
+	//!! remove children
+	kx := s.path.LastIndex(k)
+	if kx == -1 {
+		return
+	}
+	s.path = s.path[:kx]
+
 }
 
 type context struct {
+	Functions     map[string]string
+	Structs       map[string]string
+	Interfaces    map[string]string
+	Constants     map[string]string
+	Alias         map[string]string
+	Variables     map[string]string
 	pkg           *packages.Package
 	uses          fn.HashSet[string]
 	imports       fn.HashSet[string]
@@ -624,40 +746,51 @@ type context struct {
 	state
 }
 
-func (c *context) decodeNamed(x *types.Named, f func(string, ...any) *context) {
-	if x.Obj().Name() == "error" {
-		c.use("error")
-		f("error")
-	} else if x.Obj().Pkg().Path() == c.pkg.Types.Path() {
-		f("%s", x.Obj().Name())
-	} else {
-		c.imported(x.Obj().Pkg().Path())
-		f("%s.%s", x.Obj().Pkg().Name(), x.Obj().Name())
+func (c *context) decodeNamed(i InspectorX, x *types.Named, f func(string, ...any) *context) bool {
+	if x.Obj().Exported() || x.Obj().Name() == "error" {
+		if x.Obj().Name() == "error" {
+			if c.pc.Len() > 0 {
+				c.use("error")
+				f("error")
+			} else {
+				c.use("GoError")
+				f("GoError")
+			}
+		} else if x.Obj().Pkg().Path() == c.pkg.Types.Path() {
+			f("%s", x.Obj().Name())
+		} else {
+			c.imported(x.Obj().Pkg().Path())
+			f("%s.%s", x.Obj().Pkg().Name(), x.Obj().Name())
+		}
+		return true
+	} else { //!! unexported type
+		is := i.Implements(x)
+		if len(is) > 0 {
+			slices.SortFunc(is, func(a, b Face) int {
+				return a.Interface.NumMethods() - b.Interface.NumMethods()
+			})
+			b := new(bytes.Buffer)
+			for _, face := range is {
+				if face.Pkg.Name() == c.pkg.Types.Name() {
+					if b.Len() > 0 {
+						b.WriteByte('&')
+					}
+					b.WriteString(face.Name)
+				}
+			}
+			f(b.String())
+		}
 	}
+	return false
 }
 
-func (s *state) Enter(k Kind, mods Mods, seen Types) {
-	if debug {
-		fmt.Printf("ENTER[%s]\t%s:%s[%d]\tΔ%s\tΔ%s", k, s.name, anyOf(s.field, s.method, s.param), s.pc.Last(), mods, s.path)
-	}
-
-	(&s.path).PushSitu(k)
-
-}
-func (s *state) Exit(k Kind, mods Mods, seen Types) {
-	if debug {
-		fmt.Printf("EXIT[%s]\t%s:%s[%d]\tΔ%s\tΔ%s", k, s.name, anyOf(s.field, s.method, s.param), s.pc.Last(), mods, s.path)
-	}
-	l := s.path.Last()
-	if l == 0 {
-		return
-	}
-	if l != k || l <= KTVar {
-		(&s.path).PopSitu()
-	}
-
-}
 func (c *context) init() {
+	c.Alias = map[string]string{}
+	c.Functions = map[string]string{}
+	c.Structs = map[string]string{}
+	c.Interfaces = map[string]string{}
+	c.Constants = map[string]string{}
+	c.Variables = map[string]string{}
 	c.uses = fn.HashSet[string]{}
 	c.imports = fn.HashSet[string]{}
 	c.extended = fn.HashSet[string]{}
@@ -669,7 +802,7 @@ func (c *context) init() {
 
 	c.FnTypeVisitor = ctxVisitor
 }
-func (c *context) identType(s string, array bool) string {
+func (c *context) identType(s string, array, ext bool) string {
 	s = strings.TrimPrefix(s, "untyped ")
 	switch s {
 	case "byte", "uint8":
@@ -696,19 +829,39 @@ func (c *context) identType(s string, array bool) string {
 	case "error":
 		if array {
 			c.uses.Add(s)
+			if ext {
+				return "Array<error>"
+			}
 			return s + "[]"
+		} else {
+			c.uses.Add(s)
+			return s
+		}
+	case "Pointer": //!! unsafe.Pointer is a Basic type
+		if array {
+			c.uses.Add(s)
+			if ext {
+				return "Array<Pointer>"
+			}
+			return "Pointer[]"
 		} else {
 			c.uses.Add(s)
 			return s
 		}
 	case "string":
 		if array {
+			if ext {
+				return "Array<string>"
+			}
 			return "string[]"
 		} else {
 			return "string"
 		}
 	case "any":
 		if array {
+			if ext {
+				return "Array<any>"
+			}
 			return "any[]"
 		} else {
 			return "any"
@@ -717,6 +870,9 @@ func (c *context) identType(s string, array bool) string {
 		if array {
 			if !unicode.IsUpper(rune(s[0])) {
 				c.uses.Add(s)
+			}
+			if ext {
+				return fmt.Sprintf("Array<%s>", s)
 			}
 			return fmt.Sprintf("%s[]", s)
 		} else {
@@ -795,6 +951,12 @@ func (c *context) faceIntercept() {
 			c.extends("io.Closer")
 		}
 	}
+	if !c.extended.Exists("error") &&
+		bytes.Contains(bin, []byte("error():string")) &&
+		c.name != "error" {
+		c.use("GoError")
+		c.extends("GoError")
+	}
 }
 
 func anyOf(an ...string) (r string) {
@@ -802,6 +964,14 @@ func anyOf(an ...string) (r string) {
 		if s != "" {
 			r += ":"
 			r += s
+		}
+	}
+	return
+}
+func firstOf(an ...string) (r string) {
+	for _, s := range an {
+		if s != "" {
+			return s
 		}
 	}
 	return
@@ -826,6 +996,7 @@ func Exists(path string) bool {
 }
 func (c *context) flush(g *Generator) (err error) {
 	x := GetWriter()
+	defer x.Free()
 	module := ""
 	cond := ""
 	if g.suffix != "" {
@@ -847,7 +1018,6 @@ func (c *context) flush(g *Generator) (err error) {
 	}
 	//!! gen d.ts
 	{
-
 		x.Format("// noinspection JSUnusedGlobalSymbols,SpellCheckingInspection").LF().
 			Format("// Code generated by define_gene; DO NOT EDIT.").LF().
 			Format("declare module '%s'{", module).LF()
@@ -877,6 +1047,11 @@ func (c *context) flush(g *Generator) (err error) {
 				Indent(1).Format("import type {%s} from 'go'", strings.Join(c.uses.Values(), ",")).LF()
 		}
 		x.Append(c.m)
+		//!! generate struct constructor
+		/*		for name := range c.Structs {
+				x.LF().Format("export function %s():%s", Safe(name), name)
+			}*/
+		//!! generate TypeId
 		x.Format("}").LF()
 		if g.print {
 			println(x.Buffer().String())
@@ -895,13 +1070,18 @@ func (c *context) flush(g *Generator) (err error) {
 		if cond != "" {
 			x.Format("//go:build %s", cond[1:])
 		}
+		maps := ""
+		if len(c.overrideEntry) > 0 {
+			maps = "\"maps\""
+		}
 		x.Format(`
 // Code generated by define_gene; DO NOT EDIT.
 package %[1]s
 import (
 	_ "embed"
 	"github.com/ZenLiuCN/engine"
-	"%[2]s"`, pkg, pkgPath)
+	%[3]s
+	"%[2]s"`, pkg, pkgPath, maps)
 		for s := range c.imports {
 			if strings.ContainsRune(s, '.') {
 				x.LF().Format("_ \"github.com/ZenLiuCN/engine/%s\"", strings.ReplaceAll(s, ".", "/"))
@@ -938,10 +1118,8 @@ func (S %[1]sModule) Exports() map[string]any {
 		if len(c.overrideEntry) > 0 {
 			x.Format(`
 func (e %sModule) ExportsWithEngine(e *Engine) map[string]any{
-	m:=make(map[string]any,len([1]sDeclared)+10)
-	for k,v:=range [1]sDeclared {
-		m[k]=v
-	}
+	m:=maps.Clone([1]sDeclared)
+
 `)
 			for k, v := range c.overrideEntry {
 				x.Indent(1).Format("m[\"%s\"] = v", k, v).LF()
@@ -1002,5 +1180,6 @@ func TestSimple%[2]s(t *testing.T) {
 			}
 		}
 	}
+	log.Println("generated", mod)
 	return
 }

@@ -18,11 +18,23 @@ declare module "go" {
     export type rune = int32
     export type float64 = number
     export type float32 = number
-    export type error = Error | undefined
+    export type float = number
+    export type error = GoError | undefined
+
+    export interface GoError extends Error {
+        error(): string
+    }
+
+    //Pointer is the unsafe.Pointer
+    export interface Pointer {
+    }
 
     export interface uintptr {
     }
 
+    export interface Slice<T> extends Array<T> {
+
+    }
 
     export type bool = boolean
     //A go pointer of type T
@@ -36,17 +48,67 @@ declare module "go" {
     //A go empty anonymous struct
     export type Nothing = Struct<{}>
 
-    export interface TypeInfo<T> {
-        toString(): string
+    export interface TypeKind extends Alias<int> {
+
+    }
+
+    const TypeKindInvalid: TypeKind
+    const TypeKindBool: TypeKind
+    const TypeKindInt: TypeKind
+    const TypeKindInt8: TypeKind
+    const TypeKindInt16: TypeKind
+    const TypeKindInt32: TypeKind
+    const TypeKindInt64: TypeKind
+    const TypeKindUint: TypeKind
+    const TypeKindUint8: TypeKind
+    const TypeKindUint16: TypeKind
+    const TypeKindUint32: TypeKind
+    const TypeKindUint64: TypeKind
+    const TypeKindUintptr: TypeKind
+    const TypeKindFloat32: TypeKind
+    const TypeKindFloat64: TypeKind
+    const TypeKindComplex64: TypeKind
+    const TypeKindComplex128: TypeKind
+    const TypeKindArray: TypeKind
+    const TypeKindChan: TypeKind
+    const TypeKindFunc: TypeKind
+    const TypeKindInterface: TypeKind
+    const TypeKindMap: TypeKind
+    const TypeKindPointer: TypeKind
+    const TypeKindSlice: TypeKind
+    const TypeKindString: TypeKind
+    const TypeKindStruct: TypeKind
+    const TypeKindUnsafePointer: TypeKind
+
+    export interface TypeId<T> {
+        valid(): boolean
+
+        kind(): TypeKind
+
+        identity(): string
+
+        string(): string
     }
 
     export interface TypeUsage<T> {
-        slice?: (len?: int, cap?: int) => T
+        id(): TypeId<T>
+
+        //get the slice creator
+        slice(): (cap?: int, len?: int) => Slice<T>
+
+        instance(): () => T
     }
 
-    export function typeOf<T>(c: T): TypeInfo<T>
+    export function elementOf<T, V>(c: TypeId<T>): TypeId<V> | undefined
 
-    export function usage<T>(t: TypeInfo<T>): TypeUsage<T> | undefined
+    export function typeOf<T>(c: T): TypeId<T>
+
+    export function sliceOf<T>(c: TypeId<T>): TypeId<Slice<T>>
+
+    export function mapOf<K, V>(c: TypeId<K>, v: TypeId<V>): TypeId<Map<K, V>>
+
+    export function usageOf<T>(c: TypeId<T>): TypeUsage<T> | undefined
+
 
     export function imag32(c: complex64): float32
 

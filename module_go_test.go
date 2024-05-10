@@ -102,25 +102,26 @@ func TestConvert(t *testing.T) {
 	fn.Panic1(vm.RunTs(
 		//language=typescript
 		`
+							
+				import {runesFromString, stringFromRunes, typeOf, usageOf} from 'go'
+							const r=runesFromString("123ABCΔ")
+							console.log(r);
+							console.log(stringFromRunes(r))
+							r.push(49)
+							console.log(stringFromRunes(r))
+							const type=typeOf(r)
+							console.log(type)
+							console.log(type.valid())
+							console.log(typeOf(null).valid())
+							const usage=usageOf(type)
+							console.log(usage.id().identity())
+							const slice=usage.slice()
+							console.log(slice)
+							slice.push(r)
+							console.log(slice)
 					
-		import {runesFromString, stringFromRunes, typeOf, usage} from 'go'
-		import type {rune} from 'go'
-					const r=runesFromString("123ABCΔ")
-					console.log(r);
-					console.log(stringFromRunes(r))
-					r.push(49)
-					console.log(stringFromRunes(r))
-					console.log(typeOf(r))
-					const slice:rune[]=usage(typeOf(r)).slice(2)
-					console.log(slice )
-					slice[0]=49
-					slice[1]=49
-					console.log(slice)
-					console.log(typeOf(slice),typeof slice)
-					console.log(stringFromRunes(slice))
-					console.log(slice.map(v=>v))
-					console.log(typeOf(slice.map(v=>v)))
-				`))
+						
+						`))
 
 	vm.Await()
 }

@@ -31,11 +31,49 @@ var (
 	exported = ast.IsExported
 )
 
+func TypeObjectVisit[X any](pkg *packages.Package, name string, o types.Object, visitor TypeVisitor[*TypeInspector[X], X], withUnexported bool) {
+	s := &TypeInspector[X]{WithUnexported: withUnexported}
+	s.Pkg = pkg
+	s.Visitor = visitor
+	switch e := o.(type) {
+	case *types.Const:
+		if s.Visitor.VisitConst(s, ENT, name, e, s.X) {
+			s.visitType(o.Type(), o, nil, nil)
+		}
+		s.Visitor.VisitConst(s, EXT, name, e, s.X)
+	case *types.Func:
+		if s.Visitor.VisitFunc(s, ENT, name, e, s.X) {
+			s.visitType(o.Type(), o, nil, nil)
+		}
+		s.Visitor.VisitFunc(s, EXT, name, e, s.X)
+	case *types.Var:
+		if s.Visitor.VisitVar(s, ENT, name, e, s.X) {
+			s.visitType(o.Type(), o, nil, nil)
+		}
+		s.Visitor.VisitVar(s, EXT, name, e, s.X)
+	case *types.TypeName:
+		if s.Visitor.VisitTypeName(s, ENT, name, e, s.X) {
+			s.visitType(o.Type(), o, nil, nil)
+		}
+		s.Visitor.VisitTypeName(s, EXT, name, e, s.X)
+	default:
+		debugf("%s => %T\n", name, e)
+	}
+}
+func TypeVisit[X any](pkg *packages.Package, o types.Object, p types.Type, visitor TypeVisitor[*TypeInspector[X], X], withUnexported bool) {
+	v := &TypeInspector[X]{WithUnexported: withUnexported}
+	v.Pkg = pkg
+	v.Visitor = visitor
+	v.visitType(p, o, nil, nil)
+}
 func (s *TypeInspector[X]) initialize(conf *packages.Config) {
 	if s.Visitor == nil {
 		s.Visitor = new(FnTypeVisitor[*TypeInspector[X], X])
 	}
-	conf.Mode |= packages.NeedTypes | packages.NeedTypesInfo
+	if conf != nil {
+		conf.Mode |= packages.NeedTypes | packages.NeedTypesInfo
+	}
+
 }
 func (s *TypeInspector[X]) LoadFaces() {
 	if s.Face == nil {
@@ -248,10 +286,15 @@ func (s *TypeInspector[X]) visitInterface(x *types.Interface, o types.Object, mo
 }
 func (s *TypeInspector[X]) visitInterfaceEmbedded(x *types.Interface, o types.Object, mods Mods, seen Types) {
 	for i, n := 0, x.NumEmbeddeds(); i < n; i++ {
-		m := x.EmbeddedType(i).(*types.Named)
-		if s.isExported(m.String()) {
-			s.visitNamed(m, o, append(mods, ModEmbedded), seen)
+		switch m := x.EmbeddedType(i).(type) {
+		case *types.Named:
+			if s.isExported(m.String()) {
+				s.visitNamed(m, o, append(mods, ModEmbedded), seen)
+			}
+		case *types.Union:
+			s.visitUnion(m, o, append(mods, ModEmbedded), seen)
 		}
+
 	}
 }
 
