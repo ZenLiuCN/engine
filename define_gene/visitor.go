@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	. "github.com/ZenLiuCN/engine/define_gene/internal"
 	"github.com/ZenLiuCN/fn"
+	. "github.com/ZenLiuCN/go-inspect"
 	"go/format"
 	"go/types"
 	"golang.org/x/tools/go/packages"
@@ -17,25 +17,9 @@ import (
 	"unicode"
 )
 
-func safe(s string, then func(string) string) string {
-	switch s {
-	case "New", "In", "Default", "Do", "For":
-		return s
-	case "new":
-		return "New"
-	case "class", "Class":
-		return "clazz"
-	default:
-		return then(s)
-	}
-}
-func Safe(s string) string {
-	return safe(s, fn.Identity[string])
-}
-func Camel(s string) string {
-	return safe(s, CamelCase)
-}
-
+var (
+	bytesError = []byte(",error]")
+)
 var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 	FnVisitConst: func(I InspectorX, d Dir, name string, e *types.Const, c *context) bool {
 		switch d {
@@ -51,9 +35,9 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 			}
 			if !c.typeAlias {
 				c.mi(1).mf("//%s", e.Val().String()).mn()
-				c.Constants[name] = e.String()
+				c.Constants[name] = e
 			} else {
-				c.Alias[name] = c.d.String()
+				c.AliasConst[name] = e
 			}
 			c.mi(1).mf("export const %s:", name)
 			c.declared()
@@ -76,7 +60,22 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 				return false
 			}
 			c.mi(1).mf("export function %s", Camel(name))
-			c.Functions[name] = e.String()
+			c.Functions[name] = e
+
+			if !c.errors {
+				b := c.d.Bytes()
+				if bytes.HasSuffix(b, bytesError) {
+					cnt := bytes.Count(b, []byte{','})
+					if cnt == 1 {
+						x := bytes.LastIndex(b, []byte{'['})
+						b = append(b[0:x], b[x+1:len(b)-len(bytesError)]...)
+						c.d.Reset()
+						c.d.Buffer().Write(b)
+					}
+
+				}
+
+			}
 			c.declared().mn()
 			c.addEntry(Camel(name), "%s.%s", c.pkg.Types.Name(), name)
 			c.reset()
@@ -96,14 +95,14 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 				return false
 			}
 			if c.typeAlias {
-				c.Alias[name] = c.d.String()
+				c.AliasType[name] = e
 				c.mi(1).mf("export type %s=%s", name, c.d.String()).mn()
 			} else {
 				c.mi(1).mf("export interface %s", name)
 				if c.isStruct {
-					c.Structs[name] = ""
+					c.Structs[name] = e
 				} else {
-					c.Interfaces[name] = ""
+					c.Interfaces[name] = e
 				}
 				c.faceIntercept()
 				if len(c.extended) > 0 {
@@ -130,7 +129,7 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 				c.reset()
 				return false
 			}
-			c.Variables[name] = c.d.String()
+			c.Variables[name] = e
 			c.mi(1).mf("export const %s:", name)
 			c.declared().mn()
 			c.addEntry(name, "%s.%s", c.pkg.Types.Name(), name)
@@ -371,7 +370,6 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 			defer c.Enter(KStruct, I.TypePath, seen)
 			switch {
 			case x.NumFields() == 0:
-
 				c.use("Nothing")
 				if c.path.Len() <= 2 {
 					c.use("Alias")
@@ -511,16 +509,19 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 			defer c.Enter(KInterface, I.TypePath, seen)
 			switch {
 			case c.isTypeDefine(KInterface, seen):
+				c.isStruct = false
 				return true
 			case c.isTypeExtend(KInterface, seen):
 				c.use("Proto")
 				c.extends("Proto<%s>", c.name)
+				if x.NumMethods() == 0 {
+					c.df("any") //!! any == interface{}
+				}
 				return false
 			default:
 				if x.NumMethods() == 0 {
 					c.df("any") //!! any == interface{}
 				}
-
 			}
 		case EXT:
 			defer c.Exit(KInterface, I.TypePath, seen)
@@ -561,7 +562,7 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 				c.typeAlias = true
 				c.decodeNamed(I, x, c.df)
 				return false
-			case c.IsType() && I.LNth(1) == KMEmbedded: //!! embedded for interface
+			case c.IsType() && I.LNth(2) == KMEmbedded: //!! embedded for interface
 				c.decodeNamed(I, x, c.extends)
 				return false
 			default:
@@ -603,6 +604,7 @@ type state struct {
 }
 
 func (s *state) reset() {
+	s.path.CleanSitu()
 	s.name = ""
 	s.method = ""
 	s.field = ""
@@ -612,11 +614,17 @@ func (s *state) reset() {
 	s.funcAlias = false
 	s.mapAlias = false
 	s.generic = false
+	s.isStruct = false
+
 	s.arrayed = 0
 	s.arrayLen = s.arrayLen.Clean()
-
-	s.pc = s.pc.Clean()
 	s.variadic = s.variadic.Clean()
+	s.pc = s.pc.Clean()
+
+	if s.tmp != nil {
+		s.tmp.Free()
+		s.tmp = nil
+	}
 
 }
 func (s *state) resetArrayed() {
@@ -670,7 +678,7 @@ func (s *state) isTypeDefineExit(k TypeKind, seen Types) bool {
 
 }
 func (s *state) Enter(k TypeKind, path TypePath, seen Types) {
-	if k == KVar {
+	if debug {
 		log.Printf("ENTER[%s]\t%s:%s[%d]\tΔ%v\tΔ%v", k, s.name, anyOf(s.field, s.method, s.param), s.pc.Last(), path, s.path)
 	}
 
@@ -678,7 +686,7 @@ func (s *state) Enter(k TypeKind, path TypePath, seen Types) {
 
 }
 func (s *state) Exit(k TypeKind, path TypePath, seen Types) {
-	if k == KVar {
+	if debug {
 		log.Printf("EXIT[%s]\t%s:%s[%d]\tΔ%v\tΔ%v", k, s.name, anyOf(s.field, s.method, s.param), s.pc.Last(), path, s.path)
 	}
 	//!! remove children
@@ -691,12 +699,13 @@ func (s *state) Exit(k TypeKind, path TypePath, seen Types) {
 }
 
 type context struct {
-	Functions     map[string]string
-	Structs       map[string]string
-	Interfaces    map[string]string
-	Constants     map[string]string
-	Alias         map[string]string
-	Variables     map[string]string
+	Functions     map[string]*types.Func
+	Structs       map[string]*types.TypeName
+	Interfaces    map[string]*types.TypeName
+	Constants     map[string]*types.Const
+	AliasConst    map[string]*types.Const
+	AliasType     map[string]*types.TypeName
+	Variables     map[string]*types.Var
 	pkg           *packages.Package
 	uses          fn.HashSet[string]
 	imports       fn.HashSet[string]
@@ -709,6 +718,7 @@ type context struct {
 	FnTypeVisitor[*TypeInspector[*context], *context]
 
 	state
+	errors bool //reduce function end with error
 }
 
 func (c *context) decodeNamed(i InspectorX, x *types.Named, f func(string, ...any) *context) bool {
@@ -750,12 +760,14 @@ func (c *context) decodeNamed(i InspectorX, x *types.Named, f func(string, ...an
 }
 
 func (c *context) init() {
-	c.Alias = map[string]string{}
-	c.Functions = map[string]string{}
-	c.Structs = map[string]string{}
-	c.Interfaces = map[string]string{}
-	c.Constants = map[string]string{}
-	c.Variables = map[string]string{}
+	c.Functions = map[string]*types.Func{}
+	c.Structs = map[string]*types.TypeName{}
+	c.Interfaces = map[string]*types.TypeName{}
+	c.Constants = map[string]*types.Const{}
+	c.AliasConst = map[string]*types.Const{}
+	c.AliasType = map[string]*types.TypeName{}
+	c.Variables = map[string]*types.Var{}
+
 	c.uses = fn.HashSet[string]{}
 	c.imports = fn.HashSet[string]{}
 	c.extended = fn.HashSet[string]{}
@@ -923,42 +935,6 @@ func (c *context) faceIntercept() {
 		c.extends("GoError")
 	}
 }
-
-func anyOf(an ...string) (r string) {
-	for _, s := range an {
-		if s != "" {
-			r += ":"
-			r += s
-		}
-	}
-	return
-}
-func firstOf(an ...string) (r string) {
-	for _, s := range an {
-		if s != "" {
-			return s
-		}
-	}
-	return
-}
-func write(data []byte, p string, override bool) (err error) {
-	if !override && Exists(p) {
-		log.Printf("skip exists file '%s'", p)
-		return
-	}
-	err = os.MkdirAll(filepath.Dir(p), os.ModePerm)
-	if err != nil {
-		return
-	}
-	return os.WriteFile(p, data, os.ModePerm)
-}
-func Exists(path string) bool {
-	_, err := os.Stat(path)
-	if err != nil && !errors.Is(err, os.ErrNotExist) {
-		panic(err)
-	}
-	return err == nil
-}
 func (c *context) flush(g *Generator) (err error) {
 	x := GetWriter()
 	defer x.Free()
@@ -968,13 +944,17 @@ func (c *context) flush(g *Generator) (err error) {
 		cond = "_" + g.suffix
 	}
 	pkgPath := c.pkg.Types.Path()
+	filePath := pkgPath
+	if strings.IndexByte(filePath, '.') >= 0 {
+		filePath = strings.ReplaceAll(filePath, ".", "/")
+	}
 	pkg := c.pkg.Types.Name()
 	dts := strings.Join(fn.SliceMapping(strings.Split(strings.ReplaceAll(c.pkg.Types.Path(), ".", "/"), "/"), strings.ToLower), "_") + cond + ".d.ts"
 	mod := dts[:len(dts)-5] + ".go"
 	modTest := dts[:len(dts)-5] + "_test.go"
-	name := strings.Join(fn.SliceMapping(strings.Split(c.pkg.Types.Path(), "/"), PascalCase), "")
+	goMod := strings.Join(fn.SliceMapping(strings.Split(strings.ReplaceAll(c.pkg.Types.Path(), ".", "/"), "/"), PascalCase), "")
 	if cond != "" {
-		name += cond[1:]
+		goMod += cond[1:]
 	}
 	if strings.ContainsRune(c.pkg.Types.Path(), '.') {
 		module = strings.ReplaceAll(c.pkg.Types.Path(), ".", "/")
@@ -1013,15 +993,20 @@ func (c *context) flush(g *Generator) (err error) {
 		}
 		x.Append(c.m)
 		//!! generate struct constructor
-		/*		for name := range c.Structs {
-				x.LF().Format("export function %s():%s", Safe(name), name)
-			}*/
+		for name := range c.Structs {
+			if strings.HasSuffix(name, "Err") || strings.HasSuffix(name, "Error") || strings.HasPrefix(name, "Err") || strings.HasPrefix(name, "Error") {
+				continue
+			}
+			x.LF().Format("export function empty%s():%s", Safe(name), name)
+			x.LF().Format("export function ref%s():Ref<%s>", Safe(name), name)
+			x.LF().Format("export function refOf%s(x:%[2]s):Ref<%[2]s>", Safe(name), name)
+		}
 		//!! generate TypeId
 		x.Format("}").LF()
 		if g.print {
 			println(x.Buffer().String())
 		} else {
-			p := filepath.Join(g.out, pkgPath, dts)
+			p := filepath.Join(g.out, filePath, dts)
 			if err = write(x.Buffer().Bytes(), p, g.over); err != nil {
 				return
 			}
@@ -1059,9 +1044,18 @@ import (
 var (
 	//go:embed %[1]s
 	%[2]sDefine []byte
-	%[2]sDeclared = map[string]any{`, dts, name).LF()
+	%[2]sDeclared = map[string]any{`, dts, goMod).LF()
 		for k, v := range c.entry {
 			x.Indent(2).Format("\"%s\" : %s ,", k, v).LF()
+		}
+		for name := range c.Structs {
+			if strings.HasSuffix(name, "Err") || strings.HasSuffix(name, "Error") || strings.HasPrefix(name, "Err") || strings.HasPrefix(name, "Error") {
+				continue
+			}
+			t := fmt.Sprintf("%s.%s", c.pkg.Types.Name(), name)
+			x.LF().Format("\"empty%s\":func() (v %[2]s){\n\treturn v\n},", Safe(name), t)
+			x.LF().Format("\"ref%s\":func() *%[2]s{ \n\t var x %[2]s\n\treturn &x\n},", Safe(name), t)
+			x.LF().Format("\"refOf%s\":func(x %[2]s) *%[2]s{ \n\treturn &x\n},", Safe(name), t)
 		}
 		x.Format("\t}\n)")
 		x.Format(`
@@ -1079,7 +1073,7 @@ func (S %[1]sModule) TypeDefine() []byte {
 func (S %[1]sModule) Exports() map[string]any {
 	return %[1]sDeclared
 }
-`, name, module)
+`, goMod, module)
 		if len(c.overrideEntry) > 0 {
 			x.Format(`
 func (e %sModule) ExportsWithEngine(e *Engine) map[string]any{
@@ -1102,7 +1096,7 @@ func (e %sModule) ExportsWithEngine(e *Engine) map[string]any{
 		if g.print {
 			println(string(b))
 		} else {
-			p := filepath.Join(g.out, pkgPath, mod)
+			p := filepath.Join(g.out, filePath, mod)
 			if err = write(b, p, g.over); err != nil {
 				return
 			}
@@ -1129,8 +1123,8 @@ func TestSimple%[2]s(t *testing.T) {
 }
 
 `, pkg, cond, fmt.Sprintf("`"+`
-		import * as time from '%s'
-		`+"`", module))
+		import * as %s from '%s'
+		`+"`", c.pkg.Types.Name(), module))
 		b, err = format.Source(x.Buffer().Bytes())
 		if err != nil {
 			log.Printf("generated go test source have some error: %s", err)
@@ -1139,7 +1133,7 @@ func TestSimple%[2]s(t *testing.T) {
 		if g.print {
 			println(string(b))
 		} else {
-			p := filepath.Join(g.out, pkgPath, modTest)
+			p := filepath.Join(g.out, filePath, modTest)
 			if err = write(b, p, g.overTest); err != nil {
 				return
 			}
@@ -1147,4 +1141,58 @@ func TestSimple%[2]s(t *testing.T) {
 	}
 	log.Println("generated", mod)
 	return
+}
+func anyOf(an ...string) (r string) {
+	for _, s := range an {
+		if s != "" {
+			r += ":"
+			r += s
+		}
+	}
+	return
+}
+func firstOf(an ...string) (r string) {
+	for _, s := range an {
+		if s != "" {
+			return s
+		}
+	}
+	return
+}
+func write(data []byte, p string, override bool) (err error) {
+	if !override && Exists(p) {
+		log.Printf("skip exists file '%s'", p)
+		return
+	}
+	err = os.MkdirAll(filepath.Dir(p), os.ModePerm)
+	if err != nil {
+		return
+	}
+	return os.WriteFile(p, data, os.ModePerm)
+}
+func Exists(path string) bool {
+	_, err := os.Stat(path)
+	if err != nil && !errors.Is(err, os.ErrNotExist) {
+		panic(err)
+	}
+	return err == nil
+}
+
+func safe(s string, then func(string) string) string {
+	switch s {
+	case "New", "In", "Default", "Do", "For", "With":
+		return s
+	case "in", "do", "new":
+		return strings.ToUpper(s[0:1]) + s[1:]
+	case "class", "Class":
+		return "clazz"
+	default:
+		return then(s)
+	}
+}
+func Safe(s string) string {
+	return safe(s, fn.Identity[string])
+}
+func Camel(s string) string {
+	return safe(s, CamelCase)
 }

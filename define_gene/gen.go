@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	. "github.com/ZenLiuCN/engine/define_gene/internal"
+	. "github.com/ZenLiuCN/go-inspect"
 	"golang.org/x/tools/go/packages"
 	"os"
 	"strings"
@@ -21,6 +21,7 @@ type Generator struct {
 	print    bool
 	trace    bool
 	env      []string
+	errors   bool
 }
 
 func (g *Generator) generate() (err error) {
@@ -34,6 +35,7 @@ func (g *Generator) generate() (err error) {
 		flags = append(flags, fmt.Sprintf("-tags=%s", strings.Join(g.tags, " ")))
 	}
 	c := new(context)
+	c.errors = g.errors
 	c.init()
 	ip := NewTypeInspector[*context](false)
 	ip.Inspector.PopEach = true

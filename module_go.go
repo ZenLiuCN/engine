@@ -14,50 +14,7 @@ import (
 var (
 	//go:embed module_go.d.ts
 	goDefine []byte
-)
-
-type GoModule struct {
-}
-
-func (c GoModule) Identity() string {
-	return "go"
-}
-
-func (c GoModule) TypeDefine() []byte {
-	return goDefine
-}
-
-func (c GoModule) Exports() map[string]any {
-	return goMap
-}
-func (c GoModule) ExportsWithEngine(e *Engine) map[string]any {
-	m := maps.Clone(goMap)
-	ctor := e.ToConstructorRecover(func(v []goja.Value) any {
-		n := len(v)
-		if n == 0 {
-			return Text("")
-		} else if n != 1 {
-			panic("bad argument")
-		}
-		switch x := v[0].Export().(type) {
-		case string:
-			return Text(x)
-		case []byte:
-			return Text(x)
-		case *goja.ArrayBuffer:
-			return Text(x.Bytes())
-		case []rune:
-			return Text(x)
-		default:
-			panic("bad argument")
-		}
-	})
-	m["Text"] = ctor
-	return m
-}
-
-var (
-	goMap = map[string]any{
+	goMap    = map[string]any{
 		"intToString": func(value goja.Value, v []string) map[string]any {
 			m := value.Export().(map[string]any)
 			for _, s := range v {
@@ -165,6 +122,46 @@ var (
 		"TypeKindUnsafePointer": reflect.UnsafePointer,
 	}
 )
+
+type GoModule struct {
+}
+
+func (c GoModule) Identity() string {
+	return "go"
+}
+
+func (c GoModule) TypeDefine() []byte {
+	return goDefine
+}
+
+func (c GoModule) Exports() map[string]any {
+	return goMap
+}
+func (c GoModule) ExportsWithEngine(e *Engine) map[string]any {
+	m := maps.Clone(goMap)
+	ctor := e.ToConstructorRecover(func(v []goja.Value) any {
+		n := len(v)
+		if n == 0 {
+			return Text("")
+		} else if n != 1 {
+			panic("bad argument")
+		}
+		switch x := v[0].Export().(type) {
+		case string:
+			return Text(x)
+		case []byte:
+			return Text(x)
+		case *goja.ArrayBuffer:
+			return Text(x.Bytes())
+		case []rune:
+			return Text(x)
+		default:
+			panic("bad argument")
+		}
+	})
+	m["Text"] = ctor
+	return m
+}
 
 type Text string
 

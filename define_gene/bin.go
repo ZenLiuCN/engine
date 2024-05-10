@@ -34,6 +34,7 @@ func main() {
 			Usage:   "debug generator",
 			Aliases: []string{"d"},
 		},
+
 		&cli.StringSliceFlag{
 			Name:    "env",
 			Usage:   "envs to apply",
@@ -58,6 +59,11 @@ func main() {
 			Name:    "rewrite",
 			Usage:   "rewrite exist file",
 			Aliases: []string{"r"},
+		},
+		&cli.BoolFlag{
+			Name:    "errors",
+			Usage:   "generate with error as secondary result",
+			Aliases: []string{"s"},
 		},
 		&cli.BoolFlag{
 			Name:    "test",
@@ -105,6 +111,7 @@ func action(c *cli.Context) error {
 		g.trace = c.Bool("trace")
 		g.suffix = c.String("cond")
 		g.env = c.StringSlice("env")
+		g.errors = c.Bool("errors")
 		if c.Bool("debug") {
 			g.log = log.Printf
 		}

@@ -1,9 +1,11 @@
 #!/bin/sh
-#go run . -g=wasm -ro ../golang "${GOROOT}/src/syscall"
 goRun(){
   go run . -ro ../golang ${GOROOT}/src/$*
 }
-
+go run . -g=wasm -ro ../golang "${GOROOT}/src/syscall" &&\
+GOOS=windows go run . -c=windows -ro ../golang "${GOROOT}/src/syscall" &&\
+go run . -c=linux -e=GOOS=linux -ro ../golang "${GOROOT}/src/syscall" &&\
+go run . -c=darwin -e=GOOS=darwin -ro ../golang "${GOROOT}/src/syscall"
 
 goRun archive/tar
 goRun archive/zip
@@ -116,7 +118,7 @@ goRun reflect
 goRun regexp
 goRun regexp/syntax
 #goRun slices
-goRun sort
+#goRun sort
 goRun strconv
 goRun strings
 goRun sync
