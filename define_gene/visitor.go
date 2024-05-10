@@ -957,7 +957,7 @@ func (c *context) flush(g *Generator) (err error) {
 		goMod += cond[1:]
 	}
 	if strings.ContainsRune(c.pkg.Types.Path(), '.') {
-		module = strings.ReplaceAll(c.pkg.Types.Path(), ".", "/")
+		module = c.pkg.Types.Path()
 	} else {
 		module = "golang/" + c.pkg.Types.Path()
 	}
@@ -1034,7 +1034,7 @@ import (
 	"%[2]s"`, pkg, pkgPath, maps)
 		for s := range c.imports {
 			if strings.ContainsRune(s, '.') {
-				x.LF().Format("_ \"github.com/ZenLiuCN/engine/%s\"", strings.ReplaceAll(s, ".", "/"))
+				x.LF().Format("_ \"github.com/ZenLiuCN/engine/modules/%s\"", strings.ReplaceAll(s, ".", "/"))
 			} else if s != "go" {
 				x.LF().Format("_ \"github.com/ZenLiuCN/engine/golang/%s\"", s)
 			}

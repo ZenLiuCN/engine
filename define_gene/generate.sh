@@ -2,6 +2,7 @@
 goRun(){
   go run . -ro ../golang ${GOROOT}/src/$*
 }
+
 go run . -g=wasm -ro ../golang "${GOROOT}/src/syscall" &&\
 GOOS=windows go run . -c=windows -ro ../golang "${GOROOT}/src/syscall" &&\
 go run . -c=linux -e=GOOS=linux -ro ../golang "${GOROOT}/src/syscall" &&\
@@ -82,7 +83,7 @@ goRun io/fs
 #goRun io/ioutil
 goRun log
 goRun log/slog
-goRun log/syslog
+#goRun log/syslog
 #goRun maps
 goRun math
 goRun math/big
@@ -118,7 +119,7 @@ goRun reflect
 goRun regexp
 goRun regexp/syntax
 #goRun slices
-#goRun sort
+goRun sort
 goRun strconv
 goRun strings
 goRun sync
