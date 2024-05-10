@@ -1228,8 +1228,8 @@ declare module 'golang/syscall'{
 	//6
 	export const PROV_SSL:int
 	export function pipe(p:Handle[]):error
-	export interface Pointer{
-Ref<Nothing>	}
+	export interface Pointer extends Ref<Nothing>{
+	}
 	export function postQueuedCompletionStatus(cphandle:Handle,qty:uint32,key:uint32,overlapped:Ref<Overlapped>):error
 	export interface Proc extends Struct<Proc>{
 		dll:Ref<DLL>
