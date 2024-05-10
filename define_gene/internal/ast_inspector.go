@@ -61,7 +61,6 @@ func (a *AstInspector[X]) visitObject(name string, o *ast.Object) {
 }
 
 func (a *AstInspector[X]) visitObjects(name string, o *ast.Object) {
-	mods := Mods{ModeNamedElt}
 	switch x := o.Type.(type) {
 	case *ast.Field:
 		if !a.WithUnexported {
@@ -76,10 +75,10 @@ func (a *AstInspector[X]) visitObjects(name string, o *ast.Object) {
 			}
 		}
 
-		if a.Visitor.VisitFieldDecl(a, ENT, name, o, x, mods, Nodes{}, a.X) {
-			a.visitTypeExpr(x.Type, o, mods, Nodes{x})
+		if a.Visitor.VisitFieldDecl(a, ENT, name, o, x, Nodes{}, a.X) {
+			a.visitTypeExpr(x.Type, o, Nodes{x})
 		}
-		a.Visitor.VisitFieldDecl(a, EXT, name, o, x, mods, Nodes{x}, a.X)
+		a.Visitor.VisitFieldDecl(a, EXT, name, o, x, Nodes{x}, a.X)
 	case *ast.ValueSpec:
 		if !a.WithUnexported {
 			n := 0
@@ -92,31 +91,26 @@ func (a *AstInspector[X]) visitObjects(name string, o *ast.Object) {
 				return
 			}
 		}
-		if a.Visitor.VisitValueDecl(a, ENT, name, o, x, mods, Nodes{}, a.X) {
-			a.visitTypeExpr(x.Type, o, mods, Nodes{x})
+		if a.Visitor.VisitValueDecl(a, ENT, name, o, x, Nodes{}, a.X) {
+			a.visitTypeExpr(x.Type, o, Nodes{x})
 		}
-		a.Visitor.VisitValueDecl(a, EXT, name, o, x, mods, Nodes{x}, a.X)
+		a.Visitor.VisitValueDecl(a, EXT, name, o, x, Nodes{x}, a.X)
 	case *ast.TypeSpec:
 		if !a.isExported(x.Name.Name) {
 			return
 		}
-		if a.Visitor.VisitTypeDecl(a, ENT, name, o, x, mods, Nodes{}, a.X) {
-			a.visitTypeExpr(x.Type, o, mods, Nodes{x})
+		if a.Visitor.VisitTypeDecl(a, ENT, name, o, x, Nodes{}, a.X) {
+			a.visitTypeExpr(x.Type, o, Nodes{x})
 		}
-		a.Visitor.VisitTypeDecl(a, EXT, name, o, x, mods, Nodes{x}, a.X)
+		a.Visitor.VisitTypeDecl(a, EXT, name, o, x, Nodes{x}, a.X)
 	case *ast.FuncDecl:
 		if !a.isExported(x.Name.Name) {
 			return
 		}
-		if x.Recv.NumFields() > 0 {
-			mods = append(mods, ModMethod)
-		} else {
-			mods = append(mods, ModFunction)
+		if a.Visitor.VisitFuncDecl(a, ENT, name, o, x, Nodes{}, a.X) {
+			a.visitTypeExpr(x.Type, o, Nodes{x})
 		}
-		if a.Visitor.VisitFuncDecl(a, ENT, name, o, x, mods, Nodes{}, a.X) {
-			a.visitTypeExpr(x.Type, o, mods, Nodes{x})
-		}
-		a.Visitor.VisitFuncDecl(a, EXT, name, o, x, mods, Nodes{x}, a.X)
+		a.Visitor.VisitFuncDecl(a, EXT, name, o, x, Nodes{x}, a.X)
 	case *ast.LabeledStmt, *ast.AssignStmt, *ast.Scope, nil:
 		tracef(0, "ignore %s %T", o.Name, o.Type)
 	default:
@@ -124,90 +118,90 @@ func (a *AstInspector[X]) visitObjects(name string, o *ast.Object) {
 	}
 }
 
-func (a *AstInspector[X]) visitTypeExpr(expr ast.Expr, o *ast.Object, mods Mods, nodes Nodes) {
+func (a *AstInspector[X]) visitTypeExpr(expr ast.Expr, o *ast.Object, nodes Nodes) {
 	switch x := expr.(type) {
 	case *ast.Ident:
-		if a.Visitor.VisitIdent(a, ENT, o, x, mods, nodes, a.X) {
+		if a.Visitor.VisitIdent(a, ENT, o, x, nodes, a.X) {
 		}
-		a.Visitor.VisitIdent(a, EXT, o, x, mods, append(nodes, x), a.X)
+		a.Visitor.VisitIdent(a, EXT, o, x, append(nodes, x), a.X)
 	case *ast.FuncType:
-		if a.Visitor.VisitFuncType(a, ENT, o, x, mods, nodes, a.X) {
-			if a.Visitor.VisitFieldList(a, ENT, o, x.TypeParams, append(mods, ModTypeParam), append(nodes, x), a.X) {
-				a.visitFieldList(x.TypeParams, o, mods, append(nodes, x, x.TypeParams), ModTypeParam)
-				a.Visitor.VisitFieldList(a, EXT, o, x.TypeParams, append(mods, ModTypeParam), append(nodes, x), a.X)
+		if a.Visitor.VisitFuncType(a, ENT, o, x, nodes, a.X) {
+			if a.Visitor.VisitFieldList(a, ENT, o, x.TypeParams, append(nodes, x), a.X) {
+				a.visitFieldList(x.TypeParams, o, append(nodes, x, x.TypeParams))
+				a.Visitor.VisitFieldList(a, EXT, o, x.TypeParams, append(nodes, x), a.X)
 			}
-			if a.Visitor.VisitFieldList(a, ENT, o, x.Params, append(mods, ModParam), append(nodes, x), a.X) {
-				a.visitFieldList(x.Params, o, mods, append(nodes, x, x.Params), ModParam)
-				a.Visitor.VisitFieldList(a, ENT, o, x.Params, append(mods, ModParam), append(nodes, x), a.X)
+			if a.Visitor.VisitFieldList(a, ENT, o, x.Params, append(nodes, x), a.X) {
+				a.visitFieldList(x.Params, o, append(nodes, x, x.Params))
+				a.Visitor.VisitFieldList(a, ENT, o, x.Params, append(nodes, x), a.X)
 			}
-			if a.Visitor.VisitFieldList(a, EXT, o, x.Results, append(mods, ModResult), append(nodes, x), a.X) {
-				a.visitFieldList(x.Results, o, mods, append(nodes, x, x.Results), ModResult)
-				a.Visitor.VisitFieldList(a, ENT, o, x.Results, append(mods, ModResult), append(nodes, x), a.X)
+			if a.Visitor.VisitFieldList(a, EXT, o, x.Results, append(nodes, x), a.X) {
+				a.visitFieldList(x.Results, o, append(nodes, x, x.Results))
+				a.Visitor.VisitFieldList(a, ENT, o, x.Results, append(nodes, x), a.X)
 			}
 		}
-		a.Visitor.VisitFuncType(a, EXT, o, x, mods, append(nodes, x), a.X)
+		a.Visitor.VisitFuncType(a, EXT, o, x, append(nodes, x), a.X)
 	case *ast.StructType:
-		if a.Visitor.VisitStructType(a, ENT, o, x, mods, nodes, a.X) {
-			a.visitFieldList(x.Fields, o, mods, append(nodes, x), ModField)
+		if a.Visitor.VisitStructType(a, ENT, o, x, nodes, a.X) {
+			a.visitFieldList(x.Fields, o, append(nodes, x))
 		}
-		a.Visitor.VisitStructType(a, EXT, o, x, mods, nodes, a.X)
+		a.Visitor.VisitStructType(a, EXT, o, x, nodes, a.X)
 	case *ast.InterfaceType:
-		if a.Visitor.VisitInterfaceType(a, ENT, o, x, mods, nodes, a.X) {
-			a.visitFieldList(x.Methods, o, mods, append(nodes, x), ModMethod)
+		if a.Visitor.VisitInterfaceType(a, ENT, o, x, nodes, a.X) {
+			a.visitFieldList(x.Methods, o, append(nodes, x))
 		}
-		a.Visitor.VisitInterfaceType(a, EXT, o, x, mods, nodes, a.X)
+		a.Visitor.VisitInterfaceType(a, EXT, o, x, nodes, a.X)
 	case *ast.ArrayType:
-		if a.Visitor.VisitArrayType(a, ENT, o, x, mods, nodes, a.X) {
+		if a.Visitor.VisitArrayType(a, ENT, o, x, nodes, a.X) {
 			if x.Len == nil {
-				a.visitTypeExpr(x.Elt, o, append(mods, ModSliceElt), append(nodes, x))
+				a.visitTypeExpr(x.Elt, o, append(nodes, x))
 			} else {
-				a.visitTypeExpr(x.Elt, o, append(mods, ModArrayElt), append(nodes, x))
+				a.visitTypeExpr(x.Elt, o, append(nodes, x))
 			}
 		}
-		a.Visitor.VisitArrayType(a, EXT, o, x, mods, nodes, a.X)
+		a.Visitor.VisitArrayType(a, EXT, o, x, nodes, a.X)
 	case *ast.MapType:
-		if a.Visitor.VisitMapType(a, ENT, o, x, mods, nodes, a.X) {
-			a.visitTypeExpr(x.Key, o, append(mods, ModMapKey), append(nodes, x))
-			a.visitTypeExpr(x.Value, o, append(mods, ModMapValue), append(nodes, x))
+		if a.Visitor.VisitMapType(a, ENT, o, x, nodes, a.X) {
+			a.visitTypeExpr(x.Key, o, append(nodes, x))
+			a.visitTypeExpr(x.Value, o, append(nodes, x))
 		}
-		a.Visitor.VisitMapType(a, EXT, o, x, mods, nodes, a.X)
+		a.Visitor.VisitMapType(a, EXT, o, x, nodes, a.X)
 	case *ast.ChanType:
-		if a.Visitor.VisitChanType(a, ENT, o, x, mods, nodes, a.X) {
-			a.visitTypeExpr(x.Value, o, append(mods, ModChanElt), append(nodes, x))
+		if a.Visitor.VisitChanType(a, ENT, o, x, nodes, a.X) {
+			a.visitTypeExpr(x.Value, o, append(nodes, x))
 		}
-		a.Visitor.VisitChanType(a, EXT, o, x, mods, nodes, a.X)
+		a.Visitor.VisitChanType(a, EXT, o, x, nodes, a.X)
 	case *ast.StarExpr:
-		if a.Visitor.VisitStarExpr(a, ENT, o, x, mods, nodes, a.X) {
-			a.visitTypeExpr(x.X, o, append(mods, ModPointerElt), append(nodes, x))
+		if a.Visitor.VisitStarExpr(a, ENT, o, x, nodes, a.X) {
+			a.visitTypeExpr(x.X, o, append(nodes, x))
 		}
-		a.Visitor.VisitStarExpr(a, EXT, o, x, mods, nodes, a.X)
+		a.Visitor.VisitStarExpr(a, EXT, o, x, nodes, a.X)
 	case *ast.SelectorExpr:
-		if a.Visitor.VisitSelectorExpr(a, ENT, o, x, mods, nodes, a.X) {
-			a.visitTypeExpr(x.X, o, append(mods, ModSelect), append(nodes, x))
+		if a.Visitor.VisitSelectorExpr(a, ENT, o, x, nodes, a.X) {
+			a.visitTypeExpr(x.X, o, append(nodes, x))
 		}
-		a.Visitor.VisitSelectorExpr(a, EXT, o, x, mods, nodes, a.X)
+		a.Visitor.VisitSelectorExpr(a, EXT, o, x, nodes, a.X)
 
 	case *ast.BasicLit:
-		if a.Visitor.VisitBasicLit(a, ENT, o, x, mods, nodes, a.X) {
+		if a.Visitor.VisitBasicLit(a, ENT, o, x, nodes, a.X) {
 
 		}
-		a.Visitor.VisitBasicLit(a, EXT, o, x, mods, nodes, a.X)
+		a.Visitor.VisitBasicLit(a, EXT, o, x, nodes, a.X)
 	case *ast.Ellipsis:
-		if a.Visitor.VisitEllipsis(a, ENT, o, x, mods, nodes, a.X) {
-			a.visitTypeExpr(x.Elt, o, append(mods, ModEllipsis), append(nodes, x))
+		if a.Visitor.VisitEllipsis(a, ENT, o, x, nodes, a.X) {
+			a.visitTypeExpr(x.Elt, o, append(nodes, x))
 		}
-		a.Visitor.VisitEllipsis(a, EXT, o, x, mods, nodes, a.X)
+		a.Visitor.VisitEllipsis(a, EXT, o, x, nodes, a.X)
 	case *ast.UnaryExpr:
-		if a.Visitor.VisitUnaryExpr(a, ENT, o, x, mods, nodes, a.X) {
-			a.visitTypeExpr(x.X, o, append(mods, ModOperate), append(nodes, x))
+		if a.Visitor.VisitUnaryExpr(a, ENT, o, x, nodes, a.X) {
+			a.visitTypeExpr(x.X, o, append(nodes, x))
 		}
-		a.Visitor.VisitUnaryExpr(a, EXT, o, x, mods, nodes, a.X)
+		a.Visitor.VisitUnaryExpr(a, EXT, o, x, nodes, a.X)
 	case *ast.BinaryExpr:
-		if a.Visitor.VisitBinaryExpr(a, ENT, o, x, mods, nodes, a.X) {
-			a.visitTypeExpr(x.X, o, append(mods, ModOperate, ModOpLeft), append(nodes, x))
-			a.visitTypeExpr(x.Y, o, append(mods, ModOperate, ModOpRight), append(nodes, x))
+		if a.Visitor.VisitBinaryExpr(a, ENT, o, x, nodes, a.X) {
+			a.visitTypeExpr(x.X, o, append(nodes, x))
+			a.visitTypeExpr(x.Y, o, append(nodes, x))
 		}
-		a.Visitor.VisitBinaryExpr(a, EXT, o, x, mods, nodes, a.X)
+		a.Visitor.VisitBinaryExpr(a, EXT, o, x, nodes, a.X)
 	case *ast.SliceExpr,
 		*ast.IndexExpr,
 		*ast.CallExpr,
@@ -223,16 +217,16 @@ func (a *AstInspector[X]) visitTypeExpr(expr ast.Expr, o *ast.Object, mods Mods,
 	}
 }
 
-func (a *AstInspector[X]) visitFieldList(params *ast.FieldList, o *ast.Object, mods Mods, nodes Nodes, mod Mod) {
+func (a *AstInspector[X]) visitFieldList(params *ast.FieldList, o *ast.Object, nodes Nodes) {
 	if params.NumFields() == 0 {
 		return
 	}
 	lst := params.List
 	n := len(lst)
-	mods = append(mods, ModTuple)
 	for i := 0; i < n; i++ {
 		x := lst[n]
-		if mod == ModField {
+		if len(nodes) > 0 && (IsNode[*ast.StructType](nodes[len(nodes)-1])) {
+
 			if len(x.Names) > 0 {
 				c := 0
 				for _, name := range x.Names {
@@ -245,9 +239,9 @@ func (a *AstInspector[X]) visitFieldList(params *ast.FieldList, o *ast.Object, m
 				}
 			}
 		}
-		if a.Visitor.VisitField(a, ENT, o, x, mods, nodes, a.X) {
-			a.visitTypeExpr(x.Type, o, append(mods, mod), append(nodes, x))
+		if a.Visitor.VisitField(a, ENT, o, x, nodes, a.X) {
+			a.visitTypeExpr(x.Type, o, append(nodes, x))
 		}
-		a.Visitor.VisitField(a, EXT, o, x, mods, nodes, a.X)
+		a.Visitor.VisitField(a, EXT, o, x, nodes, a.X)
 	}
 }

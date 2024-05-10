@@ -28,6 +28,28 @@ func (s Stack[T]) Last() (v T) {
 	}
 	return s[s.Len()-1]
 }
+func (s Stack[T]) Equals(x ...T) bool {
+	if s.Empty() || len(x) != s.Len() {
+		return false
+	}
+
+	return equals(s, x)
+}
+func (s Stack[T]) EndWith(x ...T) bool {
+	if s.Empty() || len(x) > s.Len() {
+		return false
+	}
+	nx := len(x)
+	ns := len(s)
+	return equals(s[ns-nx:ns], x)
+}
+func (s Stack[T]) StartWith(x ...T) bool {
+	if s.Empty() || len(x) > s.Len() {
+		return false
+	}
+	nx := len(x)
+	return equals(s[0:nx], x)
+}
 func (s Stack[T]) LastIndex(v T) int {
 	if s.Empty() {
 		return -1
@@ -85,4 +107,15 @@ func (s *Stack[T]) PushSitu(v T) {
 }
 func (s *Stack[T]) CleanSitu() {
 	*s = (*s)[0:0]
+}
+func equals[E comparable, S ~[]E](a, b S) bool {
+	if len(a) != len(b) {
+		return false
+	}
+	for i := range a {
+		if b[i] != a[i] {
+			return false
+		}
+	}
+	return true
 }

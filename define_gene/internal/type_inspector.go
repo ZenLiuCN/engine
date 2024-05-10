@@ -14,6 +14,8 @@ type TypeInspector[X any] struct {
 	Pkg            *packages.Package
 	Face           map[Face]struct{}
 	X              X
+	PopEach        bool //pop each Type when done
+	TypePath            //the path from root to leaf, which is cutoff branches when current node is [ KMField ], [ KMParam ], [ KMResult ]; not include current visit node
 }
 type Face struct {
 	Pkg       *types.Package
@@ -38,22 +40,22 @@ func TypeObjectVisit[X any](pkg *packages.Package, name string, o types.Object, 
 	switch e := o.(type) {
 	case *types.Const:
 		if s.Visitor.VisitConst(s, ENT, name, e, s.X) {
-			s.visitType(o.Type(), o, nil, nil)
+			s.visitType(o.Type(), o, nil)
 		}
 		s.Visitor.VisitConst(s, EXT, name, e, s.X)
 	case *types.Func:
 		if s.Visitor.VisitFunc(s, ENT, name, e, s.X) {
-			s.visitType(o.Type(), o, nil, nil)
+			s.visitType(o.Type(), o, nil)
 		}
 		s.Visitor.VisitFunc(s, EXT, name, e, s.X)
 	case *types.Var:
 		if s.Visitor.VisitVar(s, ENT, name, e, s.X) {
-			s.visitType(o.Type(), o, nil, nil)
+			s.visitType(o.Type(), o, nil)
 		}
 		s.Visitor.VisitVar(s, EXT, name, e, s.X)
 	case *types.TypeName:
 		if s.Visitor.VisitTypeName(s, ENT, name, e, s.X) {
-			s.visitType(o.Type(), o, nil, nil)
+			s.visitType(o.Type(), o, nil)
 		}
 		s.Visitor.VisitTypeName(s, EXT, name, e, s.X)
 	default:
@@ -64,7 +66,7 @@ func TypeVisit[X any](pkg *packages.Package, o types.Object, p types.Type, visit
 	v := &TypeInspector[X]{WithUnexported: withUnexported}
 	v.Pkg = pkg
 	v.Visitor = visitor
-	v.visitType(p, o, nil, nil)
+	v.visitType(p, o, nil)
 }
 func (s *TypeInspector[X]) initialize(conf *packages.Config) {
 	if s.Visitor == nil {
@@ -167,25 +169,33 @@ func (s *TypeInspector[X]) inspect(p *packages.Package) {
 		o := scope.Lookup(name)
 		switch e := o.(type) {
 		case *types.Const:
+			s.OnEnter(KTConst)
 			if s.Visitor.VisitConst(s, ENT, name, e, s.X) {
-				s.visitType(o.Type(), o, nil, nil)
+				s.visitType(o.Type(), o, nil)
 			}
 			s.Visitor.VisitConst(s, EXT, name, e, s.X)
+			s.OnExit(KTConst)
 		case *types.Func:
+			s.OnEnter(KTFunc)
 			if s.Visitor.VisitFunc(s, ENT, name, e, s.X) {
-				s.visitType(o.Type(), o, nil, nil)
+				s.visitType(o.Type(), o, nil)
 			}
 			s.Visitor.VisitFunc(s, EXT, name, e, s.X)
+			s.OnExit(KTFunc)
 		case *types.Var:
+			s.OnEnter(KTVar)
 			if s.Visitor.VisitVar(s, ENT, name, e, s.X) {
-				s.visitType(o.Type(), o, nil, nil)
+				s.visitType(o.Type(), o, nil)
 			}
 			s.Visitor.VisitVar(s, EXT, name, e, s.X)
+			s.OnExit(KTVar)
 		case *types.TypeName:
+			s.OnEnter(KTType)
 			if s.Visitor.VisitTypeName(s, ENT, name, e, s.X) {
-				s.visitType(o.Type(), o, nil, nil)
+				s.visitType(o.Type(), o, nil)
 			}
 			s.Visitor.VisitTypeName(s, EXT, name, e, s.X)
+			s.OnExit(KTType)
 		default:
 			debugf("%s => %T\n", name, e)
 		}
@@ -193,55 +203,54 @@ func (s *TypeInspector[X]) inspect(p *packages.Package) {
 	}
 }
 
-func (s *TypeInspector[X]) visitType(t types.Type, o types.Object, mods Mods, seen Types) {
+func (s *TypeInspector[X]) visitType(t types.Type, o types.Object, seen Types) {
 	if i := slices.Index(seen, t); i > -1 && i != 0 {
 		return
 	}
 	switch x := t.(type) {
 	case *types.Basic:
-		s.visitBasic(x, o, mods, seen)
+		s.visitBasic(x, o, seen)
 	case *types.Map:
-		s.visitMap(x, o, mods, seen)
+		s.visitMap(x, o, seen)
 	case *types.Array:
-		s.visitArray(x, o, mods, seen)
+		s.visitArray(x, o, seen)
 	case *types.Struct:
-		s.visitStruct(x, o, mods, seen)
+		s.visitStruct(x, o, seen)
 	case *types.Tuple:
-		s.visitTuple(x, o, mods, seen)
+		s.visitTuple(x, o, seen)
 	case *types.Union:
-		s.visitUnion(x, o, mods, seen)
+		s.visitUnion(x, o, seen)
 	case *types.Signature:
-		s.visitSignature(x, o, mods, seen)
+		s.visitSignature(x, o, seen)
 	case *types.TypeParam:
-		s.visitTypeParam(x, o, mods, seen)
+		s.visitTypeParam(x, o, seen)
 	case *types.Pointer:
-		s.visitPointer(x, o, mods, seen)
+		s.visitPointer(x, o, seen)
 	case *types.Slice:
-		s.visitSlice(x, o, mods, seen)
+		s.visitSlice(x, o, seen)
 	case *types.Interface:
-		s.visitInterface(x, o, mods, seen)
+		s.visitInterface(x, o, seen)
 	case *types.Chan:
-		s.visitChan(x, o, mods, seen)
+		s.visitChan(x, o, seen)
 	case *types.Named:
-		s.visitNamed(x, o, mods, seen)
+		s.visitNamed(x, o, seen)
 	default:
 		debugf("undefined %T", x)
 	}
 }
 
-func (s *TypeInspector[X]) visitSignature(x *types.Signature, o types.Object, mods Mods, seen Types) {
-	if len(mods) == 0 {
-		if x.Recv() == nil {
-			mods = append(mods, ModFunction)
-		} else {
-			mods = append(mods, ModMethod)
-		}
+func (s *TypeInspector[X]) visitSignature(x *types.Signature, o types.Object, seen Types) {
+	s.OnEnter(KSignature)
+	if s.Visitor.VisitTypeSignature(s, ENT, o, x, seen, s.X) {
+		s.OnEnter(KMParam)
+		s.visitType(x.Params(), o, append(seen, x))
+		s.OnExit(KMParam)
+		s.OnEnter(KMResult)
+		s.visitType(x.Results(), o, append(seen, x))
+		s.OnExit(KMResult)
 	}
-	if s.Visitor.VisitTypeSignature(s, ENT, o, x, mods, seen, s.X) {
-		s.visitType(x.Params(), o, append(mods, ModParam), append(seen, x))
-		s.visitType(x.Results(), o, append(mods, ModResult), append(seen, x))
-	}
-	s.Visitor.VisitTypeSignature(s, EXT, o, x, mods, seen, s.X)
+	s.Visitor.VisitTypeSignature(s, EXT, o, x, seen, s.X)
+	s.OnExit(KSignature)
 }
 
 func (s *TypeInspector[X]) isExported(txt string) bool {
@@ -253,149 +262,202 @@ func (s *TypeInspector[X]) isExported(txt string) bool {
 	return true
 }
 
-func (s *TypeInspector[X]) visitNamed(x *types.Named, o types.Object, mods Mods, seen Types) {
-	if s.Visitor.VisitTypeNamed(s, ENT, o, x, mods, seen, s.X) {
+func (s *TypeInspector[X]) visitNamed(x *types.Named, o types.Object, seen Types) {
+	s.OnEnter(KNamed)
+	if s.Visitor.VisitTypeNamed(s, ENT, o, x, seen, s.X) {
 		seen2 := append(seen, x)
-		s.visitType(x.Underlying(), o, append(mods, ModeNamedElt), seen2)
+		s.visitType(x.Underlying(), o, seen2)
 		for i1, n1 := 0, x.NumMethods(); i1 < n1; i1++ {
 			m1 := x.Method(i1)
 			if s.isExported(m1.Name()) {
-				if s.Visitor.VisitTypeFunc(s, ENT, o, m1, append(mods, ModeNamedElt), seen2, s.X) {
-					s.visitType(m1.Type(), o, append(mods, ModeNamedElt, ModMethod), seen2)
+				s.OnEnter(KMMethod)
+				if s.Visitor.VisitTypeFunc(s, ENT, o, m1, seen2, s.X) {
+					s.visitType(m1.Type(), o, seen2)
 				}
-				s.Visitor.VisitTypeFunc(s, EXT, o, m1, append(mods, ModeNamedElt), seen2, s.X)
+				s.Visitor.VisitTypeFunc(s, EXT, o, m1, seen2, s.X)
+				s.OnExit(KMMethod)
 			}
 		}
 	}
-	s.Visitor.VisitTypeNamed(s, EXT, o, x, mods, seen, s.X)
+	s.Visitor.VisitTypeNamed(s, EXT, o, x, seen, s.X)
+	s.OnExit(KNamed)
 }
 
-func (s *TypeInspector[X]) visitChan(x *types.Chan, o types.Object, mods Mods, seen Types) {
-	if s.Visitor.VisitTypeChan(s, ENT, o, x, mods, seen, s.X) {
-		s.visitType(x.Elem(), o, append(mods, ModChanElt), append(seen, x))
+func (s *TypeInspector[X]) visitChan(x *types.Chan, o types.Object, seen Types) {
+	s.OnEnter(KChan)
+	if s.Visitor.VisitTypeChan(s, ENT, o, x, seen, s.X) {
+		s.visitType(x.Elem(), o, append(seen, x))
 	}
-	s.Visitor.VisitTypeChan(s, EXT, o, x, mods, seen, s.X)
+	s.Visitor.VisitTypeChan(s, EXT, o, x, seen, s.X)
+	s.OnExit(KChan)
 }
 
-func (s *TypeInspector[X]) visitInterface(x *types.Interface, o types.Object, mods Mods, seen Types) {
-	if s.Visitor.VisitTypeInterface(s, ENT, o, x, mods, seen, s.X) {
-		s.visitInterfaceEmbedded(x, o, mods, append(seen, x))
-		s.visitInterfaceMethods(x, o, mods, append(seen, x))
+func (s *TypeInspector[X]) visitInterface(x *types.Interface, o types.Object, seen Types) {
+	s.OnEnter(KInterface)
+	if s.Visitor.VisitTypeInterface(s, ENT, o, x, seen, s.X) {
+		s.visitInterfaceEmbedded(x, o, append(seen, x))
+		s.visitInterfaceMethods(x, o, append(seen, x))
 	}
-	s.Visitor.VisitTypeInterface(s, EXT, o, x, mods, seen, s.X)
+	s.Visitor.VisitTypeInterface(s, EXT, o, x, seen, s.X)
+	s.OnExit(KInterface)
 }
-func (s *TypeInspector[X]) visitInterfaceEmbedded(x *types.Interface, o types.Object, mods Mods, seen Types) {
+func (s *TypeInspector[X]) visitInterfaceEmbedded(x *types.Interface, o types.Object, seen Types) {
 	for i, n := 0, x.NumEmbeddeds(); i < n; i++ {
 		switch m := x.EmbeddedType(i).(type) {
 		case *types.Named:
 			if s.isExported(m.String()) {
-				s.visitNamed(m, o, append(mods, ModEmbedded), seen)
+				s.OnEnter(KMEmbedded)
+				s.visitNamed(m, o, seen)
+				s.OnExit(KMEmbedded)
 			}
 		case *types.Union:
-			s.visitUnion(m, o, append(mods, ModEmbedded), seen)
+			s.OnEnter(KMEmbedded)
+			s.visitUnion(m, o, seen)
+			s.OnExit(KMEmbedded)
 		}
 
 	}
 }
 
-func (s *TypeInspector[X]) visitInterfaceMethods(x *types.Interface, o types.Object, mods Mods, seen Types) {
+func (s *TypeInspector[X]) visitInterfaceMethods(x *types.Interface, o types.Object, seen Types) {
 	for i, n := 0, x.NumExplicitMethods(); i < n; i++ {
 		m := x.ExplicitMethod(i)
 		if s.isExported(m.Name()) {
-			if s.Visitor.VisitTypeFunc(s, ENT, o, m, mods, seen, s.X) {
-				s.visitType(m.Type(), o, append(mods, ModMethod), seen)
+			s.OnEnter(KMMethod)
+			if s.Visitor.VisitTypeFunc(s, ENT, o, m, seen, s.X) {
+				s.visitType(m.Type(), o, seen)
 			}
-			s.Visitor.VisitTypeFunc(s, EXT, o, m, mods, seen, s.X)
+			s.Visitor.VisitTypeFunc(s, EXT, o, m, seen, s.X)
+			s.OnExit(KMMethod)
 		}
 	}
 }
 
-func (s *TypeInspector[X]) visitSlice(x *types.Slice, o types.Object, mods Mods, seen Types) {
-	if s.Visitor.VisitTypeSlice(s, ENT, o, x, mods, seen, s.X) {
+func (s *TypeInspector[X]) visitSlice(x *types.Slice, o types.Object, seen Types) {
+	s.OnEnter(KSlice)
+	if s.Visitor.VisitTypeSlice(s, ENT, o, x, seen, s.X) {
 		if seen.LNth(1) == x {
-			s.visitType(x.Elem(), o, append(mods, ModSliceElt), seen)
+			s.visitType(x.Elem(), o, seen)
 		} else {
-			s.visitType(x.Elem(), o, append(mods, ModSliceElt), append(seen, x))
+			s.visitType(x.Elem(), o, append(seen, x))
 		}
 
 	}
-	s.Visitor.VisitTypeSlice(s, EXT, o, x, mods, seen, s.X)
+	s.Visitor.VisitTypeSlice(s, EXT, o, x, seen, s.X)
+	s.OnExit(KSlice)
 }
 
-func (s *TypeInspector[X]) visitPointer(x *types.Pointer, o types.Object, mods Mods, seen Types) {
-	if s.Visitor.VisitTypePointer(s, ENT, o, x, mods, seen, s.X) {
-		s.visitType(x.Elem(), o, append(mods, ModPointerElt), append(seen, x))
+func (s *TypeInspector[X]) visitPointer(x *types.Pointer, o types.Object, seen Types) {
+	s.OnEnter(KPointer)
+	if s.Visitor.VisitTypePointer(s, ENT, o, x, seen, s.X) {
+		s.visitType(x.Elem(), o, append(seen, x))
 	}
-	s.Visitor.VisitTypePointer(s, EXT, o, x, mods, seen, s.X)
+	s.Visitor.VisitTypePointer(s, EXT, o, x, seen, s.X)
+	s.OnExit(KPointer)
 }
 
-func (s *TypeInspector[X]) visitTypeParam(x *types.TypeParam, o types.Object, mods Mods, seen Types) {
-	if s.Visitor.VisitTypeParam(s, ENT, o, x, mods, append(seen, x), s.X) {
-		s.visitType(x.Underlying(), o, append(mods, ModTypeParam), append(seen, x))
+func (s *TypeInspector[X]) visitTypeParam(x *types.TypeParam, o types.Object, seen Types) {
+	s.OnEnter(KTypeParam)
+	if s.Visitor.VisitTypeParam(s, ENT, o, x, append(seen, x), s.X) {
+		s.visitType(x.Underlying(), o, append(seen, x))
 	}
-	s.Visitor.VisitTypeParam(s, EXT, o, x, mods, seen, s.X)
+	s.Visitor.VisitTypeParam(s, EXT, o, x, seen, s.X)
+	s.OnExit(KTypeParam)
 }
 
-func (s *TypeInspector[X]) visitUnion(x *types.Union, o types.Object, mods Mods, seen Types) {
-	if s.Visitor.VisitTypeUnion(s, ENT, o, x, mods, seen, s.X) {
+func (s *TypeInspector[X]) visitUnion(x *types.Union, o types.Object, seen Types) {
+	s.OnEnter(KUnion)
+	if s.Visitor.VisitTypeUnion(s, ENT, o, x, seen, s.X) {
 		n := x.Len()
 		for i := 0; i < n; i++ {
-			s.visitType(x.Term(i).Type(), o, mods, append(seen, x))
+			s.OnEnter(KTerm)
+			s.visitType(x.Term(i).Type(), o, append(seen, x))
+			s.OnExit(KTerm)
 		}
 	}
-	s.Visitor.VisitTypeUnion(s, EXT, o, x, mods, seen, s.X)
+	s.Visitor.VisitTypeUnion(s, EXT, o, x, seen, s.X)
+	s.OnExit(KUnion)
 }
 
-func (s *TypeInspector[X]) visitTuple(x *types.Tuple, o types.Object, mods Mods, seen Types) {
-	if s.Visitor.VisitTypeTuple(s, ENT, o, x, mods, seen, s.X) {
+func (s *TypeInspector[X]) visitTuple(x *types.Tuple, o types.Object, seen Types) {
+	s.OnEnter(KTuple)
+	if s.Visitor.VisitTypeTuple(s, ENT, o, x, seen, s.X) {
 		n := x.Len()
-		mods2 := append(mods, ModTuple)
 		seen2 := append(seen, x)
 		for i := 0; i < n; i++ {
-			s.Visitor.VisitTypeVar(s, ENT, o, x.At(i), mods2, seen2, s.X)
-			s.visitType(x.At(i).Type(), o, mods2, seen2)
-			s.Visitor.VisitTypeVar(s, EXT, o, x.At(i), mods2, seen2, s.X)
+			s.OnEnter(KVar)
+			if s.Visitor.VisitTypeVar(s, ENT, o, x.At(i), seen2, s.X) {
+				s.visitType(x.At(i).Type(), o, seen2)
+			}
+			s.Visitor.VisitTypeVar(s, EXT, o, x.At(i), seen2, s.X)
+			s.OnExit(KVar)
 		}
 	}
-	s.Visitor.VisitTypeTuple(s, EXT, o, x, mods, seen, s.X)
+	s.Visitor.VisitTypeTuple(s, EXT, o, x, seen, s.X)
+	s.OnExit(KTuple)
 }
 
-func (s *TypeInspector[X]) visitStruct(x *types.Struct, o types.Object, mods Mods, seen Types) {
-	if s.Visitor.VisitTypeStruct(s, ENT, o, x, mods, seen, s.X) {
+func (s *TypeInspector[X]) visitStruct(x *types.Struct, o types.Object, seen Types) {
+	s.OnEnter(KStruct)
+	if s.Visitor.VisitTypeStruct(s, ENT, o, x, seen, s.X) {
 		seen2 := append(seen, x)
 		for i := 0; i < x.NumFields(); i++ {
 			if s.isExported(x.Field(i).Name()) {
-				if !s.Visitor.VisitTypeVar(s, ENT, o, x.Field(i), append(mods, ModField), seen2, s.X) {
-					continue
+				s.OnEnter(KMField)
+				if s.Visitor.VisitTypeVar(s, ENT, o, x.Field(i), seen2, s.X) {
+					s.visitType(x.Field(i).Type(), x.Field(i), seen2)
 				}
-				s.visitType(x.Field(i).Type(), x.Field(i), append(mods, ModField), seen2)
-				if !s.Visitor.VisitTypeVar(s, EXT, o, x.Field(i), append(mods, ModField), seen2, s.X) {
-					continue
-				}
+				s.Visitor.VisitTypeVar(s, EXT, o, x.Field(i), seen2, s.X)
+				s.OnExit(KMField)
 			}
 		}
 	}
-	s.Visitor.VisitTypeStruct(s, EXT, o, x, mods, seen, s.X)
+	s.Visitor.VisitTypeStruct(s, EXT, o, x, seen, s.X)
+	s.OnExit(KStruct)
 }
 
-func (s *TypeInspector[X]) visitArray(x *types.Array, o types.Object, mods Mods, seen Types) {
-	if s.Visitor.VisitTypeArray(s, ENT, o, x, mods, seen, s.X) {
-		s.visitType(x.Elem(), o, append(mods, ModArrayElt), append(seen, x))
+func (s *TypeInspector[X]) visitArray(x *types.Array, o types.Object, seen Types) {
+	s.OnEnter(KArray)
+	if s.Visitor.VisitTypeArray(s, ENT, o, x, seen, s.X) {
+		s.visitType(x.Elem(), o, append(seen, x))
 	}
-	s.Visitor.VisitTypeArray(s, EXT, o, x, mods, seen, s.X)
+	s.Visitor.VisitTypeArray(s, EXT, o, x, seen, s.X)
+	s.OnExit(KArray)
 }
 
-func (s *TypeInspector[X]) visitMap(x *types.Map, o types.Object, mods Mods, seen Types) {
-	if s.Visitor.VisitTypeMap(s, ENT, o, x, mods, seen, s.X) {
-		s.visitType(x.Key(), o, append(mods, ModMapKey), append(seen, x))
-		s.visitType(x.Elem(), o, append(mods, ModMapValue), append(seen, x))
+func (s *TypeInspector[X]) visitMap(x *types.Map, o types.Object, seen Types) {
+	s.OnEnter(KMap)
+	if s.Visitor.VisitTypeMap(s, ENT, o, x, seen, s.X) {
+		s.OnEnter(KMMapKey)
+		s.visitType(x.Key(), o, append(seen, x))
+		s.OnExit(KMMapKey)
+		s.OnEnter(KMMapValue)
+		s.visitType(x.Elem(), o, append(seen, x))
+		s.OnExit(KMMapValue)
 	}
-	s.Visitor.VisitTypeMap(s, EXT, o, x, mods, seen, s.X)
+	s.Visitor.VisitTypeMap(s, EXT, o, x, seen, s.X)
+	s.OnExit(KMap)
 }
 
-func (s *TypeInspector[X]) visitBasic(x *types.Basic, o types.Object, mods Mods, seen Types) {
-	if s.Visitor.VisitTypeBasic(s, ENT, o, x, mods, seen, s.X) {
+func (s *TypeInspector[X]) visitBasic(x *types.Basic, o types.Object, seen Types) {
+	s.OnEnter(KBasic)
+	if s.Visitor.VisitTypeBasic(s, ENT, o, x, seen, s.X) {
 
 	}
-	s.Visitor.VisitTypeBasic(s, EXT, o, x, mods, seen, s.X)
+	s.Visitor.VisitTypeBasic(s, EXT, o, x, seen, s.X)
+	s.OnExit(KBasic)
+}
+
+func (s *TypeInspector[X]) OnEnter(kind TypeKind) {
+	s.TypePath.PushSitu(kind)
+}
+func (s *TypeInspector[X]) OnExit(kind TypeKind) {
+	switch kind {
+	case KMField, KMMethod, KMEmbedded, KMParam, KMResult:
+		s.TypePath = s.TypePath[:s.TypePath.LastIndex(kind)]
+	default:
+		if s.PopEach {
+			s.TypePath.PopSitu()
+		}
+	}
 }

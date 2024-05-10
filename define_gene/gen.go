@@ -36,6 +36,7 @@ func (g *Generator) generate() (err error) {
 	c := new(context)
 	c.init()
 	ip := NewTypeInspector[*context](false)
+	ip.Inspector.PopEach = true
 	ip.Inspector.Visitor = c
 	ip.Inspector.X = c
 	err = ip.Inspect(

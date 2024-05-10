@@ -40,10 +40,10 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 	FnVisitConst: func(I InspectorX, d Dir, name string, e *types.Const, c *context) bool {
 		switch d {
 		case ENT:
-			defer c.Enter(KTConst, nil, nil)
+			defer c.Enter(KTConst, I.TypePath, nil)
 			c.name = name
 		case EXT:
-			defer c.Exit(KTConst, nil, nil)
+			defer c.Exit(KTConst, I.TypePath, nil)
 			if c.generic {
 				//TODO handle generic Const
 				c.reset()
@@ -65,11 +65,11 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 	FnVisitFunc: func(I InspectorX, d Dir, name string, e *types.Func, c *context) bool {
 		switch d {
 		case ENT:
-			defer c.Enter(KTFunc, nil, nil)
+			defer c.Enter(KTFunc, I.TypePath, nil)
 			c.name = name
 
 		case EXT:
-			defer c.Exit(KTFunc, nil, nil)
+			defer c.Exit(KTFunc, I.TypePath, nil)
 			if c.generic {
 				//TODO handle generic function
 				c.reset()
@@ -86,10 +86,10 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 	FnVisitTypeName: func(I InspectorX, d Dir, name string, e *types.TypeName, c *context) bool {
 		switch d {
 		case ENT:
-			defer c.Enter(KTType, nil, nil)
+			defer c.Enter(KTType, I.TypePath, nil)
 			c.name = name
 		case EXT:
-			defer c.Exit(KTType, nil, nil)
+			defer c.Exit(KTType, I.TypePath, nil)
 			if c.generic {
 				//TODO handle generic
 				c.reset()
@@ -138,15 +138,15 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 		}
 		return true
 	},
-	FnVisitTypeTuple: func(I InspectorX, d Dir, o types.Object, x *types.Tuple, mods Mods, seen Types, c *context) bool {
+	FnVisitTypeTuple: func(I InspectorX, d Dir, o types.Object, x *types.Tuple, seen Types, c *context) bool {
 		switch d {
 		case ENT:
-			defer c.Enter(KTuple, mods, seen)
-			switch m := mods.LNth(1); true {
-			case m.IsParam():
+			defer c.Enter(KTuple, I.TypePath, seen)
+			switch m := I.LNth(2); m {
+			case KMParam:
 				c.df("(")
 				c.pc = c.pc.Push(x.Len())
-			case m.IsResult():
+			case KMResult:
 				c.pc = c.pc.Push(x.Len())
 				switch x.Len() {
 				case 0:
@@ -156,16 +156,16 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 				}
 			}
 		case EXT:
-			defer c.Exit(KTuple, mods, seen)
-			switch m := mods.LNth(1); true {
-			case m.IsParam():
-				if !c.funcAlias && (mods.Len() < 3 || mods.LNth(2).IsMethod()) {
+			defer c.Exit(KTuple, I.TypePath, seen)
+			switch m := I.LNth(2); m {
+			case KMParam:
+				if !c.funcAlias && (I.Len() <= 4 || I.LNth(4) == KMMethod) {
 					c.df("):")
 				} else {
 					c.df(")=>")
 				}
 				c.pc, _ = c.pc.Pop()
-			case m.IsResult():
+			case KMResult:
 				switch x.Len() {
 				case 0:
 					c.df("void")
@@ -178,43 +178,42 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 		}
 		return true
 	},
-	FnVisitTypeVar: func(I InspectorX, d Dir, o types.Object, x *types.Var, mods Mods, seen Types, c *context) bool {
+	FnVisitTypeVar: func(I InspectorX, d Dir, o types.Object, x *types.Var, seen Types, c *context) bool {
 		switch d {
 		case ENT:
-			defer c.Enter(KVar, mods, seen)
+			defer c.Enter(KVar, I.TypePath, seen)
 			switch {
-			case c.path.First() == KTType && mods.LNth(1).IsField():
+			case c.path.First() == KTType && I.EndWith(KStruct, KMField): //** KMField,KTuple
 				c.field = x.Name()
 				c.tmp = c.d
 				c.d = GetWriter()
 			default:
-				switch m := mods.LNth(2); true {
-				case m.IsParam() || m.IsResult():
-					if m.IsParam() {
-						c.param = x.Name()
-						if c.pc.Last() == 1 && c.variadic.Last() {
-							if c.param == "" {
-								c.df("...v%d:", c.pc.Last())
-							} else {
-								c.df("...%s:", Safe(x.Name()))
-							}
+				switch m := I.LNth(3); m {
+				case KMParam:
+					c.param = x.Name()
+					if c.pc.Last() == 1 && c.variadic.Last() {
+						if c.param == "" {
+							c.df("...v%d:", c.pc.Last())
 						} else {
-							if c.param == "" {
-								c.df("v%d:", c.pc.Last())
-							} else {
-								c.df("%s:", Safe(x.Name()))
-							}
+							c.df("...%s:", Safe(x.Name()))
+						}
+					} else {
+						if c.param == "" {
+							c.df("v%d:", c.pc.Last())
+						} else {
+							c.df("%s:", Safe(x.Name()))
 						}
 					}
-				case m.IsField():
+				case KMResult:
+				case KMField:
 					c.field = x.Name()
 				}
 			}
 		case EXT:
-			defer c.Exit(KVar, mods, seen)
+			defer c.Exit(KVar, I.TypePath, seen)
 			defer c.resetArrayed()
 			switch {
-			case c.path.First() == KTType && mods.LNth(1).IsField():
+			case c.path.First() == KTType && I.EndWith(KStruct, KMField):
 				if c.d.Buffer().Len() > 0 { //!! only expose field type should write
 					t := c.d
 					c.d = c.tmp
@@ -230,17 +229,14 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 				}
 				c.field = ""
 			default:
-				switch m := mods.LNth(2); true {
-				case m.IsParam() || m.IsResult():
+				switch I.TypePath.LNth(3) {
+				case KMParam, KMResult:
 					if c.pc.Last() > 1 {
 						c.df(",")
 					}
 					c.param = ""
 					c.pcsub()
-					/*			if c.pc.Last() == 0 && m.IsParam() && c.variadic.Last() && c.arrayed == 0 {
-								c.df("[]")
-							}*/
-				case m.IsField():
+				case KMField:
 					c.field = ""
 					c.dn()
 				}
@@ -249,29 +245,28 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 		}
 		return true
 	},
-	FnVisitTypeFunc: func(I InspectorX, d Dir, o types.Object, x *types.Func, mods Mods, seen Types, c *context) bool {
+	FnVisitTypeFunc: func(I InspectorX, d Dir, o types.Object, x *types.Func, seen Types, c *context) bool {
 		switch d {
 		case ENT:
-			defer c.Enter(KFunc, mods, seen)
+			defer c.Enter(KFunc, I.TypePath, seen)
 			c.di(2).df("%s", Camel(x.Name()))
 			c.method = x.Name()
 		case EXT:
-			defer c.Exit(KFunc, mods, seen)
+			defer c.Exit(KFunc, I.TypePath, seen)
+			defer c.resetArrayed()
 			c.dn()
 			c.method = ""
-			if c.arrayed >= c.path.Len() {
-				c.arrayed = 0
-			}
+
 		}
 		return true
 	},
-	FnVisitTypeBasic: func(I InspectorX, d Dir, o types.Object, x *types.Basic, mods Mods, seen Types, c *context) bool {
+	FnVisitTypeBasic: func(I InspectorX, d Dir, o types.Object, x *types.Basic, seen Types, c *context) bool {
 		switch d {
 		case ENT:
-			defer c.Enter(KBasic, mods, seen)
+			defer c.Enter(KBasic, I.TypePath, seen)
 			arr := c.arrayLen.Len()
 			//!! is type embedded
-			if c.isTypeDefine(KBasic, mods, seen) && !c.IsConstOrVar() {
+			if c.isTypeDefine(KBasic, seen) && !c.IsConstOrVar() {
 				if arr == 1 || arr == 0 {
 					if c.arrayLen.Last() == -1 || arr == 0 {
 						c.extends("%s", c.identType(x.Name(), arr > 0, true))
@@ -323,25 +318,25 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 			}
 			c.arrayed = c.path.Len() + 1 //!! KBasic push after process
 		case EXT:
-			defer c.Exit(KBasic, mods, seen)
-			if mods.LNth(1).IsMapKey() {
+			defer c.Exit(KBasic, I.TypePath, seen)
+			if I.LNth(2) == KMMapKey {
 				c.df(",")
 			}
 		}
 		return true
 	},
-	FnVisitTypeMap: func(I InspectorX, d Dir, o types.Object, x *types.Map, mods Mods, seen Types, c *context) bool {
+	FnVisitTypeMap: func(I InspectorX, d Dir, o types.Object, x *types.Map, seen Types, c *context) bool {
 		switch d {
 		case ENT:
-			defer c.Enter(KMap, mods, seen)
-			if c.isTypeDefine(KMap, mods, seen) {
+			defer c.Enter(KMap, I.TypePath, seen)
+			if c.isTypeDefine(KMap, seen) {
 				c.mapAlias = true
 				return true
 			}
 			c.df("Record<")
 
 		case EXT:
-			defer c.Exit(KMap, mods, seen)
+			defer c.Exit(KMap, I.TypePath, seen)
 			defer c.resetArrayed()
 			if c.mapAlias {
 				c.mapAlias = false
@@ -354,13 +349,13 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 		}
 		return true
 	},
-	FnVisitTypeArray: func(I InspectorX, d Dir, o types.Object, x *types.Array, mods Mods, seen Types, c *context) bool {
+	FnVisitTypeArray: func(I InspectorX, d Dir, o types.Object, x *types.Array, seen Types, c *context) bool {
 		switch d {
 		case ENT:
-			defer c.Enter(KArray, mods, seen)
+			defer c.Enter(KArray, I.TypePath, seen)
 			(&c.arrayLen).PushSitu(x.Len())
 		case EXT:
-			defer c.Exit(KArray, mods, seen)
+			defer c.Exit(KArray, I.TypePath, seen)
 			(&c.arrayLen).PopSitu()
 			if c.arrayed > 0 && c.arrayed >= c.path.Len() {
 				return true
@@ -370,10 +365,10 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 		}
 		return true
 	},
-	FnVisitTypeStruct: func(I InspectorX, d Dir, o types.Object, x *types.Struct, mods Mods, seen Types, c *context) bool {
+	FnVisitTypeStruct: func(I InspectorX, d Dir, o types.Object, x *types.Struct, seen Types, c *context) bool {
 		switch d {
 		case ENT:
-			defer c.Enter(KStruct, mods, seen)
+			defer c.Enter(KStruct, I.TypePath, seen)
 			switch {
 			case x.NumFields() == 0:
 
@@ -387,9 +382,9 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 
 			}
 		case EXT:
-			defer c.Exit(KStruct, mods, seen)
+			defer c.Exit(KStruct, I.TypePath, seen)
 			switch {
-			case c.isTypeDefineExit(KStruct, mods, seen):
+			case c.isTypeDefineExit(KStruct, seen):
 				switch {
 				case strings.Contains(c.name, "Err"):
 					c.use("Struct")
@@ -418,30 +413,30 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 		}
 		return true
 	},
-	FnVisitTypeUnion: func(I InspectorX, d Dir, o types.Object, x *types.Union, mods Mods, seen Types, c *context) bool {
+	FnVisitTypeUnion: func(I InspectorX, d Dir, o types.Object, x *types.Union, seen Types, c *context) bool {
 
 		switch d {
 		case ENT:
-			defer c.Enter(KUnion, mods, seen)
+			defer c.Enter(KUnion, I.TypePath, seen)
 
 		case EXT:
-			defer c.Exit(KUnion, mods, seen)
+			defer c.Exit(KUnion, I.TypePath, seen)
 
 		}
 		return true
 	},
-	FnVisitTypeSignature: func(I InspectorX, d Dir, o types.Object, x *types.Signature, mods Mods, seen Types, c *context) bool {
+	FnVisitTypeSignature: func(I InspectorX, d Dir, o types.Object, x *types.Signature, seen Types, c *context) bool {
 		switch d {
 		case ENT:
-			defer c.Enter(KSign, mods, seen)
+			defer c.Enter(KSignature, I.TypePath, seen)
 			c.variadic = c.variadic.Push(x.Variadic())
-			if c.isTypeDefine(KSign, mods, seen) {
+			if c.isTypeDefine(KSignature, seen) {
 				c.funcAlias = true
 				return true
 			}
 
 		case EXT:
-			defer c.Exit(KSign, mods, seen)
+			defer c.Exit(KSignature, I.TypePath, seen)
 			c.variadic, _ = c.variadic.Pop()
 			if c.funcAlias {
 				c.funcAlias = false
@@ -454,22 +449,22 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 		}
 		return true
 	},
-	FnVisitTypeParam: func(I InspectorX, d Dir, o types.Object, x *types.TypeParam, mods Mods, seen Types, c *context) bool {
+	FnVisitTypeParam: func(I InspectorX, d Dir, o types.Object, x *types.TypeParam, seen Types, c *context) bool {
 		switch d {
 		case ENT:
-			defer c.Enter(KTypeParam, mods, seen)
+			defer c.Enter(KTypeParam, I.TypePath, seen)
 			c.generic = true
 		case EXT:
-			defer c.Exit(KTypeParam, mods, seen)
+			defer c.Exit(KTypeParam, I.TypePath, seen)
 
 		}
 		return true
 	},
-	FnVisitTypePointer: func(I InspectorX, d Dir, o types.Object, x *types.Pointer, mods Mods, seen Types, c *context) bool {
+	FnVisitTypePointer: func(I InspectorX, d Dir, o types.Object, x *types.Pointer, seen Types, c *context) bool {
 		switch d {
 		case ENT:
-			defer c.Enter(KPointer, mods, seen)
-			if c.isTypeDefine(KPointer, mods, seen) {
+			defer c.Enter(KPointer, I.TypePath, seen)
+			if c.isTypeDefine(KPointer, seen) {
 				c.use("Ref")
 				c.df("Ref<")
 				return true
@@ -478,10 +473,10 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 			c.df("Ref<")
 
 		case EXT:
-			defer c.Exit(KPointer, mods, seen)
+			defer c.Exit(KPointer, I.TypePath, seen)
 			defer c.resetArrayed()
 			c.df(">")
-			if c.isTypeDefine(KPointer, mods, seen) && !c.IsConstOrVar() {
+			if c.isTypeDefine(KPointer, seen) && !c.IsConstOrVar() {
 				c.extends(c.d.Buffer().String())
 				c.d.Reset()
 			}
@@ -489,18 +484,18 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 		}
 		return true
 	},
-	FnVisitTypeSlice: func(I InspectorX, d Dir, o types.Object, x *types.Slice, mods Mods, seen Types, c *context) bool {
+	FnVisitTypeSlice: func(I InspectorX, d Dir, o types.Object, x *types.Slice, seen Types, c *context) bool {
 		switch d {
 		case ENT:
-			defer c.Enter(KSlice, mods, seen)
+			defer c.Enter(KSlice, I.TypePath, seen)
 			(&c.arrayLen).PushSitu(-1)
 		case EXT:
-			defer c.Exit(KSlice, mods, seen)
+			defer c.Exit(KSlice, I.TypePath, seen)
 			(&c.arrayLen).PopSitu()
 			if c.arrayed > 0 && (c.arrayed >= c.path.Len() || c.path.Last() == KBasic) {
 				return true
 			}
-			if c.isTypeDefineExit(KSlice, mods, seen) {
+			if c.isTypeDefineExit(KSlice, seen) {
 				c.extends("Array<%s>", c.d.String())
 				c.d.Reset()
 			} else {
@@ -510,14 +505,14 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 		}
 		return true
 	},
-	FnVisitTypeInterface: func(I InspectorX, d Dir, o types.Object, x *types.Interface, mods Mods, seen Types, c *context) bool {
+	FnVisitTypeInterface: func(I InspectorX, d Dir, o types.Object, x *types.Interface, seen Types, c *context) bool {
 		switch d {
 		case ENT:
-			defer c.Enter(KInterface, mods, seen)
+			defer c.Enter(KInterface, I.TypePath, seen)
 			switch {
-			case c.isTypeDefine(KInterface, mods, seen):
+			case c.isTypeDefine(KInterface, seen):
 				return true
-			case c.isTypeExtend(KInterface, mods, seen):
+			case c.isTypeExtend(KInterface, seen):
 				c.use("Proto")
 				c.extends("Proto<%s>", c.name)
 				return false
@@ -528,14 +523,14 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 
 			}
 		case EXT:
-			defer c.Exit(KInterface, mods, seen)
+			defer c.Exit(KInterface, I.TypePath, seen)
 		}
 		return true
 	},
-	FnVisitTypeChan: func(I InspectorX, d Dir, o types.Object, x *types.Chan, mods Mods, seen Types, c *context) bool {
+	FnVisitTypeChan: func(I InspectorX, d Dir, o types.Object, x *types.Chan, seen Types, c *context) bool {
 		switch d {
 		case ENT:
-			defer c.Enter(KChan, mods, seen)
+			defer c.Enter(KChan, I.TypePath, seen)
 			c.imported("go")
 			switch x.Dir() {
 			case types.SendOnly:
@@ -547,18 +542,18 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 			}
 
 		case EXT:
-			defer c.Exit(KChan, mods, seen)
+			defer c.Exit(KChan, I.TypePath, seen)
 			defer c.resetArrayed()
 			c.df(">")
 
 		}
 		return true
 	},
-	FnVisitTypeNamed: func(I InspectorX, d Dir, o types.Object, x *types.Named, mods Mods, seen Types, c *context) bool {
+	FnVisitTypeNamed: func(I InspectorX, d Dir, o types.Object, x *types.Named, seen Types, c *context) bool {
 		switch d {
 		case ENT:
 			name := x.Obj().Name()
-			defer c.Enter(KNamed, mods, seen)
+			defer c.Enter(KNamed, I.TypePath, seen)
 			switch {
 			case c.path.Len() == 1 && c.name == name && x.Obj().Pkg() == c.pkg.Types: //!! typeDefine
 				return true
@@ -566,7 +561,7 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 				c.typeAlias = true
 				c.decodeNamed(I, x, c.df)
 				return false
-			case c.IsType() && mods.LNth(1).IsEmbedded(): //!! embedded for interface
+			case c.IsType() && I.LNth(1) == KMEmbedded: //!! embedded for interface
 				c.decodeNamed(I, x, c.extends)
 				return false
 			default:
@@ -574,9 +569,9 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 				return false
 			}
 		case EXT:
-			defer c.Exit(KNamed, mods, seen)
+			defer c.Exit(KNamed, I.TypePath, seen)
 			defer c.resetArrayed()
-			if mods.LNth(1).IsMapKey() {
+			if I.LNth(2) == KMMapKey {
 				c.df(",")
 			}
 
@@ -585,39 +580,11 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 	},
 }
 
-type Path = Stack[Kind]
-
-//go:generate stringer -type=Kind
-type Kind int
-
-const (
-	KNone Kind = iota
-	KTFunc
-	KTType
-	KTConst
-	KTVar
-	KVar
-	KFunc
-
-	KNamed
-	KStruct
-	KMap
-	KPointer
-	KArray
-	KSlice
-	KInterface
-	KChan
-	KBasic
-	KTypeParam
-	KSign
-	KUnion
-	KTuple
-)
-
 type Bool = Stack[bool]
 type Int = Stack[int]
 type Int64 = Stack[int64]
 type state struct {
+	path   TypePath
 	name   string
 	method string
 	field  string
@@ -630,7 +597,6 @@ type state struct {
 	isStruct  bool
 	arrayed   int
 	arrayLen  Int64
-	path      Path
 	variadic  Bool
 	pc        Int
 	tmp       Writer
@@ -650,7 +616,6 @@ func (s *state) reset() {
 	s.arrayLen = s.arrayLen.Clean()
 
 	s.pc = s.pc.Clean()
-	s.path = s.path.Clean()
 	s.variadic = s.variadic.Clean()
 
 }
@@ -681,40 +646,40 @@ func (s *state) IsVar() bool {
 func (s *state) IsType() bool {
 	return s.path.First() == KTType
 }
-func (s *state) isTypeDefine(k Kind, mods Mods, seen Types) bool {
+func (s *state) isTypeDefine(k TypeKind, seen Types) bool {
 	return s.IsType() &&
 		((k == KNamed && s.path.Len() == 2) ||
 			(k == KStruct && s.path.Len() == 2) ||
 			(k == KInterface && s.path.Len() == 2) ||
 			(s.path.Len() == 2 && s.path.Last() == KNamed) ||
-			(k == KBasic && s.path.Len() > 2 && !slices.ContainsFunc(s.path[2:], func(kind Kind) bool {
+			(k == KBasic && s.path.Len() > 2 && !slices.ContainsFunc(s.path[2:], func(kind TypeKind) bool {
 				return kind != KSlice && kind != KArray
 			})))
 }
-func (s *state) isTypeExtend(k Kind, mods Mods, seen Types) bool {
+func (s *state) isTypeExtend(k TypeKind, seen Types) bool {
 	return s.IsType() &&
 		((k == KNamed && s.path.Len() == 3) ||
 			(k == KStruct && s.path.Len() == 3) ||
 			(k == KInterface && s.path.Len() == 3))
 }
-func (s *state) isTypeDefineExit(k Kind, mods Mods, seen Types) bool {
+func (s *state) isTypeDefineExit(k TypeKind, seen Types) bool {
 	return s.IsType() &&
 		((k == KNamed && s.path.Len() == 2) ||
 			(k == KSlice && s.path.Len() == 3) ||
 			(k == KStruct && s.path.Len() == 3))
 
 }
-func (s *state) Enter(k Kind, mods Mods, seen Types) {
-	if debug {
-		log.Printf("ENTER[%s]\t%s:%s[%d]\tΔ%s\tΔ%s", k, s.name, anyOf(s.field, s.method, s.param), s.pc.Last(), mods, s.path)
+func (s *state) Enter(k TypeKind, path TypePath, seen Types) {
+	if k == KVar {
+		log.Printf("ENTER[%s]\t%s:%s[%d]\tΔ%v\tΔ%v", k, s.name, anyOf(s.field, s.method, s.param), s.pc.Last(), path, s.path)
 	}
 
 	(&s.path).PushSitu(k)
 
 }
-func (s *state) Exit(k Kind, mods Mods, seen Types) {
-	if debug {
-		log.Printf("EXIT[%s]\t%s:%s[%d]\tΔ%s\tΔ%s", k, s.name, anyOf(s.field, s.method, s.param), s.pc.Last(), mods, s.path)
+func (s *state) Exit(k TypeKind, path TypePath, seen Types) {
+	if k == KVar {
+		log.Printf("EXIT[%s]\t%s:%s[%d]\tΔ%v\tΔ%v", k, s.name, anyOf(s.field, s.method, s.param), s.pc.Last(), path, s.path)
 	}
 	//!! remove children
 	kx := s.path.LastIndex(k)
