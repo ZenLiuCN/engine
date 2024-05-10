@@ -1194,5 +1194,11 @@ func Safe(s string) string {
 	return safe(s, fn.Identity[string])
 }
 func Camel(s string) string {
-	return safe(s, CamelCase)
+	return safe(s, moduleNameCase)
+}
+func moduleNameCase(s string) string {
+	if len(s) <= 1 {
+		return s
+	}
+	return CamelCase(s)
 }
