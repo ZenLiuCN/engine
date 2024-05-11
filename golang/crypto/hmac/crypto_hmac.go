@@ -13,8 +13,8 @@ var (
 	//go:embed crypto_hmac.d.ts
 	CryptoHmacDefine   []byte
 	CryptoHmacDeclared = map[string]any{
-		"equal": hmac.Equal,
 		"New":   hmac.New,
+		"equal": hmac.Equal,
 	}
 )
 

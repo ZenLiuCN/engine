@@ -10,7 +10,7 @@ declare module 'golang/crypto/x509/pkix'{
 	// @ts-ignore
 	import * as big from 'golang/math/big'
 	// @ts-ignore
-	import type {Struct,bool,Ref,int} from 'go'
+	import type {int,Struct,bool,Ref} from 'go'
 	export interface AlgorithmIdentifier extends Struct<AlgorithmIdentifier>{
 		algorithm:asn1.ObjectIdentifier
 		parameters:asn1.RawValue
@@ -71,6 +71,12 @@ declare module 'golang/crypto/x509/pkix'{
 		extensions:Extension[]
 	}
 
+export function emptyRevokedCertificate():RevokedCertificate
+export function refRevokedCertificate():Ref<RevokedCertificate>
+export function refOfRevokedCertificate(x:RevokedCertificate):Ref<RevokedCertificate>
+export function emptyTBSCertificateList():TBSCertificateList
+export function refTBSCertificateList():Ref<TBSCertificateList>
+export function refOfTBSCertificateList(x:TBSCertificateList):Ref<TBSCertificateList>
 export function emptyAlgorithmIdentifier():AlgorithmIdentifier
 export function refAlgorithmIdentifier():Ref<AlgorithmIdentifier>
 export function refOfAlgorithmIdentifier(x:AlgorithmIdentifier):Ref<AlgorithmIdentifier>
@@ -89,9 +95,4 @@ export function refOfExtension(x:Extension):Ref<Extension>
 export function emptyName():Name
 export function refName():Ref<Name>
 export function refOfName(x:Name):Ref<Name>
-export function emptyRevokedCertificate():RevokedCertificate
-export function refRevokedCertificate():Ref<RevokedCertificate>
-export function refOfRevokedCertificate(x:RevokedCertificate):Ref<RevokedCertificate>
-export function emptyTBSCertificateList():TBSCertificateList
-export function refTBSCertificateList():Ref<TBSCertificateList>
-export function refOfTBSCertificateList(x:TBSCertificateList):Ref<TBSCertificateList>}
+}

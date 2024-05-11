@@ -13,9 +13,9 @@ var (
 	//go:embed crypto_des.d.ts
 	CryptoDesDefine   []byte
 	CryptoDesDeclared = map[string]any{
+		"BlockSize":          des.BlockSize,
 		"newCipher":          des.NewCipher,
 		"newTripleDESCipher": des.NewTripleDESCipher,
-		"BlockSize":          des.BlockSize,
 	}
 )
 

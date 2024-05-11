@@ -16,11 +16,11 @@ var (
 	//go:embed net_smtp.d.ts
 	NetSmtpDefine   []byte
 	NetSmtpDeclared = map[string]any{
-		"plainAuth":   smtp.PlainAuth,
-		"sendMail":    smtp.SendMail,
 		"crammD5Auth": smtp.CRAMMD5Auth,
 		"dial":        smtp.Dial,
 		"newClient":   smtp.NewClient,
+		"plainAuth":   smtp.PlainAuth,
+		"sendMail":    smtp.SendMail,
 
 		"emptyClient": func() (v smtp.Client) {
 			return v

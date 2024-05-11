@@ -22,10 +22,11 @@ declare module 'golang/text/tabwriter'{
 	export const TabIndent:uint
 	export interface Writer extends Struct<Writer>,io.Writer{
 		init(output:io.Writer,minwidth:int,tabwidth:int,padding:int,padchar:byte,flags:uint):Ref<Writer>
-		flush():error
-		write(buf:Uint8Array):[int,error]
+		flush()/*error*/
+		write(buf:Uint8Array):int
 	}
 
 export function emptyWriter():Writer
 export function refWriter():Ref<Writer>
-export function refOfWriter(x:Writer):Ref<Writer>}
+export function refOfWriter(x:Writer):Ref<Writer>
+}

@@ -39,7 +39,7 @@ declare module 'golang/sync'{
 		put(x:any):void
 		get():any
 	}
-	export interface RWMutex extends Struct<RWMutex>,Locker{
+	export interface RWMutex extends Locker,Struct<RWMutex>{
 		rLock():void
 		tryRLock():bool
 		rUnlock():void
@@ -54,6 +54,15 @@ declare module 'golang/sync'{
 		wait():void
 	}
 
+export function emptyMap():Map
+export function refMap():Ref<Map>
+export function refOfMap(x:Map):Ref<Map>
+export function emptyMutex():Mutex
+export function refMutex():Ref<Mutex>
+export function refOfMutex(x:Mutex):Ref<Mutex>
+export function emptyOnce():Once
+export function refOnce():Ref<Once>
+export function refOfOnce(x:Once):Ref<Once>
 export function emptyPool():Pool
 export function refPool():Ref<Pool>
 export function refOfPool(x:Pool):Ref<Pool>
@@ -66,12 +75,4 @@ export function refOfWaitGroup(x:WaitGroup):Ref<WaitGroup>
 export function emptyCond():Cond
 export function refCond():Ref<Cond>
 export function refOfCond(x:Cond):Ref<Cond>
-export function emptyMap():Map
-export function refMap():Ref<Map>
-export function refOfMap(x:Map):Ref<Map>
-export function emptyMutex():Mutex
-export function refMutex():Ref<Mutex>
-export function refOfMutex(x:Mutex):Ref<Mutex>
-export function emptyOnce():Once
-export function refOnce():Ref<Once>
-export function refOfOnce(x:Once):Ref<Once>}
+}

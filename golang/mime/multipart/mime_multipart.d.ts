@@ -6,49 +6,46 @@ declare module 'golang/mime/multipart'{
 	// @ts-ignore
 	import * as textproto from 'golang/net/textproto'
 	// @ts-ignore
-	import type {GoError,int64,Struct,error,Ref,int} from 'go'
+	import type {int64,Struct,error,Ref,int,GoError} from 'go'
 	export const ErrMessageTooLarge:GoError
-	export interface File extends io.Reader,io.ReaderAt,io.Seeker,io.Closer{
+	export interface File extends io.Seeker,io.Closer,io.Reader,io.ReaderAt{
 	}
 	export interface FileHeader extends Struct<FileHeader>{
 		filename:string
 		header:textproto.MIMEHeader
 		size:int64
-		open():[File,error]
+		open():File
 	}
 	export interface Form extends Struct<Form>{
 		value:Record<string,string[]>
 		file:Record<string,Ref<FileHeader>>
-		removeAll():error
+		removeAll()/*error*/
 	}
 	export function newReader(r:io.Reader,boundary:string):Ref<Reader>
 	export function newWriter(w:io.Writer):Ref<Writer>
-	export interface Part extends io.ReadCloser,io.Closer,Struct<Part>{
+	export interface Part extends Struct<Part>,io.ReadCloser,io.Closer{
 		header:textproto.MIMEHeader
 		formName():string
 		fileName():string
-		read(d:Uint8Array):[int,error]
+		read(d:Uint8Array):int
 		close():error
 	}
 	export interface Reader extends Struct<Reader>{
-		readForm(maxMemory:int64):[Ref<Form>,error]
-		nextPart():[Ref<Part>,error]
-		nextRawPart():[Ref<Part>,error]
+		readForm(maxMemory:int64):Ref<Form>
+		nextPart():Ref<Part>
+		nextRawPart():Ref<Part>
 	}
 	export interface Writer extends Struct<Writer>,io.Closer{
 		boundary():string
-		setBoundary(boundary:string):error
+		setBoundary(boundary:string)/*error*/
 		formDataContentType():string
-		createPart(header:textproto.MIMEHeader):[io.Writer,error]
-		createFormFile(fieldname:string,filename:string):[io.Writer,error]
-		createFormField(fieldname:string):[io.Writer,error]
-		writeField(fieldname:string,value:string):error
+		createPart(header:textproto.MIMEHeader):io.Writer
+		createFormFile(fieldname:string,filename:string):io.Writer
+		createFormField(fieldname:string):io.Writer
+		writeField(fieldname:string,value:string)/*error*/
 		close():error
 	}
 
-export function emptyFileHeader():FileHeader
-export function refFileHeader():Ref<FileHeader>
-export function refOfFileHeader(x:FileHeader):Ref<FileHeader>
 export function emptyForm():Form
 export function refForm():Ref<Form>
 export function refOfForm(x:Form):Ref<Form>
@@ -60,4 +57,8 @@ export function refReader():Ref<Reader>
 export function refOfReader(x:Reader):Ref<Reader>
 export function emptyWriter():Writer
 export function refWriter():Ref<Writer>
-export function refOfWriter(x:Writer):Ref<Writer>}
+export function refOfWriter(x:Writer):Ref<Writer>
+export function emptyFileHeader():FileHeader
+export function refFileHeader():Ref<FileHeader>
+export function refOfFileHeader(x:FileHeader):Ref<FileHeader>
+}

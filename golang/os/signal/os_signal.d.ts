@@ -15,4 +15,5 @@ declare module 'golang/os/signal'{
 	export function notifyContext(parent:context.Context,...signals:os.Signal[]):[context.Context,context.CancelFunc]
 	export function reset(...sig:os.Signal[]):void
 	export function stop(c:go.ChanSend<os.Signal>):void
+
 }

@@ -17,22 +17,12 @@ var (
 	//go:embed crypto_ecdsa.d.ts
 	CryptoEcdsaDefine   []byte
 	CryptoEcdsaDeclared = map[string]any{
-		"verify":      ecdsa.Verify,
-		"verifyASN1":  ecdsa.VerifyASN1,
 		"generateKey": ecdsa.GenerateKey,
 		"sign":        ecdsa.Sign,
 		"signASN1":    ecdsa.SignASN1,
+		"verify":      ecdsa.Verify,
+		"verifyASN1":  ecdsa.VerifyASN1,
 
-		"emptyPublicKey": func() (v ecdsa.PublicKey) {
-			return v
-		},
-		"refPublicKey": func() *ecdsa.PublicKey {
-			var x ecdsa.PublicKey
-			return &x
-		},
-		"refOfPublicKey": func(x ecdsa.PublicKey) *ecdsa.PublicKey {
-			return &x
-		},
 		"emptyPrivateKey": func() (v ecdsa.PrivateKey) {
 			return v
 		},
@@ -41,6 +31,16 @@ var (
 			return &x
 		},
 		"refOfPrivateKey": func(x ecdsa.PrivateKey) *ecdsa.PrivateKey {
+			return &x
+		},
+		"emptyPublicKey": func() (v ecdsa.PublicKey) {
+			return v
+		},
+		"refPublicKey": func() *ecdsa.PublicKey {
+			var x ecdsa.PublicKey
+			return &x
+		},
+		"refOfPublicKey": func(x ecdsa.PublicKey) *ecdsa.PublicKey {
 			return &x
 		}}
 )

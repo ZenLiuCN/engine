@@ -13,21 +13,11 @@ var (
 	//go:embed compress_lzw.d.ts
 	CompressLzwDefine   []byte
 	CompressLzwDeclared = map[string]any{
+		"LSB":       lzw.LSB,
 		"MSB":       lzw.MSB,
 		"newReader": lzw.NewReader,
 		"newWriter": lzw.NewWriter,
-		"LSB":       lzw.LSB,
 
-		"emptyWriter": func() (v lzw.Writer) {
-			return v
-		},
-		"refWriter": func() *lzw.Writer {
-			var x lzw.Writer
-			return &x
-		},
-		"refOfWriter": func(x lzw.Writer) *lzw.Writer {
-			return &x
-		},
 		"emptyReader": func() (v lzw.Reader) {
 			return v
 		},
@@ -36,6 +26,16 @@ var (
 			return &x
 		},
 		"refOfReader": func(x lzw.Reader) *lzw.Reader {
+			return &x
+		},
+		"emptyWriter": func() (v lzw.Writer) {
+			return v
+		},
+		"refWriter": func() *lzw.Writer {
+			var x lzw.Writer
+			return &x
+		},
+		"refOfWriter": func(x lzw.Writer) *lzw.Writer {
 			return &x
 		}}
 )

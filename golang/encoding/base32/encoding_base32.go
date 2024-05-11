@@ -13,13 +13,13 @@ var (
 	//go:embed encoding_base32.d.ts
 	EncodingBase32Define   []byte
 	EncodingBase32Declared = map[string]any{
-		"HexEncoding": base32.HexEncoding,
 		"newDecoder":  base32.NewDecoder,
 		"newEncoder":  base32.NewEncoder,
 		"newEncoding": base32.NewEncoding,
 		"NoPadding":   base32.NoPadding,
 		"StdEncoding": base32.StdEncoding,
 		"StdPadding":  base32.StdPadding,
+		"HexEncoding": base32.HexEncoding,
 
 		"emptyEncoding": func() (v base32.Encoding) {
 			return v

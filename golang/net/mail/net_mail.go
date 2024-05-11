@@ -16,11 +16,11 @@ var (
 	//go:embed net_mail.d.ts
 	NetMailDefine   []byte
 	NetMailDeclared = map[string]any{
-		"ErrHeaderNotPresent": mail.ErrHeaderNotPresent,
 		"parseAddress":        mail.ParseAddress,
 		"parseAddressList":    mail.ParseAddressList,
 		"parseDate":           mail.ParseDate,
 		"readMessage":         mail.ReadMessage,
+		"ErrHeaderNotPresent": mail.ErrHeaderNotPresent,
 
 		"emptyAddress": func() (v mail.Address) {
 			return v

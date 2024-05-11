@@ -13,15 +13,15 @@ var (
 	//go:embed compress_flate.d.ts
 	CompressFlateDefine   []byte
 	CompressFlateDeclared = map[string]any{
-		"HuffmanOnly":        flate.HuffmanOnly,
-		"newReaderDict":      flate.NewReaderDict,
-		"newWriter":          flate.NewWriter,
+		"DefaultCompression": flate.DefaultCompression,
+		"NoCompression":      flate.NoCompression,
+		"newWriterDict":      flate.NewWriterDict,
 		"BestCompression":    flate.BestCompression,
 		"BestSpeed":          flate.BestSpeed,
-		"DefaultCompression": flate.DefaultCompression,
+		"HuffmanOnly":        flate.HuffmanOnly,
 		"newReader":          flate.NewReader,
-		"newWriterDict":      flate.NewWriterDict,
-		"NoCompression":      flate.NoCompression,
+		"newReaderDict":      flate.NewReaderDict,
+		"newWriter":          flate.NewWriter,
 
 		"emptyWriter": func() (v flate.Writer) {
 			return v

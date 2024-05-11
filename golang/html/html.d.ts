@@ -3,4 +3,5 @@
 declare module 'golang/html'{
 	export function escapeString(s:string):string
 	export function unescapeString(s:string):string
+
 }

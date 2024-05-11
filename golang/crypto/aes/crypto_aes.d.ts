@@ -11,4 +11,5 @@ declare module 'golang/crypto/aes'{
 		error():string
 	}
 	export function newCipher(key:Uint8Array):cipher.Block
+
 }

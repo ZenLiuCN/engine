@@ -30,4 +30,5 @@ declare module 'golang/math/cmplx'{
 	export function sqrt(x:complex128):complex128
 	export function tan(x:complex128):complex128
 	export function tanh(x:complex128):complex128
+
 }

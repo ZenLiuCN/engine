@@ -14,49 +14,19 @@ var (
 	//go:embed encoding_xml.d.ts
 	EncodingXmlDefine   []byte
 	EncodingXmlDeclared = map[string]any{
-		"copyToken":       xml.CopyToken,
 		"escapeText":      xml.EscapeText,
-		"Header":          xml.Header,
-		"newEncoder":      xml.NewEncoder,
-		"unmarshal":       xml.Unmarshal,
-		"escape":          xml.Escape,
 		"HTMLAutoClose":   xml.HTMLAutoClose,
 		"HTMLEntity":      xml.HTMLEntity,
 		"marshal":         xml.Marshal,
 		"marshalIndent":   xml.MarshalIndent,
 		"newDecoder":      xml.NewDecoder,
+		"unmarshal":       xml.Unmarshal,
+		"copyToken":       xml.CopyToken,
+		"escape":          xml.Escape,
+		"Header":          xml.Header,
+		"newEncoder":      xml.NewEncoder,
 		"newTokenDecoder": xml.NewTokenDecoder,
 
-		"emptyEncoder": func() (v xml.Encoder) {
-			return v
-		},
-		"refEncoder": func() *xml.Encoder {
-			var x xml.Encoder
-			return &x
-		},
-		"refOfEncoder": func(x xml.Encoder) *xml.Encoder {
-			return &x
-		},
-		"emptyName": func() (v xml.Name) {
-			return v
-		},
-		"refName": func() *xml.Name {
-			var x xml.Name
-			return &x
-		},
-		"refOfName": func(x xml.Name) *xml.Name {
-			return &x
-		},
-		"emptyProcInst": func() (v xml.ProcInst) {
-			return v
-		},
-		"refProcInst": func() *xml.ProcInst {
-			var x xml.ProcInst
-			return &x
-		},
-		"refOfProcInst": func(x xml.ProcInst) *xml.ProcInst {
-			return &x
-		},
 		"emptyAttr": func() (v xml.Attr) {
 			return v
 		},
@@ -77,14 +47,14 @@ var (
 		"refOfEndElement": func(x xml.EndElement) *xml.EndElement {
 			return &x
 		},
-		"emptyStartElement": func() (v xml.StartElement) {
+		"emptyName": func() (v xml.Name) {
 			return v
 		},
-		"refStartElement": func() *xml.StartElement {
-			var x xml.StartElement
+		"refName": func() *xml.Name {
+			var x xml.Name
 			return &x
 		},
-		"refOfStartElement": func(x xml.StartElement) *xml.StartElement {
+		"refOfName": func(x xml.Name) *xml.Name {
 			return &x
 		},
 		"emptyDecoder": func() (v xml.Decoder) {
@@ -95,6 +65,36 @@ var (
 			return &x
 		},
 		"refOfDecoder": func(x xml.Decoder) *xml.Decoder {
+			return &x
+		},
+		"emptyEncoder": func() (v xml.Encoder) {
+			return v
+		},
+		"refEncoder": func() *xml.Encoder {
+			var x xml.Encoder
+			return &x
+		},
+		"refOfEncoder": func(x xml.Encoder) *xml.Encoder {
+			return &x
+		},
+		"emptyProcInst": func() (v xml.ProcInst) {
+			return v
+		},
+		"refProcInst": func() *xml.ProcInst {
+			var x xml.ProcInst
+			return &x
+		},
+		"refOfProcInst": func(x xml.ProcInst) *xml.ProcInst {
+			return &x
+		},
+		"emptyStartElement": func() (v xml.StartElement) {
+			return v
+		},
+		"refStartElement": func() *xml.StartElement {
+			var x xml.StartElement
+			return &x
+		},
+		"refOfStartElement": func(x xml.StartElement) *xml.StartElement {
 			return &x
 		}}
 )

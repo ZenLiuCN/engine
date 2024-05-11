@@ -13,47 +13,27 @@ var (
 	//go:embed bufio.d.ts
 	BufioDefine   []byte
 	BufioDeclared = map[string]any{
-		"ErrBadReadCount":      bufio.ErrBadReadCount,
-		"ErrBufferFull":        bufio.ErrBufferFull,
-		"ErrInvalidUnreadRune": bufio.ErrInvalidUnreadRune,
 		"ErrNegativeAdvance":   bufio.ErrNegativeAdvance,
-		"newReaderSize":        bufio.NewReaderSize,
-		"ErrFinalToken":        bufio.ErrFinalToken,
 		"ErrTooLong":           bufio.ErrTooLong,
 		"newReader":            bufio.NewReader,
-		"newScanner":           bufio.NewScanner,
-		"newWriterSize":        bufio.NewWriterSize,
-		"MaxScanTokenSize":     bufio.MaxScanTokenSize,
+		"newWriter":            bufio.NewWriter,
+		"ErrBadReadCount":      bufio.ErrBadReadCount,
+		"newReadWriter":        bufio.NewReadWriter,
+		"newReaderSize":        bufio.NewReaderSize,
 		"scanLines":            bufio.ScanLines,
+		"scanWords":            bufio.ScanWords,
+		"ErrBufferFull":        bufio.ErrBufferFull,
+		"ErrFinalToken":        bufio.ErrFinalToken,
+		"newWriterSize":        bufio.NewWriterSize,
+		"scanBytes":            bufio.ScanBytes,
 		"scanRunes":            bufio.ScanRunes,
 		"ErrAdvanceTooFar":     bufio.ErrAdvanceTooFar,
 		"ErrInvalidUnreadByte": bufio.ErrInvalidUnreadByte,
+		"ErrInvalidUnreadRune": bufio.ErrInvalidUnreadRune,
 		"ErrNegativeCount":     bufio.ErrNegativeCount,
-		"newReadWriter":        bufio.NewReadWriter,
-		"newWriter":            bufio.NewWriter,
-		"scanBytes":            bufio.ScanBytes,
-		"scanWords":            bufio.ScanWords,
+		"MaxScanTokenSize":     bufio.MaxScanTokenSize,
+		"newScanner":           bufio.NewScanner,
 
-		"emptyReadWriter": func() (v bufio.ReadWriter) {
-			return v
-		},
-		"refReadWriter": func() *bufio.ReadWriter {
-			var x bufio.ReadWriter
-			return &x
-		},
-		"refOfReadWriter": func(x bufio.ReadWriter) *bufio.ReadWriter {
-			return &x
-		},
-		"emptyReader": func() (v bufio.Reader) {
-			return v
-		},
-		"refReader": func() *bufio.Reader {
-			var x bufio.Reader
-			return &x
-		},
-		"refOfReader": func(x bufio.Reader) *bufio.Reader {
-			return &x
-		},
 		"emptyScanner": func() (v bufio.Scanner) {
 			return v
 		},
@@ -72,6 +52,26 @@ var (
 			return &x
 		},
 		"refOfWriter": func(x bufio.Writer) *bufio.Writer {
+			return &x
+		},
+		"emptyReadWriter": func() (v bufio.ReadWriter) {
+			return v
+		},
+		"refReadWriter": func() *bufio.ReadWriter {
+			var x bufio.ReadWriter
+			return &x
+		},
+		"refOfReadWriter": func(x bufio.ReadWriter) *bufio.ReadWriter {
+			return &x
+		},
+		"emptyReader": func() (v bufio.Reader) {
+			return v
+		},
+		"refReader": func() *bufio.Reader {
+			var x bufio.Reader
+			return &x
+		},
+		"refOfReader": func(x bufio.Reader) *bufio.Reader {
 			return &x
 		}}
 )

@@ -20,9 +20,10 @@ declare module 'golang/net/http/cookiejar'{
 		string():string
 	}
 
+export function emptyJar():Jar
+export function refJar():Ref<Jar>
+export function refOfJar(x:Jar):Ref<Jar>
 export function emptyOptions():Options
 export function refOptions():Ref<Options>
 export function refOfOptions(x:Options):Ref<Options>
-export function emptyJar():Jar
-export function refJar():Ref<Jar>
-export function refOfJar(x:Jar):Ref<Jar>}
+}

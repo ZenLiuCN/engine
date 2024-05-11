@@ -14,11 +14,11 @@ var (
 	//go:embed net_rpc_jsonrpc.d.ts
 	NetRpcJsonrpcDefine   []byte
 	NetRpcJsonrpcDeclared = map[string]any{
-		"serveConn":      jsonrpc.ServeConn,
 		"dial":           jsonrpc.Dial,
 		"newClient":      jsonrpc.NewClient,
 		"newClientCodec": jsonrpc.NewClientCodec,
 		"newServerCodec": jsonrpc.NewServerCodec,
+		"serveConn":      jsonrpc.ServeConn,
 	}
 )
 

@@ -14,15 +14,15 @@ var (
 	//go:embed crypto_ed25519.d.ts
 	CryptoEd25519Define   []byte
 	CryptoEd25519Declared = map[string]any{
-		"newKeyFromSeed":    ed25519.NewKeyFromSeed,
-		"PublicKeySize":     ed25519.PublicKeySize,
-		"sign":              ed25519.Sign,
-		"generateKey":       ed25519.GenerateKey,
-		"PrivateKeySize":    ed25519.PrivateKeySize,
-		"SeedSize":          ed25519.SeedSize,
 		"SignatureSize":     ed25519.SignatureSize,
 		"verify":            ed25519.Verify,
+		"generateKey":       ed25519.GenerateKey,
+		"PrivateKeySize":    ed25519.PrivateKeySize,
+		"PublicKeySize":     ed25519.PublicKeySize,
 		"verifyWithOptions": ed25519.VerifyWithOptions,
+		"newKeyFromSeed":    ed25519.NewKeyFromSeed,
+		"SeedSize":          ed25519.SeedSize,
+		"sign":              ed25519.Sign,
 
 		"emptyOptions": func() (v ed25519.Options) {
 			return v

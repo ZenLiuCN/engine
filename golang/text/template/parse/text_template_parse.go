@@ -13,112 +13,42 @@ var (
 	//go:embed text_template_parse.d.ts
 	TextTemplateParseDefine   []byte
 	TextTemplateParseDeclared = map[string]any{
-		"NodeCommand":    parse.NodeCommand,
+		"isEmptyTree":    parse.IsEmptyTree,
+		"NodeBool":       parse.NodeBool,
 		"NodeComment":    parse.NodeComment,
-		"NodeIf":         parse.NodeIf,
-		"NodeChain":      parse.NodeChain,
 		"NodeDot":        parse.NodeDot,
-		"NodeField":      parse.NodeField,
+		"NodeTemplate":   parse.NodeTemplate,
+		"New":            parse.New,
+		"newIdentifier":  parse.NewIdentifier,
+		"NodeIf":         parse.NodeIf,
+		"ParseComments":  parse.ParseComments,
+		"NodeList":       parse.NodeList,
+		"NodeText":       parse.NodeText,
+		"NodeAction":     parse.NodeAction,
+		"NodeContinue":   parse.NodeContinue,
+		"NodeNumber":     parse.NodeNumber,
+		"NodeChain":      parse.NodeChain,
+		"NodeNil":        parse.NodeNil,
 		"NodeVariable":   parse.NodeVariable,
 		"NodeWith":       parse.NodeWith,
-		"NodeBool":       parse.NodeBool,
-		"NodeContinue":   parse.NodeContinue,
-		"NodeList":       parse.NodeList,
-		"NodePipe":       parse.NodePipe,
-		"New":            parse.New,
-		"NodeRange":      parse.NodeRange,
-		"NodeTemplate":   parse.NodeTemplate,
-		"NodeText":       parse.NodeText,
-		"NodeNumber":     parse.NodeNumber,
-		"ParseComments":  parse.ParseComments,
-		"NodeAction":     parse.NodeAction,
-		"NodeIdentifier": parse.NodeIdentifier,
-		"NodeNil":        parse.NodeNil,
-		"isEmptyTree":    parse.IsEmptyTree,
-		"NodeBreak":      parse.NodeBreak,
-		"parse":          parse.Parse,
 		"SkipFuncCheck":  parse.SkipFuncCheck,
-		"newIdentifier":  parse.NewIdentifier,
+		"NodeBreak":      parse.NodeBreak,
+		"NodeField":      parse.NodeField,
+		"parse":          parse.Parse,
+		"NodeCommand":    parse.NodeCommand,
+		"NodeIdentifier": parse.NodeIdentifier,
+		"NodePipe":       parse.NodePipe,
+		"NodeRange":      parse.NodeRange,
 		"NodeString":     parse.NodeString,
 
-		"emptyTemplateNode": func() (v parse.TemplateNode) {
+		"emptyCommandNode": func() (v parse.CommandNode) {
 			return v
 		},
-		"refTemplateNode": func() *parse.TemplateNode {
-			var x parse.TemplateNode
+		"refCommandNode": func() *parse.CommandNode {
+			var x parse.CommandNode
 			return &x
 		},
-		"refOfTemplateNode": func(x parse.TemplateNode) *parse.TemplateNode {
-			return &x
-		},
-		"emptyTextNode": func() (v parse.TextNode) {
-			return v
-		},
-		"refTextNode": func() *parse.TextNode {
-			var x parse.TextNode
-			return &x
-		},
-		"refOfTextNode": func(x parse.TextNode) *parse.TextNode {
-			return &x
-		},
-		"emptyStringNode": func() (v parse.StringNode) {
-			return v
-		},
-		"refStringNode": func() *parse.StringNode {
-			var x parse.StringNode
-			return &x
-		},
-		"refOfStringNode": func(x parse.StringNode) *parse.StringNode {
-			return &x
-		},
-		"emptyTree": func() (v parse.Tree) {
-			return v
-		},
-		"refTree": func() *parse.Tree {
-			var x parse.Tree
-			return &x
-		},
-		"refOfTree": func(x parse.Tree) *parse.Tree {
-			return &x
-		},
-		"emptyBoolNode": func() (v parse.BoolNode) {
-			return v
-		},
-		"refBoolNode": func() *parse.BoolNode {
-			var x parse.BoolNode
-			return &x
-		},
-		"refOfBoolNode": func(x parse.BoolNode) *parse.BoolNode {
-			return &x
-		},
-		"emptyBranchNode": func() (v parse.BranchNode) {
-			return v
-		},
-		"refBranchNode": func() *parse.BranchNode {
-			var x parse.BranchNode
-			return &x
-		},
-		"refOfBranchNode": func(x parse.BranchNode) *parse.BranchNode {
-			return &x
-		},
-		"emptyBreakNode": func() (v parse.BreakNode) {
-			return v
-		},
-		"refBreakNode": func() *parse.BreakNode {
-			var x parse.BreakNode
-			return &x
-		},
-		"refOfBreakNode": func(x parse.BreakNode) *parse.BreakNode {
-			return &x
-		},
-		"emptyContinueNode": func() (v parse.ContinueNode) {
-			return v
-		},
-		"refContinueNode": func() *parse.ContinueNode {
-			var x parse.ContinueNode
-			return &x
-		},
-		"refOfContinueNode": func(x parse.ContinueNode) *parse.ContinueNode {
+		"refOfCommandNode": func(x parse.CommandNode) *parse.CommandNode {
 			return &x
 		},
 		"emptyPipeNode": func() (v parse.PipeNode) {
@@ -131,14 +61,24 @@ var (
 		"refOfPipeNode": func(x parse.PipeNode) *parse.PipeNode {
 			return &x
 		},
-		"emptyRangeNode": func() (v parse.RangeNode) {
+		"emptyTree": func() (v parse.Tree) {
 			return v
 		},
-		"refRangeNode": func() *parse.RangeNode {
-			var x parse.RangeNode
+		"refTree": func() *parse.Tree {
+			var x parse.Tree
 			return &x
 		},
-		"refOfRangeNode": func(x parse.RangeNode) *parse.RangeNode {
+		"refOfTree": func(x parse.Tree) *parse.Tree {
+			return &x
+		},
+		"emptyFieldNode": func() (v parse.FieldNode) {
+			return v
+		},
+		"refFieldNode": func() *parse.FieldNode {
+			var x parse.FieldNode
+			return &x
+		},
+		"refOfFieldNode": func(x parse.FieldNode) *parse.FieldNode {
 			return &x
 		},
 		"emptyIfNode": func() (v parse.IfNode) {
@@ -151,34 +91,34 @@ var (
 		"refOfIfNode": func(x parse.IfNode) *parse.IfNode {
 			return &x
 		},
-		"emptyListNode": func() (v parse.ListNode) {
+		"emptyNilNode": func() (v parse.NilNode) {
 			return v
 		},
-		"refListNode": func() *parse.ListNode {
-			var x parse.ListNode
+		"refNilNode": func() *parse.NilNode {
+			var x parse.NilNode
 			return &x
 		},
-		"refOfListNode": func(x parse.ListNode) *parse.ListNode {
+		"refOfNilNode": func(x parse.NilNode) *parse.NilNode {
 			return &x
 		},
-		"emptyActionNode": func() (v parse.ActionNode) {
+		"emptyWithNode": func() (v parse.WithNode) {
 			return v
 		},
-		"refActionNode": func() *parse.ActionNode {
-			var x parse.ActionNode
+		"refWithNode": func() *parse.WithNode {
+			var x parse.WithNode
 			return &x
 		},
-		"refOfActionNode": func(x parse.ActionNode) *parse.ActionNode {
+		"refOfWithNode": func(x parse.WithNode) *parse.WithNode {
 			return &x
 		},
-		"emptyChainNode": func() (v parse.ChainNode) {
+		"emptyBreakNode": func() (v parse.BreakNode) {
 			return v
 		},
-		"refChainNode": func() *parse.ChainNode {
-			var x parse.ChainNode
+		"refBreakNode": func() *parse.BreakNode {
+			var x parse.BreakNode
 			return &x
 		},
-		"refOfChainNode": func(x parse.ChainNode) *parse.ChainNode {
+		"refOfBreakNode": func(x parse.BreakNode) *parse.BreakNode {
 			return &x
 		},
 		"emptyCommentNode": func() (v parse.CommentNode) {
@@ -201,26 +141,6 @@ var (
 		"refOfDotNode": func(x parse.DotNode) *parse.DotNode {
 			return &x
 		},
-		"emptyFieldNode": func() (v parse.FieldNode) {
-			return v
-		},
-		"refFieldNode": func() *parse.FieldNode {
-			var x parse.FieldNode
-			return &x
-		},
-		"refOfFieldNode": func(x parse.FieldNode) *parse.FieldNode {
-			return &x
-		},
-		"emptyIdentifierNode": func() (v parse.IdentifierNode) {
-			return v
-		},
-		"refIdentifierNode": func() *parse.IdentifierNode {
-			var x parse.IdentifierNode
-			return &x
-		},
-		"refOfIdentifierNode": func(x parse.IdentifierNode) *parse.IdentifierNode {
-			return &x
-		},
 		"emptyNumberNode": func() (v parse.NumberNode) {
 			return v
 		},
@@ -231,34 +151,34 @@ var (
 		"refOfNumberNode": func(x parse.NumberNode) *parse.NumberNode {
 			return &x
 		},
-		"emptyWithNode": func() (v parse.WithNode) {
+		"emptyRangeNode": func() (v parse.RangeNode) {
 			return v
 		},
-		"refWithNode": func() *parse.WithNode {
-			var x parse.WithNode
+		"refRangeNode": func() *parse.RangeNode {
+			var x parse.RangeNode
 			return &x
 		},
-		"refOfWithNode": func(x parse.WithNode) *parse.WithNode {
+		"refOfRangeNode": func(x parse.RangeNode) *parse.RangeNode {
 			return &x
 		},
-		"emptyCommandNode": func() (v parse.CommandNode) {
+		"emptyTemplateNode": func() (v parse.TemplateNode) {
 			return v
 		},
-		"refCommandNode": func() *parse.CommandNode {
-			var x parse.CommandNode
+		"refTemplateNode": func() *parse.TemplateNode {
+			var x parse.TemplateNode
 			return &x
 		},
-		"refOfCommandNode": func(x parse.CommandNode) *parse.CommandNode {
+		"refOfTemplateNode": func(x parse.TemplateNode) *parse.TemplateNode {
 			return &x
 		},
-		"emptyNilNode": func() (v parse.NilNode) {
+		"emptyTextNode": func() (v parse.TextNode) {
 			return v
 		},
-		"refNilNode": func() *parse.NilNode {
-			var x parse.NilNode
+		"refTextNode": func() *parse.TextNode {
+			var x parse.TextNode
 			return &x
 		},
-		"refOfNilNode": func(x parse.NilNode) *parse.NilNode {
+		"refOfTextNode": func(x parse.TextNode) *parse.TextNode {
 			return &x
 		},
 		"emptyVariableNode": func() (v parse.VariableNode) {
@@ -269,6 +189,86 @@ var (
 			return &x
 		},
 		"refOfVariableNode": func(x parse.VariableNode) *parse.VariableNode {
+			return &x
+		},
+		"emptyActionNode": func() (v parse.ActionNode) {
+			return v
+		},
+		"refActionNode": func() *parse.ActionNode {
+			var x parse.ActionNode
+			return &x
+		},
+		"refOfActionNode": func(x parse.ActionNode) *parse.ActionNode {
+			return &x
+		},
+		"emptyBoolNode": func() (v parse.BoolNode) {
+			return v
+		},
+		"refBoolNode": func() *parse.BoolNode {
+			var x parse.BoolNode
+			return &x
+		},
+		"refOfBoolNode": func(x parse.BoolNode) *parse.BoolNode {
+			return &x
+		},
+		"emptyContinueNode": func() (v parse.ContinueNode) {
+			return v
+		},
+		"refContinueNode": func() *parse.ContinueNode {
+			var x parse.ContinueNode
+			return &x
+		},
+		"refOfContinueNode": func(x parse.ContinueNode) *parse.ContinueNode {
+			return &x
+		},
+		"emptyListNode": func() (v parse.ListNode) {
+			return v
+		},
+		"refListNode": func() *parse.ListNode {
+			var x parse.ListNode
+			return &x
+		},
+		"refOfListNode": func(x parse.ListNode) *parse.ListNode {
+			return &x
+		},
+		"emptyStringNode": func() (v parse.StringNode) {
+			return v
+		},
+		"refStringNode": func() *parse.StringNode {
+			var x parse.StringNode
+			return &x
+		},
+		"refOfStringNode": func(x parse.StringNode) *parse.StringNode {
+			return &x
+		},
+		"emptyBranchNode": func() (v parse.BranchNode) {
+			return v
+		},
+		"refBranchNode": func() *parse.BranchNode {
+			var x parse.BranchNode
+			return &x
+		},
+		"refOfBranchNode": func(x parse.BranchNode) *parse.BranchNode {
+			return &x
+		},
+		"emptyChainNode": func() (v parse.ChainNode) {
+			return v
+		},
+		"refChainNode": func() *parse.ChainNode {
+			var x parse.ChainNode
+			return &x
+		},
+		"refOfChainNode": func(x parse.ChainNode) *parse.ChainNode {
+			return &x
+		},
+		"emptyIdentifierNode": func() (v parse.IdentifierNode) {
+			return v
+		},
+		"refIdentifierNode": func() *parse.IdentifierNode {
+			var x parse.IdentifierNode
+			return &x
+		},
+		"refOfIdentifierNode": func(x parse.IdentifierNode) *parse.IdentifierNode {
 			return &x
 		}}
 )

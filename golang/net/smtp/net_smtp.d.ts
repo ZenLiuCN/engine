@@ -10,32 +10,32 @@ declare module 'golang/net/smtp'{
 	// @ts-ignore
 	import * as net from 'golang/net'
 	// @ts-ignore
-	import type {bool,error,Ref,Struct} from 'go'
+	import type {error,Ref,Struct,bool} from 'go'
 	export interface Auth{
-		next(fromServer:Uint8Array,more:bool):[Uint8Array,error]
-		start(server:Ref<ServerInfo>):[string,Uint8Array,error]
+		next(fromServer:Uint8Array,more:bool):Uint8Array
+		start(server:Ref<ServerInfo>):[string,Uint8Array]
 	}
 	export function crammD5Auth(username:string,secret:string):Auth
 	export interface Client extends Struct<Client>,io.Closer{
 		text:Ref<textproto.Conn>
 		close():error
-		hello(localName:string):error
-		startTLS(config:Ref<tls.Config>):error
+		hello(localName:string)/*error*/
+		startTLS(config:Ref<tls.Config>)/*error*/
 		tlsConnectionState():[tls.ConnectionState,bool]
-		verify(addr:string):error
-		auth(a:Auth):error
-		mail(from:string):error
-		rcpt(to:string):error
-		data():[io.WriteCloser,error]
+		verify(addr:string)/*error*/
+		auth(a:Auth)/*error*/
+		mail(from:string)/*error*/
+		rcpt(to:string)/*error*/
+		data():io.WriteCloser
 		extension(ext:string):[bool,string]
-		reset():error
-		noop():error
-		quit():error
+		reset()/*error*/
+		noop()/*error*/
+		quit()/*error*/
 	}
 	export function dial(addr:string):Ref<Client>
-	export function newClient(conn:net.Conn,host:string):[Ref<Client>,error]
+	export function newClient(conn:net.Conn,host:string):Ref<Client>
 	export function plainAuth(identity:string,username:string,password:string,host:string):Auth
-	export function sendMail(addr:string,a:Auth,from:string,to:string[],msg:Uint8Array):error
+	export function sendMail(addr:string,a:Auth,from:string,to:string[],msg:Uint8Array)/*error*/
 	export interface ServerInfo extends Struct<ServerInfo>{
 		name:string
 		tls:bool
@@ -47,4 +47,5 @@ export function refClient():Ref<Client>
 export function refOfClient(x:Client):Ref<Client>
 export function emptyServerInfo():ServerInfo
 export function refServerInfo():Ref<ServerInfo>
-export function refOfServerInfo(x:ServerInfo):Ref<ServerInfo>}
+export function refOfServerInfo(x:ServerInfo):Ref<ServerInfo>
+}

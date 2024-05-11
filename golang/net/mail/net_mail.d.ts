@@ -18,21 +18,21 @@ declare module 'golang/net/mail'{
 	}
 	export interface AddressParser extends Struct<AddressParser>{
 		wordDecoder:Ref<mime.WordDecoder>
-		parse(address:string):[Ref<Address>,error]
-		parseList(list:string):[Ref<Address>[],error]
+		parse(address:string):Ref<Address>
+		parseList(list:string):Ref<Address>[]
 	}
 	export const ErrHeaderNotPresent:GoError
 	export interface Header extends Record<string,string[]>{
 		get(key:string):string
-		date():[time.Time,error]
-		addressList(key:string):[Ref<Address>[],error]
+		date():time.Time
+		addressList(key:string):Ref<Address>[]
 	}
 	export interface Message extends Struct<Message>{
 		header:Header
 		body:io.Reader
 	}
 	export function parseAddress(address:string):Ref<Address>
-	export function parseAddressList(list:string):[Ref<Address>]
+	export function parseAddressList(list:string):Ref<Address>[]
 	export function parseDate(date:string):time.Time
 	export function readMessage(r:io.Reader):Ref<Message>
 
@@ -44,4 +44,5 @@ export function refAddressParser():Ref<AddressParser>
 export function refOfAddressParser(x:AddressParser):Ref<AddressParser>
 export function emptyMessage():Message
 export function refMessage():Ref<Message>
-export function refOfMessage(x:Message):Ref<Message>}
+export function refOfMessage(x:Message):Ref<Message>
+}

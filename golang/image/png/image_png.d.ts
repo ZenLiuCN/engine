@@ -14,11 +14,11 @@ declare module 'golang/image/png'{
 	export function decode(r:io.Reader):image.Image
 	export function decodeConfig(r:io.Reader):image.Config
 	export const DefaultCompression:CompressionLevel
-	export function encode(w:io.Writer,m:image.Image):error
+	export function encode(w:io.Writer,m:image.Image)/*error*/
 	export interface Encoder extends Struct<Encoder>{
 		compressionLevel:CompressionLevel
 		bufferPool:EncoderBufferPool
-		encode(w:io.Writer,m:image.Image):error
+		encode(w:io.Writer,m:image.Image)/*error*/
 	}
 	export interface EncoderBuffer extends Struct<EncoderBuffer>{
 	}
@@ -34,9 +34,10 @@ declare module 'golang/image/png'{
 		error():string
 	}
 
+export function emptyEncoderBuffer():EncoderBuffer
+export function refEncoderBuffer():Ref<EncoderBuffer>
+export function refOfEncoderBuffer(x:EncoderBuffer):Ref<EncoderBuffer>
 export function emptyEncoder():Encoder
 export function refEncoder():Ref<Encoder>
 export function refOfEncoder(x:Encoder):Ref<Encoder>
-export function emptyEncoderBuffer():EncoderBuffer
-export function refEncoderBuffer():Ref<EncoderBuffer>
-export function refOfEncoderBuffer(x:EncoderBuffer):Ref<EncoderBuffer>}
+}

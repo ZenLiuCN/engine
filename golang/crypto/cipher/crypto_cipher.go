@@ -13,15 +13,15 @@ var (
 	//go:embed crypto_cipher.d.ts
 	CryptoCipherDefine   []byte
 	CryptoCipherDeclared = map[string]any{
+		"newCFBDecrypter":     cipher.NewCFBDecrypter,
+		"newGCM":              cipher.NewGCM,
+		"newGCMWithNonceSize": cipher.NewGCMWithNonceSize,
 		"newGCMWithTagSize":   cipher.NewGCMWithTagSize,
 		"newCBCDecrypter":     cipher.NewCBCDecrypter,
 		"newCBCEncrypter":     cipher.NewCBCEncrypter,
+		"newOFB":              cipher.NewOFB,
 		"newCFBEncrypter":     cipher.NewCFBEncrypter,
 		"newCTR":              cipher.NewCTR,
-		"newGCM":              cipher.NewGCM,
-		"newGCMWithNonceSize": cipher.NewGCMWithNonceSize,
-		"newCFBDecrypter":     cipher.NewCFBDecrypter,
-		"newOFB":              cipher.NewOFB,
 
 		"emptyStreamReader": func() (v cipher.StreamReader) {
 			return v

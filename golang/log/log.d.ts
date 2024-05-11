@@ -4,7 +4,7 @@ declare module 'golang/log'{
 	// @ts-ignore
 	import * as io from 'golang/io'
 	// @ts-ignore
-	import type {Ref,int,Struct,error} from 'go'
+	import type {error,Ref,int,Struct} from 'go'
 	export function Default():Ref<Logger>
 	export function fatal(...v:any[]):void
 	export function fatalf(format:string,...v:any[]):void
@@ -22,7 +22,7 @@ declare module 'golang/log'{
 	export const Lmsgprefix:int
 	export interface Logger extends Struct<Logger>{
 		setOutput(w:io.Writer):void
-		output(calldepth:int,s:string):error
+		output(calldepth:int,s:string)/*error*/
 		print(...v:any[]):void
 		printf(format:string,...v:any[]):void
 		println(...v:any[]):void
@@ -45,7 +45,7 @@ declare module 'golang/log'{
 	//2
 	export const Ltime:int
 	export function New(out:io.Writer,prefix:string,flag:int):Ref<Logger>
-	export function output(calldepth:int,s:string):error
+	export function output(calldepth:int,s:string)/*error*/
 	export function panic(...v:any[]):void
 	export function panicf(format:string,...v:any[]):void
 	export function panicln(...v:any[]):void
@@ -60,4 +60,5 @@ declare module 'golang/log'{
 
 export function emptyLogger():Logger
 export function refLogger():Ref<Logger>
-export function refOfLogger(x:Logger):Ref<Logger>}
+export function refOfLogger(x:Logger):Ref<Logger>
+}

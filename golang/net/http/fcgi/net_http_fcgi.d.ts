@@ -6,9 +6,10 @@ declare module 'golang/net/http/fcgi'{
 	// @ts-ignore
 	import * as net from 'golang/net'
 	// @ts-ignore
-	import type {Ref,error,GoError} from 'go'
+	import type {GoError,Ref,error} from 'go'
 	export const ErrConnClosed:GoError
 	export const ErrRequestAborted:GoError
 	export function processEnv(r:Ref<http.Request>):Record<string,string>
-	export function serve(l:net.Listener,handler:http.Handler):error
+	export function serve(l:net.Listener,handler:http.Handler)/*error*/
+
 }

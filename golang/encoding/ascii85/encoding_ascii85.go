@@ -13,11 +13,11 @@ var (
 	//go:embed encoding_ascii85.d.ts
 	EncodingAscii85Define   []byte
 	EncodingAscii85Declared = map[string]any{
+		"maxEncodedLen": ascii85.MaxEncodedLen,
+		"newDecoder":    ascii85.NewDecoder,
 		"newEncoder":    ascii85.NewEncoder,
 		"decode":        ascii85.Decode,
 		"encode":        ascii85.Encode,
-		"maxEncodedLen": ascii85.MaxEncodedLen,
-		"newDecoder":    ascii85.NewDecoder,
 	}
 )
 

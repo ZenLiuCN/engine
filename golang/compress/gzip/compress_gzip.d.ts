@@ -26,21 +26,21 @@ declare module 'golang/compress/gzip'{
 	export const HuffmanOnly:int
 	export function newReader(r:io.Reader):Ref<Reader>
 	export function newWriter(w:io.Writer):Ref<Writer>
-	export function newWriterLevel(w:io.Writer,level:int):[Ref<Writer>,error]
+	export function newWriterLevel(w:io.Writer,level:int):Ref<Writer>
 	//0
 	export const NoCompression:int
 	export interface Reader extends Struct<Reader>,io.ReadCloser,io.Closer{
 		header:Header
-		reset(r:io.Reader):error
+		reset(r:io.Reader)/*error*/
 		multistream(ok:bool):void
-		read(p:Uint8Array):[int,error]
+		read(p:Uint8Array):int
 		close():error
 	}
 	export interface Writer extends Struct<Writer>,io.WriteCloser,io.Closer{
 		header:Header
 		reset(w:io.Writer):void
-		write(p:Uint8Array):[int,error]
-		flush():error
+		write(p:Uint8Array):int
+		flush()/*error*/
 		close():error
 	}
 
@@ -52,4 +52,5 @@ export function refHeader():Ref<Header>
 export function refOfHeader(x:Header):Ref<Header>
 export function emptyReader():Reader
 export function refReader():Ref<Reader>
-export function refOfReader(x:Reader):Ref<Reader>}
+export function refOfReader(x:Reader):Ref<Reader>
+}

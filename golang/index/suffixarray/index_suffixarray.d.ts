@@ -8,8 +8,8 @@ declare module 'golang/index/suffixarray'{
 	// @ts-ignore
 	import type {Struct,error,int,Ref} from 'go'
 	export interface Index extends Struct<Index>{
-		read(r:io.Reader):error
-		write(w:io.Writer):error
+		read(r:io.Reader)/*error*/
+		write(w:io.Writer)/*error*/
 		bytes():Uint8Array
 		lookup(s:Uint8Array,n:int):int[]
 		findAllIndex(r:Ref<regexp.Regexp>,n:int):Array<int[]>
@@ -18,4 +18,5 @@ declare module 'golang/index/suffixarray'{
 
 export function emptyIndex():Index
 export function refIndex():Ref<Index>
-export function refOfIndex(x:Index):Ref<Index>}
+export function refOfIndex(x:Index):Ref<Index>
+}

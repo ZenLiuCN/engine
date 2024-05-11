@@ -14,13 +14,13 @@ var (
 	//go:embed image_png.d.ts
 	ImagePngDefine   []byte
 	ImagePngDeclared = map[string]any{
+		"decodeConfig":       png.DecodeConfig,
+		"DefaultCompression": png.DefaultCompression,
 		"encode":             png.Encode,
 		"NoCompression":      png.NoCompression,
 		"BestCompression":    png.BestCompression,
 		"BestSpeed":          png.BestSpeed,
 		"decode":             png.Decode,
-		"decodeConfig":       png.DecodeConfig,
-		"DefaultCompression": png.DefaultCompression,
 
 		"emptyEncoder": func() (v png.Encoder) {
 			return v

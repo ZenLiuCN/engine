@@ -16,23 +16,43 @@ var (
 	//go:embed crypto_rsa.d.ts
 	CryptoRsaDefine   []byte
 	CryptoRsaDeclared = map[string]any{
-		"decryptPKCS1v15SessionKey": rsa.DecryptPKCS1v15SessionKey,
-		"generateKey":               rsa.GenerateKey,
-		"generateMultiPrimeKey":     rsa.GenerateMultiPrimeKey,
-		"signPKCS1v15":              rsa.SignPKCS1v15,
+		"decryptPKCS1v15":           rsa.DecryptPKCS1v15,
+		"ErrVerification":           rsa.ErrVerification,
+		"PSSSaltLengthAuto":         rsa.PSSSaltLengthAuto,
 		"signPSS":                   rsa.SignPSS,
-		"encryptPKCS1v15":           rsa.EncryptPKCS1v15,
-		"verifyPKCS1v15":            rsa.VerifyPKCS1v15,
 		"verifyPSS":                 rsa.VerifyPSS,
 		"decryptOAEP":               rsa.DecryptOAEP,
-		"decryptPKCS1v15":           rsa.DecryptPKCS1v15,
+		"encryptPKCS1v15":           rsa.EncryptPKCS1v15,
+		"ErrMessageTooLong":         rsa.ErrMessageTooLong,
+		"generateMultiPrimeKey":     rsa.GenerateMultiPrimeKey,
+		"PSSSaltLengthEqualsHash":   rsa.PSSSaltLengthEqualsHash,
+		"signPKCS1v15":              rsa.SignPKCS1v15,
+		"verifyPKCS1v15":            rsa.VerifyPKCS1v15,
 		"encryptOAEP":               rsa.EncryptOAEP,
 		"ErrDecryption":             rsa.ErrDecryption,
-		"ErrMessageTooLong":         rsa.ErrMessageTooLong,
-		"ErrVerification":           rsa.ErrVerification,
-		"PSSSaltLengthEqualsHash":   rsa.PSSSaltLengthEqualsHash,
-		"PSSSaltLengthAuto":         rsa.PSSSaltLengthAuto,
+		"generateKey":               rsa.GenerateKey,
+		"decryptPKCS1v15SessionKey": rsa.DecryptPKCS1v15SessionKey,
 
+		"emptyPublicKey": func() (v rsa.PublicKey) {
+			return v
+		},
+		"refPublicKey": func() *rsa.PublicKey {
+			var x rsa.PublicKey
+			return &x
+		},
+		"refOfPublicKey": func(x rsa.PublicKey) *rsa.PublicKey {
+			return &x
+		},
+		"emptyCRTValue": func() (v rsa.CRTValue) {
+			return v
+		},
+		"refCRTValue": func() *rsa.CRTValue {
+			var x rsa.CRTValue
+			return &x
+		},
+		"refOfCRTValue": func(x rsa.CRTValue) *rsa.CRTValue {
+			return &x
+		},
 		"emptyOAEPOptions": func() (v rsa.OAEPOptions) {
 			return v
 		},
@@ -81,26 +101,6 @@ var (
 			return &x
 		},
 		"refOfPrivateKey": func(x rsa.PrivateKey) *rsa.PrivateKey {
-			return &x
-		},
-		"emptyPublicKey": func() (v rsa.PublicKey) {
-			return v
-		},
-		"refPublicKey": func() *rsa.PublicKey {
-			var x rsa.PublicKey
-			return &x
-		},
-		"refOfPublicKey": func(x rsa.PublicKey) *rsa.PublicKey {
-			return &x
-		},
-		"emptyCRTValue": func() (v rsa.CRTValue) {
-			return v
-		},
-		"refCRTValue": func() *rsa.CRTValue {
-			var x rsa.CRTValue
-			return &x
-		},
-		"refOfCRTValue": func(x rsa.CRTValue) *rsa.CRTValue {
 			return &x
 		}}
 )

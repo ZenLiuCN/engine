@@ -7,9 +7,9 @@ declare module 'golang/crypto/ed25519'{
 	import * as crypto from 'golang/crypto'
 	// @ts-ignore
 	import type {error,Struct,bool,int,Ref} from 'go'
-	export function generateKey(rand:io.Reader):[PublicKey,PrivateKey,error]
+	export function generateKey(rand:io.Reader):[PublicKey,PrivateKey]
 	export function newKeyFromSeed(seed:Uint8Array):PrivateKey
-	export interface Options extends crypto.PrivateKey,crypto.DecrypterOpts,crypto.SignerOpts,Struct<Options>,crypto.PublicKey{
+	export interface Options extends Struct<Options>,crypto.DecrypterOpts,crypto.PrivateKey,crypto.PublicKey,crypto.SignerOpts{
 		hash:crypto.Hash
 		context:string
 		hashFunc():crypto.Hash
@@ -18,7 +18,7 @@ declare module 'golang/crypto/ed25519'{
 		public():crypto.PublicKey
 		equal(x:crypto.PrivateKey):bool
 		seed():Uint8Array
-		sign(rand:io.Reader,message:Uint8Array,opts:crypto.SignerOpts):[Uint8Array,error]
+		sign(rand:io.Reader,message:Uint8Array,opts:crypto.SignerOpts):Uint8Array
 	}
 	//64
 	export const PrivateKeySize:int
@@ -33,8 +33,9 @@ declare module 'golang/crypto/ed25519'{
 	//64
 	export const SignatureSize:int
 	export function verify(publicKey:PublicKey,message:Uint8Array,sig:Uint8Array):bool
-	export function verifyWithOptions(publicKey:PublicKey,message:Uint8Array,sig:Uint8Array,opts:Ref<Options>):error
+	export function verifyWithOptions(publicKey:PublicKey,message:Uint8Array,sig:Uint8Array,opts:Ref<Options>)/*error*/
 
 export function emptyOptions():Options
 export function refOptions():Ref<Options>
-export function refOfOptions(x:Options):Ref<Options>}
+export function refOfOptions(x:Options):Ref<Options>
+}

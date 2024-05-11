@@ -6,18 +6,18 @@ declare module 'golang/math/big'{
 	// @ts-ignore
 	import * as rand from 'golang/math/rand'
 	// @ts-ignore
-	import type {GoError,uint,uint64,int64,float64,int8,int,float32,byte,Struct,Ref,bool,error,rune} from 'go'
+	import type {error,byte,uint,float32,uint64,rune,Ref,bool,int8,Struct,int64,float64,GoError,int} from 'go'
 	export const Above:Accuracy
 	export interface Accuracy extends int8{
 		string():string
 	}
 	export const AwayFromZero:RoundingMode
 	export const Below:Accuracy
-	export interface ErrNaN extends GoError,Struct<ErrNaN>,Error{
+	export interface ErrNaN extends Struct<ErrNaN>,Error,GoError{
 		error():string
 	}
 	export const Exact:Accuracy
-	export interface Float extends fmt.Stringer,fmt.Scanner,fmt.Formatter,Struct<Float>{
+	export interface Float extends Struct<Float>,fmt.Formatter,fmt.Scanner,fmt.Stringer{
 		setPrec(prec:uint):Ref<Float>
 		setMode(mode:RoundingMode):Ref<Float>
 		prec():uint
@@ -52,19 +52,19 @@ declare module 'golang/math/big'{
 		quo(x:Ref<Float>,y:Ref<Float>):Ref<Float>
 		cmp(y:Ref<Float>):int
 		setString(s:string):[Ref<Float>,bool]
-		parse(s:string,base:int):[Ref<Float>,int,error]
-		scan(s:fmt.ScanState,ch:rune):error
-		gobEncode():[Uint8Array,error]
-		gobDecode(buf:Uint8Array):error
-		marshalText():[Uint8Array,error]
-		unmarshalText(text:Uint8Array):error
+		parse(s:string,base:int):[Ref<Float>,int]
+		scan(s:fmt.ScanState,ch:rune)/*error*/
+		gobEncode():Uint8Array
+		gobDecode(buf:Uint8Array)/*error*/
+		marshalText():Uint8Array
+		unmarshalText(text:Uint8Array)/*error*/
 		text(format:byte,prec:int):string
 		string():string
 		append(buf:Uint8Array,fmt:byte,prec:int):Uint8Array
 		format(s:fmt.State,format:rune):void
 		sqrt(x:Ref<Float>):Ref<Float>
 	}
-	export interface Int extends Struct<Int>,fmt.Scanner,fmt.Formatter,fmt.Stringer{
+	export interface Int extends Struct<Int>,fmt.Formatter,fmt.Scanner,fmt.Stringer{
 		sign():int
 		setInt64(x:int64):Ref<Int>
 		setUint64(x:uint64):Ref<Int>
@@ -116,13 +116,13 @@ declare module 'golang/math/big'{
 		append(buf:Uint8Array,base:int):Uint8Array
 		string():string
 		format(s:fmt.State,ch:rune):void
-		scan(s:fmt.ScanState,ch:rune):error
-		gobEncode():[Uint8Array,error]
-		gobDecode(buf:Uint8Array):error
-		marshalText():[Uint8Array,error]
-		unmarshalText(text:Uint8Array):error
-		marshalJSON():[Uint8Array,error]
-		unmarshalJSON(text:Uint8Array):error
+		scan(s:fmt.ScanState,ch:rune)/*error*/
+		gobEncode():Uint8Array
+		gobDecode(buf:Uint8Array)/*error*/
+		marshalText():Uint8Array
+		unmarshalText(text:Uint8Array)/*error*/
+		marshalJSON():Uint8Array
+		unmarshalJSON(text:Uint8Array)/*error*/
 		probablyPrime(n:int):bool
 	}
 	export function jacobi(x:Ref<Int>,y:Ref<Int>):int
@@ -137,8 +137,8 @@ declare module 'golang/math/big'{
 	export function newFloat(x:float64):Ref<Float>
 	export function newInt(x:int64):Ref<Int>
 	export function newRat(a:int64,b:int64):Ref<Rat>
-	export function parseFloat(s:string,base:int,prec:uint,mode:RoundingMode):[Ref<Float>,int,error]
-	export interface Rat extends fmt.Stringer,fmt.Scanner,Struct<Rat>{
+	export function parseFloat(s:string,base:int,prec:uint,mode:RoundingMode):[Ref<Float>,int]
+	export interface Rat extends Struct<Rat>,fmt.Scanner,fmt.Stringer{
 		setFloat64(f:float64):Ref<Rat>
 		float32():[float32,bool]
 		float64():[float64,bool]
@@ -160,15 +160,15 @@ declare module 'golang/math/big'{
 		sub(x:Ref<Rat>,y:Ref<Rat>):Ref<Rat>
 		mul(x:Ref<Rat>,y:Ref<Rat>):Ref<Rat>
 		quo(x:Ref<Rat>,y:Ref<Rat>):Ref<Rat>
-		scan(s:fmt.ScanState,ch:rune):error
+		scan(s:fmt.ScanState,ch:rune)/*error*/
 		setString(s:string):[Ref<Rat>,bool]
 		string():string
 		ratString():string
 		floatString(prec:int):string
-		gobEncode():[Uint8Array,error]
-		gobDecode(buf:Uint8Array):error
-		marshalText():[Uint8Array,error]
-		unmarshalText(text:Uint8Array):error
+		gobEncode():Uint8Array
+		gobDecode(buf:Uint8Array)/*error*/
+		marshalText():Uint8Array
+		unmarshalText(text:Uint8Array)/*error*/
 	}
 	export interface RoundingMode extends byte{
 		string():string
@@ -181,12 +181,13 @@ declare module 'golang/math/big'{
 	export interface Word extends uint{
 	}
 
+export function emptyFloat():Float
+export function refFloat():Ref<Float>
+export function refOfFloat(x:Float):Ref<Float>
 export function emptyInt():Int
 export function refInt():Ref<Int>
 export function refOfInt(x:Int):Ref<Int>
 export function emptyRat():Rat
 export function refRat():Ref<Rat>
 export function refOfRat(x:Rat):Ref<Rat>
-export function emptyFloat():Float
-export function refFloat():Ref<Float>
-export function refOfFloat(x:Float):Ref<Float>}
+}

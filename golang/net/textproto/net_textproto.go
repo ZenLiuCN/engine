@@ -14,24 +14,14 @@ var (
 	//go:embed net_textproto.d.ts
 	NetTextprotoDefine   []byte
 	NetTextprotoDeclared = map[string]any{
-		"trimBytes":              textproto.TrimBytes,
-		"trimString":             textproto.TrimString,
 		"canonicalMIMEHeaderKey": textproto.CanonicalMIMEHeaderKey,
 		"dial":                   textproto.Dial,
 		"newConn":                textproto.NewConn,
 		"newReader":              textproto.NewReader,
 		"newWriter":              textproto.NewWriter,
+		"trimBytes":              textproto.TrimBytes,
+		"trimString":             textproto.TrimString,
 
-		"emptyPipeline": func() (v textproto.Pipeline) {
-			return v
-		},
-		"refPipeline": func() *textproto.Pipeline {
-			var x textproto.Pipeline
-			return &x
-		},
-		"refOfPipeline": func(x textproto.Pipeline) *textproto.Pipeline {
-			return &x
-		},
 		"emptyReader": func() (v textproto.Reader) {
 			return v
 		},
@@ -60,6 +50,16 @@ var (
 			return &x
 		},
 		"refOfConn": func(x textproto.Conn) *textproto.Conn {
+			return &x
+		},
+		"emptyPipeline": func() (v textproto.Pipeline) {
+			return v
+		},
+		"refPipeline": func() *textproto.Pipeline {
+			var x textproto.Pipeline
+			return &x
+		},
+		"refOfPipeline": func(x textproto.Pipeline) *textproto.Pipeline {
 			return &x
 		}}
 )

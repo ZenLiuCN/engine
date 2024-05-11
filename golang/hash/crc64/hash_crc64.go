@@ -13,13 +13,13 @@ var (
 	//go:embed hash_crc64.d.ts
 	HashCrc64Define   []byte
 	HashCrc64Declared = map[string]any{
+		"update":    crc64.Update,
 		"checksum":  crc64.Checksum,
 		"ECMA":      crc64.ECMA,
 		"ISO":       crc64.ISO,
 		"makeTable": crc64.MakeTable,
 		"New":       crc64.New,
 		"Size":      crc64.Size,
-		"update":    crc64.Update,
 	}
 )
 

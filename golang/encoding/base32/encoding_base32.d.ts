@@ -4,8 +4,8 @@ declare module 'golang/encoding/base32'{
 	// @ts-ignore
 	import * as io from 'golang/io'
 	// @ts-ignore
-	import type {int64,GoError,Struct,rune,Ref,int,error} from 'go'
-	export interface CorruptInputError extends int64,GoError{
+	import type {error,int64,GoError,Struct,rune,Ref,int} from 'go'
+	export interface CorruptInputError extends GoError,int64{
 		error():string
 	}
 	export interface Encoding extends Struct<Encoding>{
@@ -13,8 +13,8 @@ declare module 'golang/encoding/base32'{
 		encode(dst:Uint8Array,src:Uint8Array):void
 		encodeToString(src:Uint8Array):string
 		encodedLen(n:int):int
-		decode(dst:Uint8Array,src:Uint8Array):[int,error]
-		decodeString(s:string):[Uint8Array,error]
+		decode(dst:Uint8Array,src:Uint8Array):int
+		decodeString(s:string):Uint8Array
 		decodedLen(n:int):int
 	}
 	export const HexEncoding:Ref<Encoding>
@@ -29,4 +29,5 @@ declare module 'golang/encoding/base32'{
 
 export function emptyEncoding():Encoding
 export function refEncoding():Ref<Encoding>
-export function refOfEncoding(x:Encoding):Ref<Encoding>}
+export function refOfEncoding(x:Encoding):Ref<Encoding>
+}

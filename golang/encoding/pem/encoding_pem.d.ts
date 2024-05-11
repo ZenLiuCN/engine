@@ -11,9 +11,10 @@ declare module 'golang/encoding/pem'{
 		bytes:Uint8Array
 	}
 	export function decode(data:Uint8Array):[Ref<Block>,Uint8Array]
-	export function encode(out:io.Writer,b:Ref<Block>):error
+	export function encode(out:io.Writer,b:Ref<Block>)/*error*/
 	export function encodeToMemory(b:Ref<Block>):Uint8Array
 
 export function emptyBlock():Block
 export function refBlock():Ref<Block>
-export function refOfBlock(x:Block):Ref<Block>}
+export function refOfBlock(x:Block):Ref<Block>
+}

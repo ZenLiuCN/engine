@@ -22,4 +22,5 @@ declare module 'golang/hash/crc32'{
 	export interface Table extends Uint32Array/*256*/{
 	}
 	export function update(crc:uint32,tab:Ref<Table>,p:Uint8Array):uint32
+
 }

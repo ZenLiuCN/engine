@@ -13,17 +13,17 @@ var (
 	//go:embed encoding_hex.d.ts
 	EncodingHexDefine   []byte
 	EncodingHexDeclared = map[string]any{
-		"dumper":         hex.Dumper,
 		"encodeToString": hex.EncodeToString,
-		"newEncoder":     hex.NewEncoder,
+		"encodedLen":     hex.EncodedLen,
 		"ErrLength":      hex.ErrLength,
 		"newDecoder":     hex.NewDecoder,
-		"decode":         hex.Decode,
 		"decodeString":   hex.DecodeString,
 		"decodedLen":     hex.DecodedLen,
 		"dump":           hex.Dump,
+		"dumper":         hex.Dumper,
+		"newEncoder":     hex.NewEncoder,
+		"decode":         hex.Decode,
 		"encode":         hex.Encode,
-		"encodedLen":     hex.EncodedLen,
 	}
 )
 

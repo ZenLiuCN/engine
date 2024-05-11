@@ -12,25 +12,25 @@ var (
 	//go:embed unicode_utf8.d.ts
 	UnicodeUtf8Define   []byte
 	UnicodeUtf8Declared = map[string]any{
-		"decodeRuneInString":     utf8.DecodeRuneInString,
 		"fullRune":               utf8.FullRune,
-		"fullRuneInString":       utf8.FullRuneInString,
+		"MaxRune":                utf8.MaxRune,
 		"runeCountInString":      utf8.RuneCountInString,
 		"RuneError":              utf8.RuneError,
 		"runeLen":                utf8.RuneLen,
-		"runeStart":              utf8.RuneStart,
-		"decodeRune":             utf8.DecodeRune,
-		"valid":                  utf8.Valid,
-		"UTFMax":                 utf8.UTFMax,
-		"decodeLastRuneInString": utf8.DecodeLastRuneInString,
-		"MaxRune":                utf8.MaxRune,
-		"RuneSelf":               utf8.RuneSelf,
 		"validString":            utf8.ValidString,
 		"decodeLastRune":         utf8.DecodeLastRune,
-		"encodeRune":             utf8.EncodeRune,
-		"runeCount":              utf8.RuneCount,
+		"decodeRuneInString":     utf8.DecodeRuneInString,
+		"UTFMax":                 utf8.UTFMax,
 		"validRune":              utf8.ValidRune,
 		"appendRune":             utf8.AppendRune,
+		"runeCount":              utf8.RuneCount,
+		"fullRuneInString":       utf8.FullRuneInString,
+		"runeStart":              utf8.RuneStart,
+		"decodeLastRuneInString": utf8.DecodeLastRuneInString,
+		"decodeRune":             utf8.DecodeRune,
+		"valid":                  utf8.Valid,
+		"encodeRune":             utf8.EncodeRune,
+		"RuneSelf":               utf8.RuneSelf,
 	}
 )
 

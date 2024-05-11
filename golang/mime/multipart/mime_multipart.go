@@ -14,10 +14,30 @@ var (
 	//go:embed mime_multipart.d.ts
 	MimeMultipartDefine   []byte
 	MimeMultipartDeclared = map[string]any{
-		"ErrMessageTooLarge": multipart.ErrMessageTooLarge,
 		"newReader":          multipart.NewReader,
 		"newWriter":          multipart.NewWriter,
+		"ErrMessageTooLarge": multipart.ErrMessageTooLarge,
 
+		"emptyReader": func() (v multipart.Reader) {
+			return v
+		},
+		"refReader": func() *multipart.Reader {
+			var x multipart.Reader
+			return &x
+		},
+		"refOfReader": func(x multipart.Reader) *multipart.Reader {
+			return &x
+		},
+		"emptyWriter": func() (v multipart.Writer) {
+			return v
+		},
+		"refWriter": func() *multipart.Writer {
+			var x multipart.Writer
+			return &x
+		},
+		"refOfWriter": func(x multipart.Writer) *multipart.Writer {
+			return &x
+		},
 		"emptyFileHeader": func() (v multipart.FileHeader) {
 			return v
 		},
@@ -46,26 +66,6 @@ var (
 			return &x
 		},
 		"refOfPart": func(x multipart.Part) *multipart.Part {
-			return &x
-		},
-		"emptyReader": func() (v multipart.Reader) {
-			return v
-		},
-		"refReader": func() *multipart.Reader {
-			var x multipart.Reader
-			return &x
-		},
-		"refOfReader": func(x multipart.Reader) *multipart.Reader {
-			return &x
-		},
-		"emptyWriter": func() (v multipart.Writer) {
-			return v
-		},
-		"refWriter": func() *multipart.Writer {
-			var x multipart.Writer
-			return &x
-		},
-		"refOfWriter": func(x multipart.Writer) *multipart.Writer {
 			return &x
 		}}
 )

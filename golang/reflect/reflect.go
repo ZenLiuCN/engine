@@ -12,67 +12,97 @@ var (
 	//go:embed reflect.d.ts
 	ReflectDefine   []byte
 	ReflectDeclared = map[string]any{
-		"Uint32":          reflect.Uint32,
-		"Complex64":       reflect.Complex64,
-		"Func":            reflect.Func,
-		"Int16":           reflect.Int16,
-		"Invalid":         reflect.Invalid,
-		"makeFunc":        reflect.MakeFunc,
-		"swapper":         reflect.Swapper,
-		"typeOf":          reflect.TypeOf,
-		"Float64":         reflect.Float64,
-		"indirect":        reflect.Indirect,
-		"makeMap":         reflect.MakeMap,
-		"makeSlice":       reflect.MakeSlice,
-		"ptrTo":           reflect.PtrTo,
-		"RecvDir":         reflect.RecvDir,
-		"Bool":            reflect.Bool,
-		"Int32":           reflect.Int32,
-		"SelectDefault":   reflect.SelectDefault,
+		"select":          reflect.Select,
 		"SelectSend":      reflect.SelectSend,
-		"Uintptr":         reflect.Uintptr,
-		"valueOf":         reflect.ValueOf,
-		"newAt":           reflect.NewAt,
-		"chanOf":          reflect.ChanOf,
-		"copy":            reflect.Copy,
-		"Interface":       reflect.Interface,
-		"funcOf":          reflect.FuncOf,
-		"Map":             reflect.Map,
-		"SelectRecv":      reflect.SelectRecv,
-		"makeChan":        reflect.MakeChan,
-		"makeMapWithSize": reflect.MakeMapWithSize,
-		"pointerTo":       reflect.PointerTo,
-		"Uint16":          reflect.Uint16,
-		"append":          reflect.Append,
-		"New":             reflect.New,
-		"zero":            reflect.Zero,
-		"Array":           reflect.Array,
-		"Slice":           reflect.Slice,
-		"structOf":        reflect.StructOf,
 		"Uint8":           reflect.Uint8,
-		"Complex128":      reflect.Complex128,
-		"Int":             reflect.Int,
-		"Ptr":             reflect.Ptr,
+		"valueOf":         reflect.ValueOf,
 		"visibleFields":   reflect.VisibleFields,
-		"appendSlice":     reflect.AppendSlice,
-		"deepEqual":       reflect.DeepEqual,
-		"Pointer":         reflect.Pointer,
 		"String":          reflect.String,
 		"Uint64":          reflect.Uint64,
-		"Int64":           reflect.Int64,
-		"Int8":            reflect.Int8,
-		"Struct":          reflect.Struct,
-		"arrayOf":         reflect.ArrayOf,
-		"sliceOf":         reflect.SliceOf,
-		"Chan":            reflect.Chan,
 		"BothDir":         reflect.BothDir,
+		"copy":            reflect.Copy,
 		"Float32":         reflect.Float32,
-		"mapOf":           reflect.MapOf,
-		"select":          reflect.Select,
+		"Int":             reflect.Int,
+		"makeSlice":       reflect.MakeSlice,
+		"SelectRecv":      reflect.SelectRecv,
+		"Chan":            reflect.Chan,
+		"chanOf":          reflect.ChanOf,
+		"Invalid":         reflect.Invalid,
+		"RecvDir":         reflect.RecvDir,
+		"Uintptr":         reflect.Uintptr,
+		"Int16":           reflect.Int16,
+		"ptrTo":           reflect.PtrTo,
 		"SendDir":         reflect.SendDir,
+		"swapper":         reflect.Swapper,
+		"typeOf":          reflect.TypeOf,
+		"Uint32":          reflect.Uint32,
+		"Array":           reflect.Array,
+		"makeMap":         reflect.MakeMap,
+		"sliceOf":         reflect.SliceOf,
+		"arrayOf":         reflect.ArrayOf,
+		"Complex128":      reflect.Complex128,
+		"Bool":            reflect.Bool,
+		"newAt":           reflect.NewAt,
+		"pointerTo":       reflect.PointerTo,
+		"Struct":          reflect.Struct,
+		"append":          reflect.Append,
+		"Complex64":       reflect.Complex64,
+		"Func":            reflect.Func,
+		"Pointer":         reflect.Pointer,
 		"Uint":            reflect.Uint,
+		"deepEqual":       reflect.DeepEqual,
+		"funcOf":          reflect.FuncOf,
+		"Int8":            reflect.Int8,
+		"Map":             reflect.Map,
+		"Ptr":             reflect.Ptr,
+		"indirect":        reflect.Indirect,
+		"Int32":           reflect.Int32,
+		"Interface":       reflect.Interface,
+		"mapOf":           reflect.MapOf,
+		"SelectDefault":   reflect.SelectDefault,
+		"appendSlice":     reflect.AppendSlice,
+		"makeFunc":        reflect.MakeFunc,
+		"structOf":        reflect.StructOf,
+		"Uint16":          reflect.Uint16,
 		"UnsafePointer":   reflect.UnsafePointer,
+		"Float64":         reflect.Float64,
+		"Slice":           reflect.Slice,
+		"zero":            reflect.Zero,
+		"Int64":           reflect.Int64,
+		"makeMapWithSize": reflect.MakeMapWithSize,
+		"New":             reflect.New,
+		"makeChan":        reflect.MakeChan,
 
+		"emptyMapIter": func() (v reflect.MapIter) {
+			return v
+		},
+		"refMapIter": func() *reflect.MapIter {
+			var x reflect.MapIter
+			return &x
+		},
+		"refOfMapIter": func(x reflect.MapIter) *reflect.MapIter {
+			return &x
+		},
+		"emptyMethod": func() (v reflect.Method) {
+			return v
+		},
+		"refMethod": func() *reflect.Method {
+			var x reflect.Method
+			return &x
+		},
+		"refOfMethod": func(x reflect.Method) *reflect.Method {
+			return &x
+		},
+		"emptySelectCase": func() (v reflect.SelectCase) {
+			return v
+		},
+		"refSelectCase": func() *reflect.SelectCase {
+			var x reflect.SelectCase
+			return &x
+		},
+		"refOfSelectCase": func(x reflect.SelectCase) *reflect.SelectCase {
+			return &x
+		},
 		"emptySliceHeader": func() (v reflect.SliceHeader) {
 			return v
 		},
@@ -111,36 +141,6 @@ var (
 			return &x
 		},
 		"refOfValue": func(x reflect.Value) *reflect.Value {
-			return &x
-		},
-		"emptyMapIter": func() (v reflect.MapIter) {
-			return v
-		},
-		"refMapIter": func() *reflect.MapIter {
-			var x reflect.MapIter
-			return &x
-		},
-		"refOfMapIter": func(x reflect.MapIter) *reflect.MapIter {
-			return &x
-		},
-		"emptyMethod": func() (v reflect.Method) {
-			return v
-		},
-		"refMethod": func() *reflect.Method {
-			var x reflect.Method
-			return &x
-		},
-		"refOfMethod": func(x reflect.Method) *reflect.Method {
-			return &x
-		},
-		"emptySelectCase": func() (v reflect.SelectCase) {
-			return v
-		},
-		"refSelectCase": func() *reflect.SelectCase {
-			var x reflect.SelectCase
-			return &x
-		},
-		"refOfSelectCase": func(x reflect.SelectCase) *reflect.SelectCase {
 			return &x
 		}}
 )

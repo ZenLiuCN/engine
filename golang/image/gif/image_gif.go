@@ -15,14 +15,14 @@ var (
 	//go:embed image_gif.d.ts
 	ImageGifDefine   []byte
 	ImageGifDeclared = map[string]any{
-		"DisposalPrevious":   gif.DisposalPrevious,
-		"encode":             gif.Encode,
 		"encodeAll":          gif.EncodeAll,
 		"decode":             gif.Decode,
 		"decodeAll":          gif.DecodeAll,
 		"decodeConfig":       gif.DecodeConfig,
 		"DisposalBackground": gif.DisposalBackground,
 		"DisposalNone":       gif.DisposalNone,
+		"DisposalPrevious":   gif.DisposalPrevious,
+		"encode":             gif.Encode,
 
 		"emptyGIF": func() (v gif.GIF) {
 			return v

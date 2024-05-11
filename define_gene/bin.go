@@ -45,6 +45,11 @@ func main() {
 			Usage:   "tags to apply",
 			Aliases: []string{"g"},
 		},
+		&cli.StringSliceFlag{
+			Name:    "ignore",
+			Usage:   "ignore packages (package path)",
+			Aliases: []string{"i"},
+		},
 		&cli.StringFlag{
 			Name:    "out",
 			Usage:   "output path or current path",
@@ -112,6 +117,7 @@ func action(c *cli.Context) error {
 		g.suffix = c.String("cond")
 		g.env = c.StringSlice("env")
 		g.errors = c.Bool("errors")
+		g.ignores = c.StringSlice("ignore")
 		if c.Bool("debug") {
 			g.log = log.Printf
 		}

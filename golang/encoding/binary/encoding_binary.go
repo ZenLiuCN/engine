@@ -13,23 +13,23 @@ var (
 	//go:embed encoding_binary.d.ts
 	EncodingBinaryDefine   []byte
 	EncodingBinaryDeclared = map[string]any{
-		"readVarint":     binary.ReadVarint,
-		"MaxVarintLen16": binary.MaxVarintLen16,
-		"NativeEndian":   binary.NativeEndian,
+		"appendUvarint":  binary.AppendUvarint,
 		"putUvarint":     binary.PutUvarint,
 		"putVarint":      binary.PutVarint,
-		"uvarint":        binary.Uvarint,
-		"varint":         binary.Varint,
-		"LittleEndian":   binary.LittleEndian,
-		"MaxVarintLen64": binary.MaxVarintLen64,
 		"MaxVarintLen32": binary.MaxVarintLen32,
-		"appendUvarint":  binary.AppendUvarint,
+		"MaxVarintLen64": binary.MaxVarintLen64,
+		"NativeEndian":   binary.NativeEndian,
+		"read":           binary.Read,
+		"appendVarint":   binary.AppendVarint,
 		"BigEndian":      binary.BigEndian,
+		"readVarint":     binary.ReadVarint,
+		"varint":         binary.Varint,
+		"uvarint":        binary.Uvarint,
+		"write":          binary.Write,
+		"LittleEndian":   binary.LittleEndian,
+		"MaxVarintLen16": binary.MaxVarintLen16,
 		"readUvarint":    binary.ReadUvarint,
 		"size":           binary.Size,
-		"write":          binary.Write,
-		"appendVarint":   binary.AppendVarint,
-		"read":           binary.Read,
 	}
 )
 

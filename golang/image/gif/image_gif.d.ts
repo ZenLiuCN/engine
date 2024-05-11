@@ -18,8 +18,8 @@ declare module 'golang/image/gif'{
 	export const DisposalNone:int
 	//3
 	export const DisposalPrevious:int
-	export function encode(w:io.Writer,m:image.Image,o:Ref<Options>):error
-	export function encodeAll(w:io.Writer,g:Ref<GIF>):error
+	export function encode(w:io.Writer,m:image.Image,o:Ref<Options>)/*error*/
+	export function encodeAll(w:io.Writer,g:Ref<GIF>)/*error*/
 	export interface GIF extends Struct<GIF>{
 		image:Ref<image.Paletted>[]
 		delay:int[]
@@ -34,9 +34,10 @@ declare module 'golang/image/gif'{
 		drawer:draw.Drawer
 	}
 
+export function emptyGIF():GIF
+export function refGIF():Ref<GIF>
+export function refOfGIF(x:GIF):Ref<GIF>
 export function emptyOptions():Options
 export function refOptions():Ref<Options>
 export function refOfOptions(x:Options):Ref<Options>
-export function emptyGIF():GIF
-export function refGIF():Ref<GIF>
-export function refOfGIF(x:GIF):Ref<GIF>}
+}

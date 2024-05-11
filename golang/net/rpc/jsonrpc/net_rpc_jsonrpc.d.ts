@@ -6,10 +6,11 @@ declare module 'golang/net/rpc/jsonrpc'{
 	// @ts-ignore
 	import * as io from 'golang/io'
 	// @ts-ignore
-	import type {error,Ref} from 'go'
-	export function dial(network:string,address:string):[Ref<rpc.Client>,error]
+	import type {Ref,error} from 'go'
+	export function dial(network:string,address:string):Ref<rpc.Client>
 	export function newClient(conn:io.ReadWriteCloser):Ref<rpc.Client>
 	export function newClientCodec(conn:io.ReadWriteCloser):rpc.ClientCodec
 	export function newServerCodec(conn:io.ReadWriteCloser):rpc.ServerCodec
 	export function serveConn(conn:io.ReadWriteCloser):void
+
 }

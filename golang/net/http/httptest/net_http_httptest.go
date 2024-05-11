@@ -18,12 +18,12 @@ var (
 	//go:embed net_http_httptest.d.ts
 	NetHttpHttptestDefine   []byte
 	NetHttpHttptestDeclared = map[string]any{
+		"DefaultRemoteAddr":  httptest.DefaultRemoteAddr,
+		"newRecorder":        httptest.NewRecorder,
 		"newRequest":         httptest.NewRequest,
 		"newServer":          httptest.NewServer,
 		"newTLSServer":       httptest.NewTLSServer,
 		"newUnstartedServer": httptest.NewUnstartedServer,
-		"DefaultRemoteAddr":  httptest.DefaultRemoteAddr,
-		"newRecorder":        httptest.NewRecorder,
 
 		"emptyResponseRecorder": func() (v httptest.ResponseRecorder) {
 			return v

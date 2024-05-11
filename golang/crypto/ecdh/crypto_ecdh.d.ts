@@ -8,22 +8,22 @@ declare module 'golang/crypto/ecdh'{
 	// @ts-ignore
 	import type {Ref,error,Struct,bool} from 'go'
 	export interface Curve{
-		generateKey(rand:io.Reader):[Ref<PrivateKey>,error]
-		newPrivateKey(key:Uint8Array):[Ref<PrivateKey>,error]
-		newPublicKey(key:Uint8Array):[Ref<PublicKey>,error]
+		generateKey(rand:io.Reader):Ref<PrivateKey>
+		newPrivateKey(key:Uint8Array):Ref<PrivateKey>
+		newPublicKey(key:Uint8Array):Ref<PublicKey>
 	}
 	export function p256():Curve
 	export function p384():Curve
 	export function p521():Curve
 	export interface PrivateKey extends crypto.DecrypterOpts,crypto.PrivateKey,crypto.PublicKey,Struct<PrivateKey>{
-		ecdh(remote:Ref<PublicKey>):[Uint8Array,error]
+		ecdh(remote:Ref<PublicKey>):Uint8Array
 		bytes():Uint8Array
 		equal(x:crypto.PrivateKey):bool
 		curve():Curve
 		publicKey():Ref<PublicKey>
 		public():crypto.PublicKey
 	}
-	export interface PublicKey extends Struct<PublicKey>,crypto.DecrypterOpts,crypto.PrivateKey,crypto.PublicKey{
+	export interface PublicKey extends crypto.DecrypterOpts,crypto.PrivateKey,Struct<PublicKey>,crypto.PublicKey{
 		bytes():Uint8Array
 		equal(x:crypto.PublicKey):bool
 		curve():Curve
@@ -35,4 +35,5 @@ export function refPrivateKey():Ref<PrivateKey>
 export function refOfPrivateKey(x:PrivateKey):Ref<PrivateKey>
 export function emptyPublicKey():PublicKey
 export function refPublicKey():Ref<PublicKey>
-export function refOfPublicKey(x:PublicKey):Ref<PublicKey>}
+export function refOfPublicKey(x:PublicKey):Ref<PublicKey>
+}

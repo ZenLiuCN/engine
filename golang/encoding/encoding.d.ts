@@ -4,15 +4,16 @@ declare module 'golang/encoding'{
 	// @ts-ignore
 	import type {error} from 'go'
 	export interface BinaryMarshaler{
-		marshalBinary():[Uint8Array,error]
+		marshalBinary():Uint8Array
 	}
 	export interface BinaryUnmarshaler{
-		unmarshalBinary(data:Uint8Array):error
+		unmarshalBinary(data:Uint8Array)/*error*/
 	}
 	export interface TextMarshaler{
-		marshalText():[Uint8Array,error]
+		marshalText():Uint8Array
 	}
 	export interface TextUnmarshaler{
-		unmarshalText(text:Uint8Array):error
+		unmarshalText(text:Uint8Array)/*error*/
 	}
+
 }

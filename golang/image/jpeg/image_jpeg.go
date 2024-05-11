@@ -14,10 +14,10 @@ var (
 	//go:embed image_jpeg.d.ts
 	ImageJpegDefine   []byte
 	ImageJpegDeclared = map[string]any{
-		"decode":         jpeg.Decode,
 		"decodeConfig":   jpeg.DecodeConfig,
 		"DefaultQuality": jpeg.DefaultQuality,
 		"encode":         jpeg.Encode,
+		"decode":         jpeg.Decode,
 
 		"emptyOptions": func() (v jpeg.Options) {
 			return v

@@ -9,4 +9,5 @@ declare module 'golang/hash/fnv'{
 	export function new32a():hash.Hash32
 	export function new64():hash.Hash64
 	export function new64a():hash.Hash64
+
 }

@@ -16,18 +16,28 @@ var (
 	ArchiveZipDefine   []byte
 	ArchiveZipDeclared = map[string]any{
 		"Deflate":              zip.Deflate,
+		"ErrInsecurePath":      zip.ErrInsecurePath,
+		"newWriter":            zip.NewWriter,
+		"registerCompressor":   zip.RegisterCompressor,
+		"Store":                zip.Store,
 		"ErrAlgorithm":         zip.ErrAlgorithm,
 		"ErrChecksum":          zip.ErrChecksum,
 		"ErrFormat":            zip.ErrFormat,
-		"ErrInsecurePath":      zip.ErrInsecurePath,
 		"fileInfoHeader":       zip.FileInfoHeader,
 		"newReader":            zip.NewReader,
-		"registerCompressor":   zip.RegisterCompressor,
-		"Store":                zip.Store,
-		"newWriter":            zip.NewWriter,
 		"openReader":           zip.OpenReader,
 		"registerDecompressor": zip.RegisterDecompressor,
 
+		"emptyFile": func() (v zip.File) {
+			return v
+		},
+		"refFile": func() *zip.File {
+			var x zip.File
+			return &x
+		},
+		"refOfFile": func(x zip.File) *zip.File {
+			return &x
+		},
 		"emptyFileHeader": func() (v zip.FileHeader) {
 			return v
 		},
@@ -66,16 +76,6 @@ var (
 			return &x
 		},
 		"refOfWriter": func(x zip.Writer) *zip.Writer {
-			return &x
-		},
-		"emptyFile": func() (v zip.File) {
-			return v
-		},
-		"refFile": func() *zip.File {
-			var x zip.File
-			return &x
-		},
-		"refOfFile": func(x zip.File) *zip.File {
 			return &x
 		}}
 )

@@ -9,4 +9,5 @@ declare module 'golang/hash/adler32'{
 	export function New():hash.Hash32
 	//4
 	export const Size:int
+
 }

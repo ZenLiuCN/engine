@@ -12,27 +12,57 @@ var (
 	//go:embed image_color.d.ts
 	ImageColorDefine   []byte
 	ImageColorDeclared = map[string]any{
-		"Alpha16Model": color.Alpha16Model,
 		"CMYKModel":    color.CMYKModel,
-		"cmykToRGB":    color.CMYKToRGB,
-		"GrayModel":    color.GrayModel,
-		"NYCbCrAModel": color.NYCbCrAModel,
-		"rgbToCMYK":    color.RGBToCMYK,
+		"modelFunc":    color.ModelFunc,
 		"Opaque":       color.Opaque,
-		"Transparent":  color.Transparent,
-		"Gray16Model":  color.Gray16Model,
-		"RGBA64Model":  color.RGBA64Model,
+		"RGBAModel":    color.RGBAModel,
 		"YCbCrModel":   color.YCbCrModel,
+		"yCbCrToRGB":   color.YCbCrToRGB,
+		"Alpha16Model": color.Alpha16Model,
+		"Black":        color.Black,
+		"cmykToRGB":    color.CMYKToRGB,
 		"rgbToYCbCr":   color.RGBToYCbCr,
 		"White":        color.White,
 		"AlphaModel":   color.AlphaModel,
-		"Black":        color.Black,
-		"modelFunc":    color.ModelFunc,
 		"NRGBA64Model": color.NRGBA64Model,
+		"NYCbCrAModel": color.NYCbCrAModel,
+		"RGBA64Model":  color.RGBA64Model,
+		"Transparent":  color.Transparent,
+		"GrayModel":    color.GrayModel,
 		"NRGBAModel":   color.NRGBAModel,
-		"RGBAModel":    color.RGBAModel,
-		"yCbCrToRGB":   color.YCbCrToRGB,
+		"rgbToCMYK":    color.RGBToCMYK,
+		"Gray16Model":  color.Gray16Model,
 
+		"emptyNRGBA": func() (v color.NRGBA) {
+			return v
+		},
+		"refNRGBA": func() *color.NRGBA {
+			var x color.NRGBA
+			return &x
+		},
+		"refOfNRGBA": func(x color.NRGBA) *color.NRGBA {
+			return &x
+		},
+		"emptyNYCbCrA": func() (v color.NYCbCrA) {
+			return v
+		},
+		"refNYCbCrA": func() *color.NYCbCrA {
+			var x color.NYCbCrA
+			return &x
+		},
+		"refOfNYCbCrA": func(x color.NYCbCrA) *color.NYCbCrA {
+			return &x
+		},
+		"emptyRGBA64": func() (v color.RGBA64) {
+			return v
+		},
+		"refRGBA64": func() *color.RGBA64 {
+			var x color.RGBA64
+			return &x
+		},
+		"refOfRGBA64": func(x color.RGBA64) *color.RGBA64 {
+			return &x
+		},
 		"emptyAlpha16": func() (v color.Alpha16) {
 			return v
 		},
@@ -53,14 +83,14 @@ var (
 		"refOfCMYK": func(x color.CMYK) *color.CMYK {
 			return &x
 		},
-		"emptyNYCbCrA": func() (v color.NYCbCrA) {
+		"emptyGray16": func() (v color.Gray16) {
 			return v
 		},
-		"refNYCbCrA": func() *color.NYCbCrA {
-			var x color.NYCbCrA
+		"refGray16": func() *color.Gray16 {
+			var x color.Gray16
 			return &x
 		},
-		"refOfNYCbCrA": func(x color.NYCbCrA) *color.NYCbCrA {
+		"refOfGray16": func(x color.Gray16) *color.Gray16 {
 			return &x
 		},
 		"emptyRGBA": func() (v color.RGBA) {
@@ -71,6 +101,16 @@ var (
 			return &x
 		},
 		"refOfRGBA": func(x color.RGBA) *color.RGBA {
+			return &x
+		},
+		"emptyYCbCr": func() (v color.YCbCr) {
+			return v
+		},
+		"refYCbCr": func() *color.YCbCr {
+			var x color.YCbCr
+			return &x
+		},
+		"refOfYCbCr": func(x color.YCbCr) *color.YCbCr {
 			return &x
 		},
 		"emptyAlpha": func() (v color.Alpha) {
@@ -93,26 +133,6 @@ var (
 		"refOfGray": func(x color.Gray) *color.Gray {
 			return &x
 		},
-		"emptyGray16": func() (v color.Gray16) {
-			return v
-		},
-		"refGray16": func() *color.Gray16 {
-			var x color.Gray16
-			return &x
-		},
-		"refOfGray16": func(x color.Gray16) *color.Gray16 {
-			return &x
-		},
-		"emptyNRGBA": func() (v color.NRGBA) {
-			return v
-		},
-		"refNRGBA": func() *color.NRGBA {
-			var x color.NRGBA
-			return &x
-		},
-		"refOfNRGBA": func(x color.NRGBA) *color.NRGBA {
-			return &x
-		},
 		"emptyNRGBA64": func() (v color.NRGBA64) {
 			return v
 		},
@@ -121,26 +141,6 @@ var (
 			return &x
 		},
 		"refOfNRGBA64": func(x color.NRGBA64) *color.NRGBA64 {
-			return &x
-		},
-		"emptyRGBA64": func() (v color.RGBA64) {
-			return v
-		},
-		"refRGBA64": func() *color.RGBA64 {
-			var x color.RGBA64
-			return &x
-		},
-		"refOfRGBA64": func(x color.RGBA64) *color.RGBA64 {
-			return &x
-		},
-		"emptyYCbCr": func() (v color.YCbCr) {
-			return v
-		},
-		"refYCbCr": func() *color.YCbCr {
-			var x color.YCbCr
-			return &x
-		},
-		"refOfYCbCr": func(x color.YCbCr) *color.YCbCr {
 			return &x
 		}}
 )

@@ -13,12 +13,12 @@ var (
 	//go:embed hash_fnv.d.ts
 	HashFnvDefine   []byte
 	HashFnvDeclared = map[string]any{
-		"new128a": fnv.New128a,
-		"new32":   fnv.New32,
-		"new32a":  fnv.New32a,
 		"new64":   fnv.New64,
 		"new64a":  fnv.New64a,
 		"new128":  fnv.New128,
+		"new128a": fnv.New128a,
+		"new32":   fnv.New32,
+		"new32a":  fnv.New32a,
 	}
 )
 

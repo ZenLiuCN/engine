@@ -23,104 +23,94 @@ var (
 	//go:embed crypto_x509.d.ts
 	Crypto509Define   []byte
 	Crypto509Declared = map[string]any{
-		"KeyUsageEncipherOnly":                      x509.KeyUsageEncipherOnly,
-		"marshalPKCS1PrivateKey":                    x509.MarshalPKCS1PrivateKey,
-		"parseDERCRL":                               x509.ParseDERCRL,
-		"SHA512WithRSAPSS":                          x509.SHA512WithRSAPSS,
-		"TooManyConstraints":                        x509.TooManyConstraints,
-		"ECDSAWithSHA1":                             x509.ECDSAWithSHA1,
-		"ECDSAWithSHA512":                           x509.ECDSAWithSHA512,
-		"ExtKeyUsageNetscapeServerGatedCrypto":      x509.ExtKeyUsageNetscapeServerGatedCrypto,
-		"parsePKCS1PrivateKey":                      x509.ParsePKCS1PrivateKey,
-		"parsePKIXPublicKey":                        x509.ParsePKIXPublicKey,
 		"createCertificate":                         x509.CreateCertificate,
-		"newCertPool":                               x509.NewCertPool,
-		"PEMCipherDES":                              x509.PEMCipherDES,
-		"ExtKeyUsageMicrosoftServerGatedCrypto":     x509.ExtKeyUsageMicrosoftServerGatedCrypto,
-		"KeyUsageDecipherOnly":                      x509.KeyUsageDecipherOnly,
-		"Expired":                                   x509.Expired,
-		"ExtKeyUsageAny":                            x509.ExtKeyUsageAny,
-		"ExtKeyUsageEmailProtection":                x509.ExtKeyUsageEmailProtection,
-		"parseECPrivateKey":                         x509.ParseECPrivateKey,
-		"UnconstrainedName":                         x509.UnconstrainedName,
-		"decryptPEMBlock":                           x509.DecryptPEMBlock,
-		"KeyUsageKeyEncipherment":                   x509.KeyUsageKeyEncipherment,
-		"parseCertificateRequest":                   x509.ParseCertificateRequest,
-		"ErrUnsupportedAlgorithm":                   x509.ErrUnsupportedAlgorithm,
-		"NameMismatch":                              x509.NameMismatch,
-		"NotAuthorizedToSign":                       x509.NotAuthorizedToSign,
-		"PEMCipher3DES":                             x509.PEMCipher3DES,
-		"PEMCipherAES192":                           x509.PEMCipherAES192,
-		"parseRevocationList":                       x509.ParseRevocationList,
-		"ExtKeyUsageIPSECEndSystem":                 x509.ExtKeyUsageIPSECEndSystem,
-		"KeyUsageDigitalSignature":                  x509.KeyUsageDigitalSignature,
-		"NameConstraintsWithoutSANs":                x509.NameConstraintsWithoutSANs,
-		"SHA384WithRSAPSS":                          x509.SHA384WithRSAPSS,
-		"parsePKCS1PublicKey":                       x509.ParsePKCS1PublicKey,
 		"encryptPEMBlock":                           x509.EncryptPEMBlock,
+		"ExtKeyUsageAny":                            x509.ExtKeyUsageAny,
+		"IncompatibleUsage":                         x509.IncompatibleUsage,
 		"isEncryptedPEMBlock":                       x509.IsEncryptedPEMBlock,
-		"KeyUsageKeyAgreement":                      x509.KeyUsageKeyAgreement,
-		"SHA512WithRSA":                             x509.SHA512WithRSA,
-		"ECDSA":                                     x509.ECDSA,
-		"Ed25519":                                   x509.Ed25519,
-		"parseCRL":                                  x509.ParseCRL,
-		"UnknownPublicKeyAlgorithm":                 x509.UnknownPublicKeyAlgorithm,
+		"PEMCipherDES":                              x509.PEMCipherDES,
+		"RSA":                                       x509.RSA,
+		"CANotAuthorizedForExtKeyUsage":             x509.CANotAuthorizedForExtKeyUsage,
+		"SHA384WithRSAPSS":                          x509.SHA384WithRSAPSS,
+		"decryptPEMBlock":                           x509.DecryptPEMBlock,
+		"ExtKeyUsageIPSECEndSystem":                 x509.ExtKeyUsageIPSECEndSystem,
 		"marshalPKCS8PrivateKey":                    x509.MarshalPKCS8PrivateKey,
 		"marshalPKIXPublicKey":                      x509.MarshalPKIXPublicKey,
-		"parseCertificates":                         x509.ParseCertificates,
-		"RSA":                                       x509.RSA,
-		"DSAWithSHA1":                               x509.DSAWithSHA1,
-		"ExtKeyUsageServerAuth":                     x509.ExtKeyUsageServerAuth,
-		"KeyUsageCertSign":                          x509.KeyUsageCertSign,
-		"ExtKeyUsageIPSECTunnel":                    x509.ExtKeyUsageIPSECTunnel,
-		"ExtKeyUsageOCSPSigning":                    x509.ExtKeyUsageOCSPSigning,
-		"KeyUsageContentCommitment":                 x509.KeyUsageContentCommitment,
-		"MD5WithRSA":                                x509.MD5WithRSA,
-		"parsePKCS8PrivateKey":                      x509.ParsePKCS8PrivateKey,
-		"CANotAuthorizedForExtKeyUsage":             x509.CANotAuthorizedForExtKeyUsage,
-		"createCertificateRequest":                  x509.CreateCertificateRequest,
-		"ExtKeyUsageCodeSigning":                    x509.ExtKeyUsageCodeSigning,
-		"setFallbackRoots":                          x509.SetFallbackRoots,
-		"SHA1WithRSA":                               x509.SHA1WithRSA,
-		"SHA256WithRSAPSS":                          x509.SHA256WithRSAPSS,
-		"CANotAuthorizedForThisName":                x509.CANotAuthorizedForThisName,
-		"createRevocationList":                      x509.CreateRevocationList,
-		"ExtKeyUsageClientAuth":                     x509.ExtKeyUsageClientAuth,
-		"marshalPKCS1PublicKey":                     x509.MarshalPKCS1PublicKey,
-		"SHA384WithRSA":                             x509.SHA384WithRSA,
-		"ExtKeyUsageIPSECUser":                      x509.ExtKeyUsageIPSECUser,
-		"IncompatibleUsage":                         x509.IncompatibleUsage,
-		"IncorrectPasswordError":                    x509.IncorrectPasswordError,
-		"SHA256WithRSA":                             x509.SHA256WithRSA,
-		"systemCertPool":                            x509.SystemCertPool,
-		"TooManyIntermediates":                      x509.TooManyIntermediates,
-		"PEMCipherAES128":                           x509.PEMCipherAES128,
-		"PEMCipherAES256":                           x509.PEMCipherAES256,
-		"PureEd25519":                               x509.PureEd25519,
-		"ExtKeyUsageMicrosoftCommercialCodeSigning": x509.ExtKeyUsageMicrosoftCommercialCodeSigning,
-		"ExtKeyUsageMicrosoftKernelCodeSigning":     x509.ExtKeyUsageMicrosoftKernelCodeSigning,
 		"parseCertificate":                          x509.ParseCertificate,
 		"DSAWithSHA256":                             x509.DSAWithSHA256,
-		"ECDSAWithSHA256":                           x509.ECDSAWithSHA256,
+		"SHA512WithRSA":                             x509.SHA512WithRSA,
 		"ECDSAWithSHA384":                           x509.ECDSAWithSHA384,
-		"KeyUsageDataEncipherment":                  x509.KeyUsageDataEncipherment,
-		"MD2WithRSA":                                x509.MD2WithRSA,
-		"marshalECPrivateKey":                       x509.MarshalECPrivateKey,
 		"UnknownSignatureAlgorithm":                 x509.UnknownSignatureAlgorithm,
-		"DSA":                                       x509.DSA,
+		"SHA384WithRSA":                             x509.SHA384WithRSA,
+		"KeyUsageDecipherOnly":                      x509.KeyUsageDecipherOnly,
+		"newCertPool":                               x509.NewCertPool,
+		"parseCertificateRequest":                   x509.ParseCertificateRequest,
+		"KeyUsageContentCommitment":                 x509.KeyUsageContentCommitment,
+		"ExtKeyUsageIPSECUser":                      x509.ExtKeyUsageIPSECUser,
+		"ExtKeyUsageMicrosoftServerGatedCrypto":     x509.ExtKeyUsageMicrosoftServerGatedCrypto,
+		"ExtKeyUsageOCSPSigning":                    x509.ExtKeyUsageOCSPSigning,
 		"ExtKeyUsageTimeStamping":                   x509.ExtKeyUsageTimeStamping,
+		"KeyUsageCertSign":                          x509.KeyUsageCertSign,
+		"KeyUsageDataEncipherment":                  x509.KeyUsageDataEncipherment,
+		"KeyUsageEncipherOnly":                      x509.KeyUsageEncipherOnly,
+		"DSA":                                       x509.DSA,
+		"NameMismatch":                              x509.NameMismatch,
+		"SHA1WithRSA":                               x509.SHA1WithRSA,
+		"SHA512WithRSAPSS":                          x509.SHA512WithRSAPSS,
+		"marshalECPrivateKey":                       x509.MarshalECPrivateKey,
+		"ExtKeyUsageEmailProtection":                x509.ExtKeyUsageEmailProtection,
+		"ExtKeyUsageNetscapeServerGatedCrypto":      x509.ExtKeyUsageNetscapeServerGatedCrypto,
+		"IncorrectPasswordError":                    x509.IncorrectPasswordError,
+		"KeyUsageDigitalSignature":                  x509.KeyUsageDigitalSignature,
+		"NameConstraintsWithoutSANs":                x509.NameConstraintsWithoutSANs,
+		"PEMCipherAES256":                           x509.PEMCipherAES256,
+		"parseCRL":                                  x509.ParseCRL,
+		"createRevocationList":                      x509.CreateRevocationList,
+		"parsePKCS8PrivateKey":                      x509.ParsePKCS8PrivateKey,
+		"UnconstrainedName":                         x509.UnconstrainedName,
+		"setFallbackRoots":                          x509.SetFallbackRoots,
+		"TooManyIntermediates":                      x509.TooManyIntermediates,
+		"ExtKeyUsageCodeSigning":                    x509.ExtKeyUsageCodeSigning,
+		"ECDSAWithSHA256":                           x509.ECDSAWithSHA256,
+		"ExtKeyUsageClientAuth":                     x509.ExtKeyUsageClientAuth,
+		"ExtKeyUsageIPSECTunnel":                    x509.ExtKeyUsageIPSECTunnel,
 		"KeyUsageCRLSign":                           x509.KeyUsageCRLSign,
+		"parseCertificates":                         x509.ParseCertificates,
+		"parseRevocationList":                       x509.ParseRevocationList,
+		"systemCertPool":                            x509.SystemCertPool,
+		"CANotAuthorizedForThisName":                x509.CANotAuthorizedForThisName,
+		"TooManyConstraints":                        x509.TooManyConstraints,
+		"ExtKeyUsageMicrosoftKernelCodeSigning":     x509.ExtKeyUsageMicrosoftKernelCodeSigning,
+		"KeyUsageKeyAgreement":                      x509.KeyUsageKeyAgreement,
+		"MD5WithRSA":                                x509.MD5WithRSA,
+		"PEMCipherAES192":                           x509.PEMCipherAES192,
+		"ExtKeyUsageMicrosoftCommercialCodeSigning": x509.ExtKeyUsageMicrosoftCommercialCodeSigning,
+		"ECDSAWithSHA512":                           x509.ECDSAWithSHA512,
+		"marshalPKCS1PublicKey":                     x509.MarshalPKCS1PublicKey,
+		"NotAuthorizedToSign":                       x509.NotAuthorizedToSign,
+		"SHA256WithRSAPSS":                          x509.SHA256WithRSAPSS,
+		"UnknownPublicKeyAlgorithm":                 x509.UnknownPublicKeyAlgorithm,
+		"ExtKeyUsageServerAuth":                     x509.ExtKeyUsageServerAuth,
+		"parseECPrivateKey":                         x509.ParseECPrivateKey,
+		"parsePKCS1PrivateKey":                      x509.ParsePKCS1PrivateKey,
+		"parsePKCS1PublicKey":                       x509.ParsePKCS1PublicKey,
+		"PureEd25519":                               x509.PureEd25519,
+		"SHA256WithRSA":                             x509.SHA256WithRSA,
+		"DSAWithSHA1":                               x509.DSAWithSHA1,
+		"ECDSAWithSHA1":                             x509.ECDSAWithSHA1,
+		"ErrUnsupportedAlgorithm":                   x509.ErrUnsupportedAlgorithm,
+		"Expired":                                   x509.Expired,
+		"PEMCipherAES128":                           x509.PEMCipherAES128,
+		"parseDERCRL":                               x509.ParseDERCRL,
+		"ECDSA":                                     x509.ECDSA,
+		"Ed25519":                                   x509.Ed25519,
+		"KeyUsageKeyEncipherment":                   x509.KeyUsageKeyEncipherment,
+		"MD2WithRSA":                                x509.MD2WithRSA,
+		"marshalPKCS1PrivateKey":                    x509.MarshalPKCS1PrivateKey,
+		"PEMCipher3DES":                             x509.PEMCipher3DES,
+		"parsePKIXPublicKey":                        x509.ParsePKIXPublicKey,
+		"createCertificateRequest":                  x509.CreateCertificateRequest,
 
-		"emptyCertificateRequest": func() (v x509.CertificateRequest) {
-			return v
-		},
-		"refCertificateRequest": func() *x509.CertificateRequest {
-			var x x509.CertificateRequest
-			return &x
-		},
-		"refOfCertificateRequest": func(x x509.CertificateRequest) *x509.CertificateRequest {
-			return &x
-		},
 		"emptyVerifyOptions": func() (v x509.VerifyOptions) {
 			return v
 		},
@@ -131,24 +121,14 @@ var (
 		"refOfVerifyOptions": func(x x509.VerifyOptions) *x509.VerifyOptions {
 			return &x
 		},
-		"emptyCertificate": func() (v x509.Certificate) {
+		"emptyCertPool": func() (v x509.CertPool) {
 			return v
 		},
-		"refCertificate": func() *x509.Certificate {
-			var x x509.Certificate
+		"refCertPool": func() *x509.CertPool {
+			var x x509.CertPool
 			return &x
 		},
-		"refOfCertificate": func(x x509.Certificate) *x509.Certificate {
-			return &x
-		},
-		"emptyRevocationList": func() (v x509.RevocationList) {
-			return v
-		},
-		"refRevocationList": func() *x509.RevocationList {
-			var x x509.RevocationList
-			return &x
-		},
-		"refOfRevocationList": func(x x509.RevocationList) *x509.RevocationList {
+		"refOfCertPool": func(x x509.CertPool) *x509.CertPool {
 			return &x
 		},
 		"emptyRevocationListEntry": func() (v x509.RevocationListEntry) {
@@ -161,6 +141,26 @@ var (
 		"refOfRevocationListEntry": func(x x509.RevocationListEntry) *x509.RevocationListEntry {
 			return &x
 		},
+		"emptyCertificateRequest": func() (v x509.CertificateRequest) {
+			return v
+		},
+		"refCertificateRequest": func() *x509.CertificateRequest {
+			var x x509.CertificateRequest
+			return &x
+		},
+		"refOfCertificateRequest": func(x x509.CertificateRequest) *x509.CertificateRequest {
+			return &x
+		},
+		"emptyRevocationList": func() (v x509.RevocationList) {
+			return v
+		},
+		"refRevocationList": func() *x509.RevocationList {
+			var x x509.RevocationList
+			return &x
+		},
+		"refOfRevocationList": func(x x509.RevocationList) *x509.RevocationList {
+			return &x
+		},
 		"emptyUnhandledCriticalExtension": func() (v x509.UnhandledCriticalExtension) {
 			return v
 		},
@@ -171,14 +171,14 @@ var (
 		"refOfUnhandledCriticalExtension": func(x x509.UnhandledCriticalExtension) *x509.UnhandledCriticalExtension {
 			return &x
 		},
-		"emptyCertPool": func() (v x509.CertPool) {
+		"emptyCertificate": func() (v x509.Certificate) {
 			return v
 		},
-		"refCertPool": func() *x509.CertPool {
-			var x x509.CertPool
+		"refCertificate": func() *x509.Certificate {
+			var x x509.Certificate
 			return &x
 		},
-		"refOfCertPool": func(x x509.CertPool) *x509.CertPool {
+		"refOfCertificate": func(x x509.Certificate) *x509.Certificate {
 			return &x
 		}}
 )

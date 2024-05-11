@@ -4,10 +4,10 @@ declare module 'golang/crypto/cipher'{
 	// @ts-ignore
 	import * as io from 'golang/io'
 	// @ts-ignore
-	import type {int,error,Struct,GoError} from 'go'
+	import type {Struct,GoError,int,error} from 'go'
 	export interface AEAD{
 		nonceSize():int
-		open(dst:Uint8Array,nonce:Uint8Array,ciphertext:Uint8Array,additionalData:Uint8Array):[Uint8Array,error]
+		open(dst:Uint8Array,nonce:Uint8Array,ciphertext:Uint8Array,additionalData:Uint8Array):Uint8Array
 		overhead():int
 		seal(dst:Uint8Array,nonce:Uint8Array,plaintext:Uint8Array,additionalData:Uint8Array):Uint8Array
 	}
@@ -26,22 +26,22 @@ declare module 'golang/crypto/cipher'{
 	export function newCFBEncrypter(block:Block,iv:Uint8Array):Stream
 	export function newCTR(block:Block,iv:Uint8Array):Stream
 	export function newGCM(cipher:Block):AEAD
-	export function newGCMWithNonceSize(cipher:Block,size:int):[AEAD,error]
-	export function newGCMWithTagSize(cipher:Block,tagSize:int):[AEAD,error]
+	export function newGCMWithNonceSize(cipher:Block,size:int):AEAD
+	export function newGCMWithTagSize(cipher:Block,tagSize:int):AEAD
 	export function newOFB(b:Block,iv:Uint8Array):Stream
 	export interface Stream{
 		xorKeyStream(dst:Uint8Array,src:Uint8Array):void
 	}
-	export interface StreamReader extends io.Reader,Struct<StreamReader>{
+	export interface StreamReader extends Struct<StreamReader>,io.Reader{
 		S:Stream
 		R:io.Reader
-		read(dst:Uint8Array):[int,error]
+		read(dst:Uint8Array):int
 	}
-	export interface StreamWriter extends Struct<StreamWriter>,io.WriteCloser,io.Closer{
+	export interface StreamWriter extends io.Closer,Struct<StreamWriter>,io.WriteCloser{
 		S:Stream
 		W:io.Writer
 		err:GoError
-		write(src:Uint8Array):[int,error]
+		write(src:Uint8Array):int
 		close():error
 	}
 
@@ -50,4 +50,5 @@ export function refStreamReader():Ref<StreamReader>
 export function refOfStreamReader(x:StreamReader):Ref<StreamReader>
 export function emptyStreamWriter():StreamWriter
 export function refStreamWriter():Ref<StreamWriter>
-export function refOfStreamWriter(x:StreamWriter):Ref<StreamWriter>}
+export function refOfStreamWriter(x:StreamWriter):Ref<StreamWriter>
+}

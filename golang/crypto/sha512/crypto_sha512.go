@@ -13,19 +13,19 @@ var (
 	//go:embed crypto_sha512.d.ts
 	CryptoSha512Define   []byte
 	CryptoSha512Declared = map[string]any{
-		"Size384":    sha512.Size384,
-		"sum384":     sha512.Sum384,
-		"new384":     sha512.New384,
-		"new512_224": sha512.New512_224,
-		"Size256":    sha512.Size256,
-		"BlockSize":  sha512.BlockSize,
 		"Size":       sha512.Size,
 		"Size224":    sha512.Size224,
-		"sum512_224": sha512.Sum512_224,
-		"sum512_256": sha512.Sum512_256,
-		"New":        sha512.New,
-		"new512_256": sha512.New512_256,
+		"Size256":    sha512.Size256,
+		"new512_224": sha512.New512_224,
+		"sum384":     sha512.Sum384,
 		"sum512":     sha512.Sum512,
+		"BlockSize":  sha512.BlockSize,
+		"new384":     sha512.New384,
+		"new512_256": sha512.New512_256,
+		"sum512_224": sha512.Sum512_224,
+		"New":        sha512.New,
+		"sum512_256": sha512.Sum512_256,
+		"Size384":    sha512.Size384,
 	}
 )
 

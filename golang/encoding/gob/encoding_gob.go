@@ -14,10 +14,10 @@ var (
 	//go:embed encoding_gob.d.ts
 	EncodingGobDefine   []byte
 	EncodingGobDeclared = map[string]any{
-		"newDecoder":   gob.NewDecoder,
-		"newEncoder":   gob.NewEncoder,
 		"register":     gob.Register,
 		"registerName": gob.RegisterName,
+		"newDecoder":   gob.NewDecoder,
+		"newEncoder":   gob.NewEncoder,
 
 		"emptyCommonType": func() (v gob.CommonType) {
 			return v

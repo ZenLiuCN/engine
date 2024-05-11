@@ -4,7 +4,7 @@ declare module 'golang/encoding/csv'{
 	// @ts-ignore
 	import * as io from 'golang/io'
 	// @ts-ignore
-	import type {rune,bool,int64,GoError,Ref,int,Struct,error} from 'go'
+	import type {GoError,Ref,int,Struct,error,rune,bool,int64} from 'go'
 	export const ErrBareQuote:GoError
 	export const ErrFieldCount:GoError
 	export const ErrQuote:GoError
@@ -17,7 +17,7 @@ declare module 'golang/encoding/csv'{
 		column:int
 		err:GoError
 		error():string
-		unwrap():error
+		unwrap()/*error*/
 	}
 	export interface Reader extends Struct<Reader>{
 		comma:rune
@@ -27,18 +27,18 @@ declare module 'golang/encoding/csv'{
 		trimLeadingSpace:bool
 		reuseRecord:bool
 		trailingComma:bool
-		read():[string[],error]
+		read():string[]
 		fieldPos(field:int):[int,int]
 		inputOffset():int64
-		readAll():[Array<string[]>,error]
+		readAll():Array<string[]>
 	}
 	export interface Writer extends Struct<Writer>{
 		comma:rune
 		useCRLF:bool
-		write(record:string[]):error
+		write(record:string[])/*error*/
 		flush():void
 		error():error
-		writeAll(records:Array<string[]>):error
+		writeAll(records:Array<string[]>)/*error*/
 	}
 
 export function emptyReader():Reader
@@ -46,4 +46,5 @@ export function refReader():Ref<Reader>
 export function refOfReader(x:Reader):Ref<Reader>
 export function emptyWriter():Writer
 export function refWriter():Ref<Writer>
-export function refOfWriter(x:Writer):Ref<Writer>}
+export function refOfWriter(x:Writer):Ref<Writer>
+}

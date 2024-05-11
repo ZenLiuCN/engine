@@ -18,111 +18,111 @@ var (
 	//go:embed crypto_tls.d.ts
 	CryptoTlsDefine   []byte
 	CryptoTlsDeclared = map[string]any{
-		"ECDSAWithP256AndSHA256":                        tls.ECDSAWithP256AndSHA256,
-		"ECDSAWithP384AndSHA384":                        tls.ECDSAWithP384AndSHA384,
-		"RenegotiateNever":                              tls.RenegotiateNever,
-		"TLS_AES_128_GCM_SHA256":                        tls.TLS_AES_128_GCM_SHA256,
-		"TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256":         tls.TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,
-		"CurveP384":                                     tls.CurveP384,
-		"PKCS1WithSHA512":                               tls.PKCS1WithSHA512,
-		"PSSWithSHA384":                                 tls.PSSWithSHA384,
-		"QUICEncryptionLevelInitial":                    tls.QUICEncryptionLevelInitial,
-		"QUICHandshakeDone":                             tls.QUICHandshakeDone,
-		"QUICRejectedEarlyData":                         tls.QUICRejectedEarlyData,
-		"RequireAndVerifyClientCert":                    tls.RequireAndVerifyClientCert,
-		"PSSWithSHA512":                                 tls.PSSWithSHA512,
-		"TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384":       tls.TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,
-		"VerifyClientCertIfGiven":                       tls.VerifyClientCertIfGiven,
-		"newResumptionState":                            tls.NewResumptionState,
-		"TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA":           tls.TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA,
-		"VersionTLS13":                                  tls.VersionTLS13,
-		"QUICSetReadSecret":                             tls.QUICSetReadSecret,
-		"TLS_CHACHA20_POLY1305_SHA256":                  tls.TLS_CHACHA20_POLY1305_SHA256,
-		"TLS_RSA_WITH_AES_128_GCM_SHA256":               tls.TLS_RSA_WITH_AES_128_GCM_SHA256,
-		"versionName":                                   tls.VersionName,
-		"VersionTLS10":                                  tls.VersionTLS10,
-		"ECDSAWithP521AndSHA512":                        tls.ECDSAWithP521AndSHA512,
-		"insecureCipherSuites":                          tls.InsecureCipherSuites,
+		"QUICEncryptionLevelEarly":                      tls.QUICEncryptionLevelEarly,
+		"TLS_ECDHE_ECDSA_WITH_RC4_128_SHA":              tls.TLS_ECDHE_ECDSA_WITH_RC4_128_SHA,
+		"cipherSuites":                                  tls.CipherSuites,
 		"client":                                        tls.Client,
-		"PSSWithSHA256":                                 tls.PSSWithSHA256,
-		"quicClient":                                    tls.QUICClient,
+		"dialWithDialer":                                tls.DialWithDialer,
+		"PSSWithSHA384":                                 tls.PSSWithSHA384,
+		"QUICEncryptionLevelApplication":                tls.QUICEncryptionLevelApplication,
+		"PKCS1WithSHA256":                               tls.PKCS1WithSHA256,
+		"QUICSetReadSecret":                             tls.QUICSetReadSecret,
+		"ECDSAWithP256AndSHA256":                        tls.ECDSAWithP256AndSHA256,
+		"TLS_AES_128_GCM_SHA256":                        tls.TLS_AES_128_GCM_SHA256,
+		"TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA":          tls.TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,
+		"TLS_RSA_WITH_AES_128_CBC_SHA":                  tls.TLS_RSA_WITH_AES_128_CBC_SHA,
+		"x509KeyPair":                                   tls.X509KeyPair,
+		"VersionSSL30":                                  tls.VersionSSL30,
+		"VersionTLS12":                                  tls.VersionTLS12,
+		"VersionTLS13":                                  tls.VersionTLS13,
+		"cipherSuiteName":                               tls.CipherSuiteName,
+		"Ed25519":                                       tls.Ed25519,
+		"listen":                                        tls.Listen,
+		"TLS_CHACHA20_POLY1305_SHA256":                  tls.TLS_CHACHA20_POLY1305_SHA256,
 		"TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305":        tls.TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,
-		"TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384":         tls.TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,
+		"TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305":          tls.TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,
 		"TLS_FALLBACK_SCSV":                             tls.TLS_FALLBACK_SCSV,
 		"TLS_RSA_WITH_AES_128_CBC_SHA256":               tls.TLS_RSA_WITH_AES_128_CBC_SHA256,
-		"dialWithDialer":                                tls.DialWithDialer,
-		"Ed25519":                                       tls.Ed25519,
-		"QUICSetWriteSecret":                            tls.QUICSetWriteSecret,
-		"X25519":                                        tls.X25519,
-		"TLS_RSA_WITH_AES_256_GCM_SHA384":               tls.TLS_RSA_WITH_AES_256_GCM_SHA384,
-		"CurveP521":                                     tls.CurveP521,
-		"newLRUClientSessionCache":                      tls.NewLRUClientSessionCache,
-		"QUICNoEvent":                                   tls.QUICNoEvent,
-		"RenegotiateOnceAsClient":                       tls.RenegotiateOnceAsClient,
-		"RequireAnyClientCert":                          tls.RequireAnyClientCert,
-		"TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256":       tls.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
-		"TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256":         tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
-		"TLS_RSA_WITH_RC4_128_SHA":                      tls.TLS_RSA_WITH_RC4_128_SHA,
-		"cipherSuiteName":                               tls.CipherSuiteName,
-		"loadX509KeyPair":                               tls.LoadX509KeyPair,
-		"PKCS1WithSHA1":                                 tls.PKCS1WithSHA1,
-		"PKCS1WithSHA256":                               tls.PKCS1WithSHA256,
-		"TLS_ECDHE_ECDSA_WITH_RC4_128_SHA":              tls.TLS_ECDHE_ECDSA_WITH_RC4_128_SHA,
-		"TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA":            tls.TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,
-		"TLS_ECDHE_RSA_WITH_RC4_128_SHA":                tls.TLS_ECDHE_RSA_WITH_RC4_128_SHA,
-		"VersionTLS12":                                  tls.VersionTLS12,
-		"NoClientCert":                                  tls.NoClientCert,
-		"QUICWriteData":                                 tls.QUICWriteData,
-		"TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA":            tls.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,
-		"VersionSSL30":                                  tls.VersionSSL30,
-		"PKCS1WithSHA384":                               tls.PKCS1WithSHA384,
-		"TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256":       tls.TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,
-		"VersionTLS11":                                  tls.VersionTLS11,
-		"CurveP256":                                     tls.CurveP256,
-		"QUICEncryptionLevelApplication":                tls.QUICEncryptionLevelApplication,
-		"quicServer":                                    tls.QUICServer,
-		"RenegotiateFreelyAsClient":                     tls.RenegotiateFreelyAsClient,
-		"RequestClientCert":                             tls.RequestClientCert,
-		"TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA":          tls.TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,
-		"TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA":          tls.TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,
-		"x509KeyPair":                                   tls.X509KeyPair,
 		"dial":                                          tls.Dial,
-		"newListener":                                   tls.NewListener,
-		"QUICTransportParameters":                       tls.QUICTransportParameters,
-		"TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305":          tls.TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,
+		"PKCS1WithSHA1":                                 tls.PKCS1WithSHA1,
+		"PSSWithSHA512":                                 tls.PSSWithSHA512,
+		"TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256":         tls.TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,
+		"TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256":         tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
+		"ECDSAWithP384AndSHA384":                        tls.ECDSAWithP384AndSHA384,
+		"TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256":       tls.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
+		"TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384":       tls.TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,
+		"ECDSAWithP521AndSHA512":                        tls.ECDSAWithP521AndSHA512,
+		"NoClientCert":                                  tls.NoClientCert,
+		"RenegotiateFreelyAsClient":                     tls.RenegotiateFreelyAsClient,
 		"TLS_RSA_WITH_AES_256_CBC_SHA":                  tls.TLS_RSA_WITH_AES_256_CBC_SHA,
-		"cipherSuites":                                  tls.CipherSuites,
-		"parseSessionState":                             tls.ParseSessionState,
-		"QUICEncryptionLevelHandshake":                  tls.QUICEncryptionLevelHandshake,
-		"QUICTransportParametersRequired":               tls.QUICTransportParametersRequired,
-		"TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256": tls.TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256,
-		"TLS_RSA_WITH_AES_128_CBC_SHA":                  tls.TLS_RSA_WITH_AES_128_CBC_SHA,
-		"ECDSAWithSHA1":                                 tls.ECDSAWithSHA1,
-		"listen":                                        tls.Listen,
-		"QUICEncryptionLevelEarly":                      tls.QUICEncryptionLevelEarly,
-		"server":                                        tls.Server,
-		"TLS_AES_256_GCM_SHA384":                        tls.TLS_AES_256_GCM_SHA384,
+		"VerifyClientCertIfGiven":                       tls.VerifyClientCertIfGiven,
+		"TLS_RSA_WITH_AES_256_GCM_SHA384":               tls.TLS_RSA_WITH_AES_256_GCM_SHA384,
+		"X25519":                                        tls.X25519,
+		"CurveP521":                                     tls.CurveP521,
+		"PKCS1WithSHA512":                               tls.PKCS1WithSHA512,
+		"quicClient":                                    tls.QUICClient,
 		"TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256":   tls.TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256,
+		"TLS_ECDHE_RSA_WITH_RC4_128_SHA":                tls.TLS_ECDHE_RSA_WITH_RC4_128_SHA,
 		"TLS_RSA_WITH_3DES_EDE_CBC_SHA":                 tls.TLS_RSA_WITH_3DES_EDE_CBC_SHA,
+		"newListener":                                   tls.NewListener,
+		"quicServer":                                    tls.QUICServer,
+		"RequestClientCert":                             tls.RequestClientCert,
+		"RequireAnyClientCert":                          tls.RequireAnyClientCert,
+		"TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA":           tls.TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA,
+		"CurveP256":                                     tls.CurveP256,
+		"ECDSAWithSHA1":                                 tls.ECDSAWithSHA1,
+		"QUICHandshakeDone":                             tls.QUICHandshakeDone,
+		"TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256":       tls.TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,
+		"TLS_RSA_WITH_RC4_128_SHA":                      tls.TLS_RSA_WITH_RC4_128_SHA,
+		"loadX509KeyPair":                               tls.LoadX509KeyPair,
+		"parseSessionState":                             tls.ParseSessionState,
+		"QUICNoEvent":                                   tls.QUICNoEvent,
+		"QUICWriteData":                                 tls.QUICWriteData,
+		"TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA":            tls.TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,
+		"QUICEncryptionLevelHandshake":                  tls.QUICEncryptionLevelHandshake,
+		"server":                                        tls.Server,
+		"VersionTLS11":                                  tls.VersionTLS11,
+		"TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384":         tls.TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,
+		"TLS_RSA_WITH_AES_128_GCM_SHA256":               tls.TLS_RSA_WITH_AES_128_GCM_SHA256,
+		"newLRUClientSessionCache":                      tls.NewLRUClientSessionCache,
+		"QUICEncryptionLevelInitial":                    tls.QUICEncryptionLevelInitial,
+		"QUICRejectedEarlyData":                         tls.QUICRejectedEarlyData,
+		"RenegotiateOnceAsClient":                       tls.RenegotiateOnceAsClient,
+		"TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA":          tls.TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,
+		"insecureCipherSuites":                          tls.InsecureCipherSuites,
+		"PKCS1WithSHA384":                               tls.PKCS1WithSHA384,
+		"TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256": tls.TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256,
+		"versionName":                                   tls.VersionName,
+		"VersionTLS10":                                  tls.VersionTLS10,
+		"CurveP384":                                     tls.CurveP384,
+		"PSSWithSHA256":                                 tls.PSSWithSHA256,
+		"QUICSetWriteSecret":                            tls.QUICSetWriteSecret,
+		"RequireAndVerifyClientCert":                    tls.RequireAndVerifyClientCert,
+		"TLS_AES_256_GCM_SHA384":                        tls.TLS_AES_256_GCM_SHA384,
+		"newResumptionState":                            tls.NewResumptionState,
+		"QUICTransportParameters":                       tls.QUICTransportParameters,
+		"QUICTransportParametersRequired":               tls.QUICTransportParametersRequired,
+		"RenegotiateNever":                              tls.RenegotiateNever,
+		"TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA":            tls.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,
 
-		"emptyQUICConn": func() (v tls.QUICConn) {
+		"emptyCertificate": func() (v tls.Certificate) {
 			return v
 		},
-		"refQUICConn": func() *tls.QUICConn {
-			var x tls.QUICConn
+		"refCertificate": func() *tls.Certificate {
+			var x tls.Certificate
 			return &x
 		},
-		"refOfQUICConn": func(x tls.QUICConn) *tls.QUICConn {
+		"refOfCertificate": func(x tls.Certificate) *tls.Certificate {
 			return &x
 		},
-		"emptyQUICEvent": func() (v tls.QUICEvent) {
+		"emptyCertificateRequestInfo": func() (v tls.CertificateRequestInfo) {
 			return v
 		},
-		"refQUICEvent": func() *tls.QUICEvent {
-			var x tls.QUICEvent
+		"refCertificateRequestInfo": func() *tls.CertificateRequestInfo {
+			var x tls.CertificateRequestInfo
 			return &x
 		},
-		"refOfQUICEvent": func(x tls.QUICEvent) *tls.QUICEvent {
+		"refOfCertificateRequestInfo": func(x tls.CertificateRequestInfo) *tls.CertificateRequestInfo {
 			return &x
 		},
 		"emptySessionState": func() (v tls.SessionState) {
@@ -135,44 +135,14 @@ var (
 		"refOfSessionState": func(x tls.SessionState) *tls.SessionState {
 			return &x
 		},
-		"emptyClientSessionState": func() (v tls.ClientSessionState) {
+		"emptyConnectionState": func() (v tls.ConnectionState) {
 			return v
 		},
-		"refClientSessionState": func() *tls.ClientSessionState {
-			var x tls.ClientSessionState
+		"refConnectionState": func() *tls.ConnectionState {
+			var x tls.ConnectionState
 			return &x
 		},
-		"refOfClientSessionState": func(x tls.ClientSessionState) *tls.ClientSessionState {
-			return &x
-		},
-		"emptyCipherSuite": func() (v tls.CipherSuite) {
-			return v
-		},
-		"refCipherSuite": func() *tls.CipherSuite {
-			var x tls.CipherSuite
-			return &x
-		},
-		"refOfCipherSuite": func(x tls.CipherSuite) *tls.CipherSuite {
-			return &x
-		},
-		"emptyConn": func() (v tls.Conn) {
-			return v
-		},
-		"refConn": func() *tls.Conn {
-			var x tls.Conn
-			return &x
-		},
-		"refOfConn": func(x tls.Conn) *tls.Conn {
-			return &x
-		},
-		"emptyDialer": func() (v tls.Dialer) {
-			return v
-		},
-		"refDialer": func() *tls.Dialer {
-			var x tls.Dialer
-			return &x
-		},
-		"refOfDialer": func(x tls.Dialer) *tls.Dialer {
+		"refOfConnectionState": func(x tls.ConnectionState) *tls.ConnectionState {
 			return &x
 		},
 		"emptyQUICConfig": func() (v tls.QUICConfig) {
@@ -183,6 +153,16 @@ var (
 			return &x
 		},
 		"refOfQUICConfig": func(x tls.QUICConfig) *tls.QUICConfig {
+			return &x
+		},
+		"emptyCipherSuite": func() (v tls.CipherSuite) {
+			return v
+		},
+		"refCipherSuite": func() *tls.CipherSuite {
+			var x tls.CipherSuite
+			return &x
+		},
+		"refOfCipherSuite": func(x tls.CipherSuite) *tls.CipherSuite {
 			return &x
 		},
 		"emptyClientHelloInfo": func() (v tls.ClientHelloInfo) {
@@ -205,14 +185,24 @@ var (
 		"refOfConfig": func(x tls.Config) *tls.Config {
 			return &x
 		},
-		"emptyConnectionState": func() (v tls.ConnectionState) {
+		"emptyConn": func() (v tls.Conn) {
 			return v
 		},
-		"refConnectionState": func() *tls.ConnectionState {
-			var x tls.ConnectionState
+		"refConn": func() *tls.Conn {
+			var x tls.Conn
 			return &x
 		},
-		"refOfConnectionState": func(x tls.ConnectionState) *tls.ConnectionState {
+		"refOfConn": func(x tls.Conn) *tls.Conn {
+			return &x
+		},
+		"emptyDialer": func() (v tls.Dialer) {
+			return v
+		},
+		"refDialer": func() *tls.Dialer {
+			var x tls.Dialer
+			return &x
+		},
+		"refOfDialer": func(x tls.Dialer) *tls.Dialer {
 			return &x
 		},
 		"emptyQUICSessionTicketOptions": func() (v tls.QUICSessionTicketOptions) {
@@ -225,24 +215,34 @@ var (
 		"refOfQUICSessionTicketOptions": func(x tls.QUICSessionTicketOptions) *tls.QUICSessionTicketOptions {
 			return &x
 		},
-		"emptyCertificate": func() (v tls.Certificate) {
+		"emptyClientSessionState": func() (v tls.ClientSessionState) {
 			return v
 		},
-		"refCertificate": func() *tls.Certificate {
-			var x tls.Certificate
+		"refClientSessionState": func() *tls.ClientSessionState {
+			var x tls.ClientSessionState
 			return &x
 		},
-		"refOfCertificate": func(x tls.Certificate) *tls.Certificate {
+		"refOfClientSessionState": func(x tls.ClientSessionState) *tls.ClientSessionState {
 			return &x
 		},
-		"emptyCertificateRequestInfo": func() (v tls.CertificateRequestInfo) {
+		"emptyQUICConn": func() (v tls.QUICConn) {
 			return v
 		},
-		"refCertificateRequestInfo": func() *tls.CertificateRequestInfo {
-			var x tls.CertificateRequestInfo
+		"refQUICConn": func() *tls.QUICConn {
+			var x tls.QUICConn
 			return &x
 		},
-		"refOfCertificateRequestInfo": func(x tls.CertificateRequestInfo) *tls.CertificateRequestInfo {
+		"refOfQUICConn": func(x tls.QUICConn) *tls.QUICConn {
+			return &x
+		},
+		"emptyQUICEvent": func() (v tls.QUICEvent) {
+			return v
+		},
+		"refQUICEvent": func() *tls.QUICEvent {
+			var x tls.QUICEvent
+			return &x
+		},
+		"refOfQUICEvent": func(x tls.QUICEvent) *tls.QUICEvent {
 			return &x
 		}}
 )

@@ -13,15 +13,15 @@ var (
 	//go:embed encoding_base64.d.ts
 	EncodingBase64Define   []byte
 	EncodingBase64Declared = map[string]any{
-		"newDecoder":     base64.NewDecoder,
-		"newEncoder":     base64.NewEncoder,
 		"RawStdEncoding": base64.RawStdEncoding,
 		"RawURLEncoding": base64.RawURLEncoding,
+		"StdEncoding":    base64.StdEncoding,
 		"StdPadding":     base64.StdPadding,
+		"URLEncoding":    base64.URLEncoding,
+		"newDecoder":     base64.NewDecoder,
+		"newEncoder":     base64.NewEncoder,
 		"newEncoding":    base64.NewEncoding,
 		"NoPadding":      base64.NoPadding,
-		"StdEncoding":    base64.StdEncoding,
-		"URLEncoding":    base64.URLEncoding,
 
 		"emptyEncoding": func() (v base64.Encoding) {
 			return v

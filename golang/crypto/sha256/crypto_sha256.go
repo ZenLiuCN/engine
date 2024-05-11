@@ -13,13 +13,13 @@ var (
 	//go:embed crypto_sha256.d.ts
 	CryptoSha256Define   []byte
 	CryptoSha256Declared = map[string]any{
+		"new224":    sha256.New224,
 		"Size":      sha256.Size,
 		"Size224":   sha256.Size224,
 		"sum224":    sha256.Sum224,
 		"sum256":    sha256.Sum256,
 		"BlockSize": sha256.BlockSize,
 		"New":       sha256.New,
-		"new224":    sha256.New224,
 	}
 )
 

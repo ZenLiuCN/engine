@@ -13,12 +13,12 @@ var (
 	//go:embed encoding_csv.d.ts
 	EncodingCsvDefine   []byte
 	EncodingCsvDeclared = map[string]any{
+		"ErrBareQuote":     csv.ErrBareQuote,
+		"ErrFieldCount":    csv.ErrFieldCount,
 		"ErrQuote":         csv.ErrQuote,
 		"ErrTrailingComma": csv.ErrTrailingComma,
 		"newReader":        csv.NewReader,
 		"newWriter":        csv.NewWriter,
-		"ErrBareQuote":     csv.ErrBareQuote,
-		"ErrFieldCount":    csv.ErrFieldCount,
 
 		"emptyReader": func() (v csv.Reader) {
 			return v

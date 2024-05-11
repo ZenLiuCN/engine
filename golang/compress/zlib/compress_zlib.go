@@ -13,18 +13,18 @@ var (
 	//go:embed compress_zlib.d.ts
 	CompressZlibDefine   []byte
 	CompressZlibDeclared = map[string]any{
-		"ErrChecksum":        zlib.ErrChecksum,
-		"HuffmanOnly":        zlib.HuffmanOnly,
-		"DefaultCompression": zlib.DefaultCompression,
-		"ErrDictionary":      zlib.ErrDictionary,
-		"newReader":          zlib.NewReader,
-		"BestSpeed":          zlib.BestSpeed,
-		"newReaderDict":      zlib.NewReaderDict,
-		"NoCompression":      zlib.NoCompression,
 		"BestCompression":    zlib.BestCompression,
-		"ErrHeader":          zlib.ErrHeader,
+		"ErrDictionary":      zlib.ErrDictionary,
+		"HuffmanOnly":        zlib.HuffmanOnly,
+		"newReaderDict":      zlib.NewReaderDict,
 		"newWriter":          zlib.NewWriter,
 		"newWriterLevel":     zlib.NewWriterLevel,
+		"NoCompression":      zlib.NoCompression,
+		"DefaultCompression": zlib.DefaultCompression,
+		"BestSpeed":          zlib.BestSpeed,
+		"ErrChecksum":        zlib.ErrChecksum,
+		"ErrHeader":          zlib.ErrHeader,
+		"newReader":          zlib.NewReader,
 		"newWriterLevelDict": zlib.NewWriterLevelDict,
 
 		"emptyWriter": func() (v zlib.Writer) {

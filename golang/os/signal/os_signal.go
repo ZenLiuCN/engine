@@ -14,12 +14,12 @@ var (
 	//go:embed os_signal.d.ts
 	OsSignalDefine   []byte
 	OsSignalDeclared = map[string]any{
+		"notifyContext": signal.NotifyContext,
 		"reset":         signal.Reset,
 		"stop":          signal.Stop,
 		"ignore":        signal.Ignore,
 		"ignored":       signal.Ignored,
 		"notify":        signal.Notify,
-		"notifyContext": signal.NotifyContext,
 	}
 )
 

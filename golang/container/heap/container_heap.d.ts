@@ -14,4 +14,5 @@ declare module 'golang/container/heap'{
 	export function pop(h:Interface):any
 	export function push(h:Interface,x:any):void
 	export function remove(h:Interface,i:int):any
+
 }

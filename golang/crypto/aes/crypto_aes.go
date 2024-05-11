@@ -13,8 +13,8 @@ var (
 	//go:embed crypto_aes.d.ts
 	CryptoAesDefine   []byte
 	CryptoAesDeclared = map[string]any{
-		"BlockSize": aes.BlockSize,
 		"newCipher": aes.NewCipher,
+		"BlockSize": aes.BlockSize,
 	}
 )
 

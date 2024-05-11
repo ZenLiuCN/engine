@@ -12,4 +12,5 @@ declare module 'golang/crypto/des'{
 	}
 	export function newCipher(key:Uint8Array):cipher.Block
 	export function newTripleDESCipher(key:Uint8Array):cipher.Block
+
 }

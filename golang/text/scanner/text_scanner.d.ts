@@ -6,7 +6,7 @@ declare module 'golang/text/scanner'{
 	// @ts-ignore
 	import * as io from 'golang/io'
 	// @ts-ignore
-	import type {Ref,uint,uint64,rune,int,Struct,bool} from 'go'
+	import type {bool,Ref,uint,uint64,rune,int,Struct} from 'go'
 	//-5
 	export const Char:int
 	//-8
@@ -67,9 +67,10 @@ declare module 'golang/text/scanner'{
 	export const String:int
 	export function tokenString(tok:rune):string
 
+export function emptyPosition():Position
+export function refPosition():Ref<Position>
+export function refOfPosition(x:Position):Ref<Position>
 export function emptyScanner():Scanner
 export function refScanner():Ref<Scanner>
 export function refOfScanner(x:Scanner):Ref<Scanner>
-export function emptyPosition():Position
-export function refPosition():Ref<Position>
-export function refOfPosition(x:Position):Ref<Position>}
+}

@@ -6,8 +6,8 @@ declare module 'golang/bytes'{
 	// @ts-ignore
 	import * as unicode from 'golang/unicode'
 	// @ts-ignore
-	import type {bool,GoError,int,error,int64,byte,rune,Struct,Ref} from 'go'
-	export interface Buffer extends Struct<Buffer>,io.WriterTo,io.StringWriter,io.ReaderFrom,io.RuneScanner,io.ReadWriter,io.ByteScanner,io.ByteWriter{
+	import type {Struct,int,int64,byte,bool,GoError,Ref,error,rune} from 'go'
+	export interface Buffer extends Struct<Buffer>,io.ReadWriter,io.ByteWriter,io.WriterTo,io.StringWriter,io.ByteScanner,io.RuneScanner,io.ReaderFrom{
 		bytes():Uint8Array
 		availableBuffer():Uint8Array
 		string():string
@@ -17,20 +17,20 @@ declare module 'golang/bytes'{
 		truncate(n:int):void
 		reset():void
 		grow(n:int):void
-		write(p:Uint8Array):[int,error]
-		writeString(s:string):[int,error]
-		readFrom(r:io.Reader):[int64,error]
-		writeTo(w:io.Writer):[int64,error]
-		writeByte(c:byte):error
-		writeRune(r:rune):[int,error]
-		read(p:Uint8Array):[int,error]
+		write(p:Uint8Array):int
+		writeString(s:string):int
+		readFrom(r:io.Reader):int64
+		writeTo(w:io.Writer):int64
+		writeByte(c:byte)/*error*/
+		writeRune(r:rune):int
+		read(p:Uint8Array):int
 		next(n:int):Uint8Array
-		readByte():[byte,error]
-		readRune():[rune,int,error]
-		unreadRune():error
-		unreadByte():error
-		readBytes(delim:byte):[Uint8Array,error]
-		readString(delim:byte):[string,error]
+		readByte():byte
+		readRune():[rune,int]
+		unreadRune()/*error*/
+		unreadByte()/*error*/
+		readBytes(delim:byte):Uint8Array
+		readString(delim:byte):string
 	}
 	export function clone(b:Uint8Array):Uint8Array
 	export function compare(a:Uint8Array,b:Uint8Array):int
@@ -65,17 +65,17 @@ declare module 'golang/bytes'{
 	export function newBuffer(buf:Uint8Array):Ref<Buffer>
 	export function newBufferString(s:string):Ref<Buffer>
 	export function newReader(b:Uint8Array):Ref<Reader>
-	export interface Reader extends io.ReadSeeker,io.WriterTo,io.ReaderAt,io.RuneScanner,Struct<Reader>,io.ByteScanner{
+	export interface Reader extends io.ByteScanner,io.RuneScanner,io.ReadSeeker,io.WriterTo,io.ReaderAt,Struct<Reader>{
 		len():int
 		size():int64
-		read(b:Uint8Array):[int,error]
-		readAt(b:Uint8Array,off:int64):[int,error]
-		readByte():[byte,error]
-		unreadByte():error
-		readRune():[rune,int,error]
-		unreadRune():error
-		seek(offset:int64,whence:int):[int64,error]
-		writeTo(w:io.Writer):[int64,error]
+		read(b:Uint8Array):int
+		readAt(b:Uint8Array,off:int64):int
+		readByte():byte
+		unreadByte()/*error*/
+		readRune():[rune,int]
+		unreadRune()/*error*/
+		seek(offset:int64,whence:int):int64
+		writeTo(w:io.Writer):int64
 		reset(b:Uint8Array):void
 	}
 	export function repeat(b:Uint8Array,count:int):Uint8Array
@@ -109,4 +109,5 @@ export function refBuffer():Ref<Buffer>
 export function refOfBuffer(x:Buffer):Ref<Buffer>
 export function emptyReader():Reader
 export function refReader():Ref<Reader>
-export function refOfReader(x:Reader):Ref<Reader>}
+export function refOfReader(x:Reader):Ref<Reader>
+}

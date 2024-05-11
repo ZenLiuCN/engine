@@ -54,4 +54,5 @@ declare module 'golang/math/bits'{
 	export function trailingZeros8(x:uint8):int
 	//64
 	export const UintSize:int
+
 }

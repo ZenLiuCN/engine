@@ -5,7 +5,7 @@ declare module 'golang/encoding/hex'{
 	import * as io from 'golang/io'
 	// @ts-ignore
 	import type {error,GoError,byte,int} from 'go'
-	export function decode(dst:Uint8Array,src:Uint8Array):[int,error]
+	export function decode(dst:Uint8Array,src:Uint8Array):int
 	export function decodeString(s:string):Uint8Array
 	export function decodedLen(x:int):int
 	export function dump(data:Uint8Array):string
@@ -19,4 +19,5 @@ declare module 'golang/encoding/hex'{
 	}
 	export function newDecoder(r:io.Reader):io.Reader
 	export function newEncoder(w:io.Writer):io.Writer
+
 }

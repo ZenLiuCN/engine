@@ -8,7 +8,7 @@ declare module 'golang/io/fs'{
 	// @ts-ignore
 	import type {int,int64,uint32,Struct,Alias,error,bool,GoError} from 'go'
 	export interface DirEntry{
-		info():[FileInfo,error]
+		info():FileInfo
 		isDir():bool
 		name():string
 		type():FileMode
@@ -19,12 +19,12 @@ declare module 'golang/io/fs'{
 	export const ErrNotExist:GoError
 	export const ErrPermission:GoError
 	export interface FS{
-		open(name:string):[File,error]
+		open(name:string):File
 	}
 	export interface File extends io.Closer{
 		close():error
-		read(v1:Uint8Array):[int,error]
-		stat():[FileInfo,error]
+		read(v1:Uint8Array):int
+		stat():FileInfo
 	}
 	export interface FileInfo{
 		isDir():bool
@@ -44,9 +44,9 @@ declare module 'golang/io/fs'{
 	}
 	export function formatDirEntry(dir:DirEntry):string
 	export function formatFileInfo(info:FileInfo):string
-	export function glob(fsys:FS,pattern:string):[string[],error]
+	export function glob(fsys:FS,pattern:string):string[]
 	export interface GlobFS extends FS{
-		glob(pattern:string):[string[],error]
+		glob(pattern:string):string[]
 	}
 	export const ModeAppend:FileMode
 	export const ModeCharDevice:FileMode
@@ -63,37 +63,38 @@ declare module 'golang/io/fs'{
 	export const ModeSymlink:FileMode
 	export const ModeTemporary:FileMode
 	export const ModeType:FileMode
-	export interface PathError extends GoError,Struct<PathError>,Error{
+	export interface PathError extends Error,GoError,Struct<PathError>{
 		op:string
 		path:string
 		err:GoError
 		error():string
-		unwrap():error
+		unwrap()/*error*/
 		timeout():bool
 	}
-	export function readDir(fsys:FS,name:string):[DirEntry[],error]
+	export function readDir(fsys:FS,name:string):DirEntry[]
 	export interface ReadDirFS extends FS{
-		readDir(name:string):[DirEntry[],error]
+		readDir(name:string):DirEntry[]
 	}
 	export interface ReadDirFile extends File{
-		readDir(n:int):[DirEntry[],error]
+		readDir(n:int):DirEntry[]
 	}
-	export function readFile(fsys:FS,name:string):[Uint8Array,error]
+	export function readFile(fsys:FS,name:string):Uint8Array
 	export interface ReadFileFS extends FS{
-		readFile(name:string):[Uint8Array,error]
+		readFile(name:string):Uint8Array
 	}
 	export const SkipAll:GoError
 	export const SkipDir:GoError
-	export function stat(fsys:FS,name:string):[FileInfo,error]
+	export function stat(fsys:FS,name:string):FileInfo
 	export interface StatFS extends FS{
-		stat(name:string):[FileInfo,error]
+		stat(name:string):FileInfo
 	}
-	export function sub(fsys:FS,dir:string):[FS,error]
+	export function sub(fsys:FS,dir:string):FS
 	export interface SubFS extends FS{
-		sub(dir:string):[FS,error]
+		sub(dir:string):FS
 	}
 	export function validPath(name:string):bool
-	export function walkDir(fsys:FS,root:string,fn:WalkDirFunc):error
+	export function walkDir(fsys:FS,root:string,fn:WalkDirFunc)/*error*/
 	export interface WalkDirFunc extends Alias<(path:string,d:DirEntry,err:error)=>error>{
 	}
+
 }

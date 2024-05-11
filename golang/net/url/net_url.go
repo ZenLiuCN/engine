@@ -14,15 +14,15 @@ var (
 	NetUrlDefine   []byte
 	NetUrlDeclared = map[string]any{
 		"joinPath":        url.JoinPath,
+		"parseQuery":      url.ParseQuery,
+		"queryUnescape":   url.QueryUnescape,
+		"user":            url.User,
+		"userPassword":    url.UserPassword,
 		"parse":           url.Parse,
 		"parseRequestURI": url.ParseRequestURI,
 		"pathEscape":      url.PathEscape,
-		"userPassword":    url.UserPassword,
-		"parseQuery":      url.ParseQuery,
 		"pathUnescape":    url.PathUnescape,
 		"queryEscape":     url.QueryEscape,
-		"queryUnescape":   url.QueryUnescape,
-		"user":            url.User,
 
 		"emptyURL": func() (v url.URL) {
 			return v

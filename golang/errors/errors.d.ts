@@ -6,7 +6,8 @@ declare module 'golang/errors'{
 	export function as(err:error,target:any):bool
 	export const ErrUnsupported:GoError
 	export function is(err:error,target:error):bool
-	export function join(...errs:error[]):error
-	export function New(text:string):error
-	export function unwrap(err:error):error
+	export function join(...errs:error[])/*error*/
+	export function New(text:string)/*error*/
+	export function unwrap(err:error)/*error*/
+
 }

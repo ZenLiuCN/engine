@@ -27,9 +27,10 @@ declare module 'golang/container/list'{
 	}
 	export function New():Ref<List>
 
+export function emptyList():List
+export function refList():Ref<List>
+export function refOfList(x:List):Ref<List>
 export function emptyElement():Element
 export function refElement():Ref<Element>
 export function refOfElement(x:Element):Ref<Element>
-export function emptyList():List
-export function refList():Ref<List>
-export function refOfList(x:List):Ref<List>}
+}

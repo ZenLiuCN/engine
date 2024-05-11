@@ -4,7 +4,7 @@ declare module 'golang/encoding/base64'{
 	// @ts-ignore
 	import * as io from 'golang/io'
 	// @ts-ignore
-	import type {int,error,int64,GoError,Struct,rune,Ref} from 'go'
+	import type {int64,GoError,Struct,rune,Ref,int,error} from 'go'
 	export interface CorruptInputError extends int64,GoError{
 		error():string
 	}
@@ -14,8 +14,8 @@ declare module 'golang/encoding/base64'{
 		encode(dst:Uint8Array,src:Uint8Array):void
 		encodeToString(src:Uint8Array):string
 		encodedLen(n:int):int
-		decodeString(s:string):[Uint8Array,error]
-		decode(dst:Uint8Array,src:Uint8Array):[int,error]
+		decodeString(s:string):Uint8Array
+		decode(dst:Uint8Array,src:Uint8Array):int
 		decodedLen(n:int):int
 	}
 	export function newDecoder(enc:Ref<Encoding>,r:io.Reader):io.Reader
@@ -32,4 +32,5 @@ declare module 'golang/encoding/base64'{
 
 export function emptyEncoding():Encoding
 export function refEncoding():Ref<Encoding>
-export function refOfEncoding(x:Encoding):Ref<Encoding>}
+export function refOfEncoding(x:Encoding):Ref<Encoding>
+}

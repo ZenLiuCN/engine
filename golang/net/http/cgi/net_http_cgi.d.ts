@@ -22,9 +22,10 @@ declare module 'golang/net/http/cgi'{
 		serveHTTP(rw:http.ResponseWriter,req:Ref<http.Request>):void
 	}
 	export function request():Ref<http.Request>
-	export function requestFromMap(params:Record<string,string>):[Ref<http.Request>,error]
-	export function serve(handler:http.Handler):error
+	export function requestFromMap(params:Record<string,string>):Ref<http.Request>
+	export function serve(handler:http.Handler)/*error*/
 
 export function emptyHandler():Handler
 export function refHandler():Ref<Handler>
-export function refOfHandler(x:Handler):Ref<Handler>}
+export function refOfHandler(x:Handler):Ref<Handler>
+}

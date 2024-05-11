@@ -6,12 +6,12 @@ declare module 'golang/image/jpeg'{
 	// @ts-ignore
 	import * as image from 'golang/image'
 	// @ts-ignore
-	import type {error,int,Ref,GoError,Struct} from 'go'
+	import type {Ref,GoError,Struct,error,int} from 'go'
 	export function decode(r:io.Reader):image.Image
 	export function decodeConfig(r:io.Reader):image.Config
 	//75
 	export const DefaultQuality:int
-	export function encode(w:io.Writer,m:image.Image,o:Ref<Options>):error
+	export function encode(w:io.Writer,m:image.Image,o:Ref<Options>)/*error*/
 	export interface FormatError extends string,GoError{
 		error():string
 	}
@@ -26,4 +26,5 @@ declare module 'golang/image/jpeg'{
 
 export function emptyOptions():Options
 export function refOptions():Ref<Options>
-export function refOfOptions(x:Options):Ref<Options>}
+export function refOfOptions(x:Options):Ref<Options>
+}

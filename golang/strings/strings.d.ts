@@ -6,17 +6,17 @@ declare module 'golang/strings'{
 	// @ts-ignore
 	import * as unicode from 'golang/unicode'
 	// @ts-ignore
-	import type {byte,rune,bool,Ref,int64,Struct,int,error} from 'go'
-	export interface Builder extends io.Writer,io.ByteWriter,Struct<Builder>,io.StringWriter{
+	import type {rune,bool,Ref,int64,Struct,int,error,byte} from 'go'
+	export interface Builder extends Struct<Builder>,io.StringWriter,io.Writer,io.ByteWriter{
 		string():string
 		len():int
 		cap():int
 		reset():void
 		grow(n:int):void
-		write(p:Uint8Array):[int,error]
-		writeByte(c:byte):error
-		writeRune(r:rune):[int,error]
-		writeString(s:string):[int,error]
+		write(p:Uint8Array):int
+		writeByte(c:byte)/*error*/
+		writeRune(r:rune):int
+		writeString(s:string):int
 	}
 	export function clone(s:string):string
 	export function compare(a:string,b:string):int
@@ -46,17 +46,17 @@ declare module 'golang/strings'{
 	export function map(mapping:(v1:rune)=>rune,s:string):string
 	export function newReader(s:string):Ref<Reader>
 	export function newReplacer(...oldnew:string[]):Ref<Replacer>
-	export interface Reader extends io.ReadSeeker,io.ReaderAt,io.WriterTo,io.RuneScanner,io.ByteScanner,Struct<Reader>{
+	export interface Reader extends io.ByteScanner,io.ReadSeeker,io.RuneScanner,io.WriterTo,Struct<Reader>,io.ReaderAt{
 		len():int
 		size():int64
-		read(b:Uint8Array):[int,error]
-		readAt(b:Uint8Array,off:int64):[int,error]
-		readByte():[byte,error]
-		unreadByte():error
-		readRune():[rune,int,error]
-		unreadRune():error
-		seek(offset:int64,whence:int):[int64,error]
-		writeTo(w:io.Writer):[int64,error]
+		read(b:Uint8Array):int
+		readAt(b:Uint8Array,off:int64):int
+		readByte():byte
+		unreadByte()/*error*/
+		readRune():[rune,int]
+		unreadRune()/*error*/
+		seek(offset:int64,whence:int):int64
+		writeTo(w:io.Writer):int64
 		reset(s:string):void
 	}
 	export function repeat(s:string,count:int):string
@@ -64,7 +64,7 @@ declare module 'golang/strings'{
 	export function replaceAll(s:string,old:string,New:string):string
 	export interface Replacer extends Struct<Replacer>{
 		replace(s:string):string
-		writeString(w:io.Writer,s:string):[int,error]
+		writeString(w:io.Writer,s:string):int
 	}
 	export function split(s:string,sep:string):string[]
 	export function splitAfter(s:string,sep:string):string[]
@@ -96,4 +96,5 @@ export function refReader():Ref<Reader>
 export function refOfReader(x:Reader):Ref<Reader>
 export function emptyReplacer():Replacer
 export function refReplacer():Ref<Replacer>
-export function refOfReplacer(x:Replacer):Ref<Replacer>}
+export function refOfReplacer(x:Replacer):Ref<Replacer>
+}

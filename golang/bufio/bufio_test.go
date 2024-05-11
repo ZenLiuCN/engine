@@ -12,6 +12,10 @@ func TestSimple(t *testing.T) {
 	fn.Panic1(v.RunTs(
 		//language=typescript
 		`
-		import * as time from 'golang/bufio'
+		import * as bufio from 'golang/bufio'
+		const r=bufio.refReader()
+		console.log(r.buffered())
+		const [c,e]=r.discard(2)
+		console.log(c,e)
 		`))
 }

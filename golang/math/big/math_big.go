@@ -14,24 +14,24 @@ var (
 	//go:embed math_big.d.ts
 	MathBigDefine   []byte
 	MathBigDeclared = map[string]any{
-		"Below":         big.Below,
-		"MaxBase":       big.MaxBase,
-		"ToNegativeInf": big.ToNegativeInf,
-		"Above":         big.Above,
+		"ToNearestAway": big.ToNearestAway,
 		"AwayFromZero":  big.AwayFromZero,
-		"jacobi":        big.Jacobi,
-		"MaxPrec":       big.MaxPrec,
+		"Exact":         big.Exact,
+		"MaxExp":        big.MaxExp,
+		"parseFloat":    big.ParseFloat,
+		"ToNegativeInf": big.ToNegativeInf,
+		"ToPositiveInf": big.ToPositiveInf,
+		"ToZero":        big.ToZero,
+		"MaxBase":       big.MaxBase,
 		"MinExp":        big.MinExp,
 		"ToNearestEven": big.ToNearestEven,
-		"ToPositiveInf": big.ToPositiveInf,
-		"MaxExp":        big.MaxExp,
-		"ToNearestAway": big.ToNearestAway,
-		"Exact":         big.Exact,
+		"Above":         big.Above,
+		"Below":         big.Below,
+		"jacobi":        big.Jacobi,
+		"MaxPrec":       big.MaxPrec,
 		"newFloat":      big.NewFloat,
 		"newInt":        big.NewInt,
 		"newRat":        big.NewRat,
-		"parseFloat":    big.ParseFloat,
-		"ToZero":        big.ToZero,
 
 		"emptyFloat": func() (v big.Float) {
 			return v

@@ -14,21 +14,31 @@ var (
 	//go:embed github_com_dslipak_pdf.d.ts
 	GithubComDslipakPdfDefine   []byte
 	GithubComDslipakPdfDeclared = map[string]any{
-		"Null":               pdf.Null,
 		"open":               pdf.Open,
-		"Array":              pdf.Array,
+		"Bool":               pdf.Bool,
 		"Integer":            pdf.Integer,
+		"newReaderEncrypted": pdf.NewReaderEncrypted,
 		"Real":               pdf.Real,
+		"Stream":             pdf.Stream,
+		"interpret":          pdf.Interpret,
+		"Name":               pdf.Name,
+		"Null":               pdf.Null,
+		"newReader":          pdf.NewReader,
+		"String":             pdf.String,
+		"Array":              pdf.Array,
 		"Dict":               pdf.Dict,
 		"ErrInvalidPassword": pdf.ErrInvalidPassword,
-		"interpret":          pdf.Interpret,
-		"newReader":          pdf.NewReader,
-		"newReaderEncrypted": pdf.NewReaderEncrypted,
-		"Bool":               pdf.Bool,
-		"Stream":             pdf.Stream,
-		"String":             pdf.String,
-		"Name":               pdf.Name,
 
+		"emptyValue": func() (v pdf.Value) {
+			return v
+		},
+		"refValue": func() *pdf.Value {
+			var x pdf.Value
+			return &x
+		},
+		"refOfValue": func(x pdf.Value) *pdf.Value {
+			return &x
+		},
 		"emptyFont": func() (v pdf.Font) {
 			return v
 		},
@@ -39,14 +49,14 @@ var (
 		"refOfFont": func(x pdf.Font) *pdf.Font {
 			return &x
 		},
-		"emptyOutline": func() (v pdf.Outline) {
+		"emptyPage": func() (v pdf.Page) {
 			return v
 		},
-		"refOutline": func() *pdf.Outline {
-			var x pdf.Outline
+		"refPage": func() *pdf.Page {
+			var x pdf.Page
 			return &x
 		},
-		"refOfOutline": func(x pdf.Outline) *pdf.Outline {
+		"refOfPage": func(x pdf.Page) *pdf.Page {
 			return &x
 		},
 		"emptyPoint": func() (v pdf.Point) {
@@ -69,6 +79,16 @@ var (
 		"refOfRow": func(x pdf.Row) *pdf.Row {
 			return &x
 		},
+		"emptyStack": func() (v pdf.Stack) {
+			return v
+		},
+		"refStack": func() *pdf.Stack {
+			var x pdf.Stack
+			return &x
+		},
+		"refOfStack": func(x pdf.Stack) *pdf.Stack {
+			return &x
+		},
 		"emptyText": func() (v pdf.Text) {
 			return v
 		},
@@ -89,14 +109,24 @@ var (
 		"refOfColumn": func(x pdf.Column) *pdf.Column {
 			return &x
 		},
-		"emptyPage": func() (v pdf.Page) {
+		"emptyContent": func() (v pdf.Content) {
 			return v
 		},
-		"refPage": func() *pdf.Page {
-			var x pdf.Page
+		"refContent": func() *pdf.Content {
+			var x pdf.Content
 			return &x
 		},
-		"refOfPage": func(x pdf.Page) *pdf.Page {
+		"refOfContent": func(x pdf.Content) *pdf.Content {
+			return &x
+		},
+		"emptyOutline": func() (v pdf.Outline) {
+			return v
+		},
+		"refOutline": func() *pdf.Outline {
+			var x pdf.Outline
+			return &x
+		},
+		"refOfOutline": func(x pdf.Outline) *pdf.Outline {
 			return &x
 		},
 		"emptyReader": func() (v pdf.Reader) {
@@ -118,36 +148,6 @@ var (
 		},
 		"refOfRect": func(x pdf.Rect) *pdf.Rect {
 			return &x
-		},
-		"emptyStack": func() (v pdf.Stack) {
-			return v
-		},
-		"refStack": func() *pdf.Stack {
-			var x pdf.Stack
-			return &x
-		},
-		"refOfStack": func(x pdf.Stack) *pdf.Stack {
-			return &x
-		},
-		"emptyValue": func() (v pdf.Value) {
-			return v
-		},
-		"refValue": func() *pdf.Value {
-			var x pdf.Value
-			return &x
-		},
-		"refOfValue": func(x pdf.Value) *pdf.Value {
-			return &x
-		},
-		"emptyContent": func() (v pdf.Content) {
-			return v
-		},
-		"refContent": func() *pdf.Content {
-			var x pdf.Content
-			return &x
-		},
-		"refOfContent": func(x pdf.Content) *pdf.Content {
-			return &x
 		}}
 )
 
@@ -158,7 +158,7 @@ func init() {
 type GithubComDslipakPdfModule struct{}
 
 func (S GithubComDslipakPdfModule) Identity() string {
-	return "github/com/dslipak/pdf"
+	return "github.com/dslipak/pdf"
 }
 func (S GithubComDslipakPdfModule) TypeDefine() []byte {
 	return GithubComDslipakPdfDefine

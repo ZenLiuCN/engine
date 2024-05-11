@@ -11,4 +11,5 @@ declare module 'golang/crypto/sha1'{
 	//20
 	export const Size:int
 	export function sum(data:Uint8Array):Uint8Array/*20*/
+
 }

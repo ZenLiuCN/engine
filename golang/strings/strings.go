@@ -14,59 +14,69 @@ var (
 	//go:embed strings.d.ts
 	StringsDefine   []byte
 	StringsDeclared = map[string]any{
-		"indexRune":      strings.IndexRune,
+		"indexFunc":      strings.IndexFunc,
+		"trimRightFunc":  strings.TrimRightFunc,
+		"fieldsFunc":     strings.FieldsFunc,
+		"hasSuffix":      strings.HasSuffix,
+		"lastIndexByte":  strings.LastIndexByte,
+		"map":            strings.Map,
+		"trimLeftFunc":   strings.TrimLeftFunc,
+		"replaceAll":     strings.ReplaceAll,
+		"toTitleSpecial": strings.ToTitleSpecial,
 		"toUpperSpecial": strings.ToUpperSpecial,
 		"trimSuffix":     strings.TrimSuffix,
-		"contains":       strings.Contains,
-		"indexByte":      strings.IndexByte,
-		"lastIndexByte":  strings.LastIndexByte,
-		"cutSuffix":      strings.CutSuffix,
-		"hasPrefix":      strings.HasPrefix,
-		"indexFunc":      strings.IndexFunc,
-		"join":           strings.Join,
-		"newReader":      strings.NewReader,
-		"title":          strings.Title,
-		"splitN":         strings.SplitN,
-		"fieldsFunc":     strings.FieldsFunc,
-		"repeat":         strings.Repeat,
-		"splitAfter":     strings.SplitAfter,
-		"trimLeft":       strings.TrimLeft,
-		"toLower":        strings.ToLower,
 		"trimFunc":       strings.TrimFunc,
 		"count":          strings.Count,
-		"lastIndexFunc":  strings.LastIndexFunc,
-		"toLowerSpecial": strings.ToLowerSpecial,
-		"toUpper":        strings.ToUpper,
-		"trimLeftFunc":   strings.TrimLeftFunc,
-		"containsFunc":   strings.ContainsFunc,
-		"cut":            strings.Cut,
-		"cutPrefix":      strings.CutPrefix,
-		"equalFold":      strings.EqualFold,
-		"lastIndex":      strings.LastIndex,
-		"toTitleSpecial": strings.ToTitleSpecial,
+		"title":          strings.Title,
+		"containsAny":    strings.ContainsAny,
+		"fields":         strings.Fields,
+		"splitAfterN":    strings.SplitAfterN,
+		"split":          strings.Split,
+		"splitAfter":     strings.SplitAfter,
 		"toValidUTF8":    strings.ToValidUTF8,
+		"cutPrefix":      strings.CutPrefix,
+		"indexByte":      strings.IndexByte,
+		"replace":        strings.Replace,
+		"toTitle":        strings.ToTitle,
+		"trimLeft":       strings.TrimLeft,
+		"trimRight":      strings.TrimRight,
 		"compare":        strings.Compare,
 		"indexAny":       strings.IndexAny,
-		"trimRight":      strings.TrimRight,
-		"trimRightFunc":  strings.TrimRightFunc,
-		"hasSuffix":      strings.HasSuffix,
-		"lastIndexAny":   strings.LastIndexAny,
-		"index":          strings.Index,
-		"replaceAll":     strings.ReplaceAll,
-		"splitAfterN":    strings.SplitAfterN,
-		"containsRune":   strings.ContainsRune,
-		"toTitle":        strings.ToTitle,
+		"indexRune":      strings.IndexRune,
+		"lastIndexFunc":  strings.LastIndexFunc,
 		"trim":           strings.Trim,
-		"trimSpace":      strings.TrimSpace,
 		"clone":          strings.Clone,
-		"fields":         strings.Fields,
-		"map":            strings.Map,
-		"newReplacer":    strings.NewReplacer,
+		"index":          strings.Index,
+		"lastIndex":      strings.LastIndex,
+		"toUpper":        strings.ToUpper,
 		"trimPrefix":     strings.TrimPrefix,
-		"containsAny":    strings.ContainsAny,
-		"replace":        strings.Replace,
-		"split":          strings.Split,
+		"contains":       strings.Contains,
+		"containsFunc":   strings.ContainsFunc,
+		"containsRune":   strings.ContainsRune,
+		"equalFold":      strings.EqualFold,
+		"splitN":         strings.SplitN,
+		"toLower":        strings.ToLower,
+		"trimSpace":      strings.TrimSpace,
+		"hasPrefix":      strings.HasPrefix,
+		"repeat":         strings.Repeat,
+		"join":           strings.Join,
+		"newReplacer":    strings.NewReplacer,
+		"cut":            strings.Cut,
+		"cutSuffix":      strings.CutSuffix,
+		"lastIndexAny":   strings.LastIndexAny,
+		"newReader":      strings.NewReader,
+		"toLowerSpecial": strings.ToLowerSpecial,
 
+		"emptyReplacer": func() (v strings.Replacer) {
+			return v
+		},
+		"refReplacer": func() *strings.Replacer {
+			var x strings.Replacer
+			return &x
+		},
+		"refOfReplacer": func(x strings.Replacer) *strings.Replacer {
+			return &x
+		},
 		"emptyBuilder": func() (v strings.Builder) {
 			return v
 		},
@@ -85,16 +95,6 @@ var (
 			return &x
 		},
 		"refOfReader": func(x strings.Reader) *strings.Reader {
-			return &x
-		},
-		"emptyReplacer": func() (v strings.Replacer) {
-			return v
-		},
-		"refReplacer": func() *strings.Replacer {
-			var x strings.Replacer
-			return &x
-		},
-		"refOfReplacer": func(x strings.Replacer) *strings.Replacer {
 			return &x
 		}}
 )

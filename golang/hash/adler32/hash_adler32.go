@@ -13,9 +13,9 @@ var (
 	//go:embed hash_adler32.d.ts
 	HashAdler32Define   []byte
 	HashAdler32Declared = map[string]any{
-		"checksum": adler32.Checksum,
 		"New":      adler32.New,
 		"Size":     adler32.Size,
+		"checksum": adler32.Checksum,
 	}
 )
 

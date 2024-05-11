@@ -12,12 +12,12 @@ var (
 	//go:embed unicode_utf16.d.ts
 	UnicodeUtf16Define   []byte
 	UnicodeUtf16Declared = map[string]any{
-		"isSurrogate": utf16.IsSurrogate,
-		"appendRune":  utf16.AppendRune,
 		"decode":      utf16.Decode,
 		"decodeRune":  utf16.DecodeRune,
 		"encode":      utf16.Encode,
 		"encodeRune":  utf16.EncodeRune,
+		"isSurrogate": utf16.IsSurrogate,
+		"appendRune":  utf16.AppendRune,
 	}
 )
 

@@ -15,19 +15,19 @@ var (
 	//go:embed text_template.d.ts
 	TextTemplateDefine   []byte
 	TextTemplateDeclared = map[string]any{
-		"htmlEscape":       template.HTMLEscape,
-		"parseFiles":       template.ParseFiles,
-		"jsEscapeString":   template.JSEscapeString,
 		"New":              template.New,
-		"parseGlob":        template.ParseGlob,
+		"htmlEscapeString": template.HTMLEscapeString,
+		"jsEscaper":        template.JSEscaper,
+		"urlQueryEscaper":  template.URLQueryEscaper,
+		"htmlEscape":       template.HTMLEscape,
 		"jsEscape":         template.JSEscape,
 		"must":             template.Must,
-		"urlQueryEscaper":  template.URLQueryEscaper,
-		"htmlEscapeString": template.HTMLEscapeString,
+		"parseFS":          template.ParseFS,
+		"parseFiles":       template.ParseFiles,
+		"parseGlob":        template.ParseGlob,
 		"htmlEscaper":      template.HTMLEscaper,
 		"isTrue":           template.IsTrue,
-		"jsEscaper":        template.JSEscaper,
-		"parseFS":          template.ParseFS,
+		"jsEscapeString":   template.JSEscapeString,
 
 		"emptyTemplate": func() (v template.Template) {
 			return v

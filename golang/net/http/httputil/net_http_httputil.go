@@ -19,20 +19,30 @@ var (
 	//go:embed net_http_httputil.d.ts
 	NetHttpHttputilDefine   []byte
 	NetHttpHttputilDeclared = map[string]any{
+		"newChunkedReader":          httputil.NewChunkedReader,
+		"dumpRequest":               httputil.DumpRequest,
+		"dumpRequestOut":            httputil.DumpRequestOut,
+		"ErrClosed":                 httputil.ErrClosed,
+		"ErrLineTooLong":            httputil.ErrLineTooLong,
 		"ErrPersistEOF":             httputil.ErrPersistEOF,
+		"newProxyClientConn":        httputil.NewProxyClientConn,
+		"newSingleHostReverseProxy": httputil.NewSingleHostReverseProxy,
+		"newServerConn":             httputil.NewServerConn,
+		"dumpResponse":              httputil.DumpResponse,
 		"ErrPipeline":               httputil.ErrPipeline,
 		"newChunkedWriter":          httputil.NewChunkedWriter,
-		"newServerConn":             httputil.NewServerConn,
-		"newSingleHostReverseProxy": httputil.NewSingleHostReverseProxy,
-		"ErrLineTooLong":            httputil.ErrLineTooLong,
-		"ErrClosed":                 httputil.ErrClosed,
 		"newClientConn":             httputil.NewClientConn,
-		"dumpResponse":              httputil.DumpResponse,
-		"newChunkedReader":          httputil.NewChunkedReader,
-		"dumpRequestOut":            httputil.DumpRequestOut,
-		"newProxyClientConn":        httputil.NewProxyClientConn,
-		"dumpRequest":               httputil.DumpRequest,
 
+		"emptyClientConn": func() (v httputil.ClientConn) {
+			return v
+		},
+		"refClientConn": func() *httputil.ClientConn {
+			var x httputil.ClientConn
+			return &x
+		},
+		"refOfClientConn": func(x httputil.ClientConn) *httputil.ClientConn {
+			return &x
+		},
 		"emptyProxyRequest": func() (v httputil.ProxyRequest) {
 			return v
 		},
@@ -61,16 +71,6 @@ var (
 			return &x
 		},
 		"refOfServerConn": func(x httputil.ServerConn) *httputil.ServerConn {
-			return &x
-		},
-		"emptyClientConn": func() (v httputil.ClientConn) {
-			return v
-		},
-		"refClientConn": func() *httputil.ClientConn {
-			var x httputil.ClientConn
-			return &x
-		},
-		"refOfClientConn": func(x httputil.ClientConn) *httputil.ClientConn {
 			return &x
 		}}
 )

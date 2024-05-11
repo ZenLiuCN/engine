@@ -17,4 +17,5 @@ declare module 'golang/hash'{
 	export interface Hash64 extends Hash{
 		sum64():uint64
 	}
+
 }

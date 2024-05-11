@@ -4,12 +4,12 @@ declare module 'golang/regexp'{
 	// @ts-ignore
 	import * as io from 'golang/io'
 	// @ts-ignore
-	import type {bool,Struct,int,Ref,error} from 'go'
+	import type {Ref,error,bool,Struct,int} from 'go'
 	export function compile(expr:string):Ref<Regexp>
 	export function compilePOSIX(expr:string):Ref<Regexp>
-	export function match(pattern:string,b:Uint8Array):[bool,error]
-	export function matchReader(pattern:string,r:io.RuneReader):[bool,error]
-	export function matchString(pattern:string,s:string):[bool,error]
+	export function match(pattern:string,b:Uint8Array):bool
+	export function matchReader(pattern:string,r:io.RuneReader):bool
+	export function matchString(pattern:string,s:string):bool
 	export function mustCompile(str:string):Ref<Regexp>
 	export function mustCompilePOSIX(str:string):Ref<Regexp>
 	export function quoteMeta(s:string):string
@@ -51,10 +51,11 @@ declare module 'golang/regexp'{
 		findAllStringSubmatch(s:string,n:int):Array<string[]>
 		findAllStringSubmatchIndex(s:string,n:int):Array<int[]>
 		split(s:string,n:int):string[]
-		marshalText():[Uint8Array,error]
-		unmarshalText(text:Uint8Array):error
+		marshalText():Uint8Array
+		unmarshalText(text:Uint8Array)/*error*/
 	}
 
 export function emptyRegexp():Regexp
 export function refRegexp():Ref<Regexp>
-export function refOfRegexp(x:Regexp):Ref<Regexp>}
+export function refOfRegexp(x:Regexp):Ref<Regexp>
+}

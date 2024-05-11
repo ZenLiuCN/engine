@@ -6,13 +6,13 @@ declare module 'golang/crypto'{
 	// @ts-ignore
 	import * as hash from 'golang/hash'
 	// @ts-ignore
-	import type {error,uint,int,bool} from 'go'
+	import type {int,bool,error,uint} from 'go'
 	export const BLAKE2b_256:Hash
 	export const BLAKE2b_384:Hash
 	export const BLAKE2b_512:Hash
 	export const BLAKE2s_256:Hash
 	export interface Decrypter{
-		decrypt(rand:io.Reader,msg:Uint8Array,opts:DecrypterOpts):[Uint8Array,error]
+		decrypt(rand:io.Reader,msg:Uint8Array,opts:DecrypterOpts):Uint8Array
 		public():PublicKey
 	}
 	export interface DecrypterOpts{
@@ -46,9 +46,10 @@ declare module 'golang/crypto'{
 	export const SHA512_256:Hash
 	export interface Signer{
 		public():PublicKey
-		sign(rand:io.Reader,digest:Uint8Array,opts:SignerOpts):[Uint8Array,error]
+		sign(rand:io.Reader,digest:Uint8Array,opts:SignerOpts):Uint8Array
 	}
 	export interface SignerOpts{
 		hashFunc():Hash
 	}
+
 }

@@ -4,7 +4,7 @@ declare module 'golang/text/template/parse'{
 	// @ts-ignore
 	import * as fmt from 'golang/fmt'
 	// @ts-ignore
-	import type {complex128,error,Struct,bool,uint,uint64,float64,int,Ref,int64} from 'go'
+	import type {int,uint,int64,uint64,float64,complex128,Ref,Struct,bool,error} from 'go'
 	export interface ActionNode extends Struct<ActionNode>,fmt.Stringer,Node{
 		nodeType:NodeType
 		pos:Pos
@@ -13,14 +13,14 @@ declare module 'golang/text/template/parse'{
 		string():string
 		copy():Node
 	}
-	export interface BoolNode extends fmt.Stringer,Node,Struct<BoolNode>{
+	export interface BoolNode extends Struct<BoolNode>,fmt.Stringer,Node{
 		nodeType:NodeType
 		pos:Pos
 		true:bool
 		string():string
 		copy():Node
 	}
-	export interface BranchNode extends fmt.Stringer,Node,Struct<BranchNode>{
+	export interface BranchNode extends Node,Struct<BranchNode>,fmt.Stringer{
 		nodeType:NodeType
 		pos:Pos
 		line:int
@@ -30,14 +30,14 @@ declare module 'golang/text/template/parse'{
 		string():string
 		copy():Node
 	}
-	export interface BreakNode extends Node,Struct<BreakNode>,fmt.Stringer{
+	export interface BreakNode extends Struct<BreakNode>,fmt.Stringer,Node{
 		nodeType:NodeType
 		pos:Pos
 		line:int
 		copy():Node
 		string():string
 	}
-	export interface ChainNode extends Struct<ChainNode>,fmt.Stringer,Node{
+	export interface ChainNode extends fmt.Stringer,Node,Struct<ChainNode>{
 		nodeType:NodeType
 		pos:Pos
 		node:Node
@@ -53,14 +53,14 @@ declare module 'golang/text/template/parse'{
 		string():string
 		copy():Node
 	}
-	export interface CommentNode extends Struct<CommentNode>,fmt.Stringer,Node{
+	export interface CommentNode extends Struct<CommentNode>,Node,fmt.Stringer{
 		nodeType:NodeType
 		pos:Pos
 		text:string
 		string():string
 		copy():Node
 	}
-	export interface ContinueNode extends Struct<ContinueNode>,fmt.Stringer,Node{
+	export interface ContinueNode extends Struct<ContinueNode>,Node,fmt.Stringer{
 		nodeType:NodeType
 		pos:Pos
 		line:int
@@ -74,14 +74,14 @@ declare module 'golang/text/template/parse'{
 		string():string
 		copy():Node
 	}
-	export interface FieldNode extends Struct<FieldNode>,fmt.Stringer,Node{
+	export interface FieldNode extends Node,fmt.Stringer,Struct<FieldNode>{
 		nodeType:NodeType
 		pos:Pos
 		ident:string[]
 		string():string
 		copy():Node
 	}
-	export interface IdentifierNode extends Struct<IdentifierNode>,fmt.Stringer,Node{
+	export interface IdentifierNode extends Struct<IdentifierNode>,Node,fmt.Stringer{
 		nodeType:NodeType
 		pos:Pos
 		ident:string
@@ -95,7 +95,7 @@ declare module 'golang/text/template/parse'{
 		copy():Node
 	}
 	export function isEmptyTree(n:Node):bool
-	export interface ListNode extends Node,fmt.Stringer,Struct<ListNode>{
+	export interface ListNode extends Struct<ListNode>,fmt.Stringer,Node{
 		nodeType:NodeType
 		pos:Pos
 		nodes:Node[]
@@ -144,7 +144,7 @@ declare module 'golang/text/template/parse'{
 	}
 	export const NodeVariable:NodeType
 	export const NodeWith:NodeType
-	export interface NumberNode extends Struct<NumberNode>,fmt.Stringer,Node{
+	export interface NumberNode extends Struct<NumberNode>,Node,fmt.Stringer{
 		nodeType:NodeType
 		pos:Pos
 		isInt:bool
@@ -159,9 +159,9 @@ declare module 'golang/text/template/parse'{
 		string():string
 		copy():Node
 	}
-	export function parse(name:string,text:string,leftDelim:string,rightDelim:string,...funcs:Record<string[],any>[]):[Record<string,Ref<Tree>>,error]
+	export function parse(name:string,text:string,leftDelim:string,rightDelim:string,...funcs:Record<string[],any>[]):[Record<string,Ref<Tree>>]
 	export const ParseComments:Mode
-	export interface PipeNode extends fmt.Stringer,Node,Struct<PipeNode>{
+	export interface PipeNode extends Struct<PipeNode>,fmt.Stringer,Node{
 		nodeType:NodeType
 		pos:Pos
 		line:int
@@ -175,7 +175,7 @@ declare module 'golang/text/template/parse'{
 	export interface Pos extends int{
 		position():Pos
 	}
-	export interface RangeNode extends Struct<RangeNode>,Node,fmt.Stringer{
+	export interface RangeNode extends Struct<RangeNode>,fmt.Stringer,Node{
 		branchNode:BranchNode
 		copy():Node
 	}
@@ -188,7 +188,7 @@ declare module 'golang/text/template/parse'{
 		string():string
 		copy():Node
 	}
-	export interface TemplateNode extends Struct<TemplateNode>,Node,fmt.Stringer{
+	export interface TemplateNode extends Struct<TemplateNode>,fmt.Stringer,Node{
 		nodeType:NodeType
 		pos:Pos
 		line:int
@@ -197,7 +197,7 @@ declare module 'golang/text/template/parse'{
 		string():string
 		copy():Node
 	}
-	export interface TextNode extends Struct<TextNode>,Node,fmt.Stringer{
+	export interface TextNode extends Struct<TextNode>,fmt.Stringer,Node{
 		nodeType:NodeType
 		pos:Pos
 		text:Uint8Array
@@ -211,86 +211,87 @@ declare module 'golang/text/template/parse'{
 		mode:Mode
 		copy():Ref<Tree>
 		errorContext(n:Node):[string,string]
-		parse(text:string,leftDelim:string,rightDelim:string,treeSet:Record<string,Ref<Tree>>,...funcs:Record<string[],any>[]):[Ref<Tree>,error]
+		parse(text:string,leftDelim:string,rightDelim:string,treeSet:Record<string,Ref<Tree>>,...funcs:Record<string[],any>[]):Ref<Tree>
 	}
-	export interface VariableNode extends Struct<VariableNode>,Node,fmt.Stringer{
+	export interface VariableNode extends Node,Struct<VariableNode>,fmt.Stringer{
 		nodeType:NodeType
 		pos:Pos
 		ident:string[]
 		string():string
 		copy():Node
 	}
-	export interface WithNode extends Struct<WithNode>,Node,fmt.Stringer{
+	export interface WithNode extends Node,Struct<WithNode>,fmt.Stringer{
 		branchNode:BranchNode
 		copy():Node
 	}
 
-export function emptyCommandNode():CommandNode
-export function refCommandNode():Ref<CommandNode>
-export function refOfCommandNode(x:CommandNode):Ref<CommandNode>
-export function emptyNilNode():NilNode
-export function refNilNode():Ref<NilNode>
-export function refOfNilNode(x:NilNode):Ref<NilNode>
-export function emptyVariableNode():VariableNode
-export function refVariableNode():Ref<VariableNode>
-export function refOfVariableNode(x:VariableNode):Ref<VariableNode>
-export function emptyTemplateNode():TemplateNode
-export function refTemplateNode():Ref<TemplateNode>
-export function refOfTemplateNode(x:TemplateNode):Ref<TemplateNode>
 export function emptyTextNode():TextNode
 export function refTextNode():Ref<TextNode>
 export function refOfTextNode(x:TextNode):Ref<TextNode>
-export function emptyContinueNode():ContinueNode
-export function refContinueNode():Ref<ContinueNode>
-export function refOfContinueNode(x:ContinueNode):Ref<ContinueNode>
-export function emptyPipeNode():PipeNode
-export function refPipeNode():Ref<PipeNode>
-export function refOfPipeNode(x:PipeNode):Ref<PipeNode>
-export function emptyRangeNode():RangeNode
-export function refRangeNode():Ref<RangeNode>
-export function refOfRangeNode(x:RangeNode):Ref<RangeNode>
-export function emptyStringNode():StringNode
-export function refStringNode():Ref<StringNode>
-export function refOfStringNode(x:StringNode):Ref<StringNode>
-export function emptyTree():Tree
-export function refTree():Ref<Tree>
-export function refOfTree(x:Tree):Ref<Tree>
+export function emptyVariableNode():VariableNode
+export function refVariableNode():Ref<VariableNode>
+export function refOfVariableNode(x:VariableNode):Ref<VariableNode>
+export function emptyActionNode():ActionNode
+export function refActionNode():Ref<ActionNode>
+export function refOfActionNode(x:ActionNode):Ref<ActionNode>
 export function emptyBoolNode():BoolNode
 export function refBoolNode():Ref<BoolNode>
 export function refOfBoolNode(x:BoolNode):Ref<BoolNode>
+export function emptyContinueNode():ContinueNode
+export function refContinueNode():Ref<ContinueNode>
+export function refOfContinueNode(x:ContinueNode):Ref<ContinueNode>
+export function emptyNumberNode():NumberNode
+export function refNumberNode():Ref<NumberNode>
+export function refOfNumberNode(x:NumberNode):Ref<NumberNode>
+export function emptyRangeNode():RangeNode
+export function refRangeNode():Ref<RangeNode>
+export function refOfRangeNode(x:RangeNode):Ref<RangeNode>
+export function emptyTemplateNode():TemplateNode
+export function refTemplateNode():Ref<TemplateNode>
+export function refOfTemplateNode(x:TemplateNode):Ref<TemplateNode>
 export function emptyBranchNode():BranchNode
 export function refBranchNode():Ref<BranchNode>
 export function refOfBranchNode(x:BranchNode):Ref<BranchNode>
+export function emptyChainNode():ChainNode
+export function refChainNode():Ref<ChainNode>
+export function refOfChainNode(x:ChainNode):Ref<ChainNode>
+export function emptyIdentifierNode():IdentifierNode
+export function refIdentifierNode():Ref<IdentifierNode>
+export function refOfIdentifierNode(x:IdentifierNode):Ref<IdentifierNode>
+export function emptyListNode():ListNode
+export function refListNode():Ref<ListNode>
+export function refOfListNode(x:ListNode):Ref<ListNode>
+export function emptyStringNode():StringNode
+export function refStringNode():Ref<StringNode>
+export function refOfStringNode(x:StringNode):Ref<StringNode>
+export function emptyCommandNode():CommandNode
+export function refCommandNode():Ref<CommandNode>
+export function refOfCommandNode(x:CommandNode):Ref<CommandNode>
+export function emptyPipeNode():PipeNode
+export function refPipeNode():Ref<PipeNode>
+export function refOfPipeNode(x:PipeNode):Ref<PipeNode>
+export function emptyTree():Tree
+export function refTree():Ref<Tree>
+export function refOfTree(x:Tree):Ref<Tree>
+export function emptyWithNode():WithNode
+export function refWithNode():Ref<WithNode>
+export function refOfWithNode(x:WithNode):Ref<WithNode>
 export function emptyBreakNode():BreakNode
 export function refBreakNode():Ref<BreakNode>
 export function refOfBreakNode(x:BreakNode):Ref<BreakNode>
+export function emptyCommentNode():CommentNode
+export function refCommentNode():Ref<CommentNode>
+export function refOfCommentNode(x:CommentNode):Ref<CommentNode>
 export function emptyDotNode():DotNode
 export function refDotNode():Ref<DotNode>
 export function refOfDotNode(x:DotNode):Ref<DotNode>
 export function emptyFieldNode():FieldNode
 export function refFieldNode():Ref<FieldNode>
 export function refOfFieldNode(x:FieldNode):Ref<FieldNode>
-export function emptyIdentifierNode():IdentifierNode
-export function refIdentifierNode():Ref<IdentifierNode>
-export function refOfIdentifierNode(x:IdentifierNode):Ref<IdentifierNode>
 export function emptyIfNode():IfNode
 export function refIfNode():Ref<IfNode>
 export function refOfIfNode(x:IfNode):Ref<IfNode>
-export function emptyListNode():ListNode
-export function refListNode():Ref<ListNode>
-export function refOfListNode(x:ListNode):Ref<ListNode>
-export function emptyActionNode():ActionNode
-export function refActionNode():Ref<ActionNode>
-export function refOfActionNode(x:ActionNode):Ref<ActionNode>
-export function emptyChainNode():ChainNode
-export function refChainNode():Ref<ChainNode>
-export function refOfChainNode(x:ChainNode):Ref<ChainNode>
-export function emptyCommentNode():CommentNode
-export function refCommentNode():Ref<CommentNode>
-export function refOfCommentNode(x:CommentNode):Ref<CommentNode>
-export function emptyNumberNode():NumberNode
-export function refNumberNode():Ref<NumberNode>
-export function refOfNumberNode(x:NumberNode):Ref<NumberNode>
-export function emptyWithNode():WithNode
-export function refWithNode():Ref<WithNode>
-export function refOfWithNode(x:WithNode):Ref<WithNode>}
+export function emptyNilNode():NilNode
+export function refNilNode():Ref<NilNode>
+export function refOfNilNode(x:NilNode):Ref<NilNode>
+}

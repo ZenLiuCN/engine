@@ -5,4 +5,5 @@ declare module 'golang/image/color/palette'{
 	import * as color from 'golang/image/color'
 	export const Plan9:color.Color[]
 	export const WebSafe:color.Color[]
+
 }

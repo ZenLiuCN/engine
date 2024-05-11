@@ -18,73 +18,93 @@ var (
 	//go:embed net.d.ts
 	NetDefine   []byte
 	NetDeclared = map[string]any{
-		"interfaceByIndex":           net.InterfaceByIndex,
-		"lookupMX":                   net.LookupMX,
-		"ErrClosed":                  net.ErrClosed,
-		"FlagLoopback":               net.FlagLoopback,
-		"iPv4Mask":                   net.IPv4Mask,
-		"lookupHost":                 net.LookupHost,
-		"pipe":                       net.Pipe,
-		"FlagRunning":                net.FlagRunning,
-		"IPv6linklocalallrouters":    net.IPv6linklocalallrouters,
-		"listenUnixgram":             net.ListenUnixgram,
-		"parseMAC":                   net.ParseMAC,
-		"resolveTCPAddr":             net.ResolveTCPAddr,
-		"fileListener":               net.FileListener,
-		"IPv4allrouter":              net.IPv4allrouter,
-		"IPv6zero":                   net.IPv6zero,
-		"lookupIP":                   net.LookupIP,
-		"FlagPointToPoint":           net.FlagPointToPoint,
-		"IPv4bcast":                  net.IPv4bcast,
-		"IPv6unspecified":            net.IPv6unspecified,
-		"lookupTXT":                  net.LookupTXT,
-		"dialTimeout":                net.DialTimeout,
-		"FlagMulticast":              net.FlagMulticast,
-		"interfaceByName":            net.InterfaceByName,
-		"IPv4allsys":                 net.IPv4allsys,
-		"listenMulticastUDP":         net.ListenMulticastUDP,
-		"listenTCP":                  net.ListenTCP,
-		"udpAddrFromAddrPort":        net.UDPAddrFromAddrPort,
-		"listenPacket":               net.ListenPacket,
-		"resolveIPAddr":              net.ResolveIPAddr,
-		"resolveUnixAddr":            net.ResolveUnixAddr,
-		"listenIP":                   net.ListenIP,
-		"lookupAddr":                 net.LookupAddr,
-		"parseCIDR":                  net.ParseCIDR,
-		"IPv6loopback":               net.IPv6loopback,
-		"listenUDP":                  net.ListenUDP,
-		"IPv4zero":                   net.IPv4zero,
-		"interfaceAddrs":             net.InterfaceAddrs,
-		"parseIP":                    net.ParseIP,
-		"dialIP":                     net.DialIP,
-		"filePacketConn":             net.FilePacketConn,
-		"FlagUp":                     net.FlagUp,
-		"cidrMask":                   net.CIDRMask,
-		"joinHostPort":               net.JoinHostPort,
-		"IPv6interfacelocalallnodes": net.IPv6interfacelocalallnodes,
-		"lookupPort":                 net.LookupPort,
-		"splitHostPort":              net.SplitHostPort,
-		"dialUDP":                    net.DialUDP,
-		"FlagBroadcast":              net.FlagBroadcast,
-		"IPv4len":                    net.IPv4len,
-		"IPv6len":                    net.IPv6len,
-		"listen":                     net.Listen,
-		"lookupNS":                   net.LookupNS,
-		"lookupSRV":                  net.LookupSRV,
-		"resolveUDPAddr":             net.ResolveUDPAddr,
-		"DefaultResolver":            net.DefaultResolver,
-		"dial":                       net.Dial,
-		"ErrWriteToConnected":        net.ErrWriteToConnected,
-		"tcpAddrFromAddrPort":        net.TCPAddrFromAddrPort,
-		"dialUnix":                   net.DialUnix,
 		"listenUnix":                 net.ListenUnix,
-		"iPv4":                       net.IPv4,
-		"IPv6linklocalallnodes":      net.IPv6linklocalallnodes,
+		"lookupTXT":                  net.LookupTXT,
+		"tcpAddrFromAddrPort":        net.TCPAddrFromAddrPort,
+		"dialIP":                     net.DialIP,
+		"dialUDP":                    net.DialUDP,
+		"IPv4zero":                   net.IPv4zero,
+		"IPv6zero":                   net.IPv6zero,
 		"interfaces":                 net.Interfaces,
+		"dialUnix":                   net.DialUnix,
+		"FlagUp":                     net.FlagUp,
+		"FlagMulticast":              net.FlagMulticast,
+		"IPv6interfacelocalallnodes": net.IPv6interfacelocalallnodes,
+		"splitHostPort":              net.SplitHostPort,
+		"IPv6linklocalallnodes":      net.IPv6linklocalallnodes,
+		"listenTCP":                  net.ListenTCP,
+		"resolveTCPAddr":             net.ResolveTCPAddr,
+		"interfaceByIndex":           net.InterfaceByIndex,
+		"listen":                     net.Listen,
+		"listenUnixgram":             net.ListenUnixgram,
+		"lookupIP":                   net.LookupIP,
+		"parseMAC":                   net.ParseMAC,
+		"FlagPointToPoint":           net.FlagPointToPoint,
+		"IPv6loopback":               net.IPv6loopback,
+		"parseCIDR":                  net.ParseCIDR,
+		"resolveIPAddr":              net.ResolveIPAddr,
+		"FlagBroadcast":              net.FlagBroadcast,
+		"interfaceAddrs":             net.InterfaceAddrs,
+		"IPv4allsys":                 net.IPv4allsys,
+		"listenIP":                   net.ListenIP,
+		"listenMulticastUDP":         net.ListenMulticastUDP,
+		"lookupAddr":                 net.LookupAddr,
+		"lookupNS":                   net.LookupNS,
 		"dialTCP":                    net.DialTCP,
+		"parseIP":                    net.ParseIP,
+		"lookupMX":                   net.LookupMX,
+		"cidrMask":                   net.CIDRMask,
+		"IPv6unspecified":            net.IPv6unspecified,
+		"interfaceByName":            net.InterfaceByName,
+		"joinHostPort":               net.JoinHostPort,
+		"listenPacket":               net.ListenPacket,
+		"dialTimeout":                net.DialTimeout,
+		"FlagLoopback":               net.FlagLoopback,
+		"FlagRunning":                net.FlagRunning,
+		"resolveUnixAddr":            net.ResolveUnixAddr,
+		"DefaultResolver":            net.DefaultResolver,
 		"fileConn":                   net.FileConn,
 		"lookupCNAME":                net.LookupCNAME,
+		"lookupHost":                 net.LookupHost,
+		"fileListener":               net.FileListener,
+		"resolveUDPAddr":             net.ResolveUDPAddr,
+		"udpAddrFromAddrPort":        net.UDPAddrFromAddrPort,
+		"ErrClosed":                  net.ErrClosed,
+		"iPv4":                       net.IPv4,
+		"IPv4allrouter":              net.IPv4allrouter,
+		"IPv6len":                    net.IPv6len,
+		"lookupPort":                 net.LookupPort,
+		"IPv4len":                    net.IPv4len,
+		"IPv6linklocalallrouters":    net.IPv6linklocalallrouters,
+		"listenUDP":                  net.ListenUDP,
+		"dial":                       net.Dial,
+		"ErrWriteToConnected":        net.ErrWriteToConnected,
+		"filePacketConn":             net.FilePacketConn,
+		"iPv4Mask":                   net.IPv4Mask,
+		"IPv4bcast":                  net.IPv4bcast,
+		"lookupSRV":                  net.LookupSRV,
+		"pipe":                       net.Pipe,
 
+		"emptyListenConfig": func() (v net.ListenConfig) {
+			return v
+		},
+		"refListenConfig": func() *net.ListenConfig {
+			var x net.ListenConfig
+			return &x
+		},
+		"refOfListenConfig": func(x net.ListenConfig) *net.ListenConfig {
+			return &x
+		},
+		"emptyResolver": func() (v net.Resolver) {
+			return v
+		},
+		"refResolver": func() *net.Resolver {
+			var x net.Resolver
+			return &x
+		},
+		"refOfResolver": func(x net.Resolver) *net.Resolver {
+			return &x
+		},
 		"emptyDialer": func() (v net.Dialer) {
 			return v
 		},
@@ -95,24 +115,14 @@ var (
 		"refOfDialer": func(x net.Dialer) *net.Dialer {
 			return &x
 		},
-		"emptyInterface": func() (v net.Interface) {
+		"emptyIPConn": func() (v net.IPConn) {
 			return v
 		},
-		"refInterface": func() *net.Interface {
-			var x net.Interface
+		"refIPConn": func() *net.IPConn {
+			var x net.IPConn
 			return &x
 		},
-		"refOfInterface": func(x net.Interface) *net.Interface {
-			return &x
-		},
-		"emptyNS": func() (v net.NS) {
-			return v
-		},
-		"refNS": func() *net.NS {
-			var x net.NS
-			return &x
-		},
-		"refOfNS": func(x net.NS) *net.NS {
+		"refOfIPConn": func(x net.IPConn) *net.IPConn {
 			return &x
 		},
 		"emptySRV": func() (v net.SRV) {
@@ -125,6 +135,16 @@ var (
 		"refOfSRV": func(x net.SRV) *net.SRV {
 			return &x
 		},
+		"emptyTCPConn": func() (v net.TCPConn) {
+			return v
+		},
+		"refTCPConn": func() *net.TCPConn {
+			var x net.TCPConn
+			return &x
+		},
+		"refOfTCPConn": func(x net.TCPConn) *net.TCPConn {
+			return &x
+		},
 		"emptyUDPAddr": func() (v net.UDPAddr) {
 			return v
 		},
@@ -133,6 +153,46 @@ var (
 			return &x
 		},
 		"refOfUDPAddr": func(x net.UDPAddr) *net.UDPAddr {
+			return &x
+		},
+		"emptyIPAddr": func() (v net.IPAddr) {
+			return v
+		},
+		"refIPAddr": func() *net.IPAddr {
+			var x net.IPAddr
+			return &x
+		},
+		"refOfIPAddr": func(x net.IPAddr) *net.IPAddr {
+			return &x
+		},
+		"emptyMX": func() (v net.MX) {
+			return v
+		},
+		"refMX": func() *net.MX {
+			var x net.MX
+			return &x
+		},
+		"refOfMX": func(x net.MX) *net.MX {
+			return &x
+		},
+		"emptyNS": func() (v net.NS) {
+			return v
+		},
+		"refNS": func() *net.NS {
+			var x net.NS
+			return &x
+		},
+		"refOfNS": func(x net.NS) *net.NS {
+			return &x
+		},
+		"emptyUDPConn": func() (v net.UDPConn) {
+			return v
+		},
+		"refUDPConn": func() *net.UDPConn {
+			var x net.UDPConn
+			return &x
+		},
+		"refOfUDPConn": func(x net.UDPConn) *net.UDPConn {
 			return &x
 		},
 		"emptyUnixConn": func() (v net.UnixConn) {
@@ -155,24 +215,14 @@ var (
 		"refOfUnixListener": func(x net.UnixListener) *net.UnixListener {
 			return &x
 		},
-		"emptyIPConn": func() (v net.IPConn) {
+		"emptyTCPAddr": func() (v net.TCPAddr) {
 			return v
 		},
-		"refIPConn": func() *net.IPConn {
-			var x net.IPConn
+		"refTCPAddr": func() *net.TCPAddr {
+			var x net.TCPAddr
 			return &x
 		},
-		"refOfIPConn": func(x net.IPConn) *net.IPConn {
-			return &x
-		},
-		"emptyIPNet": func() (v net.IPNet) {
-			return v
-		},
-		"refIPNet": func() *net.IPNet {
-			var x net.IPNet
-			return &x
-		},
-		"refOfIPNet": func(x net.IPNet) *net.IPNet {
+		"refOfTCPAddr": func(x net.TCPAddr) *net.TCPAddr {
 			return &x
 		},
 		"emptyTCPListener": func() (v net.TCPListener) {
@@ -185,76 +235,6 @@ var (
 		"refOfTCPListener": func(x net.TCPListener) *net.TCPListener {
 			return &x
 		},
-		"emptyIPAddr": func() (v net.IPAddr) {
-			return v
-		},
-		"refIPAddr": func() *net.IPAddr {
-			var x net.IPAddr
-			return &x
-		},
-		"refOfIPAddr": func(x net.IPAddr) *net.IPAddr {
-			return &x
-		},
-		"emptyUDPConn": func() (v net.UDPConn) {
-			return v
-		},
-		"refUDPConn": func() *net.UDPConn {
-			var x net.UDPConn
-			return &x
-		},
-		"refOfUDPConn": func(x net.UDPConn) *net.UDPConn {
-			return &x
-		},
-		"emptyListenConfig": func() (v net.ListenConfig) {
-			return v
-		},
-		"refListenConfig": func() *net.ListenConfig {
-			var x net.ListenConfig
-			return &x
-		},
-		"refOfListenConfig": func(x net.ListenConfig) *net.ListenConfig {
-			return &x
-		},
-		"emptyMX": func() (v net.MX) {
-			return v
-		},
-		"refMX": func() *net.MX {
-			var x net.MX
-			return &x
-		},
-		"refOfMX": func(x net.MX) *net.MX {
-			return &x
-		},
-		"emptyResolver": func() (v net.Resolver) {
-			return v
-		},
-		"refResolver": func() *net.Resolver {
-			var x net.Resolver
-			return &x
-		},
-		"refOfResolver": func(x net.Resolver) *net.Resolver {
-			return &x
-		},
-		"emptyTCPAddr": func() (v net.TCPAddr) {
-			return v
-		},
-		"refTCPAddr": func() *net.TCPAddr {
-			var x net.TCPAddr
-			return &x
-		},
-		"refOfTCPAddr": func(x net.TCPAddr) *net.TCPAddr {
-			return &x
-		},
-		"emptyTCPConn": func() (v net.TCPConn) {
-			return v
-		},
-		"refTCPConn": func() *net.TCPConn {
-			var x net.TCPConn
-			return &x
-		},
-		"refOfTCPConn": func(x net.TCPConn) *net.TCPConn {
-			return &x
-		},
 		"emptyUnixAddr": func() (v net.UnixAddr) {
 			return v
 		},
@@ -263,6 +243,26 @@ var (
 			return &x
 		},
 		"refOfUnixAddr": func(x net.UnixAddr) *net.UnixAddr {
+			return &x
+		},
+		"emptyIPNet": func() (v net.IPNet) {
+			return v
+		},
+		"refIPNet": func() *net.IPNet {
+			var x net.IPNet
+			return &x
+		},
+		"refOfIPNet": func(x net.IPNet) *net.IPNet {
+			return &x
+		},
+		"emptyInterface": func() (v net.Interface) {
+			return v
+		},
+		"refInterface": func() *net.Interface {
+			var x net.Interface
+			return &x
+		},
+		"refOfInterface": func(x net.Interface) *net.Interface {
 			return &x
 		}}
 )

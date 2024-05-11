@@ -23,4 +23,5 @@ declare module 'golang/crypto/sha512'{
 	export function sum512(data:Uint8Array):Uint8Array/*64*/
 	export function sum512_224(data:Uint8Array):Uint8Array/*28*/
 	export function sum512_256(data:Uint8Array):Uint8Array/*32*/
+
 }

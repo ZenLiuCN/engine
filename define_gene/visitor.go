@@ -17,9 +17,6 @@ import (
 	"unicode"
 )
 
-var (
-	bytesError = []byte(",error]")
-)
 var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 	FnVisitConst: func(I InspectorX, d Dir, name string, e *types.Const, c *context) bool {
 		switch d {
@@ -61,21 +58,6 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 			}
 			c.mi(1).mf("export function %s", Camel(name))
 			c.Functions[name] = e
-
-			if !c.errors {
-				b := c.d.Bytes()
-				if bytes.HasSuffix(b, bytesError) {
-					cnt := bytes.Count(b, []byte{','})
-					if cnt == 1 {
-						x := bytes.LastIndex(b, []byte{'['})
-						b = append(b[0:x], b[x+1:len(b)-len(bytesError)]...)
-						c.d.Reset()
-						c.d.Buffer().Write(b)
-					}
-
-				}
-
-			}
 			c.declared().mn()
 			c.addEntry(Camel(name), "%s.%s", c.pkg.Types.Name(), name)
 			c.reset()
@@ -184,8 +166,7 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 			switch {
 			case c.path.First() == KTType && I.EndWith(KStruct, KMField): //** KMField,KTuple
 				c.field = x.Name()
-				c.tmp = c.d
-				c.d = GetWriter()
+				c.useTmpWriter()
 			default:
 				switch m := I.LNth(3); m {
 				case KMParam:
@@ -214,17 +195,16 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 			switch {
 			case c.path.First() == KTType && I.EndWith(KStruct, KMField):
 				if c.d.Buffer().Len() > 0 { //!! only expose field type should write
-					t := c.d
-					c.d = c.tmp
-					c.tmp = nil
-					c.di(2).df("%s:%s", Camel(c.field), t.String())
-					t.Free()
+					c.freeTmpWriter(func(w Writer) {
+						if c.ignore {
+							c.ignore = false
+							return
+						}
+						c.di(2).df("%s:%s", Camel(c.field), w.String())
+					})
 					c.dn()
 				} else {
-					t := c.d
-					c.d = c.tmp
-					c.tmp = nil
-					t.Free()
+					c.freeTmpWriter(nil)
 				}
 				c.field = ""
 			default:
@@ -248,11 +228,19 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 		switch d {
 		case ENT:
 			defer c.Enter(KFunc, I.TypePath, seen)
-			c.di(2).df("%s", Camel(x.Name()))
+			c.useTmpWriter()
 			c.method = x.Name()
 		case EXT:
 			defer c.Exit(KFunc, I.TypePath, seen)
 			defer c.resetArrayed()
+			c.freeTmpWriter(func(t Writer) {
+				if c.ignore || !t.NotEmpty() {
+					c.ignore = false
+					return
+				}
+				c.di(2).df("%s%s", Camel(x.Name()), t.String())
+			})
+
 			c.dn()
 			c.method = ""
 
@@ -400,7 +388,7 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 							}
 						} else {
 							name := fmt.Sprintf("%s.%s", face.Pkg.Name(), face.Name)
-							if !c.extended.Exists(name) {
+							if !c.extended.Exists(name) && !c.ignored(face.Pkg) {
 								c.imported(face.Pkg.Path())
 								c.extends(name)
 							}
@@ -443,6 +431,11 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 				c.d.Reset()
 				return true
 			}
+			//!! check error
+			if c.method == "Error" || c.method == "Close" {
+				return true
+			}
+			c.checkErrorResult()
 
 		}
 		return true
@@ -469,7 +462,6 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 			}
 			c.use("Ref")
 			c.df("Ref<")
-
 		case EXT:
 			defer c.Exit(KPointer, I.TypePath, seen)
 			defer c.resetArrayed()
@@ -559,20 +551,32 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 			case c.path.Len() == 1 && c.name == name && x.Obj().Pkg() == c.pkg.Types: //!! typeDefine
 				return true
 			case c.path.Len() == 1: //!! first alias
+				if c.ignored(x.Obj().Pkg()) {
+					c.ignore = true
+					return false
+				}
 				c.typeAlias = true
 				c.decodeNamed(I, x, c.df)
 				return false
 			case c.IsType() && I.LNth(2) == KMEmbedded: //!! embedded for interface
+				if c.ignored(x.Obj().Pkg()) {
+					c.ignore = true
+					return false
+				}
 				c.decodeNamed(I, x, c.extends)
 				return false
 			default:
+				if c.ignored(x.Obj().Pkg()) {
+					c.ignore = true
+					return false
+				}
 				c.decodeNamed(I, x, c.df)
 				return false
 			}
 		case EXT:
 			defer c.Exit(KNamed, I.TypePath, seen)
 			defer c.resetArrayed()
-			if I.LNth(2) == KMMapKey {
+			if !c.ignore && I.LNth(2) == KMMapKey {
 				c.df(",")
 			}
 
@@ -596,11 +600,13 @@ type state struct {
 	mapAlias  bool
 	generic   bool
 	isStruct  bool
-	arrayed   int
-	arrayLen  Int64
-	variadic  Bool
-	pc        Int
-	tmp       Writer
+	ignore    bool // some part of current field type or method types have ignored
+
+	arrayed  int
+	arrayLen Int64
+	variadic Bool
+	pc       Int
+	tmp      Stack[Writer]
 }
 
 func (s *state) reset() {
@@ -615,16 +621,13 @@ func (s *state) reset() {
 	s.mapAlias = false
 	s.generic = false
 	s.isStruct = false
+	s.ignore = false
 
 	s.arrayed = 0
-	s.arrayLen = s.arrayLen.Clean()
-	s.variadic = s.variadic.Clean()
-	s.pc = s.pc.Clean()
-
-	if s.tmp != nil {
-		s.tmp.Free()
-		s.tmp = nil
-	}
+	s.arrayLen.CleanSitu()
+	s.variadic.CleanSitu()
+	s.pc.CleanSitu()
+	s.tmp.CleanSitu()
 
 }
 func (s *state) resetArrayed() {
@@ -718,9 +721,29 @@ type context struct {
 	FnTypeVisitor[*TypeInspector[*context], *context]
 
 	state
-	errors bool //reduce function end with error
+	errors  bool //reduce function end with error
+	ignores []string
 }
 
+func (c *context) useTmpWriter() {
+	if c.tmp != nil {
+		panic("already have temp writer")
+	}
+	c.tmp.PushSitu(c.d)
+	c.d = GetWriter()
+}
+func (c *context) freeTmpWriter(act func(Writer)) {
+	if c.tmp == nil {
+		panic("not have temp writer")
+	}
+	t := c.d
+	c.d = c.tmp.PopSitu()
+	c.tmp = nil
+	if act != nil {
+		act(t)
+	}
+	t.Free()
+}
 func (c *context) decodeNamed(i InspectorX, x *types.Named, f func(string, ...any) *context) bool {
 	if x.Obj().Exported() || x.Obj().Name() == "error" {
 		if x.Obj().Name() == "error" {
@@ -754,8 +777,14 @@ func (c *context) decodeNamed(i InspectorX, x *types.Named, f func(string, ...an
 				}
 			}
 			f(b.String())
+			if b.Len() > 0 {
+				return true
+			}
+			c.ignore = true
+			return false
 		}
 	}
+
 	return false
 }
 
@@ -935,6 +964,70 @@ func (c *context) faceIntercept() {
 		c.extends("GoError")
 	}
 }
+
+func (c *context) ignored(pkg *types.Package) bool {
+	if pkg == nil || len(c.ignores) == 0 {
+		return false
+	}
+	return slices.Contains(c.ignores, pkg.Path())
+}
+
+var (
+	bytesError         = []byte(",error]")
+	byteVoidFuncResult = []byte(")=>void/*error*/")
+	byteErrorComment   = []byte("/*error*/")
+	byteArrow          = []byte("=>")
+	byteResult         = []byte("):")
+	byteError          = []byte("error")
+	byteErrorFunc      = []byte("error():error")
+	byteCloseFunc      = []byte("close():error")
+)
+
+func (c *context) checkErrorResult() {
+	if !c.errors {
+		b := c.d.Bytes()
+		if bytes.HasSuffix(b, bytesError) {
+			cnt := bytes.Count(b[bytes.LastIndexByte(b, ')'):], []byte{','})
+			if cnt == 1 {
+				x := bytes.LastIndex(b, byteArrow)
+				if x == -1 {
+					x = bytes.LastIndex(b, byteResult)
+				}
+				if x == -1 {
+					panic("not a function ")
+				}
+				pre := b[0 : x+2]
+				last := b[x+2:]
+
+				y := bytes.LastIndexByte(last, ',')
+				b = append(pre, last[1:y]...)
+				c.d.Reset()
+				c.d.Buffer().Write(b)
+			} else {
+				b = append(b[:len(b)-len(bytesError)], ']')
+				c.d.Reset()
+				c.d.Buffer().Write(b)
+			}
+		} else if bytes.HasSuffix(b, byteError) && !bytes.HasSuffix(b, byteErrorFunc) && !bytes.HasSuffix(b, byteCloseFunc) {
+			x := bytes.LastIndex(b, byteArrow)
+			if x == -1 {
+				x = bytes.LastIndex(b, byteResult)
+				if x != -1 {
+					b = append(b[0:x+1], byteErrorComment...)
+				}
+			} else {
+				b = append(b[0:x], byteVoidFuncResult...)
+			}
+			if x == -1 {
+				panic("not a function ")
+			}
+
+			c.d.Reset()
+			c.d.Buffer().Write(b)
+		}
+
+	}
+}
 func (c *context) flush(g *Generator) (err error) {
 	x := GetWriter()
 	defer x.Free()
@@ -1002,7 +1095,7 @@ func (c *context) flush(g *Generator) (err error) {
 			x.LF().Format("export function refOf%s(x:%[2]s):Ref<%[2]s>", Safe(name), name)
 		}
 		//!! generate TypeId
-		x.Format("}").LF()
+		x.LF().Format("}").LF()
 		if g.print {
 			println(x.Buffer().String())
 		} else {
@@ -1147,14 +1240,6 @@ func anyOf(an ...string) (r string) {
 		if s != "" {
 			r += ":"
 			r += s
-		}
-	}
-	return
-}
-func firstOf(an ...string) (r string) {
-	for _, s := range an {
-		if s != "" {
-			return s
 		}
 	}
 	return

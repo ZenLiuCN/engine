@@ -12,13 +12,13 @@ var (
 	//go:embed crypto_subtle.d.ts
 	CryptoSubtleDefine   []byte
 	CryptoSubtleDeclared = map[string]any{
-		"xorBytes":             subtle.XORBytes,
 		"constantTimeByteEq":   subtle.ConstantTimeByteEq,
 		"constantTimeCompare":  subtle.ConstantTimeCompare,
 		"constantTimeCopy":     subtle.ConstantTimeCopy,
 		"constantTimeEq":       subtle.ConstantTimeEq,
 		"constantTimeLessOrEq": subtle.ConstantTimeLessOrEq,
 		"constantTimeSelect":   subtle.ConstantTimeSelect,
+		"xorBytes":             subtle.XORBytes,
 	}
 )
 

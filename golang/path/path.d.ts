@@ -10,6 +10,7 @@ declare module 'golang/path'{
 	export function ext(path:string):string
 	export function isAbs(path:string):bool
 	export function join(...elem:string[]):string
-	export function match(pattern:string,name:string):[bool,error]
+	export function match(pattern:string,name:string):bool
 	export function split(path:string):[string,string]
+
 }

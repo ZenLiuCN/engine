@@ -15,4 +15,5 @@ declare module 'golang/crypto/sha256'{
 	export const Size224:int
 	export function sum224(data:Uint8Array):Uint8Array/*28*/
 	export function sum256(data:Uint8Array):Uint8Array/*32*/
+
 }

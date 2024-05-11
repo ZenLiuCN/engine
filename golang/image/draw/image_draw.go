@@ -14,11 +14,11 @@ var (
 	//go:embed image_draw.d.ts
 	ImageDrawDefine   []byte
 	ImageDrawDeclared = map[string]any{
+		"draw":           draw.Draw,
 		"drawMask":       draw.DrawMask,
 		"FloydSteinberg": draw.FloydSteinberg,
 		"Over":           draw.Over,
 		"Src":            draw.Src,
-		"draw":           draw.Draw,
 	}
 )
 

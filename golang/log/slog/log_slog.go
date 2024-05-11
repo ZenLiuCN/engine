@@ -19,71 +19,81 @@ var (
 	//go:embed log_slog.d.ts
 	LogSlogDefine   []byte
 	LogSlogDeclared = map[string]any{
-		"newRecord":      slog.NewRecord,
-		"bool":           slog.Bool,
-		"float64Value":   slog.Float64Value,
+		"boolValue":      slog.BoolValue,
 		"KindBool":       slog.KindBool,
-		"KindUint64":     slog.KindUint64,
-		"LevelError":     slog.LevelError,
-		"group":          slog.Group,
-		"int64Value":     slog.Int64Value,
-		"intValue":       slog.IntValue,
+		"KindLogValuer":  slog.KindLogValuer,
+		"log":            slog.Log,
+		"anyValue":       slog.AnyValue,
+		"bool":           slog.Bool,
 		"KindString":     slog.KindString,
-		"duration":       slog.Duration,
-		"infoContext":    slog.InfoContext,
-		"time":           slog.Time,
-		"With":           slog.With,
+		"warn":           slog.Warn,
+		"KindUint64":     slog.KindUint64,
+		"logAttrs":       slog.LogAttrs,
 		"New":            slog.New,
 		"debug":          slog.Debug,
 		"error":          slog.Error,
-		"setDefault":     slog.SetDefault,
-		"uint64":         slog.Uint64,
-		"anyValue":       slog.AnyValue,
-		"Default":        slog.Default,
-		"durationValue":  slog.DurationValue,
-		"KindLogValuer":  slog.KindLogValuer,
-		"LevelWarn":      slog.LevelWarn,
-		"log":            slog.Log,
-		"newJSONHandler": slog.NewJSONHandler,
-		"MessageKey":     slog.MessageKey,
-		"errorContext":   slog.ErrorContext,
-		"groupValue":     slog.GroupValue,
-		"int":            slog.Int,
-		"KindAny":        slog.KindAny,
-		"KindDuration":   slog.KindDuration,
-		"KindInt64":      slog.KindInt64,
-		"any":            slog.Any,
-		"newLogLogger":   slog.NewLogLogger,
-		"boolValue":      slog.BoolValue,
-		"debugContext":   slog.DebugContext,
-		"info":           slog.Info,
-		"int64":          slog.Int64,
-		"string":         slog.String,
 		"float64":        slog.Float64,
+		"group":          slog.Group,
+		"KindDuration":   slog.KindDuration,
+		"timeValue":      slog.TimeValue,
+		"durationValue":  slog.DurationValue,
+		"int64":          slog.Int64,
+		"KindInt64":      slog.KindInt64,
+		"newTextHandler": slog.NewTextHandler,
+		"SourceKey":      slog.SourceKey,
+		"KindGroup":      slog.KindGroup,
+		"LevelWarn":      slog.LevelWarn,
+		"time":           slog.Time,
+		"uint64":         slog.Uint64,
+		"With":           slog.With,
+		"debugContext":   slog.DebugContext,
+		"float64Value":   slog.Float64Value,
+		"intValue":       slog.IntValue,
+		"newRecord":      slog.NewRecord,
+		"string":         slog.String,
+		"Default":        slog.Default,
+		"LevelKey":       slog.LevelKey,
 		"TimeKey":        slog.TimeKey,
 		"KindFloat64":    slog.KindFloat64,
 		"LevelDebug":     slog.LevelDebug,
-		"KindTime":       slog.KindTime,
-		"SourceKey":      slog.SourceKey,
-		"stringValue":    slog.StringValue,
-		"timeValue":      slog.TimeValue,
-		"warn":           slog.Warn,
 		"LevelInfo":      slog.LevelInfo,
-		"LevelKey":       slog.LevelKey,
+		"errorContext":   slog.ErrorContext,
+		"groupValue":     slog.GroupValue,
+		"infoContext":    slog.InfoContext,
+		"newLogLogger":   slog.NewLogLogger,
+		"stringValue":    slog.StringValue,
+		"setDefault":     slog.SetDefault,
+		"duration":       slog.Duration,
+		"info":           slog.Info,
+		"KindAny":        slog.KindAny,
+		"MessageKey":     slog.MessageKey,
 		"uint64Value":    slog.Uint64Value,
+		"int":            slog.Int,
+		"LevelError":     slog.LevelError,
 		"warnContext":    slog.WarnContext,
-		"KindGroup":      slog.KindGroup,
-		"logAttrs":       slog.LogAttrs,
-		"newTextHandler": slog.NewTextHandler,
+		"int64Value":     slog.Int64Value,
+		"newJSONHandler": slog.NewJSONHandler,
+		"any":            slog.Any,
+		"KindTime":       slog.KindTime,
 
-		"emptyJSONHandler": func() (v slog.JSONHandler) {
+		"emptyAttr": func() (v slog.Attr) {
 			return v
 		},
-		"refJSONHandler": func() *slog.JSONHandler {
-			var x slog.JSONHandler
+		"refAttr": func() *slog.Attr {
+			var x slog.Attr
 			return &x
 		},
-		"refOfJSONHandler": func(x slog.JSONHandler) *slog.JSONHandler {
+		"refOfAttr": func(x slog.Attr) *slog.Attr {
+			return &x
+		},
+		"emptyHandlerOptions": func() (v slog.HandlerOptions) {
+			return v
+		},
+		"refHandlerOptions": func() *slog.HandlerOptions {
+			var x slog.HandlerOptions
+			return &x
+		},
+		"refOfHandlerOptions": func(x slog.HandlerOptions) *slog.HandlerOptions {
 			return &x
 		},
 		"emptyLevelVar": func() (v slog.LevelVar) {
@@ -94,6 +104,36 @@ var (
 			return &x
 		},
 		"refOfLevelVar": func(x slog.LevelVar) *slog.LevelVar {
+			return &x
+		},
+		"emptyRecord": func() (v slog.Record) {
+			return v
+		},
+		"refRecord": func() *slog.Record {
+			var x slog.Record
+			return &x
+		},
+		"refOfRecord": func(x slog.Record) *slog.Record {
+			return &x
+		},
+		"emptyTextHandler": func() (v slog.TextHandler) {
+			return v
+		},
+		"refTextHandler": func() *slog.TextHandler {
+			var x slog.TextHandler
+			return &x
+		},
+		"refOfTextHandler": func(x slog.TextHandler) *slog.TextHandler {
+			return &x
+		},
+		"emptyJSONHandler": func() (v slog.JSONHandler) {
+			return v
+		},
+		"refJSONHandler": func() *slog.JSONHandler {
+			var x slog.JSONHandler
+			return &x
+		},
+		"refOfJSONHandler": func(x slog.JSONHandler) *slog.JSONHandler {
 			return &x
 		},
 		"emptyLogger": func() (v slog.Logger) {
@@ -124,46 +164,6 @@ var (
 			return &x
 		},
 		"refOfValue": func(x slog.Value) *slog.Value {
-			return &x
-		},
-		"emptyAttr": func() (v slog.Attr) {
-			return v
-		},
-		"refAttr": func() *slog.Attr {
-			var x slog.Attr
-			return &x
-		},
-		"refOfAttr": func(x slog.Attr) *slog.Attr {
-			return &x
-		},
-		"emptyHandlerOptions": func() (v slog.HandlerOptions) {
-			return v
-		},
-		"refHandlerOptions": func() *slog.HandlerOptions {
-			var x slog.HandlerOptions
-			return &x
-		},
-		"refOfHandlerOptions": func(x slog.HandlerOptions) *slog.HandlerOptions {
-			return &x
-		},
-		"emptyRecord": func() (v slog.Record) {
-			return v
-		},
-		"refRecord": func() *slog.Record {
-			var x slog.Record
-			return &x
-		},
-		"refOfRecord": func(x slog.Record) *slog.Record {
-			return &x
-		},
-		"emptyTextHandler": func() (v slog.TextHandler) {
-			return v
-		},
-		"refTextHandler": func() *slog.TextHandler {
-			var x slog.TextHandler
-			return &x
-		},
-		"refOfTextHandler": func(x slog.TextHandler) *slog.TextHandler {
 			return &x
 		}}
 )

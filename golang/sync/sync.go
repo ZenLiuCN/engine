@@ -15,36 +15,6 @@ var (
 		"newCond":  sync.NewCond,
 		"onceFunc": sync.OnceFunc,
 
-		"emptyRWMutex": func() (v sync.RWMutex) {
-			return v
-		},
-		"refRWMutex": func() *sync.RWMutex {
-			var x sync.RWMutex
-			return &x
-		},
-		"refOfRWMutex": func(x sync.RWMutex) *sync.RWMutex {
-			return &x
-		},
-		"emptyWaitGroup": func() (v sync.WaitGroup) {
-			return v
-		},
-		"refWaitGroup": func() *sync.WaitGroup {
-			var x sync.WaitGroup
-			return &x
-		},
-		"refOfWaitGroup": func(x sync.WaitGroup) *sync.WaitGroup {
-			return &x
-		},
-		"emptyCond": func() (v sync.Cond) {
-			return v
-		},
-		"refCond": func() *sync.Cond {
-			var x sync.Cond
-			return &x
-		},
-		"refOfCond": func(x sync.Cond) *sync.Cond {
-			return &x
-		},
 		"emptyMap": func() (v sync.Map) {
 			return v
 		},
@@ -83,6 +53,36 @@ var (
 			return &x
 		},
 		"refOfPool": func(x sync.Pool) *sync.Pool {
+			return &x
+		},
+		"emptyRWMutex": func() (v sync.RWMutex) {
+			return v
+		},
+		"refRWMutex": func() *sync.RWMutex {
+			var x sync.RWMutex
+			return &x
+		},
+		"refOfRWMutex": func(x sync.RWMutex) *sync.RWMutex {
+			return &x
+		},
+		"emptyWaitGroup": func() (v sync.WaitGroup) {
+			return v
+		},
+		"refWaitGroup": func() *sync.WaitGroup {
+			var x sync.WaitGroup
+			return &x
+		},
+		"refOfWaitGroup": func(x sync.WaitGroup) *sync.WaitGroup {
+			return &x
+		},
+		"emptyCond": func() (v sync.Cond) {
+			return v
+		},
+		"refCond": func() *sync.Cond {
+			var x sync.Cond
+			return &x
+		},
+		"refOfCond": func(x sync.Cond) *sync.Cond {
 			return &x
 		}}
 )

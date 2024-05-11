@@ -15,14 +15,14 @@ var (
 	//go:embed encoding_json.d.ts
 	EncodingJsonDefine   []byte
 	EncodingJsonDeclared = map[string]any{
-		"newEncoder":    json.NewEncoder,
-		"unmarshal":     json.Unmarshal,
+		"indent":        json.Indent,
 		"marshalIndent": json.MarshalIndent,
 		"newDecoder":    json.NewDecoder,
+		"newEncoder":    json.NewEncoder,
+		"unmarshal":     json.Unmarshal,
 		"valid":         json.Valid,
 		"compact":       json.Compact,
 		"htmlEscape":    json.HTMLEscape,
-		"indent":        json.Indent,
 		"marshal":       json.Marshal,
 
 		"emptyDecoder": func() (v json.Decoder) {

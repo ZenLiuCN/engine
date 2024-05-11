@@ -14,7 +14,7 @@ declare module 'golang/archive/tar'{
 	export const ErrInsecurePath:GoError
 	export const ErrWriteAfterClose:GoError
 	export const ErrWriteTooLong:GoError
-	export function fileInfoHeader(fi:fs.FileInfo,link:string):[Ref<Header>,error]
+	export function fileInfoHeader(fi:fs.FileInfo,link:string):Ref<Header>
 	export interface Format extends int{
 		string():string
 	}
@@ -45,8 +45,8 @@ declare module 'golang/archive/tar'{
 	export function newReader(r:io.Reader):Ref<Reader>
 	export function newWriter(w:io.Writer):Ref<Writer>
 	export interface Reader extends Struct<Reader>,io.Reader{
-		next():[Ref<Header>,error]
-		read(b:Uint8Array):[int,error]
+		next():Ref<Header>
+		read(b:Uint8Array):int
 	}
 	//52
 	export const TypeBlock:rune
@@ -76,19 +76,20 @@ declare module 'golang/archive/tar'{
 	export const TypeXGlobalHeader:rune
 	//120
 	export const TypeXHeader:rune
-	export interface Writer extends io.WriteCloser,io.Closer,Struct<Writer>{
-		flush():error
-		writeHeader(hdr:Ref<Header>):error
-		write(b:Uint8Array):[int,error]
+	export interface Writer extends Struct<Writer>,io.WriteCloser,io.Closer{
+		flush()/*error*/
+		writeHeader(hdr:Ref<Header>)/*error*/
+		write(b:Uint8Array):int
 		close():error
 	}
 
+export function emptyHeader():Header
+export function refHeader():Ref<Header>
+export function refOfHeader(x:Header):Ref<Header>
 export function emptyReader():Reader
 export function refReader():Ref<Reader>
 export function refOfReader(x:Reader):Ref<Reader>
 export function emptyWriter():Writer
 export function refWriter():Ref<Writer>
 export function refOfWriter(x:Writer):Ref<Writer>
-export function emptyHeader():Header
-export function refHeader():Ref<Header>
-export function refOfHeader(x:Header):Ref<Header>}
+}

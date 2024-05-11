@@ -6,7 +6,7 @@ declare module 'golang/crypto/elliptic'{
 	// @ts-ignore
 	import * as io from 'golang/io'
 	// @ts-ignore
-	import type {Ref,bool,int,Struct,error} from 'go'
+	import type {bool,int,Struct,error,Ref} from 'go'
 	export interface Curve{
 		add(x1:Ref<big.Int>,y1:Ref<big.Int>,x2:Ref<big.Int>,y2:Ref<big.Int>):[Ref<big.Int>,Ref<big.Int>]
 		double(x1:Ref<big.Int>,y1:Ref<big.Int>):[Ref<big.Int>,Ref<big.Int>]
@@ -30,7 +30,7 @@ declare module 'golang/crypto/elliptic'{
 		scalarMult(Bx:Ref<big.Int>,By:Ref<big.Int>,k:Uint8Array):[Ref<big.Int>,Ref<big.Int>]
 		scalarBaseMult(k:Uint8Array):[Ref<big.Int>,Ref<big.Int>]
 	}
-	export function generateKey(curve:Curve,rand:io.Reader):[Uint8Array,Ref<big.Int>,Ref<big.Int>,error]
+	export function generateKey(curve:Curve,rand:io.Reader):[Uint8Array,Ref<big.Int>,Ref<big.Int>]
 	export function marshal(curve:Curve,x:Ref<big.Int>,y:Ref<big.Int>):Uint8Array
 	export function marshalCompressed(curve:Curve,x:Ref<big.Int>,y:Ref<big.Int>):Uint8Array
 	export function p224():Curve
@@ -42,4 +42,5 @@ declare module 'golang/crypto/elliptic'{
 
 export function emptyCurveParams():CurveParams
 export function refCurveParams():Ref<CurveParams>
-export function refOfCurveParams(x:CurveParams):Ref<CurveParams>}
+export function refOfCurveParams(x:CurveParams):Ref<CurveParams>
+}

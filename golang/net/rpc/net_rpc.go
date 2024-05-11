@@ -15,34 +15,24 @@ var (
 	//go:embed net_rpc.d.ts
 	NetRpcDefine   []byte
 	NetRpcDeclared = map[string]any{
-		"serveCodec":         rpc.ServeCodec,
-		"serveRequest":       rpc.ServeRequest,
-		"DefaultDebugPath":   rpc.DefaultDebugPath,
-		"newClientWithCodec": rpc.NewClientWithCodec,
-		"handleHTTP":         rpc.HandleHTTP,
-		"dialHTTP":           rpc.DialHTTP,
+		"register":           rpc.Register,
+		"accept":             rpc.Accept,
 		"dialHTTPPath":       rpc.DialHTTPPath,
+		"DefaultServer":      rpc.DefaultServer,
+		"newClientWithCodec": rpc.NewClientWithCodec,
+		"serveCodec":         rpc.ServeCodec,
+		"serveConn":          rpc.ServeConn,
+		"serveRequest":       rpc.ServeRequest,
+		"DefaultRPCPath":     rpc.DefaultRPCPath,
 		"dial":               rpc.Dial,
 		"ErrShutdown":        rpc.ErrShutdown,
-		"register":           rpc.Register,
-		"registerName":       rpc.RegisterName,
-		"accept":             rpc.Accept,
-		"DefaultRPCPath":     rpc.DefaultRPCPath,
-		"newServer":          rpc.NewServer,
-		"serveConn":          rpc.ServeConn,
-		"DefaultServer":      rpc.DefaultServer,
+		"handleHTTP":         rpc.HandleHTTP,
 		"newClient":          rpc.NewClient,
+		"newServer":          rpc.NewServer,
+		"registerName":       rpc.RegisterName,
+		"DefaultDebugPath":   rpc.DefaultDebugPath,
+		"dialHTTP":           rpc.DialHTTP,
 
-		"emptyCall": func() (v rpc.Call) {
-			return v
-		},
-		"refCall": func() *rpc.Call {
-			var x rpc.Call
-			return &x
-		},
-		"refOfCall": func(x rpc.Call) *rpc.Call {
-			return &x
-		},
 		"emptyClient": func() (v rpc.Client) {
 			return v
 		},
@@ -81,6 +71,16 @@ var (
 			return &x
 		},
 		"refOfServer": func(x rpc.Server) *rpc.Server {
+			return &x
+		},
+		"emptyCall": func() (v rpc.Call) {
+			return v
+		},
+		"refCall": func() *rpc.Call {
+			var x rpc.Call
+			return &x
+		},
+		"refOfCall": func(x rpc.Call) *rpc.Call {
 			return &x
 		}}
 )

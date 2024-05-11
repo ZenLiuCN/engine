@@ -12,15 +12,15 @@ var (
 	//go:embed path.d.ts
 	PathDefine   []byte
 	PathDeclared = map[string]any{
-		"isAbs":         path.IsAbs,
+		"ErrBadPattern": path.ErrBadPattern,
+		"ext":           path.Ext,
+		"join":          path.Join,
 		"split":         path.Split,
 		"base":          path.Base,
-		"ext":           path.Ext,
-		"ErrBadPattern": path.ErrBadPattern,
-		"join":          path.Join,
-		"match":         path.Match,
 		"clean":         path.Clean,
 		"dir":           path.Dir,
+		"isAbs":         path.IsAbs,
+		"match":         path.Match,
 	}
 )
 

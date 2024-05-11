@@ -6,17 +6,17 @@ declare module 'golang/net/textproto'{
 	// @ts-ignore
 	import * as bufio from 'golang/bufio'
 	// @ts-ignore
-	import type {int,GoError,Struct,error,uint,Ref} from 'go'
+	import type {Struct,error,uint,Ref,int,GoError} from 'go'
 	export function canonicalMIMEHeaderKey(s:string):string
 	export interface Conn extends Struct<Conn>,io.Closer{
 		reader:Reader
 		writer:Writer
 		pipeline:Pipeline
 		close():error
-		cmd(format:string,...args:any[]):[uint,error]
+		cmd(format:string,...args:any[]):uint
 	}
-	export function dial(network:string,addr:string):[Ref<Conn>,error]
-	export interface Error extends Struct<Error>,Error,GoError{
+	export function dial(network:string,addr:string):Ref<Conn>
+	export interface Error extends GoError,Struct<Error>,Error{
 		code:int
 		msg:string
 		error():string
@@ -43,28 +43,25 @@ declare module 'golang/net/textproto'{
 	}
 	export interface Reader extends Struct<Reader>{
 		R:Ref<bufio.Reader>
-		readLine():[string,error]
-		readLineBytes():[Uint8Array,error]
-		readContinuedLine():[string,error]
-		readContinuedLineBytes():[Uint8Array,error]
-		readCodeLine(expectCode:int):[int,string,error]
-		readResponse(expectCode:int):[int,string,error]
+		readLine():string
+		readLineBytes():Uint8Array
+		readContinuedLine():string
+		readContinuedLineBytes():Uint8Array
+		readCodeLine(expectCode:int):[int,string]
+		readResponse(expectCode:int):[int,string]
 		dotReader():io.Reader
-		readDotBytes():[Uint8Array,error]
-		readDotLines():[string[],error]
-		readMIMEHeader():[MIMEHeader,error]
+		readDotBytes():Uint8Array
+		readDotLines():string[]
+		readMIMEHeader():MIMEHeader
 	}
 	export function trimBytes(b:Uint8Array):Uint8Array
 	export function trimString(s:string):string
 	export interface Writer extends Struct<Writer>{
 		W:Ref<bufio.Writer>
-		printfLine(format:string,...args:any[]):error
+		printfLine(format:string,...args:any[])/*error*/
 		dotWriter():io.WriteCloser
 	}
 
-export function emptyConn():Conn
-export function refConn():Ref<Conn>
-export function refOfConn(x:Conn):Ref<Conn>
 export function emptyPipeline():Pipeline
 export function refPipeline():Ref<Pipeline>
 export function refOfPipeline(x:Pipeline):Ref<Pipeline>
@@ -73,4 +70,8 @@ export function refReader():Ref<Reader>
 export function refOfReader(x:Reader):Ref<Reader>
 export function emptyWriter():Writer
 export function refWriter():Ref<Writer>
-export function refOfWriter(x:Writer):Ref<Writer>}
+export function refOfWriter(x:Writer):Ref<Writer>
+export function emptyConn():Conn
+export function refConn():Ref<Conn>
+export function refOfConn(x:Conn):Ref<Conn>
+}

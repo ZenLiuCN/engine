@@ -12,14 +12,14 @@ declare module 'golang/net/http/httptrace'{
 	// @ts-ignore
 	import * as time from 'golang/time'
 	// @ts-ignore
-	import type {error,int,Struct,Ref,GoError,bool} from 'go'
+	import type {bool,error,int,Struct,Ref,GoError} from 'go'
 	export interface ClientTrace extends Struct<ClientTrace>{
 		getConn:(hostPort:string)=>void
 		gotConn:(v1:GotConnInfo)=>void
 		putIdleConn:(err:error)=>void
 		gotFirstResponseByte:()=>void
 		got100Continue:()=>void
-		got1xxResponse:(code:int,header:textproto.MIMEHeader)=>error
+		got1xxResponse:(code:int,header:textproto.MIMEHeader))=>void/*error*/
 		dnsStart:(v1:DNSStartInfo)=>void
 		dnsDone:(v1:DNSDoneInfo)=>void
 		connectStart:(network:string,addr:string)=>void
@@ -65,4 +65,5 @@ export function refGotConnInfo():Ref<GotConnInfo>
 export function refOfGotConnInfo(x:GotConnInfo):Ref<GotConnInfo>
 export function emptyWroteRequestInfo():WroteRequestInfo
 export function refWroteRequestInfo():Ref<WroteRequestInfo>
-export function refOfWroteRequestInfo(x:WroteRequestInfo):Ref<WroteRequestInfo>}
+export function refOfWroteRequestInfo(x:WroteRequestInfo):Ref<WroteRequestInfo>
+}

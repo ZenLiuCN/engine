@@ -7,8 +7,9 @@ declare module 'golang/crypto/rand'{
 	import * as big from 'golang/math/big'
 	// @ts-ignore
 	import type {Ref,error,int} from 'go'
-	export function int(rand:io.Reader,max:Ref<big.Int>):[Ref<big.Int>,error]
-	export function prime(rand:io.Reader,bits:int):[Ref<big.Int>,error]
+	export function int(rand:io.Reader,max:Ref<big.Int>):Ref<big.Int>
+	export function prime(rand:io.Reader,bits:int):Ref<big.Int>
 	export function read(b:Uint8Array):int
 	export const Reader:io.Reader
+
 }

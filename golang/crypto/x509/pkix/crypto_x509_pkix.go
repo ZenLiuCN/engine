@@ -17,36 +17,6 @@ var (
 	Crypto509PkixDefine   []byte
 	Crypto509PkixDeclared = map[string]any{
 
-		"emptyRevokedCertificate": func() (v pkix.RevokedCertificate) {
-			return v
-		},
-		"refRevokedCertificate": func() *pkix.RevokedCertificate {
-			var x pkix.RevokedCertificate
-			return &x
-		},
-		"refOfRevokedCertificate": func(x pkix.RevokedCertificate) *pkix.RevokedCertificate {
-			return &x
-		},
-		"emptyTBSCertificateList": func() (v pkix.TBSCertificateList) {
-			return v
-		},
-		"refTBSCertificateList": func() *pkix.TBSCertificateList {
-			var x pkix.TBSCertificateList
-			return &x
-		},
-		"refOfTBSCertificateList": func(x pkix.TBSCertificateList) *pkix.TBSCertificateList {
-			return &x
-		},
-		"emptyAlgorithmIdentifier": func() (v pkix.AlgorithmIdentifier) {
-			return v
-		},
-		"refAlgorithmIdentifier": func() *pkix.AlgorithmIdentifier {
-			var x pkix.AlgorithmIdentifier
-			return &x
-		},
-		"refOfAlgorithmIdentifier": func(x pkix.AlgorithmIdentifier) *pkix.AlgorithmIdentifier {
-			return &x
-		},
 		"emptyAttributeTypeAndValue": func() (v pkix.AttributeTypeAndValue) {
 			return v
 		},
@@ -95,6 +65,36 @@ var (
 			return &x
 		},
 		"refOfName": func(x pkix.Name) *pkix.Name {
+			return &x
+		},
+		"emptyRevokedCertificate": func() (v pkix.RevokedCertificate) {
+			return v
+		},
+		"refRevokedCertificate": func() *pkix.RevokedCertificate {
+			var x pkix.RevokedCertificate
+			return &x
+		},
+		"refOfRevokedCertificate": func(x pkix.RevokedCertificate) *pkix.RevokedCertificate {
+			return &x
+		},
+		"emptyTBSCertificateList": func() (v pkix.TBSCertificateList) {
+			return v
+		},
+		"refTBSCertificateList": func() *pkix.TBSCertificateList {
+			var x pkix.TBSCertificateList
+			return &x
+		},
+		"refOfTBSCertificateList": func(x pkix.TBSCertificateList) *pkix.TBSCertificateList {
+			return &x
+		},
+		"emptyAlgorithmIdentifier": func() (v pkix.AlgorithmIdentifier) {
+			return v
+		},
+		"refAlgorithmIdentifier": func() *pkix.AlgorithmIdentifier {
+			var x pkix.AlgorithmIdentifier
+			return &x
+		},
+		"refOfAlgorithmIdentifier": func(x pkix.AlgorithmIdentifier) *pkix.AlgorithmIdentifier {
 			return &x
 		}}
 )

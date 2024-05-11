@@ -13,12 +13,12 @@ var (
 	//go:embed net_http_pprof.d.ts
 	NetHttpPprofDefine   []byte
 	NetHttpPprofDeclared = map[string]any{
-		"symbol":  pprof.Symbol,
-		"trace":   pprof.Trace,
 		"cmdline": pprof.Cmdline,
 		"handler": pprof.Handler,
 		"index":   pprof.Index,
 		"profile": pprof.Profile,
+		"symbol":  pprof.Symbol,
+		"trace":   pprof.Trace,
 	}
 )
 

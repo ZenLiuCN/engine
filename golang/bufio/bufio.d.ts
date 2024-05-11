@@ -4,7 +4,7 @@ declare module 'golang/bufio'{
 	// @ts-ignore
 	import * as io from 'golang/io'
 	// @ts-ignore
-	import type {error,rune,bool,int64,Alias,Struct,int,Ref,byte,GoError} from 'go'
+	import type {int,Ref,Struct,error,rune,Alias,GoError,byte,bool,int64} from 'go'
 	export const ErrAdvanceTooFar:GoError
 	export const ErrBadReadCount:GoError
 	export const ErrBufferFull:GoError
@@ -22,33 +22,33 @@ declare module 'golang/bufio'{
 	export function newScanner(r:io.Reader):Ref<Scanner>
 	export function newWriter(w:io.Writer):Ref<Writer>
 	export function newWriterSize(w:io.Writer,size:int):Ref<Writer>
-	export interface ReadWriter extends io.RuneScanner,io.WriterTo,io.ByteWriter,io.StringWriter,io.ByteScanner,io.ReadWriter,Struct<ReadWriter>,io.ReaderFrom{
+	export interface ReadWriter extends io.ReadWriter,io.ReaderFrom,io.RuneScanner,io.ByteScanner,io.ByteWriter,io.WriterTo,Struct<ReadWriter>,io.StringWriter{
 		reader:Ref<Reader>
 		writer:Ref<Writer>
 	}
-	export interface Reader extends io.WriterTo,io.ByteScanner,io.Reader,Struct<Reader>,io.RuneScanner{
+	export interface Reader extends Struct<Reader>,io.RuneScanner,io.ByteScanner,io.Reader,io.WriterTo{
 		size():int
 		reset(r:io.Reader):void
-		peek(n:int):[Uint8Array,error]
-		discard(n:int):[int,error]
-		read(p:Uint8Array):[int,error]
-		readByte():[byte,error]
-		unreadByte():error
-		readRune():[rune,int,error]
-		unreadRune():error
+		peek(n:int):Uint8Array
+		discard(n:int):int
+		read(p:Uint8Array):int
+		readByte():byte
+		unreadByte()/*error*/
+		readRune():[rune,int]
+		unreadRune()/*error*/
 		buffered():int
-		readSlice(delim:byte):[Uint8Array,error]
-		readLine():[Uint8Array,bool,error]
-		readBytes(delim:byte):[Uint8Array,error]
-		readString(delim:byte):[string,error]
-		writeTo(w:io.Writer):[int64,error]
+		readSlice(delim:byte):Uint8Array
+		readLine():[Uint8Array,bool]
+		readBytes(delim:byte):Uint8Array
+		readString(delim:byte):string
+		writeTo(w:io.Writer):int64
 	}
-	export function scanBytes(data:Uint8Array,atEOF:bool):[int,Uint8Array,error]
-	export function scanLines(data:Uint8Array,atEOF:bool):[int,Uint8Array,error]
-	export function scanRunes(data:Uint8Array,atEOF:bool):[int,Uint8Array,error]
-	export function scanWords(data:Uint8Array,atEOF:bool):[int,Uint8Array,error]
+	export function scanBytes(data:Uint8Array,atEOF:bool):[int,Uint8Array]
+	export function scanLines(data:Uint8Array,atEOF:bool):[int,Uint8Array]
+	export function scanRunes(data:Uint8Array,atEOF:bool):[int,Uint8Array]
+	export function scanWords(data:Uint8Array,atEOF:bool):[int,Uint8Array]
 	export interface Scanner extends Struct<Scanner>{
-		err():error
+		err()/*error*/
 		bytes():Uint8Array
 		text():string
 		scan():bool
@@ -57,18 +57,18 @@ declare module 'golang/bufio'{
 	}
 	export interface SplitFunc extends Alias<(data:Uint8Array,atEOF:bool)=>[int,Uint8Array,error]>{
 	}
-	export interface Writer extends io.ByteWriter,io.StringWriter,io.ReaderFrom,Struct<Writer>,io.Writer{
+	export interface Writer extends io.StringWriter,io.ReaderFrom,io.Writer,io.ByteWriter,Struct<Writer>{
 		size():int
 		reset(w:io.Writer):void
-		flush():error
+		flush()/*error*/
 		available():int
 		availableBuffer():Uint8Array
 		buffered():int
-		write(p:Uint8Array):[int,error]
-		writeByte(c:byte):error
-		writeRune(r:rune):[int,error]
-		writeString(s:string):[int,error]
-		readFrom(r:io.Reader):[int64,error]
+		write(p:Uint8Array):int
+		writeByte(c:byte)/*error*/
+		writeRune(r:rune):int
+		writeString(s:string):int
+		readFrom(r:io.Reader):int64
 	}
 
 export function emptyReadWriter():ReadWriter
@@ -82,4 +82,5 @@ export function refScanner():Ref<Scanner>
 export function refOfScanner(x:Scanner):Ref<Scanner>
 export function emptyWriter():Writer
 export function refWriter():Ref<Writer>
-export function refOfWriter(x:Writer):Ref<Writer>}
+export function refOfWriter(x:Writer):Ref<Writer>
+}

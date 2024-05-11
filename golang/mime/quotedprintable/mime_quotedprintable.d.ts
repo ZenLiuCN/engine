@@ -4,21 +4,22 @@ declare module 'golang/mime/quotedprintable'{
 	// @ts-ignore
 	import * as io from 'golang/io'
 	// @ts-ignore
-	import type {error,bool,Ref,Struct,int} from 'go'
+	import type {bool,Ref,Struct,int,error} from 'go'
 	export function newReader(r:io.Reader):Ref<Reader>
 	export function newWriter(w:io.Writer):Ref<Writer>
-	export interface Reader extends Struct<Reader>,io.Reader{
-		read(p:Uint8Array):[int,error]
+	export interface Reader extends io.Reader,Struct<Reader>{
+		read(p:Uint8Array):int
 	}
 	export interface Writer extends Struct<Writer>,io.WriteCloser,io.Closer{
 		binary:bool
-		write(p:Uint8Array):[int,error]
+		write(p:Uint8Array):int
 		close():error
 	}
 
+export function emptyReader():Reader
+export function refReader():Ref<Reader>
+export function refOfReader(x:Reader):Ref<Reader>
 export function emptyWriter():Writer
 export function refWriter():Ref<Writer>
 export function refOfWriter(x:Writer):Ref<Writer>
-export function emptyReader():Reader
-export function refReader():Ref<Reader>
-export function refOfReader(x:Reader):Ref<Reader>}
+}

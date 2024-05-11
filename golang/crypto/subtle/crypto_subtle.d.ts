@@ -10,4 +10,5 @@ declare module 'golang/crypto/subtle'{
 	export function constantTimeLessOrEq(x:int,y:int):int
 	export function constantTimeSelect(v:int,x:int,y:int):int
 	export function xorBytes(dst:Uint8Array,x:Uint8Array,y:Uint8Array):int
+
 }

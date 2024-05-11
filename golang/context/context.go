@@ -13,20 +13,20 @@ var (
 	//go:embed context.d.ts
 	ContextDefine   []byte
 	ContextDeclared = map[string]any{
-		"cause":             context.Cause,
-		"DeadlineExceeded":  context.DeadlineExceeded,
-		"background":        context.Background,
-		"withCancelCause":   context.WithCancelCause,
 		"todo":              context.TODO,
-		"withTimeout":       context.WithTimeout,
+		"withCancel":        context.WithCancel,
+		"withDeadlineCause": context.WithDeadlineCause,
 		"withValue":         context.WithValue,
 		"withoutCancel":     context.WithoutCancel,
 		"Canceled":          context.Canceled,
-		"withCancel":        context.WithCancel,
-		"withDeadline":      context.WithDeadline,
-		"withDeadlineCause": context.WithDeadlineCause,
+		"withCancelCause":   context.WithCancelCause,
 		"withTimeoutCause":  context.WithTimeoutCause,
 		"afterFunc":         context.AfterFunc,
+		"background":        context.Background,
+		"cause":             context.Cause,
+		"withDeadline":      context.WithDeadline,
+		"DeadlineExceeded":  context.DeadlineExceeded,
+		"withTimeout":       context.WithTimeout,
 	}
 )
 

@@ -4,7 +4,7 @@ declare module 'golang/time'{
 	// @ts-ignore
 	import * as go from 'go'
 	// @ts-ignore
-	import type {int64,float64,error,Struct,GoError,bool,Ref,int} from 'go'
+	import type {Struct,GoError,bool,Ref,int,int64,float64,error} from 'go'
 	//"Mon Jan _2 15:04:05 2006"
 	export const ANSIC:string
 	export function after(d:Duration):go.ChanRecv<Time>
@@ -41,7 +41,7 @@ declare module 'golang/time'{
 	//"01/02 03:04:05PM '06 -0700"
 	export const Layout:string
 	export function loadLocation(name:string):Ref<Location>
-	export function loadLocationFromTZData(name:string,data:Uint8Array):[Ref<Location>,error]
+	export function loadLocationFromTZData(name:string,data:Uint8Array):Ref<Location>
 	export const Local:Ref<Location>
 	export interface Location extends Struct<Location>{
 		string():string
@@ -61,7 +61,7 @@ declare module 'golang/time'{
 	export const November:Month
 	export function now():Time
 	export const October:Month
-	export function parse(layout:string,value:string):[Time,error]
+	export function parse(layout:string,value:string):Time
 	export function parseDuration(s:string):Duration
 	export interface ParseError extends Struct<ParseError>,Error,GoError{
 		layout:string
@@ -71,7 +71,7 @@ declare module 'golang/time'{
 		message:string
 		error():string
 	}
-	export function parseInLocation(layout:string,value:string,loc:Ref<Location>):[Time,error]
+	export function parseInLocation(layout:string,value:string,loc:Ref<Location>):Time
 	//"Mon, 02 Jan 2006 15:04:05 MST"
 	export const RFC1123:string
 	//"Mon, 02 Jan 2006 15:04:05 -0700"
@@ -144,14 +144,14 @@ declare module 'golang/time'{
 		unixMilli():int64
 		unixMicro():int64
 		unixNano():int64
-		marshalBinary():[Uint8Array,error]
-		unmarshalBinary(data:Uint8Array):error
-		gobEncode():[Uint8Array,error]
-		gobDecode(data:Uint8Array):error
-		marshalJSON():[Uint8Array,error]
-		unmarshalJSON(data:Uint8Array):error
-		marshalText():[Uint8Array,error]
-		unmarshalText(data:Uint8Array):error
+		marshalBinary():Uint8Array
+		unmarshalBinary(data:Uint8Array)/*error*/
+		gobEncode():Uint8Array
+		gobDecode(data:Uint8Array)/*error*/
+		marshalJSON():Uint8Array
+		unmarshalJSON(data:Uint8Array)/*error*/
+		marshalText():Uint8Array
+		unmarshalText(data:Uint8Array)/*error*/
 		isDST():bool
 		truncate(d:Duration):Time
 		round(d:Duration):Time
@@ -176,15 +176,16 @@ declare module 'golang/time'{
 		string():string
 	}
 
+export function emptyLocation():Location
+export function refLocation():Ref<Location>
+export function refOfLocation(x:Location):Ref<Location>
+export function emptyTicker():Ticker
+export function refTicker():Ref<Ticker>
+export function refOfTicker(x:Ticker):Ref<Ticker>
 export function emptyTime():Time
 export function refTime():Ref<Time>
 export function refOfTime(x:Time):Ref<Time>
 export function emptyTimer():Timer
 export function refTimer():Ref<Timer>
 export function refOfTimer(x:Timer):Ref<Timer>
-export function emptyLocation():Location
-export function refLocation():Ref<Location>
-export function refOfLocation(x:Location):Ref<Location>
-export function emptyTicker():Ticker
-export function refTicker():Ref<Ticker>
-export function refOfTicker(x:Ticker):Ref<Ticker>}
+}

@@ -14,38 +14,68 @@ var (
 	//go:embed image.d.ts
 	ImageDefine   []byte
 	ImageDeclared = map[string]any{
-		"YCbCrSubsampleRatio420": image.YCbCrSubsampleRatio420,
-		"newAlpha":               image.NewAlpha,
-		"newCMYK":                image.NewCMYK,
-		"Opaque":                 image.Opaque,
-		"Transparent":            image.Transparent,
-		"YCbCrSubsampleRatio411": image.YCbCrSubsampleRatio411,
 		"YCbCrSubsampleRatio440": image.YCbCrSubsampleRatio440,
-		"YCbCrSubsampleRatio444": image.YCbCrSubsampleRatio444,
-		"ZR":                     image.ZR,
-		"newGray":                image.NewGray,
+		"newCMYK":                image.NewCMYK,
 		"newGray16":              image.NewGray16,
+		"newRGBA64":              image.NewRGBA64,
+		"newUniform":             image.NewUniform,
+		"newYCbCr":               image.NewYCbCr,
+		"White":                  image.White,
+		"newAlpha":               image.NewAlpha,
+		"newNYCbCrA":             image.NewNYCbCrA,
+		"newNRGBA":               image.NewNRGBA,
 		"newRGBA":                image.NewRGBA,
+		"pt":                     image.Pt,
+		"YCbCrSubsampleRatio411": image.YCbCrSubsampleRatio411,
+		"ErrFormat":              image.ErrFormat,
+		"newGray":                image.NewGray,
+		"Transparent":            image.Transparent,
 		"YCbCrSubsampleRatio422": image.YCbCrSubsampleRatio422,
+		"decode":                 image.Decode,
 		"newNRGBA64":             image.NewNRGBA64,
 		"Black":                  image.Black,
-		"decodeConfig":           image.DecodeConfig,
-		"newPaletted":            image.NewPaletted,
-		"newRGBA64":              image.NewRGBA64,
 		"YCbCrSubsampleRatio410": image.YCbCrSubsampleRatio410,
-		"decode":                 image.Decode,
-		"newNRGBA":               image.NewNRGBA,
-		"newYCbCr":               image.NewYCbCr,
-		"pt":                     image.Pt,
-		"rect":                   image.Rect,
+		"Opaque":                 image.Opaque,
+		"YCbCrSubsampleRatio420": image.YCbCrSubsampleRatio420,
+		"ZR":                     image.ZR,
 		"newAlpha16":             image.NewAlpha16,
-		"newUniform":             image.NewUniform,
+		"newPaletted":            image.NewPaletted,
+		"YCbCrSubsampleRatio444": image.YCbCrSubsampleRatio444,
 		"ZP":                     image.ZP,
-		"ErrFormat":              image.ErrFormat,
-		"newNYCbCrA":             image.NewNYCbCrA,
 		"registerFormat":         image.RegisterFormat,
-		"White":                  image.White,
+		"decodeConfig":           image.DecodeConfig,
+		"rect":                   image.Rect,
 
+		"emptyAlpha16": func() (v image.Alpha16) {
+			return v
+		},
+		"refAlpha16": func() *image.Alpha16 {
+			var x image.Alpha16
+			return &x
+		},
+		"refOfAlpha16": func(x image.Alpha16) *image.Alpha16 {
+			return &x
+		},
+		"emptyNRGBA": func() (v image.NRGBA) {
+			return v
+		},
+		"refNRGBA": func() *image.NRGBA {
+			var x image.NRGBA
+			return &x
+		},
+		"refOfNRGBA": func(x image.NRGBA) *image.NRGBA {
+			return &x
+		},
+		"emptyPoint": func() (v image.Point) {
+			return v
+		},
+		"refPoint": func() *image.Point {
+			var x image.Point
+			return &x
+		},
+		"refOfPoint": func(x image.Point) *image.Point {
+			return &x
+		},
 		"emptyUniform": func() (v image.Uniform) {
 			return v
 		},
@@ -64,6 +94,26 @@ var (
 			return &x
 		},
 		"refOfYCbCr": func(x image.YCbCr) *image.YCbCr {
+			return &x
+		},
+		"emptyAlpha": func() (v image.Alpha) {
+			return v
+		},
+		"refAlpha": func() *image.Alpha {
+			var x image.Alpha
+			return &x
+		},
+		"refOfAlpha": func(x image.Alpha) *image.Alpha {
+			return &x
+		},
+		"emptyCMYK": func() (v image.CMYK) {
+			return v
+		},
+		"refCMYK": func() *image.CMYK {
+			var x image.CMYK
+			return &x
+		},
+		"refOfCMYK": func(x image.CMYK) *image.CMYK {
 			return &x
 		},
 		"emptyGray": func() (v image.Gray) {
@@ -86,16 +136,6 @@ var (
 		"refOfGray16": func(x image.Gray16) *image.Gray16 {
 			return &x
 		},
-		"emptyNRGBA": func() (v image.NRGBA) {
-			return v
-		},
-		"refNRGBA": func() *image.NRGBA {
-			var x image.NRGBA
-			return &x
-		},
-		"refOfNRGBA": func(x image.NRGBA) *image.NRGBA {
-			return &x
-		},
 		"emptyRGBA": func() (v image.RGBA) {
 			return v
 		},
@@ -106,14 +146,14 @@ var (
 		"refOfRGBA": func(x image.RGBA) *image.RGBA {
 			return &x
 		},
-		"emptyRGBA64": func() (v image.RGBA64) {
+		"emptyNYCbCrA": func() (v image.NYCbCrA) {
 			return v
 		},
-		"refRGBA64": func() *image.RGBA64 {
-			var x image.RGBA64
+		"refNYCbCrA": func() *image.NYCbCrA {
+			var x image.NYCbCrA
 			return &x
 		},
-		"refOfRGBA64": func(x image.RGBA64) *image.RGBA64 {
+		"refOfNYCbCrA": func(x image.NYCbCrA) *image.NYCbCrA {
 			return &x
 		},
 		"emptyRectangle": func() (v image.Rectangle) {
@@ -124,56 +164,6 @@ var (
 			return &x
 		},
 		"refOfRectangle": func(x image.Rectangle) *image.Rectangle {
-			return &x
-		},
-		"emptyPoint": func() (v image.Point) {
-			return v
-		},
-		"refPoint": func() *image.Point {
-			var x image.Point
-			return &x
-		},
-		"refOfPoint": func(x image.Point) *image.Point {
-			return &x
-		},
-		"emptyAlpha": func() (v image.Alpha) {
-			return v
-		},
-		"refAlpha": func() *image.Alpha {
-			var x image.Alpha
-			return &x
-		},
-		"refOfAlpha": func(x image.Alpha) *image.Alpha {
-			return &x
-		},
-		"emptyAlpha16": func() (v image.Alpha16) {
-			return v
-		},
-		"refAlpha16": func() *image.Alpha16 {
-			var x image.Alpha16
-			return &x
-		},
-		"refOfAlpha16": func(x image.Alpha16) *image.Alpha16 {
-			return &x
-		},
-		"emptyPaletted": func() (v image.Paletted) {
-			return v
-		},
-		"refPaletted": func() *image.Paletted {
-			var x image.Paletted
-			return &x
-		},
-		"refOfPaletted": func(x image.Paletted) *image.Paletted {
-			return &x
-		},
-		"emptyCMYK": func() (v image.CMYK) {
-			return v
-		},
-		"refCMYK": func() *image.CMYK {
-			var x image.CMYK
-			return &x
-		},
-		"refOfCMYK": func(x image.CMYK) *image.CMYK {
 			return &x
 		},
 		"emptyConfig": func() (v image.Config) {
@@ -196,14 +186,24 @@ var (
 		"refOfNRGBA64": func(x image.NRGBA64) *image.NRGBA64 {
 			return &x
 		},
-		"emptyNYCbCrA": func() (v image.NYCbCrA) {
+		"emptyPaletted": func() (v image.Paletted) {
 			return v
 		},
-		"refNYCbCrA": func() *image.NYCbCrA {
-			var x image.NYCbCrA
+		"refPaletted": func() *image.Paletted {
+			var x image.Paletted
 			return &x
 		},
-		"refOfNYCbCrA": func(x image.NYCbCrA) *image.NYCbCrA {
+		"refOfPaletted": func(x image.Paletted) *image.Paletted {
+			return &x
+		},
+		"emptyRGBA64": func() (v image.RGBA64) {
+			return v
+		},
+		"refRGBA64": func() *image.RGBA64 {
+			var x image.RGBA64
+			return &x
+		},
+		"refOfRGBA64": func(x image.RGBA64) *image.RGBA64 {
 			return &x
 		}}
 )

@@ -14,27 +14,17 @@ var (
 	//go:embed compress_gzip.d.ts
 	CompressGzipDefine   []byte
 	CompressGzipDeclared = map[string]any{
-		"ErrHeader":          gzip.ErrHeader,
-		"newReader":          gzip.NewReader,
 		"newWriter":          gzip.NewWriter,
 		"NoCompression":      gzip.NoCompression,
-		"BestSpeed":          gzip.BestSpeed,
 		"DefaultCompression": gzip.DefaultCompression,
+		"ErrChecksum":        gzip.ErrChecksum,
+		"ErrHeader":          gzip.ErrHeader,
+		"newReader":          gzip.NewReader,
+		"BestCompression":    gzip.BestCompression,
+		"BestSpeed":          gzip.BestSpeed,
 		"HuffmanOnly":        gzip.HuffmanOnly,
 		"newWriterLevel":     gzip.NewWriterLevel,
-		"BestCompression":    gzip.BestCompression,
-		"ErrChecksum":        gzip.ErrChecksum,
 
-		"emptyWriter": func() (v gzip.Writer) {
-			return v
-		},
-		"refWriter": func() *gzip.Writer {
-			var x gzip.Writer
-			return &x
-		},
-		"refOfWriter": func(x gzip.Writer) *gzip.Writer {
-			return &x
-		},
 		"emptyHeader": func() (v gzip.Header) {
 			return v
 		},
@@ -53,6 +43,16 @@ var (
 			return &x
 		},
 		"refOfReader": func(x gzip.Reader) *gzip.Reader {
+			return &x
+		},
+		"emptyWriter": func() (v gzip.Writer) {
+			return v
+		},
+		"refWriter": func() *gzip.Writer {
+			var x gzip.Writer
+			return &x
+		},
+		"refOfWriter": func(x gzip.Writer) *gzip.Writer {
 			return &x
 		}}
 )

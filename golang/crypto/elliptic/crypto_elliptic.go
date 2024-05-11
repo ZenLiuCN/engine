@@ -14,15 +14,15 @@ var (
 	//go:embed crypto_elliptic.d.ts
 	CryptoEllipticDefine   []byte
 	CryptoEllipticDeclared = map[string]any{
+		"unmarshalCompressed": elliptic.UnmarshalCompressed,
 		"generateKey":         elliptic.GenerateKey,
-		"marshalCompressed":   elliptic.MarshalCompressed,
-		"p384":                elliptic.P384,
+		"p256":                elliptic.P256,
 		"p521":                elliptic.P521,
+		"p384":                elliptic.P384,
 		"unmarshal":           elliptic.Unmarshal,
 		"marshal":             elliptic.Marshal,
+		"marshalCompressed":   elliptic.MarshalCompressed,
 		"p224":                elliptic.P224,
-		"p256":                elliptic.P256,
-		"unmarshalCompressed": elliptic.UnmarshalCompressed,
 
 		"emptyCurveParams": func() (v elliptic.CurveParams) {
 			return v

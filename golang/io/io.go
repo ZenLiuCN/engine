@@ -12,42 +12,32 @@ var (
 	//go:embed io.d.ts
 	IoDefine   []byte
 	IoDeclared = map[string]any{
-		"copy":             io.Copy,
-		"ErrShortWrite":    io.ErrShortWrite,
-		"nopCloser":        io.NopCloser,
-		"copyN":            io.CopyN,
-		"writeString":      io.WriteString,
-		"pipe":             io.Pipe,
-		"copyBuffer":       io.CopyBuffer,
-		"EOF":              io.EOF,
-		"multiWriter":      io.MultiWriter,
-		"readAll":          io.ReadAll,
-		"SeekCurrent":      io.SeekCurrent,
-		"teeReader":        io.TeeReader,
-		"newSectionReader": io.NewSectionReader,
-		"newOffsetWriter":  io.NewOffsetWriter,
-		"ErrClosedPipe":    io.ErrClosedPipe,
 		"limitReader":      io.LimitReader,
-		"multiReader":      io.MultiReader,
-		"SeekEnd":          io.SeekEnd,
-		"ErrNoProgress":    io.ErrNoProgress,
-		"ErrUnexpectedEOF": io.ErrUnexpectedEOF,
-		"readAtLeast":      io.ReadAtLeast,
+		"pipe":             io.Pipe,
+		"writeString":      io.WriteString,
+		"copyBuffer":       io.CopyBuffer,
+		"copyN":            io.CopyN,
+		"newSectionReader": io.NewSectionReader,
+		"teeReader":        io.TeeReader,
+		"EOF":              io.EOF,
+		"ErrShortWrite":    io.ErrShortWrite,
+		"multiWriter":      io.MultiWriter,
 		"readFull":         io.ReadFull,
-		"SeekStart":        io.SeekStart,
 		"Discard":          io.Discard,
+		"ErrClosedPipe":    io.ErrClosedPipe,
+		"readAtLeast":      io.ReadAtLeast,
+		"ErrUnexpectedEOF": io.ErrUnexpectedEOF,
+		"readAll":          io.ReadAll,
 		"ErrShortBuffer":   io.ErrShortBuffer,
+		"SeekEnd":          io.SeekEnd,
+		"SeekStart":        io.SeekStart,
+		"ErrNoProgress":    io.ErrNoProgress,
+		"multiReader":      io.MultiReader,
+		"nopCloser":        io.NopCloser,
+		"SeekCurrent":      io.SeekCurrent,
+		"copy":             io.Copy,
+		"newOffsetWriter":  io.NewOffsetWriter,
 
-		"emptySectionReader": func() (v io.SectionReader) {
-			return v
-		},
-		"refSectionReader": func() *io.SectionReader {
-			var x io.SectionReader
-			return &x
-		},
-		"refOfSectionReader": func(x io.SectionReader) *io.SectionReader {
-			return &x
-		},
 		"emptyLimitedReader": func() (v io.LimitedReader) {
 			return v
 		},
@@ -86,6 +76,16 @@ var (
 			return &x
 		},
 		"refOfPipeWriter": func(x io.PipeWriter) *io.PipeWriter {
+			return &x
+		},
+		"emptySectionReader": func() (v io.SectionReader) {
+			return v
+		},
+		"refSectionReader": func() *io.SectionReader {
+			var x io.SectionReader
+			return &x
+		},
+		"refOfSectionReader": func(x io.SectionReader) *io.SectionReader {
 			return &x
 		}}
 )

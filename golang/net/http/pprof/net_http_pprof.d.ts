@@ -11,4 +11,5 @@ declare module 'golang/net/http/pprof'{
 	export function profile(w:http.ResponseWriter,r:Ref<http.Request>):void
 	export function symbol(w:http.ResponseWriter,r:Ref<http.Request>):void
 	export function trace(w:http.ResponseWriter,r:Ref<http.Request>):void
+
 }

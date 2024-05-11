@@ -12,36 +12,26 @@ var (
 	//go:embed math_rand.d.ts
 	MathRandDefine   []byte
 	MathRandDeclared = map[string]any{
-		"int63":       rand.Int63,
-		"int63n":      rand.Int63n,
-		"newZipf":     rand.NewZipf,
-		"seed":        rand.Seed,
-		"float32":     rand.Float32,
 		"float64":     rand.Float64,
-		"int31":       rand.Int31,
-		"int31n":      rand.Int31n,
-		"shuffle":     rand.Shuffle,
-		"intn":        rand.Intn,
-		"uint64":      rand.Uint64,
-		"expFloat64":  rand.ExpFloat64,
-		"int":         rand.Int,
-		"newSource":   rand.NewSource,
-		"uint32":      rand.Uint32,
 		"New":         rand.New,
-		"normFloat64": rand.NormFloat64,
+		"uint64":      rand.Uint64,
+		"int31n":      rand.Int31n,
+		"int63":       rand.Int63,
+		"intn":        rand.Intn,
+		"newSource":   rand.NewSource,
+		"seed":        rand.Seed,
+		"expFloat64":  rand.ExpFloat64,
+		"float32":     rand.Float32,
+		"int":         rand.Int,
 		"perm":        rand.Perm,
 		"read":        rand.Read,
+		"uint32":      rand.Uint32,
+		"int31":       rand.Int31,
+		"int63n":      rand.Int63n,
+		"newZipf":     rand.NewZipf,
+		"normFloat64": rand.NormFloat64,
+		"shuffle":     rand.Shuffle,
 
-		"emptyZipf": func() (v rand.Zipf) {
-			return v
-		},
-		"refZipf": func() *rand.Zipf {
-			var x rand.Zipf
-			return &x
-		},
-		"refOfZipf": func(x rand.Zipf) *rand.Zipf {
-			return &x
-		},
 		"emptyRand": func() (v rand.Rand) {
 			return v
 		},
@@ -50,6 +40,16 @@ var (
 			return &x
 		},
 		"refOfRand": func(x rand.Rand) *rand.Rand {
+			return &x
+		},
+		"emptyZipf": func() (v rand.Zipf) {
+			return v
+		},
+		"refZipf": func() *rand.Zipf {
+			var x rand.Zipf
+			return &x
+		},
+		"refOfZipf": func(x rand.Zipf) *rand.Zipf {
 			return &x
 		}}
 )

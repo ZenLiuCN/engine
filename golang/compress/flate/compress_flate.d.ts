@@ -4,7 +4,7 @@ declare module 'golang/compress/flate'{
 	// @ts-ignore
 	import * as io from 'golang/io'
 	// @ts-ignore
-	import type {error,Struct,int,int64,GoError,Ref} from 'go'
+	import type {Ref,error,Struct,int,int64,GoError} from 'go'
 	//9
 	export const BestCompression:int
 	//1
@@ -21,8 +21,8 @@ declare module 'golang/compress/flate'{
 	}
 	export function newReader(r:io.Reader):io.ReadCloser
 	export function newReaderDict(r:io.Reader,dict:Uint8Array):io.ReadCloser
-	export function newWriter(w:io.Writer,level:int):[Ref<Writer>,error]
-	export function newWriterDict(w:io.Writer,level:int,dict:Uint8Array):[Ref<Writer>,error]
+	export function newWriter(w:io.Writer,level:int):Ref<Writer>
+	export function newWriterDict(w:io.Writer,level:int,dict:Uint8Array):Ref<Writer>
 	//0
 	export const NoCompression:int
 	export interface ReadError extends Struct<ReadError>,Error,GoError{
@@ -33,20 +33,21 @@ declare module 'golang/compress/flate'{
 	export interface Reader extends io.Reader,io.ByteReader{
 	}
 	export interface Resetter{
-		reset(r:io.Reader,dict:Uint8Array):error
+		reset(r:io.Reader,dict:Uint8Array)/*error*/
 	}
 	export interface WriteError extends Struct<WriteError>,Error,GoError{
 		offset:int64
 		err:GoError
 		error():string
 	}
-	export interface Writer extends Struct<Writer>,io.WriteCloser,io.Closer{
-		write(data:Uint8Array):[int,error]
-		flush():error
+	export interface Writer extends io.Closer,Struct<Writer>,io.WriteCloser{
+		write(data:Uint8Array):int
+		flush()/*error*/
 		close():error
 		reset(dst:io.Writer):void
 	}
 
 export function emptyWriter():Writer
 export function refWriter():Ref<Writer>
-export function refOfWriter(x:Writer):Ref<Writer>}
+export function refOfWriter(x:Writer):Ref<Writer>
+}

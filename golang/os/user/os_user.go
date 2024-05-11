@@ -12,11 +12,11 @@ var (
 	//go:embed os_user.d.ts
 	OsUserDefine   []byte
 	OsUserDeclared = map[string]any{
-		"lookup":        user.Lookup,
 		"lookupGroup":   user.LookupGroup,
 		"lookupGroupId": user.LookupGroupId,
 		"lookupId":      user.LookupId,
 		"current":       user.Current,
+		"lookup":        user.Lookup,
 
 		"emptyGroup": func() (v user.Group) {
 			return v

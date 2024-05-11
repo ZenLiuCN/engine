@@ -7,4 +7,5 @@ declare module 'golang/crypto/hmac'{
 	import type {bool} from 'go'
 	export function equal(mac1:Uint8Array,mac2:Uint8Array):bool
 	export function New(h:()=>hash.Hash,key:Uint8Array):hash.Hash
+
 }

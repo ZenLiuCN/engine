@@ -13,14 +13,14 @@ var (
 	//go:embed regexp.d.ts
 	RegexpDefine   []byte
 	RegexpDeclared = map[string]any{
-		"matchReader":      regexp.MatchReader,
-		"matchString":      regexp.MatchString,
-		"mustCompile":      regexp.MustCompile,
 		"mustCompilePOSIX": regexp.MustCompilePOSIX,
 		"quoteMeta":        regexp.QuoteMeta,
 		"compile":          regexp.Compile,
 		"compilePOSIX":     regexp.CompilePOSIX,
 		"match":            regexp.Match,
+		"matchReader":      regexp.MatchReader,
+		"matchString":      regexp.MatchString,
+		"mustCompile":      regexp.MustCompile,
 
 		"emptyRegexp": func() (v regexp.Regexp) {
 			return v

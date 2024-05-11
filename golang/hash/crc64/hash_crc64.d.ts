@@ -17,4 +17,5 @@ declare module 'golang/hash/crc64'{
 	export interface Table extends Array<uint64>/*256*/{
 	}
 	export function update(crc:uint64,tab:Ref<Table>,p:Uint8Array):uint64
+
 }

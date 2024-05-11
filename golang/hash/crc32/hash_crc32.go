@@ -13,17 +13,17 @@ var (
 	//go:embed hash_crc32.d.ts
 	HashCrc32Define   []byte
 	HashCrc32Declared = map[string]any{
+		"Castagnoli":   crc32.Castagnoli,
+		"checksum":     crc32.Checksum,
+		"checksumIEEE": crc32.ChecksumIEEE,
+		"IEEE":         crc32.IEEE,
+		"New":          crc32.New,
 		"newIEEE":      crc32.NewIEEE,
+		"IEEETable":    crc32.IEEETable,
+		"Koopman":      crc32.Koopman,
+		"makeTable":    crc32.MakeTable,
 		"Size":         crc32.Size,
 		"update":       crc32.Update,
-		"Castagnoli":   crc32.Castagnoli,
-		"checksumIEEE": crc32.ChecksumIEEE,
-		"Koopman":      crc32.Koopman,
-		"New":          crc32.New,
-		"checksum":     crc32.Checksum,
-		"IEEE":         crc32.IEEE,
-		"IEEETable":    crc32.IEEETable,
-		"makeTable":    crc32.MakeTable,
 	}
 )
 

@@ -23,186 +23,166 @@ var (
 	//go:embed net_http.d.ts
 	NetHttpDefine   []byte
 	NetHttpDeclared = map[string]any{
-		"ErrUnexpectedTrailer":                http.ErrUnexpectedTrailer,
-		"SameSiteDefaultMode":                 http.SameSiteDefaultMode,
-		"StatusFound":                         http.StatusFound,
-		"StatusPermanentRedirect":             http.StatusPermanentRedirect,
-		"newServeMux":                         http.NewServeMux,
-		"proxyFromEnvironment":                http.ProxyFromEnvironment,
-		"ServerContextKey":                    http.ServerContextKey,
 		"StateNew":                            http.StateNew,
-		"StatusTeapot":                        http.StatusTeapot,
-		"StatusVariantAlsoNegotiates":         http.StatusVariantAlsoNegotiates,
-		"DefaultTransport":                    http.DefaultTransport,
-		"ErrBodyReadAfterClose":               http.ErrBodyReadAfterClose,
-		"SameSiteStrictMode":                  http.SameSiteStrictMode,
-		"StatusContinue":                      http.StatusContinue,
-		"StatusUnauthorized":                  http.StatusUnauthorized,
-		"StatusNotImplemented":                http.StatusNotImplemented,
-		"ErrUseLastResponse":                  http.ErrUseLastResponse,
-		"error":                               http.Error,
-		"fs":                                  http.FS,
-		"LocalAddrContextKey":                 http.LocalAddrContextKey,
-		"StatusConflict":                      http.StatusConflict,
-		"StatusEarlyHints":                    http.StatusEarlyHints,
-		"StatusNotAcceptable":                 http.StatusNotAcceptable,
-		"StatusPreconditionFailed":            http.StatusPreconditionFailed,
-		"ErrAbortHandler":                     http.ErrAbortHandler,
-		"ErrLineTooLong":                      http.ErrLineTooLong,
-		"readRequest":                         http.ReadRequest,
-		"serveContent":                        http.ServeContent,
-		"StatusInsufficientStorage":           http.StatusInsufficientStorage,
-		"StatusLengthRequired":                http.StatusLengthRequired,
-		"StatusRequestTimeout":                http.StatusRequestTimeout,
-		"TimeFormat":                          http.TimeFormat,
-		"ErrMissingBoundary":                  http.ErrMissingBoundary,
-		"StatusGone":                          http.StatusGone,
-		"MethodOptions":                       http.MethodOptions,
-		"parseHTTPVersion":                    http.ParseHTTPVersion,
-		"StatusNoContent":                     http.StatusNoContent,
-		"StatusServiceUnavailable":            http.StatusServiceUnavailable,
-		"StatusProcessing":                    http.StatusProcessing,
-		"allowQuerySemicolons":                http.AllowQuerySemicolons,
-		"DefaultClient":                       http.DefaultClient,
-		"ErrServerClosed":                     http.ErrServerClosed,
-		"maxBytesHandler":                     http.MaxBytesHandler,
-		"MethodTrace":                         http.MethodTrace,
-		"StatusOK":                            http.StatusOK,
-		"newResponseController":               http.NewResponseController,
 		"StatusAlreadyReported":               http.StatusAlreadyReported,
-		"StatusExpectationFailed":             http.StatusExpectationFailed,
+		"StatusGone":                          http.StatusGone,
+		"fs":                                  http.FS,
+		"proxyURL":                            http.ProxyURL,
+		"SameSiteStrictMode":                  http.SameSiteStrictMode,
+		"serve":                               http.Serve,
+		"serveFile":                           http.ServeFile,
+		"StatusNotImplemented":                http.StatusNotImplemented,
+		"StatusOK":                            http.StatusOK,
+		"StatusPermanentRedirect":             http.StatusPermanentRedirect,
+		"StatusResetContent":                  http.StatusResetContent,
+		"newRequestWithContext":               http.NewRequestWithContext,
+		"StateClosed":                         http.StateClosed,
+		"StatusServiceUnavailable":            http.StatusServiceUnavailable,
+		"StatusVariantAlsoNegotiates":         http.StatusVariantAlsoNegotiates,
+		"StatusNotExtended":                   http.StatusNotExtended,
+		"ErrNoCookie":                         http.ErrNoCookie,
+		"SameSiteDefaultMode":                 http.SameSiteDefaultMode,
+		"StateIdle":                           http.StateIdle,
+		"StatusInsufficientStorage":           http.StatusInsufficientStorage,
+		"StatusNetworkAuthenticationRequired": http.StatusNetworkAuthenticationRequired,
+		"listenAndServe":                      http.ListenAndServe,
+		"newRequest":                          http.NewRequest,
+		"setCookie":                           http.SetCookie,
+		"StatusTeapot":                        http.StatusTeapot,
+		"StatusUnsupportedMediaType":          http.StatusUnsupportedMediaType,
+		"listenAndServeTLS":                   http.ListenAndServeTLS,
+		"notFound":                            http.NotFound,
+		"StatusContinue":                      http.StatusContinue,
+		"StatusProcessing":                    http.StatusProcessing,
+		"StatusRequestTimeout":                http.StatusRequestTimeout,
+		"ErrHijacked":                         http.ErrHijacked,
+		"error":                               http.Error,
+		"StatusCreated":                       http.StatusCreated,
+		"handleFunc":                          http.HandleFunc,
+		"StatusBadRequest":                    http.StatusBadRequest,
+		"StatusHTTPVersionNotSupported":       http.StatusHTTPVersionNotSupported,
+		"StatusNoContent":                     http.StatusNoContent,
+		"StatusUnauthorized":                  http.StatusUnauthorized,
+		"ErrWriteAfterFlush":                  http.ErrWriteAfterFlush,
+		"handle":                              http.Handle,
+		"ServerContextKey":                    http.ServerContextKey,
+		"StatusMovedPermanently":              http.StatusMovedPermanently,
 		"StatusMultiStatus":                   http.StatusMultiStatus,
+		"maxBytesReader":                      http.MaxBytesReader,
+		"parseHTTPVersion":                    http.ParseHTTPVersion,
+		"StatusAccepted":                      http.StatusAccepted,
+		"ErrBodyNotAllowed":                   http.ErrBodyNotAllowed,
+		"newServeMux":                         http.NewServeMux,
+		"StatusSwitchingProtocols":            http.StatusSwitchingProtocols,
 		"StatusRequestEntityTooLarge":         http.StatusRequestEntityTooLarge,
+		"allowQuerySemicolons":                http.AllowQuerySemicolons,
+		"MethodGet":                           http.MethodGet,
+		"MethodPost":                          http.MethodPost,
+		"notFoundHandler":                     http.NotFoundHandler,
+		"StatusIMUsed":                        http.StatusIMUsed,
+		"parseTime":                           http.ParseTime,
+		"serveContent":                        http.ServeContent,
+		"StatusInternalServerError":           http.StatusInternalServerError,
+		"ErrHeaderTooLong":                    http.ErrHeaderTooLong,
+		"ErrLineTooLong":                      http.ErrLineTooLong,
+		"ErrUseLastResponse":                  http.ErrUseLastResponse,
+		"get":                                 http.Get,
+		"MethodConnect":                       http.MethodConnect,
+		"DefaultMaxIdleConnsPerHost":          http.DefaultMaxIdleConnsPerHost,
+		"StatusTemporaryRedirect":             http.StatusTemporaryRedirect,
+		"ErrServerClosed":                     http.ErrServerClosed,
+		"LocalAddrContextKey":                 http.LocalAddrContextKey,
+		"serveTLS":                            http.ServeTLS,
+		"StatusPaymentRequired":               http.StatusPaymentRequired,
+		"statusText":                          http.StatusText,
+		"StatusUpgradeRequired":               http.StatusUpgradeRequired,
+		"detectContentType":                   http.DetectContentType,
+		"newFileTransport":                    http.NewFileTransport,
+		"NoBody":                              http.NoBody,
+		"StatusExpectationFailed":             http.StatusExpectationFailed,
+		"StatusGatewayTimeout":                http.StatusGatewayTimeout,
+		"TimeFormat":                          http.TimeFormat,
+		"StatusUseProxy":                      http.StatusUseProxy,
+		"ErrContentLength":                    http.ErrContentLength,
+		"StatusLengthRequired":                http.StatusLengthRequired,
+		"StatusPreconditionFailed":            http.StatusPreconditionFailed,
+		"StatusPreconditionRequired":          http.StatusPreconditionRequired,
+		"StatusProxyAuthRequired":             http.StatusProxyAuthRequired,
+		"ErrBodyReadAfterClose":               http.ErrBodyReadAfterClose,
+		"ErrSchemeMismatch":                   http.ErrSchemeMismatch,
+		"StatusRequestedRangeNotSatisfiable":  http.StatusRequestedRangeNotSatisfiable,
+		"ErrAbortHandler":                     http.ErrAbortHandler,
+		"ErrMissingBoundary":                  http.ErrMissingBoundary,
+		"StateActive":                         http.StateActive,
+		"readResponse":                        http.ReadResponse,
+		"redirect":                            http.Redirect,
+		"SameSiteLaxMode":                     http.SameSiteLaxMode,
+		"DefaultServeMux":                     http.DefaultServeMux,
+		"ErrHandlerTimeout":                   http.ErrHandlerTimeout,
+		"ErrSkipAltProtocol":                  http.ErrSkipAltProtocol,
+		"fileServer":                          http.FileServer,
+		"MethodDelete":                        http.MethodDelete,
+		"SameSiteNoneMode":                    http.SameSiteNoneMode,
+		"StatusBadGateway":                    http.StatusBadGateway,
+		"StatusTooEarly":                      http.StatusTooEarly,
 		"StatusUnprocessableEntity":           http.StatusUnprocessableEntity,
+		"maxBytesHandler":                     http.MaxBytesHandler,
+		"postForm":                            http.PostForm,
+		"StatusMisdirectedRequest":            http.StatusMisdirectedRequest,
+		"stripPrefix":                         http.StripPrefix,
 		"timeoutHandler":                      http.TimeoutHandler,
 		"ErrNotSupported":                     http.ErrNotSupported,
-		"handle":                              http.Handle,
-		"MethodGet":                           http.MethodGet,
-		"newFileTransport":                    http.NewFileTransport,
-		"serve":                               http.Serve,
-		"StatusRequestHeaderFieldsTooLarge":   http.StatusRequestHeaderFieldsTooLarge,
-		"ErrContentLength":                    http.ErrContentLength,
-		"listenAndServeTLS":                   http.ListenAndServeTLS,
-		"StatusMisdirectedRequest":            http.StatusMisdirectedRequest,
-		"DefaultMaxIdleConnsPerHost":          http.DefaultMaxIdleConnsPerHost,
-		"ErrWriteAfterFlush":                  http.ErrWriteAfterFlush,
-		"ErrHandlerTimeout":                   http.ErrHandlerTimeout,
-		"StatusLoopDetected":                  http.StatusLoopDetected,
-		"statusText":                          http.StatusText,
-		"StatusGatewayTimeout":                http.StatusGatewayTimeout,
-		"maxBytesReader":                      http.MaxBytesReader,
-		"SameSiteLaxMode":                     http.SameSiteLaxMode,
-		"StatusMethodNotAllowed":              http.StatusMethodNotAllowed,
-		"StatusRequestURITooLong":             http.StatusRequestURITooLong,
-		"StatusTooEarly":                      http.StatusTooEarly,
-		"StatusResetContent":                  http.StatusResetContent,
-		"ErrNoCookie":                         http.ErrNoCookie,
-		"newRequest":                          http.NewRequest,
-		"StateIdle":                           http.StateIdle,
-		"StatusFailedDependency":              http.StatusFailedDependency,
-		"StatusNonAuthoritativeInfo":          http.StatusNonAuthoritativeInfo,
-		"StatusNotFound":                      http.StatusNotFound,
-		"postForm":                            http.PostForm,
-		"SameSiteNoneMode":                    http.SameSiteNoneMode,
-		"ErrSchemeMismatch":                   http.ErrSchemeMismatch,
-		"fileServer":                          http.FileServer,
-		"handleFunc":                          http.HandleFunc,
-		"listenAndServe":                      http.ListenAndServe,
-		"MethodDelete":                        http.MethodDelete,
-		"notFoundHandler":                     http.NotFoundHandler,
-		"serveTLS":                            http.ServeTLS,
-		"StatusHTTPVersionNotSupported":       http.StatusHTTPVersionNotSupported,
-		"StatusNotModified":                   http.StatusNotModified,
-		"StatusUpgradeRequired":               http.StatusUpgradeRequired,
-		"MethodConnect":                       http.MethodConnect,
-		"redirectHandler":                     http.RedirectHandler,
-		"StatusInternalServerError":           http.StatusInternalServerError,
-		"StatusPreconditionRequired":          http.StatusPreconditionRequired,
-		"StatusUnavailableForLegalReasons":    http.StatusUnavailableForLegalReasons,
-		"StatusNotExtended":                   http.StatusNotExtended,
-		"head":                                http.Head,
-		"parseTime":                           http.ParseTime,
-		"proxyURL":                            http.ProxyURL,
-		"StatusAccepted":                      http.StatusAccepted,
-		"StatusMovedPermanently":              http.StatusMovedPermanently,
-		"StatusNetworkAuthenticationRequired": http.StatusNetworkAuthenticationRequired,
-		"canonicalHeaderKey":                  http.CanonicalHeaderKey,
-		"StateActive":                         http.StateActive,
-		"StatusMultipleChoices":               http.StatusMultipleChoices,
-		"StatusPartialContent":                http.StatusPartialContent,
-		"StatusTooManyRequests":               http.StatusTooManyRequests,
-		"stripPrefix":                         http.StripPrefix,
-		"ErrBodyNotAllowed":                   http.ErrBodyNotAllowed,
-		"MethodHead":                          http.MethodHead,
-		"StatusBadGateway":                    http.StatusBadGateway,
-		"StatusBadRequest":                    http.StatusBadRequest,
-		"StatusRequestedRangeNotSatisfiable":  http.StatusRequestedRangeNotSatisfiable,
-		"StatusTemporaryRedirect":             http.StatusTemporaryRedirect,
-		"StatusUnsupportedMediaType":          http.StatusUnsupportedMediaType,
-		"DefaultServeMux":                     http.DefaultServeMux,
+		"ErrShortBody":                        http.ErrShortBody,
+		"MethodOptions":                       http.MethodOptions,
+		"StateHijacked":                       http.StateHijacked,
+		"StatusEarlyHints":                    http.StatusEarlyHints,
+		"ErrUnexpectedTrailer":                http.ErrUnexpectedTrailer,
+		"StatusConflict":                      http.StatusConflict,
+		"StatusLocked":                        http.StatusLocked,
+		"DefaultMaxHeaderBytes":               http.DefaultMaxHeaderBytes,
 		"ErrMissingContentLength":             http.ErrMissingContentLength,
+		"redirectHandler":                     http.RedirectHandler,
+		"StatusFailedDependency":              http.StatusFailedDependency,
+		"StatusFound":                         http.StatusFound,
+		"DefaultTransport":                    http.DefaultTransport,
+		"ErrMissingFile":                      http.ErrMissingFile,
+		"StatusTooManyRequests":               http.StatusTooManyRequests,
+		"MethodHead":                          http.MethodHead,
+		"MethodPatch":                         http.MethodPatch,
+		"StatusNotModified":                   http.StatusNotModified,
+		"canonicalHeaderKey":                  http.CanonicalHeaderKey,
+		"readRequest":                         http.ReadRequest,
 		"ErrNoLocation":                       http.ErrNoLocation,
 		"post":                                http.Post,
-		"ErrHijacked":                         http.ErrHijacked,
-		"StatusSwitchingProtocols":            http.StatusSwitchingProtocols,
-		"TrailerPrefix":                       http.TrailerPrefix,
-		"MethodPost":                          http.MethodPost,
-		"newRequestWithContext":               http.NewRequestWithContext,
-		"redirect":                            http.Redirect,
-		"StatusLocked":                        http.StatusLocked,
+		"StatusNotFound":                      http.StatusNotFound,
 		"StatusSeeOther":                      http.StatusSeeOther,
-		"StatusIMUsed":                        http.StatusIMUsed,
-		"ErrHeaderTooLong":                    http.ErrHeaderTooLong,
-		"ErrMissingFile":                      http.ErrMissingFile,
-		"MethodPatch":                         http.MethodPatch,
-		"NoBody":                              http.NoBody,
-		"readResponse":                        http.ReadResponse,
-		"StatusForbidden":                     http.StatusForbidden,
-		"ErrShortBody":                        http.ErrShortBody,
-		"ErrSkipAltProtocol":                  http.ErrSkipAltProtocol,
-		"MethodPut":                           http.MethodPut,
-		"StatusProxyAuthRequired":             http.StatusProxyAuthRequired,
-		"get":                                 http.Get,
-		"serveFile":                           http.ServeFile,
-		"setCookie":                           http.SetCookie,
-		"StateClosed":                         http.StateClosed,
-		"StatusCreated":                       http.StatusCreated,
 		"ErrNotMultipart":                     http.ErrNotMultipart,
-		"StatusUseProxy":                      http.StatusUseProxy,
-		"DefaultMaxHeaderBytes":               http.DefaultMaxHeaderBytes,
-		"detectContentType":                   http.DetectContentType,
-		"notFound":                            http.NotFound,
-		"StateHijacked":                       http.StateHijacked,
-		"StatusPaymentRequired":               http.StatusPaymentRequired,
+		"StatusForbidden":                     http.StatusForbidden,
+		"StatusRequestHeaderFieldsTooLarge":   http.StatusRequestHeaderFieldsTooLarge,
+		"StatusUnavailableForLegalReasons":    http.StatusUnavailableForLegalReasons,
+		"newResponseController":               http.NewResponseController,
+		"StatusPartialContent":                http.StatusPartialContent,
+		"StatusRequestURITooLong":             http.StatusRequestURITooLong,
+		"TrailerPrefix":                       http.TrailerPrefix,
+		"DefaultClient":                       http.DefaultClient,
+		"MethodTrace":                         http.MethodTrace,
+		"StatusLoopDetected":                  http.StatusLoopDetected,
+		"StatusMethodNotAllowed":              http.StatusMethodNotAllowed,
+		"StatusNotAcceptable":                 http.StatusNotAcceptable,
+		"head":                                http.Head,
+		"MethodPut":                           http.MethodPut,
+		"proxyFromEnvironment":                http.ProxyFromEnvironment,
+		"StatusMultipleChoices":               http.StatusMultipleChoices,
+		"StatusNonAuthoritativeInfo":          http.StatusNonAuthoritativeInfo,
 
-		"emptyServeMux": func() (v http.ServeMux) {
+		"emptyPushOptions": func() (v http.PushOptions) {
 			return v
 		},
-		"refServeMux": func() *http.ServeMux {
-			var x http.ServeMux
+		"refPushOptions": func() *http.PushOptions {
+			var x http.PushOptions
 			return &x
 		},
-		"refOfServeMux": func(x http.ServeMux) *http.ServeMux {
-			return &x
-		},
-		"emptyServer": func() (v http.Server) {
-			return v
-		},
-		"refServer": func() *http.Server {
-			var x http.Server
-			return &x
-		},
-		"refOfServer": func(x http.Server) *http.Server {
-			return &x
-		},
-		"emptyTransport": func() (v http.Transport) {
-			return v
-		},
-		"refTransport": func() *http.Transport {
-			var x http.Transport
-			return &x
-		},
-		"refOfTransport": func(x http.Transport) *http.Transport {
+		"refOfPushOptions": func(x http.PushOptions) *http.PushOptions {
 			return &x
 		},
 		"emptyRequest": func() (v http.Request) {
@@ -225,16 +205,6 @@ var (
 		"refOfResponse": func(x http.Response) *http.Response {
 			return &x
 		},
-		"emptyPushOptions": func() (v http.PushOptions) {
-			return v
-		},
-		"refPushOptions": func() *http.PushOptions {
-			var x http.PushOptions
-			return &x
-		},
-		"refOfPushOptions": func(x http.PushOptions) *http.PushOptions {
-			return &x
-		},
 		"emptyResponseController": func() (v http.ResponseController) {
 			return v
 		},
@@ -243,6 +213,26 @@ var (
 			return &x
 		},
 		"refOfResponseController": func(x http.ResponseController) *http.ResponseController {
+			return &x
+		},
+		"emptyServeMux": func() (v http.ServeMux) {
+			return v
+		},
+		"refServeMux": func() *http.ServeMux {
+			var x http.ServeMux
+			return &x
+		},
+		"refOfServeMux": func(x http.ServeMux) *http.ServeMux {
+			return &x
+		},
+		"emptyCookie": func() (v http.Cookie) {
+			return v
+		},
+		"refCookie": func() *http.Cookie {
+			var x http.Cookie
+			return &x
+		},
+		"refOfCookie": func(x http.Cookie) *http.Cookie {
 			return &x
 		},
 		"emptyClient": func() (v http.Client) {
@@ -255,14 +245,24 @@ var (
 		"refOfClient": func(x http.Client) *http.Client {
 			return &x
 		},
-		"emptyCookie": func() (v http.Cookie) {
+		"emptyServer": func() (v http.Server) {
 			return v
 		},
-		"refCookie": func() *http.Cookie {
-			var x http.Cookie
+		"refServer": func() *http.Server {
+			var x http.Server
 			return &x
 		},
-		"refOfCookie": func(x http.Cookie) *http.Cookie {
+		"refOfServer": func(x http.Server) *http.Server {
+			return &x
+		},
+		"emptyTransport": func() (v http.Transport) {
+			return v
+		},
+		"refTransport": func() *http.Transport {
+			var x http.Transport
+			return &x
+		},
+		"refOfTransport": func(x http.Transport) *http.Transport {
 			return &x
 		}}
 )

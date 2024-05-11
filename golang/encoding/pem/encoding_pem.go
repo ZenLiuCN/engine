@@ -13,9 +13,9 @@ var (
 	//go:embed encoding_pem.d.ts
 	EncodingPemDefine   []byte
 	EncodingPemDeclared = map[string]any{
+		"decode":         pem.Decode,
 		"encode":         pem.Encode,
 		"encodeToMemory": pem.EncodeToMemory,
-		"decode":         pem.Decode,
 
 		"emptyBlock": func() (v pem.Block) {
 			return v

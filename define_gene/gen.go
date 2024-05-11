@@ -22,6 +22,7 @@ type Generator struct {
 	trace    bool
 	env      []string
 	errors   bool
+	ignores  []string
 }
 
 func (g *Generator) generate() (err error) {
@@ -35,6 +36,7 @@ func (g *Generator) generate() (err error) {
 		flags = append(flags, fmt.Sprintf("-tags=%s", strings.Join(g.tags, " ")))
 	}
 	c := new(context)
+	c.ignores = g.ignores
 	c.errors = g.errors
 	c.init()
 	ip := NewTypeInspector[*context](false)

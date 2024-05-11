@@ -8,12 +8,12 @@ declare module 'golang/text/template'{
 	// @ts-ignore
 	import * as parse from 'golang/text/template/parse'
 	// @ts-ignore
-	import type {bool,Ref,GoError,Struct,error,Proto} from 'go'
+	import type {GoError,Struct,error,Proto,bool,Ref} from 'go'
 	export interface ExecError extends Struct<ExecError>,Error,GoError{
 		name:string
 		err:GoError
 		error():string
-		unwrap():error
+		unwrap()/*error*/
 	}
 	export interface FuncMap extends Proto<FuncMap>,Record<string,any>{
 	}
@@ -26,30 +26,31 @@ declare module 'golang/text/template'{
 	export function jsEscaper(...args:any[]):string
 	export function must(t:Ref<Template>,err:error):Ref<Template>
 	export function New(name:string):Ref<Template>
-	export function parseFS(fsys:fs.FS,...patterns:string[]):[Ref<Template>,error]
+	export function parseFS(fsys:fs.FS,...patterns:string[]):Ref<Template>
 	export function parseFiles(...filenames:string[]):Ref<Template>
 	export function parseGlob(pattern:string):Ref<Template>
 	export interface Template extends Struct<Template>{
 		tree:Ref<parse.Tree>
-		executeTemplate(wr:io.Writer,name:string,data:any):error
-		execute(wr:io.Writer,data:any):error
+		executeTemplate(wr:io.Writer,name:string,data:any)/*error*/
+		execute(wr:io.Writer,data:any)/*error*/
 		definedTemplates():string
-		parseFiles(...filenames:string[]):[Ref<Template>,error]
-		parseGlob(pattern:string):[Ref<Template>,error]
-		parseFS(fsys:fs.FS,...patterns:string[]):[Ref<Template>,error]
+		parseFiles(...filenames:string[]):Ref<Template>
+		parseGlob(pattern:string):Ref<Template>
+		parseFS(fsys:fs.FS,...patterns:string[]):Ref<Template>
 		option(...opt:string[]):Ref<Template>
 		name():string
 		New(name:string):Ref<Template>
-		clone():[Ref<Template>,error]
-		addParseTree(name:string,tree:Ref<parse.Tree>):[Ref<Template>,error]
+		clone():Ref<Template>
+		addParseTree(name:string,tree:Ref<parse.Tree>):Ref<Template>
 		templates():Ref<Template>[]
 		delims(left:string,right:string):Ref<Template>
 		funcs(funcMap:FuncMap):Ref<Template>
 		lookup(name:string):Ref<Template>
-		parse(text:string):[Ref<Template>,error]
+		parse(text:string):Ref<Template>
 	}
 	export function urlQueryEscaper(...args:any[]):string
 
 export function emptyTemplate():Template
 export function refTemplate():Ref<Template>
-export function refOfTemplate(x:Template):Ref<Template>}
+export function refOfTemplate(x:Template):Ref<Template>
+}

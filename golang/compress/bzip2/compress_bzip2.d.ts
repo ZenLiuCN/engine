@@ -6,7 +6,8 @@ declare module 'golang/compress/bzip2'{
 	// @ts-ignore
 	import type {GoError} from 'go'
 	export function newReader(r:io.Reader):io.Reader
-	export interface StructuralError extends string,GoError{
+	export interface StructuralError extends GoError,string{
 		error():string
 	}
+
 }

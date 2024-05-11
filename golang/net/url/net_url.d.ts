@@ -4,12 +4,12 @@ declare module 'golang/net/url'{
 	// @ts-ignore
 	import * as fmt from 'golang/fmt'
 	// @ts-ignore
-	import type {error,bool,Ref,GoError,Struct} from 'go'
-	export interface Error extends Error,GoError,Struct<Error>{
+	import type {GoError,Struct,error,bool,Ref} from 'go'
+	export interface Error extends GoError,Struct<Error>,Error{
 		op:string
 		url:string
 		err:GoError
-		unwrap():error
+		unwrap()/*error*/
 		error():string
 		timeout():bool
 		temporary():bool
@@ -20,7 +20,7 @@ declare module 'golang/net/url'{
 	export interface InvalidHostError extends string,GoError{
 		error():string
 	}
-	export function joinPath(base:string,...elem:string[]):[string,error]
+	export function joinPath(base:string,...elem:string[]):string
 	export function parse(rawURL:string):Ref<URL>
 	export function parseQuery(query:string):Values
 	export function parseRequestURI(rawURL:string):Ref<URL>
@@ -45,14 +45,14 @@ declare module 'golang/net/url'{
 		string():string
 		redacted():string
 		isAbs():bool
-		parse(ref:string):[Ref<URL>,error]
+		parse(ref:string):Ref<URL>
 		resolveReference(ref:Ref<URL>):Ref<URL>
 		query():Values
 		requestURI():string
 		hostname():string
 		port():string
-		marshalBinary():[Uint8Array,error]
-		unmarshalBinary(text:Uint8Array):error
+		marshalBinary():Uint8Array
+		unmarshalBinary(text:Uint8Array)/*error*/
 		joinPath(...elem:string[]):Ref<URL>
 	}
 	export function user(username:string):Ref<Userinfo>
@@ -76,4 +76,5 @@ export function refURL():Ref<URL>
 export function refOfURL(x:URL):Ref<URL>
 export function emptyUserinfo():Userinfo
 export function refUserinfo():Ref<Userinfo>
-export function refOfUserinfo(x:Userinfo):Ref<Userinfo>}
+export function refOfUserinfo(x:Userinfo):Ref<Userinfo>
+}

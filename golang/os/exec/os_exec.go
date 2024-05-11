@@ -17,12 +17,12 @@ var (
 	//go:embed os_exec.d.ts
 	OsExecDefine   []byte
 	OsExecDeclared = map[string]any{
-		"lookPath":       exec.LookPath,
 		"command":        exec.Command,
 		"commandContext": exec.CommandContext,
 		"ErrDot":         exec.ErrDot,
 		"ErrNotFound":    exec.ErrNotFound,
 		"ErrWaitDelay":   exec.ErrWaitDelay,
+		"lookPath":       exec.LookPath,
 
 		"emptyCmd": func() (v exec.Cmd) {
 			return v

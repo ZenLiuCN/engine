@@ -20,16 +20,6 @@ var (
 		"contextClientTrace": httptrace.ContextClientTrace,
 		"withClientTrace":    httptrace.WithClientTrace,
 
-		"emptyWroteRequestInfo": func() (v httptrace.WroteRequestInfo) {
-			return v
-		},
-		"refWroteRequestInfo": func() *httptrace.WroteRequestInfo {
-			var x httptrace.WroteRequestInfo
-			return &x
-		},
-		"refOfWroteRequestInfo": func(x httptrace.WroteRequestInfo) *httptrace.WroteRequestInfo {
-			return &x
-		},
 		"emptyClientTrace": func() (v httptrace.ClientTrace) {
 			return v
 		},
@@ -68,6 +58,16 @@ var (
 			return &x
 		},
 		"refOfGotConnInfo": func(x httptrace.GotConnInfo) *httptrace.GotConnInfo {
+			return &x
+		},
+		"emptyWroteRequestInfo": func() (v httptrace.WroteRequestInfo) {
+			return v
+		},
+		"refWroteRequestInfo": func() *httptrace.WroteRequestInfo {
+			var x httptrace.WroteRequestInfo
+			return &x
+		},
+		"refOfWroteRequestInfo": func(x httptrace.WroteRequestInfo) *httptrace.WroteRequestInfo {
 			return &x
 		}}
 )

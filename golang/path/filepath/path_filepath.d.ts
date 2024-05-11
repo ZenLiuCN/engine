@@ -4,7 +4,7 @@ declare module 'golang/path/filepath'{
 	// @ts-ignore
 	import * as fs from 'golang/io/fs'
 	// @ts-ignore
-	import type {bool,rune,Alias,error,GoError} from 'go'
+	import type {error,GoError,bool,rune,Alias} from 'go'
 	export function abs(path:string):string
 	export function base(path:string):string
 	export function clean(path:string):string
@@ -13,15 +13,15 @@ declare module 'golang/path/filepath'{
 	export function evalSymlinks(path:string):string
 	export function ext(path:string):string
 	export function fromSlash(path:string):string
-	export function glob(pattern:string):[string]
+	export function glob(pattern:string):string[]
 	export function hasPrefix(p:string,prefix:string):bool
 	export function isAbs(path:string):bool
 	export function isLocal(path:string):bool
 	export function join(...elem:string[]):string
 	//59
 	export const ListSeparator:rune
-	export function match(pattern:string,name:string):[bool,error]
-	export function rel(basepath:string,targpath:string):[string,error]
+	export function match(pattern:string,name:string):bool
+	export function rel(basepath:string,targpath:string):string
 	//92
 	export const Separator:rune
 	export const SkipAll:GoError
@@ -30,8 +30,9 @@ declare module 'golang/path/filepath'{
 	export function splitList(path:string):string[]
 	export function toSlash(path:string):string
 	export function volumeName(path:string):string
-	export function walk(root:string,fn:WalkFunc):error
-	export function walkDir(root:string,fn:fs.WalkDirFunc):error
+	export function walk(root:string,fn:WalkFunc)/*error*/
+	export function walkDir(root:string,fn:fs.WalkDirFunc)/*error*/
 	export interface WalkFunc extends Alias<(path:string,info:fs.FileInfo,err:error)=>error>{
 	}
+
 }

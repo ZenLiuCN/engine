@@ -13,21 +13,21 @@ var (
 	NetNetipDefine   []byte
 	NetNetipDeclared = map[string]any{
 		"parsePrefix":             netip.ParsePrefix,
-		"addrFrom4":               netip.AddrFrom4,
 		"addrPortFrom":            netip.AddrPortFrom,
-		"iPv6Loopback":            netip.IPv6Loopback,
-		"mustParsePrefix":         netip.MustParsePrefix,
-		"mustParseAddr":           netip.MustParseAddr,
-		"parseAddrPort":           netip.ParseAddrPort,
-		"prefixFrom":              netip.PrefixFrom,
-		"addrFromSlice":           netip.AddrFromSlice,
-		"iPv4Unspecified":         netip.IPv4Unspecified,
-		"parseAddr":               netip.ParseAddr,
-		"mustParseAddrPort":       netip.MustParseAddrPort,
-		"addrFrom16":              netip.AddrFrom16,
 		"iPv6LinkLocalAllNodes":   netip.IPv6LinkLocalAllNodes,
+		"iPv6Loopback":            netip.IPv6Loopback,
 		"iPv6LinkLocalAllRouters": netip.IPv6LinkLocalAllRouters,
+		"mustParseAddrPort":       netip.MustParseAddrPort,
+		"iPv4Unspecified":         netip.IPv4Unspecified,
 		"iPv6Unspecified":         netip.IPv6Unspecified,
+		"mustParseAddr":           netip.MustParseAddr,
+		"parseAddr":               netip.ParseAddr,
+		"parseAddrPort":           netip.ParseAddrPort,
+		"addrFrom16":              netip.AddrFrom16,
+		"addrFrom4":               netip.AddrFrom4,
+		"addrFromSlice":           netip.AddrFromSlice,
+		"prefixFrom":              netip.PrefixFrom,
+		"mustParsePrefix":         netip.MustParsePrefix,
 
 		"emptyAddr": func() (v netip.Addr) {
 			return v

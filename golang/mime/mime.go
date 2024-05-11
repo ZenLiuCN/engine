@@ -13,14 +13,14 @@ var (
 	//go:embed mime.d.ts
 	MimeDefine   []byte
 	MimeDeclared = map[string]any{
+		"BEncoding":                mime.BEncoding,
+		"ErrInvalidMediaParameter": mime.ErrInvalidMediaParameter,
+		"extensionsByType":         mime.ExtensionsByType,
 		"formatMediaType":          mime.FormatMediaType,
 		"parseMediaType":           mime.ParseMediaType,
 		"QEncoding":                mime.QEncoding,
 		"typeByExtension":          mime.TypeByExtension,
 		"addExtensionType":         mime.AddExtensionType,
-		"BEncoding":                mime.BEncoding,
-		"ErrInvalidMediaParameter": mime.ErrInvalidMediaParameter,
-		"extensionsByType":         mime.ExtensionsByType,
 
 		"emptyWordDecoder": func() (v mime.WordDecoder) {
 			return v

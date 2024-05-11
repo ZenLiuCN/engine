@@ -12,7 +12,7 @@ declare module 'golang/os/exec'{
 	// @ts-ignore
 	import * as context from 'golang/context'
 	// @ts-ignore
-	import type {error,Struct,Ref,GoError} from 'go'
+	import type {Ref,GoError,error,Struct} from 'go'
 	export interface Cmd extends Struct<Cmd>{
 		path:string
 		args:string[]
@@ -26,17 +26,17 @@ declare module 'golang/os/exec'{
 		process:Ref<os.Process>
 		processState:Ref<os.ProcessState>
 		err:GoError
-		cancel:()=>error
+		cancel:())=>void/*error*/
 		waitDelay:time.Duration
 		string():string
-		run():error
-		start():error
-		wait():error
-		output():[Uint8Array,error]
-		combinedOutput():[Uint8Array,error]
-		stdinPipe():[io.WriteCloser,error]
-		stdoutPipe():[io.ReadCloser,error]
-		stderrPipe():[io.ReadCloser,error]
+		run()/*error*/
+		start()/*error*/
+		wait()/*error*/
+		output():Uint8Array
+		combinedOutput():Uint8Array
+		stdinPipe():io.WriteCloser
+		stdoutPipe():io.ReadCloser
+		stderrPipe():io.ReadCloser
 		environ():string[]
 	}
 	export function command(name:string,...arg:string[]):Ref<Cmd>
@@ -48,7 +48,7 @@ declare module 'golang/os/exec'{
 		name:string
 		err:GoError
 		error():string
-		unwrap():error
+		unwrap()/*error*/
 	}
 	export interface ExitError extends Error,GoError,Struct<ExitError>{
 		processState:Ref<os.ProcessState>
@@ -59,4 +59,5 @@ declare module 'golang/os/exec'{
 
 export function emptyCmd():Cmd
 export function refCmd():Ref<Cmd>
-export function refOfCmd(x:Cmd):Ref<Cmd>}
+export function refOfCmd(x:Cmd):Ref<Cmd>
+}

@@ -8,14 +8,14 @@ declare module 'golang/encoding/json'{
 	// @ts-ignore
 	import * as reflect from 'golang/reflect'
 	// @ts-ignore
-	import type {bool,int64,rune,GoError,float64,Ref,error,Struct} from 'go'
-	export function compact(dst:Ref<bytes.Buffer>,src:Uint8Array):error
+	import type {error,Struct,bool,int64,rune,GoError,float64,Ref} from 'go'
+	export function compact(dst:Ref<bytes.Buffer>,src:Uint8Array)/*error*/
 	export interface Decoder extends Token,Struct<Decoder>{
 		useNumber():void
 		disallowUnknownFields():void
-		decode(v:any):error
+		decode(v:any)/*error*/
 		buffered():io.Reader
-		token():[Token,error]
+		token():Token
 		more():bool
 		inputOffset():int64
 	}
@@ -23,12 +23,12 @@ declare module 'golang/encoding/json'{
 		string():string
 	}
 	export interface Encoder extends Struct<Encoder>,Token{
-		encode(v:any):error
+		encode(v:any)/*error*/
 		setIndent(prefix:string,indent:string):void
 		setEscapeHTML(on:bool):void
 	}
 	export function htmlEscape(dst:Ref<bytes.Buffer>,src:Uint8Array):void
-	export function indent(dst:Ref<bytes.Buffer>,src:Uint8Array,prefix:string,indent:string):error
+	export function indent(dst:Ref<bytes.Buffer>,src:Uint8Array,prefix:string,indent:string)/*error*/
 	export interface InvalidUTF8Error extends Struct<InvalidUTF8Error>,Error,GoError{
 		S:string
 		error():string
@@ -38,26 +38,26 @@ declare module 'golang/encoding/json'{
 		error():string
 	}
 	export function marshal(v:any):Uint8Array
-	export function marshalIndent(v:any,prefix:string,indent:string):[Uint8Array,error]
+	export function marshalIndent(v:any,prefix:string,indent:string):Uint8Array
 	export interface Marshaler{
-		marshalJSON():[Uint8Array,error]
+		marshalJSON():Uint8Array
 	}
-	export interface MarshalerError extends Error,GoError,Struct<MarshalerError>{
+	export interface MarshalerError extends Struct<MarshalerError>,Error,GoError{
 		type:reflect.Type
 		err:GoError
 		error():string
-		unwrap():error
+		unwrap()/*error*/
 	}
 	export function newDecoder(r:io.Reader):Ref<Decoder>
 	export function newEncoder(w:io.Writer):Ref<Encoder>
 	export interface Number extends string{
 		string():string
-		float64():[float64,error]
-		int64():[int64,error]
+		float64():float64
+		int64():int64
 	}
 	export interface RawMessage extends Uint8Array{
-		marshalJSON():[Uint8Array,error]
-		unmarshalJSON(data:Uint8Array):error
+		marshalJSON():Uint8Array
+		unmarshalJSON(data:Uint8Array)/*error*/
 	}
 	export interface SyntaxError extends Error,GoError,Struct<SyntaxError>{
 		offset:int64
@@ -65,14 +65,14 @@ declare module 'golang/encoding/json'{
 	}
 	export interface Token{
 	}
-	export function unmarshal(data:Uint8Array,v:any):error
+	export function unmarshal(data:Uint8Array,v:any)/*error*/
 	export interface UnmarshalFieldError extends Struct<UnmarshalFieldError>,Error,GoError{
 		key:string
 		type:reflect.Type
 		field:reflect.StructField
 		error():string
 	}
-	export interface UnmarshalTypeError extends Struct<UnmarshalTypeError>,Error,GoError{
+	export interface UnmarshalTypeError extends GoError,Struct<UnmarshalTypeError>,Error{
 		value:string
 		type:reflect.Type
 		offset:int64
@@ -81,7 +81,7 @@ declare module 'golang/encoding/json'{
 		error():string
 	}
 	export interface Unmarshaler{
-		unmarshalJSON(v1:Uint8Array):error
+		unmarshalJSON(v1:Uint8Array)/*error*/
 	}
 	export interface UnsupportedTypeError extends Struct<UnsupportedTypeError>,Error,GoError{
 		type:reflect.Type
@@ -99,4 +99,5 @@ export function refDecoder():Ref<Decoder>
 export function refOfDecoder(x:Decoder):Ref<Decoder>
 export function emptyEncoder():Encoder
 export function refEncoder():Ref<Encoder>
-export function refOfEncoder(x:Encoder):Ref<Encoder>}
+export function refOfEncoder(x:Encoder):Ref<Encoder>
+}

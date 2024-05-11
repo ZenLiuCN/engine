@@ -14,10 +14,10 @@ var (
 	//go:embed net_http_fcgi.d.ts
 	NetHttpFcgiDefine   []byte
 	NetHttpFcgiDeclared = map[string]any{
-		"processEnv":        fcgi.ProcessEnv,
-		"serve":             fcgi.Serve,
 		"ErrConnClosed":     fcgi.ErrConnClosed,
 		"ErrRequestAborted": fcgi.ErrRequestAborted,
+		"processEnv":        fcgi.ProcessEnv,
+		"serve":             fcgi.Serve,
 	}
 )
 

@@ -14,15 +14,15 @@ var (
 	//go:embed crypto_dsa.d.ts
 	CryptoDsaDefine   []byte
 	CryptoDsaDeclared = map[string]any{
+		"ErrInvalidPublicKey": dsa.ErrInvalidPublicKey,
+		"L2048N256":           dsa.L2048N256,
+		"verify":              dsa.Verify,
+		"sign":                dsa.Sign,
 		"generateKey":         dsa.GenerateKey,
 		"generateParameters":  dsa.GenerateParameters,
 		"L1024N160":           dsa.L1024N160,
-		"L2048N256":           dsa.L2048N256,
-		"L3072N256":           dsa.L3072N256,
-		"sign":                dsa.Sign,
-		"ErrInvalidPublicKey": dsa.ErrInvalidPublicKey,
 		"L2048N224":           dsa.L2048N224,
-		"verify":              dsa.Verify,
+		"L3072N256":           dsa.L3072N256,
 
 		"emptyParameters": func() (v dsa.Parameters) {
 			return v

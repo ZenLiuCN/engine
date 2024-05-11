@@ -4,7 +4,7 @@ declare module 'golang/encoding/binary'{
 	// @ts-ignore
 	import * as io from 'golang/io'
 	// @ts-ignore
-	import type {int64,int,error,uint16,uint32,uint64} from 'go'
+	import type {uint16,uint32,uint64,int64,int,error} from 'go'
 	export interface AppendByteOrder{
 		appendUint16(v2:Uint8Array,v1:uint16):Uint8Array
 		appendUint32(v2:Uint8Array,v1:uint32):Uint8Array
@@ -33,11 +33,12 @@ declare module 'golang/encoding/binary'{
 	export const NativeEndian:AppendByteOrder&ByteOrder
 	export function putUvarint(buf:Uint8Array,x:uint64):int
 	export function putVarint(buf:Uint8Array,x:int64):int
-	export function read(r:io.Reader,order:ByteOrder,data:any):error
+	export function read(r:io.Reader,order:ByteOrder,data:any)/*error*/
 	export function readUvarint(r:io.ByteReader):uint64
 	export function readVarint(r:io.ByteReader):int64
 	export function size(v:any):int
 	export function uvarint(buf:Uint8Array):[uint64,int]
 	export function varint(buf:Uint8Array):[int64,int]
-	export function write(w:io.Writer,order:ByteOrder,data:any):error
+	export function write(w:io.Writer,order:ByteOrder,data:any)/*error*/
+
 }

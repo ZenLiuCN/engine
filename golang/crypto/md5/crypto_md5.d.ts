@@ -11,4 +11,5 @@ declare module 'golang/crypto/md5'{
 	//16
 	export const Size:int
 	export function sum(data:Uint8Array):Uint8Array/*16*/
+
 }
