@@ -97,7 +97,6 @@ func (s *Engine) RunTs(src string) (v Value, err error) {
 		s.SourceMap = nil
 	}()
 	if s.Debug {
-		var src string
 		src, s.SourceMap = CompileTsWithMapping(src, true)
 		v, err = s.Runtime.RunString(src)
 	} else {
@@ -119,7 +118,6 @@ func (s *Engine) RunJs(src string) (v Value, err error) {
 		s.SourceMap = nil
 	}()
 	if s.Debug {
-		var src string
 		src, s.SourceMap = CompileJsWithMapping(src, true)
 		v, err = s.Runtime.RunString(src)
 	} else {

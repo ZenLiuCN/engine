@@ -1,5 +1,7 @@
 // noinspection JSUnusedGlobalSymbols
 
+
+
 /**
  * the module contains basic and built-in function and types for go. except generic types
  */
@@ -20,6 +22,8 @@ declare module "go" {
     export type float32 = number
     export type float = number
     export type error = GoError | undefined
+    export type reserved = void
+    export type map<K,V> = Record<K,V>
 
     export interface GoError extends Error {
         error(): string

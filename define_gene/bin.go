@@ -67,7 +67,7 @@ func main() {
 		},
 		&cli.BoolFlag{
 			Name:    "errors",
-			Usage:   "generate with error as secondary result",
+			Usage:   "generate subWriter error as secondary result",
 			Aliases: []string{"s"},
 		},
 		&cli.BoolFlag{
@@ -100,7 +100,7 @@ func action(c *cli.Context) error {
 	if len(file) == 1 && IsDir(file[0]) {
 		dir = file[0]
 	} else if len(tags) != 0 {
-		log.Fatal("--tags can only applies with directory")
+		log.Fatal("--tags can only applies subWriter directory")
 	} else {
 		dir = filepath.Dir(file[0])
 	}

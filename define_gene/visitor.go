@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/ZenLiuCN/fn"
 	. "github.com/ZenLiuCN/go-inspect"
+	"go/ast"
 	"go/format"
 	"go/types"
 	"golang.org/x/tools/go/packages"
@@ -23,6 +24,7 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 		case ENT:
 			defer c.Enter(KTConst, I.TypePath, nil)
 			c.name = name
+			c.d.Indent(c.m.Indents() + 1)
 		case EXT:
 			defer c.Exit(KTConst, I.TypePath, nil)
 			if c.generic {
@@ -31,15 +33,15 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 				return false
 			}
 			if !c.typeAlias {
-				c.mi(1).mf("//%s", e.Val().String()).mn()
+				c.mind().mf("//%s", e.Val().String())
 				c.Constants[name] = e
 			} else {
 				c.AliasConst[name] = e
 			}
-			c.mi(1).mf("export const %s:", name)
+			c.mind().mf("export const %s:", name)
 			c.declared()
 			c.addEntry(name, "%s.%s", c.pkg.Types.Name(), name)
-			c.mn().reset()
+			c.reset()
 		}
 		return true
 	},
@@ -48,15 +50,15 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 		case ENT:
 			defer c.Enter(KTFunc, I.TypePath, nil)
 			c.name = name
-
+			c.d.Indent(c.m.Indents() + 1)
 		case EXT:
 			defer c.Exit(KTFunc, I.TypePath, nil)
-			if c.generic {
+			if c.generic || c.ignore {
 				//TODO handle generic function
 				c.reset()
 				return false
 			}
-			c.mi(1).mf("export function %s", Camel(name))
+			c.mind().mf("export function %s", Camel(name))
 			c.Functions[name] = e
 			c.declared().mn()
 			c.addEntry(Camel(name), "%s.%s", c.pkg.Types.Name(), name)
@@ -69,6 +71,7 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 		case ENT:
 			defer c.Enter(KTType, I.TypePath, nil)
 			c.name = name
+			c.d.Indent(c.m.Indents() + 1)
 		case EXT:
 			defer c.Exit(KTType, I.TypePath, nil)
 			if c.generic {
@@ -78,9 +81,9 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 			}
 			if c.typeAlias {
 				c.AliasType[name] = e
-				c.mi(1).mf("export type %s=%s", name, c.d.String()).mn()
+				c.mind().mf("export type %s=%s", name, c.d.String())
 			} else {
-				c.mi(1).mf("export interface %s", name)
+				c.mind().mf("export interface %s", name)
 				if c.isStruct {
 					c.Structs[name] = e
 				} else {
@@ -90,9 +93,9 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 				if len(c.extended) > 0 {
 					c.mf(" extends %s", strings.Join(c.extended.Values(), ","))
 				}
-				c.mf("{").mn()
-				c.declared().
-					mi(1).mf("}").mn()
+				c.mf("{").
+					mn().declared().
+					mind().mf("}")
 			}
 			c.reset()
 		}
@@ -103,7 +106,7 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 		case ENT:
 			defer c.Enter(KTVar, nil, nil)
 			c.name = name
-
+			c.d.Indent(c.m.Indents() + 1)
 		case EXT:
 			defer c.Exit(KTVar, nil, nil)
 			if c.generic {
@@ -112,23 +115,23 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 				return false
 			}
 			c.Variables[name] = e
-			c.mi(1).mf("export const %s:", name)
-			c.declared().mn()
+			c.mind().mf("export const %s:", name)
+			c.declared()
 			c.addEntry(name, "%s.%s", c.pkg.Types.Name(), name)
 			c.reset()
 		}
 		return true
 	},
-	FnVisitTypeTuple: func(I InspectorX, d Dir, o types.Object, x *types.Tuple, seen Types, c *context) bool {
+	FnVisitTypeTuple: func(I InspectorX, d Dir, o types.Object, x *types.Tuple, seen *Types, c *context) bool {
 		switch d {
 		case ENT:
 			defer c.Enter(KTuple, I.TypePath, seen)
 			switch m := I.LNth(2); m {
 			case KMParam:
 				c.df("(")
-				c.pc = c.pc.Push(x.Len())
+				c.pc.PushSitu(x.Len())
 			case KMResult:
-				c.pc = c.pc.Push(x.Len())
+				c.pc.PushSitu(x.Len())
 				switch x.Len() {
 				case 0:
 				case 1:
@@ -140,12 +143,12 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 			defer c.Exit(KTuple, I.TypePath, seen)
 			switch m := I.LNth(2); m {
 			case KMParam:
-				if !c.funcAlias && (I.Len() <= 4 || I.LNth(4) == KMMethod) {
+				if !c.funcAlias && (I.LNth(4) == KMMethod || (I.Len() <= 4 && (I.First() == KTType || I.First() == KTFunc))) {
 					c.df("):")
 				} else {
 					c.df(")=>")
 				}
-				c.pc, _ = c.pc.Pop()
+				c.pc.PopSitu()
 			case KMResult:
 				switch x.Len() {
 				case 0:
@@ -154,156 +157,191 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 				default:
 					c.df("]")
 				}
-				c.pc, _ = c.pc.Pop()
+				c.pc.PopSitu()
 			}
 		}
 		return true
 	},
-	FnVisitTypeVar: func(I InspectorX, d Dir, o types.Object, x *types.Var, seen Types, c *context) bool {
+	FnVisitTypeVar: func(I InspectorX, d Dir, o types.Object, x *types.Var, seen *Types, c *context) bool {
 		switch d {
 		case ENT:
 			defer c.Enter(KVar, I.TypePath, seen)
 			switch {
-			case c.path.First() == KTType && I.EndWith(KStruct, KMField): //** KMField,KTuple
+			//!! field writer
+			case I.First() == KTType && I.EndWith(KStruct, KMField):
+				c.buf(c.field)
 				c.field = x.Name()
-				c.useTmpWriter()
 			default:
+				// !! KMParam,KTuple,KVar
 				switch m := I.LNth(3); m {
 				case KMParam:
 					c.param = x.Name()
-					if c.pc.Last() == 1 && c.variadic.Last() {
-						if c.param == "" {
-							c.df("...v%d:", c.pc.Last())
-						} else {
-							c.df("...%s:", Safe(x.Name()))
-						}
-					} else {
-						if c.param == "" {
-							c.df("v%d:", c.pc.Last())
-						} else {
-							c.df("%s:", Safe(x.Name()))
-						}
-					}
-				case KMResult:
 				case KMField:
 					c.field = x.Name()
 				}
 			}
+			c.subWriter(I.TypePath, x.Type())
 		case EXT:
 			defer c.Exit(KVar, I.TypePath, seen)
-			defer c.resetArrayed()
 			switch {
-			case c.path.First() == KTType && I.EndWith(KStruct, KMField):
-				if c.d.Buffer().Len() > 0 { //!! only expose field type should write
-					c.freeTmpWriter(func(w Writer) {
+			//!! field writer
+			case c.field != "" && I.First() == KTType && I.EndWith(KStruct, KMField):
+				switch {
+				//!! only expose field type should write
+				case c.d.Buffer().Len() > 0:
+					c.mergeWriter(I.TypePath, x.Type(), func(w Writer) {
 						if c.ignore {
 							c.ignore = false
 							return
 						}
-						c.di(2).df("%s:%s", Camel(c.field), w.String())
+						c.dn().df("%s:%s", Camel(c.field), w.String())
 					})
-					c.dn()
-				} else {
-					c.freeTmpWriter(nil)
+				//!! ignore field
+				default:
+					c.mergeWriter(I.TypePath, x.Type(), assertEmpty)
 				}
-				c.field = ""
+				c.field = c.unBuf().(string)
+			//!! KParam KTuple KVar
 			default:
-				switch I.TypePath.LNth(3) {
-				case KMParam, KMResult:
+				switch I.LNth(3) {
+				case KMParam:
+					c.mergeWriter(I.TypePath, x.Type(), func(w Writer) {
+						switch {
+						case c.pc.Last() == 1 && c.variadic.Last():
+							if c.param == "" {
+								c.df("...v%d:%s", c.pc.Last(), w.String())
+							} else {
+								c.df("...%s:%s", Safe(x.Name()), w.String())
+							}
+						default:
+							if c.param == "" {
+								c.df("v%d:%s", c.pc.Last(), w.String())
+							} else {
+								c.df("%s:%s", Safe(x.Name()), w.String())
+							}
+						}
+					})
 					if c.pc.Last() > 1 {
 						c.df(",")
 					}
 					c.param = ""
 					c.pcsub()
+				case KMResult:
+					c.mergeWriter(I.TypePath, x.Type(), func(w Writer) {
+						if c.pc.Last() > 1 {
+							c.df("%s,", w.String())
+						} else {
+							c.df("%s", w.String())
+						}
+					})
+					c.pcsub()
 				case KMField:
-					c.field = ""
-					c.dn()
+					panic(x)
+				/*	c.mergeWriter(I.TypePath, x.Type(), func(w Writer) {
+						c.dn().df("%s:%s", w.String())
+					})
+					c.field = ""*/
+				default:
+					c.mergeWriter(I.TypePath, x.Type(), func(w Writer) {
+						c.dn().df("%s", w.String())
+					})
 				}
 			}
 
 		}
 		return true
 	},
-	FnVisitTypeFunc: func(I InspectorX, d Dir, o types.Object, x *types.Func, seen Types, c *context) bool {
+	FnVisitTypeFunc: func(I InspectorX, d Dir, o types.Object, x *types.Func, seen *Types, c *context) bool {
 		switch d {
 		case ENT:
 			defer c.Enter(KFunc, I.TypePath, seen)
-			c.useTmpWriter()
+			c.subWriter(I.TypePath, x.Type())
 			c.method = x.Name()
 		case EXT:
 			defer c.Exit(KFunc, I.TypePath, seen)
-			defer c.resetArrayed()
-			c.freeTmpWriter(func(t Writer) {
+			c.mergeWriter(I.TypePath, x.Type(), func(t Writer) {
 				if c.ignore || !t.NotEmpty() {
 					c.ignore = false
 					return
 				}
-				c.di(2).df("%s%s", Camel(x.Name()), t.String())
+				//!! Func declare
+				c.di().dn().df("%s%s", Camel(x.Name()), t.String()).dd()
 			})
-
-			c.dn()
 			c.method = ""
-
 		}
 		return true
 	},
-	FnVisitTypeBasic: func(I InspectorX, d Dir, o types.Object, x *types.Basic, seen Types, c *context) bool {
+	FnVisitTypeBasic: func(I InspectorX, d Dir, o types.Object, x *types.Basic, seen *Types, c *context) bool {
 		switch d {
 		case ENT:
 			defer c.Enter(KBasic, I.TypePath, seen)
-			arr := c.arrayLen.Len()
-			//!! is type embedded
-			if c.isTypeDefine(KBasic, seen) && !c.IsConstOrVar() {
-				if arr == 1 || arr == 0 {
-					if c.arrayLen.Last() == -1 || arr == 0 {
-						c.extends("%s", c.identType(x.Name(), arr > 0, true))
-					} else {
-						c.extends("%s/*%d*/", c.identType(x.Name(), arr > 0, true), c.arrayLen.Last())
-					}
-				} else {
-
-					b := GetWriter()
-					for _, i := range c.arrayLen[:arr-1] {
-						if i == -1 {
-							b.Format("Array<")
-						} else {
-							b.Format("Array</*%d*/", i)
-						}
-					}
-					lst := c.arrayLen.Last()
-					s := ""
-					if lst > 0 {
-						s = fmt.Sprintf("/*%d*/", lst)
-					}
-					arr--
-					c.extends("%s%s%s%s", b.String(), c.identType(x.Name(), true, true), s, strings.Repeat(">", arr))
-					b.Free()
-
-				}
-				c.arrayed = c.path.Len() + 1 //!! KBasic push after process
-				return true
+			//arr := c.arrayLen.LastIndex(0)
+			//len := c.arrayLen.Len() - arr
+			//switch {
+			//case I.Equals(KTType, KNamed, KBasic):
+			//	switch arr {
+			//	case 0, -1:
+			//		if c.arrayLen.Last() == -1 || len == 0 {
+			//			c.extends("%s", c.identType(x.Name(), len > 0, true))
+			//		} else {
+			//			c.extends("%s/*%d*/", c.identType(x.Name(), len > 0, true), c.arrayLen.Last())
+			//		}
+			//	default:
+			//		b := GetWriter()
+			//		for _, i := range c.arrayLen[arr:] {
+			//			if i == -1 {
+			//				b.Format("Array<")
+			//			} else {
+			//				b.Format("Array</*%d*/", i)
+			//			}
+			//		}
+			//		lst := c.arrayLen.Last()
+			//		s := ""
+			//		if lst > 0 {
+			//			s = fmt.Sprintf("/*%d*/", lst)
+			//		}
+			//		len--
+			//		c.extends("%s%s%s%s", b.String(), c.identType(x.Name(), true, true), s, strings.Repeat(">", len))
+			//		b.Release()
+			//	}
+			//	c.arrayed = c.path.Len() + 1 //!! KBasic push after process
+			//default:
+			//	switch arr {
+			//	case 0, -1:
+			//		if c.arrayLen.Last() == -1 || arr == -1 {
+			//			c.df("%s", c.identType(x.Name(), arr > -1, false))
+			//		} else {
+			//			c.df("%s/*%d*/", c.identType(x.Name(), arr > -1, false), c.arrayLen.Last())
+			//		}
+			//	default:
+			//		b := GetWriter()
+			//		for _, i := range c.arrayLen[arr:] {
+			//			if i == -1 {
+			//				b.Format("Array<")
+			//			} else {
+			//				b.Format("Array</*%d*/", i)
+			//			}
+			//		}
+			//		len--
+			//		c.df("%s%s%s", b.String(), c.identType(x.Name(), true, false), strings.Repeat(">", len))
+			//		b.Release()
+			//	}
+			//	c.arrayed = c.path.Len() + 1 //!! KBasic push after process
+			//}
+			if I.Equals(KTType, KBasic) {
+				c.df("%s", c.identType(x.Name(), false, true))
+				c.typeAlias = true
+				return false
 			}
-			if arr == 1 || arr == 0 {
-				if c.arrayLen.Last() == -1 || arr == 0 {
-					c.df("%s", c.identType(x.Name(), arr > 0, false))
-				} else {
-					c.df("%s/*%d*/", c.identType(x.Name(), arr > 0, false), c.arrayLen.Last())
-				}
-			} else {
-
-				b := GetWriter()
-				for _, i := range c.arrayLen[:arr-1] {
-					if i == -1 {
-						b.Format("Array<")
-					} else {
-						b.Format("Array</*%d*/", i)
-					}
-				}
-				arr--
-				c.df("%s%s%s", b.String(), c.identType(x.Name(), true, false), strings.Repeat(">", arr))
-				b.Free()
+			arr := c.arrayLen.Last()
+			switch arr {
+			case 0:
+				c.df("%s", c.identType(x.Name(), false, c.extending.Last()))
+			case -1:
+				c.df("%s", c.identType(x.Name(), true, c.extending.Last()))
+			default:
+				c.df("%s/*%d*/", c.identType(x.Name(), false, c.extending.Last()), arr)
 			}
-			c.arrayed = c.path.Len() + 1 //!! KBasic push after process
 		case EXT:
 			defer c.Exit(KBasic, I.TypePath, seen)
 			if I.LNth(2) == KMMapKey {
@@ -312,71 +350,171 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 		}
 		return true
 	},
-	FnVisitTypeMap: func(I InspectorX, d Dir, o types.Object, x *types.Map, seen Types, c *context) bool {
+	FnVisitTypeMap: func(I InspectorX, d Dir, o types.Object, x *types.Map, seen *Types, c *context) bool {
 		switch d {
 		case ENT:
 			defer c.Enter(KMap, I.TypePath, seen)
-			if c.isTypeDefine(KMap, seen) {
+			switch {
+			case I.Equals(KTType, KNamed, KMap) || I.Equals(KTType, KMap):
 				c.mapAlias = true
-				return true
+				c.extending.PushSitu(true)
+				c.subWriter(I.TypePath, x)
+			default:
+				c.extending.PushSitu(false)
+				c.subWriter(I.TypePath, x)
 			}
-			c.df("Record<")
-
 		case EXT:
 			defer c.Exit(KMap, I.TypePath, seen)
-			defer c.resetArrayed()
-			if c.mapAlias {
+			defer c.extending.PopSitu()
+			switch {
+			case c.mapAlias:
 				c.mapAlias = false
-				c.extends("Record<%s>", c.d.Buffer().String())
-				c.d.Buffer().Reset()
+				c.mergeWriter(I.TypePath, x, func(w Writer) {
+					c.use("map")
+					c.extends("map<%s>", w.String())
+				})
 				return true
+			default:
+				c.mergeWriter(I.TypePath, x, func(w Writer) {
+					c.use("map")
+					c.df("map<%s>", w.String())
+				})
 			}
-			c.df(">")
-
 		}
 		return true
 	},
-	FnVisitTypeArray: func(I InspectorX, d Dir, o types.Object, x *types.Array, seen Types, c *context) bool {
+	FnVisitTypeArray: func(I InspectorX, d Dir, o types.Object, x *types.Array, seen *Types, c *context) bool {
 		switch d {
 		case ENT:
 			defer c.Enter(KArray, I.TypePath, seen)
-			(&c.arrayLen).PushSitu(x.Len())
+			c.arrayLen.PushSitu(x.Len())
+			if I.Equals(KTType, KNamed, KArray) || I.Equals(KTType, KArray) {
+				c.extending.PushSitu(true)
+			}
+			c.subWriter(I.TypePath, x)
 		case EXT:
 			defer c.Exit(KArray, I.TypePath, seen)
-			(&c.arrayLen).PopSitu()
-			if c.arrayed > 0 && c.arrayed >= c.path.Len() {
-				return true
+			defer c.arrayLen.PopSitu()
+			switch {
+			case I.Equals(KTType, KNamed, KArray) || I.Equals(KTType, KArray):
+				c.mergeWriter(I.TypePath, x, func(w Writer) {
+					if c.path.Last() == KBasic {
+						c.extends("%s", w.String())
+					} else {
+						c.extends("Array<%s/*%d*/>", w.String(), x.Len())
+					}
+				})
+				c.extending.PopSitu()
+			case c.extending.Last():
+				c.mergeWriter(I.TypePath, x, func(w Writer) {
+					if c.path.Last() == KBasic {
+						c.df("%s", w.String())
+					} else {
+						c.df("Array<%s/*%d*/>", w.String(), x.Len())
+					}
+				})
+			default:
+				c.mergeWriter(I.TypePath, x, func(w Writer) {
+					if c.path.Last() == KBasic {
+						c.df("%s", w.String())
+					} else {
+						c.df("%s[/*%d*/]", w.String(), x.Len())
+					}
+				})
 			}
-			c.df("[/*%d*/]", x.Len())
-
 		}
 		return true
 	},
-	FnVisitTypeStruct: func(I InspectorX, d Dir, o types.Object, x *types.Struct, seen Types, c *context) bool {
+	FnVisitTypeStruct: func(I InspectorX, d Dir, o types.Object, x *types.Struct, seen *Types, c *context) bool {
 		switch d {
 		case ENT:
 			defer c.Enter(KStruct, I.TypePath, seen)
 			switch {
+			//!! embedded (first level)
+			case c.field != "" && I.StartWith(KTType, KNamed, KStruct, KMField) && I.EndWith(KStruct) && I.Len() == 6:
+				if x.NumFields() == 0 {
+					return false
+				}
+				c.buf(c.field)
+				c.field = ""
+				c.subWriter(I.TypePath, x)
+				c.di()
+			//!! embedded (more level)
+			case c.field != "" && c.buffed.Len() > 0:
+				if x.NumFields() == 0 {
+					return false
+				}
+				c.buf(c.field)
+				c.field = ""
+				c.subWriter(I.TypePath, x)
+				c.di()
+			//!! define
+			case I.Equals(KTType, KNamed, KStruct):
+				if x.NumFields() == 0 {
+					c.use("Alias")
+					c.use("Nothing")
+					c.extends("Alias<Nothing>")
+					return false
+				}
+				c.subWriter(I.TypePath, x)
+				c.di()
+				//!! anonymous empty struct
+			//!! anonymous nothing struct without sub-writer
 			case x.NumFields() == 0:
 				c.use("Nothing")
-				if c.path.Len() <= 2 {
-					c.use("Alias")
-					c.extends("Alias<Nothing>")
-				} else {
-					c.df("Nothing")
-				}
-
+				c.df("Nothing")
+				return false
+			default:
+				c.subWriter(I.TypePath, x)
 			}
 		case EXT:
 			defer c.Exit(KStruct, I.TypePath, seen)
 			switch {
-			case c.isTypeDefineExit(KStruct, seen):
+			//!! anonymous nothing struct, without sub-writer
+			case x.NumFields() == 0:
+
+			//!! embedded first level
+			case c.field == "" && I.StartWith(KTType, KNamed, KStruct, KMField) && I.EndWith(KStruct) && I.Len() == 6:
+				c.field = c.unBuf().(string)
+				c.mergeWriter(I.TypePath, x, func(w Writer) {
+					if !w.NotEmpty() { // ** ignore if nothing
+						return
+					}
+					c.use("Struct")
+					if c.path.Last() == KArray || c.path.Last() == KSlice {
+						x := w.String()
+						c.df("Struct<{").dn().df("%s", x[:len(x)-2]).dn().df("}>[]")
+					} else {
+						c.df("Struct<{").dn().df("%s", w.String()).dn().df("}>")
+					}
+				})
+			//!! embedded more level
+			case c.field == "" && c.buffed.Len() > 1:
+				c.field = c.unBuf().(string)
+				c.mergeWriter(I.TypePath, x, func(w Writer) {
+					if !w.NotEmpty() { // ** ignore if nothing
+						return
+					}
+					c.use("Struct")
+					if c.path.Last() == KArray || c.path.Last() == KSlice {
+						x := w.String()
+						c.df("Struct<{").dn().df("%s", x[:len(x)-2]).dn().df("}>[]")
+					} else {
+						c.df("Struct<{").dn().df("%s", w.String()).dn().df("}>")
+					}
+
+				})
+			//!! define
+			case I.Equals(KTType, KNamed, KStruct):
 				switch {
 				case strings.Contains(c.name, "Err"):
 					c.use("Struct")
 					c.extends("Struct<%s>", c.name)
 					c.extends("Error")
 					c.isStruct = true
+					c.mergeWriter(I.TypePath, x, func(w Writer) {
+						c.df("%s", w.String())
+					})
 				default:
 					c.use("Struct")
 					c.extends("Struct<%s>", c.name)
@@ -389,18 +527,24 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 						} else {
 							name := fmt.Sprintf("%s.%s", face.Pkg.Name(), face.Name)
 							if !c.extended.Exists(name) && !c.ignored(face.Pkg) {
-								c.imported(face.Pkg.Path())
+								c.imported(face.Pkg, face.Pkg.Name())
 								c.extends(name)
 							}
 						}
 					}
+					c.mergeWriter(I.TypePath, x, func(w Writer) {
+						c.df("%s", w.String())
+					})
 				}
+			default:
+				c.mergeWriter(I.TypePath, x, func(w Writer) {
+					c.d.Append(w)
+				})
 			}
 		}
 		return true
 	},
-	FnVisitTypeUnion: func(I InspectorX, d Dir, o types.Object, x *types.Union, seen Types, c *context) bool {
-
+	FnVisitTypeUnion: func(I InspectorX, d Dir, o types.Object, x *types.Union, seen *Types, c *context) bool {
 		switch d {
 		case ENT:
 			defer c.Enter(KUnion, I.TypePath, seen)
@@ -411,36 +555,38 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 		}
 		return true
 	},
-	FnVisitTypeSignature: func(I InspectorX, d Dir, o types.Object, x *types.Signature, seen Types, c *context) bool {
+	FnVisitTypeSignature: func(I InspectorX, d Dir, o types.Object, x *types.Signature, seen *Types, c *context) bool {
 		switch d {
 		case ENT:
 			defer c.Enter(KSignature, I.TypePath, seen)
 			c.variadic = c.variadic.Push(x.Variadic())
-			if c.isTypeDefine(KSignature, seen) {
-				c.funcAlias = true
-				return true
+			if I.Equals(KTType, KNamed, KFunc, KSignature) || I.Equals(KTType, KNamed, KSignature) {
+				c.funcAlias = true //!! not need Extending for function
 			}
-
+			c.subWriter(I.TypePath, x)
 		case EXT:
 			defer c.Exit(KSignature, I.TypePath, seen)
 			c.variadic, _ = c.variadic.Pop()
 			if c.funcAlias {
 				c.funcAlias = false
 				c.use("Alias")
-				c.extends("Alias<%s>", c.d.String())
-				c.d.Reset()
+				c.mergeWriter(I.TypePath, x, func(w Writer) {
+					c.extends("Alias<%s>", w.String())
+				})
 				return true
 			}
+			c.mergeWriter(I.TypePath, x, func(w Writer) {
+				c.df(w.String())
+			})
 			//!! check error
 			if c.method == "Error" || c.method == "Close" {
 				return true
 			}
 			c.checkErrorResult()
-
 		}
 		return true
 	},
-	FnVisitTypeParam: func(I InspectorX, d Dir, o types.Object, x *types.TypeParam, seen Types, c *context) bool {
+	FnVisitTypeParam: func(I InspectorX, d Dir, o types.Object, x *types.TypeParam, seen *Types, c *context) bool {
 		switch d {
 		case ENT:
 			defer c.Enter(KTypeParam, I.TypePath, seen)
@@ -451,64 +597,93 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 		}
 		return true
 	},
-	FnVisitTypePointer: func(I InspectorX, d Dir, o types.Object, x *types.Pointer, seen Types, c *context) bool {
+	FnVisitTypePointer: func(I InspectorX, d Dir, o types.Object, x *types.Pointer, seen *Types, c *context) bool {
 		switch d {
 		case ENT:
 			defer c.Enter(KPointer, I.TypePath, seen)
-			if c.isTypeDefine(KPointer, seen) {
-				c.use("Ref")
-				c.df("Ref<")
-				return true
+			switch {
+			//!! extends
+			case I.Equals(KTType, KNamed, KPointer):
+				c.extending.PushSitu(true)
+			default:
 			}
-			c.use("Ref")
-			c.df("Ref<")
+			c.subWriter(I.TypePath, x)
 		case EXT:
 			defer c.Exit(KPointer, I.TypePath, seen)
-			defer c.resetArrayed()
-			c.df(">")
-			if c.isTypeDefine(KPointer, seen) && !c.IsConstOrVar() {
-				c.extends(c.d.Buffer().String())
-				c.d.Reset()
+			switch {
+			case I.Equals(KTType, KNamed, KPointer):
+				c.extending.PopSitu()
+				c.mergeWriter(I.TypePath, x, func(w Writer) {
+					c.use("Ref")
+					c.extends("Ref<%s>", w.String())
+				})
+			default:
+				c.mergeWriter(I.TypePath, x, func(w Writer) {
+					c.use("Ref")
+					c.df("Ref<%s>", w.String())
+				})
 			}
-
 		}
 		return true
 	},
-	FnVisitTypeSlice: func(I InspectorX, d Dir, o types.Object, x *types.Slice, seen Types, c *context) bool {
+	FnVisitTypeSlice: func(I InspectorX, d Dir, o types.Object, x *types.Slice, seen *Types, c *context) bool {
 		switch d {
 		case ENT:
 			defer c.Enter(KSlice, I.TypePath, seen)
-			(&c.arrayLen).PushSitu(-1)
+			defer c.arrayLen.PushSitu(-1)
+			if I.Equals(KTType, KNamed, KSlice) || I.Equals(KTType, KSlice) {
+				c.extending.PushSitu(true)
+			}
+			c.subWriter(I.TypePath, x)
 		case EXT:
 			defer c.Exit(KSlice, I.TypePath, seen)
-			(&c.arrayLen).PopSitu()
-			if c.arrayed > 0 && (c.arrayed >= c.path.Len() || c.path.Last() == KBasic) {
-				return true
+			defer c.arrayLen.PopSitu()
+			switch {
+			case I.Equals(KTType, KNamed, KSlice) || I.Equals(KTType, KSlice):
+				c.mergeWriter(I.TypePath, x, func(w Writer) {
+					if c.path.Last() == KBasic {
+						c.extends("%s", w.String())
+					} else {
+						c.extends("Array<%s>", w.String())
+					}
+				})
+				c.extending.PopSitu()
+			case c.extending.Last():
+				c.mergeWriter(I.TypePath, x, func(w Writer) {
+					if c.path.Last() == KBasic {
+						c.df("%s", w.String())
+					} else {
+						c.df("Array<%s>", w.String())
+					}
+				})
+			default:
+				c.mergeWriter(I.TypePath, x, func(w Writer) {
+					if c.path.Last() == KBasic {
+						c.df("%s", w.String())
+					} else {
+						c.df("%s[]", w.String())
+					}
+				})
 			}
-			if c.isTypeDefineExit(KSlice, seen) {
-				c.extends("Array<%s>", c.d.String())
-				c.d.Reset()
-			} else {
-				c.df("[]")
-			}
-
 		}
 		return true
 	},
-	FnVisitTypeInterface: func(I InspectorX, d Dir, o types.Object, x *types.Interface, seen Types, c *context) bool {
+	FnVisitTypeInterface: func(I InspectorX, d Dir, o types.Object, x *types.Interface, seen *Types, c *context) bool {
 		switch d {
 		case ENT:
 			defer c.Enter(KInterface, I.TypePath, seen)
 			switch {
-			case c.isTypeDefine(KInterface, seen):
+			//!! declared
+			case I.Equals(KTType, KNamed, KInterface) || I.Equals(KTType, KInterface):
 				c.isStruct = false
+				if x.NumMethods() == 0 && x.NumEmbeddeds() == 0 {
+					return false
+				}
 				return true
-			case c.isTypeExtend(KInterface, seen):
+			//!! alias
+			case I.Len() == 3 && I.LNth(2) == KNamed:
 				c.use("Proto")
 				c.extends("Proto<%s>", c.name)
-				if x.NumMethods() == 0 {
-					c.df("any") //!! any == interface{}
-				}
 				return false
 			default:
 				if x.NumMethods() == 0 {
@@ -520,37 +695,38 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 		}
 		return true
 	},
-	FnVisitTypeChan: func(I InspectorX, d Dir, o types.Object, x *types.Chan, seen Types, c *context) bool {
+	FnVisitTypeChan: func(I InspectorX, d Dir, o types.Object, x *types.Chan, seen *Types, c *context) bool {
 		switch d {
 		case ENT:
 			defer c.Enter(KChan, I.TypePath, seen)
-			c.imported("go")
-			switch x.Dir() {
-			case types.SendOnly:
-				c.df("go.ChanSend<")
-			case types.RecvOnly:
-				c.df("go.ChanRecv<")
-			default:
-				c.df("go.Chan<")
-			}
-
+			c.subWriter(I.TypePath, x)
 		case EXT:
 			defer c.Exit(KChan, I.TypePath, seen)
-			defer c.resetArrayed()
-			c.df(">")
-
+			c.mergeWriter(I.TypePath, x, func(w Writer) {
+				c.imported(nil, "go")
+				switch x.Dir() {
+				case types.SendOnly:
+					c.df("go.ChanSend<%s>", w.String())
+				case types.RecvOnly:
+					c.df("go.ChanRecv<%s>", w.String())
+				default:
+					c.df("go.Chan<%s>", w.String())
+				}
+			})
 		}
 		return true
 	},
-	FnVisitTypeNamed: func(I InspectorX, d Dir, o types.Object, x *types.Named, seen Types, c *context) bool {
+	FnVisitTypeNamed: func(I InspectorX, d Dir, o types.Object, x *types.Named, seen *Types, c *context) bool {
+		name := x.Obj().Name()
 		switch d {
 		case ENT:
-			name := x.Obj().Name()
 			defer c.Enter(KNamed, I.TypePath, seen)
 			switch {
-			case c.path.Len() == 1 && c.name == name && x.Obj().Pkg() == c.pkg.Types: //!! typeDefine
+			//!! typeDefine
+			case c.path.Len() == 1 && c.name == name && x.Obj().Pkg() == c.pkg.Types:
 				return true
-			case c.path.Len() == 1: //!! first alias
+			//!! first alias
+			case c.path.Len() == 1:
 				if c.ignored(x.Obj().Pkg()) {
 					c.ignore = true
 					return false
@@ -558,26 +734,56 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 				c.typeAlias = true
 				c.decodeNamed(I, x, c.df)
 				return false
-			case c.IsType() && I.LNth(2) == KMEmbedded: //!! embedded for interface
+			//!! embedded for interface
+			case I.First() == KTType && I.LNth(2) == KMEmbedded:
 				if c.ignored(x.Obj().Pkg()) {
 					c.ignore = true
 					return false
 				}
 				c.decodeNamed(I, x, c.extends)
 				return false
-			default:
-				if c.ignored(x.Obj().Pkg()) {
+			//!! unexported
+			case name != "error" && !ast.IsExported(name):
+				switch {
+				case I.LastIndex(KSignature) > 3 || I.StartWith(KTType, KSignature) || I.StartWith(KTType, KNamed, KSignature):
+					c.use("reserved")
+					c.df("reserved")
+					return false
+				//!! field with unexported but with exported methods
+				case I.Len() <= 7 && c.field != "" && c.method == "" && x.NumMethods() > 0:
+					c.subWriter(I.TypePath, x)
+					return true
+				default:
 					c.ignore = true
 					return false
 				}
+			case c.ignored(x.Obj().Pkg()):
+				c.ignore = true
+				return false
+			default:
 				c.decodeNamed(I, x, c.df)
 				return false
+
+			}
+		case ONC:
+			switch {
+			//!! alias
+			case I.Len() == 2 && I.First() == KTType && c.path.Last() == KBasic:
+				c.extends("%s", c.d.String())
+				c.d.Reset()
 			}
 		case EXT:
 			defer c.Exit(KNamed, I.TypePath, seen)
-			defer c.resetArrayed()
-			if !c.ignore && I.LNth(2) == KMMapKey {
-				c.df(",")
+			if !c.ignore {
+				switch {
+				//!! field with unexported struct but with exported methods
+				case I.Len() <= 7 && name != "error" && !ast.IsExported(name) && c.method == "" && c.field != "" && x.NumMethods() > 0:
+					c.mergeWriter(I.TypePath, x, func(w Writer) {
+						c.df("{").dn().df("%s", w.String()).dn().df("}")
+					})
+				case I.LNth(2) == KMMapKey:
+					c.df(",")
+				}
 			}
 
 		}
@@ -585,9 +791,16 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 	},
 }
 
-type Bool = Stack[bool]
-type Int = Stack[int]
-type Int64 = Stack[int64]
+type Bool = fn.Stack[bool]
+type Writers = fn.StackAny[WriterInfo]
+type WriterInfo struct {
+	path   fn.Stack[TypeKind]
+	writer Writer
+	types  types.Type
+}
+type Any = fn.Stack[any]
+type Int = fn.Stack[int]
+type Int64 = fn.Stack[int64]
 type state struct {
 	path   TypePath
 	name   string
@@ -601,104 +814,102 @@ type state struct {
 	generic   bool
 	isStruct  bool
 	ignore    bool // some part of current field type or method types have ignored
-
-	arrayed  int
-	arrayLen Int64
-	variadic Bool
-	pc       Int
-	tmp      Stack[Writer]
+	buffed    Any
+	arrayLen  Int64
+	variadic  Bool
+	extending Bool
+	pc        Int
+	tmp       Writers
 }
 
-func (s *state) reset() {
-	s.path.CleanSitu()
-	s.name = ""
-	s.method = ""
-	s.field = ""
-	s.param = ""
-
-	s.typeAlias = false
-	s.funcAlias = false
-	s.mapAlias = false
-	s.generic = false
-	s.isStruct = false
-	s.ignore = false
-
-	s.arrayed = 0
-	s.arrayLen.CleanSitu()
-	s.variadic.CleanSitu()
-	s.pc.CleanSitu()
-	s.tmp.CleanSitu()
-
-}
-func (s *state) resetArrayed() {
-	if s.arrayed >= s.path.Len() {
-		s.arrayed = 0
+func (c *state) buf(v any) {
+	if c.buffed == nil {
+		c.buffed = fn.Stack[any]{}
 	}
+	c.buffed.PushSitu(v)
 }
-func (s *state) pcsub() {
-	if s.pc.Empty() {
+func (c *state) unBuf() any {
+	if c.buffed.Len() == 0 {
+		panic("empty buffered")
+	}
+	return c.buffed.PopSitu()
+}
+func (c *state) reset() {
+	c.path.CleanSitu()
+	c.name = ""
+	c.method = ""
+	c.field = ""
+	c.param = ""
+
+	c.typeAlias = false
+	c.funcAlias = false
+	c.mapAlias = false
+	c.generic = false
+	c.isStruct = false
+	c.ignore = false
+
+	c.buffed.CleanSitu()
+	c.arrayLen.CleanSitu()
+	c.extending.CleanSitu()
+	c.variadic.CleanSitu()
+	c.pc.CleanSitu()
+	c.tmp.CleanSitu()
+
+}
+
+/*
+	func (s *state) resetArrayed() {
+		if s.arrayed >= s.path.Len() {
+			s.arrayed = 0
+		}
+	}
+*/
+func (c *state) pcsub() {
+	if c.pc.Empty() {
 		return
 	}
-	s.pc[s.pc.MaxIdx()]--
+	c.pc[c.pc.MaxIdx()]--
 }
-func (s *state) IsConstOrVar() bool {
-	f := s.path.First()
-	return f == KTVar || f == KTConst
-}
-func (s *state) IsConst() bool {
-	return s.path.First() == KTConst
-}
-func (s *state) IsFunc() bool {
-	return s.path.First() == KTFunc
-}
-func (s *state) IsVar() bool {
-	return s.path.First() == KTVar
-}
-func (s *state) IsType() bool {
-	return s.path.First() == KTType
-}
-func (s *state) isTypeDefine(k TypeKind, seen Types) bool {
-	return s.IsType() &&
-		((k == KNamed && s.path.Len() == 2) ||
-			(k == KStruct && s.path.Len() == 2) ||
-			(k == KInterface && s.path.Len() == 2) ||
-			(s.path.Len() == 2 && s.path.Last() == KNamed) ||
-			(k == KBasic && s.path.Len() > 2 && !slices.ContainsFunc(s.path[2:], func(kind TypeKind) bool {
-				return kind != KSlice && kind != KArray
-			})))
-}
-func (s *state) isTypeExtend(k TypeKind, seen Types) bool {
-	return s.IsType() &&
-		((k == KNamed && s.path.Len() == 3) ||
-			(k == KStruct && s.path.Len() == 3) ||
-			(k == KInterface && s.path.Len() == 3))
-}
-func (s *state) isTypeDefineExit(k TypeKind, seen Types) bool {
-	return s.IsType() &&
-		((k == KNamed && s.path.Len() == 2) ||
-			(k == KSlice && s.path.Len() == 3) ||
-			(k == KStruct && s.path.Len() == 3))
 
-}
-func (s *state) Enter(k TypeKind, path TypePath, seen Types) {
+func (c *state) Enter(k TypeKind, path TypePath, seen *Types) {
 	if debug {
-		log.Printf("ENTER[%s]\t%s:%s[%d]\tΔ%v\tΔ%v", k, s.name, anyOf(s.field, s.method, s.param), s.pc.Last(), path, s.path)
+		log.Printf("ENTER[%s]\t%s:%s[%d]\tΔ%v\tΔ%v", k, c.name, anyOf(c.field, c.method, c.param), c.pc.Last(), path, c.path)
 	}
-
-	(&s.path).PushSitu(k)
+	switch k {
+	case KSlice, KArray:
+	default:
+		c.arrayLen.Push(0)
+	}
+	c.path.PushSitu(k)
 
 }
-func (s *state) Exit(k TypeKind, path TypePath, seen Types) {
+func (c *state) Exit(k TypeKind, path TypePath, seen *Types) {
 	if debug {
-		log.Printf("EXIT[%s]\t%s:%s[%d]\tΔ%v\tΔ%v", k, s.name, anyOf(s.field, s.method, s.param), s.pc.Last(), path, s.path)
+		log.Printf("EXIT[%s]\t%s:%s[%d]\tΔ%v\tΔ%v", k, c.name, anyOf(c.field, c.method, c.param), c.pc.Last(), path, c.path)
 	}
-	//!! remove children
-	kx := s.path.LastIndex(k)
-	if kx == -1 {
-		return
+	if c.tmp.Len() > 0 && c.tmp.Last().path.Equals(path...) {
+		panic(fmt.Errorf("not reset writer %s", path))
 	}
-	s.path = s.path[:kx]
-
+	switch k {
+	case KVar, KMap, KTuple, KFunc, KSignature, KSlice, KPointer, KArray: //!! branch clean
+		if path.Len() > 2 {
+			kx := c.path.LastIndex(k)
+			if kx == -1 {
+				return
+			}
+			c.path = c.path[:kx]
+		}
+	default:
+		if path.Len() < 3 {
+			//!! remove children branch
+			kx := c.path.LastIndex(k)
+			if kx == -1 {
+				return
+			}
+			c.path = c.path[:kx]
+		}
+	}
+	c.arrayLen.PopSitu()
 }
 
 type context struct {
@@ -711,7 +922,7 @@ type context struct {
 	Variables     map[string]*types.Var
 	pkg           *packages.Package
 	uses          fn.HashSet[string]
-	imports       fn.HashSet[string]
+	imports       fn.HashSet[Imported]
 	entry         map[string]string
 	overrideEntry map[string]string
 	wrapper       Writer
@@ -721,28 +932,50 @@ type context struct {
 	FnTypeVisitor[*TypeInspector[*context], *context]
 
 	state
-	errors  bool //reduce function end with error
+	errors  bool //reduce function end subWriter error
 	ignores []string
 }
-
-func (c *context) useTmpWriter() {
-	if c.tmp != nil {
-		panic("already have temp writer")
-	}
-	c.tmp.PushSitu(c.d)
-	c.d = GetWriter()
+type Imported struct {
+	Pkg  *types.Package
+	Name string
 }
-func (c *context) freeTmpWriter(act func(Writer)) {
+
+func (c *context) subWriter(path TypePath, t types.Type) {
+	if debug {
+		log.Printf("acquire tmp writers: %d", c.tmp.Len())
+	}
 	if c.tmp == nil {
+		c.tmp = fn.StackAny[WriterInfo]{}
+	}
+	n := c.d.Indents()
+	if c.tmp.Len() > 0 && (path.Len() <= c.tmp.Last().path.Len() || !path.StartWith(c.tmp.Last().path...)) {
+		panic(fmt.Errorf("miss push writer: %s vs %s", path, c.tmp.Last().path))
+	}
+	c.tmp.PushSitu(WriterInfo{
+		path:   slices.Clone(path),
+		types:  t,
+		writer: c.d,
+	})
+	c.d = GetWriter()
+	c.d.Indent(n)
+}
+func (c *context) mergeWriter(path TypePath, types types.Type, act func(w Writer)) {
+	if debug {
+		log.Printf("free tmp writers: %d", c.tmp.Len())
+	}
+	if c.tmp.Len() == 0 {
 		panic("not have temp writer")
 	}
 	t := c.d
-	c.d = c.tmp.PopSitu()
-	c.tmp = nil
+	x := c.tmp.PopSitu()
+	if x.types != types || !x.path.Equals(path...) {
+		panic("miss remove writer")
+	}
+	c.d = x.writer
 	if act != nil {
 		act(t)
 	}
-	t.Free()
+	t.Release()
 }
 func (c *context) decodeNamed(i InspectorX, x *types.Named, f func(string, ...any) *context) bool {
 	if x.Obj().Exported() || x.Obj().Name() == "error" {
@@ -757,7 +990,7 @@ func (c *context) decodeNamed(i InspectorX, x *types.Named, f func(string, ...an
 		} else if x.Obj().Pkg().Path() == c.pkg.Types.Path() {
 			f("%s", x.Obj().Name())
 		} else {
-			c.imported(x.Obj().Pkg().Path())
+			c.imported(x.Obj().Pkg(), x.Obj().Pkg().Name())
 			f("%s.%s", x.Obj().Pkg().Name(), x.Obj().Name())
 		}
 		return true
@@ -789,6 +1022,25 @@ func (c *context) decodeNamed(i InspectorX, x *types.Named, f func(string, ...an
 }
 
 func (c *context) init() {
+	c.state = state{
+		path:      TypePath{},
+		name:      "",
+		method:    "",
+		field:     "",
+		param:     "",
+		typeAlias: false,
+		funcAlias: false,
+		mapAlias:  false,
+		generic:   false,
+		isStruct:  false,
+		ignore:    false,
+		buffed:    Any{},
+		arrayLen:  Int64{},
+		extending: Bool{},
+		variadic:  Bool{},
+		pc:        Int{},
+		tmp:       Writers{},
+	}
 	c.Functions = map[string]*types.Func{}
 	c.Structs = map[string]*types.TypeName{}
 	c.Interfaces = map[string]*types.TypeName{}
@@ -798,14 +1050,14 @@ func (c *context) init() {
 	c.Variables = map[string]*types.Var{}
 
 	c.uses = fn.HashSet[string]{}
-	c.imports = fn.HashSet[string]{}
+	c.imports = fn.HashSet[Imported]{}
 	c.extended = fn.HashSet[string]{}
 	c.entry = map[string]string{}
 	c.overrideEntry = map[string]string{}
 	c.wrapper = GetWriter()
 	c.m = GetWriter()
 	c.d = GetWriter()
-
+	c.m.Indent(1)
 	c.FnTypeVisitor = ctxVisitor
 }
 func (c *context) identType(s string, array, ext bool) string {
@@ -891,8 +1143,11 @@ func (c *context) identType(s string, array, ext bool) string {
 	}
 }
 
-func (c *context) imported(s string) {
-	c.imports.Add(s)
+func (c *context) imported(pkg *types.Package, s string) {
+	c.imports.Add(Imported{
+		Pkg:  pkg,
+		Name: s,
+	})
 }
 
 func (c *context) addEntry(name string, format string, args ...any) {
@@ -912,33 +1167,41 @@ func (c *context) extends(format string, args ...any) *context {
 	c.extended.Add(fmt.Sprintf(format, args...))
 	return c
 }
-func (c *context) di(n int) *context {
-	c.d.Indent(n)
+
+func (c *context) di() *context {
+	c.d.Indent(c.d.Indents() + 1)
+	return c
+}
+func (c *context) dd() *context {
+	c.d.Indent(c.d.Indents() - 1)
+	return c
+}
+func (c *context) dn() *context {
+	c.d.IndLF()
+	return c
+}
+func (c *context) dl() *context {
+	c.d.LF()
 	return c
 }
 func (c *context) df(format string, args ...any) *context {
 	c.d.Format(format, args...)
 	return c
 }
-func (c *context) mi(n int) *context {
-	c.m.Indent(n)
-	return c
-}
+
 func (c *context) mf(s string, args ...any) *context {
 	c.m.Format(s, args...)
 	return c
 }
 
-func (c *context) dn() *context {
-	c.d.LF()
-
-	return c
-}
 func (c *context) mn() *context {
 	c.m.LF()
 	return c
 }
-
+func (c *context) mind() *context {
+	c.m.IndLF()
+	return c
+}
 func (c *context) reset() {
 	c.state.reset()
 	c.extended.Clear()
@@ -953,7 +1216,7 @@ func (c *context) faceIntercept() {
 		if c.pkg.Types.Name() == "io" {
 			c.extends("Closer")
 		} else {
-			c.imported("io")
+			c.imported(nil, "io")
 			c.extends("io.Closer")
 		}
 	}
@@ -1030,7 +1293,7 @@ func (c *context) checkErrorResult() {
 }
 func (c *context) flush(g *Generator) (err error) {
 	x := GetWriter()
-	defer x.Free()
+	defer x.Release()
 	module := ""
 	cond := ""
 	if g.suffix != "" {
@@ -1045,7 +1308,7 @@ func (c *context) flush(g *Generator) (err error) {
 	dts := strings.Join(fn.SliceMapping(strings.Split(strings.ReplaceAll(c.pkg.Types.Path(), ".", "/"), "/"), strings.ToLower), "_") + cond + ".d.ts"
 	mod := dts[:len(dts)-5] + ".go"
 	modTest := dts[:len(dts)-5] + "_test.go"
-	goMod := strings.Join(fn.SliceMapping(strings.Split(strings.ReplaceAll(c.pkg.Types.Path(), ".", "/"), "/"), PascalCase), "")
+	goMod := strings.Join(fn.SliceMapping(strings.Split(strings.ReplaceAll(strings.ReplaceAll(c.pkg.Types.Path(), "-", "/"), ".", "/"), "/"), PascalCase), "")
 	if cond != "" {
 		goMod += cond[1:]
 	}
@@ -1059,30 +1322,39 @@ func (c *context) flush(g *Generator) (err error) {
 		x.Format("// noinspection JSUnusedGlobalSymbols,SpellCheckingInspection").LF().
 			Format("// Code generated by define_gene; DO NOT EDIT.").LF().
 			Format("declare module '%s'{", module).LF()
+		x.Indent(1)
 		for s := range c.imports {
 			switch {
-			case strings.Contains(s, "."):
-				name := s
-				if i := strings.LastIndexByte(s, '/'); i >= 0 {
-					name = s[i+1:]
+			case strings.Contains(s.Name, ".") || (s.Pkg != nil && strings.Contains(s.Pkg.Path(), ".")):
+				path := s.Name
+				name := s.Name
+				if s.Pkg != nil {
+					path = s.Pkg.Path()
 				}
-				x.Indent(1).Format("// @ts-ignore").LF().
-					Indent(1).Format("import * as %s from '%s'", name, s).LF()
-			case s == "go":
-				x.Indent(1).Format("// @ts-ignore").LF().
-					Indent(1).Format("import * as go from 'go'").LF()
+				if i := strings.LastIndexByte(s.Name, '/'); i >= 0 {
+					name = s.Name[i+1:]
+				}
+				x.IndLF().Format("// @ts-ignore").
+					IndLF().Format("import * as %s from '%s'", name, path)
+			case s.Name == "go":
+				x.IndLF().Format("// @ts-ignore").
+					IndLF().Format("import * as go from 'go'")
 			default:
-				name := s
-				if i := strings.LastIndexByte(s, '/'); i >= 0 {
-					name = s[i+1:]
+				name := s.Name
+				path := s.Name
+				if s.Pkg != nil {
+					path = s.Pkg.Path()
 				}
-				x.Indent(1).Format("// @ts-ignore").LF().
-					Indent(1).Format("import * as %s from 'golang/%s'", name, s).LF()
+				if i := strings.LastIndexByte(name, '/'); i >= 0 {
+					name = name[i+1:]
+				}
+				x.IndLF().Format("// @ts-ignore").
+					IndLF().Format("import * as %s from 'golang/%s'", name, path)
 			}
 		}
 		if c.uses.Len() > 0 {
-			x.Indent(1).Format("// @ts-ignore").LF().
-				Indent(1).Format("import type {%s} from 'go'", strings.Join(c.uses.Values(), ",")).LF()
+			x.IndLF().Format("// @ts-ignore").
+				IndLF().Format("import type {%s} from 'go'", strings.Join(c.uses.Values(), ","))
 		}
 		x.Append(c.m)
 		//!! generate struct constructor
@@ -1090,12 +1362,13 @@ func (c *context) flush(g *Generator) (err error) {
 			if strings.HasSuffix(name, "Err") || strings.HasSuffix(name, "Error") || strings.HasPrefix(name, "Err") || strings.HasPrefix(name, "Error") {
 				continue
 			}
-			x.LF().Format("export function empty%s():%s", Safe(name), name)
-			x.LF().Format("export function ref%s():Ref<%s>", Safe(name), name)
-			x.LF().Format("export function refOf%s(x:%[2]s):Ref<%[2]s>", Safe(name), name)
+			x.IndLF().Format("export function empty%s():%s", Safe(name), name)
+			x.IndLF().Format("export function emptyRef%s():Ref<%s>", Safe(name), name)
+			x.IndLF().Format("export function refOf%s(x:%[2]s,v:Ref<%[2]s>)", Safe(name), name)
+			x.IndLF().Format("export function unRef%s(v:Ref<%[2]s>):%[2]s", Safe(name), name)
 		}
 		//!! generate TypeId
-		x.LF().Format("}").LF()
+		x.Format("\n}")
 		if g.print {
 			println(x.Buffer().String())
 		} else {
@@ -1106,7 +1379,9 @@ func (c *context) flush(g *Generator) (err error) {
 		}
 
 	}
+
 	var b []byte
+
 	//!! gen go source
 	{
 		x.Buffer().Reset()
@@ -1126,10 +1401,14 @@ import (
 	%[3]s
 	"%[2]s"`, pkg, pkgPath, maps)
 		for s := range c.imports {
-			if strings.ContainsRune(s, '.') {
-				x.LF().Format("_ \"github.com/ZenLiuCN/engine/modules/%s\"", strings.ReplaceAll(s, ".", "/"))
-			} else if s != "go" {
-				x.LF().Format("_ \"github.com/ZenLiuCN/engine/golang/%s\"", s)
+			name := s.Name
+			if s.Pkg != nil {
+				name = s.Pkg.Path()
+			}
+			if strings.ContainsRune(name, '.') {
+				x.LF().Format("_ \"github.com/ZenLiuCN/engine/modules/%s\"", strings.ReplaceAll(name, ".", "/"))
+			} else if name != "go" {
+				x.LF().Format("_ \"github.com/ZenLiuCN/engine/golang/%s\"", name)
 			}
 		}
 		x.Format(`
@@ -1146,9 +1425,10 @@ var (
 				continue
 			}
 			t := fmt.Sprintf("%s.%s", c.pkg.Types.Name(), name)
-			x.LF().Format("\"empty%s\":func() (v %[2]s){\n\treturn v\n},", Safe(name), t)
-			x.LF().Format("\"ref%s\":func() *%[2]s{ \n\t var x %[2]s\n\treturn &x\n},", Safe(name), t)
-			x.LF().Format("\"refOf%s\":func(x %[2]s) *%[2]s{ \n\treturn &x\n},", Safe(name), t)
+			x.LF().Format("\"empty%s\":engine.Empty[%[2]s],", Safe(name), t)
+			x.LF().Format("\"emptyRef%s\":engine.EmptyRefer[%[2]s],", Safe(name), t)
+			x.LF().Format("\"refOf%s\":engine.ReferOf[%[2]s],", Safe(name), t)
+			x.LF().Format("\"unRef%s\":engine.UnRefer[%[2]s],", Safe(name), t)
 		}
 		x.Format("\t}\n)")
 		x.Format(`
@@ -1195,6 +1475,7 @@ func (e %sModule) ExportsWithEngine(e *Engine) map[string]any{
 			}
 		}
 	}
+
 	//!! gen go test source
 	{
 		x.Reset()
@@ -1285,5 +1566,19 @@ func moduleNameCase(s string) string {
 	if len(s) <= 1 {
 		return s
 	}
+	for _, i2 := range s[1:] {
+		if i2 >= 48 && i2 <= 57 {
+			continue
+		}
+		goto x
+	}
+	return s
+x:
 	return CamelCase(s)
+}
+
+func assertEmpty(w Writer) {
+	if w.NotEmpty() {
+		panic("should empty of writer: " + w.String())
+	}
 }
