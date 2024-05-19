@@ -8,7 +8,7 @@ import (
 	_ "github.com/ZenLiuCN/engine/golang/context"
 	_ "github.com/ZenLiuCN/engine/golang/encoding/json"
 	_ "github.com/ZenLiuCN/engine/golang/fmt"
-	_ "github.com/ZenLiuCN/engine/modules/github/com/gogo/protobuf/proto"
+	//_ "github.com/ZenLiuCN/engine/modules/github/com/gogo/protobuf/proto"
 	_ "github.com/ZenLiuCN/engine/modules/github/com/larksuite/oapi-sdk-go/v3/core"
 	_ "github.com/ZenLiuCN/engine/modules/github/com/larksuite/oapi-sdk-go/v3/event/dispatcher"
 	"github.com/larksuite/oapi-sdk-go/v3/ws"

@@ -275,59 +275,6 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 		switch d {
 		case ENT:
 			defer c.Enter(KBasic, I.TypePath, seen)
-			//arr := c.arrayLen.LastIndex(0)
-			//len := c.arrayLen.Len() - arr
-			//switch {
-			//case I.Equals(KTType, KNamed, KBasic):
-			//	switch arr {
-			//	case 0, -1:
-			//		if c.arrayLen.Last() == -1 || len == 0 {
-			//			c.extends("%s", c.identType(x.Name(), len > 0, true))
-			//		} else {
-			//			c.extends("%s/*%d*/", c.identType(x.Name(), len > 0, true), c.arrayLen.Last())
-			//		}
-			//	default:
-			//		b := GetWriter()
-			//		for _, i := range c.arrayLen[arr:] {
-			//			if i == -1 {
-			//				b.Format("Array<")
-			//			} else {
-			//				b.Format("Array</*%d*/", i)
-			//			}
-			//		}
-			//		lst := c.arrayLen.Last()
-			//		s := ""
-			//		if lst > 0 {
-			//			s = fmt.Sprintf("/*%d*/", lst)
-			//		}
-			//		len--
-			//		c.extends("%s%s%s%s", b.String(), c.identType(x.Name(), true, true), s, strings.Repeat(">", len))
-			//		b.Release()
-			//	}
-			//	c.arrayed = c.path.Len() + 1 //!! KBasic push after process
-			//default:
-			//	switch arr {
-			//	case 0, -1:
-			//		if c.arrayLen.Last() == -1 || arr == -1 {
-			//			c.df("%s", c.identType(x.Name(), arr > -1, false))
-			//		} else {
-			//			c.df("%s/*%d*/", c.identType(x.Name(), arr > -1, false), c.arrayLen.Last())
-			//		}
-			//	default:
-			//		b := GetWriter()
-			//		for _, i := range c.arrayLen[arr:] {
-			//			if i == -1 {
-			//				b.Format("Array<")
-			//			} else {
-			//				b.Format("Array</*%d*/", i)
-			//			}
-			//		}
-			//		len--
-			//		c.df("%s%s%s", b.String(), c.identType(x.Name(), true, false), strings.Repeat(">", len))
-			//		b.Release()
-			//	}
-			//	c.arrayed = c.path.Len() + 1 //!! KBasic push after process
-			//}
 			if I.Equals(KTType, KBasic) {
 				c.df("%s", c.identType(x.Name(), false, true))
 				c.typeAlias = true
@@ -1113,6 +1060,10 @@ func (c *context) identType(s string, array, ext bool) string {
 			}
 			return "string[]"
 		} else {
+			if ext {
+				c.uses.Add("Alias")
+				return "Alias<string>"
+			}
 			return "string"
 		}
 	case "any":
