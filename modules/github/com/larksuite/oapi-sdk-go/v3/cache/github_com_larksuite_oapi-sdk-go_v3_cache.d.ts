@@ -5,7 +5,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/cache'{
 	// @ts-ignore
 	import * as time from 'golang/time'
 	// @ts-ignore
-	import type {Ref,Struct} from 'go'
+	import type {Struct,Ref} from 'go'
 	export interface Cache extends Struct<Cache>{
 
 			get(key:string):any

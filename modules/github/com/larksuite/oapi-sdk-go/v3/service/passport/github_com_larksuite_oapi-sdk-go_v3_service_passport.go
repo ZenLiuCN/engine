@@ -15,11 +15,7 @@ var (
 	GithubComLarksuiteOapiSdkGo3ServicePassportDefine   []byte
 	GithubComLarksuiteOapiSdkGo3ServicePassportDeclared = map[string]any{
 		"newService": passport.NewService,
-
-		"emptyService":    engine.Empty[passport.Service],
-		"emptyRefService": engine.EmptyRefer[passport.Service],
-		"refOfService":    engine.ReferOf[passport.Service],
-		"unRefService":    engine.UnRefer[passport.Service]}
+	}
 )
 
 func init() {

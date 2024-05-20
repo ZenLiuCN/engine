@@ -15,11 +15,7 @@ var (
 	GithubComLarksuiteOapiSdkGo3ServiceAdminDefine   []byte
 	GithubComLarksuiteOapiSdkGo3ServiceAdminDeclared = map[string]any{
 		"newService": admin.NewService,
-
-		"emptyService":    engine.Empty[admin.Service],
-		"emptyRefService": engine.EmptyRefer[admin.Service],
-		"refOfService":    engine.ReferOf[admin.Service],
-		"unRefService":    engine.UnRefer[admin.Service]}
+	}
 )
 
 func init() {

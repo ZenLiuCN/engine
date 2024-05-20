@@ -7,7 +7,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/event/v1'{
 	// @ts-ignore
 	import * as context from 'golang/context'
 	// @ts-ignore
-	import type {int,Ref,Struct,bool,error} from 'go'
+	import type {Ref,Struct,bool,error,int} from 'go'
 	export interface DepartmentId extends Struct<DepartmentId>{
 
 			departmentId:Ref<string>
@@ -62,22 +62,6 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/event/v1'{
 				listByIterator(ctx:context.Context,req:Ref<ListOutboundIpReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListOutboundIpIterator>
 			}>
 	}
-	export function emptyDepartmentIdBuilder():DepartmentIdBuilder
-	export function emptyRefDepartmentIdBuilder():Ref<DepartmentIdBuilder>
-	export function refOfDepartmentIdBuilder(x:DepartmentIdBuilder,v:Ref<DepartmentIdBuilder>)
-	export function unRefDepartmentIdBuilder(v:Ref<DepartmentIdBuilder>):DepartmentIdBuilder
-	export function emptyListOutboundIpIterator():ListOutboundIpIterator
-	export function emptyRefListOutboundIpIterator():Ref<ListOutboundIpIterator>
-	export function refOfListOutboundIpIterator(x:ListOutboundIpIterator,v:Ref<ListOutboundIpIterator>)
-	export function unRefListOutboundIpIterator(v:Ref<ListOutboundIpIterator>):ListOutboundIpIterator
-	export function emptyListOutboundIpReq():ListOutboundIpReq
-	export function emptyRefListOutboundIpReq():Ref<ListOutboundIpReq>
-	export function refOfListOutboundIpReq(x:ListOutboundIpReq,v:Ref<ListOutboundIpReq>)
-	export function unRefListOutboundIpReq(v:Ref<ListOutboundIpReq>):ListOutboundIpReq
-	export function emptyListOutboundIpReqBuilder():ListOutboundIpReqBuilder
-	export function emptyRefListOutboundIpReqBuilder():Ref<ListOutboundIpReqBuilder>
-	export function refOfListOutboundIpReqBuilder(x:ListOutboundIpReqBuilder,v:Ref<ListOutboundIpReqBuilder>)
-	export function unRefListOutboundIpReqBuilder(v:Ref<ListOutboundIpReqBuilder>):ListOutboundIpReqBuilder
 	export function emptyListOutboundIpResp():ListOutboundIpResp
 	export function emptyRefListOutboundIpResp():Ref<ListOutboundIpResp>
 	export function refOfListOutboundIpResp(x:ListOutboundIpResp,v:Ref<ListOutboundIpResp>)
@@ -94,4 +78,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/event/v1'{
 	export function emptyRefDepartmentId():Ref<DepartmentId>
 	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
 	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
+	export function emptyListOutboundIpIterator():ListOutboundIpIterator
+	export function emptyRefListOutboundIpIterator():Ref<ListOutboundIpIterator>
+	export function refOfListOutboundIpIterator(x:ListOutboundIpIterator,v:Ref<ListOutboundIpIterator>)
+	export function unRefListOutboundIpIterator(v:Ref<ListOutboundIpIterator>):ListOutboundIpIterator
+	export function emptyListOutboundIpReq():ListOutboundIpReq
+	export function emptyRefListOutboundIpReq():Ref<ListOutboundIpReq>
+	export function refOfListOutboundIpReq(x:ListOutboundIpReq,v:Ref<ListOutboundIpReq>)
+	export function unRefListOutboundIpReq(v:Ref<ListOutboundIpReq>):ListOutboundIpReq
 }

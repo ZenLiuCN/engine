@@ -99,52 +99,32 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/human_authentication
 				create(ctx:context.Context,req:Ref<CreateIdentityReq>,...options:larkcore.RequestOptionFunc[]):Ref<CreateIdentityResp>
 			}>
 	}
-	export function emptyCreateIdentityResp():CreateIdentityResp
-	export function emptyRefCreateIdentityResp():Ref<CreateIdentityResp>
-	export function refOfCreateIdentityResp(x:CreateIdentityResp,v:Ref<CreateIdentityResp>)
-	export function unRefCreateIdentityResp(v:Ref<CreateIdentityResp>):CreateIdentityResp
-	export function emptyDepartmentIdBuilder():DepartmentIdBuilder
-	export function emptyRefDepartmentIdBuilder():Ref<DepartmentIdBuilder>
-	export function refOfDepartmentIdBuilder(x:DepartmentIdBuilder,v:Ref<DepartmentIdBuilder>)
-	export function unRefDepartmentIdBuilder(v:Ref<DepartmentIdBuilder>):DepartmentIdBuilder
-	export function emptyIdentity():Identity
-	export function emptyRefIdentity():Ref<Identity>
-	export function refOfIdentity(x:Identity,v:Ref<Identity>)
-	export function unRefIdentity(v:Ref<Identity>):Identity
-	export function emptyIdentityBuilder():IdentityBuilder
-	export function emptyRefIdentityBuilder():Ref<IdentityBuilder>
-	export function refOfIdentityBuilder(x:IdentityBuilder,v:Ref<IdentityBuilder>)
-	export function unRefIdentityBuilder(v:Ref<IdentityBuilder>):IdentityBuilder
-	export function emptyV1():V1
-	export function emptyRefV1():Ref<V1>
-	export function refOfV1(x:V1,v:Ref<V1>)
-	export function unRefV1(v:Ref<V1>):V1
-	export function emptyCreateIdentityReqBuilder():CreateIdentityReqBuilder
-	export function emptyRefCreateIdentityReqBuilder():Ref<CreateIdentityReqBuilder>
-	export function refOfCreateIdentityReqBuilder(x:CreateIdentityReqBuilder,v:Ref<CreateIdentityReqBuilder>)
-	export function unRefCreateIdentityReqBuilder(v:Ref<CreateIdentityReqBuilder>):CreateIdentityReqBuilder
-	export function emptyCreateIdentityReq():CreateIdentityReq
-	export function emptyRefCreateIdentityReq():Ref<CreateIdentityReq>
-	export function refOfCreateIdentityReq(x:CreateIdentityReq,v:Ref<CreateIdentityReq>)
-	export function unRefCreateIdentityReq(v:Ref<CreateIdentityReq>):CreateIdentityReq
 	export function emptyCreateIdentityReqBody():CreateIdentityReqBody
 	export function emptyRefCreateIdentityReqBody():Ref<CreateIdentityReqBody>
 	export function refOfCreateIdentityReqBody(x:CreateIdentityReqBody,v:Ref<CreateIdentityReqBody>)
 	export function unRefCreateIdentityReqBody(v:Ref<CreateIdentityReqBody>):CreateIdentityReqBody
-	export function emptyCreateIdentityReqBodyBuilder():CreateIdentityReqBodyBuilder
-	export function emptyRefCreateIdentityReqBodyBuilder():Ref<CreateIdentityReqBodyBuilder>
-	export function refOfCreateIdentityReqBodyBuilder(x:CreateIdentityReqBodyBuilder,v:Ref<CreateIdentityReqBodyBuilder>)
-	export function unRefCreateIdentityReqBodyBuilder(v:Ref<CreateIdentityReqBodyBuilder>):CreateIdentityReqBodyBuilder
-	export function emptyCreateIdentityRespData():CreateIdentityRespData
-	export function emptyRefCreateIdentityRespData():Ref<CreateIdentityRespData>
-	export function refOfCreateIdentityRespData(x:CreateIdentityRespData,v:Ref<CreateIdentityRespData>)
-	export function unRefCreateIdentityRespData(v:Ref<CreateIdentityRespData>):CreateIdentityRespData
 	export function emptyDepartmentId():DepartmentId
 	export function emptyRefDepartmentId():Ref<DepartmentId>
 	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
 	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptyCreateIdentityPathReqBodyBuilder():CreateIdentityPathReqBodyBuilder
-	export function emptyRefCreateIdentityPathReqBodyBuilder():Ref<CreateIdentityPathReqBodyBuilder>
-	export function refOfCreateIdentityPathReqBodyBuilder(x:CreateIdentityPathReqBodyBuilder,v:Ref<CreateIdentityPathReqBodyBuilder>)
-	export function unRefCreateIdentityPathReqBodyBuilder(v:Ref<CreateIdentityPathReqBodyBuilder>):CreateIdentityPathReqBodyBuilder
+	export function emptyCreateIdentityReq():CreateIdentityReq
+	export function emptyRefCreateIdentityReq():Ref<CreateIdentityReq>
+	export function refOfCreateIdentityReq(x:CreateIdentityReq,v:Ref<CreateIdentityReq>)
+	export function unRefCreateIdentityReq(v:Ref<CreateIdentityReq>):CreateIdentityReq
+	export function emptyCreateIdentityResp():CreateIdentityResp
+	export function emptyRefCreateIdentityResp():Ref<CreateIdentityResp>
+	export function refOfCreateIdentityResp(x:CreateIdentityResp,v:Ref<CreateIdentityResp>)
+	export function unRefCreateIdentityResp(v:Ref<CreateIdentityResp>):CreateIdentityResp
+	export function emptyCreateIdentityRespData():CreateIdentityRespData
+	export function emptyRefCreateIdentityRespData():Ref<CreateIdentityRespData>
+	export function refOfCreateIdentityRespData(x:CreateIdentityRespData,v:Ref<CreateIdentityRespData>)
+	export function unRefCreateIdentityRespData(v:Ref<CreateIdentityRespData>):CreateIdentityRespData
+	export function emptyIdentity():Identity
+	export function emptyRefIdentity():Ref<Identity>
+	export function refOfIdentity(x:Identity,v:Ref<Identity>)
+	export function unRefIdentity(v:Ref<Identity>):Identity
+	export function emptyV1():V1
+	export function emptyRefV1():Ref<V1>
+	export function refOfV1(x:V1,v:Ref<V1>)
+	export function unRefV1(v:Ref<V1>):V1
 }

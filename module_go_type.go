@@ -10,6 +10,28 @@ func init() {
 	TypeAlias = map[TypeId]TypeId{}
 	RegisterType[[]rune]()
 	RegisterTypeAlias(rune(0), int32(0))
+	//TODO
+}
+
+type TypeUtil struct {
+	e *Engine
+}
+
+func (s *TypeUtil) UsageOf(t TypeId) TypeUse {
+	v, ok := TypeRegistry[t]
+	if ok {
+		v.e = s.e
+		return &v
+	}
+	if a, ok := TypeAlias[t]; ok {
+		v, ok = TypeRegistry[a]
+		if ok {
+			v.e = s.e
+			return &v
+		}
+	}
+	i := ReflectTypeInfo{id: t, e: s.e}
+	return &i
 }
 
 type TypeId [1]reflect.Type
@@ -55,6 +77,13 @@ func SliceOf(x TypeId) (v TypeId) {
 	}
 	return
 }
+func ChanOf(dir reflect.ChanDir, x TypeId) (v TypeId) {
+	if x.Valid() {
+		t := x.typo()
+		v = TypeId{reflect.ChanOf(dir, t)}
+	}
+	return
+}
 func MapOf(k, v TypeId) (r TypeId) {
 	if k.Valid() && v.Valid() {
 		v = TypeId{reflect.MapOf(k.typo(), v.typo())}
@@ -70,30 +99,20 @@ func TypeOf(v any) (x TypeId) {
 	x = TypeId{t}
 	return
 }
-func TypeUsage(t TypeId) TypeUse {
-	v, ok := TypeRegistry[t]
-	if ok {
-		return &v
-	}
-	if a, ok := TypeAlias[t]; ok {
-		v, ok = TypeRegistry[a]
-		if ok {
-			return &v
-		}
-	}
-	i := ReflectTypeInfo{id: t}
-	return &i
-}
 
 type TypeUse interface {
 	Id() TypeId
 	Slice() any
 	Instance() any
+	Channel() any
 }
 type TypeInfo struct {
-	id       TypeId
-	slice    any //function(cap,len)[]T
-	instance any //function(cap,len)[]T
+	e         *Engine
+	id        TypeId
+	slice     any                      //function(cap,len)[]T
+	instance  any                      //function(c)T
+	channel   any                      //function(buf)chan T
+	goChannel func(engine *Engine) any //function(buf)chan T
 }
 
 func (t TypeInfo) Id() TypeId {
@@ -105,11 +124,20 @@ func (t TypeInfo) Slice() any {
 func (t TypeInfo) Instance() any {
 	return t.instance
 }
+func (t TypeInfo) Channel() any {
+	return t.channel
+}
+func (t TypeInfo) GoChannel() any {
+	return t.goChannel(t.e)
+}
 
 type ReflectTypeInfo struct {
-	id       TypeId
-	slice    any
-	instance any
+	e         *Engine
+	id        TypeId
+	slice     any
+	instance  any
+	channel   any
+	goChannel func(e *Engine) any
 }
 
 func (t *ReflectTypeInfo) Id() TypeId {
@@ -127,6 +155,15 @@ func (t *ReflectTypeInfo) Instance() any {
 	}
 	return t.instance
 }
+func (t *ReflectTypeInfo) Channel() any {
+	if t.channel == nil {
+		t.channel = channel(t.id)
+	}
+	return t.channel
+}
+func (t *ReflectTypeInfo) GoChannel() any {
+	return t.goChannel(t.e)
+}
 func slice(id TypeId) func(n ...int) any {
 	return func(n ...int) any {
 		switch len(n) {
@@ -141,7 +178,26 @@ func slice(id TypeId) func(n ...int) any {
 }
 func instance(id TypeId) func() any {
 	return func() any {
-		return reflect.New(id.typo())
+		return reflect.New(id.typo()).Interface()
+	}
+}
+func channel(id TypeId) func(n ...int) any {
+	return func(n ...int) any {
+		switch len(n) {
+		case 0:
+			return reflect.MakeChan(reflect.ChanOf(reflect.BothDir, id.typo()), 0).Interface()
+		default:
+			return reflect.MakeChan(reflect.ChanOf(reflect.BothDir, id.typo()), n[0]).Interface()
+		}
+	}
+}
+func goChannel(id TypeId) func(e *Engine) any {
+	return nil //TODO
+}
+
+func _GenericChannel[T any](e *Engine) func(v chan T) *GoChan[T] {
+	return func(v chan T) *GoChan[T] {
+		return &GoChan[T]{e, v, nil}
 	}
 }
 
@@ -179,6 +235,19 @@ func RegisterType[T any]() bool {
 		instance: func() T {
 			var v T
 			return v
+		},
+		channel: func(n ...int) chan T {
+			switch len(n) {
+			case 0:
+				return make(chan T)
+			default:
+				return make(chan T, n[0])
+			}
+		},
+		goChannel: func(e *Engine) any {
+			return func(v chan T) any {
+				return &GoChan[T]{e, v, nil}
+			}
 		},
 	}
 	TypeRegistry[t] = v

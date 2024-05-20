@@ -78,21 +78,22 @@ var (
 		"imag64": func(c complex128) float64 {
 			return real(c)
 		},
-		"bytesFromString":       func(v string) []byte { return []byte(v) },
-		"runesFromString":       func(v string) []rune { return []rune(v) },
-		"stringFromBytes":       func(v []byte) string { return string(v) },
-		"stringFromRunes":       func(v []rune) string { return string(v) },
-		"toInt8":                func(v float64) int8 { return int8(v) },
-		"toInt16":               func(v float64) int16 { return int16(v) },
-		"toInt32":               func(v float64) int32 { return int32(v) },
-		"toInt64":               func(v float64) int64 { return int64(v) },
-		"toUint8":               func(v float64) uint8 { return uint8(v) },
-		"toUint16":              func(v float64) uint16 { return uint16(v) },
-		"toUint32":              func(v float64) uint32 { return uint32(v) },
-		"toUint64":              func(v float64) uint64 { return uint64(v) },
-		"typeOf":                TypeOf,
-		"usageOf":               TypeUsage,
-		"elementOf":             ElementOf,
+		"bytesFromString": func(v string) []byte { return []byte(v) },
+		"runesFromString": func(v string) []rune { return []rune(v) },
+		"stringFromBytes": func(v []byte) string { return string(v) },
+		"stringFromRunes": func(v []rune) string { return string(v) },
+		"toInt8":          func(v float64) int8 { return int8(v) },
+		"toInt16":         func(v float64) int16 { return int16(v) },
+		"toInt32":         func(v float64) int32 { return int32(v) },
+		"toInt64":         func(v float64) int64 { return int64(v) },
+		"toUint8":         func(v float64) uint8 { return uint8(v) },
+		"toUint16":        func(v float64) uint16 { return uint16(v) },
+		"toUint32":        func(v float64) uint32 { return uint32(v) },
+		"toUint64":        func(v float64) uint64 { return uint64(v) },
+
+		"typeOf":    TypeOf,
+		"elementOf": ElementOf,
+
 		"TypeKindInvalid":       reflect.Invalid,
 		"TypeKindBool":          reflect.Bool,
 		"TypeKindInt":           reflect.Int,
@@ -160,6 +161,7 @@ func (c GoModule) ExportsWithEngine(e *Engine) map[string]any {
 		}
 	})
 	m["Text"] = ctor
+	m["typeUnit"] = &TypeUtil{e: e}
 	return m
 }
 

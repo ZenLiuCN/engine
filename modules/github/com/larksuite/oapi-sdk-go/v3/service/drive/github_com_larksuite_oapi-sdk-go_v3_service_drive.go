@@ -16,11 +16,7 @@ var (
 	GithubComLarksuiteOapiSdkGo3ServiceDriveDefine   []byte
 	GithubComLarksuiteOapiSdkGo3ServiceDriveDeclared = map[string]any{
 		"newService": drive.NewService,
-
-		"emptyService":    engine.Empty[drive.Service],
-		"emptyRefService": engine.EmptyRefer[drive.Service],
-		"refOfService":    engine.ReferOf[drive.Service],
-		"unRefService":    engine.UnRefer[drive.Service]}
+	}
 )
 
 func init() {

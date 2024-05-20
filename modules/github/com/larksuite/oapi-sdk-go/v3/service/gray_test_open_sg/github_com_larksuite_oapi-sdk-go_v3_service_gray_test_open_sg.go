@@ -15,11 +15,7 @@ var (
 	GithubComLarksuiteOapiSdkGo3ServiceGray_test_open_sgDefine   []byte
 	GithubComLarksuiteOapiSdkGo3ServiceGray_test_open_sgDeclared = map[string]any{
 		"newService": gray_test_open_sg.NewService,
-
-		"emptyService":    engine.Empty[gray_test_open_sg.Service],
-		"emptyRefService": engine.EmptyRefer[gray_test_open_sg.Service],
-		"refOfService":    engine.ReferOf[gray_test_open_sg.Service],
-		"unRefService":    engine.UnRefer[gray_test_open_sg.Service]}
+	}
 )
 
 func init() {

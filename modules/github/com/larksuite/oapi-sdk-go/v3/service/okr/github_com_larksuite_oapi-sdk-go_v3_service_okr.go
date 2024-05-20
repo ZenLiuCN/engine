@@ -15,11 +15,7 @@ var (
 	GithubComLarksuiteOapiSdkGo3ServiceOkrDefine   []byte
 	GithubComLarksuiteOapiSdkGo3ServiceOkrDeclared = map[string]any{
 		"newService": okr.NewService,
-
-		"emptyService":    engine.Empty[okr.Service],
-		"emptyRefService": engine.EmptyRefer[okr.Service],
-		"refOfService":    engine.ReferOf[okr.Service],
-		"unRefService":    engine.UnRefer[okr.Service]}
+	}
 )
 
 func init() {

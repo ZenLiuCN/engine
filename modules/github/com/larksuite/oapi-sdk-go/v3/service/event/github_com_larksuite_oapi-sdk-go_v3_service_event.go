@@ -15,11 +15,7 @@ var (
 	GithubComLarksuiteOapiSdkGo3ServiceEventDefine   []byte
 	GithubComLarksuiteOapiSdkGo3ServiceEventDeclared = map[string]any{
 		"newService": event.NewService,
-
-		"emptyService":    engine.Empty[event.Service],
-		"emptyRefService": engine.EmptyRefer[event.Service],
-		"refOfService":    engine.ReferOf[event.Service],
-		"unRefService":    engine.UnRefer[event.Service]}
+	}
 )
 
 func init() {

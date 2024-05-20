@@ -3,11 +3,11 @@
 declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr'{
 
 	// @ts-ignore
+	import * as larkcore from 'github.com/larksuite/oapi-sdk-go/v3/core'
+	// @ts-ignore
 	import * as larkcorehr from 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'
 	// @ts-ignore
 	import * as larkcorehr from 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'
-	// @ts-ignore
-	import * as larkcore from 'github.com/larksuite/oapi-sdk-go/v3/core'
 	// @ts-ignore
 	import type {Ref,Struct} from 'go'
 	export function newService(config:Ref<larkcore.Config>):Ref<Service>
@@ -17,8 +17,4 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr'{
 			V1:Ref<larkcorehr.V1>
 			V2:Ref<larkcorehr.V2>
 	}
-	export function emptyService():Service
-	export function emptyRefService():Ref<Service>
-	export function refOfService(x:Service,v:Ref<Service>)
-	export function unRefService(v:Ref<Service>):Service
 }

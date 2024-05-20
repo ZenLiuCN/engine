@@ -3,17 +3,17 @@
 declare module 'github.com/larksuite/base-sdk-go/v3'{
 
 	// @ts-ignore
-	import * as larkbase from 'github.com/larksuite/base-sdk-go/v3/service/base/v1'
-	// @ts-ignore
-	import * as larkdrive from 'github.com/larksuite/base-sdk-go/v3/service/drive/v1'
-	// @ts-ignore
-	import * as context from 'golang/context'
-	// @ts-ignore
 	import * as larkcore from 'github.com/larksuite/base-sdk-go/v3/core'
 	// @ts-ignore
 	import * as http from 'golang/net/http'
 	// @ts-ignore
 	import * as time from 'golang/time'
+	// @ts-ignore
+	import * as larkbase from 'github.com/larksuite/base-sdk-go/v3/service/base/v1'
+	// @ts-ignore
+	import * as larkdrive from 'github.com/larksuite/base-sdk-go/v3/service/drive/v1'
+	// @ts-ignore
+	import * as context from 'golang/context'
 	// @ts-ignore
 	import type {Ref,Struct,error,Alias,bool} from 'go'
 	export interface Client extends Struct<Client>{
@@ -50,8 +50,4 @@ declare module 'github.com/larksuite/base-sdk-go/v3'{
 
 	export function withSerialization(serializable:larkcore.Serializable):ClientOptionFunc
 
-	export function emptyClient():Client
-	export function emptyRefClient():Ref<Client>
-	export function refOfClient(x:Client,v:Ref<Client>)
-	export function unRefClient(v:Ref<Client>):Client
 }

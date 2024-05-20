@@ -14,8 +14,4 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/lingo'{
 
 			V1:Ref<larklingo.V1>
 	}
-	export function emptyService():Service
-	export function emptyRefService():Ref<Service>
-	export function refOfService(x:Service,v:Ref<Service>)
-	export function unRefService(v:Ref<Service>):Service
 }

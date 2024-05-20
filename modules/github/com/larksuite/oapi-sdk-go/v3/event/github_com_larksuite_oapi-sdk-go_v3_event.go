@@ -5,9 +5,9 @@ import (
 	_ "embed"
 	"github.com/ZenLiuCN/engine"
 
-	_ "github.com/ZenLiuCN/engine/golang/context"
-	_ "github.com/ZenLiuCN/engine/golang/net/http"
 	_ "github.com/ZenLiuCN/engine/modules/github/com/larksuite/oapi-sdk-go/v3/core"
+	_ "github.com/ZenLiuCN/engine/modules/golang/context"
+	_ "github.com/ZenLiuCN/engine/modules/golang/net/http"
 	"github.com/larksuite/oapi-sdk-go/v3/event"
 )
 
@@ -15,34 +15,34 @@ var (
 	//go:embed github_com_larksuite_oapi-sdk-go_v3_event.d.ts
 	GithubComLarksuiteOapiSdkGo3EventDefine   []byte
 	GithubComLarksuiteOapiSdkGo3EventDeclared = map[string]any{
-		"withSkipSignVerify":      larkevent.WithSkipSignVerify,
 		"ChallengeResponseFormat": larkevent.ChallengeResponseFormat,
-		"DefaultContentType":      larkevent.DefaultContentType,
+		"ContentTypeJson":         larkevent.ContentTypeJson,
+		"signature":               larkevent.Signature,
+		"withLogLevel":            larkevent.WithLogLevel,
+		"ContentTypeHeader":       larkevent.ContentTypeHeader,
+		"EventSignature":          larkevent.EventSignature,
+		"ReqTypeChallenge":        larkevent.ReqTypeChallenge,
+		"ReqTypeEventCallBack":    larkevent.ReqTypeEventCallBack,
 		"eventDecrypt":            larkevent.EventDecrypt,
 		"EventRequestNonce":       larkevent.EventRequestNonce,
-		"signature":               larkevent.Signature,
-		"ContentTypeHeader":       larkevent.ContentTypeHeader,
 		"EventRequestTimestamp":   larkevent.EventRequestTimestamp,
-		"EventSignature":          larkevent.EventSignature,
-		"ReqTypeEventCallBack":    larkevent.ReqTypeEventCallBack,
 		"WebhookResponseFormat":   larkevent.WebhookResponseFormat,
-		"withLogLevel":            larkevent.WithLogLevel,
-		"ContentTypeJson":         larkevent.ContentTypeJson,
-		"ReqTypeChallenge":        larkevent.ReqTypeChallenge,
 		"withLogger":              larkevent.WithLogger,
+		"DefaultContentType":      larkevent.DefaultContentType,
+		"withSkipSignVerify":      larkevent.WithSkipSignVerify,
 
-		"emptyEventV2Body":        engine.Empty[larkevent.EventV2Body],
-		"emptyRefEventV2Body":     engine.EmptyRefer[larkevent.EventV2Body],
-		"refOfEventV2Body":        engine.ReferOf[larkevent.EventV2Body],
-		"unRefEventV2Body":        engine.UnRefer[larkevent.EventV2Body],
-		"emptyEventBase":          engine.Empty[larkevent.EventBase],
-		"emptyRefEventBase":       engine.EmptyRefer[larkevent.EventBase],
-		"refOfEventBase":          engine.ReferOf[larkevent.EventBase],
-		"unRefEventBase":          engine.UnRefer[larkevent.EventBase],
 		"emptyEventHeader":        engine.Empty[larkevent.EventHeader],
 		"emptyRefEventHeader":     engine.EmptyRefer[larkevent.EventHeader],
 		"refOfEventHeader":        engine.ReferOf[larkevent.EventHeader],
 		"unRefEventHeader":        engine.UnRefer[larkevent.EventHeader],
+		"emptyEventV2Base":        engine.Empty[larkevent.EventV2Base],
+		"emptyRefEventV2Base":     engine.EmptyRefer[larkevent.EventV2Base],
+		"refOfEventV2Base":        engine.ReferOf[larkevent.EventV2Base],
+		"unRefEventV2Base":        engine.UnRefer[larkevent.EventV2Base],
+		"emptyEventV2Body":        engine.Empty[larkevent.EventV2Body],
+		"emptyRefEventV2Body":     engine.EmptyRefer[larkevent.EventV2Body],
+		"refOfEventV2Body":        engine.ReferOf[larkevent.EventV2Body],
+		"unRefEventV2Body":        engine.UnRefer[larkevent.EventV2Body],
 		"emptyEventReq":           engine.Empty[larkevent.EventReq],
 		"emptyRefEventReq":        engine.EmptyRefer[larkevent.EventReq],
 		"refOfEventReq":           engine.ReferOf[larkevent.EventReq],
@@ -55,10 +55,10 @@ var (
 		"emptyRefEventV1Header":   engine.EmptyRefer[larkevent.EventV1Header],
 		"refOfEventV1Header":      engine.ReferOf[larkevent.EventV1Header],
 		"unRefEventV1Header":      engine.UnRefer[larkevent.EventV1Header],
-		"emptyEventV2Base":        engine.Empty[larkevent.EventV2Base],
-		"emptyRefEventV2Base":     engine.EmptyRefer[larkevent.EventV2Base],
-		"refOfEventV2Base":        engine.ReferOf[larkevent.EventV2Base],
-		"unRefEventV2Base":        engine.UnRefer[larkevent.EventV2Base],
+		"emptyEventBase":          engine.Empty[larkevent.EventBase],
+		"emptyRefEventBase":       engine.EmptyRefer[larkevent.EventBase],
+		"refOfEventBase":          engine.ReferOf[larkevent.EventBase],
+		"unRefEventBase":          engine.UnRefer[larkevent.EventBase],
 		"emptyEventEncryptMsg":    engine.Empty[larkevent.EventEncryptMsg],
 		"emptyRefEventEncryptMsg": engine.EmptyRefer[larkevent.EventEncryptMsg],
 		"refOfEventEncryptMsg":    engine.ReferOf[larkevent.EventEncryptMsg],

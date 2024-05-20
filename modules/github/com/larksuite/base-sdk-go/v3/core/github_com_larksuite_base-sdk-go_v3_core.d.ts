@@ -3,8 +3,6 @@
 declare module 'github.com/larksuite/base-sdk-go/v3/core'{
 
 	// @ts-ignore
-	import * as context from 'golang/context'
-	// @ts-ignore
 	import * as json from 'golang/encoding/json'
 	// @ts-ignore
 	import * as http from 'golang/net/http'
@@ -15,13 +13,15 @@ declare module 'github.com/larksuite/base-sdk-go/v3/core'{
 	// @ts-ignore
 	import * as io from 'golang/io'
 	// @ts-ignore
-	import type {int,Alias,map,Struct,Ref,error,GoError,bool,Nothing} from 'go'
-	export interface AccessTokenType extends Alias<string>{
+	import * as context from 'golang/context'
+	// @ts-ignore
+	import type {Alias,map,Ref,int,error,GoError,bool,Nothing,Struct} from 'go'
+	export interface AccessTokenType extends string{
 
 	}
 	export const AccessTokenTypeNone:AccessTokenType
 	export const AccessTokenTypePersonal:AccessTokenType
-	export interface ApiReq extends Struct<ApiReq>,json.Token{
+	export interface ApiReq extends json.Token,Struct<ApiReq>{
 
 			httpMethod:string
 			apiPath:string
@@ -30,7 +30,7 @@ declare module 'github.com/larksuite/base-sdk-go/v3/core'{
 			pathParams:PathParams
 			supportedAccessTokenTypes:AccessTokenType[]
 	}
-	export interface ApiResp extends json.Token,Struct<ApiResp>,fmt.Stringer{
+	export interface ApiResp extends Struct<ApiResp>,fmt.Stringer,json.Token{
 
 			statusCode:int
 			header:http.Header
@@ -40,7 +40,7 @@ declare module 'github.com/larksuite/base-sdk-go/v3/core'{
 			requestId():string
 			string():string
 	}
-	export interface ClientTimeoutError extends Error,GoError,Struct<ClientTimeoutError>{
+	export interface ClientTimeoutError extends Struct<ClientTimeoutError>,Error,GoError{
 
 			error():string
 	}
@@ -57,7 +57,7 @@ declare module 'github.com/larksuite/base-sdk-go/v3/core'{
 			error():string
 			string():string
 	}
-	export interface CodeErrorDetail extends Struct<CodeErrorDetail>,Error{
+	export interface CodeErrorDetail extends Error,Struct<CodeErrorDetail>{
 
 			key:string
 			value:string
@@ -74,7 +74,7 @@ declare module 'github.com/larksuite/base-sdk-go/v3/core'{
 			subject:string
 			description:string
 	}
-	export interface Config extends Struct<Config>,json.Token{
+	export interface Config extends json.Token,Struct<Config>{
 
 			baseUrl:string
 			personalBaseToken:string
@@ -100,7 +100,7 @@ declare module 'github.com/larksuite/base-sdk-go/v3/core'{
 
 	export function fileNameByHeader(header:http.Header):string
 
-	export interface Formdata extends Struct<Formdata>,json.Token{
+	export interface Formdata extends json.Token,Struct<Formdata>{
 
 			addField(field:string,val:any):Ref<Formdata>
 			addFile(field:string,r:io.Reader):Ref<Formdata>
@@ -188,6 +188,14 @@ declare module 'github.com/larksuite/base-sdk-go/v3/core'{
 
 	export function withRequestId(requestId:string):RequestOptionFunc
 
+	export function emptyCodeErrorDetail():CodeErrorDetail
+	export function emptyRefCodeErrorDetail():Ref<CodeErrorDetail>
+	export function refOfCodeErrorDetail(x:CodeErrorDetail,v:Ref<CodeErrorDetail>)
+	export function unRefCodeErrorDetail(v:Ref<CodeErrorDetail>):CodeErrorDetail
+	export function emptyConfig():Config
+	export function emptyRefConfig():Ref<Config>
+	export function refOfConfig(x:Config,v:Ref<Config>)
+	export function unRefConfig(v:Ref<Config>):Config
 	export function emptyApiReq():ApiReq
 	export function emptyRefApiReq():Ref<ApiReq>
 	export function refOfApiReq(x:ApiReq,v:Ref<ApiReq>)
@@ -196,10 +204,10 @@ declare module 'github.com/larksuite/base-sdk-go/v3/core'{
 	export function emptyRefCodeErrorFieldViolation():Ref<CodeErrorFieldViolation>
 	export function refOfCodeErrorFieldViolation(x:CodeErrorFieldViolation,v:Ref<CodeErrorFieldViolation>)
 	export function unRefCodeErrorFieldViolation(v:Ref<CodeErrorFieldViolation>):CodeErrorFieldViolation
-	export function emptyFormdata():Formdata
-	export function emptyRefFormdata():Ref<Formdata>
-	export function refOfFormdata(x:Formdata,v:Ref<Formdata>)
-	export function unRefFormdata(v:Ref<Formdata>):Formdata
+	export function emptyCodeErrorPermissionViolation():CodeErrorPermissionViolation
+	export function emptyRefCodeErrorPermissionViolation():Ref<CodeErrorPermissionViolation>
+	export function refOfCodeErrorPermissionViolation(x:CodeErrorPermissionViolation,v:Ref<CodeErrorPermissionViolation>)
+	export function unRefCodeErrorPermissionViolation(v:Ref<CodeErrorPermissionViolation>):CodeErrorPermissionViolation
 	export function emptyApiResp():ApiResp
 	export function emptyRefApiResp():Ref<ApiResp>
 	export function refOfApiResp(x:ApiResp,v:Ref<ApiResp>)
@@ -208,16 +216,4 @@ declare module 'github.com/larksuite/base-sdk-go/v3/core'{
 	export function emptyRefRequestOption():Ref<RequestOption>
 	export function refOfRequestOption(x:RequestOption,v:Ref<RequestOption>)
 	export function unRefRequestOption(v:Ref<RequestOption>):RequestOption
-	export function emptyConfig():Config
-	export function emptyRefConfig():Ref<Config>
-	export function refOfConfig(x:Config,v:Ref<Config>)
-	export function unRefConfig(v:Ref<Config>):Config
-	export function emptyCodeErrorDetail():CodeErrorDetail
-	export function emptyRefCodeErrorDetail():Ref<CodeErrorDetail>
-	export function refOfCodeErrorDetail(x:CodeErrorDetail,v:Ref<CodeErrorDetail>)
-	export function unRefCodeErrorDetail(v:Ref<CodeErrorDetail>):CodeErrorDetail
-	export function emptyCodeErrorPermissionViolation():CodeErrorPermissionViolation
-	export function emptyRefCodeErrorPermissionViolation():Ref<CodeErrorPermissionViolation>
-	export function refOfCodeErrorPermissionViolation(x:CodeErrorPermissionViolation,v:Ref<CodeErrorPermissionViolation>)
-	export function unRefCodeErrorPermissionViolation(v:Ref<CodeErrorPermissionViolation>):CodeErrorPermissionViolation
 }

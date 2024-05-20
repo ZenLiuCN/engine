@@ -15,11 +15,7 @@ var (
 	GithubComLarksuiteOapiSdkGo3ServiceOptical_char_recognitionDefine   []byte
 	GithubComLarksuiteOapiSdkGo3ServiceOptical_char_recognitionDeclared = map[string]any{
 		"newService": optical_char_recognition.NewService,
-
-		"emptyService":    engine.Empty[optical_char_recognition.Service],
-		"emptyRefService": engine.EmptyRefer[optical_char_recognition.Service],
-		"refOfService":    engine.ReferOf[optical_char_recognition.Service],
-		"unRefService":    engine.UnRefer[optical_char_recognition.Service]}
+	}
 )
 
 func init() {

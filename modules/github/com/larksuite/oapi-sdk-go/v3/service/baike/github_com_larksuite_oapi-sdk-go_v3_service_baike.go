@@ -15,11 +15,7 @@ var (
 	GithubComLarksuiteOapiSdkGo3ServiceBaikeDefine   []byte
 	GithubComLarksuiteOapiSdkGo3ServiceBaikeDeclared = map[string]any{
 		"newService": baike.NewService,
-
-		"emptyService":    engine.Empty[baike.Service],
-		"emptyRefService": engine.EmptyRefer[baike.Service],
-		"refOfService":    engine.ReferOf[baike.Service],
-		"unRefService":    engine.UnRefer[baike.Service]}
+	}
 )
 
 func init() {

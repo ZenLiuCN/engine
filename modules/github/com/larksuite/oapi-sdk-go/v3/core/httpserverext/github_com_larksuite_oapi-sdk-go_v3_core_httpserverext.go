@@ -5,10 +5,10 @@ import (
 	_ "embed"
 	"github.com/ZenLiuCN/engine"
 
-	_ "github.com/ZenLiuCN/engine/golang/net/http"
 	_ "github.com/ZenLiuCN/engine/modules/github/com/larksuite/oapi-sdk-go/v3/card"
 	_ "github.com/ZenLiuCN/engine/modules/github/com/larksuite/oapi-sdk-go/v3/event"
 	_ "github.com/ZenLiuCN/engine/modules/github/com/larksuite/oapi-sdk-go/v3/event/dispatcher"
+	_ "github.com/ZenLiuCN/engine/modules/golang/net/http"
 	"github.com/larksuite/oapi-sdk-go/v3/core/httpserverext"
 )
 

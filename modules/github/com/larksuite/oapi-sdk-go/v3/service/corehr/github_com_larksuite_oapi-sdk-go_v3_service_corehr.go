@@ -16,11 +16,7 @@ var (
 	GithubComLarksuiteOapiSdkGo3ServiceCorehrDefine   []byte
 	GithubComLarksuiteOapiSdkGo3ServiceCorehrDeclared = map[string]any{
 		"newService": corehr.NewService,
-
-		"emptyService":    engine.Empty[corehr.Service],
-		"emptyRefService": engine.EmptyRefer[corehr.Service],
-		"refOfService":    engine.ReferOf[corehr.Service],
-		"unRefService":    engine.UnRefer[corehr.Service]}
+	}
 )
 
 func init() {

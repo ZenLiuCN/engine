@@ -15,11 +15,7 @@ var (
 	GithubComLarksuiteOapiSdkGo3ServiceMeeting_roomDefine   []byte
 	GithubComLarksuiteOapiSdkGo3ServiceMeeting_roomDeclared = map[string]any{
 		"newService": meeting_room.NewService,
-
-		"emptyService":    engine.Empty[meeting_room.Service],
-		"emptyRefService": engine.EmptyRefer[meeting_room.Service],
-		"refOfService":    engine.ReferOf[meeting_room.Service],
-		"unRefService":    engine.UnRefer[meeting_room.Service]}
+	}
 )
 
 func init() {

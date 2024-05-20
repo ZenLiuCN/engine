@@ -15,11 +15,7 @@ var (
 	GithubComLarksuiteOapiSdkGo3ServiceSheetsDefine   []byte
 	GithubComLarksuiteOapiSdkGo3ServiceSheetsDeclared = map[string]any{
 		"newService": sheets.NewService,
-
-		"emptyService":    engine.Empty[sheets.Service],
-		"emptyRefService": engine.EmptyRefer[sheets.Service],
-		"refOfService":    engine.ReferOf[sheets.Service],
-		"unRefService":    engine.UnRefer[sheets.Service]}
+	}
 )
 
 func init() {

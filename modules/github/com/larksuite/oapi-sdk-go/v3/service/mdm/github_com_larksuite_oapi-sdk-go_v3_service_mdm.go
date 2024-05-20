@@ -15,11 +15,7 @@ var (
 	GithubComLarksuiteOapiSdkGo3ServiceMdmDefine   []byte
 	GithubComLarksuiteOapiSdkGo3ServiceMdmDeclared = map[string]any{
 		"newService": mdm.NewService,
-
-		"emptyService":    engine.Empty[mdm.Service],
-		"emptyRefService": engine.EmptyRefer[mdm.Service],
-		"refOfService":    engine.ReferOf[mdm.Service],
-		"unRefService":    engine.UnRefer[mdm.Service]}
+	}
 )
 
 func init() {

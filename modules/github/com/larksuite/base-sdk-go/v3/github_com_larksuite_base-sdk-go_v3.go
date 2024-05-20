@@ -5,12 +5,12 @@ import (
 	_ "embed"
 	"github.com/ZenLiuCN/engine"
 
-	_ "github.com/ZenLiuCN/engine/golang/context"
-	_ "github.com/ZenLiuCN/engine/golang/net/http"
-	_ "github.com/ZenLiuCN/engine/golang/time"
 	_ "github.com/ZenLiuCN/engine/modules/github/com/larksuite/base-sdk-go/v3/core"
 	_ "github.com/ZenLiuCN/engine/modules/github/com/larksuite/base-sdk-go/v3/service/base/v1"
 	_ "github.com/ZenLiuCN/engine/modules/github/com/larksuite/base-sdk-go/v3/service/drive/v1"
+	_ "github.com/ZenLiuCN/engine/modules/golang/context"
+	_ "github.com/ZenLiuCN/engine/modules/golang/net/http"
+	_ "github.com/ZenLiuCN/engine/modules/golang/time"
 	"github.com/larksuite/base-sdk-go/v3"
 )
 
@@ -18,22 +18,18 @@ var (
 	//go:embed github_com_larksuite_base-sdk-go_v3.d.ts
 	GithubComLarksuiteBaseSdkGo3Define   []byte
 	GithubComLarksuiteBaseSdkGo3Declared = map[string]any{
-		"FeishuBaseUrl":     lark.FeishuBaseUrl,
-		"withHttpClient":    lark.WithHttpClient,
-		"withLogReqAtDebug": lark.WithLogReqAtDebug,
-		"withOpenBaseUrl":   lark.WithOpenBaseUrl,
-		"withSerialization": lark.WithSerialization,
-		"withReqTimeout":    lark.WithReqTimeout,
-		"LarkBaseUrl":       lark.LarkBaseUrl,
 		"newClient":         lark.NewClient,
 		"withHeaders":       lark.WithHeaders,
-		"withLogLevel":      lark.WithLogLevel,
+		"withLogReqAtDebug": lark.WithLogReqAtDebug,
 		"withLogger":        lark.WithLogger,
-
-		"emptyClient":    engine.Empty[lark.Client],
-		"emptyRefClient": engine.EmptyRefer[lark.Client],
-		"refOfClient":    engine.ReferOf[lark.Client],
-		"unRefClient":    engine.UnRefer[lark.Client]}
+		"withReqTimeout":    lark.WithReqTimeout,
+		"withSerialization": lark.WithSerialization,
+		"FeishuBaseUrl":     lark.FeishuBaseUrl,
+		"LarkBaseUrl":       lark.LarkBaseUrl,
+		"withHttpClient":    lark.WithHttpClient,
+		"withLogLevel":      lark.WithLogLevel,
+		"withOpenBaseUrl":   lark.WithOpenBaseUrl,
+	}
 )
 
 func init() {

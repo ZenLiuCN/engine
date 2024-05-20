@@ -9,13 +9,11 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/ws'{
 	// @ts-ignore
 	import * as fmt from 'golang/fmt'
 	// @ts-ignore
-	import * as proto from 'github.com/gogo/protobuf/proto'
-	// @ts-ignore
 	import * as dispatcher from 'github.com/larksuite/oapi-sdk-go/v3/event/dispatcher'
 	// @ts-ignore
 	import * as larkcore from 'github.com/larksuite/oapi-sdk-go/v3/core'
 	// @ts-ignore
-	import type {int,Struct,Ref,int32,bool,map,error,GoError,Alias,uint64} from 'go'
+	import type {bool,int,Struct,error,Alias,uint64,GoError,Ref,int32,map} from 'go'
 	//514
 	export const AuthFailed:int
 	export interface Client extends Struct<Client>,json.Token{
@@ -29,7 +27,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/ws'{
 			reconnectNonce:int
 			pingInterval:int
 	}
-	export interface ClientError extends Struct<ClientError>,Error,GoError{
+	export interface ClientError extends Error,GoError,Struct<ClientError>{
 
 			code:int
 			msg:string
@@ -45,7 +43,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/ws'{
 			url:string
 			clientConfig:Ref<ClientConfig>
 	}
-	export interface EndpointResp extends json.Token,Struct<EndpointResp>{
+	export interface EndpointResp extends Struct<EndpointResp>,json.Token{
 
 			code:int
 			msg:string
@@ -58,7 +56,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/ws'{
 	export const ExceedConnLimit:int
 	//403
 	export const Forbidden:int
-	export interface Frame extends proto.Sizer,proto.Marshaler,Struct<Frame>,json.Token,fmt.Stringer,proto.Message,proto.Unmarshaler{
+	export interface Frame extends Struct<Frame>,json.Token,fmt.Stringer{
 
 			seqID:uint64
 			logID:uint64
@@ -75,7 +73,6 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/ws'{
 			descriptor():[Uint8Array,int[]]
 			xxX_Unmarshal(b:Uint8Array)/*error*/
 			xxX_Marshal(b:Uint8Array,deterministic:bool):Uint8Array
-			xxX_Merge(src:proto.Message):void
 			xxX_Size():int
 			xxX_DiscardUnknown():void
 			getSeqID():uint64
@@ -100,7 +97,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/ws'{
 	export const FrameTypeData:FrameType
 	//"/callback/ws/endpoint"
 	export const GenEndpointUri:string
-	export interface Header extends proto.Marshaler,proto.Sizer,Struct<Header>,json.Token,fmt.Stringer,proto.Message,proto.Unmarshaler{
+	export interface Header extends Struct<Header>,fmt.Stringer,json.Token{
 
 			key:string
 			value:string
@@ -110,7 +107,6 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/ws'{
 			descriptor():[Uint8Array,int[]]
 			xxX_Unmarshal(b:Uint8Array)/*error*/
 			xxX_Marshal(b:Uint8Array,deterministic:bool):Uint8Array
-			xxX_Merge(src:proto.Message):void
 			xxX_Size():int
 			xxX_DiscardUnknown():void
 			getKey():string
@@ -196,22 +192,22 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/ws'{
 
 	export function withLogger(logger:larkcore.Logger):ClientOption
 
-	export function emptyEndpoint():Endpoint
-	export function emptyRefEndpoint():Ref<Endpoint>
-	export function refOfEndpoint(x:Endpoint,v:Ref<Endpoint>)
-	export function unRefEndpoint(v:Ref<Endpoint>):Endpoint
-	export function emptyEndpointResp():EndpointResp
-	export function emptyRefEndpointResp():Ref<EndpointResp>
-	export function refOfEndpointResp(x:EndpointResp,v:Ref<EndpointResp>)
-	export function unRefEndpointResp(v:Ref<EndpointResp>):EndpointResp
-	export function emptyClient():Client
-	export function emptyRefClient():Ref<Client>
-	export function refOfClient(x:Client,v:Ref<Client>)
-	export function unRefClient(v:Ref<Client>):Client
 	export function emptyClientConfig():ClientConfig
 	export function emptyRefClientConfig():Ref<ClientConfig>
 	export function refOfClientConfig(x:ClientConfig,v:Ref<ClientConfig>)
 	export function unRefClientConfig(v:Ref<ClientConfig>):ClientConfig
+	export function emptyEndpoint():Endpoint
+	export function emptyRefEndpoint():Ref<Endpoint>
+	export function refOfEndpoint(x:Endpoint,v:Ref<Endpoint>)
+	export function unRefEndpoint(v:Ref<Endpoint>):Endpoint
+	export function emptyResponse():Response
+	export function emptyRefResponse():Ref<Response>
+	export function refOfResponse(x:Response,v:Ref<Response>)
+	export function unRefResponse(v:Ref<Response>):Response
+	export function emptyEndpointResp():EndpointResp
+	export function emptyRefEndpointResp():Ref<EndpointResp>
+	export function refOfEndpointResp(x:EndpointResp,v:Ref<EndpointResp>)
+	export function unRefEndpointResp(v:Ref<EndpointResp>):EndpointResp
 	export function emptyFrame():Frame
 	export function emptyRefFrame():Ref<Frame>
 	export function refOfFrame(x:Frame,v:Ref<Frame>)
@@ -220,8 +216,4 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/ws'{
 	export function emptyRefHeader():Ref<Header>
 	export function refOfHeader(x:Header,v:Ref<Header>)
 	export function unRefHeader(v:Ref<Header>):Header
-	export function emptyResponse():Response
-	export function emptyRefResponse():Ref<Response>
-	export function refOfResponse(x:Response,v:Ref<Response>)
-	export function unRefResponse(v:Ref<Response>):Response
 }

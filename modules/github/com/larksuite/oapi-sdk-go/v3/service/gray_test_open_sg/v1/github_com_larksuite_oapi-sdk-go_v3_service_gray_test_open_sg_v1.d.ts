@@ -143,84 +143,60 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/gray_test_open_sg/v1
 				listByIterator(ctx:context.Context,req:Ref<ListMotoReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListMotoIterator>
 			}>
 	}
-	export function emptyCreateMotoRespData():CreateMotoRespData
-	export function emptyRefCreateMotoRespData():Ref<CreateMotoRespData>
-	export function refOfCreateMotoRespData(x:CreateMotoRespData,v:Ref<CreateMotoRespData>)
-	export function unRefCreateMotoRespData(v:Ref<CreateMotoRespData>):CreateMotoRespData
-	export function emptyGetMotoReq():GetMotoReq
-	export function emptyRefGetMotoReq():Ref<GetMotoReq>
-	export function refOfGetMotoReq(x:GetMotoReq,v:Ref<GetMotoReq>)
-	export function unRefGetMotoReq(v:Ref<GetMotoReq>):GetMotoReq
-	export function emptyListMotoResp():ListMotoResp
-	export function emptyRefListMotoResp():Ref<ListMotoResp>
-	export function refOfListMotoResp(x:ListMotoResp,v:Ref<ListMotoResp>)
-	export function unRefListMotoResp(v:Ref<ListMotoResp>):ListMotoResp
 	export function emptyCreateMotoReq():CreateMotoReq
 	export function emptyRefCreateMotoReq():Ref<CreateMotoReq>
 	export function refOfCreateMotoReq(x:CreateMotoReq,v:Ref<CreateMotoReq>)
 	export function unRefCreateMotoReq(v:Ref<CreateMotoReq>):CreateMotoReq
-	export function emptyLevel():Level
-	export function emptyRefLevel():Ref<Level>
-	export function refOfLevel(x:Level,v:Ref<Level>)
-	export function unRefLevel(v:Ref<Level>):Level
-	export function emptyLevelBuilder():LevelBuilder
-	export function emptyRefLevelBuilder():Ref<LevelBuilder>
-	export function refOfLevelBuilder(x:LevelBuilder,v:Ref<LevelBuilder>)
-	export function unRefLevelBuilder(v:Ref<LevelBuilder>):LevelBuilder
-	export function emptyMoto():Moto
-	export function emptyRefMoto():Ref<Moto>
-	export function refOfMoto(x:Moto,v:Ref<Moto>)
-	export function unRefMoto(v:Ref<Moto>):Moto
 	export function emptyV1():V1
 	export function emptyRefV1():Ref<V1>
 	export function refOfV1(x:V1,v:Ref<V1>)
 	export function unRefV1(v:Ref<V1>):V1
-	export function emptyDepartmentIdBuilder():DepartmentIdBuilder
-	export function emptyRefDepartmentIdBuilder():Ref<DepartmentIdBuilder>
-	export function refOfDepartmentIdBuilder(x:DepartmentIdBuilder,v:Ref<DepartmentIdBuilder>)
-	export function unRefDepartmentIdBuilder(v:Ref<DepartmentIdBuilder>):DepartmentIdBuilder
+	export function emptyCreateMotoRespData():CreateMotoRespData
+	export function emptyRefCreateMotoRespData():Ref<CreateMotoRespData>
+	export function refOfCreateMotoRespData(x:CreateMotoRespData,v:Ref<CreateMotoRespData>)
+	export function unRefCreateMotoRespData(v:Ref<CreateMotoRespData>):CreateMotoRespData
 	export function emptyDepartmentId():DepartmentId
 	export function emptyRefDepartmentId():Ref<DepartmentId>
 	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
 	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptyListMotoReq():ListMotoReq
-	export function emptyRefListMotoReq():Ref<ListMotoReq>
-	export function refOfListMotoReq(x:ListMotoReq,v:Ref<ListMotoReq>)
-	export function unRefListMotoReq(v:Ref<ListMotoReq>):ListMotoReq
-	export function emptyCreateMotoReqBuilder():CreateMotoReqBuilder
-	export function emptyRefCreateMotoReqBuilder():Ref<CreateMotoReqBuilder>
-	export function refOfCreateMotoReqBuilder(x:CreateMotoReqBuilder,v:Ref<CreateMotoReqBuilder>)
-	export function unRefCreateMotoReqBuilder(v:Ref<CreateMotoReqBuilder>):CreateMotoReqBuilder
-	export function emptyGetMotoReqBuilder():GetMotoReqBuilder
-	export function emptyRefGetMotoReqBuilder():Ref<GetMotoReqBuilder>
-	export function refOfGetMotoReqBuilder(x:GetMotoReqBuilder,v:Ref<GetMotoReqBuilder>)
-	export function unRefGetMotoReqBuilder(v:Ref<GetMotoReqBuilder>):GetMotoReqBuilder
-	export function emptyGetMotoResp():GetMotoResp
-	export function emptyRefGetMotoResp():Ref<GetMotoResp>
-	export function refOfGetMotoResp(x:GetMotoResp,v:Ref<GetMotoResp>)
-	export function unRefGetMotoResp(v:Ref<GetMotoResp>):GetMotoResp
 	export function emptyGetMotoRespData():GetMotoRespData
 	export function emptyRefGetMotoRespData():Ref<GetMotoRespData>
 	export function refOfGetMotoRespData(x:GetMotoRespData,v:Ref<GetMotoRespData>)
 	export function unRefGetMotoRespData(v:Ref<GetMotoRespData>):GetMotoRespData
+	export function emptyMoto():Moto
+	export function emptyRefMoto():Ref<Moto>
+	export function refOfMoto(x:Moto,v:Ref<Moto>)
+	export function unRefMoto(v:Ref<Moto>):Moto
+	export function emptyGetMotoReq():GetMotoReq
+	export function emptyRefGetMotoReq():Ref<GetMotoReq>
+	export function refOfGetMotoReq(x:GetMotoReq,v:Ref<GetMotoReq>)
+	export function unRefGetMotoReq(v:Ref<GetMotoReq>):GetMotoReq
+	export function emptyGetMotoResp():GetMotoResp
+	export function emptyRefGetMotoResp():Ref<GetMotoResp>
+	export function refOfGetMotoResp(x:GetMotoResp,v:Ref<GetMotoResp>)
+	export function unRefGetMotoResp(v:Ref<GetMotoResp>):GetMotoResp
+	export function emptyLevel():Level
+	export function emptyRefLevel():Ref<Level>
+	export function refOfLevel(x:Level,v:Ref<Level>)
+	export function unRefLevel(v:Ref<Level>):Level
 	export function emptyListMotoIterator():ListMotoIterator
 	export function emptyRefListMotoIterator():Ref<ListMotoIterator>
 	export function refOfListMotoIterator(x:ListMotoIterator,v:Ref<ListMotoIterator>)
 	export function unRefListMotoIterator(v:Ref<ListMotoIterator>):ListMotoIterator
-	export function emptyListMotoReqBuilder():ListMotoReqBuilder
-	export function emptyRefListMotoReqBuilder():Ref<ListMotoReqBuilder>
-	export function refOfListMotoReqBuilder(x:ListMotoReqBuilder,v:Ref<ListMotoReqBuilder>)
-	export function unRefListMotoReqBuilder(v:Ref<ListMotoReqBuilder>):ListMotoReqBuilder
-	export function emptyListMotoRespData():ListMotoRespData
-	export function emptyRefListMotoRespData():Ref<ListMotoRespData>
-	export function refOfListMotoRespData(x:ListMotoRespData,v:Ref<ListMotoRespData>)
-	export function unRefListMotoRespData(v:Ref<ListMotoRespData>):ListMotoRespData
-	export function emptyMotoBuilder():MotoBuilder
-	export function emptyRefMotoBuilder():Ref<MotoBuilder>
-	export function refOfMotoBuilder(x:MotoBuilder,v:Ref<MotoBuilder>)
-	export function unRefMotoBuilder(v:Ref<MotoBuilder>):MotoBuilder
+	export function emptyListMotoResp():ListMotoResp
+	export function emptyRefListMotoResp():Ref<ListMotoResp>
+	export function refOfListMotoResp(x:ListMotoResp,v:Ref<ListMotoResp>)
+	export function unRefListMotoResp(v:Ref<ListMotoResp>):ListMotoResp
 	export function emptyCreateMotoResp():CreateMotoResp
 	export function emptyRefCreateMotoResp():Ref<CreateMotoResp>
 	export function refOfCreateMotoResp(x:CreateMotoResp,v:Ref<CreateMotoResp>)
 	export function unRefCreateMotoResp(v:Ref<CreateMotoResp>):CreateMotoResp
+	export function emptyListMotoReq():ListMotoReq
+	export function emptyRefListMotoReq():Ref<ListMotoReq>
+	export function refOfListMotoReq(x:ListMotoReq,v:Ref<ListMotoReq>)
+	export function unRefListMotoReq(v:Ref<ListMotoReq>):ListMotoReq
+	export function emptyListMotoRespData():ListMotoRespData
+	export function emptyRefListMotoRespData():Ref<ListMotoRespData>
+	export function refOfListMotoRespData(x:ListMotoRespData,v:Ref<ListMotoRespData>)
+	export function unRefListMotoRespData(v:Ref<ListMotoRespData>):ListMotoRespData
 }

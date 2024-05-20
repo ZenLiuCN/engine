@@ -15,11 +15,7 @@ var (
 	GithubComLarksuiteOapiSdkGo3ServiceCalendarDefine   []byte
 	GithubComLarksuiteOapiSdkGo3ServiceCalendarDeclared = map[string]any{
 		"newService": calendar.NewService,
-
-		"emptyService":    engine.Empty[calendar.Service],
-		"emptyRefService": engine.EmptyRefer[calendar.Service],
-		"refOfService":    engine.ReferOf[calendar.Service],
-		"unRefService":    engine.UnRefer[calendar.Service]}
+	}
 )
 
 func init() {

@@ -7,15 +7,11 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/optical_char_recogni
 	// @ts-ignore
 	import * as larkoptical_char_recognition from 'github.com/larksuite/oapi-sdk-go/v3/service/optical_char_recognition/v1'
 	// @ts-ignore
-	import type {Ref,Struct} from 'go'
+	import type {Struct,Ref} from 'go'
 	export function newService(config:Ref<larkcore.Config>):Ref<Service>
 
 	export interface Service extends Struct<Service>{
 
 			V1:Ref<larkoptical_char_recognition.V1>
 	}
-	export function emptyService():Service
-	export function emptyRefService():Ref<Service>
-	export function refOfService(x:Service,v:Ref<Service>)
-	export function unRefService(v:Ref<Service>):Service
 }

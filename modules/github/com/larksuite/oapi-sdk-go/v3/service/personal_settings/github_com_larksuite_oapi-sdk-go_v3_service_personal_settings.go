@@ -15,11 +15,7 @@ var (
 	GithubComLarksuiteOapiSdkGo3ServicePersonal_settingsDefine   []byte
 	GithubComLarksuiteOapiSdkGo3ServicePersonal_settingsDeclared = map[string]any{
 		"newService": personal_settings.NewService,
-
-		"emptyService":    engine.Empty[personal_settings.Service],
-		"emptyRefService": engine.EmptyRefer[personal_settings.Service],
-		"refOfService":    engine.ReferOf[personal_settings.Service],
-		"unRefService":    engine.UnRefer[personal_settings.Service]}
+	}
 )
 
 func init() {

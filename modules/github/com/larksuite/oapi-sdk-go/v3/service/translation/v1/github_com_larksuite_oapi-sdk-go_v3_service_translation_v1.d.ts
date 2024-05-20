@@ -7,7 +7,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/translation/v1'{
 	// @ts-ignore
 	import * as context from 'golang/context'
 	// @ts-ignore
-	import type {Ref,Struct,error,bool,Alias,Nothing} from 'go'
+	import type {error,bool,Alias,Nothing,Ref,Struct} from 'go'
 	export interface DepartmentId extends Struct<DepartmentId>{
 
 			departmentId:Ref<string>
@@ -136,34 +136,14 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/translation/v1'{
 				translate(ctx:context.Context,req:Ref<TranslateTextReq>,...options:larkcore.RequestOptionFunc[]):Ref<TranslateTextResp>
 			}>
 	}
-	export function emptyDetectTextReqBuilder():DetectTextReqBuilder
-	export function emptyRefDetectTextReqBuilder():Ref<DetectTextReqBuilder>
-	export function refOfDetectTextReqBuilder(x:DetectTextReqBuilder,v:Ref<DetectTextReqBuilder>)
-	export function unRefDetectTextReqBuilder(v:Ref<DetectTextReqBuilder>):DetectTextReqBuilder
-	export function emptyDetectTextRespData():DetectTextRespData
-	export function emptyRefDetectTextRespData():Ref<DetectTextRespData>
-	export function refOfDetectTextRespData(x:DetectTextRespData,v:Ref<DetectTextRespData>)
-	export function unRefDetectTextRespData(v:Ref<DetectTextRespData>):DetectTextRespData
-	export function emptyTerm():Term
-	export function emptyRefTerm():Ref<Term>
-	export function refOfTerm(x:Term,v:Ref<Term>)
-	export function unRefTerm(v:Ref<Term>):Term
-	export function emptyTermBuilder():TermBuilder
-	export function emptyRefTermBuilder():Ref<TermBuilder>
-	export function refOfTermBuilder(x:TermBuilder,v:Ref<TermBuilder>)
-	export function unRefTermBuilder(v:Ref<TermBuilder>):TermBuilder
-	export function emptyTranslateTextReq():TranslateTextReq
-	export function emptyRefTranslateTextReq():Ref<TranslateTextReq>
-	export function refOfTranslateTextReq(x:TranslateTextReq,v:Ref<TranslateTextReq>)
-	export function unRefTranslateTextReq(v:Ref<TranslateTextReq>):TranslateTextReq
-	export function emptyTranslateTextReqBuilder():TranslateTextReqBuilder
-	export function emptyRefTranslateTextReqBuilder():Ref<TranslateTextReqBuilder>
-	export function refOfTranslateTextReqBuilder(x:TranslateTextReqBuilder,v:Ref<TranslateTextReqBuilder>)
-	export function unRefTranslateTextReqBuilder(v:Ref<TranslateTextReqBuilder>):TranslateTextReqBuilder
-	export function emptyTranslateTextRespData():TranslateTextRespData
-	export function emptyRefTranslateTextRespData():Ref<TranslateTextRespData>
-	export function refOfTranslateTextRespData(x:TranslateTextRespData,v:Ref<TranslateTextRespData>)
-	export function unRefTranslateTextRespData(v:Ref<TranslateTextRespData>):TranslateTextRespData
+	export function emptyTranslateTextReqBody():TranslateTextReqBody
+	export function emptyRefTranslateTextReqBody():Ref<TranslateTextReqBody>
+	export function refOfTranslateTextReqBody(x:TranslateTextReqBody,v:Ref<TranslateTextReqBody>)
+	export function unRefTranslateTextReqBody(v:Ref<TranslateTextReqBody>):TranslateTextReqBody
+	export function emptyDetectTextReq():DetectTextReq
+	export function emptyRefDetectTextReq():Ref<DetectTextReq>
+	export function refOfDetectTextReq(x:DetectTextReq,v:Ref<DetectTextReq>)
+	export function unRefDetectTextReq(v:Ref<DetectTextReq>):DetectTextReq
 	export function emptyDetectTextReqBody():DetectTextReqBody
 	export function emptyRefDetectTextReqBody():Ref<DetectTextReqBody>
 	export function refOfDetectTextReqBody(x:DetectTextReqBody,v:Ref<DetectTextReqBody>)
@@ -172,44 +152,32 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/translation/v1'{
 	export function emptyRefDetectTextResp():Ref<DetectTextResp>
 	export function refOfDetectTextResp(x:DetectTextResp,v:Ref<DetectTextResp>)
 	export function unRefDetectTextResp(v:Ref<DetectTextResp>):DetectTextResp
-	export function emptyTranslateTextReqBody():TranslateTextReqBody
-	export function emptyRefTranslateTextReqBody():Ref<TranslateTextReqBody>
-	export function refOfTranslateTextReqBody(x:TranslateTextReqBody,v:Ref<TranslateTextReqBody>)
-	export function unRefTranslateTextReqBody(v:Ref<TranslateTextReqBody>):TranslateTextReqBody
-	export function emptyV1():V1
-	export function emptyRefV1():Ref<V1>
-	export function refOfV1(x:V1,v:Ref<V1>)
-	export function unRefV1(v:Ref<V1>):V1
+	export function emptyTerm():Term
+	export function emptyRefTerm():Ref<Term>
+	export function refOfTerm(x:Term,v:Ref<Term>)
+	export function unRefTerm(v:Ref<Term>):Term
+	export function emptyTranslateTextReq():TranslateTextReq
+	export function emptyRefTranslateTextReq():Ref<TranslateTextReq>
+	export function refOfTranslateTextReq(x:TranslateTextReq,v:Ref<TranslateTextReq>)
+	export function unRefTranslateTextReq(v:Ref<TranslateTextReq>):TranslateTextReq
 	export function emptyDepartmentId():DepartmentId
 	export function emptyRefDepartmentId():Ref<DepartmentId>
 	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
 	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptyDepartmentIdBuilder():DepartmentIdBuilder
-	export function emptyRefDepartmentIdBuilder():Ref<DepartmentIdBuilder>
-	export function refOfDepartmentIdBuilder(x:DepartmentIdBuilder,v:Ref<DepartmentIdBuilder>)
-	export function unRefDepartmentIdBuilder(v:Ref<DepartmentIdBuilder>):DepartmentIdBuilder
-	export function emptyDetectTextReq():DetectTextReq
-	export function emptyRefDetectTextReq():Ref<DetectTextReq>
-	export function refOfDetectTextReq(x:DetectTextReq,v:Ref<DetectTextReq>)
-	export function unRefDetectTextReq(v:Ref<DetectTextReq>):DetectTextReq
-	export function emptyDetectTextReqBodyBuilder():DetectTextReqBodyBuilder
-	export function emptyRefDetectTextReqBodyBuilder():Ref<DetectTextReqBodyBuilder>
-	export function refOfDetectTextReqBodyBuilder(x:DetectTextReqBodyBuilder,v:Ref<DetectTextReqBodyBuilder>)
-	export function unRefDetectTextReqBodyBuilder(v:Ref<DetectTextReqBodyBuilder>):DetectTextReqBodyBuilder
-	export function emptyTranslateTextPathReqBodyBuilder():TranslateTextPathReqBodyBuilder
-	export function emptyRefTranslateTextPathReqBodyBuilder():Ref<TranslateTextPathReqBodyBuilder>
-	export function refOfTranslateTextPathReqBodyBuilder(x:TranslateTextPathReqBodyBuilder,v:Ref<TranslateTextPathReqBodyBuilder>)
-	export function unRefTranslateTextPathReqBodyBuilder(v:Ref<TranslateTextPathReqBodyBuilder>):TranslateTextPathReqBodyBuilder
-	export function emptyTranslateTextReqBodyBuilder():TranslateTextReqBodyBuilder
-	export function emptyRefTranslateTextReqBodyBuilder():Ref<TranslateTextReqBodyBuilder>
-	export function refOfTranslateTextReqBodyBuilder(x:TranslateTextReqBodyBuilder,v:Ref<TranslateTextReqBodyBuilder>)
-	export function unRefTranslateTextReqBodyBuilder(v:Ref<TranslateTextReqBodyBuilder>):TranslateTextReqBodyBuilder
 	export function emptyTranslateTextResp():TranslateTextResp
 	export function emptyRefTranslateTextResp():Ref<TranslateTextResp>
 	export function refOfTranslateTextResp(x:TranslateTextResp,v:Ref<TranslateTextResp>)
 	export function unRefTranslateTextResp(v:Ref<TranslateTextResp>):TranslateTextResp
-	export function emptyDetectTextPathReqBodyBuilder():DetectTextPathReqBodyBuilder
-	export function emptyRefDetectTextPathReqBodyBuilder():Ref<DetectTextPathReqBodyBuilder>
-	export function refOfDetectTextPathReqBodyBuilder(x:DetectTextPathReqBodyBuilder,v:Ref<DetectTextPathReqBodyBuilder>)
-	export function unRefDetectTextPathReqBodyBuilder(v:Ref<DetectTextPathReqBodyBuilder>):DetectTextPathReqBodyBuilder
+	export function emptyTranslateTextRespData():TranslateTextRespData
+	export function emptyRefTranslateTextRespData():Ref<TranslateTextRespData>
+	export function refOfTranslateTextRespData(x:TranslateTextRespData,v:Ref<TranslateTextRespData>)
+	export function unRefTranslateTextRespData(v:Ref<TranslateTextRespData>):TranslateTextRespData
+	export function emptyV1():V1
+	export function emptyRefV1():Ref<V1>
+	export function refOfV1(x:V1,v:Ref<V1>)
+	export function unRefV1(v:Ref<V1>):V1
+	export function emptyDetectTextRespData():DetectTextRespData
+	export function emptyRefDetectTextRespData():Ref<DetectTextRespData>
+	export function refOfDetectTextRespData(x:DetectTextRespData,v:Ref<DetectTextRespData>)
+	export function unRefDetectTextRespData(v:Ref<DetectTextRespData>):DetectTextRespData
 }

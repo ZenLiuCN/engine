@@ -14,8 +14,4 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/workplace'{
 
 			V1:Ref<larkworkplace.V1>
 	}
-	export function emptyService():Service
-	export function emptyRefService():Ref<Service>
-	export function refOfService(x:Service,v:Ref<Service>)
-	export function unRefService(v:Ref<Service>):Service
 }

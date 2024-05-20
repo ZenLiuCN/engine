@@ -15,11 +15,7 @@ var (
 	GithubComLarksuiteOapiSdkGo3ServiceSpeech_to_textDefine   []byte
 	GithubComLarksuiteOapiSdkGo3ServiceSpeech_to_textDeclared = map[string]any{
 		"newService": speech_to_text.NewService,
-
-		"emptyService":    engine.Empty[speech_to_text.Service],
-		"emptyRefService": engine.EmptyRefer[speech_to_text.Service],
-		"refOfService":    engine.ReferOf[speech_to_text.Service],
-		"unRefService":    engine.UnRefer[speech_to_text.Service]}
+	}
 )
 
 func init() {

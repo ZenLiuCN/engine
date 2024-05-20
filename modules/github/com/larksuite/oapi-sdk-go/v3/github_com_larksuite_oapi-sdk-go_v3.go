@@ -5,10 +5,6 @@ import (
 	_ "embed"
 	"github.com/ZenLiuCN/engine"
 
-	_ "github.com/ZenLiuCN/engine/golang/context"
-	_ "github.com/ZenLiuCN/engine/golang/encoding/json"
-	_ "github.com/ZenLiuCN/engine/golang/net/http"
-	_ "github.com/ZenLiuCN/engine/golang/time"
 	_ "github.com/ZenLiuCN/engine/modules/github/com/larksuite/oapi-sdk-go/v3/core"
 	_ "github.com/ZenLiuCN/engine/modules/github/com/larksuite/oapi-sdk-go/v3/service/acs"
 	_ "github.com/ZenLiuCN/engine/modules/github/com/larksuite/oapi-sdk-go/v3/service/admin"
@@ -56,6 +52,10 @@ import (
 	_ "github.com/ZenLiuCN/engine/modules/github/com/larksuite/oapi-sdk-go/v3/service/verification"
 	_ "github.com/ZenLiuCN/engine/modules/github/com/larksuite/oapi-sdk-go/v3/service/wiki"
 	_ "github.com/ZenLiuCN/engine/modules/github/com/larksuite/oapi-sdk-go/v3/service/workplace"
+	_ "github.com/ZenLiuCN/engine/modules/golang/context"
+	_ "github.com/ZenLiuCN/engine/modules/golang/encoding/json"
+	_ "github.com/ZenLiuCN/engine/modules/golang/net/http"
+	_ "github.com/ZenLiuCN/engine/modules/golang/time"
 	"github.com/larksuite/oapi-sdk-go/v3"
 )
 
@@ -63,27 +63,23 @@ var (
 	//go:embed github_com_larksuite_oapi-sdk-go_v3.d.ts
 	GithubComLarksuiteOapiSdkGo3Define   []byte
 	GithubComLarksuiteOapiSdkGo3Declared = map[string]any{
-		"withAppType":            lark.WithAppType,
 		"withOpenBaseUrl":        lark.WithOpenBaseUrl,
-		"FeishuBaseUrl":          lark.FeishuBaseUrl,
+		"withTokenCache":         lark.WithTokenCache,
 		"newClient":              lark.NewClient,
 		"withLogLevel":           lark.WithLogLevel,
-		"withLogger":             lark.WithLogger,
-		"withHeaders":            lark.WithHeaders,
-		"withLogReqAtDebug":      lark.WithLogReqAtDebug,
 		"withReqTimeout":         lark.WithReqTimeout,
-		"withTokenCache":         lark.WithTokenCache,
+		"withAppType":            lark.WithAppType,
+		"withHelpdeskCredential": lark.WithHelpdeskCredential,
 		"LarkBaseUrl":            lark.LarkBaseUrl,
 		"withEnableTokenCache":   lark.WithEnableTokenCache,
-		"withHelpdeskCredential": lark.WithHelpdeskCredential,
+		"withHeaders":            lark.WithHeaders,
 		"withHttpClient":         lark.WithHttpClient,
+		"withLogReqAtDebug":      lark.WithLogReqAtDebug,
+		"withLogger":             lark.WithLogger,
 		"withMarketplaceApp":     lark.WithMarketplaceApp,
+		"FeishuBaseUrl":          lark.FeishuBaseUrl,
 		"withSerialization":      lark.WithSerialization,
-
-		"emptyClient":    engine.Empty[lark.Client],
-		"emptyRefClient": engine.EmptyRefer[lark.Client],
-		"refOfClient":    engine.ReferOf[lark.Client],
-		"unRefClient":    engine.UnRefer[lark.Client]}
+	}
 )
 
 func init() {

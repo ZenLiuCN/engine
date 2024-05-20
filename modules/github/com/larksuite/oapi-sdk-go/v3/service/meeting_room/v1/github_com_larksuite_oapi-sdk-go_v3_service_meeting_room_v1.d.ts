@@ -47,15 +47,15 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/meeting_room/v1'{
 
 	export function newMeetingRoomBuilder():Ref<MeetingRoomBuilder>
 
-	export function newP1ThirdPartyMeetingRoomChangedV1Handler(v1:(v2:context.Context,v1:Ref<P1ThirdPartyMeetingRoomChangedV1>))=>void/*error*/):Ref<P1ThirdPartyMeetingRoomChangedV1Handler>
+	export function newP1ThirdPartyMeetingRoomChangedV1Handler(v1:(v2:context.Context,v1:Ref<P1ThirdPartyMeetingRoomChangedV1>)=>void/*error*/):Ref<P1ThirdPartyMeetingRoomChangedV1Handler>
 
-	export function newP2MeetingRoomCreatedV1Handler(v1:(v2:context.Context,v1:Ref<P2MeetingRoomCreatedV1>))=>void/*error*/):Ref<P2MeetingRoomCreatedV1Handler>
+	export function newP2MeetingRoomCreatedV1Handler(v1:(v2:context.Context,v1:Ref<P2MeetingRoomCreatedV1>)=>void/*error*/):Ref<P2MeetingRoomCreatedV1Handler>
 
-	export function newP2MeetingRoomDeletedV1Handler(v1:(v2:context.Context,v1:Ref<P2MeetingRoomDeletedV1>))=>void/*error*/):Ref<P2MeetingRoomDeletedV1Handler>
+	export function newP2MeetingRoomDeletedV1Handler(v1:(v2:context.Context,v1:Ref<P2MeetingRoomDeletedV1>)=>void/*error*/):Ref<P2MeetingRoomDeletedV1Handler>
 
-	export function newP2MeetingRoomStatusChangedV1Handler(v1:(v2:context.Context,v1:Ref<P2MeetingRoomStatusChangedV1>))=>void/*error*/):Ref<P2MeetingRoomStatusChangedV1Handler>
+	export function newP2MeetingRoomStatusChangedV1Handler(v1:(v2:context.Context,v1:Ref<P2MeetingRoomStatusChangedV1>)=>void/*error*/):Ref<P2MeetingRoomStatusChangedV1Handler>
 
-	export function newP2MeetingRoomUpdatedV1Handler(v1:(v2:context.Context,v1:Ref<P2MeetingRoomUpdatedV1>))=>void/*error*/):Ref<P2MeetingRoomUpdatedV1Handler>
+	export function newP2MeetingRoomUpdatedV1Handler(v1:(v2:context.Context,v1:Ref<P2MeetingRoomUpdatedV1>)=>void/*error*/):Ref<P2MeetingRoomUpdatedV1Handler>
 
 	export function newUserInfoBuilder():Ref<UserInfoBuilder>
 
@@ -72,7 +72,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/meeting_room/v1'{
 			openId:string
 			userId:string
 	}
-	export interface P1ThirdPartyMeetingRoomChangedV1 extends larkevent.EventHandlerModel,Struct<P1ThirdPartyMeetingRoomChangedV1>{
+	export interface P1ThirdPartyMeetingRoomChangedV1 extends Struct<P1ThirdPartyMeetingRoomChangedV1>,larkevent.EventHandlerModel{
 
 			eventReq:Ref<larkevent.EventReq>
 			eventBase:Ref<larkevent.EventBase>
@@ -179,112 +179,76 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/meeting_room/v1'{
 	export interface V1 extends Struct<V1>{
 
 	}
-	export function emptyEventTime():EventTime
-	export function emptyRefEventTime():Ref<EventTime>
-	export function refOfEventTime(x:EventTime,v:Ref<EventTime>)
-	export function unRefEventTime(v:Ref<EventTime>):EventTime
-	export function emptyP2MeetingRoomCreatedV1():P2MeetingRoomCreatedV1
-	export function emptyRefP2MeetingRoomCreatedV1():Ref<P2MeetingRoomCreatedV1>
-	export function refOfP2MeetingRoomCreatedV1(x:P2MeetingRoomCreatedV1,v:Ref<P2MeetingRoomCreatedV1>)
-	export function unRefP2MeetingRoomCreatedV1(v:Ref<P2MeetingRoomCreatedV1>):P2MeetingRoomCreatedV1
-	export function emptyP2MeetingRoomStatusChangedV1Data():P2MeetingRoomStatusChangedV1Data
-	export function emptyRefP2MeetingRoomStatusChangedV1Data():Ref<P2MeetingRoomStatusChangedV1Data>
-	export function refOfP2MeetingRoomStatusChangedV1Data(x:P2MeetingRoomStatusChangedV1Data,v:Ref<P2MeetingRoomStatusChangedV1Data>)
-	export function unRefP2MeetingRoomStatusChangedV1Data(v:Ref<P2MeetingRoomStatusChangedV1Data>):P2MeetingRoomStatusChangedV1Data
-	export function emptyP2MeetingRoomUpdatedV1Handler():P2MeetingRoomUpdatedV1Handler
-	export function emptyRefP2MeetingRoomUpdatedV1Handler():Ref<P2MeetingRoomUpdatedV1Handler>
-	export function refOfP2MeetingRoomUpdatedV1Handler(x:P2MeetingRoomUpdatedV1Handler,v:Ref<P2MeetingRoomUpdatedV1Handler>)
-	export function unRefP2MeetingRoomUpdatedV1Handler(v:Ref<P2MeetingRoomUpdatedV1Handler>):P2MeetingRoomUpdatedV1Handler
-	export function emptyP2MeetingRoomStatusChangedV1Handler():P2MeetingRoomStatusChangedV1Handler
-	export function emptyRefP2MeetingRoomStatusChangedV1Handler():Ref<P2MeetingRoomStatusChangedV1Handler>
-	export function refOfP2MeetingRoomStatusChangedV1Handler(x:P2MeetingRoomStatusChangedV1Handler,v:Ref<P2MeetingRoomStatusChangedV1Handler>)
-	export function unRefP2MeetingRoomStatusChangedV1Handler(v:Ref<P2MeetingRoomStatusChangedV1Handler>):P2MeetingRoomStatusChangedV1Handler
-	export function emptyDepartmentId():DepartmentId
-	export function emptyRefDepartmentId():Ref<DepartmentId>
-	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
-	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptyEventTimeBuilder():EventTimeBuilder
-	export function emptyRefEventTimeBuilder():Ref<EventTimeBuilder>
-	export function refOfEventTimeBuilder(x:EventTimeBuilder,v:Ref<EventTimeBuilder>)
-	export function unRefEventTimeBuilder(v:Ref<EventTimeBuilder>):EventTimeBuilder
-	export function emptyMeetingRoomBuilder():MeetingRoomBuilder
-	export function emptyRefMeetingRoomBuilder():Ref<MeetingRoomBuilder>
-	export function refOfMeetingRoomBuilder(x:MeetingRoomBuilder,v:Ref<MeetingRoomBuilder>)
-	export function unRefMeetingRoomBuilder(v:Ref<MeetingRoomBuilder>):MeetingRoomBuilder
-	export function emptyMeetingRoom():MeetingRoom
-	export function emptyRefMeetingRoom():Ref<MeetingRoom>
-	export function refOfMeetingRoom(x:MeetingRoom,v:Ref<MeetingRoom>)
-	export function unRefMeetingRoom(v:Ref<MeetingRoom>):MeetingRoom
-	export function emptyP1EventTimeV1():P1EventTimeV1
-	export function emptyRefP1EventTimeV1():Ref<P1EventTimeV1>
-	export function refOfP1EventTimeV1(x:P1EventTimeV1,v:Ref<P1EventTimeV1>)
-	export function unRefP1EventTimeV1(v:Ref<P1EventTimeV1>):P1EventTimeV1
-	export function emptyV1():V1
-	export function emptyRefV1():Ref<V1>
-	export function refOfV1(x:V1,v:Ref<V1>)
-	export function unRefV1(v:Ref<V1>):V1
-	export function emptyDepartmentIdBuilder():DepartmentIdBuilder
-	export function emptyRefDepartmentIdBuilder():Ref<DepartmentIdBuilder>
-	export function refOfDepartmentIdBuilder(x:DepartmentIdBuilder,v:Ref<DepartmentIdBuilder>)
-	export function unRefDepartmentIdBuilder(v:Ref<DepartmentIdBuilder>):DepartmentIdBuilder
-	export function emptyP2MeetingRoomStatusChangedV1():P2MeetingRoomStatusChangedV1
-	export function emptyRefP2MeetingRoomStatusChangedV1():Ref<P2MeetingRoomStatusChangedV1>
-	export function refOfP2MeetingRoomStatusChangedV1(x:P2MeetingRoomStatusChangedV1,v:Ref<P2MeetingRoomStatusChangedV1>)
-	export function unRefP2MeetingRoomStatusChangedV1(v:Ref<P2MeetingRoomStatusChangedV1>):P2MeetingRoomStatusChangedV1
-	export function emptyP2MeetingRoomUpdatedV1():P2MeetingRoomUpdatedV1
-	export function emptyRefP2MeetingRoomUpdatedV1():Ref<P2MeetingRoomUpdatedV1>
-	export function refOfP2MeetingRoomUpdatedV1(x:P2MeetingRoomUpdatedV1,v:Ref<P2MeetingRoomUpdatedV1>)
-	export function unRefP2MeetingRoomUpdatedV1(v:Ref<P2MeetingRoomUpdatedV1>):P2MeetingRoomUpdatedV1
-	export function emptyUserInfo():UserInfo
-	export function emptyRefUserInfo():Ref<UserInfo>
-	export function refOfUserInfo(x:UserInfo,v:Ref<UserInfo>)
-	export function unRefUserInfo(v:Ref<UserInfo>):UserInfo
-	export function emptyUserInfoBuilder():UserInfoBuilder
-	export function emptyRefUserInfoBuilder():Ref<UserInfoBuilder>
-	export function refOfUserInfoBuilder(x:UserInfoBuilder,v:Ref<UserInfoBuilder>)
-	export function unRefUserInfoBuilder(v:Ref<UserInfoBuilder>):UserInfoBuilder
-	export function emptyP1MeetingRoomV1():P1MeetingRoomV1
-	export function emptyRefP1MeetingRoomV1():Ref<P1MeetingRoomV1>
-	export function refOfP1MeetingRoomV1(x:P1MeetingRoomV1,v:Ref<P1MeetingRoomV1>)
-	export function unRefP1MeetingRoomV1(v:Ref<P1MeetingRoomV1>):P1MeetingRoomV1
 	export function emptyP1OrganizerV1():P1OrganizerV1
 	export function emptyRefP1OrganizerV1():Ref<P1OrganizerV1>
 	export function refOfP1OrganizerV1(x:P1OrganizerV1,v:Ref<P1OrganizerV1>)
 	export function unRefP1OrganizerV1(v:Ref<P1OrganizerV1>):P1OrganizerV1
-	export function emptyP2MeetingRoomDeletedV1Handler():P2MeetingRoomDeletedV1Handler
-	export function emptyRefP2MeetingRoomDeletedV1Handler():Ref<P2MeetingRoomDeletedV1Handler>
-	export function refOfP2MeetingRoomDeletedV1Handler(x:P2MeetingRoomDeletedV1Handler,v:Ref<P2MeetingRoomDeletedV1Handler>)
-	export function unRefP2MeetingRoomDeletedV1Handler(v:Ref<P2MeetingRoomDeletedV1Handler>):P2MeetingRoomDeletedV1Handler
+	export function emptyV1():V1
+	export function emptyRefV1():Ref<V1>
+	export function refOfV1(x:V1,v:Ref<V1>)
+	export function unRefV1(v:Ref<V1>):V1
 	export function emptyP1ThirdPartyMeetingRoomChangedV1Data():P1ThirdPartyMeetingRoomChangedV1Data
 	export function emptyRefP1ThirdPartyMeetingRoomChangedV1Data():Ref<P1ThirdPartyMeetingRoomChangedV1Data>
 	export function refOfP1ThirdPartyMeetingRoomChangedV1Data(x:P1ThirdPartyMeetingRoomChangedV1Data,v:Ref<P1ThirdPartyMeetingRoomChangedV1Data>)
 	export function unRefP1ThirdPartyMeetingRoomChangedV1Data(v:Ref<P1ThirdPartyMeetingRoomChangedV1Data>):P1ThirdPartyMeetingRoomChangedV1Data
-	export function emptyP2MeetingRoomCreatedV1Handler():P2MeetingRoomCreatedV1Handler
-	export function emptyRefP2MeetingRoomCreatedV1Handler():Ref<P2MeetingRoomCreatedV1Handler>
-	export function refOfP2MeetingRoomCreatedV1Handler(x:P2MeetingRoomCreatedV1Handler,v:Ref<P2MeetingRoomCreatedV1Handler>)
-	export function unRefP2MeetingRoomCreatedV1Handler(v:Ref<P2MeetingRoomCreatedV1Handler>):P2MeetingRoomCreatedV1Handler
-	export function emptyP2MeetingRoomDeletedV1():P2MeetingRoomDeletedV1
-	export function emptyRefP2MeetingRoomDeletedV1():Ref<P2MeetingRoomDeletedV1>
-	export function refOfP2MeetingRoomDeletedV1(x:P2MeetingRoomDeletedV1,v:Ref<P2MeetingRoomDeletedV1>)
-	export function unRefP2MeetingRoomDeletedV1(v:Ref<P2MeetingRoomDeletedV1>):P2MeetingRoomDeletedV1
-	export function emptyP1ThirdPartyMeetingRoomChangedV1():P1ThirdPartyMeetingRoomChangedV1
-	export function emptyRefP1ThirdPartyMeetingRoomChangedV1():Ref<P1ThirdPartyMeetingRoomChangedV1>
-	export function refOfP1ThirdPartyMeetingRoomChangedV1(x:P1ThirdPartyMeetingRoomChangedV1,v:Ref<P1ThirdPartyMeetingRoomChangedV1>)
-	export function unRefP1ThirdPartyMeetingRoomChangedV1(v:Ref<P1ThirdPartyMeetingRoomChangedV1>):P1ThirdPartyMeetingRoomChangedV1
-	export function emptyP1ThirdPartyMeetingRoomChangedV1Handler():P1ThirdPartyMeetingRoomChangedV1Handler
-	export function emptyRefP1ThirdPartyMeetingRoomChangedV1Handler():Ref<P1ThirdPartyMeetingRoomChangedV1Handler>
-	export function refOfP1ThirdPartyMeetingRoomChangedV1Handler(x:P1ThirdPartyMeetingRoomChangedV1Handler,v:Ref<P1ThirdPartyMeetingRoomChangedV1Handler>)
-	export function unRefP1ThirdPartyMeetingRoomChangedV1Handler(v:Ref<P1ThirdPartyMeetingRoomChangedV1Handler>):P1ThirdPartyMeetingRoomChangedV1Handler
+	export function emptyP2MeetingRoomCreatedV1():P2MeetingRoomCreatedV1
+	export function emptyRefP2MeetingRoomCreatedV1():Ref<P2MeetingRoomCreatedV1>
+	export function refOfP2MeetingRoomCreatedV1(x:P2MeetingRoomCreatedV1,v:Ref<P2MeetingRoomCreatedV1>)
+	export function unRefP2MeetingRoomCreatedV1(v:Ref<P2MeetingRoomCreatedV1>):P2MeetingRoomCreatedV1
+	export function emptyP2MeetingRoomUpdatedV1():P2MeetingRoomUpdatedV1
+	export function emptyRefP2MeetingRoomUpdatedV1():Ref<P2MeetingRoomUpdatedV1>
+	export function refOfP2MeetingRoomUpdatedV1(x:P2MeetingRoomUpdatedV1,v:Ref<P2MeetingRoomUpdatedV1>)
+	export function unRefP2MeetingRoomUpdatedV1(v:Ref<P2MeetingRoomUpdatedV1>):P2MeetingRoomUpdatedV1
+	export function emptyP2MeetingRoomStatusChangedV1Data():P2MeetingRoomStatusChangedV1Data
+	export function emptyRefP2MeetingRoomStatusChangedV1Data():Ref<P2MeetingRoomStatusChangedV1Data>
+	export function refOfP2MeetingRoomStatusChangedV1Data(x:P2MeetingRoomStatusChangedV1Data,v:Ref<P2MeetingRoomStatusChangedV1Data>)
+	export function unRefP2MeetingRoomStatusChangedV1Data(v:Ref<P2MeetingRoomStatusChangedV1Data>):P2MeetingRoomStatusChangedV1Data
+	export function emptyP1EventTimeV1():P1EventTimeV1
+	export function emptyRefP1EventTimeV1():Ref<P1EventTimeV1>
+	export function refOfP1EventTimeV1(x:P1EventTimeV1,v:Ref<P1EventTimeV1>)
+	export function unRefP1EventTimeV1(v:Ref<P1EventTimeV1>):P1EventTimeV1
 	export function emptyP2MeetingRoomCreatedV1Data():P2MeetingRoomCreatedV1Data
 	export function emptyRefP2MeetingRoomCreatedV1Data():Ref<P2MeetingRoomCreatedV1Data>
 	export function refOfP2MeetingRoomCreatedV1Data(x:P2MeetingRoomCreatedV1Data,v:Ref<P2MeetingRoomCreatedV1Data>)
 	export function unRefP2MeetingRoomCreatedV1Data(v:Ref<P2MeetingRoomCreatedV1Data>):P2MeetingRoomCreatedV1Data
-	export function emptyP2MeetingRoomDeletedV1Data():P2MeetingRoomDeletedV1Data
-	export function emptyRefP2MeetingRoomDeletedV1Data():Ref<P2MeetingRoomDeletedV1Data>
-	export function refOfP2MeetingRoomDeletedV1Data(x:P2MeetingRoomDeletedV1Data,v:Ref<P2MeetingRoomDeletedV1Data>)
-	export function unRefP2MeetingRoomDeletedV1Data(v:Ref<P2MeetingRoomDeletedV1Data>):P2MeetingRoomDeletedV1Data
+	export function emptyUserInfo():UserInfo
+	export function emptyRefUserInfo():Ref<UserInfo>
+	export function refOfUserInfo(x:UserInfo,v:Ref<UserInfo>)
+	export function unRefUserInfo(v:Ref<UserInfo>):UserInfo
+	export function emptyP1MeetingRoomV1():P1MeetingRoomV1
+	export function emptyRefP1MeetingRoomV1():Ref<P1MeetingRoomV1>
+	export function refOfP1MeetingRoomV1(x:P1MeetingRoomV1,v:Ref<P1MeetingRoomV1>)
+	export function unRefP1MeetingRoomV1(v:Ref<P1MeetingRoomV1>):P1MeetingRoomV1
 	export function emptyP2MeetingRoomUpdatedV1Data():P2MeetingRoomUpdatedV1Data
 	export function emptyRefP2MeetingRoomUpdatedV1Data():Ref<P2MeetingRoomUpdatedV1Data>
 	export function refOfP2MeetingRoomUpdatedV1Data(x:P2MeetingRoomUpdatedV1Data,v:Ref<P2MeetingRoomUpdatedV1Data>)
 	export function unRefP2MeetingRoomUpdatedV1Data(v:Ref<P2MeetingRoomUpdatedV1Data>):P2MeetingRoomUpdatedV1Data
+	export function emptyEventTime():EventTime
+	export function emptyRefEventTime():Ref<EventTime>
+	export function refOfEventTime(x:EventTime,v:Ref<EventTime>)
+	export function unRefEventTime(v:Ref<EventTime>):EventTime
+	export function emptyMeetingRoom():MeetingRoom
+	export function emptyRefMeetingRoom():Ref<MeetingRoom>
+	export function refOfMeetingRoom(x:MeetingRoom,v:Ref<MeetingRoom>)
+	export function unRefMeetingRoom(v:Ref<MeetingRoom>):MeetingRoom
+	export function emptyP1ThirdPartyMeetingRoomChangedV1():P1ThirdPartyMeetingRoomChangedV1
+	export function emptyRefP1ThirdPartyMeetingRoomChangedV1():Ref<P1ThirdPartyMeetingRoomChangedV1>
+	export function refOfP1ThirdPartyMeetingRoomChangedV1(x:P1ThirdPartyMeetingRoomChangedV1,v:Ref<P1ThirdPartyMeetingRoomChangedV1>)
+	export function unRefP1ThirdPartyMeetingRoomChangedV1(v:Ref<P1ThirdPartyMeetingRoomChangedV1>):P1ThirdPartyMeetingRoomChangedV1
+	export function emptyP2MeetingRoomDeletedV1():P2MeetingRoomDeletedV1
+	export function emptyRefP2MeetingRoomDeletedV1():Ref<P2MeetingRoomDeletedV1>
+	export function refOfP2MeetingRoomDeletedV1(x:P2MeetingRoomDeletedV1,v:Ref<P2MeetingRoomDeletedV1>)
+	export function unRefP2MeetingRoomDeletedV1(v:Ref<P2MeetingRoomDeletedV1>):P2MeetingRoomDeletedV1
+	export function emptyDepartmentId():DepartmentId
+	export function emptyRefDepartmentId():Ref<DepartmentId>
+	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
+	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
+	export function emptyP2MeetingRoomStatusChangedV1():P2MeetingRoomStatusChangedV1
+	export function emptyRefP2MeetingRoomStatusChangedV1():Ref<P2MeetingRoomStatusChangedV1>
+	export function refOfP2MeetingRoomStatusChangedV1(x:P2MeetingRoomStatusChangedV1,v:Ref<P2MeetingRoomStatusChangedV1>)
+	export function unRefP2MeetingRoomStatusChangedV1(v:Ref<P2MeetingRoomStatusChangedV1>):P2MeetingRoomStatusChangedV1
+	export function emptyP2MeetingRoomDeletedV1Data():P2MeetingRoomDeletedV1Data
+	export function emptyRefP2MeetingRoomDeletedV1Data():Ref<P2MeetingRoomDeletedV1Data>
+	export function refOfP2MeetingRoomDeletedV1Data(x:P2MeetingRoomDeletedV1Data,v:Ref<P2MeetingRoomDeletedV1Data>)
+	export function unRefP2MeetingRoomDeletedV1Data(v:Ref<P2MeetingRoomDeletedV1Data>):P2MeetingRoomDeletedV1Data
 }

@@ -3,15 +3,15 @@
 declare module 'github.com/larksuite/oapi-sdk-go/v3/service/acs/v1'{
 
 	// @ts-ignore
+	import * as io from 'golang/io'
+	// @ts-ignore
 	import * as context from 'golang/context'
 	// @ts-ignore
 	import * as larkevent from 'github.com/larksuite/oapi-sdk-go/v3/event'
 	// @ts-ignore
 	import * as larkcore from 'github.com/larksuite/oapi-sdk-go/v3/core'
 	// @ts-ignore
-	import * as io from 'golang/io'
-	// @ts-ignore
-	import type {Ref,bool,Struct,error,int} from 'go'
+	import type {Struct,error,int,Ref,bool} from 'go'
 	export interface AccessRecord extends Struct<AccessRecord>{
 
 			accessRecordId:Ref<string>
@@ -432,9 +432,9 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/acs/v1'{
 
 	export function newOpeningTimeValidDayExternalBuilder():Ref<OpeningTimeValidDayExternalBuilder>
 
-	export function newP2AccessRecordCreatedV1Handler(v1:(v2:context.Context,v1:Ref<P2AccessRecordCreatedV1>))=>void/*error*/):Ref<P2AccessRecordCreatedV1Handler>
+	export function newP2AccessRecordCreatedV1Handler(v1:(v2:context.Context,v1:Ref<P2AccessRecordCreatedV1>)=>void/*error*/):Ref<P2AccessRecordCreatedV1Handler>
 
-	export function newP2UserUpdatedV1Handler(v1:(v2:context.Context,v1:Ref<P2UserUpdatedV1>))=>void/*error*/):Ref<P2UserUpdatedV1Handler>
+	export function newP2UserUpdatedV1Handler(v1:(v2:context.Context,v1:Ref<P2UserUpdatedV1>)=>void/*error*/):Ref<P2UserUpdatedV1Handler>
 
 	export function newPatchUserReqBuilder():Ref<PatchUserReqBuilder>
 
@@ -519,7 +519,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/acs/v1'{
 			card:Ref<int>
 			faceUploaded:Ref<bool>
 	}
-	export interface P2UserUpdatedV1Handler extends Struct<P2UserUpdatedV1Handler>,larkevent.EventHandler{
+	export interface P2UserUpdatedV1Handler extends larkevent.EventHandler,Struct<P2UserUpdatedV1Handler>{
 
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
@@ -745,376 +745,236 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/acs/v1'{
 				delete(ctx:context.Context,req:Ref<DeleteVisitorReq>,...options:larkcore.RequestOptionFunc[]):Ref<DeleteVisitorResp>
 			}>
 	}
-	export function emptyCreateRuleExternalRespData():CreateRuleExternalRespData
-	export function emptyRefCreateRuleExternalRespData():Ref<CreateRuleExternalRespData>
-	export function refOfCreateRuleExternalRespData(x:CreateRuleExternalRespData,v:Ref<CreateRuleExternalRespData>)
-	export function unRefCreateRuleExternalRespData(v:Ref<CreateRuleExternalRespData>):CreateRuleExternalRespData
-	export function emptyCreateVisitorPathReqBodyBuilder():CreateVisitorPathReqBodyBuilder
-	export function emptyRefCreateVisitorPathReqBodyBuilder():Ref<CreateVisitorPathReqBodyBuilder>
-	export function refOfCreateVisitorPathReqBodyBuilder(x:CreateVisitorPathReqBodyBuilder,v:Ref<CreateVisitorPathReqBodyBuilder>)
-	export function unRefCreateVisitorPathReqBodyBuilder(v:Ref<CreateVisitorPathReqBodyBuilder>):CreateVisitorPathReqBodyBuilder
-	export function emptyDeviceExternalBuilder():DeviceExternalBuilder
-	export function emptyRefDeviceExternalBuilder():Ref<DeviceExternalBuilder>
-	export function refOfDeviceExternalBuilder(x:DeviceExternalBuilder,v:Ref<DeviceExternalBuilder>)
-	export function unRefDeviceExternalBuilder(v:Ref<DeviceExternalBuilder>):DeviceExternalBuilder
-	export function emptyGetRuleExternalReq():GetRuleExternalReq
-	export function emptyRefGetRuleExternalReq():Ref<GetRuleExternalReq>
-	export function refOfGetRuleExternalReq(x:GetRuleExternalReq,v:Ref<GetRuleExternalReq>)
-	export function unRefGetRuleExternalReq(v:Ref<GetRuleExternalReq>):GetRuleExternalReq
-	export function emptyListAccessRecordIterator():ListAccessRecordIterator
-	export function emptyRefListAccessRecordIterator():Ref<ListAccessRecordIterator>
-	export function refOfListAccessRecordIterator(x:ListAccessRecordIterator,v:Ref<ListAccessRecordIterator>)
-	export function unRefListAccessRecordIterator(v:Ref<ListAccessRecordIterator>):ListAccessRecordIterator
-	export function emptyP2UserUpdatedV1Data():P2UserUpdatedV1Data
-	export function emptyRefP2UserUpdatedV1Data():Ref<P2UserUpdatedV1Data>
-	export function refOfP2UserUpdatedV1Data(x:P2UserUpdatedV1Data,v:Ref<P2UserUpdatedV1Data>)
-	export function unRefP2UserUpdatedV1Data(v:Ref<P2UserUpdatedV1Data>):P2UserUpdatedV1Data
-	export function emptyUserExternal():UserExternal
-	export function emptyRefUserExternal():Ref<UserExternal>
-	export function refOfUserExternal(x:UserExternal,v:Ref<UserExternal>)
-	export function unRefUserExternal(v:Ref<UserExternal>):UserExternal
-	export function emptyUserId():UserId
-	export function emptyRefUserId():Ref<UserId>
-	export function refOfUserId(x:UserId,v:Ref<UserId>)
-	export function unRefUserId(v:Ref<UserId>):UserId
-	export function emptyCreateRuleExternalReq():CreateRuleExternalReq
-	export function emptyRefCreateRuleExternalReq():Ref<CreateRuleExternalReq>
-	export function refOfCreateRuleExternalReq(x:CreateRuleExternalReq,v:Ref<CreateRuleExternalReq>)
-	export function unRefCreateRuleExternalReq(v:Ref<CreateRuleExternalReq>):CreateRuleExternalReq
-	export function emptyDepartmentId():DepartmentId
-	export function emptyRefDepartmentId():Ref<DepartmentId>
-	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
-	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptyListAccessRecordReqBuilder():ListAccessRecordReqBuilder
-	export function emptyRefListAccessRecordReqBuilder():Ref<ListAccessRecordReqBuilder>
-	export function refOfListAccessRecordReqBuilder(x:ListAccessRecordReqBuilder,v:Ref<ListAccessRecordReqBuilder>)
-	export function unRefListAccessRecordReqBuilder(v:Ref<ListAccessRecordReqBuilder>):ListAccessRecordReqBuilder
-	export function emptyCreateRuleExternalReqBodyBuilder():CreateRuleExternalReqBodyBuilder
-	export function emptyRefCreateRuleExternalReqBodyBuilder():Ref<CreateRuleExternalReqBodyBuilder>
-	export function refOfCreateRuleExternalReqBodyBuilder(x:CreateRuleExternalReqBodyBuilder,v:Ref<CreateRuleExternalReqBodyBuilder>)
-	export function unRefCreateRuleExternalReqBodyBuilder(v:Ref<CreateRuleExternalReqBodyBuilder>):CreateRuleExternalReqBodyBuilder
-	export function emptyDeleteVisitorReqBuilder():DeleteVisitorReqBuilder
-	export function emptyRefDeleteVisitorReqBuilder():Ref<DeleteVisitorReqBuilder>
-	export function refOfDeleteVisitorReqBuilder(x:DeleteVisitorReqBuilder,v:Ref<DeleteVisitorReqBuilder>)
-	export function unRefDeleteVisitorReqBuilder(v:Ref<DeleteVisitorReqBuilder>):DeleteVisitorReqBuilder
-	export function emptyGetRuleExternalResp():GetRuleExternalResp
-	export function emptyRefGetRuleExternalResp():Ref<GetRuleExternalResp>
-	export function refOfGetRuleExternalResp(x:GetRuleExternalResp,v:Ref<GetRuleExternalResp>)
-	export function unRefGetRuleExternalResp(v:Ref<GetRuleExternalResp>):GetRuleExternalResp
-	export function emptyOpeningTimeValidDayExternal():OpeningTimeValidDayExternal
-	export function emptyRefOpeningTimeValidDayExternal():Ref<OpeningTimeValidDayExternal>
-	export function refOfOpeningTimeValidDayExternal(x:OpeningTimeValidDayExternal,v:Ref<OpeningTimeValidDayExternal>)
-	export function unRefOpeningTimeValidDayExternal(v:Ref<OpeningTimeValidDayExternal>):OpeningTimeValidDayExternal
-	export function emptyOpeningTimeValidDayExternalBuilder():OpeningTimeValidDayExternalBuilder
-	export function emptyRefOpeningTimeValidDayExternalBuilder():Ref<OpeningTimeValidDayExternalBuilder>
-	export function refOfOpeningTimeValidDayExternalBuilder(x:OpeningTimeValidDayExternalBuilder,v:Ref<OpeningTimeValidDayExternalBuilder>)
-	export function unRefOpeningTimeValidDayExternalBuilder(v:Ref<OpeningTimeValidDayExternalBuilder>):OpeningTimeValidDayExternalBuilder
-	export function emptyUpdateUserFaceResp():UpdateUserFaceResp
-	export function emptyRefUpdateUserFaceResp():Ref<UpdateUserFaceResp>
-	export function refOfUpdateUserFaceResp(x:UpdateUserFaceResp,v:Ref<UpdateUserFaceResp>)
-	export function unRefUpdateUserFaceResp(v:Ref<UpdateUserFaceResp>):UpdateUserFaceResp
-	export function emptyCreateVisitorReq():CreateVisitorReq
-	export function emptyRefCreateVisitorReq():Ref<CreateVisitorReq>
-	export function refOfCreateVisitorReq(x:CreateVisitorReq,v:Ref<CreateVisitorReq>)
-	export function unRefCreateVisitorReq(v:Ref<CreateVisitorReq>):CreateVisitorReq
-	export function emptyDeviceBindRuleExternalReqBody():DeviceBindRuleExternalReqBody
-	export function emptyRefDeviceBindRuleExternalReqBody():Ref<DeviceBindRuleExternalReqBody>
-	export function refOfDeviceBindRuleExternalReqBody(x:DeviceBindRuleExternalReqBody,v:Ref<DeviceBindRuleExternalReqBody>)
-	export function unRefDeviceBindRuleExternalReqBody(v:Ref<DeviceBindRuleExternalReqBody>):DeviceBindRuleExternalReqBody
-	export function emptyDeviceBindRuleExternalReqBodyBuilder():DeviceBindRuleExternalReqBodyBuilder
-	export function emptyRefDeviceBindRuleExternalReqBodyBuilder():Ref<DeviceBindRuleExternalReqBodyBuilder>
-	export function refOfDeviceBindRuleExternalReqBodyBuilder(x:DeviceBindRuleExternalReqBodyBuilder,v:Ref<DeviceBindRuleExternalReqBodyBuilder>)
-	export function unRefDeviceBindRuleExternalReqBodyBuilder(v:Ref<DeviceBindRuleExternalReqBodyBuilder>):DeviceBindRuleExternalReqBodyBuilder
-	export function emptyListDeviceRespData():ListDeviceRespData
-	export function emptyRefListDeviceRespData():Ref<ListDeviceRespData>
-	export function refOfListDeviceRespData(x:ListDeviceRespData,v:Ref<ListDeviceRespData>)
-	export function unRefListDeviceRespData(v:Ref<ListDeviceRespData>):ListDeviceRespData
-	export function emptyUser():User
-	export function emptyRefUser():Ref<User>
-	export function refOfUser(x:User,v:Ref<User>)
-	export function unRefUser(v:Ref<User>):User
-	export function emptyCreateRuleExternalReqBody():CreateRuleExternalReqBody
-	export function emptyRefCreateRuleExternalReqBody():Ref<CreateRuleExternalReqBody>
-	export function refOfCreateRuleExternalReqBody(x:CreateRuleExternalReqBody,v:Ref<CreateRuleExternalReqBody>)
-	export function unRefCreateRuleExternalReqBody(v:Ref<CreateRuleExternalReqBody>):CreateRuleExternalReqBody
-	export function emptyFile():File
-	export function emptyRefFile():Ref<File>
-	export function refOfFile(x:File,v:Ref<File>)
-	export function unRefFile(v:Ref<File>):File
-	export function emptyGetUserFaceReq():GetUserFaceReq
-	export function emptyRefGetUserFaceReq():Ref<GetUserFaceReq>
-	export function refOfGetUserFaceReq(x:GetUserFaceReq,v:Ref<GetUserFaceReq>)
-	export function unRefGetUserFaceReq(v:Ref<GetUserFaceReq>):GetUserFaceReq
-	export function emptyOpeningTimePeriodExternal():OpeningTimePeriodExternal
-	export function emptyRefOpeningTimePeriodExternal():Ref<OpeningTimePeriodExternal>
-	export function refOfOpeningTimePeriodExternal(x:OpeningTimePeriodExternal,v:Ref<OpeningTimePeriodExternal>)
-	export function unRefOpeningTimePeriodExternal(v:Ref<OpeningTimePeriodExternal>):OpeningTimePeriodExternal
-	export function emptyP2AccessRecordCreatedV1Data():P2AccessRecordCreatedV1Data
-	export function emptyRefP2AccessRecordCreatedV1Data():Ref<P2AccessRecordCreatedV1Data>
-	export function refOfP2AccessRecordCreatedV1Data(x:P2AccessRecordCreatedV1Data,v:Ref<P2AccessRecordCreatedV1Data>)
-	export function unRefP2AccessRecordCreatedV1Data(v:Ref<P2AccessRecordCreatedV1Data>):P2AccessRecordCreatedV1Data
-	export function emptyUpdateUserFaceReq():UpdateUserFaceReq
-	export function emptyRefUpdateUserFaceReq():Ref<UpdateUserFaceReq>
-	export function refOfUpdateUserFaceReq(x:UpdateUserFaceReq,v:Ref<UpdateUserFaceReq>)
-	export function unRefUpdateUserFaceReq(v:Ref<UpdateUserFaceReq>):UpdateUserFaceReq
-	export function emptyUserBuilder():UserBuilder
-	export function emptyRefUserBuilder():Ref<UserBuilder>
-	export function refOfUserBuilder(x:UserBuilder,v:Ref<UserBuilder>)
-	export function unRefUserBuilder(v:Ref<UserBuilder>):UserBuilder
-	export function emptyCreateRuleExternalResp():CreateRuleExternalResp
-	export function emptyRefCreateRuleExternalResp():Ref<CreateRuleExternalResp>
-	export function refOfCreateRuleExternalResp(x:CreateRuleExternalResp,v:Ref<CreateRuleExternalResp>)
-	export function unRefCreateRuleExternalResp(v:Ref<CreateRuleExternalResp>):CreateRuleExternalResp
-	export function emptyDeleteRuleExternalResp():DeleteRuleExternalResp
-	export function emptyRefDeleteRuleExternalResp():Ref<DeleteRuleExternalResp>
-	export function refOfDeleteRuleExternalResp(x:DeleteRuleExternalResp,v:Ref<DeleteRuleExternalResp>)
-	export function unRefDeleteRuleExternalResp(v:Ref<DeleteRuleExternalResp>):DeleteRuleExternalResp
-	export function emptyDeleteVisitorResp():DeleteVisitorResp
-	export function emptyRefDeleteVisitorResp():Ref<DeleteVisitorResp>
-	export function refOfDeleteVisitorResp(x:DeleteVisitorResp,v:Ref<DeleteVisitorResp>)
-	export function unRefDeleteVisitorResp(v:Ref<DeleteVisitorResp>):DeleteVisitorResp
-	export function emptyListUserRespData():ListUserRespData
-	export function emptyRefListUserRespData():Ref<ListUserRespData>
-	export function refOfListUserRespData(x:ListUserRespData,v:Ref<ListUserRespData>)
-	export function unRefListUserRespData(v:Ref<ListUserRespData>):ListUserRespData
-	export function emptyP2AccessRecordCreatedV1():P2AccessRecordCreatedV1
-	export function emptyRefP2AccessRecordCreatedV1():Ref<P2AccessRecordCreatedV1>
-	export function refOfP2AccessRecordCreatedV1(x:P2AccessRecordCreatedV1,v:Ref<P2AccessRecordCreatedV1>)
-	export function unRefP2AccessRecordCreatedV1(v:Ref<P2AccessRecordCreatedV1>):P2AccessRecordCreatedV1
-	export function emptyP2UserUpdatedV1Handler():P2UserUpdatedV1Handler
-	export function emptyRefP2UserUpdatedV1Handler():Ref<P2UserUpdatedV1Handler>
-	export function refOfP2UserUpdatedV1Handler(x:P2UserUpdatedV1Handler,v:Ref<P2UserUpdatedV1Handler>)
-	export function unRefP2UserUpdatedV1Handler(v:Ref<P2UserUpdatedV1Handler>):P2UserUpdatedV1Handler
-	export function emptyPatchUserResp():PatchUserResp
-	export function emptyRefPatchUserResp():Ref<PatchUserResp>
-	export function refOfPatchUserResp(x:PatchUserResp,v:Ref<PatchUserResp>)
-	export function unRefPatchUserResp(v:Ref<PatchUserResp>):PatchUserResp
-	export function emptyUpdateUserFaceReqBuilder():UpdateUserFaceReqBuilder
-	export function emptyRefUpdateUserFaceReqBuilder():Ref<UpdateUserFaceReqBuilder>
-	export function refOfUpdateUserFaceReqBuilder(x:UpdateUserFaceReqBuilder,v:Ref<UpdateUserFaceReqBuilder>)
-	export function unRefUpdateUserFaceReqBuilder(v:Ref<UpdateUserFaceReqBuilder>):UpdateUserFaceReqBuilder
-	export function emptyCreateRuleExternalPathReqBodyBuilder():CreateRuleExternalPathReqBodyBuilder
-	export function emptyRefCreateRuleExternalPathReqBodyBuilder():Ref<CreateRuleExternalPathReqBodyBuilder>
-	export function refOfCreateRuleExternalPathReqBodyBuilder(x:CreateRuleExternalPathReqBodyBuilder,v:Ref<CreateRuleExternalPathReqBodyBuilder>)
-	export function unRefCreateRuleExternalPathReqBodyBuilder(v:Ref<CreateRuleExternalPathReqBodyBuilder>):CreateRuleExternalPathReqBodyBuilder
-	export function emptyDeleteRuleExternalReqBuilder():DeleteRuleExternalReqBuilder
-	export function emptyRefDeleteRuleExternalReqBuilder():Ref<DeleteRuleExternalReqBuilder>
-	export function refOfDeleteRuleExternalReqBuilder(x:DeleteRuleExternalReqBuilder,v:Ref<DeleteRuleExternalReqBuilder>)
-	export function unRefDeleteRuleExternalReqBuilder(v:Ref<DeleteRuleExternalReqBuilder>):DeleteRuleExternalReqBuilder
-	export function emptyDevice():Device
-	export function emptyRefDevice():Ref<Device>
-	export function refOfDevice(x:Device,v:Ref<Device>)
-	export function unRefDevice(v:Ref<Device>):Device
-	export function emptyDeviceBindRuleExternalReq():DeviceBindRuleExternalReq
-	export function emptyRefDeviceBindRuleExternalReq():Ref<DeviceBindRuleExternalReq>
-	export function refOfDeviceBindRuleExternalReq(x:DeviceBindRuleExternalReq,v:Ref<DeviceBindRuleExternalReq>)
-	export function unRefDeviceBindRuleExternalReq(v:Ref<DeviceBindRuleExternalReq>):DeviceBindRuleExternalReq
-	export function emptyDeviceBindRuleExternalReqBuilder():DeviceBindRuleExternalReqBuilder
-	export function emptyRefDeviceBindRuleExternalReqBuilder():Ref<DeviceBindRuleExternalReqBuilder>
-	export function refOfDeviceBindRuleExternalReqBuilder(x:DeviceBindRuleExternalReqBuilder,v:Ref<DeviceBindRuleExternalReqBuilder>)
-	export function unRefDeviceBindRuleExternalReqBuilder(v:Ref<DeviceBindRuleExternalReqBuilder>):DeviceBindRuleExternalReqBuilder
-	export function emptyGetUserReqBuilder():GetUserReqBuilder
-	export function emptyRefGetUserReqBuilder():Ref<GetUserReqBuilder>
-	export function refOfGetUserReqBuilder(x:GetUserReqBuilder,v:Ref<GetUserReqBuilder>)
-	export function unRefGetUserReqBuilder(v:Ref<GetUserReqBuilder>):GetUserReqBuilder
-	export function emptyPatchUserReq():PatchUserReq
-	export function emptyRefPatchUserReq():Ref<PatchUserReq>
-	export function refOfPatchUserReq(x:PatchUserReq,v:Ref<PatchUserReq>)
-	export function unRefPatchUserReq(v:Ref<PatchUserReq>):PatchUserReq
-	export function emptyRuleBuilder():RuleBuilder
-	export function emptyRefRuleBuilder():Ref<RuleBuilder>
-	export function refOfRuleBuilder(x:RuleBuilder,v:Ref<RuleBuilder>)
-	export function unRefRuleBuilder(v:Ref<RuleBuilder>):RuleBuilder
-	export function emptyFeature():Feature
-	export function emptyRefFeature():Ref<Feature>
-	export function refOfFeature(x:Feature,v:Ref<Feature>)
-	export function unRefFeature(v:Ref<Feature>):Feature
-	export function emptyGetRuleExternalRespData():GetRuleExternalRespData
-	export function emptyRefGetRuleExternalRespData():Ref<GetRuleExternalRespData>
-	export function refOfGetRuleExternalRespData(x:GetRuleExternalRespData,v:Ref<GetRuleExternalRespData>)
-	export function unRefGetRuleExternalRespData(v:Ref<GetRuleExternalRespData>):GetRuleExternalRespData
-	export function emptyCreateVisitorReqBodyBuilder():CreateVisitorReqBodyBuilder
-	export function emptyRefCreateVisitorReqBodyBuilder():Ref<CreateVisitorReqBodyBuilder>
-	export function refOfCreateVisitorReqBodyBuilder(x:CreateVisitorReqBodyBuilder,v:Ref<CreateVisitorReqBodyBuilder>)
-	export function unRefCreateVisitorReqBodyBuilder(v:Ref<CreateVisitorReqBodyBuilder>):CreateVisitorReqBodyBuilder
-	export function emptyCreateVisitorReqBuilder():CreateVisitorReqBuilder
-	export function emptyRefCreateVisitorReqBuilder():Ref<CreateVisitorReqBuilder>
-	export function refOfCreateVisitorReqBuilder(x:CreateVisitorReqBuilder,v:Ref<CreateVisitorReqBuilder>)
-	export function unRefCreateVisitorReqBuilder(v:Ref<CreateVisitorReqBuilder>):CreateVisitorReqBuilder
-	export function emptyGetUserResp():GetUserResp
-	export function emptyRefGetUserResp():Ref<GetUserResp>
-	export function refOfGetUserResp(x:GetUserResp,v:Ref<GetUserResp>)
-	export function unRefGetUserResp(v:Ref<GetUserResp>):GetUserResp
 	export function emptyListUserIterator():ListUserIterator
 	export function emptyRefListUserIterator():Ref<ListUserIterator>
 	export function refOfListUserIterator(x:ListUserIterator,v:Ref<ListUserIterator>)
 	export function unRefListUserIterator(v:Ref<ListUserIterator>):ListUserIterator
-	export function emptyOpeningTimePeriodExternalBuilder():OpeningTimePeriodExternalBuilder
-	export function emptyRefOpeningTimePeriodExternalBuilder():Ref<OpeningTimePeriodExternalBuilder>
-	export function refOfOpeningTimePeriodExternalBuilder(x:OpeningTimePeriodExternalBuilder,v:Ref<OpeningTimePeriodExternalBuilder>)
-	export function unRefOpeningTimePeriodExternalBuilder(v:Ref<OpeningTimePeriodExternalBuilder>):OpeningTimePeriodExternalBuilder
-	export function emptyDeleteVisitorReq():DeleteVisitorReq
-	export function emptyRefDeleteVisitorReq():Ref<DeleteVisitorReq>
-	export function refOfDeleteVisitorReq(x:DeleteVisitorReq,v:Ref<DeleteVisitorReq>)
-	export function unRefDeleteVisitorReq(v:Ref<DeleteVisitorReq>):DeleteVisitorReq
-	export function emptyDeviceBindRuleExternalPathReqBodyBuilder():DeviceBindRuleExternalPathReqBodyBuilder
-	export function emptyRefDeviceBindRuleExternalPathReqBodyBuilder():Ref<DeviceBindRuleExternalPathReqBodyBuilder>
-	export function refOfDeviceBindRuleExternalPathReqBodyBuilder(x:DeviceBindRuleExternalPathReqBodyBuilder,v:Ref<DeviceBindRuleExternalPathReqBodyBuilder>)
-	export function unRefDeviceBindRuleExternalPathReqBodyBuilder(v:Ref<DeviceBindRuleExternalPathReqBodyBuilder>):DeviceBindRuleExternalPathReqBodyBuilder
-	export function emptyFeatureBuilder():FeatureBuilder
-	export function emptyRefFeatureBuilder():Ref<FeatureBuilder>
-	export function refOfFeatureBuilder(x:FeatureBuilder,v:Ref<FeatureBuilder>)
-	export function unRefFeatureBuilder(v:Ref<FeatureBuilder>):FeatureBuilder
-	export function emptyGetAccessRecordAccessPhotoReqBuilder():GetAccessRecordAccessPhotoReqBuilder
-	export function emptyRefGetAccessRecordAccessPhotoReqBuilder():Ref<GetAccessRecordAccessPhotoReqBuilder>
-	export function refOfGetAccessRecordAccessPhotoReqBuilder(x:GetAccessRecordAccessPhotoReqBuilder,v:Ref<GetAccessRecordAccessPhotoReqBuilder>)
-	export function unRefGetAccessRecordAccessPhotoReqBuilder(v:Ref<GetAccessRecordAccessPhotoReqBuilder>):GetAccessRecordAccessPhotoReqBuilder
-	export function emptyListAccessRecordRespData():ListAccessRecordRespData
-	export function emptyRefListAccessRecordRespData():Ref<ListAccessRecordRespData>
-	export function refOfListAccessRecordRespData(x:ListAccessRecordRespData,v:Ref<ListAccessRecordRespData>)
-	export function unRefListAccessRecordRespData(v:Ref<ListAccessRecordRespData>):ListAccessRecordRespData
-	export function emptyListUserReqBuilder():ListUserReqBuilder
-	export function emptyRefListUserReqBuilder():Ref<ListUserReqBuilder>
-	export function refOfListUserReqBuilder(x:ListUserReqBuilder,v:Ref<ListUserReqBuilder>)
-	export function unRefListUserReqBuilder(v:Ref<ListUserReqBuilder>):ListUserReqBuilder
-	export function emptyP2AccessRecordCreatedV1Handler():P2AccessRecordCreatedV1Handler
-	export function emptyRefP2AccessRecordCreatedV1Handler():Ref<P2AccessRecordCreatedV1Handler>
-	export function refOfP2AccessRecordCreatedV1Handler(x:P2AccessRecordCreatedV1Handler,v:Ref<P2AccessRecordCreatedV1Handler>)
-	export function unRefP2AccessRecordCreatedV1Handler(v:Ref<P2AccessRecordCreatedV1Handler>):P2AccessRecordCreatedV1Handler
+	export function emptyDeleteVisitorResp():DeleteVisitorResp
+	export function emptyRefDeleteVisitorResp():Ref<DeleteVisitorResp>
+	export function refOfDeleteVisitorResp(x:DeleteVisitorResp,v:Ref<DeleteVisitorResp>)
+	export function unRefDeleteVisitorResp(v:Ref<DeleteVisitorResp>):DeleteVisitorResp
+	export function emptyDepartmentId():DepartmentId
+	export function emptyRefDepartmentId():Ref<DepartmentId>
+	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
+	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
+	export function emptyUpdateUserFaceResp():UpdateUserFaceResp
+	export function emptyRefUpdateUserFaceResp():Ref<UpdateUserFaceResp>
+	export function refOfUpdateUserFaceResp(x:UpdateUserFaceResp,v:Ref<UpdateUserFaceResp>)
+	export function unRefUpdateUserFaceResp(v:Ref<UpdateUserFaceResp>):UpdateUserFaceResp
+	export function emptyFile():File
+	export function emptyRefFile():Ref<File>
+	export function refOfFile(x:File,v:Ref<File>)
+	export function unRefFile(v:Ref<File>):File
+	export function emptyGetRuleExternalReq():GetRuleExternalReq
+	export function emptyRefGetRuleExternalReq():Ref<GetRuleExternalReq>
+	export function refOfGetRuleExternalReq(x:GetRuleExternalReq,v:Ref<GetRuleExternalReq>)
+	export function unRefGetRuleExternalReq(v:Ref<GetRuleExternalReq>):GetRuleExternalReq
+	export function emptyGetUserResp():GetUserResp
+	export function emptyRefGetUserResp():Ref<GetUserResp>
+	export function refOfGetUserResp(x:GetUserResp,v:Ref<GetUserResp>)
+	export function unRefGetUserResp(v:Ref<GetUserResp>):GetUserResp
 	export function emptyP2UserUpdatedV1():P2UserUpdatedV1
 	export function emptyRefP2UserUpdatedV1():Ref<P2UserUpdatedV1>
 	export function refOfP2UserUpdatedV1(x:P2UserUpdatedV1,v:Ref<P2UserUpdatedV1>)
 	export function unRefP2UserUpdatedV1(v:Ref<P2UserUpdatedV1>):P2UserUpdatedV1
-	export function emptyProperty():Property
-	export function emptyRefProperty():Ref<Property>
-	export function refOfProperty(x:Property,v:Ref<Property>)
-	export function unRefProperty(v:Ref<Property>):Property
-	export function emptyV1():V1
-	export function emptyRefV1():Ref<V1>
-	export function refOfV1(x:V1,v:Ref<V1>)
-	export function unRefV1(v:Ref<V1>):V1
-	export function emptyCreateVisitorResp():CreateVisitorResp
-	export function emptyRefCreateVisitorResp():Ref<CreateVisitorResp>
-	export function refOfCreateVisitorResp(x:CreateVisitorResp,v:Ref<CreateVisitorResp>)
-	export function unRefCreateVisitorResp(v:Ref<CreateVisitorResp>):CreateVisitorResp
-	export function emptyDeviceBindRuleExternalResp():DeviceBindRuleExternalResp
-	export function emptyRefDeviceBindRuleExternalResp():Ref<DeviceBindRuleExternalResp>
-	export function refOfDeviceBindRuleExternalResp(x:DeviceBindRuleExternalResp,v:Ref<DeviceBindRuleExternalResp>)
-	export function unRefDeviceBindRuleExternalResp(v:Ref<DeviceBindRuleExternalResp>):DeviceBindRuleExternalResp
-	export function emptyGetUserFaceReqBuilder():GetUserFaceReqBuilder
-	export function emptyRefGetUserFaceReqBuilder():Ref<GetUserFaceReqBuilder>
-	export function refOfGetUserFaceReqBuilder(x:GetUserFaceReqBuilder,v:Ref<GetUserFaceReqBuilder>)
-	export function unRefGetUserFaceReqBuilder(v:Ref<GetUserFaceReqBuilder>):GetUserFaceReqBuilder
-	export function emptyGetUserRespData():GetUserRespData
-	export function emptyRefGetUserRespData():Ref<GetUserRespData>
-	export function refOfGetUserRespData(x:GetUserRespData,v:Ref<GetUserRespData>)
-	export function unRefGetUserRespData(v:Ref<GetUserRespData>):GetUserRespData
-	export function emptyListDeviceResp():ListDeviceResp
-	export function emptyRefListDeviceResp():Ref<ListDeviceResp>
-	export function refOfListDeviceResp(x:ListDeviceResp,v:Ref<ListDeviceResp>)
-	export function unRefListDeviceResp(v:Ref<ListDeviceResp>):ListDeviceResp
-	export function emptyListUserReq():ListUserReq
-	export function emptyRefListUserReq():Ref<ListUserReq>
-	export function refOfListUserReq(x:ListUserReq,v:Ref<ListUserReq>)
-	export function unRefListUserReq(v:Ref<ListUserReq>):ListUserReq
-	export function emptyOpeningTimeExternalBuilder():OpeningTimeExternalBuilder
-	export function emptyRefOpeningTimeExternalBuilder():Ref<OpeningTimeExternalBuilder>
-	export function refOfOpeningTimeExternalBuilder(x:OpeningTimeExternalBuilder,v:Ref<OpeningTimeExternalBuilder>)
-	export function unRefOpeningTimeExternalBuilder(v:Ref<OpeningTimeExternalBuilder>):OpeningTimeExternalBuilder
-	export function emptyPropertyBuilder():PropertyBuilder
-	export function emptyRefPropertyBuilder():Ref<PropertyBuilder>
-	export function refOfPropertyBuilder(x:PropertyBuilder,v:Ref<PropertyBuilder>)
-	export function unRefPropertyBuilder(v:Ref<PropertyBuilder>):PropertyBuilder
-	export function emptyRule():Rule
-	export function emptyRefRule():Ref<Rule>
-	export function refOfRule(x:Rule,v:Ref<Rule>)
-	export function unRefRule(v:Ref<Rule>):Rule
 	export function emptyAccessRecord():AccessRecord
 	export function emptyRefAccessRecord():Ref<AccessRecord>
 	export function refOfAccessRecord(x:AccessRecord,v:Ref<AccessRecord>)
 	export function unRefAccessRecord(v:Ref<AccessRecord>):AccessRecord
-	export function emptyDepartmentIdBuilder():DepartmentIdBuilder
-	export function emptyRefDepartmentIdBuilder():Ref<DepartmentIdBuilder>
-	export function refOfDepartmentIdBuilder(x:DepartmentIdBuilder,v:Ref<DepartmentIdBuilder>)
-	export function unRefDepartmentIdBuilder(v:Ref<DepartmentIdBuilder>):DepartmentIdBuilder
-	export function emptyGetUserFaceResp():GetUserFaceResp
-	export function emptyRefGetUserFaceResp():Ref<GetUserFaceResp>
-	export function refOfGetUserFaceResp(x:GetUserFaceResp,v:Ref<GetUserFaceResp>)
-	export function unRefGetUserFaceResp(v:Ref<GetUserFaceResp>):GetUserFaceResp
+	export function emptyDevice():Device
+	export function emptyRefDevice():Ref<Device>
+	export function refOfDevice(x:Device,v:Ref<Device>)
+	export function unRefDevice(v:Ref<Device>):Device
+	export function emptyGetUserFaceReq():GetUserFaceReq
+	export function emptyRefGetUserFaceReq():Ref<GetUserFaceReq>
+	export function refOfGetUserFaceReq(x:GetUserFaceReq,v:Ref<GetUserFaceReq>)
+	export function unRefGetUserFaceReq(v:Ref<GetUserFaceReq>):GetUserFaceReq
 	export function emptyListAccessRecordReq():ListAccessRecordReq
 	export function emptyRefListAccessRecordReq():Ref<ListAccessRecordReq>
 	export function refOfListAccessRecordReq(x:ListAccessRecordReq,v:Ref<ListAccessRecordReq>)
 	export function unRefListAccessRecordReq(v:Ref<ListAccessRecordReq>):ListAccessRecordReq
-	export function emptyOpeningTimeExternal():OpeningTimeExternal
-	export function emptyRefOpeningTimeExternal():Ref<OpeningTimeExternal>
-	export function refOfOpeningTimeExternal(x:OpeningTimeExternal,v:Ref<OpeningTimeExternal>)
-	export function unRefOpeningTimeExternal(v:Ref<OpeningTimeExternal>):OpeningTimeExternal
-	export function emptyAccessRecordBuilder():AccessRecordBuilder
-	export function emptyRefAccessRecordBuilder():Ref<AccessRecordBuilder>
-	export function refOfAccessRecordBuilder(x:AccessRecordBuilder,v:Ref<AccessRecordBuilder>)
-	export function unRefAccessRecordBuilder(v:Ref<AccessRecordBuilder>):AccessRecordBuilder
-	export function emptyDeviceBuilder():DeviceBuilder
-	export function emptyRefDeviceBuilder():Ref<DeviceBuilder>
-	export function refOfDeviceBuilder(x:DeviceBuilder,v:Ref<DeviceBuilder>)
-	export function unRefDeviceBuilder(v:Ref<DeviceBuilder>):DeviceBuilder
-	export function emptyGetAccessRecordAccessPhotoResp():GetAccessRecordAccessPhotoResp
-	export function emptyRefGetAccessRecordAccessPhotoResp():Ref<GetAccessRecordAccessPhotoResp>
-	export function refOfGetAccessRecordAccessPhotoResp(x:GetAccessRecordAccessPhotoResp,v:Ref<GetAccessRecordAccessPhotoResp>)
-	export function unRefGetAccessRecordAccessPhotoResp(v:Ref<GetAccessRecordAccessPhotoResp>):GetAccessRecordAccessPhotoResp
-	export function emptyGetRuleExternalReqBuilder():GetRuleExternalReqBuilder
-	export function emptyRefGetRuleExternalReqBuilder():Ref<GetRuleExternalReqBuilder>
-	export function refOfGetRuleExternalReqBuilder(x:GetRuleExternalReqBuilder,v:Ref<GetRuleExternalReqBuilder>)
-	export function unRefGetRuleExternalReqBuilder(v:Ref<GetRuleExternalReqBuilder>):GetRuleExternalReqBuilder
-	export function emptyGetUserReq():GetUserReq
-	export function emptyRefGetUserReq():Ref<GetUserReq>
-	export function refOfGetUserReq(x:GetUserReq,v:Ref<GetUserReq>)
-	export function unRefGetUserReq(v:Ref<GetUserReq>):GetUserReq
-	export function emptyListAccessRecordResp():ListAccessRecordResp
-	export function emptyRefListAccessRecordResp():Ref<ListAccessRecordResp>
-	export function refOfListAccessRecordResp(x:ListAccessRecordResp,v:Ref<ListAccessRecordResp>)
-	export function unRefListAccessRecordResp(v:Ref<ListAccessRecordResp>):ListAccessRecordResp
-	export function emptyPatchUserReqBuilder():PatchUserReqBuilder
-	export function emptyRefPatchUserReqBuilder():Ref<PatchUserReqBuilder>
-	export function refOfPatchUserReqBuilder(x:PatchUserReqBuilder,v:Ref<PatchUserReqBuilder>)
-	export function unRefPatchUserReqBuilder(v:Ref<PatchUserReqBuilder>):PatchUserReqBuilder
-	export function emptyCreateVisitorReqBody():CreateVisitorReqBody
-	export function emptyRefCreateVisitorReqBody():Ref<CreateVisitorReqBody>
-	export function refOfCreateVisitorReqBody(x:CreateVisitorReqBody,v:Ref<CreateVisitorReqBody>)
-	export function unRefCreateVisitorReqBody(v:Ref<CreateVisitorReqBody>):CreateVisitorReqBody
-	export function emptyDeviceExternal():DeviceExternal
-	export function emptyRefDeviceExternal():Ref<DeviceExternal>
-	export function refOfDeviceExternal(x:DeviceExternal,v:Ref<DeviceExternal>)
-	export function unRefDeviceExternal(v:Ref<DeviceExternal>):DeviceExternal
-	export function emptyFileBuilder():FileBuilder
-	export function emptyRefFileBuilder():Ref<FileBuilder>
-	export function refOfFileBuilder(x:FileBuilder,v:Ref<FileBuilder>)
-	export function unRefFileBuilder(v:Ref<FileBuilder>):FileBuilder
-	export function emptyGetAccessRecordAccessPhotoReq():GetAccessRecordAccessPhotoReq
-	export function emptyRefGetAccessRecordAccessPhotoReq():Ref<GetAccessRecordAccessPhotoReq>
-	export function refOfGetAccessRecordAccessPhotoReq(x:GetAccessRecordAccessPhotoReq,v:Ref<GetAccessRecordAccessPhotoReq>)
-	export function unRefGetAccessRecordAccessPhotoReq(v:Ref<GetAccessRecordAccessPhotoReq>):GetAccessRecordAccessPhotoReq
-	export function emptyListUserResp():ListUserResp
-	export function emptyRefListUserResp():Ref<ListUserResp>
-	export function refOfListUserResp(x:ListUserResp,v:Ref<ListUserResp>)
-	export function unRefListUserResp(v:Ref<ListUserResp>):ListUserResp
-	export function emptyCreateRuleExternalReqBuilder():CreateRuleExternalReqBuilder
-	export function emptyRefCreateRuleExternalReqBuilder():Ref<CreateRuleExternalReqBuilder>
-	export function refOfCreateRuleExternalReqBuilder(x:CreateRuleExternalReqBuilder,v:Ref<CreateRuleExternalReqBuilder>)
-	export function unRefCreateRuleExternalReqBuilder(v:Ref<CreateRuleExternalReqBuilder>):CreateRuleExternalReqBuilder
+	export function emptyOpeningTimeValidDayExternal():OpeningTimeValidDayExternal
+	export function emptyRefOpeningTimeValidDayExternal():Ref<OpeningTimeValidDayExternal>
+	export function refOfOpeningTimeValidDayExternal(x:OpeningTimeValidDayExternal,v:Ref<OpeningTimeValidDayExternal>)
+	export function unRefOpeningTimeValidDayExternal(v:Ref<OpeningTimeValidDayExternal>):OpeningTimeValidDayExternal
+	export function emptyP2UserUpdatedV1Data():P2UserUpdatedV1Data
+	export function emptyRefP2UserUpdatedV1Data():Ref<P2UserUpdatedV1Data>
+	export function refOfP2UserUpdatedV1Data(x:P2UserUpdatedV1Data,v:Ref<P2UserUpdatedV1Data>)
+	export function unRefP2UserUpdatedV1Data(v:Ref<P2UserUpdatedV1Data>):P2UserUpdatedV1Data
+	export function emptyGetUserRespData():GetUserRespData
+	export function emptyRefGetUserRespData():Ref<GetUserRespData>
+	export function refOfGetUserRespData(x:GetUserRespData,v:Ref<GetUserRespData>)
+	export function unRefGetUserRespData(v:Ref<GetUserRespData>):GetUserRespData
+	export function emptyListAccessRecordIterator():ListAccessRecordIterator
+	export function emptyRefListAccessRecordIterator():Ref<ListAccessRecordIterator>
+	export function refOfListAccessRecordIterator(x:ListAccessRecordIterator,v:Ref<ListAccessRecordIterator>)
+	export function unRefListAccessRecordIterator(v:Ref<ListAccessRecordIterator>):ListAccessRecordIterator
+	export function emptyDeleteRuleExternalResp():DeleteRuleExternalResp
+	export function emptyRefDeleteRuleExternalResp():Ref<DeleteRuleExternalResp>
+	export function refOfDeleteRuleExternalResp(x:DeleteRuleExternalResp,v:Ref<DeleteRuleExternalResp>)
+	export function unRefDeleteRuleExternalResp(v:Ref<DeleteRuleExternalResp>):DeleteRuleExternalResp
+	export function emptyGetRuleExternalResp():GetRuleExternalResp
+	export function emptyRefGetRuleExternalResp():Ref<GetRuleExternalResp>
+	export function refOfGetRuleExternalResp(x:GetRuleExternalResp,v:Ref<GetRuleExternalResp>)
+	export function unRefGetRuleExternalResp(v:Ref<GetRuleExternalResp>):GetRuleExternalResp
+	export function emptyProperty():Property
+	export function emptyRefProperty():Ref<Property>
+	export function refOfProperty(x:Property,v:Ref<Property>)
+	export function unRefProperty(v:Ref<Property>):Property
+	export function emptyRule():Rule
+	export function emptyRefRule():Ref<Rule>
+	export function refOfRule(x:Rule,v:Ref<Rule>)
+	export function unRefRule(v:Ref<Rule>):Rule
+	export function emptyCreateVisitorReq():CreateVisitorReq
+	export function emptyRefCreateVisitorReq():Ref<CreateVisitorReq>
+	export function refOfCreateVisitorReq(x:CreateVisitorReq,v:Ref<CreateVisitorReq>)
+	export function unRefCreateVisitorReq(v:Ref<CreateVisitorReq>):CreateVisitorReq
+	export function emptyCreateVisitorResp():CreateVisitorResp
+	export function emptyRefCreateVisitorResp():Ref<CreateVisitorResp>
+	export function refOfCreateVisitorResp(x:CreateVisitorResp,v:Ref<CreateVisitorResp>)
+	export function unRefCreateVisitorResp(v:Ref<CreateVisitorResp>):CreateVisitorResp
 	export function emptyCreateVisitorRespData():CreateVisitorRespData
 	export function emptyRefCreateVisitorRespData():Ref<CreateVisitorRespData>
 	export function refOfCreateVisitorRespData(x:CreateVisitorRespData,v:Ref<CreateVisitorRespData>)
 	export function unRefCreateVisitorRespData(v:Ref<CreateVisitorRespData>):CreateVisitorRespData
+	export function emptyFeature():Feature
+	export function emptyRefFeature():Ref<Feature>
+	export function refOfFeature(x:Feature,v:Ref<Feature>)
+	export function unRefFeature(v:Ref<Feature>):Feature
+	export function emptyP2AccessRecordCreatedV1():P2AccessRecordCreatedV1
+	export function emptyRefP2AccessRecordCreatedV1():Ref<P2AccessRecordCreatedV1>
+	export function refOfP2AccessRecordCreatedV1(x:P2AccessRecordCreatedV1,v:Ref<P2AccessRecordCreatedV1>)
+	export function unRefP2AccessRecordCreatedV1(v:Ref<P2AccessRecordCreatedV1>):P2AccessRecordCreatedV1
+	export function emptyCreateRuleExternalRespData():CreateRuleExternalRespData
+	export function emptyRefCreateRuleExternalRespData():Ref<CreateRuleExternalRespData>
+	export function refOfCreateRuleExternalRespData(x:CreateRuleExternalRespData,v:Ref<CreateRuleExternalRespData>)
+	export function unRefCreateRuleExternalRespData(v:Ref<CreateRuleExternalRespData>):CreateRuleExternalRespData
+	export function emptyDeviceBindRuleExternalReq():DeviceBindRuleExternalReq
+	export function emptyRefDeviceBindRuleExternalReq():Ref<DeviceBindRuleExternalReq>
+	export function refOfDeviceBindRuleExternalReq(x:DeviceBindRuleExternalReq,v:Ref<DeviceBindRuleExternalReq>)
+	export function unRefDeviceBindRuleExternalReq(v:Ref<DeviceBindRuleExternalReq>):DeviceBindRuleExternalReq
+	export function emptyListUserReq():ListUserReq
+	export function emptyRefListUserReq():Ref<ListUserReq>
+	export function refOfListUserReq(x:ListUserReq,v:Ref<ListUserReq>)
+	export function unRefListUserReq(v:Ref<ListUserReq>):ListUserReq
+	export function emptyListUserResp():ListUserResp
+	export function emptyRefListUserResp():Ref<ListUserResp>
+	export function refOfListUserResp(x:ListUserResp,v:Ref<ListUserResp>)
+	export function unRefListUserResp(v:Ref<ListUserResp>):ListUserResp
+	export function emptyOpeningTimeExternal():OpeningTimeExternal
+	export function emptyRefOpeningTimeExternal():Ref<OpeningTimeExternal>
+	export function refOfOpeningTimeExternal(x:OpeningTimeExternal,v:Ref<OpeningTimeExternal>)
+	export function unRefOpeningTimeExternal(v:Ref<OpeningTimeExternal>):OpeningTimeExternal
+	export function emptyUserId():UserId
+	export function emptyRefUserId():Ref<UserId>
+	export function refOfUserId(x:UserId,v:Ref<UserId>)
+	export function unRefUserId(v:Ref<UserId>):UserId
+	export function emptyGetRuleExternalRespData():GetRuleExternalRespData
+	export function emptyRefGetRuleExternalRespData():Ref<GetRuleExternalRespData>
+	export function refOfGetRuleExternalRespData(x:GetRuleExternalRespData,v:Ref<GetRuleExternalRespData>)
+	export function unRefGetRuleExternalRespData(v:Ref<GetRuleExternalRespData>):GetRuleExternalRespData
+	export function emptyGetUserReq():GetUserReq
+	export function emptyRefGetUserReq():Ref<GetUserReq>
+	export function refOfGetUserReq(x:GetUserReq,v:Ref<GetUserReq>)
+	export function unRefGetUserReq(v:Ref<GetUserReq>):GetUserReq
+	export function emptyListAccessRecordRespData():ListAccessRecordRespData
+	export function emptyRefListAccessRecordRespData():Ref<ListAccessRecordRespData>
+	export function refOfListAccessRecordRespData(x:ListAccessRecordRespData,v:Ref<ListAccessRecordRespData>)
+	export function unRefListAccessRecordRespData(v:Ref<ListAccessRecordRespData>):ListAccessRecordRespData
+	export function emptyV1():V1
+	export function emptyRefV1():Ref<V1>
+	export function refOfV1(x:V1,v:Ref<V1>)
+	export function unRefV1(v:Ref<V1>):V1
+	export function emptyUpdateUserFaceReq():UpdateUserFaceReq
+	export function emptyRefUpdateUserFaceReq():Ref<UpdateUserFaceReq>
+	export function refOfUpdateUserFaceReq(x:UpdateUserFaceReq,v:Ref<UpdateUserFaceReq>)
+	export function unRefUpdateUserFaceReq(v:Ref<UpdateUserFaceReq>):UpdateUserFaceReq
+	export function emptyCreateRuleExternalReq():CreateRuleExternalReq
+	export function emptyRefCreateRuleExternalReq():Ref<CreateRuleExternalReq>
+	export function refOfCreateRuleExternalReq(x:CreateRuleExternalReq,v:Ref<CreateRuleExternalReq>)
+	export function unRefCreateRuleExternalReq(v:Ref<CreateRuleExternalReq>):CreateRuleExternalReq
 	export function emptyDeleteRuleExternalReq():DeleteRuleExternalReq
 	export function emptyRefDeleteRuleExternalReq():Ref<DeleteRuleExternalReq>
 	export function refOfDeleteRuleExternalReq(x:DeleteRuleExternalReq,v:Ref<DeleteRuleExternalReq>)
 	export function unRefDeleteRuleExternalReq(v:Ref<DeleteRuleExternalReq>):DeleteRuleExternalReq
-	export function emptyUserExternalBuilder():UserExternalBuilder
-	export function emptyRefUserExternalBuilder():Ref<UserExternalBuilder>
-	export function refOfUserExternalBuilder(x:UserExternalBuilder,v:Ref<UserExternalBuilder>)
-	export function unRefUserExternalBuilder(v:Ref<UserExternalBuilder>):UserExternalBuilder
-	export function emptyUserIdBuilder():UserIdBuilder
-	export function emptyRefUserIdBuilder():Ref<UserIdBuilder>
-	export function refOfUserIdBuilder(x:UserIdBuilder,v:Ref<UserIdBuilder>)
-	export function unRefUserIdBuilder(v:Ref<UserIdBuilder>):UserIdBuilder
+	export function emptyP2AccessRecordCreatedV1Data():P2AccessRecordCreatedV1Data
+	export function emptyRefP2AccessRecordCreatedV1Data():Ref<P2AccessRecordCreatedV1Data>
+	export function refOfP2AccessRecordCreatedV1Data(x:P2AccessRecordCreatedV1Data,v:Ref<P2AccessRecordCreatedV1Data>)
+	export function unRefP2AccessRecordCreatedV1Data(v:Ref<P2AccessRecordCreatedV1Data>):P2AccessRecordCreatedV1Data
+	export function emptyListDeviceRespData():ListDeviceRespData
+	export function emptyRefListDeviceRespData():Ref<ListDeviceRespData>
+	export function refOfListDeviceRespData(x:ListDeviceRespData,v:Ref<ListDeviceRespData>)
+	export function unRefListDeviceRespData(v:Ref<ListDeviceRespData>):ListDeviceRespData
+	export function emptyOpeningTimePeriodExternal():OpeningTimePeriodExternal
+	export function emptyRefOpeningTimePeriodExternal():Ref<OpeningTimePeriodExternal>
+	export function refOfOpeningTimePeriodExternal(x:OpeningTimePeriodExternal,v:Ref<OpeningTimePeriodExternal>)
+	export function unRefOpeningTimePeriodExternal(v:Ref<OpeningTimePeriodExternal>):OpeningTimePeriodExternal
+	export function emptyUserExternal():UserExternal
+	export function emptyRefUserExternal():Ref<UserExternal>
+	export function refOfUserExternal(x:UserExternal,v:Ref<UserExternal>)
+	export function unRefUserExternal(v:Ref<UserExternal>):UserExternal
+	export function emptyDeleteVisitorReq():DeleteVisitorReq
+	export function emptyRefDeleteVisitorReq():Ref<DeleteVisitorReq>
+	export function refOfDeleteVisitorReq(x:DeleteVisitorReq,v:Ref<DeleteVisitorReq>)
+	export function unRefDeleteVisitorReq(v:Ref<DeleteVisitorReq>):DeleteVisitorReq
+	export function emptyDeviceBindRuleExternalResp():DeviceBindRuleExternalResp
+	export function emptyRefDeviceBindRuleExternalResp():Ref<DeviceBindRuleExternalResp>
+	export function refOfDeviceBindRuleExternalResp(x:DeviceBindRuleExternalResp,v:Ref<DeviceBindRuleExternalResp>)
+	export function unRefDeviceBindRuleExternalResp(v:Ref<DeviceBindRuleExternalResp>):DeviceBindRuleExternalResp
+	export function emptyUser():User
+	export function emptyRefUser():Ref<User>
+	export function refOfUser(x:User,v:Ref<User>)
+	export function unRefUser(v:Ref<User>):User
+	export function emptyDeviceExternal():DeviceExternal
+	export function emptyRefDeviceExternal():Ref<DeviceExternal>
+	export function refOfDeviceExternal(x:DeviceExternal,v:Ref<DeviceExternal>)
+	export function unRefDeviceExternal(v:Ref<DeviceExternal>):DeviceExternal
+	export function emptyListDeviceResp():ListDeviceResp
+	export function emptyRefListDeviceResp():Ref<ListDeviceResp>
+	export function refOfListDeviceResp(x:ListDeviceResp,v:Ref<ListDeviceResp>)
+	export function unRefListDeviceResp(v:Ref<ListDeviceResp>):ListDeviceResp
+	export function emptyCreateRuleExternalReqBody():CreateRuleExternalReqBody
+	export function emptyRefCreateRuleExternalReqBody():Ref<CreateRuleExternalReqBody>
+	export function refOfCreateRuleExternalReqBody(x:CreateRuleExternalReqBody,v:Ref<CreateRuleExternalReqBody>)
+	export function unRefCreateRuleExternalReqBody(v:Ref<CreateRuleExternalReqBody>):CreateRuleExternalReqBody
+	export function emptyCreateVisitorReqBody():CreateVisitorReqBody
+	export function emptyRefCreateVisitorReqBody():Ref<CreateVisitorReqBody>
+	export function refOfCreateVisitorReqBody(x:CreateVisitorReqBody,v:Ref<CreateVisitorReqBody>)
+	export function unRefCreateVisitorReqBody(v:Ref<CreateVisitorReqBody>):CreateVisitorReqBody
+	export function emptyPatchUserResp():PatchUserResp
+	export function emptyRefPatchUserResp():Ref<PatchUserResp>
+	export function refOfPatchUserResp(x:PatchUserResp,v:Ref<PatchUserResp>)
+	export function unRefPatchUserResp(v:Ref<PatchUserResp>):PatchUserResp
+	export function emptyGetAccessRecordAccessPhotoReq():GetAccessRecordAccessPhotoReq
+	export function emptyRefGetAccessRecordAccessPhotoReq():Ref<GetAccessRecordAccessPhotoReq>
+	export function refOfGetAccessRecordAccessPhotoReq(x:GetAccessRecordAccessPhotoReq,v:Ref<GetAccessRecordAccessPhotoReq>)
+	export function unRefGetAccessRecordAccessPhotoReq(v:Ref<GetAccessRecordAccessPhotoReq>):GetAccessRecordAccessPhotoReq
+	export function emptyGetUserFaceResp():GetUserFaceResp
+	export function emptyRefGetUserFaceResp():Ref<GetUserFaceResp>
+	export function refOfGetUserFaceResp(x:GetUserFaceResp,v:Ref<GetUserFaceResp>)
+	export function unRefGetUserFaceResp(v:Ref<GetUserFaceResp>):GetUserFaceResp
+	export function emptyListUserRespData():ListUserRespData
+	export function emptyRefListUserRespData():Ref<ListUserRespData>
+	export function refOfListUserRespData(x:ListUserRespData,v:Ref<ListUserRespData>)
+	export function unRefListUserRespData(v:Ref<ListUserRespData>):ListUserRespData
+	export function emptyPatchUserReq():PatchUserReq
+	export function emptyRefPatchUserReq():Ref<PatchUserReq>
+	export function refOfPatchUserReq(x:PatchUserReq,v:Ref<PatchUserReq>)
+	export function unRefPatchUserReq(v:Ref<PatchUserReq>):PatchUserReq
+	export function emptyDeviceBindRuleExternalReqBody():DeviceBindRuleExternalReqBody
+	export function emptyRefDeviceBindRuleExternalReqBody():Ref<DeviceBindRuleExternalReqBody>
+	export function refOfDeviceBindRuleExternalReqBody(x:DeviceBindRuleExternalReqBody,v:Ref<DeviceBindRuleExternalReqBody>)
+	export function unRefDeviceBindRuleExternalReqBody(v:Ref<DeviceBindRuleExternalReqBody>):DeviceBindRuleExternalReqBody
+	export function emptyCreateRuleExternalResp():CreateRuleExternalResp
+	export function emptyRefCreateRuleExternalResp():Ref<CreateRuleExternalResp>
+	export function refOfCreateRuleExternalResp(x:CreateRuleExternalResp,v:Ref<CreateRuleExternalResp>)
+	export function unRefCreateRuleExternalResp(v:Ref<CreateRuleExternalResp>):CreateRuleExternalResp
+	export function emptyGetAccessRecordAccessPhotoResp():GetAccessRecordAccessPhotoResp
+	export function emptyRefGetAccessRecordAccessPhotoResp():Ref<GetAccessRecordAccessPhotoResp>
+	export function refOfGetAccessRecordAccessPhotoResp(x:GetAccessRecordAccessPhotoResp,v:Ref<GetAccessRecordAccessPhotoResp>)
+	export function unRefGetAccessRecordAccessPhotoResp(v:Ref<GetAccessRecordAccessPhotoResp>):GetAccessRecordAccessPhotoResp
+	export function emptyListAccessRecordResp():ListAccessRecordResp
+	export function emptyRefListAccessRecordResp():Ref<ListAccessRecordResp>
+	export function refOfListAccessRecordResp(x:ListAccessRecordResp,v:Ref<ListAccessRecordResp>)
+	export function unRefListAccessRecordResp(v:Ref<ListAccessRecordResp>):ListAccessRecordResp
 }

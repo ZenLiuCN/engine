@@ -15,11 +15,7 @@ var (
 	GithubComLarksuiteOapiSdkGo3ServiceSearchDefine   []byte
 	GithubComLarksuiteOapiSdkGo3ServiceSearchDeclared = map[string]any{
 		"newService": search.NewService,
-
-		"emptyService":    engine.Empty[search.Service],
-		"emptyRefService": engine.EmptyRefer[search.Service],
-		"refOfService":    engine.ReferOf[search.Service],
-		"unRefService":    engine.UnRefer[search.Service]}
+	}
 )
 
 func init() {

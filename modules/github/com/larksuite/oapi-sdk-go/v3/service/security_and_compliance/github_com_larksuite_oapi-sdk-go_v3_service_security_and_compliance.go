@@ -15,11 +15,7 @@ var (
 	GithubComLarksuiteOapiSdkGo3ServiceSecurity_and_complianceDefine   []byte
 	GithubComLarksuiteOapiSdkGo3ServiceSecurity_and_complianceDeclared = map[string]any{
 		"newService": security_and_compliance.NewService,
-
-		"emptyService":    engine.Empty[security_and_compliance.Service],
-		"emptyRefService": engine.EmptyRefer[security_and_compliance.Service],
-		"refOfService":    engine.ReferOf[security_and_compliance.Service],
-		"unRefService":    engine.UnRefer[security_and_compliance.Service]}
+	}
 )
 
 func init() {

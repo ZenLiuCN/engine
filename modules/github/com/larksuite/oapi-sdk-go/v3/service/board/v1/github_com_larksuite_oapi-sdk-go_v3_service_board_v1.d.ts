@@ -7,7 +7,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/board/v1'{
 	// @ts-ignore
 	import * as context from 'golang/context'
 	// @ts-ignore
-	import type {float64,int,error,Ref,Struct,bool} from 'go'
+	import type {error,Ref,Struct,bool,float64,int} from 'go'
 	export interface CompositeShape extends Struct<CompositeShape>{
 
 			type:Ref<string>
@@ -275,144 +275,80 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/board/v1'{
 			mindMap(mindMap:Ref<MindMap>):Ref<WhiteboardNodeBuilder>
 			build():Ref<WhiteboardNode>
 	}
-	export function emptyListWhiteboardNodeReqBuilder():ListWhiteboardNodeReqBuilder
-	export function emptyRefListWhiteboardNodeReqBuilder():Ref<ListWhiteboardNodeReqBuilder>
-	export function refOfListWhiteboardNodeReqBuilder(x:ListWhiteboardNodeReqBuilder,v:Ref<ListWhiteboardNodeReqBuilder>)
-	export function unRefListWhiteboardNodeReqBuilder(v:Ref<ListWhiteboardNodeReqBuilder>):ListWhiteboardNodeReqBuilder
-	export function emptyListWhiteboardNodeResp():ListWhiteboardNodeResp
-	export function emptyRefListWhiteboardNodeResp():Ref<ListWhiteboardNodeResp>
-	export function refOfListWhiteboardNodeResp(x:ListWhiteboardNodeResp,v:Ref<ListWhiteboardNodeResp>)
-	export function unRefListWhiteboardNodeResp(v:Ref<ListWhiteboardNodeResp>):ListWhiteboardNodeResp
-	export function emptySectionBuilder():SectionBuilder
-	export function emptyRefSectionBuilder():Ref<SectionBuilder>
-	export function refOfSectionBuilder(x:SectionBuilder,v:Ref<SectionBuilder>)
-	export function unRefSectionBuilder(v:Ref<SectionBuilder>):SectionBuilder
-	export function emptyStyle():Style
-	export function emptyRefStyle():Ref<Style>
-	export function refOfStyle(x:Style,v:Ref<Style>)
-	export function unRefStyle(v:Ref<Style>):Style
 	export function emptyTable():Table
 	export function emptyRefTable():Ref<Table>
 	export function refOfTable(x:Table,v:Ref<Table>)
 	export function unRefTable(v:Ref<Table>):Table
-	export function emptyConnectorAttachedObject():ConnectorAttachedObject
-	export function emptyRefConnectorAttachedObject():Ref<ConnectorAttachedObject>
-	export function refOfConnectorAttachedObject(x:ConnectorAttachedObject,v:Ref<ConnectorAttachedObject>)
-	export function unRefConnectorAttachedObject(v:Ref<ConnectorAttachedObject>):ConnectorAttachedObject
-	export function emptyDepartmentIdBuilder():DepartmentIdBuilder
-	export function emptyRefDepartmentIdBuilder():Ref<DepartmentIdBuilder>
-	export function refOfDepartmentIdBuilder(x:DepartmentIdBuilder,v:Ref<DepartmentIdBuilder>)
-	export function unRefDepartmentIdBuilder(v:Ref<DepartmentIdBuilder>):DepartmentIdBuilder
-	export function emptyConnectorAttachedObjectBuilder():ConnectorAttachedObjectBuilder
-	export function emptyRefConnectorAttachedObjectBuilder():Ref<ConnectorAttachedObjectBuilder>
-	export function refOfConnectorAttachedObjectBuilder(x:ConnectorAttachedObjectBuilder,v:Ref<ConnectorAttachedObjectBuilder>)
-	export function unRefConnectorAttachedObjectBuilder(v:Ref<ConnectorAttachedObjectBuilder>):ConnectorAttachedObjectBuilder
-	export function emptyDepartmentId():DepartmentId
-	export function emptyRefDepartmentId():Ref<DepartmentId>
-	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
-	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptyMindMap():MindMap
-	export function emptyRefMindMap():Ref<MindMap>
-	export function refOfMindMap(x:MindMap,v:Ref<MindMap>)
-	export function unRefMindMap(v:Ref<MindMap>):MindMap
-	export function emptyMindMapBuilder():MindMapBuilder
-	export function emptyRefMindMapBuilder():Ref<MindMapBuilder>
-	export function refOfMindMapBuilder(x:MindMapBuilder,v:Ref<MindMapBuilder>)
-	export function unRefMindMapBuilder(v:Ref<MindMapBuilder>):MindMapBuilder
-	export function emptyStyleBuilder():StyleBuilder
-	export function emptyRefStyleBuilder():Ref<StyleBuilder>
-	export function refOfStyleBuilder(x:StyleBuilder,v:Ref<StyleBuilder>)
-	export function unRefStyleBuilder(v:Ref<StyleBuilder>):StyleBuilder
-	export function emptyTableBuilder():TableBuilder
-	export function emptyRefTableBuilder():Ref<TableBuilder>
-	export function refOfTableBuilder(x:TableBuilder,v:Ref<TableBuilder>)
-	export function unRefTableBuilder(v:Ref<TableBuilder>):TableBuilder
-	export function emptyTableCell():TableCell
-	export function emptyRefTableCell():Ref<TableCell>
-	export function refOfTableCell(x:TableCell,v:Ref<TableCell>)
-	export function unRefTableCell(v:Ref<TableCell>):TableCell
-	export function emptyTableCellBuilder():TableCellBuilder
-	export function emptyRefTableCellBuilder():Ref<TableCellBuilder>
-	export function refOfTableCellBuilder(x:TableCellBuilder,v:Ref<TableCellBuilder>)
-	export function unRefTableCellBuilder(v:Ref<TableCellBuilder>):TableCellBuilder
-	export function emptyConnectorBuilder():ConnectorBuilder
-	export function emptyRefConnectorBuilder():Ref<ConnectorBuilder>
-	export function refOfConnectorBuilder(x:ConnectorBuilder,v:Ref<ConnectorBuilder>)
-	export function unRefConnectorBuilder(v:Ref<ConnectorBuilder>):ConnectorBuilder
-	export function emptyText():Text
-	export function emptyRefText():Ref<Text>
-	export function refOfText(x:Text,v:Ref<Text>)
-	export function unRefText(v:Ref<Text>):Text
-	export function emptyWhiteboardNode():WhiteboardNode
-	export function emptyRefWhiteboardNode():Ref<WhiteboardNode>
-	export function refOfWhiteboardNode(x:WhiteboardNode,v:Ref<WhiteboardNode>)
-	export function unRefWhiteboardNode(v:Ref<WhiteboardNode>):WhiteboardNode
-	export function emptyTableMeta():TableMeta
-	export function emptyRefTableMeta():Ref<TableMeta>
-	export function refOfTableMeta(x:TableMeta,v:Ref<TableMeta>)
-	export function unRefTableMeta(v:Ref<TableMeta>):TableMeta
-	export function emptyImage():Image
-	export function emptyRefImage():Ref<Image>
-	export function refOfImage(x:Image,v:Ref<Image>)
-	export function unRefImage(v:Ref<Image>):Image
-	export function emptyListWhiteboardNodeReq():ListWhiteboardNodeReq
-	export function emptyRefListWhiteboardNodeReq():Ref<ListWhiteboardNodeReq>
-	export function refOfListWhiteboardNodeReq(x:ListWhiteboardNodeReq,v:Ref<ListWhiteboardNodeReq>)
-	export function unRefListWhiteboardNodeReq(v:Ref<ListWhiteboardNodeReq>):ListWhiteboardNodeReq
-	export function emptyListWhiteboardNodeRespData():ListWhiteboardNodeRespData
-	export function emptyRefListWhiteboardNodeRespData():Ref<ListWhiteboardNodeRespData>
-	export function refOfListWhiteboardNodeRespData(x:ListWhiteboardNodeRespData,v:Ref<ListWhiteboardNodeRespData>)
-	export function unRefListWhiteboardNodeRespData(v:Ref<ListWhiteboardNodeRespData>):ListWhiteboardNodeRespData
-	export function emptyTableCellMergeInfo():TableCellMergeInfo
-	export function emptyRefTableCellMergeInfo():Ref<TableCellMergeInfo>
-	export function refOfTableCellMergeInfo(x:TableCellMergeInfo,v:Ref<TableCellMergeInfo>)
-	export function unRefTableCellMergeInfo(v:Ref<TableCellMergeInfo>):TableCellMergeInfo
-	export function emptyTableMetaBuilder():TableMetaBuilder
-	export function emptyRefTableMetaBuilder():Ref<TableMetaBuilder>
-	export function refOfTableMetaBuilder(x:TableMetaBuilder,v:Ref<TableMetaBuilder>)
-	export function unRefTableMetaBuilder(v:Ref<TableMetaBuilder>):TableMetaBuilder
-	export function emptyV1():V1
-	export function emptyRefV1():Ref<V1>
-	export function refOfV1(x:V1,v:Ref<V1>)
-	export function unRefV1(v:Ref<V1>):V1
-	export function emptyWhiteboardNodeBuilder():WhiteboardNodeBuilder
-	export function emptyRefWhiteboardNodeBuilder():Ref<WhiteboardNodeBuilder>
-	export function refOfWhiteboardNodeBuilder(x:WhiteboardNodeBuilder,v:Ref<WhiteboardNodeBuilder>)
-	export function unRefWhiteboardNodeBuilder(v:Ref<WhiteboardNodeBuilder>):WhiteboardNodeBuilder
-	export function emptyCompositeShape():CompositeShape
-	export function emptyRefCompositeShape():Ref<CompositeShape>
-	export function refOfCompositeShape(x:CompositeShape,v:Ref<CompositeShape>)
-	export function unRefCompositeShape(v:Ref<CompositeShape>):CompositeShape
-	export function emptyConnectorCaptionBuilder():ConnectorCaptionBuilder
-	export function emptyRefConnectorCaptionBuilder():Ref<ConnectorCaptionBuilder>
-	export function refOfConnectorCaptionBuilder(x:ConnectorCaptionBuilder,v:Ref<ConnectorCaptionBuilder>)
-	export function unRefConnectorCaptionBuilder(v:Ref<ConnectorCaptionBuilder>):ConnectorCaptionBuilder
 	export function emptyConnector():Connector
 	export function emptyRefConnector():Ref<Connector>
 	export function refOfConnector(x:Connector,v:Ref<Connector>)
 	export function unRefConnector(v:Ref<Connector>):Connector
-	export function emptyConnectorCaption():ConnectorCaption
-	export function emptyRefConnectorCaption():Ref<ConnectorCaption>
-	export function refOfConnectorCaption(x:ConnectorCaption,v:Ref<ConnectorCaption>)
-	export function unRefConnectorCaption(v:Ref<ConnectorCaption>):ConnectorCaption
-	export function emptyTextBuilder():TextBuilder
-	export function emptyRefTextBuilder():Ref<TextBuilder>
-	export function refOfTextBuilder(x:TextBuilder,v:Ref<TextBuilder>)
-	export function unRefTextBuilder(v:Ref<TextBuilder>):TextBuilder
-	export function emptyCompositeShapeBuilder():CompositeShapeBuilder
-	export function emptyRefCompositeShapeBuilder():Ref<CompositeShapeBuilder>
-	export function refOfCompositeShapeBuilder(x:CompositeShapeBuilder,v:Ref<CompositeShapeBuilder>)
-	export function unRefCompositeShapeBuilder(v:Ref<CompositeShapeBuilder>):CompositeShapeBuilder
+	export function emptyListWhiteboardNodeRespData():ListWhiteboardNodeRespData
+	export function emptyRefListWhiteboardNodeRespData():Ref<ListWhiteboardNodeRespData>
+	export function refOfListWhiteboardNodeRespData(x:ListWhiteboardNodeRespData,v:Ref<ListWhiteboardNodeRespData>)
+	export function unRefListWhiteboardNodeRespData(v:Ref<ListWhiteboardNodeRespData>):ListWhiteboardNodeRespData
 	export function emptySection():Section
 	export function emptyRefSection():Ref<Section>
 	export function refOfSection(x:Section,v:Ref<Section>)
 	export function unRefSection(v:Ref<Section>):Section
-	export function emptyTableCellMergeInfoBuilder():TableCellMergeInfoBuilder
-	export function emptyRefTableCellMergeInfoBuilder():Ref<TableCellMergeInfoBuilder>
-	export function refOfTableCellMergeInfoBuilder(x:TableCellMergeInfoBuilder,v:Ref<TableCellMergeInfoBuilder>)
-	export function unRefTableCellMergeInfoBuilder(v:Ref<TableCellMergeInfoBuilder>):TableCellMergeInfoBuilder
-	export function emptyImageBuilder():ImageBuilder
-	export function emptyRefImageBuilder():Ref<ImageBuilder>
-	export function refOfImageBuilder(x:ImageBuilder,v:Ref<ImageBuilder>)
-	export function unRefImageBuilder(v:Ref<ImageBuilder>):ImageBuilder
+	export function emptyTableCell():TableCell
+	export function emptyRefTableCell():Ref<TableCell>
+	export function refOfTableCell(x:TableCell,v:Ref<TableCell>)
+	export function unRefTableCell(v:Ref<TableCell>):TableCell
+	export function emptyCompositeShape():CompositeShape
+	export function emptyRefCompositeShape():Ref<CompositeShape>
+	export function refOfCompositeShape(x:CompositeShape,v:Ref<CompositeShape>)
+	export function unRefCompositeShape(v:Ref<CompositeShape>):CompositeShape
+	export function emptyListWhiteboardNodeReq():ListWhiteboardNodeReq
+	export function emptyRefListWhiteboardNodeReq():Ref<ListWhiteboardNodeReq>
+	export function refOfListWhiteboardNodeReq(x:ListWhiteboardNodeReq,v:Ref<ListWhiteboardNodeReq>)
+	export function unRefListWhiteboardNodeReq(v:Ref<ListWhiteboardNodeReq>):ListWhiteboardNodeReq
+	export function emptyDepartmentId():DepartmentId
+	export function emptyRefDepartmentId():Ref<DepartmentId>
+	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
+	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
+	export function emptyTableMeta():TableMeta
+	export function emptyRefTableMeta():Ref<TableMeta>
+	export function refOfTableMeta(x:TableMeta,v:Ref<TableMeta>)
+	export function unRefTableMeta(v:Ref<TableMeta>):TableMeta
+	export function emptyStyle():Style
+	export function emptyRefStyle():Ref<Style>
+	export function refOfStyle(x:Style,v:Ref<Style>)
+	export function unRefStyle(v:Ref<Style>):Style
+	export function emptyV1():V1
+	export function emptyRefV1():Ref<V1>
+	export function refOfV1(x:V1,v:Ref<V1>)
+	export function unRefV1(v:Ref<V1>):V1
+	export function emptyWhiteboardNode():WhiteboardNode
+	export function emptyRefWhiteboardNode():Ref<WhiteboardNode>
+	export function refOfWhiteboardNode(x:WhiteboardNode,v:Ref<WhiteboardNode>)
+	export function unRefWhiteboardNode(v:Ref<WhiteboardNode>):WhiteboardNode
+	export function emptyConnectorCaption():ConnectorCaption
+	export function emptyRefConnectorCaption():Ref<ConnectorCaption>
+	export function refOfConnectorCaption(x:ConnectorCaption,v:Ref<ConnectorCaption>)
+	export function unRefConnectorCaption(v:Ref<ConnectorCaption>):ConnectorCaption
+	export function emptyImage():Image
+	export function emptyRefImage():Ref<Image>
+	export function refOfImage(x:Image,v:Ref<Image>)
+	export function unRefImage(v:Ref<Image>):Image
+	export function emptyMindMap():MindMap
+	export function emptyRefMindMap():Ref<MindMap>
+	export function refOfMindMap(x:MindMap,v:Ref<MindMap>)
+	export function unRefMindMap(v:Ref<MindMap>):MindMap
+	export function emptyTableCellMergeInfo():TableCellMergeInfo
+	export function emptyRefTableCellMergeInfo():Ref<TableCellMergeInfo>
+	export function refOfTableCellMergeInfo(x:TableCellMergeInfo,v:Ref<TableCellMergeInfo>)
+	export function unRefTableCellMergeInfo(v:Ref<TableCellMergeInfo>):TableCellMergeInfo
+	export function emptyConnectorAttachedObject():ConnectorAttachedObject
+	export function emptyRefConnectorAttachedObject():Ref<ConnectorAttachedObject>
+	export function refOfConnectorAttachedObject(x:ConnectorAttachedObject,v:Ref<ConnectorAttachedObject>)
+	export function unRefConnectorAttachedObject(v:Ref<ConnectorAttachedObject>):ConnectorAttachedObject
+	export function emptyListWhiteboardNodeResp():ListWhiteboardNodeResp
+	export function emptyRefListWhiteboardNodeResp():Ref<ListWhiteboardNodeResp>
+	export function refOfListWhiteboardNodeResp(x:ListWhiteboardNodeResp,v:Ref<ListWhiteboardNodeResp>)
+	export function unRefListWhiteboardNodeResp(v:Ref<ListWhiteboardNodeResp>):ListWhiteboardNodeResp
+	export function emptyText():Text
+	export function emptyRefText():Ref<Text>
+	export function refOfText(x:Text,v:Ref<Text>)
+	export function unRefText(v:Ref<Text>):Text
 }

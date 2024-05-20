@@ -15,11 +15,7 @@ var (
 	GithubComLarksuiteOapiSdkGo3ServiceAuthDefine   []byte
 	GithubComLarksuiteOapiSdkGo3ServiceAuthDeclared = map[string]any{
 		"newService": auth.NewService,
-
-		"emptyService":    engine.Empty[auth.Service],
-		"emptyRefService": engine.EmptyRefer[auth.Service],
-		"refOfService":    engine.ReferOf[auth.Service],
-		"unRefService":    engine.UnRefer[auth.Service]}
+	}
 )
 
 func init() {

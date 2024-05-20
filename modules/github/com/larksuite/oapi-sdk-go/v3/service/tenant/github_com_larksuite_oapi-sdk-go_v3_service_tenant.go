@@ -15,11 +15,7 @@ var (
 	GithubComLarksuiteOapiSdkGo3ServiceTenantDefine   []byte
 	GithubComLarksuiteOapiSdkGo3ServiceTenantDeclared = map[string]any{
 		"newService": tenant.NewService,
-
-		"emptyService":    engine.Empty[tenant.Service],
-		"emptyRefService": engine.EmptyRefer[tenant.Service],
-		"refOfService":    engine.ReferOf[tenant.Service],
-		"unRefService":    engine.UnRefer[tenant.Service]}
+	}
 )
 
 func init() {

@@ -15,11 +15,7 @@ var (
 	GithubComLarksuiteOapiSdkGo3ServiceBitableDefine   []byte
 	GithubComLarksuiteOapiSdkGo3ServiceBitableDeclared = map[string]any{
 		"newService": bitable.NewService,
-
-		"emptyService":    engine.Empty[bitable.Service],
-		"emptyRefService": engine.EmptyRefer[bitable.Service],
-		"refOfService":    engine.ReferOf[bitable.Service],
-		"unRefService":    engine.UnRefer[bitable.Service]}
+	}
 )
 
 func init() {

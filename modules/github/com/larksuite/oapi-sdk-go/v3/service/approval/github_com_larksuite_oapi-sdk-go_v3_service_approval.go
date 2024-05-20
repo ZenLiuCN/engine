@@ -15,11 +15,7 @@ var (
 	GithubComLarksuiteOapiSdkGo3ServiceApprovalDefine   []byte
 	GithubComLarksuiteOapiSdkGo3ServiceApprovalDeclared = map[string]any{
 		"newService": approval.NewService,
-
-		"emptyService":    engine.Empty[approval.Service],
-		"emptyRefService": engine.EmptyRefer[approval.Service],
-		"refOfService":    engine.ReferOf[approval.Service],
-		"unRefService":    engine.UnRefer[approval.Service]}
+	}
 )
 
 func init() {

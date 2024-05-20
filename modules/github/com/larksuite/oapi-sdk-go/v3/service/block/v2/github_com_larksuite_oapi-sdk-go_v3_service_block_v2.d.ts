@@ -197,84 +197,52 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/block/v2'{
 				create(ctx:context.Context,req:Ref<CreateMessageReq>,...options:larkcore.RequestOptionFunc[]):Ref<CreateMessageResp>
 			}>
 	}
-	export function emptyCreateMessageReq():CreateMessageReq
-	export function emptyRefCreateMessageReq():Ref<CreateMessageReq>
-	export function refOfCreateMessageReq(x:CreateMessageReq,v:Ref<CreateMessageReq>)
-	export function unRefCreateMessageReq(v:Ref<CreateMessageReq>):CreateMessageReq
-	export function emptyDepartmentId():DepartmentId
-	export function emptyRefDepartmentId():Ref<DepartmentId>
-	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
-	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptyEntityBuilder():EntityBuilder
-	export function emptyRefEntityBuilder():Ref<EntityBuilder>
-	export function refOfEntityBuilder(x:EntityBuilder,v:Ref<EntityBuilder>)
-	export function unRefEntityBuilder(v:Ref<EntityBuilder>):EntityBuilder
-	export function emptyUpdateEntityResp():UpdateEntityResp
-	export function emptyRefUpdateEntityResp():Ref<UpdateEntityResp>
-	export function refOfUpdateEntityResp(x:UpdateEntityResp,v:Ref<UpdateEntityResp>)
-	export function unRefUpdateEntityResp(v:Ref<UpdateEntityResp>):UpdateEntityResp
-	export function emptyV2():V2
-	export function emptyRefV2():Ref<V2>
-	export function refOfV2(x:V2,v:Ref<V2>)
-	export function unRefV2(v:Ref<V2>):V2
-	export function emptyCreateEntityReqBodyBuilder():CreateEntityReqBodyBuilder
-	export function emptyRefCreateEntityReqBodyBuilder():Ref<CreateEntityReqBodyBuilder>
-	export function refOfCreateEntityReqBodyBuilder(x:CreateEntityReqBodyBuilder,v:Ref<CreateEntityReqBodyBuilder>)
-	export function unRefCreateEntityReqBodyBuilder(v:Ref<CreateEntityReqBodyBuilder>):CreateEntityReqBodyBuilder
 	export function emptyCreateEntityRespData():CreateEntityRespData
 	export function emptyRefCreateEntityRespData():Ref<CreateEntityRespData>
 	export function refOfCreateEntityRespData(x:CreateEntityRespData,v:Ref<CreateEntityRespData>)
 	export function unRefCreateEntityRespData(v:Ref<CreateEntityRespData>):CreateEntityRespData
+	export function emptyDepartmentId():DepartmentId
+	export function emptyRefDepartmentId():Ref<DepartmentId>
+	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
+	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
 	export function emptyEntity():Entity
 	export function emptyRefEntity():Ref<Entity>
 	export function refOfEntity(x:Entity,v:Ref<Entity>)
 	export function unRefEntity(v:Ref<Entity>):Entity
-	export function emptyMessageBuilder():MessageBuilder
-	export function emptyRefMessageBuilder():Ref<MessageBuilder>
-	export function refOfMessageBuilder(x:MessageBuilder,v:Ref<MessageBuilder>)
-	export function unRefMessageBuilder(v:Ref<MessageBuilder>):MessageBuilder
-	export function emptyUpdateEntityReq():UpdateEntityReq
-	export function emptyRefUpdateEntityReq():Ref<UpdateEntityReq>
-	export function refOfUpdateEntityReq(x:UpdateEntityReq,v:Ref<UpdateEntityReq>)
-	export function unRefUpdateEntityReq(v:Ref<UpdateEntityReq>):UpdateEntityReq
-	export function emptyUpdateEntityReqBuilder():UpdateEntityReqBuilder
-	export function emptyRefUpdateEntityReqBuilder():Ref<UpdateEntityReqBuilder>
-	export function refOfUpdateEntityReqBuilder(x:UpdateEntityReqBuilder,v:Ref<UpdateEntityReqBuilder>)
-	export function unRefUpdateEntityReqBuilder(v:Ref<UpdateEntityReqBuilder>):UpdateEntityReqBuilder
-	export function emptyCreateEntityReq():CreateEntityReq
-	export function emptyRefCreateEntityReq():Ref<CreateEntityReq>
-	export function refOfCreateEntityReq(x:CreateEntityReq,v:Ref<CreateEntityReq>)
-	export function unRefCreateEntityReq(v:Ref<CreateEntityReq>):CreateEntityReq
-	export function emptyCreateEntityReqBuilder():CreateEntityReqBuilder
-	export function emptyRefCreateEntityReqBuilder():Ref<CreateEntityReqBuilder>
-	export function refOfCreateEntityReqBuilder(x:CreateEntityReqBuilder,v:Ref<CreateEntityReqBuilder>)
-	export function unRefCreateEntityReqBuilder(v:Ref<CreateEntityReqBuilder>):CreateEntityReqBuilder
-	export function emptyCreateMessageReqBuilder():CreateMessageReqBuilder
-	export function emptyRefCreateMessageReqBuilder():Ref<CreateMessageReqBuilder>
-	export function refOfCreateMessageReqBuilder(x:CreateMessageReqBuilder,v:Ref<CreateMessageReqBuilder>)
-	export function unRefCreateMessageReqBuilder(v:Ref<CreateMessageReqBuilder>):CreateMessageReqBuilder
-	export function emptyCreateEntityPathReqBodyBuilder():CreateEntityPathReqBodyBuilder
-	export function emptyRefCreateEntityPathReqBodyBuilder():Ref<CreateEntityPathReqBodyBuilder>
-	export function refOfCreateEntityPathReqBodyBuilder(x:CreateEntityPathReqBodyBuilder,v:Ref<CreateEntityPathReqBodyBuilder>)
-	export function unRefCreateEntityPathReqBodyBuilder(v:Ref<CreateEntityPathReqBodyBuilder>):CreateEntityPathReqBodyBuilder
 	export function emptyCreateEntityReqBody():CreateEntityReqBody
 	export function emptyRefCreateEntityReqBody():Ref<CreateEntityReqBody>
 	export function refOfCreateEntityReqBody(x:CreateEntityReqBody,v:Ref<CreateEntityReqBody>)
 	export function unRefCreateEntityReqBody(v:Ref<CreateEntityReqBody>):CreateEntityReqBody
-	export function emptyCreateEntityResp():CreateEntityResp
-	export function emptyRefCreateEntityResp():Ref<CreateEntityResp>
-	export function refOfCreateEntityResp(x:CreateEntityResp,v:Ref<CreateEntityResp>)
-	export function unRefCreateEntityResp(v:Ref<CreateEntityResp>):CreateEntityResp
 	export function emptyCreateMessageResp():CreateMessageResp
 	export function emptyRefCreateMessageResp():Ref<CreateMessageResp>
 	export function refOfCreateMessageResp(x:CreateMessageResp,v:Ref<CreateMessageResp>)
 	export function unRefCreateMessageResp(v:Ref<CreateMessageResp>):CreateMessageResp
-	export function emptyDepartmentIdBuilder():DepartmentIdBuilder
-	export function emptyRefDepartmentIdBuilder():Ref<DepartmentIdBuilder>
-	export function refOfDepartmentIdBuilder(x:DepartmentIdBuilder,v:Ref<DepartmentIdBuilder>)
-	export function unRefDepartmentIdBuilder(v:Ref<DepartmentIdBuilder>):DepartmentIdBuilder
 	export function emptyMessage():Message
 	export function emptyRefMessage():Ref<Message>
 	export function refOfMessage(x:Message,v:Ref<Message>)
 	export function unRefMessage(v:Ref<Message>):Message
+	export function emptyUpdateEntityResp():UpdateEntityResp
+	export function emptyRefUpdateEntityResp():Ref<UpdateEntityResp>
+	export function refOfUpdateEntityResp(x:UpdateEntityResp,v:Ref<UpdateEntityResp>)
+	export function unRefUpdateEntityResp(v:Ref<UpdateEntityResp>):UpdateEntityResp
+	export function emptyCreateMessageReq():CreateMessageReq
+	export function emptyRefCreateMessageReq():Ref<CreateMessageReq>
+	export function refOfCreateMessageReq(x:CreateMessageReq,v:Ref<CreateMessageReq>)
+	export function unRefCreateMessageReq(v:Ref<CreateMessageReq>):CreateMessageReq
+	export function emptyCreateEntityResp():CreateEntityResp
+	export function emptyRefCreateEntityResp():Ref<CreateEntityResp>
+	export function refOfCreateEntityResp(x:CreateEntityResp,v:Ref<CreateEntityResp>)
+	export function unRefCreateEntityResp(v:Ref<CreateEntityResp>):CreateEntityResp
+	export function emptyV2():V2
+	export function emptyRefV2():Ref<V2>
+	export function refOfV2(x:V2,v:Ref<V2>)
+	export function unRefV2(v:Ref<V2>):V2
+	export function emptyCreateEntityReq():CreateEntityReq
+	export function emptyRefCreateEntityReq():Ref<CreateEntityReq>
+	export function refOfCreateEntityReq(x:CreateEntityReq,v:Ref<CreateEntityReq>)
+	export function unRefCreateEntityReq(v:Ref<CreateEntityReq>):CreateEntityReq
+	export function emptyUpdateEntityReq():UpdateEntityReq
+	export function emptyRefUpdateEntityReq():Ref<UpdateEntityReq>
+	export function refOfUpdateEntityReq(x:UpdateEntityReq,v:Ref<UpdateEntityReq>)
+	export function unRefUpdateEntityReq(v:Ref<UpdateEntityReq>):UpdateEntityReq
 }

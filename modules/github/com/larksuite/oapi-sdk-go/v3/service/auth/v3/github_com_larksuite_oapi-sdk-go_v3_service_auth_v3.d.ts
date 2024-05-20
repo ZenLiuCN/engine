@@ -3,9 +3,9 @@
 declare module 'github.com/larksuite/oapi-sdk-go/v3/service/auth/v3'{
 
 	// @ts-ignore
-	import * as context from 'golang/context'
-	// @ts-ignore
 	import * as larkcore from 'github.com/larksuite/oapi-sdk-go/v3/core'
+	// @ts-ignore
+	import * as context from 'golang/context'
 	// @ts-ignore
 	import type {Alias,Nothing,Struct,Ref,error,bool} from 'go'
 	export interface AppAccessToken extends Alias<Nothing>{
@@ -261,144 +261,76 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/auth/v3'{
 				internal(ctx:context.Context,req:Ref<InternalTenantAccessTokenReq>,...options:larkcore.RequestOptionFunc[]):Ref<InternalTenantAccessTokenResp>
 			}>
 	}
-	export function emptyCreateTenantAccessTokenReq():CreateTenantAccessTokenReq
-	export function emptyRefCreateTenantAccessTokenReq():Ref<CreateTenantAccessTokenReq>
-	export function refOfCreateTenantAccessTokenReq(x:CreateTenantAccessTokenReq,v:Ref<CreateTenantAccessTokenReq>)
-	export function unRefCreateTenantAccessTokenReq(v:Ref<CreateTenantAccessTokenReq>):CreateTenantAccessTokenReq
-	export function emptyCreateTenantAccessTokenReqBodyBuilder():CreateTenantAccessTokenReqBodyBuilder
-	export function emptyRefCreateTenantAccessTokenReqBodyBuilder():Ref<CreateTenantAccessTokenReqBodyBuilder>
-	export function refOfCreateTenantAccessTokenReqBodyBuilder(x:CreateTenantAccessTokenReqBodyBuilder,v:Ref<CreateTenantAccessTokenReqBodyBuilder>)
-	export function unRefCreateTenantAccessTokenReqBodyBuilder(v:Ref<CreateTenantAccessTokenReqBodyBuilder>):CreateTenantAccessTokenReqBodyBuilder
-	export function emptyCreateTenantAccessTokenReqBuilder():CreateTenantAccessTokenReqBuilder
-	export function emptyRefCreateTenantAccessTokenReqBuilder():Ref<CreateTenantAccessTokenReqBuilder>
-	export function refOfCreateTenantAccessTokenReqBuilder(x:CreateTenantAccessTokenReqBuilder,v:Ref<CreateTenantAccessTokenReqBuilder>)
-	export function unRefCreateTenantAccessTokenReqBuilder(v:Ref<CreateTenantAccessTokenReqBuilder>):CreateTenantAccessTokenReqBuilder
-	export function emptyInternalAppAccessTokenReqBuilder():InternalAppAccessTokenReqBuilder
-	export function emptyRefInternalAppAccessTokenReqBuilder():Ref<InternalAppAccessTokenReqBuilder>
-	export function refOfInternalAppAccessTokenReqBuilder(x:InternalAppAccessTokenReqBuilder,v:Ref<InternalAppAccessTokenReqBuilder>)
-	export function unRefInternalAppAccessTokenReqBuilder(v:Ref<InternalAppAccessTokenReqBuilder>):InternalAppAccessTokenReqBuilder
-	export function emptyCreateTenantAccessTokenReqBody():CreateTenantAccessTokenReqBody
-	export function emptyRefCreateTenantAccessTokenReqBody():Ref<CreateTenantAccessTokenReqBody>
-	export function refOfCreateTenantAccessTokenReqBody(x:CreateTenantAccessTokenReqBody,v:Ref<CreateTenantAccessTokenReqBody>)
-	export function unRefCreateTenantAccessTokenReqBody(v:Ref<CreateTenantAccessTokenReqBody>):CreateTenantAccessTokenReqBody
-	export function emptyDepartmentIdBuilder():DepartmentIdBuilder
-	export function emptyRefDepartmentIdBuilder():Ref<DepartmentIdBuilder>
-	export function refOfDepartmentIdBuilder(x:DepartmentIdBuilder,v:Ref<DepartmentIdBuilder>)
-	export function unRefDepartmentIdBuilder(v:Ref<DepartmentIdBuilder>):DepartmentIdBuilder
-	export function emptyResendAppTicketReqBodyBuilder():ResendAppTicketReqBodyBuilder
-	export function emptyRefResendAppTicketReqBodyBuilder():Ref<ResendAppTicketReqBodyBuilder>
-	export function refOfResendAppTicketReqBodyBuilder(x:ResendAppTicketReqBodyBuilder,v:Ref<ResendAppTicketReqBodyBuilder>)
-	export function unRefResendAppTicketReqBodyBuilder(v:Ref<ResendAppTicketReqBodyBuilder>):ResendAppTicketReqBodyBuilder
-	export function emptyResendAppTicketResp():ResendAppTicketResp
-	export function emptyRefResendAppTicketResp():Ref<ResendAppTicketResp>
-	export function refOfResendAppTicketResp(x:ResendAppTicketResp,v:Ref<ResendAppTicketResp>)
-	export function unRefResendAppTicketResp(v:Ref<ResendAppTicketResp>):ResendAppTicketResp
-	export function emptyRevokeTokenEvent():RevokeTokenEvent
-	export function emptyRefRevokeTokenEvent():Ref<RevokeTokenEvent>
-	export function refOfRevokeTokenEvent(x:RevokeTokenEvent,v:Ref<RevokeTokenEvent>)
-	export function unRefRevokeTokenEvent(v:Ref<RevokeTokenEvent>):RevokeTokenEvent
-	export function emptyRevokeTokenEventBuilder():RevokeTokenEventBuilder
-	export function emptyRefRevokeTokenEventBuilder():Ref<RevokeTokenEventBuilder>
-	export function refOfRevokeTokenEventBuilder(x:RevokeTokenEventBuilder,v:Ref<RevokeTokenEventBuilder>)
-	export function unRefRevokeTokenEventBuilder(v:Ref<RevokeTokenEventBuilder>):RevokeTokenEventBuilder
-	export function emptyInternalAppAccessTokenReq():InternalAppAccessTokenReq
-	export function emptyRefInternalAppAccessTokenReq():Ref<InternalAppAccessTokenReq>
-	export function refOfInternalAppAccessTokenReq(x:InternalAppAccessTokenReq,v:Ref<InternalAppAccessTokenReq>)
-	export function unRefInternalAppAccessTokenReq(v:Ref<InternalAppAccessTokenReq>):InternalAppAccessTokenReq
-	export function emptyInternalAppAccessTokenReqBodyBuilder():InternalAppAccessTokenReqBodyBuilder
-	export function emptyRefInternalAppAccessTokenReqBodyBuilder():Ref<InternalAppAccessTokenReqBodyBuilder>
-	export function refOfInternalAppAccessTokenReqBodyBuilder(x:InternalAppAccessTokenReqBodyBuilder,v:Ref<InternalAppAccessTokenReqBodyBuilder>)
-	export function unRefInternalAppAccessTokenReqBodyBuilder(v:Ref<InternalAppAccessTokenReqBodyBuilder>):InternalAppAccessTokenReqBodyBuilder
-	export function emptyInternalTenantAccessTokenReqBuilder():InternalTenantAccessTokenReqBuilder
-	export function emptyRefInternalTenantAccessTokenReqBuilder():Ref<InternalTenantAccessTokenReqBuilder>
-	export function refOfInternalTenantAccessTokenReqBuilder(x:InternalTenantAccessTokenReqBuilder,v:Ref<InternalTenantAccessTokenReqBuilder>)
-	export function unRefInternalTenantAccessTokenReqBuilder(v:Ref<InternalTenantAccessTokenReqBuilder>):InternalTenantAccessTokenReqBuilder
-	export function emptyResendAppTicketReq():ResendAppTicketReq
-	export function emptyRefResendAppTicketReq():Ref<ResendAppTicketReq>
-	export function refOfResendAppTicketReq(x:ResendAppTicketReq,v:Ref<ResendAppTicketReq>)
-	export function unRefResendAppTicketReq(v:Ref<ResendAppTicketReq>):ResendAppTicketReq
-	export function emptyResendAppTicketReqBuilder():ResendAppTicketReqBuilder
-	export function emptyRefResendAppTicketReqBuilder():Ref<ResendAppTicketReqBuilder>
-	export function refOfResendAppTicketReqBuilder(x:ResendAppTicketReqBuilder,v:Ref<ResendAppTicketReqBuilder>)
-	export function unRefResendAppTicketReqBuilder(v:Ref<ResendAppTicketReqBuilder>):ResendAppTicketReqBuilder
-	export function emptyCreateAppAccessTokenReq():CreateAppAccessTokenReq
-	export function emptyRefCreateAppAccessTokenReq():Ref<CreateAppAccessTokenReq>
-	export function refOfCreateAppAccessTokenReq(x:CreateAppAccessTokenReq,v:Ref<CreateAppAccessTokenReq>)
-	export function unRefCreateAppAccessTokenReq(v:Ref<CreateAppAccessTokenReq>):CreateAppAccessTokenReq
-	export function emptyCreateAppAccessTokenResp():CreateAppAccessTokenResp
-	export function emptyRefCreateAppAccessTokenResp():Ref<CreateAppAccessTokenResp>
-	export function refOfCreateAppAccessTokenResp(x:CreateAppAccessTokenResp,v:Ref<CreateAppAccessTokenResp>)
-	export function unRefCreateAppAccessTokenResp(v:Ref<CreateAppAccessTokenResp>):CreateAppAccessTokenResp
-	export function emptyInternalTenantAccessTokenReqBodyBuilder():InternalTenantAccessTokenReqBodyBuilder
-	export function emptyRefInternalTenantAccessTokenReqBodyBuilder():Ref<InternalTenantAccessTokenReqBodyBuilder>
-	export function refOfInternalTenantAccessTokenReqBodyBuilder(x:InternalTenantAccessTokenReqBodyBuilder,v:Ref<InternalTenantAccessTokenReqBodyBuilder>)
-	export function unRefInternalTenantAccessTokenReqBodyBuilder(v:Ref<InternalTenantAccessTokenReqBodyBuilder>):InternalTenantAccessTokenReqBodyBuilder
-	export function emptyResendAppTicketReqBody():ResendAppTicketReqBody
-	export function emptyRefResendAppTicketReqBody():Ref<ResendAppTicketReqBody>
-	export function refOfResendAppTicketReqBody(x:ResendAppTicketReqBody,v:Ref<ResendAppTicketReqBody>)
-	export function unRefResendAppTicketReqBody(v:Ref<ResendAppTicketReqBody>):ResendAppTicketReqBody
-	export function emptyInternalTenantAccessTokenResp():InternalTenantAccessTokenResp
-	export function emptyRefInternalTenantAccessTokenResp():Ref<InternalTenantAccessTokenResp>
-	export function refOfInternalTenantAccessTokenResp(x:InternalTenantAccessTokenResp,v:Ref<InternalTenantAccessTokenResp>)
-	export function unRefInternalTenantAccessTokenResp(v:Ref<InternalTenantAccessTokenResp>):InternalTenantAccessTokenResp
-	export function emptyCreateAppAccessTokenReqBody():CreateAppAccessTokenReqBody
-	export function emptyRefCreateAppAccessTokenReqBody():Ref<CreateAppAccessTokenReqBody>
-	export function refOfCreateAppAccessTokenReqBody(x:CreateAppAccessTokenReqBody,v:Ref<CreateAppAccessTokenReqBody>)
-	export function unRefCreateAppAccessTokenReqBody(v:Ref<CreateAppAccessTokenReqBody>):CreateAppAccessTokenReqBody
-	export function emptyCreateAppAccessTokenReqBodyBuilder():CreateAppAccessTokenReqBodyBuilder
-	export function emptyRefCreateAppAccessTokenReqBodyBuilder():Ref<CreateAppAccessTokenReqBodyBuilder>
-	export function refOfCreateAppAccessTokenReqBodyBuilder(x:CreateAppAccessTokenReqBodyBuilder,v:Ref<CreateAppAccessTokenReqBodyBuilder>)
-	export function unRefCreateAppAccessTokenReqBodyBuilder(v:Ref<CreateAppAccessTokenReqBodyBuilder>):CreateAppAccessTokenReqBodyBuilder
-	export function emptyCreateAppAccessTokenReqBuilder():CreateAppAccessTokenReqBuilder
-	export function emptyRefCreateAppAccessTokenReqBuilder():Ref<CreateAppAccessTokenReqBuilder>
-	export function refOfCreateAppAccessTokenReqBuilder(x:CreateAppAccessTokenReqBuilder,v:Ref<CreateAppAccessTokenReqBuilder>)
-	export function unRefCreateAppAccessTokenReqBuilder(v:Ref<CreateAppAccessTokenReqBuilder>):CreateAppAccessTokenReqBuilder
-	export function emptyInternalAppAccessTokenPathReqBodyBuilder():InternalAppAccessTokenPathReqBodyBuilder
-	export function emptyRefInternalAppAccessTokenPathReqBodyBuilder():Ref<InternalAppAccessTokenPathReqBodyBuilder>
-	export function refOfInternalAppAccessTokenPathReqBodyBuilder(x:InternalAppAccessTokenPathReqBodyBuilder,v:Ref<InternalAppAccessTokenPathReqBodyBuilder>)
-	export function unRefInternalAppAccessTokenPathReqBodyBuilder(v:Ref<InternalAppAccessTokenPathReqBodyBuilder>):InternalAppAccessTokenPathReqBodyBuilder
-	export function emptyInternalAppAccessTokenReqBody():InternalAppAccessTokenReqBody
-	export function emptyRefInternalAppAccessTokenReqBody():Ref<InternalAppAccessTokenReqBody>
-	export function refOfInternalAppAccessTokenReqBody(x:InternalAppAccessTokenReqBody,v:Ref<InternalAppAccessTokenReqBody>)
-	export function unRefInternalAppAccessTokenReqBody(v:Ref<InternalAppAccessTokenReqBody>):InternalAppAccessTokenReqBody
-	export function emptyCreateTenantAccessTokenPathReqBodyBuilder():CreateTenantAccessTokenPathReqBodyBuilder
-	export function emptyRefCreateTenantAccessTokenPathReqBodyBuilder():Ref<CreateTenantAccessTokenPathReqBodyBuilder>
-	export function refOfCreateTenantAccessTokenPathReqBodyBuilder(x:CreateTenantAccessTokenPathReqBodyBuilder,v:Ref<CreateTenantAccessTokenPathReqBodyBuilder>)
-	export function unRefCreateTenantAccessTokenPathReqBodyBuilder(v:Ref<CreateTenantAccessTokenPathReqBodyBuilder>):CreateTenantAccessTokenPathReqBodyBuilder
-	export function emptyCreateTenantAccessTokenResp():CreateTenantAccessTokenResp
-	export function emptyRefCreateTenantAccessTokenResp():Ref<CreateTenantAccessTokenResp>
-	export function refOfCreateTenantAccessTokenResp(x:CreateTenantAccessTokenResp,v:Ref<CreateTenantAccessTokenResp>)
-	export function unRefCreateTenantAccessTokenResp(v:Ref<CreateTenantAccessTokenResp>):CreateTenantAccessTokenResp
 	export function emptyInternalAppAccessTokenResp():InternalAppAccessTokenResp
 	export function emptyRefInternalAppAccessTokenResp():Ref<InternalAppAccessTokenResp>
 	export function refOfInternalAppAccessTokenResp(x:InternalAppAccessTokenResp,v:Ref<InternalAppAccessTokenResp>)
 	export function unRefInternalAppAccessTokenResp(v:Ref<InternalAppAccessTokenResp>):InternalAppAccessTokenResp
-	export function emptyInternalTenantAccessTokenPathReqBodyBuilder():InternalTenantAccessTokenPathReqBodyBuilder
-	export function emptyRefInternalTenantAccessTokenPathReqBodyBuilder():Ref<InternalTenantAccessTokenPathReqBodyBuilder>
-	export function refOfInternalTenantAccessTokenPathReqBodyBuilder(x:InternalTenantAccessTokenPathReqBodyBuilder,v:Ref<InternalTenantAccessTokenPathReqBodyBuilder>)
-	export function unRefInternalTenantAccessTokenPathReqBodyBuilder(v:Ref<InternalTenantAccessTokenPathReqBodyBuilder>):InternalTenantAccessTokenPathReqBodyBuilder
+	export function emptyRevokeTokenEvent():RevokeTokenEvent
+	export function emptyRefRevokeTokenEvent():Ref<RevokeTokenEvent>
+	export function refOfRevokeTokenEvent(x:RevokeTokenEvent,v:Ref<RevokeTokenEvent>)
+	export function unRefRevokeTokenEvent(v:Ref<RevokeTokenEvent>):RevokeTokenEvent
+	export function emptyInternalAppAccessTokenReq():InternalAppAccessTokenReq
+	export function emptyRefInternalAppAccessTokenReq():Ref<InternalAppAccessTokenReq>
+	export function refOfInternalAppAccessTokenReq(x:InternalAppAccessTokenReq,v:Ref<InternalAppAccessTokenReq>)
+	export function unRefInternalAppAccessTokenReq(v:Ref<InternalAppAccessTokenReq>):InternalAppAccessTokenReq
 	export function emptyInternalTenantAccessTokenReq():InternalTenantAccessTokenReq
 	export function emptyRefInternalTenantAccessTokenReq():Ref<InternalTenantAccessTokenReq>
 	export function refOfInternalTenantAccessTokenReq(x:InternalTenantAccessTokenReq,v:Ref<InternalTenantAccessTokenReq>)
 	export function unRefInternalTenantAccessTokenReq(v:Ref<InternalTenantAccessTokenReq>):InternalTenantAccessTokenReq
-	export function emptyDepartmentId():DepartmentId
-	export function emptyRefDepartmentId():Ref<DepartmentId>
-	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
-	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptyInternalTenantAccessTokenReqBody():InternalTenantAccessTokenReqBody
-	export function emptyRefInternalTenantAccessTokenReqBody():Ref<InternalTenantAccessTokenReqBody>
-	export function refOfInternalTenantAccessTokenReqBody(x:InternalTenantAccessTokenReqBody,v:Ref<InternalTenantAccessTokenReqBody>)
-	export function unRefInternalTenantAccessTokenReqBody(v:Ref<InternalTenantAccessTokenReqBody>):InternalTenantAccessTokenReqBody
-	export function emptyResendAppTicketPathReqBodyBuilder():ResendAppTicketPathReqBodyBuilder
-	export function emptyRefResendAppTicketPathReqBodyBuilder():Ref<ResendAppTicketPathReqBodyBuilder>
-	export function refOfResendAppTicketPathReqBodyBuilder(x:ResendAppTicketPathReqBodyBuilder,v:Ref<ResendAppTicketPathReqBodyBuilder>)
-	export function unRefResendAppTicketPathReqBodyBuilder(v:Ref<ResendAppTicketPathReqBodyBuilder>):ResendAppTicketPathReqBodyBuilder
+	export function emptyInternalTenantAccessTokenResp():InternalTenantAccessTokenResp
+	export function emptyRefInternalTenantAccessTokenResp():Ref<InternalTenantAccessTokenResp>
+	export function refOfInternalTenantAccessTokenResp(x:InternalTenantAccessTokenResp,v:Ref<InternalTenantAccessTokenResp>)
+	export function unRefInternalTenantAccessTokenResp(v:Ref<InternalTenantAccessTokenResp>):InternalTenantAccessTokenResp
+	export function emptyResendAppTicketReq():ResendAppTicketReq
+	export function emptyRefResendAppTicketReq():Ref<ResendAppTicketReq>
+	export function refOfResendAppTicketReq(x:ResendAppTicketReq,v:Ref<ResendAppTicketReq>)
+	export function unRefResendAppTicketReq(v:Ref<ResendAppTicketReq>):ResendAppTicketReq
+	export function emptyCreateAppAccessTokenResp():CreateAppAccessTokenResp
+	export function emptyRefCreateAppAccessTokenResp():Ref<CreateAppAccessTokenResp>
+	export function refOfCreateAppAccessTokenResp(x:CreateAppAccessTokenResp,v:Ref<CreateAppAccessTokenResp>)
+	export function unRefCreateAppAccessTokenResp(v:Ref<CreateAppAccessTokenResp>):CreateAppAccessTokenResp
+	export function emptyCreateTenantAccessTokenResp():CreateTenantAccessTokenResp
+	export function emptyRefCreateTenantAccessTokenResp():Ref<CreateTenantAccessTokenResp>
+	export function refOfCreateTenantAccessTokenResp(x:CreateTenantAccessTokenResp,v:Ref<CreateTenantAccessTokenResp>)
+	export function unRefCreateTenantAccessTokenResp(v:Ref<CreateTenantAccessTokenResp>):CreateTenantAccessTokenResp
 	export function emptyV3():V3
 	export function emptyRefV3():Ref<V3>
 	export function refOfV3(x:V3,v:Ref<V3>)
 	export function unRefV3(v:Ref<V3>):V3
-	export function emptyCreateAppAccessTokenPathReqBodyBuilder():CreateAppAccessTokenPathReqBodyBuilder
-	export function emptyRefCreateAppAccessTokenPathReqBodyBuilder():Ref<CreateAppAccessTokenPathReqBodyBuilder>
-	export function refOfCreateAppAccessTokenPathReqBodyBuilder(x:CreateAppAccessTokenPathReqBodyBuilder,v:Ref<CreateAppAccessTokenPathReqBodyBuilder>)
-	export function unRefCreateAppAccessTokenPathReqBodyBuilder(v:Ref<CreateAppAccessTokenPathReqBodyBuilder>):CreateAppAccessTokenPathReqBodyBuilder
+	export function emptyCreateAppAccessTokenReq():CreateAppAccessTokenReq
+	export function emptyRefCreateAppAccessTokenReq():Ref<CreateAppAccessTokenReq>
+	export function refOfCreateAppAccessTokenReq(x:CreateAppAccessTokenReq,v:Ref<CreateAppAccessTokenReq>)
+	export function unRefCreateAppAccessTokenReq(v:Ref<CreateAppAccessTokenReq>):CreateAppAccessTokenReq
+	export function emptyDepartmentId():DepartmentId
+	export function emptyRefDepartmentId():Ref<DepartmentId>
+	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
+	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
+	export function emptyInternalAppAccessTokenReqBody():InternalAppAccessTokenReqBody
+	export function emptyRefInternalAppAccessTokenReqBody():Ref<InternalAppAccessTokenReqBody>
+	export function refOfInternalAppAccessTokenReqBody(x:InternalAppAccessTokenReqBody,v:Ref<InternalAppAccessTokenReqBody>)
+	export function unRefInternalAppAccessTokenReqBody(v:Ref<InternalAppAccessTokenReqBody>):InternalAppAccessTokenReqBody
+	export function emptyResendAppTicketReqBody():ResendAppTicketReqBody
+	export function emptyRefResendAppTicketReqBody():Ref<ResendAppTicketReqBody>
+	export function refOfResendAppTicketReqBody(x:ResendAppTicketReqBody,v:Ref<ResendAppTicketReqBody>)
+	export function unRefResendAppTicketReqBody(v:Ref<ResendAppTicketReqBody>):ResendAppTicketReqBody
+	export function emptyCreateAppAccessTokenReqBody():CreateAppAccessTokenReqBody
+	export function emptyRefCreateAppAccessTokenReqBody():Ref<CreateAppAccessTokenReqBody>
+	export function refOfCreateAppAccessTokenReqBody(x:CreateAppAccessTokenReqBody,v:Ref<CreateAppAccessTokenReqBody>)
+	export function unRefCreateAppAccessTokenReqBody(v:Ref<CreateAppAccessTokenReqBody>):CreateAppAccessTokenReqBody
+	export function emptyResendAppTicketResp():ResendAppTicketResp
+	export function emptyRefResendAppTicketResp():Ref<ResendAppTicketResp>
+	export function refOfResendAppTicketResp(x:ResendAppTicketResp,v:Ref<ResendAppTicketResp>)
+	export function unRefResendAppTicketResp(v:Ref<ResendAppTicketResp>):ResendAppTicketResp
+	export function emptyCreateTenantAccessTokenReq():CreateTenantAccessTokenReq
+	export function emptyRefCreateTenantAccessTokenReq():Ref<CreateTenantAccessTokenReq>
+	export function refOfCreateTenantAccessTokenReq(x:CreateTenantAccessTokenReq,v:Ref<CreateTenantAccessTokenReq>)
+	export function unRefCreateTenantAccessTokenReq(v:Ref<CreateTenantAccessTokenReq>):CreateTenantAccessTokenReq
+	export function emptyInternalTenantAccessTokenReqBody():InternalTenantAccessTokenReqBody
+	export function emptyRefInternalTenantAccessTokenReqBody():Ref<InternalTenantAccessTokenReqBody>
+	export function refOfInternalTenantAccessTokenReqBody(x:InternalTenantAccessTokenReqBody,v:Ref<InternalTenantAccessTokenReqBody>)
+	export function unRefInternalTenantAccessTokenReqBody(v:Ref<InternalTenantAccessTokenReqBody>):InternalTenantAccessTokenReqBody
+	export function emptyCreateTenantAccessTokenReqBody():CreateTenantAccessTokenReqBody
+	export function emptyRefCreateTenantAccessTokenReqBody():Ref<CreateTenantAccessTokenReqBody>
+	export function refOfCreateTenantAccessTokenReqBody(x:CreateTenantAccessTokenReqBody,v:Ref<CreateTenantAccessTokenReqBody>)
+	export function unRefCreateTenantAccessTokenReqBody(v:Ref<CreateTenantAccessTokenReqBody>):CreateTenantAccessTokenReqBody
 }

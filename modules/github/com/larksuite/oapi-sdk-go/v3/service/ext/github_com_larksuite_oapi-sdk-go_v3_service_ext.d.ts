@@ -7,7 +7,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/ext'{
 	// @ts-ignore
 	import * as context from 'golang/context'
 	// @ts-ignore
-	import type {bool,int64,error,Ref,Struct} from 'go'
+	import type {int64,error,Ref,Struct,bool} from 'go'
 	export interface AuthenAccessTokenReq extends Struct<AuthenAccessTokenReq>{
 
 			body:Ref<AuthenAccessTokenReqBody>
@@ -197,38 +197,18 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/ext'{
 			refreshExpiresIn:int64
 			refreshToken:string
 	}
+	export function emptyAuthenAccessTokenRespBody():AuthenAccessTokenRespBody
+	export function emptyRefAuthenAccessTokenRespBody():Ref<AuthenAccessTokenRespBody>
+	export function refOfAuthenAccessTokenRespBody(x:AuthenAccessTokenRespBody,v:Ref<AuthenAccessTokenRespBody>)
+	export function unRefAuthenAccessTokenRespBody(v:Ref<AuthenAccessTokenRespBody>):AuthenAccessTokenRespBody
 	export function emptyCreateFileReqBody():CreateFileReqBody
 	export function emptyRefCreateFileReqBody():Ref<CreateFileReqBody>
 	export function refOfCreateFileReqBody(x:CreateFileReqBody,v:Ref<CreateFileReqBody>)
 	export function unRefCreateFileReqBody(v:Ref<CreateFileReqBody>):CreateFileReqBody
-	export function emptyCreateFileReqBodyBuilder():CreateFileReqBodyBuilder
-	export function emptyRefCreateFileReqBodyBuilder():Ref<CreateFileReqBodyBuilder>
-	export function refOfCreateFileReqBodyBuilder(x:CreateFileReqBodyBuilder,v:Ref<CreateFileReqBodyBuilder>)
-	export function unRefCreateFileReqBodyBuilder(v:Ref<CreateFileReqBodyBuilder>):CreateFileReqBodyBuilder
-	export function emptyCreateFileRespData():CreateFileRespData
-	export function emptyRefCreateFileRespData():Ref<CreateFileRespData>
-	export function refOfCreateFileRespData(x:CreateFileRespData,v:Ref<CreateFileRespData>)
-	export function unRefCreateFileRespData(v:Ref<CreateFileRespData>):CreateFileRespData
-	export function emptyRefreshAuthenAccessTokenRespBody():RefreshAuthenAccessTokenRespBody
-	export function emptyRefRefreshAuthenAccessTokenRespBody():Ref<RefreshAuthenAccessTokenRespBody>
-	export function refOfRefreshAuthenAccessTokenRespBody(x:RefreshAuthenAccessTokenRespBody,v:Ref<RefreshAuthenAccessTokenRespBody>)
-	export function unRefRefreshAuthenAccessTokenRespBody(v:Ref<RefreshAuthenAccessTokenRespBody>):RefreshAuthenAccessTokenRespBody
-	export function emptyAuthenAccessTokenReqBody():AuthenAccessTokenReqBody
-	export function emptyRefAuthenAccessTokenReqBody():Ref<AuthenAccessTokenReqBody>
-	export function refOfAuthenAccessTokenReqBody(x:AuthenAccessTokenReqBody,v:Ref<AuthenAccessTokenReqBody>)
-	export function unRefAuthenAccessTokenReqBody(v:Ref<AuthenAccessTokenReqBody>):AuthenAccessTokenReqBody
-	export function emptyAuthenAccessTokenReqBodyBuilder():AuthenAccessTokenReqBodyBuilder
-	export function emptyRefAuthenAccessTokenReqBodyBuilder():Ref<AuthenAccessTokenReqBodyBuilder>
-	export function refOfAuthenAccessTokenReqBodyBuilder(x:AuthenAccessTokenReqBodyBuilder,v:Ref<AuthenAccessTokenReqBodyBuilder>)
-	export function unRefAuthenAccessTokenReqBodyBuilder(v:Ref<AuthenAccessTokenReqBodyBuilder>):AuthenAccessTokenReqBodyBuilder
-	export function emptyAuthenAccessTokenReqBuilder():AuthenAccessTokenReqBuilder
-	export function emptyRefAuthenAccessTokenReqBuilder():Ref<AuthenAccessTokenReqBuilder>
-	export function refOfAuthenAccessTokenReqBuilder(x:AuthenAccessTokenReqBuilder,v:Ref<AuthenAccessTokenReqBuilder>)
-	export function unRefAuthenAccessTokenReqBuilder(v:Ref<AuthenAccessTokenReqBuilder>):AuthenAccessTokenReqBuilder
-	export function emptyAuthenUserInfoResp():AuthenUserInfoResp
-	export function emptyRefAuthenUserInfoResp():Ref<AuthenUserInfoResp>
-	export function refOfAuthenUserInfoResp(x:AuthenUserInfoResp,v:Ref<AuthenUserInfoResp>)
-	export function unRefAuthenUserInfoResp(v:Ref<AuthenUserInfoResp>):AuthenUserInfoResp
+	export function emptyAuthenAccessTokenResp():AuthenAccessTokenResp
+	export function emptyRefAuthenAccessTokenResp():Ref<AuthenAccessTokenResp>
+	export function refOfAuthenAccessTokenResp(x:AuthenAccessTokenResp,v:Ref<AuthenAccessTokenResp>)
+	export function unRefAuthenAccessTokenResp(v:Ref<AuthenAccessTokenResp>):AuthenAccessTokenResp
 	export function emptyAuthenUserInfoRespBody():AuthenUserInfoRespBody
 	export function emptyRefAuthenUserInfoRespBody():Ref<AuthenUserInfoRespBody>
 	export function refOfAuthenUserInfoRespBody(x:AuthenUserInfoRespBody,v:Ref<AuthenUserInfoRespBody>)
@@ -237,48 +217,44 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/ext'{
 	export function emptyRefCreateFileResp():Ref<CreateFileResp>
 	export function refOfCreateFileResp(x:CreateFileResp,v:Ref<CreateFileResp>)
 	export function unRefCreateFileResp(v:Ref<CreateFileResp>):CreateFileResp
-	export function emptyExtService():ExtService
-	export function emptyRefExtService():Ref<ExtService>
-	export function refOfExtService(x:ExtService,v:Ref<ExtService>)
-	export function unRefExtService(v:Ref<ExtService>):ExtService
-	export function emptyAuthenAccessTokenReq():AuthenAccessTokenReq
-	export function emptyRefAuthenAccessTokenReq():Ref<AuthenAccessTokenReq>
-	export function refOfAuthenAccessTokenReq(x:AuthenAccessTokenReq,v:Ref<AuthenAccessTokenReq>)
-	export function unRefAuthenAccessTokenReq(v:Ref<AuthenAccessTokenReq>):AuthenAccessTokenReq
-	export function emptyAuthenAccessTokenResp():AuthenAccessTokenResp
-	export function emptyRefAuthenAccessTokenResp():Ref<AuthenAccessTokenResp>
-	export function refOfAuthenAccessTokenResp(x:AuthenAccessTokenResp,v:Ref<AuthenAccessTokenResp>)
-	export function unRefAuthenAccessTokenResp(v:Ref<AuthenAccessTokenResp>):AuthenAccessTokenResp
-	export function emptyRefreshAuthenAccessTokenResp():RefreshAuthenAccessTokenResp
-	export function emptyRefRefreshAuthenAccessTokenResp():Ref<RefreshAuthenAccessTokenResp>
-	export function refOfRefreshAuthenAccessTokenResp(x:RefreshAuthenAccessTokenResp,v:Ref<RefreshAuthenAccessTokenResp>)
-	export function unRefRefreshAuthenAccessTokenResp(v:Ref<RefreshAuthenAccessTokenResp>):RefreshAuthenAccessTokenResp
-	export function emptyAuthenAccessTokenRespBody():AuthenAccessTokenRespBody
-	export function emptyRefAuthenAccessTokenRespBody():Ref<AuthenAccessTokenRespBody>
-	export function refOfAuthenAccessTokenRespBody(x:AuthenAccessTokenRespBody,v:Ref<AuthenAccessTokenRespBody>)
-	export function unRefAuthenAccessTokenRespBody(v:Ref<AuthenAccessTokenRespBody>):AuthenAccessTokenRespBody
-	export function emptyCreateFileReq():CreateFileReq
-	export function emptyRefCreateFileReq():Ref<CreateFileReq>
-	export function refOfCreateFileReq(x:CreateFileReq,v:Ref<CreateFileReq>)
-	export function unRefCreateFileReq(v:Ref<CreateFileReq>):CreateFileReq
-	export function emptyCreateFileReqBuilder():CreateFileReqBuilder
-	export function emptyRefCreateFileReqBuilder():Ref<CreateFileReqBuilder>
-	export function refOfCreateFileReqBuilder(x:CreateFileReqBuilder,v:Ref<CreateFileReqBuilder>)
-	export function unRefCreateFileReqBuilder(v:Ref<CreateFileReqBuilder>):CreateFileReqBuilder
-	export function emptyRefreshAuthenAccessTokenReq():RefreshAuthenAccessTokenReq
-	export function emptyRefRefreshAuthenAccessTokenReq():Ref<RefreshAuthenAccessTokenReq>
-	export function refOfRefreshAuthenAccessTokenReq(x:RefreshAuthenAccessTokenReq,v:Ref<RefreshAuthenAccessTokenReq>)
-	export function unRefRefreshAuthenAccessTokenReq(v:Ref<RefreshAuthenAccessTokenReq>):RefreshAuthenAccessTokenReq
 	export function emptyRefreshAuthenAccessTokenReqBody():RefreshAuthenAccessTokenReqBody
 	export function emptyRefRefreshAuthenAccessTokenReqBody():Ref<RefreshAuthenAccessTokenReqBody>
 	export function refOfRefreshAuthenAccessTokenReqBody(x:RefreshAuthenAccessTokenReqBody,v:Ref<RefreshAuthenAccessTokenReqBody>)
 	export function unRefRefreshAuthenAccessTokenReqBody(v:Ref<RefreshAuthenAccessTokenReqBody>):RefreshAuthenAccessTokenReqBody
-	export function emptyRefreshAuthenAccessTokenReqBodyBuilder():RefreshAuthenAccessTokenReqBodyBuilder
-	export function emptyRefRefreshAuthenAccessTokenReqBodyBuilder():Ref<RefreshAuthenAccessTokenReqBodyBuilder>
-	export function refOfRefreshAuthenAccessTokenReqBodyBuilder(x:RefreshAuthenAccessTokenReqBodyBuilder,v:Ref<RefreshAuthenAccessTokenReqBodyBuilder>)
-	export function unRefRefreshAuthenAccessTokenReqBodyBuilder(v:Ref<RefreshAuthenAccessTokenReqBodyBuilder>):RefreshAuthenAccessTokenReqBodyBuilder
-	export function emptyRefreshAuthenAccessTokenReqBuilder():RefreshAuthenAccessTokenReqBuilder
-	export function emptyRefRefreshAuthenAccessTokenReqBuilder():Ref<RefreshAuthenAccessTokenReqBuilder>
-	export function refOfRefreshAuthenAccessTokenReqBuilder(x:RefreshAuthenAccessTokenReqBuilder,v:Ref<RefreshAuthenAccessTokenReqBuilder>)
-	export function unRefRefreshAuthenAccessTokenReqBuilder(v:Ref<RefreshAuthenAccessTokenReqBuilder>):RefreshAuthenAccessTokenReqBuilder
+	export function emptyRefreshAuthenAccessTokenResp():RefreshAuthenAccessTokenResp
+	export function emptyRefRefreshAuthenAccessTokenResp():Ref<RefreshAuthenAccessTokenResp>
+	export function refOfRefreshAuthenAccessTokenResp(x:RefreshAuthenAccessTokenResp,v:Ref<RefreshAuthenAccessTokenResp>)
+	export function unRefRefreshAuthenAccessTokenResp(v:Ref<RefreshAuthenAccessTokenResp>):RefreshAuthenAccessTokenResp
+	export function emptyRefreshAuthenAccessTokenRespBody():RefreshAuthenAccessTokenRespBody
+	export function emptyRefRefreshAuthenAccessTokenRespBody():Ref<RefreshAuthenAccessTokenRespBody>
+	export function refOfRefreshAuthenAccessTokenRespBody(x:RefreshAuthenAccessTokenRespBody,v:Ref<RefreshAuthenAccessTokenRespBody>)
+	export function unRefRefreshAuthenAccessTokenRespBody(v:Ref<RefreshAuthenAccessTokenRespBody>):RefreshAuthenAccessTokenRespBody
+	export function emptyAuthenAccessTokenReq():AuthenAccessTokenReq
+	export function emptyRefAuthenAccessTokenReq():Ref<AuthenAccessTokenReq>
+	export function refOfAuthenAccessTokenReq(x:AuthenAccessTokenReq,v:Ref<AuthenAccessTokenReq>)
+	export function unRefAuthenAccessTokenReq(v:Ref<AuthenAccessTokenReq>):AuthenAccessTokenReq
+	export function emptyRefreshAuthenAccessTokenReq():RefreshAuthenAccessTokenReq
+	export function emptyRefRefreshAuthenAccessTokenReq():Ref<RefreshAuthenAccessTokenReq>
+	export function refOfRefreshAuthenAccessTokenReq(x:RefreshAuthenAccessTokenReq,v:Ref<RefreshAuthenAccessTokenReq>)
+	export function unRefRefreshAuthenAccessTokenReq(v:Ref<RefreshAuthenAccessTokenReq>):RefreshAuthenAccessTokenReq
+	export function emptyCreateFileRespData():CreateFileRespData
+	export function emptyRefCreateFileRespData():Ref<CreateFileRespData>
+	export function refOfCreateFileRespData(x:CreateFileRespData,v:Ref<CreateFileRespData>)
+	export function unRefCreateFileRespData(v:Ref<CreateFileRespData>):CreateFileRespData
+	export function emptyExtService():ExtService
+	export function emptyRefExtService():Ref<ExtService>
+	export function refOfExtService(x:ExtService,v:Ref<ExtService>)
+	export function unRefExtService(v:Ref<ExtService>):ExtService
+	export function emptyAuthenAccessTokenReqBody():AuthenAccessTokenReqBody
+	export function emptyRefAuthenAccessTokenReqBody():Ref<AuthenAccessTokenReqBody>
+	export function refOfAuthenAccessTokenReqBody(x:AuthenAccessTokenReqBody,v:Ref<AuthenAccessTokenReqBody>)
+	export function unRefAuthenAccessTokenReqBody(v:Ref<AuthenAccessTokenReqBody>):AuthenAccessTokenReqBody
+	export function emptyAuthenUserInfoResp():AuthenUserInfoResp
+	export function emptyRefAuthenUserInfoResp():Ref<AuthenUserInfoResp>
+	export function refOfAuthenUserInfoResp(x:AuthenUserInfoResp,v:Ref<AuthenUserInfoResp>)
+	export function unRefAuthenUserInfoResp(v:Ref<AuthenUserInfoResp>):AuthenUserInfoResp
+	export function emptyCreateFileReq():CreateFileReq
+	export function emptyRefCreateFileReq():Ref<CreateFileReq>
+	export function refOfCreateFileReq(x:CreateFileReq,v:Ref<CreateFileReq>)
+	export function unRefCreateFileReq(v:Ref<CreateFileReq>):CreateFileReq
 }

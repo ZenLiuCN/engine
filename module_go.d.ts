@@ -1,7 +1,6 @@
 // noinspection JSUnusedGlobalSymbols
 
 
-
 /**
  * the module contains basic and built-in function and types for go. except generic types
  */
@@ -23,7 +22,7 @@ declare module "go" {
     export type float = number
     export type error = GoError | undefined
     export type reserved = void
-    export type map<K,V> = Record<K,V>
+    export type map<K, V> = Record<K, V>
 
     export interface GoError extends Error {
         error(): string
@@ -101,6 +100,8 @@ declare module "go" {
         slice(): (cap?: int, len?: int) => Slice<T>
 
         instance(): () => T
+
+        channel(): (buf?: int) => Chan<T>
     }
 
     export function elementOf<T, V>(c: TypeId<T>): TypeId<V> | undefined
@@ -109,10 +110,13 @@ declare module "go" {
 
     export function sliceOf<T>(c: TypeId<T>): TypeId<Slice<T>>
 
+    export function chanOf<T>(c: TypeId<T>): TypeId<Chan<T>>
+
     export function mapOf<K, V>(c: TypeId<K>, v: TypeId<V>): TypeId<Map<K, V>>
 
-    export function usageOf<T>(c: TypeId<T>): TypeUsage<T> | undefined
-
+    export const typeUnit:  {
+        usageOf<T>(c: TypeId<T>): TypeUsage<T> | undefined
+    }
 
     export function imag32(c: complex64): float32
 
@@ -183,18 +187,41 @@ declare module "go" {
 
     export interface ChanRecv<T> {
 
-        recv(handle: (t: T) => void): Promise<void>
 
-        closed(): bool
-
-        close(): error
     }
 
     export interface ChanSend<T> {
 
+
+    }
+
+    export interface GoChan<T> {
+        raw(): Chan<T>
+
+        asSendOnly(): GoSendChan<T>
+
+        asRecvOnly(): GoRecvChan<T>
+
+        recv(handle: (t: T) => void): Promise<void>
+
         send(v: T)
 
-        closed(): boolean
+        close(): error
+
+        stop(): boolean
+    }
+
+    export interface GoRecvChan<T> {
+        raw(): ChanRecv<T>
+
+        recv(handle: (t: T) => void): Promise<void>
+
+    }
+
+    export interface GoSendChan<T> {
+        raw(): ChanSend<T>
+
+        send(v: T)
 
         close(): error
     }

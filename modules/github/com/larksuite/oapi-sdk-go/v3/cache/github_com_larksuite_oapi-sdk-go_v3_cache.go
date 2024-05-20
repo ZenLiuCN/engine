@@ -5,7 +5,7 @@ import (
 	_ "embed"
 	"github.com/ZenLiuCN/engine"
 
-	_ "github.com/ZenLiuCN/engine/golang/time"
+	_ "github.com/ZenLiuCN/engine/modules/golang/time"
 	"github.com/larksuite/oapi-sdk-go/v3/cache"
 )
 

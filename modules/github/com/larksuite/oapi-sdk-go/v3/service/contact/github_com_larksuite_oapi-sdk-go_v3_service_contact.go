@@ -15,11 +15,7 @@ var (
 	GithubComLarksuiteOapiSdkGo3ServiceContactDefine   []byte
 	GithubComLarksuiteOapiSdkGo3ServiceContactDeclared = map[string]any{
 		"newService": contact.NewService,
-
-		"emptyService":    engine.Empty[contact.Service],
-		"emptyRefService": engine.EmptyRefer[contact.Service],
-		"refOfService":    engine.ReferOf[contact.Service],
-		"unRefService":    engine.UnRefer[contact.Service]}
+	}
 )
 
 func init() {

@@ -15,11 +15,7 @@ var (
 	GithubComLarksuiteOapiSdkGo3ServiceVerificationDefine   []byte
 	GithubComLarksuiteOapiSdkGo3ServiceVerificationDeclared = map[string]any{
 		"newService": verification.NewService,
-
-		"emptyService":    engine.Empty[verification.Service],
-		"emptyRefService": engine.EmptyRefer[verification.Service],
-		"refOfService":    engine.ReferOf[verification.Service],
-		"unRefService":    engine.UnRefer[verification.Service]}
+	}
 )
 
 func init() {

@@ -15,11 +15,7 @@ var (
 	GithubComLarksuiteOapiSdkGo3ServiceAttendanceDefine   []byte
 	GithubComLarksuiteOapiSdkGo3ServiceAttendanceDeclared = map[string]any{
 		"newService": attendance.NewService,
-
-		"emptyService":    engine.Empty[attendance.Service],
-		"emptyRefService": engine.EmptyRefer[attendance.Service],
-		"refOfService":    engine.ReferOf[attendance.Service],
-		"unRefService":    engine.UnRefer[attendance.Service]}
+	}
 )
 
 func init() {

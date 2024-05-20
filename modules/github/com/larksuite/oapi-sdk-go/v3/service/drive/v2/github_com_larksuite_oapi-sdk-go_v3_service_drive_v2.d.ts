@@ -7,7 +7,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/drive/v2'{
 	// @ts-ignore
 	import * as context from 'golang/context'
 	// @ts-ignore
-	import type {Struct,int,bool,error,Ref} from 'go'
+	import type {Ref,Struct,int,bool,error} from 'go'
 	//"anyone_can_edit"
 	export const CommentEntityAnyoneCanEdit:string
 	//"anyone_can_view"
@@ -302,104 +302,64 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/drive/v2'{
 				patch(ctx:context.Context,req:Ref<PatchPermissionPublicReq>,...options:larkcore.RequestOptionFunc[]):Ref<PatchPermissionPublicResp>
 			}>
 	}
-	export function emptyFileLikeBuilder():FileLikeBuilder
-	export function emptyRefFileLikeBuilder():Ref<FileLikeBuilder>
-	export function refOfFileLikeBuilder(x:FileLikeBuilder,v:Ref<FileLikeBuilder>)
-	export function unRefFileLikeBuilder(v:Ref<FileLikeBuilder>):FileLikeBuilder
-	export function emptyImportJobMountPointBuilder():ImportJobMountPointBuilder
-	export function emptyRefImportJobMountPointBuilder():Ref<ImportJobMountPointBuilder>
-	export function refOfImportJobMountPointBuilder(x:ImportJobMountPointBuilder,v:Ref<ImportJobMountPointBuilder>)
-	export function unRefImportJobMountPointBuilder(v:Ref<ImportJobMountPointBuilder>):ImportJobMountPointBuilder
-	export function emptyDepartmentId():DepartmentId
-	export function emptyRefDepartmentId():Ref<DepartmentId>
-	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
-	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptyDepartmentIdBuilder():DepartmentIdBuilder
-	export function emptyRefDepartmentIdBuilder():Ref<DepartmentIdBuilder>
-	export function refOfDepartmentIdBuilder(x:DepartmentIdBuilder,v:Ref<DepartmentIdBuilder>)
-	export function unRefDepartmentIdBuilder(v:Ref<DepartmentIdBuilder>):DepartmentIdBuilder
-	export function emptyPermissionPublic():PermissionPublic
-	export function emptyRefPermissionPublic():Ref<PermissionPublic>
-	export function refOfPermissionPublic(x:PermissionPublic,v:Ref<PermissionPublic>)
-	export function unRefPermissionPublic(v:Ref<PermissionPublic>):PermissionPublic
-	export function emptyPermissionPublicBuilder():PermissionPublicBuilder
-	export function emptyRefPermissionPublicBuilder():Ref<PermissionPublicBuilder>
-	export function refOfPermissionPublicBuilder(x:PermissionPublicBuilder,v:Ref<PermissionPublicBuilder>)
-	export function unRefPermissionPublicBuilder(v:Ref<PermissionPublicBuilder>):PermissionPublicBuilder
-	export function emptyV2():V2
-	export function emptyRefV2():Ref<V2>
-	export function refOfV2(x:V2,v:Ref<V2>)
-	export function unRefV2(v:Ref<V2>):V2
-	export function emptyExportJob():ExportJob
-	export function emptyRefExportJob():Ref<ExportJob>
-	export function refOfExportJob(x:ExportJob,v:Ref<ExportJob>)
-	export function unRefExportJob(v:Ref<ExportJob>):ExportJob
-	export function emptyPatchPermissionPublicReqBuilder():PatchPermissionPublicReqBuilder
-	export function emptyRefPatchPermissionPublicReqBuilder():Ref<PatchPermissionPublicReqBuilder>
-	export function refOfPatchPermissionPublicReqBuilder(x:PatchPermissionPublicReqBuilder,v:Ref<PatchPermissionPublicReqBuilder>)
-	export function unRefPatchPermissionPublicReqBuilder(v:Ref<PatchPermissionPublicReqBuilder>):PatchPermissionPublicReqBuilder
-	export function emptySecureLabelBuilder():SecureLabelBuilder
-	export function emptyRefSecureLabelBuilder():Ref<SecureLabelBuilder>
-	export function refOfSecureLabelBuilder(x:SecureLabelBuilder,v:Ref<SecureLabelBuilder>)
-	export function unRefSecureLabelBuilder(v:Ref<SecureLabelBuilder>):SecureLabelBuilder
-	export function emptyGetPermissionPublicReq():GetPermissionPublicReq
-	export function emptyRefGetPermissionPublicReq():Ref<GetPermissionPublicReq>
-	export function refOfGetPermissionPublicReq(x:GetPermissionPublicReq,v:Ref<GetPermissionPublicReq>)
-	export function unRefGetPermissionPublicReq(v:Ref<GetPermissionPublicReq>):GetPermissionPublicReq
-	export function emptyMyLike():MyLike
-	export function emptyRefMyLike():Ref<MyLike>
-	export function refOfMyLike(x:MyLike,v:Ref<MyLike>)
-	export function unRefMyLike(v:Ref<MyLike>):MyLike
-	export function emptyExportJobBuilder():ExportJobBuilder
-	export function emptyRefExportJobBuilder():Ref<ExportJobBuilder>
-	export function refOfExportJobBuilder(x:ExportJobBuilder,v:Ref<ExportJobBuilder>)
-	export function unRefExportJobBuilder(v:Ref<ExportJobBuilder>):ExportJobBuilder
-	export function emptyImportJobBuilder():ImportJobBuilder
-	export function emptyRefImportJobBuilder():Ref<ImportJobBuilder>
-	export function refOfImportJobBuilder(x:ImportJobBuilder,v:Ref<ImportJobBuilder>)
-	export function unRefImportJobBuilder(v:Ref<ImportJobBuilder>):ImportJobBuilder
-	export function emptyMyLikeBuilder():MyLikeBuilder
-	export function emptyRefMyLikeBuilder():Ref<MyLikeBuilder>
-	export function refOfMyLikeBuilder(x:MyLikeBuilder,v:Ref<MyLikeBuilder>)
-	export function unRefMyLikeBuilder(v:Ref<MyLikeBuilder>):MyLikeBuilder
-	export function emptyPatchPermissionPublicRespData():PatchPermissionPublicRespData
-	export function emptyRefPatchPermissionPublicRespData():Ref<PatchPermissionPublicRespData>
-	export function refOfPatchPermissionPublicRespData(x:PatchPermissionPublicRespData,v:Ref<PatchPermissionPublicRespData>)
-	export function unRefPatchPermissionPublicRespData(v:Ref<PatchPermissionPublicRespData>):PatchPermissionPublicRespData
-	export function emptyImportJobMountPoint():ImportJobMountPoint
-	export function emptyRefImportJobMountPoint():Ref<ImportJobMountPoint>
-	export function refOfImportJobMountPoint(x:ImportJobMountPoint,v:Ref<ImportJobMountPoint>)
-	export function unRefImportJobMountPoint(v:Ref<ImportJobMountPoint>):ImportJobMountPoint
-	export function emptyPatchPermissionPublicReq():PatchPermissionPublicReq
-	export function emptyRefPatchPermissionPublicReq():Ref<PatchPermissionPublicReq>
-	export function refOfPatchPermissionPublicReq(x:PatchPermissionPublicReq,v:Ref<PatchPermissionPublicReq>)
-	export function unRefPatchPermissionPublicReq(v:Ref<PatchPermissionPublicReq>):PatchPermissionPublicReq
-	export function emptyPatchPermissionPublicResp():PatchPermissionPublicResp
-	export function emptyRefPatchPermissionPublicResp():Ref<PatchPermissionPublicResp>
-	export function refOfPatchPermissionPublicResp(x:PatchPermissionPublicResp,v:Ref<PatchPermissionPublicResp>)
-	export function unRefPatchPermissionPublicResp(v:Ref<PatchPermissionPublicResp>):PatchPermissionPublicResp
-	export function emptyGetPermissionPublicReqBuilder():GetPermissionPublicReqBuilder
-	export function emptyRefGetPermissionPublicReqBuilder():Ref<GetPermissionPublicReqBuilder>
-	export function refOfGetPermissionPublicReqBuilder(x:GetPermissionPublicReqBuilder,v:Ref<GetPermissionPublicReqBuilder>)
-	export function unRefGetPermissionPublicReqBuilder(v:Ref<GetPermissionPublicReqBuilder>):GetPermissionPublicReqBuilder
-	export function emptyGetPermissionPublicResp():GetPermissionPublicResp
-	export function emptyRefGetPermissionPublicResp():Ref<GetPermissionPublicResp>
-	export function refOfGetPermissionPublicResp(x:GetPermissionPublicResp,v:Ref<GetPermissionPublicResp>)
-	export function unRefGetPermissionPublicResp(v:Ref<GetPermissionPublicResp>):GetPermissionPublicResp
 	export function emptyImportJob():ImportJob
 	export function emptyRefImportJob():Ref<ImportJob>
 	export function refOfImportJob(x:ImportJob,v:Ref<ImportJob>)
 	export function unRefImportJob(v:Ref<ImportJob>):ImportJob
-	export function emptySecureLabel():SecureLabel
-	export function emptyRefSecureLabel():Ref<SecureLabel>
-	export function refOfSecureLabel(x:SecureLabel,v:Ref<SecureLabel>)
-	export function unRefSecureLabel(v:Ref<SecureLabel>):SecureLabel
-	export function emptyFileLike():FileLike
-	export function emptyRefFileLike():Ref<FileLike>
-	export function refOfFileLike(x:FileLike,v:Ref<FileLike>)
-	export function unRefFileLike(v:Ref<FileLike>):FileLike
+	export function emptyMyLike():MyLike
+	export function emptyRefMyLike():Ref<MyLike>
+	export function refOfMyLike(x:MyLike,v:Ref<MyLike>)
+	export function unRefMyLike(v:Ref<MyLike>):MyLike
 	export function emptyGetPermissionPublicRespData():GetPermissionPublicRespData
 	export function emptyRefGetPermissionPublicRespData():Ref<GetPermissionPublicRespData>
 	export function refOfGetPermissionPublicRespData(x:GetPermissionPublicRespData,v:Ref<GetPermissionPublicRespData>)
 	export function unRefGetPermissionPublicRespData(v:Ref<GetPermissionPublicRespData>):GetPermissionPublicRespData
+	export function emptyDepartmentId():DepartmentId
+	export function emptyRefDepartmentId():Ref<DepartmentId>
+	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
+	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
+	export function emptyFileLike():FileLike
+	export function emptyRefFileLike():Ref<FileLike>
+	export function refOfFileLike(x:FileLike,v:Ref<FileLike>)
+	export function unRefFileLike(v:Ref<FileLike>):FileLike
+	export function emptyGetPermissionPublicReq():GetPermissionPublicReq
+	export function emptyRefGetPermissionPublicReq():Ref<GetPermissionPublicReq>
+	export function refOfGetPermissionPublicReq(x:GetPermissionPublicReq,v:Ref<GetPermissionPublicReq>)
+	export function unRefGetPermissionPublicReq(v:Ref<GetPermissionPublicReq>):GetPermissionPublicReq
+	export function emptyPatchPermissionPublicResp():PatchPermissionPublicResp
+	export function emptyRefPatchPermissionPublicResp():Ref<PatchPermissionPublicResp>
+	export function refOfPatchPermissionPublicResp(x:PatchPermissionPublicResp,v:Ref<PatchPermissionPublicResp>)
+	export function unRefPatchPermissionPublicResp(v:Ref<PatchPermissionPublicResp>):PatchPermissionPublicResp
+	export function emptyPatchPermissionPublicReq():PatchPermissionPublicReq
+	export function emptyRefPatchPermissionPublicReq():Ref<PatchPermissionPublicReq>
+	export function refOfPatchPermissionPublicReq(x:PatchPermissionPublicReq,v:Ref<PatchPermissionPublicReq>)
+	export function unRefPatchPermissionPublicReq(v:Ref<PatchPermissionPublicReq>):PatchPermissionPublicReq
+	export function emptyV2():V2
+	export function emptyRefV2():Ref<V2>
+	export function refOfV2(x:V2,v:Ref<V2>)
+	export function unRefV2(v:Ref<V2>):V2
+	export function emptyImportJobMountPoint():ImportJobMountPoint
+	export function emptyRefImportJobMountPoint():Ref<ImportJobMountPoint>
+	export function refOfImportJobMountPoint(x:ImportJobMountPoint,v:Ref<ImportJobMountPoint>)
+	export function unRefImportJobMountPoint(v:Ref<ImportJobMountPoint>):ImportJobMountPoint
+	export function emptyPermissionPublic():PermissionPublic
+	export function emptyRefPermissionPublic():Ref<PermissionPublic>
+	export function refOfPermissionPublic(x:PermissionPublic,v:Ref<PermissionPublic>)
+	export function unRefPermissionPublic(v:Ref<PermissionPublic>):PermissionPublic
+	export function emptyExportJob():ExportJob
+	export function emptyRefExportJob():Ref<ExportJob>
+	export function refOfExportJob(x:ExportJob,v:Ref<ExportJob>)
+	export function unRefExportJob(v:Ref<ExportJob>):ExportJob
+	export function emptyGetPermissionPublicResp():GetPermissionPublicResp
+	export function emptyRefGetPermissionPublicResp():Ref<GetPermissionPublicResp>
+	export function refOfGetPermissionPublicResp(x:GetPermissionPublicResp,v:Ref<GetPermissionPublicResp>)
+	export function unRefGetPermissionPublicResp(v:Ref<GetPermissionPublicResp>):GetPermissionPublicResp
+	export function emptyPatchPermissionPublicRespData():PatchPermissionPublicRespData
+	export function emptyRefPatchPermissionPublicRespData():Ref<PatchPermissionPublicRespData>
+	export function refOfPatchPermissionPublicRespData(x:PatchPermissionPublicRespData,v:Ref<PatchPermissionPublicRespData>)
+	export function unRefPatchPermissionPublicRespData(v:Ref<PatchPermissionPublicRespData>):PatchPermissionPublicRespData
+	export function emptySecureLabel():SecureLabel
+	export function emptyRefSecureLabel():Ref<SecureLabel>
+	export function refOfSecureLabel(x:SecureLabel,v:Ref<SecureLabel>)
+	export function unRefSecureLabel(v:Ref<SecureLabel>):SecureLabel
 }

@@ -15,11 +15,7 @@ var (
 	GithubComLarksuiteOapiSdkGo3ServiceEhrDefine   []byte
 	GithubComLarksuiteOapiSdkGo3ServiceEhrDeclared = map[string]any{
 		"newService": ehr.NewService,
-
-		"emptyService":    engine.Empty[ehr.Service],
-		"emptyRefService": engine.EmptyRefer[ehr.Service],
-		"refOfService":    engine.ReferOf[ehr.Service],
-		"unRefService":    engine.UnRefer[ehr.Service]}
+	}
 )
 
 func init() {

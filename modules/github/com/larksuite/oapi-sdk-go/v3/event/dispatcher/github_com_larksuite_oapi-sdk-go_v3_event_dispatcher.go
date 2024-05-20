@@ -5,8 +5,6 @@ import (
 	_ "embed"
 	"github.com/ZenLiuCN/engine"
 
-	_ "github.com/ZenLiuCN/engine/golang/context"
-	_ "github.com/ZenLiuCN/engine/golang/encoding/json"
 	_ "github.com/ZenLiuCN/engine/modules/github/com/larksuite/oapi-sdk-go/v3/core"
 	_ "github.com/ZenLiuCN/engine/modules/github/com/larksuite/oapi-sdk-go/v3/event"
 	_ "github.com/ZenLiuCN/engine/modules/github/com/larksuite/oapi-sdk-go/v3/service/acs/v1"
@@ -23,6 +21,8 @@ import (
 	_ "github.com/ZenLiuCN/engine/modules/github/com/larksuite/oapi-sdk-go/v3/service/meeting_room/v1"
 	_ "github.com/ZenLiuCN/engine/modules/github/com/larksuite/oapi-sdk-go/v3/service/task/v1"
 	_ "github.com/ZenLiuCN/engine/modules/github/com/larksuite/oapi-sdk-go/v3/service/vc/v1"
+	_ "github.com/ZenLiuCN/engine/modules/golang/context"
+	_ "github.com/ZenLiuCN/engine/modules/golang/encoding/json"
 	"github.com/larksuite/oapi-sdk-go/v3/event/dispatcher"
 )
 
@@ -39,11 +39,7 @@ var (
 		"emptyCustomAppTicketEventHandler":    engine.Empty[dispatcher.CustomAppTicketEventHandler],
 		"emptyRefCustomAppTicketEventHandler": engine.EmptyRefer[dispatcher.CustomAppTicketEventHandler],
 		"refOfCustomAppTicketEventHandler":    engine.ReferOf[dispatcher.CustomAppTicketEventHandler],
-		"unRefCustomAppTicketEventHandler":    engine.UnRefer[dispatcher.CustomAppTicketEventHandler],
-		"emptyEventDispatcher":                engine.Empty[dispatcher.EventDispatcher],
-		"emptyRefEventDispatcher":             engine.EmptyRefer[dispatcher.EventDispatcher],
-		"refOfEventDispatcher":                engine.ReferOf[dispatcher.EventDispatcher],
-		"unRefEventDispatcher":                engine.UnRefer[dispatcher.EventDispatcher]}
+		"unRefCustomAppTicketEventHandler":    engine.UnRefer[dispatcher.CustomAppTicketEventHandler]}
 )
 
 func init() {

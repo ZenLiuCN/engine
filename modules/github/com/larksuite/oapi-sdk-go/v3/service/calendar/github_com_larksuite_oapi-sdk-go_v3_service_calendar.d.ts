@@ -14,8 +14,4 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/calendar'{
 
 			V4:Ref<larkcalendar.V4>
 	}
-	export function emptyService():Service
-	export function emptyRefService():Ref<Service>
-	export function refOfService(x:Service,v:Ref<Service>)
-	export function unRefService(v:Ref<Service>):Service
 }

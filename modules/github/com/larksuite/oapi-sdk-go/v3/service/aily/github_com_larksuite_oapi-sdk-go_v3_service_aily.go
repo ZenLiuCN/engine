@@ -15,11 +15,7 @@ var (
 	GithubComLarksuiteOapiSdkGo3ServiceAilyDefine   []byte
 	GithubComLarksuiteOapiSdkGo3ServiceAilyDeclared = map[string]any{
 		"newService": aily.NewService,
-
-		"emptyService":    engine.Empty[aily.Service],
-		"emptyRefService": engine.EmptyRefer[aily.Service],
-		"refOfService":    engine.ReferOf[aily.Service],
-		"unRefService":    engine.UnRefer[aily.Service]}
+	}
 )
 
 func init() {

@@ -15,11 +15,7 @@ var (
 	GithubComLarksuiteOapiSdkGo3ServiceDocument_aiDefine   []byte
 	GithubComLarksuiteOapiSdkGo3ServiceDocument_aiDeclared = map[string]any{
 		"newService": document_ai.NewService,
-
-		"emptyService":    engine.Empty[document_ai.Service],
-		"emptyRefService": engine.EmptyRefer[document_ai.Service],
-		"refOfService":    engine.ReferOf[document_ai.Service],
-		"unRefService":    engine.UnRefer[document_ai.Service]}
+	}
 )
 
 func init() {

@@ -11,7 +11,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 	// @ts-ignore
 	import * as context from 'golang/context'
 	// @ts-ignore
-	import type {Alias,Nothing,Ref,map,Struct,error,int,bool} from 'go'
+	import type {Nothing,Ref,map,Struct,error,int,bool,Alias} from 'go'
 	export interface CardAction extends Struct<CardAction>,json.Token{
 
 			eventReq:Ref<larkevent.EventReq>
@@ -32,13 +32,13 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 				timezone:string
 			}>>
 	}
-	export interface CardActionBody extends json.Token,Struct<CardActionBody>{
+	export interface CardActionBody extends Struct<CardActionBody>,json.Token{
 
 			cardAction:Ref<CardAction>
 			challenge:string
 			type:string
 	}
-	export interface CardActionHandler extends Struct<CardActionHandler>,larkevent.IReqHandler,json.Token{
+	export interface CardActionHandler extends Struct<CardActionHandler>,json.Token,larkevent.IReqHandler{
 
 			config:Ref<larkcore.Config>
 			handle(ctx:context.Context,req:Ref<larkevent.EventReq>):Ref<larkevent.EventResp>
@@ -49,7 +49,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 			doHandle(ctx:context.Context,cardAction:Ref<CardAction>):Ref<larkevent.EventResp>
 			verifySign(ctx:context.Context,req:Ref<larkevent.EventReq>)/*error*/
 	}
-	export interface CustomResp extends Struct<CustomResp>,json.Token{
+	export interface CustomResp extends json.Token,Struct<CustomResp>{
 
 			statusCode:int
 			body:map<string,any>
@@ -81,7 +81,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 			build():Ref<MessageCard>
 			json():string
 	}
-	export interface MessageCardAction extends json.Token,Struct<MessageCardAction>,MessageCardElement,json.Marshaler{
+	export interface MessageCardAction extends json.Marshaler,Struct<MessageCardAction>,json.Token,MessageCardElement{
 
 			actions_:MessageCardActionElement[]
 			layout_:Ref<MessageCardActionLayout>
@@ -127,7 +127,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 			wideScreenMode(wideScreenMode:bool):Ref<MessageCardConfig>
 			build():Ref<MessageCardConfig>
 	}
-	export interface MessageCardDiv extends Struct<MessageCardDiv>,json.Marshaler,json.Token,MessageCardElement{
+	export interface MessageCardDiv extends json.Marshaler,Struct<MessageCardDiv>,json.Token,MessageCardElement{
 
 			text_:MessageCardText
 			fields_:Ref<MessageCardField>[]
@@ -144,7 +144,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 			marshalJSON():Uint8Array
 			tag():string
 	}
-	export interface MessageCardEmbedButton extends Struct<MessageCardEmbedButton>,json.Marshaler,json.Token,MessageCardActionElement,MessageCardExtraElement{
+	export interface MessageCardEmbedButton extends MessageCardExtraElement,json.Token,json.Marshaler,Struct<MessageCardEmbedButton>,MessageCardActionElement{
 
 			text_:MessageCardText
 			urL_:Ref<string>
@@ -164,7 +164,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 			isAction():void
 			isExtra():void
 	}
-	export interface MessageCardEmbedDatePicker extends Struct<MessageCardEmbedDatePicker>,MessageCardExtraElement,json.Marshaler,json.Token,MessageCardActionElement{
+	export interface MessageCardEmbedDatePicker extends Struct<MessageCardEmbedDatePicker>,MessageCardActionElement,MessageCardExtraElement,json.Token,json.Marshaler{
 
 			messageCardEmbedDatePickerBase:Ref<MessageCardEmbedDatePickerBase>
 			messageCardEmbedDatePicker(base:Ref<MessageCardEmbedDatePickerBase>):Ref<MessageCardEmbedDatePicker>
@@ -189,7 +189,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 			isAction():void
 			isExtra():void
 	}
-	export interface MessageCardEmbedImage extends json.Token,MessageCardExtraElement,MessageCardNoteElement,Struct<MessageCardEmbedImage>,json.Marshaler{
+	export interface MessageCardEmbedImage extends json.Marshaler,Struct<MessageCardEmbedImage>,MessageCardExtraElement,MessageCardNoteElement,json.Token{
 
 			alt_:Ref<MessageCardPlainText>
 			imgKey_:string
@@ -205,7 +205,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 			isNote():void
 			marshalJSON():Uint8Array
 	}
-	export interface MessageCardEmbedOverflow extends MessageCardExtraElement,Struct<MessageCardEmbedOverflow>,json.Marshaler,json.Token,MessageCardActionElement{
+	export interface MessageCardEmbedOverflow extends Struct<MessageCardEmbedOverflow>,json.Token,json.Marshaler,MessageCardActionElement,MessageCardExtraElement{
 
 			options_:Ref<MessageCardEmbedSelectOption>[]
 			value_:map<string,any>
@@ -219,7 +219,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 			isAction():void
 			isExtra():void
 	}
-	export interface MessageCardEmbedPickerDatetime extends MessageCardExtraElement,Struct<MessageCardEmbedPickerDatetime>,json.Marshaler,json.Token,MessageCardActionElement{
+	export interface MessageCardEmbedPickerDatetime extends Struct<MessageCardEmbedPickerDatetime>,json.Token,json.Marshaler,MessageCardActionElement,MessageCardExtraElement{
 
 			messageCardEmbedDatePickerBase:Ref<MessageCardEmbedDatePickerBase>
 			messageCardEmbedPickerDatetime(base:Ref<MessageCardEmbedDatePickerBase>):Ref<MessageCardEmbedPickerDatetime>
@@ -227,7 +227,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 			tag():string
 			marshalJSON():Uint8Array
 	}
-	export interface MessageCardEmbedPickerTime extends Struct<MessageCardEmbedPickerTime>,json.Marshaler,json.Token,MessageCardActionElement,MessageCardExtraElement{
+	export interface MessageCardEmbedPickerTime extends Struct<MessageCardEmbedPickerTime>,MessageCardActionElement,MessageCardExtraElement,json.Token,json.Marshaler{
 
 			messageCardEmbedDatePickerBase:Ref<MessageCardEmbedDatePickerBase>
 			messageCardEmbedPickerTime(base:Ref<MessageCardEmbedDatePickerBase>):Ref<MessageCardEmbedPickerTime>
@@ -251,7 +251,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 			isAction():void
 			isExtra():void
 	}
-	export interface MessageCardEmbedSelectMenuPerson extends Struct<MessageCardEmbedSelectMenuPerson>,json.Marshaler,json.Token,MessageCardActionElement,MessageCardExtraElement{
+	export interface MessageCardEmbedSelectMenuPerson extends Struct<MessageCardEmbedSelectMenuPerson>,MessageCardActionElement,MessageCardExtraElement,json.Token,json.Marshaler{
 
 			messageCardEmbedSelectMenuBase:Ref<MessageCardEmbedSelectMenuBase>
 			messageCardEmbedSelectMenu(messageCardEmbedSelectMenuBase:Ref<MessageCardEmbedSelectMenuBase>):Ref<MessageCardEmbedSelectMenuPerson>
@@ -259,7 +259,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 			tag():string
 			marshalJSON():Uint8Array
 	}
-	export interface MessageCardEmbedSelectMenuStatic extends json.Token,Struct<MessageCardEmbedSelectMenuStatic>,MessageCardActionElement,MessageCardExtraElement,json.Marshaler{
+	export interface MessageCardEmbedSelectMenuStatic extends MessageCardActionElement,MessageCardExtraElement,Struct<MessageCardEmbedSelectMenuStatic>,json.Token,json.Marshaler{
 
 			messageCardEmbedSelectMenuBase:Ref<MessageCardEmbedSelectMenuBase>
 			messageCardEmbedSelectMenuStatic(base:Ref<MessageCardEmbedSelectMenuBase>):Ref<MessageCardEmbedSelectMenuStatic>
@@ -317,7 +317,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 			jaJP(jaJP:MessageCardElement[]):Ref<MessageCardI18nElements>
 			build():Ref<MessageCardI18nElements>
 	}
-	export interface MessageCardImage extends Struct<MessageCardImage>,MessageCardElement,json.Marshaler,json.Token{
+	export interface MessageCardImage extends MessageCardElement,json.Marshaler,Struct<MessageCardImage>,json.Token{
 
 			alt_:Ref<MessageCardPlainText>
 			title_:MessageCardText
@@ -343,7 +343,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 	}
 	export const MessageCardImageModelCropCenter:MessageCardImageModel
 	export const MessageCardImageModelFitHorizontal:MessageCardImageModel
-	export interface MessageCardLarkMd extends json.Token,MessageCardExtraElement,MessageCardNoteElement,Struct<MessageCardLarkMd>,MessageCardText,json.Marshaler{
+	export interface MessageCardLarkMd extends json.Token,Struct<MessageCardLarkMd>,json.Marshaler,MessageCardExtraElement,MessageCardText,MessageCardNoteElement{
 
 			content_:string
 			content(content:string):Ref<MessageCardLarkMd>
@@ -354,7 +354,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 			isExtra():void
 			isNote():void
 	}
-	export interface MessageCardMarkdown extends json.Marshaler,json.Token,MessageCardElement,Struct<MessageCardMarkdown>{
+	export interface MessageCardMarkdown extends Struct<MessageCardMarkdown>,json.Token,json.Marshaler,MessageCardElement{
 
 			content_:string
 			href_:map<string,Ref<MessageCardURL>>
@@ -364,7 +364,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 			tag():string
 			marshalJSON():Uint8Array
 	}
-	export interface MessageCardNote extends json.Token,Struct<MessageCardNote>,MessageCardElement,json.Marshaler{
+	export interface MessageCardNote extends Struct<MessageCardNote>,json.Token,MessageCardElement,json.Marshaler{
 
 			elements_:MessageCardNoteElement[]
 			elements(elements:MessageCardNoteElement[]):Ref<MessageCardNote>
@@ -376,7 +376,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 
 			isNote():void
 	}
-	export interface MessageCardPlainText extends Struct<MessageCardPlainText>,json.Marshaler,json.Token,MessageCardExtraElement,MessageCardNoteElement,MessageCardText{
+	export interface MessageCardPlainText extends json.Token,json.Marshaler,MessageCardExtraElement,MessageCardText,MessageCardNoteElement,Struct<MessageCardPlainText>{
 
 			content_:string
 			lines_:Ref<int>
@@ -391,7 +391,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 			isExtra():void
 			isNote():void
 	}
-	export interface MessageCardPlainTextI18n extends Struct<MessageCardPlainTextI18n>,json.Token{
+	export interface MessageCardPlainTextI18n extends json.Token,Struct<MessageCardPlainTextI18n>{
 
 			zhCN_:string
 			enUS_:string
@@ -499,132 +499,24 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 	export const TemplateWathet:string
 	//"yellow"
 	export const TemplateYellow:string
-	export function emptyMessageCardActionConfirm():MessageCardActionConfirm
-	export function emptyRefMessageCardActionConfirm():Ref<MessageCardActionConfirm>
-	export function refOfMessageCardActionConfirm(x:MessageCardActionConfirm,v:Ref<MessageCardActionConfirm>)
-	export function unRefMessageCardActionConfirm(v:Ref<MessageCardActionConfirm>):MessageCardActionConfirm
-	export function emptyMessageCardEmbedDatePicker():MessageCardEmbedDatePicker
-	export function emptyRefMessageCardEmbedDatePicker():Ref<MessageCardEmbedDatePicker>
-	export function refOfMessageCardEmbedDatePicker(x:MessageCardEmbedDatePicker,v:Ref<MessageCardEmbedDatePicker>)
-	export function unRefMessageCardEmbedDatePicker(v:Ref<MessageCardEmbedDatePicker>):MessageCardEmbedDatePicker
-	export function emptyMessageCardImage():MessageCardImage
-	export function emptyRefMessageCardImage():Ref<MessageCardImage>
-	export function refOfMessageCardImage(x:MessageCardImage,v:Ref<MessageCardImage>)
-	export function unRefMessageCardImage(v:Ref<MessageCardImage>):MessageCardImage
-	export function emptyMessageCardNote():MessageCardNote
-	export function emptyRefMessageCardNote():Ref<MessageCardNote>
-	export function refOfMessageCardNote(x:MessageCardNote,v:Ref<MessageCardNote>)
-	export function unRefMessageCardNote(v:Ref<MessageCardNote>):MessageCardNote
-	export function emptyI18n():I18n
-	export function emptyRefI18n():Ref<I18n>
-	export function refOfI18n(x:I18n,v:Ref<I18n>)
-	export function unRefI18n(v:Ref<I18n>):I18n
-	export function emptyMessageCardAction():MessageCardAction
-	export function emptyRefMessageCardAction():Ref<MessageCardAction>
-	export function refOfMessageCardAction(x:MessageCardAction,v:Ref<MessageCardAction>)
-	export function unRefMessageCardAction(v:Ref<MessageCardAction>):MessageCardAction
-	export function emptyMessageCardField():MessageCardField
-	export function emptyRefMessageCardField():Ref<MessageCardField>
-	export function refOfMessageCardField(x:MessageCardField,v:Ref<MessageCardField>)
-	export function unRefMessageCardField(v:Ref<MessageCardField>):MessageCardField
-	export function emptyMessageCardPlainText():MessageCardPlainText
-	export function emptyRefMessageCardPlainText():Ref<MessageCardPlainText>
-	export function refOfMessageCardPlainText(x:MessageCardPlainText,v:Ref<MessageCardPlainText>)
-	export function unRefMessageCardPlainText(v:Ref<MessageCardPlainText>):MessageCardPlainText
-	export function emptyCustomResp():CustomResp
-	export function emptyRefCustomResp():Ref<CustomResp>
-	export function refOfCustomResp(x:CustomResp,v:Ref<CustomResp>)
-	export function unRefCustomResp(v:Ref<CustomResp>):CustomResp
-	export function emptyMessageCardEmbedPickerDatetime():MessageCardEmbedPickerDatetime
-	export function emptyRefMessageCardEmbedPickerDatetime():Ref<MessageCardEmbedPickerDatetime>
-	export function refOfMessageCardEmbedPickerDatetime(x:MessageCardEmbedPickerDatetime,v:Ref<MessageCardEmbedPickerDatetime>)
-	export function unRefMessageCardEmbedPickerDatetime(v:Ref<MessageCardEmbedPickerDatetime>):MessageCardEmbedPickerDatetime
-	export function emptyMessageCardHeader():MessageCardHeader
-	export function emptyRefMessageCardHeader():Ref<MessageCardHeader>
-	export function refOfMessageCardHeader(x:MessageCardHeader,v:Ref<MessageCardHeader>)
-	export function unRefMessageCardHeader(v:Ref<MessageCardHeader>):MessageCardHeader
-	export function emptyMessageCardURL():MessageCardURL
-	export function emptyRefMessageCardURL():Ref<MessageCardURL>
-	export function refOfMessageCardURL(x:MessageCardURL,v:Ref<MessageCardURL>)
-	export function unRefMessageCardURL(v:Ref<MessageCardURL>):MessageCardURL
-	export function emptyMessageCard():MessageCard
-	export function emptyRefMessageCard():Ref<MessageCard>
-	export function refOfMessageCard(x:MessageCard,v:Ref<MessageCard>)
-	export function unRefMessageCard(v:Ref<MessageCard>):MessageCard
-	export function emptyMessageCardEmbedSelectMenuPerson():MessageCardEmbedSelectMenuPerson
-	export function emptyRefMessageCardEmbedSelectMenuPerson():Ref<MessageCardEmbedSelectMenuPerson>
-	export function refOfMessageCardEmbedSelectMenuPerson(x:MessageCardEmbedSelectMenuPerson,v:Ref<MessageCardEmbedSelectMenuPerson>)
-	export function unRefMessageCardEmbedSelectMenuPerson(v:Ref<MessageCardEmbedSelectMenuPerson>):MessageCardEmbedSelectMenuPerson
-	export function emptyMessageCardMarkdown():MessageCardMarkdown
-	export function emptyRefMessageCardMarkdown():Ref<MessageCardMarkdown>
-	export function refOfMessageCardMarkdown(x:MessageCardMarkdown,v:Ref<MessageCardMarkdown>)
-	export function unRefMessageCardMarkdown(v:Ref<MessageCardMarkdown>):MessageCardMarkdown
-	export function emptyMessageCardConfig():MessageCardConfig
-	export function emptyRefMessageCardConfig():Ref<MessageCardConfig>
-	export function refOfMessageCardConfig(x:MessageCardConfig,v:Ref<MessageCardConfig>)
-	export function unRefMessageCardConfig(v:Ref<MessageCardConfig>):MessageCardConfig
-	export function emptyMessageCardEmbedSelectMenuBase():MessageCardEmbedSelectMenuBase
-	export function emptyRefMessageCardEmbedSelectMenuBase():Ref<MessageCardEmbedSelectMenuBase>
-	export function refOfMessageCardEmbedSelectMenuBase(x:MessageCardEmbedSelectMenuBase,v:Ref<MessageCardEmbedSelectMenuBase>)
-	export function unRefMessageCardEmbedSelectMenuBase(v:Ref<MessageCardEmbedSelectMenuBase>):MessageCardEmbedSelectMenuBase
-	export function emptyMessageCardEmbedImage():MessageCardEmbedImage
-	export function emptyRefMessageCardEmbedImage():Ref<MessageCardEmbedImage>
-	export function refOfMessageCardEmbedImage(x:MessageCardEmbedImage,v:Ref<MessageCardEmbedImage>)
-	export function unRefMessageCardEmbedImage(v:Ref<MessageCardEmbedImage>):MessageCardEmbedImage
 	export function emptyCustomToastBody():CustomToastBody
 	export function emptyRefCustomToastBody():Ref<CustomToastBody>
 	export function refOfCustomToastBody(x:CustomToastBody,v:Ref<CustomToastBody>)
 	export function unRefCustomToastBody(v:Ref<CustomToastBody>):CustomToastBody
-	export function emptyMessageCardEmbedDatePickerBase():MessageCardEmbedDatePickerBase
-	export function emptyRefMessageCardEmbedDatePickerBase():Ref<MessageCardEmbedDatePickerBase>
-	export function refOfMessageCardEmbedDatePickerBase(x:MessageCardEmbedDatePickerBase,v:Ref<MessageCardEmbedDatePickerBase>)
-	export function unRefMessageCardEmbedDatePickerBase(v:Ref<MessageCardEmbedDatePickerBase>):MessageCardEmbedDatePickerBase
-	export function emptyMessageCardDiv():MessageCardDiv
-	export function emptyRefMessageCardDiv():Ref<MessageCardDiv>
-	export function refOfMessageCardDiv(x:MessageCardDiv,v:Ref<MessageCardDiv>)
-	export function unRefMessageCardDiv(v:Ref<MessageCardDiv>):MessageCardDiv
-	export function emptyMessageCardEmbedButton():MessageCardEmbedButton
-	export function emptyRefMessageCardEmbedButton():Ref<MessageCardEmbedButton>
-	export function refOfMessageCardEmbedButton(x:MessageCardEmbedButton,v:Ref<MessageCardEmbedButton>)
-	export function unRefMessageCardEmbedButton(v:Ref<MessageCardEmbedButton>):MessageCardEmbedButton
-	export function emptyMessageCardEmbedSelectOption():MessageCardEmbedSelectOption
-	export function emptyRefMessageCardEmbedSelectOption():Ref<MessageCardEmbedSelectOption>
-	export function refOfMessageCardEmbedSelectOption(x:MessageCardEmbedSelectOption,v:Ref<MessageCardEmbedSelectOption>)
-	export function unRefMessageCardEmbedSelectOption(v:Ref<MessageCardEmbedSelectOption>):MessageCardEmbedSelectOption
 	export function emptyCardAction():CardAction
 	export function emptyRefCardAction():Ref<CardAction>
 	export function refOfCardAction(x:CardAction,v:Ref<CardAction>)
 	export function unRefCardAction(v:Ref<CardAction>):CardAction
-	export function emptyCardActionHandler():CardActionHandler
-	export function emptyRefCardActionHandler():Ref<CardActionHandler>
-	export function refOfCardActionHandler(x:CardActionHandler,v:Ref<CardActionHandler>)
-	export function unRefCardActionHandler(v:Ref<CardActionHandler>):CardActionHandler
-	export function emptyMessageCardEmbedOverflow():MessageCardEmbedOverflow
-	export function emptyRefMessageCardEmbedOverflow():Ref<MessageCardEmbedOverflow>
-	export function refOfMessageCardEmbedOverflow(x:MessageCardEmbedOverflow,v:Ref<MessageCardEmbedOverflow>)
-	export function unRefMessageCardEmbedOverflow(v:Ref<MessageCardEmbedOverflow>):MessageCardEmbedOverflow
-	export function emptyMessageCardLarkMd():MessageCardLarkMd
-	export function emptyRefMessageCardLarkMd():Ref<MessageCardLarkMd>
-	export function refOfMessageCardLarkMd(x:MessageCardLarkMd,v:Ref<MessageCardLarkMd>)
-	export function unRefMessageCardLarkMd(v:Ref<MessageCardLarkMd>):MessageCardLarkMd
-	export function emptyMessageCardEmbedSelectMenuStatic():MessageCardEmbedSelectMenuStatic
-	export function emptyRefMessageCardEmbedSelectMenuStatic():Ref<MessageCardEmbedSelectMenuStatic>
-	export function refOfMessageCardEmbedSelectMenuStatic(x:MessageCardEmbedSelectMenuStatic,v:Ref<MessageCardEmbedSelectMenuStatic>)
-	export function unRefMessageCardEmbedSelectMenuStatic(v:Ref<MessageCardEmbedSelectMenuStatic>):MessageCardEmbedSelectMenuStatic
-	export function emptyMessageCardI18nElements():MessageCardI18nElements
-	export function emptyRefMessageCardI18nElements():Ref<MessageCardI18nElements>
-	export function refOfMessageCardI18nElements(x:MessageCardI18nElements,v:Ref<MessageCardI18nElements>)
-	export function unRefMessageCardI18nElements(v:Ref<MessageCardI18nElements>):MessageCardI18nElements
-	export function emptyMessageCardPlainTextI18n():MessageCardPlainTextI18n
-	export function emptyRefMessageCardPlainTextI18n():Ref<MessageCardPlainTextI18n>
-	export function refOfMessageCardPlainTextI18n(x:MessageCardPlainTextI18n,v:Ref<MessageCardPlainTextI18n>)
-	export function unRefMessageCardPlainTextI18n(v:Ref<MessageCardPlainTextI18n>):MessageCardPlainTextI18n
 	export function emptyCardActionBody():CardActionBody
 	export function emptyRefCardActionBody():Ref<CardActionBody>
 	export function refOfCardActionBody(x:CardActionBody,v:Ref<CardActionBody>)
 	export function unRefCardActionBody(v:Ref<CardActionBody>):CardActionBody
-	export function emptyMessageCardEmbedPickerTime():MessageCardEmbedPickerTime
-	export function emptyRefMessageCardEmbedPickerTime():Ref<MessageCardEmbedPickerTime>
-	export function refOfMessageCardEmbedPickerTime(x:MessageCardEmbedPickerTime,v:Ref<MessageCardEmbedPickerTime>)
-	export function unRefMessageCardEmbedPickerTime(v:Ref<MessageCardEmbedPickerTime>):MessageCardEmbedPickerTime
+	export function emptyCustomResp():CustomResp
+	export function emptyRefCustomResp():Ref<CustomResp>
+	export function refOfCustomResp(x:CustomResp,v:Ref<CustomResp>)
+	export function unRefCustomResp(v:Ref<CustomResp>):CustomResp
+	export function emptyI18n():I18n
+	export function emptyRefI18n():Ref<I18n>
+	export function refOfI18n(x:I18n,v:Ref<I18n>)
+	export function unRefI18n(v:Ref<I18n>):I18n
 }

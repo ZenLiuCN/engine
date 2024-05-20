@@ -7,7 +7,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/verification/v1'{
 	// @ts-ignore
 	import * as context from 'golang/context'
 	// @ts-ignore
-	import type {error,Ref,Struct,bool} from 'go'
+	import type {Ref,Struct,bool,error} from 'go'
 	export interface DepartmentId extends Struct<DepartmentId>{
 
 			departmentId:Ref<string>
@@ -54,18 +54,14 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/verification/v1'{
 			hasVerification(hasVerification:bool):Ref<VerificationBuilder>
 			build():Ref<Verification>
 	}
-	export function emptyVerificationBuilder():VerificationBuilder
-	export function emptyRefVerificationBuilder():Ref<VerificationBuilder>
-	export function refOfVerificationBuilder(x:VerificationBuilder,v:Ref<VerificationBuilder>)
-	export function unRefVerificationBuilder(v:Ref<VerificationBuilder>):VerificationBuilder
+	export function emptyVerification():Verification
+	export function emptyRefVerification():Ref<Verification>
+	export function refOfVerification(x:Verification,v:Ref<Verification>)
+	export function unRefVerification(v:Ref<Verification>):Verification
 	export function emptyDepartmentId():DepartmentId
 	export function emptyRefDepartmentId():Ref<DepartmentId>
 	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
 	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptyDepartmentIdBuilder():DepartmentIdBuilder
-	export function emptyRefDepartmentIdBuilder():Ref<DepartmentIdBuilder>
-	export function refOfDepartmentIdBuilder(x:DepartmentIdBuilder,v:Ref<DepartmentIdBuilder>)
-	export function unRefDepartmentIdBuilder(v:Ref<DepartmentIdBuilder>):DepartmentIdBuilder
 	export function emptyGetVerificationResp():GetVerificationResp
 	export function emptyRefGetVerificationResp():Ref<GetVerificationResp>
 	export function refOfGetVerificationResp(x:GetVerificationResp,v:Ref<GetVerificationResp>)
@@ -78,8 +74,4 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/verification/v1'{
 	export function emptyRefV1():Ref<V1>
 	export function refOfV1(x:V1,v:Ref<V1>)
 	export function unRefV1(v:Ref<V1>):V1
-	export function emptyVerification():Verification
-	export function emptyRefVerification():Ref<Verification>
-	export function refOfVerification(x:Verification,v:Ref<Verification>)
-	export function unRefVerification(v:Ref<Verification>):Verification
 }

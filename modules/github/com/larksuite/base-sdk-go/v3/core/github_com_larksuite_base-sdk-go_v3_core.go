@@ -5,12 +5,12 @@ import (
 	_ "embed"
 	"github.com/ZenLiuCN/engine"
 
-	_ "github.com/ZenLiuCN/engine/golang/context"
-	_ "github.com/ZenLiuCN/engine/golang/encoding/json"
-	_ "github.com/ZenLiuCN/engine/golang/fmt"
-	_ "github.com/ZenLiuCN/engine/golang/io"
-	_ "github.com/ZenLiuCN/engine/golang/net/http"
-	_ "github.com/ZenLiuCN/engine/golang/time"
+	_ "github.com/ZenLiuCN/engine/modules/golang/context"
+	_ "github.com/ZenLiuCN/engine/modules/golang/encoding/json"
+	_ "github.com/ZenLiuCN/engine/modules/golang/fmt"
+	_ "github.com/ZenLiuCN/engine/modules/golang/io"
+	_ "github.com/ZenLiuCN/engine/modules/golang/net/http"
+	_ "github.com/ZenLiuCN/engine/modules/golang/time"
 	"github.com/larksuite/base-sdk-go/v3/core"
 )
 
@@ -18,60 +18,56 @@ var (
 	//go:embed github_com_larksuite_base-sdk-go_v3_core.d.ts
 	GithubComLarksuiteBaseSdkGo3CoreDefine   []byte
 	GithubComLarksuiteBaseSdkGo3CoreDeclared = map[string]any{
-		"fileNameByHeader":        larkcore.FileNameByHeader,
-		"newSerialization":        larkcore.NewSerialization,
-		"file2Bytes":              larkcore.File2Bytes,
-		"LogLevelError":           larkcore.LogLevelError,
-		"LogLevelWarn":            larkcore.LogLevelWarn,
 		"newEventLogger":          larkcore.NewEventLogger,
 		"newFormdata":             larkcore.NewFormdata,
-		"request":                 larkcore.Request,
-		"withRequestId":           larkcore.WithRequestId,
-		"AccessTokenTypeNone":     larkcore.AccessTokenTypeNone,
-		"LogLevelDebug":           larkcore.LogLevelDebug,
-		"newHttpClient":           larkcore.NewHttpClient,
-		"withFileUpload":          larkcore.WithFileUpload,
+		"withHeaders":             larkcore.WithHeaders,
 		"HttpHeaderKeyLogId":      larkcore.HttpHeaderKeyLogId,
-		"HttpHeaderKeyRequestId":  larkcore.HttpHeaderKeyRequestId,
+		"LogLevelError":           larkcore.LogLevelError,
+		"LogLevelWarn":            larkcore.LogLevelWarn,
+		"newHttpClient":           larkcore.NewHttpClient,
+		"newSerialization":        larkcore.NewSerialization,
+		"request":                 larkcore.Request,
+		"withFileDownload":        larkcore.WithFileDownload,
+		"withRequestId":           larkcore.WithRequestId,
+		"file2Bytes":              larkcore.File2Bytes,
 		"LogLevelInfo":            larkcore.LogLevelInfo,
 		"newLogger":               larkcore.NewLogger,
-		"prettify":                larkcore.Prettify,
-		"withFileDownload":        larkcore.WithFileDownload,
-		"withHeaders":             larkcore.WithHeaders,
+		"withFileUpload":          larkcore.WithFileUpload,
 		"AccessTokenTypePersonal": larkcore.AccessTokenTypePersonal,
+		"fileNameByHeader":        larkcore.FileNameByHeader,
+		"HttpHeaderKeyRequestId":  larkcore.HttpHeaderKeyRequestId,
+		"LogLevelDebug":           larkcore.LogLevelDebug,
+		"prettify":                larkcore.Prettify,
+		"AccessTokenTypeNone":     larkcore.AccessTokenTypeNone,
 
-		"emptyCodeErrorDetail":                 engine.Empty[larkcore.CodeErrorDetail],
-		"emptyRefCodeErrorDetail":              engine.EmptyRefer[larkcore.CodeErrorDetail],
-		"refOfCodeErrorDetail":                 engine.ReferOf[larkcore.CodeErrorDetail],
-		"unRefCodeErrorDetail":                 engine.UnRefer[larkcore.CodeErrorDetail],
-		"emptyCodeErrorPermissionViolation":    engine.Empty[larkcore.CodeErrorPermissionViolation],
-		"emptyRefCodeErrorPermissionViolation": engine.EmptyRefer[larkcore.CodeErrorPermissionViolation],
-		"refOfCodeErrorPermissionViolation":    engine.ReferOf[larkcore.CodeErrorPermissionViolation],
-		"unRefCodeErrorPermissionViolation":    engine.UnRefer[larkcore.CodeErrorPermissionViolation],
-		"emptyConfig":                          engine.Empty[larkcore.Config],
-		"emptyRefConfig":                       engine.EmptyRefer[larkcore.Config],
-		"refOfConfig":                          engine.ReferOf[larkcore.Config],
-		"unRefConfig":                          engine.UnRefer[larkcore.Config],
-		"emptyCodeErrorFieldViolation":         engine.Empty[larkcore.CodeErrorFieldViolation],
-		"emptyRefCodeErrorFieldViolation":      engine.EmptyRefer[larkcore.CodeErrorFieldViolation],
-		"refOfCodeErrorFieldViolation":         engine.ReferOf[larkcore.CodeErrorFieldViolation],
-		"unRefCodeErrorFieldViolation":         engine.UnRefer[larkcore.CodeErrorFieldViolation],
-		"emptyFormdata":                        engine.Empty[larkcore.Formdata],
-		"emptyRefFormdata":                     engine.EmptyRefer[larkcore.Formdata],
-		"refOfFormdata":                        engine.ReferOf[larkcore.Formdata],
-		"unRefFormdata":                        engine.UnRefer[larkcore.Formdata],
-		"emptyApiReq":                          engine.Empty[larkcore.ApiReq],
-		"emptyRefApiReq":                       engine.EmptyRefer[larkcore.ApiReq],
-		"refOfApiReq":                          engine.ReferOf[larkcore.ApiReq],
-		"unRefApiReq":                          engine.UnRefer[larkcore.ApiReq],
+		"emptyApiResp":                         engine.Empty[larkcore.ApiResp],
+		"emptyRefApiResp":                      engine.EmptyRefer[larkcore.ApiResp],
+		"refOfApiResp":                         engine.ReferOf[larkcore.ApiResp],
+		"unRefApiResp":                         engine.UnRefer[larkcore.ApiResp],
 		"emptyRequestOption":                   engine.Empty[larkcore.RequestOption],
 		"emptyRefRequestOption":                engine.EmptyRefer[larkcore.RequestOption],
 		"refOfRequestOption":                   engine.ReferOf[larkcore.RequestOption],
 		"unRefRequestOption":                   engine.UnRefer[larkcore.RequestOption],
-		"emptyApiResp":                         engine.Empty[larkcore.ApiResp],
-		"emptyRefApiResp":                      engine.EmptyRefer[larkcore.ApiResp],
-		"refOfApiResp":                         engine.ReferOf[larkcore.ApiResp],
-		"unRefApiResp":                         engine.UnRefer[larkcore.ApiResp]}
+		"emptyCodeErrorDetail":                 engine.Empty[larkcore.CodeErrorDetail],
+		"emptyRefCodeErrorDetail":              engine.EmptyRefer[larkcore.CodeErrorDetail],
+		"refOfCodeErrorDetail":                 engine.ReferOf[larkcore.CodeErrorDetail],
+		"unRefCodeErrorDetail":                 engine.UnRefer[larkcore.CodeErrorDetail],
+		"emptyConfig":                          engine.Empty[larkcore.Config],
+		"emptyRefConfig":                       engine.EmptyRefer[larkcore.Config],
+		"refOfConfig":                          engine.ReferOf[larkcore.Config],
+		"unRefConfig":                          engine.UnRefer[larkcore.Config],
+		"emptyApiReq":                          engine.Empty[larkcore.ApiReq],
+		"emptyRefApiReq":                       engine.EmptyRefer[larkcore.ApiReq],
+		"refOfApiReq":                          engine.ReferOf[larkcore.ApiReq],
+		"unRefApiReq":                          engine.UnRefer[larkcore.ApiReq],
+		"emptyCodeErrorFieldViolation":         engine.Empty[larkcore.CodeErrorFieldViolation],
+		"emptyRefCodeErrorFieldViolation":      engine.EmptyRefer[larkcore.CodeErrorFieldViolation],
+		"refOfCodeErrorFieldViolation":         engine.ReferOf[larkcore.CodeErrorFieldViolation],
+		"unRefCodeErrorFieldViolation":         engine.UnRefer[larkcore.CodeErrorFieldViolation],
+		"emptyCodeErrorPermissionViolation":    engine.Empty[larkcore.CodeErrorPermissionViolation],
+		"emptyRefCodeErrorPermissionViolation": engine.EmptyRefer[larkcore.CodeErrorPermissionViolation],
+		"refOfCodeErrorPermissionViolation":    engine.ReferOf[larkcore.CodeErrorPermissionViolation],
+		"unRefCodeErrorPermissionViolation":    engine.UnRefer[larkcore.CodeErrorPermissionViolation]}
 )
 
 func init() {

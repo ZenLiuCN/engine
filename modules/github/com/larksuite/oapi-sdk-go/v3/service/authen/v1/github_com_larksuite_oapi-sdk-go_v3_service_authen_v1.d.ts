@@ -7,7 +7,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/authen/v1'{
 	// @ts-ignore
 	import * as context from 'golang/context'
 	// @ts-ignore
-	import type {error,bool,int,Struct,Ref} from 'go'
+	import type {Struct,Ref,error,bool,int} from 'go'
 	export interface CreateAccessTokenPathReqBodyBuilder extends Struct<CreateAccessTokenPathReqBodyBuilder>{
 
 			grantType(grantType:string):Ref<CreateAccessTokenPathReqBodyBuilder>
@@ -393,160 +393,96 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/authen/v1'{
 				get(ctx:context.Context,...options:larkcore.RequestOptionFunc[]):Ref<GetUserInfoResp>
 			}>
 	}
-	export function emptyCreateAccessTokenReqBody():CreateAccessTokenReqBody
-	export function emptyRefCreateAccessTokenReqBody():Ref<CreateAccessTokenReqBody>
-	export function refOfCreateAccessTokenReqBody(x:CreateAccessTokenReqBody,v:Ref<CreateAccessTokenReqBody>)
-	export function unRefCreateAccessTokenReqBody(v:Ref<CreateAccessTokenReqBody>):CreateAccessTokenReqBody
-	export function emptyCreateOidcAccessTokenResp():CreateOidcAccessTokenResp
-	export function emptyRefCreateOidcAccessTokenResp():Ref<CreateOidcAccessTokenResp>
-	export function refOfCreateOidcAccessTokenResp(x:CreateOidcAccessTokenResp,v:Ref<CreateOidcAccessTokenResp>)
-	export function unRefCreateOidcAccessTokenResp(v:Ref<CreateOidcAccessTokenResp>):CreateOidcAccessTokenResp
-	export function emptyCreateAccessTokenReq():CreateAccessTokenReq
-	export function emptyRefCreateAccessTokenReq():Ref<CreateAccessTokenReq>
-	export function refOfCreateAccessTokenReq(x:CreateAccessTokenReq,v:Ref<CreateAccessTokenReq>)
-	export function unRefCreateAccessTokenReq(v:Ref<CreateAccessTokenReq>):CreateAccessTokenReq
-	export function emptyCreateOidcAccessTokenPathReqBodyBuilder():CreateOidcAccessTokenPathReqBodyBuilder
-	export function emptyRefCreateOidcAccessTokenPathReqBodyBuilder():Ref<CreateOidcAccessTokenPathReqBodyBuilder>
-	export function refOfCreateOidcAccessTokenPathReqBodyBuilder(x:CreateOidcAccessTokenPathReqBodyBuilder,v:Ref<CreateOidcAccessTokenPathReqBodyBuilder>)
-	export function unRefCreateOidcAccessTokenPathReqBodyBuilder(v:Ref<CreateOidcAccessTokenPathReqBodyBuilder>):CreateOidcAccessTokenPathReqBodyBuilder
-	export function emptyCreateRefreshAccessTokenReq():CreateRefreshAccessTokenReq
-	export function emptyRefCreateRefreshAccessTokenReq():Ref<CreateRefreshAccessTokenReq>
-	export function refOfCreateRefreshAccessTokenReq(x:CreateRefreshAccessTokenReq,v:Ref<CreateRefreshAccessTokenReq>)
-	export function unRefCreateRefreshAccessTokenReq(v:Ref<CreateRefreshAccessTokenReq>):CreateRefreshAccessTokenReq
-	export function emptyV1():V1
-	export function emptyRefV1():Ref<V1>
-	export function refOfV1(x:V1,v:Ref<V1>)
-	export function unRefV1(v:Ref<V1>):V1
-	export function emptyCreateOidcRefreshAccessTokenPathReqBodyBuilder():CreateOidcRefreshAccessTokenPathReqBodyBuilder
-	export function emptyRefCreateOidcRefreshAccessTokenPathReqBodyBuilder():Ref<CreateOidcRefreshAccessTokenPathReqBodyBuilder>
-	export function refOfCreateOidcRefreshAccessTokenPathReqBodyBuilder(x:CreateOidcRefreshAccessTokenPathReqBodyBuilder,v:Ref<CreateOidcRefreshAccessTokenPathReqBodyBuilder>)
-	export function unRefCreateOidcRefreshAccessTokenPathReqBodyBuilder(v:Ref<CreateOidcRefreshAccessTokenPathReqBodyBuilder>):CreateOidcRefreshAccessTokenPathReqBodyBuilder
-	export function emptyCreateOidcRefreshAccessTokenReqBuilder():CreateOidcRefreshAccessTokenReqBuilder
-	export function emptyRefCreateOidcRefreshAccessTokenReqBuilder():Ref<CreateOidcRefreshAccessTokenReqBuilder>
-	export function refOfCreateOidcRefreshAccessTokenReqBuilder(x:CreateOidcRefreshAccessTokenReqBuilder,v:Ref<CreateOidcRefreshAccessTokenReqBuilder>)
-	export function unRefCreateOidcRefreshAccessTokenReqBuilder(v:Ref<CreateOidcRefreshAccessTokenReqBuilder>):CreateOidcRefreshAccessTokenReqBuilder
-	export function emptyCreateOidcRefreshAccessTokenResp():CreateOidcRefreshAccessTokenResp
-	export function emptyRefCreateOidcRefreshAccessTokenResp():Ref<CreateOidcRefreshAccessTokenResp>
-	export function refOfCreateOidcRefreshAccessTokenResp(x:CreateOidcRefreshAccessTokenResp,v:Ref<CreateOidcRefreshAccessTokenResp>)
-	export function unRefCreateOidcRefreshAccessTokenResp(v:Ref<CreateOidcRefreshAccessTokenResp>):CreateOidcRefreshAccessTokenResp
 	export function emptyCreateOidcRefreshAccessTokenRespData():CreateOidcRefreshAccessTokenRespData
 	export function emptyRefCreateOidcRefreshAccessTokenRespData():Ref<CreateOidcRefreshAccessTokenRespData>
 	export function refOfCreateOidcRefreshAccessTokenRespData(x:CreateOidcRefreshAccessTokenRespData,v:Ref<CreateOidcRefreshAccessTokenRespData>)
 	export function unRefCreateOidcRefreshAccessTokenRespData(v:Ref<CreateOidcRefreshAccessTokenRespData>):CreateOidcRefreshAccessTokenRespData
-	export function emptyCreateRefreshAccessTokenRespData():CreateRefreshAccessTokenRespData
-	export function emptyRefCreateRefreshAccessTokenRespData():Ref<CreateRefreshAccessTokenRespData>
-	export function refOfCreateRefreshAccessTokenRespData(x:CreateRefreshAccessTokenRespData,v:Ref<CreateRefreshAccessTokenRespData>)
-	export function unRefCreateRefreshAccessTokenRespData(v:Ref<CreateRefreshAccessTokenRespData>):CreateRefreshAccessTokenRespData
-	export function emptyDepartmentId():DepartmentId
-	export function emptyRefDepartmentId():Ref<DepartmentId>
-	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
-	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptyCreateOidcRefreshAccessTokenReq():CreateOidcRefreshAccessTokenReq
-	export function emptyRefCreateOidcRefreshAccessTokenReq():Ref<CreateOidcRefreshAccessTokenReq>
-	export function refOfCreateOidcRefreshAccessTokenReq(x:CreateOidcRefreshAccessTokenReq,v:Ref<CreateOidcRefreshAccessTokenReq>)
-	export function unRefCreateOidcRefreshAccessTokenReq(v:Ref<CreateOidcRefreshAccessTokenReq>):CreateOidcRefreshAccessTokenReq
-	export function emptyCreateRefreshAccessTokenPathReqBodyBuilder():CreateRefreshAccessTokenPathReqBodyBuilder
-	export function emptyRefCreateRefreshAccessTokenPathReqBodyBuilder():Ref<CreateRefreshAccessTokenPathReqBodyBuilder>
-	export function refOfCreateRefreshAccessTokenPathReqBodyBuilder(x:CreateRefreshAccessTokenPathReqBodyBuilder,v:Ref<CreateRefreshAccessTokenPathReqBodyBuilder>)
-	export function unRefCreateRefreshAccessTokenPathReqBodyBuilder(v:Ref<CreateRefreshAccessTokenPathReqBodyBuilder>):CreateRefreshAccessTokenPathReqBodyBuilder
-	export function emptyCreateRefreshAccessTokenReqBody():CreateRefreshAccessTokenReqBody
-	export function emptyRefCreateRefreshAccessTokenReqBody():Ref<CreateRefreshAccessTokenReqBody>
-	export function refOfCreateRefreshAccessTokenReqBody(x:CreateRefreshAccessTokenReqBody,v:Ref<CreateRefreshAccessTokenReqBody>)
-	export function unRefCreateRefreshAccessTokenReqBody(v:Ref<CreateRefreshAccessTokenReqBody>):CreateRefreshAccessTokenReqBody
-	export function emptyDepartmentIdBuilder():DepartmentIdBuilder
-	export function emptyRefDepartmentIdBuilder():Ref<DepartmentIdBuilder>
-	export function refOfDepartmentIdBuilder(x:DepartmentIdBuilder,v:Ref<DepartmentIdBuilder>)
-	export function unRefDepartmentIdBuilder(v:Ref<DepartmentIdBuilder>):DepartmentIdBuilder
-	export function emptyGetUserInfoResp():GetUserInfoResp
-	export function emptyRefGetUserInfoResp():Ref<GetUserInfoResp>
-	export function refOfGetUserInfoResp(x:GetUserInfoResp,v:Ref<GetUserInfoResp>)
-	export function unRefGetUserInfoResp(v:Ref<GetUserInfoResp>):GetUserInfoResp
-	export function emptyCreateAccessTokenReqBodyBuilder():CreateAccessTokenReqBodyBuilder
-	export function emptyRefCreateAccessTokenReqBodyBuilder():Ref<CreateAccessTokenReqBodyBuilder>
-	export function refOfCreateAccessTokenReqBodyBuilder(x:CreateAccessTokenReqBodyBuilder,v:Ref<CreateAccessTokenReqBodyBuilder>)
-	export function unRefCreateAccessTokenReqBodyBuilder(v:Ref<CreateAccessTokenReqBodyBuilder>):CreateAccessTokenReqBodyBuilder
-	export function emptyCreateAccessTokenResp():CreateAccessTokenResp
-	export function emptyRefCreateAccessTokenResp():Ref<CreateAccessTokenResp>
-	export function refOfCreateAccessTokenResp(x:CreateAccessTokenResp,v:Ref<CreateAccessTokenResp>)
-	export function unRefCreateAccessTokenResp(v:Ref<CreateAccessTokenResp>):CreateAccessTokenResp
-	export function emptyCreateOidcAccessTokenReqBodyBuilder():CreateOidcAccessTokenReqBodyBuilder
-	export function emptyRefCreateOidcAccessTokenReqBodyBuilder():Ref<CreateOidcAccessTokenReqBodyBuilder>
-	export function refOfCreateOidcAccessTokenReqBodyBuilder(x:CreateOidcAccessTokenReqBodyBuilder,v:Ref<CreateOidcAccessTokenReqBodyBuilder>)
-	export function unRefCreateOidcAccessTokenReqBodyBuilder(v:Ref<CreateOidcAccessTokenReqBodyBuilder>):CreateOidcAccessTokenReqBodyBuilder
-	export function emptyCreateOidcAccessTokenRespData():CreateOidcAccessTokenRespData
-	export function emptyRefCreateOidcAccessTokenRespData():Ref<CreateOidcAccessTokenRespData>
-	export function refOfCreateOidcAccessTokenRespData(x:CreateOidcAccessTokenRespData,v:Ref<CreateOidcAccessTokenRespData>)
-	export function unRefCreateOidcAccessTokenRespData(v:Ref<CreateOidcAccessTokenRespData>):CreateOidcAccessTokenRespData
-	export function emptyCreateRefreshAccessTokenReqBodyBuilder():CreateRefreshAccessTokenReqBodyBuilder
-	export function emptyRefCreateRefreshAccessTokenReqBodyBuilder():Ref<CreateRefreshAccessTokenReqBodyBuilder>
-	export function refOfCreateRefreshAccessTokenReqBodyBuilder(x:CreateRefreshAccessTokenReqBodyBuilder,v:Ref<CreateRefreshAccessTokenReqBodyBuilder>)
-	export function unRefCreateRefreshAccessTokenReqBodyBuilder(v:Ref<CreateRefreshAccessTokenReqBodyBuilder>):CreateRefreshAccessTokenReqBodyBuilder
-	export function emptyCreateRefreshAccessTokenReqBuilder():CreateRefreshAccessTokenReqBuilder
-	export function emptyRefCreateRefreshAccessTokenReqBuilder():Ref<CreateRefreshAccessTokenReqBuilder>
-	export function refOfCreateRefreshAccessTokenReqBuilder(x:CreateRefreshAccessTokenReqBuilder,v:Ref<CreateRefreshAccessTokenReqBuilder>)
-	export function unRefCreateRefreshAccessTokenReqBuilder(v:Ref<CreateRefreshAccessTokenReqBuilder>):CreateRefreshAccessTokenReqBuilder
-	export function emptyTokenInfo():TokenInfo
-	export function emptyRefTokenInfo():Ref<TokenInfo>
-	export function refOfTokenInfo(x:TokenInfo,v:Ref<TokenInfo>)
-	export function unRefTokenInfo(v:Ref<TokenInfo>):TokenInfo
-	export function emptyTokenInfoBuilder():TokenInfoBuilder
-	export function emptyRefTokenInfoBuilder():Ref<TokenInfoBuilder>
-	export function refOfTokenInfoBuilder(x:TokenInfoBuilder,v:Ref<TokenInfoBuilder>)
-	export function unRefTokenInfoBuilder(v:Ref<TokenInfoBuilder>):TokenInfoBuilder
-	export function emptyUserAccessTokenInfo():UserAccessTokenInfo
-	export function emptyRefUserAccessTokenInfo():Ref<UserAccessTokenInfo>
-	export function refOfUserAccessTokenInfo(x:UserAccessTokenInfo,v:Ref<UserAccessTokenInfo>)
-	export function unRefUserAccessTokenInfo(v:Ref<UserAccessTokenInfo>):UserAccessTokenInfo
-	export function emptyUserInfo():UserInfo
-	export function emptyRefUserInfo():Ref<UserInfo>
-	export function refOfUserInfo(x:UserInfo,v:Ref<UserInfo>)
-	export function unRefUserInfo(v:Ref<UserInfo>):UserInfo
-	export function emptyUserInfoBuilder():UserInfoBuilder
-	export function emptyRefUserInfoBuilder():Ref<UserInfoBuilder>
-	export function refOfUserInfoBuilder(x:UserInfoBuilder,v:Ref<UserInfoBuilder>)
-	export function unRefUserInfoBuilder(v:Ref<UserInfoBuilder>):UserInfoBuilder
-	export function emptyCreateAccessTokenPathReqBodyBuilder():CreateAccessTokenPathReqBodyBuilder
-	export function emptyRefCreateAccessTokenPathReqBodyBuilder():Ref<CreateAccessTokenPathReqBodyBuilder>
-	export function refOfCreateAccessTokenPathReqBodyBuilder(x:CreateAccessTokenPathReqBodyBuilder,v:Ref<CreateAccessTokenPathReqBodyBuilder>)
-	export function unRefCreateAccessTokenPathReqBodyBuilder(v:Ref<CreateAccessTokenPathReqBodyBuilder>):CreateAccessTokenPathReqBodyBuilder
-	export function emptyCreateAccessTokenReqBuilder():CreateAccessTokenReqBuilder
-	export function emptyRefCreateAccessTokenReqBuilder():Ref<CreateAccessTokenReqBuilder>
-	export function refOfCreateAccessTokenReqBuilder(x:CreateAccessTokenReqBuilder,v:Ref<CreateAccessTokenReqBuilder>)
-	export function unRefCreateAccessTokenReqBuilder(v:Ref<CreateAccessTokenReqBuilder>):CreateAccessTokenReqBuilder
-	export function emptyCreateAccessTokenRespData():CreateAccessTokenRespData
-	export function emptyRefCreateAccessTokenRespData():Ref<CreateAccessTokenRespData>
-	export function refOfCreateAccessTokenRespData(x:CreateAccessTokenRespData,v:Ref<CreateAccessTokenRespData>)
-	export function unRefCreateAccessTokenRespData(v:Ref<CreateAccessTokenRespData>):CreateAccessTokenRespData
 	export function emptyCreateOidcAccessTokenReq():CreateOidcAccessTokenReq
 	export function emptyRefCreateOidcAccessTokenReq():Ref<CreateOidcAccessTokenReq>
 	export function refOfCreateOidcAccessTokenReq(x:CreateOidcAccessTokenReq,v:Ref<CreateOidcAccessTokenReq>)
 	export function unRefCreateOidcAccessTokenReq(v:Ref<CreateOidcAccessTokenReq>):CreateOidcAccessTokenReq
-	export function emptyCreateOidcRefreshAccessTokenReqBody():CreateOidcRefreshAccessTokenReqBody
-	export function emptyRefCreateOidcRefreshAccessTokenReqBody():Ref<CreateOidcRefreshAccessTokenReqBody>
-	export function refOfCreateOidcRefreshAccessTokenReqBody(x:CreateOidcRefreshAccessTokenReqBody,v:Ref<CreateOidcRefreshAccessTokenReqBody>)
-	export function unRefCreateOidcRefreshAccessTokenReqBody(v:Ref<CreateOidcRefreshAccessTokenReqBody>):CreateOidcRefreshAccessTokenReqBody
-	export function emptyUserAccessTokenInfoBuilder():UserAccessTokenInfoBuilder
-	export function emptyRefUserAccessTokenInfoBuilder():Ref<UserAccessTokenInfoBuilder>
-	export function refOfUserAccessTokenInfoBuilder(x:UserAccessTokenInfoBuilder,v:Ref<UserAccessTokenInfoBuilder>)
-	export function unRefUserAccessTokenInfoBuilder(v:Ref<UserAccessTokenInfoBuilder>):UserAccessTokenInfoBuilder
-	export function emptyCreateOidcAccessTokenReqBuilder():CreateOidcAccessTokenReqBuilder
-	export function emptyRefCreateOidcAccessTokenReqBuilder():Ref<CreateOidcAccessTokenReqBuilder>
-	export function refOfCreateOidcAccessTokenReqBuilder(x:CreateOidcAccessTokenReqBuilder,v:Ref<CreateOidcAccessTokenReqBuilder>)
-	export function unRefCreateOidcAccessTokenReqBuilder(v:Ref<CreateOidcAccessTokenReqBuilder>):CreateOidcAccessTokenReqBuilder
-	export function emptyGetUserInfoRespData():GetUserInfoRespData
-	export function emptyRefGetUserInfoRespData():Ref<GetUserInfoRespData>
-	export function refOfGetUserInfoRespData(x:GetUserInfoRespData,v:Ref<GetUserInfoRespData>)
-	export function unRefGetUserInfoRespData(v:Ref<GetUserInfoRespData>):GetUserInfoRespData
-	export function emptyCreateOidcAccessTokenReqBody():CreateOidcAccessTokenReqBody
-	export function emptyRefCreateOidcAccessTokenReqBody():Ref<CreateOidcAccessTokenReqBody>
-	export function refOfCreateOidcAccessTokenReqBody(x:CreateOidcAccessTokenReqBody,v:Ref<CreateOidcAccessTokenReqBody>)
-	export function unRefCreateOidcAccessTokenReqBody(v:Ref<CreateOidcAccessTokenReqBody>):CreateOidcAccessTokenReqBody
-	export function emptyCreateOidcRefreshAccessTokenReqBodyBuilder():CreateOidcRefreshAccessTokenReqBodyBuilder
-	export function emptyRefCreateOidcRefreshAccessTokenReqBodyBuilder():Ref<CreateOidcRefreshAccessTokenReqBodyBuilder>
-	export function refOfCreateOidcRefreshAccessTokenReqBodyBuilder(x:CreateOidcRefreshAccessTokenReqBodyBuilder,v:Ref<CreateOidcRefreshAccessTokenReqBodyBuilder>)
-	export function unRefCreateOidcRefreshAccessTokenReqBodyBuilder(v:Ref<CreateOidcRefreshAccessTokenReqBodyBuilder>):CreateOidcRefreshAccessTokenReqBodyBuilder
+	export function emptyCreateOidcAccessTokenRespData():CreateOidcAccessTokenRespData
+	export function emptyRefCreateOidcAccessTokenRespData():Ref<CreateOidcAccessTokenRespData>
+	export function refOfCreateOidcAccessTokenRespData(x:CreateOidcAccessTokenRespData,v:Ref<CreateOidcAccessTokenRespData>)
+	export function unRefCreateOidcAccessTokenRespData(v:Ref<CreateOidcAccessTokenRespData>):CreateOidcAccessTokenRespData
 	export function emptyCreateRefreshAccessTokenResp():CreateRefreshAccessTokenResp
 	export function emptyRefCreateRefreshAccessTokenResp():Ref<CreateRefreshAccessTokenResp>
 	export function refOfCreateRefreshAccessTokenResp(x:CreateRefreshAccessTokenResp,v:Ref<CreateRefreshAccessTokenResp>)
 	export function unRefCreateRefreshAccessTokenResp(v:Ref<CreateRefreshAccessTokenResp>):CreateRefreshAccessTokenResp
+	export function emptyTokenInfo():TokenInfo
+	export function emptyRefTokenInfo():Ref<TokenInfo>
+	export function refOfTokenInfo(x:TokenInfo,v:Ref<TokenInfo>)
+	export function unRefTokenInfo(v:Ref<TokenInfo>):TokenInfo
+	export function emptyCreateOidcAccessTokenResp():CreateOidcAccessTokenResp
+	export function emptyRefCreateOidcAccessTokenResp():Ref<CreateOidcAccessTokenResp>
+	export function refOfCreateOidcAccessTokenResp(x:CreateOidcAccessTokenResp,v:Ref<CreateOidcAccessTokenResp>)
+	export function unRefCreateOidcAccessTokenResp(v:Ref<CreateOidcAccessTokenResp>):CreateOidcAccessTokenResp
+	export function emptyDepartmentId():DepartmentId
+	export function emptyRefDepartmentId():Ref<DepartmentId>
+	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
+	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
+	export function emptyUserAccessTokenInfo():UserAccessTokenInfo
+	export function emptyRefUserAccessTokenInfo():Ref<UserAccessTokenInfo>
+	export function refOfUserAccessTokenInfo(x:UserAccessTokenInfo,v:Ref<UserAccessTokenInfo>)
+	export function unRefUserAccessTokenInfo(v:Ref<UserAccessTokenInfo>):UserAccessTokenInfo
+	export function emptyCreateAccessTokenResp():CreateAccessTokenResp
+	export function emptyRefCreateAccessTokenResp():Ref<CreateAccessTokenResp>
+	export function refOfCreateAccessTokenResp(x:CreateAccessTokenResp,v:Ref<CreateAccessTokenResp>)
+	export function unRefCreateAccessTokenResp(v:Ref<CreateAccessTokenResp>):CreateAccessTokenResp
+	export function emptyCreateRefreshAccessTokenRespData():CreateRefreshAccessTokenRespData
+	export function emptyRefCreateRefreshAccessTokenRespData():Ref<CreateRefreshAccessTokenRespData>
+	export function refOfCreateRefreshAccessTokenRespData(x:CreateRefreshAccessTokenRespData,v:Ref<CreateRefreshAccessTokenRespData>)
+	export function unRefCreateRefreshAccessTokenRespData(v:Ref<CreateRefreshAccessTokenRespData>):CreateRefreshAccessTokenRespData
+	export function emptyGetUserInfoRespData():GetUserInfoRespData
+	export function emptyRefGetUserInfoRespData():Ref<GetUserInfoRespData>
+	export function refOfGetUserInfoRespData(x:GetUserInfoRespData,v:Ref<GetUserInfoRespData>)
+	export function unRefGetUserInfoRespData(v:Ref<GetUserInfoRespData>):GetUserInfoRespData
+	export function emptyCreateAccessTokenReqBody():CreateAccessTokenReqBody
+	export function emptyRefCreateAccessTokenReqBody():Ref<CreateAccessTokenReqBody>
+	export function refOfCreateAccessTokenReqBody(x:CreateAccessTokenReqBody,v:Ref<CreateAccessTokenReqBody>)
+	export function unRefCreateAccessTokenReqBody(v:Ref<CreateAccessTokenReqBody>):CreateAccessTokenReqBody
+	export function emptyCreateOidcRefreshAccessTokenResp():CreateOidcRefreshAccessTokenResp
+	export function emptyRefCreateOidcRefreshAccessTokenResp():Ref<CreateOidcRefreshAccessTokenResp>
+	export function refOfCreateOidcRefreshAccessTokenResp(x:CreateOidcRefreshAccessTokenResp,v:Ref<CreateOidcRefreshAccessTokenResp>)
+	export function unRefCreateOidcRefreshAccessTokenResp(v:Ref<CreateOidcRefreshAccessTokenResp>):CreateOidcRefreshAccessTokenResp
+	export function emptyCreateOidcRefreshAccessTokenReq():CreateOidcRefreshAccessTokenReq
+	export function emptyRefCreateOidcRefreshAccessTokenReq():Ref<CreateOidcRefreshAccessTokenReq>
+	export function refOfCreateOidcRefreshAccessTokenReq(x:CreateOidcRefreshAccessTokenReq,v:Ref<CreateOidcRefreshAccessTokenReq>)
+	export function unRefCreateOidcRefreshAccessTokenReq(v:Ref<CreateOidcRefreshAccessTokenReq>):CreateOidcRefreshAccessTokenReq
+	export function emptyCreateOidcRefreshAccessTokenReqBody():CreateOidcRefreshAccessTokenReqBody
+	export function emptyRefCreateOidcRefreshAccessTokenReqBody():Ref<CreateOidcRefreshAccessTokenReqBody>
+	export function refOfCreateOidcRefreshAccessTokenReqBody(x:CreateOidcRefreshAccessTokenReqBody,v:Ref<CreateOidcRefreshAccessTokenReqBody>)
+	export function unRefCreateOidcRefreshAccessTokenReqBody(v:Ref<CreateOidcRefreshAccessTokenReqBody>):CreateOidcRefreshAccessTokenReqBody
+	export function emptyCreateRefreshAccessTokenReq():CreateRefreshAccessTokenReq
+	export function emptyRefCreateRefreshAccessTokenReq():Ref<CreateRefreshAccessTokenReq>
+	export function refOfCreateRefreshAccessTokenReq(x:CreateRefreshAccessTokenReq,v:Ref<CreateRefreshAccessTokenReq>)
+	export function unRefCreateRefreshAccessTokenReq(v:Ref<CreateRefreshAccessTokenReq>):CreateRefreshAccessTokenReq
+	export function emptyCreateRefreshAccessTokenReqBody():CreateRefreshAccessTokenReqBody
+	export function emptyRefCreateRefreshAccessTokenReqBody():Ref<CreateRefreshAccessTokenReqBody>
+	export function refOfCreateRefreshAccessTokenReqBody(x:CreateRefreshAccessTokenReqBody,v:Ref<CreateRefreshAccessTokenReqBody>)
+	export function unRefCreateRefreshAccessTokenReqBody(v:Ref<CreateRefreshAccessTokenReqBody>):CreateRefreshAccessTokenReqBody
+	export function emptyGetUserInfoResp():GetUserInfoResp
+	export function emptyRefGetUserInfoResp():Ref<GetUserInfoResp>
+	export function refOfGetUserInfoResp(x:GetUserInfoResp,v:Ref<GetUserInfoResp>)
+	export function unRefGetUserInfoResp(v:Ref<GetUserInfoResp>):GetUserInfoResp
+	export function emptyCreateAccessTokenReq():CreateAccessTokenReq
+	export function emptyRefCreateAccessTokenReq():Ref<CreateAccessTokenReq>
+	export function refOfCreateAccessTokenReq(x:CreateAccessTokenReq,v:Ref<CreateAccessTokenReq>)
+	export function unRefCreateAccessTokenReq(v:Ref<CreateAccessTokenReq>):CreateAccessTokenReq
+	export function emptyCreateOidcAccessTokenReqBody():CreateOidcAccessTokenReqBody
+	export function emptyRefCreateOidcAccessTokenReqBody():Ref<CreateOidcAccessTokenReqBody>
+	export function refOfCreateOidcAccessTokenReqBody(x:CreateOidcAccessTokenReqBody,v:Ref<CreateOidcAccessTokenReqBody>)
+	export function unRefCreateOidcAccessTokenReqBody(v:Ref<CreateOidcAccessTokenReqBody>):CreateOidcAccessTokenReqBody
+	export function emptyUserInfo():UserInfo
+	export function emptyRefUserInfo():Ref<UserInfo>
+	export function refOfUserInfo(x:UserInfo,v:Ref<UserInfo>)
+	export function unRefUserInfo(v:Ref<UserInfo>):UserInfo
+	export function emptyV1():V1
+	export function emptyRefV1():Ref<V1>
+	export function refOfV1(x:V1,v:Ref<V1>)
+	export function unRefV1(v:Ref<V1>):V1
+	export function emptyCreateAccessTokenRespData():CreateAccessTokenRespData
+	export function emptyRefCreateAccessTokenRespData():Ref<CreateAccessTokenRespData>
+	export function refOfCreateAccessTokenRespData(x:CreateAccessTokenRespData,v:Ref<CreateAccessTokenRespData>)
+	export function unRefCreateAccessTokenRespData(v:Ref<CreateAccessTokenRespData>):CreateAccessTokenRespData
 }

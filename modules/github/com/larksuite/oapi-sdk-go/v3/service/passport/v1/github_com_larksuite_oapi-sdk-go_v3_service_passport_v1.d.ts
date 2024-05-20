@@ -7,7 +7,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/passport/v1'{
 	// @ts-ignore
 	import * as context from 'golang/context'
 	// @ts-ignore
-	import type {bool,Ref,Struct,Alias,Nothing,int,error} from 'go'
+	import type {Ref,Struct,Alias,Nothing,int,error,bool} from 'go'
 	export interface Credentials extends Struct<Credentials>{
 
 			email:Ref<string>
@@ -134,76 +134,44 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/passport/v1'{
 				query(ctx:context.Context,req:Ref<QuerySessionReq>,...options:larkcore.RequestOptionFunc[]):Ref<QuerySessionResp>
 			}>
 	}
-	export function emptyIdpCredentialId():IdpCredentialId
-	export function emptyRefIdpCredentialId():Ref<IdpCredentialId>
-	export function refOfIdpCredentialId(x:IdpCredentialId,v:Ref<IdpCredentialId>)
-	export function unRefIdpCredentialId(v:Ref<IdpCredentialId>):IdpCredentialId
-	export function emptyQuerySessionReqBodyBuilder():QuerySessionReqBodyBuilder
-	export function emptyRefQuerySessionReqBodyBuilder():Ref<QuerySessionReqBodyBuilder>
-	export function refOfQuerySessionReqBodyBuilder(x:QuerySessionReqBodyBuilder,v:Ref<QuerySessionReqBodyBuilder>)
-	export function unRefQuerySessionReqBodyBuilder(v:Ref<QuerySessionReqBodyBuilder>):QuerySessionReqBodyBuilder
-	export function emptyQuerySessionRespData():QuerySessionRespData
-	export function emptyRefQuerySessionRespData():Ref<QuerySessionRespData>
-	export function refOfQuerySessionRespData(x:QuerySessionRespData,v:Ref<QuerySessionRespData>)
-	export function unRefQuerySessionRespData(v:Ref<QuerySessionRespData>):QuerySessionRespData
-	export function emptyCredentialsBuilder():CredentialsBuilder
-	export function emptyRefCredentialsBuilder():Ref<CredentialsBuilder>
-	export function refOfCredentialsBuilder(x:CredentialsBuilder,v:Ref<CredentialsBuilder>)
-	export function unRefCredentialsBuilder(v:Ref<CredentialsBuilder>):CredentialsBuilder
-	export function emptyDeviceBuilder():DeviceBuilder
-	export function emptyRefDeviceBuilder():Ref<DeviceBuilder>
-	export function refOfDeviceBuilder(x:DeviceBuilder,v:Ref<DeviceBuilder>)
-	export function unRefDeviceBuilder(v:Ref<DeviceBuilder>):DeviceBuilder
-	export function emptyIdpCredentialIdBuilder():IdpCredentialIdBuilder
-	export function emptyRefIdpCredentialIdBuilder():Ref<IdpCredentialIdBuilder>
-	export function refOfIdpCredentialIdBuilder(x:IdpCredentialIdBuilder,v:Ref<IdpCredentialIdBuilder>)
-	export function unRefIdpCredentialIdBuilder(v:Ref<IdpCredentialIdBuilder>):IdpCredentialIdBuilder
-	export function emptyV1():V1
-	export function emptyRefV1():Ref<V1>
-	export function refOfV1(x:V1,v:Ref<V1>)
-	export function unRefV1(v:Ref<V1>):V1
-	export function emptyDevice():Device
-	export function emptyRefDevice():Ref<Device>
-	export function refOfDevice(x:Device,v:Ref<Device>)
-	export function unRefDevice(v:Ref<Device>):Device
 	export function emptyMaskSession():MaskSession
 	export function emptyRefMaskSession():Ref<MaskSession>
 	export function refOfMaskSession(x:MaskSession,v:Ref<MaskSession>)
 	export function unRefMaskSession(v:Ref<MaskSession>):MaskSession
-	export function emptyQuerySessionPathReqBodyBuilder():QuerySessionPathReqBodyBuilder
-	export function emptyRefQuerySessionPathReqBodyBuilder():Ref<QuerySessionPathReqBodyBuilder>
-	export function refOfQuerySessionPathReqBodyBuilder(x:QuerySessionPathReqBodyBuilder,v:Ref<QuerySessionPathReqBodyBuilder>)
-	export function unRefQuerySessionPathReqBodyBuilder(v:Ref<QuerySessionPathReqBodyBuilder>):QuerySessionPathReqBodyBuilder
-	export function emptyQuerySessionReq():QuerySessionReq
-	export function emptyRefQuerySessionReq():Ref<QuerySessionReq>
-	export function refOfQuerySessionReq(x:QuerySessionReq,v:Ref<QuerySessionReq>)
-	export function unRefQuerySessionReq(v:Ref<QuerySessionReq>):QuerySessionReq
+	export function emptyV1():V1
+	export function emptyRefV1():Ref<V1>
+	export function refOfV1(x:V1,v:Ref<V1>)
+	export function unRefV1(v:Ref<V1>):V1
 	export function emptyQuerySessionReqBody():QuerySessionReqBody
 	export function emptyRefQuerySessionReqBody():Ref<QuerySessionReqBody>
 	export function refOfQuerySessionReqBody(x:QuerySessionReqBody,v:Ref<QuerySessionReqBody>)
 	export function unRefQuerySessionReqBody(v:Ref<QuerySessionReqBody>):QuerySessionReqBody
+	export function emptyQuerySessionRespData():QuerySessionRespData
+	export function emptyRefQuerySessionRespData():Ref<QuerySessionRespData>
+	export function refOfQuerySessionRespData(x:QuerySessionRespData,v:Ref<QuerySessionRespData>)
+	export function unRefQuerySessionRespData(v:Ref<QuerySessionRespData>):QuerySessionRespData
 	export function emptyQuerySessionResp():QuerySessionResp
 	export function emptyRefQuerySessionResp():Ref<QuerySessionResp>
 	export function refOfQuerySessionResp(x:QuerySessionResp,v:Ref<QuerySessionResp>)
 	export function unRefQuerySessionResp(v:Ref<QuerySessionResp>):QuerySessionResp
-	export function emptyCredentials():Credentials
-	export function emptyRefCredentials():Ref<Credentials>
-	export function refOfCredentials(x:Credentials,v:Ref<Credentials>)
-	export function unRefCredentials(v:Ref<Credentials>):Credentials
 	export function emptyDepartmentId():DepartmentId
 	export function emptyRefDepartmentId():Ref<DepartmentId>
 	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
 	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptyDepartmentIdBuilder():DepartmentIdBuilder
-	export function emptyRefDepartmentIdBuilder():Ref<DepartmentIdBuilder>
-	export function refOfDepartmentIdBuilder(x:DepartmentIdBuilder,v:Ref<DepartmentIdBuilder>)
-	export function unRefDepartmentIdBuilder(v:Ref<DepartmentIdBuilder>):DepartmentIdBuilder
-	export function emptyMaskSessionBuilder():MaskSessionBuilder
-	export function emptyRefMaskSessionBuilder():Ref<MaskSessionBuilder>
-	export function refOfMaskSessionBuilder(x:MaskSessionBuilder,v:Ref<MaskSessionBuilder>)
-	export function unRefMaskSessionBuilder(v:Ref<MaskSessionBuilder>):MaskSessionBuilder
-	export function emptyQuerySessionReqBuilder():QuerySessionReqBuilder
-	export function emptyRefQuerySessionReqBuilder():Ref<QuerySessionReqBuilder>
-	export function refOfQuerySessionReqBuilder(x:QuerySessionReqBuilder,v:Ref<QuerySessionReqBuilder>)
-	export function unRefQuerySessionReqBuilder(v:Ref<QuerySessionReqBuilder>):QuerySessionReqBuilder
+	export function emptyDevice():Device
+	export function emptyRefDevice():Ref<Device>
+	export function refOfDevice(x:Device,v:Ref<Device>)
+	export function unRefDevice(v:Ref<Device>):Device
+	export function emptyIdpCredentialId():IdpCredentialId
+	export function emptyRefIdpCredentialId():Ref<IdpCredentialId>
+	export function refOfIdpCredentialId(x:IdpCredentialId,v:Ref<IdpCredentialId>)
+	export function unRefIdpCredentialId(v:Ref<IdpCredentialId>):IdpCredentialId
+	export function emptyQuerySessionReq():QuerySessionReq
+	export function emptyRefQuerySessionReq():Ref<QuerySessionReq>
+	export function refOfQuerySessionReq(x:QuerySessionReq,v:Ref<QuerySessionReq>)
+	export function unRefQuerySessionReq(v:Ref<QuerySessionReq>):QuerySessionReq
+	export function emptyCredentials():Credentials
+	export function emptyRefCredentials():Ref<Credentials>
+	export function refOfCredentials(x:Credentials,v:Ref<Credentials>)
+	export function unRefCredentials(v:Ref<Credentials>):Credentials
 }

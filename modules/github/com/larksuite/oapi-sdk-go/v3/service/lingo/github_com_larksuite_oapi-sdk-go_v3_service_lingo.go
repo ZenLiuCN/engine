@@ -15,11 +15,7 @@ var (
 	GithubComLarksuiteOapiSdkGo3ServiceLingoDefine   []byte
 	GithubComLarksuiteOapiSdkGo3ServiceLingoDeclared = map[string]any{
 		"newService": lingo.NewService,
-
-		"emptyService":    engine.Empty[lingo.Service],
-		"emptyRefService": engine.EmptyRefer[lingo.Service],
-		"refOfService":    engine.ReferOf[lingo.Service],
-		"unRefService":    engine.UnRefer[lingo.Service]}
+	}
 )
 
 func init() {

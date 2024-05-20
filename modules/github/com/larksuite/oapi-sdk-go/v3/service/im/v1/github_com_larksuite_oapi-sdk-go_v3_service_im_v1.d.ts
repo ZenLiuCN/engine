@@ -3,6 +3,8 @@
 declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 
 	// @ts-ignore
+	import * as json from 'golang/encoding/json'
+	// @ts-ignore
 	import * as larkcore from 'github.com/larksuite/oapi-sdk-go/v3/core'
 	// @ts-ignore
 	import * as io from 'golang/io'
@@ -11,9 +13,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 	// @ts-ignore
 	import * as larkevent from 'github.com/larksuite/oapi-sdk-go/v3/event'
 	// @ts-ignore
-	import * as json from 'golang/encoding/json'
-	// @ts-ignore
-	import type {int,Alias,Nothing,float64,Struct,Ref,error,bool} from 'go'
+	import type {Ref,error,bool,int,Alias,Nothing,float64,Struct} from 'go'
 	export interface AddManagersChatManagersPathReqBodyBuilder extends Struct<AddManagersChatManagersPathReqBodyBuilder>,json.Token{
 
 			managerIds(managerIds:string[]):Ref<AddManagersChatManagersPathReqBodyBuilder>
@@ -92,7 +92,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			successUserIdsCount:Ref<int>
 			readUserIdsCount:Ref<int>
 	}
-	export interface BatchMessageSendProgressBuilder extends Struct<BatchMessageSendProgressBuilder>,json.Token{
+	export interface BatchMessageSendProgressBuilder extends json.Token,Struct<BatchMessageSendProgressBuilder>{
 
 			validUserIdsCount(validUserIdsCount:int):Ref<BatchMessageSendProgressBuilder>
 			successUserIdsCount(successUserIdsCount:int):Ref<BatchMessageSendProgressBuilder>
@@ -104,13 +104,13 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			recallCount:Ref<string>
 			totalRecallCount:Ref<string>
 	}
-	export interface BatchRecallProgressBuilder extends Struct<BatchRecallProgressBuilder>,json.Token{
+	export interface BatchRecallProgressBuilder extends json.Token,Struct<BatchRecallProgressBuilder>{
 
 			recallCount(recallCount:string):Ref<BatchRecallProgressBuilder>
 			totalRecallCount(totalRecallCount:string):Ref<BatchRecallProgressBuilder>
 			build():Ref<BatchRecallProgress>
 	}
-	export interface BatchSendProgress extends json.Token,Struct<BatchSendProgress>{
+	export interface BatchSendProgress extends Struct<BatchSendProgress>,json.Token{
 
 			sendCount:Ref<string>
 			totalSendCount:Ref<string>
@@ -121,7 +121,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			totalSendCount(totalSendCount:string):Ref<BatchSendProgressBuilder>
 			build():Ref<BatchSendProgress>
 	}
-	export interface Chat extends Struct<Chat>,json.Token{
+	export interface Chat extends json.Token,Struct<Chat>{
 
 			chatId:Ref<string>
 			avatar:Ref<string>
@@ -190,12 +190,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			groupMessageType(groupMessageType:string):Ref<ChatChangeBuilder>
 			build():Ref<ChatChange>
 	}
-	export interface ChatI18nNames extends Struct<ChatI18nNames>,json.Token{
+	export interface ChatI18nNames extends json.Token,Struct<ChatI18nNames>{
 
 			enUs:string
 			zhCn:string
 	}
-	export interface ChatManagers extends Struct<ChatManagers>,json.Token{
+	export interface ChatManagers extends json.Token,Struct<ChatManagers>{
 
 			managerId:Ref<string>
 	}
@@ -204,7 +204,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			managerId(managerId:string):Ref<ChatManagersBuilder>
 			build():Ref<ChatManagers>
 	}
-	export interface ChatMember extends json.Token,Struct<ChatMember>{
+	export interface ChatMember extends Struct<ChatMember>,json.Token{
 
 			userId:Ref<string>
 	}
@@ -222,7 +222,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			userId(userId:string):Ref<ChatMemberBuilder>
 			build():Ref<ChatMember>
 	}
-	export interface ChatMemberUser extends json.Token,Struct<ChatMemberUser>{
+	export interface ChatMemberUser extends Struct<ChatMemberUser>,json.Token{
 
 			name:Ref<string>
 			tenantKey:Ref<string>
@@ -235,7 +235,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			userId(userId:Ref<UserId>):Ref<ChatMemberUserBuilder>
 			build():Ref<ChatMemberUser>
 	}
-	export interface ChatMembers extends json.Token,Struct<ChatMembers>{
+	export interface ChatMembers extends Struct<ChatMembers>,json.Token{
 
 			userId:Ref<string>
 	}
@@ -252,7 +252,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			name:Ref<string>
 			i18nNames:Ref<I18nNames>
 	}
-	export interface ChatMenuItemBuilder extends json.Token,Struct<ChatMenuItemBuilder>{
+	export interface ChatMenuItemBuilder extends Struct<ChatMenuItemBuilder>,json.Token{
 
 			actionType(actionType:string):Ref<ChatMenuItemBuilder>
 			redirectLink(redirectLink:Ref<ChatMenuItemRedirectLink>):Ref<ChatMenuItemBuilder>
@@ -269,7 +269,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			pcUrl:Ref<string>
 			webUrl:Ref<string>
 	}
-	export interface ChatMenuItemRedirectLinkBuilder extends Struct<ChatMenuItemRedirectLinkBuilder>,json.Token{
+	export interface ChatMenuItemRedirectLinkBuilder extends json.Token,Struct<ChatMenuItemRedirectLinkBuilder>{
 
 			commonUrl(commonUrl:string):Ref<ChatMenuItemRedirectLinkBuilder>
 			iosUrl(iosUrl:string):Ref<ChatMenuItemRedirectLinkBuilder>
@@ -333,7 +333,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			iconKey:Ref<string>
 			isBuiltIn:Ref<bool>
 	}
-	export interface ChatTabConfigBuilder extends json.Token,Struct<ChatTabConfigBuilder>{
+	export interface ChatTabConfigBuilder extends Struct<ChatTabConfigBuilder>,json.Token{
 
 			iconKey(iconKey:string):Ref<ChatTabConfigBuilder>
 			isBuiltIn(isBuiltIn:bool):Ref<ChatTabConfigBuilder>
@@ -345,14 +345,14 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			doc:Ref<string>
 			meetingMinute:Ref<string>
 	}
-	export interface ChatTabContentBuilder extends Struct<ChatTabContentBuilder>,json.Token{
+	export interface ChatTabContentBuilder extends json.Token,Struct<ChatTabContentBuilder>{
 
 			url(url:string):Ref<ChatTabContentBuilder>
 			doc(doc:string):Ref<ChatTabContentBuilder>
 			meetingMinute(meetingMinute:string):Ref<ChatTabContentBuilder>
 			build():Ref<ChatTabContent>
 	}
-	export interface ChatTopNotice extends json.Token,Struct<ChatTopNotice>{
+	export interface ChatTopNotice extends Struct<ChatTopNotice>,json.Token{
 
 			actionType:Ref<string>
 			messageId:Ref<string>
@@ -396,7 +396,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			idList(idList:string[]):Ref<CreateChatMembersReqBodyBuilder>
 			build():Ref<CreateChatMembersReqBody>
 	}
-	export interface CreateChatMembersReqBuilder extends json.Token,Struct<CreateChatMembersReqBuilder>{
+	export interface CreateChatMembersReqBuilder extends Struct<CreateChatMembersReqBuilder>,json.Token{
 
 			chatId(chatId:string):Ref<CreateChatMembersReqBuilder>
 			memberIdType(memberIdType:string):Ref<CreateChatMembersReqBuilder>
@@ -422,7 +422,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			menuTree(menuTree:Ref<ChatMenuTree>):Ref<CreateChatMenuTreePathReqBodyBuilder>
 			build():Ref<CreateChatMenuTreeReqBody>
 	}
-	export interface CreateChatMenuTreeReq extends json.Token,Struct<CreateChatMenuTreeReq>{
+	export interface CreateChatMenuTreeReq extends Struct<CreateChatMenuTreeReq>,json.Token{
 
 			body:Ref<CreateChatMenuTreeReqBody>
 	}
@@ -435,7 +435,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			menuTree(menuTree:Ref<ChatMenuTree>):Ref<CreateChatMenuTreeReqBodyBuilder>
 			build():Ref<CreateChatMenuTreeReqBody>
 	}
-	export interface CreateChatMenuTreeReqBuilder extends Struct<CreateChatMenuTreeReqBuilder>,json.Token{
+	export interface CreateChatMenuTreeReqBuilder extends json.Token,Struct<CreateChatMenuTreeReqBuilder>{
 
 			chatId(chatId:string):Ref<CreateChatMenuTreeReqBuilder>
 			body(body:Ref<CreateChatMenuTreeReqBody>):Ref<CreateChatMenuTreeReqBuilder>
@@ -452,7 +452,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 
 			menuTree:Ref<ChatMenuTree>
 	}
-	export interface CreateChatPathReqBodyBuilder extends json.Token,Struct<CreateChatPathReqBodyBuilder>{
+	export interface CreateChatPathReqBodyBuilder extends Struct<CreateChatPathReqBodyBuilder>,json.Token{
 
 			avatar(avatar:string):Ref<CreateChatPathReqBodyBuilder>
 			name(name:string):Ref<CreateChatPathReqBodyBuilder>
@@ -581,25 +581,25 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 
 			chatTabs:Ref<ChatTab>[]
 	}
-	export interface CreateChatTabReqBodyBuilder extends json.Token,Struct<CreateChatTabReqBodyBuilder>{
+	export interface CreateChatTabReqBodyBuilder extends Struct<CreateChatTabReqBodyBuilder>,json.Token{
 
 			chatTabs(chatTabs:Ref<ChatTab>[]):Ref<CreateChatTabReqBodyBuilder>
 			build():Ref<CreateChatTabReqBody>
 	}
-	export interface CreateChatTabReqBuilder extends json.Token,Struct<CreateChatTabReqBuilder>{
+	export interface CreateChatTabReqBuilder extends Struct<CreateChatTabReqBuilder>,json.Token{
 
 			chatId(chatId:string):Ref<CreateChatTabReqBuilder>
 			body(body:Ref<CreateChatTabReqBody>):Ref<CreateChatTabReqBuilder>
 			build():Ref<CreateChatTabReq>
 	}
-	export interface CreateChatTabResp extends Struct<CreateChatTabResp>,json.Token{
+	export interface CreateChatTabResp extends json.Token,Struct<CreateChatTabResp>{
 
 			apiResp:Ref<larkcore.ApiResp>
 			codeError:larkcore.CodeError
 			data:Ref<CreateChatTabRespData>
 			success():bool
 	}
-	export interface CreateChatTabRespData extends json.Token,Struct<CreateChatTabRespData>{
+	export interface CreateChatTabRespData extends Struct<CreateChatTabRespData>,json.Token{
 
 			chatTabs:Ref<ChatTab>[]
 	}
@@ -740,7 +740,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			content:Ref<string>
 			uuid:Ref<string>
 	}
-	export interface CreateMessageReqBodyBuilder extends Struct<CreateMessageReqBodyBuilder>,json.Token{
+	export interface CreateMessageReqBodyBuilder extends json.Token,Struct<CreateMessageReqBodyBuilder>{
 
 			receiveId(receiveId:string):Ref<CreateMessageReqBodyBuilder>
 			msgType(msgType:string):Ref<CreateMessageReqBodyBuilder>
@@ -761,7 +761,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			data:Ref<CreateMessageRespData>
 			success():bool
 	}
-	export interface CreateMessageRespData extends json.Token,Struct<CreateMessageRespData>{
+	export interface CreateMessageRespData extends Struct<CreateMessageRespData>,json.Token{
 
 			messageId:Ref<string>
 			rootId:Ref<string>
@@ -801,7 +801,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			body(body:Ref<CreatePinReqBody>):Ref<CreatePinReqBuilder>
 			build():Ref<CreatePinReq>
 	}
-	export interface CreatePinResp extends Struct<CreatePinResp>,json.Token{
+	export interface CreatePinResp extends json.Token,Struct<CreatePinResp>{
 
 			apiResp:Ref<larkcore.ApiResp>
 			codeError:larkcore.CodeError
@@ -831,11 +831,11 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			idList(idList:string[]):Ref<DeleteChatMembersPathReqBodyBuilder>
 			build():Ref<DeleteChatMembersReqBody>
 	}
-	export interface DeleteChatMembersReq extends json.Token,Struct<DeleteChatMembersReq>{
+	export interface DeleteChatMembersReq extends Struct<DeleteChatMembersReq>,json.Token{
 
 			body:Ref<DeleteChatMembersReqBody>
 	}
-	export interface DeleteChatMembersReqBody extends json.Token,Struct<DeleteChatMembersReqBody>{
+	export interface DeleteChatMembersReqBody extends Struct<DeleteChatMembersReqBody>,json.Token{
 
 			idList:string[]
 	}
@@ -851,7 +851,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			body(body:Ref<DeleteChatMembersReqBody>):Ref<DeleteChatMembersReqBuilder>
 			build():Ref<DeleteChatMembersReq>
 	}
-	export interface DeleteChatMembersResp extends json.Token,Struct<DeleteChatMembersResp>{
+	export interface DeleteChatMembersResp extends Struct<DeleteChatMembersResp>,json.Token{
 
 			apiResp:Ref<larkcore.ApiResp>
 			codeError:larkcore.CodeError
@@ -916,7 +916,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			managerIds(managerIds:string[]):Ref<DeleteManagersChatManagersPathReqBodyBuilder>
 			build():Ref<DeleteManagersChatManagersReqBody>
 	}
-	export interface DeleteManagersChatManagersReq extends Struct<DeleteManagersChatManagersReq>,json.Token{
+	export interface DeleteManagersChatManagersReq extends json.Token,Struct<DeleteManagersChatManagersReq>{
 
 			body:Ref<DeleteManagersChatManagersReqBody>
 	}
@@ -924,7 +924,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 
 			managerIds:string[]
 	}
-	export interface DeleteManagersChatManagersReqBodyBuilder extends json.Token,Struct<DeleteManagersChatManagersReqBodyBuilder>{
+	export interface DeleteManagersChatManagersReqBodyBuilder extends Struct<DeleteManagersChatManagersReqBodyBuilder>,json.Token{
 
 			managerIds(managerIds:string[]):Ref<DeleteManagersChatManagersReqBodyBuilder>
 			build():Ref<DeleteManagersChatManagersReqBody>
@@ -974,12 +974,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 	export interface DeleteMessageReq extends Struct<DeleteMessageReq>,json.Token{
 
 	}
-	export interface DeleteMessageReqBuilder extends json.Token,Struct<DeleteMessageReqBuilder>{
+	export interface DeleteMessageReqBuilder extends Struct<DeleteMessageReqBuilder>,json.Token{
 
 			messageId(messageId:string):Ref<DeleteMessageReqBuilder>
 			build():Ref<DeleteMessageReq>
 	}
-	export interface DeleteMessageResp extends json.Token,Struct<DeleteMessageResp>{
+	export interface DeleteMessageResp extends Struct<DeleteMessageResp>,json.Token{
 
 			apiResp:Ref<larkcore.ApiResp>
 			codeError:larkcore.CodeError
@@ -1034,10 +1034,10 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 
 			chatTabs:Ref<ChatTab>[]
 	}
-	export interface DeleteTopNoticeChatTopNoticeReq extends Struct<DeleteTopNoticeChatTopNoticeReq>,json.Token{
+	export interface DeleteTopNoticeChatTopNoticeReq extends json.Token,Struct<DeleteTopNoticeChatTopNoticeReq>{
 
 	}
-	export interface DeleteTopNoticeChatTopNoticeReqBuilder extends json.Token,Struct<DeleteTopNoticeChatTopNoticeReqBuilder>{
+	export interface DeleteTopNoticeChatTopNoticeReqBuilder extends Struct<DeleteTopNoticeChatTopNoticeReqBuilder>,json.Token{
 
 			chatId(chatId:string):Ref<DeleteTopNoticeChatTopNoticeReqBuilder>
 			build():Ref<DeleteTopNoticeChatTopNoticeReq>
@@ -1116,7 +1116,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			tenantKey(tenantKey:string):Ref<EventMessageReaderBuilder>
 			build():Ref<EventMessageReader>
 	}
-	export interface EventSender extends json.Token,Struct<EventSender>{
+	export interface EventSender extends Struct<EventSender>,json.Token{
 
 			senderId:Ref<UserId>
 			senderType:Ref<string>
@@ -1151,7 +1151,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			content:Ref<string>
 			i18nContents:Ref<I18nContent>[]
 	}
-	export interface FollowUpBuilder extends json.Token,Struct<FollowUpBuilder>{
+	export interface FollowUpBuilder extends Struct<FollowUpBuilder>,json.Token{
 
 			content(content:string):Ref<FollowUpBuilder>
 			i18nContents(i18nContents:Ref<I18nContent>[]):Ref<FollowUpBuilder>
@@ -1183,7 +1183,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			body(body:Ref<ForwardMessageReqBody>):Ref<ForwardMessageReqBuilder>
 			build():Ref<ForwardMessageReq>
 	}
-	export interface ForwardMessageResp extends Struct<ForwardMessageResp>,json.Token{
+	export interface ForwardMessageResp extends json.Token,Struct<ForwardMessageResp>{
 
 			apiResp:Ref<larkcore.ApiResp>
 			codeError:larkcore.CodeError
@@ -1207,7 +1207,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			mentions:Ref<Mention>[]
 			upperMessageId:Ref<string>
 	}
-	export interface ForwardThreadPathReqBodyBuilder extends json.Token,Struct<ForwardThreadPathReqBodyBuilder>{
+	export interface ForwardThreadPathReqBodyBuilder extends Struct<ForwardThreadPathReqBodyBuilder>,json.Token{
 
 			receiveId(receiveId:string):Ref<ForwardThreadPathReqBodyBuilder>
 			build():Ref<ForwardThreadReqBody>
@@ -1240,7 +1240,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			data:Ref<ForwardThreadRespData>
 			success():bool
 	}
-	export interface ForwardThreadRespData extends Struct<ForwardThreadRespData>,json.Token{
+	export interface ForwardThreadRespData extends json.Token,Struct<ForwardThreadRespData>{
 
 			messageId:Ref<string>
 			rootId:Ref<string>
@@ -1284,7 +1284,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			modifierIdType:Ref<string>
 			modifierId:Ref<string>
 	}
-	export interface GetChatMembersIterator extends Struct<GetChatMembersIterator>,json.Token{
+	export interface GetChatMembersIterator extends json.Token,Struct<GetChatMembersIterator>{
 
 			next():[bool,Ref<ListMember>]
 			nextPageToken():Ref<string>
@@ -1309,7 +1309,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			data:Ref<GetChatMembersRespData>
 			success():bool
 	}
-	export interface GetChatMembersRespData extends json.Token,Struct<GetChatMembersRespData>{
+	export interface GetChatMembersRespData extends Struct<GetChatMembersRespData>,json.Token{
 
 			items:Ref<ListMember>[]
 			pageToken:Ref<string>
@@ -1324,14 +1324,14 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			chatId(chatId:string):Ref<GetChatMenuTreeReqBuilder>
 			build():Ref<GetChatMenuTreeReq>
 	}
-	export interface GetChatMenuTreeResp extends json.Token,Struct<GetChatMenuTreeResp>{
+	export interface GetChatMenuTreeResp extends Struct<GetChatMenuTreeResp>,json.Token{
 
 			apiResp:Ref<larkcore.ApiResp>
 			codeError:larkcore.CodeError
 			data:Ref<GetChatMenuTreeRespData>
 			success():bool
 	}
-	export interface GetChatMenuTreeRespData extends Struct<GetChatMenuTreeRespData>,json.Token{
+	export interface GetChatMenuTreeRespData extends json.Token,Struct<GetChatMenuTreeRespData>{
 
 			menuTree:Ref<ChatMenuTree>
 	}
@@ -1433,7 +1433,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			success():bool
 			writeFile(fileName:string)/*error*/
 	}
-	export interface GetImageReq extends Struct<GetImageReq>,json.Token{
+	export interface GetImageReq extends json.Token,Struct<GetImageReq>{
 
 	}
 	export interface GetImageReqBuilder extends Struct<GetImageReqBuilder>,json.Token{
@@ -1450,7 +1450,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			success():bool
 			writeFile(fileName:string)/*error*/
 	}
-	export interface GetMessageReq extends Struct<GetMessageReq>,json.Token{
+	export interface GetMessageReq extends json.Token,Struct<GetMessageReq>{
 
 	}
 	export interface GetMessageReqBuilder extends json.Token,Struct<GetMessageReqBuilder>{
@@ -1573,7 +1573,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			stickerSendMsgRate:Ref<float64>
 			postSendMsgRate:Ref<float64>
 	}
-	export interface ImDepthDataBuilder extends json.Token,Struct<ImDepthDataBuilder>{
+	export interface ImDepthDataBuilder extends Struct<ImDepthDataBuilder>,json.Token{
 
 			pDate(pDate:string):Ref<ImDepthDataBuilder>
 			departmentId(departmentId:string):Ref<ImDepthDataBuilder>
@@ -1608,7 +1608,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 	export interface IsInChatChatMembersReq extends Struct<IsInChatChatMembersReq>,json.Token{
 
 	}
-	export interface IsInChatChatMembersReqBuilder extends Struct<IsInChatChatMembersReqBuilder>,json.Token{
+	export interface IsInChatChatMembersReqBuilder extends json.Token,Struct<IsInChatChatMembersReqBuilder>{
 
 			chatId(chatId:string):Ref<IsInChatChatMembersReqBuilder>
 			build():Ref<IsInChatChatMembersReq>
@@ -1642,7 +1642,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			validityPeriod(validityPeriod:string):Ref<LinkChatReqBodyBuilder>
 			build():Ref<LinkChatReqBody>
 	}
-	export interface LinkChatReqBuilder extends json.Token,Struct<LinkChatReqBuilder>{
+	export interface LinkChatReqBuilder extends Struct<LinkChatReqBuilder>,json.Token{
 
 			chatId(chatId:string):Ref<LinkChatReqBuilder>
 			body(body:Ref<LinkChatReqBody>):Ref<LinkChatReqBuilder>
@@ -1661,7 +1661,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			expireTime:Ref<string>
 			isPermanent:Ref<bool>
 	}
-	export interface ListChat extends Struct<ListChat>,json.Token{
+	export interface ListChat extends json.Token,Struct<ListChat>{
 
 			chatId:Ref<string>
 			avatar:Ref<string>
@@ -1711,13 +1711,13 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			data:Ref<ListChatRespData>
 			success():bool
 	}
-	export interface ListChatRespData extends json.Token,Struct<ListChatRespData>{
+	export interface ListChatRespData extends Struct<ListChatRespData>,json.Token{
 
 			items:Ref<ListChat>[]
 			pageToken:Ref<string>
 			hasMore:Ref<bool>
 	}
-	export interface ListEventModerator extends Struct<ListEventModerator>,json.Token{
+	export interface ListEventModerator extends json.Token,Struct<ListEventModerator>{
 
 			tenantKey:Ref<string>
 			userId:Ref<UserId>
@@ -1728,7 +1728,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			userId(userId:Ref<UserId>):Ref<ListEventModeratorBuilder>
 			build():Ref<ListEventModerator>
 	}
-	export interface ListMember extends json.Token,Struct<ListMember>{
+	export interface ListMember extends Struct<ListMember>,json.Token{
 
 			memberIdType:Ref<string>
 			memberId:Ref<string>
@@ -1822,12 +1822,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			tenantKey(tenantKey:string):Ref<ListModeratorBuilder>
 			build():Ref<ListModerator>
 	}
-	export interface ListNotifyStatus extends Struct<ListNotifyStatus>,json.Token{
+	export interface ListNotifyStatus extends json.Token,Struct<ListNotifyStatus>{
 
 			userId:Ref<UserId>
 			notifyStatusType:Ref<string>
 	}
-	export interface ListNotifyStatusBuilder extends json.Token,Struct<ListNotifyStatusBuilder>{
+	export interface ListNotifyStatusBuilder extends Struct<ListNotifyStatusBuilder>,json.Token{
 
 			userId(userId:Ref<UserId>):Ref<ListNotifyStatusBuilder>
 			notifyStatusType(notifyStatusType:string):Ref<ListNotifyStatusBuilder>
@@ -1859,7 +1859,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			data:Ref<ListPinRespData>
 			success():bool
 	}
-	export interface ListPinRespData extends json.Token,Struct<ListPinRespData>{
+	export interface ListPinRespData extends Struct<ListPinRespData>,json.Token{
 
 			items:Ref<Pin>[]
 			hasMore:Ref<bool>
@@ -1892,7 +1892,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			chatId(chatId:string):Ref<MeJoinChatMembersReqBuilder>
 			build():Ref<MeJoinChatMembersReq>
 	}
-	export interface MeJoinChatMembersResp extends json.Token,Struct<MeJoinChatMembersResp>{
+	export interface MeJoinChatMembersResp extends Struct<MeJoinChatMembersResp>,json.Token{
 
 			apiResp:Ref<larkcore.ApiResp>
 			codeError:larkcore.CodeError
@@ -1936,7 +1936,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 	export const MemberIdTypeUnionId:string
 	//"user_id"
 	export const MemberIdTypeUserId:string
-	export interface Mention extends Struct<Mention>,json.Token{
+	export interface Mention extends json.Token,Struct<Mention>{
 
 			key:Ref<string>
 			id:Ref<string>
@@ -1968,7 +1968,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			tenantKey(tenantKey:string):Ref<MentionEventBuilder>
 			build():Ref<MentionEvent>
 	}
-	export interface MergeForwardMessagePathReqBodyBuilder extends json.Token,Struct<MergeForwardMessagePathReqBodyBuilder>{
+	export interface MergeForwardMessagePathReqBodyBuilder extends Struct<MergeForwardMessagePathReqBodyBuilder>,json.Token{
 
 			receiveId(receiveId:string):Ref<MergeForwardMessagePathReqBodyBuilder>
 			messageIdList(messageIdList:string[]):Ref<MergeForwardMessagePathReqBodyBuilder>
@@ -1989,7 +1989,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			messageIdList(messageIdList:string[]):Ref<MergeForwardMessageReqBodyBuilder>
 			build():Ref<MergeForwardMessageReqBody>
 	}
-	export interface MergeForwardMessageReqBuilder extends Struct<MergeForwardMessageReqBuilder>,json.Token{
+	export interface MergeForwardMessageReqBuilder extends json.Token,Struct<MergeForwardMessageReqBuilder>{
 
 			receiveIdType(receiveIdType:string):Ref<MergeForwardMessageReqBuilder>
 			uuid(uuid:string):Ref<MergeForwardMessageReqBuilder>
@@ -2025,7 +2025,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			mentions:Ref<Mention>[]
 			upperMessageId:Ref<string>
 	}
-	export interface MessageAudio extends json.Token,Struct<MessageAudio>{
+	export interface MessageAudio extends Struct<MessageAudio>,json.Token{
 
 			fileKey:string
 			string():string
@@ -2084,7 +2084,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			build():string
 			string():string
 	}
-	export interface MessagePostA extends json.Marshaler,Struct<MessagePostA>,json.Token,MessagePostElement{
+	export interface MessagePostA extends Struct<MessagePostA>,MessagePostElement,json.Token,json.Marshaler{
 
 			text:string
 			href:string
@@ -2093,7 +2093,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			isPost():void
 			marshalJSON():Uint8Array
 	}
-	export interface MessagePostAt extends json.Token,MessagePostElement,json.Marshaler,Struct<MessagePostAt>{
+	export interface MessagePostAt extends Struct<MessagePostAt>,json.Token,json.Marshaler,MessagePostElement{
 
 			userId:string
 			userName:string
@@ -2101,7 +2101,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			isPost():void
 			marshalJSON():Uint8Array
 	}
-	export interface MessagePostContent extends json.Token,Struct<MessagePostContent>{
+	export interface MessagePostContent extends Struct<MessagePostContent>,json.Token{
 
 			title:string
 			content:MessagePostElement[][]
@@ -2115,14 +2115,14 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			marshalJSON():Uint8Array
 			tag():string
 	}
-	export interface MessagePostImage extends Struct<MessagePostImage>,json.Token,MessagePostElement,json.Marshaler{
+	export interface MessagePostImage extends Struct<MessagePostImage>,json.Marshaler,MessagePostElement,json.Token{
 
 			imageKey:string
 			tag():string
 			isPost():void
 			marshalJSON():Uint8Array
 	}
-	export interface MessagePostMedia extends Struct<MessagePostMedia>,json.Token,MessagePostElement,json.Marshaler{
+	export interface MessagePostMedia extends Struct<MessagePostMedia>,MessagePostElement,json.Token,json.Marshaler{
 
 			fileKey:string
 			imageKey:string
@@ -2130,7 +2130,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			isPost():void
 			marshalJSON():Uint8Array
 	}
-	export interface MessagePostText extends Struct<MessagePostText>,json.Token,MessagePostElement,json.Marshaler{
+	export interface MessagePostText extends json.Marshaler,MessagePostElement,Struct<MessagePostText>,json.Token{
 
 			text:string
 			unEscape:bool
@@ -2166,7 +2166,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			userId:string
 			string():string
 	}
-	export interface MessageSticker extends json.Token,Struct<MessageSticker>{
+	export interface MessageSticker extends Struct<MessageSticker>,json.Token{
 
 			fileKey:string
 			string():string
@@ -2508,45 +2508,45 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 
 	export function newOperatorBuilder():Ref<OperatorBuilder>
 
-	export function newP1AddBotV1Handler(v1:(v2:context.Context,v1:Ref<P1AddBotV1>))=>void/*error*/):Ref<P1AddBotV1Handler>
+	export function newP1AddBotV1Handler(v1:(v2:context.Context,v1:Ref<P1AddBotV1>)=>void/*error*/):Ref<P1AddBotV1Handler>
 
-	export function newP1DisbandChatV1Handler(v1:(v2:context.Context,v1:Ref<P1ChatDisbandV1>))=>void/*error*/):Ref<P1ChatDisbandV1Handler>
+	export function newP1DisbandChatV1Handler(v1:(v2:context.Context,v1:Ref<P1ChatDisbandV1>)=>void/*error*/):Ref<P1ChatDisbandV1Handler>
 
-	export function newP1GroupSettingUpdatedV1Handler(v1:(v2:context.Context,v1:Ref<P1GroupSettingUpdatedV1>))=>void/*error*/):Ref<P1GroupSettingUpdatedV1Handler>
+	export function newP1GroupSettingUpdatedV1Handler(v1:(v2:context.Context,v1:Ref<P1GroupSettingUpdatedV1>)=>void/*error*/):Ref<P1GroupSettingUpdatedV1Handler>
 
-	export function newP1MessageReadV1Handler(v1:(v2:context.Context,v1:Ref<P1MessageReadV1>))=>void/*error*/):Ref<P1MessageReadV1Handler>
+	export function newP1MessageReadV1Handler(v1:(v2:context.Context,v1:Ref<P1MessageReadV1>)=>void/*error*/):Ref<P1MessageReadV1Handler>
 
-	export function newP1MessageReceiveV1Handler(v1:(v2:context.Context,v1:Ref<P1MessageReceiveV1>))=>void/*error*/):Ref<P1MessageReceiveV1Handler>
+	export function newP1MessageReceiveV1Handler(v1:(v2:context.Context,v1:Ref<P1MessageReceiveV1>)=>void/*error*/):Ref<P1MessageReceiveV1Handler>
 
-	export function newP1P2PChatCreatedV1Handler(v1:(v2:context.Context,v1:Ref<P1P2PChatCreatedV1>))=>void/*error*/):Ref<P1P2PChatCreatedV1Handler>
+	export function newP1P2PChatCreatedV1Handler(v1:(v2:context.Context,v1:Ref<P1P2PChatCreatedV1>)=>void/*error*/):Ref<P1P2PChatCreatedV1Handler>
 
-	export function newP1RemoveBotV1Handler(v1:(v2:context.Context,v1:Ref<P1RemoveBotV1>))=>void/*error*/):Ref<P1RemoveBotV1Handler>
+	export function newP1RemoveBotV1Handler(v1:(v2:context.Context,v1:Ref<P1RemoveBotV1>)=>void/*error*/):Ref<P1RemoveBotV1Handler>
 
-	export function newP1UserInOutChatV1Handler(v1:(v2:context.Context,v1:Ref<P1UserInOutChatV1>))=>void/*error*/):Ref<P1UserInOutChatV1Handler>
+	export function newP1UserInOutChatV1Handler(v1:(v2:context.Context,v1:Ref<P1UserInOutChatV1>)=>void/*error*/):Ref<P1UserInOutChatV1Handler>
 
-	export function newP2ChatDisbandedV1Handler(v1:(v2:context.Context,v1:Ref<P2ChatDisbandedV1>))=>void/*error*/):Ref<P2ChatDisbandedV1Handler>
+	export function newP2ChatDisbandedV1Handler(v1:(v2:context.Context,v1:Ref<P2ChatDisbandedV1>)=>void/*error*/):Ref<P2ChatDisbandedV1Handler>
 
-	export function newP2ChatMemberBotAddedV1Handler(v1:(v2:context.Context,v1:Ref<P2ChatMemberBotAddedV1>))=>void/*error*/):Ref<P2ChatMemberBotAddedV1Handler>
+	export function newP2ChatMemberBotAddedV1Handler(v1:(v2:context.Context,v1:Ref<P2ChatMemberBotAddedV1>)=>void/*error*/):Ref<P2ChatMemberBotAddedV1Handler>
 
-	export function newP2ChatMemberBotDeletedV1Handler(v1:(v2:context.Context,v1:Ref<P2ChatMemberBotDeletedV1>))=>void/*error*/):Ref<P2ChatMemberBotDeletedV1Handler>
+	export function newP2ChatMemberBotDeletedV1Handler(v1:(v2:context.Context,v1:Ref<P2ChatMemberBotDeletedV1>)=>void/*error*/):Ref<P2ChatMemberBotDeletedV1Handler>
 
-	export function newP2ChatMemberUserAddedV1Handler(v1:(v2:context.Context,v1:Ref<P2ChatMemberUserAddedV1>))=>void/*error*/):Ref<P2ChatMemberUserAddedV1Handler>
+	export function newP2ChatMemberUserAddedV1Handler(v1:(v2:context.Context,v1:Ref<P2ChatMemberUserAddedV1>)=>void/*error*/):Ref<P2ChatMemberUserAddedV1Handler>
 
-	export function newP2ChatMemberUserDeletedV1Handler(v1:(v2:context.Context,v1:Ref<P2ChatMemberUserDeletedV1>))=>void/*error*/):Ref<P2ChatMemberUserDeletedV1Handler>
+	export function newP2ChatMemberUserDeletedV1Handler(v1:(v2:context.Context,v1:Ref<P2ChatMemberUserDeletedV1>)=>void/*error*/):Ref<P2ChatMemberUserDeletedV1Handler>
 
-	export function newP2ChatMemberUserWithdrawnV1Handler(v1:(v2:context.Context,v1:Ref<P2ChatMemberUserWithdrawnV1>))=>void/*error*/):Ref<P2ChatMemberUserWithdrawnV1Handler>
+	export function newP2ChatMemberUserWithdrawnV1Handler(v1:(v2:context.Context,v1:Ref<P2ChatMemberUserWithdrawnV1>)=>void/*error*/):Ref<P2ChatMemberUserWithdrawnV1Handler>
 
-	export function newP2ChatUpdatedV1Handler(v1:(v2:context.Context,v1:Ref<P2ChatUpdatedV1>))=>void/*error*/):Ref<P2ChatUpdatedV1Handler>
+	export function newP2ChatUpdatedV1Handler(v1:(v2:context.Context,v1:Ref<P2ChatUpdatedV1>)=>void/*error*/):Ref<P2ChatUpdatedV1Handler>
 
-	export function newP2MessageReactionCreatedV1Handler(v1:(v2:context.Context,v1:Ref<P2MessageReactionCreatedV1>))=>void/*error*/):Ref<P2MessageReactionCreatedV1Handler>
+	export function newP2MessageReactionCreatedV1Handler(v1:(v2:context.Context,v1:Ref<P2MessageReactionCreatedV1>)=>void/*error*/):Ref<P2MessageReactionCreatedV1Handler>
 
-	export function newP2MessageReactionDeletedV1Handler(v1:(v2:context.Context,v1:Ref<P2MessageReactionDeletedV1>))=>void/*error*/):Ref<P2MessageReactionDeletedV1Handler>
+	export function newP2MessageReactionDeletedV1Handler(v1:(v2:context.Context,v1:Ref<P2MessageReactionDeletedV1>)=>void/*error*/):Ref<P2MessageReactionDeletedV1Handler>
 
-	export function newP2MessageReadV1Handler(v1:(v2:context.Context,v1:Ref<P2MessageReadV1>))=>void/*error*/):Ref<P2MessageReadV1Handler>
+	export function newP2MessageReadV1Handler(v1:(v2:context.Context,v1:Ref<P2MessageReadV1>)=>void/*error*/):Ref<P2MessageReadV1Handler>
 
-	export function newP2MessageRecalledV1Handler(v1:(v2:context.Context,v1:Ref<P2MessageRecalledV1>))=>void/*error*/):Ref<P2MessageRecalledV1Handler>
+	export function newP2MessageRecalledV1Handler(v1:(v2:context.Context,v1:Ref<P2MessageRecalledV1>)=>void/*error*/):Ref<P2MessageRecalledV1Handler>
 
-	export function newP2MessageReceiveV1Handler(v1:(v2:context.Context,v1:Ref<P2MessageReceiveV1>))=>void/*error*/):Ref<P2MessageReceiveV1Handler>
+	export function newP2MessageReceiveV1Handler(v1:(v2:context.Context,v1:Ref<P2MessageReceiveV1>)=>void/*error*/):Ref<P2MessageReceiveV1Handler>
 
 	export function newPatchChatAnnouncementPathReqBodyBuilder():Ref<PatchChatAnnouncementPathReqBodyBuilder>
 
@@ -2692,12 +2692,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			ownerIsBot:bool
 			tenantKey:string
 	}
-	export interface P1AddBotV1Handler extends Struct<P1AddBotV1Handler>,json.Token,larkevent.EventHandler{
+	export interface P1AddBotV1Handler extends Struct<P1AddBotV1Handler>,larkevent.EventHandler,json.Token{
 
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
 	}
-	export interface P1ChatDisbandV1 extends Struct<P1ChatDisbandV1>,json.Token,larkevent.EventHandlerModel{
+	export interface P1ChatDisbandV1 extends json.Token,Struct<P1ChatDisbandV1>,larkevent.EventHandlerModel{
 
 			eventReq:Ref<larkevent.EventReq>
 			eventBase:Ref<larkevent.EventBase>
@@ -2724,7 +2724,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			addMemberPermission:string
 			messageNotification:bool
 	}
-	export interface P1GroupSettingUpdatedV1 extends Struct<P1GroupSettingUpdatedV1>,json.Token,larkevent.EventHandlerModel{
+	export interface P1GroupSettingUpdatedV1 extends Struct<P1GroupSettingUpdatedV1>,larkevent.EventHandlerModel,json.Token{
 
 			eventReq:Ref<larkevent.EventReq>
 			eventBase:Ref<larkevent.EventBase>
@@ -2753,7 +2753,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			event:Ref<P1MessageReadV1Data>
 			rawReq(req:Ref<larkevent.EventReq>):void
 	}
-	export interface P1MessageReadV1Data extends Struct<P1MessageReadV1Data>,json.Token{
+	export interface P1MessageReadV1Data extends json.Token,Struct<P1MessageReadV1Data>{
 
 			messageIdList:string[]
 			appID:string
@@ -2762,12 +2762,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			tenantKey:string
 			type:string
 	}
-	export interface P1MessageReadV1Handler extends larkevent.EventHandler,Struct<P1MessageReadV1Handler>,json.Token{
+	export interface P1MessageReadV1Handler extends Struct<P1MessageReadV1Handler>,larkevent.EventHandler,json.Token{
 
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
 	}
-	export interface P1MessageReceiveV1 extends json.Token,larkevent.EventHandlerModel,Struct<P1MessageReceiveV1>{
+	export interface P1MessageReceiveV1 extends Struct<P1MessageReceiveV1>,json.Token,larkevent.EventHandlerModel{
 
 			eventBase:Ref<larkevent.EventBase>
 			eventReq:Ref<larkevent.EventReq>
@@ -2796,7 +2796,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			imageKey:string
 			fileKey:string
 	}
-	export interface P1MessageReceiveV1Handler extends Struct<P1MessageReceiveV1Handler>,json.Token,larkevent.EventHandler{
+	export interface P1MessageReceiveV1Handler extends Struct<P1MessageReceiveV1Handler>,larkevent.EventHandler,json.Token{
 
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
@@ -2822,12 +2822,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			type:string
 			user:Ref<P1UserV1>
 	}
-	export interface P1P2PChatCreatedV1Handler extends json.Token,larkevent.EventHandler,Struct<P1P2PChatCreatedV1Handler>{
+	export interface P1P2PChatCreatedV1Handler extends Struct<P1P2PChatCreatedV1Handler>,json.Token,larkevent.EventHandler{
 
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
 	}
-	export interface P1RemoveBotV1 extends Struct<P1RemoveBotV1>,json.Token,larkevent.EventHandlerModel{
+	export interface P1RemoveBotV1 extends Struct<P1RemoveBotV1>,larkevent.EventHandlerModel,json.Token{
 
 			eventReq:Ref<larkevent.EventReq>
 			eventBase:Ref<larkevent.EventBase>
@@ -2850,12 +2850,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			ownerIsBot:bool
 			tenantKey:string
 	}
-	export interface P1RemoveBotV1Handler extends Struct<P1RemoveBotV1Handler>,json.Token,larkevent.EventHandler{
+	export interface P1RemoveBotV1Handler extends larkevent.EventHandler,Struct<P1RemoveBotV1Handler>,json.Token{
 
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
 	}
-	export interface P1UserInOutChatV1 extends larkevent.EventHandlerModel,Struct<P1UserInOutChatV1>,json.Token{
+	export interface P1UserInOutChatV1 extends Struct<P1UserInOutChatV1>,json.Token,larkevent.EventHandlerModel{
 
 			eventReq:Ref<larkevent.EventReq>
 			eventBase:Ref<larkevent.EventBase>
@@ -2871,7 +2871,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			tenantKey:string
 			users:Ref<P1UserV1>[]
 	}
-	export interface P1UserInOutChatV1Handler extends larkevent.EventHandler,Struct<P1UserInOutChatV1Handler>,json.Token{
+	export interface P1UserInOutChatV1Handler extends json.Token,larkevent.EventHandler,Struct<P1UserInOutChatV1Handler>{
 
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
@@ -2882,7 +2882,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			userId:string
 			name:string
 	}
-	export interface P2ChatDisbandedV1 extends Struct<P2ChatDisbandedV1>,json.Token,larkevent.EventHandlerModel{
+	export interface P2ChatDisbandedV1 extends Struct<P2ChatDisbandedV1>,larkevent.EventHandlerModel,json.Token{
 
 			eventV2Base:Ref<larkevent.EventV2Base>
 			eventReq:Ref<larkevent.EventReq>
@@ -2903,7 +2903,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
 	}
-	export interface P2ChatMemberBotAddedV1 extends Struct<P2ChatMemberBotAddedV1>,larkevent.EventHandlerModel,json.Token{
+	export interface P2ChatMemberBotAddedV1 extends Struct<P2ChatMemberBotAddedV1>,json.Token,larkevent.EventHandlerModel{
 
 			eventV2Base:Ref<larkevent.EventV2Base>
 			eventReq:Ref<larkevent.EventReq>
@@ -2919,7 +2919,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			name:Ref<string>
 			i18nNames:Ref<I18nNames>
 	}
-	export interface P2ChatMemberBotAddedV1Handler extends Struct<P2ChatMemberBotAddedV1Handler>,larkevent.EventHandler,json.Token{
+	export interface P2ChatMemberBotAddedV1Handler extends Struct<P2ChatMemberBotAddedV1Handler>,json.Token,larkevent.EventHandler{
 
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
@@ -2931,7 +2931,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			event:Ref<P2ChatMemberBotDeletedV1Data>
 			rawReq(req:Ref<larkevent.EventReq>):void
 	}
-	export interface P2ChatMemberBotDeletedV1Data extends Struct<P2ChatMemberBotDeletedV1Data>,json.Token{
+	export interface P2ChatMemberBotDeletedV1Data extends json.Token,Struct<P2ChatMemberBotDeletedV1Data>{
 
 			chatId:Ref<string>
 			operatorId:Ref<UserId>
@@ -2940,19 +2940,19 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			name:Ref<string>
 			i18nNames:Ref<I18nNames>
 	}
-	export interface P2ChatMemberBotDeletedV1Handler extends json.Token,Struct<P2ChatMemberBotDeletedV1Handler>,larkevent.EventHandler{
+	export interface P2ChatMemberBotDeletedV1Handler extends Struct<P2ChatMemberBotDeletedV1Handler>,larkevent.EventHandler,json.Token{
 
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
 	}
-	export interface P2ChatMemberUserAddedV1 extends Struct<P2ChatMemberUserAddedV1>,larkevent.EventHandlerModel,json.Token{
+	export interface P2ChatMemberUserAddedV1 extends larkevent.EventHandlerModel,json.Token,Struct<P2ChatMemberUserAddedV1>{
 
 			eventV2Base:Ref<larkevent.EventV2Base>
 			eventReq:Ref<larkevent.EventReq>
 			event:Ref<P2ChatMemberUserAddedV1Data>
 			rawReq(req:Ref<larkevent.EventReq>):void
 	}
-	export interface P2ChatMemberUserAddedV1Data extends Struct<P2ChatMemberUserAddedV1Data>,json.Token{
+	export interface P2ChatMemberUserAddedV1Data extends json.Token,Struct<P2ChatMemberUserAddedV1Data>{
 
 			chatId:Ref<string>
 			operatorId:Ref<UserId>
@@ -2962,12 +2962,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			name:Ref<string>
 			i18nNames:Ref<I18nNames>
 	}
-	export interface P2ChatMemberUserAddedV1Handler extends Struct<P2ChatMemberUserAddedV1Handler>,json.Token,larkevent.EventHandler{
+	export interface P2ChatMemberUserAddedV1Handler extends Struct<P2ChatMemberUserAddedV1Handler>,larkevent.EventHandler,json.Token{
 
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
 	}
-	export interface P2ChatMemberUserDeletedV1 extends Struct<P2ChatMemberUserDeletedV1>,json.Token,larkevent.EventHandlerModel{
+	export interface P2ChatMemberUserDeletedV1 extends Struct<P2ChatMemberUserDeletedV1>,larkevent.EventHandlerModel,json.Token{
 
 			eventV2Base:Ref<larkevent.EventV2Base>
 			eventReq:Ref<larkevent.EventReq>
@@ -2984,12 +2984,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			name:Ref<string>
 			i18nNames:Ref<I18nNames>
 	}
-	export interface P2ChatMemberUserDeletedV1Handler extends larkevent.EventHandler,json.Token,Struct<P2ChatMemberUserDeletedV1Handler>{
+	export interface P2ChatMemberUserDeletedV1Handler extends Struct<P2ChatMemberUserDeletedV1Handler>,larkevent.EventHandler,json.Token{
 
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
 	}
-	export interface P2ChatMemberUserWithdrawnV1 extends json.Token,larkevent.EventHandlerModel,Struct<P2ChatMemberUserWithdrawnV1>{
+	export interface P2ChatMemberUserWithdrawnV1 extends Struct<P2ChatMemberUserWithdrawnV1>,larkevent.EventHandlerModel,json.Token{
 
 			eventV2Base:Ref<larkevent.EventV2Base>
 			eventReq:Ref<larkevent.EventReq>
@@ -3011,7 +3011,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
 	}
-	export interface P2ChatUpdatedV1 extends Struct<P2ChatUpdatedV1>,json.Token,larkevent.EventHandlerModel{
+	export interface P2ChatUpdatedV1 extends larkevent.EventHandlerModel,Struct<P2ChatUpdatedV1>,json.Token{
 
 			eventV2Base:Ref<larkevent.EventV2Base>
 			eventReq:Ref<larkevent.EventReq>
@@ -3028,12 +3028,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			beforeChange:Ref<ChatChange>
 			moderatorList:Ref<ModeratorList>
 	}
-	export interface P2ChatUpdatedV1Handler extends larkevent.EventHandler,Struct<P2ChatUpdatedV1Handler>,json.Token{
+	export interface P2ChatUpdatedV1Handler extends Struct<P2ChatUpdatedV1Handler>,larkevent.EventHandler,json.Token{
 
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
 	}
-	export interface P2MessageReactionCreatedV1 extends larkevent.EventHandlerModel,Struct<P2MessageReactionCreatedV1>,json.Token{
+	export interface P2MessageReactionCreatedV1 extends larkevent.EventHandlerModel,json.Token,Struct<P2MessageReactionCreatedV1>{
 
 			eventV2Base:Ref<larkevent.EventV2Base>
 			eventReq:Ref<larkevent.EventReq>
@@ -3049,19 +3049,19 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			appId:Ref<string>
 			actionTime:Ref<string>
 	}
-	export interface P2MessageReactionCreatedV1Handler extends json.Token,larkevent.EventHandler,Struct<P2MessageReactionCreatedV1Handler>{
+	export interface P2MessageReactionCreatedV1Handler extends Struct<P2MessageReactionCreatedV1Handler>,json.Token,larkevent.EventHandler{
 
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
 	}
-	export interface P2MessageReactionDeletedV1 extends Struct<P2MessageReactionDeletedV1>,json.Token,larkevent.EventHandlerModel{
+	export interface P2MessageReactionDeletedV1 extends Struct<P2MessageReactionDeletedV1>,larkevent.EventHandlerModel,json.Token{
 
 			eventV2Base:Ref<larkevent.EventV2Base>
 			eventReq:Ref<larkevent.EventReq>
 			event:Ref<P2MessageReactionDeletedV1Data>
 			rawReq(req:Ref<larkevent.EventReq>):void
 	}
-	export interface P2MessageReactionDeletedV1Data extends json.Token,Struct<P2MessageReactionDeletedV1Data>{
+	export interface P2MessageReactionDeletedV1Data extends Struct<P2MessageReactionDeletedV1Data>,json.Token{
 
 			messageId:Ref<string>
 			reactionType:Ref<Emoji>
@@ -3075,7 +3075,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
 	}
-	export interface P2MessageReadV1 extends Struct<P2MessageReadV1>,json.Token,larkevent.EventHandlerModel{
+	export interface P2MessageReadV1 extends Struct<P2MessageReadV1>,larkevent.EventHandlerModel,json.Token{
 
 			eventV2Base:Ref<larkevent.EventV2Base>
 			eventReq:Ref<larkevent.EventReq>
@@ -3092,7 +3092,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
 	}
-	export interface P2MessageRecalledV1 extends Struct<P2MessageRecalledV1>,json.Token,larkevent.EventHandlerModel{
+	export interface P2MessageRecalledV1 extends Struct<P2MessageRecalledV1>,larkevent.EventHandlerModel,json.Token{
 
 			eventV2Base:Ref<larkevent.EventV2Base>
 			eventReq:Ref<larkevent.EventReq>
@@ -3111,7 +3111,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
 	}
-	export interface P2MessageReceiveV1 extends Struct<P2MessageReceiveV1>,json.Token,larkevent.EventHandlerModel{
+	export interface P2MessageReceiveV1 extends Struct<P2MessageReceiveV1>,larkevent.EventHandlerModel,json.Token{
 
 			eventV2Base:Ref<larkevent.EventV2Base>
 			eventReq:Ref<larkevent.EventReq>
@@ -3134,7 +3134,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			requests(requests:string[]):Ref<PatchChatAnnouncementPathReqBodyBuilder>
 			build():Ref<PatchChatAnnouncementReqBody>
 	}
-	export interface PatchChatAnnouncementReq extends Struct<PatchChatAnnouncementReq>,json.Token{
+	export interface PatchChatAnnouncementReq extends json.Token,Struct<PatchChatAnnouncementReq>{
 
 			body:Ref<PatchChatAnnouncementReqBody>
 	}
@@ -3196,7 +3196,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			data:Ref<PatchChatMenuItemRespData>
 			success():bool
 	}
-	export interface PatchChatMenuItemRespData extends json.Token,Struct<PatchChatMenuItemRespData>{
+	export interface PatchChatMenuItemRespData extends Struct<PatchChatMenuItemRespData>,json.Token{
 
 			chatMenuItem:Ref<ChatMenuItem>
 	}
@@ -3213,7 +3213,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 
 			content:Ref<string>
 	}
-	export interface PatchMessageReqBodyBuilder extends Struct<PatchMessageReqBodyBuilder>,json.Token{
+	export interface PatchMessageReqBodyBuilder extends json.Token,Struct<PatchMessageReqBodyBuilder>{
 
 			content(content:string):Ref<PatchMessageReqBodyBuilder>
 			build():Ref<PatchMessageReqBody>
@@ -3318,7 +3318,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			data:Ref<ReadUserBatchMessageRespData>
 			success():bool
 	}
-	export interface ReadUserBatchMessageRespData extends json.Token,Struct<ReadUserBatchMessageRespData>{
+	export interface ReadUserBatchMessageRespData extends Struct<ReadUserBatchMessageRespData>,json.Token{
 
 			readUser:Ref<BatchMessageReadUser>
 	}
@@ -3412,14 +3412,14 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 
 			body:Ref<ReplyMessageReqBody>
 	}
-	export interface ReplyMessageReqBody extends Struct<ReplyMessageReqBody>,json.Token{
+	export interface ReplyMessageReqBody extends json.Token,Struct<ReplyMessageReqBody>{
 
 			content:Ref<string>
 			msgType:Ref<string>
 			replyInThread:Ref<bool>
 			uuid:Ref<string>
 	}
-	export interface ReplyMessageReqBodyBuilder extends Struct<ReplyMessageReqBodyBuilder>,json.Token{
+	export interface ReplyMessageReqBodyBuilder extends json.Token,Struct<ReplyMessageReqBodyBuilder>{
 
 			content(content:string):Ref<ReplyMessageReqBodyBuilder>
 			msgType(msgType:string):Ref<ReplyMessageReqBodyBuilder>
@@ -3427,13 +3427,13 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			uuid(uuid:string):Ref<ReplyMessageReqBodyBuilder>
 			build():Ref<ReplyMessageReqBody>
 	}
-	export interface ReplyMessageReqBuilder extends json.Token,Struct<ReplyMessageReqBuilder>{
+	export interface ReplyMessageReqBuilder extends Struct<ReplyMessageReqBuilder>,json.Token{
 
 			messageId(messageId:string):Ref<ReplyMessageReqBuilder>
 			body(body:Ref<ReplyMessageReqBody>):Ref<ReplyMessageReqBuilder>
 			build():Ref<ReplyMessageReq>
 	}
-	export interface ReplyMessageResp extends json.Token,Struct<ReplyMessageResp>{
+	export interface ReplyMessageResp extends Struct<ReplyMessageResp>,json.Token{
 
 			apiResp:Ref<larkcore.ApiResp>
 			codeError:larkcore.CodeError
@@ -3497,7 +3497,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			data:Ref<SearchChatRespData>
 			success():bool
 	}
-	export interface SearchChatRespData extends json.Token,Struct<SearchChatRespData>{
+	export interface SearchChatRespData extends Struct<SearchChatRespData>,json.Token{
 
 			items:Ref<ListChat>[]
 			pageToken:Ref<string>
@@ -3549,7 +3549,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			data:Ref<SortChatMenuTreeRespData>
 			success():bool
 	}
-	export interface SortChatMenuTreeRespData extends Struct<SortChatMenuTreeRespData>,json.Token{
+	export interface SortChatMenuTreeRespData extends json.Token,Struct<SortChatMenuTreeRespData>{
 
 			menuTree:Ref<ChatMenuTree>
 	}
@@ -3562,7 +3562,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 
 			body:Ref<SortTabsChatTabReqBody>
 	}
-	export interface SortTabsChatTabReqBody extends json.Token,Struct<SortTabsChatTabReqBody>{
+	export interface SortTabsChatTabReqBody extends Struct<SortTabsChatTabReqBody>,json.Token{
 
 			tabIds:string[]
 	}
@@ -3596,12 +3596,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 	export const SortTypeListMessageByCreateTimeAsc:string
 	//"ByCreateTimeDesc"
 	export const SortTypeListMessageByCreateTimeDesc:string
-	export interface SpecialFocus extends json.Token,Struct<SpecialFocus>{
+	export interface SpecialFocus extends Struct<SpecialFocus>,json.Token{
 
 			id:Ref<string>
 			idType:Ref<string>
 	}
-	export interface SpecialFocusBuilder extends json.Token,Struct<SpecialFocusBuilder>{
+	export interface SpecialFocusBuilder extends Struct<SpecialFocusBuilder>,json.Token{
 
 			id(id:string):Ref<SpecialFocusBuilder>
 			idType(idType:string):Ref<SpecialFocusBuilder>
@@ -3639,7 +3639,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			updateTime(updateTime:string):Ref<ThreadBuilder>
 			build():Ref<Thread>
 	}
-	export interface Toolkit extends json.Token,Struct<Toolkit>{
+	export interface Toolkit extends Struct<Toolkit>,json.Token{
 
 			toolkitId:Ref<string>
 			imageKey:Ref<string>
@@ -3649,7 +3649,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			redirectLink:Ref<ToolkitRedirectLink>
 			callback:Ref<ToolkitCallback>
 	}
-	export interface ToolkitBuilder extends json.Token,Struct<ToolkitBuilder>{
+	export interface ToolkitBuilder extends Struct<ToolkitBuilder>,json.Token{
 
 			toolkitId(toolkitId:string):Ref<ToolkitBuilder>
 			imageKey(imageKey:string):Ref<ToolkitBuilder>
@@ -3697,14 +3697,14 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			moderatorAddedList:string[]
 			moderatorRemovedList:string[]
 	}
-	export interface UpdateChatModerationReqBodyBuilder extends Struct<UpdateChatModerationReqBodyBuilder>,json.Token{
+	export interface UpdateChatModerationReqBodyBuilder extends json.Token,Struct<UpdateChatModerationReqBodyBuilder>{
 
 			moderationSetting(moderationSetting:string):Ref<UpdateChatModerationReqBodyBuilder>
 			moderatorAddedList(moderatorAddedList:string[]):Ref<UpdateChatModerationReqBodyBuilder>
 			moderatorRemovedList(moderatorRemovedList:string[]):Ref<UpdateChatModerationReqBodyBuilder>
 			build():Ref<UpdateChatModerationReqBody>
 	}
-	export interface UpdateChatModerationReqBuilder extends json.Token,Struct<UpdateChatModerationReqBuilder>{
+	export interface UpdateChatModerationReqBuilder extends Struct<UpdateChatModerationReqBuilder>,json.Token{
 
 			chatId(chatId:string):Ref<UpdateChatModerationReqBuilder>
 			userIdType(userIdType:string):Ref<UpdateChatModerationReqBuilder>
@@ -3744,7 +3744,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 
 			body:Ref<UpdateChatReqBody>
 	}
-	export interface UpdateChatReqBody extends json.Token,Struct<UpdateChatReqBody>{
+	export interface UpdateChatReqBody extends Struct<UpdateChatReqBody>,json.Token{
 
 			avatar:Ref<string>
 			name:Ref<string>
@@ -3766,7 +3766,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			pinManageSetting:Ref<string>
 			hideMemberCountSetting:Ref<string>
 	}
-	export interface UpdateChatReqBodyBuilder extends json.Token,Struct<UpdateChatReqBodyBuilder>{
+	export interface UpdateChatReqBodyBuilder extends Struct<UpdateChatReqBodyBuilder>,json.Token{
 
 			avatar(avatar:string):Ref<UpdateChatReqBodyBuilder>
 			name(name:string):Ref<UpdateChatReqBodyBuilder>
@@ -3829,14 +3829,14 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			body(body:Ref<UpdateMessageReqBody>):Ref<UpdateMessageReqBuilder>
 			build():Ref<UpdateMessageReq>
 	}
-	export interface UpdateMessageResp extends json.Token,Struct<UpdateMessageResp>{
+	export interface UpdateMessageResp extends Struct<UpdateMessageResp>,json.Token{
 
 			apiResp:Ref<larkcore.ApiResp>
 			codeError:larkcore.CodeError
 			data:Ref<UpdateMessageRespData>
 			success():bool
 	}
-	export interface UpdateMessageRespData extends json.Token,Struct<UpdateMessageRespData>{
+	export interface UpdateMessageRespData extends Struct<UpdateMessageRespData>,json.Token{
 
 			messageId:Ref<string>
 			rootId:Ref<string>
@@ -3858,11 +3858,11 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			chatTabs(chatTabs:Ref<ChatTab>[]):Ref<UpdateTabsChatTabPathReqBodyBuilder>
 			build():Ref<UpdateTabsChatTabReqBody>
 	}
-	export interface UpdateTabsChatTabReq extends Struct<UpdateTabsChatTabReq>,json.Token{
+	export interface UpdateTabsChatTabReq extends json.Token,Struct<UpdateTabsChatTabReq>{
 
 			body:Ref<UpdateTabsChatTabReqBody>
 	}
-	export interface UpdateTabsChatTabReqBody extends json.Token,Struct<UpdateTabsChatTabReqBody>{
+	export interface UpdateTabsChatTabReqBody extends Struct<UpdateTabsChatTabReqBody>,json.Token{
 
 			chatTabs:Ref<ChatTab>[]
 	}
@@ -3877,7 +3877,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			body(body:Ref<UpdateTabsChatTabReqBody>):Ref<UpdateTabsChatTabReqBuilder>
 			build():Ref<UpdateTabsChatTabReq>
 	}
-	export interface UpdateTabsChatTabResp extends Struct<UpdateTabsChatTabResp>,json.Token{
+	export interface UpdateTabsChatTabResp extends json.Token,Struct<UpdateTabsChatTabResp>{
 
 			apiResp:Ref<larkcore.ApiResp>
 			codeError:larkcore.CodeError
@@ -3888,7 +3888,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 
 			chatTabs:Ref<ChatTab>[]
 	}
-	export interface UrgentAppMessageReq extends json.Token,Struct<UrgentAppMessageReq>{
+	export interface UrgentAppMessageReq extends Struct<UrgentAppMessageReq>,json.Token{
 
 			urgentReceivers:Ref<UrgentReceivers>
 	}
@@ -3921,14 +3921,14 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			urgentReceivers(urgentReceivers:Ref<UrgentReceivers>):Ref<UrgentPhoneMessageReqBuilder>
 			build():Ref<UrgentPhoneMessageReq>
 	}
-	export interface UrgentPhoneMessageResp extends json.Token,Struct<UrgentPhoneMessageResp>{
+	export interface UrgentPhoneMessageResp extends Struct<UrgentPhoneMessageResp>,json.Token{
 
 			apiResp:Ref<larkcore.ApiResp>
 			codeError:larkcore.CodeError
 			data:Ref<UrgentPhoneMessageRespData>
 			success():bool
 	}
-	export interface UrgentPhoneMessageRespData extends Struct<UrgentPhoneMessageRespData>,json.Token{
+	export interface UrgentPhoneMessageRespData extends json.Token,Struct<UrgentPhoneMessageRespData>{
 
 			invalidUserIdList:string[]
 	}
@@ -3949,7 +3949,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 	export const UrgentSettingTypeUpdateChatAllMembers:string
 	//"only_owner"
 	export const UrgentSettingTypeUpdateChatOnlyOwner:string
-	export interface UrgentSmsMessageReq extends json.Token,Struct<UrgentSmsMessageReq>{
+	export interface UrgentSmsMessageReq extends Struct<UrgentSmsMessageReq>,json.Token{
 
 			urgentReceivers:Ref<UrgentReceivers>
 	}
@@ -3960,7 +3960,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			urgentReceivers(urgentReceivers:Ref<UrgentReceivers>):Ref<UrgentSmsMessageReqBuilder>
 			build():Ref<UrgentSmsMessageReq>
 	}
-	export interface UrgentSmsMessageResp extends json.Token,Struct<UrgentSmsMessageResp>{
+	export interface UrgentSmsMessageResp extends Struct<UrgentSmsMessageResp>,json.Token{
 
 			apiResp:Ref<larkcore.ApiResp>
 			codeError:larkcore.CodeError
@@ -3977,7 +3977,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			openId:Ref<string>
 			unionId:Ref<string>
 	}
-	export interface UserIdBuilder extends Struct<UserIdBuilder>,json.Token{
+	export interface UserIdBuilder extends json.Token,Struct<UserIdBuilder>{
 
 			userId(userId:string):Ref<UserIdBuilder>
 			openId(openId:string):Ref<UserIdBuilder>
@@ -4068,7 +4068,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 	export const UserIdTypeUrgentSmsMessageUserId:string
 	//"user_id"
 	export const UserIdTypeUserId:string
-	export interface V1 extends json.Token,Struct<V1>{
+	export interface V1 extends Struct<V1>,json.Token{
 
 			batchMessage:Ref<{
 			
@@ -4214,911 +4214,611 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 			widgetUrl(widgetUrl:Ref<WidgetUrl>):Ref<WidgetBuilder>
 			build():Ref<Widget>
 	}
-	export interface WidgetUrl extends json.Token,Struct<WidgetUrl>{
+	export interface WidgetUrl extends Struct<WidgetUrl>,json.Token{
 
 			url:Ref<string>
 	}
-	export interface WidgetUrlBuilder extends Struct<WidgetUrlBuilder>,json.Token{
+	export interface WidgetUrlBuilder extends json.Token,Struct<WidgetUrlBuilder>{
 
 			url(url:string):Ref<WidgetUrlBuilder>
 			build():Ref<WidgetUrl>
 	}
-	export function emptyCreateMessageReactionPathReqBodyBuilder():CreateMessageReactionPathReqBodyBuilder
-	export function emptyRefCreateMessageReactionPathReqBodyBuilder():Ref<CreateMessageReactionPathReqBodyBuilder>
-	export function refOfCreateMessageReactionPathReqBodyBuilder(x:CreateMessageReactionPathReqBodyBuilder,v:Ref<CreateMessageReactionPathReqBodyBuilder>)
-	export function unRefCreateMessageReactionPathReqBodyBuilder(v:Ref<CreateMessageReactionPathReqBodyBuilder>):CreateMessageReactionPathReqBodyBuilder
-	export function emptyCreatePinResp():CreatePinResp
-	export function emptyRefCreatePinResp():Ref<CreatePinResp>
-	export function refOfCreatePinResp(x:CreatePinResp,v:Ref<CreatePinResp>)
-	export function unRefCreatePinResp(v:Ref<CreatePinResp>):CreatePinResp
-	export function emptyDeleteChatMenuTreeReq():DeleteChatMenuTreeReq
-	export function emptyRefDeleteChatMenuTreeReq():Ref<DeleteChatMenuTreeReq>
-	export function refOfDeleteChatMenuTreeReq(x:DeleteChatMenuTreeReq,v:Ref<DeleteChatMenuTreeReq>)
-	export function unRefDeleteChatMenuTreeReq(v:Ref<DeleteChatMenuTreeReq>):DeleteChatMenuTreeReq
-	export function emptyDepartmentIdBuilder():DepartmentIdBuilder
-	export function emptyRefDepartmentIdBuilder():Ref<DepartmentIdBuilder>
-	export function refOfDepartmentIdBuilder(x:DepartmentIdBuilder,v:Ref<DepartmentIdBuilder>)
-	export function unRefDepartmentIdBuilder(v:Ref<DepartmentIdBuilder>):DepartmentIdBuilder
-	export function emptyListChatReqBuilder():ListChatReqBuilder
-	export function emptyRefListChatReqBuilder():Ref<ListChatReqBuilder>
-	export function refOfListChatReqBuilder(x:ListChatReqBuilder,v:Ref<ListChatReqBuilder>)
-	export function unRefListChatReqBuilder(v:Ref<ListChatReqBuilder>):ListChatReqBuilder
-	export function emptyReadUsersMessageReqBuilder():ReadUsersMessageReqBuilder
-	export function emptyRefReadUsersMessageReqBuilder():Ref<ReadUsersMessageReqBuilder>
-	export function refOfReadUsersMessageReqBuilder(x:ReadUsersMessageReqBuilder,v:Ref<ReadUsersMessageReqBuilder>)
-	export function unRefReadUsersMessageReqBuilder(v:Ref<ReadUsersMessageReqBuilder>):ReadUsersMessageReqBuilder
-	export function emptyGetMessageReq():GetMessageReq
-	export function emptyRefGetMessageReq():Ref<GetMessageReq>
-	export function refOfGetMessageReq(x:GetMessageReq,v:Ref<GetMessageReq>)
-	export function unRefGetMessageReq(v:Ref<GetMessageReq>):GetMessageReq
-	export function emptyListChatResp():ListChatResp
-	export function emptyRefListChatResp():Ref<ListChatResp>
-	export function refOfListChatResp(x:ListChatResp,v:Ref<ListChatResp>)
-	export function unRefListChatResp(v:Ref<ListChatResp>):ListChatResp
-	export function emptyP2MessageRecalledV1Data():P2MessageRecalledV1Data
-	export function emptyRefP2MessageRecalledV1Data():Ref<P2MessageRecalledV1Data>
-	export function refOfP2MessageRecalledV1Data(x:P2MessageRecalledV1Data,v:Ref<P2MessageRecalledV1Data>)
-	export function unRefP2MessageRecalledV1Data(v:Ref<P2MessageRecalledV1Data>):P2MessageRecalledV1Data
-	export function emptyPatchChatAnnouncementReqBody():PatchChatAnnouncementReqBody
-	export function emptyRefPatchChatAnnouncementReqBody():Ref<PatchChatAnnouncementReqBody>
-	export function refOfPatchChatAnnouncementReqBody(x:PatchChatAnnouncementReqBody,v:Ref<PatchChatAnnouncementReqBody>)
-	export function unRefPatchChatAnnouncementReqBody(v:Ref<PatchChatAnnouncementReqBody>):PatchChatAnnouncementReqBody
-	export function emptyDeletePinResp():DeletePinResp
-	export function emptyRefDeletePinResp():Ref<DeletePinResp>
-	export function refOfDeletePinResp(x:DeletePinResp,v:Ref<DeletePinResp>)
-	export function unRefDeletePinResp(v:Ref<DeletePinResp>):DeletePinResp
-	export function emptyCreateChatRespData():CreateChatRespData
-	export function emptyRefCreateChatRespData():Ref<CreateChatRespData>
-	export function refOfCreateChatRespData(x:CreateChatRespData,v:Ref<CreateChatRespData>)
-	export function unRefCreateChatRespData(v:Ref<CreateChatRespData>):CreateChatRespData
-	export function emptyMeJoinChatMembersReqBuilder():MeJoinChatMembersReqBuilder
-	export function emptyRefMeJoinChatMembersReqBuilder():Ref<MeJoinChatMembersReqBuilder>
-	export function refOfMeJoinChatMembersReqBuilder(x:MeJoinChatMembersReqBuilder,v:Ref<MeJoinChatMembersReqBuilder>)
-	export function unRefMeJoinChatMembersReqBuilder(v:Ref<MeJoinChatMembersReqBuilder>):MeJoinChatMembersReqBuilder
-	export function emptyP2ChatMemberUserDeletedV1Handler():P2ChatMemberUserDeletedV1Handler
-	export function emptyRefP2ChatMemberUserDeletedV1Handler():Ref<P2ChatMemberUserDeletedV1Handler>
-	export function refOfP2ChatMemberUserDeletedV1Handler(x:P2ChatMemberUserDeletedV1Handler,v:Ref<P2ChatMemberUserDeletedV1Handler>)
-	export function unRefP2ChatMemberUserDeletedV1Handler(v:Ref<P2ChatMemberUserDeletedV1Handler>):P2ChatMemberUserDeletedV1Handler
-	export function emptyP2ChatMemberUserWithdrawnV1():P2ChatMemberUserWithdrawnV1
-	export function emptyRefP2ChatMemberUserWithdrawnV1():Ref<P2ChatMemberUserWithdrawnV1>
-	export function refOfP2ChatMemberUserWithdrawnV1(x:P2ChatMemberUserWithdrawnV1,v:Ref<P2ChatMemberUserWithdrawnV1>)
-	export function unRefP2ChatMemberUserWithdrawnV1(v:Ref<P2ChatMemberUserWithdrawnV1>):P2ChatMemberUserWithdrawnV1
-	export function emptySortTabsChatTabPathReqBodyBuilder():SortTabsChatTabPathReqBodyBuilder
-	export function emptyRefSortTabsChatTabPathReqBodyBuilder():Ref<SortTabsChatTabPathReqBodyBuilder>
-	export function refOfSortTabsChatTabPathReqBodyBuilder(x:SortTabsChatTabPathReqBodyBuilder,v:Ref<SortTabsChatTabPathReqBodyBuilder>)
-	export function unRefSortTabsChatTabPathReqBodyBuilder(v:Ref<SortTabsChatTabPathReqBodyBuilder>):SortTabsChatTabPathReqBodyBuilder
-	export function emptyListMessageReactionReqBuilder():ListMessageReactionReqBuilder
-	export function emptyRefListMessageReactionReqBuilder():Ref<ListMessageReactionReqBuilder>
-	export function refOfListMessageReactionReqBuilder(x:ListMessageReactionReqBuilder,v:Ref<ListMessageReactionReqBuilder>)
-	export function unRefListMessageReactionReqBuilder(v:Ref<ListMessageReactionReqBuilder>):ListMessageReactionReqBuilder
-	export function emptyP1P2PChatCreatedV1Handler():P1P2PChatCreatedV1Handler
-	export function emptyRefP1P2PChatCreatedV1Handler():Ref<P1P2PChatCreatedV1Handler>
-	export function refOfP1P2PChatCreatedV1Handler(x:P1P2PChatCreatedV1Handler,v:Ref<P1P2PChatCreatedV1Handler>)
-	export function unRefP1P2PChatCreatedV1Handler(v:Ref<P1P2PChatCreatedV1Handler>):P1P2PChatCreatedV1Handler
-	export function emptyReadUser():ReadUser
-	export function emptyRefReadUser():Ref<ReadUser>
-	export function refOfReadUser(x:ReadUser,v:Ref<ReadUser>)
-	export function unRefReadUser(v:Ref<ReadUser>):ReadUser
-	export function emptyUpdateTabsChatTabReqBuilder():UpdateTabsChatTabReqBuilder
-	export function emptyRefUpdateTabsChatTabReqBuilder():Ref<UpdateTabsChatTabReqBuilder>
-	export function refOfUpdateTabsChatTabReqBuilder(x:UpdateTabsChatTabReqBuilder,v:Ref<UpdateTabsChatTabReqBuilder>)
-	export function unRefUpdateTabsChatTabReqBuilder(v:Ref<UpdateTabsChatTabReqBuilder>):UpdateTabsChatTabReqBuilder
-	export function emptyCreateChatMembersPathReqBodyBuilder():CreateChatMembersPathReqBodyBuilder
-	export function emptyRefCreateChatMembersPathReqBodyBuilder():Ref<CreateChatMembersPathReqBodyBuilder>
-	export function refOfCreateChatMembersPathReqBodyBuilder(x:CreateChatMembersPathReqBodyBuilder,v:Ref<CreateChatMembersPathReqBodyBuilder>)
-	export function unRefCreateChatMembersPathReqBodyBuilder(v:Ref<CreateChatMembersPathReqBodyBuilder>):CreateChatMembersPathReqBodyBuilder
-	export function emptyDeleteManagersChatManagersReqBodyBuilder():DeleteManagersChatManagersReqBodyBuilder
-	export function emptyRefDeleteManagersChatManagersReqBodyBuilder():Ref<DeleteManagersChatManagersReqBodyBuilder>
-	export function refOfDeleteManagersChatManagersReqBodyBuilder(x:DeleteManagersChatManagersReqBodyBuilder,v:Ref<DeleteManagersChatManagersReqBodyBuilder>)
-	export function unRefDeleteManagersChatManagersReqBodyBuilder(v:Ref<DeleteManagersChatManagersReqBodyBuilder>):DeleteManagersChatManagersReqBodyBuilder
-	export function emptyDeleteMessageReq():DeleteMessageReq
-	export function emptyRefDeleteMessageReq():Ref<DeleteMessageReq>
-	export function refOfDeleteMessageReq(x:DeleteMessageReq,v:Ref<DeleteMessageReq>)
-	export function unRefDeleteMessageReq(v:Ref<DeleteMessageReq>):DeleteMessageReq
-	export function emptyPatchChatMenuItemRespData():PatchChatMenuItemRespData
-	export function emptyRefPatchChatMenuItemRespData():Ref<PatchChatMenuItemRespData>
-	export function refOfPatchChatMenuItemRespData(x:PatchChatMenuItemRespData,v:Ref<PatchChatMenuItemRespData>)
-	export function unRefPatchChatMenuItemRespData(v:Ref<PatchChatMenuItemRespData>):PatchChatMenuItemRespData
-	export function emptyChatChange():ChatChange
-	export function emptyRefChatChange():Ref<ChatChange>
-	export function refOfChatChange(x:ChatChange,v:Ref<ChatChange>)
-	export function unRefChatChange(v:Ref<ChatChange>):ChatChange
-	export function emptyCreateChatMenuTreeReq():CreateChatMenuTreeReq
-	export function emptyRefCreateChatMenuTreeReq():Ref<CreateChatMenuTreeReq>
-	export function refOfCreateChatMenuTreeReq(x:CreateChatMenuTreeReq,v:Ref<CreateChatMenuTreeReq>)
-	export function unRefCreateChatMenuTreeReq(v:Ref<CreateChatMenuTreeReq>):CreateChatMenuTreeReq
-	export function emptyCreateMessageResp():CreateMessageResp
-	export function emptyRefCreateMessageResp():Ref<CreateMessageResp>
-	export function refOfCreateMessageResp(x:CreateMessageResp,v:Ref<CreateMessageResp>)
-	export function unRefCreateMessageResp(v:Ref<CreateMessageResp>):CreateMessageResp
-	export function emptyDeleteChatMembersRespData():DeleteChatMembersRespData
-	export function emptyRefDeleteChatMembersRespData():Ref<DeleteChatMembersRespData>
-	export function refOfDeleteChatMembersRespData(x:DeleteChatMembersRespData,v:Ref<DeleteChatMembersRespData>)
-	export function unRefDeleteChatMembersRespData(v:Ref<DeleteChatMembersRespData>):DeleteChatMembersRespData
-	export function emptyMessageBody():MessageBody
-	export function emptyRefMessageBody():Ref<MessageBody>
-	export function refOfMessageBody(x:MessageBody,v:Ref<MessageBody>)
-	export function unRefMessageBody(v:Ref<MessageBody>):MessageBody
-	export function emptyP1MessageReceiveV1Handler():P1MessageReceiveV1Handler
-	export function emptyRefP1MessageReceiveV1Handler():Ref<P1MessageReceiveV1Handler>
-	export function refOfP1MessageReceiveV1Handler(x:P1MessageReceiveV1Handler,v:Ref<P1MessageReceiveV1Handler>)
-	export function unRefP1MessageReceiveV1Handler(v:Ref<P1MessageReceiveV1Handler>):P1MessageReceiveV1Handler
-	export function emptyP2ChatUpdatedV1Data():P2ChatUpdatedV1Data
-	export function emptyRefP2ChatUpdatedV1Data():Ref<P2ChatUpdatedV1Data>
-	export function refOfP2ChatUpdatedV1Data(x:P2ChatUpdatedV1Data,v:Ref<P2ChatUpdatedV1Data>)
-	export function unRefP2ChatUpdatedV1Data(v:Ref<P2ChatUpdatedV1Data>):P2ChatUpdatedV1Data
-	export function emptyAddManagersChatManagersRespData():AddManagersChatManagersRespData
-	export function emptyRefAddManagersChatManagersRespData():Ref<AddManagersChatManagersRespData>
-	export function refOfAddManagersChatManagersRespData(x:AddManagersChatManagersRespData,v:Ref<AddManagersChatManagersRespData>)
-	export function unRefAddManagersChatManagersRespData(v:Ref<AddManagersChatManagersRespData>):AddManagersChatManagersRespData
-	export function emptyGetChatMenuTreeRespData():GetChatMenuTreeRespData
-	export function emptyRefGetChatMenuTreeRespData():Ref<GetChatMenuTreeRespData>
-	export function refOfGetChatMenuTreeRespData(x:GetChatMenuTreeRespData,v:Ref<GetChatMenuTreeRespData>)
-	export function unRefGetChatMenuTreeRespData(v:Ref<GetChatMenuTreeRespData>):GetChatMenuTreeRespData
-	export function emptyP1UserInOutChatV1Data():P1UserInOutChatV1Data
-	export function emptyRefP1UserInOutChatV1Data():Ref<P1UserInOutChatV1Data>
-	export function refOfP1UserInOutChatV1Data(x:P1UserInOutChatV1Data,v:Ref<P1UserInOutChatV1Data>)
-	export function unRefP1UserInOutChatV1Data(v:Ref<P1UserInOutChatV1Data>):P1UserInOutChatV1Data
-	export function emptyReadUsersMessageResp():ReadUsersMessageResp
-	export function emptyRefReadUsersMessageResp():Ref<ReadUsersMessageResp>
-	export function refOfReadUsersMessageResp(x:ReadUsersMessageResp,v:Ref<ReadUsersMessageResp>)
-	export function unRefReadUsersMessageResp(v:Ref<ReadUsersMessageResp>):ReadUsersMessageResp
-	export function emptyToolkitRedirectLinkBuilder():ToolkitRedirectLinkBuilder
-	export function emptyRefToolkitRedirectLinkBuilder():Ref<ToolkitRedirectLinkBuilder>
-	export function refOfToolkitRedirectLinkBuilder(x:ToolkitRedirectLinkBuilder,v:Ref<ToolkitRedirectLinkBuilder>)
-	export function unRefToolkitRedirectLinkBuilder(v:Ref<ToolkitRedirectLinkBuilder>):ToolkitRedirectLinkBuilder
-	export function emptyI18nContent():I18nContent
-	export function emptyRefI18nContent():Ref<I18nContent>
-	export function refOfI18nContent(x:I18nContent,v:Ref<I18nContent>)
-	export function unRefI18nContent(v:Ref<I18nContent>):I18nContent
-	export function emptyListMessageReqBuilder():ListMessageReqBuilder
-	export function emptyRefListMessageReqBuilder():Ref<ListMessageReqBuilder>
-	export function refOfListMessageReqBuilder(x:ListMessageReqBuilder,v:Ref<ListMessageReqBuilder>)
-	export function unRefListMessageReqBuilder(v:Ref<ListMessageReqBuilder>):ListMessageReqBuilder
-	export function emptyChatMembers():ChatMembers
-	export function emptyRefChatMembers():Ref<ChatMembers>
-	export function refOfChatMembers(x:ChatMembers,v:Ref<ChatMembers>)
-	export function unRefChatMembers(v:Ref<ChatMembers>):ChatMembers
-	export function emptyUrgentSmsMessageRespData():UrgentSmsMessageRespData
-	export function emptyRefUrgentSmsMessageRespData():Ref<UrgentSmsMessageRespData>
-	export function refOfUrgentSmsMessageRespData(x:UrgentSmsMessageRespData,v:Ref<UrgentSmsMessageRespData>)
-	export function unRefUrgentSmsMessageRespData(v:Ref<UrgentSmsMessageRespData>):UrgentSmsMessageRespData
-	export function emptyCreateImageRespData():CreateImageRespData
-	export function emptyRefCreateImageRespData():Ref<CreateImageRespData>
-	export function refOfCreateImageRespData(x:CreateImageRespData,v:Ref<CreateImageRespData>)
-	export function unRefCreateImageRespData(v:Ref<CreateImageRespData>):CreateImageRespData
-	export function emptyDeleteBatchMessageResp():DeleteBatchMessageResp
-	export function emptyRefDeleteBatchMessageResp():Ref<DeleteBatchMessageResp>
-	export function refOfDeleteBatchMessageResp(x:DeleteBatchMessageResp,v:Ref<DeleteBatchMessageResp>)
-	export function unRefDeleteBatchMessageResp(v:Ref<DeleteBatchMessageResp>):DeleteBatchMessageResp
-	export function emptyListMessageReq():ListMessageReq
-	export function emptyRefListMessageReq():Ref<ListMessageReq>
-	export function refOfListMessageReq(x:ListMessageReq,v:Ref<ListMessageReq>)
-	export function unRefListMessageReq(v:Ref<ListMessageReq>):ListMessageReq
-	export function emptyP2ChatDisbandedV1Handler():P2ChatDisbandedV1Handler
-	export function emptyRefP2ChatDisbandedV1Handler():Ref<P2ChatDisbandedV1Handler>
-	export function refOfP2ChatDisbandedV1Handler(x:P2ChatDisbandedV1Handler,v:Ref<P2ChatDisbandedV1Handler>)
-	export function unRefP2ChatDisbandedV1Handler(v:Ref<P2ChatDisbandedV1Handler>):P2ChatDisbandedV1Handler
-	export function emptyChatMenuTreeBuilder():ChatMenuTreeBuilder
-	export function emptyRefChatMenuTreeBuilder():Ref<ChatMenuTreeBuilder>
-	export function refOfChatMenuTreeBuilder(x:ChatMenuTreeBuilder,v:Ref<ChatMenuTreeBuilder>)
-	export function unRefChatMenuTreeBuilder(v:Ref<ChatMenuTreeBuilder>):ChatMenuTreeBuilder
-	export function emptyGetChatResp():GetChatResp
-	export function emptyRefGetChatResp():Ref<GetChatResp>
-	export function refOfGetChatResp(x:GetChatResp,v:Ref<GetChatResp>)
-	export function unRefGetChatResp(v:Ref<GetChatResp>):GetChatResp
-	export function emptyListMessageReactionResp():ListMessageReactionResp
-	export function emptyRefListMessageReactionResp():Ref<ListMessageReactionResp>
-	export function refOfListMessageReactionResp(x:ListMessageReactionResp,v:Ref<ListMessageReactionResp>)
-	export function unRefListMessageReactionResp(v:Ref<ListMessageReactionResp>):ListMessageReactionResp
-	export function emptyP1GroupSettingUpdatedV1():P1GroupSettingUpdatedV1
-	export function emptyRefP1GroupSettingUpdatedV1():Ref<P1GroupSettingUpdatedV1>
-	export function refOfP1GroupSettingUpdatedV1(x:P1GroupSettingUpdatedV1,v:Ref<P1GroupSettingUpdatedV1>)
-	export function unRefP1GroupSettingUpdatedV1(v:Ref<P1GroupSettingUpdatedV1>):P1GroupSettingUpdatedV1
-	export function emptyUpdateChatModerationReqBody():UpdateChatModerationReqBody
-	export function emptyRefUpdateChatModerationReqBody():Ref<UpdateChatModerationReqBody>
-	export function refOfUpdateChatModerationReqBody(x:UpdateChatModerationReqBody,v:Ref<UpdateChatModerationReqBody>)
-	export function unRefUpdateChatModerationReqBody(v:Ref<UpdateChatModerationReqBody>):UpdateChatModerationReqBody
-	export function emptyUpdateChatReqBodyBuilder():UpdateChatReqBodyBuilder
-	export function emptyRefUpdateChatReqBodyBuilder():Ref<UpdateChatReqBodyBuilder>
-	export function refOfUpdateChatReqBodyBuilder(x:UpdateChatReqBodyBuilder,v:Ref<UpdateChatReqBodyBuilder>)
-	export function unRefUpdateChatReqBodyBuilder(v:Ref<UpdateChatReqBodyBuilder>):UpdateChatReqBodyBuilder
-	export function emptyForwardThreadReq():ForwardThreadReq
-	export function emptyRefForwardThreadReq():Ref<ForwardThreadReq>
-	export function refOfForwardThreadReq(x:ForwardThreadReq,v:Ref<ForwardThreadReq>)
-	export function unRefForwardThreadReq(v:Ref<ForwardThreadReq>):ForwardThreadReq
-	export function emptyReplyMessageReqBodyBuilder():ReplyMessageReqBodyBuilder
-	export function emptyRefReplyMessageReqBodyBuilder():Ref<ReplyMessageReqBodyBuilder>
-	export function refOfReplyMessageReqBodyBuilder(x:ReplyMessageReqBodyBuilder,v:Ref<ReplyMessageReqBodyBuilder>)
-	export function unRefReplyMessageReqBodyBuilder(v:Ref<ReplyMessageReqBodyBuilder>):ReplyMessageReqBodyBuilder
-	export function emptyChatTabConfigBuilder():ChatTabConfigBuilder
-	export function emptyRefChatTabConfigBuilder():Ref<ChatTabConfigBuilder>
-	export function refOfChatTabConfigBuilder(x:ChatTabConfigBuilder,v:Ref<ChatTabConfigBuilder>)
-	export function unRefChatTabConfigBuilder(v:Ref<ChatTabConfigBuilder>):ChatTabConfigBuilder
-	export function emptyListTabsChatTabResp():ListTabsChatTabResp
-	export function emptyRefListTabsChatTabResp():Ref<ListTabsChatTabResp>
-	export function refOfListTabsChatTabResp(x:ListTabsChatTabResp,v:Ref<ListTabsChatTabResp>)
-	export function unRefListTabsChatTabResp(v:Ref<ListTabsChatTabResp>):ListTabsChatTabResp
-	export function emptySortTabsChatTabReq():SortTabsChatTabReq
-	export function emptyRefSortTabsChatTabReq():Ref<SortTabsChatTabReq>
-	export function refOfSortTabsChatTabReq(x:SortTabsChatTabReq,v:Ref<SortTabsChatTabReq>)
-	export function unRefSortTabsChatTabReq(v:Ref<SortTabsChatTabReq>):SortTabsChatTabReq
-	export function emptyWidget():Widget
-	export function emptyRefWidget():Ref<Widget>
-	export function refOfWidget(x:Widget,v:Ref<Widget>)
-	export function unRefWidget(v:Ref<Widget>):Widget
-	export function emptyMessage():Message
-	export function emptyRefMessage():Ref<Message>
-	export function refOfMessage(x:Message,v:Ref<Message>)
-	export function unRefMessage(v:Ref<Message>):Message
-	export function emptyPutTopNoticeChatTopNoticeReqBodyBuilder():PutTopNoticeChatTopNoticeReqBodyBuilder
-	export function emptyRefPutTopNoticeChatTopNoticeReqBodyBuilder():Ref<PutTopNoticeChatTopNoticeReqBodyBuilder>
-	export function refOfPutTopNoticeChatTopNoticeReqBodyBuilder(x:PutTopNoticeChatTopNoticeReqBodyBuilder,v:Ref<PutTopNoticeChatTopNoticeReqBodyBuilder>)
-	export function unRefPutTopNoticeChatTopNoticeReqBodyBuilder(v:Ref<PutTopNoticeChatTopNoticeReqBodyBuilder>):PutTopNoticeChatTopNoticeReqBodyBuilder
-	export function emptyCreatePinReq():CreatePinReq
-	export function emptyRefCreatePinReq():Ref<CreatePinReq>
-	export function refOfCreatePinReq(x:CreatePinReq,v:Ref<CreatePinReq>)
-	export function unRefCreatePinReq(v:Ref<CreatePinReq>):CreatePinReq
-	export function emptyDeleteChatMembersReqBuilder():DeleteChatMembersReqBuilder
-	export function emptyRefDeleteChatMembersReqBuilder():Ref<DeleteChatMembersReqBuilder>
-	export function refOfDeleteChatMembersReqBuilder(x:DeleteChatMembersReqBuilder,v:Ref<DeleteChatMembersReqBuilder>)
-	export function unRefDeleteChatMembersReqBuilder(v:Ref<DeleteChatMembersReqBuilder>):DeleteChatMembersReqBuilder
-	export function emptyGetChatMembersIterator():GetChatMembersIterator
-	export function emptyRefGetChatMembersIterator():Ref<GetChatMembersIterator>
-	export function refOfGetChatMembersIterator(x:GetChatMembersIterator,v:Ref<GetChatMembersIterator>)
-	export function unRefGetChatMembersIterator(v:Ref<GetChatMembersIterator>):GetChatMembersIterator
-	export function emptyChatTopNotice():ChatTopNotice
-	export function emptyRefChatTopNotice():Ref<ChatTopNotice>
-	export function refOfChatTopNotice(x:ChatTopNotice,v:Ref<ChatTopNotice>)
-	export function unRefChatTopNotice(v:Ref<ChatTopNotice>):ChatTopNotice
-	export function emptyCreateChatMenuTreeReqBodyBuilder():CreateChatMenuTreeReqBodyBuilder
-	export function emptyRefCreateChatMenuTreeReqBodyBuilder():Ref<CreateChatMenuTreeReqBodyBuilder>
-	export function refOfCreateChatMenuTreeReqBodyBuilder(x:CreateChatMenuTreeReqBodyBuilder,v:Ref<CreateChatMenuTreeReqBodyBuilder>)
-	export function unRefCreateChatMenuTreeReqBodyBuilder(v:Ref<CreateChatMenuTreeReqBodyBuilder>):CreateChatMenuTreeReqBodyBuilder
-	export function emptyIsInChatChatMembersResp():IsInChatChatMembersResp
-	export function emptyRefIsInChatChatMembersResp():Ref<IsInChatChatMembersResp>
-	export function refOfIsInChatChatMembersResp(x:IsInChatChatMembersResp,v:Ref<IsInChatChatMembersResp>)
-	export function unRefIsInChatChatMembersResp(v:Ref<IsInChatChatMembersResp>):IsInChatChatMembersResp
-	export function emptySortTabsChatTabReqBodyBuilder():SortTabsChatTabReqBodyBuilder
-	export function emptyRefSortTabsChatTabReqBodyBuilder():Ref<SortTabsChatTabReqBodyBuilder>
-	export function refOfSortTabsChatTabReqBodyBuilder(x:SortTabsChatTabReqBodyBuilder,v:Ref<SortTabsChatTabReqBodyBuilder>)
-	export function unRefSortTabsChatTabReqBodyBuilder(v:Ref<SortTabsChatTabReqBodyBuilder>):SortTabsChatTabReqBodyBuilder
-	export function emptySortTabsChatTabRespData():SortTabsChatTabRespData
-	export function emptyRefSortTabsChatTabRespData():Ref<SortTabsChatTabRespData>
-	export function refOfSortTabsChatTabRespData(x:SortTabsChatTabRespData,v:Ref<SortTabsChatTabRespData>)
-	export function unRefSortTabsChatTabRespData(v:Ref<SortTabsChatTabRespData>):SortTabsChatTabRespData
-	export function emptyUpdateChatResp():UpdateChatResp
-	export function emptyRefUpdateChatResp():Ref<UpdateChatResp>
-	export function refOfUpdateChatResp(x:UpdateChatResp,v:Ref<UpdateChatResp>)
-	export function unRefUpdateChatResp(v:Ref<UpdateChatResp>):UpdateChatResp
-	export function emptyGetMessageResourceResp():GetMessageResourceResp
-	export function emptyRefGetMessageResourceResp():Ref<GetMessageResourceResp>
-	export function refOfGetMessageResourceResp(x:GetMessageResourceResp,v:Ref<GetMessageResourceResp>)
-	export function unRefGetMessageResourceResp(v:Ref<GetMessageResourceResp>):GetMessageResourceResp
-	export function emptyP1AddBotV1():P1AddBotV1
-	export function emptyRefP1AddBotV1():Ref<P1AddBotV1>
-	export function refOfP1AddBotV1(x:P1AddBotV1,v:Ref<P1AddBotV1>)
-	export function unRefP1AddBotV1(v:Ref<P1AddBotV1>):P1AddBotV1
-	export function emptyUrgentSmsMessageResp():UrgentSmsMessageResp
-	export function emptyRefUrgentSmsMessageResp():Ref<UrgentSmsMessageResp>
-	export function refOfUrgentSmsMessageResp(x:UrgentSmsMessageResp,v:Ref<UrgentSmsMessageResp>)
-	export function unRefUrgentSmsMessageResp(v:Ref<UrgentSmsMessageResp>):UrgentSmsMessageResp
-	export function emptyBatchMessageBuilder():BatchMessageBuilder
-	export function emptyRefBatchMessageBuilder():Ref<BatchMessageBuilder>
-	export function refOfBatchMessageBuilder(x:BatchMessageBuilder,v:Ref<BatchMessageBuilder>)
-	export function unRefBatchMessageBuilder(v:Ref<BatchMessageBuilder>):BatchMessageBuilder
-	export function emptyChatTopNoticeBuilder():ChatTopNoticeBuilder
-	export function emptyRefChatTopNoticeBuilder():Ref<ChatTopNoticeBuilder>
-	export function refOfChatTopNoticeBuilder(x:ChatTopNoticeBuilder,v:Ref<ChatTopNoticeBuilder>)
-	export function unRefChatTopNoticeBuilder(v:Ref<ChatTopNoticeBuilder>):ChatTopNoticeBuilder
-	export function emptyLinkChatRespData():LinkChatRespData
-	export function emptyRefLinkChatRespData():Ref<LinkChatRespData>
-	export function refOfLinkChatRespData(x:LinkChatRespData,v:Ref<LinkChatRespData>)
-	export function unRefLinkChatRespData(v:Ref<LinkChatRespData>):LinkChatRespData
-	export function emptyP1AddBotV1Handler():P1AddBotV1Handler
-	export function emptyRefP1AddBotV1Handler():Ref<P1AddBotV1Handler>
-	export function refOfP1AddBotV1Handler(x:P1AddBotV1Handler,v:Ref<P1AddBotV1Handler>)
-	export function unRefP1AddBotV1Handler(v:Ref<P1AddBotV1Handler>):P1AddBotV1Handler
-	export function emptyP1OperatorV1():P1OperatorV1
-	export function emptyRefP1OperatorV1():Ref<P1OperatorV1>
-	export function refOfP1OperatorV1(x:P1OperatorV1,v:Ref<P1OperatorV1>)
-	export function unRefP1OperatorV1(v:Ref<P1OperatorV1>):P1OperatorV1
-	export function emptyP2ChatMemberBotAddedV1():P2ChatMemberBotAddedV1
-	export function emptyRefP2ChatMemberBotAddedV1():Ref<P2ChatMemberBotAddedV1>
-	export function refOfP2ChatMemberBotAddedV1(x:P2ChatMemberBotAddedV1,v:Ref<P2ChatMemberBotAddedV1>)
-	export function unRefP2ChatMemberBotAddedV1(v:Ref<P2ChatMemberBotAddedV1>):P2ChatMemberBotAddedV1
-	export function emptyReplyMessagePathReqBodyBuilder():ReplyMessagePathReqBodyBuilder
-	export function emptyRefReplyMessagePathReqBodyBuilder():Ref<ReplyMessagePathReqBodyBuilder>
-	export function refOfReplyMessagePathReqBodyBuilder(x:ReplyMessagePathReqBodyBuilder,v:Ref<ReplyMessagePathReqBodyBuilder>)
-	export function unRefReplyMessagePathReqBodyBuilder(v:Ref<ReplyMessagePathReqBodyBuilder>):ReplyMessagePathReqBodyBuilder
-	export function emptyUrgentReceiversBuilder():UrgentReceiversBuilder
-	export function emptyRefUrgentReceiversBuilder():Ref<UrgentReceiversBuilder>
-	export function refOfUrgentReceiversBuilder(x:UrgentReceiversBuilder,v:Ref<UrgentReceiversBuilder>)
-	export function unRefUrgentReceiversBuilder(v:Ref<UrgentReceiversBuilder>):UrgentReceiversBuilder
-	export function emptyDeleteChatReq():DeleteChatReq
-	export function emptyRefDeleteChatReq():Ref<DeleteChatReq>
-	export function refOfDeleteChatReq(x:DeleteChatReq,v:Ref<DeleteChatReq>)
-	export function unRefDeleteChatReq(v:Ref<DeleteChatReq>):DeleteChatReq
-	export function emptyGetChatAnnouncementReq():GetChatAnnouncementReq
-	export function emptyRefGetChatAnnouncementReq():Ref<GetChatAnnouncementReq>
-	export function refOfGetChatAnnouncementReq(x:GetChatAnnouncementReq,v:Ref<GetChatAnnouncementReq>)
-	export function unRefGetChatAnnouncementReq(v:Ref<GetChatAnnouncementReq>):GetChatAnnouncementReq
-	export function emptyGetChatReqBuilder():GetChatReqBuilder
-	export function emptyRefGetChatReqBuilder():Ref<GetChatReqBuilder>
-	export function refOfGetChatReqBuilder(x:GetChatReqBuilder,v:Ref<GetChatReqBuilder>)
-	export function unRefGetChatReqBuilder(v:Ref<GetChatReqBuilder>):GetChatReqBuilder
-	export function emptyI18nNames():I18nNames
-	export function emptyRefI18nNames():Ref<I18nNames>
-	export function refOfI18nNames(x:I18nNames,v:Ref<I18nNames>)
-	export function unRefI18nNames(v:Ref<I18nNames>):I18nNames
-	export function emptyLinkChatReq():LinkChatReq
-	export function emptyRefLinkChatReq():Ref<LinkChatReq>
-	export function refOfLinkChatReq(x:LinkChatReq,v:Ref<LinkChatReq>)
-	export function unRefLinkChatReq(v:Ref<LinkChatReq>):LinkChatReq
-	export function emptyMsgProcessDataBuilder():MsgProcessDataBuilder
-	export function emptyRefMsgProcessDataBuilder():Ref<MsgProcessDataBuilder>
-	export function refOfMsgProcessDataBuilder(x:MsgProcessDataBuilder,v:Ref<MsgProcessDataBuilder>)
-	export function unRefMsgProcessDataBuilder(v:Ref<MsgProcessDataBuilder>):MsgProcessDataBuilder
-	export function emptyP2ChatUpdatedV1():P2ChatUpdatedV1
-	export function emptyRefP2ChatUpdatedV1():Ref<P2ChatUpdatedV1>
-	export function refOfP2ChatUpdatedV1(x:P2ChatUpdatedV1,v:Ref<P2ChatUpdatedV1>)
-	export function unRefP2ChatUpdatedV1(v:Ref<P2ChatUpdatedV1>):P2ChatUpdatedV1
-	export function emptyDeleteChatMenuTreeReqBody():DeleteChatMenuTreeReqBody
-	export function emptyRefDeleteChatMenuTreeReqBody():Ref<DeleteChatMenuTreeReqBody>
-	export function refOfDeleteChatMenuTreeReqBody(x:DeleteChatMenuTreeReqBody,v:Ref<DeleteChatMenuTreeReqBody>)
-	export function unRefDeleteChatMenuTreeReqBody(v:Ref<DeleteChatMenuTreeReqBody>):DeleteChatMenuTreeReqBody
-	export function emptyFollowUpBuilder():FollowUpBuilder
-	export function emptyRefFollowUpBuilder():Ref<FollowUpBuilder>
-	export function refOfFollowUpBuilder(x:FollowUpBuilder,v:Ref<FollowUpBuilder>)
-	export function unRefFollowUpBuilder(v:Ref<FollowUpBuilder>):FollowUpBuilder
-	export function emptyForwardThreadReqBody():ForwardThreadReqBody
-	export function emptyRefForwardThreadReqBody():Ref<ForwardThreadReqBody>
-	export function refOfForwardThreadReqBody(x:ForwardThreadReqBody,v:Ref<ForwardThreadReqBody>)
-	export function unRefForwardThreadReqBody(v:Ref<ForwardThreadReqBody>):ForwardThreadReqBody
-	export function emptyGetChatAnnouncementReqBuilder():GetChatAnnouncementReqBuilder
-	export function emptyRefGetChatAnnouncementReqBuilder():Ref<GetChatAnnouncementReqBuilder>
-	export function refOfGetChatAnnouncementReqBuilder(x:GetChatAnnouncementReqBuilder,v:Ref<GetChatAnnouncementReqBuilder>)
-	export function unRefGetChatAnnouncementReqBuilder(v:Ref<GetChatAnnouncementReqBuilder>):GetChatAnnouncementReqBuilder
-	export function emptyPutTopNoticeChatTopNoticeReqBuilder():PutTopNoticeChatTopNoticeReqBuilder
-	export function emptyRefPutTopNoticeChatTopNoticeReqBuilder():Ref<PutTopNoticeChatTopNoticeReqBuilder>
-	export function refOfPutTopNoticeChatTopNoticeReqBuilder(x:PutTopNoticeChatTopNoticeReqBuilder,v:Ref<PutTopNoticeChatTopNoticeReqBuilder>)
-	export function unRefPutTopNoticeChatTopNoticeReqBuilder(v:Ref<PutTopNoticeChatTopNoticeReqBuilder>):PutTopNoticeChatTopNoticeReqBuilder
-	export function emptyReplyMessageResp():ReplyMessageResp
-	export function emptyRefReplyMessageResp():Ref<ReplyMessageResp>
-	export function refOfReplyMessageResp(x:ReplyMessageResp,v:Ref<ReplyMessageResp>)
-	export function unRefReplyMessageResp(v:Ref<ReplyMessageResp>):ReplyMessageResp
-	export function emptySortChatMenuTreePathReqBodyBuilder():SortChatMenuTreePathReqBodyBuilder
-	export function emptyRefSortChatMenuTreePathReqBodyBuilder():Ref<SortChatMenuTreePathReqBodyBuilder>
-	export function refOfSortChatMenuTreePathReqBodyBuilder(x:SortChatMenuTreePathReqBodyBuilder,v:Ref<SortChatMenuTreePathReqBodyBuilder>)
-	export function unRefSortChatMenuTreePathReqBodyBuilder(v:Ref<SortChatMenuTreePathReqBodyBuilder>):SortChatMenuTreePathReqBodyBuilder
-	export function emptyCreateMessageRespData():CreateMessageRespData
-	export function emptyRefCreateMessageRespData():Ref<CreateMessageRespData>
-	export function refOfCreateMessageRespData(x:CreateMessageRespData,v:Ref<CreateMessageRespData>)
-	export function unRefCreateMessageRespData(v:Ref<CreateMessageRespData>):CreateMessageRespData
-	export function emptyUrgentAppMessageReqBuilder():UrgentAppMessageReqBuilder
-	export function emptyRefUrgentAppMessageReqBuilder():Ref<UrgentAppMessageReqBuilder>
-	export function refOfUrgentAppMessageReqBuilder(x:UrgentAppMessageReqBuilder,v:Ref<UrgentAppMessageReqBuilder>)
-	export function unRefUrgentAppMessageReqBuilder(v:Ref<UrgentAppMessageReqBuilder>):UrgentAppMessageReqBuilder
-	export function emptyToolkitCallback():ToolkitCallback
-	export function emptyRefToolkitCallback():Ref<ToolkitCallback>
-	export function refOfToolkitCallback(x:ToolkitCallback,v:Ref<ToolkitCallback>)
-	export function unRefToolkitCallback(v:Ref<ToolkitCallback>):ToolkitCallback
-	export function emptyGetFileResp():GetFileResp
-	export function emptyRefGetFileResp():Ref<GetFileResp>
-	export function refOfGetFileResp(x:GetFileResp,v:Ref<GetFileResp>)
-	export function unRefGetFileResp(v:Ref<GetFileResp>):GetFileResp
-	export function emptyP1ChatDisbandV1Handler():P1ChatDisbandV1Handler
-	export function emptyRefP1ChatDisbandV1Handler():Ref<P1ChatDisbandV1Handler>
-	export function refOfP1ChatDisbandV1Handler(x:P1ChatDisbandV1Handler,v:Ref<P1ChatDisbandV1Handler>)
-	export function unRefP1ChatDisbandV1Handler(v:Ref<P1ChatDisbandV1Handler>):P1ChatDisbandV1Handler
-	export function emptyP1GroupSettingUpdatedV1Data():P1GroupSettingUpdatedV1Data
-	export function emptyRefP1GroupSettingUpdatedV1Data():Ref<P1GroupSettingUpdatedV1Data>
-	export function refOfP1GroupSettingUpdatedV1Data(x:P1GroupSettingUpdatedV1Data,v:Ref<P1GroupSettingUpdatedV1Data>)
-	export function unRefP1GroupSettingUpdatedV1Data(v:Ref<P1GroupSettingUpdatedV1Data>):P1GroupSettingUpdatedV1Data
-	export function emptyP2ChatDisbandedV1Data():P2ChatDisbandedV1Data
-	export function emptyRefP2ChatDisbandedV1Data():Ref<P2ChatDisbandedV1Data>
-	export function refOfP2ChatDisbandedV1Data(x:P2ChatDisbandedV1Data,v:Ref<P2ChatDisbandedV1Data>)
-	export function unRefP2ChatDisbandedV1Data(v:Ref<P2ChatDisbandedV1Data>):P2ChatDisbandedV1Data
-	export function emptyPatchChatAnnouncementReqBuilder():PatchChatAnnouncementReqBuilder
-	export function emptyRefPatchChatAnnouncementReqBuilder():Ref<PatchChatAnnouncementReqBuilder>
-	export function refOfPatchChatAnnouncementReqBuilder(x:PatchChatAnnouncementReqBuilder,v:Ref<PatchChatAnnouncementReqBuilder>)
-	export function unRefPatchChatAnnouncementReqBuilder(v:Ref<PatchChatAnnouncementReqBuilder>):PatchChatAnnouncementReqBuilder
-	export function emptyPatchMessageReq():PatchMessageReq
-	export function emptyRefPatchMessageReq():Ref<PatchMessageReq>
-	export function refOfPatchMessageReq(x:PatchMessageReq,v:Ref<PatchMessageReq>)
-	export function unRefPatchMessageReq(v:Ref<PatchMessageReq>):PatchMessageReq
-	export function emptySearchChatReq():SearchChatReq
-	export function emptyRefSearchChatReq():Ref<SearchChatReq>
-	export function refOfSearchChatReq(x:SearchChatReq,v:Ref<SearchChatReq>)
-	export function unRefSearchChatReq(v:Ref<SearchChatReq>):SearchChatReq
-	export function emptyDeleteMessageReactionRespData():DeleteMessageReactionRespData
-	export function emptyRefDeleteMessageReactionRespData():Ref<DeleteMessageReactionRespData>
-	export function refOfDeleteMessageReactionRespData(x:DeleteMessageReactionRespData,v:Ref<DeleteMessageReactionRespData>)
-	export function unRefDeleteMessageReactionRespData(v:Ref<DeleteMessageReactionRespData>):DeleteMessageReactionRespData
 	export function emptyGetChatMembersRespData():GetChatMembersRespData
 	export function emptyRefGetChatMembersRespData():Ref<GetChatMembersRespData>
 	export function refOfGetChatMembersRespData(x:GetChatMembersRespData,v:Ref<GetChatMembersRespData>)
 	export function unRefGetChatMembersRespData(v:Ref<GetChatMembersRespData>):GetChatMembersRespData
-	export function emptyMessagePostText():MessagePostText
-	export function emptyRefMessagePostText():Ref<MessagePostText>
-	export function refOfMessagePostText(x:MessagePostText,v:Ref<MessagePostText>)
-	export function unRefMessagePostText(v:Ref<MessagePostText>):MessagePostText
-	export function emptyP1MessageReadV1():P1MessageReadV1
-	export function emptyRefP1MessageReadV1():Ref<P1MessageReadV1>
-	export function refOfP1MessageReadV1(x:P1MessageReadV1,v:Ref<P1MessageReadV1>)
-	export function unRefP1MessageReadV1(v:Ref<P1MessageReadV1>):P1MessageReadV1
-	export function emptyChatChangeBuilder():ChatChangeBuilder
-	export function emptyRefChatChangeBuilder():Ref<ChatChangeBuilder>
-	export function refOfChatChangeBuilder(x:ChatChangeBuilder,v:Ref<ChatChangeBuilder>)
-	export function unRefChatChangeBuilder(v:Ref<ChatChangeBuilder>):ChatChangeBuilder
-	export function emptyCreatePinReqBuilder():CreatePinReqBuilder
-	export function emptyRefCreatePinReqBuilder():Ref<CreatePinReqBuilder>
-	export function refOfCreatePinReqBuilder(x:CreatePinReqBuilder,v:Ref<CreatePinReqBuilder>)
-	export function unRefCreatePinReqBuilder(v:Ref<CreatePinReqBuilder>):CreatePinReqBuilder
-	export function emptyDeleteBatchMessageReq():DeleteBatchMessageReq
-	export function emptyRefDeleteBatchMessageReq():Ref<DeleteBatchMessageReq>
-	export function refOfDeleteBatchMessageReq(x:DeleteBatchMessageReq,v:Ref<DeleteBatchMessageReq>)
-	export function unRefDeleteBatchMessageReq(v:Ref<DeleteBatchMessageReq>):DeleteBatchMessageReq
-	export function emptyMentionBuilder():MentionBuilder
-	export function emptyRefMentionBuilder():Ref<MentionBuilder>
-	export function refOfMentionBuilder(x:MentionBuilder,v:Ref<MentionBuilder>)
-	export function unRefMentionBuilder(v:Ref<MentionBuilder>):MentionBuilder
-	export function emptyP1UserV1():P1UserV1
-	export function emptyRefP1UserV1():Ref<P1UserV1>
-	export function refOfP1UserV1(x:P1UserV1,v:Ref<P1UserV1>)
-	export function unRefP1UserV1(v:Ref<P1UserV1>):P1UserV1
-	export function emptyGetImageResp():GetImageResp
-	export function emptyRefGetImageResp():Ref<GetImageResp>
-	export function refOfGetImageResp(x:GetImageResp,v:Ref<GetImageResp>)
-	export function unRefGetImageResp(v:Ref<GetImageResp>):GetImageResp
-	export function emptyPutTopNoticeChatTopNoticeReqBody():PutTopNoticeChatTopNoticeReqBody
-	export function emptyRefPutTopNoticeChatTopNoticeReqBody():Ref<PutTopNoticeChatTopNoticeReqBody>
-	export function refOfPutTopNoticeChatTopNoticeReqBody(x:PutTopNoticeChatTopNoticeReqBody,v:Ref<PutTopNoticeChatTopNoticeReqBody>)
-	export function unRefPutTopNoticeChatTopNoticeReqBody(v:Ref<PutTopNoticeChatTopNoticeReqBody>):PutTopNoticeChatTopNoticeReqBody
-	export function emptySortChatMenuTreeReqBody():SortChatMenuTreeReqBody
-	export function emptyRefSortChatMenuTreeReqBody():Ref<SortChatMenuTreeReqBody>
-	export function refOfSortChatMenuTreeReqBody(x:SortChatMenuTreeReqBody,v:Ref<SortChatMenuTreeReqBody>)
-	export function unRefSortChatMenuTreeReqBody(v:Ref<SortChatMenuTreeReqBody>):SortChatMenuTreeReqBody
-	export function emptyUrgentPhoneMessageReqBuilder():UrgentPhoneMessageReqBuilder
-	export function emptyRefUrgentPhoneMessageReqBuilder():Ref<UrgentPhoneMessageReqBuilder>
-	export function refOfUrgentPhoneMessageReqBuilder(x:UrgentPhoneMessageReqBuilder,v:Ref<UrgentPhoneMessageReqBuilder>)
-	export function unRefUrgentPhoneMessageReqBuilder(v:Ref<UrgentPhoneMessageReqBuilder>):UrgentPhoneMessageReqBuilder
-	export function emptyCreateMessageReactionReqBodyBuilder():CreateMessageReactionReqBodyBuilder
-	export function emptyRefCreateMessageReactionReqBodyBuilder():Ref<CreateMessageReactionReqBodyBuilder>
-	export function refOfCreateMessageReactionReqBodyBuilder(x:CreateMessageReactionReqBodyBuilder,v:Ref<CreateMessageReactionReqBodyBuilder>)
-	export function unRefCreateMessageReactionReqBodyBuilder(v:Ref<CreateMessageReactionReqBodyBuilder>):CreateMessageReactionReqBodyBuilder
-	export function emptyGetChatMembersResp():GetChatMembersResp
-	export function emptyRefGetChatMembersResp():Ref<GetChatMembersResp>
-	export function refOfGetChatMembersResp(x:GetChatMembersResp,v:Ref<GetChatMembersResp>)
-	export function unRefGetChatMembersResp(v:Ref<GetChatMembersResp>):GetChatMembersResp
-	export function emptyImDepthDataBuilder():ImDepthDataBuilder
-	export function emptyRefImDepthDataBuilder():Ref<ImDepthDataBuilder>
-	export function refOfImDepthDataBuilder(x:ImDepthDataBuilder,v:Ref<ImDepthDataBuilder>)
-	export function unRefImDepthDataBuilder(v:Ref<ImDepthDataBuilder>):ImDepthDataBuilder
-	export function emptyListMessageRespData():ListMessageRespData
-	export function emptyRefListMessageRespData():Ref<ListMessageRespData>
-	export function refOfListMessageRespData(x:ListMessageRespData,v:Ref<ListMessageRespData>)
-	export function unRefListMessageRespData(v:Ref<ListMessageRespData>):ListMessageRespData
-	export function emptyListModerator():ListModerator
-	export function emptyRefListModerator():Ref<ListModerator>
-	export function refOfListModerator(x:ListModerator,v:Ref<ListModerator>)
-	export function unRefListModerator(v:Ref<ListModerator>):ListModerator
-	export function emptyP1AddBotV1Data():P1AddBotV1Data
-	export function emptyRefP1AddBotV1Data():Ref<P1AddBotV1Data>
-	export function refOfP1AddBotV1Data(x:P1AddBotV1Data,v:Ref<P1AddBotV1Data>)
-	export function unRefP1AddBotV1Data(v:Ref<P1AddBotV1Data>):P1AddBotV1Data
-	export function emptyUrgentPhoneMessageRespData():UrgentPhoneMessageRespData
-	export function emptyRefUrgentPhoneMessageRespData():Ref<UrgentPhoneMessageRespData>
-	export function refOfUrgentPhoneMessageRespData(x:UrgentPhoneMessageRespData,v:Ref<UrgentPhoneMessageRespData>)
-	export function unRefUrgentPhoneMessageRespData(v:Ref<UrgentPhoneMessageRespData>):UrgentPhoneMessageRespData
-	export function emptyBatchRecallProgressBuilder():BatchRecallProgressBuilder
-	export function emptyRefBatchRecallProgressBuilder():Ref<BatchRecallProgressBuilder>
-	export function refOfBatchRecallProgressBuilder(x:BatchRecallProgressBuilder,v:Ref<BatchRecallProgressBuilder>)
-	export function unRefBatchRecallProgressBuilder(v:Ref<BatchRecallProgressBuilder>):BatchRecallProgressBuilder
-	export function emptyCreateChatTabReqBody():CreateChatTabReqBody
-	export function emptyRefCreateChatTabReqBody():Ref<CreateChatTabReqBody>
-	export function refOfCreateChatTabReqBody(x:CreateChatTabReqBody,v:Ref<CreateChatTabReqBody>)
-	export function unRefCreateChatTabReqBody(v:Ref<CreateChatTabReqBody>):CreateChatTabReqBody
-	export function emptyCreateFileReqBuilder():CreateFileReqBuilder
-	export function emptyRefCreateFileReqBuilder():Ref<CreateFileReqBuilder>
-	export function refOfCreateFileReqBuilder(x:CreateFileReqBuilder,v:Ref<CreateFileReqBuilder>)
-	export function unRefCreateFileReqBuilder(v:Ref<CreateFileReqBuilder>):CreateFileReqBuilder
-	export function emptyDeleteTopNoticeChatTopNoticeReq():DeleteTopNoticeChatTopNoticeReq
-	export function emptyRefDeleteTopNoticeChatTopNoticeReq():Ref<DeleteTopNoticeChatTopNoticeReq>
-	export function refOfDeleteTopNoticeChatTopNoticeReq(x:DeleteTopNoticeChatTopNoticeReq,v:Ref<DeleteTopNoticeChatTopNoticeReq>)
-	export function unRefDeleteTopNoticeChatTopNoticeReq(v:Ref<DeleteTopNoticeChatTopNoticeReq>):DeleteTopNoticeChatTopNoticeReq
-	export function emptyListMemberBuilder():ListMemberBuilder
-	export function emptyRefListMemberBuilder():Ref<ListMemberBuilder>
-	export function refOfListMemberBuilder(x:ListMemberBuilder,v:Ref<ListMemberBuilder>)
-	export function unRefListMemberBuilder(v:Ref<ListMemberBuilder>):ListMemberBuilder
-	export function emptyPatchMessageReqBody():PatchMessageReqBody
-	export function emptyRefPatchMessageReqBody():Ref<PatchMessageReqBody>
-	export function refOfPatchMessageReqBody(x:PatchMessageReqBody,v:Ref<PatchMessageReqBody>)
-	export function unRefPatchMessageReqBody(v:Ref<PatchMessageReqBody>):PatchMessageReqBody
-	export function emptyEventSender():EventSender
-	export function emptyRefEventSender():Ref<EventSender>
-	export function refOfEventSender(x:EventSender,v:Ref<EventSender>)
-	export function unRefEventSender(v:Ref<EventSender>):EventSender
-	export function emptyMessageImage():MessageImage
-	export function emptyRefMessageImage():Ref<MessageImage>
-	export function refOfMessageImage(x:MessageImage,v:Ref<MessageImage>)
-	export function unRefMessageImage(v:Ref<MessageImage>):MessageImage
-	export function emptyMessageSticker():MessageSticker
-	export function emptyRefMessageSticker():Ref<MessageSticker>
-	export function refOfMessageSticker(x:MessageSticker,v:Ref<MessageSticker>)
-	export function unRefMessageSticker(v:Ref<MessageSticker>):MessageSticker
-	export function emptyP2ChatMemberUserWithdrawnV1Data():P2ChatMemberUserWithdrawnV1Data
-	export function emptyRefP2ChatMemberUserWithdrawnV1Data():Ref<P2ChatMemberUserWithdrawnV1Data>
-	export function refOfP2ChatMemberUserWithdrawnV1Data(x:P2ChatMemberUserWithdrawnV1Data,v:Ref<P2ChatMemberUserWithdrawnV1Data>)
-	export function unRefP2ChatMemberUserWithdrawnV1Data(v:Ref<P2ChatMemberUserWithdrawnV1Data>):P2ChatMemberUserWithdrawnV1Data
-	export function emptyUrgentSmsMessageReqBuilder():UrgentSmsMessageReqBuilder
-	export function emptyRefUrgentSmsMessageReqBuilder():Ref<UrgentSmsMessageReqBuilder>
-	export function refOfUrgentSmsMessageReqBuilder(x:UrgentSmsMessageReqBuilder,v:Ref<UrgentSmsMessageReqBuilder>)
-	export function unRefUrgentSmsMessageReqBuilder(v:Ref<UrgentSmsMessageReqBuilder>):UrgentSmsMessageReqBuilder
-	export function emptyIsInChatChatMembersReqBuilder():IsInChatChatMembersReqBuilder
-	export function emptyRefIsInChatChatMembersReqBuilder():Ref<IsInChatChatMembersReqBuilder>
-	export function refOfIsInChatChatMembersReqBuilder(x:IsInChatChatMembersReqBuilder,v:Ref<IsInChatChatMembersReqBuilder>)
-	export function unRefIsInChatChatMembersReqBuilder(v:Ref<IsInChatChatMembersReqBuilder>):IsInChatChatMembersReqBuilder
-	export function emptyListModeratorBuilder():ListModeratorBuilder
-	export function emptyRefListModeratorBuilder():Ref<ListModeratorBuilder>
-	export function refOfListModeratorBuilder(x:ListModeratorBuilder,v:Ref<ListModeratorBuilder>)
-	export function unRefListModeratorBuilder(v:Ref<ListModeratorBuilder>):ListModeratorBuilder
-	export function emptyCreateFileResp():CreateFileResp
-	export function emptyRefCreateFileResp():Ref<CreateFileResp>
-	export function refOfCreateFileResp(x:CreateFileResp,v:Ref<CreateFileResp>)
-	export function unRefCreateFileResp(v:Ref<CreateFileResp>):CreateFileResp
-	export function emptyDeleteTabsChatTabReqBody():DeleteTabsChatTabReqBody
-	export function emptyRefDeleteTabsChatTabReqBody():Ref<DeleteTabsChatTabReqBody>
-	export function refOfDeleteTabsChatTabReqBody(x:DeleteTabsChatTabReqBody,v:Ref<DeleteTabsChatTabReqBody>)
-	export function unRefDeleteTabsChatTabReqBody(v:Ref<DeleteTabsChatTabReqBody>):DeleteTabsChatTabReqBody
-	export function emptyDeleteTabsChatTabReqBodyBuilder():DeleteTabsChatTabReqBodyBuilder
-	export function emptyRefDeleteTabsChatTabReqBodyBuilder():Ref<DeleteTabsChatTabReqBodyBuilder>
-	export function refOfDeleteTabsChatTabReqBodyBuilder(x:DeleteTabsChatTabReqBodyBuilder,v:Ref<DeleteTabsChatTabReqBodyBuilder>)
-	export function unRefDeleteTabsChatTabReqBodyBuilder(v:Ref<DeleteTabsChatTabReqBodyBuilder>):DeleteTabsChatTabReqBodyBuilder
-	export function emptyMessagePostAt():MessagePostAt
-	export function emptyRefMessagePostAt():Ref<MessagePostAt>
-	export function refOfMessagePostAt(x:MessagePostAt,v:Ref<MessagePostAt>)
-	export function unRefMessagePostAt(v:Ref<MessagePostAt>):MessagePostAt
-	export function emptyP2MessageRecalledV1():P2MessageRecalledV1
-	export function emptyRefP2MessageRecalledV1():Ref<P2MessageRecalledV1>
-	export function refOfP2MessageRecalledV1(x:P2MessageRecalledV1,v:Ref<P2MessageRecalledV1>)
-	export function unRefP2MessageRecalledV1(v:Ref<P2MessageRecalledV1>):P2MessageRecalledV1
-	export function emptyUserIdBuilder():UserIdBuilder
-	export function emptyRefUserIdBuilder():Ref<UserIdBuilder>
-	export function refOfUserIdBuilder(x:UserIdBuilder,v:Ref<UserIdBuilder>)
-	export function unRefUserIdBuilder(v:Ref<UserIdBuilder>):UserIdBuilder
-	export function emptyPinedMessage():PinedMessage
-	export function emptyRefPinedMessage():Ref<PinedMessage>
-	export function refOfPinedMessage(x:PinedMessage,v:Ref<PinedMessage>)
-	export function unRefPinedMessage(v:Ref<PinedMessage>):PinedMessage
-	export function emptyCreateImageReq():CreateImageReq
-	export function emptyRefCreateImageReq():Ref<CreateImageReq>
-	export function refOfCreateImageReq(x:CreateImageReq,v:Ref<CreateImageReq>)
-	export function unRefCreateImageReq(v:Ref<CreateImageReq>):CreateImageReq
-	export function emptyGetChatModerationReqBuilder():GetChatModerationReqBuilder
-	export function emptyRefGetChatModerationReqBuilder():Ref<GetChatModerationReqBuilder>
-	export function refOfGetChatModerationReqBuilder(x:GetChatModerationReqBuilder,v:Ref<GetChatModerationReqBuilder>)
-	export function unRefGetChatModerationReqBuilder(v:Ref<GetChatModerationReqBuilder>):GetChatModerationReqBuilder
-	export function emptyGetProgressBatchMessageReqBuilder():GetProgressBatchMessageReqBuilder
-	export function emptyRefGetProgressBatchMessageReqBuilder():Ref<GetProgressBatchMessageReqBuilder>
-	export function refOfGetProgressBatchMessageReqBuilder(x:GetProgressBatchMessageReqBuilder,v:Ref<GetProgressBatchMessageReqBuilder>)
-	export function unRefGetProgressBatchMessageReqBuilder(v:Ref<GetProgressBatchMessageReqBuilder>):GetProgressBatchMessageReqBuilder
-	export function emptyLinkChatReqBody():LinkChatReqBody
-	export function emptyRefLinkChatReqBody():Ref<LinkChatReqBody>
-	export function refOfLinkChatReqBody(x:LinkChatReqBody,v:Ref<LinkChatReqBody>)
-	export function unRefLinkChatReqBody(v:Ref<LinkChatReqBody>):LinkChatReqBody
-	export function emptyMessageMedia():MessageMedia
-	export function emptyRefMessageMedia():Ref<MessageMedia>
-	export function refOfMessageMedia(x:MessageMedia,v:Ref<MessageMedia>)
-	export function unRefMessageMedia(v:Ref<MessageMedia>):MessageMedia
-	export function emptyP1P2PChatCreatedV1():P1P2PChatCreatedV1
-	export function emptyRefP1P2PChatCreatedV1():Ref<P1P2PChatCreatedV1>
-	export function refOfP1P2PChatCreatedV1(x:P1P2PChatCreatedV1,v:Ref<P1P2PChatCreatedV1>)
-	export function unRefP1P2PChatCreatedV1(v:Ref<P1P2PChatCreatedV1>):P1P2PChatCreatedV1
-	export function emptyP2MessageReactionDeletedV1Data():P2MessageReactionDeletedV1Data
-	export function emptyRefP2MessageReactionDeletedV1Data():Ref<P2MessageReactionDeletedV1Data>
-	export function refOfP2MessageReactionDeletedV1Data(x:P2MessageReactionDeletedV1Data,v:Ref<P2MessageReactionDeletedV1Data>)
-	export function unRefP2MessageReactionDeletedV1Data(v:Ref<P2MessageReactionDeletedV1Data>):P2MessageReactionDeletedV1Data
-	export function emptyGetChatModerationRespData():GetChatModerationRespData
-	export function emptyRefGetChatModerationRespData():Ref<GetChatModerationRespData>
-	export function refOfGetChatModerationRespData(x:GetChatModerationRespData,v:Ref<GetChatModerationRespData>)
-	export function unRefGetChatModerationRespData(v:Ref<GetChatModerationRespData>):GetChatModerationRespData
-	export function emptyPatchChatMenuItemResp():PatchChatMenuItemResp
-	export function emptyRefPatchChatMenuItemResp():Ref<PatchChatMenuItemResp>
-	export function refOfPatchChatMenuItemResp(x:PatchChatMenuItemResp,v:Ref<PatchChatMenuItemResp>)
-	export function unRefPatchChatMenuItemResp(v:Ref<PatchChatMenuItemResp>):PatchChatMenuItemResp
-	export function emptyDeleteMessageReactionResp():DeleteMessageReactionResp
-	export function emptyRefDeleteMessageReactionResp():Ref<DeleteMessageReactionResp>
-	export function refOfDeleteMessageReactionResp(x:DeleteMessageReactionResp,v:Ref<DeleteMessageReactionResp>)
-	export function unRefDeleteMessageReactionResp(v:Ref<DeleteMessageReactionResp>):DeleteMessageReactionResp
-	export function emptyCreateImagePathReqBodyBuilder():CreateImagePathReqBodyBuilder
-	export function emptyRefCreateImagePathReqBodyBuilder():Ref<CreateImagePathReqBodyBuilder>
-	export function refOfCreateImagePathReqBodyBuilder(x:CreateImagePathReqBodyBuilder,v:Ref<CreateImagePathReqBodyBuilder>)
-	export function unRefCreateImagePathReqBodyBuilder(v:Ref<CreateImagePathReqBodyBuilder>):CreateImagePathReqBodyBuilder
-	export function emptyDeleteTabsChatTabPathReqBodyBuilder():DeleteTabsChatTabPathReqBodyBuilder
-	export function emptyRefDeleteTabsChatTabPathReqBodyBuilder():Ref<DeleteTabsChatTabPathReqBodyBuilder>
-	export function refOfDeleteTabsChatTabPathReqBodyBuilder(x:DeleteTabsChatTabPathReqBodyBuilder,v:Ref<DeleteTabsChatTabPathReqBodyBuilder>)
-	export function unRefDeleteTabsChatTabPathReqBodyBuilder(v:Ref<DeleteTabsChatTabPathReqBodyBuilder>):DeleteTabsChatTabPathReqBodyBuilder
-	export function emptyForwardThreadRespData():ForwardThreadRespData
-	export function emptyRefForwardThreadRespData():Ref<ForwardThreadRespData>
-	export function refOfForwardThreadRespData(x:ForwardThreadRespData,v:Ref<ForwardThreadRespData>)
-	export function unRefForwardThreadRespData(v:Ref<ForwardThreadRespData>):ForwardThreadRespData
-	export function emptyIsInChatChatMembersReq():IsInChatChatMembersReq
-	export function emptyRefIsInChatChatMembersReq():Ref<IsInChatChatMembersReq>
-	export function refOfIsInChatChatMembersReq(x:IsInChatChatMembersReq,v:Ref<IsInChatChatMembersReq>)
-	export function unRefIsInChatChatMembersReq(v:Ref<IsInChatChatMembersReq>):IsInChatChatMembersReq
-	export function emptyListMessageIterator():ListMessageIterator
-	export function emptyRefListMessageIterator():Ref<ListMessageIterator>
-	export function refOfListMessageIterator(x:ListMessageIterator,v:Ref<ListMessageIterator>)
-	export function unRefListMessageIterator(v:Ref<ListMessageIterator>):ListMessageIterator
-	export function emptyUrgentAppMessageRespData():UrgentAppMessageRespData
-	export function emptyRefUrgentAppMessageRespData():Ref<UrgentAppMessageRespData>
-	export function refOfUrgentAppMessageRespData(x:UrgentAppMessageRespData,v:Ref<UrgentAppMessageRespData>)
-	export function unRefUrgentAppMessageRespData(v:Ref<UrgentAppMessageRespData>):UrgentAppMessageRespData
-	export function emptyBatchSendProgressBuilder():BatchSendProgressBuilder
-	export function emptyRefBatchSendProgressBuilder():Ref<BatchSendProgressBuilder>
-	export function refOfBatchSendProgressBuilder(x:BatchSendProgressBuilder,v:Ref<BatchSendProgressBuilder>)
-	export function unRefBatchSendProgressBuilder(v:Ref<BatchSendProgressBuilder>):BatchSendProgressBuilder
-	export function emptyCreateChatMenuTreeRespData():CreateChatMenuTreeRespData
-	export function emptyRefCreateChatMenuTreeRespData():Ref<CreateChatMenuTreeRespData>
-	export function refOfCreateChatMenuTreeRespData(x:CreateChatMenuTreeRespData,v:Ref<CreateChatMenuTreeRespData>)
-	export function unRefCreateChatMenuTreeRespData(v:Ref<CreateChatMenuTreeRespData>):CreateChatMenuTreeRespData
-	export function emptyMessagePostMedia():MessagePostMedia
-	export function emptyRefMessagePostMedia():Ref<MessagePostMedia>
-	export function refOfMessagePostMedia(x:MessagePostMedia,v:Ref<MessagePostMedia>)
-	export function unRefMessagePostMedia(v:Ref<MessagePostMedia>):MessagePostMedia
-	export function emptyP2ChatMemberBotAddedV1Data():P2ChatMemberBotAddedV1Data
-	export function emptyRefP2ChatMemberBotAddedV1Data():Ref<P2ChatMemberBotAddedV1Data>
-	export function refOfP2ChatMemberBotAddedV1Data(x:P2ChatMemberBotAddedV1Data,v:Ref<P2ChatMemberBotAddedV1Data>)
-	export function unRefP2ChatMemberBotAddedV1Data(v:Ref<P2ChatMemberBotAddedV1Data>):P2ChatMemberBotAddedV1Data
-	export function emptyChatMemberBuilder():ChatMemberBuilder
-	export function emptyRefChatMemberBuilder():Ref<ChatMemberBuilder>
-	export function refOfChatMemberBuilder(x:ChatMemberBuilder,v:Ref<ChatMemberBuilder>)
-	export function unRefChatMemberBuilder(v:Ref<ChatMemberBuilder>):ChatMemberBuilder
-	export function emptyGetChatReq():GetChatReq
-	export function emptyRefGetChatReq():Ref<GetChatReq>
-	export function refOfGetChatReq(x:GetChatReq,v:Ref<GetChatReq>)
-	export function unRefGetChatReq(v:Ref<GetChatReq>):GetChatReq
-	export function emptyListChatIterator():ListChatIterator
-	export function emptyRefListChatIterator():Ref<ListChatIterator>
-	export function refOfListChatIterator(x:ListChatIterator,v:Ref<ListChatIterator>)
-	export function unRefListChatIterator(v:Ref<ListChatIterator>):ListChatIterator
-	export function emptyReadUsersMessageReq():ReadUsersMessageReq
-	export function emptyRefReadUsersMessageReq():Ref<ReadUsersMessageReq>
-	export function refOfReadUsersMessageReq(x:ReadUsersMessageReq,v:Ref<ReadUsersMessageReq>)
-	export function unRefReadUsersMessageReq(v:Ref<ReadUsersMessageReq>):ReadUsersMessageReq
-	export function emptyCreateChatMenuTreeReqBuilder():CreateChatMenuTreeReqBuilder
-	export function emptyRefCreateChatMenuTreeReqBuilder():Ref<CreateChatMenuTreeReqBuilder>
-	export function refOfCreateChatMenuTreeReqBuilder(x:CreateChatMenuTreeReqBuilder,v:Ref<CreateChatMenuTreeReqBuilder>)
-	export function unRefCreateChatMenuTreeReqBuilder(v:Ref<CreateChatMenuTreeReqBuilder>):CreateChatMenuTreeReqBuilder
-	export function emptyUpdateTabsChatTabRespData():UpdateTabsChatTabRespData
-	export function emptyRefUpdateTabsChatTabRespData():Ref<UpdateTabsChatTabRespData>
-	export function refOfUpdateTabsChatTabRespData(x:UpdateTabsChatTabRespData,v:Ref<UpdateTabsChatTabRespData>)
-	export function unRefUpdateTabsChatTabRespData(v:Ref<UpdateTabsChatTabRespData>):UpdateTabsChatTabRespData
-	export function emptyDeleteChatMenuTreeReqBuilder():DeleteChatMenuTreeReqBuilder
-	export function emptyRefDeleteChatMenuTreeReqBuilder():Ref<DeleteChatMenuTreeReqBuilder>
-	export function refOfDeleteChatMenuTreeReqBuilder(x:DeleteChatMenuTreeReqBuilder,v:Ref<DeleteChatMenuTreeReqBuilder>)
-	export function unRefDeleteChatMenuTreeReqBuilder(v:Ref<DeleteChatMenuTreeReqBuilder>):DeleteChatMenuTreeReqBuilder
-	export function emptyPutTopNoticeChatTopNoticeReq():PutTopNoticeChatTopNoticeReq
-	export function emptyRefPutTopNoticeChatTopNoticeReq():Ref<PutTopNoticeChatTopNoticeReq>
-	export function refOfPutTopNoticeChatTopNoticeReq(x:PutTopNoticeChatTopNoticeReq,v:Ref<PutTopNoticeChatTopNoticeReq>)
-	export function unRefPutTopNoticeChatTopNoticeReq(v:Ref<PutTopNoticeChatTopNoticeReq>):PutTopNoticeChatTopNoticeReq
-	export function emptyChatMenuItemRedirectLinkBuilder():ChatMenuItemRedirectLinkBuilder
-	export function emptyRefChatMenuItemRedirectLinkBuilder():Ref<ChatMenuItemRedirectLinkBuilder>
-	export function refOfChatMenuItemRedirectLinkBuilder(x:ChatMenuItemRedirectLinkBuilder,v:Ref<ChatMenuItemRedirectLinkBuilder>)
-	export function unRefChatMenuItemRedirectLinkBuilder(v:Ref<ChatMenuItemRedirectLinkBuilder>):ChatMenuItemRedirectLinkBuilder
-	export function emptyGetProgressBatchMessageResp():GetProgressBatchMessageResp
-	export function emptyRefGetProgressBatchMessageResp():Ref<GetProgressBatchMessageResp>
-	export function refOfGetProgressBatchMessageResp(x:GetProgressBatchMessageResp,v:Ref<GetProgressBatchMessageResp>)
-	export function unRefGetProgressBatchMessageResp(v:Ref<GetProgressBatchMessageResp>):GetProgressBatchMessageResp
-	export function emptyMention():Mention
-	export function emptyRefMention():Ref<Mention>
-	export function refOfMention(x:Mention,v:Ref<Mention>)
-	export function unRefMention(v:Ref<Mention>):Mention
-	export function emptyReplyMessageReq():ReplyMessageReq
-	export function emptyRefReplyMessageReq():Ref<ReplyMessageReq>
-	export function refOfReplyMessageReq(x:ReplyMessageReq,v:Ref<ReplyMessageReq>)
-	export function unRefReplyMessageReq(v:Ref<ReplyMessageReq>):ReplyMessageReq
-	export function emptyDeleteManagersChatManagersPathReqBodyBuilder():DeleteManagersChatManagersPathReqBodyBuilder
-	export function emptyRefDeleteManagersChatManagersPathReqBodyBuilder():Ref<DeleteManagersChatManagersPathReqBodyBuilder>
-	export function refOfDeleteManagersChatManagersPathReqBodyBuilder(x:DeleteManagersChatManagersPathReqBodyBuilder,v:Ref<DeleteManagersChatManagersPathReqBodyBuilder>)
-	export function unRefDeleteManagersChatManagersPathReqBodyBuilder(v:Ref<DeleteManagersChatManagersPathReqBodyBuilder>):DeleteManagersChatManagersPathReqBodyBuilder
-	export function emptyForwardThreadReqBuilder():ForwardThreadReqBuilder
-	export function emptyRefForwardThreadReqBuilder():Ref<ForwardThreadReqBuilder>
-	export function refOfForwardThreadReqBuilder(x:ForwardThreadReqBuilder,v:Ref<ForwardThreadReqBuilder>)
-	export function unRefForwardThreadReqBuilder(v:Ref<ForwardThreadReqBuilder>):ForwardThreadReqBuilder
-	export function emptyUpdateMessageReqBodyBuilder():UpdateMessageReqBodyBuilder
-	export function emptyRefUpdateMessageReqBodyBuilder():Ref<UpdateMessageReqBodyBuilder>
-	export function refOfUpdateMessageReqBodyBuilder(x:UpdateMessageReqBodyBuilder,v:Ref<UpdateMessageReqBodyBuilder>)
-	export function unRefUpdateMessageReqBodyBuilder(v:Ref<UpdateMessageReqBodyBuilder>):UpdateMessageReqBodyBuilder
-	export function emptyCreateImageResp():CreateImageResp
-	export function emptyRefCreateImageResp():Ref<CreateImageResp>
-	export function refOfCreateImageResp(x:CreateImageResp,v:Ref<CreateImageResp>)
-	export function unRefCreateImageResp(v:Ref<CreateImageResp>):CreateImageResp
-	export function emptyDepartmentId():DepartmentId
-	export function emptyRefDepartmentId():Ref<DepartmentId>
-	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
-	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptyToolkit():Toolkit
-	export function emptyRefToolkit():Ref<Toolkit>
-	export function refOfToolkit(x:Toolkit,v:Ref<Toolkit>)
-	export function unRefToolkit(v:Ref<Toolkit>):Toolkit
-	export function emptyToolkitBuilder():ToolkitBuilder
-	export function emptyRefToolkitBuilder():Ref<ToolkitBuilder>
-	export function refOfToolkitBuilder(x:ToolkitBuilder,v:Ref<ToolkitBuilder>)
-	export function unRefToolkitBuilder(v:Ref<ToolkitBuilder>):ToolkitBuilder
-	export function emptyCreateChatReq():CreateChatReq
-	export function emptyRefCreateChatReq():Ref<CreateChatReq>
-	export function refOfCreateChatReq(x:CreateChatReq,v:Ref<CreateChatReq>)
-	export function unRefCreateChatReq(v:Ref<CreateChatReq>):CreateChatReq
-	export function emptyBatchMessageSendProgress():BatchMessageSendProgress
-	export function emptyRefBatchMessageSendProgress():Ref<BatchMessageSendProgress>
-	export function refOfBatchMessageSendProgress(x:BatchMessageSendProgress,v:Ref<BatchMessageSendProgress>)
-	export function unRefBatchMessageSendProgress(v:Ref<BatchMessageSendProgress>):BatchMessageSendProgress
-	export function emptyCreateChatMenuTreePathReqBodyBuilder():CreateChatMenuTreePathReqBodyBuilder
-	export function emptyRefCreateChatMenuTreePathReqBodyBuilder():Ref<CreateChatMenuTreePathReqBodyBuilder>
-	export function refOfCreateChatMenuTreePathReqBodyBuilder(x:CreateChatMenuTreePathReqBodyBuilder,v:Ref<CreateChatMenuTreePathReqBodyBuilder>)
-	export function unRefCreateChatMenuTreePathReqBodyBuilder(v:Ref<CreateChatMenuTreePathReqBodyBuilder>):CreateChatMenuTreePathReqBodyBuilder
-	export function emptyListTabsChatTabReqBuilder():ListTabsChatTabReqBuilder
-	export function emptyRefListTabsChatTabReqBuilder():Ref<ListTabsChatTabReqBuilder>
-	export function refOfListTabsChatTabReqBuilder(x:ListTabsChatTabReqBuilder,v:Ref<ListTabsChatTabReqBuilder>)
-	export function unRefListTabsChatTabReqBuilder(v:Ref<ListTabsChatTabReqBuilder>):ListTabsChatTabReqBuilder
-	export function emptyP1GroupSettingChangeV1():P1GroupSettingChangeV1
-	export function emptyRefP1GroupSettingChangeV1():Ref<P1GroupSettingChangeV1>
-	export function refOfP1GroupSettingChangeV1(x:P1GroupSettingChangeV1,v:Ref<P1GroupSettingChangeV1>)
-	export function unRefP1GroupSettingChangeV1(v:Ref<P1GroupSettingChangeV1>):P1GroupSettingChangeV1
-	export function emptyUrgentAppMessageReq():UrgentAppMessageReq
-	export function emptyRefUrgentAppMessageReq():Ref<UrgentAppMessageReq>
-	export function refOfUrgentAppMessageReq(x:UrgentAppMessageReq,v:Ref<UrgentAppMessageReq>)
-	export function unRefUrgentAppMessageReq(v:Ref<UrgentAppMessageReq>):UrgentAppMessageReq
-	export function emptyGetProgressBatchMessageRespData():GetProgressBatchMessageRespData
-	export function emptyRefGetProgressBatchMessageRespData():Ref<GetProgressBatchMessageRespData>
-	export function refOfGetProgressBatchMessageRespData(x:GetProgressBatchMessageRespData,v:Ref<GetProgressBatchMessageRespData>)
-	export function unRefGetProgressBatchMessageRespData(v:Ref<GetProgressBatchMessageRespData>):GetProgressBatchMessageRespData
-	export function emptyPutTopNoticeChatTopNoticeResp():PutTopNoticeChatTopNoticeResp
-	export function emptyRefPutTopNoticeChatTopNoticeResp():Ref<PutTopNoticeChatTopNoticeResp>
-	export function refOfPutTopNoticeChatTopNoticeResp(x:PutTopNoticeChatTopNoticeResp,v:Ref<PutTopNoticeChatTopNoticeResp>)
-	export function unRefPutTopNoticeChatTopNoticeResp(v:Ref<PutTopNoticeChatTopNoticeResp>):PutTopNoticeChatTopNoticeResp
-	export function emptyReplyMessageRespData():ReplyMessageRespData
-	export function emptyRefReplyMessageRespData():Ref<ReplyMessageRespData>
-	export function refOfReplyMessageRespData(x:ReplyMessageRespData,v:Ref<ReplyMessageRespData>)
-	export function unRefReplyMessageRespData(v:Ref<ReplyMessageRespData>):ReplyMessageRespData
-	export function emptyBatchMessage():BatchMessage
-	export function emptyRefBatchMessage():Ref<BatchMessage>
-	export function refOfBatchMessage(x:BatchMessage,v:Ref<BatchMessage>)
-	export function unRefBatchMessage(v:Ref<BatchMessage>):BatchMessage
+	export function emptyUpdateChatModerationResp():UpdateChatModerationResp
+	export function emptyRefUpdateChatModerationResp():Ref<UpdateChatModerationResp>
+	export function refOfUpdateChatModerationResp(x:UpdateChatModerationResp,v:Ref<UpdateChatModerationResp>)
+	export function unRefUpdateChatModerationResp(v:Ref<UpdateChatModerationResp>):UpdateChatModerationResp
 	export function emptyListMember():ListMember
 	export function emptyRefListMember():Ref<ListMember>
 	export function refOfListMember(x:ListMember,v:Ref<ListMember>)
 	export function unRefListMember(v:Ref<ListMember>):ListMember
-	export function emptyMessagePostContent():MessagePostContent
-	export function emptyRefMessagePostContent():Ref<MessagePostContent>
-	export function refOfMessagePostContent(x:MessagePostContent,v:Ref<MessagePostContent>)
-	export function unRefMessagePostContent(v:Ref<MessagePostContent>):MessagePostContent
-	export function emptyP2MessageReadV1():P2MessageReadV1
-	export function emptyRefP2MessageReadV1():Ref<P2MessageReadV1>
-	export function refOfP2MessageReadV1(x:P2MessageReadV1,v:Ref<P2MessageReadV1>)
-	export function unRefP2MessageReadV1(v:Ref<P2MessageReadV1>):P2MessageReadV1
-	export function emptyReplyMessageReqBuilder():ReplyMessageReqBuilder
-	export function emptyRefReplyMessageReqBuilder():Ref<ReplyMessageReqBuilder>
-	export function refOfReplyMessageReqBuilder(x:ReplyMessageReqBuilder,v:Ref<ReplyMessageReqBuilder>)
-	export function unRefReplyMessageReqBuilder(v:Ref<ReplyMessageReqBuilder>):ReplyMessageReqBuilder
-	export function emptyDeleteChatMembersPathReqBodyBuilder():DeleteChatMembersPathReqBodyBuilder
-	export function emptyRefDeleteChatMembersPathReqBodyBuilder():Ref<DeleteChatMembersPathReqBodyBuilder>
-	export function refOfDeleteChatMembersPathReqBodyBuilder(x:DeleteChatMembersPathReqBodyBuilder,v:Ref<DeleteChatMembersPathReqBodyBuilder>)
-	export function unRefDeleteChatMembersPathReqBodyBuilder(v:Ref<DeleteChatMembersPathReqBodyBuilder>):DeleteChatMembersPathReqBodyBuilder
-	export function emptyGetMessageResp():GetMessageResp
-	export function emptyRefGetMessageResp():Ref<GetMessageResp>
-	export function refOfGetMessageResp(x:GetMessageResp,v:Ref<GetMessageResp>)
-	export function unRefGetMessageResp(v:Ref<GetMessageResp>):GetMessageResp
-	export function emptyListMessageReactionRespData():ListMessageReactionRespData
-	export function emptyRefListMessageReactionRespData():Ref<ListMessageReactionRespData>
-	export function refOfListMessageReactionRespData(x:ListMessageReactionRespData,v:Ref<ListMessageReactionRespData>)
-	export function unRefListMessageReactionRespData(v:Ref<ListMessageReactionRespData>):ListMessageReactionRespData
-	export function emptyMessageShareChat():MessageShareChat
-	export function emptyRefMessageShareChat():Ref<MessageShareChat>
-	export function refOfMessageShareChat(x:MessageShareChat,v:Ref<MessageShareChat>)
-	export function unRefMessageShareChat(v:Ref<MessageShareChat>):MessageShareChat
-	export function emptyP1MessageReceiveV1Data():P1MessageReceiveV1Data
-	export function emptyRefP1MessageReceiveV1Data():Ref<P1MessageReceiveV1Data>
-	export function refOfP1MessageReceiveV1Data(x:P1MessageReceiveV1Data,v:Ref<P1MessageReceiveV1Data>)
-	export function unRefP1MessageReceiveV1Data(v:Ref<P1MessageReceiveV1Data>):P1MessageReceiveV1Data
-	export function emptyP2MessageReactionCreatedV1():P2MessageReactionCreatedV1
-	export function emptyRefP2MessageReactionCreatedV1():Ref<P2MessageReactionCreatedV1>
-	export function refOfP2MessageReactionCreatedV1(x:P2MessageReactionCreatedV1,v:Ref<P2MessageReactionCreatedV1>)
-	export function unRefP2MessageReactionCreatedV1(v:Ref<P2MessageReactionCreatedV1>):P2MessageReactionCreatedV1
-	export function emptyP2MessageReadV1Handler():P2MessageReadV1Handler
-	export function emptyRefP2MessageReadV1Handler():Ref<P2MessageReadV1Handler>
-	export function refOfP2MessageReadV1Handler(x:P2MessageReadV1Handler,v:Ref<P2MessageReadV1Handler>)
-	export function unRefP2MessageReadV1Handler(v:Ref<P2MessageReadV1Handler>):P2MessageReadV1Handler
-	export function emptySpecialFocusUnread():SpecialFocusUnread
-	export function emptyRefSpecialFocusUnread():Ref<SpecialFocusUnread>
-	export function refOfSpecialFocusUnread(x:SpecialFocusUnread,v:Ref<SpecialFocusUnread>)
-	export function unRefSpecialFocusUnread(v:Ref<SpecialFocusUnread>):SpecialFocusUnread
-	export function emptySpecialFocusUnreadBuilder():SpecialFocusUnreadBuilder
-	export function emptyRefSpecialFocusUnreadBuilder():Ref<SpecialFocusUnreadBuilder>
-	export function refOfSpecialFocusUnreadBuilder(x:SpecialFocusUnreadBuilder,v:Ref<SpecialFocusUnreadBuilder>)
-	export function unRefSpecialFocusUnreadBuilder(v:Ref<SpecialFocusUnreadBuilder>):SpecialFocusUnreadBuilder
-	export function emptyUpdateChatModerationPathReqBodyBuilder():UpdateChatModerationPathReqBodyBuilder
-	export function emptyRefUpdateChatModerationPathReqBodyBuilder():Ref<UpdateChatModerationPathReqBodyBuilder>
-	export function refOfUpdateChatModerationPathReqBodyBuilder(x:UpdateChatModerationPathReqBodyBuilder,v:Ref<UpdateChatModerationPathReqBodyBuilder>)
-	export function unRefUpdateChatModerationPathReqBodyBuilder(v:Ref<UpdateChatModerationPathReqBodyBuilder>):UpdateChatModerationPathReqBodyBuilder
-	export function emptyAddManagersChatManagersReqBuilder():AddManagersChatManagersReqBuilder
-	export function emptyRefAddManagersChatManagersReqBuilder():Ref<AddManagersChatManagersReqBuilder>
-	export function refOfAddManagersChatManagersReqBuilder(x:AddManagersChatManagersReqBuilder,v:Ref<AddManagersChatManagersReqBuilder>)
-	export function unRefAddManagersChatManagersReqBuilder(v:Ref<AddManagersChatManagersReqBuilder>):AddManagersChatManagersReqBuilder
-	export function emptyCreateMessageReactionReqBody():CreateMessageReactionReqBody
-	export function emptyRefCreateMessageReactionReqBody():Ref<CreateMessageReactionReqBody>
-	export function refOfCreateMessageReactionReqBody(x:CreateMessageReactionReqBody,v:Ref<CreateMessageReactionReqBody>)
-	export function unRefCreateMessageReactionReqBody(v:Ref<CreateMessageReactionReqBody>):CreateMessageReactionReqBody
-	export function emptyLinkChatReqBuilder():LinkChatReqBuilder
-	export function emptyRefLinkChatReqBuilder():Ref<LinkChatReqBuilder>
-	export function refOfLinkChatReqBuilder(x:LinkChatReqBuilder,v:Ref<LinkChatReqBuilder>)
-	export function unRefLinkChatReqBuilder(v:Ref<LinkChatReqBuilder>):LinkChatReqBuilder
-	export function emptyChatTabConfig():ChatTabConfig
-	export function emptyRefChatTabConfig():Ref<ChatTabConfig>
-	export function refOfChatTabConfig(x:ChatTabConfig,v:Ref<ChatTabConfig>)
-	export function unRefChatTabConfig(v:Ref<ChatTabConfig>):ChatTabConfig
-	export function emptyCreateChatMembersReqBody():CreateChatMembersReqBody
-	export function emptyRefCreateChatMembersReqBody():Ref<CreateChatMembersReqBody>
-	export function refOfCreateChatMembersReqBody(x:CreateChatMembersReqBody,v:Ref<CreateChatMembersReqBody>)
-	export function unRefCreateChatMembersReqBody(v:Ref<CreateChatMembersReqBody>):CreateChatMembersReqBody
-	export function emptyCreateFileReqBody():CreateFileReqBody
-	export function emptyRefCreateFileReqBody():Ref<CreateFileReqBody>
-	export function refOfCreateFileReqBody(x:CreateFileReqBody,v:Ref<CreateFileReqBody>)
-	export function unRefCreateFileReqBody(v:Ref<CreateFileReqBody>):CreateFileReqBody
-	export function emptyCreateMessageReactionResp():CreateMessageReactionResp
-	export function emptyRefCreateMessageReactionResp():Ref<CreateMessageReactionResp>
-	export function refOfCreateMessageReactionResp(x:CreateMessageReactionResp,v:Ref<CreateMessageReactionResp>)
-	export function unRefCreateMessageReactionResp(v:Ref<CreateMessageReactionResp>):CreateMessageReactionResp
+	export function emptyRestrictedModeSetting():RestrictedModeSetting
+	export function emptyRefRestrictedModeSetting():Ref<RestrictedModeSetting>
+	export function refOfRestrictedModeSetting(x:RestrictedModeSetting,v:Ref<RestrictedModeSetting>)
+	export function unRefRestrictedModeSetting(v:Ref<RestrictedModeSetting>):RestrictedModeSetting
+	export function emptyMessageFile():MessageFile
+	export function emptyRefMessageFile():Ref<MessageFile>
+	export function refOfMessageFile(x:MessageFile,v:Ref<MessageFile>)
+	export function unRefMessageFile(v:Ref<MessageFile>):MessageFile
+	export function emptyCreateImageResp():CreateImageResp
+	export function emptyRefCreateImageResp():Ref<CreateImageResp>
+	export function refOfCreateImageResp(x:CreateImageResp,v:Ref<CreateImageResp>)
+	export function unRefCreateImageResp(v:Ref<CreateImageResp>):CreateImageResp
+	export function emptyCreatePinResp():CreatePinResp
+	export function emptyRefCreatePinResp():Ref<CreatePinResp>
+	export function refOfCreatePinResp(x:CreatePinResp,v:Ref<CreatePinResp>)
+	export function unRefCreatePinResp(v:Ref<CreatePinResp>):CreatePinResp
+	export function emptyDeleteManagersChatManagersResp():DeleteManagersChatManagersResp
+	export function emptyRefDeleteManagersChatManagersResp():Ref<DeleteManagersChatManagersResp>
+	export function refOfDeleteManagersChatManagersResp(x:DeleteManagersChatManagersResp,v:Ref<DeleteManagersChatManagersResp>)
+	export function unRefDeleteManagersChatManagersResp(v:Ref<DeleteManagersChatManagersResp>):DeleteManagersChatManagersResp
+	export function emptyUpdateChatResp():UpdateChatResp
+	export function emptyRefUpdateChatResp():Ref<UpdateChatResp>
+	export function refOfUpdateChatResp(x:UpdateChatResp,v:Ref<UpdateChatResp>)
+	export function unRefUpdateChatResp(v:Ref<UpdateChatResp>):UpdateChatResp
+	export function emptyEventMessageReader():EventMessageReader
+	export function emptyRefEventMessageReader():Ref<EventMessageReader>
+	export function refOfEventMessageReader(x:EventMessageReader,v:Ref<EventMessageReader>)
+	export function unRefEventMessageReader(v:Ref<EventMessageReader>):EventMessageReader
+	export function emptyP1OperatorV1():P1OperatorV1
+	export function emptyRefP1OperatorV1():Ref<P1OperatorV1>
+	export function refOfP1OperatorV1(x:P1OperatorV1,v:Ref<P1OperatorV1>)
+	export function unRefP1OperatorV1(v:Ref<P1OperatorV1>):P1OperatorV1
+	export function emptyP2MessageReactionDeletedV1():P2MessageReactionDeletedV1
+	export function emptyRefP2MessageReactionDeletedV1():Ref<P2MessageReactionDeletedV1>
+	export function refOfP2MessageReactionDeletedV1(x:P2MessageReactionDeletedV1,v:Ref<P2MessageReactionDeletedV1>)
+	export function unRefP2MessageReactionDeletedV1(v:Ref<P2MessageReactionDeletedV1>):P2MessageReactionDeletedV1
+	export function emptyCreateChatMenuTreeReq():CreateChatMenuTreeReq
+	export function emptyRefCreateChatMenuTreeReq():Ref<CreateChatMenuTreeReq>
+	export function refOfCreateChatMenuTreeReq(x:CreateChatMenuTreeReq,v:Ref<CreateChatMenuTreeReq>)
+	export function unRefCreateChatMenuTreeReq(v:Ref<CreateChatMenuTreeReq>):CreateChatMenuTreeReq
+	export function emptyCreateFileRespData():CreateFileRespData
+	export function emptyRefCreateFileRespData():Ref<CreateFileRespData>
+	export function refOfCreateFileRespData(x:CreateFileRespData,v:Ref<CreateFileRespData>)
+	export function unRefCreateFileRespData(v:Ref<CreateFileRespData>):CreateFileRespData
+	export function emptyGetImageResp():GetImageResp
+	export function emptyRefGetImageResp():Ref<GetImageResp>
+	export function refOfGetImageResp(x:GetImageResp,v:Ref<GetImageResp>)
+	export function unRefGetImageResp(v:Ref<GetImageResp>):GetImageResp
+	export function emptyUrgentAppMessageRespData():UrgentAppMessageRespData
+	export function emptyRefUrgentAppMessageRespData():Ref<UrgentAppMessageRespData>
+	export function refOfUrgentAppMessageRespData(x:UrgentAppMessageRespData,v:Ref<UrgentAppMessageRespData>)
+	export function unRefUrgentAppMessageRespData(v:Ref<UrgentAppMessageRespData>):UrgentAppMessageRespData
 	export function emptyDeleteTopNoticeChatTopNoticeResp():DeleteTopNoticeChatTopNoticeResp
 	export function emptyRefDeleteTopNoticeChatTopNoticeResp():Ref<DeleteTopNoticeChatTopNoticeResp>
 	export function refOfDeleteTopNoticeChatTopNoticeResp(x:DeleteTopNoticeChatTopNoticeResp,v:Ref<DeleteTopNoticeChatTopNoticeResp>)
 	export function unRefDeleteTopNoticeChatTopNoticeResp(v:Ref<DeleteTopNoticeChatTopNoticeResp>):DeleteTopNoticeChatTopNoticeResp
-	export function emptyMergeForwardMessageRespData():MergeForwardMessageRespData
-	export function emptyRefMergeForwardMessageRespData():Ref<MergeForwardMessageRespData>
-	export function refOfMergeForwardMessageRespData(x:MergeForwardMessageRespData,v:Ref<MergeForwardMessageRespData>)
-	export function unRefMergeForwardMessageRespData(v:Ref<MergeForwardMessageRespData>):MergeForwardMessageRespData
-	export function emptyChatTabContentBuilder():ChatTabContentBuilder
-	export function emptyRefChatTabContentBuilder():Ref<ChatTabContentBuilder>
-	export function refOfChatTabContentBuilder(x:ChatTabContentBuilder,v:Ref<ChatTabContentBuilder>)
-	export function unRefChatTabContentBuilder(v:Ref<ChatTabContentBuilder>):ChatTabContentBuilder
-	export function emptyCreateMessageReqBody():CreateMessageReqBody
-	export function emptyRefCreateMessageReqBody():Ref<CreateMessageReqBody>
-	export function refOfCreateMessageReqBody(x:CreateMessageReqBody,v:Ref<CreateMessageReqBody>)
-	export function unRefCreateMessageReqBody(v:Ref<CreateMessageReqBody>):CreateMessageReqBody
-	export function emptyP1RemoveBotV1():P1RemoveBotV1
-	export function emptyRefP1RemoveBotV1():Ref<P1RemoveBotV1>
-	export function refOfP1RemoveBotV1(x:P1RemoveBotV1,v:Ref<P1RemoveBotV1>)
-	export function unRefP1RemoveBotV1(v:Ref<P1RemoveBotV1>):P1RemoveBotV1
+	export function emptyForwardMessageRespData():ForwardMessageRespData
+	export function emptyRefForwardMessageRespData():Ref<ForwardMessageRespData>
+	export function refOfForwardMessageRespData(x:ForwardMessageRespData,v:Ref<ForwardMessageRespData>)
+	export function unRefForwardMessageRespData(v:Ref<ForwardMessageRespData>):ForwardMessageRespData
+	export function emptyMsgProcessData():MsgProcessData
+	export function emptyRefMsgProcessData():Ref<MsgProcessData>
+	export function refOfMsgProcessData(x:MsgProcessData,v:Ref<MsgProcessData>)
+	export function unRefMsgProcessData(v:Ref<MsgProcessData>):MsgProcessData
+	export function emptyUpdateTabsChatTabReq():UpdateTabsChatTabReq
+	export function emptyRefUpdateTabsChatTabReq():Ref<UpdateTabsChatTabReq>
+	export function refOfUpdateTabsChatTabReq(x:UpdateTabsChatTabReq,v:Ref<UpdateTabsChatTabReq>)
+	export function unRefUpdateTabsChatTabReq(v:Ref<UpdateTabsChatTabReq>):UpdateTabsChatTabReq
+	export function emptyDeleteTabsChatTabReqBody():DeleteTabsChatTabReqBody
+	export function emptyRefDeleteTabsChatTabReqBody():Ref<DeleteTabsChatTabReqBody>
+	export function refOfDeleteTabsChatTabReqBody(x:DeleteTabsChatTabReqBody,v:Ref<DeleteTabsChatTabReqBody>)
+	export function unRefDeleteTabsChatTabReqBody(v:Ref<DeleteTabsChatTabReqBody>):DeleteTabsChatTabReqBody
+	export function emptyListPinResp():ListPinResp
+	export function emptyRefListPinResp():Ref<ListPinResp>
+	export function refOfListPinResp(x:ListPinResp,v:Ref<ListPinResp>)
+	export function unRefListPinResp(v:Ref<ListPinResp>):ListPinResp
+	export function emptyModeratorList():ModeratorList
+	export function emptyRefModeratorList():Ref<ModeratorList>
+	export function refOfModeratorList(x:ModeratorList,v:Ref<ModeratorList>)
+	export function unRefModeratorList(v:Ref<ModeratorList>):ModeratorList
+	export function emptyDeleteMessageReactionRespData():DeleteMessageReactionRespData
+	export function emptyRefDeleteMessageReactionRespData():Ref<DeleteMessageReactionRespData>
+	export function refOfDeleteMessageReactionRespData(x:DeleteMessageReactionRespData,v:Ref<DeleteMessageReactionRespData>)
+	export function unRefDeleteMessageReactionRespData(v:Ref<DeleteMessageReactionRespData>):DeleteMessageReactionRespData
+	export function emptyMessageShareChat():MessageShareChat
+	export function emptyRefMessageShareChat():Ref<MessageShareChat>
+	export function refOfMessageShareChat(x:MessageShareChat,v:Ref<MessageShareChat>)
+	export function unRefMessageShareChat(v:Ref<MessageShareChat>):MessageShareChat
+	export function emptyP2ChatMemberUserWithdrawnV1():P2ChatMemberUserWithdrawnV1
+	export function emptyRefP2ChatMemberUserWithdrawnV1():Ref<P2ChatMemberUserWithdrawnV1>
+	export function refOfP2ChatMemberUserWithdrawnV1(x:P2ChatMemberUserWithdrawnV1,v:Ref<P2ChatMemberUserWithdrawnV1>)
+	export function unRefP2ChatMemberUserWithdrawnV1(v:Ref<P2ChatMemberUserWithdrawnV1>):P2ChatMemberUserWithdrawnV1
+	export function emptyCreateChatMenuTreeResp():CreateChatMenuTreeResp
+	export function emptyRefCreateChatMenuTreeResp():Ref<CreateChatMenuTreeResp>
+	export function refOfCreateChatMenuTreeResp(x:CreateChatMenuTreeResp,v:Ref<CreateChatMenuTreeResp>)
+	export function unRefCreateChatMenuTreeResp(v:Ref<CreateChatMenuTreeResp>):CreateChatMenuTreeResp
+	export function emptyP2MessageRecalledV1Data():P2MessageRecalledV1Data
+	export function emptyRefP2MessageRecalledV1Data():Ref<P2MessageRecalledV1Data>
+	export function refOfP2MessageRecalledV1Data(x:P2MessageRecalledV1Data,v:Ref<P2MessageRecalledV1Data>)
+	export function unRefP2MessageRecalledV1Data(v:Ref<P2MessageRecalledV1Data>):P2MessageRecalledV1Data
+	export function emptyGetChatReq():GetChatReq
+	export function emptyRefGetChatReq():Ref<GetChatReq>
+	export function refOfGetChatReq(x:GetChatReq,v:Ref<GetChatReq>)
+	export function unRefGetChatReq(v:Ref<GetChatReq>):GetChatReq
+	export function emptyPutTopNoticeChatTopNoticeReq():PutTopNoticeChatTopNoticeReq
+	export function emptyRefPutTopNoticeChatTopNoticeReq():Ref<PutTopNoticeChatTopNoticeReq>
+	export function refOfPutTopNoticeChatTopNoticeReq(x:PutTopNoticeChatTopNoticeReq,v:Ref<PutTopNoticeChatTopNoticeReq>)
+	export function unRefPutTopNoticeChatTopNoticeReq(v:Ref<PutTopNoticeChatTopNoticeReq>):PutTopNoticeChatTopNoticeReq
+	export function emptyUpdateTabsChatTabRespData():UpdateTabsChatTabRespData
+	export function emptyRefUpdateTabsChatTabRespData():Ref<UpdateTabsChatTabRespData>
+	export function refOfUpdateTabsChatTabRespData(x:UpdateTabsChatTabRespData,v:Ref<UpdateTabsChatTabRespData>)
+	export function unRefUpdateTabsChatTabRespData(v:Ref<UpdateTabsChatTabRespData>):UpdateTabsChatTabRespData
+	export function emptyListMessageResp():ListMessageResp
+	export function emptyRefListMessageResp():Ref<ListMessageResp>
+	export function refOfListMessageResp(x:ListMessageResp,v:Ref<ListMessageResp>)
+	export function unRefListMessageResp(v:Ref<ListMessageResp>):ListMessageResp
+	export function emptyChatMenuTree():ChatMenuTree
+	export function emptyRefChatMenuTree():Ref<ChatMenuTree>
+	export function refOfChatMenuTree(x:ChatMenuTree,v:Ref<ChatMenuTree>)
+	export function unRefChatMenuTree(v:Ref<ChatMenuTree>):ChatMenuTree
+	export function emptyDeleteMessageResp():DeleteMessageResp
+	export function emptyRefDeleteMessageResp():Ref<DeleteMessageResp>
+	export function refOfDeleteMessageResp(x:DeleteMessageResp,v:Ref<DeleteMessageResp>)
+	export function unRefDeleteMessageResp(v:Ref<DeleteMessageResp>):DeleteMessageResp
+	export function emptyP2ChatUpdatedV1():P2ChatUpdatedV1
+	export function emptyRefP2ChatUpdatedV1():Ref<P2ChatUpdatedV1>
+	export function refOfP2ChatUpdatedV1(x:P2ChatUpdatedV1,v:Ref<P2ChatUpdatedV1>)
+	export function unRefP2ChatUpdatedV1(v:Ref<P2ChatUpdatedV1>):P2ChatUpdatedV1
+	export function emptyChatChange():ChatChange
+	export function emptyRefChatChange():Ref<ChatChange>
+	export function refOfChatChange(x:ChatChange,v:Ref<ChatChange>)
+	export function unRefChatChange(v:Ref<ChatChange>):ChatChange
+	export function emptyP2MessageReceiveV1():P2MessageReceiveV1
+	export function emptyRefP2MessageReceiveV1():Ref<P2MessageReceiveV1>
+	export function refOfP2MessageReceiveV1(x:P2MessageReceiveV1,v:Ref<P2MessageReceiveV1>)
+	export function unRefP2MessageReceiveV1(v:Ref<P2MessageReceiveV1>):P2MessageReceiveV1
+	export function emptyToolkit():Toolkit
+	export function emptyRefToolkit():Ref<Toolkit>
+	export function refOfToolkit(x:Toolkit,v:Ref<Toolkit>)
+	export function unRefToolkit(v:Ref<Toolkit>):Toolkit
+	export function emptyAddManagersChatManagersRespData():AddManagersChatManagersRespData
+	export function emptyRefAddManagersChatManagersRespData():Ref<AddManagersChatManagersRespData>
+	export function refOfAddManagersChatManagersRespData(x:AddManagersChatManagersRespData,v:Ref<AddManagersChatManagersRespData>)
+	export function unRefAddManagersChatManagersRespData(v:Ref<AddManagersChatManagersRespData>):AddManagersChatManagersRespData
+	export function emptyP2ChatMemberBotAddedV1():P2ChatMemberBotAddedV1
+	export function emptyRefP2ChatMemberBotAddedV1():Ref<P2ChatMemberBotAddedV1>
+	export function refOfP2ChatMemberBotAddedV1(x:P2ChatMemberBotAddedV1,v:Ref<P2ChatMemberBotAddedV1>)
+	export function unRefP2ChatMemberBotAddedV1(v:Ref<P2ChatMemberBotAddedV1>):P2ChatMemberBotAddedV1
+	export function emptyP2MessageReactionDeletedV1Data():P2MessageReactionDeletedV1Data
+	export function emptyRefP2MessageReactionDeletedV1Data():Ref<P2MessageReactionDeletedV1Data>
+	export function refOfP2MessageReactionDeletedV1Data(x:P2MessageReactionDeletedV1Data,v:Ref<P2MessageReactionDeletedV1Data>)
+	export function unRefP2MessageReactionDeletedV1Data(v:Ref<P2MessageReactionDeletedV1Data>):P2MessageReactionDeletedV1Data
+	export function emptyI18nNames():I18nNames
+	export function emptyRefI18nNames():Ref<I18nNames>
+	export function refOfI18nNames(x:I18nNames,v:Ref<I18nNames>)
+	export function unRefI18nNames(v:Ref<I18nNames>):I18nNames
+	export function emptyReplyMessageReqBody():ReplyMessageReqBody
+	export function emptyRefReplyMessageReqBody():Ref<ReplyMessageReqBody>
+	export function refOfReplyMessageReqBody(x:ReplyMessageReqBody,v:Ref<ReplyMessageReqBody>)
+	export function unRefReplyMessageReqBody(v:Ref<ReplyMessageReqBody>):ReplyMessageReqBody
+	export function emptyToolkitCallback():ToolkitCallback
+	export function emptyRefToolkitCallback():Ref<ToolkitCallback>
+	export function refOfToolkitCallback(x:ToolkitCallback,v:Ref<ToolkitCallback>)
+	export function unRefToolkitCallback(v:Ref<ToolkitCallback>):ToolkitCallback
+	export function emptySortTabsChatTabRespData():SortTabsChatTabRespData
+	export function emptyRefSortTabsChatTabRespData():Ref<SortTabsChatTabRespData>
+	export function refOfSortTabsChatTabRespData(x:SortTabsChatTabRespData,v:Ref<SortTabsChatTabRespData>)
+	export function unRefSortTabsChatTabRespData(v:Ref<SortTabsChatTabRespData>):SortTabsChatTabRespData
+	export function emptyUpdateChatModerationReq():UpdateChatModerationReq
+	export function emptyRefUpdateChatModerationReq():Ref<UpdateChatModerationReq>
+	export function refOfUpdateChatModerationReq(x:UpdateChatModerationReq,v:Ref<UpdateChatModerationReq>)
+	export function unRefUpdateChatModerationReq(v:Ref<UpdateChatModerationReq>):UpdateChatModerationReq
+	export function emptyCreateMessageReactionReqBody():CreateMessageReactionReqBody
+	export function emptyRefCreateMessageReactionReqBody():Ref<CreateMessageReactionReqBody>
+	export function refOfCreateMessageReactionReqBody(x:CreateMessageReactionReqBody,v:Ref<CreateMessageReactionReqBody>)
+	export function unRefCreateMessageReactionReqBody(v:Ref<CreateMessageReactionReqBody>):CreateMessageReactionReqBody
+	export function emptyP1ChatDisbandV1Data():P1ChatDisbandV1Data
+	export function emptyRefP1ChatDisbandV1Data():Ref<P1ChatDisbandV1Data>
+	export function refOfP1ChatDisbandV1Data(x:P1ChatDisbandV1Data,v:Ref<P1ChatDisbandV1Data>)
+	export function unRefP1ChatDisbandV1Data(v:Ref<P1ChatDisbandV1Data>):P1ChatDisbandV1Data
+	export function emptyPatchChatMenuItemRespData():PatchChatMenuItemRespData
+	export function emptyRefPatchChatMenuItemRespData():Ref<PatchChatMenuItemRespData>
+	export function refOfPatchChatMenuItemRespData(x:PatchChatMenuItemRespData,v:Ref<PatchChatMenuItemRespData>)
+	export function unRefPatchChatMenuItemRespData(v:Ref<PatchChatMenuItemRespData>):PatchChatMenuItemRespData
 	export function emptyAddManagersChatManagersReqBody():AddManagersChatManagersReqBody
 	export function emptyRefAddManagersChatManagersReqBody():Ref<AddManagersChatManagersReqBody>
 	export function refOfAddManagersChatManagersReqBody(x:AddManagersChatManagersReqBody,v:Ref<AddManagersChatManagersReqBody>)
 	export function unRefAddManagersChatManagersReqBody(v:Ref<AddManagersChatManagersReqBody>):AddManagersChatManagersReqBody
-	export function emptyChatMenuSecondLevel():ChatMenuSecondLevel
-	export function emptyRefChatMenuSecondLevel():Ref<ChatMenuSecondLevel>
-	export function refOfChatMenuSecondLevel(x:ChatMenuSecondLevel,v:Ref<ChatMenuSecondLevel>)
-	export function unRefChatMenuSecondLevel(v:Ref<ChatMenuSecondLevel>):ChatMenuSecondLevel
-	export function emptySortChatMenuTreeReqBuilder():SortChatMenuTreeReqBuilder
-	export function emptyRefSortChatMenuTreeReqBuilder():Ref<SortChatMenuTreeReqBuilder>
-	export function refOfSortChatMenuTreeReqBuilder(x:SortChatMenuTreeReqBuilder,v:Ref<SortChatMenuTreeReqBuilder>)
-	export function unRefSortChatMenuTreeReqBuilder(v:Ref<SortChatMenuTreeReqBuilder>):SortChatMenuTreeReqBuilder
-	export function emptyWidgetUrlBuilder():WidgetUrlBuilder
-	export function emptyRefWidgetUrlBuilder():Ref<WidgetUrlBuilder>
-	export function refOfWidgetUrlBuilder(x:WidgetUrlBuilder,v:Ref<WidgetUrlBuilder>)
-	export function unRefWidgetUrlBuilder(v:Ref<WidgetUrlBuilder>):WidgetUrlBuilder
-	export function emptyDeleteTopNoticeChatTopNoticeReqBuilder():DeleteTopNoticeChatTopNoticeReqBuilder
-	export function emptyRefDeleteTopNoticeChatTopNoticeReqBuilder():Ref<DeleteTopNoticeChatTopNoticeReqBuilder>
-	export function refOfDeleteTopNoticeChatTopNoticeReqBuilder(x:DeleteTopNoticeChatTopNoticeReqBuilder,v:Ref<DeleteTopNoticeChatTopNoticeReqBuilder>)
-	export function unRefDeleteTopNoticeChatTopNoticeReqBuilder(v:Ref<DeleteTopNoticeChatTopNoticeReqBuilder>):DeleteTopNoticeChatTopNoticeReqBuilder
+	export function emptyCreateFileReq():CreateFileReq
+	export function emptyRefCreateFileReq():Ref<CreateFileReq>
+	export function refOfCreateFileReq(x:CreateFileReq,v:Ref<CreateFileReq>)
+	export function unRefCreateFileReq(v:Ref<CreateFileReq>):CreateFileReq
+	export function emptyUpdateMessageResp():UpdateMessageResp
+	export function emptyRefUpdateMessageResp():Ref<UpdateMessageResp>
+	export function refOfUpdateMessageResp(x:UpdateMessageResp,v:Ref<UpdateMessageResp>)
+	export function unRefUpdateMessageResp(v:Ref<UpdateMessageResp>):UpdateMessageResp
+	export function emptyP2ChatDisbandedV1Data():P2ChatDisbandedV1Data
+	export function emptyRefP2ChatDisbandedV1Data():Ref<P2ChatDisbandedV1Data>
+	export function refOfP2ChatDisbandedV1Data(x:P2ChatDisbandedV1Data,v:Ref<P2ChatDisbandedV1Data>)
+	export function unRefP2ChatDisbandedV1Data(v:Ref<P2ChatDisbandedV1Data>):P2ChatDisbandedV1Data
+	export function emptyP2ChatMemberUserDeletedV1Data():P2ChatMemberUserDeletedV1Data
+	export function emptyRefP2ChatMemberUserDeletedV1Data():Ref<P2ChatMemberUserDeletedV1Data>
+	export function refOfP2ChatMemberUserDeletedV1Data(x:P2ChatMemberUserDeletedV1Data,v:Ref<P2ChatMemberUserDeletedV1Data>)
+	export function unRefP2ChatMemberUserDeletedV1Data(v:Ref<P2ChatMemberUserDeletedV1Data>):P2ChatMemberUserDeletedV1Data
+	export function emptyCreateImageRespData():CreateImageRespData
+	export function emptyRefCreateImageRespData():Ref<CreateImageRespData>
+	export function refOfCreateImageRespData(x:CreateImageRespData,v:Ref<CreateImageRespData>)
+	export function unRefCreateImageRespData(v:Ref<CreateImageRespData>):CreateImageRespData
+	export function emptyLinkChatReq():LinkChatReq
+	export function emptyRefLinkChatReq():Ref<LinkChatReq>
+	export function refOfLinkChatReq(x:LinkChatReq,v:Ref<LinkChatReq>)
+	export function unRefLinkChatReq(v:Ref<LinkChatReq>):LinkChatReq
+	export function emptyP2ChatMemberBotDeletedV1Data():P2ChatMemberBotDeletedV1Data
+	export function emptyRefP2ChatMemberBotDeletedV1Data():Ref<P2ChatMemberBotDeletedV1Data>
+	export function refOfP2ChatMemberBotDeletedV1Data(x:P2ChatMemberBotDeletedV1Data,v:Ref<P2ChatMemberBotDeletedV1Data>)
+	export function unRefP2ChatMemberBotDeletedV1Data(v:Ref<P2ChatMemberBotDeletedV1Data>):P2ChatMemberBotDeletedV1Data
+	export function emptyBatchRecallProgress():BatchRecallProgress
+	export function emptyRefBatchRecallProgress():Ref<BatchRecallProgress>
+	export function refOfBatchRecallProgress(x:BatchRecallProgress,v:Ref<BatchRecallProgress>)
+	export function unRefBatchRecallProgress(v:Ref<BatchRecallProgress>):BatchRecallProgress
+	export function emptyBatchMessage():BatchMessage
+	export function emptyRefBatchMessage():Ref<BatchMessage>
+	export function refOfBatchMessage(x:BatchMessage,v:Ref<BatchMessage>)
+	export function unRefBatchMessage(v:Ref<BatchMessage>):BatchMessage
+	export function emptyUpdateChatModerationReqBody():UpdateChatModerationReqBody
+	export function emptyRefUpdateChatModerationReqBody():Ref<UpdateChatModerationReqBody>
+	export function refOfUpdateChatModerationReqBody(x:UpdateChatModerationReqBody,v:Ref<UpdateChatModerationReqBody>)
+	export function unRefUpdateChatModerationReqBody(v:Ref<UpdateChatModerationReqBody>):UpdateChatModerationReqBody
+	export function emptyGetChatMembersReq():GetChatMembersReq
+	export function emptyRefGetChatMembersReq():Ref<GetChatMembersReq>
+	export function refOfGetChatMembersReq(x:GetChatMembersReq,v:Ref<GetChatMembersReq>)
+	export function unRefGetChatMembersReq(v:Ref<GetChatMembersReq>):GetChatMembersReq
+	export function emptyP2MessageReceiveV1Data():P2MessageReceiveV1Data
+	export function emptyRefP2MessageReceiveV1Data():Ref<P2MessageReceiveV1Data>
+	export function refOfP2MessageReceiveV1Data(x:P2MessageReceiveV1Data,v:Ref<P2MessageReceiveV1Data>)
+	export function unRefP2MessageReceiveV1Data(v:Ref<P2MessageReceiveV1Data>):P2MessageReceiveV1Data
+	export function emptyGetProgressBatchMessageReq():GetProgressBatchMessageReq
+	export function emptyRefGetProgressBatchMessageReq():Ref<GetProgressBatchMessageReq>
+	export function refOfGetProgressBatchMessageReq(x:GetProgressBatchMessageReq,v:Ref<GetProgressBatchMessageReq>)
+	export function unRefGetProgressBatchMessageReq(v:Ref<GetProgressBatchMessageReq>):GetProgressBatchMessageReq
 	export function emptySender():Sender
 	export function emptyRefSender():Ref<Sender>
 	export function refOfSender(x:Sender,v:Ref<Sender>)
 	export function unRefSender(v:Ref<Sender>):Sender
+	export function emptyChatMenuItem():ChatMenuItem
+	export function emptyRefChatMenuItem():Ref<ChatMenuItem>
+	export function refOfChatMenuItem(x:ChatMenuItem,v:Ref<ChatMenuItem>)
+	export function unRefChatMenuItem(v:Ref<ChatMenuItem>):ChatMenuItem
+	export function emptyGetImageReq():GetImageReq
+	export function emptyRefGetImageReq():Ref<GetImageReq>
+	export function refOfGetImageReq(x:GetImageReq,v:Ref<GetImageReq>)
+	export function unRefGetImageReq(v:Ref<GetImageReq>):GetImageReq
+	export function emptySortTabsChatTabResp():SortTabsChatTabResp
+	export function emptyRefSortTabsChatTabResp():Ref<SortTabsChatTabResp>
+	export function refOfSortTabsChatTabResp(x:SortTabsChatTabResp,v:Ref<SortTabsChatTabResp>)
+	export function unRefSortTabsChatTabResp(v:Ref<SortTabsChatTabResp>):SortTabsChatTabResp
+	export function emptyPatchChatAnnouncementReq():PatchChatAnnouncementReq
+	export function emptyRefPatchChatAnnouncementReq():Ref<PatchChatAnnouncementReq>
+	export function refOfPatchChatAnnouncementReq(x:PatchChatAnnouncementReq,v:Ref<PatchChatAnnouncementReq>)
+	export function unRefPatchChatAnnouncementReq(v:Ref<PatchChatAnnouncementReq>):PatchChatAnnouncementReq
+	export function emptyP2MessageReactionCreatedV1Data():P2MessageReactionCreatedV1Data
+	export function emptyRefP2MessageReactionCreatedV1Data():Ref<P2MessageReactionCreatedV1Data>
+	export function refOfP2MessageReactionCreatedV1Data(x:P2MessageReactionCreatedV1Data,v:Ref<P2MessageReactionCreatedV1Data>)
+	export function unRefP2MessageReactionCreatedV1Data(v:Ref<P2MessageReactionCreatedV1Data>):P2MessageReactionCreatedV1Data
+	export function emptyReplyMessageRespData():ReplyMessageRespData
+	export function emptyRefReplyMessageRespData():Ref<ReplyMessageRespData>
+	export function refOfReplyMessageRespData(x:ReplyMessageRespData,v:Ref<ReplyMessageRespData>)
+	export function unRefReplyMessageRespData(v:Ref<ReplyMessageRespData>):ReplyMessageRespData
+	export function emptyCreateChatTabRespData():CreateChatTabRespData
+	export function emptyRefCreateChatTabRespData():Ref<CreateChatTabRespData>
+	export function refOfCreateChatTabRespData(x:CreateChatTabRespData,v:Ref<CreateChatTabRespData>)
+	export function unRefCreateChatTabRespData(v:Ref<CreateChatTabRespData>):CreateChatTabRespData
+	export function emptyCreateMessageReactionResp():CreateMessageReactionResp
+	export function emptyRefCreateMessageReactionResp():Ref<CreateMessageReactionResp>
+	export function refOfCreateMessageReactionResp(x:CreateMessageReactionResp,v:Ref<CreateMessageReactionResp>)
+	export function unRefCreateMessageReactionResp(v:Ref<CreateMessageReactionResp>):CreateMessageReactionResp
+	export function emptyMessagePostAt():MessagePostAt
+	export function emptyRefMessagePostAt():Ref<MessagePostAt>
+	export function refOfMessagePostAt(x:MessagePostAt,v:Ref<MessagePostAt>)
+	export function unRefMessagePostAt(v:Ref<MessagePostAt>):MessagePostAt
+	export function emptyP2ChatMemberUserAddedV1():P2ChatMemberUserAddedV1
+	export function emptyRefP2ChatMemberUserAddedV1():Ref<P2ChatMemberUserAddedV1>
+	export function refOfP2ChatMemberUserAddedV1(x:P2ChatMemberUserAddedV1,v:Ref<P2ChatMemberUserAddedV1>)
+	export function unRefP2ChatMemberUserAddedV1(v:Ref<P2ChatMemberUserAddedV1>):P2ChatMemberUserAddedV1
+	export function emptyBatchMessageReadUser():BatchMessageReadUser
+	export function emptyRefBatchMessageReadUser():Ref<BatchMessageReadUser>
+	export function refOfBatchMessageReadUser(x:BatchMessageReadUser,v:Ref<BatchMessageReadUser>)
+	export function unRefBatchMessageReadUser(v:Ref<BatchMessageReadUser>):BatchMessageReadUser
+	export function emptyCreateChatTabResp():CreateChatTabResp
+	export function emptyRefCreateChatTabResp():Ref<CreateChatTabResp>
+	export function refOfCreateChatTabResp(x:CreateChatTabResp,v:Ref<CreateChatTabResp>)
+	export function unRefCreateChatTabResp(v:Ref<CreateChatTabResp>):CreateChatTabResp
+	export function emptyDeleteTopNoticeChatTopNoticeReq():DeleteTopNoticeChatTopNoticeReq
+	export function emptyRefDeleteTopNoticeChatTopNoticeReq():Ref<DeleteTopNoticeChatTopNoticeReq>
+	export function refOfDeleteTopNoticeChatTopNoticeReq(x:DeleteTopNoticeChatTopNoticeReq,v:Ref<DeleteTopNoticeChatTopNoticeReq>)
+	export function unRefDeleteTopNoticeChatTopNoticeReq(v:Ref<DeleteTopNoticeChatTopNoticeReq>):DeleteTopNoticeChatTopNoticeReq
+	export function emptyImDepthData():ImDepthData
+	export function emptyRefImDepthData():Ref<ImDepthData>
+	export function refOfImDepthData(x:ImDepthData,v:Ref<ImDepthData>)
+	export function unRefImDepthData(v:Ref<ImDepthData>):ImDepthData
+	export function emptyMessage():Message
+	export function emptyRefMessage():Ref<Message>
+	export function refOfMessage(x:Message,v:Ref<Message>)
+	export function unRefMessage(v:Ref<Message>):Message
+	export function emptyMessageAudio():MessageAudio
+	export function emptyRefMessageAudio():Ref<MessageAudio>
+	export function refOfMessageAudio(x:MessageAudio,v:Ref<MessageAudio>)
+	export function unRefMessageAudio(v:Ref<MessageAudio>):MessageAudio
+	export function emptyListChatResp():ListChatResp
+	export function emptyRefListChatResp():Ref<ListChatResp>
+	export function refOfListChatResp(x:ListChatResp,v:Ref<ListChatResp>)
+	export function unRefListChatResp(v:Ref<ListChatResp>):ListChatResp
+	export function emptyUpdateMessageReq():UpdateMessageReq
+	export function emptyRefUpdateMessageReq():Ref<UpdateMessageReq>
+	export function refOfUpdateMessageReq(x:UpdateMessageReq,v:Ref<UpdateMessageReq>)
+	export function unRefUpdateMessageReq(v:Ref<UpdateMessageReq>):UpdateMessageReq
+	export function emptyListTabsChatTabReq():ListTabsChatTabReq
+	export function emptyRefListTabsChatTabReq():Ref<ListTabsChatTabReq>
+	export function refOfListTabsChatTabReq(x:ListTabsChatTabReq,v:Ref<ListTabsChatTabReq>)
+	export function unRefListTabsChatTabReq(v:Ref<ListTabsChatTabReq>):ListTabsChatTabReq
+	export function emptyChatManagers():ChatManagers
+	export function emptyRefChatManagers():Ref<ChatManagers>
+	export function refOfChatManagers(x:ChatManagers,v:Ref<ChatManagers>)
+	export function unRefChatManagers(v:Ref<ChatManagers>):ChatManagers
+	export function emptyCreateMessageRespData():CreateMessageRespData
+	export function emptyRefCreateMessageRespData():Ref<CreateMessageRespData>
+	export function refOfCreateMessageRespData(x:CreateMessageRespData,v:Ref<CreateMessageRespData>)
+	export function unRefCreateMessageRespData(v:Ref<CreateMessageRespData>):CreateMessageRespData
+	export function emptyDeleteTabsChatTabResp():DeleteTabsChatTabResp
+	export function emptyRefDeleteTabsChatTabResp():Ref<DeleteTabsChatTabResp>
+	export function refOfDeleteTabsChatTabResp(x:DeleteTabsChatTabResp,v:Ref<DeleteTabsChatTabResp>)
+	export function unRefDeleteTabsChatTabResp(v:Ref<DeleteTabsChatTabResp>):DeleteTabsChatTabResp
+	export function emptyGetChatModerationIterator():GetChatModerationIterator
+	export function emptyRefGetChatModerationIterator():Ref<GetChatModerationIterator>
+	export function refOfGetChatModerationIterator(x:GetChatModerationIterator,v:Ref<GetChatModerationIterator>)
+	export function unRefGetChatModerationIterator(v:Ref<GetChatModerationIterator>):GetChatModerationIterator
+	export function emptyDeleteChatMembersResp():DeleteChatMembersResp
+	export function emptyRefDeleteChatMembersResp():Ref<DeleteChatMembersResp>
+	export function refOfDeleteChatMembersResp(x:DeleteChatMembersResp,v:Ref<DeleteChatMembersResp>)
+	export function unRefDeleteChatMembersResp(v:Ref<DeleteChatMembersResp>):DeleteChatMembersResp
+	export function emptyGetChatAnnouncementRespData():GetChatAnnouncementRespData
+	export function emptyRefGetChatAnnouncementRespData():Ref<GetChatAnnouncementRespData>
+	export function refOfGetChatAnnouncementRespData(x:GetChatAnnouncementRespData,v:Ref<GetChatAnnouncementRespData>)
+	export function unRefGetChatAnnouncementRespData(v:Ref<GetChatAnnouncementRespData>):GetChatAnnouncementRespData
+	export function emptyReadUsersMessageResp():ReadUsersMessageResp
+	export function emptyRefReadUsersMessageResp():Ref<ReadUsersMessageResp>
+	export function refOfReadUsersMessageResp(x:ReadUsersMessageResp,v:Ref<ReadUsersMessageResp>)
+	export function unRefReadUsersMessageResp(v:Ref<ReadUsersMessageResp>):ReadUsersMessageResp
+	export function emptyReplyMessageResp():ReplyMessageResp
+	export function emptyRefReplyMessageResp():Ref<ReplyMessageResp>
+	export function refOfReplyMessageResp(x:ReplyMessageResp,v:Ref<ReplyMessageResp>)
+	export function unRefReplyMessageResp(v:Ref<ReplyMessageResp>):ReplyMessageResp
+	export function emptyChatMemberUser():ChatMemberUser
+	export function emptyRefChatMemberUser():Ref<ChatMemberUser>
+	export function refOfChatMemberUser(x:ChatMemberUser,v:Ref<ChatMemberUser>)
+	export function unRefChatMemberUser(v:Ref<ChatMemberUser>):ChatMemberUser
+	export function emptyUrgentPhoneMessageResp():UrgentPhoneMessageResp
+	export function emptyRefUrgentPhoneMessageResp():Ref<UrgentPhoneMessageResp>
+	export function refOfUrgentPhoneMessageResp(x:UrgentPhoneMessageResp,v:Ref<UrgentPhoneMessageResp>)
+	export function unRefUrgentPhoneMessageResp(v:Ref<UrgentPhoneMessageResp>):UrgentPhoneMessageResp
+	export function emptyGetChatMembersIterator():GetChatMembersIterator
+	export function emptyRefGetChatMembersIterator():Ref<GetChatMembersIterator>
+	export function refOfGetChatMembersIterator(x:GetChatMembersIterator,v:Ref<GetChatMembersIterator>)
+	export function unRefGetChatMembersIterator(v:Ref<GetChatMembersIterator>):GetChatMembersIterator
+	export function emptyDeleteMessageReq():DeleteMessageReq
+	export function emptyRefDeleteMessageReq():Ref<DeleteMessageReq>
+	export function refOfDeleteMessageReq(x:DeleteMessageReq,v:Ref<DeleteMessageReq>)
+	export function unRefDeleteMessageReq(v:Ref<DeleteMessageReq>):DeleteMessageReq
+	export function emptyGetChatMenuTreeRespData():GetChatMenuTreeRespData
+	export function emptyRefGetChatMenuTreeRespData():Ref<GetChatMenuTreeRespData>
+	export function refOfGetChatMenuTreeRespData(x:GetChatMenuTreeRespData,v:Ref<GetChatMenuTreeRespData>)
+	export function unRefGetChatMenuTreeRespData(v:Ref<GetChatMenuTreeRespData>):GetChatMenuTreeRespData
+	export function emptyReadUser():ReadUser
+	export function emptyRefReadUser():Ref<ReadUser>
+	export function refOfReadUser(x:ReadUser,v:Ref<ReadUser>)
+	export function unRefReadUser(v:Ref<ReadUser>):ReadUser
+	export function emptyDeleteTabsChatTabReq():DeleteTabsChatTabReq
+	export function emptyRefDeleteTabsChatTabReq():Ref<DeleteTabsChatTabReq>
+	export function refOfDeleteTabsChatTabReq(x:DeleteTabsChatTabReq,v:Ref<DeleteTabsChatTabReq>)
+	export function unRefDeleteTabsChatTabReq(v:Ref<DeleteTabsChatTabReq>):DeleteTabsChatTabReq
+	export function emptyChatTabConfig():ChatTabConfig
+	export function emptyRefChatTabConfig():Ref<ChatTabConfig>
+	export function refOfChatTabConfig(x:ChatTabConfig,v:Ref<ChatTabConfig>)
+	export function unRefChatTabConfig(v:Ref<ChatTabConfig>):ChatTabConfig
+	export function emptyP2MessageReadV1Data():P2MessageReadV1Data
+	export function emptyRefP2MessageReadV1Data():Ref<P2MessageReadV1Data>
+	export function refOfP2MessageReadV1Data(x:P2MessageReadV1Data,v:Ref<P2MessageReadV1Data>)
+	export function unRefP2MessageReadV1Data(v:Ref<P2MessageReadV1Data>):P2MessageReadV1Data
+	export function emptyDeleteChatMembersReqBody():DeleteChatMembersReqBody
+	export function emptyRefDeleteChatMembersReqBody():Ref<DeleteChatMembersReqBody>
+	export function refOfDeleteChatMembersReqBody(x:DeleteChatMembersReqBody,v:Ref<DeleteChatMembersReqBody>)
+	export function unRefDeleteChatMembersReqBody(v:Ref<DeleteChatMembersReqBody>):DeleteChatMembersReqBody
+	export function emptyGetProgressBatchMessageRespData():GetProgressBatchMessageRespData
+	export function emptyRefGetProgressBatchMessageRespData():Ref<GetProgressBatchMessageRespData>
+	export function refOfGetProgressBatchMessageRespData(x:GetProgressBatchMessageRespData,v:Ref<GetProgressBatchMessageRespData>)
+	export function unRefGetProgressBatchMessageRespData(v:Ref<GetProgressBatchMessageRespData>):GetProgressBatchMessageRespData
+	export function emptyListChatRespData():ListChatRespData
+	export function emptyRefListChatRespData():Ref<ListChatRespData>
+	export function refOfListChatRespData(x:ListChatRespData,v:Ref<ListChatRespData>)
+	export function unRefListChatRespData(v:Ref<ListChatRespData>):ListChatRespData
+	export function emptyListTabsChatTabResp():ListTabsChatTabResp
+	export function emptyRefListTabsChatTabResp():Ref<ListTabsChatTabResp>
+	export function refOfListTabsChatTabResp(x:ListTabsChatTabResp,v:Ref<ListTabsChatTabResp>)
+	export function unRefListTabsChatTabResp(v:Ref<ListTabsChatTabResp>):ListTabsChatTabResp
+	export function emptyMessageText():MessageText
+	export function emptyRefMessageText():Ref<MessageText>
+	export function refOfMessageText(x:MessageText,v:Ref<MessageText>)
+	export function unRefMessageText(v:Ref<MessageText>):MessageText
+	export function emptyGetMessageRespData():GetMessageRespData
+	export function emptyRefGetMessageRespData():Ref<GetMessageRespData>
+	export function refOfGetMessageRespData(x:GetMessageRespData,v:Ref<GetMessageRespData>)
+	export function unRefGetMessageRespData(v:Ref<GetMessageRespData>):GetMessageRespData
+	export function emptyP1GroupSettingChangeV1():P1GroupSettingChangeV1
+	export function emptyRefP1GroupSettingChangeV1():Ref<P1GroupSettingChangeV1>
+	export function refOfP1GroupSettingChangeV1(x:P1GroupSettingChangeV1,v:Ref<P1GroupSettingChangeV1>)
+	export function unRefP1GroupSettingChangeV1(v:Ref<P1GroupSettingChangeV1>):P1GroupSettingChangeV1
+	export function emptyCreateChatMembersRespData():CreateChatMembersRespData
+	export function emptyRefCreateChatMembersRespData():Ref<CreateChatMembersRespData>
+	export function refOfCreateChatMembersRespData(x:CreateChatMembersRespData,v:Ref<CreateChatMembersRespData>)
+	export function unRefCreateChatMembersRespData(v:Ref<CreateChatMembersRespData>):CreateChatMembersRespData
+	export function emptyDeleteMessageReactionResp():DeleteMessageReactionResp
+	export function emptyRefDeleteMessageReactionResp():Ref<DeleteMessageReactionResp>
+	export function refOfDeleteMessageReactionResp(x:DeleteMessageReactionResp,v:Ref<DeleteMessageReactionResp>)
+	export function unRefDeleteMessageReactionResp(v:Ref<DeleteMessageReactionResp>):DeleteMessageReactionResp
+	export function emptyUrgentAppMessageReq():UrgentAppMessageReq
+	export function emptyRefUrgentAppMessageReq():Ref<UrgentAppMessageReq>
+	export function refOfUrgentAppMessageReq(x:UrgentAppMessageReq,v:Ref<UrgentAppMessageReq>)
+	export function unRefUrgentAppMessageReq(v:Ref<UrgentAppMessageReq>):UrgentAppMessageReq
+	export function emptyUpdateMessageReqBody():UpdateMessageReqBody
+	export function emptyRefUpdateMessageReqBody():Ref<UpdateMessageReqBody>
+	export function refOfUpdateMessageReqBody(x:UpdateMessageReqBody,v:Ref<UpdateMessageReqBody>)
+	export function unRefUpdateMessageReqBody(v:Ref<UpdateMessageReqBody>):UpdateMessageReqBody
+	export function emptyUrgentPhoneMessageRespData():UrgentPhoneMessageRespData
+	export function emptyRefUrgentPhoneMessageRespData():Ref<UrgentPhoneMessageRespData>
+	export function refOfUrgentPhoneMessageRespData(x:UrgentPhoneMessageRespData,v:Ref<UrgentPhoneMessageRespData>)
+	export function unRefUrgentPhoneMessageRespData(v:Ref<UrgentPhoneMessageRespData>):UrgentPhoneMessageRespData
+	export function emptyForwardMessageReq():ForwardMessageReq
+	export function emptyRefForwardMessageReq():Ref<ForwardMessageReq>
+	export function refOfForwardMessageReq(x:ForwardMessageReq,v:Ref<ForwardMessageReq>)
+	export function unRefForwardMessageReq(v:Ref<ForwardMessageReq>):ForwardMessageReq
+	export function emptyGetChatResp():GetChatResp
+	export function emptyRefGetChatResp():Ref<GetChatResp>
+	export function refOfGetChatResp(x:GetChatResp,v:Ref<GetChatResp>)
+	export function unRefGetChatResp(v:Ref<GetChatResp>):GetChatResp
+	export function emptyListEventModerator():ListEventModerator
+	export function emptyRefListEventModerator():Ref<ListEventModerator>
+	export function refOfListEventModerator(x:ListEventModerator,v:Ref<ListEventModerator>)
+	export function unRefListEventModerator(v:Ref<ListEventModerator>):ListEventModerator
+	export function emptyP1UserInOutChatV1Data():P1UserInOutChatV1Data
+	export function emptyRefP1UserInOutChatV1Data():Ref<P1UserInOutChatV1Data>
+	export function refOfP1UserInOutChatV1Data(x:P1UserInOutChatV1Data,v:Ref<P1UserInOutChatV1Data>)
+	export function unRefP1UserInOutChatV1Data(v:Ref<P1UserInOutChatV1Data>):P1UserInOutChatV1Data
+	export function emptyAddManagersChatManagersReq():AddManagersChatManagersReq
+	export function emptyRefAddManagersChatManagersReq():Ref<AddManagersChatManagersReq>
+	export function refOfAddManagersChatManagersReq(x:AddManagersChatManagersReq,v:Ref<AddManagersChatManagersReq>)
+	export function unRefAddManagersChatManagersReq(v:Ref<AddManagersChatManagersReq>):AddManagersChatManagersReq
+	export function emptyCreateChatMembersResp():CreateChatMembersResp
+	export function emptyRefCreateChatMembersResp():Ref<CreateChatMembersResp>
+	export function refOfCreateChatMembersResp(x:CreateChatMembersResp,v:Ref<CreateChatMembersResp>)
+	export function unRefCreateChatMembersResp(v:Ref<CreateChatMembersResp>):CreateChatMembersResp
+	export function emptyDeleteManagersChatManagersRespData():DeleteManagersChatManagersRespData
+	export function emptyRefDeleteManagersChatManagersRespData():Ref<DeleteManagersChatManagersRespData>
+	export function refOfDeleteManagersChatManagersRespData(x:DeleteManagersChatManagersRespData,v:Ref<DeleteManagersChatManagersRespData>)
+	export function unRefDeleteManagersChatManagersRespData(v:Ref<DeleteManagersChatManagersRespData>):DeleteManagersChatManagersRespData
+	export function emptyP2ChatMemberUserAddedV1Data():P2ChatMemberUserAddedV1Data
+	export function emptyRefP2ChatMemberUserAddedV1Data():Ref<P2ChatMemberUserAddedV1Data>
+	export function refOfP2ChatMemberUserAddedV1Data(x:P2ChatMemberUserAddedV1Data,v:Ref<P2ChatMemberUserAddedV1Data>)
+	export function unRefP2ChatMemberUserAddedV1Data(v:Ref<P2ChatMemberUserAddedV1Data>):P2ChatMemberUserAddedV1Data
+	export function emptyPatchMessageReqBody():PatchMessageReqBody
+	export function emptyRefPatchMessageReqBody():Ref<PatchMessageReqBody>
+	export function refOfPatchMessageReqBody(x:PatchMessageReqBody,v:Ref<PatchMessageReqBody>)
+	export function unRefPatchMessageReqBody(v:Ref<PatchMessageReqBody>):PatchMessageReqBody
+	export function emptyGetMessageResourceReq():GetMessageResourceReq
+	export function emptyRefGetMessageResourceReq():Ref<GetMessageResourceReq>
+	export function refOfGetMessageResourceReq(x:GetMessageResourceReq,v:Ref<GetMessageResourceReq>)
+	export function unRefGetMessageResourceReq(v:Ref<GetMessageResourceReq>):GetMessageResourceReq
+	export function emptySortChatMenuTreeReq():SortChatMenuTreeReq
+	export function emptyRefSortChatMenuTreeReq():Ref<SortChatMenuTreeReq>
+	export function refOfSortChatMenuTreeReq(x:SortChatMenuTreeReq,v:Ref<SortChatMenuTreeReq>)
+	export function unRefSortChatMenuTreeReq(v:Ref<SortChatMenuTreeReq>):SortChatMenuTreeReq
+	export function emptyMention():Mention
+	export function emptyRefMention():Ref<Mention>
+	export function refOfMention(x:Mention,v:Ref<Mention>)
+	export function unRefMention(v:Ref<Mention>):Mention
+	export function emptyChat():Chat
+	export function emptyRefChat():Ref<Chat>
+	export function refOfChat(x:Chat,v:Ref<Chat>)
+	export function unRefChat(v:Ref<Chat>):Chat
+	export function emptyDeleteManagersChatManagersReq():DeleteManagersChatManagersReq
+	export function emptyRefDeleteManagersChatManagersReq():Ref<DeleteManagersChatManagersReq>
+	export function refOfDeleteManagersChatManagersReq(x:DeleteManagersChatManagersReq,v:Ref<DeleteManagersChatManagersReq>)
+	export function unRefDeleteManagersChatManagersReq(v:Ref<DeleteManagersChatManagersReq>):DeleteManagersChatManagersReq
+	export function emptyV1():V1
+	export function emptyRefV1():Ref<V1>
+	export function refOfV1(x:V1,v:Ref<V1>)
+	export function unRefV1(v:Ref<V1>):V1
+	export function emptyP2ChatMemberBotDeletedV1():P2ChatMemberBotDeletedV1
+	export function emptyRefP2ChatMemberBotDeletedV1():Ref<P2ChatMemberBotDeletedV1>
+	export function refOfP2ChatMemberBotDeletedV1(x:P2ChatMemberBotDeletedV1,v:Ref<P2ChatMemberBotDeletedV1>)
+	export function unRefP2ChatMemberBotDeletedV1(v:Ref<P2ChatMemberBotDeletedV1>):P2ChatMemberBotDeletedV1
+	export function emptyForwardThreadRespData():ForwardThreadRespData
+	export function emptyRefForwardThreadRespData():Ref<ForwardThreadRespData>
+	export function refOfForwardThreadRespData(x:ForwardThreadRespData,v:Ref<ForwardThreadRespData>)
+	export function unRefForwardThreadRespData(v:Ref<ForwardThreadRespData>):ForwardThreadRespData
+	export function emptyGetChatAnnouncementResp():GetChatAnnouncementResp
+	export function emptyRefGetChatAnnouncementResp():Ref<GetChatAnnouncementResp>
+	export function refOfGetChatAnnouncementResp(x:GetChatAnnouncementResp,v:Ref<GetChatAnnouncementResp>)
+	export function unRefGetChatAnnouncementResp(v:Ref<GetChatAnnouncementResp>):GetChatAnnouncementResp
+	export function emptyGetMessageResourceResp():GetMessageResourceResp
+	export function emptyRefGetMessageResourceResp():Ref<GetMessageResourceResp>
+	export function refOfGetMessageResourceResp(x:GetMessageResourceResp,v:Ref<GetMessageResourceResp>)
+	export function unRefGetMessageResourceResp(v:Ref<GetMessageResourceResp>):GetMessageResourceResp
+	export function emptySpecialFocusUnread():SpecialFocusUnread
+	export function emptyRefSpecialFocusUnread():Ref<SpecialFocusUnread>
+	export function refOfSpecialFocusUnread(x:SpecialFocusUnread,v:Ref<SpecialFocusUnread>)
+	export function unRefSpecialFocusUnread(v:Ref<SpecialFocusUnread>):SpecialFocusUnread
 	export function emptyUrgentAppMessageResp():UrgentAppMessageResp
 	export function emptyRefUrgentAppMessageResp():Ref<UrgentAppMessageResp>
 	export function refOfUrgentAppMessageResp(x:UrgentAppMessageResp,v:Ref<UrgentAppMessageResp>)
 	export function unRefUrgentAppMessageResp(v:Ref<UrgentAppMessageResp>):UrgentAppMessageResp
+	export function emptyChatMemberBot():ChatMemberBot
+	export function emptyRefChatMemberBot():Ref<ChatMemberBot>
+	export function refOfChatMemberBot(x:ChatMemberBot,v:Ref<ChatMemberBot>)
+	export function unRefChatMemberBot(v:Ref<ChatMemberBot>):ChatMemberBot
+	export function emptyCreateImageReq():CreateImageReq
+	export function emptyRefCreateImageReq():Ref<CreateImageReq>
+	export function refOfCreateImageReq(x:CreateImageReq,v:Ref<CreateImageReq>)
+	export function unRefCreateImageReq(v:Ref<CreateImageReq>):CreateImageReq
+	export function emptyDeleteMessageReactionReq():DeleteMessageReactionReq
+	export function emptyRefDeleteMessageReactionReq():Ref<DeleteMessageReactionReq>
+	export function refOfDeleteMessageReactionReq(x:DeleteMessageReactionReq,v:Ref<DeleteMessageReactionReq>)
+	export function unRefDeleteMessageReactionReq(v:Ref<DeleteMessageReactionReq>):DeleteMessageReactionReq
+	export function emptyForwardMessageResp():ForwardMessageResp
+	export function emptyRefForwardMessageResp():Ref<ForwardMessageResp>
+	export function refOfForwardMessageResp(x:ForwardMessageResp,v:Ref<ForwardMessageResp>)
+	export function unRefForwardMessageResp(v:Ref<ForwardMessageResp>):ForwardMessageResp
+	export function emptyListChatReq():ListChatReq
+	export function emptyRefListChatReq():Ref<ListChatReq>
+	export function refOfListChatReq(x:ListChatReq,v:Ref<ListChatReq>)
+	export function unRefListChatReq(v:Ref<ListChatReq>):ListChatReq
+	export function emptyListMessageIterator():ListMessageIterator
+	export function emptyRefListMessageIterator():Ref<ListMessageIterator>
+	export function refOfListMessageIterator(x:ListMessageIterator,v:Ref<ListMessageIterator>)
+	export function unRefListMessageIterator(v:Ref<ListMessageIterator>):ListMessageIterator
+	export function emptyReadUserBatchMessageRespData():ReadUserBatchMessageRespData
+	export function emptyRefReadUserBatchMessageRespData():Ref<ReadUserBatchMessageRespData>
+	export function refOfReadUserBatchMessageRespData(x:ReadUserBatchMessageRespData,v:Ref<ReadUserBatchMessageRespData>)
+	export function unRefReadUserBatchMessageRespData(v:Ref<ReadUserBatchMessageRespData>):ReadUserBatchMessageRespData
+	export function emptyP1ChatDisbandV1Handler():P1ChatDisbandV1Handler
+	export function emptyRefP1ChatDisbandV1Handler():Ref<P1ChatDisbandV1Handler>
+	export function refOfP1ChatDisbandV1Handler(x:P1ChatDisbandV1Handler,v:Ref<P1ChatDisbandV1Handler>)
+	export function unRefP1ChatDisbandV1Handler(v:Ref<P1ChatDisbandV1Handler>):P1ChatDisbandV1Handler
+	export function emptyChatMembers():ChatMembers
+	export function emptyRefChatMembers():Ref<ChatMembers>
+	export function refOfChatMembers(x:ChatMembers,v:Ref<ChatMembers>)
+	export function unRefChatMembers(v:Ref<ChatMembers>):ChatMembers
+	export function emptyCreateFileReqBody():CreateFileReqBody
+	export function emptyRefCreateFileReqBody():Ref<CreateFileReqBody>
+	export function refOfCreateFileReqBody(x:CreateFileReqBody,v:Ref<CreateFileReqBody>)
+	export function unRefCreateFileReqBody(v:Ref<CreateFileReqBody>):CreateFileReqBody
+	export function emptyListMessageReactionIterator():ListMessageReactionIterator
+	export function emptyRefListMessageReactionIterator():Ref<ListMessageReactionIterator>
+	export function refOfListMessageReactionIterator(x:ListMessageReactionIterator,v:Ref<ListMessageReactionIterator>)
+	export function unRefListMessageReactionIterator(v:Ref<ListMessageReactionIterator>):ListMessageReactionIterator
+	export function emptyWidgetUrl():WidgetUrl
+	export function emptyRefWidgetUrl():Ref<WidgetUrl>
+	export function refOfWidgetUrl(x:WidgetUrl,v:Ref<WidgetUrl>)
+	export function unRefWidgetUrl(v:Ref<WidgetUrl>):WidgetUrl
+	export function emptyWidget():Widget
+	export function emptyRefWidget():Ref<Widget>
+	export function refOfWidget(x:Widget,v:Ref<Widget>)
+	export function unRefWidget(v:Ref<Widget>):Widget
+	export function emptyPutTopNoticeChatTopNoticeResp():PutTopNoticeChatTopNoticeResp
+	export function emptyRefPutTopNoticeChatTopNoticeResp():Ref<PutTopNoticeChatTopNoticeResp>
+	export function refOfPutTopNoticeChatTopNoticeResp(x:PutTopNoticeChatTopNoticeResp,v:Ref<PutTopNoticeChatTopNoticeResp>)
+	export function unRefPutTopNoticeChatTopNoticeResp(v:Ref<PutTopNoticeChatTopNoticeResp>):PutTopNoticeChatTopNoticeResp
+	export function emptySortTabsChatTabReqBody():SortTabsChatTabReqBody
+	export function emptyRefSortTabsChatTabReqBody():Ref<SortTabsChatTabReqBody>
+	export function refOfSortTabsChatTabReqBody(x:SortTabsChatTabReqBody,v:Ref<SortTabsChatTabReqBody>)
+	export function unRefSortTabsChatTabReqBody(v:Ref<SortTabsChatTabReqBody>):SortTabsChatTabReqBody
+	export function emptyChatMenuSecondLevel():ChatMenuSecondLevel
+	export function emptyRefChatMenuSecondLevel():Ref<ChatMenuSecondLevel>
+	export function refOfChatMenuSecondLevel(x:ChatMenuSecondLevel,v:Ref<ChatMenuSecondLevel>)
+	export function unRefChatMenuSecondLevel(v:Ref<ChatMenuSecondLevel>):ChatMenuSecondLevel
 	export function emptyChatTabContent():ChatTabContent
 	export function emptyRefChatTabContent():Ref<ChatTabContent>
 	export function refOfChatTabContent(x:ChatTabContent,v:Ref<ChatTabContent>)
@@ -5127,1148 +4827,660 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'{
 	export function emptyRefCreateMessageReactionRespData():Ref<CreateMessageReactionRespData>
 	export function refOfCreateMessageReactionRespData(x:CreateMessageReactionRespData,v:Ref<CreateMessageReactionRespData>)
 	export function unRefCreateMessageReactionRespData(v:Ref<CreateMessageReactionRespData>):CreateMessageReactionRespData
-	export function emptyGetMessageResourceReq():GetMessageResourceReq
-	export function emptyRefGetMessageResourceReq():Ref<GetMessageResourceReq>
-	export function refOfGetMessageResourceReq(x:GetMessageResourceReq,v:Ref<GetMessageResourceReq>)
-	export function unRefGetMessageResourceReq(v:Ref<GetMessageResourceReq>):GetMessageResourceReq
-	export function emptyGetMessageResourceReqBuilder():GetMessageResourceReqBuilder
-	export function emptyRefGetMessageResourceReqBuilder():Ref<GetMessageResourceReqBuilder>
-	export function refOfGetMessageResourceReqBuilder(x:GetMessageResourceReqBuilder,v:Ref<GetMessageResourceReqBuilder>)
-	export function unRefGetMessageResourceReqBuilder(v:Ref<GetMessageResourceReqBuilder>):GetMessageResourceReqBuilder
-	export function emptyMergeForwardMessageReq():MergeForwardMessageReq
-	export function emptyRefMergeForwardMessageReq():Ref<MergeForwardMessageReq>
-	export function refOfMergeForwardMessageReq(x:MergeForwardMessageReq,v:Ref<MergeForwardMessageReq>)
-	export function unRefMergeForwardMessageReq(v:Ref<MergeForwardMessageReq>):MergeForwardMessageReq
-	export function emptyPatchChatMenuItemReqBodyBuilder():PatchChatMenuItemReqBodyBuilder
-	export function emptyRefPatchChatMenuItemReqBodyBuilder():Ref<PatchChatMenuItemReqBodyBuilder>
-	export function refOfPatchChatMenuItemReqBodyBuilder(x:PatchChatMenuItemReqBodyBuilder,v:Ref<PatchChatMenuItemReqBodyBuilder>)
-	export function unRefPatchChatMenuItemReqBodyBuilder(v:Ref<PatchChatMenuItemReqBodyBuilder>):PatchChatMenuItemReqBodyBuilder
-	export function emptyChatTabBuilder():ChatTabBuilder
-	export function emptyRefChatTabBuilder():Ref<ChatTabBuilder>
-	export function refOfChatTabBuilder(x:ChatTabBuilder,v:Ref<ChatTabBuilder>)
-	export function unRefChatTabBuilder(v:Ref<ChatTabBuilder>):ChatTabBuilder
-	export function emptyGetImageReqBuilder():GetImageReqBuilder
-	export function emptyRefGetImageReqBuilder():Ref<GetImageReqBuilder>
-	export function refOfGetImageReqBuilder(x:GetImageReqBuilder,v:Ref<GetImageReqBuilder>)
-	export function unRefGetImageReqBuilder(v:Ref<GetImageReqBuilder>):GetImageReqBuilder
-	export function emptyI18nNamesBuilder():I18nNamesBuilder
-	export function emptyRefI18nNamesBuilder():Ref<I18nNamesBuilder>
-	export function refOfI18nNamesBuilder(x:I18nNamesBuilder,v:Ref<I18nNamesBuilder>)
-	export function unRefI18nNamesBuilder(v:Ref<I18nNamesBuilder>):I18nNamesBuilder
-	export function emptyListChatRespData():ListChatRespData
-	export function emptyRefListChatRespData():Ref<ListChatRespData>
-	export function refOfListChatRespData(x:ListChatRespData,v:Ref<ListChatRespData>)
-	export function unRefListChatRespData(v:Ref<ListChatRespData>):ListChatRespData
-	export function emptySortChatMenuTreeReqBodyBuilder():SortChatMenuTreeReqBodyBuilder
-	export function emptyRefSortChatMenuTreeReqBodyBuilder():Ref<SortChatMenuTreeReqBodyBuilder>
-	export function refOfSortChatMenuTreeReqBodyBuilder(x:SortChatMenuTreeReqBodyBuilder,v:Ref<SortChatMenuTreeReqBodyBuilder>)
-	export function unRefSortChatMenuTreeReqBodyBuilder(v:Ref<SortChatMenuTreeReqBodyBuilder>):SortChatMenuTreeReqBodyBuilder
-	export function emptyChatManagersBuilder():ChatManagersBuilder
-	export function emptyRefChatManagersBuilder():Ref<ChatManagersBuilder>
-	export function refOfChatManagersBuilder(x:ChatManagersBuilder,v:Ref<ChatManagersBuilder>)
-	export function unRefChatManagersBuilder(v:Ref<ChatManagersBuilder>):ChatManagersBuilder
-	export function emptyDeleteManagersChatManagersReqBody():DeleteManagersChatManagersReqBody
-	export function emptyRefDeleteManagersChatManagersReqBody():Ref<DeleteManagersChatManagersReqBody>
-	export function refOfDeleteManagersChatManagersReqBody(x:DeleteManagersChatManagersReqBody,v:Ref<DeleteManagersChatManagersReqBody>)
-	export function unRefDeleteManagersChatManagersReqBody(v:Ref<DeleteManagersChatManagersReqBody>):DeleteManagersChatManagersReqBody
-	export function emptyGetChatMembersReqBuilder():GetChatMembersReqBuilder
-	export function emptyRefGetChatMembersReqBuilder():Ref<GetChatMembersReqBuilder>
-	export function refOfGetChatMembersReqBuilder(x:GetChatMembersReqBuilder,v:Ref<GetChatMembersReqBuilder>)
-	export function unRefGetChatMembersReqBuilder(v:Ref<GetChatMembersReqBuilder>):GetChatMembersReqBuilder
-	export function emptyListPinReqBuilder():ListPinReqBuilder
-	export function emptyRefListPinReqBuilder():Ref<ListPinReqBuilder>
-	export function refOfListPinReqBuilder(x:ListPinReqBuilder,v:Ref<ListPinReqBuilder>)
-	export function unRefListPinReqBuilder(v:Ref<ListPinReqBuilder>):ListPinReqBuilder
-	export function emptyBatchMessageSendProgressBuilder():BatchMessageSendProgressBuilder
-	export function emptyRefBatchMessageSendProgressBuilder():Ref<BatchMessageSendProgressBuilder>
-	export function refOfBatchMessageSendProgressBuilder(x:BatchMessageSendProgressBuilder,v:Ref<BatchMessageSendProgressBuilder>)
-	export function unRefBatchMessageSendProgressBuilder(v:Ref<BatchMessageSendProgressBuilder>):BatchMessageSendProgressBuilder
-	export function emptyDeleteChatMembersReq():DeleteChatMembersReq
-	export function emptyRefDeleteChatMembersReq():Ref<DeleteChatMembersReq>
-	export function refOfDeleteChatMembersReq(x:DeleteChatMembersReq,v:Ref<DeleteChatMembersReq>)
-	export function unRefDeleteChatMembersReq(v:Ref<DeleteChatMembersReq>):DeleteChatMembersReq
-	export function emptyMessagePostImage():MessagePostImage
-	export function emptyRefMessagePostImage():Ref<MessagePostImage>
-	export function refOfMessagePostImage(x:MessagePostImage,v:Ref<MessagePostImage>)
-	export function unRefMessagePostImage(v:Ref<MessagePostImage>):MessagePostImage
-	export function emptyPatchChatMenuItemPathReqBodyBuilder():PatchChatMenuItemPathReqBodyBuilder
-	export function emptyRefPatchChatMenuItemPathReqBodyBuilder():Ref<PatchChatMenuItemPathReqBodyBuilder>
-	export function refOfPatchChatMenuItemPathReqBodyBuilder(x:PatchChatMenuItemPathReqBodyBuilder,v:Ref<PatchChatMenuItemPathReqBodyBuilder>)
-	export function unRefPatchChatMenuItemPathReqBodyBuilder(v:Ref<PatchChatMenuItemPathReqBodyBuilder>):PatchChatMenuItemPathReqBodyBuilder
-	export function emptyCreateChatMembersReqBodyBuilder():CreateChatMembersReqBodyBuilder
-	export function emptyRefCreateChatMembersReqBodyBuilder():Ref<CreateChatMembersReqBodyBuilder>
-	export function refOfCreateChatMembersReqBodyBuilder(x:CreateChatMembersReqBodyBuilder,v:Ref<CreateChatMembersReqBodyBuilder>)
-	export function unRefCreateChatMembersReqBodyBuilder(v:Ref<CreateChatMembersReqBodyBuilder>):CreateChatMembersReqBodyBuilder
-	export function emptySortTabsChatTabReqBuilder():SortTabsChatTabReqBuilder
-	export function emptyRefSortTabsChatTabReqBuilder():Ref<SortTabsChatTabReqBuilder>
-	export function refOfSortTabsChatTabReqBuilder(x:SortTabsChatTabReqBuilder,v:Ref<SortTabsChatTabReqBuilder>)
-	export function unRefSortTabsChatTabReqBuilder(v:Ref<SortTabsChatTabReqBuilder>):SortTabsChatTabReqBuilder
-	export function emptyCreateChatMenuTreeReqBody():CreateChatMenuTreeReqBody
-	export function emptyRefCreateChatMenuTreeReqBody():Ref<CreateChatMenuTreeReqBody>
-	export function refOfCreateChatMenuTreeReqBody(x:CreateChatMenuTreeReqBody,v:Ref<CreateChatMenuTreeReqBody>)
-	export function unRefCreateChatMenuTreeReqBody(v:Ref<CreateChatMenuTreeReqBody>):CreateChatMenuTreeReqBody
-	export function emptyMessageFile():MessageFile
-	export function emptyRefMessageFile():Ref<MessageFile>
-	export function refOfMessageFile(x:MessageFile,v:Ref<MessageFile>)
-	export function unRefMessageFile(v:Ref<MessageFile>):MessageFile
-	export function emptyP1ChatDisbandV1():P1ChatDisbandV1
-	export function emptyRefP1ChatDisbandV1():Ref<P1ChatDisbandV1>
-	export function refOfP1ChatDisbandV1(x:P1ChatDisbandV1,v:Ref<P1ChatDisbandV1>)
-	export function unRefP1ChatDisbandV1(v:Ref<P1ChatDisbandV1>):P1ChatDisbandV1
-	export function emptyP2MessageReceiveV1Data():P2MessageReceiveV1Data
-	export function emptyRefP2MessageReceiveV1Data():Ref<P2MessageReceiveV1Data>
-	export function refOfP2MessageReceiveV1Data(x:P2MessageReceiveV1Data,v:Ref<P2MessageReceiveV1Data>)
-	export function unRefP2MessageReceiveV1Data(v:Ref<P2MessageReceiveV1Data>):P2MessageReceiveV1Data
-	export function emptyUpdateMessageReq():UpdateMessageReq
-	export function emptyRefUpdateMessageReq():Ref<UpdateMessageReq>
-	export function refOfUpdateMessageReq(x:UpdateMessageReq,v:Ref<UpdateMessageReq>)
-	export function unRefUpdateMessageReq(v:Ref<UpdateMessageReq>):UpdateMessageReq
-	export function emptyUrgentPhoneMessageResp():UrgentPhoneMessageResp
-	export function emptyRefUrgentPhoneMessageResp():Ref<UrgentPhoneMessageResp>
-	export function refOfUrgentPhoneMessageResp(x:UrgentPhoneMessageResp,v:Ref<UrgentPhoneMessageResp>)
-	export function unRefUrgentPhoneMessageResp(v:Ref<UrgentPhoneMessageResp>):UrgentPhoneMessageResp
-	export function emptyCreateChatResp():CreateChatResp
-	export function emptyRefCreateChatResp():Ref<CreateChatResp>
-	export function refOfCreateChatResp(x:CreateChatResp,v:Ref<CreateChatResp>)
-	export function unRefCreateChatResp(v:Ref<CreateChatResp>):CreateChatResp
-	export function emptyCreatePinReqBody():CreatePinReqBody
-	export function emptyRefCreatePinReqBody():Ref<CreatePinReqBody>
-	export function refOfCreatePinReqBody(x:CreatePinReqBody,v:Ref<CreatePinReqBody>)
-	export function unRefCreatePinReqBody(v:Ref<CreatePinReqBody>):CreatePinReqBody
-	export function emptyForwardThreadReqBodyBuilder():ForwardThreadReqBodyBuilder
-	export function emptyRefForwardThreadReqBodyBuilder():Ref<ForwardThreadReqBodyBuilder>
-	export function refOfForwardThreadReqBodyBuilder(x:ForwardThreadReqBodyBuilder,v:Ref<ForwardThreadReqBodyBuilder>)
-	export function unRefForwardThreadReqBodyBuilder(v:Ref<ForwardThreadReqBodyBuilder>):ForwardThreadReqBodyBuilder
-	export function emptyUpdateChatModerationReqBuilder():UpdateChatModerationReqBuilder
-	export function emptyRefUpdateChatModerationReqBuilder():Ref<UpdateChatModerationReqBuilder>
-	export function refOfUpdateChatModerationReqBuilder(x:UpdateChatModerationReqBuilder,v:Ref<UpdateChatModerationReqBuilder>)
-	export function unRefUpdateChatModerationReqBuilder(v:Ref<UpdateChatModerationReqBuilder>):UpdateChatModerationReqBuilder
-	export function emptyUpdateChatPathReqBodyBuilder():UpdateChatPathReqBodyBuilder
-	export function emptyRefUpdateChatPathReqBodyBuilder():Ref<UpdateChatPathReqBodyBuilder>
-	export function refOfUpdateChatPathReqBodyBuilder(x:UpdateChatPathReqBodyBuilder,v:Ref<UpdateChatPathReqBodyBuilder>)
-	export function unRefUpdateChatPathReqBodyBuilder(v:Ref<UpdateChatPathReqBodyBuilder>):UpdateChatPathReqBodyBuilder
-	export function emptyCreateChatMenuTreeResp():CreateChatMenuTreeResp
-	export function emptyRefCreateChatMenuTreeResp():Ref<CreateChatMenuTreeResp>
-	export function refOfCreateChatMenuTreeResp(x:CreateChatMenuTreeResp,v:Ref<CreateChatMenuTreeResp>)
-	export function unRefCreateChatMenuTreeResp(v:Ref<CreateChatMenuTreeResp>):CreateChatMenuTreeResp
-	export function emptyAddManagersChatManagersResp():AddManagersChatManagersResp
-	export function emptyRefAddManagersChatManagersResp():Ref<AddManagersChatManagersResp>
-	export function refOfAddManagersChatManagersResp(x:AddManagersChatManagersResp,v:Ref<AddManagersChatManagersResp>)
-	export function unRefAddManagersChatManagersResp(v:Ref<AddManagersChatManagersResp>):AddManagersChatManagersResp
-	export function emptyChatMemberUser():ChatMemberUser
-	export function emptyRefChatMemberUser():Ref<ChatMemberUser>
-	export function refOfChatMemberUser(x:ChatMemberUser,v:Ref<ChatMemberUser>)
-	export function unRefChatMemberUser(v:Ref<ChatMemberUser>):ChatMemberUser
-	export function emptyCreateChatTabPathReqBodyBuilder():CreateChatTabPathReqBodyBuilder
-	export function emptyRefCreateChatTabPathReqBodyBuilder():Ref<CreateChatTabPathReqBodyBuilder>
-	export function refOfCreateChatTabPathReqBodyBuilder(x:CreateChatTabPathReqBodyBuilder,v:Ref<CreateChatTabPathReqBodyBuilder>)
-	export function unRefCreateChatTabPathReqBodyBuilder(v:Ref<CreateChatTabPathReqBodyBuilder>):CreateChatTabPathReqBodyBuilder
-	export function emptyCreateFileReqBodyBuilder():CreateFileReqBodyBuilder
-	export function emptyRefCreateFileReqBodyBuilder():Ref<CreateFileReqBodyBuilder>
-	export function refOfCreateFileReqBodyBuilder(x:CreateFileReqBodyBuilder,v:Ref<CreateFileReqBodyBuilder>)
-	export function unRefCreateFileReqBodyBuilder(v:Ref<CreateFileReqBodyBuilder>):CreateFileReqBodyBuilder
-	export function emptyGetChatModerationReq():GetChatModerationReq
-	export function emptyRefGetChatModerationReq():Ref<GetChatModerationReq>
-	export function refOfGetChatModerationReq(x:GetChatModerationReq,v:Ref<GetChatModerationReq>)
-	export function unRefGetChatModerationReq(v:Ref<GetChatModerationReq>):GetChatModerationReq
-	export function emptyGetMessageRespData():GetMessageRespData
-	export function emptyRefGetMessageRespData():Ref<GetMessageRespData>
-	export function refOfGetMessageRespData(x:GetMessageRespData,v:Ref<GetMessageRespData>)
-	export function unRefGetMessageRespData(v:Ref<GetMessageRespData>):GetMessageRespData
-	export function emptyP1UserInOutChatV1():P1UserInOutChatV1
-	export function emptyRefP1UserInOutChatV1():Ref<P1UserInOutChatV1>
-	export function refOfP1UserInOutChatV1(x:P1UserInOutChatV1,v:Ref<P1UserInOutChatV1>)
-	export function unRefP1UserInOutChatV1(v:Ref<P1UserInOutChatV1>):P1UserInOutChatV1
-	export function emptyCreatePinReqBodyBuilder():CreatePinReqBodyBuilder
-	export function emptyRefCreatePinReqBodyBuilder():Ref<CreatePinReqBodyBuilder>
-	export function refOfCreatePinReqBodyBuilder(x:CreatePinReqBodyBuilder,v:Ref<CreatePinReqBodyBuilder>)
-	export function unRefCreatePinReqBodyBuilder(v:Ref<CreatePinReqBodyBuilder>):CreatePinReqBodyBuilder
-	export function emptyPatchMessageResp():PatchMessageResp
-	export function emptyRefPatchMessageResp():Ref<PatchMessageResp>
-	export function refOfPatchMessageResp(x:PatchMessageResp,v:Ref<PatchMessageResp>)
-	export function unRefPatchMessageResp(v:Ref<PatchMessageResp>):PatchMessageResp
-	export function emptySpecialFocus():SpecialFocus
-	export function emptyRefSpecialFocus():Ref<SpecialFocus>
-	export function refOfSpecialFocus(x:SpecialFocus,v:Ref<SpecialFocus>)
-	export function unRefSpecialFocus(v:Ref<SpecialFocus>):SpecialFocus
-	export function emptyChatMenuItemRedirectLink():ChatMenuItemRedirectLink
-	export function emptyRefChatMenuItemRedirectLink():Ref<ChatMenuItemRedirectLink>
-	export function refOfChatMenuItemRedirectLink(x:ChatMenuItemRedirectLink,v:Ref<ChatMenuItemRedirectLink>)
-	export function unRefChatMenuItemRedirectLink(v:Ref<ChatMenuItemRedirectLink>):ChatMenuItemRedirectLink
-	export function emptyCreateChatTabReqBodyBuilder():CreateChatTabReqBodyBuilder
-	export function emptyRefCreateChatTabReqBodyBuilder():Ref<CreateChatTabReqBodyBuilder>
-	export function refOfCreateChatTabReqBodyBuilder(x:CreateChatTabReqBodyBuilder,v:Ref<CreateChatTabReqBodyBuilder>)
-	export function unRefCreateChatTabReqBodyBuilder(v:Ref<CreateChatTabReqBodyBuilder>):CreateChatTabReqBodyBuilder
-	export function emptyGetChatMenuTreeReqBuilder():GetChatMenuTreeReqBuilder
-	export function emptyRefGetChatMenuTreeReqBuilder():Ref<GetChatMenuTreeReqBuilder>
-	export function refOfGetChatMenuTreeReqBuilder(x:GetChatMenuTreeReqBuilder,v:Ref<GetChatMenuTreeReqBuilder>)
-	export function unRefGetChatMenuTreeReqBuilder(v:Ref<GetChatMenuTreeReqBuilder>):GetChatMenuTreeReqBuilder
-	export function emptyChatMenuSecondLevelBuilder():ChatMenuSecondLevelBuilder
-	export function emptyRefChatMenuSecondLevelBuilder():Ref<ChatMenuSecondLevelBuilder>
-	export function refOfChatMenuSecondLevelBuilder(x:ChatMenuSecondLevelBuilder,v:Ref<ChatMenuSecondLevelBuilder>)
-	export function unRefChatMenuSecondLevelBuilder(v:Ref<ChatMenuSecondLevelBuilder>):ChatMenuSecondLevelBuilder
-	export function emptyLinkChatResp():LinkChatResp
-	export function emptyRefLinkChatResp():Ref<LinkChatResp>
-	export function refOfLinkChatResp(x:LinkChatResp,v:Ref<LinkChatResp>)
-	export function unRefLinkChatResp(v:Ref<LinkChatResp>):LinkChatResp
-	export function emptyP2ChatMemberBotDeletedV1Handler():P2ChatMemberBotDeletedV1Handler
-	export function emptyRefP2ChatMemberBotDeletedV1Handler():Ref<P2ChatMemberBotDeletedV1Handler>
-	export function refOfP2ChatMemberBotDeletedV1Handler(x:P2ChatMemberBotDeletedV1Handler,v:Ref<P2ChatMemberBotDeletedV1Handler>)
-	export function unRefP2ChatMemberBotDeletedV1Handler(v:Ref<P2ChatMemberBotDeletedV1Handler>):P2ChatMemberBotDeletedV1Handler
-	export function emptyP2ChatMemberUserAddedV1Handler():P2ChatMemberUserAddedV1Handler
-	export function emptyRefP2ChatMemberUserAddedV1Handler():Ref<P2ChatMemberUserAddedV1Handler>
-	export function refOfP2ChatMemberUserAddedV1Handler(x:P2ChatMemberUserAddedV1Handler,v:Ref<P2ChatMemberUserAddedV1Handler>)
-	export function unRefP2ChatMemberUserAddedV1Handler(v:Ref<P2ChatMemberUserAddedV1Handler>):P2ChatMemberUserAddedV1Handler
-	export function emptyThreadBuilder():ThreadBuilder
-	export function emptyRefThreadBuilder():Ref<ThreadBuilder>
-	export function refOfThreadBuilder(x:ThreadBuilder,v:Ref<ThreadBuilder>)
-	export function unRefThreadBuilder(v:Ref<ThreadBuilder>):ThreadBuilder
-	export function emptyGetMessageReqBuilder():GetMessageReqBuilder
-	export function emptyRefGetMessageReqBuilder():Ref<GetMessageReqBuilder>
-	export function refOfGetMessageReqBuilder(x:GetMessageReqBuilder,v:Ref<GetMessageReqBuilder>)
-	export function unRefGetMessageReqBuilder(v:Ref<GetMessageReqBuilder>):GetMessageReqBuilder
-	export function emptyListChatBuilder():ListChatBuilder
-	export function emptyRefListChatBuilder():Ref<ListChatBuilder>
-	export function refOfListChatBuilder(x:ListChatBuilder,v:Ref<ListChatBuilder>)
-	export function unRefListChatBuilder(v:Ref<ListChatBuilder>):ListChatBuilder
-	export function emptyListTabsChatTabReq():ListTabsChatTabReq
-	export function emptyRefListTabsChatTabReq():Ref<ListTabsChatTabReq>
-	export function refOfListTabsChatTabReq(x:ListTabsChatTabReq,v:Ref<ListTabsChatTabReq>)
-	export function unRefListTabsChatTabReq(v:Ref<ListTabsChatTabReq>):ListTabsChatTabReq
-	export function emptyUpdateMessageReqBuilder():UpdateMessageReqBuilder
-	export function emptyRefUpdateMessageReqBuilder():Ref<UpdateMessageReqBuilder>
-	export function refOfUpdateMessageReqBuilder(x:UpdateMessageReqBuilder,v:Ref<UpdateMessageReqBuilder>)
-	export function unRefUpdateMessageReqBuilder(v:Ref<UpdateMessageReqBuilder>):UpdateMessageReqBuilder
-	export function emptyWidgetUrl():WidgetUrl
-	export function emptyRefWidgetUrl():Ref<WidgetUrl>
-	export function refOfWidgetUrl(x:WidgetUrl,v:Ref<WidgetUrl>)
-	export function unRefWidgetUrl(v:Ref<WidgetUrl>):WidgetUrl
-	export function emptyDeleteChatResp():DeleteChatResp
-	export function emptyRefDeleteChatResp():Ref<DeleteChatResp>
-	export function refOfDeleteChatResp(x:DeleteChatResp,v:Ref<DeleteChatResp>)
-	export function unRefDeleteChatResp(v:Ref<DeleteChatResp>):DeleteChatResp
-	export function emptyUpdateChatReqBody():UpdateChatReqBody
-	export function emptyRefUpdateChatReqBody():Ref<UpdateChatReqBody>
-	export function refOfUpdateChatReqBody(x:UpdateChatReqBody,v:Ref<UpdateChatReqBody>)
-	export function unRefUpdateChatReqBody(v:Ref<UpdateChatReqBody>):UpdateChatReqBody
-	export function emptyUpdateTabsChatTabResp():UpdateTabsChatTabResp
-	export function emptyRefUpdateTabsChatTabResp():Ref<UpdateTabsChatTabResp>
-	export function refOfUpdateTabsChatTabResp(x:UpdateTabsChatTabResp,v:Ref<UpdateTabsChatTabResp>)
-	export function unRefUpdateTabsChatTabResp(v:Ref<UpdateTabsChatTabResp>):UpdateTabsChatTabResp
-	export function emptyGetFileReq():GetFileReq
-	export function emptyRefGetFileReq():Ref<GetFileReq>
-	export function refOfGetFileReq(x:GetFileReq,v:Ref<GetFileReq>)
-	export function unRefGetFileReq(v:Ref<GetFileReq>):GetFileReq
-	export function emptyMessageBodyBuilder():MessageBodyBuilder
-	export function emptyRefMessageBodyBuilder():Ref<MessageBodyBuilder>
-	export function refOfMessageBodyBuilder(x:MessageBodyBuilder,v:Ref<MessageBodyBuilder>)
-	export function unRefMessageBodyBuilder(v:Ref<MessageBodyBuilder>):MessageBodyBuilder
-	export function emptyP2MessageReactionCreatedV1Data():P2MessageReactionCreatedV1Data
-	export function emptyRefP2MessageReactionCreatedV1Data():Ref<P2MessageReactionCreatedV1Data>
-	export function refOfP2MessageReactionCreatedV1Data(x:P2MessageReactionCreatedV1Data,v:Ref<P2MessageReactionCreatedV1Data>)
-	export function unRefP2MessageReactionCreatedV1Data(v:Ref<P2MessageReactionCreatedV1Data>):P2MessageReactionCreatedV1Data
-	export function emptyPatchMessageReqBodyBuilder():PatchMessageReqBodyBuilder
-	export function emptyRefPatchMessageReqBodyBuilder():Ref<PatchMessageReqBodyBuilder>
-	export function refOfPatchMessageReqBodyBuilder(x:PatchMessageReqBodyBuilder,v:Ref<PatchMessageReqBodyBuilder>)
-	export function unRefPatchMessageReqBodyBuilder(v:Ref<PatchMessageReqBodyBuilder>):PatchMessageReqBodyBuilder
-	export function emptyPinBuilder():PinBuilder
-	export function emptyRefPinBuilder():Ref<PinBuilder>
-	export function refOfPinBuilder(x:PinBuilder,v:Ref<PinBuilder>)
-	export function unRefPinBuilder(v:Ref<PinBuilder>):PinBuilder
-	export function emptyListNotifyStatus():ListNotifyStatus
-	export function emptyRefListNotifyStatus():Ref<ListNotifyStatus>
-	export function refOfListNotifyStatus(x:ListNotifyStatus,v:Ref<ListNotifyStatus>)
-	export function unRefListNotifyStatus(v:Ref<ListNotifyStatus>):ListNotifyStatus
-	export function emptyP2ChatMemberBotAddedV1Handler():P2ChatMemberBotAddedV1Handler
-	export function emptyRefP2ChatMemberBotAddedV1Handler():Ref<P2ChatMemberBotAddedV1Handler>
-	export function refOfP2ChatMemberBotAddedV1Handler(x:P2ChatMemberBotAddedV1Handler,v:Ref<P2ChatMemberBotAddedV1Handler>)
-	export function unRefP2ChatMemberBotAddedV1Handler(v:Ref<P2ChatMemberBotAddedV1Handler>):P2ChatMemberBotAddedV1Handler
-	export function emptyUpdateChatModerationResp():UpdateChatModerationResp
-	export function emptyRefUpdateChatModerationResp():Ref<UpdateChatModerationResp>
-	export function refOfUpdateChatModerationResp(x:UpdateChatModerationResp,v:Ref<UpdateChatModerationResp>)
-	export function unRefUpdateChatModerationResp(v:Ref<UpdateChatModerationResp>):UpdateChatModerationResp
-	export function emptyChat():Chat
-	export function emptyRefChat():Ref<Chat>
-	export function refOfChat(x:Chat,v:Ref<Chat>)
-	export function unRefChat(v:Ref<Chat>):Chat
-	export function emptyImDepthData():ImDepthData
-	export function emptyRefImDepthData():Ref<ImDepthData>
-	export function refOfImDepthData(x:ImDepthData,v:Ref<ImDepthData>)
-	export function unRefImDepthData(v:Ref<ImDepthData>):ImDepthData
-	export function emptyP1MessageReadV1Data():P1MessageReadV1Data
-	export function emptyRefP1MessageReadV1Data():Ref<P1MessageReadV1Data>
-	export function refOfP1MessageReadV1Data(x:P1MessageReadV1Data,v:Ref<P1MessageReadV1Data>)
-	export function unRefP1MessageReadV1Data(v:Ref<P1MessageReadV1Data>):P1MessageReadV1Data
-	export function emptyPin():Pin
-	export function emptyRefPin():Ref<Pin>
-	export function refOfPin(x:Pin,v:Ref<Pin>)
-	export function unRefPin(v:Ref<Pin>):Pin
-	export function emptyCrc32Item():Crc32Item
-	export function emptyRefCrc32Item():Ref<Crc32Item>
-	export function refOfCrc32Item(x:Crc32Item,v:Ref<Crc32Item>)
-	export function unRefCrc32Item(v:Ref<Crc32Item>):Crc32Item
-	export function emptyDeleteChatMenuTreeResp():DeleteChatMenuTreeResp
-	export function emptyRefDeleteChatMenuTreeResp():Ref<DeleteChatMenuTreeResp>
-	export function refOfDeleteChatMenuTreeResp(x:DeleteChatMenuTreeResp,v:Ref<DeleteChatMenuTreeResp>)
-	export function unRefDeleteChatMenuTreeResp(v:Ref<DeleteChatMenuTreeResp>):DeleteChatMenuTreeResp
-	export function emptyForwardMessageReq():ForwardMessageReq
-	export function emptyRefForwardMessageReq():Ref<ForwardMessageReq>
-	export function refOfForwardMessageReq(x:ForwardMessageReq,v:Ref<ForwardMessageReq>)
-	export function unRefForwardMessageReq(v:Ref<ForwardMessageReq>):ForwardMessageReq
-	export function emptyListPinResp():ListPinResp
-	export function emptyRefListPinResp():Ref<ListPinResp>
-	export function refOfListPinResp(x:ListPinResp,v:Ref<ListPinResp>)
-	export function unRefListPinResp(v:Ref<ListPinResp>):ListPinResp
-	export function emptyMessageShareUser():MessageShareUser
-	export function emptyRefMessageShareUser():Ref<MessageShareUser>
-	export function refOfMessageShareUser(x:MessageShareUser,v:Ref<MessageShareUser>)
-	export function unRefMessageShareUser(v:Ref<MessageShareUser>):MessageShareUser
-	export function emptyUpdateMessageReqBody():UpdateMessageReqBody
-	export function emptyRefUpdateMessageReqBody():Ref<UpdateMessageReqBody>
-	export function refOfUpdateMessageReqBody(x:UpdateMessageReqBody,v:Ref<UpdateMessageReqBody>)
-	export function unRefUpdateMessageReqBody(v:Ref<UpdateMessageReqBody>):UpdateMessageReqBody
-	export function emptyBatchMessageRecallProgressBuilder():BatchMessageRecallProgressBuilder
-	export function emptyRefBatchMessageRecallProgressBuilder():Ref<BatchMessageRecallProgressBuilder>
-	export function refOfBatchMessageRecallProgressBuilder(x:BatchMessageRecallProgressBuilder,v:Ref<BatchMessageRecallProgressBuilder>)
-	export function unRefBatchMessageRecallProgressBuilder(v:Ref<BatchMessageRecallProgressBuilder>):BatchMessageRecallProgressBuilder
-	export function emptyChatMembersBuilder():ChatMembersBuilder
-	export function emptyRefChatMembersBuilder():Ref<ChatMembersBuilder>
-	export function refOfChatMembersBuilder(x:ChatMembersBuilder,v:Ref<ChatMembersBuilder>)
-	export function unRefChatMembersBuilder(v:Ref<ChatMembersBuilder>):ChatMembersBuilder
-	export function emptyGetChatModerationIterator():GetChatModerationIterator
-	export function emptyRefGetChatModerationIterator():Ref<GetChatModerationIterator>
-	export function refOfGetChatModerationIterator(x:GetChatModerationIterator,v:Ref<GetChatModerationIterator>)
-	export function unRefGetChatModerationIterator(v:Ref<GetChatModerationIterator>):GetChatModerationIterator
-	export function emptyListPinRespData():ListPinRespData
-	export function emptyRefListPinRespData():Ref<ListPinRespData>
-	export function refOfListPinRespData(x:ListPinRespData,v:Ref<ListPinRespData>)
-	export function unRefListPinRespData(v:Ref<ListPinRespData>):ListPinRespData
-	export function emptyReadUserBatchMessageReq():ReadUserBatchMessageReq
-	export function emptyRefReadUserBatchMessageReq():Ref<ReadUserBatchMessageReq>
-	export function refOfReadUserBatchMessageReq(x:ReadUserBatchMessageReq,v:Ref<ReadUserBatchMessageReq>)
-	export function unRefReadUserBatchMessageReq(v:Ref<ReadUserBatchMessageReq>):ReadUserBatchMessageReq
-	export function emptyReadUserBatchMessageReqBuilder():ReadUserBatchMessageReqBuilder
-	export function emptyRefReadUserBatchMessageReqBuilder():Ref<ReadUserBatchMessageReqBuilder>
-	export function refOfReadUserBatchMessageReqBuilder(x:ReadUserBatchMessageReqBuilder,v:Ref<ReadUserBatchMessageReqBuilder>)
-	export function unRefReadUserBatchMessageReqBuilder(v:Ref<ReadUserBatchMessageReqBuilder>):ReadUserBatchMessageReqBuilder
-	export function emptyToolkitRedirectLink():ToolkitRedirectLink
-	export function emptyRefToolkitRedirectLink():Ref<ToolkitRedirectLink>
-	export function refOfToolkitRedirectLink(x:ToolkitRedirectLink,v:Ref<ToolkitRedirectLink>)
-	export function unRefToolkitRedirectLink(v:Ref<ToolkitRedirectLink>):ToolkitRedirectLink
-	export function emptyUrgentReceivers():UrgentReceivers
-	export function emptyRefUrgentReceivers():Ref<UrgentReceivers>
-	export function refOfUrgentReceivers(x:UrgentReceivers,v:Ref<UrgentReceivers>)
-	export function unRefUrgentReceivers(v:Ref<UrgentReceivers>):UrgentReceivers
-	export function emptyDeleteChatMembersReqBody():DeleteChatMembersReqBody
-	export function emptyRefDeleteChatMembersReqBody():Ref<DeleteChatMembersReqBody>
-	export function refOfDeleteChatMembersReqBody(x:DeleteChatMembersReqBody,v:Ref<DeleteChatMembersReqBody>)
-	export function unRefDeleteChatMembersReqBody(v:Ref<DeleteChatMembersReqBody>):DeleteChatMembersReqBody
-	export function emptyP2ChatMemberUserAddedV1Data():P2ChatMemberUserAddedV1Data
-	export function emptyRefP2ChatMemberUserAddedV1Data():Ref<P2ChatMemberUserAddedV1Data>
-	export function refOfP2ChatMemberUserAddedV1Data(x:P2ChatMemberUserAddedV1Data,v:Ref<P2ChatMemberUserAddedV1Data>)
-	export function unRefP2ChatMemberUserAddedV1Data(v:Ref<P2ChatMemberUserAddedV1Data>):P2ChatMemberUserAddedV1Data
-	export function emptySearchChatRespData():SearchChatRespData
-	export function emptyRefSearchChatRespData():Ref<SearchChatRespData>
-	export function refOfSearchChatRespData(x:SearchChatRespData,v:Ref<SearchChatRespData>)
-	export function unRefSearchChatRespData(v:Ref<SearchChatRespData>):SearchChatRespData
-	export function emptyCreateChatTabReqBuilder():CreateChatTabReqBuilder
-	export function emptyRefCreateChatTabReqBuilder():Ref<CreateChatTabReqBuilder>
-	export function refOfCreateChatTabReqBuilder(x:CreateChatTabReqBuilder,v:Ref<CreateChatTabReqBuilder>)
-	export function unRefCreateChatTabReqBuilder(v:Ref<CreateChatTabReqBuilder>):CreateChatTabReqBuilder
-	export function emptyMergeForwardMessageReqBody():MergeForwardMessageReqBody
-	export function emptyRefMergeForwardMessageReqBody():Ref<MergeForwardMessageReqBody>
-	export function refOfMergeForwardMessageReqBody(x:MergeForwardMessageReqBody,v:Ref<MergeForwardMessageReqBody>)
-	export function unRefMergeForwardMessageReqBody(v:Ref<MergeForwardMessageReqBody>):MergeForwardMessageReqBody
-	export function emptyCreateChatPathReqBodyBuilder():CreateChatPathReqBodyBuilder
-	export function emptyRefCreateChatPathReqBodyBuilder():Ref<CreateChatPathReqBodyBuilder>
-	export function refOfCreateChatPathReqBodyBuilder(x:CreateChatPathReqBodyBuilder,v:Ref<CreateChatPathReqBodyBuilder>)
-	export function unRefCreateChatPathReqBodyBuilder(v:Ref<CreateChatPathReqBodyBuilder>):CreateChatPathReqBodyBuilder
-	export function emptyDeleteMessageResp():DeleteMessageResp
-	export function emptyRefDeleteMessageResp():Ref<DeleteMessageResp>
-	export function refOfDeleteMessageResp(x:DeleteMessageResp,v:Ref<DeleteMessageResp>)
-	export function unRefDeleteMessageResp(v:Ref<DeleteMessageResp>):DeleteMessageResp
-	export function emptyDeletePinReq():DeletePinReq
-	export function emptyRefDeletePinReq():Ref<DeletePinReq>
-	export function refOfDeletePinReq(x:DeletePinReq,v:Ref<DeletePinReq>)
-	export function unRefDeletePinReq(v:Ref<DeletePinReq>):DeletePinReq
-	export function emptyDeleteMessageReactionReqBuilder():DeleteMessageReactionReqBuilder
-	export function emptyRefDeleteMessageReactionReqBuilder():Ref<DeleteMessageReactionReqBuilder>
-	export function refOfDeleteMessageReactionReqBuilder(x:DeleteMessageReactionReqBuilder,v:Ref<DeleteMessageReactionReqBuilder>)
-	export function unRefDeleteMessageReactionReqBuilder(v:Ref<DeleteMessageReactionReqBuilder>):DeleteMessageReactionReqBuilder
-	export function emptyMergeForwardMessageResp():MergeForwardMessageResp
-	export function emptyRefMergeForwardMessageResp():Ref<MergeForwardMessageResp>
-	export function refOfMergeForwardMessageResp(x:MergeForwardMessageResp,v:Ref<MergeForwardMessageResp>)
-	export function unRefMergeForwardMessageResp(v:Ref<MergeForwardMessageResp>):MergeForwardMessageResp
-	export function emptyP1RemoveBotV1Handler():P1RemoveBotV1Handler
-	export function emptyRefP1RemoveBotV1Handler():Ref<P1RemoveBotV1Handler>
-	export function refOfP1RemoveBotV1Handler(x:P1RemoveBotV1Handler,v:Ref<P1RemoveBotV1Handler>)
-	export function unRefP1RemoveBotV1Handler(v:Ref<P1RemoveBotV1Handler>):P1RemoveBotV1Handler
-	export function emptyPatchMessageReqBuilder():PatchMessageReqBuilder
-	export function emptyRefPatchMessageReqBuilder():Ref<PatchMessageReqBuilder>
-	export function refOfPatchMessageReqBuilder(x:PatchMessageReqBuilder,v:Ref<PatchMessageReqBuilder>)
-	export function unRefPatchMessageReqBuilder(v:Ref<PatchMessageReqBuilder>):PatchMessageReqBuilder
-	export function emptySortChatMenuTreeRespData():SortChatMenuTreeRespData
-	export function emptyRefSortChatMenuTreeRespData():Ref<SortChatMenuTreeRespData>
-	export function refOfSortChatMenuTreeRespData(x:SortChatMenuTreeRespData,v:Ref<SortChatMenuTreeRespData>)
-	export function unRefSortChatMenuTreeRespData(v:Ref<SortChatMenuTreeRespData>):SortChatMenuTreeRespData
-	export function emptyPatchChatAnnouncementReq():PatchChatAnnouncementReq
-	export function emptyRefPatchChatAnnouncementReq():Ref<PatchChatAnnouncementReq>
-	export function refOfPatchChatAnnouncementReq(x:PatchChatAnnouncementReq,v:Ref<PatchChatAnnouncementReq>)
-	export function unRefPatchChatAnnouncementReq(v:Ref<PatchChatAnnouncementReq>):PatchChatAnnouncementReq
-	export function emptyUpdateChatModerationReqBodyBuilder():UpdateChatModerationReqBodyBuilder
-	export function emptyRefUpdateChatModerationReqBodyBuilder():Ref<UpdateChatModerationReqBodyBuilder>
-	export function refOfUpdateChatModerationReqBodyBuilder(x:UpdateChatModerationReqBodyBuilder,v:Ref<UpdateChatModerationReqBodyBuilder>)
-	export function unRefUpdateChatModerationReqBodyBuilder(v:Ref<UpdateChatModerationReqBodyBuilder>):UpdateChatModerationReqBodyBuilder
-	export function emptyBatchSendProgress():BatchSendProgress
-	export function emptyRefBatchSendProgress():Ref<BatchSendProgress>
-	export function refOfBatchSendProgress(x:BatchSendProgress,v:Ref<BatchSendProgress>)
-	export function unRefBatchSendProgress(v:Ref<BatchSendProgress>):BatchSendProgress
-	export function emptyCreateChatMembersReq():CreateChatMembersReq
-	export function emptyRefCreateChatMembersReq():Ref<CreateChatMembersReq>
-	export function refOfCreateChatMembersReq(x:CreateChatMembersReq,v:Ref<CreateChatMembersReq>)
-	export function unRefCreateChatMembersReq(v:Ref<CreateChatMembersReq>):CreateChatMembersReq
-	export function emptyFollowUp():FollowUp
-	export function emptyRefFollowUp():Ref<FollowUp>
-	export function refOfFollowUp(x:FollowUp,v:Ref<FollowUp>)
-	export function unRefFollowUp(v:Ref<FollowUp>):FollowUp
-	export function emptyForwardThreadPathReqBodyBuilder():ForwardThreadPathReqBodyBuilder
-	export function emptyRefForwardThreadPathReqBodyBuilder():Ref<ForwardThreadPathReqBodyBuilder>
-	export function refOfForwardThreadPathReqBodyBuilder(x:ForwardThreadPathReqBodyBuilder,v:Ref<ForwardThreadPathReqBodyBuilder>)
-	export function unRefForwardThreadPathReqBodyBuilder(v:Ref<ForwardThreadPathReqBodyBuilder>):ForwardThreadPathReqBodyBuilder
-	export function emptyGetFileReqBuilder():GetFileReqBuilder
-	export function emptyRefGetFileReqBuilder():Ref<GetFileReqBuilder>
-	export function refOfGetFileReqBuilder(x:GetFileReqBuilder,v:Ref<GetFileReqBuilder>)
-	export function unRefGetFileReqBuilder(v:Ref<GetFileReqBuilder>):GetFileReqBuilder
-	export function emptyListMessageReactionIterator():ListMessageReactionIterator
-	export function emptyRefListMessageReactionIterator():Ref<ListMessageReactionIterator>
-	export function refOfListMessageReactionIterator(x:ListMessageReactionIterator,v:Ref<ListMessageReactionIterator>)
-	export function unRefListMessageReactionIterator(v:Ref<ListMessageReactionIterator>):ListMessageReactionIterator
-	export function emptyModeratorListBuilder():ModeratorListBuilder
-	export function emptyRefModeratorListBuilder():Ref<ModeratorListBuilder>
-	export function refOfModeratorListBuilder(x:ModeratorListBuilder,v:Ref<ModeratorListBuilder>)
-	export function unRefModeratorListBuilder(v:Ref<ModeratorListBuilder>):ModeratorListBuilder
-	export function emptyDeleteManagersChatManagersReq():DeleteManagersChatManagersReq
-	export function emptyRefDeleteManagersChatManagersReq():Ref<DeleteManagersChatManagersReq>
-	export function refOfDeleteManagersChatManagersReq(x:DeleteManagersChatManagersReq,v:Ref<DeleteManagersChatManagersReq>)
-	export function unRefDeleteManagersChatManagersReq(v:Ref<DeleteManagersChatManagersReq>):DeleteManagersChatManagersReq
-	export function emptyDeleteTabsChatTabReqBuilder():DeleteTabsChatTabReqBuilder
-	export function emptyRefDeleteTabsChatTabReqBuilder():Ref<DeleteTabsChatTabReqBuilder>
-	export function refOfDeleteTabsChatTabReqBuilder(x:DeleteTabsChatTabReqBuilder,v:Ref<DeleteTabsChatTabReqBuilder>)
-	export function unRefDeleteTabsChatTabReqBuilder(v:Ref<DeleteTabsChatTabReqBuilder>):DeleteTabsChatTabReqBuilder
-	export function emptyUserId():UserId
-	export function emptyRefUserId():Ref<UserId>
-	export function refOfUserId(x:UserId,v:Ref<UserId>)
-	export function unRefUserId(v:Ref<UserId>):UserId
-	export function emptyDeleteChatReqBuilder():DeleteChatReqBuilder
-	export function emptyRefDeleteChatReqBuilder():Ref<DeleteChatReqBuilder>
-	export function refOfDeleteChatReqBuilder(x:DeleteChatReqBuilder,v:Ref<DeleteChatReqBuilder>)
-	export function unRefDeleteChatReqBuilder(v:Ref<DeleteChatReqBuilder>):DeleteChatReqBuilder
-	export function emptyGetChatMenuTreeResp():GetChatMenuTreeResp
-	export function emptyRefGetChatMenuTreeResp():Ref<GetChatMenuTreeResp>
-	export function refOfGetChatMenuTreeResp(x:GetChatMenuTreeResp,v:Ref<GetChatMenuTreeResp>)
-	export function unRefGetChatMenuTreeResp(v:Ref<GetChatMenuTreeResp>):GetChatMenuTreeResp
-	export function emptyCreateMessageReactionReq():CreateMessageReactionReq
-	export function emptyRefCreateMessageReactionReq():Ref<CreateMessageReactionReq>
-	export function refOfCreateMessageReactionReq(x:CreateMessageReactionReq,v:Ref<CreateMessageReactionReq>)
-	export function unRefCreateMessageReactionReq(v:Ref<CreateMessageReactionReq>):CreateMessageReactionReq
-	export function emptyMentionEventBuilder():MentionEventBuilder
-	export function emptyRefMentionEventBuilder():Ref<MentionEventBuilder>
-	export function refOfMentionEventBuilder(x:MentionEventBuilder,v:Ref<MentionEventBuilder>)
-	export function unRefMentionEventBuilder(v:Ref<MentionEventBuilder>):MentionEventBuilder
-	export function emptyUrgentPhoneMessageReq():UrgentPhoneMessageReq
-	export function emptyRefUrgentPhoneMessageReq():Ref<UrgentPhoneMessageReq>
-	export function refOfUrgentPhoneMessageReq(x:UrgentPhoneMessageReq,v:Ref<UrgentPhoneMessageReq>)
-	export function unRefUrgentPhoneMessageReq(v:Ref<UrgentPhoneMessageReq>):UrgentPhoneMessageReq
-	export function emptyCrc32ItemBuilder():Crc32ItemBuilder
-	export function emptyRefCrc32ItemBuilder():Ref<Crc32ItemBuilder>
-	export function refOfCrc32ItemBuilder(x:Crc32ItemBuilder,v:Ref<Crc32ItemBuilder>)
-	export function unRefCrc32ItemBuilder(v:Ref<Crc32ItemBuilder>):Crc32ItemBuilder
-	export function emptyCreateChatTabResp():CreateChatTabResp
-	export function emptyRefCreateChatTabResp():Ref<CreateChatTabResp>
-	export function refOfCreateChatTabResp(x:CreateChatTabResp,v:Ref<CreateChatTabResp>)
-	export function unRefCreateChatTabResp(v:Ref<CreateChatTabResp>):CreateChatTabResp
-	export function emptyDeleteChatMembersReqBodyBuilder():DeleteChatMembersReqBodyBuilder
-	export function emptyRefDeleteChatMembersReqBodyBuilder():Ref<DeleteChatMembersReqBodyBuilder>
-	export function refOfDeleteChatMembersReqBodyBuilder(x:DeleteChatMembersReqBodyBuilder,v:Ref<DeleteChatMembersReqBodyBuilder>)
-	export function unRefDeleteChatMembersReqBodyBuilder(v:Ref<DeleteChatMembersReqBodyBuilder>):DeleteChatMembersReqBodyBuilder
-	export function emptyOperatorBuilder():OperatorBuilder
-	export function emptyRefOperatorBuilder():Ref<OperatorBuilder>
-	export function refOfOperatorBuilder(x:OperatorBuilder,v:Ref<OperatorBuilder>)
-	export function unRefOperatorBuilder(v:Ref<OperatorBuilder>):OperatorBuilder
-	export function emptyAddManagersChatManagersPathReqBodyBuilder():AddManagersChatManagersPathReqBodyBuilder
-	export function emptyRefAddManagersChatManagersPathReqBodyBuilder():Ref<AddManagersChatManagersPathReqBodyBuilder>
-	export function refOfAddManagersChatManagersPathReqBodyBuilder(x:AddManagersChatManagersPathReqBodyBuilder,v:Ref<AddManagersChatManagersPathReqBodyBuilder>)
-	export function unRefAddManagersChatManagersPathReqBodyBuilder(v:Ref<AddManagersChatManagersPathReqBodyBuilder>):AddManagersChatManagersPathReqBodyBuilder
-	export function emptyCreateChatReqBuilder():CreateChatReqBuilder
-	export function emptyRefCreateChatReqBuilder():Ref<CreateChatReqBuilder>
-	export function refOfCreateChatReqBuilder(x:CreateChatReqBuilder,v:Ref<CreateChatReqBuilder>)
-	export function unRefCreateChatReqBuilder(v:Ref<CreateChatReqBuilder>):CreateChatReqBuilder
-	export function emptyForwardMessageResp():ForwardMessageResp
-	export function emptyRefForwardMessageResp():Ref<ForwardMessageResp>
-	export function refOfForwardMessageResp(x:ForwardMessageResp,v:Ref<ForwardMessageResp>)
-	export function unRefForwardMessageResp(v:Ref<ForwardMessageResp>):ForwardMessageResp
-	export function emptyGetChatAnnouncementResp():GetChatAnnouncementResp
-	export function emptyRefGetChatAnnouncementResp():Ref<GetChatAnnouncementResp>
-	export function refOfGetChatAnnouncementResp(x:GetChatAnnouncementResp,v:Ref<GetChatAnnouncementResp>)
-	export function unRefGetChatAnnouncementResp(v:Ref<GetChatAnnouncementResp>):GetChatAnnouncementResp
-	export function emptyMergeForwardMessageReqBuilder():MergeForwardMessageReqBuilder
-	export function emptyRefMergeForwardMessageReqBuilder():Ref<MergeForwardMessageReqBuilder>
-	export function refOfMergeForwardMessageReqBuilder(x:MergeForwardMessageReqBuilder,v:Ref<MergeForwardMessageReqBuilder>)
-	export function unRefMergeForwardMessageReqBuilder(v:Ref<MergeForwardMessageReqBuilder>):MergeForwardMessageReqBuilder
-	export function emptyMessageReactionBuilder():MessageReactionBuilder
-	export function emptyRefMessageReactionBuilder():Ref<MessageReactionBuilder>
-	export function refOfMessageReactionBuilder(x:MessageReactionBuilder,v:Ref<MessageReactionBuilder>)
-	export function unRefMessageReactionBuilder(v:Ref<MessageReactionBuilder>):MessageReactionBuilder
-	export function emptyDeleteManagersChatManagersReqBuilder():DeleteManagersChatManagersReqBuilder
-	export function emptyRefDeleteManagersChatManagersReqBuilder():Ref<DeleteManagersChatManagersReqBuilder>
-	export function refOfDeleteManagersChatManagersReqBuilder(x:DeleteManagersChatManagersReqBuilder,v:Ref<DeleteManagersChatManagersReqBuilder>)
-	export function unRefDeleteManagersChatManagersReqBuilder(v:Ref<DeleteManagersChatManagersReqBuilder>):DeleteManagersChatManagersReqBuilder
-	export function emptyDeleteTabsChatTabRespData():DeleteTabsChatTabRespData
-	export function emptyRefDeleteTabsChatTabRespData():Ref<DeleteTabsChatTabRespData>
-	export function refOfDeleteTabsChatTabRespData(x:DeleteTabsChatTabRespData,v:Ref<DeleteTabsChatTabRespData>)
-	export function unRefDeleteTabsChatTabRespData(v:Ref<DeleteTabsChatTabRespData>):DeleteTabsChatTabRespData
-	export function emptyLinkChatReqBodyBuilder():LinkChatReqBodyBuilder
-	export function emptyRefLinkChatReqBodyBuilder():Ref<LinkChatReqBodyBuilder>
-	export function refOfLinkChatReqBodyBuilder(x:LinkChatReqBodyBuilder,v:Ref<LinkChatReqBodyBuilder>)
-	export function unRefLinkChatReqBodyBuilder(v:Ref<LinkChatReqBodyBuilder>):LinkChatReqBodyBuilder
-	export function emptyP2MessageReactionDeletedV1():P2MessageReactionDeletedV1
-	export function emptyRefP2MessageReactionDeletedV1():Ref<P2MessageReactionDeletedV1>
-	export function refOfP2MessageReactionDeletedV1(x:P2MessageReactionDeletedV1,v:Ref<P2MessageReactionDeletedV1>)
-	export function unRefP2MessageReactionDeletedV1(v:Ref<P2MessageReactionDeletedV1>):P2MessageReactionDeletedV1
-	export function emptyUpdateChatReq():UpdateChatReq
-	export function emptyRefUpdateChatReq():Ref<UpdateChatReq>
-	export function refOfUpdateChatReq(x:UpdateChatReq,v:Ref<UpdateChatReq>)
-	export function unRefUpdateChatReq(v:Ref<UpdateChatReq>):UpdateChatReq
-	export function emptyCreateChatMembersReqBuilder():CreateChatMembersReqBuilder
-	export function emptyRefCreateChatMembersReqBuilder():Ref<CreateChatMembersReqBuilder>
-	export function refOfCreateChatMembersReqBuilder(x:CreateChatMembersReqBuilder,v:Ref<CreateChatMembersReqBuilder>)
-	export function unRefCreateChatMembersReqBuilder(v:Ref<CreateChatMembersReqBuilder>):CreateChatMembersReqBuilder
-	export function emptyMergeForwardMessagePathReqBodyBuilder():MergeForwardMessagePathReqBodyBuilder
-	export function emptyRefMergeForwardMessagePathReqBodyBuilder():Ref<MergeForwardMessagePathReqBodyBuilder>
-	export function refOfMergeForwardMessagePathReqBodyBuilder(x:MergeForwardMessagePathReqBodyBuilder,v:Ref<MergeForwardMessagePathReqBodyBuilder>)
-	export function unRefMergeForwardMessagePathReqBodyBuilder(v:Ref<MergeForwardMessagePathReqBodyBuilder>):MergeForwardMessagePathReqBodyBuilder
-	export function emptyBatchMessageReadUser():BatchMessageReadUser
-	export function emptyRefBatchMessageReadUser():Ref<BatchMessageReadUser>
-	export function refOfBatchMessageReadUser(x:BatchMessageReadUser,v:Ref<BatchMessageReadUser>)
-	export function unRefBatchMessageReadUser(v:Ref<BatchMessageReadUser>):BatchMessageReadUser
-	export function emptyCreateMessageReqBuilder():CreateMessageReqBuilder
-	export function emptyRefCreateMessageReqBuilder():Ref<CreateMessageReqBuilder>
-	export function refOfCreateMessageReqBuilder(x:CreateMessageReqBuilder,v:Ref<CreateMessageReqBuilder>)
-	export function unRefCreateMessageReqBuilder(v:Ref<CreateMessageReqBuilder>):CreateMessageReqBuilder
-	export function emptyCreatePinRespData():CreatePinRespData
-	export function emptyRefCreatePinRespData():Ref<CreatePinRespData>
-	export function refOfCreatePinRespData(x:CreatePinRespData,v:Ref<CreatePinRespData>)
-	export function unRefCreatePinRespData(v:Ref<CreatePinRespData>):CreatePinRespData
-	export function emptyDeleteTabsChatTabReq():DeleteTabsChatTabReq
-	export function emptyRefDeleteTabsChatTabReq():Ref<DeleteTabsChatTabReq>
-	export function refOfDeleteTabsChatTabReq(x:DeleteTabsChatTabReq,v:Ref<DeleteTabsChatTabReq>)
-	export function unRefDeleteTabsChatTabReq(v:Ref<DeleteTabsChatTabReq>):DeleteTabsChatTabReq
-	export function emptyGetImageReq():GetImageReq
-	export function emptyRefGetImageReq():Ref<GetImageReq>
-	export function refOfGetImageReq(x:GetImageReq,v:Ref<GetImageReq>)
-	export function unRefGetImageReq(v:Ref<GetImageReq>):GetImageReq
-	export function emptyP2ChatUpdatedV1Handler():P2ChatUpdatedV1Handler
-	export function emptyRefP2ChatUpdatedV1Handler():Ref<P2ChatUpdatedV1Handler>
-	export function refOfP2ChatUpdatedV1Handler(x:P2ChatUpdatedV1Handler,v:Ref<P2ChatUpdatedV1Handler>)
-	export function unRefP2ChatUpdatedV1Handler(v:Ref<P2ChatUpdatedV1Handler>):P2ChatUpdatedV1Handler
-	export function emptyReadUsersMessageRespData():ReadUsersMessageRespData
-	export function emptyRefReadUsersMessageRespData():Ref<ReadUsersMessageRespData>
-	export function refOfReadUsersMessageRespData(x:ReadUsersMessageRespData,v:Ref<ReadUsersMessageRespData>)
-	export function unRefReadUsersMessageRespData(v:Ref<ReadUsersMessageRespData>):ReadUsersMessageRespData
-	export function emptyChatBuilder():ChatBuilder
-	export function emptyRefChatBuilder():Ref<ChatBuilder>
-	export function refOfChatBuilder(x:ChatBuilder,v:Ref<ChatBuilder>)
-	export function unRefChatBuilder(v:Ref<ChatBuilder>):ChatBuilder
-	export function emptyDeleteChatMenuTreeReqBodyBuilder():DeleteChatMenuTreeReqBodyBuilder
-	export function emptyRefDeleteChatMenuTreeReqBodyBuilder():Ref<DeleteChatMenuTreeReqBodyBuilder>
-	export function refOfDeleteChatMenuTreeReqBodyBuilder(x:DeleteChatMenuTreeReqBodyBuilder,v:Ref<DeleteChatMenuTreeReqBodyBuilder>)
-	export function unRefDeleteChatMenuTreeReqBodyBuilder(v:Ref<DeleteChatMenuTreeReqBodyBuilder>):DeleteChatMenuTreeReqBodyBuilder
-	export function emptyP2ChatMemberUserDeletedV1Data():P2ChatMemberUserDeletedV1Data
-	export function emptyRefP2ChatMemberUserDeletedV1Data():Ref<P2ChatMemberUserDeletedV1Data>
-	export function refOfP2ChatMemberUserDeletedV1Data(x:P2ChatMemberUserDeletedV1Data,v:Ref<P2ChatMemberUserDeletedV1Data>)
-	export function unRefP2ChatMemberUserDeletedV1Data(v:Ref<P2ChatMemberUserDeletedV1Data>):P2ChatMemberUserDeletedV1Data
-	export function emptySortChatMenuTreeResp():SortChatMenuTreeResp
-	export function emptyRefSortChatMenuTreeResp():Ref<SortChatMenuTreeResp>
-	export function refOfSortChatMenuTreeResp(x:SortChatMenuTreeResp,v:Ref<SortChatMenuTreeResp>)
-	export function unRefSortChatMenuTreeResp(v:Ref<SortChatMenuTreeResp>):SortChatMenuTreeResp
-	export function emptyCreateFileRespData():CreateFileRespData
-	export function emptyRefCreateFileRespData():Ref<CreateFileRespData>
-	export function refOfCreateFileRespData(x:CreateFileRespData,v:Ref<CreateFileRespData>)
-	export function unRefCreateFileRespData(v:Ref<CreateFileRespData>):CreateFileRespData
-	export function emptyEmojiBuilder():EmojiBuilder
-	export function emptyRefEmojiBuilder():Ref<EmojiBuilder>
-	export function refOfEmojiBuilder(x:EmojiBuilder,v:Ref<EmojiBuilder>)
-	export function unRefEmojiBuilder(v:Ref<EmojiBuilder>):EmojiBuilder
-	export function emptyForwardMessageReqBuilder():ForwardMessageReqBuilder
-	export function emptyRefForwardMessageReqBuilder():Ref<ForwardMessageReqBuilder>
-	export function refOfForwardMessageReqBuilder(x:ForwardMessageReqBuilder,v:Ref<ForwardMessageReqBuilder>)
-	export function unRefForwardMessageReqBuilder(v:Ref<ForwardMessageReqBuilder>):ForwardMessageReqBuilder
-	export function emptyForwardThreadResp():ForwardThreadResp
-	export function emptyRefForwardThreadResp():Ref<ForwardThreadResp>
-	export function refOfForwardThreadResp(x:ForwardThreadResp,v:Ref<ForwardThreadResp>)
-	export function unRefForwardThreadResp(v:Ref<ForwardThreadResp>):ForwardThreadResp
-	export function emptyListMessageReactionReq():ListMessageReactionReq
-	export function emptyRefListMessageReactionReq():Ref<ListMessageReactionReq>
-	export function refOfListMessageReactionReq(x:ListMessageReactionReq,v:Ref<ListMessageReactionReq>)
-	export function unRefListMessageReactionReq(v:Ref<ListMessageReactionReq>):ListMessageReactionReq
-	export function emptyP2MessageReceiveV1Handler():P2MessageReceiveV1Handler
-	export function emptyRefP2MessageReceiveV1Handler():Ref<P2MessageReceiveV1Handler>
-	export function refOfP2MessageReceiveV1Handler(x:P2MessageReceiveV1Handler,v:Ref<P2MessageReceiveV1Handler>)
-	export function unRefP2MessageReceiveV1Handler(v:Ref<P2MessageReceiveV1Handler>):P2MessageReceiveV1Handler
-	export function emptyReadUserBuilder():ReadUserBuilder
-	export function emptyRefReadUserBuilder():Ref<ReadUserBuilder>
-	export function refOfReadUserBuilder(x:ReadUserBuilder,v:Ref<ReadUserBuilder>)
-	export function unRefReadUserBuilder(v:Ref<ReadUserBuilder>):ReadUserBuilder
-	export function emptySpecialFocusBuilder():SpecialFocusBuilder
-	export function emptyRefSpecialFocusBuilder():Ref<SpecialFocusBuilder>
-	export function refOfSpecialFocusBuilder(x:SpecialFocusBuilder,v:Ref<SpecialFocusBuilder>)
-	export function unRefSpecialFocusBuilder(v:Ref<SpecialFocusBuilder>):SpecialFocusBuilder
-	export function emptyUpdateMessageRespData():UpdateMessageRespData
-	export function emptyRefUpdateMessageRespData():Ref<UpdateMessageRespData>
-	export function refOfUpdateMessageRespData(x:UpdateMessageRespData,v:Ref<UpdateMessageRespData>)
-	export function unRefUpdateMessageRespData(v:Ref<UpdateMessageRespData>):UpdateMessageRespData
-	export function emptyUrgentSmsMessageReq():UrgentSmsMessageReq
-	export function emptyRefUrgentSmsMessageReq():Ref<UrgentSmsMessageReq>
-	export function refOfUrgentSmsMessageReq(x:UrgentSmsMessageReq,v:Ref<UrgentSmsMessageReq>)
-	export function unRefUrgentSmsMessageReq(v:Ref<UrgentSmsMessageReq>):UrgentSmsMessageReq
-	export function emptyDeleteTabsChatTabResp():DeleteTabsChatTabResp
-	export function emptyRefDeleteTabsChatTabResp():Ref<DeleteTabsChatTabResp>
-	export function refOfDeleteTabsChatTabResp(x:DeleteTabsChatTabResp,v:Ref<DeleteTabsChatTabResp>)
-	export function unRefDeleteTabsChatTabResp(v:Ref<DeleteTabsChatTabResp>):DeleteTabsChatTabResp
-	export function emptyUpdateMessagePathReqBodyBuilder():UpdateMessagePathReqBodyBuilder
-	export function emptyRefUpdateMessagePathReqBodyBuilder():Ref<UpdateMessagePathReqBodyBuilder>
-	export function refOfUpdateMessagePathReqBodyBuilder(x:UpdateMessagePathReqBodyBuilder,v:Ref<UpdateMessagePathReqBodyBuilder>)
-	export function unRefUpdateMessagePathReqBodyBuilder(v:Ref<UpdateMessagePathReqBodyBuilder>):UpdateMessagePathReqBodyBuilder
-	export function emptyCreateMessageReq():CreateMessageReq
-	export function emptyRefCreateMessageReq():Ref<CreateMessageReq>
-	export function refOfCreateMessageReq(x:CreateMessageReq,v:Ref<CreateMessageReq>)
-	export function unRefCreateMessageReq(v:Ref<CreateMessageReq>):CreateMessageReq
-	export function emptyCreateMessageReqBodyBuilder():CreateMessageReqBodyBuilder
-	export function emptyRefCreateMessageReqBodyBuilder():Ref<CreateMessageReqBodyBuilder>
-	export function refOfCreateMessageReqBodyBuilder(x:CreateMessageReqBodyBuilder,v:Ref<CreateMessageReqBodyBuilder>)
-	export function unRefCreateMessageReqBodyBuilder(v:Ref<CreateMessageReqBodyBuilder>):CreateMessageReqBodyBuilder
-	export function emptyMsgProcessData():MsgProcessData
-	export function emptyRefMsgProcessData():Ref<MsgProcessData>
-	export function refOfMsgProcessData(x:MsgProcessData,v:Ref<MsgProcessData>)
-	export function unRefMsgProcessData(v:Ref<MsgProcessData>):MsgProcessData
-	export function emptyP1P2PChatCreatedV1Data():P1P2PChatCreatedV1Data
-	export function emptyRefP1P2PChatCreatedV1Data():Ref<P1P2PChatCreatedV1Data>
-	export function refOfP1P2PChatCreatedV1Data(x:P1P2PChatCreatedV1Data,v:Ref<P1P2PChatCreatedV1Data>)
-	export function unRefP1P2PChatCreatedV1Data(v:Ref<P1P2PChatCreatedV1Data>):P1P2PChatCreatedV1Data
-	export function emptyThread():Thread
-	export function emptyRefThread():Ref<Thread>
-	export function refOfThread(x:Thread,v:Ref<Thread>)
-	export function unRefThread(v:Ref<Thread>):Thread
-	export function emptyUpdateChatReqBuilder():UpdateChatReqBuilder
-	export function emptyRefUpdateChatReqBuilder():Ref<UpdateChatReqBuilder>
-	export function refOfUpdateChatReqBuilder(x:UpdateChatReqBuilder,v:Ref<UpdateChatReqBuilder>)
-	export function unRefUpdateChatReqBuilder(v:Ref<UpdateChatReqBuilder>):UpdateChatReqBuilder
-	export function emptyUpdateTabsChatTabReq():UpdateTabsChatTabReq
-	export function emptyRefUpdateTabsChatTabReq():Ref<UpdateTabsChatTabReq>
-	export function refOfUpdateTabsChatTabReq(x:UpdateTabsChatTabReq,v:Ref<UpdateTabsChatTabReq>)
-	export function unRefUpdateTabsChatTabReq(v:Ref<UpdateTabsChatTabReq>):UpdateTabsChatTabReq
-	export function emptyChatMember():ChatMember
-	export function emptyRefChatMember():Ref<ChatMember>
-	export function refOfChatMember(x:ChatMember,v:Ref<ChatMember>)
-	export function unRefChatMember(v:Ref<ChatMember>):ChatMember
-	export function emptyCreateChatMembersResp():CreateChatMembersResp
-	export function emptyRefCreateChatMembersResp():Ref<CreateChatMembersResp>
-	export function refOfCreateChatMembersResp(x:CreateChatMembersResp,v:Ref<CreateChatMembersResp>)
-	export function unRefCreateChatMembersResp(v:Ref<CreateChatMembersResp>):CreateChatMembersResp
-	export function emptyDeleteBatchMessageReqBuilder():DeleteBatchMessageReqBuilder
-	export function emptyRefDeleteBatchMessageReqBuilder():Ref<DeleteBatchMessageReqBuilder>
-	export function refOfDeleteBatchMessageReqBuilder(x:DeleteBatchMessageReqBuilder,v:Ref<DeleteBatchMessageReqBuilder>)
-	export function unRefDeleteBatchMessageReqBuilder(v:Ref<DeleteBatchMessageReqBuilder>):DeleteBatchMessageReqBuilder
-	export function emptyGetChatAnnouncementRespData():GetChatAnnouncementRespData
-	export function emptyRefGetChatAnnouncementRespData():Ref<GetChatAnnouncementRespData>
-	export function refOfGetChatAnnouncementRespData(x:GetChatAnnouncementRespData,v:Ref<GetChatAnnouncementRespData>)
-	export function unRefGetChatAnnouncementRespData(v:Ref<GetChatAnnouncementRespData>):GetChatAnnouncementRespData
-	export function emptyListChatReq():ListChatReq
-	export function emptyRefListChatReq():Ref<ListChatReq>
-	export function refOfListChatReq(x:ListChatReq,v:Ref<ListChatReq>)
-	export function unRefListChatReq(v:Ref<ListChatReq>):ListChatReq
-	export function emptyV1():V1
-	export function emptyRefV1():Ref<V1>
-	export function refOfV1(x:V1,v:Ref<V1>)
-	export function unRefV1(v:Ref<V1>):V1
-	export function emptyCreateImageReqBuilder():CreateImageReqBuilder
-	export function emptyRefCreateImageReqBuilder():Ref<CreateImageReqBuilder>
-	export function refOfCreateImageReqBuilder(x:CreateImageReqBuilder,v:Ref<CreateImageReqBuilder>)
-	export function unRefCreateImageReqBuilder(v:Ref<CreateImageReqBuilder>):CreateImageReqBuilder
-	export function emptyDeleteMessageReqBuilder():DeleteMessageReqBuilder
-	export function emptyRefDeleteMessageReqBuilder():Ref<DeleteMessageReqBuilder>
-	export function refOfDeleteMessageReqBuilder(x:DeleteMessageReqBuilder,v:Ref<DeleteMessageReqBuilder>)
-	export function unRefDeleteMessageReqBuilder(v:Ref<DeleteMessageReqBuilder>):DeleteMessageReqBuilder
-	export function emptyListEventModeratorBuilder():ListEventModeratorBuilder
-	export function emptyRefListEventModeratorBuilder():Ref<ListEventModeratorBuilder>
-	export function refOfListEventModeratorBuilder(x:ListEventModeratorBuilder,v:Ref<ListEventModeratorBuilder>)
-	export function unRefListEventModeratorBuilder(v:Ref<ListEventModeratorBuilder>):ListEventModeratorBuilder
-	export function emptyDeleteChatMenuTreePathReqBodyBuilder():DeleteChatMenuTreePathReqBodyBuilder
-	export function emptyRefDeleteChatMenuTreePathReqBodyBuilder():Ref<DeleteChatMenuTreePathReqBodyBuilder>
-	export function refOfDeleteChatMenuTreePathReqBodyBuilder(x:DeleteChatMenuTreePathReqBodyBuilder,v:Ref<DeleteChatMenuTreePathReqBodyBuilder>)
-	export function unRefDeleteChatMenuTreePathReqBodyBuilder(v:Ref<DeleteChatMenuTreePathReqBodyBuilder>):DeleteChatMenuTreePathReqBodyBuilder
-	export function emptyEventMessageReader():EventMessageReader
-	export function emptyRefEventMessageReader():Ref<EventMessageReader>
-	export function refOfEventMessageReader(x:EventMessageReader,v:Ref<EventMessageReader>)
-	export function unRefEventMessageReader(v:Ref<EventMessageReader>):EventMessageReader
-	export function emptyMessageAudio():MessageAudio
-	export function emptyRefMessageAudio():Ref<MessageAudio>
-	export function refOfMessageAudio(x:MessageAudio,v:Ref<MessageAudio>)
-	export function unRefMessageAudio(v:Ref<MessageAudio>):MessageAudio
-	export function emptyCreateImageReqBodyBuilder():CreateImageReqBodyBuilder
-	export function emptyRefCreateImageReqBodyBuilder():Ref<CreateImageReqBodyBuilder>
-	export function refOfCreateImageReqBodyBuilder(x:CreateImageReqBodyBuilder,v:Ref<CreateImageReqBodyBuilder>)
-	export function unRefCreateImageReqBodyBuilder(v:Ref<CreateImageReqBodyBuilder>):CreateImageReqBodyBuilder
-	export function emptyChatMemberUserBuilder():ChatMemberUserBuilder
-	export function emptyRefChatMemberUserBuilder():Ref<ChatMemberUserBuilder>
-	export function refOfChatMemberUserBuilder(x:ChatMemberUserBuilder,v:Ref<ChatMemberUserBuilder>)
-	export function unRefChatMemberUserBuilder(v:Ref<ChatMemberUserBuilder>):ChatMemberUserBuilder
-	export function emptyDeleteMessageReactionReq():DeleteMessageReactionReq
-	export function emptyRefDeleteMessageReactionReq():Ref<DeleteMessageReactionReq>
-	export function refOfDeleteMessageReactionReq(x:DeleteMessageReactionReq,v:Ref<DeleteMessageReactionReq>)
-	export function unRefDeleteMessageReactionReq(v:Ref<DeleteMessageReactionReq>):DeleteMessageReactionReq
-	export function emptyEventMessageBuilder():EventMessageBuilder
-	export function emptyRefEventMessageBuilder():Ref<EventMessageBuilder>
-	export function refOfEventMessageBuilder(x:EventMessageBuilder,v:Ref<EventMessageBuilder>)
-	export function unRefEventMessageBuilder(v:Ref<EventMessageBuilder>):EventMessageBuilder
-	export function emptyGetChatMembersReq():GetChatMembersReq
-	export function emptyRefGetChatMembersReq():Ref<GetChatMembersReq>
-	export function refOfGetChatMembersReq(x:GetChatMembersReq,v:Ref<GetChatMembersReq>)
-	export function unRefGetChatMembersReq(v:Ref<GetChatMembersReq>):GetChatMembersReq
-	export function emptyIsInChatChatMembersRespData():IsInChatChatMembersRespData
-	export function emptyRefIsInChatChatMembersRespData():Ref<IsInChatChatMembersRespData>
-	export function refOfIsInChatChatMembersRespData(x:IsInChatChatMembersRespData,v:Ref<IsInChatChatMembersRespData>)
-	export function unRefIsInChatChatMembersRespData(v:Ref<IsInChatChatMembersRespData>):IsInChatChatMembersRespData
-	export function emptyPatchMessagePathReqBodyBuilder():PatchMessagePathReqBodyBuilder
-	export function emptyRefPatchMessagePathReqBodyBuilder():Ref<PatchMessagePathReqBodyBuilder>
-	export function refOfPatchMessagePathReqBodyBuilder(x:PatchMessagePathReqBodyBuilder,v:Ref<PatchMessagePathReqBodyBuilder>)
-	export function unRefPatchMessagePathReqBodyBuilder(v:Ref<PatchMessagePathReqBodyBuilder>):PatchMessagePathReqBodyBuilder
-	export function emptyPutTopNoticeChatTopNoticePathReqBodyBuilder():PutTopNoticeChatTopNoticePathReqBodyBuilder
-	export function emptyRefPutTopNoticeChatTopNoticePathReqBodyBuilder():Ref<PutTopNoticeChatTopNoticePathReqBodyBuilder>
-	export function refOfPutTopNoticeChatTopNoticePathReqBodyBuilder(x:PutTopNoticeChatTopNoticePathReqBodyBuilder,v:Ref<PutTopNoticeChatTopNoticePathReqBodyBuilder>)
-	export function unRefPutTopNoticeChatTopNoticePathReqBodyBuilder(v:Ref<PutTopNoticeChatTopNoticePathReqBodyBuilder>):PutTopNoticeChatTopNoticePathReqBodyBuilder
-	export function emptyChatMenuTopLevelBuilder():ChatMenuTopLevelBuilder
-	export function emptyRefChatMenuTopLevelBuilder():Ref<ChatMenuTopLevelBuilder>
-	export function refOfChatMenuTopLevelBuilder(x:ChatMenuTopLevelBuilder,v:Ref<ChatMenuTopLevelBuilder>)
-	export function unRefChatMenuTopLevelBuilder(v:Ref<ChatMenuTopLevelBuilder>):ChatMenuTopLevelBuilder
-	export function emptyP2ChatMemberBotDeletedV1Data():P2ChatMemberBotDeletedV1Data
-	export function emptyRefP2ChatMemberBotDeletedV1Data():Ref<P2ChatMemberBotDeletedV1Data>
-	export function refOfP2ChatMemberBotDeletedV1Data(x:P2ChatMemberBotDeletedV1Data,v:Ref<P2ChatMemberBotDeletedV1Data>)
-	export function unRefP2ChatMemberBotDeletedV1Data(v:Ref<P2ChatMemberBotDeletedV1Data>):P2ChatMemberBotDeletedV1Data
-	export function emptyWidgetBuilder():WidgetBuilder
-	export function emptyRefWidgetBuilder():Ref<WidgetBuilder>
-	export function refOfWidgetBuilder(x:WidgetBuilder,v:Ref<WidgetBuilder>)
-	export function unRefWidgetBuilder(v:Ref<WidgetBuilder>):WidgetBuilder
-	export function emptyBatchMessageReadUserBuilder():BatchMessageReadUserBuilder
-	export function emptyRefBatchMessageReadUserBuilder():Ref<BatchMessageReadUserBuilder>
-	export function refOfBatchMessageReadUserBuilder(x:BatchMessageReadUserBuilder,v:Ref<BatchMessageReadUserBuilder>)
-	export function unRefBatchMessageReadUserBuilder(v:Ref<BatchMessageReadUserBuilder>):BatchMessageReadUserBuilder
-	export function emptyBatchMessageRecallProgress():BatchMessageRecallProgress
-	export function emptyRefBatchMessageRecallProgress():Ref<BatchMessageRecallProgress>
-	export function refOfBatchMessageRecallProgress(x:BatchMessageRecallProgress,v:Ref<BatchMessageRecallProgress>)
-	export function unRefBatchMessageRecallProgress(v:Ref<BatchMessageRecallProgress>):BatchMessageRecallProgress
-	export function emptyCreateFileReq():CreateFileReq
-	export function emptyRefCreateFileReq():Ref<CreateFileReq>
-	export function refOfCreateFileReq(x:CreateFileReq,v:Ref<CreateFileReq>)
-	export function unRefCreateFileReq(v:Ref<CreateFileReq>):CreateFileReq
-	export function emptyDeleteChatMembersResp():DeleteChatMembersResp
-	export function emptyRefDeleteChatMembersResp():Ref<DeleteChatMembersResp>
-	export function refOfDeleteChatMembersResp(x:DeleteChatMembersResp,v:Ref<DeleteChatMembersResp>)
-	export function unRefDeleteChatMembersResp(v:Ref<DeleteChatMembersResp>):DeleteChatMembersResp
 	export function emptyListChat():ListChat
 	export function emptyRefListChat():Ref<ListChat>
 	export function refOfListChat(x:ListChat,v:Ref<ListChat>)
 	export function unRefListChat(v:Ref<ListChat>):ListChat
-	export function emptyP2ChatDisbandedV1():P2ChatDisbandedV1
-	export function emptyRefP2ChatDisbandedV1():Ref<P2ChatDisbandedV1>
-	export function refOfP2ChatDisbandedV1(x:P2ChatDisbandedV1,v:Ref<P2ChatDisbandedV1>)
-	export function unRefP2ChatDisbandedV1(v:Ref<P2ChatDisbandedV1>):P2ChatDisbandedV1
-	export function emptyPatchChatMenuItemReqBody():PatchChatMenuItemReqBody
-	export function emptyRefPatchChatMenuItemReqBody():Ref<PatchChatMenuItemReqBody>
-	export function refOfPatchChatMenuItemReqBody(x:PatchChatMenuItemReqBody,v:Ref<PatchChatMenuItemReqBody>)
-	export function unRefPatchChatMenuItemReqBody(v:Ref<PatchChatMenuItemReqBody>):PatchChatMenuItemReqBody
-	export function emptySearchChatIterator():SearchChatIterator
-	export function emptyRefSearchChatIterator():Ref<SearchChatIterator>
-	export function refOfSearchChatIterator(x:SearchChatIterator,v:Ref<SearchChatIterator>)
-	export function unRefSearchChatIterator(v:Ref<SearchChatIterator>):SearchChatIterator
-	export function emptyChatMenuItem():ChatMenuItem
-	export function emptyRefChatMenuItem():Ref<ChatMenuItem>
-	export function refOfChatMenuItem(x:ChatMenuItem,v:Ref<ChatMenuItem>)
-	export function unRefChatMenuItem(v:Ref<ChatMenuItem>):ChatMenuItem
-	export function emptyP2MessageReceiveV1():P2MessageReceiveV1
-	export function emptyRefP2MessageReceiveV1():Ref<P2MessageReceiveV1>
-	export function refOfP2MessageReceiveV1(x:P2MessageReceiveV1,v:Ref<P2MessageReceiveV1>)
-	export function unRefP2MessageReceiveV1(v:Ref<P2MessageReceiveV1>):P2MessageReceiveV1
-	export function emptySortChatMenuTreeReq():SortChatMenuTreeReq
-	export function emptyRefSortChatMenuTreeReq():Ref<SortChatMenuTreeReq>
-	export function refOfSortChatMenuTreeReq(x:SortChatMenuTreeReq,v:Ref<SortChatMenuTreeReq>)
-	export function unRefSortChatMenuTreeReq(v:Ref<SortChatMenuTreeReq>):SortChatMenuTreeReq
-	export function emptyEventSenderBuilder():EventSenderBuilder
-	export function emptyRefEventSenderBuilder():Ref<EventSenderBuilder>
-	export function refOfEventSenderBuilder(x:EventSenderBuilder,v:Ref<EventSenderBuilder>)
-	export function unRefEventSenderBuilder(v:Ref<EventSenderBuilder>):EventSenderBuilder
-	export function emptyListTabsChatTabRespData():ListTabsChatTabRespData
-	export function emptyRefListTabsChatTabRespData():Ref<ListTabsChatTabRespData>
-	export function refOfListTabsChatTabRespData(x:ListTabsChatTabRespData,v:Ref<ListTabsChatTabRespData>)
-	export function unRefListTabsChatTabRespData(v:Ref<ListTabsChatTabRespData>):ListTabsChatTabRespData
-	export function emptyMessagePost():MessagePost
-	export function emptyRefMessagePost():Ref<MessagePost>
-	export function refOfMessagePost(x:MessagePost,v:Ref<MessagePost>)
-	export function unRefMessagePost(v:Ref<MessagePost>):MessagePost
-	export function emptyRestrictedModeSetting():RestrictedModeSetting
-	export function emptyRefRestrictedModeSetting():Ref<RestrictedModeSetting>
-	export function refOfRestrictedModeSetting(x:RestrictedModeSetting,v:Ref<RestrictedModeSetting>)
-	export function unRefRestrictedModeSetting(v:Ref<RestrictedModeSetting>):RestrictedModeSetting
-	export function emptyCreateChatReqBodyBuilder():CreateChatReqBodyBuilder
-	export function emptyRefCreateChatReqBodyBuilder():Ref<CreateChatReqBodyBuilder>
-	export function refOfCreateChatReqBodyBuilder(x:CreateChatReqBodyBuilder,v:Ref<CreateChatReqBodyBuilder>)
-	export function unRefCreateChatReqBodyBuilder(v:Ref<CreateChatReqBodyBuilder>):CreateChatReqBodyBuilder
-	export function emptyListNotifyStatusBuilder():ListNotifyStatusBuilder
-	export function emptyRefListNotifyStatusBuilder():Ref<ListNotifyStatusBuilder>
-	export function refOfListNotifyStatusBuilder(x:ListNotifyStatusBuilder,v:Ref<ListNotifyStatusBuilder>)
-	export function unRefListNotifyStatusBuilder(v:Ref<ListNotifyStatusBuilder>):ListNotifyStatusBuilder
-	export function emptyP2MessageReactionDeletedV1Handler():P2MessageReactionDeletedV1Handler
-	export function emptyRefP2MessageReactionDeletedV1Handler():Ref<P2MessageReactionDeletedV1Handler>
-	export function refOfP2MessageReactionDeletedV1Handler(x:P2MessageReactionDeletedV1Handler,v:Ref<P2MessageReactionDeletedV1Handler>)
-	export function unRefP2MessageReactionDeletedV1Handler(v:Ref<P2MessageReactionDeletedV1Handler>):P2MessageReactionDeletedV1Handler
-	export function emptyP1ChatDisbandV1Data():P1ChatDisbandV1Data
-	export function emptyRefP1ChatDisbandV1Data():Ref<P1ChatDisbandV1Data>
-	export function refOfP1ChatDisbandV1Data(x:P1ChatDisbandV1Data,v:Ref<P1ChatDisbandV1Data>)
-	export function unRefP1ChatDisbandV1Data(v:Ref<P1ChatDisbandV1Data>):P1ChatDisbandV1Data
-	export function emptyP1MessageReadV1Handler():P1MessageReadV1Handler
-	export function emptyRefP1MessageReadV1Handler():Ref<P1MessageReadV1Handler>
-	export function refOfP1MessageReadV1Handler(x:P1MessageReadV1Handler,v:Ref<P1MessageReadV1Handler>)
-	export function unRefP1MessageReadV1Handler(v:Ref<P1MessageReadV1Handler>):P1MessageReadV1Handler
-	export function emptyPatchChatAnnouncementPathReqBodyBuilder():PatchChatAnnouncementPathReqBodyBuilder
-	export function emptyRefPatchChatAnnouncementPathReqBodyBuilder():Ref<PatchChatAnnouncementPathReqBodyBuilder>
-	export function refOfPatchChatAnnouncementPathReqBodyBuilder(x:PatchChatAnnouncementPathReqBodyBuilder,v:Ref<PatchChatAnnouncementPathReqBodyBuilder>)
-	export function unRefPatchChatAnnouncementPathReqBodyBuilder(v:Ref<PatchChatAnnouncementPathReqBodyBuilder>):PatchChatAnnouncementPathReqBodyBuilder
-	export function emptySearchChatReqBuilder():SearchChatReqBuilder
-	export function emptyRefSearchChatReqBuilder():Ref<SearchChatReqBuilder>
-	export function refOfSearchChatReqBuilder(x:SearchChatReqBuilder,v:Ref<SearchChatReqBuilder>)
-	export function unRefSearchChatReqBuilder(v:Ref<SearchChatReqBuilder>):SearchChatReqBuilder
-	export function emptyCreateMessagePathReqBodyBuilder():CreateMessagePathReqBodyBuilder
-	export function emptyRefCreateMessagePathReqBodyBuilder():Ref<CreateMessagePathReqBodyBuilder>
-	export function refOfCreateMessagePathReqBodyBuilder(x:CreateMessagePathReqBodyBuilder,v:Ref<CreateMessagePathReqBodyBuilder>)
-	export function unRefCreateMessagePathReqBodyBuilder(v:Ref<CreateMessagePathReqBodyBuilder>):CreateMessagePathReqBodyBuilder
-	export function emptyDeleteManagersChatManagersResp():DeleteManagersChatManagersResp
-	export function emptyRefDeleteManagersChatManagersResp():Ref<DeleteManagersChatManagersResp>
-	export function refOfDeleteManagersChatManagersResp(x:DeleteManagersChatManagersResp,v:Ref<DeleteManagersChatManagersResp>)
-	export function unRefDeleteManagersChatManagersResp(v:Ref<DeleteManagersChatManagersResp>):DeleteManagersChatManagersResp
-	export function emptyLinkChatPathReqBodyBuilder():LinkChatPathReqBodyBuilder
-	export function emptyRefLinkChatPathReqBodyBuilder():Ref<LinkChatPathReqBodyBuilder>
-	export function refOfLinkChatPathReqBodyBuilder(x:LinkChatPathReqBodyBuilder,v:Ref<LinkChatPathReqBodyBuilder>)
-	export function unRefLinkChatPathReqBodyBuilder(v:Ref<LinkChatPathReqBodyBuilder>):LinkChatPathReqBodyBuilder
-	export function emptyPatchChatMenuItemReq():PatchChatMenuItemReq
-	export function emptyRefPatchChatMenuItemReq():Ref<PatchChatMenuItemReq>
-	export function refOfPatchChatMenuItemReq(x:PatchChatMenuItemReq,v:Ref<PatchChatMenuItemReq>)
-	export function unRefPatchChatMenuItemReq(v:Ref<PatchChatMenuItemReq>):PatchChatMenuItemReq
-	export function emptyChatMemberBot():ChatMemberBot
-	export function emptyRefChatMemberBot():Ref<ChatMemberBot>
-	export function refOfChatMemberBot(x:ChatMemberBot,v:Ref<ChatMemberBot>)
-	export function unRefChatMemberBot(v:Ref<ChatMemberBot>):ChatMemberBot
-	export function emptyGetChatMenuTreeReq():GetChatMenuTreeReq
-	export function emptyRefGetChatMenuTreeReq():Ref<GetChatMenuTreeReq>
-	export function refOfGetChatMenuTreeReq(x:GetChatMenuTreeReq,v:Ref<GetChatMenuTreeReq>)
-	export function unRefGetChatMenuTreeReq(v:Ref<GetChatMenuTreeReq>):GetChatMenuTreeReq
-	export function emptyOperator():Operator
-	export function emptyRefOperator():Ref<Operator>
-	export function refOfOperator(x:Operator,v:Ref<Operator>)
-	export function unRefOperator(v:Ref<Operator>):Operator
-	export function emptyP1RemoveBotV1Data():P1RemoveBotV1Data
-	export function emptyRefP1RemoveBotV1Data():Ref<P1RemoveBotV1Data>
-	export function refOfP1RemoveBotV1Data(x:P1RemoveBotV1Data,v:Ref<P1RemoveBotV1Data>)
-	export function unRefP1RemoveBotV1Data(v:Ref<P1RemoveBotV1Data>):P1RemoveBotV1Data
-	export function emptySearchChatResp():SearchChatResp
-	export function emptyRefSearchChatResp():Ref<SearchChatResp>
-	export function refOfSearchChatResp(x:SearchChatResp,v:Ref<SearchChatResp>)
-	export function unRefSearchChatResp(v:Ref<SearchChatResp>):SearchChatResp
-	export function emptyEmoji():Emoji
-	export function emptyRefEmoji():Ref<Emoji>
-	export function refOfEmoji(x:Emoji,v:Ref<Emoji>)
-	export function unRefEmoji(v:Ref<Emoji>):Emoji
-	export function emptyEventMessageReaderBuilder():EventMessageReaderBuilder
-	export function emptyRefEventMessageReaderBuilder():Ref<EventMessageReaderBuilder>
-	export function refOfEventMessageReaderBuilder(x:EventMessageReaderBuilder,v:Ref<EventMessageReaderBuilder>)
-	export function unRefEventMessageReaderBuilder(v:Ref<EventMessageReaderBuilder>):EventMessageReaderBuilder
-	export function emptyMessageReaction():MessageReaction
-	export function emptyRefMessageReaction():Ref<MessageReaction>
-	export function refOfMessageReaction(x:MessageReaction,v:Ref<MessageReaction>)
-	export function unRefMessageReaction(v:Ref<MessageReaction>):MessageReaction
-	export function emptyUpdateChatModerationReq():UpdateChatModerationReq
-	export function emptyRefUpdateChatModerationReq():Ref<UpdateChatModerationReq>
-	export function refOfUpdateChatModerationReq(x:UpdateChatModerationReq,v:Ref<UpdateChatModerationReq>)
-	export function unRefUpdateChatModerationReq(v:Ref<UpdateChatModerationReq>):UpdateChatModerationReq
-	export function emptyP1GroupSettingUpdatedV1Handler():P1GroupSettingUpdatedV1Handler
-	export function emptyRefP1GroupSettingUpdatedV1Handler():Ref<P1GroupSettingUpdatedV1Handler>
-	export function refOfP1GroupSettingUpdatedV1Handler(x:P1GroupSettingUpdatedV1Handler,v:Ref<P1GroupSettingUpdatedV1Handler>)
-	export function unRefP1GroupSettingUpdatedV1Handler(v:Ref<P1GroupSettingUpdatedV1Handler>):P1GroupSettingUpdatedV1Handler
-	export function emptyPinedMessageBuilder():PinedMessageBuilder
-	export function emptyRefPinedMessageBuilder():Ref<PinedMessageBuilder>
-	export function refOfPinedMessageBuilder(x:PinedMessageBuilder,v:Ref<PinedMessageBuilder>)
-	export function unRefPinedMessageBuilder(v:Ref<PinedMessageBuilder>):PinedMessageBuilder
-	export function emptyReplyMessageReqBody():ReplyMessageReqBody
-	export function emptyRefReplyMessageReqBody():Ref<ReplyMessageReqBody>
-	export function refOfReplyMessageReqBody(x:ReplyMessageReqBody,v:Ref<ReplyMessageReqBody>)
-	export function unRefReplyMessageReqBody(v:Ref<ReplyMessageReqBody>):ReplyMessageReqBody
-	export function emptyRestrictedModeSettingBuilder():RestrictedModeSettingBuilder
-	export function emptyRefRestrictedModeSettingBuilder():Ref<RestrictedModeSettingBuilder>
-	export function refOfRestrictedModeSettingBuilder(x:RestrictedModeSettingBuilder,v:Ref<RestrictedModeSettingBuilder>)
-	export function unRefRestrictedModeSettingBuilder(v:Ref<RestrictedModeSettingBuilder>):RestrictedModeSettingBuilder
-	export function emptyBatchRecallProgress():BatchRecallProgress
-	export function emptyRefBatchRecallProgress():Ref<BatchRecallProgress>
-	export function refOfBatchRecallProgress(x:BatchRecallProgress,v:Ref<BatchRecallProgress>)
-	export function unRefBatchRecallProgress(v:Ref<BatchRecallProgress>):BatchRecallProgress
-	export function emptyChatManagers():ChatManagers
-	export function emptyRefChatManagers():Ref<ChatManagers>
-	export function refOfChatManagers(x:ChatManagers,v:Ref<ChatManagers>)
-	export function unRefChatManagers(v:Ref<ChatManagers>):ChatManagers
-	export function emptyListMessageResp():ListMessageResp
-	export function emptyRefListMessageResp():Ref<ListMessageResp>
-	export function refOfListMessageResp(x:ListMessageResp,v:Ref<ListMessageResp>)
-	export function unRefListMessageResp(v:Ref<ListMessageResp>):ListMessageResp
-	export function emptyMessageText():MessageText
-	export function emptyRefMessageText():Ref<MessageText>
-	export function refOfMessageText(x:MessageText,v:Ref<MessageText>)
-	export function unRefMessageText(v:Ref<MessageText>):MessageText
-	export function emptyModeratorList():ModeratorList
-	export function emptyRefModeratorList():Ref<ModeratorList>
-	export function refOfModeratorList(x:ModeratorList,v:Ref<ModeratorList>)
-	export function unRefModeratorList(v:Ref<ModeratorList>):ModeratorList
-	export function emptyAddManagersChatManagersReqBodyBuilder():AddManagersChatManagersReqBodyBuilder
-	export function emptyRefAddManagersChatManagersReqBodyBuilder():Ref<AddManagersChatManagersReqBodyBuilder>
-	export function refOfAddManagersChatManagersReqBodyBuilder(x:AddManagersChatManagersReqBodyBuilder,v:Ref<AddManagersChatManagersReqBodyBuilder>)
-	export function unRefAddManagersChatManagersReqBodyBuilder(v:Ref<AddManagersChatManagersReqBodyBuilder>):AddManagersChatManagersReqBodyBuilder
-	export function emptyMergeForwardMessageReqBodyBuilder():MergeForwardMessageReqBodyBuilder
-	export function emptyRefMergeForwardMessageReqBodyBuilder():Ref<MergeForwardMessageReqBodyBuilder>
-	export function refOfMergeForwardMessageReqBodyBuilder(x:MergeForwardMessageReqBodyBuilder,v:Ref<MergeForwardMessageReqBodyBuilder>)
-	export function unRefMergeForwardMessageReqBodyBuilder(v:Ref<MergeForwardMessageReqBodyBuilder>):MergeForwardMessageReqBodyBuilder
-	export function emptyCreateChatTabReq():CreateChatTabReq
-	export function emptyRefCreateChatTabReq():Ref<CreateChatTabReq>
-	export function refOfCreateChatTabReq(x:CreateChatTabReq,v:Ref<CreateChatTabReq>)
-	export function unRefCreateChatTabReq(v:Ref<CreateChatTabReq>):CreateChatTabReq
-	export function emptyDeleteManagersChatManagersRespData():DeleteManagersChatManagersRespData
-	export function emptyRefDeleteManagersChatManagersRespData():Ref<DeleteManagersChatManagersRespData>
-	export function refOfDeleteManagersChatManagersRespData(x:DeleteManagersChatManagersRespData,v:Ref<DeleteManagersChatManagersRespData>)
-	export function unRefDeleteManagersChatManagersRespData(v:Ref<DeleteManagersChatManagersRespData>):DeleteManagersChatManagersRespData
-	export function emptyEventMessage():EventMessage
-	export function emptyRefEventMessage():Ref<EventMessage>
-	export function refOfEventMessage(x:EventMessage,v:Ref<EventMessage>)
-	export function unRefEventMessage(v:Ref<EventMessage>):EventMessage
-	export function emptyForwardMessageReqBodyBuilder():ForwardMessageReqBodyBuilder
-	export function emptyRefForwardMessageReqBodyBuilder():Ref<ForwardMessageReqBodyBuilder>
-	export function refOfForwardMessageReqBodyBuilder(x:ForwardMessageReqBodyBuilder,v:Ref<ForwardMessageReqBodyBuilder>)
-	export function unRefForwardMessageReqBodyBuilder(v:Ref<ForwardMessageReqBodyBuilder>):ForwardMessageReqBodyBuilder
-	export function emptyMessagePostA():MessagePostA
-	export function emptyRefMessagePostA():Ref<MessagePostA>
-	export function refOfMessagePostA(x:MessagePostA,v:Ref<MessagePostA>)
-	export function unRefMessagePostA(v:Ref<MessagePostA>):MessagePostA
-	export function emptyPatchChatAnnouncementReqBodyBuilder():PatchChatAnnouncementReqBodyBuilder
-	export function emptyRefPatchChatAnnouncementReqBodyBuilder():Ref<PatchChatAnnouncementReqBodyBuilder>
-	export function refOfPatchChatAnnouncementReqBodyBuilder(x:PatchChatAnnouncementReqBodyBuilder,v:Ref<PatchChatAnnouncementReqBodyBuilder>)
-	export function unRefPatchChatAnnouncementReqBodyBuilder(v:Ref<PatchChatAnnouncementReqBodyBuilder>):PatchChatAnnouncementReqBodyBuilder
-	export function emptyDeleteChatMenuTreeRespData():DeleteChatMenuTreeRespData
-	export function emptyRefDeleteChatMenuTreeRespData():Ref<DeleteChatMenuTreeRespData>
-	export function refOfDeleteChatMenuTreeRespData(x:DeleteChatMenuTreeRespData,v:Ref<DeleteChatMenuTreeRespData>)
-	export function unRefDeleteChatMenuTreeRespData(v:Ref<DeleteChatMenuTreeRespData>):DeleteChatMenuTreeRespData
-	export function emptyGetChatModerationResp():GetChatModerationResp
-	export function emptyRefGetChatModerationResp():Ref<GetChatModerationResp>
-	export function refOfGetChatModerationResp(x:GetChatModerationResp,v:Ref<GetChatModerationResp>)
-	export function unRefGetChatModerationResp(v:Ref<GetChatModerationResp>):GetChatModerationResp
-	export function emptyListEventModerator():ListEventModerator
-	export function emptyRefListEventModerator():Ref<ListEventModerator>
-	export function refOfListEventModerator(x:ListEventModerator,v:Ref<ListEventModerator>)
-	export function unRefListEventModerator(v:Ref<ListEventModerator>):ListEventModerator
-	export function emptyReadUserBatchMessageResp():ReadUserBatchMessageResp
-	export function emptyRefReadUserBatchMessageResp():Ref<ReadUserBatchMessageResp>
-	export function refOfReadUserBatchMessageResp(x:ReadUserBatchMessageResp,v:Ref<ReadUserBatchMessageResp>)
-	export function unRefReadUserBatchMessageResp(v:Ref<ReadUserBatchMessageResp>):ReadUserBatchMessageResp
-	export function emptyCreateFilePathReqBodyBuilder():CreateFilePathReqBodyBuilder
-	export function emptyRefCreateFilePathReqBodyBuilder():Ref<CreateFilePathReqBodyBuilder>
-	export function refOfCreateFilePathReqBodyBuilder(x:CreateFilePathReqBodyBuilder,v:Ref<CreateFilePathReqBodyBuilder>)
-	export function unRefCreateFilePathReqBodyBuilder(v:Ref<CreateFilePathReqBodyBuilder>):CreateFilePathReqBodyBuilder
-	export function emptyCreatePinPathReqBodyBuilder():CreatePinPathReqBodyBuilder
-	export function emptyRefCreatePinPathReqBodyBuilder():Ref<CreatePinPathReqBodyBuilder>
-	export function refOfCreatePinPathReqBodyBuilder(x:CreatePinPathReqBodyBuilder,v:Ref<CreatePinPathReqBodyBuilder>)
-	export function unRefCreatePinPathReqBodyBuilder(v:Ref<CreatePinPathReqBodyBuilder>):CreatePinPathReqBodyBuilder
-	export function emptyI18nContentBuilder():I18nContentBuilder
-	export function emptyRefI18nContentBuilder():Ref<I18nContentBuilder>
-	export function refOfI18nContentBuilder(x:I18nContentBuilder,v:Ref<I18nContentBuilder>)
-	export function unRefI18nContentBuilder(v:Ref<I18nContentBuilder>):I18nContentBuilder
-	export function emptyReadUserBatchMessageRespData():ReadUserBatchMessageRespData
-	export function emptyRefReadUserBatchMessageRespData():Ref<ReadUserBatchMessageRespData>
-	export function refOfReadUserBatchMessageRespData(x:ReadUserBatchMessageRespData,v:Ref<ReadUserBatchMessageRespData>)
-	export function unRefReadUserBatchMessageRespData(v:Ref<ReadUserBatchMessageRespData>):ReadUserBatchMessageRespData
-	export function emptyToolkitCallbackBuilder():ToolkitCallbackBuilder
-	export function emptyRefToolkitCallbackBuilder():Ref<ToolkitCallbackBuilder>
-	export function refOfToolkitCallbackBuilder(x:ToolkitCallbackBuilder,v:Ref<ToolkitCallbackBuilder>)
-	export function unRefToolkitCallbackBuilder(v:Ref<ToolkitCallbackBuilder>):ToolkitCallbackBuilder
-	export function emptyP2ChatMemberBotDeletedV1():P2ChatMemberBotDeletedV1
-	export function emptyRefP2ChatMemberBotDeletedV1():Ref<P2ChatMemberBotDeletedV1>
-	export function refOfP2ChatMemberBotDeletedV1(x:P2ChatMemberBotDeletedV1,v:Ref<P2ChatMemberBotDeletedV1>)
-	export function unRefP2ChatMemberBotDeletedV1(v:Ref<P2ChatMemberBotDeletedV1>):P2ChatMemberBotDeletedV1
-	export function emptyMeJoinChatMembersReq():MeJoinChatMembersReq
-	export function emptyRefMeJoinChatMembersReq():Ref<MeJoinChatMembersReq>
-	export function refOfMeJoinChatMembersReq(x:MeJoinChatMembersReq,v:Ref<MeJoinChatMembersReq>)
-	export function unRefMeJoinChatMembersReq(v:Ref<MeJoinChatMembersReq>):MeJoinChatMembersReq
-	export function emptyUpdateTabsChatTabPathReqBodyBuilder():UpdateTabsChatTabPathReqBodyBuilder
-	export function emptyRefUpdateTabsChatTabPathReqBodyBuilder():Ref<UpdateTabsChatTabPathReqBodyBuilder>
-	export function refOfUpdateTabsChatTabPathReqBodyBuilder(x:UpdateTabsChatTabPathReqBodyBuilder,v:Ref<UpdateTabsChatTabPathReqBodyBuilder>)
-	export function unRefUpdateTabsChatTabPathReqBodyBuilder(v:Ref<UpdateTabsChatTabPathReqBodyBuilder>):UpdateTabsChatTabPathReqBodyBuilder
-	export function emptyCreateImageReqBody():CreateImageReqBody
-	export function emptyRefCreateImageReqBody():Ref<CreateImageReqBody>
-	export function refOfCreateImageReqBody(x:CreateImageReqBody,v:Ref<CreateImageReqBody>)
-	export function unRefCreateImageReqBody(v:Ref<CreateImageReqBody>):CreateImageReqBody
-	export function emptyDeletePinReqBuilder():DeletePinReqBuilder
-	export function emptyRefDeletePinReqBuilder():Ref<DeletePinReqBuilder>
-	export function refOfDeletePinReqBuilder(x:DeletePinReqBuilder,v:Ref<DeletePinReqBuilder>)
-	export function unRefDeletePinReqBuilder(v:Ref<DeletePinReqBuilder>):DeletePinReqBuilder
-	export function emptyForwardMessageRespData():ForwardMessageRespData
-	export function emptyRefForwardMessageRespData():Ref<ForwardMessageRespData>
-	export function refOfForwardMessageRespData(x:ForwardMessageRespData,v:Ref<ForwardMessageRespData>)
-	export function unRefForwardMessageRespData(v:Ref<ForwardMessageRespData>):ForwardMessageRespData
-	export function emptyMentionEvent():MentionEvent
-	export function emptyRefMentionEvent():Ref<MentionEvent>
-	export function refOfMentionEvent(x:MentionEvent,v:Ref<MentionEvent>)
-	export function unRefMentionEvent(v:Ref<MentionEvent>):MentionEvent
-	export function emptyP2MessageReactionCreatedV1Handler():P2MessageReactionCreatedV1Handler
-	export function emptyRefP2MessageReactionCreatedV1Handler():Ref<P2MessageReactionCreatedV1Handler>
-	export function refOfP2MessageReactionCreatedV1Handler(x:P2MessageReactionCreatedV1Handler,v:Ref<P2MessageReactionCreatedV1Handler>)
-	export function unRefP2MessageReactionCreatedV1Handler(v:Ref<P2MessageReactionCreatedV1Handler>):P2MessageReactionCreatedV1Handler
-	export function emptyChatI18nNames():ChatI18nNames
-	export function emptyRefChatI18nNames():Ref<ChatI18nNames>
-	export function refOfChatI18nNames(x:ChatI18nNames,v:Ref<ChatI18nNames>)
-	export function unRefChatI18nNames(v:Ref<ChatI18nNames>):ChatI18nNames
-	export function emptyChatMenuTree():ChatMenuTree
-	export function emptyRefChatMenuTree():Ref<ChatMenuTree>
-	export function refOfChatMenuTree(x:ChatMenuTree,v:Ref<ChatMenuTree>)
-	export function unRefChatMenuTree(v:Ref<ChatMenuTree>):ChatMenuTree
-	export function emptyP1MessageReceiveV1():P1MessageReceiveV1
-	export function emptyRefP1MessageReceiveV1():Ref<P1MessageReceiveV1>
-	export function refOfP1MessageReceiveV1(x:P1MessageReceiveV1,v:Ref<P1MessageReceiveV1>)
-	export function unRefP1MessageReceiveV1(v:Ref<P1MessageReceiveV1>):P1MessageReceiveV1
-	export function emptySortTabsChatTabReqBody():SortTabsChatTabReqBody
-	export function emptyRefSortTabsChatTabReqBody():Ref<SortTabsChatTabReqBody>
-	export function refOfSortTabsChatTabReqBody(x:SortTabsChatTabReqBody,v:Ref<SortTabsChatTabReqBody>)
-	export function unRefSortTabsChatTabReqBody(v:Ref<SortTabsChatTabReqBody>):SortTabsChatTabReqBody
-	export function emptyChatTab():ChatTab
-	export function emptyRefChatTab():Ref<ChatTab>
-	export function refOfChatTab(x:ChatTab,v:Ref<ChatTab>)
-	export function unRefChatTab(v:Ref<ChatTab>):ChatTab
 	export function emptyCreateChatReqBody():CreateChatReqBody
 	export function emptyRefCreateChatReqBody():Ref<CreateChatReqBody>
 	export function refOfCreateChatReqBody(x:CreateChatReqBody,v:Ref<CreateChatReqBody>)
 	export function unRefCreateChatReqBody(v:Ref<CreateChatReqBody>):CreateChatReqBody
-	export function emptyP1UserInOutChatV1Handler():P1UserInOutChatV1Handler
-	export function emptyRefP1UserInOutChatV1Handler():Ref<P1UserInOutChatV1Handler>
-	export function refOfP1UserInOutChatV1Handler(x:P1UserInOutChatV1Handler,v:Ref<P1UserInOutChatV1Handler>)
-	export function unRefP1UserInOutChatV1Handler(v:Ref<P1UserInOutChatV1Handler>):P1UserInOutChatV1Handler
-	export function emptyP2ChatMemberUserAddedV1():P2ChatMemberUserAddedV1
-	export function emptyRefP2ChatMemberUserAddedV1():Ref<P2ChatMemberUserAddedV1>
-	export function refOfP2ChatMemberUserAddedV1(x:P2ChatMemberUserAddedV1,v:Ref<P2ChatMemberUserAddedV1>)
-	export function unRefP2ChatMemberUserAddedV1(v:Ref<P2ChatMemberUserAddedV1>):P2ChatMemberUserAddedV1
-	export function emptyP2ChatMemberUserDeletedV1():P2ChatMemberUserDeletedV1
-	export function emptyRefP2ChatMemberUserDeletedV1():Ref<P2ChatMemberUserDeletedV1>
-	export function refOfP2ChatMemberUserDeletedV1(x:P2ChatMemberUserDeletedV1,v:Ref<P2ChatMemberUserDeletedV1>)
-	export function unRefP2ChatMemberUserDeletedV1(v:Ref<P2ChatMemberUserDeletedV1>):P2ChatMemberUserDeletedV1
-	export function emptyP2MessageRecalledV1Handler():P2MessageRecalledV1Handler
-	export function emptyRefP2MessageRecalledV1Handler():Ref<P2MessageRecalledV1Handler>
-	export function refOfP2MessageRecalledV1Handler(x:P2MessageRecalledV1Handler,v:Ref<P2MessageRecalledV1Handler>)
-	export function unRefP2MessageRecalledV1Handler(v:Ref<P2MessageRecalledV1Handler>):P2MessageRecalledV1Handler
-	export function emptySortTabsChatTabResp():SortTabsChatTabResp
-	export function emptyRefSortTabsChatTabResp():Ref<SortTabsChatTabResp>
-	export function refOfSortTabsChatTabResp(x:SortTabsChatTabResp,v:Ref<SortTabsChatTabResp>)
-	export function unRefSortTabsChatTabResp(v:Ref<SortTabsChatTabResp>):SortTabsChatTabResp
-	export function emptyGetProgressBatchMessageReq():GetProgressBatchMessageReq
-	export function emptyRefGetProgressBatchMessageReq():Ref<GetProgressBatchMessageReq>
-	export function refOfGetProgressBatchMessageReq(x:GetProgressBatchMessageReq,v:Ref<GetProgressBatchMessageReq>)
-	export function unRefGetProgressBatchMessageReq(v:Ref<GetProgressBatchMessageReq>):GetProgressBatchMessageReq
-	export function emptyMessageBuilder():MessageBuilder
-	export function emptyRefMessageBuilder():Ref<MessageBuilder>
-	export function refOfMessageBuilder(x:MessageBuilder,v:Ref<MessageBuilder>)
-	export function unRefMessageBuilder(v:Ref<MessageBuilder>):MessageBuilder
-	export function emptyP2ChatMemberUserWithdrawnV1Handler():P2ChatMemberUserWithdrawnV1Handler
-	export function emptyRefP2ChatMemberUserWithdrawnV1Handler():Ref<P2ChatMemberUserWithdrawnV1Handler>
-	export function refOfP2ChatMemberUserWithdrawnV1Handler(x:P2ChatMemberUserWithdrawnV1Handler,v:Ref<P2ChatMemberUserWithdrawnV1Handler>)
-	export function unRefP2ChatMemberUserWithdrawnV1Handler(v:Ref<P2ChatMemberUserWithdrawnV1Handler>):P2ChatMemberUserWithdrawnV1Handler
-	export function emptyCreateMessageReactionReqBuilder():CreateMessageReactionReqBuilder
-	export function emptyRefCreateMessageReactionReqBuilder():Ref<CreateMessageReactionReqBuilder>
-	export function refOfCreateMessageReactionReqBuilder(x:CreateMessageReactionReqBuilder,v:Ref<CreateMessageReactionReqBuilder>)
-	export function unRefCreateMessageReactionReqBuilder(v:Ref<CreateMessageReactionReqBuilder>):CreateMessageReactionReqBuilder
-	export function emptyPatchChatAnnouncementResp():PatchChatAnnouncementResp
-	export function emptyRefPatchChatAnnouncementResp():Ref<PatchChatAnnouncementResp>
-	export function refOfPatchChatAnnouncementResp(x:PatchChatAnnouncementResp,v:Ref<PatchChatAnnouncementResp>)
-	export function unRefPatchChatAnnouncementResp(v:Ref<PatchChatAnnouncementResp>):PatchChatAnnouncementResp
-	export function emptyForwardMessagePathReqBodyBuilder():ForwardMessagePathReqBodyBuilder
-	export function emptyRefForwardMessagePathReqBodyBuilder():Ref<ForwardMessagePathReqBodyBuilder>
-	export function refOfForwardMessagePathReqBodyBuilder(x:ForwardMessagePathReqBodyBuilder,v:Ref<ForwardMessagePathReqBodyBuilder>)
-	export function unRefForwardMessagePathReqBodyBuilder(v:Ref<ForwardMessagePathReqBodyBuilder>):ForwardMessagePathReqBodyBuilder
-	export function emptyMeJoinChatMembersResp():MeJoinChatMembersResp
-	export function emptyRefMeJoinChatMembersResp():Ref<MeJoinChatMembersResp>
-	export function refOfMeJoinChatMembersResp(x:MeJoinChatMembersResp,v:Ref<MeJoinChatMembersResp>)
-	export function unRefMeJoinChatMembersResp(v:Ref<MeJoinChatMembersResp>):MeJoinChatMembersResp
-	export function emptyUpdateMessageResp():UpdateMessageResp
-	export function emptyRefUpdateMessageResp():Ref<UpdateMessageResp>
-	export function refOfUpdateMessageResp(x:UpdateMessageResp,v:Ref<UpdateMessageResp>)
-	export function unRefUpdateMessageResp(v:Ref<UpdateMessageResp>):UpdateMessageResp
-	export function emptyChatMenuTopLevel():ChatMenuTopLevel
-	export function emptyRefChatMenuTopLevel():Ref<ChatMenuTopLevel>
-	export function refOfChatMenuTopLevel(x:ChatMenuTopLevel,v:Ref<ChatMenuTopLevel>)
-	export function unRefChatMenuTopLevel(v:Ref<ChatMenuTopLevel>):ChatMenuTopLevel
-	export function emptyCreateChatMembersRespData():CreateChatMembersRespData
-	export function emptyRefCreateChatMembersRespData():Ref<CreateChatMembersRespData>
-	export function refOfCreateChatMembersRespData(x:CreateChatMembersRespData,v:Ref<CreateChatMembersRespData>)
-	export function unRefCreateChatMembersRespData(v:Ref<CreateChatMembersRespData>):CreateChatMembersRespData
-	export function emptyCreateChatTabRespData():CreateChatTabRespData
-	export function emptyRefCreateChatTabRespData():Ref<CreateChatTabRespData>
-	export function refOfCreateChatTabRespData(x:CreateChatTabRespData,v:Ref<CreateChatTabRespData>)
-	export function unRefCreateChatTabRespData(v:Ref<CreateChatTabRespData>):CreateChatTabRespData
-	export function emptyForwardMessageReqBody():ForwardMessageReqBody
-	export function emptyRefForwardMessageReqBody():Ref<ForwardMessageReqBody>
-	export function refOfForwardMessageReqBody(x:ForwardMessageReqBody,v:Ref<ForwardMessageReqBody>)
-	export function unRefForwardMessageReqBody(v:Ref<ForwardMessageReqBody>):ForwardMessageReqBody
-	export function emptyGetChatRespData():GetChatRespData
-	export function emptyRefGetChatRespData():Ref<GetChatRespData>
-	export function refOfGetChatRespData(x:GetChatRespData,v:Ref<GetChatRespData>)
-	export function unRefGetChatRespData(v:Ref<GetChatRespData>):GetChatRespData
-	export function emptyPatchChatMenuItemReqBuilder():PatchChatMenuItemReqBuilder
-	export function emptyRefPatchChatMenuItemReqBuilder():Ref<PatchChatMenuItemReqBuilder>
-	export function refOfPatchChatMenuItemReqBuilder(x:PatchChatMenuItemReqBuilder,v:Ref<PatchChatMenuItemReqBuilder>)
-	export function unRefPatchChatMenuItemReqBuilder(v:Ref<PatchChatMenuItemReqBuilder>):PatchChatMenuItemReqBuilder
-	export function emptyChatMemberBotBuilder():ChatMemberBotBuilder
-	export function emptyRefChatMemberBotBuilder():Ref<ChatMemberBotBuilder>
-	export function refOfChatMemberBotBuilder(x:ChatMemberBotBuilder,v:Ref<ChatMemberBotBuilder>)
-	export function unRefChatMemberBotBuilder(v:Ref<ChatMemberBotBuilder>):ChatMemberBotBuilder
-	export function emptyListPinIterator():ListPinIterator
-	export function emptyRefListPinIterator():Ref<ListPinIterator>
-	export function refOfListPinIterator(x:ListPinIterator,v:Ref<ListPinIterator>)
-	export function unRefListPinIterator(v:Ref<ListPinIterator>):ListPinIterator
-	export function emptyAddManagersChatManagersReq():AddManagersChatManagersReq
-	export function emptyRefAddManagersChatManagersReq():Ref<AddManagersChatManagersReq>
-	export function refOfAddManagersChatManagersReq(x:AddManagersChatManagersReq,v:Ref<AddManagersChatManagersReq>)
-	export function unRefAddManagersChatManagersReq(v:Ref<AddManagersChatManagersReq>):AddManagersChatManagersReq
-	export function emptyChatMenuItemBuilder():ChatMenuItemBuilder
-	export function emptyRefChatMenuItemBuilder():Ref<ChatMenuItemBuilder>
-	export function refOfChatMenuItemBuilder(x:ChatMenuItemBuilder,v:Ref<ChatMenuItemBuilder>)
-	export function unRefChatMenuItemBuilder(v:Ref<ChatMenuItemBuilder>):ChatMenuItemBuilder
-	export function emptyListPinReq():ListPinReq
-	export function emptyRefListPinReq():Ref<ListPinReq>
-	export function refOfListPinReq(x:ListPinReq,v:Ref<ListPinReq>)
-	export function unRefListPinReq(v:Ref<ListPinReq>):ListPinReq
-	export function emptyP2MessageReadV1Data():P2MessageReadV1Data
-	export function emptyRefP2MessageReadV1Data():Ref<P2MessageReadV1Data>
-	export function refOfP2MessageReadV1Data(x:P2MessageReadV1Data,v:Ref<P2MessageReadV1Data>)
-	export function unRefP2MessageReadV1Data(v:Ref<P2MessageReadV1Data>):P2MessageReadV1Data
-	export function emptySenderBuilder():SenderBuilder
-	export function emptyRefSenderBuilder():Ref<SenderBuilder>
-	export function refOfSenderBuilder(x:SenderBuilder,v:Ref<SenderBuilder>)
-	export function unRefSenderBuilder(v:Ref<SenderBuilder>):SenderBuilder
+	export function emptyDeleteTabsChatTabRespData():DeleteTabsChatTabRespData
+	export function emptyRefDeleteTabsChatTabRespData():Ref<DeleteTabsChatTabRespData>
+	export function refOfDeleteTabsChatTabRespData(x:DeleteTabsChatTabRespData,v:Ref<DeleteTabsChatTabRespData>)
+	export function unRefDeleteTabsChatTabRespData(v:Ref<DeleteTabsChatTabRespData>):DeleteTabsChatTabRespData
+	export function emptyGetChatModerationResp():GetChatModerationResp
+	export function emptyRefGetChatModerationResp():Ref<GetChatModerationResp>
+	export function refOfGetChatModerationResp(x:GetChatModerationResp,v:Ref<GetChatModerationResp>)
+	export function unRefGetChatModerationResp(v:Ref<GetChatModerationResp>):GetChatModerationResp
+	export function emptyP1UserV1():P1UserV1
+	export function emptyRefP1UserV1():Ref<P1UserV1>
+	export function refOfP1UserV1(x:P1UserV1,v:Ref<P1UserV1>)
+	export function unRefP1UserV1(v:Ref<P1UserV1>):P1UserV1
+	export function emptySortChatMenuTreeRespData():SortChatMenuTreeRespData
+	export function emptyRefSortChatMenuTreeRespData():Ref<SortChatMenuTreeRespData>
+	export function refOfSortChatMenuTreeRespData(x:SortChatMenuTreeRespData,v:Ref<SortChatMenuTreeRespData>)
+	export function unRefSortChatMenuTreeRespData(v:Ref<SortChatMenuTreeRespData>):SortChatMenuTreeRespData
+	export function emptyUpdateMessageRespData():UpdateMessageRespData
+	export function emptyRefUpdateMessageRespData():Ref<UpdateMessageRespData>
+	export function refOfUpdateMessageRespData(x:UpdateMessageRespData,v:Ref<UpdateMessageRespData>)
+	export function unRefUpdateMessageRespData(v:Ref<UpdateMessageRespData>):UpdateMessageRespData
+	export function emptyUpdateTabsChatTabResp():UpdateTabsChatTabResp
+	export function emptyRefUpdateTabsChatTabResp():Ref<UpdateTabsChatTabResp>
+	export function refOfUpdateTabsChatTabResp(x:UpdateTabsChatTabResp,v:Ref<UpdateTabsChatTabResp>)
+	export function unRefUpdateTabsChatTabResp(v:Ref<UpdateTabsChatTabResp>):UpdateTabsChatTabResp
+	export function emptyUpdateChatReqBody():UpdateChatReqBody
+	export function emptyRefUpdateChatReqBody():Ref<UpdateChatReqBody>
+	export function refOfUpdateChatReqBody(x:UpdateChatReqBody,v:Ref<UpdateChatReqBody>)
+	export function unRefUpdateChatReqBody(v:Ref<UpdateChatReqBody>):UpdateChatReqBody
 	export function emptyUpdateTabsChatTabReqBody():UpdateTabsChatTabReqBody
 	export function emptyRefUpdateTabsChatTabReqBody():Ref<UpdateTabsChatTabReqBody>
 	export function refOfUpdateTabsChatTabReqBody(x:UpdateTabsChatTabReqBody,v:Ref<UpdateTabsChatTabReqBody>)
 	export function unRefUpdateTabsChatTabReqBody(v:Ref<UpdateTabsChatTabReqBody>):UpdateTabsChatTabReqBody
-	export function emptyUpdateTabsChatTabReqBodyBuilder():UpdateTabsChatTabReqBodyBuilder
-	export function emptyRefUpdateTabsChatTabReqBodyBuilder():Ref<UpdateTabsChatTabReqBodyBuilder>
-	export function refOfUpdateTabsChatTabReqBodyBuilder(x:UpdateTabsChatTabReqBodyBuilder,v:Ref<UpdateTabsChatTabReqBodyBuilder>)
-	export function unRefUpdateTabsChatTabReqBodyBuilder(v:Ref<UpdateTabsChatTabReqBodyBuilder>):UpdateTabsChatTabReqBodyBuilder
+	export function emptyForwardThreadResp():ForwardThreadResp
+	export function emptyRefForwardThreadResp():Ref<ForwardThreadResp>
+	export function refOfForwardThreadResp(x:ForwardThreadResp,v:Ref<ForwardThreadResp>)
+	export function unRefForwardThreadResp(v:Ref<ForwardThreadResp>):ForwardThreadResp
+	export function emptyGetChatAnnouncementReq():GetChatAnnouncementReq
+	export function emptyRefGetChatAnnouncementReq():Ref<GetChatAnnouncementReq>
+	export function refOfGetChatAnnouncementReq(x:GetChatAnnouncementReq,v:Ref<GetChatAnnouncementReq>)
+	export function unRefGetChatAnnouncementReq(v:Ref<GetChatAnnouncementReq>):GetChatAnnouncementReq
+	export function emptyPatchChatMenuItemReq():PatchChatMenuItemReq
+	export function emptyRefPatchChatMenuItemReq():Ref<PatchChatMenuItemReq>
+	export function refOfPatchChatMenuItemReq(x:PatchChatMenuItemReq,v:Ref<PatchChatMenuItemReq>)
+	export function unRefPatchChatMenuItemReq(v:Ref<PatchChatMenuItemReq>):PatchChatMenuItemReq
+	export function emptyListNotifyStatus():ListNotifyStatus
+	export function emptyRefListNotifyStatus():Ref<ListNotifyStatus>
+	export function refOfListNotifyStatus(x:ListNotifyStatus,v:Ref<ListNotifyStatus>)
+	export function unRefListNotifyStatus(v:Ref<ListNotifyStatus>):ListNotifyStatus
+	export function emptyCreateMessageReqBody():CreateMessageReqBody
+	export function emptyRefCreateMessageReqBody():Ref<CreateMessageReqBody>
+	export function refOfCreateMessageReqBody(x:CreateMessageReqBody,v:Ref<CreateMessageReqBody>)
+	export function unRefCreateMessageReqBody(v:Ref<CreateMessageReqBody>):CreateMessageReqBody
+	export function emptyForwardThreadReqBody():ForwardThreadReqBody
+	export function emptyRefForwardThreadReqBody():Ref<ForwardThreadReqBody>
+	export function refOfForwardThreadReqBody(x:ForwardThreadReqBody,v:Ref<ForwardThreadReqBody>)
+	export function unRefForwardThreadReqBody(v:Ref<ForwardThreadReqBody>):ForwardThreadReqBody
+	export function emptyBatchMessageRecallProgress():BatchMessageRecallProgress
+	export function emptyRefBatchMessageRecallProgress():Ref<BatchMessageRecallProgress>
+	export function refOfBatchMessageRecallProgress(x:BatchMessageRecallProgress,v:Ref<BatchMessageRecallProgress>)
+	export function unRefBatchMessageRecallProgress(v:Ref<BatchMessageRecallProgress>):BatchMessageRecallProgress
+	export function emptyMessageMedia():MessageMedia
+	export function emptyRefMessageMedia():Ref<MessageMedia>
+	export function refOfMessageMedia(x:MessageMedia,v:Ref<MessageMedia>)
+	export function unRefMessageMedia(v:Ref<MessageMedia>):MessageMedia
+	export function emptyPinedMessage():PinedMessage
+	export function emptyRefPinedMessage():Ref<PinedMessage>
+	export function refOfPinedMessage(x:PinedMessage,v:Ref<PinedMessage>)
+	export function unRefPinedMessage(v:Ref<PinedMessage>):PinedMessage
+	export function emptyChatMenuItemRedirectLink():ChatMenuItemRedirectLink
+	export function emptyRefChatMenuItemRedirectLink():Ref<ChatMenuItemRedirectLink>
+	export function refOfChatMenuItemRedirectLink(x:ChatMenuItemRedirectLink,v:Ref<ChatMenuItemRedirectLink>)
+	export function unRefChatMenuItemRedirectLink(v:Ref<ChatMenuItemRedirectLink>):ChatMenuItemRedirectLink
+	export function emptyCreateChatTabReq():CreateChatTabReq
+	export function emptyRefCreateChatTabReq():Ref<CreateChatTabReq>
+	export function refOfCreateChatTabReq(x:CreateChatTabReq,v:Ref<CreateChatTabReq>)
+	export function unRefCreateChatTabReq(v:Ref<CreateChatTabReq>):CreateChatTabReq
+	export function emptyMessagePostImage():MessagePostImage
+	export function emptyRefMessagePostImage():Ref<MessagePostImage>
+	export function refOfMessagePostImage(x:MessagePostImage,v:Ref<MessagePostImage>)
+	export function unRefMessagePostImage(v:Ref<MessagePostImage>):MessagePostImage
+	export function emptySearchChatResp():SearchChatResp
+	export function emptyRefSearchChatResp():Ref<SearchChatResp>
+	export function refOfSearchChatResp(x:SearchChatResp,v:Ref<SearchChatResp>)
+	export function unRefSearchChatResp(v:Ref<SearchChatResp>):SearchChatResp
+	export function emptyDeleteChatMenuTreeReq():DeleteChatMenuTreeReq
+	export function emptyRefDeleteChatMenuTreeReq():Ref<DeleteChatMenuTreeReq>
+	export function refOfDeleteChatMenuTreeReq(x:DeleteChatMenuTreeReq,v:Ref<DeleteChatMenuTreeReq>)
+	export function unRefDeleteChatMenuTreeReq(v:Ref<DeleteChatMenuTreeReq>):DeleteChatMenuTreeReq
+	export function emptyReadUserBatchMessageResp():ReadUserBatchMessageResp
+	export function emptyRefReadUserBatchMessageResp():Ref<ReadUserBatchMessageResp>
+	export function refOfReadUserBatchMessageResp(x:ReadUserBatchMessageResp,v:Ref<ReadUserBatchMessageResp>)
+	export function unRefReadUserBatchMessageResp(v:Ref<ReadUserBatchMessageResp>):ReadUserBatchMessageResp
+	export function emptyCreatePinRespData():CreatePinRespData
+	export function emptyRefCreatePinRespData():Ref<CreatePinRespData>
+	export function refOfCreatePinRespData(x:CreatePinRespData,v:Ref<CreatePinRespData>)
+	export function unRefCreatePinRespData(v:Ref<CreatePinRespData>):CreatePinRespData
+	export function emptyMentionEvent():MentionEvent
+	export function emptyRefMentionEvent():Ref<MentionEvent>
+	export function refOfMentionEvent(x:MentionEvent,v:Ref<MentionEvent>)
+	export function unRefMentionEvent(v:Ref<MentionEvent>):MentionEvent
+	export function emptyBatchMessageSendProgress():BatchMessageSendProgress
+	export function emptyRefBatchMessageSendProgress():Ref<BatchMessageSendProgress>
+	export function refOfBatchMessageSendProgress(x:BatchMessageSendProgress,v:Ref<BatchMessageSendProgress>)
+	export function unRefBatchMessageSendProgress(v:Ref<BatchMessageSendProgress>):BatchMessageSendProgress
+	export function emptyMeJoinChatMembersReq():MeJoinChatMembersReq
+	export function emptyRefMeJoinChatMembersReq():Ref<MeJoinChatMembersReq>
+	export function refOfMeJoinChatMembersReq(x:MeJoinChatMembersReq,v:Ref<MeJoinChatMembersReq>)
+	export function unRefMeJoinChatMembersReq(v:Ref<MeJoinChatMembersReq>):MeJoinChatMembersReq
+	export function emptyCreateImageReqBody():CreateImageReqBody
+	export function emptyRefCreateImageReqBody():Ref<CreateImageReqBody>
+	export function refOfCreateImageReqBody(x:CreateImageReqBody,v:Ref<CreateImageReqBody>)
+	export function unRefCreateImageReqBody(v:Ref<CreateImageReqBody>):CreateImageReqBody
+	export function emptyDeletePinResp():DeletePinResp
+	export function emptyRefDeletePinResp():Ref<DeletePinResp>
+	export function refOfDeletePinResp(x:DeletePinResp,v:Ref<DeletePinResp>)
+	export function unRefDeletePinResp(v:Ref<DeletePinResp>):DeletePinResp
+	export function emptyP1GroupSettingUpdatedV1():P1GroupSettingUpdatedV1
+	export function emptyRefP1GroupSettingUpdatedV1():Ref<P1GroupSettingUpdatedV1>
+	export function refOfP1GroupSettingUpdatedV1(x:P1GroupSettingUpdatedV1,v:Ref<P1GroupSettingUpdatedV1>)
+	export function unRefP1GroupSettingUpdatedV1(v:Ref<P1GroupSettingUpdatedV1>):P1GroupSettingUpdatedV1
+	export function emptyP1P2PChatCreatedV1():P1P2PChatCreatedV1
+	export function emptyRefP1P2PChatCreatedV1():Ref<P1P2PChatCreatedV1>
+	export function refOfP1P2PChatCreatedV1(x:P1P2PChatCreatedV1,v:Ref<P1P2PChatCreatedV1>)
+	export function unRefP1P2PChatCreatedV1(v:Ref<P1P2PChatCreatedV1>):P1P2PChatCreatedV1
+	export function emptyGetFileReq():GetFileReq
+	export function emptyRefGetFileReq():Ref<GetFileReq>
+	export function refOfGetFileReq(x:GetFileReq,v:Ref<GetFileReq>)
+	export function unRefGetFileReq(v:Ref<GetFileReq>):GetFileReq
+	export function emptyMeJoinChatMembersResp():MeJoinChatMembersResp
+	export function emptyRefMeJoinChatMembersResp():Ref<MeJoinChatMembersResp>
+	export function refOfMeJoinChatMembersResp(x:MeJoinChatMembersResp,v:Ref<MeJoinChatMembersResp>)
+	export function unRefMeJoinChatMembersResp(v:Ref<MeJoinChatMembersResp>):MeJoinChatMembersResp
+	export function emptyReadUserBatchMessageReq():ReadUserBatchMessageReq
+	export function emptyRefReadUserBatchMessageReq():Ref<ReadUserBatchMessageReq>
+	export function refOfReadUserBatchMessageReq(x:ReadUserBatchMessageReq,v:Ref<ReadUserBatchMessageReq>)
+	export function unRefReadUserBatchMessageReq(v:Ref<ReadUserBatchMessageReq>):ReadUserBatchMessageReq
+	export function emptyMessagePostMedia():MessagePostMedia
+	export function emptyRefMessagePostMedia():Ref<MessagePostMedia>
+	export function refOfMessagePostMedia(x:MessagePostMedia,v:Ref<MessagePostMedia>)
+	export function unRefMessagePostMedia(v:Ref<MessagePostMedia>):MessagePostMedia
+	export function emptyUpdateChatReq():UpdateChatReq
+	export function emptyRefUpdateChatReq():Ref<UpdateChatReq>
+	export function refOfUpdateChatReq(x:UpdateChatReq,v:Ref<UpdateChatReq>)
+	export function unRefUpdateChatReq(v:Ref<UpdateChatReq>):UpdateChatReq
+	export function emptyChatTab():ChatTab
+	export function emptyRefChatTab():Ref<ChatTab>
+	export function refOfChatTab(x:ChatTab,v:Ref<ChatTab>)
+	export function unRefChatTab(v:Ref<ChatTab>):ChatTab
+	export function emptyDepartmentId():DepartmentId
+	export function emptyRefDepartmentId():Ref<DepartmentId>
+	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
+	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
+	export function emptyListTabsChatTabRespData():ListTabsChatTabRespData
+	export function emptyRefListTabsChatTabRespData():Ref<ListTabsChatTabRespData>
+	export function refOfListTabsChatTabRespData(x:ListTabsChatTabRespData,v:Ref<ListTabsChatTabRespData>)
+	export function unRefListTabsChatTabRespData(v:Ref<ListTabsChatTabRespData>):ListTabsChatTabRespData
+	export function emptyP1AddBotV1Data():P1AddBotV1Data
+	export function emptyRefP1AddBotV1Data():Ref<P1AddBotV1Data>
+	export function refOfP1AddBotV1Data(x:P1AddBotV1Data,v:Ref<P1AddBotV1Data>)
+	export function unRefP1AddBotV1Data(v:Ref<P1AddBotV1Data>):P1AddBotV1Data
+	export function emptyCreateMessageReactionReq():CreateMessageReactionReq
+	export function emptyRefCreateMessageReactionReq():Ref<CreateMessageReactionReq>
+	export function refOfCreateMessageReactionReq(x:CreateMessageReactionReq,v:Ref<CreateMessageReactionReq>)
+	export function unRefCreateMessageReactionReq(v:Ref<CreateMessageReactionReq>):CreateMessageReactionReq
+	export function emptyGetFileResp():GetFileResp
+	export function emptyRefGetFileResp():Ref<GetFileResp>
+	export function refOfGetFileResp(x:GetFileResp,v:Ref<GetFileResp>)
+	export function unRefGetFileResp(v:Ref<GetFileResp>):GetFileResp
+	export function emptyListChatIterator():ListChatIterator
+	export function emptyRefListChatIterator():Ref<ListChatIterator>
+	export function refOfListChatIterator(x:ListChatIterator,v:Ref<ListChatIterator>)
+	export function unRefListChatIterator(v:Ref<ListChatIterator>):ListChatIterator
+	export function emptyChatTopNotice():ChatTopNotice
+	export function emptyRefChatTopNotice():Ref<ChatTopNotice>
+	export function refOfChatTopNotice(x:ChatTopNotice,v:Ref<ChatTopNotice>)
+	export function unRefChatTopNotice(v:Ref<ChatTopNotice>):ChatTopNotice
+	export function emptyIsInChatChatMembersReq():IsInChatChatMembersReq
+	export function emptyRefIsInChatChatMembersReq():Ref<IsInChatChatMembersReq>
+	export function refOfIsInChatChatMembersReq(x:IsInChatChatMembersReq,v:Ref<IsInChatChatMembersReq>)
+	export function unRefIsInChatChatMembersReq(v:Ref<IsInChatChatMembersReq>):IsInChatChatMembersReq
+	export function emptyMessageShareUser():MessageShareUser
+	export function emptyRefMessageShareUser():Ref<MessageShareUser>
+	export function refOfMessageShareUser(x:MessageShareUser,v:Ref<MessageShareUser>)
+	export function unRefMessageShareUser(v:Ref<MessageShareUser>):MessageShareUser
+	export function emptyGetChatModerationReq():GetChatModerationReq
+	export function emptyRefGetChatModerationReq():Ref<GetChatModerationReq>
+	export function refOfGetChatModerationReq(x:GetChatModerationReq,v:Ref<GetChatModerationReq>)
+	export function unRefGetChatModerationReq(v:Ref<GetChatModerationReq>):GetChatModerationReq
+	export function emptyP1ChatDisbandV1():P1ChatDisbandV1
+	export function emptyRefP1ChatDisbandV1():Ref<P1ChatDisbandV1>
+	export function refOfP1ChatDisbandV1(x:P1ChatDisbandV1,v:Ref<P1ChatDisbandV1>)
+	export function unRefP1ChatDisbandV1(v:Ref<P1ChatDisbandV1>):P1ChatDisbandV1
+	export function emptyI18nContent():I18nContent
+	export function emptyRefI18nContent():Ref<I18nContent>
+	export function refOfI18nContent(x:I18nContent,v:Ref<I18nContent>)
+	export function unRefI18nContent(v:Ref<I18nContent>):I18nContent
+	export function emptyDeleteChatMembersReq():DeleteChatMembersReq
+	export function emptyRefDeleteChatMembersReq():Ref<DeleteChatMembersReq>
+	export function refOfDeleteChatMembersReq(x:DeleteChatMembersReq,v:Ref<DeleteChatMembersReq>)
+	export function unRefDeleteChatMembersReq(v:Ref<DeleteChatMembersReq>):DeleteChatMembersReq
+	export function emptyCreateChatResp():CreateChatResp
+	export function emptyRefCreateChatResp():Ref<CreateChatResp>
+	export function refOfCreateChatResp(x:CreateChatResp,v:Ref<CreateChatResp>)
+	export function unRefCreateChatResp(v:Ref<CreateChatResp>):CreateChatResp
+	export function emptyListMessageRespData():ListMessageRespData
+	export function emptyRefListMessageRespData():Ref<ListMessageRespData>
+	export function refOfListMessageRespData(x:ListMessageRespData,v:Ref<ListMessageRespData>)
+	export function unRefListMessageRespData(v:Ref<ListMessageRespData>):ListMessageRespData
+	export function emptyP1MessageReceiveV1Data():P1MessageReceiveV1Data
+	export function emptyRefP1MessageReceiveV1Data():Ref<P1MessageReceiveV1Data>
+	export function refOfP1MessageReceiveV1Data(x:P1MessageReceiveV1Data,v:Ref<P1MessageReceiveV1Data>)
+	export function unRefP1MessageReceiveV1Data(v:Ref<P1MessageReceiveV1Data>):P1MessageReceiveV1Data
+	export function emptyLinkChatResp():LinkChatResp
+	export function emptyRefLinkChatResp():Ref<LinkChatResp>
+	export function refOfLinkChatResp(x:LinkChatResp,v:Ref<LinkChatResp>)
+	export function unRefLinkChatResp(v:Ref<LinkChatResp>):LinkChatResp
+	export function emptyPatchMessageReq():PatchMessageReq
+	export function emptyRefPatchMessageReq():Ref<PatchMessageReq>
+	export function refOfPatchMessageReq(x:PatchMessageReq,v:Ref<PatchMessageReq>)
+	export function unRefPatchMessageReq(v:Ref<PatchMessageReq>):PatchMessageReq
+	export function emptyCreateChatMenuTreeReqBody():CreateChatMenuTreeReqBody
+	export function emptyRefCreateChatMenuTreeReqBody():Ref<CreateChatMenuTreeReqBody>
+	export function refOfCreateChatMenuTreeReqBody(x:CreateChatMenuTreeReqBody,v:Ref<CreateChatMenuTreeReqBody>)
+	export function unRefCreateChatMenuTreeReqBody(v:Ref<CreateChatMenuTreeReqBody>):CreateChatMenuTreeReqBody
+	export function emptyP1GroupSettingUpdatedV1Data():P1GroupSettingUpdatedV1Data
+	export function emptyRefP1GroupSettingUpdatedV1Data():Ref<P1GroupSettingUpdatedV1Data>
+	export function refOfP1GroupSettingUpdatedV1Data(x:P1GroupSettingUpdatedV1Data,v:Ref<P1GroupSettingUpdatedV1Data>)
+	export function unRefP1GroupSettingUpdatedV1Data(v:Ref<P1GroupSettingUpdatedV1Data>):P1GroupSettingUpdatedV1Data
+	export function emptyPatchChatMenuItemResp():PatchChatMenuItemResp
+	export function emptyRefPatchChatMenuItemResp():Ref<PatchChatMenuItemResp>
+	export function refOfPatchChatMenuItemResp(x:PatchChatMenuItemResp,v:Ref<PatchChatMenuItemResp>)
+	export function unRefPatchChatMenuItemResp(v:Ref<PatchChatMenuItemResp>):PatchChatMenuItemResp
+	export function emptyP1MessageReadV1Data():P1MessageReadV1Data
+	export function emptyRefP1MessageReadV1Data():Ref<P1MessageReadV1Data>
+	export function refOfP1MessageReadV1Data(x:P1MessageReadV1Data,v:Ref<P1MessageReadV1Data>)
+	export function unRefP1MessageReadV1Data(v:Ref<P1MessageReadV1Data>):P1MessageReadV1Data
+	export function emptyDeleteChatMenuTreeReqBody():DeleteChatMenuTreeReqBody
+	export function emptyRefDeleteChatMenuTreeReqBody():Ref<DeleteChatMenuTreeReqBody>
+	export function refOfDeleteChatMenuTreeReqBody(x:DeleteChatMenuTreeReqBody,v:Ref<DeleteChatMenuTreeReqBody>)
+	export function unRefDeleteChatMenuTreeReqBody(v:Ref<DeleteChatMenuTreeReqBody>):DeleteChatMenuTreeReqBody
+	export function emptyListPinIterator():ListPinIterator
+	export function emptyRefListPinIterator():Ref<ListPinIterator>
+	export function refOfListPinIterator(x:ListPinIterator,v:Ref<ListPinIterator>)
+	export function unRefListPinIterator(v:Ref<ListPinIterator>):ListPinIterator
+	export function emptyMessageImage():MessageImage
+	export function emptyRefMessageImage():Ref<MessageImage>
+	export function refOfMessageImage(x:MessageImage,v:Ref<MessageImage>)
+	export function unRefMessageImage(v:Ref<MessageImage>):MessageImage
+	export function emptyUrgentSmsMessageRespData():UrgentSmsMessageRespData
+	export function emptyRefUrgentSmsMessageRespData():Ref<UrgentSmsMessageRespData>
+	export function refOfUrgentSmsMessageRespData(x:UrgentSmsMessageRespData,v:Ref<UrgentSmsMessageRespData>)
+	export function unRefUrgentSmsMessageRespData(v:Ref<UrgentSmsMessageRespData>):UrgentSmsMessageRespData
+	export function emptyDeleteBatchMessageResp():DeleteBatchMessageResp
+	export function emptyRefDeleteBatchMessageResp():Ref<DeleteBatchMessageResp>
+	export function refOfDeleteBatchMessageResp(x:DeleteBatchMessageResp,v:Ref<DeleteBatchMessageResp>)
+	export function unRefDeleteBatchMessageResp(v:Ref<DeleteBatchMessageResp>):DeleteBatchMessageResp
+	export function emptyForwardMessageReqBody():ForwardMessageReqBody
+	export function emptyRefForwardMessageReqBody():Ref<ForwardMessageReqBody>
+	export function refOfForwardMessageReqBody(x:ForwardMessageReqBody,v:Ref<ForwardMessageReqBody>)
+	export function unRefForwardMessageReqBody(v:Ref<ForwardMessageReqBody>):ForwardMessageReqBody
+	export function emptyListMessageReq():ListMessageReq
+	export function emptyRefListMessageReq():Ref<ListMessageReq>
+	export function refOfListMessageReq(x:ListMessageReq,v:Ref<ListMessageReq>)
+	export function unRefListMessageReq(v:Ref<ListMessageReq>):ListMessageReq
+	export function emptyP1MessageReadV1():P1MessageReadV1
+	export function emptyRefP1MessageReadV1():Ref<P1MessageReadV1>
+	export function refOfP1MessageReadV1(x:P1MessageReadV1,v:Ref<P1MessageReadV1>)
+	export function unRefP1MessageReadV1(v:Ref<P1MessageReadV1>):P1MessageReadV1
+	export function emptyP1P2PChatCreatedV1Data():P1P2PChatCreatedV1Data
+	export function emptyRefP1P2PChatCreatedV1Data():Ref<P1P2PChatCreatedV1Data>
+	export function refOfP1P2PChatCreatedV1Data(x:P1P2PChatCreatedV1Data,v:Ref<P1P2PChatCreatedV1Data>)
+	export function unRefP1P2PChatCreatedV1Data(v:Ref<P1P2PChatCreatedV1Data>):P1P2PChatCreatedV1Data
+	export function emptyP1RemoveBotV1():P1RemoveBotV1
+	export function emptyRefP1RemoveBotV1():Ref<P1RemoveBotV1>
+	export function refOfP1RemoveBotV1(x:P1RemoveBotV1,v:Ref<P1RemoveBotV1>)
+	export function unRefP1RemoveBotV1(v:Ref<P1RemoveBotV1>):P1RemoveBotV1
+	export function emptyP2MessageRecalledV1():P2MessageRecalledV1
+	export function emptyRefP2MessageRecalledV1():Ref<P2MessageRecalledV1>
+	export function refOfP2MessageRecalledV1(x:P2MessageRecalledV1,v:Ref<P2MessageRecalledV1>)
+	export function unRefP2MessageRecalledV1(v:Ref<P2MessageRecalledV1>):P2MessageRecalledV1
+	export function emptyForwardThreadReq():ForwardThreadReq
+	export function emptyRefForwardThreadReq():Ref<ForwardThreadReq>
+	export function refOfForwardThreadReq(x:ForwardThreadReq,v:Ref<ForwardThreadReq>)
+	export function unRefForwardThreadReq(v:Ref<ForwardThreadReq>):ForwardThreadReq
+	export function emptyPatchChatMenuItemReqBody():PatchChatMenuItemReqBody
+	export function emptyRefPatchChatMenuItemReqBody():Ref<PatchChatMenuItemReqBody>
+	export function refOfPatchChatMenuItemReqBody(x:PatchChatMenuItemReqBody,v:Ref<PatchChatMenuItemReqBody>)
+	export function unRefPatchChatMenuItemReqBody(v:Ref<PatchChatMenuItemReqBody>):PatchChatMenuItemReqBody
+	export function emptyUserId():UserId
+	export function emptyRefUserId():Ref<UserId>
+	export function refOfUserId(x:UserId,v:Ref<UserId>)
+	export function unRefUserId(v:Ref<UserId>):UserId
+	export function emptyMergeForwardMessageReq():MergeForwardMessageReq
+	export function emptyRefMergeForwardMessageReq():Ref<MergeForwardMessageReq>
+	export function refOfMergeForwardMessageReq(x:MergeForwardMessageReq,v:Ref<MergeForwardMessageReq>)
+	export function unRefMergeForwardMessageReq(v:Ref<MergeForwardMessageReq>):MergeForwardMessageReq
+	export function emptyDeleteChatMenuTreeRespData():DeleteChatMenuTreeRespData
+	export function emptyRefDeleteChatMenuTreeRespData():Ref<DeleteChatMenuTreeRespData>
+	export function refOfDeleteChatMenuTreeRespData(x:DeleteChatMenuTreeRespData,v:Ref<DeleteChatMenuTreeRespData>)
+	export function unRefDeleteChatMenuTreeRespData(v:Ref<DeleteChatMenuTreeRespData>):DeleteChatMenuTreeRespData
+	export function emptyGetChatMembersResp():GetChatMembersResp
+	export function emptyRefGetChatMembersResp():Ref<GetChatMembersResp>
+	export function refOfGetChatMembersResp(x:GetChatMembersResp,v:Ref<GetChatMembersResp>)
+	export function unRefGetChatMembersResp(v:Ref<GetChatMembersResp>):GetChatMembersResp
+	export function emptyGetChatModerationRespData():GetChatModerationRespData
+	export function emptyRefGetChatModerationRespData():Ref<GetChatModerationRespData>
+	export function refOfGetChatModerationRespData(x:GetChatModerationRespData,v:Ref<GetChatModerationRespData>)
+	export function unRefGetChatModerationRespData(v:Ref<GetChatModerationRespData>):GetChatModerationRespData
+	export function emptyChatMenuTopLevel():ChatMenuTopLevel
+	export function emptyRefChatMenuTopLevel():Ref<ChatMenuTopLevel>
+	export function refOfChatMenuTopLevel(x:ChatMenuTopLevel,v:Ref<ChatMenuTopLevel>)
+	export function unRefChatMenuTopLevel(v:Ref<ChatMenuTopLevel>):ChatMenuTopLevel
+	export function emptyGetChatMenuTreeResp():GetChatMenuTreeResp
+	export function emptyRefGetChatMenuTreeResp():Ref<GetChatMenuTreeResp>
+	export function refOfGetChatMenuTreeResp(x:GetChatMenuTreeResp,v:Ref<GetChatMenuTreeResp>)
+	export function unRefGetChatMenuTreeResp(v:Ref<GetChatMenuTreeResp>):GetChatMenuTreeResp
+	export function emptyP1MessageReceiveV1():P1MessageReceiveV1
+	export function emptyRefP1MessageReceiveV1():Ref<P1MessageReceiveV1>
+	export function refOfP1MessageReceiveV1(x:P1MessageReceiveV1,v:Ref<P1MessageReceiveV1>)
+	export function unRefP1MessageReceiveV1(v:Ref<P1MessageReceiveV1>):P1MessageReceiveV1
+	export function emptyDeleteChatReq():DeleteChatReq
+	export function emptyRefDeleteChatReq():Ref<DeleteChatReq>
+	export function refOfDeleteChatReq(x:DeleteChatReq,v:Ref<DeleteChatReq>)
+	export function unRefDeleteChatReq(v:Ref<DeleteChatReq>):DeleteChatReq
+	export function emptyPutTopNoticeChatTopNoticeReqBody():PutTopNoticeChatTopNoticeReqBody
+	export function emptyRefPutTopNoticeChatTopNoticeReqBody():Ref<PutTopNoticeChatTopNoticeReqBody>
+	export function refOfPutTopNoticeChatTopNoticeReqBody(x:PutTopNoticeChatTopNoticeReqBody,v:Ref<PutTopNoticeChatTopNoticeReqBody>)
+	export function unRefPutTopNoticeChatTopNoticeReqBody(v:Ref<PutTopNoticeChatTopNoticeReqBody>):PutTopNoticeChatTopNoticeReqBody
+	export function emptyGetMessageResp():GetMessageResp
+	export function emptyRefGetMessageResp():Ref<GetMessageResp>
+	export function refOfGetMessageResp(x:GetMessageResp,v:Ref<GetMessageResp>)
+	export function unRefGetMessageResp(v:Ref<GetMessageResp>):GetMessageResp
+	export function emptyLinkChatReqBody():LinkChatReqBody
+	export function emptyRefLinkChatReqBody():Ref<LinkChatReqBody>
+	export function refOfLinkChatReqBody(x:LinkChatReqBody,v:Ref<LinkChatReqBody>)
+	export function unRefLinkChatReqBody(v:Ref<LinkChatReqBody>):LinkChatReqBody
+	export function emptySpecialFocus():SpecialFocus
+	export function emptyRefSpecialFocus():Ref<SpecialFocus>
+	export function refOfSpecialFocus(x:SpecialFocus,v:Ref<SpecialFocus>)
+	export function unRefSpecialFocus(v:Ref<SpecialFocus>):SpecialFocus
+	export function emptyCreatePinReq():CreatePinReq
+	export function emptyRefCreatePinReq():Ref<CreatePinReq>
+	export function refOfCreatePinReq(x:CreatePinReq,v:Ref<CreatePinReq>)
+	export function unRefCreatePinReq(v:Ref<CreatePinReq>):CreatePinReq
+	export function emptyMessagePostA():MessagePostA
+	export function emptyRefMessagePostA():Ref<MessagePostA>
+	export function refOfMessagePostA(x:MessagePostA,v:Ref<MessagePostA>)
+	export function unRefMessagePostA(v:Ref<MessagePostA>):MessagePostA
+	export function emptyMessagePostText():MessagePostText
+	export function emptyRefMessagePostText():Ref<MessagePostText>
+	export function refOfMessagePostText(x:MessagePostText,v:Ref<MessagePostText>)
+	export function unRefMessagePostText(v:Ref<MessagePostText>):MessagePostText
+	export function emptyPatchChatAnnouncementResp():PatchChatAnnouncementResp
+	export function emptyRefPatchChatAnnouncementResp():Ref<PatchChatAnnouncementResp>
+	export function refOfPatchChatAnnouncementResp(x:PatchChatAnnouncementResp,v:Ref<PatchChatAnnouncementResp>)
+	export function unRefPatchChatAnnouncementResp(v:Ref<PatchChatAnnouncementResp>):PatchChatAnnouncementResp
+	export function emptySearchChatReq():SearchChatReq
+	export function emptyRefSearchChatReq():Ref<SearchChatReq>
+	export function refOfSearchChatReq(x:SearchChatReq,v:Ref<SearchChatReq>)
+	export function unRefSearchChatReq(v:Ref<SearchChatReq>):SearchChatReq
+	export function emptySearchChatRespData():SearchChatRespData
+	export function emptyRefSearchChatRespData():Ref<SearchChatRespData>
+	export function refOfSearchChatRespData(x:SearchChatRespData,v:Ref<SearchChatRespData>)
+	export function unRefSearchChatRespData(v:Ref<SearchChatRespData>):SearchChatRespData
+	export function emptySearchChatIterator():SearchChatIterator
+	export function emptyRefSearchChatIterator():Ref<SearchChatIterator>
+	export function refOfSearchChatIterator(x:SearchChatIterator,v:Ref<SearchChatIterator>)
+	export function unRefSearchChatIterator(v:Ref<SearchChatIterator>):SearchChatIterator
+	export function emptyDeleteChatResp():DeleteChatResp
+	export function emptyRefDeleteChatResp():Ref<DeleteChatResp>
+	export function refOfDeleteChatResp(x:DeleteChatResp,v:Ref<DeleteChatResp>)
+	export function unRefDeleteChatResp(v:Ref<DeleteChatResp>):DeleteChatResp
+	export function emptyIsInChatChatMembersResp():IsInChatChatMembersResp
+	export function emptyRefIsInChatChatMembersResp():Ref<IsInChatChatMembersResp>
+	export function refOfIsInChatChatMembersResp(x:IsInChatChatMembersResp,v:Ref<IsInChatChatMembersResp>)
+	export function unRefIsInChatChatMembersResp(v:Ref<IsInChatChatMembersResp>):IsInChatChatMembersResp
+	export function emptyListMessageReactionRespData():ListMessageReactionRespData
+	export function emptyRefListMessageReactionRespData():Ref<ListMessageReactionRespData>
+	export function refOfListMessageReactionRespData(x:ListMessageReactionRespData,v:Ref<ListMessageReactionRespData>)
+	export function unRefListMessageReactionRespData(v:Ref<ListMessageReactionRespData>):ListMessageReactionRespData
+	export function emptyCreateMessageReq():CreateMessageReq
+	export function emptyRefCreateMessageReq():Ref<CreateMessageReq>
+	export function refOfCreateMessageReq(x:CreateMessageReq,v:Ref<CreateMessageReq>)
+	export function unRefCreateMessageReq(v:Ref<CreateMessageReq>):CreateMessageReq
+	export function emptyCreateChatReq():CreateChatReq
+	export function emptyRefCreateChatReq():Ref<CreateChatReq>
+	export function refOfCreateChatReq(x:CreateChatReq,v:Ref<CreateChatReq>)
+	export function unRefCreateChatReq(v:Ref<CreateChatReq>):CreateChatReq
+	export function emptyListPinReq():ListPinReq
+	export function emptyRefListPinReq():Ref<ListPinReq>
+	export function refOfListPinReq(x:ListPinReq,v:Ref<ListPinReq>)
+	export function unRefListPinReq(v:Ref<ListPinReq>):ListPinReq
+	export function emptyP1AddBotV1():P1AddBotV1
+	export function emptyRefP1AddBotV1():Ref<P1AddBotV1>
+	export function refOfP1AddBotV1(x:P1AddBotV1,v:Ref<P1AddBotV1>)
+	export function unRefP1AddBotV1(v:Ref<P1AddBotV1>):P1AddBotV1
+	export function emptyDeleteBatchMessageReq():DeleteBatchMessageReq
+	export function emptyRefDeleteBatchMessageReq():Ref<DeleteBatchMessageReq>
+	export function refOfDeleteBatchMessageReq(x:DeleteBatchMessageReq,v:Ref<DeleteBatchMessageReq>)
+	export function unRefDeleteBatchMessageReq(v:Ref<DeleteBatchMessageReq>):DeleteBatchMessageReq
+	export function emptyEmoji():Emoji
+	export function emptyRefEmoji():Ref<Emoji>
+	export function refOfEmoji(x:Emoji,v:Ref<Emoji>)
+	export function unRefEmoji(v:Ref<Emoji>):Emoji
+	export function emptyGetChatRespData():GetChatRespData
+	export function emptyRefGetChatRespData():Ref<GetChatRespData>
+	export function refOfGetChatRespData(x:GetChatRespData,v:Ref<GetChatRespData>)
+	export function unRefGetChatRespData(v:Ref<GetChatRespData>):GetChatRespData
+	export function emptyP2ChatMemberUserWithdrawnV1Data():P2ChatMemberUserWithdrawnV1Data
+	export function emptyRefP2ChatMemberUserWithdrawnV1Data():Ref<P2ChatMemberUserWithdrawnV1Data>
+	export function refOfP2ChatMemberUserWithdrawnV1Data(x:P2ChatMemberUserWithdrawnV1Data,v:Ref<P2ChatMemberUserWithdrawnV1Data>)
+	export function unRefP2ChatMemberUserWithdrawnV1Data(v:Ref<P2ChatMemberUserWithdrawnV1Data>):P2ChatMemberUserWithdrawnV1Data
+	export function emptyUrgentPhoneMessageReq():UrgentPhoneMessageReq
+	export function emptyRefUrgentPhoneMessageReq():Ref<UrgentPhoneMessageReq>
+	export function refOfUrgentPhoneMessageReq(x:UrgentPhoneMessageReq,v:Ref<UrgentPhoneMessageReq>)
+	export function unRefUrgentPhoneMessageReq(v:Ref<UrgentPhoneMessageReq>):UrgentPhoneMessageReq
+	export function emptyChatI18nNames():ChatI18nNames
+	export function emptyRefChatI18nNames():Ref<ChatI18nNames>
+	export function refOfChatI18nNames(x:ChatI18nNames,v:Ref<ChatI18nNames>)
+	export function unRefChatI18nNames(v:Ref<ChatI18nNames>):ChatI18nNames
+	export function emptyDeleteChatMenuTreeResp():DeleteChatMenuTreeResp
+	export function emptyRefDeleteChatMenuTreeResp():Ref<DeleteChatMenuTreeResp>
+	export function refOfDeleteChatMenuTreeResp(x:DeleteChatMenuTreeResp,v:Ref<DeleteChatMenuTreeResp>)
+	export function unRefDeleteChatMenuTreeResp(v:Ref<DeleteChatMenuTreeResp>):DeleteChatMenuTreeResp
+	export function emptyMessageBody():MessageBody
+	export function emptyRefMessageBody():Ref<MessageBody>
+	export function refOfMessageBody(x:MessageBody,v:Ref<MessageBody>)
+	export function unRefMessageBody(v:Ref<MessageBody>):MessageBody
+	export function emptyOperator():Operator
+	export function emptyRefOperator():Ref<Operator>
+	export function refOfOperator(x:Operator,v:Ref<Operator>)
+	export function unRefOperator(v:Ref<Operator>):Operator
+	export function emptyToolkitRedirectLink():ToolkitRedirectLink
+	export function emptyRefToolkitRedirectLink():Ref<ToolkitRedirectLink>
+	export function refOfToolkitRedirectLink(x:ToolkitRedirectLink,v:Ref<ToolkitRedirectLink>)
+	export function unRefToolkitRedirectLink(v:Ref<ToolkitRedirectLink>):ToolkitRedirectLink
+	export function emptyGetProgressBatchMessageResp():GetProgressBatchMessageResp
+	export function emptyRefGetProgressBatchMessageResp():Ref<GetProgressBatchMessageResp>
+	export function refOfGetProgressBatchMessageResp(x:GetProgressBatchMessageResp,v:Ref<GetProgressBatchMessageResp>)
+	export function unRefGetProgressBatchMessageResp(v:Ref<GetProgressBatchMessageResp>):GetProgressBatchMessageResp
+	export function emptyListPinRespData():ListPinRespData
+	export function emptyRefListPinRespData():Ref<ListPinRespData>
+	export function refOfListPinRespData(x:ListPinRespData,v:Ref<ListPinRespData>)
+	export function unRefListPinRespData(v:Ref<ListPinRespData>):ListPinRespData
+	export function emptyGetChatMenuTreeReq():GetChatMenuTreeReq
+	export function emptyRefGetChatMenuTreeReq():Ref<GetChatMenuTreeReq>
+	export function refOfGetChatMenuTreeReq(x:GetChatMenuTreeReq,v:Ref<GetChatMenuTreeReq>)
+	export function unRefGetChatMenuTreeReq(v:Ref<GetChatMenuTreeReq>):GetChatMenuTreeReq
+	export function emptyBatchSendProgress():BatchSendProgress
+	export function emptyRefBatchSendProgress():Ref<BatchSendProgress>
+	export function refOfBatchSendProgress(x:BatchSendProgress,v:Ref<BatchSendProgress>)
+	export function unRefBatchSendProgress(v:Ref<BatchSendProgress>):BatchSendProgress
+	export function emptyPin():Pin
+	export function emptyRefPin():Ref<Pin>
+	export function refOfPin(x:Pin,v:Ref<Pin>)
+	export function unRefPin(v:Ref<Pin>):Pin
+	export function emptyThread():Thread
+	export function emptyRefThread():Ref<Thread>
+	export function refOfThread(x:Thread,v:Ref<Thread>)
+	export function unRefThread(v:Ref<Thread>):Thread
+	export function emptyCreateChatRespData():CreateChatRespData
+	export function emptyRefCreateChatRespData():Ref<CreateChatRespData>
+	export function refOfCreateChatRespData(x:CreateChatRespData,v:Ref<CreateChatRespData>)
+	export function unRefCreateChatRespData(v:Ref<CreateChatRespData>):CreateChatRespData
+	export function emptyP2MessageReactionCreatedV1():P2MessageReactionCreatedV1
+	export function emptyRefP2MessageReactionCreatedV1():Ref<P2MessageReactionCreatedV1>
+	export function refOfP2MessageReactionCreatedV1(x:P2MessageReactionCreatedV1,v:Ref<P2MessageReactionCreatedV1>)
+	export function unRefP2MessageReactionCreatedV1(v:Ref<P2MessageReactionCreatedV1>):P2MessageReactionCreatedV1
+	export function emptyDeleteChatMembersRespData():DeleteChatMembersRespData
+	export function emptyRefDeleteChatMembersRespData():Ref<DeleteChatMembersRespData>
+	export function refOfDeleteChatMembersRespData(x:DeleteChatMembersRespData,v:Ref<DeleteChatMembersRespData>)
+	export function unRefDeleteChatMembersRespData(v:Ref<DeleteChatMembersRespData>):DeleteChatMembersRespData
+	export function emptyPatchMessageResp():PatchMessageResp
+	export function emptyRefPatchMessageResp():Ref<PatchMessageResp>
+	export function refOfPatchMessageResp(x:PatchMessageResp,v:Ref<PatchMessageResp>)
+	export function unRefPatchMessageResp(v:Ref<PatchMessageResp>):PatchMessageResp
+	export function emptyAddManagersChatManagersResp():AddManagersChatManagersResp
+	export function emptyRefAddManagersChatManagersResp():Ref<AddManagersChatManagersResp>
+	export function refOfAddManagersChatManagersResp(x:AddManagersChatManagersResp,v:Ref<AddManagersChatManagersResp>)
+	export function unRefAddManagersChatManagersResp(v:Ref<AddManagersChatManagersResp>):AddManagersChatManagersResp
+	export function emptyCreateChatMenuTreeRespData():CreateChatMenuTreeRespData
+	export function emptyRefCreateChatMenuTreeRespData():Ref<CreateChatMenuTreeRespData>
+	export function refOfCreateChatMenuTreeRespData(x:CreateChatMenuTreeRespData,v:Ref<CreateChatMenuTreeRespData>)
+	export function unRefCreateChatMenuTreeRespData(v:Ref<CreateChatMenuTreeRespData>):CreateChatMenuTreeRespData
+	export function emptyP2ChatUpdatedV1Data():P2ChatUpdatedV1Data
+	export function emptyRefP2ChatUpdatedV1Data():Ref<P2ChatUpdatedV1Data>
+	export function refOfP2ChatUpdatedV1Data(x:P2ChatUpdatedV1Data,v:Ref<P2ChatUpdatedV1Data>)
+	export function unRefP2ChatUpdatedV1Data(v:Ref<P2ChatUpdatedV1Data>):P2ChatUpdatedV1Data
+	export function emptyChatMember():ChatMember
+	export function emptyRefChatMember():Ref<ChatMember>
+	export function refOfChatMember(x:ChatMember,v:Ref<ChatMember>)
+	export function unRefChatMember(v:Ref<ChatMember>):ChatMember
+	export function emptyCreateFileResp():CreateFileResp
+	export function emptyRefCreateFileResp():Ref<CreateFileResp>
+	export function refOfCreateFileResp(x:CreateFileResp,v:Ref<CreateFileResp>)
+	export function unRefCreateFileResp(v:Ref<CreateFileResp>):CreateFileResp
+	export function emptyIsInChatChatMembersRespData():IsInChatChatMembersRespData
+	export function emptyRefIsInChatChatMembersRespData():Ref<IsInChatChatMembersRespData>
+	export function refOfIsInChatChatMembersRespData(x:IsInChatChatMembersRespData,v:Ref<IsInChatChatMembersRespData>)
+	export function unRefIsInChatChatMembersRespData(v:Ref<IsInChatChatMembersRespData>):IsInChatChatMembersRespData
+	export function emptyP1RemoveBotV1Data():P1RemoveBotV1Data
+	export function emptyRefP1RemoveBotV1Data():Ref<P1RemoveBotV1Data>
+	export function refOfP1RemoveBotV1Data(x:P1RemoveBotV1Data,v:Ref<P1RemoveBotV1Data>)
+	export function unRefP1RemoveBotV1Data(v:Ref<P1RemoveBotV1Data>):P1RemoveBotV1Data
+	export function emptyListMessageReactionResp():ListMessageReactionResp
+	export function emptyRefListMessageReactionResp():Ref<ListMessageReactionResp>
+	export function refOfListMessageReactionResp(x:ListMessageReactionResp,v:Ref<ListMessageReactionResp>)
+	export function unRefListMessageReactionResp(v:Ref<ListMessageReactionResp>):ListMessageReactionResp
+	export function emptyCreateChatMembersReqBody():CreateChatMembersReqBody
+	export function emptyRefCreateChatMembersReqBody():Ref<CreateChatMembersReqBody>
+	export function refOfCreateChatMembersReqBody(x:CreateChatMembersReqBody,v:Ref<CreateChatMembersReqBody>)
+	export function unRefCreateChatMembersReqBody(v:Ref<CreateChatMembersReqBody>):CreateChatMembersReqBody
+	export function emptyEventSender():EventSender
+	export function emptyRefEventSender():Ref<EventSender>
+	export function refOfEventSender(x:EventSender,v:Ref<EventSender>)
+	export function unRefEventSender(v:Ref<EventSender>):EventSender
+	export function emptyPatchChatAnnouncementReqBody():PatchChatAnnouncementReqBody
+	export function emptyRefPatchChatAnnouncementReqBody():Ref<PatchChatAnnouncementReqBody>
+	export function refOfPatchChatAnnouncementReqBody(x:PatchChatAnnouncementReqBody,v:Ref<PatchChatAnnouncementReqBody>)
+	export function unRefPatchChatAnnouncementReqBody(v:Ref<PatchChatAnnouncementReqBody>):PatchChatAnnouncementReqBody
+	export function emptyCrc32Item():Crc32Item
+	export function emptyRefCrc32Item():Ref<Crc32Item>
+	export function refOfCrc32Item(x:Crc32Item,v:Ref<Crc32Item>)
+	export function unRefCrc32Item(v:Ref<Crc32Item>):Crc32Item
+	export function emptyReplyMessageReq():ReplyMessageReq
+	export function emptyRefReplyMessageReq():Ref<ReplyMessageReq>
+	export function refOfReplyMessageReq(x:ReplyMessageReq,v:Ref<ReplyMessageReq>)
+	export function unRefReplyMessageReq(v:Ref<ReplyMessageReq>):ReplyMessageReq
+	export function emptyCreatePinReqBody():CreatePinReqBody
+	export function emptyRefCreatePinReqBody():Ref<CreatePinReqBody>
+	export function refOfCreatePinReqBody(x:CreatePinReqBody,v:Ref<CreatePinReqBody>)
+	export function unRefCreatePinReqBody(v:Ref<CreatePinReqBody>):CreatePinReqBody
+	export function emptyMergeForwardMessageReqBody():MergeForwardMessageReqBody
+	export function emptyRefMergeForwardMessageReqBody():Ref<MergeForwardMessageReqBody>
+	export function refOfMergeForwardMessageReqBody(x:MergeForwardMessageReqBody,v:Ref<MergeForwardMessageReqBody>)
+	export function unRefMergeForwardMessageReqBody(v:Ref<MergeForwardMessageReqBody>):MergeForwardMessageReqBody
+	export function emptyReadUsersMessageReq():ReadUsersMessageReq
+	export function emptyRefReadUsersMessageReq():Ref<ReadUsersMessageReq>
+	export function refOfReadUsersMessageReq(x:ReadUsersMessageReq,v:Ref<ReadUsersMessageReq>)
+	export function unRefReadUsersMessageReq(v:Ref<ReadUsersMessageReq>):ReadUsersMessageReq
+	export function emptyUrgentSmsMessageReq():UrgentSmsMessageReq
+	export function emptyRefUrgentSmsMessageReq():Ref<UrgentSmsMessageReq>
+	export function refOfUrgentSmsMessageReq(x:UrgentSmsMessageReq,v:Ref<UrgentSmsMessageReq>)
+	export function unRefUrgentSmsMessageReq(v:Ref<UrgentSmsMessageReq>):UrgentSmsMessageReq
+	export function emptyEventMessage():EventMessage
+	export function emptyRefEventMessage():Ref<EventMessage>
+	export function refOfEventMessage(x:EventMessage,v:Ref<EventMessage>)
+	export function unRefEventMessage(v:Ref<EventMessage>):EventMessage
+	export function emptyMessageReaction():MessageReaction
+	export function emptyRefMessageReaction():Ref<MessageReaction>
+	export function refOfMessageReaction(x:MessageReaction,v:Ref<MessageReaction>)
+	export function unRefMessageReaction(v:Ref<MessageReaction>):MessageReaction
+	export function emptyMessageSticker():MessageSticker
+	export function emptyRefMessageSticker():Ref<MessageSticker>
+	export function refOfMessageSticker(x:MessageSticker,v:Ref<MessageSticker>)
+	export function unRefMessageSticker(v:Ref<MessageSticker>):MessageSticker
+	export function emptyMergeForwardMessageRespData():MergeForwardMessageRespData
+	export function emptyRefMergeForwardMessageRespData():Ref<MergeForwardMessageRespData>
+	export function refOfMergeForwardMessageRespData(x:MergeForwardMessageRespData,v:Ref<MergeForwardMessageRespData>)
+	export function unRefMergeForwardMessageRespData(v:Ref<MergeForwardMessageRespData>):MergeForwardMessageRespData
+	export function emptyDeletePinReq():DeletePinReq
+	export function emptyRefDeletePinReq():Ref<DeletePinReq>
+	export function refOfDeletePinReq(x:DeletePinReq,v:Ref<DeletePinReq>)
+	export function unRefDeletePinReq(v:Ref<DeletePinReq>):DeletePinReq
+	export function emptyListModerator():ListModerator
+	export function emptyRefListModerator():Ref<ListModerator>
+	export function refOfListModerator(x:ListModerator,v:Ref<ListModerator>)
+	export function unRefListModerator(v:Ref<ListModerator>):ListModerator
+	export function emptyMergeForwardMessageResp():MergeForwardMessageResp
+	export function emptyRefMergeForwardMessageResp():Ref<MergeForwardMessageResp>
+	export function refOfMergeForwardMessageResp(x:MergeForwardMessageResp,v:Ref<MergeForwardMessageResp>)
+	export function unRefMergeForwardMessageResp(v:Ref<MergeForwardMessageResp>):MergeForwardMessageResp
+	export function emptyUrgentSmsMessageResp():UrgentSmsMessageResp
+	export function emptyRefUrgentSmsMessageResp():Ref<UrgentSmsMessageResp>
+	export function refOfUrgentSmsMessageResp(x:UrgentSmsMessageResp,v:Ref<UrgentSmsMessageResp>)
+	export function unRefUrgentSmsMessageResp(v:Ref<UrgentSmsMessageResp>):UrgentSmsMessageResp
+	export function emptyP2ChatDisbandedV1():P2ChatDisbandedV1
+	export function emptyRefP2ChatDisbandedV1():Ref<P2ChatDisbandedV1>
+	export function refOfP2ChatDisbandedV1(x:P2ChatDisbandedV1,v:Ref<P2ChatDisbandedV1>)
+	export function unRefP2ChatDisbandedV1(v:Ref<P2ChatDisbandedV1>):P2ChatDisbandedV1
+	export function emptyP2ChatMemberBotAddedV1Data():P2ChatMemberBotAddedV1Data
+	export function emptyRefP2ChatMemberBotAddedV1Data():Ref<P2ChatMemberBotAddedV1Data>
+	export function refOfP2ChatMemberBotAddedV1Data(x:P2ChatMemberBotAddedV1Data,v:Ref<P2ChatMemberBotAddedV1Data>)
+	export function unRefP2ChatMemberBotAddedV1Data(v:Ref<P2ChatMemberBotAddedV1Data>):P2ChatMemberBotAddedV1Data
+	export function emptyP2ChatMemberUserDeletedV1():P2ChatMemberUserDeletedV1
+	export function emptyRefP2ChatMemberUserDeletedV1():Ref<P2ChatMemberUserDeletedV1>
+	export function refOfP2ChatMemberUserDeletedV1(x:P2ChatMemberUserDeletedV1,v:Ref<P2ChatMemberUserDeletedV1>)
+	export function unRefP2ChatMemberUserDeletedV1(v:Ref<P2ChatMemberUserDeletedV1>):P2ChatMemberUserDeletedV1
+	export function emptyUrgentReceivers():UrgentReceivers
+	export function emptyRefUrgentReceivers():Ref<UrgentReceivers>
+	export function refOfUrgentReceivers(x:UrgentReceivers,v:Ref<UrgentReceivers>)
+	export function unRefUrgentReceivers(v:Ref<UrgentReceivers>):UrgentReceivers
+	export function emptyLinkChatRespData():LinkChatRespData
+	export function emptyRefLinkChatRespData():Ref<LinkChatRespData>
+	export function refOfLinkChatRespData(x:LinkChatRespData,v:Ref<LinkChatRespData>)
+	export function unRefLinkChatRespData(v:Ref<LinkChatRespData>):LinkChatRespData
+	export function emptyP2MessageReadV1():P2MessageReadV1
+	export function emptyRefP2MessageReadV1():Ref<P2MessageReadV1>
+	export function refOfP2MessageReadV1(x:P2MessageReadV1,v:Ref<P2MessageReadV1>)
+	export function unRefP2MessageReadV1(v:Ref<P2MessageReadV1>):P2MessageReadV1
+	export function emptyCreateChatTabReqBody():CreateChatTabReqBody
+	export function emptyRefCreateChatTabReqBody():Ref<CreateChatTabReqBody>
+	export function refOfCreateChatTabReqBody(x:CreateChatTabReqBody,v:Ref<CreateChatTabReqBody>)
+	export function unRefCreateChatTabReqBody(v:Ref<CreateChatTabReqBody>):CreateChatTabReqBody
+	export function emptyFollowUp():FollowUp
+	export function emptyRefFollowUp():Ref<FollowUp>
+	export function refOfFollowUp(x:FollowUp,v:Ref<FollowUp>)
+	export function unRefFollowUp(v:Ref<FollowUp>):FollowUp
+	export function emptyP1UserInOutChatV1():P1UserInOutChatV1
+	export function emptyRefP1UserInOutChatV1():Ref<P1UserInOutChatV1>
+	export function refOfP1UserInOutChatV1(x:P1UserInOutChatV1,v:Ref<P1UserInOutChatV1>)
+	export function unRefP1UserInOutChatV1(v:Ref<P1UserInOutChatV1>):P1UserInOutChatV1
+	export function emptySortChatMenuTreeResp():SortChatMenuTreeResp
+	export function emptyRefSortChatMenuTreeResp():Ref<SortChatMenuTreeResp>
+	export function refOfSortChatMenuTreeResp(x:SortChatMenuTreeResp,v:Ref<SortChatMenuTreeResp>)
+	export function unRefSortChatMenuTreeResp(v:Ref<SortChatMenuTreeResp>):SortChatMenuTreeResp
+	export function emptySortTabsChatTabReq():SortTabsChatTabReq
+	export function emptyRefSortTabsChatTabReq():Ref<SortTabsChatTabReq>
+	export function refOfSortTabsChatTabReq(x:SortTabsChatTabReq,v:Ref<SortTabsChatTabReq>)
+	export function unRefSortTabsChatTabReq(v:Ref<SortTabsChatTabReq>):SortTabsChatTabReq
+	export function emptyDeleteManagersChatManagersReqBody():DeleteManagersChatManagersReqBody
+	export function emptyRefDeleteManagersChatManagersReqBody():Ref<DeleteManagersChatManagersReqBody>
+	export function refOfDeleteManagersChatManagersReqBody(x:DeleteManagersChatManagersReqBody,v:Ref<DeleteManagersChatManagersReqBody>)
+	export function unRefDeleteManagersChatManagersReqBody(v:Ref<DeleteManagersChatManagersReqBody>):DeleteManagersChatManagersReqBody
+	export function emptyGetMessageReq():GetMessageReq
+	export function emptyRefGetMessageReq():Ref<GetMessageReq>
+	export function refOfGetMessageReq(x:GetMessageReq,v:Ref<GetMessageReq>)
+	export function unRefGetMessageReq(v:Ref<GetMessageReq>):GetMessageReq
+	export function emptyListMessageReactionReq():ListMessageReactionReq
+	export function emptyRefListMessageReactionReq():Ref<ListMessageReactionReq>
+	export function refOfListMessageReactionReq(x:ListMessageReactionReq,v:Ref<ListMessageReactionReq>)
+	export function unRefListMessageReactionReq(v:Ref<ListMessageReactionReq>):ListMessageReactionReq
+	export function emptyReadUsersMessageRespData():ReadUsersMessageRespData
+	export function emptyRefReadUsersMessageRespData():Ref<ReadUsersMessageRespData>
+	export function refOfReadUsersMessageRespData(x:ReadUsersMessageRespData,v:Ref<ReadUsersMessageRespData>)
+	export function unRefReadUsersMessageRespData(v:Ref<ReadUsersMessageRespData>):ReadUsersMessageRespData
+	export function emptyCreateChatMembersReq():CreateChatMembersReq
+	export function emptyRefCreateChatMembersReq():Ref<CreateChatMembersReq>
+	export function refOfCreateChatMembersReq(x:CreateChatMembersReq,v:Ref<CreateChatMembersReq>)
+	export function unRefCreateChatMembersReq(v:Ref<CreateChatMembersReq>):CreateChatMembersReq
+	export function emptyCreateMessageResp():CreateMessageResp
+	export function emptyRefCreateMessageResp():Ref<CreateMessageResp>
+	export function refOfCreateMessageResp(x:CreateMessageResp,v:Ref<CreateMessageResp>)
+	export function unRefCreateMessageResp(v:Ref<CreateMessageResp>):CreateMessageResp
+	export function emptySortChatMenuTreeReqBody():SortChatMenuTreeReqBody
+	export function emptyRefSortChatMenuTreeReqBody():Ref<SortChatMenuTreeReqBody>
+	export function refOfSortChatMenuTreeReqBody(x:SortChatMenuTreeReqBody,v:Ref<SortChatMenuTreeReqBody>)
+	export function unRefSortChatMenuTreeReqBody(v:Ref<SortChatMenuTreeReqBody>):SortChatMenuTreeReqBody
 }

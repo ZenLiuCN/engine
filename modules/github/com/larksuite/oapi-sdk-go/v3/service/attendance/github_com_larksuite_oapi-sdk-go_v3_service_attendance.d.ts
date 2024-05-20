@@ -3,9 +3,9 @@
 declare module 'github.com/larksuite/oapi-sdk-go/v3/service/attendance'{
 
 	// @ts-ignore
-	import * as larkattendance from 'github.com/larksuite/oapi-sdk-go/v3/service/attendance/v1'
-	// @ts-ignore
 	import * as larkcore from 'github.com/larksuite/oapi-sdk-go/v3/core'
+	// @ts-ignore
+	import * as larkattendance from 'github.com/larksuite/oapi-sdk-go/v3/service/attendance/v1'
 	// @ts-ignore
 	import type {Ref,Struct} from 'go'
 	export function newService(config:Ref<larkcore.Config>):Ref<Service>
@@ -14,8 +14,4 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/attendance'{
 
 			V1:Ref<larkattendance.V1>
 	}
-	export function emptyService():Service
-	export function emptyRefService():Ref<Service>
-	export function refOfService(x:Service,v:Ref<Service>)
-	export function unRefService(v:Ref<Service>):Service
 }
