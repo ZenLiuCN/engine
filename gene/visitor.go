@@ -1366,8 +1366,8 @@ package %[1]s
 import (
 	_ "embed"
 	"github.com/ZenLiuCN/engine"
-	%[3]s
-	"%[2]s"`, pkg, pkgPath, maps)
+	%[2]s
+	`, pkg, maps)
 		for s := range c.imports {
 			name := s.Name
 			if s.Pkg != nil {
@@ -1378,6 +1378,9 @@ import (
 			} else if name != "go" {
 				x.LF().Format("_ \"github.com/ZenLiuCN/engine/modules/golang/%s\"", name)
 			}
+		}
+		if len(c.entry) > 0 || len(c.overrideEntry) > 0 {
+			x.Format("\"%[2]s\"", pkgPath)
 		}
 		x.Format(`
 )
