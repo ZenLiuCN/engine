@@ -5,13 +5,13 @@ import (
 	_ "embed"
 	"github.com/ZenLiuCN/engine"
 
-	_ "github.com/ZenLiuCN/engine/golang/archive/zip"
-	_ "github.com/ZenLiuCN/engine/golang/bytes"
-	_ "github.com/ZenLiuCN/engine/golang/encoding/xml"
-	_ "github.com/ZenLiuCN/engine/golang/image/color"
-	_ "github.com/ZenLiuCN/engine/golang/io"
-	_ "github.com/ZenLiuCN/engine/golang/sync"
-	_ "github.com/ZenLiuCN/engine/golang/time"
+	_ "github.com/ZenLiuCN/engine/modules/golang/archive/zip"
+	_ "github.com/ZenLiuCN/engine/modules/golang/bytes"
+	_ "github.com/ZenLiuCN/engine/modules/golang/encoding/xml"
+	_ "github.com/ZenLiuCN/engine/modules/golang/image/color"
+	_ "github.com/ZenLiuCN/engine/modules/golang/io"
+	_ "github.com/ZenLiuCN/engine/modules/golang/sync"
+	_ "github.com/ZenLiuCN/engine/modules/golang/time"
 	"github.com/xuri/excelize/v2"
 )
 

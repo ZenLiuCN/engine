@@ -1522,6 +1522,8 @@ func safe(s string, then func(string) string) string {
 		return strings.ToUpper(s[0:1]) + s[1:]
 	case "class", "Class":
 		return "clazz"
+	case "NaN":
+		return "nan"
 	default:
 		return then(s)
 	}

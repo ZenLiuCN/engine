@@ -4,8 +4,6 @@ package encoding
 import (
 	_ "embed"
 	"github.com/ZenLiuCN/engine"
-
-	"encoding"
 )
 
 var (

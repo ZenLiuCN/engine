@@ -18,7 +18,7 @@ func main() {
 		Name:        "Engine",
 		Description: "ESM engine with golang extensions",
 		Usage:       "engine [flags] <script> [args ...]",
-		Version:     "0.1.0",
+		Version:     "0.5.0",
 		Flags: []Flag{
 			&BoolFlag{Name: "define", Aliases: []string{"d"}, Usage: "Dump extension definitions (.d.ts)\n Eg: engine -d <PATH TO STORE FILES>"},
 			&BoolFlag{Name: "typescript", Aliases: []string{"t"}, Usage: "typescript mode, script file will auto detect by extension."},

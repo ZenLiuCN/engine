@@ -5,8 +5,8 @@ import (
 	_ "embed"
 	"github.com/ZenLiuCN/engine"
 
-	_ "github.com/ZenLiuCN/engine/golang/fmt"
-	_ "github.com/ZenLiuCN/engine/golang/io"
+	_ "github.com/ZenLiuCN/engine/modules/golang/fmt"
+	_ "github.com/ZenLiuCN/engine/modules/golang/io"
 	"github.com/dslipak/pdf"
 )
 

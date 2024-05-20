@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	//_ "github.com/go-sql-driver/mysql"
-	_ "github.com/ZenLiuCN/engine/sqlx/mysql_2023-12-22"
+	_ "github.com/ZenLiuCN/engine/modules/go/sqlx/mysql_2023-12-22"
 	_ "github.com/jackc/pgx/v5/stdlib"
 	_ "modernc.org/sqlite"
 )

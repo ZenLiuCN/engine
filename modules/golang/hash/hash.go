@@ -6,7 +6,6 @@ import (
 	"github.com/ZenLiuCN/engine"
 
 	_ "github.com/ZenLiuCN/engine/modules/golang/io"
-	"hash"
 )
 
 var (

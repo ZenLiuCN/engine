@@ -16,8 +16,8 @@ var (
 		"Size":      crc64.Size,
 		"update":    crc64.Update,
 		"checksum":  crc64.Checksum,
-		"ECMA":      crc64.ECMA,
-		"ISO":       crc64.ISO,
+		"ECMA":      uint64(crc64.ECMA),
+		"ISO":       uint64(crc64.ISO),
 		"makeTable": crc64.MakeTable,
 		"New":       crc64.New,
 	}

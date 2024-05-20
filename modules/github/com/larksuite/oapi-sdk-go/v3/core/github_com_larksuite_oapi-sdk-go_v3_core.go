@@ -5,12 +5,12 @@ import (
 	_ "embed"
 	"github.com/ZenLiuCN/engine"
 
-	_ "github.com/ZenLiuCN/engine/golang/context"
-	_ "github.com/ZenLiuCN/engine/golang/encoding/json"
-	_ "github.com/ZenLiuCN/engine/golang/fmt"
-	_ "github.com/ZenLiuCN/engine/golang/io"
-	_ "github.com/ZenLiuCN/engine/golang/net/http"
-	_ "github.com/ZenLiuCN/engine/golang/time"
+	_ "github.com/ZenLiuCN/engine/modules/golang/context"
+	_ "github.com/ZenLiuCN/engine/modules/golang/encoding/json"
+	_ "github.com/ZenLiuCN/engine/modules/golang/fmt"
+	_ "github.com/ZenLiuCN/engine/modules/golang/io"
+	_ "github.com/ZenLiuCN/engine/modules/golang/net/http"
+	_ "github.com/ZenLiuCN/engine/modules/golang/time"
 	"github.com/larksuite/oapi-sdk-go/v3/core"
 )
 

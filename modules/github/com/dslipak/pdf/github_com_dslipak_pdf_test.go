@@ -2,7 +2,7 @@ package pdf
 
 import (
 	"github.com/ZenLiuCN/engine"
-	_ "github.com/ZenLiuCN/engine/golang/strings"
+	_ "github.com/ZenLiuCN/engine/modules/golang/strings"
 	"github.com/ZenLiuCN/fn"
 	"testing"
 )

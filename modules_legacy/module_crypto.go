@@ -16,7 +16,7 @@ import (
 	_ "embed"
 	"errors"
 	"fmt"
-	"github.com/ZenLiuCN/engine/eciesgo"
+	"github.com/ZenLiuCN/engine/units/eciesgo"
 	"github.com/ZenLiuCN/fn"
 	"hash"
 )

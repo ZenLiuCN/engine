@@ -2,8 +2,8 @@ package lark
 
 import (
 	"github.com/ZenLiuCN/engine"
-	_ "github.com/ZenLiuCN/engine/golang/context"
 	_ "github.com/ZenLiuCN/engine/modules/github/com/larksuite/oapi-sdk-go/v3/service/bitable/v1"
+	_ "github.com/ZenLiuCN/engine/modules/golang/context"
 	"github.com/ZenLiuCN/fn"
 
 	"testing"

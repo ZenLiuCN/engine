@@ -144,7 +144,7 @@ declare module 'golang/math'{
 
 	export function modf(f:float64):[float64,float64]
 
-	export function naN():float64
+	export function nan():float64
 
 	export function nextafter(x:float64,y:float64):float64
 

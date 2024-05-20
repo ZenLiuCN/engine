@@ -2,7 +2,7 @@ package duckdb
 
 import (
 	"github.com/ZenLiuCN/engine"
-	_ "github.com/ZenLiuCN/engine/sqlx"
+	_ "github.com/ZenLiuCN/engine/modules/go/sqlx"
 
 	"github.com/ZenLiuCN/fn"
 	"testing"
