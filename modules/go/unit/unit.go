@@ -6,6 +6,7 @@ import (
 	"github.com/ZenLiuCN/engine"
 	"github.com/ZenLiuCN/fn"
 	"io"
+	"maps"
 	"os"
 )
 
@@ -122,6 +123,16 @@ func (o Unit) TypeDefine() []byte {
 }
 func (o Unit) Exports() map[string]any {
 	return UnitMap
+}
+func (o Unit) ExportsWithEngine(e *engine.Engine) (m map[string]any) {
+	m = maps.Clone(UnitMap)
+	m["evalFile"] = func(p string) any {
+		return engine.EvalFile(e, p)
+	}
+	m["evalFiles"] = func(paths ...string) (r []any) {
+		return engine.EvalFiles(e, paths...)
+	}
+	return
 }
 
 type SubProc struct {

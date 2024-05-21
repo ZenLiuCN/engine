@@ -323,4 +323,18 @@ declare module "go/unit" {
     export function exec(option: ExecOption)
 
     export function proc(option: ProcOption): SubProc
+
+    /**
+     * eval script file
+     * @see os.expand
+     * @param path of typescript file or javascript file
+     */
+    export function evalFile(path: string): any
+
+    /**
+     * eval script files
+     * @see os.expand
+     * @param paths of typescript files or javascript files
+     */
+    export function evalFiles(...paths: string[]): any[]
 }
