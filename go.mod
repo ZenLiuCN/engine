@@ -5,7 +5,7 @@ go 1.21
 require (
 	filippo.io/edwards25519 v1.1.0
 	github.com/Joker/jade v1.1.3
-	github.com/ZenLiuCN/fn v0.1.27
+	github.com/ZenLiuCN/fn v0.1.30
 	github.com/ZenLiuCN/go-duckdb v0.0.0-20231225150847-e53c10997fd2
 	github.com/ZenLiuCN/go-inspect v0.0.0-20240510095945-b82b73e35b45
 	github.com/chromedp/cdproto v0.0.0-20240421230201-ab917191657d
