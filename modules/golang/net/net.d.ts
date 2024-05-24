@@ -17,7 +17,7 @@ declare module 'golang/net'{
 	// @ts-ignore
 	import * as context from 'golang/context'
 	// @ts-ignore
-	import type {Struct,error,int,Nothing,uint,byte,uint16,bool,GoError,int64,Ref} from 'go'
+	import type {Struct,error,int,Nothing,Alias,uint,byte,uint16,bool,GoError,int64,Ref} from 'go'
 	export interface Addr{
 
 			network():string
@@ -211,7 +211,7 @@ declare module 'golang/net'{
 
 	export function interfaces():Interface[]
 
-	export interface InvalidAddrError extends string,GoError{
+	export interface InvalidAddrError extends Alias<string>,GoError{
 
 	error():string
 	timeout():bool
@@ -437,7 +437,7 @@ declare module 'golang/net'{
 			file():Ref<os.File>
 			setUnlinkOnClose(unlink:bool):void
 	}
-	export interface UnknownNetworkError extends string,GoError{
+	export interface UnknownNetworkError extends Alias<string>,GoError{
 
 	error():string
 	timeout():bool

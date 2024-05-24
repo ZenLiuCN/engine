@@ -48,7 +48,7 @@ declare module 'golang/os/exec'{
 	export const ErrDot:GoError
 	export const ErrNotFound:GoError
 	export const ErrWaitDelay:GoError
-	export interface Error extends GoError,Struct<Error>,Error{
+	export interface OsError extends GoError,Struct<Error>{
 
 			name:string
 			err:GoError
