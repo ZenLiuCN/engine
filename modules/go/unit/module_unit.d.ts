@@ -135,6 +135,7 @@ declare module "go/unit" {
 
     export function userHomeDir(): string
     export function chown(path: string, uid, gid: number)
+    export function chmod(path: string, flag: number)
     export function getUID(): number
 
     export function getGID(): number
@@ -151,19 +152,16 @@ declare module "go/unit" {
 
     export function tempDir(): string
     export function ls(path?: string): Array<{
-        dir: boolean, name: string, mode: string,
-        size: number, modified: string }>
+        name: string,
+        mode: string,
+        size: number,
+        modified: string }>
 
     export function stat(path: string): undefined | {
-        name(): string
-
-        size(): number
-
-        mode(): number
-
-        modTime(): any /*golang/time.Time*/
-
-        isDir(): boolean
+        name: string
+        mode: string
+        size: number
+        modified: string /*golang/time.Time*/
     }
 
     export interface ExecOption extends ProcOption {

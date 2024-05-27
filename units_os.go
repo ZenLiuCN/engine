@@ -121,10 +121,16 @@ func EnvExpand(path string) string {
 	}
 	return fixPath(os.ExpandEnv(p))
 }
-func Stat(path string) os.FileInfo {
-	info, err := os.Stat(path)
+func Stat(path string) map[string]any {
+	entry, err := os.Stat(path)
 	if errors.Is(err, os.ErrNotExist) {
 		return nil
 	}
-	return info
+	return map[string]any{
+		//"dir":      entry.IsDir(),
+		"name":     entry.Name(),
+		"mode":     entry.Mode().String(),
+		"size":     entry.Size(),
+		"modified": entry.ModTime().Format("2006-01-02 15:04:05.000Z07"),
+	}
 }

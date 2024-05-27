@@ -8,6 +8,7 @@ import (
 	"io"
 	"maps"
 	"os"
+	"strconv"
 )
 
 var (
@@ -63,8 +64,8 @@ var (
 		"chown": func(path string, uid, gid int) error {
 			return os.Chown(engine.EnvExpand(path), uid, gid)
 		},
-		"chmod": func(path string, mod os.FileMode) error {
-			return os.Chmod(engine.EnvExpand(path), mod)
+		"chmod": func(path string, mod string) error {
+			return os.Chmod(engine.EnvExpand(path), os.FileMode(fn.Panic1(strconv.ParseInt(mod, 8, 32))))
 		},
 		"ls": func(path string) (r []map[string]any, err error) {
 			defer func() {
@@ -86,11 +87,11 @@ var (
 			for _, entry := range dir {
 				info := fn.Panic1(entry.Info())
 				r = append(r, map[string]any{
-					"dir":      entry.IsDir(),
+					//"dir":      entry.IsDir(),
 					"name":     entry.Name(),
-					"mode":     entry.Type().String(),
+					"mode":     info.Mode().String(),
 					"size":     info.Size(),
-					"modified": info.ModTime().Format("2006-01-02 15:04:05.000"),
+					"modified": info.ModTime().Format("2006-01-02 15:04:05.000Z07"),
 				})
 			}
 			return
