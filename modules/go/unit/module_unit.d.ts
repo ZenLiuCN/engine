@@ -107,8 +107,6 @@ declare module "go/unit" {
      */
     export function evalFiles(...paths: string[]): any[]
 
-
-
     export function mkdir(path: string)
 
     export function mkdirAll(path: string)
@@ -126,9 +124,11 @@ declare module "go/unit" {
     export function chdir(path: string)
 
     export function pwd(): string
-    export function mkdirAll(path: string, perm: number)//511=0777
+    export function mkdirAll(path: string, perm: number)
 
     export function rename(path, newPath: string)
+
+    export function cp(fromFile, toFile: string)
     export function userCacheDir(): string
 
     export function userConfigDir(): string

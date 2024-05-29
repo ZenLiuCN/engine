@@ -49,8 +49,23 @@ var (
 		"userHomeDir":       os.UserHomeDir,
 		"hostname":          os.Hostname,
 		"tempDir":           os.TempDir,
-		"mkdirALL": func(path string, perm os.FileMode) error {
-			return os.MkdirAll(engine.EnvExpand(path), perm)
+		"cp": func(from, to string) (err error) {
+			var f, f1 *os.File
+			f, err = os.OpenFile(engine.EnvExpand(from), os.O_RDONLY, os.ModePerm)
+			if err != nil {
+				return
+			}
+			defer f.Close()
+			f1, err = os.OpenFile(engine.EnvExpand(to), os.O_WRONLY|os.O_TRUNC|os.O_CREATE, os.ModePerm)
+			if err != nil {
+				return
+			}
+			defer f1.Close()
+			_, err = io.Copy(f1, f)
+			return
+		},
+		"mkdirALL": func(path string, perm string) error {
+			return os.MkdirAll(engine.EnvExpand(path), os.FileMode(fn.Panic1(strconv.ParseInt(perm, 8, 32))))
 		},
 		"rename": func(path, new string) error {
 			return os.Rename(engine.EnvExpand(path), engine.EnvExpand(new))
@@ -96,7 +111,6 @@ var (
 			}
 			return
 		},
-
 		"stat": engine.Stat,
 		"exec": engine.Execute,
 		"proc": func(option *engine.ProcOption) (r *SubProc, err error) {
