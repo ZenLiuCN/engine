@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/ZenLiuCN/engine"
+	_ "github.com/ZenLiuCN/engine/modules/go/unit"
 	"github.com/ZenLiuCN/fn"
 	"github.com/dop251/goja"
 	. "github.com/urfave/cli/v2"

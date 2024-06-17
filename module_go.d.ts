@@ -22,6 +22,7 @@ declare module "go" {
     export type float = number
     export type error = GoError | undefined
     export type reserved = void
+    //@ts-ignore
     export type map<K, V> = Record<K, V>
 
     export interface GoError extends Error {
@@ -51,6 +52,7 @@ declare module "go" {
     //A go empty anonymous struct
     export type Nothing = Struct<{}>
 
+    // @ts-ignore
     export interface TypeKind extends Alias<int> {
 
     }
@@ -112,9 +114,10 @@ declare module "go" {
 
     export function chanOf<T>(c: TypeId<T>): TypeId<Chan<T>>
 
+    // @ts-ignore
     export function mapOf<K, V>(c: TypeId<K>, v: TypeId<V>): TypeId<Map<K, V>>
 
-    export const typeUnit:  {
+    export const typeUnit: {
         usageOf<T>(c: TypeId<T>): TypeUsage<T> | undefined
     }
 
@@ -163,6 +166,8 @@ declare module "go" {
     export function runesFromString(t: string): rune[]
 
     export function stringFromRunes(t: rune[]): string
+
+    export function stringFromBytes(t: Uint8Array): string
 
     export function toInt8(t: number): int8
 
