@@ -49,6 +49,7 @@ declare module 'golang/io/fs'{
 	perm():FileMode
 	type():FileMode
 	}
+	export function toFileMode(n:uint32):FileMode
 	export function formatDirEntry(dir:DirEntry):string
 
 	export function formatFileInfo(info:FileInfo):string

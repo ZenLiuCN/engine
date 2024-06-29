@@ -346,7 +346,8 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 			case I.Equals(KTType, KNamed, KArray) || I.Equals(KTType, KArray):
 				c.mergeWriter(I.TypePath, x, func(w Writer) {
 					if c.path.Last() == KBasic {
-						c.extends("%s", w.String())
+						c.use("Alias")
+						c.extends("Alias<%s>", w.String())
 					} else {
 						c.extends("Array<%s/*%d*/>", w.String(), x.Len())
 					}
@@ -591,7 +592,8 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 			case I.Equals(KTType, KNamed, KSlice) || I.Equals(KTType, KSlice):
 				c.mergeWriter(I.TypePath, x, func(w Writer) {
 					if c.path.Last() == KBasic {
-						c.extends("%s", w.String())
+						c.use("Alias")
+						c.extends("Alias<%s>", w.String())
 					} else {
 						c.extends("Array<%s>", w.String())
 					}
@@ -718,7 +720,8 @@ var ctxVisitor = FnTypeVisitor[*TypeInspector[*context], *context]{
 			switch {
 			//!! alias
 			case I.Len() == 2 && I.First() == KTType && c.path.Last() == KBasic:
-				c.extends("%s", c.d.String())
+				c.use("Alias")
+				c.extends("Alias<%s>", c.d.String())
 				c.d.Reset()
 			}
 		case EXT:
@@ -1193,10 +1196,11 @@ var (
 	byteVoidFuncResult = []byte("=>void/*error*/")
 	byteErrorComment   = []byte("/*error*/")
 	byteArrow          = []byte("=>")
-	byteResult         = []byte("):")
-	byteError          = []byte("error")
-	byteErrorFunc      = []byte("error():error")
-	byteCloseFunc      = []byte("close():error")
+
+	byteResult    = []byte("):")
+	byteError     = []byte("error")
+	byteErrorFunc = []byte("error():error")
+	byteCloseFunc = []byte("close():error")
 )
 
 func (c *context) checkErrorResult() {
@@ -1226,8 +1230,9 @@ func (c *context) checkErrorResult() {
 			}
 		} else if bytes.HasSuffix(b, byteError) && !bytes.HasSuffix(b, byteErrorFunc) && !bytes.HasSuffix(b, byteCloseFunc) {
 			x := bytes.LastIndex(b, byteArrow)
-			if x == -1 {
-				x = bytes.LastIndex(b, byteResult)
+			y := bytes.LastIndex(b, byteResult)
+			if x == -1 || x < y || y > 0 { //fix: for parameter contains lambda
+				x = y //bytes.LastIndex(b, byteResult)
 				if x != -1 {
 					b = append(b[0:x+1], byteErrorComment...)
 				}
@@ -1380,7 +1385,7 @@ import (
 			}
 		}
 		if len(c.entry) > 0 || len(c.overrideEntry) > 0 {
-			x.Format("\"%[2]s\"", pkgPath)
+			x.Format("\n\"%[1]s\"", pkgPath)
 		}
 		x.Format(`
 )
@@ -1436,7 +1441,7 @@ func (e %sModule) ExportsWithEngine(e *Engine) map[string]any{
 		}
 		b, err = format.Source(x.Buffer().Bytes())
 		if err != nil {
-			log.Printf("generated go source have some error: %s", err)
+			log.Printf("generated go source have some error: %w", err)
 			b = x.Buffer().Bytes()
 		}
 		if g.print {

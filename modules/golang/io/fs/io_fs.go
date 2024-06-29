@@ -46,6 +46,9 @@ var (
 		"ModeNamedPipe":      fs.ModeNamedPipe,
 		"ModeSocket":         fs.ModeSocket,
 		"ModeType":           fs.ModeType,
+		"toFileMode": func(n uint32) fs.FileMode {
+			return fs.FileMode(n)
+		},
 	}
 )
 
