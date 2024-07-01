@@ -61,6 +61,7 @@ func (r *Require) Require(specifier string) (*goja.Object, error) {
 	defer func() {
 		r.pwd = current
 	}()
+	//resolve file or url
 	fileURL, err := Loader.Resolve(r.pwd, specifier)
 	if err != nil {
 		return nil, err
@@ -75,13 +76,14 @@ func (r *Require) Require(specifier string) (*goja.Object, error) {
 	}
 	if instance, ok := r.cache[m]; ok {
 		return instance.Exports(), nil
+	} else {
+		instance = m.Instance(r.Engine)
+		r.cache[m] = instance
+		if err = instance.Execute(); err != nil {
+			return nil, err
+		}
+		return instance.Exports(), nil
 	}
-	instance := m.Instance(r.Engine)
-	r.cache[m] = instance
-	if err = instance.Execute(); err != nil {
-		return nil, err
-	}
-	return instance.Exports(), nil
 }
 
 func PathToUrl(path string) *url.URL {

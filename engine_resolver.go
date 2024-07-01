@@ -150,6 +150,12 @@ func (s *BaseResolver) LoadFile(u *url.URL) (*Source, error) {
 		return nil, err
 	}
 	var extensions []string
+	var stat os.FileInfo
+	if stat, err = os.Stat(pathOnFs); err == nil {
+		if stat.IsDir() {
+			pathOnFs = path.Clean(filepath.Join(pathOnFs, "index"))
+		}
+	}
 	if path.Ext(pathOnFs) == "" {
 		extensions = []string{".js", ".ts", ".cjs", ".mjs"}
 	}
@@ -160,7 +166,7 @@ load:
 		ex := path.Ext(pathOnFs)
 		if n >= len(extensions) {
 			pathOnFs = strings.TrimSuffix(pathOnFs, ex)
-		} else {
+		} else { //try next extension
 			n++
 			pathOnFs = strings.TrimSuffix(pathOnFs, ex) + extensions[n-1]
 			goto load
@@ -213,12 +219,11 @@ func (s *BaseResolver) Load(specifier *url.URL, originalModuleSpecifier string) 
 }
 func (s *BaseResolver) Resolve(pwd *url.URL, specifier string) (*url.URL, error) {
 	if specifier == "" {
-		return nil, errors.New("local or remote path required")
+		return nil, errors.New("local or remote uri required")
 	}
-	if specifier[0] == '.' || specifier[0] == '/' || filepath.IsAbs(specifier) {
+	if !strings.Contains(specifier, "://") { // specifier[0] == '.' || specifier[0] == '/' || filepath.IsAbs(specifier) {
 		return s.ResolveFilePath(pwd, specifier)
-	}
-	if strings.Contains(specifier, "://") {
+	} else {
 		u, err := url.Parse(specifier)
 		if err != nil {
 			return nil, err
@@ -233,7 +238,7 @@ func (s *BaseResolver) Resolve(pwd *url.URL, specifier string) (*url.URL, error)
 		}
 		return u, err
 	}
-	return &url.URL{Opaque: specifier}, nil
+	//return &url.URL{Opaque: specifier}, nil
 }
 
 type (
