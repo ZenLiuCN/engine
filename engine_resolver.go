@@ -13,6 +13,7 @@ import (
 	"path"
 	"path/filepath"
 	"runtime"
+	"slices"
 	"strings"
 	"time"
 )
@@ -128,6 +129,10 @@ func (s *BaseResolver) ResolveFilePath(pwd *url.URL, moduleSpecifier string) (*u
 	return finalPwd.Parse(moduleSpecifier)
 }
 
+var (
+	exts = []string{".js", ".ts", ".cjs", ".mjs"}
+)
+
 func (s *BaseResolver) LoadFile(u *url.URL) (*Source, error) {
 	if c, ok := s.cache[u]; ok {
 		return c.Src, c.Err
@@ -156,10 +161,16 @@ func (s *BaseResolver) LoadFile(u *url.URL) (*Source, error) {
 			pathOnFs = path.Clean(filepath.Join(pathOnFs, "index"))
 		}
 	}
-	if path.Ext(pathOnFs) == "" {
-		extensions = []string{".js", ".ts", ".cjs", ".mjs"}
+	var n = 0
+	{
+		var ext = path.Ext(pathOnFs)
+		if ext == "" || !slices.Contains(exts, ext) {
+			extensions = exts
+			n = 1
+			pathOnFs = pathOnFs + extensions[n-1]
+		}
 	}
-	n := 0
+
 load:
 	data, err := os.ReadFile(pathOnFs)
 	if extensions != nil && errors.Is(err, os.ErrNotExist) {
@@ -281,7 +292,7 @@ func (c *cjsModule) Execute() error {
 		c.Engine.require.pwd = pwd
 	}()
 	if c.mod.prg.Path != "" {
-		c.Engine.SetScriptPath(path.Dir(c.mod.prg.Path))
+		c.Engine.SetScriptPath(filepath.Dir(c.mod.prg.Path))
 	}
 
 	err = c.Engine.Runtime.Set("module", c.obj)
