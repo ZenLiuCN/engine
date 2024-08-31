@@ -21,6 +21,7 @@ require (
 	github.com/jmoiron/sqlx v1.4.0
 	github.com/larksuite/base-sdk-go/v3 v3.0.2
 	github.com/larksuite/oapi-sdk-go/v3 v3.2.5
+	github.com/mattn/go-colorable v0.1.13
 	github.com/tdewolff/minify/v2 v2.20.20
 	github.com/urfave/cli/v2 v2.27.1
 	github.com/xuri/excelize/v2 v2.8.1
