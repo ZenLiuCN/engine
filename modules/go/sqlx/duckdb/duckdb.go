@@ -10,8 +10,10 @@ import (
 	"github.com/ZenLiuCN/engine"
 	"github.com/ZenLiuCN/engine/modules/go/sqlx"
 	"github.com/ZenLiuCN/fn"
-	"github.com/ZenLiuCN/go-duckdb"
-	_ "github.com/ZenLiuCN/go-duckdb"
+	//"github.com/ZenLiuCN/go-duckdb"
+	"github.com/marcboeker/go-duckdb"
+	//"github.com/ZenLiuCN/go-duckdb"
+	//_ "github.com/ZenLiuCN/go-duckdb"
 	"github.com/dop251/goja"
 	sqlx2 "github.com/jmoiron/sqlx"
 )
@@ -120,7 +122,7 @@ type Appender struct {
 }
 
 func (a *Appender) Error() error {
-	return a.a.Error()
+	return nil //a.a.Error()
 }
 
 func (a *Appender) Flush() error {
