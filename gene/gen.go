@@ -11,6 +11,7 @@ import (
 type InspectorX = *TypeInspector[*context]
 type Generator struct {
 	dir      string
+	root     string
 	tags     []string
 	files    []string
 	out      string
@@ -38,6 +39,10 @@ func (g *Generator) generate() (err error) {
 	c := new(context)
 	c.ignores = g.ignores
 	c.errors = g.errors
+	c.root = g.root
+	if c.root == "" {
+		c.root = "github.com/ZenLiuCN/engine/modules/"
+	}
 	c.init()
 	ip := NewTypeInspector[*context](false)
 	ip.Inspector.PopEach = true

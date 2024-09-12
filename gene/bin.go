@@ -23,7 +23,11 @@ func main() {
 	app.Version = "v0.0.1"
 	app.Usage = "Generate engine define from go source"
 	app.Flags = []cli.Flag{
-
+		&cli.StringFlag{
+			Name:    "packages",
+			Usage:   "root packages",
+			Aliases: []string{"rt"},
+		},
 		&cli.StringFlag{
 			Name:    "cond",
 			Usage:   "condition and suffix for module",
@@ -107,6 +111,7 @@ func action(c *cli.Context) error {
 	g := new(Generator)
 	{
 		g.dir = dir
+		g.root = c.String("rt")
 		g.tags = tags
 		g.files = file
 		g.out = c.String("out")

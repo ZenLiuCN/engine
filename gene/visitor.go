@@ -865,6 +865,7 @@ func (c *state) Exit(k TypeKind, path TypePath, seen *Types) {
 }
 
 type context struct {
+	root          string
 	Functions     map[string]*types.Func
 	Structs       map[string]*types.TypeName
 	Interfaces    map[string]*types.TypeName
@@ -1379,7 +1380,7 @@ import (
 				name = s.Pkg.Path()
 			}
 			if strings.ContainsRune(name, '.') {
-				x.LF().Format("_ \"github.com/ZenLiuCN/engine/modules/%s\"", strings.ReplaceAll(name, ".", "/"))
+				x.LF().Format("_ \"%s%s\"", c.root, strings.ReplaceAll(name, ".", "/"))
 			} else if name != "go" {
 				x.LF().Format("_ \"github.com/ZenLiuCN/engine/modules/golang/%s\"", name)
 			}
