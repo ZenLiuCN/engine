@@ -756,78 +756,30 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/mdm/v1'{
 			extendInfo(extendInfo:Ref<ExtendField>[]):Ref<VendorContactBuilder>
 			build():Ref<VendorContact>
 	}
-	export function emptyConfig():Config
-	export function emptyRefConfig():Ref<Config>
-	export function refOfConfig(x:Config,v:Ref<Config>)
-	export function unRefConfig(v:Ref<Config>):Config
-	export function emptyProject():Project
-	export function emptyRefProject():Ref<Project>
-	export function refOfProject(x:Project,v:Ref<Project>)
-	export function unRefProject(v:Ref<Project>):Project
-	export function emptyVendorAddress():VendorAddress
-	export function emptyRefVendorAddress():Ref<VendorAddress>
-	export function refOfVendorAddress(x:VendorAddress,v:Ref<VendorAddress>)
-	export function unRefVendorAddress(v:Ref<VendorAddress>):VendorAddress
-	export function emptyVendorCompanyView():VendorCompanyView
-	export function emptyRefVendorCompanyView():Ref<VendorCompanyView>
-	export function refOfVendorCompanyView(x:VendorCompanyView,v:Ref<VendorCompanyView>)
-	export function unRefVendorCompanyView(v:Ref<VendorCompanyView>):VendorCompanyView
-	export function emptyV1():V1
-	export function emptyRefV1():Ref<V1>
-	export function refOfV1(x:V1,v:Ref<V1>)
-	export function unRefV1(v:Ref<V1>):V1
-	export function emptyBindUserAuthDataRelationReq():BindUserAuthDataRelationReq
-	export function emptyRefBindUserAuthDataRelationReq():Ref<BindUserAuthDataRelationReq>
-	export function refOfBindUserAuthDataRelationReq(x:BindUserAuthDataRelationReq,v:Ref<BindUserAuthDataRelationReq>)
-	export function unRefBindUserAuthDataRelationReq(v:Ref<BindUserAuthDataRelationReq>):BindUserAuthDataRelationReq
-	export function emptyFixedExchangeRate():FixedExchangeRate
-	export function emptyRefFixedExchangeRate():Ref<FixedExchangeRate>
-	export function refOfFixedExchangeRate(x:FixedExchangeRate,v:Ref<FixedExchangeRate>)
-	export function unRefFixedExchangeRate(v:Ref<FixedExchangeRate>):FixedExchangeRate
-	export function emptyGlAccountCompanyRelationship():GlAccountCompanyRelationship
-	export function emptyRefGlAccountCompanyRelationship():Ref<GlAccountCompanyRelationship>
-	export function refOfGlAccountCompanyRelationship(x:GlAccountCompanyRelationship,v:Ref<GlAccountCompanyRelationship>)
-	export function unRefGlAccountCompanyRelationship(v:Ref<GlAccountCompanyRelationship>):GlAccountCompanyRelationship
 	export function emptyUnbindUserAuthDataRelationReq():UnbindUserAuthDataRelationReq
 	export function emptyRefUnbindUserAuthDataRelationReq():Ref<UnbindUserAuthDataRelationReq>
 	export function refOfUnbindUserAuthDataRelationReq(x:UnbindUserAuthDataRelationReq,v:Ref<UnbindUserAuthDataRelationReq>)
 	export function unRefUnbindUserAuthDataRelationReq(v:Ref<UnbindUserAuthDataRelationReq>):UnbindUserAuthDataRelationReq
+	export function emptyProject():Project
+	export function emptyRefProject():Ref<Project>
+	export function refOfProject(x:Project,v:Ref<Project>)
+	export function unRefProject(v:Ref<Project>):Project
 	export function emptyVendorAccount():VendorAccount
 	export function emptyRefVendorAccount():Ref<VendorAccount>
 	export function refOfVendorAccount(x:VendorAccount,v:Ref<VendorAccount>)
 	export function unRefVendorAccount(v:Ref<VendorAccount>):VendorAccount
-	export function emptyI18nStruct():I18nStruct
-	export function emptyRefI18nStruct():Ref<I18nStruct>
-	export function refOfI18nStruct(x:I18nStruct,v:Ref<I18nStruct>)
-	export function unRefI18nStruct(v:Ref<I18nStruct>):I18nStruct
-	export function emptyOpenApiUpdateVendor():OpenApiUpdateVendor
-	export function emptyRefOpenApiUpdateVendor():Ref<OpenApiUpdateVendor>
-	export function refOfOpenApiUpdateVendor(x:OpenApiUpdateVendor,v:Ref<OpenApiUpdateVendor>)
-	export function unRefOpenApiUpdateVendor(v:Ref<OpenApiUpdateVendor>):OpenApiUpdateVendor
-	export function emptyGlAccount():GlAccount
-	export function emptyRefGlAccount():Ref<GlAccount>
-	export function refOfGlAccount(x:GlAccount,v:Ref<GlAccount>)
-	export function unRefGlAccount(v:Ref<GlAccount>):GlAccount
-	export function emptyCompany():Company
-	export function emptyRefCompany():Ref<Company>
-	export function refOfCompany(x:Company,v:Ref<Company>)
-	export function unRefCompany(v:Ref<Company>):Company
-	export function emptyExtendField():ExtendField
-	export function emptyRefExtendField():Ref<ExtendField>
-	export function refOfExtendField(x:ExtendField,v:Ref<ExtendField>)
-	export function unRefExtendField(v:Ref<ExtendField>):ExtendField
-	export function emptyLegalEntity():LegalEntity
-	export function emptyRefLegalEntity():Ref<LegalEntity>
-	export function refOfLegalEntity(x:LegalEntity,v:Ref<LegalEntity>)
-	export function unRefLegalEntity(v:Ref<LegalEntity>):LegalEntity
-	export function emptyVendorContact():VendorContact
-	export function emptyRefVendorContact():Ref<VendorContact>
-	export function refOfVendorContact(x:VendorContact,v:Ref<VendorContact>)
-	export function unRefVendorContact(v:Ref<VendorContact>):VendorContact
-	export function emptyBindUserAuthDataRelationResp():BindUserAuthDataRelationResp
-	export function emptyRefBindUserAuthDataRelationResp():Ref<BindUserAuthDataRelationResp>
-	export function refOfBindUserAuthDataRelationResp(x:BindUserAuthDataRelationResp,v:Ref<BindUserAuthDataRelationResp>)
-	export function unRefBindUserAuthDataRelationResp(v:Ref<BindUserAuthDataRelationResp>):BindUserAuthDataRelationResp
+	export function emptyInternalOrder():InternalOrder
+	export function emptyRefInternalOrder():Ref<InternalOrder>
+	export function refOfInternalOrder(x:InternalOrder,v:Ref<InternalOrder>)
+	export function unRefInternalOrder(v:Ref<InternalOrder>):InternalOrder
+	export function emptyUnbindUserAuthDataRelationResp():UnbindUserAuthDataRelationResp
+	export function emptyRefUnbindUserAuthDataRelationResp():Ref<UnbindUserAuthDataRelationResp>
+	export function refOfUnbindUserAuthDataRelationResp(x:UnbindUserAuthDataRelationResp,v:Ref<UnbindUserAuthDataRelationResp>)
+	export function unRefUnbindUserAuthDataRelationResp(v:Ref<UnbindUserAuthDataRelationResp>):UnbindUserAuthDataRelationResp
+	export function emptyVendorCompanyView():VendorCompanyView
+	export function emptyRefVendorCompanyView():Ref<VendorCompanyView>
+	export function refOfVendorCompanyView(x:VendorCompanyView,v:Ref<VendorCompanyView>)
+	export function unRefVendorCompanyView(v:Ref<VendorCompanyView>):VendorCompanyView
 	export function emptyDepartmentCostCenterRelationship():DepartmentCostCenterRelationship
 	export function emptyRefDepartmentCostCenterRelationship():Ref<DepartmentCostCenterRelationship>
 	export function refOfDepartmentCostCenterRelationship(x:DepartmentCostCenterRelationship,v:Ref<DepartmentCostCenterRelationship>)
@@ -836,48 +788,96 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/mdm/v1'{
 	export function emptyRefLegalEntityBank():Ref<LegalEntityBank>
 	export function refOfLegalEntityBank(x:LegalEntityBank,v:Ref<LegalEntityBank>)
 	export function unRefLegalEntityBank(v:Ref<LegalEntityBank>):LegalEntityBank
-	export function emptyCompanyCompanyBankAccount():CompanyCompanyBankAccount
-	export function emptyRefCompanyCompanyBankAccount():Ref<CompanyCompanyBankAccount>
-	export function refOfCompanyCompanyBankAccount(x:CompanyCompanyBankAccount,v:Ref<CompanyCompanyBankAccount>)
-	export function unRefCompanyCompanyBankAccount(v:Ref<CompanyCompanyBankAccount>):CompanyCompanyBankAccount
-	export function emptyInternalOrder():InternalOrder
-	export function emptyRefInternalOrder():Ref<InternalOrder>
-	export function refOfInternalOrder(x:InternalOrder,v:Ref<InternalOrder>)
-	export function unRefInternalOrder(v:Ref<InternalOrder>):InternalOrder
 	export function emptyCompanyAsset():CompanyAsset
 	export function emptyRefCompanyAsset():Ref<CompanyAsset>
 	export function refOfCompanyAsset(x:CompanyAsset,v:Ref<CompanyAsset>)
 	export function unRefCompanyAsset(v:Ref<CompanyAsset>):CompanyAsset
-	export function emptyMultiLanguage():MultiLanguage
-	export function emptyRefMultiLanguage():Ref<MultiLanguage>
-	export function refOfMultiLanguage(x:MultiLanguage,v:Ref<MultiLanguage>)
-	export function unRefMultiLanguage(v:Ref<MultiLanguage>):MultiLanguage
-	export function emptyUnbindUserAuthDataRelationResp():UnbindUserAuthDataRelationResp
-	export function emptyRefUnbindUserAuthDataRelationResp():Ref<UnbindUserAuthDataRelationResp>
-	export function refOfUnbindUserAuthDataRelationResp(x:UnbindUserAuthDataRelationResp,v:Ref<UnbindUserAuthDataRelationResp>)
-	export function unRefUnbindUserAuthDataRelationResp(v:Ref<UnbindUserAuthDataRelationResp>):UnbindUserAuthDataRelationResp
-	export function emptyAppendix():Appendix
-	export function emptyRefAppendix():Ref<Appendix>
-	export function refOfAppendix(x:Appendix,v:Ref<Appendix>)
-	export function unRefAppendix(v:Ref<Appendix>):Appendix
-	export function emptyUserAuthDataRelation():UserAuthDataRelation
-	export function emptyRefUserAuthDataRelation():Ref<UserAuthDataRelation>
-	export function refOfUserAuthDataRelation(x:UserAuthDataRelation,v:Ref<UserAuthDataRelation>)
-	export function unRefUserAuthDataRelation(v:Ref<UserAuthDataRelation>):UserAuthDataRelation
-	export function emptyCostCenter():CostCenter
-	export function emptyRefCostCenter():Ref<CostCenter>
-	export function refOfCostCenter(x:CostCenter,v:Ref<CostCenter>)
-	export function unRefCostCenter(v:Ref<CostCenter>):CostCenter
-	export function emptyProjectCompanyDeptMapping():ProjectCompanyDeptMapping
-	export function emptyRefProjectCompanyDeptMapping():Ref<ProjectCompanyDeptMapping>
-	export function refOfProjectCompanyDeptMapping(x:ProjectCompanyDeptMapping,v:Ref<ProjectCompanyDeptMapping>)
-	export function unRefProjectCompanyDeptMapping(v:Ref<ProjectCompanyDeptMapping>):ProjectCompanyDeptMapping
+	export function emptyCompanyCompanyBankAccount():CompanyCompanyBankAccount
+	export function emptyRefCompanyCompanyBankAccount():Ref<CompanyCompanyBankAccount>
+	export function refOfCompanyCompanyBankAccount(x:CompanyCompanyBankAccount,v:Ref<CompanyCompanyBankAccount>)
+	export function unRefCompanyCompanyBankAccount(v:Ref<CompanyCompanyBankAccount>):CompanyCompanyBankAccount
+	export function emptyGlAccountCompanyRelationship():GlAccountCompanyRelationship
+	export function emptyRefGlAccountCompanyRelationship():Ref<GlAccountCompanyRelationship>
+	export function refOfGlAccountCompanyRelationship(x:GlAccountCompanyRelationship,v:Ref<GlAccountCompanyRelationship>)
+	export function unRefGlAccountCompanyRelationship(v:Ref<GlAccountCompanyRelationship>):GlAccountCompanyRelationship
+	export function emptyVendorAddress():VendorAddress
+	export function emptyRefVendorAddress():Ref<VendorAddress>
+	export function refOfVendorAddress(x:VendorAddress,v:Ref<VendorAddress>)
+	export function unRefVendorAddress(v:Ref<VendorAddress>):VendorAddress
+	export function emptyBindUserAuthDataRelationResp():BindUserAuthDataRelationResp
+	export function emptyRefBindUserAuthDataRelationResp():Ref<BindUserAuthDataRelationResp>
+	export function refOfBindUserAuthDataRelationResp(x:BindUserAuthDataRelationResp,v:Ref<BindUserAuthDataRelationResp>)
+	export function unRefBindUserAuthDataRelationResp(v:Ref<BindUserAuthDataRelationResp>):BindUserAuthDataRelationResp
+	export function emptyCompany():Company
+	export function emptyRefCompany():Ref<Company>
+	export function refOfCompany(x:Company,v:Ref<Company>)
+	export function unRefCompany(v:Ref<Company>):Company
+	export function emptyExtendField():ExtendField
+	export function emptyRefExtendField():Ref<ExtendField>
+	export function refOfExtendField(x:ExtendField,v:Ref<ExtendField>)
+	export function unRefExtendField(v:Ref<ExtendField>):ExtendField
+	export function emptyConfig():Config
+	export function emptyRefConfig():Ref<Config>
+	export function refOfConfig(x:Config,v:Ref<Config>)
+	export function unRefConfig(v:Ref<Config>):Config
+	export function emptyI18nStruct():I18nStruct
+	export function emptyRefI18nStruct():Ref<I18nStruct>
+	export function refOfI18nStruct(x:I18nStruct,v:Ref<I18nStruct>)
+	export function unRefI18nStruct(v:Ref<I18nStruct>):I18nStruct
+	export function emptyLegalEntity():LegalEntity
+	export function emptyRefLegalEntity():Ref<LegalEntity>
+	export function refOfLegalEntity(x:LegalEntity,v:Ref<LegalEntity>)
+	export function unRefLegalEntity(v:Ref<LegalEntity>):LegalEntity
+	export function emptyV1():V1
+	export function emptyRefV1():Ref<V1>
+	export function refOfV1(x:V1,v:Ref<V1>)
+	export function unRefV1(v:Ref<V1>):V1
 	export function emptyVendor():Vendor
 	export function emptyRefVendor():Ref<Vendor>
 	export function refOfVendor(x:Vendor,v:Ref<Vendor>)
 	export function unRefVendor(v:Ref<Vendor>):Vendor
+	export function emptyBindUserAuthDataRelationReq():BindUserAuthDataRelationReq
+	export function emptyRefBindUserAuthDataRelationReq():Ref<BindUserAuthDataRelationReq>
+	export function refOfBindUserAuthDataRelationReq(x:BindUserAuthDataRelationReq,v:Ref<BindUserAuthDataRelationReq>)
+	export function unRefBindUserAuthDataRelationReq(v:Ref<BindUserAuthDataRelationReq>):BindUserAuthDataRelationReq
+	export function emptyGlAccount():GlAccount
+	export function emptyRefGlAccount():Ref<GlAccount>
+	export function refOfGlAccount(x:GlAccount,v:Ref<GlAccount>)
+	export function unRefGlAccount(v:Ref<GlAccount>):GlAccount
+	export function emptyMultiLanguage():MultiLanguage
+	export function emptyRefMultiLanguage():Ref<MultiLanguage>
+	export function refOfMultiLanguage(x:MultiLanguage,v:Ref<MultiLanguage>)
+	export function unRefMultiLanguage(v:Ref<MultiLanguage>):MultiLanguage
+	export function emptyOpenApiUpdateVendor():OpenApiUpdateVendor
+	export function emptyRefOpenApiUpdateVendor():Ref<OpenApiUpdateVendor>
+	export function refOfOpenApiUpdateVendor(x:OpenApiUpdateVendor,v:Ref<OpenApiUpdateVendor>)
+	export function unRefOpenApiUpdateVendor(v:Ref<OpenApiUpdateVendor>):OpenApiUpdateVendor
+	export function emptyCostCenter():CostCenter
+	export function emptyRefCostCenter():Ref<CostCenter>
+	export function refOfCostCenter(x:CostCenter,v:Ref<CostCenter>)
+	export function unRefCostCenter(v:Ref<CostCenter>):CostCenter
 	export function emptyDepartmentId():DepartmentId
 	export function emptyRefDepartmentId():Ref<DepartmentId>
 	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
 	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
+	export function emptyUserAuthDataRelation():UserAuthDataRelation
+	export function emptyRefUserAuthDataRelation():Ref<UserAuthDataRelation>
+	export function refOfUserAuthDataRelation(x:UserAuthDataRelation,v:Ref<UserAuthDataRelation>)
+	export function unRefUserAuthDataRelation(v:Ref<UserAuthDataRelation>):UserAuthDataRelation
+	export function emptyAppendix():Appendix
+	export function emptyRefAppendix():Ref<Appendix>
+	export function refOfAppendix(x:Appendix,v:Ref<Appendix>)
+	export function unRefAppendix(v:Ref<Appendix>):Appendix
+	export function emptyFixedExchangeRate():FixedExchangeRate
+	export function emptyRefFixedExchangeRate():Ref<FixedExchangeRate>
+	export function refOfFixedExchangeRate(x:FixedExchangeRate,v:Ref<FixedExchangeRate>)
+	export function unRefFixedExchangeRate(v:Ref<FixedExchangeRate>):FixedExchangeRate
+	export function emptyProjectCompanyDeptMapping():ProjectCompanyDeptMapping
+	export function emptyRefProjectCompanyDeptMapping():Ref<ProjectCompanyDeptMapping>
+	export function refOfProjectCompanyDeptMapping(x:ProjectCompanyDeptMapping,v:Ref<ProjectCompanyDeptMapping>)
+	export function unRefProjectCompanyDeptMapping(v:Ref<ProjectCompanyDeptMapping>):ProjectCompanyDeptMapping
+	export function emptyVendorContact():VendorContact
+	export function emptyRefVendorContact():Ref<VendorContact>
+	export function refOfVendorContact(x:VendorContact,v:Ref<VendorContact>)
+	export function unRefVendorContact(v:Ref<VendorContact>):VendorContact
 }

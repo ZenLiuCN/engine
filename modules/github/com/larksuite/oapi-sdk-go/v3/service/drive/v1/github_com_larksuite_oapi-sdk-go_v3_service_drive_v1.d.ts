@@ -3,15 +3,15 @@
 declare module 'github.com/larksuite/oapi-sdk-go/v3/service/drive/v1'{
 
 	// @ts-ignore
-	import * as larkevent from 'github.com/larksuite/oapi-sdk-go/v3/event'
-	// @ts-ignore
 	import * as larkcore from 'github.com/larksuite/oapi-sdk-go/v3/core'
 	// @ts-ignore
 	import * as io from 'golang/io'
 	// @ts-ignore
 	import * as context from 'golang/context'
 	// @ts-ignore
-	import type {Ref,Struct,bool,error,int,Alias,Nothing} from 'go'
+	import * as larkevent from 'github.com/larksuite/oapi-sdk-go/v3/event'
+	// @ts-ignore
+	import type {Nothing,Ref,Struct,bool,error,int,Alias} from 'go'
 	export interface ApplyMemberRequest extends Struct<ApplyMemberRequest>{
 
 			perm:Ref<string>
@@ -49,6 +49,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/drive/v1'{
 			memberType:Ref<string>
 			memberId:Ref<string>
 			perm:Ref<string>
+			permType:Ref<string>
 			type:Ref<string>
 	}
 	export interface BaseMemberBuilder extends Struct<BaseMemberBuilder>{
@@ -56,8 +57,46 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/drive/v1'{
 			memberType(memberType:string):Ref<BaseMemberBuilder>
 			memberId(memberId:string):Ref<BaseMemberBuilder>
 			perm(perm:string):Ref<BaseMemberBuilder>
+			permType(permType:string):Ref<BaseMemberBuilder>
 			type(type_:string):Ref<BaseMemberBuilder>
 			build():Ref<BaseMember>
+	}
+	export interface BatchCreatePermissionMemberPathReqBodyBuilder extends Struct<BatchCreatePermissionMemberPathReqBodyBuilder>{
+
+			members(members:Ref<BaseMember>[]):Ref<BatchCreatePermissionMemberPathReqBodyBuilder>
+			build():Ref<BatchCreatePermissionMemberReqBody>
+	}
+	export interface BatchCreatePermissionMemberReq extends Struct<BatchCreatePermissionMemberReq>{
+
+			body:Ref<BatchCreatePermissionMemberReqBody>
+	}
+	export interface BatchCreatePermissionMemberReqBody extends Struct<BatchCreatePermissionMemberReqBody>{
+
+			members:Ref<BaseMember>[]
+	}
+	export interface BatchCreatePermissionMemberReqBodyBuilder extends Struct<BatchCreatePermissionMemberReqBodyBuilder>{
+
+			members(members:Ref<BaseMember>[]):Ref<BatchCreatePermissionMemberReqBodyBuilder>
+			build():Ref<BatchCreatePermissionMemberReqBody>
+	}
+	export interface BatchCreatePermissionMemberReqBuilder extends Struct<BatchCreatePermissionMemberReqBuilder>{
+
+			token(token:string):Ref<BatchCreatePermissionMemberReqBuilder>
+			type(type_:string):Ref<BatchCreatePermissionMemberReqBuilder>
+			needNotification(needNotification:bool):Ref<BatchCreatePermissionMemberReqBuilder>
+			body(body:Ref<BatchCreatePermissionMemberReqBody>):Ref<BatchCreatePermissionMemberReqBuilder>
+			build():Ref<BatchCreatePermissionMemberReq>
+	}
+	export interface BatchCreatePermissionMemberResp extends Struct<BatchCreatePermissionMemberResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<BatchCreatePermissionMemberRespData>
+			success():bool
+	}
+	export interface BatchCreatePermissionMemberRespData extends Struct<BatchCreatePermissionMemberRespData>{
+
+			members:Ref<BaseMember>[]
 	}
 	export interface BatchGetTmpDownloadUrlMediaReq extends Struct<BatchGetTmpDownloadUrlMediaReq>{
 
@@ -657,6 +696,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/drive/v1'{
 	export interface DeletePermissionMemberPathReqBodyBuilder extends Struct<DeletePermissionMemberPathReqBodyBuilder>{
 
 			type(type_:string):Ref<DeletePermissionMemberPathReqBodyBuilder>
+			permType(permType:string):Ref<DeletePermissionMemberPathReqBodyBuilder>
 			build():Ref<DeletePermissionMemberReqBody>
 	}
 	export interface DeletePermissionMemberReq extends Struct<DeletePermissionMemberReq>{
@@ -666,10 +706,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/drive/v1'{
 	export interface DeletePermissionMemberReqBody extends Struct<DeletePermissionMemberReqBody>{
 
 			type:Ref<string>
+			permType:Ref<string>
 	}
 	export interface DeletePermissionMemberReqBodyBuilder extends Struct<DeletePermissionMemberReqBodyBuilder>{
 
 			type(type_:string):Ref<DeletePermissionMemberReqBodyBuilder>
+			permType(permType:string):Ref<DeletePermissionMemberReqBodyBuilder>
 			build():Ref<DeletePermissionMemberReqBody>
 	}
 	export interface DeletePermissionMemberReqBuilder extends Struct<DeletePermissionMemberReqBuilder>{
@@ -1578,6 +1620,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/drive/v1'{
 			token(token:string):Ref<ListPermissionMemberReqBuilder>
 			type(type_:string):Ref<ListPermissionMemberReqBuilder>
 			fields(fields:string):Ref<ListPermissionMemberReqBuilder>
+			permType(permType:string):Ref<ListPermissionMemberReqBuilder>
 			build():Ref<ListPermissionMemberReq>
 	}
 	export interface ListPermissionMemberResp extends Struct<ListPermissionMemberResp>{
@@ -1628,6 +1671,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/drive/v1'{
 			memberType:Ref<string>
 			memberId:Ref<string>
 			perm:Ref<string>
+			permType:Ref<string>
 			type:Ref<string>
 			name:Ref<string>
 			avatar:Ref<string>
@@ -1638,6 +1682,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/drive/v1'{
 			memberType(memberType:string):Ref<MemberBuilder>
 			memberId(memberId:string):Ref<MemberBuilder>
 			perm(perm:string):Ref<MemberBuilder>
+			permType(permType:string):Ref<MemberBuilder>
 			type(type_:string):Ref<MemberBuilder>
 			name(name:string):Ref<MemberBuilder>
 			avatar(avatar:string):Ref<MemberBuilder>
@@ -1790,6 +1835,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/drive/v1'{
 	export function newAuthPermissionMemberReqBuilder():Ref<AuthPermissionMemberReqBuilder>
 
 	export function newBaseMemberBuilder():Ref<BaseMemberBuilder>
+
+	export function newBatchCreatePermissionMemberPathReqBodyBuilder():Ref<BatchCreatePermissionMemberPathReqBodyBuilder>
+
+	export function newBatchCreatePermissionMemberReqBodyBuilder():Ref<BatchCreatePermissionMemberReqBodyBuilder>
+
+	export function newBatchCreatePermissionMemberReqBuilder():Ref<BatchCreatePermissionMemberReqBuilder>
 
 	export function newBatchGetTmpDownloadUrlMediaReqBuilder():Ref<BatchGetTmpDownloadUrlMediaReqBuilder>
 
@@ -1960,6 +2011,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/drive/v1'{
 	export function newOwnerBuilder():Ref<OwnerBuilder>
 
 	export function newP2FileBitableFieldChangedV1Handler(v1:(v2:context.Context,v1:Ref<P2FileBitableFieldChangedV1>)=>void/*error*/):Ref<P2FileBitableFieldChangedV1Handler>
+
+	export function newP2FileBitableRecordChangedV1Handler(v1:(v2:context.Context,v1:Ref<P2FileBitableRecordChangedV1>)=>void/*error*/):Ref<P2FileBitableRecordChangedV1Handler>
 
 	export function newP2FileDeletedV1Handler(v1:(v2:context.Context,v1:Ref<P2FileDeletedV1>)=>void/*error*/):Ref<P2FileDeletedV1Handler>
 
@@ -2133,7 +2186,30 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/drive/v1'{
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
 	}
-	export interface P2FileDeletedV1 extends larkevent.EventHandlerModel,Struct<P2FileDeletedV1>{
+	export interface P2FileBitableRecordChangedV1 extends Struct<P2FileBitableRecordChangedV1>,larkevent.EventHandlerModel{
+
+			eventV2Base:Ref<larkevent.EventV2Base>
+			eventReq:Ref<larkevent.EventReq>
+			event:Ref<P2FileBitableRecordChangedV1Data>
+			rawReq(req:Ref<larkevent.EventReq>):void
+	}
+	export interface P2FileBitableRecordChangedV1Data extends Struct<P2FileBitableRecordChangedV1Data>{
+
+			fileType:Ref<string>
+			fileToken:Ref<string>
+			tableId:Ref<string>
+			revision:Ref<int>
+			operatorId:Ref<UserId>
+			actionList:Ref<BitableTableRecordAction>[]
+			subscriberIdList:Ref<UserId>[]
+			updateTime:Ref<int>
+	}
+	export interface P2FileBitableRecordChangedV1Handler extends Struct<P2FileBitableRecordChangedV1Handler>,larkevent.EventHandler{
+
+			event():any
+			handle(ctx:context.Context,event:any)/*error*/
+	}
+	export interface P2FileDeletedV1 extends Struct<P2FileDeletedV1>,larkevent.EventHandlerModel{
 
 			eventV2Base:Ref<larkevent.EventV2Base>
 			eventReq:Ref<larkevent.EventReq>
@@ -2147,12 +2223,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/drive/v1'{
 			operatorId:Ref<UserId>
 			subscriberIdList:Ref<UserId>[]
 	}
-	export interface P2FileDeletedV1Handler extends Struct<P2FileDeletedV1Handler>,larkevent.EventHandler{
+	export interface P2FileDeletedV1Handler extends larkevent.EventHandler,Struct<P2FileDeletedV1Handler>{
 
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
 	}
-	export interface P2FileEditV1 extends Struct<P2FileEditV1>,larkevent.EventHandlerModel{
+	export interface P2FileEditV1 extends larkevent.EventHandlerModel,Struct<P2FileEditV1>{
 
 			eventV2Base:Ref<larkevent.EventV2Base>
 			eventReq:Ref<larkevent.EventReq>
@@ -2189,7 +2265,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/drive/v1'{
 			openDepartmentIdList:string[]
 			subscriberIdList:Ref<UserId>[]
 	}
-	export interface P2FilePermissionMemberAddedV1Handler extends Struct<P2FilePermissionMemberAddedV1Handler>,larkevent.EventHandler{
+	export interface P2FilePermissionMemberAddedV1Handler extends larkevent.EventHandler,Struct<P2FilePermissionMemberAddedV1Handler>{
 
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
@@ -2279,6 +2355,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/drive/v1'{
 	export const ParentTypeUploadAllMediaBitableFile:string
 	//"bitable_image"
 	export const ParentTypeUploadAllMediaBitableImage:string
+	//"calendar"
+	export const ParentTypeUploadAllMediaCalendar:string
 	//"ccm_import_open"
 	export const ParentTypeUploadAllMediaCcmImportOpen:string
 	//"doc_file"
@@ -2439,6 +2517,22 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/drive/v1'{
 	export const PermPrint:string
 	//"share"
 	export const PermShare:string
+	//"container"
+	export const PermTypeContainer:string
+	//"container"
+	export const PermTypeDeletePermissionMemberContainer:string
+	//"single_page"
+	export const PermTypeDeletePermissionMemberSinglePage:string
+	//"container"
+	export const PermTypeListPermissionMemberContainer:string
+	//"single_page"
+	export const PermTypeListPermissionMemberSinglePage:string
+	//"single_page"
+	export const PermTypeSinglePage:string
+	//"container"
+	export const PermTypeUpdatePermissionMemberContainer:string
+	//"single_page"
+	export const PermTypeUpdatePermissionMemberSinglePage:string
 	//"edit"
 	export const PermUpdatePermissionMemberEdit:string
 	//"full_access"
@@ -2791,6 +2885,26 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/drive/v1'{
 	export const TokenTypeUpdatePermissionMemberWiki:string
 	//"bitable"
 	export const TokenTypeV2Bitable:string
+	//"bitable"
+	export const TokenTypeV2CreatePermissionMemberBitable:string
+	//"doc"
+	export const TokenTypeV2CreatePermissionMemberDoc:string
+	//"docx"
+	export const TokenTypeV2CreatePermissionMemberDocx:string
+	//"file"
+	export const TokenTypeV2CreatePermissionMemberFile:string
+	//"folder"
+	export const TokenTypeV2CreatePermissionMemberFolder:string
+	//"mindnote"
+	export const TokenTypeV2CreatePermissionMemberMindnote:string
+	//"minutes"
+	export const TokenTypeV2CreatePermissionMemberMinutes:string
+	//"sheet"
+	export const TokenTypeV2CreatePermissionMemberSheet:string
+	//"slides"
+	export const TokenTypeV2CreatePermissionMemberSlides:string
+	//"wiki"
+	export const TokenTypeV2CreatePermissionMemberWiki:string
 	//"bitable"
 	export const TokenTypeV2DeletePermissionMemberBitable:string
 	//"doc"
@@ -3564,6 +3678,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/drive/v1'{
 			permissionMember:Ref<{
 			
 				auth(ctx:context.Context,req:Ref<AuthPermissionMemberReq>,...options:larkcore.RequestOptionFunc[]):Ref<AuthPermissionMemberResp>
+				batchCreate(ctx:context.Context,req:Ref<BatchCreatePermissionMemberReq>,...options:larkcore.RequestOptionFunc[]):Ref<BatchCreatePermissionMemberResp>
 				create(ctx:context.Context,req:Ref<CreatePermissionMemberReq>,...options:larkcore.RequestOptionFunc[]):Ref<CreatePermissionMemberResp>
 				delete(ctx:context.Context,req:Ref<DeletePermissionMemberReq>,...options:larkcore.RequestOptionFunc[]):Ref<DeletePermissionMemberResp>
 				list(ctx:context.Context,req:Ref<ListPermissionMemberReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListPermissionMemberResp>
@@ -3615,126 +3730,382 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/drive/v1'{
 	export const ViewerIdTypeUnionId:string
 	//"user_id"
 	export const ViewerIdTypeUserId:string
-	export function emptyReplyElement():ReplyElement
-	export function emptyRefReplyElement():Ref<ReplyElement>
-	export function refOfReplyElement(x:ReplyElement,v:Ref<ReplyElement>)
-	export function unRefReplyElement(v:Ref<ReplyElement>):ReplyElement
-	export function emptyUploadAllFileRespData():UploadAllFileRespData
-	export function emptyRefUploadAllFileRespData():Ref<UploadAllFileRespData>
-	export function refOfUploadAllFileRespData(x:UploadAllFileRespData,v:Ref<UploadAllFileRespData>)
-	export function unRefUploadAllFileRespData(v:Ref<UploadAllFileRespData>):UploadAllFileRespData
+	export function emptyCreatePermissionMemberResp():CreatePermissionMemberResp
+	export function emptyRefCreatePermissionMemberResp():Ref<CreatePermissionMemberResp>
+	export function refOfCreatePermissionMemberResp(x:CreatePermissionMemberResp,v:Ref<CreatePermissionMemberResp>)
+	export function unRefCreatePermissionMemberResp(v:Ref<CreatePermissionMemberResp>):CreatePermissionMemberResp
+	export function emptyP2FileTitleUpdatedV1Data():P2FileTitleUpdatedV1Data
+	export function emptyRefP2FileTitleUpdatedV1Data():Ref<P2FileTitleUpdatedV1Data>
+	export function refOfP2FileTitleUpdatedV1Data(x:P2FileTitleUpdatedV1Data,v:Ref<P2FileTitleUpdatedV1Data>)
+	export function unRefP2FileTitleUpdatedV1Data(v:Ref<P2FileTitleUpdatedV1Data>):P2FileTitleUpdatedV1Data
+	export function emptyUpdatePermissionPublicPasswordReq():UpdatePermissionPublicPasswordReq
+	export function emptyRefUpdatePermissionPublicPasswordReq():Ref<UpdatePermissionPublicPasswordReq>
+	export function refOfUpdatePermissionPublicPasswordReq(x:UpdatePermissionPublicPasswordReq,v:Ref<UpdatePermissionPublicPasswordReq>)
+	export function unRefUpdatePermissionPublicPasswordReq(v:Ref<UpdatePermissionPublicPasswordReq>):UpdatePermissionPublicPasswordReq
+	export function emptyCreateExportTaskRespData():CreateExportTaskRespData
+	export function emptyRefCreateExportTaskRespData():Ref<CreateExportTaskRespData>
+	export function refOfCreateExportTaskRespData(x:CreateExportTaskRespData,v:Ref<CreateExportTaskRespData>)
+	export function unRefCreateExportTaskRespData(v:Ref<CreateExportTaskRespData>):CreateExportTaskRespData
+	export function emptyTransferOwnerPermissionMemberReq():TransferOwnerPermissionMemberReq
+	export function emptyRefTransferOwnerPermissionMemberReq():Ref<TransferOwnerPermissionMemberReq>
+	export function refOfTransferOwnerPermissionMemberReq(x:TransferOwnerPermissionMemberReq,v:Ref<TransferOwnerPermissionMemberReq>)
+	export function unRefTransferOwnerPermissionMemberReq(v:Ref<TransferOwnerPermissionMemberReq>):TransferOwnerPermissionMemberReq
+	export function emptyUploadPartMediaResp():UploadPartMediaResp
+	export function emptyRefUploadPartMediaResp():Ref<UploadPartMediaResp>
+	export function refOfUploadPartMediaResp(x:UploadPartMediaResp,v:Ref<UploadPartMediaResp>)
+	export function unRefUploadPartMediaResp(v:Ref<UploadPartMediaResp>):UploadPartMediaResp
 	export function emptyListFileVersionResp():ListFileVersionResp
 	export function emptyRefListFileVersionResp():Ref<ListFileVersionResp>
 	export function refOfListFileVersionResp(x:ListFileVersionResp,v:Ref<ListFileVersionResp>)
 	export function unRefListFileVersionResp(v:Ref<ListFileVersionResp>):ListFileVersionResp
-	export function emptyP2FilePermissionMemberAddedV1Data():P2FilePermissionMemberAddedV1Data
-	export function emptyRefP2FilePermissionMemberAddedV1Data():Ref<P2FilePermissionMemberAddedV1Data>
-	export function refOfP2FilePermissionMemberAddedV1Data(x:P2FilePermissionMemberAddedV1Data,v:Ref<P2FilePermissionMemberAddedV1Data>)
-	export function unRefP2FilePermissionMemberAddedV1Data(v:Ref<P2FilePermissionMemberAddedV1Data>):P2FilePermissionMemberAddedV1Data
-	export function emptyUploadPartFileResp():UploadPartFileResp
-	export function emptyRefUploadPartFileResp():Ref<UploadPartFileResp>
-	export function refOfUploadPartFileResp(x:UploadPartFileResp,v:Ref<UploadPartFileResp>)
-	export function unRefUploadPartFileResp(v:Ref<UploadPartFileResp>):UploadPartFileResp
-	export function emptyCreateFolderFileReqBody():CreateFolderFileReqBody
-	export function emptyRefCreateFolderFileReqBody():Ref<CreateFolderFileReqBody>
-	export function refOfCreateFolderFileReqBody(x:CreateFolderFileReqBody,v:Ref<CreateFolderFileReqBody>)
-	export function unRefCreateFolderFileReqBody(v:Ref<CreateFolderFileReqBody>):CreateFolderFileReqBody
-	export function emptyDownloadFileResp():DownloadFileResp
-	export function emptyRefDownloadFileResp():Ref<DownloadFileResp>
-	export function refOfDownloadFileResp(x:DownloadFileResp,v:Ref<DownloadFileResp>)
-	export function unRefDownloadFileResp(v:Ref<DownloadFileResp>):DownloadFileResp
-	export function emptyGetFileStatisticsReq():GetFileStatisticsReq
-	export function emptyRefGetFileStatisticsReq():Ref<GetFileStatisticsReq>
-	export function refOfGetFileStatisticsReq(x:GetFileStatisticsReq,v:Ref<GetFileStatisticsReq>)
-	export function unRefGetFileStatisticsReq(v:Ref<GetFileStatisticsReq>):GetFileStatisticsReq
-	export function emptyUploadPrepareMediaResp():UploadPrepareMediaResp
-	export function emptyRefUploadPrepareMediaResp():Ref<UploadPrepareMediaResp>
-	export function refOfUploadPrepareMediaResp(x:UploadPrepareMediaResp,v:Ref<UploadPrepareMediaResp>)
-	export function unRefUploadPrepareMediaResp(v:Ref<UploadPrepareMediaResp>):UploadPrepareMediaResp
-	export function emptyCreateFileCommentReq():CreateFileCommentReq
-	export function emptyRefCreateFileCommentReq():Ref<CreateFileCommentReq>
-	export function refOfCreateFileCommentReq(x:CreateFileCommentReq,v:Ref<CreateFileCommentReq>)
-	export function unRefCreateFileCommentReq(v:Ref<CreateFileCommentReq>):CreateFileCommentReq
-	export function emptyReferEntity():ReferEntity
-	export function emptyRefReferEntity():Ref<ReferEntity>
-	export function refOfReferEntity(x:ReferEntity,v:Ref<ReferEntity>)
-	export function unRefReferEntity(v:Ref<ReferEntity>):ReferEntity
-	export function emptyUploadFinishFileResp():UploadFinishFileResp
-	export function emptyRefUploadFinishFileResp():Ref<UploadFinishFileResp>
-	export function refOfUploadFinishFileResp(x:UploadFinishFileResp,v:Ref<UploadFinishFileResp>)
-	export function unRefUploadFinishFileResp(v:Ref<UploadFinishFileResp>):UploadFinishFileResp
-	export function emptyP2FileTrashedV1Data():P2FileTrashedV1Data
-	export function emptyRefP2FileTrashedV1Data():Ref<P2FileTrashedV1Data>
-	export function refOfP2FileTrashedV1Data(x:P2FileTrashedV1Data,v:Ref<P2FileTrashedV1Data>)
-	export function unRefP2FileTrashedV1Data(v:Ref<P2FileTrashedV1Data>):P2FileTrashedV1Data
-	export function emptyUploadPartFileReqBody():UploadPartFileReqBody
-	export function emptyRefUploadPartFileReqBody():Ref<UploadPartFileReqBody>
-	export function refOfUploadPartFileReqBody(x:UploadPartFileReqBody,v:Ref<UploadPartFileReqBody>)
-	export function unRefUploadPartFileReqBody(v:Ref<UploadPartFileReqBody>):UploadPartFileReqBody
-	export function emptyUpdatePermissionMemberRespData():UpdatePermissionMemberRespData
-	export function emptyRefUpdatePermissionMemberRespData():Ref<UpdatePermissionMemberRespData>
-	export function refOfUpdatePermissionMemberRespData(x:UpdatePermissionMemberRespData,v:Ref<UpdatePermissionMemberRespData>)
-	export function unRefUpdatePermissionMemberRespData(v:Ref<UpdatePermissionMemberRespData>):UpdatePermissionMemberRespData
+	export function emptyCreateImportTaskRespData():CreateImportTaskRespData
+	export function emptyRefCreateImportTaskRespData():Ref<CreateImportTaskRespData>
+	export function refOfCreateImportTaskRespData(x:CreateImportTaskRespData,v:Ref<CreateImportTaskRespData>)
+	export function unRefCreateImportTaskRespData(v:Ref<CreateImportTaskRespData>):CreateImportTaskRespData
+	export function emptyGetFileSubscriptionRespData():GetFileSubscriptionRespData
+	export function emptyRefGetFileSubscriptionRespData():Ref<GetFileSubscriptionRespData>
+	export function refOfGetFileSubscriptionRespData(x:GetFileSubscriptionRespData,v:Ref<GetFileSubscriptionRespData>)
+	export function unRefGetFileSubscriptionRespData(v:Ref<GetFileSubscriptionRespData>):GetFileSubscriptionRespData
+	export function emptyImportTask():ImportTask
+	export function emptyRefImportTask():Ref<ImportTask>
+	export function refOfImportTask(x:ImportTask,v:Ref<ImportTask>)
+	export function unRefImportTask(v:Ref<ImportTask>):ImportTask
+	export function emptyListFileCommentIterator():ListFileCommentIterator
+	export function emptyRefListFileCommentIterator():Ref<ListFileCommentIterator>
+	export function refOfListFileCommentIterator(x:ListFileCommentIterator,v:Ref<ListFileCommentIterator>)
+	export function unRefListFileCommentIterator(v:Ref<ListFileCommentIterator>):ListFileCommentIterator
+	export function emptyBitableTableFieldAction():BitableTableFieldAction
+	export function emptyRefBitableTableFieldAction():Ref<BitableTableFieldAction>
+	export function refOfBitableTableFieldAction(x:BitableTableFieldAction,v:Ref<BitableTableFieldAction>)
+	export function unRefBitableTableFieldAction(v:Ref<BitableTableFieldAction>):BitableTableFieldAction
+	export function emptyImportTaskMountPoint():ImportTaskMountPoint
+	export function emptyRefImportTaskMountPoint():Ref<ImportTaskMountPoint>
+	export function refOfImportTaskMountPoint(x:ImportTaskMountPoint,v:Ref<ImportTaskMountPoint>)
+	export function unRefImportTaskMountPoint(v:Ref<ImportTaskMountPoint>):ImportTaskMountPoint
 	export function emptyCreatePermissionPublicPasswordRespData():CreatePermissionPublicPasswordRespData
 	export function emptyRefCreatePermissionPublicPasswordRespData():Ref<CreatePermissionPublicPasswordRespData>
 	export function refOfCreatePermissionPublicPasswordRespData(x:CreatePermissionPublicPasswordRespData,v:Ref<CreatePermissionPublicPasswordRespData>)
 	export function unRefCreatePermissionPublicPasswordRespData(v:Ref<CreatePermissionPublicPasswordRespData>):CreatePermissionPublicPasswordRespData
+	export function emptyBitableTableRecordActionFieldIdentityUser():BitableTableRecordActionFieldIdentityUser
+	export function emptyRefBitableTableRecordActionFieldIdentityUser():Ref<BitableTableRecordActionFieldIdentityUser>
+	export function refOfBitableTableRecordActionFieldIdentityUser(x:BitableTableRecordActionFieldIdentityUser,v:Ref<BitableTableRecordActionFieldIdentityUser>)
+	export function unRefBitableTableRecordActionFieldIdentityUser(v:Ref<BitableTableRecordActionFieldIdentityUser>):BitableTableRecordActionFieldIdentityUser
+	export function emptyGetImportTaskResp():GetImportTaskResp
+	export function emptyRefGetImportTaskResp():Ref<GetImportTaskResp>
+	export function refOfGetImportTaskResp(x:GetImportTaskResp,v:Ref<GetImportTaskResp>)
+	export function unRefGetImportTaskResp(v:Ref<GetImportTaskResp>):GetImportTaskResp
+	export function emptyMoveFileReqBody():MoveFileReqBody
+	export function emptyRefMoveFileReqBody():Ref<MoveFileReqBody>
+	export function refOfMoveFileReqBody(x:MoveFileReqBody,v:Ref<MoveFileReqBody>)
+	export function unRefMoveFileReqBody(v:Ref<MoveFileReqBody>):MoveFileReqBody
+	export function emptyCreateShortcutFileReqBody():CreateShortcutFileReqBody
+	export function emptyRefCreateShortcutFileReqBody():Ref<CreateShortcutFileReqBody>
+	export function refOfCreateShortcutFileReqBody(x:CreateShortcutFileReqBody,v:Ref<CreateShortcutFileReqBody>)
+	export function unRefCreateShortcutFileReqBody(v:Ref<CreateShortcutFileReqBody>):CreateShortcutFileReqBody
+	export function emptyBatchGetTmpDownloadUrlMediaResp():BatchGetTmpDownloadUrlMediaResp
+	export function emptyRefBatchGetTmpDownloadUrlMediaResp():Ref<BatchGetTmpDownloadUrlMediaResp>
+	export function refOfBatchGetTmpDownloadUrlMediaResp(x:BatchGetTmpDownloadUrlMediaResp,v:Ref<BatchGetTmpDownloadUrlMediaResp>)
+	export function unRefBatchGetTmpDownloadUrlMediaResp(v:Ref<BatchGetTmpDownloadUrlMediaResp>):BatchGetTmpDownloadUrlMediaResp
 	export function emptyTokenType():TokenType
 	export function emptyRefTokenType():Ref<TokenType>
 	export function refOfTokenType(x:TokenType,v:Ref<TokenType>)
 	export function unRefTokenType(v:Ref<TokenType>):TokenType
-	export function emptyCreateFileVersionReq():CreateFileVersionReq
-	export function emptyRefCreateFileVersionReq():Ref<CreateFileVersionReq>
-	export function refOfCreateFileVersionReq(x:CreateFileVersionReq,v:Ref<CreateFileVersionReq>)
-	export function unRefCreateFileVersionReq(v:Ref<CreateFileVersionReq>):CreateFileVersionReq
-	export function emptyBitableTableFieldActionValue():BitableTableFieldActionValue
-	export function emptyRefBitableTableFieldActionValue():Ref<BitableTableFieldActionValue>
-	export function refOfBitableTableFieldActionValue(x:BitableTableFieldActionValue,v:Ref<BitableTableFieldActionValue>)
-	export function unRefBitableTableFieldActionValue(v:Ref<BitableTableFieldActionValue>):BitableTableFieldActionValue
-	export function emptyCopyFileReqBody():CopyFileReqBody
-	export function emptyRefCopyFileReqBody():Ref<CopyFileReqBody>
-	export function refOfCopyFileReqBody(x:CopyFileReqBody,v:Ref<CopyFileReqBody>)
-	export function unRefCopyFileReqBody(v:Ref<CopyFileReqBody>):CopyFileReqBody
-	export function emptyGetSubscribeFileRespData():GetSubscribeFileRespData
-	export function emptyRefGetSubscribeFileRespData():Ref<GetSubscribeFileRespData>
-	export function refOfGetSubscribeFileRespData(x:GetSubscribeFileRespData,v:Ref<GetSubscribeFileRespData>)
-	export function unRefGetSubscribeFileRespData(v:Ref<GetSubscribeFileRespData>):GetSubscribeFileRespData
-	export function emptyUploadFinishMediaReq():UploadFinishMediaReq
-	export function emptyRefUploadFinishMediaReq():Ref<UploadFinishMediaReq>
-	export function refOfUploadFinishMediaReq(x:UploadFinishMediaReq,v:Ref<UploadFinishMediaReq>)
-	export function unRefUploadFinishMediaReq(v:Ref<UploadFinishMediaReq>):UploadFinishMediaReq
-	export function emptyGetPermissionPublicReq():GetPermissionPublicReq
-	export function emptyRefGetPermissionPublicReq():Ref<GetPermissionPublicReq>
-	export function refOfGetPermissionPublicReq(x:GetPermissionPublicReq,v:Ref<GetPermissionPublicReq>)
-	export function unRefGetPermissionPublicReq(v:Ref<GetPermissionPublicReq>):GetPermissionPublicReq
-	export function emptyFileViewRecord():FileViewRecord
-	export function emptyRefFileViewRecord():Ref<FileViewRecord>
-	export function refOfFileViewRecord(x:FileViewRecord,v:Ref<FileViewRecord>)
-	export function unRefFileViewRecord(v:Ref<FileViewRecord>):FileViewRecord
-	export function emptyPatchPermissionPublicRespData():PatchPermissionPublicRespData
-	export function emptyRefPatchPermissionPublicRespData():Ref<PatchPermissionPublicRespData>
-	export function refOfPatchPermissionPublicRespData(x:PatchPermissionPublicRespData,v:Ref<PatchPermissionPublicRespData>)
-	export function unRefPatchPermissionPublicRespData(v:Ref<PatchPermissionPublicRespData>):PatchPermissionPublicRespData
-	export function emptyTextRun():TextRun
-	export function emptyRefTextRun():Ref<TextRun>
-	export function refOfTextRun(x:TextRun,v:Ref<TextRun>)
-	export function unRefTextRun(v:Ref<TextRun>):TextRun
-	export function emptyFileComment():FileComment
-	export function emptyRefFileComment():Ref<FileComment>
-	export function refOfFileComment(x:FileComment,v:Ref<FileComment>)
-	export function unRefFileComment(v:Ref<FileComment>):FileComment
-	export function emptyMetaRequest():MetaRequest
-	export function emptyRefMetaRequest():Ref<MetaRequest>
-	export function refOfMetaRequest(x:MetaRequest,v:Ref<MetaRequest>)
-	export function unRefMetaRequest(v:Ref<MetaRequest>):MetaRequest
-	export function emptyPatchFileCommentReq():PatchFileCommentReq
-	export function emptyRefPatchFileCommentReq():Ref<PatchFileCommentReq>
-	export function refOfPatchFileCommentReq(x:PatchFileCommentReq,v:Ref<PatchFileCommentReq>)
-	export function unRefPatchFileCommentReq(v:Ref<PatchFileCommentReq>):PatchFileCommentReq
+	export function emptyGetFileStatisticsRespData():GetFileStatisticsRespData
+	export function emptyRefGetFileStatisticsRespData():Ref<GetFileStatisticsRespData>
+	export function refOfGetFileStatisticsRespData(x:GetFileStatisticsRespData,v:Ref<GetFileStatisticsRespData>)
+	export function unRefGetFileStatisticsRespData(v:Ref<GetFileStatisticsRespData>):GetFileStatisticsRespData
+	export function emptyListFileCommentReplyRespData():ListFileCommentReplyRespData
+	export function emptyRefListFileCommentReplyRespData():Ref<ListFileCommentReplyRespData>
+	export function refOfListFileCommentReplyRespData(x:ListFileCommentReplyRespData,v:Ref<ListFileCommentReplyRespData>)
+	export function unRefListFileCommentReplyRespData(v:Ref<ListFileCommentReplyRespData>):ListFileCommentReplyRespData
+	export function emptyUploadAllMediaReq():UploadAllMediaReq
+	export function emptyRefUploadAllMediaReq():Ref<UploadAllMediaReq>
+	export function refOfUploadAllMediaReq(x:UploadAllMediaReq,v:Ref<UploadAllMediaReq>)
+	export function unRefUploadAllMediaReq(v:Ref<UploadAllMediaReq>):UploadAllMediaReq
+	export function emptyBitableTableFieldActionValuePropertyOption():BitableTableFieldActionValuePropertyOption
+	export function emptyRefBitableTableFieldActionValuePropertyOption():Ref<BitableTableFieldActionValuePropertyOption>
+	export function refOfBitableTableFieldActionValuePropertyOption(x:BitableTableFieldActionValuePropertyOption,v:Ref<BitableTableFieldActionValuePropertyOption>)
+	export function unRefBitableTableFieldActionValuePropertyOption(v:Ref<BitableTableFieldActionValuePropertyOption>):BitableTableFieldActionValuePropertyOption
+	export function emptyUpdatePermissionPublicPasswordResp():UpdatePermissionPublicPasswordResp
+	export function emptyRefUpdatePermissionPublicPasswordResp():Ref<UpdatePermissionPublicPasswordResp>
+	export function refOfUpdatePermissionPublicPasswordResp(x:UpdatePermissionPublicPasswordResp,v:Ref<UpdatePermissionPublicPasswordResp>)
+	export function unRefUpdatePermissionPublicPasswordResp(v:Ref<UpdatePermissionPublicPasswordResp>):UpdatePermissionPublicPasswordResp
+	export function emptyBitableTableFieldActionValuePropertyAutoSerial():BitableTableFieldActionValuePropertyAutoSerial
+	export function emptyRefBitableTableFieldActionValuePropertyAutoSerial():Ref<BitableTableFieldActionValuePropertyAutoSerial>
+	export function refOfBitableTableFieldActionValuePropertyAutoSerial(x:BitableTableFieldActionValuePropertyAutoSerial,v:Ref<BitableTableFieldActionValuePropertyAutoSerial>)
+	export function unRefBitableTableFieldActionValuePropertyAutoSerial(v:Ref<BitableTableFieldActionValuePropertyAutoSerial>):BitableTableFieldActionValuePropertyAutoSerial
+	export function emptyDeleteSubscribeFileReq():DeleteSubscribeFileReq
+	export function emptyRefDeleteSubscribeFileReq():Ref<DeleteSubscribeFileReq>
+	export function refOfDeleteSubscribeFileReq(x:DeleteSubscribeFileReq,v:Ref<DeleteSubscribeFileReq>)
+	export function unRefDeleteSubscribeFileReq(v:Ref<DeleteSubscribeFileReq>):DeleteSubscribeFileReq
+	export function emptyListFileCommentResp():ListFileCommentResp
+	export function emptyRefListFileCommentResp():Ref<ListFileCommentResp>
+	export function refOfListFileCommentResp(x:ListFileCommentResp,v:Ref<ListFileCommentResp>)
+	export function unRefListFileCommentResp(v:Ref<ListFileCommentResp>):ListFileCommentResp
+	export function emptyCreateFileCommentReq():CreateFileCommentReq
+	export function emptyRefCreateFileCommentReq():Ref<CreateFileCommentReq>
+	export function refOfCreateFileCommentReq(x:CreateFileCommentReq,v:Ref<CreateFileCommentReq>)
+	export function unRefCreateFileCommentReq(v:Ref<CreateFileCommentReq>):CreateFileCommentReq
+	export function emptyUploadAllFileRespData():UploadAllFileRespData
+	export function emptyRefUploadAllFileRespData():Ref<UploadAllFileRespData>
+	export function refOfUploadAllFileRespData(x:UploadAllFileRespData,v:Ref<UploadAllFileRespData>)
+	export function unRefUploadAllFileRespData(v:Ref<UploadAllFileRespData>):UploadAllFileRespData
+	export function emptyBatchGetTmpDownloadUrlMediaRespData():BatchGetTmpDownloadUrlMediaRespData
+	export function emptyRefBatchGetTmpDownloadUrlMediaRespData():Ref<BatchGetTmpDownloadUrlMediaRespData>
+	export function refOfBatchGetTmpDownloadUrlMediaRespData(x:BatchGetTmpDownloadUrlMediaRespData,v:Ref<BatchGetTmpDownloadUrlMediaRespData>)
+	export function unRefBatchGetTmpDownloadUrlMediaRespData(v:Ref<BatchGetTmpDownloadUrlMediaRespData>):BatchGetTmpDownloadUrlMediaRespData
+	export function emptyUploadAllFileReq():UploadAllFileReq
+	export function emptyRefUploadAllFileReq():Ref<UploadAllFileReq>
+	export function refOfUploadAllFileReq(x:UploadAllFileReq,v:Ref<UploadAllFileReq>)
+	export function unRefUploadAllFileReq(v:Ref<UploadAllFileReq>):UploadAllFileReq
+	export function emptyReplyContent():ReplyContent
+	export function emptyRefReplyContent():Ref<ReplyContent>
+	export function refOfReplyContent(x:ReplyContent,v:Ref<ReplyContent>)
+	export function unRefReplyContent(v:Ref<ReplyContent>):ReplyContent
+	export function emptyDownloadMediaResp():DownloadMediaResp
+	export function emptyRefDownloadMediaResp():Ref<DownloadMediaResp>
+	export function refOfDownloadMediaResp(x:DownloadMediaResp,v:Ref<DownloadMediaResp>)
+	export function unRefDownloadMediaResp(v:Ref<DownloadMediaResp>):DownloadMediaResp
+	export function emptyListFileCommentRespData():ListFileCommentRespData
+	export function emptyRefListFileCommentRespData():Ref<ListFileCommentRespData>
+	export function refOfListFileCommentRespData(x:ListFileCommentRespData,v:Ref<ListFileCommentRespData>)
+	export function unRefListFileCommentRespData(v:Ref<ListFileCommentRespData>):ListFileCommentRespData
+	export function emptyMoveFileResp():MoveFileResp
+	export function emptyRefMoveFileResp():Ref<MoveFileResp>
+	export function refOfMoveFileResp(x:MoveFileResp,v:Ref<MoveFileResp>)
+	export function unRefMoveFileResp(v:Ref<MoveFileResp>):MoveFileResp
+	export function emptyUpdatePermissionMemberResp():UpdatePermissionMemberResp
+	export function emptyRefUpdatePermissionMemberResp():Ref<UpdatePermissionMemberResp>
+	export function refOfUpdatePermissionMemberResp(x:UpdatePermissionMemberResp,v:Ref<UpdatePermissionMemberResp>)
+	export function unRefUpdatePermissionMemberResp(v:Ref<UpdatePermissionMemberResp>):UpdatePermissionMemberResp
+	export function emptyDeletePermissionMemberReq():DeletePermissionMemberReq
+	export function emptyRefDeletePermissionMemberReq():Ref<DeletePermissionMemberReq>
+	export function refOfDeletePermissionMemberReq(x:DeletePermissionMemberReq,v:Ref<DeletePermissionMemberReq>)
+	export function unRefDeletePermissionMemberReq(v:Ref<DeletePermissionMemberReq>):DeletePermissionMemberReq
+	export function emptyGetFileSubscriptionReqBody():GetFileSubscriptionReqBody
+	export function emptyRefGetFileSubscriptionReqBody():Ref<GetFileSubscriptionReqBody>
+	export function refOfGetFileSubscriptionReqBody(x:GetFileSubscriptionReqBody,v:Ref<GetFileSubscriptionReqBody>)
+	export function unRefGetFileSubscriptionReqBody(v:Ref<GetFileSubscriptionReqBody>):GetFileSubscriptionReqBody
+	export function emptyBatchQueryFileCommentRespData():BatchQueryFileCommentRespData
+	export function emptyRefBatchQueryFileCommentRespData():Ref<BatchQueryFileCommentRespData>
+	export function refOfBatchQueryFileCommentRespData(x:BatchQueryFileCommentRespData,v:Ref<BatchQueryFileCommentRespData>)
+	export function unRefBatchQueryFileCommentRespData(v:Ref<BatchQueryFileCommentRespData>):BatchQueryFileCommentRespData
+	export function emptyListFileIterator():ListFileIterator
+	export function emptyRefListFileIterator():Ref<ListFileIterator>
+	export function refOfListFileIterator(x:ListFileIterator,v:Ref<ListFileIterator>)
+	export function unRefListFileIterator(v:Ref<ListFileIterator>):ListFileIterator
+	export function emptyBatchQueryFileCommentResp():BatchQueryFileCommentResp
+	export function emptyRefBatchQueryFileCommentResp():Ref<BatchQueryFileCommentResp>
+	export function refOfBatchQueryFileCommentResp(x:BatchQueryFileCommentResp,v:Ref<BatchQueryFileCommentResp>)
+	export function unRefBatchQueryFileCommentResp(v:Ref<BatchQueryFileCommentResp>):BatchQueryFileCommentResp
+	export function emptyGetSubscribeFileResp():GetSubscribeFileResp
+	export function emptyRefGetSubscribeFileResp():Ref<GetSubscribeFileResp>
+	export function refOfGetSubscribeFileResp(x:GetSubscribeFileResp,v:Ref<GetSubscribeFileResp>)
+	export function unRefGetSubscribeFileResp(v:Ref<GetSubscribeFileResp>):GetSubscribeFileResp
+	export function emptyDeleteFileVersionReq():DeleteFileVersionReq
+	export function emptyRefDeleteFileVersionReq():Ref<DeleteFileVersionReq>
+	export function refOfDeleteFileVersionReq(x:DeleteFileVersionReq,v:Ref<DeleteFileVersionReq>)
+	export function unRefDeleteFileVersionReq(v:Ref<DeleteFileVersionReq>):DeleteFileVersionReq
+	export function emptyGetFileStatisticsResp():GetFileStatisticsResp
+	export function emptyRefGetFileStatisticsResp():Ref<GetFileStatisticsResp>
+	export function refOfGetFileStatisticsResp(x:GetFileStatisticsResp,v:Ref<GetFileStatisticsResp>)
+	export function unRefGetFileStatisticsResp(v:Ref<GetFileStatisticsResp>):GetFileStatisticsResp
+	export function emptyListPermissionMemberResp():ListPermissionMemberResp
+	export function emptyRefListPermissionMemberResp():Ref<ListPermissionMemberResp>
+	export function refOfListPermissionMemberResp(x:ListPermissionMemberResp,v:Ref<ListPermissionMemberResp>)
+	export function unRefListPermissionMemberResp(v:Ref<ListPermissionMemberResp>):ListPermissionMemberResp
+	export function emptyRequestDoc():RequestDoc
+	export function emptyRefRequestDoc():Ref<RequestDoc>
+	export function refOfRequestDoc(x:RequestDoc,v:Ref<RequestDoc>)
+	export function unRefRequestDoc(v:Ref<RequestDoc>):RequestDoc
+	export function emptyDeleteFileReq():DeleteFileReq
+	export function emptyRefDeleteFileReq():Ref<DeleteFileReq>
+	export function refOfDeleteFileReq(x:DeleteFileReq,v:Ref<DeleteFileReq>)
+	export function unRefDeleteFileReq(v:Ref<DeleteFileReq>):DeleteFileReq
+	export function emptyListFileViewRecordIterator():ListFileViewRecordIterator
+	export function emptyRefListFileViewRecordIterator():Ref<ListFileViewRecordIterator>
+	export function refOfListFileViewRecordIterator(x:ListFileViewRecordIterator,v:Ref<ListFileViewRecordIterator>)
+	export function unRefListFileViewRecordIterator(v:Ref<ListFileViewRecordIterator>):ListFileViewRecordIterator
+	export function emptyP2FileDeletedV1Data():P2FileDeletedV1Data
+	export function emptyRefP2FileDeletedV1Data():Ref<P2FileDeletedV1Data>
+	export function refOfP2FileDeletedV1Data(x:P2FileDeletedV1Data,v:Ref<P2FileDeletedV1Data>)
+	export function unRefP2FileDeletedV1Data(v:Ref<P2FileDeletedV1Data>):P2FileDeletedV1Data
+	export function emptyUploadAllMediaResp():UploadAllMediaResp
+	export function emptyRefUploadAllMediaResp():Ref<UploadAllMediaResp>
+	export function refOfUploadAllMediaResp(x:UploadAllMediaResp,v:Ref<UploadAllMediaResp>)
+	export function unRefUploadAllMediaResp(v:Ref<UploadAllMediaResp>):UploadAllMediaResp
+	export function emptyP2FileBitableRecordChangedV1Data():P2FileBitableRecordChangedV1Data
+	export function emptyRefP2FileBitableRecordChangedV1Data():Ref<P2FileBitableRecordChangedV1Data>
+	export function refOfP2FileBitableRecordChangedV1Data(x:P2FileBitableRecordChangedV1Data,v:Ref<P2FileBitableRecordChangedV1Data>)
+	export function unRefP2FileBitableRecordChangedV1Data(v:Ref<P2FileBitableRecordChangedV1Data>):P2FileBitableRecordChangedV1Data
+	export function emptySubscribeFileReq():SubscribeFileReq
+	export function emptyRefSubscribeFileReq():Ref<SubscribeFileReq>
+	export function refOfSubscribeFileReq(x:SubscribeFileReq,v:Ref<SubscribeFileReq>)
+	export function unRefSubscribeFileReq(v:Ref<SubscribeFileReq>):SubscribeFileReq
+	export function emptyUpdatePermissionPublicPasswordRespData():UpdatePermissionPublicPasswordRespData
+	export function emptyRefUpdatePermissionPublicPasswordRespData():Ref<UpdatePermissionPublicPasswordRespData>
+	export function refOfUpdatePermissionPublicPasswordRespData(x:UpdatePermissionPublicPasswordRespData,v:Ref<UpdatePermissionPublicPasswordRespData>)
+	export function unRefUpdatePermissionPublicPasswordRespData(v:Ref<UpdatePermissionPublicPasswordRespData>):UpdatePermissionPublicPasswordRespData
+	export function emptyUploadFinishFileRespData():UploadFinishFileRespData
+	export function emptyRefUploadFinishFileRespData():Ref<UploadFinishFileRespData>
+	export function refOfUploadFinishFileRespData(x:UploadFinishFileRespData,v:Ref<UploadFinishFileRespData>)
+	export function unRefUploadFinishFileRespData(v:Ref<UploadFinishFileRespData>):UploadFinishFileRespData
+	export function emptyListFileVersionRespData():ListFileVersionRespData
+	export function emptyRefListFileVersionRespData():Ref<ListFileVersionRespData>
+	export function refOfListFileVersionRespData(x:ListFileVersionRespData,v:Ref<ListFileVersionRespData>)
+	export function unRefListFileVersionRespData(v:Ref<ListFileVersionRespData>):ListFileVersionRespData
+	export function emptyCreateFileSubscriptionRespData():CreateFileSubscriptionRespData
+	export function emptyRefCreateFileSubscriptionRespData():Ref<CreateFileSubscriptionRespData>
+	export function refOfCreateFileSubscriptionRespData(x:CreateFileSubscriptionRespData,v:Ref<CreateFileSubscriptionRespData>)
+	export function unRefCreateFileSubscriptionRespData(v:Ref<CreateFileSubscriptionRespData>):CreateFileSubscriptionRespData
+	export function emptyCreateFileCommentRespData():CreateFileCommentRespData
+	export function emptyRefCreateFileCommentRespData():Ref<CreateFileCommentRespData>
+	export function refOfCreateFileCommentRespData(x:CreateFileCommentRespData,v:Ref<CreateFileCommentRespData>)
+	export function unRefCreateFileCommentRespData(v:Ref<CreateFileCommentRespData>):CreateFileCommentRespData
+	export function emptyListFileVersionReq():ListFileVersionReq
+	export function emptyRefListFileVersionReq():Ref<ListFileVersionReq>
+	export function refOfListFileVersionReq(x:ListFileVersionReq,v:Ref<ListFileVersionReq>)
+	export function unRefListFileVersionReq(v:Ref<ListFileVersionReq>):ListFileVersionReq
+	export function emptyUploadPrepareFileRespData():UploadPrepareFileRespData
+	export function emptyRefUploadPrepareFileRespData():Ref<UploadPrepareFileRespData>
+	export function refOfUploadPrepareFileRespData(x:UploadPrepareFileRespData,v:Ref<UploadPrepareFileRespData>)
+	export function unRefUploadPrepareFileRespData(v:Ref<UploadPrepareFileRespData>):UploadPrepareFileRespData
+	export function emptyApplyMemberRequest():ApplyMemberRequest
+	export function emptyRefApplyMemberRequest():Ref<ApplyMemberRequest>
+	export function refOfApplyMemberRequest(x:ApplyMemberRequest,v:Ref<ApplyMemberRequest>)
+	export function unRefApplyMemberRequest(v:Ref<ApplyMemberRequest>):ApplyMemberRequest
+	export function emptyOwner():Owner
+	export function emptyRefOwner():Ref<Owner>
+	export function refOfOwner(x:Owner,v:Ref<Owner>)
+	export function unRefOwner(v:Ref<Owner>):Owner
+	export function emptyPatchFileSubscriptionResp():PatchFileSubscriptionResp
+	export function emptyRefPatchFileSubscriptionResp():Ref<PatchFileSubscriptionResp>
+	export function refOfPatchFileSubscriptionResp(x:PatchFileSubscriptionResp,v:Ref<PatchFileSubscriptionResp>)
+	export function unRefPatchFileSubscriptionResp(v:Ref<PatchFileSubscriptionResp>):PatchFileSubscriptionResp
+	export function emptyPerson():Person
+	export function emptyRefPerson():Ref<Person>
+	export function refOfPerson(x:Person,v:Ref<Person>)
+	export function unRefPerson(v:Ref<Person>):Person
+	export function emptyAuthPermissionMemberReq():AuthPermissionMemberReq
+	export function emptyRefAuthPermissionMemberReq():Ref<AuthPermissionMemberReq>
+	export function refOfAuthPermissionMemberReq(x:AuthPermissionMemberReq,v:Ref<AuthPermissionMemberReq>)
+	export function unRefAuthPermissionMemberReq(v:Ref<AuthPermissionMemberReq>):AuthPermissionMemberReq
+	export function emptyGetFileCommentRespData():GetFileCommentRespData
+	export function emptyRefGetFileCommentRespData():Ref<GetFileCommentRespData>
+	export function refOfGetFileCommentRespData(x:GetFileCommentRespData,v:Ref<GetFileCommentRespData>)
+	export function unRefGetFileCommentRespData(v:Ref<GetFileCommentRespData>):GetFileCommentRespData
+	export function emptyP2FileTrashedV1Data():P2FileTrashedV1Data
+	export function emptyRefP2FileTrashedV1Data():Ref<P2FileTrashedV1Data>
+	export function refOfP2FileTrashedV1Data(x:P2FileTrashedV1Data,v:Ref<P2FileTrashedV1Data>)
+	export function unRefP2FileTrashedV1Data(v:Ref<P2FileTrashedV1Data>):P2FileTrashedV1Data
+	export function emptyDownloadMediaReq():DownloadMediaReq
+	export function emptyRefDownloadMediaReq():Ref<DownloadMediaReq>
+	export function refOfDownloadMediaReq(x:DownloadMediaReq,v:Ref<DownloadMediaReq>)
+	export function unRefDownloadMediaReq(v:Ref<DownloadMediaReq>):DownloadMediaReq
+	export function emptyTaskCheckFileReq():TaskCheckFileReq
+	export function emptyRefTaskCheckFileReq():Ref<TaskCheckFileReq>
+	export function refOfTaskCheckFileReq(x:TaskCheckFileReq,v:Ref<TaskCheckFileReq>)
+	export function unRefTaskCheckFileReq(v:Ref<TaskCheckFileReq>):TaskCheckFileReq
+	export function emptyUploadFinishMediaRespData():UploadFinishMediaRespData
+	export function emptyRefUploadFinishMediaRespData():Ref<UploadFinishMediaRespData>
+	export function refOfUploadFinishMediaRespData(x:UploadFinishMediaRespData,v:Ref<UploadFinishMediaRespData>)
+	export function unRefUploadFinishMediaRespData(v:Ref<UploadFinishMediaRespData>):UploadFinishMediaRespData
 	export function emptyCopyFileResp():CopyFileResp
 	export function emptyRefCopyFileResp():Ref<CopyFileResp>
 	export function refOfCopyFileResp(x:CopyFileResp,v:Ref<CopyFileResp>)
 	export function unRefCopyFileResp(v:Ref<CopyFileResp>):CopyFileResp
+	export function emptyCreateFileSubscriptionResp():CreateFileSubscriptionResp
+	export function emptyRefCreateFileSubscriptionResp():Ref<CreateFileSubscriptionResp>
+	export function refOfCreateFileSubscriptionResp(x:CreateFileSubscriptionResp,v:Ref<CreateFileSubscriptionResp>)
+	export function unRefCreateFileSubscriptionResp(v:Ref<CreateFileSubscriptionResp>):CreateFileSubscriptionResp
+	export function emptyCreateFolderFileResp():CreateFolderFileResp
+	export function emptyRefCreateFolderFileResp():Ref<CreateFolderFileResp>
+	export function refOfCreateFolderFileResp(x:CreateFolderFileResp,v:Ref<CreateFolderFileResp>)
+	export function unRefCreateFolderFileResp(v:Ref<CreateFolderFileResp>):CreateFolderFileResp
+	export function emptyReplyExtra():ReplyExtra
+	export function emptyRefReplyExtra():Ref<ReplyExtra>
+	export function refOfReplyExtra(x:ReplyExtra,v:Ref<ReplyExtra>)
+	export function unRefReplyExtra(v:Ref<ReplyExtra>):ReplyExtra
+	export function emptyUpdateFileCommentReplyReqBody():UpdateFileCommentReplyReqBody
+	export function emptyRefUpdateFileCommentReplyReqBody():Ref<UpdateFileCommentReplyReqBody>
+	export function refOfUpdateFileCommentReplyReqBody(x:UpdateFileCommentReplyReqBody,v:Ref<UpdateFileCommentReplyReqBody>)
+	export function unRefUpdateFileCommentReplyReqBody(v:Ref<UpdateFileCommentReplyReqBody>):UpdateFileCommentReplyReqBody
+	export function emptyGetFileSubscriptionReq():GetFileSubscriptionReq
+	export function emptyRefGetFileSubscriptionReq():Ref<GetFileSubscriptionReq>
+	export function refOfGetFileSubscriptionReq(x:GetFileSubscriptionReq,v:Ref<GetFileSubscriptionReq>)
+	export function unRefGetFileSubscriptionReq(v:Ref<GetFileSubscriptionReq>):GetFileSubscriptionReq
+	export function emptyListFileViewRecordReq():ListFileViewRecordReq
+	export function emptyRefListFileViewRecordReq():Ref<ListFileViewRecordReq>
+	export function refOfListFileViewRecordReq(x:ListFileViewRecordReq,v:Ref<ListFileViewRecordReq>)
+	export function unRefListFileViewRecordReq(v:Ref<ListFileViewRecordReq>):ListFileViewRecordReq
+	export function emptyGetSubscribeFileReq():GetSubscribeFileReq
+	export function emptyRefGetSubscribeFileReq():Ref<GetSubscribeFileReq>
+	export function refOfGetSubscribeFileReq(x:GetSubscribeFileReq,v:Ref<GetSubscribeFileReq>)
+	export function unRefGetSubscribeFileReq(v:Ref<GetSubscribeFileReq>):GetSubscribeFileReq
+	export function emptyMoveFileRespData():MoveFileRespData
+	export function emptyRefMoveFileRespData():Ref<MoveFileRespData>
+	export function refOfMoveFileRespData(x:MoveFileRespData,v:Ref<MoveFileRespData>)
+	export function unRefMoveFileRespData(v:Ref<MoveFileRespData>):MoveFileRespData
+	export function emptyCreatePermissionPublicPasswordResp():CreatePermissionPublicPasswordResp
+	export function emptyRefCreatePermissionPublicPasswordResp():Ref<CreatePermissionPublicPasswordResp>
+	export function refOfCreatePermissionPublicPasswordResp(x:CreatePermissionPublicPasswordResp,v:Ref<CreatePermissionPublicPasswordResp>)
+	export function unRefCreatePermissionPublicPasswordResp(v:Ref<CreatePermissionPublicPasswordResp>):CreatePermissionPublicPasswordResp
+	export function emptyPermissionPublic():PermissionPublic
+	export function emptyRefPermissionPublic():Ref<PermissionPublic>
+	export function refOfPermissionPublic(x:PermissionPublic,v:Ref<PermissionPublic>)
+	export function unRefPermissionPublic(v:Ref<PermissionPublic>):PermissionPublic
+	export function emptyUploadPrepareFileReq():UploadPrepareFileReq
+	export function emptyRefUploadPrepareFileReq():Ref<UploadPrepareFileReq>
+	export function refOfUploadPrepareFileReq(x:UploadPrepareFileReq,v:Ref<UploadPrepareFileReq>)
+	export function unRefUploadPrepareFileReq(v:Ref<UploadPrepareFileReq>):UploadPrepareFileReq
+	export function emptyCreateImportTaskReq():CreateImportTaskReq
+	export function emptyRefCreateImportTaskReq():Ref<CreateImportTaskReq>
+	export function refOfCreateImportTaskReq(x:CreateImportTaskReq,v:Ref<CreateImportTaskReq>)
+	export function unRefCreateImportTaskReq(v:Ref<CreateImportTaskReq>):CreateImportTaskReq
+	export function emptyListFileResp():ListFileResp
+	export function emptyRefListFileResp():Ref<ListFileResp>
+	export function refOfListFileResp(x:ListFileResp,v:Ref<ListFileResp>)
+	export function unRefListFileResp(v:Ref<ListFileResp>):ListFileResp
+	export function emptyFileStatistics():FileStatistics
+	export function emptyRefFileStatistics():Ref<FileStatistics>
+	export function refOfFileStatistics(x:FileStatistics,v:Ref<FileStatistics>)
+	export function unRefFileStatistics(v:Ref<FileStatistics>):FileStatistics
+	export function emptyListFileReq():ListFileReq
+	export function emptyRefListFileReq():Ref<ListFileReq>
+	export function refOfListFileReq(x:ListFileReq,v:Ref<ListFileReq>)
+	export function unRefListFileReq(v:Ref<ListFileReq>):ListFileReq
+	export function emptySubscribeFileResp():SubscribeFileResp
+	export function emptyRefSubscribeFileResp():Ref<SubscribeFileResp>
+	export function refOfSubscribeFileResp(x:SubscribeFileResp,v:Ref<SubscribeFileResp>)
+	export function unRefSubscribeFileResp(v:Ref<SubscribeFileResp>):SubscribeFileResp
+	export function emptyPatchFileSubscriptionRespData():PatchFileSubscriptionRespData
+	export function emptyRefPatchFileSubscriptionRespData():Ref<PatchFileSubscriptionRespData>
+	export function refOfPatchFileSubscriptionRespData(x:PatchFileSubscriptionRespData,v:Ref<PatchFileSubscriptionRespData>)
+	export function unRefPatchFileSubscriptionRespData(v:Ref<PatchFileSubscriptionRespData>):PatchFileSubscriptionRespData
+	export function emptyDeletePermissionMemberResp():DeletePermissionMemberResp
+	export function emptyRefDeletePermissionMemberResp():Ref<DeletePermissionMemberResp>
+	export function refOfDeletePermissionMemberResp(x:DeletePermissionMemberResp,v:Ref<DeletePermissionMemberResp>)
+	export function unRefDeletePermissionMemberResp(v:Ref<DeletePermissionMemberResp>):DeletePermissionMemberResp
+	export function emptyP2FileDeletedV1():P2FileDeletedV1
+	export function emptyRefP2FileDeletedV1():Ref<P2FileDeletedV1>
+	export function refOfP2FileDeletedV1(x:P2FileDeletedV1,v:Ref<P2FileDeletedV1>)
+	export function unRefP2FileDeletedV1(v:Ref<P2FileDeletedV1>):P2FileDeletedV1
+	export function emptyPatchFileCommentReq():PatchFileCommentReq
+	export function emptyRefPatchFileCommentReq():Ref<PatchFileCommentReq>
+	export function refOfPatchFileCommentReq(x:PatchFileCommentReq,v:Ref<PatchFileCommentReq>)
+	export function unRefPatchFileCommentReq(v:Ref<PatchFileCommentReq>):PatchFileCommentReq
+	export function emptyExportTask():ExportTask
+	export function emptyRefExportTask():Ref<ExportTask>
+	export function refOfExportTask(x:ExportTask,v:Ref<ExportTask>)
+	export function unRefExportTask(v:Ref<ExportTask>):ExportTask
+	export function emptyProperty():Property
+	export function emptyRefProperty():Ref<Property>
+	export function refOfProperty(x:Property,v:Ref<Property>)
+	export function unRefProperty(v:Ref<Property>):Property
+	export function emptyGetFileVersionResp():GetFileVersionResp
+	export function emptyRefGetFileVersionResp():Ref<GetFileVersionResp>
+	export function refOfGetFileVersionResp(x:GetFileVersionResp,v:Ref<GetFileVersionResp>)
+	export function unRefGetFileVersionResp(v:Ref<GetFileVersionResp>):GetFileVersionResp
 	export function emptyTmpDownloadUrl():TmpDownloadUrl
 	export function emptyRefTmpDownloadUrl():Ref<TmpDownloadUrl>
 	export function refOfTmpDownloadUrl(x:TmpDownloadUrl,v:Ref<TmpDownloadUrl>)
@@ -3743,370 +4114,34 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/drive/v1'{
 	export function emptyRefPermissionPublicRequest():Ref<PermissionPublicRequest>
 	export function refOfPermissionPublicRequest(x:PermissionPublicRequest,v:Ref<PermissionPublicRequest>)
 	export function unRefPermissionPublicRequest(v:Ref<PermissionPublicRequest>):PermissionPublicRequest
-	export function emptyBitableTableFieldActionValuePropertyAutoSerial():BitableTableFieldActionValuePropertyAutoSerial
-	export function emptyRefBitableTableFieldActionValuePropertyAutoSerial():Ref<BitableTableFieldActionValuePropertyAutoSerial>
-	export function refOfBitableTableFieldActionValuePropertyAutoSerial(x:BitableTableFieldActionValuePropertyAutoSerial,v:Ref<BitableTableFieldActionValuePropertyAutoSerial>)
-	export function unRefBitableTableFieldActionValuePropertyAutoSerial(v:Ref<BitableTableFieldActionValuePropertyAutoSerial>):BitableTableFieldActionValuePropertyAutoSerial
-	export function emptyDeleteFileCommentReplyResp():DeleteFileCommentReplyResp
-	export function emptyRefDeleteFileCommentReplyResp():Ref<DeleteFileCommentReplyResp>
-	export function refOfDeleteFileCommentReplyResp(x:DeleteFileCommentReplyResp,v:Ref<DeleteFileCommentReplyResp>)
-	export function unRefDeleteFileCommentReplyResp(v:Ref<DeleteFileCommentReplyResp>):DeleteFileCommentReplyResp
-	export function emptyDeletePermissionPublicPasswordResp():DeletePermissionPublicPasswordResp
-	export function emptyRefDeletePermissionPublicPasswordResp():Ref<DeletePermissionPublicPasswordResp>
-	export function refOfDeletePermissionPublicPasswordResp(x:DeletePermissionPublicPasswordResp,v:Ref<DeletePermissionPublicPasswordResp>)
-	export function unRefDeletePermissionPublicPasswordResp(v:Ref<DeletePermissionPublicPasswordResp>):DeletePermissionPublicPasswordResp
-	export function emptyListFileRespData():ListFileRespData
-	export function emptyRefListFileRespData():Ref<ListFileRespData>
-	export function refOfListFileRespData(x:ListFileRespData,v:Ref<ListFileRespData>)
-	export function unRefListFileRespData(v:Ref<ListFileRespData>):ListFileRespData
-	export function emptyAuthPermissionMemberReq():AuthPermissionMemberReq
-	export function emptyRefAuthPermissionMemberReq():Ref<AuthPermissionMemberReq>
-	export function refOfAuthPermissionMemberReq(x:AuthPermissionMemberReq,v:Ref<AuthPermissionMemberReq>)
-	export function unRefAuthPermissionMemberReq(v:Ref<AuthPermissionMemberReq>):AuthPermissionMemberReq
-	export function emptyCollaborator():Collaborator
-	export function emptyRefCollaborator():Ref<Collaborator>
-	export function refOfCollaborator(x:Collaborator,v:Ref<Collaborator>)
-	export function unRefCollaborator(v:Ref<Collaborator>):Collaborator
-	export function emptyGetPermissionPublicRespData():GetPermissionPublicRespData
-	export function emptyRefGetPermissionPublicRespData():Ref<GetPermissionPublicRespData>
-	export function refOfGetPermissionPublicRespData(x:GetPermissionPublicRespData,v:Ref<GetPermissionPublicRespData>)
-	export function unRefGetPermissionPublicRespData(v:Ref<GetPermissionPublicRespData>):GetPermissionPublicRespData
-	export function emptyListFileCommentReplyIterator():ListFileCommentReplyIterator
-	export function emptyRefListFileCommentReplyIterator():Ref<ListFileCommentReplyIterator>
-	export function refOfListFileCommentReplyIterator(x:ListFileCommentReplyIterator,v:Ref<ListFileCommentReplyIterator>)
-	export function unRefListFileCommentReplyIterator(v:Ref<ListFileCommentReplyIterator>):ListFileCommentReplyIterator
-	export function emptyP2FilePermissionMemberRemovedV1():P2FilePermissionMemberRemovedV1
-	export function emptyRefP2FilePermissionMemberRemovedV1():Ref<P2FilePermissionMemberRemovedV1>
-	export function refOfP2FilePermissionMemberRemovedV1(x:P2FilePermissionMemberRemovedV1,v:Ref<P2FilePermissionMemberRemovedV1>)
-	export function unRefP2FilePermissionMemberRemovedV1(v:Ref<P2FilePermissionMemberRemovedV1>):P2FilePermissionMemberRemovedV1
-	export function emptyCreateFileSubscriptionResp():CreateFileSubscriptionResp
-	export function emptyRefCreateFileSubscriptionResp():Ref<CreateFileSubscriptionResp>
-	export function refOfCreateFileSubscriptionResp(x:CreateFileSubscriptionResp,v:Ref<CreateFileSubscriptionResp>)
-	export function unRefCreateFileSubscriptionResp(v:Ref<CreateFileSubscriptionResp>):CreateFileSubscriptionResp
-	export function emptyUploadAllFileReq():UploadAllFileReq
-	export function emptyRefUploadAllFileReq():Ref<UploadAllFileReq>
-	export function refOfUploadAllFileReq(x:UploadAllFileReq,v:Ref<UploadAllFileReq>)
-	export function unRefUploadAllFileReq(v:Ref<UploadAllFileReq>):UploadAllFileReq
+	export function emptyBatchGetTmpDownloadUrlMediaReq():BatchGetTmpDownloadUrlMediaReq
+	export function emptyRefBatchGetTmpDownloadUrlMediaReq():Ref<BatchGetTmpDownloadUrlMediaReq>
+	export function refOfBatchGetTmpDownloadUrlMediaReq(x:BatchGetTmpDownloadUrlMediaReq,v:Ref<BatchGetTmpDownloadUrlMediaReq>)
+	export function unRefBatchGetTmpDownloadUrlMediaReq(v:Ref<BatchGetTmpDownloadUrlMediaReq>):BatchGetTmpDownloadUrlMediaReq
+	export function emptyDeleteSubscribeFileResp():DeleteSubscribeFileResp
+	export function emptyRefDeleteSubscribeFileResp():Ref<DeleteSubscribeFileResp>
+	export function refOfDeleteSubscribeFileResp(x:DeleteSubscribeFileResp,v:Ref<DeleteSubscribeFileResp>)
+	export function unRefDeleteSubscribeFileResp(v:Ref<DeleteSubscribeFileResp>):DeleteSubscribeFileResp
+	export function emptyMeta():Meta
+	export function emptyRefMeta():Ref<Meta>
+	export function refOfMeta(x:Meta,v:Ref<Meta>)
+	export function unRefMeta(v:Ref<Meta>):Meta
+	export function emptyP2FileBitableRecordChangedV1():P2FileBitableRecordChangedV1
+	export function emptyRefP2FileBitableRecordChangedV1():Ref<P2FileBitableRecordChangedV1>
+	export function refOfP2FileBitableRecordChangedV1(x:P2FileBitableRecordChangedV1,v:Ref<P2FileBitableRecordChangedV1>)
+	export function unRefP2FileBitableRecordChangedV1(v:Ref<P2FileBitableRecordChangedV1>):P2FileBitableRecordChangedV1
+	export function emptyUpdateFileCommentReplyReq():UpdateFileCommentReplyReq
+	export function emptyRefUpdateFileCommentReplyReq():Ref<UpdateFileCommentReplyReq>
+	export function refOfUpdateFileCommentReplyReq(x:UpdateFileCommentReplyReq,v:Ref<UpdateFileCommentReplyReq>)
+	export function unRefUpdateFileCommentReplyReq(v:Ref<UpdateFileCommentReplyReq>):UpdateFileCommentReplyReq
 	export function emptyListFileCommentReq():ListFileCommentReq
 	export function emptyRefListFileCommentReq():Ref<ListFileCommentReq>
 	export function refOfListFileCommentReq(x:ListFileCommentReq,v:Ref<ListFileCommentReq>)
 	export function unRefListFileCommentReq(v:Ref<ListFileCommentReq>):ListFileCommentReq
-	export function emptyUploadPrepareMediaReq():UploadPrepareMediaReq
-	export function emptyRefUploadPrepareMediaReq():Ref<UploadPrepareMediaReq>
-	export function refOfUploadPrepareMediaReq(x:UploadPrepareMediaReq,v:Ref<UploadPrepareMediaReq>)
-	export function unRefUploadPrepareMediaReq(v:Ref<UploadPrepareMediaReq>):UploadPrepareMediaReq
-	export function emptyBitableTableFieldAction():BitableTableFieldAction
-	export function emptyRefBitableTableFieldAction():Ref<BitableTableFieldAction>
-	export function refOfBitableTableFieldAction(x:BitableTableFieldAction,v:Ref<BitableTableFieldAction>)
-	export function unRefBitableTableFieldAction(v:Ref<BitableTableFieldAction>):BitableTableFieldAction
-	export function emptyShortcutInfo():ShortcutInfo
-	export function emptyRefShortcutInfo():Ref<ShortcutInfo>
-	export function refOfShortcutInfo(x:ShortcutInfo,v:Ref<ShortcutInfo>)
-	export function unRefShortcutInfo(v:Ref<ShortcutInfo>):ShortcutInfo
-	export function emptyBitableTableRecordActionFieldIdentity():BitableTableRecordActionFieldIdentity
-	export function emptyRefBitableTableRecordActionFieldIdentity():Ref<BitableTableRecordActionFieldIdentity>
-	export function refOfBitableTableRecordActionFieldIdentity(x:BitableTableRecordActionFieldIdentity,v:Ref<BitableTableRecordActionFieldIdentity>)
-	export function unRefBitableTableRecordActionFieldIdentity(v:Ref<BitableTableRecordActionFieldIdentity>):BitableTableRecordActionFieldIdentity
-	export function emptyCopyFileRespData():CopyFileRespData
-	export function emptyRefCopyFileRespData():Ref<CopyFileRespData>
-	export function refOfCopyFileRespData(x:CopyFileRespData,v:Ref<CopyFileRespData>)
-	export function unRefCopyFileRespData(v:Ref<CopyFileRespData>):CopyFileRespData
-	export function emptyDocsLink():DocsLink
-	export function emptyRefDocsLink():Ref<DocsLink>
-	export function refOfDocsLink(x:DocsLink,v:Ref<DocsLink>)
-	export function unRefDocsLink(v:Ref<DocsLink>):DocsLink
-	export function emptyBitableTableRecordActionField():BitableTableRecordActionField
-	export function emptyRefBitableTableRecordActionField():Ref<BitableTableRecordActionField>
-	export function refOfBitableTableRecordActionField(x:BitableTableRecordActionField,v:Ref<BitableTableRecordActionField>)
-	export function unRefBitableTableRecordActionField(v:Ref<BitableTableRecordActionField>):BitableTableRecordActionField
-	export function emptyBatchQueryFileCommentReq():BatchQueryFileCommentReq
-	export function emptyRefBatchQueryFileCommentReq():Ref<BatchQueryFileCommentReq>
-	export function refOfBatchQueryFileCommentReq(x:BatchQueryFileCommentReq,v:Ref<BatchQueryFileCommentReq>)
-	export function unRefBatchQueryFileCommentReq(v:Ref<BatchQueryFileCommentReq>):BatchQueryFileCommentReq
-	export function emptyBatchQueryMetaReq():BatchQueryMetaReq
-	export function emptyRefBatchQueryMetaReq():Ref<BatchQueryMetaReq>
-	export function refOfBatchQueryMetaReq(x:BatchQueryMetaReq,v:Ref<BatchQueryMetaReq>)
-	export function unRefBatchQueryMetaReq(v:Ref<BatchQueryMetaReq>):BatchQueryMetaReq
-	export function emptyGetExportTaskRespData():GetExportTaskRespData
-	export function emptyRefGetExportTaskRespData():Ref<GetExportTaskRespData>
-	export function refOfGetExportTaskRespData(x:GetExportTaskRespData,v:Ref<GetExportTaskRespData>)
-	export function unRefGetExportTaskRespData(v:Ref<GetExportTaskRespData>):GetExportTaskRespData
-	export function emptyListFileViewRecordIterator():ListFileViewRecordIterator
-	export function emptyRefListFileViewRecordIterator():Ref<ListFileViewRecordIterator>
-	export function refOfListFileViewRecordIterator(x:ListFileViewRecordIterator,v:Ref<ListFileViewRecordIterator>)
-	export function unRefListFileViewRecordIterator(v:Ref<ListFileViewRecordIterator>):ListFileViewRecordIterator
-	export function emptyPatchFileCommentReqBody():PatchFileCommentReqBody
-	export function emptyRefPatchFileCommentReqBody():Ref<PatchFileCommentReqBody>
-	export function refOfPatchFileCommentReqBody(x:PatchFileCommentReqBody,v:Ref<PatchFileCommentReqBody>)
-	export function unRefPatchFileCommentReqBody(v:Ref<PatchFileCommentReqBody>):PatchFileCommentReqBody
-	export function emptyListFileResp():ListFileResp
-	export function emptyRefListFileResp():Ref<ListFileResp>
-	export function refOfListFileResp(x:ListFileResp,v:Ref<ListFileResp>)
-	export function unRefListFileResp(v:Ref<ListFileResp>):ListFileResp
-	export function emptyPatchPermissionPublicReq():PatchPermissionPublicReq
-	export function emptyRefPatchPermissionPublicReq():Ref<PatchPermissionPublicReq>
-	export function refOfPatchPermissionPublicReq(x:PatchPermissionPublicReq,v:Ref<PatchPermissionPublicReq>)
-	export function unRefPatchPermissionPublicReq(v:Ref<PatchPermissionPublicReq>):PatchPermissionPublicReq
-	export function emptyUpdateFileCommentReplyResp():UpdateFileCommentReplyResp
-	export function emptyRefUpdateFileCommentReplyResp():Ref<UpdateFileCommentReplyResp>
-	export function refOfUpdateFileCommentReplyResp(x:UpdateFileCommentReplyResp,v:Ref<UpdateFileCommentReplyResp>)
-	export function unRefUpdateFileCommentReplyResp(v:Ref<UpdateFileCommentReplyResp>):UpdateFileCommentReplyResp
-	export function emptyBitableTableFieldActionValueProperty():BitableTableFieldActionValueProperty
-	export function emptyRefBitableTableFieldActionValueProperty():Ref<BitableTableFieldActionValueProperty>
-	export function refOfBitableTableFieldActionValueProperty(x:BitableTableFieldActionValueProperty,v:Ref<BitableTableFieldActionValueProperty>)
-	export function unRefBitableTableFieldActionValueProperty(v:Ref<BitableTableFieldActionValueProperty>):BitableTableFieldActionValueProperty
-	export function emptyGetFileStatisticsRespData():GetFileStatisticsRespData
-	export function emptyRefGetFileStatisticsRespData():Ref<GetFileStatisticsRespData>
-	export function refOfGetFileStatisticsRespData(x:GetFileStatisticsRespData,v:Ref<GetFileStatisticsRespData>)
-	export function unRefGetFileStatisticsRespData(v:Ref<GetFileStatisticsRespData>):GetFileStatisticsRespData
-	export function emptyUserId():UserId
-	export function emptyRefUserId():Ref<UserId>
-	export function refOfUserId(x:UserId,v:Ref<UserId>)
-	export function unRefUserId(v:Ref<UserId>):UserId
-	export function emptyListFileIterator():ListFileIterator
-	export function emptyRefListFileIterator():Ref<ListFileIterator>
-	export function refOfListFileIterator(x:ListFileIterator,v:Ref<ListFileIterator>)
-	export function unRefListFileIterator(v:Ref<ListFileIterator>):ListFileIterator
-	export function emptyCreatePermissionPublicPasswordResp():CreatePermissionPublicPasswordResp
-	export function emptyRefCreatePermissionPublicPasswordResp():Ref<CreatePermissionPublicPasswordResp>
-	export function refOfCreatePermissionPublicPasswordResp(x:CreatePermissionPublicPasswordResp,v:Ref<CreatePermissionPublicPasswordResp>)
-	export function unRefCreatePermissionPublicPasswordResp(v:Ref<CreatePermissionPublicPasswordResp>):CreatePermissionPublicPasswordResp
-	export function emptyUploadPartFileReq():UploadPartFileReq
-	export function emptyRefUploadPartFileReq():Ref<UploadPartFileReq>
-	export function refOfUploadPartFileReq(x:UploadPartFileReq,v:Ref<UploadPartFileReq>)
-	export function unRefUploadPartFileReq(v:Ref<UploadPartFileReq>):UploadPartFileReq
-	export function emptyProperty():Property
-	export function emptyRefProperty():Ref<Property>
-	export function refOfProperty(x:Property,v:Ref<Property>)
-	export function unRefProperty(v:Ref<Property>):Property
-	export function emptyDeletePermissionPublicPasswordReq():DeletePermissionPublicPasswordReq
-	export function emptyRefDeletePermissionPublicPasswordReq():Ref<DeletePermissionPublicPasswordReq>
-	export function refOfDeletePermissionPublicPasswordReq(x:DeletePermissionPublicPasswordReq,v:Ref<DeletePermissionPublicPasswordReq>)
-	export function unRefDeletePermissionPublicPasswordReq(v:Ref<DeletePermissionPublicPasswordReq>):DeletePermissionPublicPasswordReq
-	export function emptyDeleteFileVersionReq():DeleteFileVersionReq
-	export function emptyRefDeleteFileVersionReq():Ref<DeleteFileVersionReq>
-	export function refOfDeleteFileVersionReq(x:DeleteFileVersionReq,v:Ref<DeleteFileVersionReq>)
-	export function unRefDeleteFileVersionReq(v:Ref<DeleteFileVersionReq>):DeleteFileVersionReq
-	export function emptyListFileCommentReplyRespData():ListFileCommentReplyRespData
-	export function emptyRefListFileCommentReplyRespData():Ref<ListFileCommentReplyRespData>
-	export function refOfListFileCommentReplyRespData(x:ListFileCommentReplyRespData,v:Ref<ListFileCommentReplyRespData>)
-	export function unRefListFileCommentReplyRespData(v:Ref<ListFileCommentReplyRespData>):ListFileCommentReplyRespData
-	export function emptyListPermissionMemberRespData():ListPermissionMemberRespData
-	export function emptyRefListPermissionMemberRespData():Ref<ListPermissionMemberRespData>
-	export function refOfListPermissionMemberRespData(x:ListPermissionMemberRespData,v:Ref<ListPermissionMemberRespData>)
-	export function unRefListPermissionMemberRespData(v:Ref<ListPermissionMemberRespData>):ListPermissionMemberRespData
-	export function emptyP2FileReadV1():P2FileReadV1
-	export function emptyRefP2FileReadV1():Ref<P2FileReadV1>
-	export function refOfP2FileReadV1(x:P2FileReadV1,v:Ref<P2FileReadV1>)
-	export function unRefP2FileReadV1(v:Ref<P2FileReadV1>):P2FileReadV1
-	export function emptyDeleteFileReq():DeleteFileReq
-	export function emptyRefDeleteFileReq():Ref<DeleteFileReq>
-	export function refOfDeleteFileReq(x:DeleteFileReq,v:Ref<DeleteFileReq>)
-	export function unRefDeleteFileReq(v:Ref<DeleteFileReq>):DeleteFileReq
-	export function emptyUploadAllMediaReqBody():UploadAllMediaReqBody
-	export function emptyRefUploadAllMediaReqBody():Ref<UploadAllMediaReqBody>
-	export function refOfUploadAllMediaReqBody(x:UploadAllMediaReqBody,v:Ref<UploadAllMediaReqBody>)
-	export function unRefUploadAllMediaReqBody(v:Ref<UploadAllMediaReqBody>):UploadAllMediaReqBody
-	export function emptyCreatePermissionMemberRespData():CreatePermissionMemberRespData
-	export function emptyRefCreatePermissionMemberRespData():Ref<CreatePermissionMemberRespData>
-	export function refOfCreatePermissionMemberRespData(x:CreatePermissionMemberRespData,v:Ref<CreatePermissionMemberRespData>)
-	export function unRefCreatePermissionMemberRespData(v:Ref<CreatePermissionMemberRespData>):CreatePermissionMemberRespData
-	export function emptyCreateImportTaskRespData():CreateImportTaskRespData
-	export function emptyRefCreateImportTaskRespData():Ref<CreateImportTaskRespData>
-	export function refOfCreateImportTaskRespData(x:CreateImportTaskRespData,v:Ref<CreateImportTaskRespData>)
-	export function unRefCreateImportTaskRespData(v:Ref<CreateImportTaskRespData>):CreateImportTaskRespData
-	export function emptyTaskCheckFileReq():TaskCheckFileReq
-	export function emptyRefTaskCheckFileReq():Ref<TaskCheckFileReq>
-	export function refOfTaskCheckFileReq(x:TaskCheckFileReq,v:Ref<TaskCheckFileReq>)
-	export function unRefTaskCheckFileReq(v:Ref<TaskCheckFileReq>):TaskCheckFileReq
-	export function emptyUploadFinishFileRespData():UploadFinishFileRespData
-	export function emptyRefUploadFinishFileRespData():Ref<UploadFinishFileRespData>
-	export function refOfUploadFinishFileRespData(x:UploadFinishFileRespData,v:Ref<UploadFinishFileRespData>)
-	export function unRefUploadFinishFileRespData(v:Ref<UploadFinishFileRespData>):UploadFinishFileRespData
-	export function emptyBaseMember():BaseMember
-	export function emptyRefBaseMember():Ref<BaseMember>
-	export function refOfBaseMember(x:BaseMember,v:Ref<BaseMember>)
-	export function unRefBaseMember(v:Ref<BaseMember>):BaseMember
-	export function emptyListFileCommentReplyReq():ListFileCommentReplyReq
-	export function emptyRefListFileCommentReplyReq():Ref<ListFileCommentReplyReq>
-	export function refOfListFileCommentReplyReq(x:ListFileCommentReplyReq,v:Ref<ListFileCommentReplyReq>)
-	export function unRefListFileCommentReplyReq(v:Ref<ListFileCommentReplyReq>):ListFileCommentReplyReq
-	export function emptyP2FileBitableFieldChangedV1():P2FileBitableFieldChangedV1
-	export function emptyRefP2FileBitableFieldChangedV1():Ref<P2FileBitableFieldChangedV1>
-	export function refOfP2FileBitableFieldChangedV1(x:P2FileBitableFieldChangedV1,v:Ref<P2FileBitableFieldChangedV1>)
-	export function unRefP2FileBitableFieldChangedV1(v:Ref<P2FileBitableFieldChangedV1>):P2FileBitableFieldChangedV1
-	export function emptyCreateFileCommentResp():CreateFileCommentResp
-	export function emptyRefCreateFileCommentResp():Ref<CreateFileCommentResp>
-	export function refOfCreateFileCommentResp(x:CreateFileCommentResp,v:Ref<CreateFileCommentResp>)
-	export function unRefCreateFileCommentResp(v:Ref<CreateFileCommentResp>):CreateFileCommentResp
-	export function emptyUploadFinishMediaRespData():UploadFinishMediaRespData
-	export function emptyRefUploadFinishMediaRespData():Ref<UploadFinishMediaRespData>
-	export function refOfUploadFinishMediaRespData(x:UploadFinishMediaRespData,v:Ref<UploadFinishMediaRespData>)
-	export function unRefUploadFinishMediaRespData(v:Ref<UploadFinishMediaRespData>):UploadFinishMediaRespData
-	export function emptyUpdatePermissionMemberResp():UpdatePermissionMemberResp
-	export function emptyRefUpdatePermissionMemberResp():Ref<UpdatePermissionMemberResp>
-	export function refOfUpdatePermissionMemberResp(x:UpdatePermissionMemberResp,v:Ref<UpdatePermissionMemberResp>)
-	export function unRefUpdatePermissionMemberResp(v:Ref<UpdatePermissionMemberResp>):UpdatePermissionMemberResp
-	export function emptyUploadFinishFileReqBody():UploadFinishFileReqBody
-	export function emptyRefUploadFinishFileReqBody():Ref<UploadFinishFileReqBody>
-	export function refOfUploadFinishFileReqBody(x:UploadFinishFileReqBody,v:Ref<UploadFinishFileReqBody>)
-	export function unRefUploadFinishFileReqBody(v:Ref<UploadFinishFileReqBody>):UploadFinishFileReqBody
-	export function emptyBatchQueryMetaRespData():BatchQueryMetaRespData
-	export function emptyRefBatchQueryMetaRespData():Ref<BatchQueryMetaRespData>
-	export function refOfBatchQueryMetaRespData(x:BatchQueryMetaRespData,v:Ref<BatchQueryMetaRespData>)
-	export function unRefBatchQueryMetaRespData(v:Ref<BatchQueryMetaRespData>):BatchQueryMetaRespData
-	export function emptyCreateFolderFileReq():CreateFolderFileReq
-	export function emptyRefCreateFolderFileReq():Ref<CreateFolderFileReq>
-	export function refOfCreateFolderFileReq(x:CreateFolderFileReq,v:Ref<CreateFolderFileReq>)
-	export function unRefCreateFolderFileReq(v:Ref<CreateFolderFileReq>):CreateFolderFileReq
-	export function emptyDownloadMediaResp():DownloadMediaResp
-	export function emptyRefDownloadMediaResp():Ref<DownloadMediaResp>
-	export function refOfDownloadMediaResp(x:DownloadMediaResp,v:Ref<DownloadMediaResp>)
-	export function unRefDownloadMediaResp(v:Ref<DownloadMediaResp>):DownloadMediaResp
-	export function emptyCreatePermissionMemberReq():CreatePermissionMemberReq
-	export function emptyRefCreatePermissionMemberReq():Ref<CreatePermissionMemberReq>
-	export function refOfCreatePermissionMemberReq(x:CreatePermissionMemberReq,v:Ref<CreatePermissionMemberReq>)
-	export function unRefCreatePermissionMemberReq(v:Ref<CreatePermissionMemberReq>):CreatePermissionMemberReq
-	export function emptyGetFileCommentReq():GetFileCommentReq
-	export function emptyRefGetFileCommentReq():Ref<GetFileCommentReq>
-	export function refOfGetFileCommentReq(x:GetFileCommentReq,v:Ref<GetFileCommentReq>)
-	export function unRefGetFileCommentReq(v:Ref<GetFileCommentReq>):GetFileCommentReq
-	export function emptyCreatePermissionMemberResp():CreatePermissionMemberResp
-	export function emptyRefCreatePermissionMemberResp():Ref<CreatePermissionMemberResp>
-	export function refOfCreatePermissionMemberResp(x:CreatePermissionMemberResp,v:Ref<CreatePermissionMemberResp>)
-	export function unRefCreatePermissionMemberResp(v:Ref<CreatePermissionMemberResp>):CreatePermissionMemberResp
-	export function emptyCreateFileCommentRespData():CreateFileCommentRespData
-	export function emptyRefCreateFileCommentRespData():Ref<CreateFileCommentRespData>
-	export function refOfCreateFileCommentRespData(x:CreateFileCommentRespData,v:Ref<CreateFileCommentRespData>)
-	export function unRefCreateFileCommentRespData(v:Ref<CreateFileCommentRespData>):CreateFileCommentRespData
-	export function emptyP2FileEditV1Data():P2FileEditV1Data
-	export function emptyRefP2FileEditV1Data():Ref<P2FileEditV1Data>
-	export function refOfP2FileEditV1Data(x:P2FileEditV1Data,v:Ref<P2FileEditV1Data>)
-	export function unRefP2FileEditV1Data(v:Ref<P2FileEditV1Data>):P2FileEditV1Data
-	export function emptyP2FilePermissionMemberAddedV1():P2FilePermissionMemberAddedV1
-	export function emptyRefP2FilePermissionMemberAddedV1():Ref<P2FilePermissionMemberAddedV1>
-	export function refOfP2FilePermissionMemberAddedV1(x:P2FilePermissionMemberAddedV1,v:Ref<P2FilePermissionMemberAddedV1>)
-	export function unRefP2FilePermissionMemberAddedV1(v:Ref<P2FilePermissionMemberAddedV1>):P2FilePermissionMemberAddedV1
-	export function emptyBitableTableRecordActionFieldIdentityUser():BitableTableRecordActionFieldIdentityUser
-	export function emptyRefBitableTableRecordActionFieldIdentityUser():Ref<BitableTableRecordActionFieldIdentityUser>
-	export function refOfBitableTableRecordActionFieldIdentityUser(x:BitableTableRecordActionFieldIdentityUser,v:Ref<BitableTableRecordActionFieldIdentityUser>)
-	export function unRefBitableTableRecordActionFieldIdentityUser(v:Ref<BitableTableRecordActionFieldIdentityUser>):BitableTableRecordActionFieldIdentityUser
-	export function emptyCreateExportTaskRespData():CreateExportTaskRespData
-	export function emptyRefCreateExportTaskRespData():Ref<CreateExportTaskRespData>
-	export function refOfCreateExportTaskRespData(x:CreateExportTaskRespData,v:Ref<CreateExportTaskRespData>)
-	export function unRefCreateExportTaskRespData(v:Ref<CreateExportTaskRespData>):CreateExportTaskRespData
-	export function emptyDeletePermissionMemberResp():DeletePermissionMemberResp
-	export function emptyRefDeletePermissionMemberResp():Ref<DeletePermissionMemberResp>
-	export function refOfDeletePermissionMemberResp(x:DeletePermissionMemberResp,v:Ref<DeletePermissionMemberResp>)
-	export function unRefDeletePermissionMemberResp(v:Ref<DeletePermissionMemberResp>):DeletePermissionMemberResp
-	export function emptyGetImportTaskResp():GetImportTaskResp
-	export function emptyRefGetImportTaskResp():Ref<GetImportTaskResp>
-	export function refOfGetImportTaskResp(x:GetImportTaskResp,v:Ref<GetImportTaskResp>)
-	export function unRefGetImportTaskResp(v:Ref<GetImportTaskResp>):GetImportTaskResp
-	export function emptyPatchFileCommentResp():PatchFileCommentResp
-	export function emptyRefPatchFileCommentResp():Ref<PatchFileCommentResp>
-	export function refOfPatchFileCommentResp(x:PatchFileCommentResp,v:Ref<PatchFileCommentResp>)
-	export function unRefPatchFileCommentResp(v:Ref<PatchFileCommentResp>):PatchFileCommentResp
-	export function emptyBatchQueryFileCommentRespData():BatchQueryFileCommentRespData
-	export function emptyRefBatchQueryFileCommentRespData():Ref<BatchQueryFileCommentRespData>
-	export function refOfBatchQueryFileCommentRespData(x:BatchQueryFileCommentRespData,v:Ref<BatchQueryFileCommentRespData>)
-	export function unRefBatchQueryFileCommentRespData(v:Ref<BatchQueryFileCommentRespData>):BatchQueryFileCommentRespData
-	export function emptyGetImportTaskRespData():GetImportTaskRespData
-	export function emptyRefGetImportTaskRespData():Ref<GetImportTaskRespData>
-	export function refOfGetImportTaskRespData(x:GetImportTaskRespData,v:Ref<GetImportTaskRespData>)
-	export function unRefGetImportTaskRespData(v:Ref<GetImportTaskRespData>):GetImportTaskRespData
-	export function emptyGetSubscribeFileResp():GetSubscribeFileResp
-	export function emptyRefGetSubscribeFileResp():Ref<GetSubscribeFileResp>
-	export function refOfGetSubscribeFileResp(x:GetSubscribeFileResp,v:Ref<GetSubscribeFileResp>)
-	export function unRefGetSubscribeFileResp(v:Ref<GetSubscribeFileResp>):GetSubscribeFileResp
-	export function emptyGetFileSubscriptionReqBody():GetFileSubscriptionReqBody
-	export function emptyRefGetFileSubscriptionReqBody():Ref<GetFileSubscriptionReqBody>
-	export function refOfGetFileSubscriptionReqBody(x:GetFileSubscriptionReqBody,v:Ref<GetFileSubscriptionReqBody>)
-	export function unRefGetFileSubscriptionReqBody(v:Ref<GetFileSubscriptionReqBody>):GetFileSubscriptionReqBody
-	export function emptyGetFileCommentResp():GetFileCommentResp
-	export function emptyRefGetFileCommentResp():Ref<GetFileCommentResp>
-	export function refOfGetFileCommentResp(x:GetFileCommentResp,v:Ref<GetFileCommentResp>)
-	export function unRefGetFileCommentResp(v:Ref<GetFileCommentResp>):GetFileCommentResp
-	export function emptyUpdatePermissionPublicPasswordReq():UpdatePermissionPublicPasswordReq
-	export function emptyRefUpdatePermissionPublicPasswordReq():Ref<UpdatePermissionPublicPasswordReq>
-	export function refOfUpdatePermissionPublicPasswordReq(x:UpdatePermissionPublicPasswordReq,v:Ref<UpdatePermissionPublicPasswordReq>)
-	export function unRefUpdatePermissionPublicPasswordReq(v:Ref<UpdatePermissionPublicPasswordReq>):UpdatePermissionPublicPasswordReq
-	export function emptyPatchPermissionPublicResp():PatchPermissionPublicResp
-	export function emptyRefPatchPermissionPublicResp():Ref<PatchPermissionPublicResp>
-	export function refOfPatchPermissionPublicResp(x:PatchPermissionPublicResp,v:Ref<PatchPermissionPublicResp>)
-	export function unRefPatchPermissionPublicResp(v:Ref<PatchPermissionPublicResp>):PatchPermissionPublicResp
-	export function emptyPerson():Person
-	export function emptyRefPerson():Ref<Person>
-	export function refOfPerson(x:Person,v:Ref<Person>)
-	export function unRefPerson(v:Ref<Person>):Person
-	export function emptyUploadFinishFileReq():UploadFinishFileReq
-	export function emptyRefUploadFinishFileReq():Ref<UploadFinishFileReq>
-	export function refOfUploadFinishFileReq(x:UploadFinishFileReq,v:Ref<UploadFinishFileReq>)
-	export function unRefUploadFinishFileReq(v:Ref<UploadFinishFileReq>):UploadFinishFileReq
-	export function emptyFileBlockChangeInfo():FileBlockChangeInfo
-	export function emptyRefFileBlockChangeInfo():Ref<FileBlockChangeInfo>
-	export function refOfFileBlockChangeInfo(x:FileBlockChangeInfo,v:Ref<FileBlockChangeInfo>)
-	export function unRefFileBlockChangeInfo(v:Ref<FileBlockChangeInfo>):FileBlockChangeInfo
-	export function emptyGetSubscribeFileReq():GetSubscribeFileReq
-	export function emptyRefGetSubscribeFileReq():Ref<GetSubscribeFileReq>
-	export function refOfGetSubscribeFileReq(x:GetSubscribeFileReq,v:Ref<GetSubscribeFileReq>)
-	export function unRefGetSubscribeFileReq(v:Ref<GetSubscribeFileReq>):GetSubscribeFileReq
-	export function emptyUpdatePermissionMemberReq():UpdatePermissionMemberReq
-	export function emptyRefUpdatePermissionMemberReq():Ref<UpdatePermissionMemberReq>
-	export function refOfUpdatePermissionMemberReq(x:UpdatePermissionMemberReq,v:Ref<UpdatePermissionMemberReq>)
-	export function unRefUpdatePermissionMemberReq(v:Ref<UpdatePermissionMemberReq>):UpdatePermissionMemberReq
-	export function emptyDownloadFileReq():DownloadFileReq
-	export function emptyRefDownloadFileReq():Ref<DownloadFileReq>
-	export function refOfDownloadFileReq(x:DownloadFileReq,v:Ref<DownloadFileReq>)
-	export function unRefDownloadFileReq(v:Ref<DownloadFileReq>):DownloadFileReq
-	export function emptyGetImportTaskReq():GetImportTaskReq
-	export function emptyRefGetImportTaskReq():Ref<GetImportTaskReq>
-	export function refOfGetImportTaskReq(x:GetImportTaskReq,v:Ref<GetImportTaskReq>)
-	export function unRefGetImportTaskReq(v:Ref<GetImportTaskReq>):GetImportTaskReq
-	export function emptyUploadPartMediaReq():UploadPartMediaReq
-	export function emptyRefUploadPartMediaReq():Ref<UploadPartMediaReq>
-	export function refOfUploadPartMediaReq(x:UploadPartMediaReq,v:Ref<UploadPartMediaReq>)
-	export function unRefUploadPartMediaReq(v:Ref<UploadPartMediaReq>):UploadPartMediaReq
-	export function emptyListFileViewRecordResp():ListFileViewRecordResp
-	export function emptyRefListFileViewRecordResp():Ref<ListFileViewRecordResp>
-	export function refOfListFileViewRecordResp(x:ListFileViewRecordResp,v:Ref<ListFileViewRecordResp>)
-	export function unRefListFileViewRecordResp(v:Ref<ListFileViewRecordResp>):ListFileViewRecordResp
-	export function emptyUploadPrepareFileReq():UploadPrepareFileReq
-	export function emptyRefUploadPrepareFileReq():Ref<UploadPrepareFileReq>
-	export function refOfUploadPrepareFileReq(x:UploadPrepareFileReq,v:Ref<UploadPrepareFileReq>)
-	export function unRefUploadPrepareFileReq(v:Ref<UploadPrepareFileReq>):UploadPrepareFileReq
-	export function emptyCreateShortcutFileResp():CreateShortcutFileResp
-	export function emptyRefCreateShortcutFileResp():Ref<CreateShortcutFileResp>
-	export function refOfCreateShortcutFileResp(x:CreateShortcutFileResp,v:Ref<CreateShortcutFileResp>)
-	export function unRefCreateShortcutFileResp(v:Ref<CreateShortcutFileResp>):CreateShortcutFileResp
-	export function emptyFileSubscription():FileSubscription
-	export function emptyRefFileSubscription():Ref<FileSubscription>
-	export function refOfFileSubscription(x:FileSubscription,v:Ref<FileSubscription>)
-	export function unRefFileSubscription(v:Ref<FileSubscription>):FileSubscription
-	export function emptyCopyFileReq():CopyFileReq
-	export function emptyRefCopyFileReq():Ref<CopyFileReq>
-	export function refOfCopyFileReq(x:CopyFileReq,v:Ref<CopyFileReq>)
-	export function unRefCopyFileReq(v:Ref<CopyFileReq>):CopyFileReq
-	export function emptyFileUploadInfo():FileUploadInfo
-	export function emptyRefFileUploadInfo():Ref<FileUploadInfo>
-	export function refOfFileUploadInfo(x:FileUploadInfo,v:Ref<FileUploadInfo>)
-	export function unRefFileUploadInfo(v:Ref<FileUploadInfo>):FileUploadInfo
-	export function emptyP2FilePermissionMemberRemovedV1Data():P2FilePermissionMemberRemovedV1Data
-	export function emptyRefP2FilePermissionMemberRemovedV1Data():Ref<P2FilePermissionMemberRemovedV1Data>
-	export function refOfP2FilePermissionMemberRemovedV1Data(x:P2FilePermissionMemberRemovedV1Data,v:Ref<P2FilePermissionMemberRemovedV1Data>)
-	export function unRefP2FilePermissionMemberRemovedV1Data(v:Ref<P2FilePermissionMemberRemovedV1Data>):P2FilePermissionMemberRemovedV1Data
-	export function emptyMetaFailed():MetaFailed
-	export function emptyRefMetaFailed():Ref<MetaFailed>
-	export function refOfMetaFailed(x:MetaFailed,v:Ref<MetaFailed>)
-	export function unRefMetaFailed(v:Ref<MetaFailed>):MetaFailed
-	export function emptyCreateFileSubscriptionRespData():CreateFileSubscriptionRespData
-	export function emptyRefCreateFileSubscriptionRespData():Ref<CreateFileSubscriptionRespData>
-	export function refOfCreateFileSubscriptionRespData(x:CreateFileSubscriptionRespData,v:Ref<CreateFileSubscriptionRespData>)
-	export function unRefCreateFileSubscriptionRespData(v:Ref<CreateFileSubscriptionRespData>):CreateFileSubscriptionRespData
-	export function emptyUpdateFileCommentReplyReqBody():UpdateFileCommentReplyReqBody
-	export function emptyRefUpdateFileCommentReplyReqBody():Ref<UpdateFileCommentReplyReqBody>
-	export function refOfUpdateFileCommentReplyReqBody(x:UpdateFileCommentReplyReqBody,v:Ref<UpdateFileCommentReplyReqBody>)
-	export function unRefUpdateFileCommentReplyReqBody(v:Ref<UpdateFileCommentReplyReqBody>):UpdateFileCommentReplyReqBody
+	export function emptyBatchQueryMetaResp():BatchQueryMetaResp
+	export function emptyRefBatchQueryMetaResp():Ref<BatchQueryMetaResp>
+	export function refOfBatchQueryMetaResp(x:BatchQueryMetaResp,v:Ref<BatchQueryMetaResp>)
+	export function unRefBatchQueryMetaResp(v:Ref<BatchQueryMetaResp>):BatchQueryMetaResp
 	export function emptyPatchFileSubscriptionReqBody():PatchFileSubscriptionReqBody
 	export function emptyRefPatchFileSubscriptionReqBody():Ref<PatchFileSubscriptionReqBody>
 	export function refOfPatchFileSubscriptionReqBody(x:PatchFileSubscriptionReqBody,v:Ref<PatchFileSubscriptionReqBody>)
@@ -4115,394 +4150,326 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/drive/v1'{
 	export function emptyRefDownloadExportTaskResp():Ref<DownloadExportTaskResp>
 	export function refOfDownloadExportTaskResp(x:DownloadExportTaskResp,v:Ref<DownloadExportTaskResp>)
 	export function unRefDownloadExportTaskResp(v:Ref<DownloadExportTaskResp>):DownloadExportTaskResp
-	export function emptyUploadAllMediaReq():UploadAllMediaReq
-	export function emptyRefUploadAllMediaReq():Ref<UploadAllMediaReq>
-	export function refOfUploadAllMediaReq(x:UploadAllMediaReq,v:Ref<UploadAllMediaReq>)
-	export function unRefUploadAllMediaReq(v:Ref<UploadAllMediaReq>):UploadAllMediaReq
-	export function emptyCreateExportTaskResp():CreateExportTaskResp
-	export function emptyRefCreateExportTaskResp():Ref<CreateExportTaskResp>
-	export function refOfCreateExportTaskResp(x:CreateExportTaskResp,v:Ref<CreateExportTaskResp>)
-	export function unRefCreateExportTaskResp(v:Ref<CreateExportTaskResp>):CreateExportTaskResp
-	export function emptyFile():File
-	export function emptyRefFile():Ref<File>
-	export function refOfFile(x:File,v:Ref<File>)
-	export function unRefFile(v:Ref<File>):File
-	export function emptyUploadPrepareMediaRespData():UploadPrepareMediaRespData
-	export function emptyRefUploadPrepareMediaRespData():Ref<UploadPrepareMediaRespData>
-	export function refOfUploadPrepareMediaRespData(x:UploadPrepareMediaRespData,v:Ref<UploadPrepareMediaRespData>)
-	export function unRefUploadPrepareMediaRespData(v:Ref<UploadPrepareMediaRespData>):UploadPrepareMediaRespData
-	export function emptyListFileCommentRespData():ListFileCommentRespData
-	export function emptyRefListFileCommentRespData():Ref<ListFileCommentRespData>
-	export function refOfListFileCommentRespData(x:ListFileCommentRespData,v:Ref<ListFileCommentRespData>)
-	export function unRefListFileCommentRespData(v:Ref<ListFileCommentRespData>):ListFileCommentRespData
-	export function emptyGetFileCommentRespData():GetFileCommentRespData
-	export function emptyRefGetFileCommentRespData():Ref<GetFileCommentRespData>
-	export function refOfGetFileCommentRespData(x:GetFileCommentRespData,v:Ref<GetFileCommentRespData>)
-	export function unRefGetFileCommentRespData(v:Ref<GetFileCommentRespData>):GetFileCommentRespData
-	export function emptyUpdateFileCommentReplyReq():UpdateFileCommentReplyReq
-	export function emptyRefUpdateFileCommentReplyReq():Ref<UpdateFileCommentReplyReq>
-	export function refOfUpdateFileCommentReplyReq(x:UpdateFileCommentReplyReq,v:Ref<UpdateFileCommentReplyReq>)
-	export function unRefUpdateFileCommentReplyReq(v:Ref<UpdateFileCommentReplyReq>):UpdateFileCommentReplyReq
-	export function emptyUploadInfo():UploadInfo
-	export function emptyRefUploadInfo():Ref<UploadInfo>
-	export function refOfUploadInfo(x:UploadInfo,v:Ref<UploadInfo>)
-	export function unRefUploadInfo(v:Ref<UploadInfo>):UploadInfo
-	export function emptyCreateImportTaskResp():CreateImportTaskResp
-	export function emptyRefCreateImportTaskResp():Ref<CreateImportTaskResp>
-	export function refOfCreateImportTaskResp(x:CreateImportTaskResp,v:Ref<CreateImportTaskResp>)
-	export function unRefCreateImportTaskResp(v:Ref<CreateImportTaskResp>):CreateImportTaskResp
-	export function emptyAuthPermissionMemberResp():AuthPermissionMemberResp
-	export function emptyRefAuthPermissionMemberResp():Ref<AuthPermissionMemberResp>
-	export function refOfAuthPermissionMemberResp(x:AuthPermissionMemberResp,v:Ref<AuthPermissionMemberResp>)
-	export function unRefAuthPermissionMemberResp(v:Ref<AuthPermissionMemberResp>):AuthPermissionMemberResp
-	export function emptyMoveFileReqBody():MoveFileReqBody
-	export function emptyRefMoveFileReqBody():Ref<MoveFileReqBody>
-	export function refOfMoveFileReqBody(x:MoveFileReqBody,v:Ref<MoveFileReqBody>)
-	export function unRefMoveFileReqBody(v:Ref<MoveFileReqBody>):MoveFileReqBody
-	export function emptyFileSearch():FileSearch
-	export function emptyRefFileSearch():Ref<FileSearch>
-	export function refOfFileSearch(x:FileSearch,v:Ref<FileSearch>)
-	export function unRefFileSearch(v:Ref<FileSearch>):FileSearch
-	export function emptyListFileCommentReplyResp():ListFileCommentReplyResp
-	export function emptyRefListFileCommentReplyResp():Ref<ListFileCommentReplyResp>
-	export function refOfListFileCommentReplyResp(x:ListFileCommentReplyResp,v:Ref<ListFileCommentReplyResp>)
-	export function unRefListFileCommentReplyResp(v:Ref<ListFileCommentReplyResp>):ListFileCommentReplyResp
-	export function emptyPermissionPublic():PermissionPublic
-	export function emptyRefPermissionPublic():Ref<PermissionPublic>
-	export function refOfPermissionPublic(x:PermissionPublic,v:Ref<PermissionPublic>)
-	export function unRefPermissionPublic(v:Ref<PermissionPublic>):PermissionPublic
-	export function emptyBatchGetTmpDownloadUrlMediaResp():BatchGetTmpDownloadUrlMediaResp
-	export function emptyRefBatchGetTmpDownloadUrlMediaResp():Ref<BatchGetTmpDownloadUrlMediaResp>
-	export function refOfBatchGetTmpDownloadUrlMediaResp(x:BatchGetTmpDownloadUrlMediaResp,v:Ref<BatchGetTmpDownloadUrlMediaResp>)
-	export function unRefBatchGetTmpDownloadUrlMediaResp(v:Ref<BatchGetTmpDownloadUrlMediaResp>):BatchGetTmpDownloadUrlMediaResp
-	export function emptyCreateFileSubscriptionReq():CreateFileSubscriptionReq
-	export function emptyRefCreateFileSubscriptionReq():Ref<CreateFileSubscriptionReq>
-	export function refOfCreateFileSubscriptionReq(x:CreateFileSubscriptionReq,v:Ref<CreateFileSubscriptionReq>)
-	export function unRefCreateFileSubscriptionReq(v:Ref<CreateFileSubscriptionReq>):CreateFileSubscriptionReq
-	export function emptyBatchQueryFileCommentReqBody():BatchQueryFileCommentReqBody
-	export function emptyRefBatchQueryFileCommentReqBody():Ref<BatchQueryFileCommentReqBody>
-	export function refOfBatchQueryFileCommentReqBody(x:BatchQueryFileCommentReqBody,v:Ref<BatchQueryFileCommentReqBody>)
-	export function unRefBatchQueryFileCommentReqBody(v:Ref<BatchQueryFileCommentReqBody>):BatchQueryFileCommentReqBody
-	export function emptyCreateShortcutFileRespData():CreateShortcutFileRespData
-	export function emptyRefCreateShortcutFileRespData():Ref<CreateShortcutFileRespData>
-	export function refOfCreateShortcutFileRespData(x:CreateShortcutFileRespData,v:Ref<CreateShortcutFileRespData>)
-	export function unRefCreateShortcutFileRespData(v:Ref<CreateShortcutFileRespData>):CreateShortcutFileRespData
-	export function emptyGetFileSubscriptionRespData():GetFileSubscriptionRespData
-	export function emptyRefGetFileSubscriptionRespData():Ref<GetFileSubscriptionRespData>
-	export function refOfGetFileSubscriptionRespData(x:GetFileSubscriptionRespData,v:Ref<GetFileSubscriptionRespData>)
-	export function unRefGetFileSubscriptionRespData(v:Ref<GetFileSubscriptionRespData>):GetFileSubscriptionRespData
-	export function emptyMember():Member
-	export function emptyRefMember():Ref<Member>
-	export function refOfMember(x:Member,v:Ref<Member>)
-	export function unRefMember(v:Ref<Member>):Member
-	export function emptyOwner():Owner
-	export function emptyRefOwner():Ref<Owner>
-	export function refOfOwner(x:Owner,v:Ref<Owner>)
-	export function unRefOwner(v:Ref<Owner>):Owner
-	export function emptyP2FileEditV1():P2FileEditV1
-	export function emptyRefP2FileEditV1():Ref<P2FileEditV1>
-	export function refOfP2FileEditV1(x:P2FileEditV1,v:Ref<P2FileEditV1>)
-	export function unRefP2FileEditV1(v:Ref<P2FileEditV1>):P2FileEditV1
-	export function emptyBatchGetTmpDownloadUrlMediaRespData():BatchGetTmpDownloadUrlMediaRespData
-	export function emptyRefBatchGetTmpDownloadUrlMediaRespData():Ref<BatchGetTmpDownloadUrlMediaRespData>
-	export function refOfBatchGetTmpDownloadUrlMediaRespData(x:BatchGetTmpDownloadUrlMediaRespData,v:Ref<BatchGetTmpDownloadUrlMediaRespData>)
-	export function unRefBatchGetTmpDownloadUrlMediaRespData(v:Ref<BatchGetTmpDownloadUrlMediaRespData>):BatchGetTmpDownloadUrlMediaRespData
-	export function emptyCreateFolderFileResp():CreateFolderFileResp
-	export function emptyRefCreateFolderFileResp():Ref<CreateFolderFileResp>
-	export function refOfCreateFolderFileResp(x:CreateFolderFileResp,v:Ref<CreateFolderFileResp>)
-	export function unRefCreateFolderFileResp(v:Ref<CreateFolderFileResp>):CreateFolderFileResp
-	export function emptyReplyContent():ReplyContent
-	export function emptyRefReplyContent():Ref<ReplyContent>
-	export function refOfReplyContent(x:ReplyContent,v:Ref<ReplyContent>)
-	export function unRefReplyContent(v:Ref<ReplyContent>):ReplyContent
-	export function emptyApplyMemberRequest():ApplyMemberRequest
-	export function emptyRefApplyMemberRequest():Ref<ApplyMemberRequest>
-	export function refOfApplyMemberRequest(x:ApplyMemberRequest,v:Ref<ApplyMemberRequest>)
-	export function unRefApplyMemberRequest(v:Ref<ApplyMemberRequest>):ApplyMemberRequest
-	export function emptyUpdatePermissionPublicPasswordResp():UpdatePermissionPublicPasswordResp
-	export function emptyRefUpdatePermissionPublicPasswordResp():Ref<UpdatePermissionPublicPasswordResp>
-	export function refOfUpdatePermissionPublicPasswordResp(x:UpdatePermissionPublicPasswordResp,v:Ref<UpdatePermissionPublicPasswordResp>)
-	export function unRefUpdatePermissionPublicPasswordResp(v:Ref<UpdatePermissionPublicPasswordResp>):UpdatePermissionPublicPasswordResp
-	export function emptyUpdatePermissionPublicPasswordRespData():UpdatePermissionPublicPasswordRespData
-	export function emptyRefUpdatePermissionPublicPasswordRespData():Ref<UpdatePermissionPublicPasswordRespData>
-	export function refOfUpdatePermissionPublicPasswordRespData(x:UpdatePermissionPublicPasswordRespData,v:Ref<UpdatePermissionPublicPasswordRespData>)
-	export function unRefUpdatePermissionPublicPasswordRespData(v:Ref<UpdatePermissionPublicPasswordRespData>):UpdatePermissionPublicPasswordRespData
-	export function emptyReplyList():ReplyList
-	export function emptyRefReplyList():Ref<ReplyList>
-	export function refOfReplyList(x:ReplyList,v:Ref<ReplyList>)
-	export function unRefReplyList(v:Ref<ReplyList>):ReplyList
-	export function emptyBitableTableFieldActionValuePropertyOption():BitableTableFieldActionValuePropertyOption
-	export function emptyRefBitableTableFieldActionValuePropertyOption():Ref<BitableTableFieldActionValuePropertyOption>
-	export function refOfBitableTableFieldActionValuePropertyOption(x:BitableTableFieldActionValuePropertyOption,v:Ref<BitableTableFieldActionValuePropertyOption>)
-	export function unRefBitableTableFieldActionValuePropertyOption(v:Ref<BitableTableFieldActionValuePropertyOption>):BitableTableFieldActionValuePropertyOption
-	export function emptyV1():V1
-	export function emptyRefV1():Ref<V1>
-	export function refOfV1(x:V1,v:Ref<V1>)
-	export function unRefV1(v:Ref<V1>):V1
-	export function emptyListPermissionMemberReq():ListPermissionMemberReq
-	export function emptyRefListPermissionMemberReq():Ref<ListPermissionMemberReq>
-	export function refOfListPermissionMemberReq(x:ListPermissionMemberReq,v:Ref<ListPermissionMemberReq>)
-	export function unRefListPermissionMemberReq(v:Ref<ListPermissionMemberReq>):ListPermissionMemberReq
-	export function emptyMoveFileReq():MoveFileReq
-	export function emptyRefMoveFileReq():Ref<MoveFileReq>
-	export function refOfMoveFileReq(x:MoveFileReq,v:Ref<MoveFileReq>)
-	export function unRefMoveFileReq(v:Ref<MoveFileReq>):MoveFileReq
-	export function emptyPatchFileSubscriptionRespData():PatchFileSubscriptionRespData
-	export function emptyRefPatchFileSubscriptionRespData():Ref<PatchFileSubscriptionRespData>
-	export function refOfPatchFileSubscriptionRespData(x:PatchFileSubscriptionRespData,v:Ref<PatchFileSubscriptionRespData>)
-	export function unRefPatchFileSubscriptionRespData(v:Ref<PatchFileSubscriptionRespData>):PatchFileSubscriptionRespData
-	export function emptyTransferOwnerPermissionMemberReq():TransferOwnerPermissionMemberReq
-	export function emptyRefTransferOwnerPermissionMemberReq():Ref<TransferOwnerPermissionMemberReq>
-	export function refOfTransferOwnerPermissionMemberReq(x:TransferOwnerPermissionMemberReq,v:Ref<TransferOwnerPermissionMemberReq>)
-	export function unRefTransferOwnerPermissionMemberReq(v:Ref<TransferOwnerPermissionMemberReq>):TransferOwnerPermissionMemberReq
-	export function emptyUploadPrepareFileResp():UploadPrepareFileResp
-	export function emptyRefUploadPrepareFileResp():Ref<UploadPrepareFileResp>
-	export function refOfUploadPrepareFileResp(x:UploadPrepareFileResp,v:Ref<UploadPrepareFileResp>)
-	export function unRefUploadPrepareFileResp(v:Ref<UploadPrepareFileResp>):UploadPrepareFileResp
-	export function emptyMediaUploadInfo():MediaUploadInfo
-	export function emptyRefMediaUploadInfo():Ref<MediaUploadInfo>
-	export function refOfMediaUploadInfo(x:MediaUploadInfo,v:Ref<MediaUploadInfo>)
-	export function unRefMediaUploadInfo(v:Ref<MediaUploadInfo>):MediaUploadInfo
-	export function emptyDeleteFileResp():DeleteFileResp
-	export function emptyRefDeleteFileResp():Ref<DeleteFileResp>
-	export function refOfDeleteFileResp(x:DeleteFileResp,v:Ref<DeleteFileResp>)
-	export function unRefDeleteFileResp(v:Ref<DeleteFileResp>):DeleteFileResp
-	export function emptyFileCommentReply():FileCommentReply
-	export function emptyRefFileCommentReply():Ref<FileCommentReply>
-	export function refOfFileCommentReply(x:FileCommentReply,v:Ref<FileCommentReply>)
-	export function unRefFileCommentReply(v:Ref<FileCommentReply>):FileCommentReply
-	export function emptyListFileVersionIterator():ListFileVersionIterator
-	export function emptyRefListFileVersionIterator():Ref<ListFileVersionIterator>
-	export function refOfListFileVersionIterator(x:ListFileVersionIterator,v:Ref<ListFileVersionIterator>)
-	export function unRefListFileVersionIterator(v:Ref<ListFileVersionIterator>):ListFileVersionIterator
-	export function emptyBatchQueryFileCommentResp():BatchQueryFileCommentResp
-	export function emptyRefBatchQueryFileCommentResp():Ref<BatchQueryFileCommentResp>
-	export function refOfBatchQueryFileCommentResp(x:BatchQueryFileCommentResp,v:Ref<BatchQueryFileCommentResp>)
-	export function unRefBatchQueryFileCommentResp(v:Ref<BatchQueryFileCommentResp>):BatchQueryFileCommentResp
-	export function emptyCreatePermissionPublicPasswordReq():CreatePermissionPublicPasswordReq
-	export function emptyRefCreatePermissionPublicPasswordReq():Ref<CreatePermissionPublicPasswordReq>
-	export function refOfCreatePermissionPublicPasswordReq(x:CreatePermissionPublicPasswordReq,v:Ref<CreatePermissionPublicPasswordReq>)
-	export function unRefCreatePermissionPublicPasswordReq(v:Ref<CreatePermissionPublicPasswordReq>):CreatePermissionPublicPasswordReq
-	export function emptyDeletePermissionMemberReq():DeletePermissionMemberReq
-	export function emptyRefDeletePermissionMemberReq():Ref<DeletePermissionMemberReq>
-	export function refOfDeletePermissionMemberReq(x:DeletePermissionMemberReq,v:Ref<DeletePermissionMemberReq>)
-	export function unRefDeletePermissionMemberReq(v:Ref<DeletePermissionMemberReq>):DeletePermissionMemberReq
-	export function emptyMoveFileResp():MoveFileResp
-	export function emptyRefMoveFileResp():Ref<MoveFileResp>
-	export function refOfMoveFileResp(x:MoveFileResp,v:Ref<MoveFileResp>)
-	export function unRefMoveFileResp(v:Ref<MoveFileResp>):MoveFileResp
-	export function emptyDeleteFileVersionResp():DeleteFileVersionResp
-	export function emptyRefDeleteFileVersionResp():Ref<DeleteFileVersionResp>
-	export function refOfDeleteFileVersionResp(x:DeleteFileVersionResp,v:Ref<DeleteFileVersionResp>)
-	export function unRefDeleteFileVersionResp(v:Ref<DeleteFileVersionResp>):DeleteFileVersionResp
-	export function emptyUploadAllFileResp():UploadAllFileResp
-	export function emptyRefUploadAllFileResp():Ref<UploadAllFileResp>
-	export function refOfUploadAllFileResp(x:UploadAllFileResp,v:Ref<UploadAllFileResp>)
-	export function unRefUploadAllFileResp(v:Ref<UploadAllFileResp>):UploadAllFileResp
-	export function emptyTransferOwnerPermissionMemberResp():TransferOwnerPermissionMemberResp
-	export function emptyRefTransferOwnerPermissionMemberResp():Ref<TransferOwnerPermissionMemberResp>
-	export function refOfTransferOwnerPermissionMemberResp(x:TransferOwnerPermissionMemberResp,v:Ref<TransferOwnerPermissionMemberResp>)
-	export function unRefTransferOwnerPermissionMemberResp(v:Ref<TransferOwnerPermissionMemberResp>):TransferOwnerPermissionMemberResp
-	export function emptyTaskCheckFileRespData():TaskCheckFileRespData
-	export function emptyRefTaskCheckFileRespData():Ref<TaskCheckFileRespData>
-	export function refOfTaskCheckFileRespData(x:TaskCheckFileRespData,v:Ref<TaskCheckFileRespData>)
-	export function unRefTaskCheckFileRespData(v:Ref<TaskCheckFileRespData>):TaskCheckFileRespData
-	export function emptyRequestDoc():RequestDoc
-	export function emptyRefRequestDoc():Ref<RequestDoc>
-	export function refOfRequestDoc(x:RequestDoc,v:Ref<RequestDoc>)
-	export function unRefRequestDoc(v:Ref<RequestDoc>):RequestDoc
-	export function emptyDepartmentId():DepartmentId
-	export function emptyRefDepartmentId():Ref<DepartmentId>
-	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
-	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptyGetPermissionPublicResp():GetPermissionPublicResp
-	export function emptyRefGetPermissionPublicResp():Ref<GetPermissionPublicResp>
-	export function refOfGetPermissionPublicResp(x:GetPermissionPublicResp,v:Ref<GetPermissionPublicResp>)
-	export function unRefGetPermissionPublicResp(v:Ref<GetPermissionPublicResp>):GetPermissionPublicResp
-	export function emptyP2FileDeletedV1Data():P2FileDeletedV1Data
-	export function emptyRefP2FileDeletedV1Data():Ref<P2FileDeletedV1Data>
-	export function refOfP2FileDeletedV1Data(x:P2FileDeletedV1Data,v:Ref<P2FileDeletedV1Data>)
-	export function unRefP2FileDeletedV1Data(v:Ref<P2FileDeletedV1Data>):P2FileDeletedV1Data
-	export function emptyDeleteSubscribeFileResp():DeleteSubscribeFileResp
-	export function emptyRefDeleteSubscribeFileResp():Ref<DeleteSubscribeFileResp>
-	export function refOfDeleteSubscribeFileResp(x:DeleteSubscribeFileResp,v:Ref<DeleteSubscribeFileResp>)
-	export function unRefDeleteSubscribeFileResp(v:Ref<DeleteSubscribeFileResp>):DeleteSubscribeFileResp
-	export function emptyExportTask():ExportTask
-	export function emptyRefExportTask():Ref<ExportTask>
-	export function refOfExportTask(x:ExportTask,v:Ref<ExportTask>)
-	export function unRefExportTask(v:Ref<ExportTask>):ExportTask
-	export function emptyUploadPartMediaResp():UploadPartMediaResp
-	export function emptyRefUploadPartMediaResp():Ref<UploadPartMediaResp>
-	export function refOfUploadPartMediaResp(x:UploadPartMediaResp,v:Ref<UploadPartMediaResp>)
-	export function unRefUploadPartMediaResp(v:Ref<UploadPartMediaResp>):UploadPartMediaResp
-	export function emptyDownloadMediaReq():DownloadMediaReq
-	export function emptyRefDownloadMediaReq():Ref<DownloadMediaReq>
-	export function refOfDownloadMediaReq(x:DownloadMediaReq,v:Ref<DownloadMediaReq>)
-	export function unRefDownloadMediaReq(v:Ref<DownloadMediaReq>):DownloadMediaReq
-	export function emptyUploadAllMediaRespData():UploadAllMediaRespData
-	export function emptyRefUploadAllMediaRespData():Ref<UploadAllMediaRespData>
-	export function refOfUploadAllMediaRespData(x:UploadAllMediaRespData,v:Ref<UploadAllMediaRespData>)
-	export function unRefUploadAllMediaRespData(v:Ref<UploadAllMediaRespData>):UploadAllMediaRespData
-	export function emptyListFileCommentResp():ListFileCommentResp
-	export function emptyRefListFileCommentResp():Ref<ListFileCommentResp>
-	export function refOfListFileCommentResp(x:ListFileCommentResp,v:Ref<ListFileCommentResp>)
-	export function unRefListFileCommentResp(v:Ref<ListFileCommentResp>):ListFileCommentResp
-	export function emptyMeta():Meta
-	export function emptyRefMeta():Ref<Meta>
-	export function refOfMeta(x:Meta,v:Ref<Meta>)
-	export function unRefMeta(v:Ref<Meta>):Meta
-	export function emptyListFileViewRecordReq():ListFileViewRecordReq
-	export function emptyRefListFileViewRecordReq():Ref<ListFileViewRecordReq>
-	export function refOfListFileViewRecordReq(x:ListFileViewRecordReq,v:Ref<ListFileViewRecordReq>)
-	export function unRefListFileViewRecordReq(v:Ref<ListFileViewRecordReq>):ListFileViewRecordReq
-	export function emptyDeleteSubscribeFileReq():DeleteSubscribeFileReq
-	export function emptyRefDeleteSubscribeFileReq():Ref<DeleteSubscribeFileReq>
-	export function refOfDeleteSubscribeFileReq(x:DeleteSubscribeFileReq,v:Ref<DeleteSubscribeFileReq>)
-	export function unRefDeleteSubscribeFileReq(v:Ref<DeleteSubscribeFileReq>):DeleteSubscribeFileReq
-	export function emptyP2FileDeletedV1():P2FileDeletedV1
-	export function emptyRefP2FileDeletedV1():Ref<P2FileDeletedV1>
-	export function refOfP2FileDeletedV1(x:P2FileDeletedV1,v:Ref<P2FileDeletedV1>)
-	export function unRefP2FileDeletedV1(v:Ref<P2FileDeletedV1>):P2FileDeletedV1
-	export function emptyReplyExtra():ReplyExtra
-	export function emptyRefReplyExtra():Ref<ReplyExtra>
-	export function refOfReplyExtra(x:ReplyExtra,v:Ref<ReplyExtra>)
-	export function unRefReplyExtra(v:Ref<ReplyExtra>):ReplyExtra
-	export function emptySubscribeFileReq():SubscribeFileReq
-	export function emptyRefSubscribeFileReq():Ref<SubscribeFileReq>
-	export function refOfSubscribeFileReq(x:SubscribeFileReq,v:Ref<SubscribeFileReq>)
-	export function unRefSubscribeFileReq(v:Ref<SubscribeFileReq>):SubscribeFileReq
-	export function emptyUploadFinishMediaReqBody():UploadFinishMediaReqBody
-	export function emptyRefUploadFinishMediaReqBody():Ref<UploadFinishMediaReqBody>
-	export function refOfUploadFinishMediaReqBody(x:UploadFinishMediaReqBody,v:Ref<UploadFinishMediaReqBody>)
-	export function unRefUploadFinishMediaReqBody(v:Ref<UploadFinishMediaReqBody>):UploadFinishMediaReqBody
-	export function emptyUploadPrepareFileRespData():UploadPrepareFileRespData
-	export function emptyRefUploadPrepareFileRespData():Ref<UploadPrepareFileRespData>
-	export function refOfUploadPrepareFileRespData(x:UploadPrepareFileRespData,v:Ref<UploadPrepareFileRespData>)
-	export function unRefUploadPrepareFileRespData(v:Ref<UploadPrepareFileRespData>):UploadPrepareFileRespData
-	export function emptyBatchQueryMetaResp():BatchQueryMetaResp
-	export function emptyRefBatchQueryMetaResp():Ref<BatchQueryMetaResp>
-	export function refOfBatchQueryMetaResp(x:BatchQueryMetaResp,v:Ref<BatchQueryMetaResp>)
-	export function unRefBatchQueryMetaResp(v:Ref<BatchQueryMetaResp>):BatchQueryMetaResp
-	export function emptyDeletePermissionMemberReqBody():DeletePermissionMemberReqBody
-	export function emptyRefDeletePermissionMemberReqBody():Ref<DeletePermissionMemberReqBody>
-	export function refOfDeletePermissionMemberReqBody(x:DeletePermissionMemberReqBody,v:Ref<DeletePermissionMemberReqBody>)
-	export function unRefDeletePermissionMemberReqBody(v:Ref<DeletePermissionMemberReqBody>):DeletePermissionMemberReqBody
-	export function emptyMoveFileRespData():MoveFileRespData
-	export function emptyRefMoveFileRespData():Ref<MoveFileRespData>
-	export function refOfMoveFileRespData(x:MoveFileRespData,v:Ref<MoveFileRespData>)
-	export function unRefMoveFileRespData(v:Ref<MoveFileRespData>):MoveFileRespData
-	export function emptyListFileVersionRespData():ListFileVersionRespData
-	export function emptyRefListFileVersionRespData():Ref<ListFileVersionRespData>
-	export function refOfListFileVersionRespData(x:ListFileVersionRespData,v:Ref<ListFileVersionRespData>)
-	export function unRefListFileVersionRespData(v:Ref<ListFileVersionRespData>):ListFileVersionRespData
-	export function emptyImportTask():ImportTask
-	export function emptyRefImportTask():Ref<ImportTask>
-	export function refOfImportTask(x:ImportTask,v:Ref<ImportTask>)
-	export function unRefImportTask(v:Ref<ImportTask>):ImportTask
-	export function emptyFileStatistics():FileStatistics
-	export function emptyRefFileStatistics():Ref<FileStatistics>
-	export function refOfFileStatistics(x:FileStatistics,v:Ref<FileStatistics>)
-	export function unRefFileStatistics(v:Ref<FileStatistics>):FileStatistics
-	export function emptyListFileViewRecordRespData():ListFileViewRecordRespData
-	export function emptyRefListFileViewRecordRespData():Ref<ListFileViewRecordRespData>
-	export function refOfListFileViewRecordRespData(x:ListFileViewRecordRespData,v:Ref<ListFileViewRecordRespData>)
-	export function unRefListFileViewRecordRespData(v:Ref<ListFileViewRecordRespData>):ListFileViewRecordRespData
-	export function emptyUploadPartMediaReqBody():UploadPartMediaReqBody
-	export function emptyRefUploadPartMediaReqBody():Ref<UploadPartMediaReqBody>
-	export function refOfUploadPartMediaReqBody(x:UploadPartMediaReqBody,v:Ref<UploadPartMediaReqBody>)
-	export function unRefUploadPartMediaReqBody(v:Ref<UploadPartMediaReqBody>):UploadPartMediaReqBody
-	export function emptyCreateShortcutFileReqBody():CreateShortcutFileReqBody
-	export function emptyRefCreateShortcutFileReqBody():Ref<CreateShortcutFileReqBody>
-	export function refOfCreateShortcutFileReqBody(x:CreateShortcutFileReqBody,v:Ref<CreateShortcutFileReqBody>)
-	export function unRefCreateShortcutFileReqBody(v:Ref<CreateShortcutFileReqBody>):CreateShortcutFileReqBody
-	export function emptyFileChangeInfo():FileChangeInfo
-	export function emptyRefFileChangeInfo():Ref<FileChangeInfo>
-	export function refOfFileChangeInfo(x:FileChangeInfo,v:Ref<FileChangeInfo>)
-	export function unRefFileChangeInfo(v:Ref<FileChangeInfo>):FileChangeInfo
-	export function emptyUploadAllFileReqBody():UploadAllFileReqBody
-	export function emptyRefUploadAllFileReqBody():Ref<UploadAllFileReqBody>
-	export function refOfUploadAllFileReqBody(x:UploadAllFileReqBody,v:Ref<UploadAllFileReqBody>)
-	export function unRefUploadAllFileReqBody(v:Ref<UploadAllFileReqBody>):UploadAllFileReqBody
-	export function emptyBitableTableFieldActionValuePropertyAutoSerialOptions():BitableTableFieldActionValuePropertyAutoSerialOptions
-	export function emptyRefBitableTableFieldActionValuePropertyAutoSerialOptions():Ref<BitableTableFieldActionValuePropertyAutoSerialOptions>
-	export function refOfBitableTableFieldActionValuePropertyAutoSerialOptions(x:BitableTableFieldActionValuePropertyAutoSerialOptions,v:Ref<BitableTableFieldActionValuePropertyAutoSerialOptions>)
-	export function unRefBitableTableFieldActionValuePropertyAutoSerialOptions(v:Ref<BitableTableFieldActionValuePropertyAutoSerialOptions>):BitableTableFieldActionValuePropertyAutoSerialOptions
-	export function emptyDeleteFileRespData():DeleteFileRespData
-	export function emptyRefDeleteFileRespData():Ref<DeleteFileRespData>
-	export function refOfDeleteFileRespData(x:DeleteFileRespData,v:Ref<DeleteFileRespData>)
-	export function unRefDeleteFileRespData(v:Ref<DeleteFileRespData>):DeleteFileRespData
-	export function emptyP2FileBitableFieldChangedV1Data():P2FileBitableFieldChangedV1Data
-	export function emptyRefP2FileBitableFieldChangedV1Data():Ref<P2FileBitableFieldChangedV1Data>
-	export function refOfP2FileBitableFieldChangedV1Data(x:P2FileBitableFieldChangedV1Data,v:Ref<P2FileBitableFieldChangedV1Data>)
-	export function unRefP2FileBitableFieldChangedV1Data(v:Ref<P2FileBitableFieldChangedV1Data>):P2FileBitableFieldChangedV1Data
-	export function emptyP2FileTrashedV1():P2FileTrashedV1
-	export function emptyRefP2FileTrashedV1():Ref<P2FileTrashedV1>
-	export function refOfP2FileTrashedV1(x:P2FileTrashedV1,v:Ref<P2FileTrashedV1>)
-	export function unRefP2FileTrashedV1(v:Ref<P2FileTrashedV1>):P2FileTrashedV1
-	export function emptyMedia():Media
-	export function emptyRefMedia():Ref<Media>
-	export function refOfMedia(x:Media,v:Ref<Media>)
-	export function unRefMedia(v:Ref<Media>):Media
-	export function emptyVersion():Version
-	export function emptyRefVersion():Ref<Version>
-	export function refOfVersion(x:Version,v:Ref<Version>)
-	export function unRefVersion(v:Ref<Version>):Version
-	export function emptyGetFileVersionReq():GetFileVersionReq
-	export function emptyRefGetFileVersionReq():Ref<GetFileVersionReq>
-	export function refOfGetFileVersionReq(x:GetFileVersionReq,v:Ref<GetFileVersionReq>)
-	export function unRefGetFileVersionReq(v:Ref<GetFileVersionReq>):GetFileVersionReq
-	export function emptyGetFileVersionRespData():GetFileVersionRespData
-	export function emptyRefGetFileVersionRespData():Ref<GetFileVersionRespData>
-	export function refOfGetFileVersionRespData(x:GetFileVersionRespData,v:Ref<GetFileVersionRespData>)
-	export function unRefGetFileVersionRespData(v:Ref<GetFileVersionRespData>):GetFileVersionRespData
-	export function emptyCreateFolderFileRespData():CreateFolderFileRespData
-	export function emptyRefCreateFolderFileRespData():Ref<CreateFolderFileRespData>
-	export function refOfCreateFolderFileRespData(x:CreateFolderFileRespData,v:Ref<CreateFolderFileRespData>)
-	export function unRefCreateFolderFileRespData(v:Ref<CreateFolderFileRespData>):CreateFolderFileRespData
-	export function emptyListFileReq():ListFileReq
-	export function emptyRefListFileReq():Ref<ListFileReq>
-	export function refOfListFileReq(x:ListFileReq,v:Ref<ListFileReq>)
-	export function unRefListFileReq(v:Ref<ListFileReq>):ListFileReq
-	export function emptyCreateExportTaskReq():CreateExportTaskReq
-	export function emptyRefCreateExportTaskReq():Ref<CreateExportTaskReq>
-	export function refOfCreateExportTaskReq(x:CreateExportTaskReq,v:Ref<CreateExportTaskReq>)
-	export function unRefCreateExportTaskReq(v:Ref<CreateExportTaskReq>):CreateExportTaskReq
-	export function emptyGetExportTaskReq():GetExportTaskReq
-	export function emptyRefGetExportTaskReq():Ref<GetExportTaskReq>
-	export function refOfGetExportTaskReq(x:GetExportTaskReq,v:Ref<GetExportTaskReq>)
-	export function unRefGetExportTaskReq(v:Ref<GetExportTaskReq>):GetExportTaskReq
-	export function emptyBitableTableRecordAction():BitableTableRecordAction
-	export function emptyRefBitableTableRecordAction():Ref<BitableTableRecordAction>
-	export function refOfBitableTableRecordAction(x:BitableTableRecordAction,v:Ref<BitableTableRecordAction>)
-	export function unRefBitableTableRecordAction(v:Ref<BitableTableRecordAction>):BitableTableRecordAction
 	export function emptyDeleteFileCommentReplyReq():DeleteFileCommentReplyReq
 	export function emptyRefDeleteFileCommentReplyReq():Ref<DeleteFileCommentReplyReq>
 	export function refOfDeleteFileCommentReplyReq(x:DeleteFileCommentReplyReq,v:Ref<DeleteFileCommentReplyReq>)
 	export function unRefDeleteFileCommentReplyReq(v:Ref<DeleteFileCommentReplyReq>):DeleteFileCommentReplyReq
-	export function emptyP2FileTitleUpdatedV1():P2FileTitleUpdatedV1
-	export function emptyRefP2FileTitleUpdatedV1():Ref<P2FileTitleUpdatedV1>
-	export function refOfP2FileTitleUpdatedV1(x:P2FileTitleUpdatedV1,v:Ref<P2FileTitleUpdatedV1>)
-	export function unRefP2FileTitleUpdatedV1(v:Ref<P2FileTitleUpdatedV1>):P2FileTitleUpdatedV1
-	export function emptyListFileCommentIterator():ListFileCommentIterator
-	export function emptyRefListFileCommentIterator():Ref<ListFileCommentIterator>
-	export function refOfListFileCommentIterator(x:ListFileCommentIterator,v:Ref<ListFileCommentIterator>)
-	export function unRefListFileCommentIterator(v:Ref<ListFileCommentIterator>):ListFileCommentIterator
-	export function emptySubscribeFileResp():SubscribeFileResp
-	export function emptyRefSubscribeFileResp():Ref<SubscribeFileResp>
-	export function refOfSubscribeFileResp(x:SubscribeFileResp,v:Ref<SubscribeFileResp>)
-	export function unRefSubscribeFileResp(v:Ref<SubscribeFileResp>):SubscribeFileResp
-	export function emptyBatchGetTmpDownloadUrlMediaReq():BatchGetTmpDownloadUrlMediaReq
-	export function emptyRefBatchGetTmpDownloadUrlMediaReq():Ref<BatchGetTmpDownloadUrlMediaReq>
-	export function refOfBatchGetTmpDownloadUrlMediaReq(x:BatchGetTmpDownloadUrlMediaReq,v:Ref<BatchGetTmpDownloadUrlMediaReq>)
-	export function unRefBatchGetTmpDownloadUrlMediaReq(v:Ref<BatchGetTmpDownloadUrlMediaReq>):BatchGetTmpDownloadUrlMediaReq
-	export function emptyUploadAllMediaResp():UploadAllMediaResp
-	export function emptyRefUploadAllMediaResp():Ref<UploadAllMediaResp>
-	export function refOfUploadAllMediaResp(x:UploadAllMediaResp,v:Ref<UploadAllMediaResp>)
-	export function unRefUploadAllMediaResp(v:Ref<UploadAllMediaResp>):UploadAllMediaResp
+	export function emptyDeleteFileVersionResp():DeleteFileVersionResp
+	export function emptyRefDeleteFileVersionResp():Ref<DeleteFileVersionResp>
+	export function refOfDeleteFileVersionResp(x:DeleteFileVersionResp,v:Ref<DeleteFileVersionResp>)
+	export function unRefDeleteFileVersionResp(v:Ref<DeleteFileVersionResp>):DeleteFileVersionResp
+	export function emptyCreatePermissionPublicPasswordReq():CreatePermissionPublicPasswordReq
+	export function emptyRefCreatePermissionPublicPasswordReq():Ref<CreatePermissionPublicPasswordReq>
+	export function refOfCreatePermissionPublicPasswordReq(x:CreatePermissionPublicPasswordReq,v:Ref<CreatePermissionPublicPasswordReq>)
+	export function unRefCreatePermissionPublicPasswordReq(v:Ref<CreatePermissionPublicPasswordReq>):CreatePermissionPublicPasswordReq
+	export function emptyAuthPermissionMemberRespData():AuthPermissionMemberRespData
+	export function emptyRefAuthPermissionMemberRespData():Ref<AuthPermissionMemberRespData>
+	export function refOfAuthPermissionMemberRespData(x:AuthPermissionMemberRespData,v:Ref<AuthPermissionMemberRespData>)
+	export function unRefAuthPermissionMemberRespData(v:Ref<AuthPermissionMemberRespData>):AuthPermissionMemberRespData
+	export function emptyCreateFileVersionReq():CreateFileVersionReq
+	export function emptyRefCreateFileVersionReq():Ref<CreateFileVersionReq>
+	export function refOfCreateFileVersionReq(x:CreateFileVersionReq,v:Ref<CreateFileVersionReq>)
+	export function unRefCreateFileVersionReq(v:Ref<CreateFileVersionReq>):CreateFileVersionReq
+	export function emptyFileComment():FileComment
+	export function emptyRefFileComment():Ref<FileComment>
+	export function refOfFileComment(x:FileComment,v:Ref<FileComment>)
+	export function unRefFileComment(v:Ref<FileComment>):FileComment
+	export function emptyGetFileVersionReq():GetFileVersionReq
+	export function emptyRefGetFileVersionReq():Ref<GetFileVersionReq>
+	export function refOfGetFileVersionReq(x:GetFileVersionReq,v:Ref<GetFileVersionReq>)
+	export function unRefGetFileVersionReq(v:Ref<GetFileVersionReq>):GetFileVersionReq
+	export function emptyP2FileEditV1():P2FileEditV1
+	export function emptyRefP2FileEditV1():Ref<P2FileEditV1>
+	export function refOfP2FileEditV1(x:P2FileEditV1,v:Ref<P2FileEditV1>)
+	export function unRefP2FileEditV1(v:Ref<P2FileEditV1>):P2FileEditV1
+	export function emptyBatchQueryFileCommentReqBody():BatchQueryFileCommentReqBody
+	export function emptyRefBatchQueryFileCommentReqBody():Ref<BatchQueryFileCommentReqBody>
+	export function refOfBatchQueryFileCommentReqBody(x:BatchQueryFileCommentReqBody,v:Ref<BatchQueryFileCommentReqBody>)
+	export function unRefBatchQueryFileCommentReqBody(v:Ref<BatchQueryFileCommentReqBody>):BatchQueryFileCommentReqBody
+	export function emptyDownloadExportTaskReq():DownloadExportTaskReq
+	export function emptyRefDownloadExportTaskReq():Ref<DownloadExportTaskReq>
+	export function refOfDownloadExportTaskReq(x:DownloadExportTaskReq,v:Ref<DownloadExportTaskReq>)
+	export function unRefDownloadExportTaskReq(v:Ref<DownloadExportTaskReq>):DownloadExportTaskReq
+	export function emptyBatchQueryMetaReq():BatchQueryMetaReq
+	export function emptyRefBatchQueryMetaReq():Ref<BatchQueryMetaReq>
+	export function refOfBatchQueryMetaReq(x:BatchQueryMetaReq,v:Ref<BatchQueryMetaReq>)
+	export function unRefBatchQueryMetaReq(v:Ref<BatchQueryMetaReq>):BatchQueryMetaReq
+	export function emptyCreateFileSubscriptionReq():CreateFileSubscriptionReq
+	export function emptyRefCreateFileSubscriptionReq():Ref<CreateFileSubscriptionReq>
+	export function refOfCreateFileSubscriptionReq(x:CreateFileSubscriptionReq,v:Ref<CreateFileSubscriptionReq>)
+	export function unRefCreateFileSubscriptionReq(v:Ref<CreateFileSubscriptionReq>):CreateFileSubscriptionReq
+	export function emptyUploadPrepareMediaReq():UploadPrepareMediaReq
+	export function emptyRefUploadPrepareMediaReq():Ref<UploadPrepareMediaReq>
+	export function refOfUploadPrepareMediaReq(x:UploadPrepareMediaReq,v:Ref<UploadPrepareMediaReq>)
+	export function unRefUploadPrepareMediaReq(v:Ref<UploadPrepareMediaReq>):UploadPrepareMediaReq
+	export function emptyPatchPermissionPublicResp():PatchPermissionPublicResp
+	export function emptyRefPatchPermissionPublicResp():Ref<PatchPermissionPublicResp>
+	export function refOfPatchPermissionPublicResp(x:PatchPermissionPublicResp,v:Ref<PatchPermissionPublicResp>)
+	export function unRefPatchPermissionPublicResp(v:Ref<PatchPermissionPublicResp>):PatchPermissionPublicResp
+	export function emptyUploadInfo():UploadInfo
+	export function emptyRefUploadInfo():Ref<UploadInfo>
+	export function refOfUploadInfo(x:UploadInfo,v:Ref<UploadInfo>)
+	export function unRefUploadInfo(v:Ref<UploadInfo>):UploadInfo
+	export function emptyBitableTableRecordActionField():BitableTableRecordActionField
+	export function emptyRefBitableTableRecordActionField():Ref<BitableTableRecordActionField>
+	export function refOfBitableTableRecordActionField(x:BitableTableRecordActionField,v:Ref<BitableTableRecordActionField>)
+	export function unRefBitableTableRecordActionField(v:Ref<BitableTableRecordActionField>):BitableTableRecordActionField
+	export function emptyP2FileBitableFieldChangedV1():P2FileBitableFieldChangedV1
+	export function emptyRefP2FileBitableFieldChangedV1():Ref<P2FileBitableFieldChangedV1>
+	export function refOfP2FileBitableFieldChangedV1(x:P2FileBitableFieldChangedV1,v:Ref<P2FileBitableFieldChangedV1>)
+	export function unRefP2FileBitableFieldChangedV1(v:Ref<P2FileBitableFieldChangedV1>):P2FileBitableFieldChangedV1
+	export function emptyUploadAllMediaRespData():UploadAllMediaRespData
+	export function emptyRefUploadAllMediaRespData():Ref<UploadAllMediaRespData>
+	export function refOfUploadAllMediaRespData(x:UploadAllMediaRespData,v:Ref<UploadAllMediaRespData>)
+	export function unRefUploadAllMediaRespData(v:Ref<UploadAllMediaRespData>):UploadAllMediaRespData
+	export function emptyCreateFolderFileReq():CreateFolderFileReq
+	export function emptyRefCreateFolderFileReq():Ref<CreateFolderFileReq>
+	export function refOfCreateFolderFileReq(x:CreateFolderFileReq,v:Ref<CreateFolderFileReq>)
+	export function unRefCreateFolderFileReq(v:Ref<CreateFolderFileReq>):CreateFolderFileReq
+	export function emptyMetaRequest():MetaRequest
+	export function emptyRefMetaRequest():Ref<MetaRequest>
+	export function refOfMetaRequest(x:MetaRequest,v:Ref<MetaRequest>)
+	export function unRefMetaRequest(v:Ref<MetaRequest>):MetaRequest
+	export function emptyBatchCreatePermissionMemberRespData():BatchCreatePermissionMemberRespData
+	export function emptyRefBatchCreatePermissionMemberRespData():Ref<BatchCreatePermissionMemberRespData>
+	export function refOfBatchCreatePermissionMemberRespData(x:BatchCreatePermissionMemberRespData,v:Ref<BatchCreatePermissionMemberRespData>)
+	export function unRefBatchCreatePermissionMemberRespData(v:Ref<BatchCreatePermissionMemberRespData>):BatchCreatePermissionMemberRespData
+	export function emptyDeleteFileCommentReplyResp():DeleteFileCommentReplyResp
+	export function emptyRefDeleteFileCommentReplyResp():Ref<DeleteFileCommentReplyResp>
+	export function refOfDeleteFileCommentReplyResp(x:DeleteFileCommentReplyResp,v:Ref<DeleteFileCommentReplyResp>)
+	export function unRefDeleteFileCommentReplyResp(v:Ref<DeleteFileCommentReplyResp>):DeleteFileCommentReplyResp
+	export function emptyGetPermissionPublicResp():GetPermissionPublicResp
+	export function emptyRefGetPermissionPublicResp():Ref<GetPermissionPublicResp>
+	export function refOfGetPermissionPublicResp(x:GetPermissionPublicResp,v:Ref<GetPermissionPublicResp>)
+	export function unRefGetPermissionPublicResp(v:Ref<GetPermissionPublicResp>):GetPermissionPublicResp
+	export function emptyListFileViewRecordResp():ListFileViewRecordResp
+	export function emptyRefListFileViewRecordResp():Ref<ListFileViewRecordResp>
+	export function refOfListFileViewRecordResp(x:ListFileViewRecordResp,v:Ref<ListFileViewRecordResp>)
+	export function unRefListFileViewRecordResp(v:Ref<ListFileViewRecordResp>):ListFileViewRecordResp
+	export function emptyUploadFinishFileReq():UploadFinishFileReq
+	export function emptyRefUploadFinishFileReq():Ref<UploadFinishFileReq>
+	export function refOfUploadFinishFileReq(x:UploadFinishFileReq,v:Ref<UploadFinishFileReq>)
+	export function unRefUploadFinishFileReq(v:Ref<UploadFinishFileReq>):UploadFinishFileReq
+	export function emptyTransferOwnerPermissionMemberResp():TransferOwnerPermissionMemberResp
+	export function emptyRefTransferOwnerPermissionMemberResp():Ref<TransferOwnerPermissionMemberResp>
+	export function refOfTransferOwnerPermissionMemberResp(x:TransferOwnerPermissionMemberResp,v:Ref<TransferOwnerPermissionMemberResp>)
+	export function unRefTransferOwnerPermissionMemberResp(v:Ref<TransferOwnerPermissionMemberResp>):TransferOwnerPermissionMemberResp
+	export function emptyCreateExportTaskReq():CreateExportTaskReq
+	export function emptyRefCreateExportTaskReq():Ref<CreateExportTaskReq>
+	export function refOfCreateExportTaskReq(x:CreateExportTaskReq,v:Ref<CreateExportTaskReq>)
+	export function unRefCreateExportTaskReq(v:Ref<CreateExportTaskReq>):CreateExportTaskReq
 	export function emptyCreateShortcutFileReq():CreateShortcutFileReq
 	export function emptyRefCreateShortcutFileReq():Ref<CreateShortcutFileReq>
 	export function refOfCreateShortcutFileReq(x:CreateShortcutFileReq,v:Ref<CreateShortcutFileReq>)
 	export function unRefCreateShortcutFileReq(v:Ref<CreateShortcutFileReq>):CreateShortcutFileReq
+	export function emptyFileViewRecord():FileViewRecord
+	export function emptyRefFileViewRecord():Ref<FileViewRecord>
+	export function refOfFileViewRecord(x:FileViewRecord,v:Ref<FileViewRecord>)
+	export function unRefFileViewRecord(v:Ref<FileViewRecord>):FileViewRecord
+	export function emptyBatchCreatePermissionMemberReqBody():BatchCreatePermissionMemberReqBody
+	export function emptyRefBatchCreatePermissionMemberReqBody():Ref<BatchCreatePermissionMemberReqBody>
+	export function refOfBatchCreatePermissionMemberReqBody(x:BatchCreatePermissionMemberReqBody,v:Ref<BatchCreatePermissionMemberReqBody>)
+	export function unRefBatchCreatePermissionMemberReqBody(v:Ref<BatchCreatePermissionMemberReqBody>):BatchCreatePermissionMemberReqBody
+	export function emptyUploadAllMediaReqBody():UploadAllMediaReqBody
+	export function emptyRefUploadAllMediaReqBody():Ref<UploadAllMediaReqBody>
+	export function refOfUploadAllMediaReqBody(x:UploadAllMediaReqBody,v:Ref<UploadAllMediaReqBody>)
+	export function unRefUploadAllMediaReqBody(v:Ref<UploadAllMediaReqBody>):UploadAllMediaReqBody
+	export function emptyPatchFileCommentResp():PatchFileCommentResp
+	export function emptyRefPatchFileCommentResp():Ref<PatchFileCommentResp>
+	export function refOfPatchFileCommentResp(x:PatchFileCommentResp,v:Ref<PatchFileCommentResp>)
+	export function unRefPatchFileCommentResp(v:Ref<PatchFileCommentResp>):PatchFileCommentResp
+	export function emptyPatchPermissionPublicReq():PatchPermissionPublicReq
+	export function emptyRefPatchPermissionPublicReq():Ref<PatchPermissionPublicReq>
+	export function refOfPatchPermissionPublicReq(x:PatchPermissionPublicReq,v:Ref<PatchPermissionPublicReq>)
+	export function unRefPatchPermissionPublicReq(v:Ref<PatchPermissionPublicReq>):PatchPermissionPublicReq
+	export function emptyDocsLink():DocsLink
+	export function emptyRefDocsLink():Ref<DocsLink>
+	export function refOfDocsLink(x:DocsLink,v:Ref<DocsLink>)
+	export function unRefDocsLink(v:Ref<DocsLink>):DocsLink
+	export function emptyGetExportTaskReq():GetExportTaskReq
+	export function emptyRefGetExportTaskReq():Ref<GetExportTaskReq>
+	export function refOfGetExportTaskReq(x:GetExportTaskReq,v:Ref<GetExportTaskReq>)
+	export function unRefGetExportTaskReq(v:Ref<GetExportTaskReq>):GetExportTaskReq
+	export function emptyGetImportTaskRespData():GetImportTaskRespData
+	export function emptyRefGetImportTaskRespData():Ref<GetImportTaskRespData>
+	export function refOfGetImportTaskRespData(x:GetImportTaskRespData,v:Ref<GetImportTaskRespData>)
+	export function unRefGetImportTaskRespData(v:Ref<GetImportTaskRespData>):GetImportTaskRespData
+	export function emptyListFileCommentReplyResp():ListFileCommentReplyResp
+	export function emptyRefListFileCommentReplyResp():Ref<ListFileCommentReplyResp>
+	export function refOfListFileCommentReplyResp(x:ListFileCommentReplyResp,v:Ref<ListFileCommentReplyResp>)
+	export function unRefListFileCommentReplyResp(v:Ref<ListFileCommentReplyResp>):ListFileCommentReplyResp
+	export function emptyListFileRespData():ListFileRespData
+	export function emptyRefListFileRespData():Ref<ListFileRespData>
+	export function refOfListFileRespData(x:ListFileRespData,v:Ref<ListFileRespData>)
+	export function unRefListFileRespData(v:Ref<ListFileRespData>):ListFileRespData
+	export function emptyP2FileEditV1Data():P2FileEditV1Data
+	export function emptyRefP2FileEditV1Data():Ref<P2FileEditV1Data>
+	export function refOfP2FileEditV1Data(x:P2FileEditV1Data,v:Ref<P2FileEditV1Data>)
+	export function unRefP2FileEditV1Data(v:Ref<P2FileEditV1Data>):P2FileEditV1Data
+	export function emptyCopyFileReq():CopyFileReq
+	export function emptyRefCopyFileReq():Ref<CopyFileReq>
+	export function refOfCopyFileReq(x:CopyFileReq,v:Ref<CopyFileReq>)
+	export function unRefCopyFileReq(v:Ref<CopyFileReq>):CopyFileReq
+	export function emptyDeletePermissionPublicPasswordResp():DeletePermissionPublicPasswordResp
+	export function emptyRefDeletePermissionPublicPasswordResp():Ref<DeletePermissionPublicPasswordResp>
+	export function refOfDeletePermissionPublicPasswordResp(x:DeletePermissionPublicPasswordResp,v:Ref<DeletePermissionPublicPasswordResp>)
+	export function unRefDeletePermissionPublicPasswordResp(v:Ref<DeletePermissionPublicPasswordResp>):DeletePermissionPublicPasswordResp
+	export function emptyUploadFinishMediaReqBody():UploadFinishMediaReqBody
+	export function emptyRefUploadFinishMediaReqBody():Ref<UploadFinishMediaReqBody>
+	export function refOfUploadFinishMediaReqBody(x:UploadFinishMediaReqBody,v:Ref<UploadFinishMediaReqBody>)
+	export function unRefUploadFinishMediaReqBody(v:Ref<UploadFinishMediaReqBody>):UploadFinishMediaReqBody
+	export function emptyUploadAllFileReqBody():UploadAllFileReqBody
+	export function emptyRefUploadAllFileReqBody():Ref<UploadAllFileReqBody>
+	export function refOfUploadAllFileReqBody(x:UploadAllFileReqBody,v:Ref<UploadAllFileReqBody>)
+	export function unRefUploadAllFileReqBody(v:Ref<UploadAllFileReqBody>):UploadAllFileReqBody
+	export function emptyDeletePermissionMemberReqBody():DeletePermissionMemberReqBody
+	export function emptyRefDeletePermissionMemberReqBody():Ref<DeletePermissionMemberReqBody>
+	export function refOfDeletePermissionMemberReqBody(x:DeletePermissionMemberReqBody,v:Ref<DeletePermissionMemberReqBody>)
+	export function unRefDeletePermissionMemberReqBody(v:Ref<DeletePermissionMemberReqBody>):DeletePermissionMemberReqBody
+	export function emptyTextRun():TextRun
+	export function emptyRefTextRun():Ref<TextRun>
+	export function refOfTextRun(x:TextRun,v:Ref<TextRun>)
+	export function unRefTextRun(v:Ref<TextRun>):TextRun
+	export function emptyBatchQueryMetaRespData():BatchQueryMetaRespData
+	export function emptyRefBatchQueryMetaRespData():Ref<BatchQueryMetaRespData>
+	export function refOfBatchQueryMetaRespData(x:BatchQueryMetaRespData,v:Ref<BatchQueryMetaRespData>)
+	export function unRefBatchQueryMetaRespData(v:Ref<BatchQueryMetaRespData>):BatchQueryMetaRespData
+	export function emptyCreateFileVersionRespData():CreateFileVersionRespData
+	export function emptyRefCreateFileVersionRespData():Ref<CreateFileVersionRespData>
+	export function refOfCreateFileVersionRespData(x:CreateFileVersionRespData,v:Ref<CreateFileVersionRespData>)
+	export function unRefCreateFileVersionRespData(v:Ref<CreateFileVersionRespData>):CreateFileVersionRespData
+	export function emptyListPermissionMemberRespData():ListPermissionMemberRespData
+	export function emptyRefListPermissionMemberRespData():Ref<ListPermissionMemberRespData>
+	export function refOfListPermissionMemberRespData(x:ListPermissionMemberRespData,v:Ref<ListPermissionMemberRespData>)
+	export function unRefListPermissionMemberRespData(v:Ref<ListPermissionMemberRespData>):ListPermissionMemberRespData
+	export function emptyGetImportTaskReq():GetImportTaskReq
+	export function emptyRefGetImportTaskReq():Ref<GetImportTaskReq>
+	export function refOfGetImportTaskReq(x:GetImportTaskReq,v:Ref<GetImportTaskReq>)
+	export function unRefGetImportTaskReq(v:Ref<GetImportTaskReq>):GetImportTaskReq
+	export function emptyP2FileTitleUpdatedV1():P2FileTitleUpdatedV1
+	export function emptyRefP2FileTitleUpdatedV1():Ref<P2FileTitleUpdatedV1>
+	export function refOfP2FileTitleUpdatedV1(x:P2FileTitleUpdatedV1,v:Ref<P2FileTitleUpdatedV1>)
+	export function unRefP2FileTitleUpdatedV1(v:Ref<P2FileTitleUpdatedV1>):P2FileTitleUpdatedV1
+	export function emptyVersion():Version
+	export function emptyRefVersion():Ref<Version>
+	export function refOfVersion(x:Version,v:Ref<Version>)
+	export function unRefVersion(v:Ref<Version>):Version
+	export function emptyP2FileReadV1Data():P2FileReadV1Data
+	export function emptyRefP2FileReadV1Data():Ref<P2FileReadV1Data>
+	export function refOfP2FileReadV1Data(x:P2FileReadV1Data,v:Ref<P2FileReadV1Data>)
+	export function unRefP2FileReadV1Data(v:Ref<P2FileReadV1Data>):P2FileReadV1Data
+	export function emptyCollaborator():Collaborator
+	export function emptyRefCollaborator():Ref<Collaborator>
+	export function refOfCollaborator(x:Collaborator,v:Ref<Collaborator>)
+	export function unRefCollaborator(v:Ref<Collaborator>):Collaborator
+	export function emptyListFileCommentReplyIterator():ListFileCommentReplyIterator
+	export function emptyRefListFileCommentReplyIterator():Ref<ListFileCommentReplyIterator>
+	export function refOfListFileCommentReplyIterator(x:ListFileCommentReplyIterator,v:Ref<ListFileCommentReplyIterator>)
+	export function unRefListFileCommentReplyIterator(v:Ref<ListFileCommentReplyIterator>):ListFileCommentReplyIterator
+	export function emptyMedia():Media
+	export function emptyRefMedia():Ref<Media>
+	export function refOfMedia(x:Media,v:Ref<Media>)
+	export function unRefMedia(v:Ref<Media>):Media
+	export function emptyGetFileCommentResp():GetFileCommentResp
+	export function emptyRefGetFileCommentResp():Ref<GetFileCommentResp>
+	export function refOfGetFileCommentResp(x:GetFileCommentResp,v:Ref<GetFileCommentResp>)
+	export function unRefGetFileCommentResp(v:Ref<GetFileCommentResp>):GetFileCommentResp
+	export function emptyGetFileSubscriptionResp():GetFileSubscriptionResp
+	export function emptyRefGetFileSubscriptionResp():Ref<GetFileSubscriptionResp>
+	export function refOfGetFileSubscriptionResp(x:GetFileSubscriptionResp,v:Ref<GetFileSubscriptionResp>)
+	export function unRefGetFileSubscriptionResp(v:Ref<GetFileSubscriptionResp>):GetFileSubscriptionResp
+	export function emptyCreateImportTaskResp():CreateImportTaskResp
+	export function emptyRefCreateImportTaskResp():Ref<CreateImportTaskResp>
+	export function refOfCreateImportTaskResp(x:CreateImportTaskResp,v:Ref<CreateImportTaskResp>)
+	export function unRefCreateImportTaskResp(v:Ref<CreateImportTaskResp>):CreateImportTaskResp
+	export function emptyDeleteFileRespData():DeleteFileRespData
+	export function emptyRefDeleteFileRespData():Ref<DeleteFileRespData>
+	export function refOfDeleteFileRespData(x:DeleteFileRespData,v:Ref<DeleteFileRespData>)
+	export function unRefDeleteFileRespData(v:Ref<DeleteFileRespData>):DeleteFileRespData
+	export function emptyGetSubscribeFileRespData():GetSubscribeFileRespData
+	export function emptyRefGetSubscribeFileRespData():Ref<GetSubscribeFileRespData>
+	export function refOfGetSubscribeFileRespData(x:GetSubscribeFileRespData,v:Ref<GetSubscribeFileRespData>)
+	export function unRefGetSubscribeFileRespData(v:Ref<GetSubscribeFileRespData>):GetSubscribeFileRespData
+	export function emptyListPermissionMemberReq():ListPermissionMemberReq
+	export function emptyRefListPermissionMemberReq():Ref<ListPermissionMemberReq>
+	export function refOfListPermissionMemberReq(x:ListPermissionMemberReq,v:Ref<ListPermissionMemberReq>)
+	export function unRefListPermissionMemberReq(v:Ref<ListPermissionMemberReq>):ListPermissionMemberReq
+	export function emptyMediaUploadInfo():MediaUploadInfo
+	export function emptyRefMediaUploadInfo():Ref<MediaUploadInfo>
+	export function refOfMediaUploadInfo(x:MediaUploadInfo,v:Ref<MediaUploadInfo>)
+	export function unRefMediaUploadInfo(v:Ref<MediaUploadInfo>):MediaUploadInfo
+	export function emptyP2FileBitableFieldChangedV1Data():P2FileBitableFieldChangedV1Data
+	export function emptyRefP2FileBitableFieldChangedV1Data():Ref<P2FileBitableFieldChangedV1Data>
+	export function refOfP2FileBitableFieldChangedV1Data(x:P2FileBitableFieldChangedV1Data,v:Ref<P2FileBitableFieldChangedV1Data>)
+	export function unRefP2FileBitableFieldChangedV1Data(v:Ref<P2FileBitableFieldChangedV1Data>):P2FileBitableFieldChangedV1Data
+	export function emptyPatchFileCommentReqBody():PatchFileCommentReqBody
+	export function emptyRefPatchFileCommentReqBody():Ref<PatchFileCommentReqBody>
+	export function refOfPatchFileCommentReqBody(x:PatchFileCommentReqBody,v:Ref<PatchFileCommentReqBody>)
+	export function unRefPatchFileCommentReqBody(v:Ref<PatchFileCommentReqBody>):PatchFileCommentReqBody
+	export function emptyFileSearch():FileSearch
+	export function emptyRefFileSearch():Ref<FileSearch>
+	export function refOfFileSearch(x:FileSearch,v:Ref<FileSearch>)
+	export function unRefFileSearch(v:Ref<FileSearch>):FileSearch
+	export function emptyDeletePermissionPublicPasswordReq():DeletePermissionPublicPasswordReq
+	export function emptyRefDeletePermissionPublicPasswordReq():Ref<DeletePermissionPublicPasswordReq>
+	export function refOfDeletePermissionPublicPasswordReq(x:DeletePermissionPublicPasswordReq,v:Ref<DeletePermissionPublicPasswordReq>)
+	export function unRefDeletePermissionPublicPasswordReq(v:Ref<DeletePermissionPublicPasswordReq>):DeletePermissionPublicPasswordReq
+	export function emptyGetExportTaskRespData():GetExportTaskRespData
+	export function emptyRefGetExportTaskRespData():Ref<GetExportTaskRespData>
+	export function refOfGetExportTaskRespData(x:GetExportTaskRespData,v:Ref<GetExportTaskRespData>)
+	export function unRefGetExportTaskRespData(v:Ref<GetExportTaskRespData>):GetExportTaskRespData
+	export function emptyAuthPermissionMemberResp():AuthPermissionMemberResp
+	export function emptyRefAuthPermissionMemberResp():Ref<AuthPermissionMemberResp>
+	export function refOfAuthPermissionMemberResp(x:AuthPermissionMemberResp,v:Ref<AuthPermissionMemberResp>)
+	export function unRefAuthPermissionMemberResp(v:Ref<AuthPermissionMemberResp>):AuthPermissionMemberResp
+	export function emptyDownloadFileReq():DownloadFileReq
+	export function emptyRefDownloadFileReq():Ref<DownloadFileReq>
+	export function refOfDownloadFileReq(x:DownloadFileReq,v:Ref<DownloadFileReq>)
+	export function unRefDownloadFileReq(v:Ref<DownloadFileReq>):DownloadFileReq
+	export function emptyP2FilePermissionMemberAddedV1():P2FilePermissionMemberAddedV1
+	export function emptyRefP2FilePermissionMemberAddedV1():Ref<P2FilePermissionMemberAddedV1>
+	export function refOfP2FilePermissionMemberAddedV1(x:P2FilePermissionMemberAddedV1,v:Ref<P2FilePermissionMemberAddedV1>)
+	export function unRefP2FilePermissionMemberAddedV1(v:Ref<P2FilePermissionMemberAddedV1>):P2FilePermissionMemberAddedV1
+	export function emptyUploadFinishMediaResp():UploadFinishMediaResp
+	export function emptyRefUploadFinishMediaResp():Ref<UploadFinishMediaResp>
+	export function refOfUploadFinishMediaResp(x:UploadFinishMediaResp,v:Ref<UploadFinishMediaResp>)
+	export function unRefUploadFinishMediaResp(v:Ref<UploadFinishMediaResp>):UploadFinishMediaResp
+	export function emptyBitableTableRecordAction():BitableTableRecordAction
+	export function emptyRefBitableTableRecordAction():Ref<BitableTableRecordAction>
+	export function refOfBitableTableRecordAction(x:BitableTableRecordAction,v:Ref<BitableTableRecordAction>)
+	export function unRefBitableTableRecordAction(v:Ref<BitableTableRecordAction>):BitableTableRecordAction
+	export function emptyCreateShortcutFileRespData():CreateShortcutFileRespData
+	export function emptyRefCreateShortcutFileRespData():Ref<CreateShortcutFileRespData>
+	export function refOfCreateShortcutFileRespData(x:CreateShortcutFileRespData,v:Ref<CreateShortcutFileRespData>)
+	export function unRefCreateShortcutFileRespData(v:Ref<CreateShortcutFileRespData>):CreateShortcutFileRespData
+	export function emptyBatchCreatePermissionMemberResp():BatchCreatePermissionMemberResp
+	export function emptyRefBatchCreatePermissionMemberResp():Ref<BatchCreatePermissionMemberResp>
+	export function refOfBatchCreatePermissionMemberResp(x:BatchCreatePermissionMemberResp,v:Ref<BatchCreatePermissionMemberResp>)
+	export function unRefBatchCreatePermissionMemberResp(v:Ref<BatchCreatePermissionMemberResp>):BatchCreatePermissionMemberResp
+	export function emptyShortcutInfo():ShortcutInfo
+	export function emptyRefShortcutInfo():Ref<ShortcutInfo>
+	export function refOfShortcutInfo(x:ShortcutInfo,v:Ref<ShortcutInfo>)
+	export function unRefShortcutInfo(v:Ref<ShortcutInfo>):ShortcutInfo
+	export function emptyUploadAllFileResp():UploadAllFileResp
+	export function emptyRefUploadAllFileResp():Ref<UploadAllFileResp>
+	export function refOfUploadAllFileResp(x:UploadAllFileResp,v:Ref<UploadAllFileResp>)
+	export function unRefUploadAllFileResp(v:Ref<UploadAllFileResp>):UploadAllFileResp
+	export function emptyBaseMember():BaseMember
+	export function emptyRefBaseMember():Ref<BaseMember>
+	export function refOfBaseMember(x:BaseMember,v:Ref<BaseMember>)
+	export function unRefBaseMember(v:Ref<BaseMember>):BaseMember
+	export function emptyDownloadFileResp():DownloadFileResp
+	export function emptyRefDownloadFileResp():Ref<DownloadFileResp>
+	export function refOfDownloadFileResp(x:DownloadFileResp,v:Ref<DownloadFileResp>)
+	export function unRefDownloadFileResp(v:Ref<DownloadFileResp>):DownloadFileResp
+	export function emptyUploadFinishFileResp():UploadFinishFileResp
+	export function emptyRefUploadFinishFileResp():Ref<UploadFinishFileResp>
+	export function refOfUploadFinishFileResp(x:UploadFinishFileResp,v:Ref<UploadFinishFileResp>)
+	export function unRefUploadFinishFileResp(v:Ref<UploadFinishFileResp>):UploadFinishFileResp
+	export function emptyDepartmentId():DepartmentId
+	export function emptyRefDepartmentId():Ref<DepartmentId>
+	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
+	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
 	export function emptyGetExportTaskResp():GetExportTaskResp
 	export function emptyRefGetExportTaskResp():Ref<GetExportTaskResp>
 	export function refOfGetExportTaskResp(x:GetExportTaskResp,v:Ref<GetExportTaskResp>)
@@ -4511,72 +4478,244 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/drive/v1'{
 	export function emptyRefCreateFileVersionResp():Ref<CreateFileVersionResp>
 	export function refOfCreateFileVersionResp(x:CreateFileVersionResp,v:Ref<CreateFileVersionResp>)
 	export function unRefCreateFileVersionResp(v:Ref<CreateFileVersionResp>):CreateFileVersionResp
-	export function emptyGetFileSubscriptionResp():GetFileSubscriptionResp
-	export function emptyRefGetFileSubscriptionResp():Ref<GetFileSubscriptionResp>
-	export function refOfGetFileSubscriptionResp(x:GetFileSubscriptionResp,v:Ref<GetFileSubscriptionResp>)
-	export function unRefGetFileSubscriptionResp(v:Ref<GetFileSubscriptionResp>):GetFileSubscriptionResp
-	export function emptyP2FileTitleUpdatedV1Data():P2FileTitleUpdatedV1Data
-	export function emptyRefP2FileTitleUpdatedV1Data():Ref<P2FileTitleUpdatedV1Data>
-	export function refOfP2FileTitleUpdatedV1Data(x:P2FileTitleUpdatedV1Data,v:Ref<P2FileTitleUpdatedV1Data>)
-	export function unRefP2FileTitleUpdatedV1Data(v:Ref<P2FileTitleUpdatedV1Data>):P2FileTitleUpdatedV1Data
-	export function emptyListPermissionMemberResp():ListPermissionMemberResp
-	export function emptyRefListPermissionMemberResp():Ref<ListPermissionMemberResp>
-	export function refOfListPermissionMemberResp(x:ListPermissionMemberResp,v:Ref<ListPermissionMemberResp>)
-	export function unRefListPermissionMemberResp(v:Ref<ListPermissionMemberResp>):ListPermissionMemberResp
-	export function emptyGetFileStatisticsResp():GetFileStatisticsResp
-	export function emptyRefGetFileStatisticsResp():Ref<GetFileStatisticsResp>
-	export function refOfGetFileStatisticsResp(x:GetFileStatisticsResp,v:Ref<GetFileStatisticsResp>)
-	export function unRefGetFileStatisticsResp(v:Ref<GetFileStatisticsResp>):GetFileStatisticsResp
-	export function emptyGetFileSubscriptionReq():GetFileSubscriptionReq
-	export function emptyRefGetFileSubscriptionReq():Ref<GetFileSubscriptionReq>
-	export function refOfGetFileSubscriptionReq(x:GetFileSubscriptionReq,v:Ref<GetFileSubscriptionReq>)
-	export function unRefGetFileSubscriptionReq(v:Ref<GetFileSubscriptionReq>):GetFileSubscriptionReq
-	export function emptyP2FileReadV1Data():P2FileReadV1Data
-	export function emptyRefP2FileReadV1Data():Ref<P2FileReadV1Data>
-	export function refOfP2FileReadV1Data(x:P2FileReadV1Data,v:Ref<P2FileReadV1Data>)
-	export function unRefP2FileReadV1Data(v:Ref<P2FileReadV1Data>):P2FileReadV1Data
-	export function emptyPatchFileSubscriptionResp():PatchFileSubscriptionResp
-	export function emptyRefPatchFileSubscriptionResp():Ref<PatchFileSubscriptionResp>
-	export function refOfPatchFileSubscriptionResp(x:PatchFileSubscriptionResp,v:Ref<PatchFileSubscriptionResp>)
-	export function unRefPatchFileSubscriptionResp(v:Ref<PatchFileSubscriptionResp>):PatchFileSubscriptionResp
-	export function emptyListFileVersionReq():ListFileVersionReq
-	export function emptyRefListFileVersionReq():Ref<ListFileVersionReq>
-	export function refOfListFileVersionReq(x:ListFileVersionReq,v:Ref<ListFileVersionReq>)
-	export function unRefListFileVersionReq(v:Ref<ListFileVersionReq>):ListFileVersionReq
-	export function emptyAuthPermissionMemberRespData():AuthPermissionMemberRespData
-	export function emptyRefAuthPermissionMemberRespData():Ref<AuthPermissionMemberRespData>
-	export function refOfAuthPermissionMemberRespData(x:AuthPermissionMemberRespData,v:Ref<AuthPermissionMemberRespData>)
-	export function unRefAuthPermissionMemberRespData(v:Ref<AuthPermissionMemberRespData>):AuthPermissionMemberRespData
-	export function emptyDownloadExportTaskReq():DownloadExportTaskReq
-	export function emptyRefDownloadExportTaskReq():Ref<DownloadExportTaskReq>
-	export function refOfDownloadExportTaskReq(x:DownloadExportTaskReq,v:Ref<DownloadExportTaskReq>)
-	export function unRefDownloadExportTaskReq(v:Ref<DownloadExportTaskReq>):DownloadExportTaskReq
-	export function emptyGetFileVersionResp():GetFileVersionResp
-	export function emptyRefGetFileVersionResp():Ref<GetFileVersionResp>
-	export function refOfGetFileVersionResp(x:GetFileVersionResp,v:Ref<GetFileVersionResp>)
-	export function unRefGetFileVersionResp(v:Ref<GetFileVersionResp>):GetFileVersionResp
-	export function emptyImportTaskMountPoint():ImportTaskMountPoint
-	export function emptyRefImportTaskMountPoint():Ref<ImportTaskMountPoint>
-	export function refOfImportTaskMountPoint(x:ImportTaskMountPoint,v:Ref<ImportTaskMountPoint>)
-	export function unRefImportTaskMountPoint(v:Ref<ImportTaskMountPoint>):ImportTaskMountPoint
-	export function emptyCreateImportTaskReq():CreateImportTaskReq
-	export function emptyRefCreateImportTaskReq():Ref<CreateImportTaskReq>
-	export function refOfCreateImportTaskReq(x:CreateImportTaskReq,v:Ref<CreateImportTaskReq>)
-	export function unRefCreateImportTaskReq(v:Ref<CreateImportTaskReq>):CreateImportTaskReq
-	export function emptyUploadFinishMediaResp():UploadFinishMediaResp
-	export function emptyRefUploadFinishMediaResp():Ref<UploadFinishMediaResp>
-	export function refOfUploadFinishMediaResp(x:UploadFinishMediaResp,v:Ref<UploadFinishMediaResp>)
-	export function unRefUploadFinishMediaResp(v:Ref<UploadFinishMediaResp>):UploadFinishMediaResp
-	export function emptyTaskCheckFileResp():TaskCheckFileResp
-	export function emptyRefTaskCheckFileResp():Ref<TaskCheckFileResp>
-	export function refOfTaskCheckFileResp(x:TaskCheckFileResp,v:Ref<TaskCheckFileResp>)
-	export function unRefTaskCheckFileResp(v:Ref<TaskCheckFileResp>):TaskCheckFileResp
+	export function emptyDeleteFileResp():DeleteFileResp
+	export function emptyRefDeleteFileResp():Ref<DeleteFileResp>
+	export function refOfDeleteFileResp(x:DeleteFileResp,v:Ref<DeleteFileResp>)
+	export function unRefDeleteFileResp(v:Ref<DeleteFileResp>):DeleteFileResp
+	export function emptyUpdatePermissionMemberRespData():UpdatePermissionMemberRespData
+	export function emptyRefUpdatePermissionMemberRespData():Ref<UpdatePermissionMemberRespData>
+	export function refOfUpdatePermissionMemberRespData(x:UpdatePermissionMemberRespData,v:Ref<UpdatePermissionMemberRespData>)
+	export function unRefUpdatePermissionMemberRespData(v:Ref<UpdatePermissionMemberRespData>):UpdatePermissionMemberRespData
+	export function emptyV1():V1
+	export function emptyRefV1():Ref<V1>
+	export function refOfV1(x:V1,v:Ref<V1>)
+	export function unRefV1(v:Ref<V1>):V1
+	export function emptyFileChangeInfo():FileChangeInfo
+	export function emptyRefFileChangeInfo():Ref<FileChangeInfo>
+	export function refOfFileChangeInfo(x:FileChangeInfo,v:Ref<FileChangeInfo>)
+	export function unRefFileChangeInfo(v:Ref<FileChangeInfo>):FileChangeInfo
+	export function emptyUploadPartFileReqBody():UploadPartFileReqBody
+	export function emptyRefUploadPartFileReqBody():Ref<UploadPartFileReqBody>
+	export function refOfUploadPartFileReqBody(x:UploadPartFileReqBody,v:Ref<UploadPartFileReqBody>)
+	export function unRefUploadPartFileReqBody(v:Ref<UploadPartFileReqBody>):UploadPartFileReqBody
+	export function emptyBitableTableRecordActionFieldIdentity():BitableTableRecordActionFieldIdentity
+	export function emptyRefBitableTableRecordActionFieldIdentity():Ref<BitableTableRecordActionFieldIdentity>
+	export function refOfBitableTableRecordActionFieldIdentity(x:BitableTableRecordActionFieldIdentity,v:Ref<BitableTableRecordActionFieldIdentity>)
+	export function unRefBitableTableRecordActionFieldIdentity(v:Ref<BitableTableRecordActionFieldIdentity>):BitableTableRecordActionFieldIdentity
+	export function emptyUpdatePermissionMemberReq():UpdatePermissionMemberReq
+	export function emptyRefUpdatePermissionMemberReq():Ref<UpdatePermissionMemberReq>
+	export function refOfUpdatePermissionMemberReq(x:UpdatePermissionMemberReq,v:Ref<UpdatePermissionMemberReq>)
+	export function unRefUpdatePermissionMemberReq(v:Ref<UpdatePermissionMemberReq>):UpdatePermissionMemberReq
+	export function emptyBatchQueryFileCommentReq():BatchQueryFileCommentReq
+	export function emptyRefBatchQueryFileCommentReq():Ref<BatchQueryFileCommentReq>
+	export function refOfBatchQueryFileCommentReq(x:BatchQueryFileCommentReq,v:Ref<BatchQueryFileCommentReq>)
+	export function unRefBatchQueryFileCommentReq(v:Ref<BatchQueryFileCommentReq>):BatchQueryFileCommentReq
+	export function emptyReferEntity():ReferEntity
+	export function emptyRefReferEntity():Ref<ReferEntity>
+	export function refOfReferEntity(x:ReferEntity,v:Ref<ReferEntity>)
+	export function unRefReferEntity(v:Ref<ReferEntity>):ReferEntity
+	export function emptyUploadPartMediaReq():UploadPartMediaReq
+	export function emptyRefUploadPartMediaReq():Ref<UploadPartMediaReq>
+	export function refOfUploadPartMediaReq(x:UploadPartMediaReq,v:Ref<UploadPartMediaReq>)
+	export function unRefUploadPartMediaReq(v:Ref<UploadPartMediaReq>):UploadPartMediaReq
+	export function emptyPatchPermissionPublicRespData():PatchPermissionPublicRespData
+	export function emptyRefPatchPermissionPublicRespData():Ref<PatchPermissionPublicRespData>
+	export function refOfPatchPermissionPublicRespData(x:PatchPermissionPublicRespData,v:Ref<PatchPermissionPublicRespData>)
+	export function unRefPatchPermissionPublicRespData(v:Ref<PatchPermissionPublicRespData>):PatchPermissionPublicRespData
+	export function emptyReplyElement():ReplyElement
+	export function emptyRefReplyElement():Ref<ReplyElement>
+	export function refOfReplyElement(x:ReplyElement,v:Ref<ReplyElement>)
+	export function unRefReplyElement(v:Ref<ReplyElement>):ReplyElement
+	export function emptyGetFileStatisticsReq():GetFileStatisticsReq
+	export function emptyRefGetFileStatisticsReq():Ref<GetFileStatisticsReq>
+	export function refOfGetFileStatisticsReq(x:GetFileStatisticsReq,v:Ref<GetFileStatisticsReq>)
+	export function unRefGetFileStatisticsReq(v:Ref<GetFileStatisticsReq>):GetFileStatisticsReq
+	export function emptyListFileCommentReplyReq():ListFileCommentReplyReq
+	export function emptyRefListFileCommentReplyReq():Ref<ListFileCommentReplyReq>
+	export function refOfListFileCommentReplyReq(x:ListFileCommentReplyReq,v:Ref<ListFileCommentReplyReq>)
+	export function unRefListFileCommentReplyReq(v:Ref<ListFileCommentReplyReq>):ListFileCommentReplyReq
+	export function emptyCopyFileRespData():CopyFileRespData
+	export function emptyRefCopyFileRespData():Ref<CopyFileRespData>
+	export function refOfCopyFileRespData(x:CopyFileRespData,v:Ref<CopyFileRespData>)
+	export function unRefCopyFileRespData(v:Ref<CopyFileRespData>):CopyFileRespData
+	export function emptyFileBlockChangeInfo():FileBlockChangeInfo
+	export function emptyRefFileBlockChangeInfo():Ref<FileBlockChangeInfo>
+	export function refOfFileBlockChangeInfo(x:FileBlockChangeInfo,v:Ref<FileBlockChangeInfo>)
+	export function unRefFileBlockChangeInfo(v:Ref<FileBlockChangeInfo>):FileBlockChangeInfo
+	export function emptyCreatePermissionMemberRespData():CreatePermissionMemberRespData
+	export function emptyRefCreatePermissionMemberRespData():Ref<CreatePermissionMemberRespData>
+	export function refOfCreatePermissionMemberRespData(x:CreatePermissionMemberRespData,v:Ref<CreatePermissionMemberRespData>)
+	export function unRefCreatePermissionMemberRespData(v:Ref<CreatePermissionMemberRespData>):CreatePermissionMemberRespData
+	export function emptyFileCommentReply():FileCommentReply
+	export function emptyRefFileCommentReply():Ref<FileCommentReply>
+	export function refOfFileCommentReply(x:FileCommentReply,v:Ref<FileCommentReply>)
+	export function unRefFileCommentReply(v:Ref<FileCommentReply>):FileCommentReply
+	export function emptyGetPermissionPublicRespData():GetPermissionPublicRespData
+	export function emptyRefGetPermissionPublicRespData():Ref<GetPermissionPublicRespData>
+	export function refOfGetPermissionPublicRespData(x:GetPermissionPublicRespData,v:Ref<GetPermissionPublicRespData>)
+	export function unRefGetPermissionPublicRespData(v:Ref<GetPermissionPublicRespData>):GetPermissionPublicRespData
+	export function emptyP2FileReadV1():P2FileReadV1
+	export function emptyRefP2FileReadV1():Ref<P2FileReadV1>
+	export function refOfP2FileReadV1(x:P2FileReadV1,v:Ref<P2FileReadV1>)
+	export function unRefP2FileReadV1(v:Ref<P2FileReadV1>):P2FileReadV1
+	export function emptyMoveFileReq():MoveFileReq
+	export function emptyRefMoveFileReq():Ref<MoveFileReq>
+	export function refOfMoveFileReq(x:MoveFileReq,v:Ref<MoveFileReq>)
+	export function unRefMoveFileReq(v:Ref<MoveFileReq>):MoveFileReq
+	export function emptyBitableTableFieldActionValue():BitableTableFieldActionValue
+	export function emptyRefBitableTableFieldActionValue():Ref<BitableTableFieldActionValue>
+	export function refOfBitableTableFieldActionValue(x:BitableTableFieldActionValue,v:Ref<BitableTableFieldActionValue>)
+	export function unRefBitableTableFieldActionValue(v:Ref<BitableTableFieldActionValue>):BitableTableFieldActionValue
+	export function emptyMetaFailed():MetaFailed
+	export function emptyRefMetaFailed():Ref<MetaFailed>
+	export function refOfMetaFailed(x:MetaFailed,v:Ref<MetaFailed>)
+	export function unRefMetaFailed(v:Ref<MetaFailed>):MetaFailed
+	export function emptyP2FilePermissionMemberRemovedV1Data():P2FilePermissionMemberRemovedV1Data
+	export function emptyRefP2FilePermissionMemberRemovedV1Data():Ref<P2FilePermissionMemberRemovedV1Data>
+	export function refOfP2FilePermissionMemberRemovedV1Data(x:P2FilePermissionMemberRemovedV1Data,v:Ref<P2FilePermissionMemberRemovedV1Data>)
+	export function unRefP2FilePermissionMemberRemovedV1Data(v:Ref<P2FilePermissionMemberRemovedV1Data>):P2FilePermissionMemberRemovedV1Data
+	export function emptyBitableTableFieldActionValuePropertyAutoSerialOptions():BitableTableFieldActionValuePropertyAutoSerialOptions
+	export function emptyRefBitableTableFieldActionValuePropertyAutoSerialOptions():Ref<BitableTableFieldActionValuePropertyAutoSerialOptions>
+	export function refOfBitableTableFieldActionValuePropertyAutoSerialOptions(x:BitableTableFieldActionValuePropertyAutoSerialOptions,v:Ref<BitableTableFieldActionValuePropertyAutoSerialOptions>)
+	export function unRefBitableTableFieldActionValuePropertyAutoSerialOptions(v:Ref<BitableTableFieldActionValuePropertyAutoSerialOptions>):BitableTableFieldActionValuePropertyAutoSerialOptions
+	export function emptyCreateFolderFileReqBody():CreateFolderFileReqBody
+	export function emptyRefCreateFolderFileReqBody():Ref<CreateFolderFileReqBody>
+	export function refOfCreateFolderFileReqBody(x:CreateFolderFileReqBody,v:Ref<CreateFolderFileReqBody>)
+	export function unRefCreateFolderFileReqBody(v:Ref<CreateFolderFileReqBody>):CreateFolderFileReqBody
+	export function emptyFileSubscription():FileSubscription
+	export function emptyRefFileSubscription():Ref<FileSubscription>
+	export function refOfFileSubscription(x:FileSubscription,v:Ref<FileSubscription>)
+	export function unRefFileSubscription(v:Ref<FileSubscription>):FileSubscription
+	export function emptyBitableTableFieldActionValueProperty():BitableTableFieldActionValueProperty
+	export function emptyRefBitableTableFieldActionValueProperty():Ref<BitableTableFieldActionValueProperty>
+	export function refOfBitableTableFieldActionValueProperty(x:BitableTableFieldActionValueProperty,v:Ref<BitableTableFieldActionValueProperty>)
+	export function unRefBitableTableFieldActionValueProperty(v:Ref<BitableTableFieldActionValueProperty>):BitableTableFieldActionValueProperty
+	export function emptyUploadFinishFileReqBody():UploadFinishFileReqBody
+	export function emptyRefUploadFinishFileReqBody():Ref<UploadFinishFileReqBody>
+	export function refOfUploadFinishFileReqBody(x:UploadFinishFileReqBody,v:Ref<UploadFinishFileReqBody>)
+	export function unRefUploadFinishFileReqBody(v:Ref<UploadFinishFileReqBody>):UploadFinishFileReqBody
+	export function emptyListFileViewRecordRespData():ListFileViewRecordRespData
+	export function emptyRefListFileViewRecordRespData():Ref<ListFileViewRecordRespData>
+	export function refOfListFileViewRecordRespData(x:ListFileViewRecordRespData,v:Ref<ListFileViewRecordRespData>)
+	export function unRefListFileViewRecordRespData(v:Ref<ListFileViewRecordRespData>):ListFileViewRecordRespData
+	export function emptyGetFileVersionRespData():GetFileVersionRespData
+	export function emptyRefGetFileVersionRespData():Ref<GetFileVersionRespData>
+	export function refOfGetFileVersionRespData(x:GetFileVersionRespData,v:Ref<GetFileVersionRespData>)
+	export function unRefGetFileVersionRespData(v:Ref<GetFileVersionRespData>):GetFileVersionRespData
+	export function emptyCreatePermissionMemberReq():CreatePermissionMemberReq
+	export function emptyRefCreatePermissionMemberReq():Ref<CreatePermissionMemberReq>
+	export function refOfCreatePermissionMemberReq(x:CreatePermissionMemberReq,v:Ref<CreatePermissionMemberReq>)
+	export function unRefCreatePermissionMemberReq(v:Ref<CreatePermissionMemberReq>):CreatePermissionMemberReq
+	export function emptyGetFileCommentReq():GetFileCommentReq
+	export function emptyRefGetFileCommentReq():Ref<GetFileCommentReq>
+	export function refOfGetFileCommentReq(x:GetFileCommentReq,v:Ref<GetFileCommentReq>)
+	export function unRefGetFileCommentReq(v:Ref<GetFileCommentReq>):GetFileCommentReq
+	export function emptyListFileVersionIterator():ListFileVersionIterator
+	export function emptyRefListFileVersionIterator():Ref<ListFileVersionIterator>
+	export function refOfListFileVersionIterator(x:ListFileVersionIterator,v:Ref<ListFileVersionIterator>)
+	export function unRefListFileVersionIterator(v:Ref<ListFileVersionIterator>):ListFileVersionIterator
+	export function emptyMember():Member
+	export function emptyRefMember():Ref<Member>
+	export function refOfMember(x:Member,v:Ref<Member>)
+	export function unRefMember(v:Ref<Member>):Member
+	export function emptyP2FilePermissionMemberAddedV1Data():P2FilePermissionMemberAddedV1Data
+	export function emptyRefP2FilePermissionMemberAddedV1Data():Ref<P2FilePermissionMemberAddedV1Data>
+	export function refOfP2FilePermissionMemberAddedV1Data(x:P2FilePermissionMemberAddedV1Data,v:Ref<P2FilePermissionMemberAddedV1Data>)
+	export function unRefP2FilePermissionMemberAddedV1Data(v:Ref<P2FilePermissionMemberAddedV1Data>):P2FilePermissionMemberAddedV1Data
+	export function emptyTaskCheckFileRespData():TaskCheckFileRespData
+	export function emptyRefTaskCheckFileRespData():Ref<TaskCheckFileRespData>
+	export function refOfTaskCheckFileRespData(x:TaskCheckFileRespData,v:Ref<TaskCheckFileRespData>)
+	export function unRefTaskCheckFileRespData(v:Ref<TaskCheckFileRespData>):TaskCheckFileRespData
+	export function emptyUploadPartFileResp():UploadPartFileResp
+	export function emptyRefUploadPartFileResp():Ref<UploadPartFileResp>
+	export function refOfUploadPartFileResp(x:UploadPartFileResp,v:Ref<UploadPartFileResp>)
+	export function unRefUploadPartFileResp(v:Ref<UploadPartFileResp>):UploadPartFileResp
+	export function emptyCopyFileReqBody():CopyFileReqBody
+	export function emptyRefCopyFileReqBody():Ref<CopyFileReqBody>
+	export function refOfCopyFileReqBody(x:CopyFileReqBody,v:Ref<CopyFileReqBody>)
+	export function unRefCopyFileReqBody(v:Ref<CopyFileReqBody>):CopyFileReqBody
+	export function emptyCreateExportTaskResp():CreateExportTaskResp
+	export function emptyRefCreateExportTaskResp():Ref<CreateExportTaskResp>
+	export function refOfCreateExportTaskResp(x:CreateExportTaskResp,v:Ref<CreateExportTaskResp>)
+	export function unRefCreateExportTaskResp(v:Ref<CreateExportTaskResp>):CreateExportTaskResp
+	export function emptyUploadPrepareFileResp():UploadPrepareFileResp
+	export function emptyRefUploadPrepareFileResp():Ref<UploadPrepareFileResp>
+	export function refOfUploadPrepareFileResp(x:UploadPrepareFileResp,v:Ref<UploadPrepareFileResp>)
+	export function unRefUploadPrepareFileResp(v:Ref<UploadPrepareFileResp>):UploadPrepareFileResp
+	export function emptyUploadPartMediaReqBody():UploadPartMediaReqBody
+	export function emptyRefUploadPartMediaReqBody():Ref<UploadPartMediaReqBody>
+	export function refOfUploadPartMediaReqBody(x:UploadPartMediaReqBody,v:Ref<UploadPartMediaReqBody>)
+	export function unRefUploadPartMediaReqBody(v:Ref<UploadPartMediaReqBody>):UploadPartMediaReqBody
+	export function emptyCreateFileCommentResp():CreateFileCommentResp
+	export function emptyRefCreateFileCommentResp():Ref<CreateFileCommentResp>
+	export function refOfCreateFileCommentResp(x:CreateFileCommentResp,v:Ref<CreateFileCommentResp>)
+	export function unRefCreateFileCommentResp(v:Ref<CreateFileCommentResp>):CreateFileCommentResp
+	export function emptyCreateShortcutFileResp():CreateShortcutFileResp
+	export function emptyRefCreateShortcutFileResp():Ref<CreateShortcutFileResp>
+	export function refOfCreateShortcutFileResp(x:CreateShortcutFileResp,v:Ref<CreateShortcutFileResp>)
+	export function unRefCreateShortcutFileResp(v:Ref<CreateShortcutFileResp>):CreateShortcutFileResp
+	export function emptyUploadPrepareMediaResp():UploadPrepareMediaResp
+	export function emptyRefUploadPrepareMediaResp():Ref<UploadPrepareMediaResp>
+	export function refOfUploadPrepareMediaResp(x:UploadPrepareMediaResp,v:Ref<UploadPrepareMediaResp>)
+	export function unRefUploadPrepareMediaResp(v:Ref<UploadPrepareMediaResp>):UploadPrepareMediaResp
+	export function emptyFile():File
+	export function emptyRefFile():Ref<File>
+	export function refOfFile(x:File,v:Ref<File>)
+	export function unRefFile(v:Ref<File>):File
+	export function emptyP2FileTrashedV1():P2FileTrashedV1
+	export function emptyRefP2FileTrashedV1():Ref<P2FileTrashedV1>
+	export function refOfP2FileTrashedV1(x:P2FileTrashedV1,v:Ref<P2FileTrashedV1>)
+	export function unRefP2FileTrashedV1(v:Ref<P2FileTrashedV1>):P2FileTrashedV1
+	export function emptyUploadFinishMediaReq():UploadFinishMediaReq
+	export function emptyRefUploadFinishMediaReq():Ref<UploadFinishMediaReq>
+	export function refOfUploadFinishMediaReq(x:UploadFinishMediaReq,v:Ref<UploadFinishMediaReq>)
+	export function unRefUploadFinishMediaReq(v:Ref<UploadFinishMediaReq>):UploadFinishMediaReq
+	export function emptyUserId():UserId
+	export function emptyRefUserId():Ref<UserId>
+	export function refOfUserId(x:UserId,v:Ref<UserId>)
+	export function unRefUserId(v:Ref<UserId>):UserId
+	export function emptyP2FilePermissionMemberRemovedV1():P2FilePermissionMemberRemovedV1
+	export function emptyRefP2FilePermissionMemberRemovedV1():Ref<P2FilePermissionMemberRemovedV1>
+	export function refOfP2FilePermissionMemberRemovedV1(x:P2FilePermissionMemberRemovedV1,v:Ref<P2FilePermissionMemberRemovedV1>)
+	export function unRefP2FilePermissionMemberRemovedV1(v:Ref<P2FilePermissionMemberRemovedV1>):P2FilePermissionMemberRemovedV1
 	export function emptyPatchFileSubscriptionReq():PatchFileSubscriptionReq
 	export function emptyRefPatchFileSubscriptionReq():Ref<PatchFileSubscriptionReq>
 	export function refOfPatchFileSubscriptionReq(x:PatchFileSubscriptionReq,v:Ref<PatchFileSubscriptionReq>)
 	export function unRefPatchFileSubscriptionReq(v:Ref<PatchFileSubscriptionReq>):PatchFileSubscriptionReq
-	export function emptyCreateFileVersionRespData():CreateFileVersionRespData
-	export function emptyRefCreateFileVersionRespData():Ref<CreateFileVersionRespData>
-	export function refOfCreateFileVersionRespData(x:CreateFileVersionRespData,v:Ref<CreateFileVersionRespData>)
-	export function unRefCreateFileVersionRespData(v:Ref<CreateFileVersionRespData>):CreateFileVersionRespData
+	export function emptyFileUploadInfo():FileUploadInfo
+	export function emptyRefFileUploadInfo():Ref<FileUploadInfo>
+	export function refOfFileUploadInfo(x:FileUploadInfo,v:Ref<FileUploadInfo>)
+	export function unRefFileUploadInfo(v:Ref<FileUploadInfo>):FileUploadInfo
+	export function emptyUpdateFileCommentReplyResp():UpdateFileCommentReplyResp
+	export function emptyRefUpdateFileCommentReplyResp():Ref<UpdateFileCommentReplyResp>
+	export function refOfUpdateFileCommentReplyResp(x:UpdateFileCommentReplyResp,v:Ref<UpdateFileCommentReplyResp>)
+	export function unRefUpdateFileCommentReplyResp(v:Ref<UpdateFileCommentReplyResp>):UpdateFileCommentReplyResp
+	export function emptyReplyList():ReplyList
+	export function emptyRefReplyList():Ref<ReplyList>
+	export function refOfReplyList(x:ReplyList,v:Ref<ReplyList>)
+	export function unRefReplyList(v:Ref<ReplyList>):ReplyList
+	export function emptyUploadPartFileReq():UploadPartFileReq
+	export function emptyRefUploadPartFileReq():Ref<UploadPartFileReq>
+	export function refOfUploadPartFileReq(x:UploadPartFileReq,v:Ref<UploadPartFileReq>)
+	export function unRefUploadPartFileReq(v:Ref<UploadPartFileReq>):UploadPartFileReq
+	export function emptyBatchCreatePermissionMemberReq():BatchCreatePermissionMemberReq
+	export function emptyRefBatchCreatePermissionMemberReq():Ref<BatchCreatePermissionMemberReq>
+	export function refOfBatchCreatePermissionMemberReq(x:BatchCreatePermissionMemberReq,v:Ref<BatchCreatePermissionMemberReq>)
+	export function unRefBatchCreatePermissionMemberReq(v:Ref<BatchCreatePermissionMemberReq>):BatchCreatePermissionMemberReq
+	export function emptyGetPermissionPublicReq():GetPermissionPublicReq
+	export function emptyRefGetPermissionPublicReq():Ref<GetPermissionPublicReq>
+	export function refOfGetPermissionPublicReq(x:GetPermissionPublicReq,v:Ref<GetPermissionPublicReq>)
+	export function unRefGetPermissionPublicReq(v:Ref<GetPermissionPublicReq>):GetPermissionPublicReq
+	export function emptyTaskCheckFileResp():TaskCheckFileResp
+	export function emptyRefTaskCheckFileResp():Ref<TaskCheckFileResp>
+	export function refOfTaskCheckFileResp(x:TaskCheckFileResp,v:Ref<TaskCheckFileResp>)
+	export function unRefTaskCheckFileResp(v:Ref<TaskCheckFileResp>):TaskCheckFileResp
+	export function emptyCreateFolderFileRespData():CreateFolderFileRespData
+	export function emptyRefCreateFolderFileRespData():Ref<CreateFolderFileRespData>
+	export function refOfCreateFolderFileRespData(x:CreateFolderFileRespData,v:Ref<CreateFolderFileRespData>)
+	export function unRefCreateFolderFileRespData(v:Ref<CreateFolderFileRespData>):CreateFolderFileRespData
+	export function emptyUploadPrepareMediaRespData():UploadPrepareMediaRespData
+	export function emptyRefUploadPrepareMediaRespData():Ref<UploadPrepareMediaRespData>
+	export function refOfUploadPrepareMediaRespData(x:UploadPrepareMediaRespData,v:Ref<UploadPrepareMediaRespData>)
+	export function unRefUploadPrepareMediaRespData(v:Ref<UploadPrepareMediaRespData>):UploadPrepareMediaRespData
 }

@@ -3,13 +3,13 @@
 declare module 'github.com/larksuite/oapi-sdk-go/v3/event'{
 
 	// @ts-ignore
-	import * as context from 'golang/context'
-	// @ts-ignore
 	import * as http from 'golang/net/http'
 	// @ts-ignore
 	import * as larkcore from 'github.com/larksuite/oapi-sdk-go/v3/core'
 	// @ts-ignore
-	import type {bool,Struct,GoError,error,Ref,map,int,Alias} from 'go'
+	import * as context from 'golang/context'
+	// @ts-ignore
+	import type {int,Alias,bool,Struct,GoError,error,Ref,map} from 'go'
 	//"{\"challenge\":\"%s\"}"
 	export const ChallengeResponseFormat:string
 	//"Content-Type"
@@ -130,22 +130,22 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/event'{
 
 	export function withSkipSignVerify(skipSignVerify:bool):OptionFunc
 
+	export function emptyEventV2Body():EventV2Body
+	export function emptyRefEventV2Body():Ref<EventV2Body>
+	export function refOfEventV2Body(x:EventV2Body,v:Ref<EventV2Body>)
+	export function unRefEventV2Body(v:Ref<EventV2Body>):EventV2Body
 	export function emptyEventBase():EventBase
 	export function emptyRefEventBase():Ref<EventBase>
 	export function refOfEventBase(x:EventBase,v:Ref<EventBase>)
 	export function unRefEventBase(v:Ref<EventBase>):EventBase
-	export function emptyEventEncryptMsg():EventEncryptMsg
-	export function emptyRefEventEncryptMsg():Ref<EventEncryptMsg>
-	export function refOfEventEncryptMsg(x:EventEncryptMsg,v:Ref<EventEncryptMsg>)
-	export function unRefEventEncryptMsg(v:Ref<EventEncryptMsg>):EventEncryptMsg
 	export function emptyEventFuzzy():EventFuzzy
 	export function emptyRefEventFuzzy():Ref<EventFuzzy>
 	export function refOfEventFuzzy(x:EventFuzzy,v:Ref<EventFuzzy>)
 	export function unRefEventFuzzy(v:Ref<EventFuzzy>):EventFuzzy
-	export function emptyEventReq():EventReq
-	export function emptyRefEventReq():Ref<EventReq>
-	export function refOfEventReq(x:EventReq,v:Ref<EventReq>)
-	export function unRefEventReq(v:Ref<EventReq>):EventReq
+	export function emptyEventHeader():EventHeader
+	export function emptyRefEventHeader():Ref<EventHeader>
+	export function refOfEventHeader(x:EventHeader,v:Ref<EventHeader>)
+	export function unRefEventHeader(v:Ref<EventHeader>):EventHeader
 	export function emptyEventResp():EventResp
 	export function emptyRefEventResp():Ref<EventResp>
 	export function refOfEventResp(x:EventResp,v:Ref<EventResp>)
@@ -154,16 +154,16 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/event'{
 	export function emptyRefEventV1Header():Ref<EventV1Header>
 	export function refOfEventV1Header(x:EventV1Header,v:Ref<EventV1Header>)
 	export function unRefEventV1Header(v:Ref<EventV1Header>):EventV1Header
-	export function emptyEventHeader():EventHeader
-	export function emptyRefEventHeader():Ref<EventHeader>
-	export function refOfEventHeader(x:EventHeader,v:Ref<EventHeader>)
-	export function unRefEventHeader(v:Ref<EventHeader>):EventHeader
 	export function emptyEventV2Base():EventV2Base
 	export function emptyRefEventV2Base():Ref<EventV2Base>
 	export function refOfEventV2Base(x:EventV2Base,v:Ref<EventV2Base>)
 	export function unRefEventV2Base(v:Ref<EventV2Base>):EventV2Base
-	export function emptyEventV2Body():EventV2Body
-	export function emptyRefEventV2Body():Ref<EventV2Body>
-	export function refOfEventV2Body(x:EventV2Body,v:Ref<EventV2Body>)
-	export function unRefEventV2Body(v:Ref<EventV2Body>):EventV2Body
+	export function emptyEventEncryptMsg():EventEncryptMsg
+	export function emptyRefEventEncryptMsg():Ref<EventEncryptMsg>
+	export function refOfEventEncryptMsg(x:EventEncryptMsg,v:Ref<EventEncryptMsg>)
+	export function unRefEventEncryptMsg(v:Ref<EventEncryptMsg>):EventEncryptMsg
+	export function emptyEventReq():EventReq
+	export function emptyRefEventReq():Ref<EventReq>
+	export function refOfEventReq(x:EventReq,v:Ref<EventReq>)
+	export function unRefEventReq(v:Ref<EventReq>):EventReq
 }

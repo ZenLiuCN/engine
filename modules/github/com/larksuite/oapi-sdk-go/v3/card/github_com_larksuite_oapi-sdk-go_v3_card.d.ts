@@ -3,15 +3,15 @@
 declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 
 	// @ts-ignore
-	import * as larkevent from 'github.com/larksuite/oapi-sdk-go/v3/event'
-	// @ts-ignore
 	import * as json from 'golang/encoding/json'
 	// @ts-ignore
 	import * as larkcore from 'github.com/larksuite/oapi-sdk-go/v3/core'
 	// @ts-ignore
 	import * as context from 'golang/context'
 	// @ts-ignore
-	import type {Nothing,Ref,map,Struct,error,int,bool,Alias} from 'go'
+	import * as larkevent from 'github.com/larksuite/oapi-sdk-go/v3/event'
+	// @ts-ignore
+	import type {Alias,Nothing,Ref,map,bool,Struct,error,int} from 'go'
 	export interface CardAction extends Struct<CardAction>,json.Token{
 
 			eventReq:Ref<larkevent.EventReq>
@@ -30,15 +30,20 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 				tag:string
 				option:string
 				timezone:string
+				name:string
+				formValue:map<string,any>
+				inputValue:string
+				options:string[]
+				checked:bool
 			}>>
 	}
-	export interface CardActionBody extends Struct<CardActionBody>,json.Token{
+	export interface CardActionBody extends json.Token,Struct<CardActionBody>{
 
 			cardAction:Ref<CardAction>
 			challenge:string
 			type:string
 	}
-	export interface CardActionHandler extends Struct<CardActionHandler>,json.Token,larkevent.IReqHandler{
+	export interface CardActionHandler extends json.Token,Struct<CardActionHandler>,larkevent.IReqHandler{
 
 			config:Ref<larkcore.Config>
 			handle(ctx:context.Context,req:Ref<larkevent.EventReq>):Ref<larkevent.EventResp>
@@ -49,7 +54,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 			doHandle(ctx:context.Context,cardAction:Ref<CardAction>):Ref<larkevent.EventResp>
 			verifySign(ctx:context.Context,req:Ref<larkevent.EventReq>)/*error*/
 	}
-	export interface CustomResp extends json.Token,Struct<CustomResp>{
+	export interface CustomResp extends Struct<CustomResp>,json.Token{
 
 			statusCode:int
 			body:map<string,any>
@@ -64,6 +69,19 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 			zhCn:string
 			enCn:string
 			jaJp:string
+			zhHk:string
+			zhTw:string
+			idId:string
+			viVn:string
+			thTh:string
+			ptBr:string
+			esEs:string
+			koKr:string
+			deDe:string
+			frFr:string
+			itIt:string
+			ruRu:string
+			msMy:string
 	}
 	export interface MessageCard extends Struct<MessageCard>,json.Token{
 
@@ -81,7 +99,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 			build():Ref<MessageCard>
 			json():string
 	}
-	export interface MessageCardAction extends json.Marshaler,Struct<MessageCardAction>,json.Token,MessageCardElement{
+	export interface MessageCardAction extends Struct<MessageCardAction>,MessageCardElement,json.Token,json.Marshaler{
 
 			actions_:MessageCardActionElement[]
 			layout_:Ref<MessageCardActionLayout>
@@ -127,7 +145,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 			wideScreenMode(wideScreenMode:bool):Ref<MessageCardConfig>
 			build():Ref<MessageCardConfig>
 	}
-	export interface MessageCardDiv extends json.Marshaler,Struct<MessageCardDiv>,json.Token,MessageCardElement{
+	export interface MessageCardDiv extends Struct<MessageCardDiv>,MessageCardElement,json.Token,json.Marshaler{
 
 			text_:MessageCardText
 			fields_:Ref<MessageCardField>[]
@@ -144,7 +162,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 			marshalJSON():Uint8Array
 			tag():string
 	}
-	export interface MessageCardEmbedButton extends MessageCardExtraElement,json.Token,json.Marshaler,Struct<MessageCardEmbedButton>,MessageCardActionElement{
+	export interface MessageCardEmbedButton extends Struct<MessageCardEmbedButton>,MessageCardExtraElement,json.Token,MessageCardActionElement,json.Marshaler{
 
 			text_:MessageCardText
 			urL_:Ref<string>
@@ -171,7 +189,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 			tag():string
 			marshalJSON():Uint8Array
 	}
-	export interface MessageCardEmbedDatePickerBase extends Struct<MessageCardEmbedDatePickerBase>,json.Token{
+	export interface MessageCardEmbedDatePickerBase extends json.Token,Struct<MessageCardEmbedDatePickerBase>{
 
 			initialDate_:Ref<string>
 			initialTime_:Ref<string>
@@ -189,7 +207,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 			isAction():void
 			isExtra():void
 	}
-	export interface MessageCardEmbedImage extends json.Marshaler,Struct<MessageCardEmbedImage>,MessageCardExtraElement,MessageCardNoteElement,json.Token{
+	export interface MessageCardEmbedImage extends Struct<MessageCardEmbedImage>,MessageCardExtraElement,json.Token,MessageCardNoteElement,json.Marshaler{
 
 			alt_:Ref<MessageCardPlainText>
 			imgKey_:string
@@ -205,7 +223,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 			isNote():void
 			marshalJSON():Uint8Array
 	}
-	export interface MessageCardEmbedOverflow extends Struct<MessageCardEmbedOverflow>,json.Token,json.Marshaler,MessageCardActionElement,MessageCardExtraElement{
+	export interface MessageCardEmbedOverflow extends json.Marshaler,Struct<MessageCardEmbedOverflow>,MessageCardActionElement,MessageCardExtraElement,json.Token{
 
 			options_:Ref<MessageCardEmbedSelectOption>[]
 			value_:map<string,any>
@@ -219,7 +237,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 			isAction():void
 			isExtra():void
 	}
-	export interface MessageCardEmbedPickerDatetime extends Struct<MessageCardEmbedPickerDatetime>,json.Token,json.Marshaler,MessageCardActionElement,MessageCardExtraElement{
+	export interface MessageCardEmbedPickerDatetime extends MessageCardExtraElement,json.Token,json.Marshaler,Struct<MessageCardEmbedPickerDatetime>,MessageCardActionElement{
 
 			messageCardEmbedDatePickerBase:Ref<MessageCardEmbedDatePickerBase>
 			messageCardEmbedPickerDatetime(base:Ref<MessageCardEmbedDatePickerBase>):Ref<MessageCardEmbedPickerDatetime>
@@ -251,7 +269,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 			isAction():void
 			isExtra():void
 	}
-	export interface MessageCardEmbedSelectMenuPerson extends Struct<MessageCardEmbedSelectMenuPerson>,MessageCardActionElement,MessageCardExtraElement,json.Token,json.Marshaler{
+	export interface MessageCardEmbedSelectMenuPerson extends json.Token,json.Marshaler,Struct<MessageCardEmbedSelectMenuPerson>,MessageCardActionElement,MessageCardExtraElement{
 
 			messageCardEmbedSelectMenuBase:Ref<MessageCardEmbedSelectMenuBase>
 			messageCardEmbedSelectMenu(messageCardEmbedSelectMenuBase:Ref<MessageCardEmbedSelectMenuBase>):Ref<MessageCardEmbedSelectMenuPerson>
@@ -259,7 +277,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 			tag():string
 			marshalJSON():Uint8Array
 	}
-	export interface MessageCardEmbedSelectMenuStatic extends MessageCardActionElement,MessageCardExtraElement,Struct<MessageCardEmbedSelectMenuStatic>,json.Token,json.Marshaler{
+	export interface MessageCardEmbedSelectMenuStatic extends Struct<MessageCardEmbedSelectMenuStatic>,MessageCardActionElement,MessageCardExtraElement,json.Token,json.Marshaler{
 
 			messageCardEmbedSelectMenuBase:Ref<MessageCardEmbedSelectMenuBase>
 			messageCardEmbedSelectMenuStatic(base:Ref<MessageCardEmbedSelectMenuBase>):Ref<MessageCardEmbedSelectMenuStatic>
@@ -293,7 +311,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 			text(text:MessageCardText):Ref<MessageCardField>
 			build():Ref<MessageCardField>
 	}
-	export interface MessageCardHeader extends json.Token,Struct<MessageCardHeader>{
+	export interface MessageCardHeader extends Struct<MessageCardHeader>,json.Token{
 
 			template_:Ref<string>
 			title_:Ref<MessageCardPlainText>
@@ -312,12 +330,25 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 			zhCN_:MessageCardElement[]
 			enUS_:MessageCardElement[]
 			jaJP_:MessageCardElement[]
+			zhHK_:MessageCardElement[]
+			zhTW_:MessageCardElement[]
+			idID_:MessageCardElement[]
+			viVN_:MessageCardElement[]
+			thTH_:MessageCardElement[]
+			ptBR_:MessageCardElement[]
+			esES_:MessageCardElement[]
+			koKR_:MessageCardElement[]
+			deDE_:MessageCardElement[]
+			frFR_:MessageCardElement[]
+			itIT_:MessageCardElement[]
+			ruRU_:MessageCardElement[]
+			msMY_:MessageCardElement[]
 			zhCN(zhCn:MessageCardElement[]):Ref<MessageCardI18nElements>
 			enUS(enUS:MessageCardElement[]):Ref<MessageCardI18nElements>
 			jaJP(jaJP:MessageCardElement[]):Ref<MessageCardI18nElements>
 			build():Ref<MessageCardI18nElements>
 	}
-	export interface MessageCardImage extends MessageCardElement,json.Marshaler,Struct<MessageCardImage>,json.Token{
+	export interface MessageCardImage extends Struct<MessageCardImage>,json.Token,MessageCardElement,json.Marshaler{
 
 			alt_:Ref<MessageCardPlainText>
 			title_:MessageCardText
@@ -343,7 +374,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 	}
 	export const MessageCardImageModelCropCenter:MessageCardImageModel
 	export const MessageCardImageModelFitHorizontal:MessageCardImageModel
-	export interface MessageCardLarkMd extends json.Token,Struct<MessageCardLarkMd>,json.Marshaler,MessageCardExtraElement,MessageCardText,MessageCardNoteElement{
+	export interface MessageCardLarkMd extends json.Token,MessageCardNoteElement,MessageCardText,json.Marshaler,Struct<MessageCardLarkMd>,MessageCardExtraElement{
 
 			content_:string
 			content(content:string):Ref<MessageCardLarkMd>
@@ -354,7 +385,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 			isExtra():void
 			isNote():void
 	}
-	export interface MessageCardMarkdown extends Struct<MessageCardMarkdown>,json.Token,json.Marshaler,MessageCardElement{
+	export interface MessageCardMarkdown extends json.Marshaler,Struct<MessageCardMarkdown>,json.Token,MessageCardElement{
 
 			content_:string
 			href_:map<string,Ref<MessageCardURL>>
@@ -364,7 +395,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 			tag():string
 			marshalJSON():Uint8Array
 	}
-	export interface MessageCardNote extends Struct<MessageCardNote>,json.Token,MessageCardElement,json.Marshaler{
+	export interface MessageCardNote extends MessageCardElement,json.Marshaler,Struct<MessageCardNote>,json.Token{
 
 			elements_:MessageCardNoteElement[]
 			elements(elements:MessageCardNoteElement[]):Ref<MessageCardNote>
@@ -376,7 +407,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 
 			isNote():void
 	}
-	export interface MessageCardPlainText extends json.Token,json.Marshaler,MessageCardExtraElement,MessageCardText,MessageCardNoteElement,Struct<MessageCardPlainText>{
+	export interface MessageCardPlainText extends MessageCardExtraElement,json.Token,MessageCardNoteElement,MessageCardText,json.Marshaler,Struct<MessageCardPlainText>{
 
 			content_:string
 			lines_:Ref<int>
@@ -391,11 +422,24 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 			isExtra():void
 			isNote():void
 	}
-	export interface MessageCardPlainTextI18n extends json.Token,Struct<MessageCardPlainTextI18n>{
+	export interface MessageCardPlainTextI18n extends Struct<MessageCardPlainTextI18n>,json.Token{
 
 			zhCN_:string
 			enUS_:string
 			jaJP_:string
+			zhHK_:string
+			zhTW_:string
+			idID_:string
+			viVN_:string
+			thTH_:string
+			ptBR_:string
+			esES_:string
+			koKR_:string
+			deDE_:string
+			frFR_:string
+			itIT_:string
+			ruRU_:string
+			msMY_:string
 			zhCN(zhCn:string):Ref<MessageCardPlainTextI18n>
 			enUS(enUs:string):Ref<MessageCardPlainTextI18n>
 			jaJP(jaJp:string):Ref<MessageCardPlainTextI18n>
@@ -499,14 +543,14 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 	export const TemplateWathet:string
 	//"yellow"
 	export const TemplateYellow:string
-	export function emptyCustomToastBody():CustomToastBody
-	export function emptyRefCustomToastBody():Ref<CustomToastBody>
-	export function refOfCustomToastBody(x:CustomToastBody,v:Ref<CustomToastBody>)
-	export function unRefCustomToastBody(v:Ref<CustomToastBody>):CustomToastBody
 	export function emptyCardAction():CardAction
 	export function emptyRefCardAction():Ref<CardAction>
 	export function refOfCardAction(x:CardAction,v:Ref<CardAction>)
 	export function unRefCardAction(v:Ref<CardAction>):CardAction
+	export function emptyI18n():I18n
+	export function emptyRefI18n():Ref<I18n>
+	export function refOfI18n(x:I18n,v:Ref<I18n>)
+	export function unRefI18n(v:Ref<I18n>):I18n
 	export function emptyCardActionBody():CardActionBody
 	export function emptyRefCardActionBody():Ref<CardActionBody>
 	export function refOfCardActionBody(x:CardActionBody,v:Ref<CardActionBody>)
@@ -515,8 +559,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/card'{
 	export function emptyRefCustomResp():Ref<CustomResp>
 	export function refOfCustomResp(x:CustomResp,v:Ref<CustomResp>)
 	export function unRefCustomResp(v:Ref<CustomResp>):CustomResp
-	export function emptyI18n():I18n
-	export function emptyRefI18n():Ref<I18n>
-	export function refOfI18n(x:I18n,v:Ref<I18n>)
-	export function unRefI18n(v:Ref<I18n>):I18n
+	export function emptyCustomToastBody():CustomToastBody
+	export function emptyRefCustomToastBody():Ref<CustomToastBody>
+	export function refOfCustomToastBody(x:CustomToastBody,v:Ref<CustomToastBody>)
+	export function unRefCustomToastBody(v:Ref<CustomToastBody>):CustomToastBody
 }

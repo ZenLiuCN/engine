@@ -9,7 +9,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 	// @ts-ignore
 	import * as larkevent from 'github.com/larksuite/oapi-sdk-go/v3/event'
 	// @ts-ignore
-	import type {Struct,bool,float64,error,Alias,Nothing,Ref,int} from 'go'
+	import type {Alias,Nothing,Ref,int,Struct,bool,float64,error} from 'go'
 	export interface AbnormalReason extends Struct<AbnormalReason>{
 
 			id:Ref<string>
@@ -54,8 +54,15 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			addressId:Ref<string>
 			countryRegionId:Ref<string>
 			regionId:Ref<string>
-			cityIdV2:Ref<string>
-			districtIdV2:Ref<string>
+			addressLine1:Ref<string>
+			addressLine2:Ref<string>
+			addressLine3:Ref<string>
+			addressLine4:Ref<string>
+			addressLine5:Ref<string>
+			addressLine6:Ref<string>
+			addressLine7:Ref<string>
+			addressLine8:Ref<string>
+			addressLine9:Ref<string>
 			localAddressLine1:Ref<string>
 			localAddressLine2:Ref<string>
 			localAddressLine3:Ref<string>
@@ -78,8 +85,15 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			addressId(addressId:string):Ref<AddressBuilder>
 			countryRegionId(countryRegionId:string):Ref<AddressBuilder>
 			regionId(regionId:string):Ref<AddressBuilder>
-			cityIdV2(cityIdV2:string):Ref<AddressBuilder>
-			districtIdV2(districtIdV2:string):Ref<AddressBuilder>
+			addressLine1(addressLine1:string):Ref<AddressBuilder>
+			addressLine2(addressLine2:string):Ref<AddressBuilder>
+			addressLine3(addressLine3:string):Ref<AddressBuilder>
+			addressLine4(addressLine4:string):Ref<AddressBuilder>
+			addressLine5(addressLine5:string):Ref<AddressBuilder>
+			addressLine6(addressLine6:string):Ref<AddressBuilder>
+			addressLine7(addressLine7:string):Ref<AddressBuilder>
+			addressLine8(addressLine8:string):Ref<AddressBuilder>
+			addressLine9(addressLine9:string):Ref<AddressBuilder>
 			localAddressLine1(localAddressLine1:string):Ref<AddressBuilder>
 			localAddressLine2(localAddressLine2:string):Ref<AddressBuilder>
 			localAddressLine3(localAddressLine3:string):Ref<AddressBuilder>
@@ -95,6 +109,45 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			isPublic(isPublic:bool):Ref<AddressBuilder>
 			customFields(customFields:Ref<CustomFieldData>[]):Ref<AddressBuilder>
 			build():Ref<Address>
+	}
+	export interface AddressForUpdate extends Struct<AddressForUpdate>{
+
+			addressId:Ref<string>
+			countryRegionId:Ref<string>
+			regionId:Ref<string>
+			localAddressLine1:Ref<string>
+			localAddressLine2:Ref<string>
+			localAddressLine3:Ref<string>
+			localAddressLine4:Ref<string>
+			localAddressLine5:Ref<string>
+			localAddressLine6:Ref<string>
+			localAddressLine7:Ref<string>
+			localAddressLine8:Ref<string>
+			localAddressLine9:Ref<string>
+			postalCode:Ref<string>
+			addressTypes:string[]
+			isPrimary:Ref<bool>
+			isPublic:Ref<bool>
+	}
+	export interface AddressForUpdateBuilder extends Struct<AddressForUpdateBuilder>{
+
+			addressId(addressId:string):Ref<AddressForUpdateBuilder>
+			countryRegionId(countryRegionId:string):Ref<AddressForUpdateBuilder>
+			regionId(regionId:string):Ref<AddressForUpdateBuilder>
+			localAddressLine1(localAddressLine1:string):Ref<AddressForUpdateBuilder>
+			localAddressLine2(localAddressLine2:string):Ref<AddressForUpdateBuilder>
+			localAddressLine3(localAddressLine3:string):Ref<AddressForUpdateBuilder>
+			localAddressLine4(localAddressLine4:string):Ref<AddressForUpdateBuilder>
+			localAddressLine5(localAddressLine5:string):Ref<AddressForUpdateBuilder>
+			localAddressLine6(localAddressLine6:string):Ref<AddressForUpdateBuilder>
+			localAddressLine7(localAddressLine7:string):Ref<AddressForUpdateBuilder>
+			localAddressLine8(localAddressLine8:string):Ref<AddressForUpdateBuilder>
+			localAddressLine9(localAddressLine9:string):Ref<AddressForUpdateBuilder>
+			postalCode(postalCode:string):Ref<AddressForUpdateBuilder>
+			addressTypes(addressTypes:string[]):Ref<AddressForUpdateBuilder>
+			isPrimary(isPrimary:bool):Ref<AddressForUpdateBuilder>
+			isPublic(isPublic:bool):Ref<AddressForUpdateBuilder>
+			build():Ref<AddressForUpdate>
 	}
 	export interface ApprovalGroup extends Struct<ApprovalGroup>{
 
@@ -222,6 +275,27 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			customFields(customFields:Ref<CustomFieldData>[]):Ref<BankAccountBuilder>
 			build():Ref<BankAccount>
 	}
+	export interface BankAccountForUpdate extends Struct<BankAccountForUpdate>{
+
+			bankName:Ref<string>
+			branchName:Ref<string>
+			bankAccountNumber:Ref<string>
+			accountHolder:Ref<string>
+			countryRegionId:Ref<string>
+			bankAccountUsages:string[]
+			bankAccountType:Ref<string>
+	}
+	export interface BankAccountForUpdateBuilder extends Struct<BankAccountForUpdateBuilder>{
+
+			bankName(bankName:string):Ref<BankAccountForUpdateBuilder>
+			branchName(branchName:string):Ref<BankAccountForUpdateBuilder>
+			bankAccountNumber(bankAccountNumber:string):Ref<BankAccountForUpdateBuilder>
+			accountHolder(accountHolder:string):Ref<BankAccountForUpdateBuilder>
+			countryRegionId(countryRegionId:string):Ref<BankAccountForUpdateBuilder>
+			bankAccountUsages(bankAccountUsages:string[]):Ref<BankAccountForUpdateBuilder>
+			bankAccountType(bankAccountType:string):Ref<BankAccountForUpdateBuilder>
+			build():Ref<BankAccountForUpdate>
+	}
 	export interface BankBranch extends Struct<BankBranch>{
 
 			bankBranchId:Ref<string>
@@ -300,12 +374,33 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			dateEnteredWorkforce:Ref<string>
 			genderId:Ref<string>
 			nationalityId:Ref<string>
+			nationalityV2Id:Ref<string>
 			additionalNationalityIdList:string[]
 			citizenshipStatusIdList:string[]
 			homeAddress:Ref<string>
 			workerId:Ref<string>
 			userGeo:Ref<string>
 			legalName:Ref<Name>
+			residentTaxList:Ref<ResidentTaxForUpdate>[]
+			bornCountryRegion:Ref<string>
+			isDisabled:Ref<bool>
+			disableCardNumber:Ref<string>
+			isOldAlone:Ref<bool>
+			isMartyrFamily:Ref<bool>
+			martyrCardNumber:Ref<string>
+			dependentList:Ref<DependentForUpdate>[]
+			religion:Ref<string>
+			bankAccountList:Ref<BankAccountForUpdate>[]
+			nationalIdList:Ref<NationalIdForUpdate>[]
+			personalProfileList:Ref<PersonalProfileForUpdate>[]
+			emergencyContactList:Ref<EmergencyContactForUpdate>[]
+			addressList:Ref<AddressForUpdate>[]
+			maritalStatus:Ref<string>
+			ethnicityRace:Ref<string>
+			nativeRegion:Ref<string>
+			hukouType:Ref<string>
+			hukouLocation:Ref<string>
+			customFields:Ref<ObjectFieldData>[]
 	}
 	export interface BasicInfoBuilder extends Struct<BasicInfoBuilder>{
 
@@ -319,12 +414,33 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			dateEnteredWorkforce(dateEnteredWorkforce:string):Ref<BasicInfoBuilder>
 			genderId(genderId:string):Ref<BasicInfoBuilder>
 			nationalityId(nationalityId:string):Ref<BasicInfoBuilder>
+			nationalityV2Id(nationalityV2Id:string):Ref<BasicInfoBuilder>
 			additionalNationalityIdList(additionalNationalityIdList:string[]):Ref<BasicInfoBuilder>
 			citizenshipStatusIdList(citizenshipStatusIdList:string[]):Ref<BasicInfoBuilder>
 			homeAddress(homeAddress:string):Ref<BasicInfoBuilder>
 			workerId(workerId:string):Ref<BasicInfoBuilder>
 			userGeo(userGeo:string):Ref<BasicInfoBuilder>
 			legalName(legalName:Ref<Name>):Ref<BasicInfoBuilder>
+			residentTaxList(residentTaxList:Ref<ResidentTaxForUpdate>[]):Ref<BasicInfoBuilder>
+			bornCountryRegion(bornCountryRegion:string):Ref<BasicInfoBuilder>
+			isDisabled(isDisabled:bool):Ref<BasicInfoBuilder>
+			disableCardNumber(disableCardNumber:string):Ref<BasicInfoBuilder>
+			isOldAlone(isOldAlone:bool):Ref<BasicInfoBuilder>
+			isMartyrFamily(isMartyrFamily:bool):Ref<BasicInfoBuilder>
+			martyrCardNumber(martyrCardNumber:string):Ref<BasicInfoBuilder>
+			dependentList(dependentList:Ref<DependentForUpdate>[]):Ref<BasicInfoBuilder>
+			religion(religion:string):Ref<BasicInfoBuilder>
+			bankAccountList(bankAccountList:Ref<BankAccountForUpdate>[]):Ref<BasicInfoBuilder>
+			nationalIdList(nationalIdList:Ref<NationalIdForUpdate>[]):Ref<BasicInfoBuilder>
+			personalProfileList(personalProfileList:Ref<PersonalProfileForUpdate>[]):Ref<BasicInfoBuilder>
+			emergencyContactList(emergencyContactList:Ref<EmergencyContactForUpdate>[]):Ref<BasicInfoBuilder>
+			addressList(addressList:Ref<AddressForUpdate>[]):Ref<BasicInfoBuilder>
+			maritalStatus(maritalStatus:string):Ref<BasicInfoBuilder>
+			ethnicityRace(ethnicityRace:string):Ref<BasicInfoBuilder>
+			nativeRegion(nativeRegion:string):Ref<BasicInfoBuilder>
+			hukouType(hukouType:string):Ref<BasicInfoBuilder>
+			hukouLocation(hukouLocation:string):Ref<BasicInfoBuilder>
+			customFields(customFields:Ref<ObjectFieldData>[]):Ref<BasicInfoBuilder>
 			build():Ref<BasicInfo>
 	}
 	export interface BasicInfoUpdate extends Struct<BasicInfoUpdate>{
@@ -332,12 +448,56 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			names:Ref<NameForUpdate>[]
 			phones:Ref<PhoneForUpdate>[]
 			emails:Ref<EmailForUpdate>[]
+			nationalityV2Id:Ref<string>
+			additionalNationalityIdList:string[]
+			residentTaxList:Ref<ResidentTaxForUpdate>[]
+			bornCountryRegion:Ref<string>
+			isDisabled:Ref<bool>
+			disableCardNumber:Ref<string>
+			isOldAlone:Ref<bool>
+			isMartyrFamily:Ref<bool>
+			martyrCardNumber:Ref<string>
+			dependentList:Ref<DependentForUpdate>[]
+			religion:Ref<string>
+			bankAccountList:Ref<BankAccountForUpdate>[]
+			nationalIdList:Ref<NationalIdForUpdate>[]
+			personalProfileList:Ref<PersonalProfileForUpdate>[]
+			emergencyContactList:Ref<EmergencyContactForUpdate>[]
+			addressList:Ref<AddressForUpdate>[]
+			maritalStatus:Ref<string>
+			ethnicityRace:Ref<string>
+			customFields:Ref<ObjectFieldData>[]
+			nativeRegion:Ref<string>
+			hukouType:Ref<string>
+			hukouLocation:Ref<string>
 	}
 	export interface BasicInfoUpdateBuilder extends Struct<BasicInfoUpdateBuilder>{
 
 			names(names:Ref<NameForUpdate>[]):Ref<BasicInfoUpdateBuilder>
 			phones(phones:Ref<PhoneForUpdate>[]):Ref<BasicInfoUpdateBuilder>
 			emails(emails:Ref<EmailForUpdate>[]):Ref<BasicInfoUpdateBuilder>
+			nationalityV2Id(nationalityV2Id:string):Ref<BasicInfoUpdateBuilder>
+			additionalNationalityIdList(additionalNationalityIdList:string[]):Ref<BasicInfoUpdateBuilder>
+			residentTaxList(residentTaxList:Ref<ResidentTaxForUpdate>[]):Ref<BasicInfoUpdateBuilder>
+			bornCountryRegion(bornCountryRegion:string):Ref<BasicInfoUpdateBuilder>
+			isDisabled(isDisabled:bool):Ref<BasicInfoUpdateBuilder>
+			disableCardNumber(disableCardNumber:string):Ref<BasicInfoUpdateBuilder>
+			isOldAlone(isOldAlone:bool):Ref<BasicInfoUpdateBuilder>
+			isMartyrFamily(isMartyrFamily:bool):Ref<BasicInfoUpdateBuilder>
+			martyrCardNumber(martyrCardNumber:string):Ref<BasicInfoUpdateBuilder>
+			dependentList(dependentList:Ref<DependentForUpdate>[]):Ref<BasicInfoUpdateBuilder>
+			religion(religion:string):Ref<BasicInfoUpdateBuilder>
+			bankAccountList(bankAccountList:Ref<BankAccountForUpdate>[]):Ref<BasicInfoUpdateBuilder>
+			nationalIdList(nationalIdList:Ref<NationalIdForUpdate>[]):Ref<BasicInfoUpdateBuilder>
+			personalProfileList(personalProfileList:Ref<PersonalProfileForUpdate>[]):Ref<BasicInfoUpdateBuilder>
+			emergencyContactList(emergencyContactList:Ref<EmergencyContactForUpdate>[]):Ref<BasicInfoUpdateBuilder>
+			addressList(addressList:Ref<AddressForUpdate>[]):Ref<BasicInfoUpdateBuilder>
+			maritalStatus(maritalStatus:string):Ref<BasicInfoUpdateBuilder>
+			ethnicityRace(ethnicityRace:string):Ref<BasicInfoUpdateBuilder>
+			customFields(customFields:Ref<ObjectFieldData>[]):Ref<BasicInfoUpdateBuilder>
+			nativeRegion(nativeRegion:string):Ref<BasicInfoUpdateBuilder>
+			hukouType(hukouType:string):Ref<BasicInfoUpdateBuilder>
+			hukouLocation(hukouLocation:string):Ref<BasicInfoUpdateBuilder>
 			build():Ref<BasicInfoUpdate>
 	}
 	export interface BasicJobData extends Struct<BasicJobData>{
@@ -757,6 +917,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			name:Ref<I18n>[]
 			countryRegionSubdivisionId:Ref<string>
 			code:Ref<string>
+			subregionCode:Ref<string>
 			status:Ref<int>
 	}
 	export interface CityBuilder extends Struct<CityBuilder>{
@@ -765,6 +926,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			name(name:Ref<I18n>[]):Ref<CityBuilder>
 			countryRegionSubdivisionId(countryRegionSubdivisionId:string):Ref<CityBuilder>
 			code(code:string):Ref<CityBuilder>
+			subregionCode(subregionCode:string):Ref<CityBuilder>
 			status(status:int):Ref<CityBuilder>
 			build():Ref<City>
 	}
@@ -824,6 +986,25 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			companyName(companyName:Ref<I18n>[]):Ref<CompanyIdAndNameBuilder>
 			build():Ref<CompanyIdAndName>
 	}
+	export interface CompletePreHireReq extends Struct<CompletePreHireReq>{
+
+	}
+	export interface CompletePreHireReqBuilder extends Struct<CompletePreHireReqBuilder>{
+
+			preHireId(preHireId:string):Ref<CompletePreHireReqBuilder>
+			build():Ref<CompletePreHireReq>
+	}
+	export interface CompletePreHireResp extends Struct<CompletePreHireResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<CompletePreHireRespData>
+			success():bool
+	}
+	export interface CompletePreHireRespData extends Struct<CompletePreHireRespData>{
+
+			success:Ref<bool>
+	}
 	export interface Contract extends Struct<Contract>{
 
 			id:Ref<string>
@@ -837,6 +1018,9 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			durationType:Ref<Enum>
 			contractNumber:Ref<string>
 			signingType:Ref<Enum>
+			contractStatus:Ref<Enum>
+			renewalStatus:Ref<Enum>
+			signingTimes:Ref<int>
 	}
 	export interface ContractBuilder extends Struct<ContractBuilder>{
 
@@ -851,8 +1035,15 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			durationType(durationType:Ref<Enum>):Ref<ContractBuilder>
 			contractNumber(contractNumber:string):Ref<ContractBuilder>
 			signingType(signingType:Ref<Enum>):Ref<ContractBuilder>
+			contractStatus(contractStatus:Ref<Enum>):Ref<ContractBuilder>
+			renewalStatus(renewalStatus:Ref<Enum>):Ref<ContractBuilder>
+			signingTimes(signingTimes:int):Ref<ContractBuilder>
 			build():Ref<Contract>
 	}
+	//1
+	export const ConversionMode1:int
+	//2
+	export const ConversionMode2:int
 	export interface CostCenter extends Struct<CostCenter>{
 
 			costCenterId:Ref<string>
@@ -992,6 +1183,56 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 
 			version:Ref<CostCenterVersion>
 	}
+	export interface CreateEmployeePathReqBodyBuilder extends Struct<CreateEmployeePathReqBodyBuilder>{
+
+			personalInfo(personalInfo:Ref<ProfileSettingPersonalInfo>):Ref<CreateEmployeePathReqBodyBuilder>
+			employmentInfo(employmentInfo:Ref<ProfileSettingEmploymentInfo>):Ref<CreateEmployeePathReqBodyBuilder>
+			career(career:Ref<ProfileSettingCareer>):Ref<CreateEmployeePathReqBodyBuilder>
+			dataAttachment(dataAttachment:Ref<ProfileSettingDataAttachment>):Ref<CreateEmployeePathReqBodyBuilder>
+			build():Ref<CreateEmployeeReqBody>
+	}
+	export interface CreateEmployeeReq extends Struct<CreateEmployeeReq>{
+
+			body:Ref<CreateEmployeeReqBody>
+	}
+	export interface CreateEmployeeReqBody extends Struct<CreateEmployeeReqBody>{
+
+			personalInfo:Ref<ProfileSettingPersonalInfo>
+			employmentInfo:Ref<ProfileSettingEmploymentInfo>
+			career:Ref<ProfileSettingCareer>
+			dataAttachment:Ref<ProfileSettingDataAttachment>
+	}
+	export interface CreateEmployeeReqBodyBuilder extends Struct<CreateEmployeeReqBodyBuilder>{
+
+			personalInfo(personalInfo:Ref<ProfileSettingPersonalInfo>):Ref<CreateEmployeeReqBodyBuilder>
+			employmentInfo(employmentInfo:Ref<ProfileSettingEmploymentInfo>):Ref<CreateEmployeeReqBodyBuilder>
+			career(career:Ref<ProfileSettingCareer>):Ref<CreateEmployeeReqBodyBuilder>
+			dataAttachment(dataAttachment:Ref<ProfileSettingDataAttachment>):Ref<CreateEmployeeReqBodyBuilder>
+			build():Ref<CreateEmployeeReqBody>
+	}
+	export interface CreateEmployeeReqBuilder extends Struct<CreateEmployeeReqBuilder>{
+
+			clientToken(clientToken:string):Ref<CreateEmployeeReqBuilder>
+			rehire(rehire:bool):Ref<CreateEmployeeReqBuilder>
+			rehireEmploymentId(rehireEmploymentId:string):Ref<CreateEmployeeReqBuilder>
+			forceSubmit(forceSubmit:bool):Ref<CreateEmployeeReqBuilder>
+			ignoreWorkingHoursTypeRule(ignoreWorkingHoursTypeRule:bool):Ref<CreateEmployeeReqBuilder>
+			body(body:Ref<CreateEmployeeReqBody>):Ref<CreateEmployeeReqBuilder>
+			build():Ref<CreateEmployeeReq>
+	}
+	export interface CreateEmployeeResp extends Struct<CreateEmployeeResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<CreateEmployeeRespData>
+			success():bool
+	}
+	export interface CreateEmployeeRespData extends Struct<CreateEmployeeRespData>{
+
+			employmentId:Ref<string>
+			contractId:Ref<string>
+			jobDataId:Ref<string>
+	}
 	export interface CreatePersonReq extends Struct<CreatePersonReq>{
 
 			personInfo:Ref<PersonInfo>
@@ -1075,7 +1316,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 	export interface Currency extends Struct<Currency>{
 
 			currencyId:Ref<string>
-			countryRegionId:Ref<string>
+			countryRegionIdList:string[]
 			currencyName:Ref<I18n>[]
 			numericCode:Ref<int>
 			currencyAlpha3Code:Ref<string>
@@ -1084,7 +1325,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 	export interface CurrencyBuilder extends Struct<CurrencyBuilder>{
 
 			currencyId(currencyId:string):Ref<CurrencyBuilder>
-			countryRegionId(countryRegionId:string):Ref<CurrencyBuilder>
+			countryRegionIdList(countryRegionIdList:string[]):Ref<CurrencyBuilder>
 			currencyName(currencyName:Ref<I18n>[]):Ref<CurrencyBuilder>
 			numericCode(numericCode:int):Ref<CurrencyBuilder>
 			currencyAlpha3Code(currencyAlpha3Code:string):Ref<CurrencyBuilder>
@@ -1434,6 +1675,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 	export const DepartmentIdTypeGetProcessFormVariableDataDepartmentId:string
 	//"open_department_id"
 	export const DepartmentIdTypeGetProcessFormVariableDataOpenDepartmentId:string
+	//"people_corehr_department_id"
+	export const DepartmentIdTypeGetProcessFormVariableDataPeopleCorehrDepartmentId:string
 	//"department_id"
 	export const DepartmentIdTypeListBpDepartmentId:string
 	//"open_department_id"
@@ -1456,6 +1699,18 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 	export const DepartmentIdTypeQueryEmployeesJobDataOpenDepartmentId:string
 	//"people_corehr_department_id"
 	export const DepartmentIdTypeQueryEmployeesJobDataPeopleCorehrDepartmentId:string
+	//"department_id"
+	export const DepartmentIdTypeQueryMultiTimelineDepartmentDepartmentId:string
+	//"open_department_id"
+	export const DepartmentIdTypeQueryMultiTimelineDepartmentOpenDepartmentId:string
+	//"people_corehr_department_id"
+	export const DepartmentIdTypeQueryMultiTimelineDepartmentPeopleCorehrDepartmentId:string
+	//"department_id"
+	export const DepartmentIdTypeQueryPreHireDepartmentId:string
+	//"open_department_id"
+	export const DepartmentIdTypeQueryPreHireOpenDepartmentId:string
+	//"people_corehr_department_id"
+	export const DepartmentIdTypeQueryPreHirePeopleCorehrDepartmentId:string
 	//"department_id"
 	export const DepartmentIdTypeQueryTimelineDepartmentDepartmentId:string
 	//"open_department_id"
@@ -1492,6 +1747,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 	export const DepartmentIdTypeSearchProbationOpenDepartmentId:string
 	//"people_corehr_department_id"
 	export const DepartmentIdTypeSearchProbationPeopleCorehrDepartmentId:string
+	//"department_id"
+	export const DepartmentIdTypeUpdateProcessApproverDepartmentId:string
+	//"open_department_id"
+	export const DepartmentIdTypeUpdateProcessApproverOpenDepartmentId:string
+	//"people_corehr_department_id"
+	export const DepartmentIdTypeUpdateProcessApproverPeopleCorehrDepartmentId:string
 	export interface DepartmentParentInfo extends Struct<DepartmentParentInfo>{
 
 			departmentId:Ref<string>
@@ -1523,6 +1784,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 	export interface DepartmentTimeline extends Struct<DepartmentTimeline>{
 
 			id:Ref<string>
+			versionId:Ref<string>
 			names:Ref<I18n>[]
 			parentDepartmentId:Ref<string>
 			manager:Ref<string>
@@ -1530,10 +1792,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			effectiveDate:Ref<string>
 			active:Ref<bool>
 			descriptions:Ref<I18n>[]
+			customFields:Ref<CustomFieldData>[]
 	}
 	export interface DepartmentTimelineBuilder extends Struct<DepartmentTimelineBuilder>{
 
 			id(id:string):Ref<DepartmentTimelineBuilder>
+			versionId(versionId:string):Ref<DepartmentTimelineBuilder>
 			names(names:Ref<I18n>[]):Ref<DepartmentTimelineBuilder>
 			parentDepartmentId(parentDepartmentId:string):Ref<DepartmentTimelineBuilder>
 			manager(manager:string):Ref<DepartmentTimelineBuilder>
@@ -1541,6 +1805,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			effectiveDate(effectiveDate:string):Ref<DepartmentTimelineBuilder>
 			active(active:bool):Ref<DepartmentTimelineBuilder>
 			descriptions(descriptions:Ref<I18n>[]):Ref<DepartmentTimelineBuilder>
+			customFields(customFields:Ref<CustomFieldData>[]):Ref<DepartmentTimelineBuilder>
 			build():Ref<DepartmentTimeline>
 	}
 	export interface Dependent extends Struct<Dependent>{
@@ -1581,6 +1846,39 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			address(address:Ref<Address>):Ref<DependentBuilder>
 			birthCertificateOfChild(birthCertificateOfChild:Ref<File>[]):Ref<DependentBuilder>
 			build():Ref<Dependent>
+	}
+	export interface DependentForUpdate extends Struct<DependentForUpdate>{
+
+			relationship:Ref<string>
+			gender:Ref<string>
+			dateOfBirth:Ref<string>
+			nationalIds:Ref<NationalIdForUpdate>[]
+			spousesWorkingStatus:Ref<string>
+			isThisPersonCoveredByHealthInsurance:Ref<bool>
+			isThisPersonAllowedForTaxDeduction:Ref<bool>
+			dependentName:Ref<string>
+			employer:Ref<string>
+			job:Ref<string>
+			phone:Ref<PhoneForUpdate>
+			address:Ref<AddressForUpdate>
+			birthCertificateOfChildren:Ref<File>[]
+	}
+	export interface DependentForUpdateBuilder extends Struct<DependentForUpdateBuilder>{
+
+			relationship(relationship:string):Ref<DependentForUpdateBuilder>
+			gender(gender:string):Ref<DependentForUpdateBuilder>
+			dateOfBirth(dateOfBirth:string):Ref<DependentForUpdateBuilder>
+			nationalIds(nationalIds:Ref<NationalIdForUpdate>[]):Ref<DependentForUpdateBuilder>
+			spousesWorkingStatus(spousesWorkingStatus:string):Ref<DependentForUpdateBuilder>
+			isThisPersonCoveredByHealthInsurance(isThisPersonCoveredByHealthInsurance:bool):Ref<DependentForUpdateBuilder>
+			isThisPersonAllowedForTaxDeduction(isThisPersonAllowedForTaxDeduction:bool):Ref<DependentForUpdateBuilder>
+			dependentName(dependentName:string):Ref<DependentForUpdateBuilder>
+			employer(employer:string):Ref<DependentForUpdateBuilder>
+			job(job:string):Ref<DependentForUpdateBuilder>
+			phone(phone:Ref<PhoneForUpdate>):Ref<DependentForUpdateBuilder>
+			address(address:Ref<AddressForUpdate>):Ref<DependentForUpdateBuilder>
+			birthCertificateOfChildren(birthCertificateOfChildren:Ref<File>[]):Ref<DependentForUpdateBuilder>
+			build():Ref<DependentForUpdate>
 	}
 	export interface Dimension extends Struct<Dimension>{
 
@@ -1648,6 +1946,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			districtId:Ref<string>
 			name:Ref<I18n>[]
 			cityId:Ref<string>
+			subregionCode:Ref<string>
 			status:Ref<int>
 	}
 	export interface DistrictBuilder extends Struct<DistrictBuilder>{
@@ -1655,6 +1954,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			districtId(districtId:string):Ref<DistrictBuilder>
 			name(name:Ref<I18n>[]):Ref<DistrictBuilder>
 			cityId(cityId:string):Ref<DistrictBuilder>
+			subregionCode(subregionCode:string):Ref<DistrictBuilder>
 			status(status:int):Ref<DistrictBuilder>
 			build():Ref<District>
 	}
@@ -1757,6 +2057,23 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			email(email:Ref<Email>):Ref<EmergencyContactBuilder>
 			build():Ref<EmergencyContact>
 	}
+	export interface EmergencyContactForUpdate extends Struct<EmergencyContactForUpdate>{
+
+			legalName:Ref<string>
+			relationship:Ref<string>
+			phones:Ref<PhoneForUpdate>[]
+			address:Ref<AddressForUpdate>
+			email:Ref<EmailForUpdate>
+	}
+	export interface EmergencyContactForUpdateBuilder extends Struct<EmergencyContactForUpdateBuilder>{
+
+			legalName(legalName:string):Ref<EmergencyContactForUpdateBuilder>
+			relationship(relationship:string):Ref<EmergencyContactForUpdateBuilder>
+			phones(phones:Ref<PhoneForUpdate>[]):Ref<EmergencyContactForUpdateBuilder>
+			address(address:Ref<AddressForUpdate>):Ref<EmergencyContactForUpdateBuilder>
+			email(email:Ref<EmailForUpdate>):Ref<EmergencyContactForUpdateBuilder>
+			build():Ref<EmergencyContactForUpdate>
+	}
 	export interface Employee extends Struct<Employee>{
 
 			employmentId:Ref<string>
@@ -1766,11 +2083,13 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			employeeTypeId:Ref<string>
 			departmentId:Ref<string>
 			jobLevelId:Ref<string>
-			jobLevel:Ref<JobLevel>
+			jobLevel:Ref<EmployeeJobLevel>
 			jobGradeId:Ref<string>
 			workLocationId:Ref<string>
 			jobFamilyId:Ref<string>
-			jobFamily:Ref<JobFamily>
+			jobFamily:Ref<EmployeeJobFamily>
+			positionId:Ref<string>
+			position:Ref<Position>
 			jobId:Ref<string>
 			job:Ref<Job>
 			companyId:Ref<string>
@@ -1826,11 +2145,13 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			employeeTypeId(employeeTypeId:string):Ref<EmployeeBuilder>
 			departmentId(departmentId:string):Ref<EmployeeBuilder>
 			jobLevelId(jobLevelId:string):Ref<EmployeeBuilder>
-			jobLevel(jobLevel:Ref<JobLevel>):Ref<EmployeeBuilder>
+			jobLevel(jobLevel:Ref<EmployeeJobLevel>):Ref<EmployeeBuilder>
 			jobGradeId(jobGradeId:string):Ref<EmployeeBuilder>
 			workLocationId(workLocationId:string):Ref<EmployeeBuilder>
 			jobFamilyId(jobFamilyId:string):Ref<EmployeeBuilder>
-			jobFamily(jobFamily:Ref<JobFamily>):Ref<EmployeeBuilder>
+			jobFamily(jobFamily:Ref<EmployeeJobFamily>):Ref<EmployeeBuilder>
+			positionId(positionId:string):Ref<EmployeeBuilder>
+			position(position:Ref<Position>):Ref<EmployeeBuilder>
 			jobId(jobId:string):Ref<EmployeeBuilder>
 			job(job:Ref<Job>):Ref<EmployeeBuilder>
 			companyId(companyId:string):Ref<EmployeeBuilder>
@@ -1918,6 +2239,188 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			employmentId(employmentId:string):Ref<EmployeeJobDataBuilder>
 			jobDatas(jobDatas:Ref<JobData>[]):Ref<EmployeeJobDataBuilder>
 			build():Ref<EmployeeJobData>
+	}
+	export interface EmployeeJobFamily extends Struct<EmployeeJobFamily>{
+
+			id:Ref<string>
+			name:Ref<I18n>[]
+			active:Ref<bool>
+			parentId:Ref<string>
+			effectiveTime:Ref<string>
+			expirationTime:Ref<string>
+			code:Ref<string>
+			customFields:Ref<CustomFieldData>[]
+	}
+	export interface EmployeeJobFamilyBuilder extends Struct<EmployeeJobFamilyBuilder>{
+
+			id(id:string):Ref<EmployeeJobFamilyBuilder>
+			name(name:Ref<I18n>[]):Ref<EmployeeJobFamilyBuilder>
+			active(active:bool):Ref<EmployeeJobFamilyBuilder>
+			parentId(parentId:string):Ref<EmployeeJobFamilyBuilder>
+			effectiveTime(effectiveTime:string):Ref<EmployeeJobFamilyBuilder>
+			expirationTime(expirationTime:string):Ref<EmployeeJobFamilyBuilder>
+			code(code:string):Ref<EmployeeJobFamilyBuilder>
+			customFields(customFields:Ref<CustomFieldData>[]):Ref<EmployeeJobFamilyBuilder>
+			build():Ref<EmployeeJobFamily>
+	}
+	export interface EmployeeJobLevel extends Struct<EmployeeJobLevel>{
+
+			id:Ref<string>
+			levelOrder:Ref<int>
+			code:Ref<string>
+			name:Ref<I18n>[]
+			description:Ref<I18n>[]
+			active:Ref<bool>
+			customFields:Ref<CustomFieldData>[]
+	}
+	export interface EmployeeJobLevelBuilder extends Struct<EmployeeJobLevelBuilder>{
+
+			id(id:string):Ref<EmployeeJobLevelBuilder>
+			levelOrder(levelOrder:int):Ref<EmployeeJobLevelBuilder>
+			code(code:string):Ref<EmployeeJobLevelBuilder>
+			name(name:Ref<I18n>[]):Ref<EmployeeJobLevelBuilder>
+			description(description:Ref<I18n>[]):Ref<EmployeeJobLevelBuilder>
+			active(active:bool):Ref<EmployeeJobLevelBuilder>
+			customFields(customFields:Ref<CustomFieldData>[]):Ref<EmployeeJobLevelBuilder>
+			build():Ref<EmployeeJobLevel>
+	}
+	export interface EmployeesAdditionalJob extends Struct<EmployeesAdditionalJob>{
+
+			id:Ref<string>
+			employeeTypeId:Ref<string>
+			workingHoursTypeId:Ref<string>
+			workLocationId:Ref<string>
+			departmentId:Ref<string>
+			jobId:Ref<string>
+			jobLevelId:Ref<string>
+			jobFamilyId:Ref<string>
+			employmentId:Ref<string>
+			startDate:Ref<string>
+			endDate:Ref<string>
+			directManagerId:Ref<string>
+			dottedLineManagerId:Ref<string>
+			workShift:Ref<Enum>
+			compensationType:Ref<Enum>
+			serviceCompany:Ref<string>
+			weeklyWorkingHours:Ref<string>
+			workCalendarId:Ref<string>
+	}
+	export interface EmployeesAdditionalJobBatchReqDate extends Struct<EmployeesAdditionalJobBatchReqDate>{
+
+			start:Ref<string>
+			end:Ref<string>
+	}
+	export interface EmployeesAdditionalJobBatchReqDateBuilder extends Struct<EmployeesAdditionalJobBatchReqDateBuilder>{
+
+			start(start:string):Ref<EmployeesAdditionalJobBatchReqDateBuilder>
+			end(end:string):Ref<EmployeesAdditionalJobBatchReqDateBuilder>
+			build():Ref<EmployeesAdditionalJobBatchReqDate>
+	}
+	export interface EmployeesAdditionalJobBuilder extends Struct<EmployeesAdditionalJobBuilder>{
+
+			id(id:string):Ref<EmployeesAdditionalJobBuilder>
+			employeeTypeId(employeeTypeId:string):Ref<EmployeesAdditionalJobBuilder>
+			workingHoursTypeId(workingHoursTypeId:string):Ref<EmployeesAdditionalJobBuilder>
+			workLocationId(workLocationId:string):Ref<EmployeesAdditionalJobBuilder>
+			departmentId(departmentId:string):Ref<EmployeesAdditionalJobBuilder>
+			jobId(jobId:string):Ref<EmployeesAdditionalJobBuilder>
+			jobLevelId(jobLevelId:string):Ref<EmployeesAdditionalJobBuilder>
+			jobFamilyId(jobFamilyId:string):Ref<EmployeesAdditionalJobBuilder>
+			employmentId(employmentId:string):Ref<EmployeesAdditionalJobBuilder>
+			startDate(startDate:string):Ref<EmployeesAdditionalJobBuilder>
+			endDate(endDate:string):Ref<EmployeesAdditionalJobBuilder>
+			directManagerId(directManagerId:string):Ref<EmployeesAdditionalJobBuilder>
+			dottedLineManagerId(dottedLineManagerId:string):Ref<EmployeesAdditionalJobBuilder>
+			workShift(workShift:Ref<Enum>):Ref<EmployeesAdditionalJobBuilder>
+			compensationType(compensationType:Ref<Enum>):Ref<EmployeesAdditionalJobBuilder>
+			serviceCompany(serviceCompany:string):Ref<EmployeesAdditionalJobBuilder>
+			weeklyWorkingHours(weeklyWorkingHours:string):Ref<EmployeesAdditionalJobBuilder>
+			workCalendarId(workCalendarId:string):Ref<EmployeesAdditionalJobBuilder>
+			build():Ref<EmployeesAdditionalJob>
+	}
+	export interface EmployeesAdditionalJobEdit extends Struct<EmployeesAdditionalJobEdit>{
+
+			employeeTypeId:Ref<string>
+			workingHoursTypeId:Ref<string>
+			workLocationId:Ref<string>
+			departmentId:Ref<string>
+			jobId:Ref<string>
+			jobLevelId:Ref<string>
+			jobFamilyId:Ref<string>
+			employmentId:Ref<string>
+			startDate:Ref<string>
+			endDate:Ref<string>
+			directManagerId:Ref<string>
+			dottedLineManagerId:Ref<string>
+			workShift:Ref<Enum>
+			compensationType:Ref<Enum>
+			serviceCompany:Ref<string>
+			weeklyWorkingHours:Ref<string>
+			workCalendarId:Ref<string>
+	}
+	export interface EmployeesAdditionalJobEditBuilder extends Struct<EmployeesAdditionalJobEditBuilder>{
+
+			employeeTypeId(employeeTypeId:string):Ref<EmployeesAdditionalJobEditBuilder>
+			workingHoursTypeId(workingHoursTypeId:string):Ref<EmployeesAdditionalJobEditBuilder>
+			workLocationId(workLocationId:string):Ref<EmployeesAdditionalJobEditBuilder>
+			departmentId(departmentId:string):Ref<EmployeesAdditionalJobEditBuilder>
+			jobId(jobId:string):Ref<EmployeesAdditionalJobEditBuilder>
+			jobLevelId(jobLevelId:string):Ref<EmployeesAdditionalJobEditBuilder>
+			jobFamilyId(jobFamilyId:string):Ref<EmployeesAdditionalJobEditBuilder>
+			employmentId(employmentId:string):Ref<EmployeesAdditionalJobEditBuilder>
+			startDate(startDate:string):Ref<EmployeesAdditionalJobEditBuilder>
+			endDate(endDate:string):Ref<EmployeesAdditionalJobEditBuilder>
+			directManagerId(directManagerId:string):Ref<EmployeesAdditionalJobEditBuilder>
+			dottedLineManagerId(dottedLineManagerId:string):Ref<EmployeesAdditionalJobEditBuilder>
+			workShift(workShift:Ref<Enum>):Ref<EmployeesAdditionalJobEditBuilder>
+			compensationType(compensationType:Ref<Enum>):Ref<EmployeesAdditionalJobEditBuilder>
+			serviceCompany(serviceCompany:string):Ref<EmployeesAdditionalJobEditBuilder>
+			weeklyWorkingHours(weeklyWorkingHours:string):Ref<EmployeesAdditionalJobEditBuilder>
+			workCalendarId(workCalendarId:string):Ref<EmployeesAdditionalJobEditBuilder>
+			build():Ref<EmployeesAdditionalJobEdit>
+	}
+	export interface EmployeesAdditionalJobWriteResp extends Struct<EmployeesAdditionalJobWriteResp>{
+
+			id:Ref<string>
+			employeeTypeId:Ref<string>
+			workingHoursTypeId:Ref<string>
+			workLocationId:Ref<string>
+			departmentId:Ref<string>
+			jobId:Ref<string>
+			jobLevelId:Ref<string>
+			jobFamilyId:Ref<string>
+			employmentId:Ref<string>
+			startDate:Ref<string>
+			endDate:Ref<string>
+			directManagerId:Ref<string>
+			dottedLineManagerId:Ref<string>
+			workShift:Ref<Enum>
+			compensationType:Ref<Enum>
+			serviceCompany:Ref<string>
+			weeklyWorkingHours:Ref<string>
+			workCalendarId:Ref<string>
+	}
+	export interface EmployeesAdditionalJobWriteRespBuilder extends Struct<EmployeesAdditionalJobWriteRespBuilder>{
+
+			id(id:string):Ref<EmployeesAdditionalJobWriteRespBuilder>
+			employeeTypeId(employeeTypeId:string):Ref<EmployeesAdditionalJobWriteRespBuilder>
+			workingHoursTypeId(workingHoursTypeId:string):Ref<EmployeesAdditionalJobWriteRespBuilder>
+			workLocationId(workLocationId:string):Ref<EmployeesAdditionalJobWriteRespBuilder>
+			departmentId(departmentId:string):Ref<EmployeesAdditionalJobWriteRespBuilder>
+			jobId(jobId:string):Ref<EmployeesAdditionalJobWriteRespBuilder>
+			jobLevelId(jobLevelId:string):Ref<EmployeesAdditionalJobWriteRespBuilder>
+			jobFamilyId(jobFamilyId:string):Ref<EmployeesAdditionalJobWriteRespBuilder>
+			employmentId(employmentId:string):Ref<EmployeesAdditionalJobWriteRespBuilder>
+			startDate(startDate:string):Ref<EmployeesAdditionalJobWriteRespBuilder>
+			endDate(endDate:string):Ref<EmployeesAdditionalJobWriteRespBuilder>
+			directManagerId(directManagerId:string):Ref<EmployeesAdditionalJobWriteRespBuilder>
+			dottedLineManagerId(dottedLineManagerId:string):Ref<EmployeesAdditionalJobWriteRespBuilder>
+			workShift(workShift:Ref<Enum>):Ref<EmployeesAdditionalJobWriteRespBuilder>
+			compensationType(compensationType:Ref<Enum>):Ref<EmployeesAdditionalJobWriteRespBuilder>
+			serviceCompany(serviceCompany:string):Ref<EmployeesAdditionalJobWriteRespBuilder>
+			weeklyWorkingHours(weeklyWorkingHours:string):Ref<EmployeesAdditionalJobWriteRespBuilder>
+			workCalendarId(workCalendarId:string):Ref<EmployeesAdditionalJobWriteRespBuilder>
+			build():Ref<EmployeesAdditionalJobWriteResp>
 	}
 	export interface Employment extends Struct<Employment>{
 
@@ -2392,6 +2895,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			todos:Ref<ProcessTodoItem>[]
 			ccList:Ref<ProcessCcItem>[]
 			doneList:Ref<ProcessDoneItem>[]
+			properties:Ref<int>
 	}
 	export interface HiberarchyCommon extends Struct<HiberarchyCommon>{
 
@@ -2642,6 +3146,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			workingHoursTypeId:Ref<string>
 			workLocationId:Ref<string>
 			departmentId:Ref<string>
+			positionId:Ref<string>
 			jobId:Ref<string>
 			jobLevelId:Ref<string>
 			jobGradeId:Ref<string>
@@ -2662,6 +3167,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			workShift:Ref<Enum>
 			compensationType:Ref<Enum>
 			serviceCompany:Ref<string>
+			createdAt:Ref<string>
 	}
 	export interface JobDataBuilder extends Struct<JobDataBuilder>{
 
@@ -2671,6 +3177,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			workingHoursTypeId(workingHoursTypeId:string):Ref<JobDataBuilder>
 			workLocationId(workLocationId:string):Ref<JobDataBuilder>
 			departmentId(departmentId:string):Ref<JobDataBuilder>
+			positionId(positionId:string):Ref<JobDataBuilder>
 			jobId(jobId:string):Ref<JobDataBuilder>
 			jobLevelId(jobLevelId:string):Ref<JobDataBuilder>
 			jobGradeId(jobGradeId:string):Ref<JobDataBuilder>
@@ -2691,6 +3198,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			workShift(workShift:Ref<Enum>):Ref<JobDataBuilder>
 			compensationType(compensationType:Ref<Enum>):Ref<JobDataBuilder>
 			serviceCompany(serviceCompany:string):Ref<JobDataBuilder>
+			createdAt(createdAt:string):Ref<JobDataBuilder>
 			build():Ref<JobData>
 	}
 	export interface JobDataCostCenter extends Struct<JobDataCostCenter>{
@@ -3229,6 +3737,25 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			customFields(customFields:Ref<CustomFieldData>[]):Ref<NationalIdBuilder>
 			build():Ref<NationalId>
 	}
+	export interface NationalIdForUpdate extends Struct<NationalIdForUpdate>{
+
+			countryRegionId:Ref<string>
+			nationalIdTypeId:Ref<string>
+			nationalIdNumber:Ref<string>
+			issueDate:Ref<string>
+			expirationDate:Ref<string>
+			issuedBy:Ref<string>
+	}
+	export interface NationalIdForUpdateBuilder extends Struct<NationalIdForUpdateBuilder>{
+
+			countryRegionId(countryRegionId:string):Ref<NationalIdForUpdateBuilder>
+			nationalIdTypeId(nationalIdTypeId:string):Ref<NationalIdForUpdateBuilder>
+			nationalIdNumber(nationalIdNumber:string):Ref<NationalIdForUpdateBuilder>
+			issueDate(issueDate:string):Ref<NationalIdForUpdateBuilder>
+			expirationDate(expirationDate:string):Ref<NationalIdForUpdateBuilder>
+			issuedBy(issuedBy:string):Ref<NationalIdForUpdateBuilder>
+			build():Ref<NationalIdForUpdate>
+	}
 	export interface Nationality extends Struct<Nationality>{
 
 			nationalityId:Ref<string>
@@ -3260,6 +3787,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 
 	export function newAddressBuilder():Ref<AddressBuilder>
 
+	export function newAddressForUpdateBuilder():Ref<AddressForUpdateBuilder>
+
 	export function newApprovalGroupBuilder():Ref<ApprovalGroupBuilder>
 
 	export function newAssessmentBuilder():Ref<AssessmentBuilder>
@@ -3267,6 +3796,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 	export function newAssessmentForCreateBuilder():Ref<AssessmentForCreateBuilder>
 
 	export function newBankAccountBuilder():Ref<BankAccountBuilder>
+
+	export function newBankAccountForUpdateBuilder():Ref<BankAccountForUpdateBuilder>
 
 	export function newBankBranchBuilder():Ref<BankBranchBuilder>
 
@@ -3348,6 +3879,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 
 	export function newCompanyIdAndNameBuilder():Ref<CompanyIdAndNameBuilder>
 
+	export function newCompletePreHireReqBuilder():Ref<CompletePreHireReqBuilder>
+
 	export function newContractBuilder():Ref<ContractBuilder>
 
 	export function newCostCenterBuilder():Ref<CostCenterBuilder>
@@ -3361,6 +3894,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 	export function newCreateCostCenterReqBuilder():Ref<CreateCostCenterReqBuilder>
 
 	export function newCreateCostCenterVersionReqBuilder():Ref<CreateCostCenterVersionReqBuilder>
+
+	export function newCreateEmployeePathReqBodyBuilder():Ref<CreateEmployeePathReqBodyBuilder>
+
+	export function newCreateEmployeeReqBodyBuilder():Ref<CreateEmployeeReqBodyBuilder>
+
+	export function newCreateEmployeeReqBuilder():Ref<CreateEmployeeReqBuilder>
 
 	export function newCreatePersonReqBuilder():Ref<CreatePersonReqBuilder>
 
@@ -3422,6 +3961,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 
 	export function newDependentBuilder():Ref<DependentBuilder>
 
+	export function newDependentForUpdateBuilder():Ref<DependentForUpdateBuilder>
+
 	export function newDimensionBuilder():Ref<DimensionBuilder>
 
 	export function newDimensionIdInDataBuilder():Ref<DimensionIdInDataBuilder>
@@ -3444,6 +3985,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 
 	export function newEmergencyContactBuilder():Ref<EmergencyContactBuilder>
 
+	export function newEmergencyContactForUpdateBuilder():Ref<EmergencyContactForUpdateBuilder>
+
 	export function newEmployeeBuilder():Ref<EmployeeBuilder>
 
 	export function newEmployeeDomainEventDataBuilder():Ref<EmployeeDomainEventDataBuilder>
@@ -3451,6 +3994,18 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 	export function newEmployeeInternationalAssignmentBuilder():Ref<EmployeeInternationalAssignmentBuilder>
 
 	export function newEmployeeJobDataBuilder():Ref<EmployeeJobDataBuilder>
+
+	export function newEmployeeJobFamilyBuilder():Ref<EmployeeJobFamilyBuilder>
+
+	export function newEmployeeJobLevelBuilder():Ref<EmployeeJobLevelBuilder>
+
+	export function newEmployeesAdditionalJobBatchReqDateBuilder():Ref<EmployeesAdditionalJobBatchReqDateBuilder>
+
+	export function newEmployeesAdditionalJobBuilder():Ref<EmployeesAdditionalJobBuilder>
+
+	export function newEmployeesAdditionalJobEditBuilder():Ref<EmployeesAdditionalJobEditBuilder>
+
+	export function newEmployeesAdditionalJobWriteRespBuilder():Ref<EmployeesAdditionalJobWriteRespBuilder>
 
 	export function newEmploymentBpBuilder():Ref<EmploymentBpBuilder>
 
@@ -3570,6 +4125,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 
 	export function newNationalIdBuilder():Ref<NationalIdBuilder>
 
+	export function newNationalIdForUpdateBuilder():Ref<NationalIdForUpdateBuilder>
+
 	export function newNationalityBuilder():Ref<NationalityBuilder>
 
 	export function newObjectFieldDataBuilder():Ref<ObjectFieldDataBuilder>
@@ -3588,11 +4145,29 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 
 	export function newOnboardingTaskChangeBuilder():Ref<OnboardingTaskChangeBuilder>
 
+	export function newOperationLogEntityBuilder():Ref<OperationLogEntityBuilder>
+
+	export function newOperationLogEntityFieldBuilder():Ref<OperationLogEntityFieldBuilder>
+
+	export function newOperationLogListReqBuilder():Ref<OperationLogListReqBuilder>
+
+	export function newOperationLogListRespItemBuilder():Ref<OperationLogListRespItemBuilder>
+
 	export function newOrgRoleBuilder():Ref<OrgRoleBuilder>
 
 	export function newOrgRoleUpdateBuilder():Ref<OrgRoleUpdateBuilder>
 
 	export function newOrgdraftDepartmentIdBuilder():Ref<OrgdraftDepartmentIdBuilder>
+
+	export function newP2EmployeeDomainEventV2Handler(v1:(v2:context.Context,v1:Ref<P2EmployeeDomainEventV2>)=>void/*error*/):Ref<P2EmployeeDomainEventV2Handler>
+
+	export function newP2JobChangeUpdatedV2Handler(v1:(v2:context.Context,v1:Ref<P2JobChangeUpdatedV2>)=>void/*error*/):Ref<P2JobChangeUpdatedV2Handler>
+
+	export function newP2OffboardingChecklistUpdatedV2Handler(v1:(v2:context.Context,v1:Ref<P2OffboardingChecklistUpdatedV2>)=>void/*error*/):Ref<P2OffboardingChecklistUpdatedV2Handler>
+
+	export function newP2OffboardingStatusUpdatedV2Handler(v1:(v2:context.Context,v1:Ref<P2OffboardingStatusUpdatedV2>)=>void/*error*/):Ref<P2OffboardingStatusUpdatedV2Handler>
+
+	export function newP2OffboardingUpdatedV2Handler(v1:(v2:context.Context,v1:Ref<P2OffboardingUpdatedV2>)=>void/*error*/):Ref<P2OffboardingUpdatedV2Handler>
 
 	export function newP2ProbationUpdatedV2Handler(v1:(v2:context.Context,v1:Ref<P2ProbationUpdatedV2>)=>void/*error*/):Ref<P2ProbationUpdatedV2Handler>
 
@@ -3636,11 +4211,21 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 
 	export function newPersonalProfileBuilder():Ref<PersonalProfileBuilder>
 
+	export function newPersonalProfileForUpdateBuilder():Ref<PersonalProfileForUpdateBuilder>
+
 	export function newPhoneBuilder():Ref<PhoneBuilder>
 
 	export function newPhoneForUpdateBuilder():Ref<PhoneForUpdateBuilder>
 
 	export function newPhoneNumberAndAreaCodeBuilder():Ref<PhoneNumberAndAreaCodeBuilder>
+
+	export function newPositionBuilder():Ref<PositionBuilder>
+
+	export function newPositionCreateBuilder():Ref<PositionCreateBuilder>
+
+	export function newPositionUpdateBuilder():Ref<PositionUpdateBuilder>
+
+	export function newPreHireAbnormalReasonBuilder():Ref<PreHireAbnormalReasonBuilder>
 
 	export function newPreHireBuilder():Ref<PreHireBuilder>
 
@@ -3649,6 +4234,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 	export function newPreHireEmploymentInfoBuilder():Ref<PreHireEmploymentInfoBuilder>
 
 	export function newPreHireOnboardingInfoBuilder():Ref<PreHireOnboardingInfoBuilder>
+
+	export function newPreHirePayGroupInfoBuilder():Ref<PreHirePayGroupInfoBuilder>
 
 	export function newPreHireProbationInfoBuilder():Ref<PreHireProbationInfoBuilder>
 
@@ -3750,6 +4337,24 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 
 	export function newQueryEmployeesJobDataReqBuilder():Ref<QueryEmployeesJobDataReqBuilder>
 
+	export function newQueryJobGradePathReqBodyBuilder():Ref<QueryJobGradePathReqBodyBuilder>
+
+	export function newQueryJobGradeReqBodyBuilder():Ref<QueryJobGradeReqBodyBuilder>
+
+	export function newQueryJobGradeReqBuilder():Ref<QueryJobGradeReqBuilder>
+
+	export function newQueryMultiTimelineDepartmentPathReqBodyBuilder():Ref<QueryMultiTimelineDepartmentPathReqBodyBuilder>
+
+	export function newQueryMultiTimelineDepartmentReqBodyBuilder():Ref<QueryMultiTimelineDepartmentReqBodyBuilder>
+
+	export function newQueryMultiTimelineDepartmentReqBuilder():Ref<QueryMultiTimelineDepartmentReqBuilder>
+
+	export function newQueryPreHirePathReqBodyBuilder():Ref<QueryPreHirePathReqBodyBuilder>
+
+	export function newQueryPreHireReqBodyBuilder():Ref<QueryPreHireReqBodyBuilder>
+
+	export function newQueryPreHireReqBuilder():Ref<QueryPreHireReqBuilder>
+
 	export function newQueryTimelineDepartmentPathReqBodyBuilder():Ref<QueryTimelineDepartmentPathReqBodyBuilder>
 
 	export function newQueryTimelineDepartmentReqBodyBuilder():Ref<QueryTimelineDepartmentReqBodyBuilder>
@@ -3759,6 +4364,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 	export function newReorganizationInfoBuilder():Ref<ReorganizationInfoBuilder>
 
 	export function newResidentTaxBuilder():Ref<ResidentTaxBuilder>
+
+	export function newResidentTaxForUpdateBuilder():Ref<ResidentTaxForUpdateBuilder>
 
 	export function newSearchBasicInfoBankBranchPathReqBodyBuilder():Ref<SearchBasicInfoBankBranchPathReqBodyBuilder>
 
@@ -3850,15 +4457,99 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 
 	export function newSearchProbationReqBuilder():Ref<SearchProbationReqBuilder>
 
+	export function newSignatureCustomFieldV1Builder():Ref<SignatureCustomFieldV1Builder>
+
+	export function newSignatureCustomFieldV2Builder():Ref<SignatureCustomFieldV2Builder>
+
+	export function newSignatureCustomFieldValueBuilder():Ref<SignatureCustomFieldValueBuilder>
+
+	export function newSignatureCustomFieldValueMultilingualValueBuilder():Ref<SignatureCustomFieldValueMultilingualValueBuilder>
+
+	export function newSignatureEnumInfoBuilder():Ref<SignatureEnumInfoBuilder>
+
+	export function newSignatureEnumInfoLabelBuilder():Ref<SignatureEnumInfoLabelBuilder>
+
 	export function newSignatureFileBuilder():Ref<SignatureFileBuilder>
+
+	export function newSignatureFileSystemFieldBuilder():Ref<SignatureFileSystemFieldBuilder>
+
+	export function newSignatureFolderBuilder():Ref<SignatureFolderBuilder>
+
+	export function newSignatureHumanInfoBuilder():Ref<SignatureHumanInfoBuilder>
+
+	export function newSignatureMetaInfoBuilder():Ref<SignatureMetaInfoBuilder>
+
+	export function newSignatureSignatoryLabelBuilder():Ref<SignatureSignatoryLabelBuilder>
+
+	export function newSignatureTemplateAttachmentInfoBuilder():Ref<SignatureTemplateAttachmentInfoBuilder>
+
+	export function newSignatureTemplateBriefInfoBuilder():Ref<SignatureTemplateBriefInfoBuilder>
+
+	export function newSignatureTemplateBuilder():Ref<SignatureTemplateBuilder>
+
+	export function newSignatureTemplateCombinationFieldInfoBuilder():Ref<SignatureTemplateCombinationFieldInfoBuilder>
+
+	export function newSignatureTemplateCombinationFieldInfoV2Builder():Ref<SignatureTemplateCombinationFieldInfoV2Builder>
+
+	export function newSignatureTemplateCombinationSubFieldInfoBuilder():Ref<SignatureTemplateCombinationSubFieldInfoBuilder>
+
+	export function newSignatureTemplateCommonFieldInfoBuilder():Ref<SignatureTemplateCommonFieldInfoBuilder>
+
+	export function newSignatureTemplateContentInfoBuilder():Ref<SignatureTemplateContentInfoBuilder>
+
+	export function newSignatureTemplateContentItemBuilder():Ref<SignatureTemplateContentItemBuilder>
+
+	export function newSignatureTemplateCustomFieldBuilder():Ref<SignatureTemplateCustomFieldBuilder>
+
+	export function newSignatureTemplateFieldBuilder():Ref<SignatureTemplateFieldBuilder>
+
+	export function newSignatureTemplateFilterBuilder():Ref<SignatureTemplateFilterBuilder>
+
+	export function newSignatureTemplateFilterItemBuilder():Ref<SignatureTemplateFilterItemBuilder>
+
+	export function newSignatureTemplateIdWithSystemAndCustomFieldBuilder():Ref<SignatureTemplateIdWithSystemAndCustomFieldBuilder>
+
+	export function newSignatureTemplateInfoBuilder():Ref<SignatureTemplateInfoBuilder>
+
+	export function newSignatureTemplateInfoWithThumbnailBuilder():Ref<SignatureTemplateInfoWithThumbnailBuilder>
+
+	export function newSignatureTemplatePermissionInfoBuilder():Ref<SignatureTemplatePermissionInfoBuilder>
+
+	export function newSignatureTemplateRegionInfoBuilder():Ref<SignatureTemplateRegionInfoBuilder>
+
+	export function newSignatureTemplateSettingBuilder():Ref<SignatureTemplateSettingBuilder>
+
+	export function newSignatureUserInfoBuilder():Ref<SignatureUserInfoBuilder>
+
+	export function newSubmitProbationPathReqBodyBuilder():Ref<SubmitProbationPathReqBodyBuilder>
+
+	export function newSubmitProbationReqBodyBuilder():Ref<SubmitProbationReqBodyBuilder>
+
+	export function newSubmitProbationReqBuilder():Ref<SubmitProbationReqBuilder>
 
 	export function newTranferEmploymentInfoBuilder():Ref<TranferEmploymentInfoBuilder>
 
 	export function newTransferInfoBuilder():Ref<TransferInfoBuilder>
 
+	export function newTransitTaskPreHirePathReqBodyBuilder():Ref<TransitTaskPreHirePathReqBodyBuilder>
+
+	export function newTransitTaskPreHireReqBodyBuilder():Ref<TransitTaskPreHireReqBodyBuilder>
+
+	export function newTransitTaskPreHireReqBuilder():Ref<TransitTaskPreHireReqBuilder>
+
+	export function newUpdateProcessApproverReqBuilder():Ref<UpdateProcessApproverReqBuilder>
+
 	export function newUserContactBuilder():Ref<UserContactBuilder>
 
+	export function newUserIdBuilder():Ref<UserIdBuilder>
+
 	export function newUserInfoBuilder():Ref<UserInfoBuilder>
+
+	export function newWithdrawProbationPathReqBodyBuilder():Ref<WithdrawProbationPathReqBodyBuilder>
+
+	export function newWithdrawProbationReqBodyBuilder():Ref<WithdrawProbationReqBodyBuilder>
+
+	export function newWithdrawProbationReqBuilder():Ref<WithdrawProbationReqBuilder>
 
 	export function newWorkEmailBuilder():Ref<WorkEmailBuilder>
 
@@ -3928,6 +4619,13 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			workLocationId:Ref<string>
 			onboardingAddressId:Ref<string>
 			officeAddressId:Ref<string>
+			positionId:Ref<string>
+			workingCalendarId:Ref<string>
+			workingHoursType:Ref<string>
+			payGroupId:Ref<string>
+			flowId:Ref<string>
+			checkInTime:Ref<string>
+			checkInMethod:Ref<string>
 	}
 	export interface OfferInfoBuilder extends Struct<OfferInfoBuilder>{
 
@@ -3968,6 +4666,13 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			workLocationId(workLocationId:string):Ref<OfferInfoBuilder>
 			onboardingAddressId(onboardingAddressId:string):Ref<OfferInfoBuilder>
 			officeAddressId(officeAddressId:string):Ref<OfferInfoBuilder>
+			positionId(positionId:string):Ref<OfferInfoBuilder>
+			workingCalendarId(workingCalendarId:string):Ref<OfferInfoBuilder>
+			workingHoursType(workingHoursType:string):Ref<OfferInfoBuilder>
+			payGroupId(payGroupId:string):Ref<OfferInfoBuilder>
+			flowId(flowId:string):Ref<OfferInfoBuilder>
+			checkInTime(checkInTime:string):Ref<OfferInfoBuilder>
+			checkInMethod(checkInMethod:string):Ref<OfferInfoBuilder>
 			build():Ref<OfferInfo>
 	}
 	export interface OfferInfoUpdate extends Struct<OfferInfoUpdate>{
@@ -3983,6 +4688,35 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			workEmails:Ref<EmailForUpdate>[]
 			costCenterRates:Ref<JobDataCostCenter>[]
 			customFields:Ref<ObjectFieldData>[]
+			positionId:Ref<string>
+			probationPeriod:Ref<int>
+			probationStartDate:Ref<string>
+			probationEndDate:Ref<string>
+			contractStartDate:Ref<string>
+			contractEndDate:Ref<string>
+			contractType:Ref<string>
+			durationTypeId:Ref<string>
+			signingTypeId:Ref<string>
+			workerId:Ref<string>
+			checkInTime:Ref<string>
+			checkInMethod:Ref<string>
+			company:Ref<string>
+			workShift:Ref<string>
+			recruitmentTypeId:Ref<string>
+			compensationType:Ref<string>
+			payGroupId:Ref<string>
+			offerHrId:Ref<string>
+			jobId:Ref<string>
+			jobFamilyId:Ref<string>
+			jobLevelId:Ref<string>
+			jobGradeId:Ref<string>
+			employeeTypeId:Ref<string>
+			directLeaderId:Ref<string>
+			departmentId:Ref<string>
+			socialSecurityCity:Ref<string>
+			workLocationId:Ref<string>
+			workingCalendar:Ref<string>
+			workingHoursType:Ref<string>
 	}
 	export interface OfferInfoUpdateBuilder extends Struct<OfferInfoUpdateBuilder>{
 
@@ -3997,6 +4731,35 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			workEmails(workEmails:Ref<EmailForUpdate>[]):Ref<OfferInfoUpdateBuilder>
 			costCenterRates(costCenterRates:Ref<JobDataCostCenter>[]):Ref<OfferInfoUpdateBuilder>
 			customFields(customFields:Ref<ObjectFieldData>[]):Ref<OfferInfoUpdateBuilder>
+			positionId(positionId:string):Ref<OfferInfoUpdateBuilder>
+			probationPeriod(probationPeriod:int):Ref<OfferInfoUpdateBuilder>
+			probationStartDate(probationStartDate:string):Ref<OfferInfoUpdateBuilder>
+			probationEndDate(probationEndDate:string):Ref<OfferInfoUpdateBuilder>
+			contractStartDate(contractStartDate:string):Ref<OfferInfoUpdateBuilder>
+			contractEndDate(contractEndDate:string):Ref<OfferInfoUpdateBuilder>
+			contractType(contractType:string):Ref<OfferInfoUpdateBuilder>
+			durationTypeId(durationTypeId:string):Ref<OfferInfoUpdateBuilder>
+			signingTypeId(signingTypeId:string):Ref<OfferInfoUpdateBuilder>
+			workerId(workerId:string):Ref<OfferInfoUpdateBuilder>
+			checkInTime(checkInTime:string):Ref<OfferInfoUpdateBuilder>
+			checkInMethod(checkInMethod:string):Ref<OfferInfoUpdateBuilder>
+			company(company:string):Ref<OfferInfoUpdateBuilder>
+			workShift(workShift:string):Ref<OfferInfoUpdateBuilder>
+			recruitmentTypeId(recruitmentTypeId:string):Ref<OfferInfoUpdateBuilder>
+			compensationType(compensationType:string):Ref<OfferInfoUpdateBuilder>
+			payGroupId(payGroupId:string):Ref<OfferInfoUpdateBuilder>
+			offerHrId(offerHrId:string):Ref<OfferInfoUpdateBuilder>
+			jobId(jobId:string):Ref<OfferInfoUpdateBuilder>
+			jobFamilyId(jobFamilyId:string):Ref<OfferInfoUpdateBuilder>
+			jobLevelId(jobLevelId:string):Ref<OfferInfoUpdateBuilder>
+			jobGradeId(jobGradeId:string):Ref<OfferInfoUpdateBuilder>
+			employeeTypeId(employeeTypeId:string):Ref<OfferInfoUpdateBuilder>
+			directLeaderId(directLeaderId:string):Ref<OfferInfoUpdateBuilder>
+			departmentId(departmentId:string):Ref<OfferInfoUpdateBuilder>
+			socialSecurityCity(socialSecurityCity:string):Ref<OfferInfoUpdateBuilder>
+			workLocationId(workLocationId:string):Ref<OfferInfoUpdateBuilder>
+			workingCalendar(workingCalendar:string):Ref<OfferInfoUpdateBuilder>
+			workingHoursType(workingHoursType:string):Ref<OfferInfoUpdateBuilder>
 			build():Ref<OfferInfoUpdate>
 	}
 	export interface OnboardingFlow extends Struct<OnboardingFlow>{
@@ -4080,6 +4843,62 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			taskCode(taskCode:string):Ref<OnboardingTaskChangeBuilder>
 			build():Ref<OnboardingTaskChange>
 	}
+	export interface OperationLogEntity extends Struct<OperationLogEntity>{
+
+			optType:Ref<string>
+			fields:Ref<OperationLogEntityField>[]
+			employmentId:Ref<string>
+	}
+	export interface OperationLogEntityBuilder extends Struct<OperationLogEntityBuilder>{
+
+			optType(optType:string):Ref<OperationLogEntityBuilder>
+			fields(fields:Ref<OperationLogEntityField>[]):Ref<OperationLogEntityBuilder>
+			employmentId(employmentId:string):Ref<OperationLogEntityBuilder>
+			build():Ref<OperationLogEntity>
+	}
+	export interface OperationLogEntityField extends Struct<OperationLogEntityField>{
+
+			field:Ref<string>
+			before:Ref<string>
+			after:Ref<string>
+	}
+	export interface OperationLogEntityFieldBuilder extends Struct<OperationLogEntityFieldBuilder>{
+
+			field(field:string):Ref<OperationLogEntityFieldBuilder>
+			before(before:string):Ref<OperationLogEntityFieldBuilder>
+			after(after:string):Ref<OperationLogEntityFieldBuilder>
+			build():Ref<OperationLogEntityField>
+	}
+	export interface OperationLogListReq extends Struct<OperationLogListReq>{
+
+			startTime:Ref<string>
+			endTime:Ref<string>
+			operatorIds:string[]
+			employmentId:Ref<string>
+			filterFields:string[]
+	}
+	export interface OperationLogListReqBuilder extends Struct<OperationLogListReqBuilder>{
+
+			startTime(startTime:string):Ref<OperationLogListReqBuilder>
+			endTime(endTime:string):Ref<OperationLogListReqBuilder>
+			operatorIds(operatorIds:string[]):Ref<OperationLogListReqBuilder>
+			employmentId(employmentId:string):Ref<OperationLogListReqBuilder>
+			filterFields(filterFields:string[]):Ref<OperationLogListReqBuilder>
+			build():Ref<OperationLogListReq>
+	}
+	export interface OperationLogListRespItem extends Struct<OperationLogListRespItem>{
+
+			operatorId:Ref<string>
+			optTime:Ref<string>
+			entities:Ref<OperationLogEntity>[]
+	}
+	export interface OperationLogListRespItemBuilder extends Struct<OperationLogListRespItemBuilder>{
+
+			operatorId(operatorId:string):Ref<OperationLogListRespItemBuilder>
+			optTime(optTime:string):Ref<OperationLogListRespItemBuilder>
+			entities(entities:Ref<OperationLogEntity>[]):Ref<OperationLogListRespItemBuilder>
+			build():Ref<OperationLogListRespItem>
+	}
 	export interface OrgRole extends Struct<OrgRole>{
 
 			apiName:Ref<string>
@@ -4115,7 +4934,123 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			draftDepartmentId(draftDepartmentId:string):Ref<OrgdraftDepartmentIdBuilder>
 			build():Ref<OrgdraftDepartmentId>
 	}
-	export interface P2ProbationUpdatedV2 extends larkevent.EventHandlerModel,Struct<P2ProbationUpdatedV2>{
+	export interface P2EmployeeDomainEventV2 extends Struct<P2EmployeeDomainEventV2>,larkevent.EventHandlerModel{
+
+			eventV2Base:Ref<larkevent.EventV2Base>
+			eventReq:Ref<larkevent.EventReq>
+			event:Ref<P2EmployeeDomainEventV2Data>
+			rawReq(req:Ref<larkevent.EventReq>):void
+	}
+	export interface P2EmployeeDomainEventV2Data extends Struct<P2EmployeeDomainEventV2Data>{
+
+			eventType:Ref<int>
+			subEventType:Ref<int>
+			operatorUserId:Ref<string>
+			optScene:Ref<string>
+			optDesc:Ref<string>
+			optTime:Ref<string>
+			optId:Ref<string>
+			employmentId:Ref<string>
+			data:Ref<EmployeeDomainEventData>[]
+	}
+	export interface P2EmployeeDomainEventV2Handler extends Struct<P2EmployeeDomainEventV2Handler>,larkevent.EventHandler{
+
+			event():any
+			handle(ctx:context.Context,event:any)/*error*/
+	}
+	export interface P2JobChangeUpdatedV2 extends Struct<P2JobChangeUpdatedV2>,larkevent.EventHandlerModel{
+
+			eventV2Base:Ref<larkevent.EventV2Base>
+			eventReq:Ref<larkevent.EventReq>
+			event:Ref<P2JobChangeUpdatedV2Data>
+			rawReq(req:Ref<larkevent.EventReq>):void
+	}
+	export interface P2JobChangeUpdatedV2Data extends Struct<P2JobChangeUpdatedV2Data>{
+
+			employmentId:Ref<string>
+			tenantId:Ref<string>
+			processId:Ref<string>
+			initiator:Ref<string>
+			operator:Ref<string>
+			updatedTime:Ref<string>
+			jobChangeId:Ref<string>
+			status:Ref<int>
+			operateReason:Ref<string>
+			transferType:Ref<int>
+			updatedFields:string[]
+	}
+	export interface P2JobChangeUpdatedV2Handler extends Struct<P2JobChangeUpdatedV2Handler>,larkevent.EventHandler{
+
+			event():any
+			handle(ctx:context.Context,event:any)/*error*/
+	}
+	export interface P2OffboardingChecklistUpdatedV2 extends Struct<P2OffboardingChecklistUpdatedV2>,larkevent.EventHandlerModel{
+
+			eventV2Base:Ref<larkevent.EventV2Base>
+			eventReq:Ref<larkevent.EventReq>
+			event:Ref<P2OffboardingChecklistUpdatedV2Data>
+			rawReq(req:Ref<larkevent.EventReq>):void
+	}
+	export interface P2OffboardingChecklistUpdatedV2Data extends Struct<P2OffboardingChecklistUpdatedV2Data>{
+
+			employmentId:Ref<string>
+			targetUserId:Ref<UserId>
+			offboardingId:Ref<string>
+			checklistProcessId:Ref<string>
+			checklistStatus:Ref<int>
+	}
+	export interface P2OffboardingChecklistUpdatedV2Handler extends larkevent.EventHandler,Struct<P2OffboardingChecklistUpdatedV2Handler>{
+
+			event():any
+			handle(ctx:context.Context,event:any)/*error*/
+	}
+	export interface P2OffboardingStatusUpdatedV2 extends Struct<P2OffboardingStatusUpdatedV2>,larkevent.EventHandlerModel{
+
+			eventV2Base:Ref<larkevent.EventV2Base>
+			eventReq:Ref<larkevent.EventReq>
+			event:Ref<P2OffboardingStatusUpdatedV2Data>
+			rawReq(req:Ref<larkevent.EventReq>):void
+	}
+	export interface P2OffboardingStatusUpdatedV2Data extends Struct<P2OffboardingStatusUpdatedV2Data>{
+
+			employmentId:Ref<string>
+			targetUserId:Ref<UserId>
+			offboardingId:Ref<string>
+			processId:Ref<string>
+			status:Ref<int>
+	}
+	export interface P2OffboardingStatusUpdatedV2Handler extends Struct<P2OffboardingStatusUpdatedV2Handler>,larkevent.EventHandler{
+
+			event():any
+			handle(ctx:context.Context,event:any)/*error*/
+	}
+	export interface P2OffboardingUpdatedV2 extends Struct<P2OffboardingUpdatedV2>,larkevent.EventHandlerModel{
+
+			eventV2Base:Ref<larkevent.EventV2Base>
+			eventReq:Ref<larkevent.EventReq>
+			event:Ref<P2OffboardingUpdatedV2Data>
+			rawReq(req:Ref<larkevent.EventReq>):void
+	}
+	export interface P2OffboardingUpdatedV2Data extends Struct<P2OffboardingUpdatedV2Data>{
+
+			tenantId:Ref<string>
+			offboardingInfoId:Ref<string>
+			processId:Ref<string>
+			checklistProcessId:Ref<string>
+			employmentId:Ref<string>
+			operator:Ref<string>
+			status:Ref<int>
+			checklistStatus:Ref<int>
+			updatedTime:Ref<string>
+			updatedFields:string[]
+			targetUserId:Ref<UserId>
+	}
+	export interface P2OffboardingUpdatedV2Handler extends Struct<P2OffboardingUpdatedV2Handler>,larkevent.EventHandler{
+
+			event():any
+			handle(ctx:context.Context,event:any)/*error*/
+	}
+	export interface P2ProbationUpdatedV2 extends Struct<P2ProbationUpdatedV2>,larkevent.EventHandlerModel{
 
 			eventV2Base:Ref<larkevent.EventV2Base>
 			eventReq:Ref<larkevent.EventReq>
@@ -4128,7 +5063,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			probationStatus:Ref<string>
 			actualProbationEndDate:Ref<string>
 	}
-	export interface P2ProbationUpdatedV2Handler extends larkevent.EventHandler,Struct<P2ProbationUpdatedV2Handler>{
+	export interface P2ProbationUpdatedV2Handler extends Struct<P2ProbationUpdatedV2Handler>,larkevent.EventHandler{
 
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
@@ -4147,6 +5082,9 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			type:Ref<int>
 			status:Ref<int>
 			bizType:Ref<string>
+			flowDefinitionId:Ref<string>
+			nodeDefinitionId:Ref<string>
+			nodeId:Ref<string>
 	}
 	export interface P2ProcessApproverUpdatedV2Handler extends Struct<P2ProcessApproverUpdatedV2Handler>,larkevent.EventHandler{
 
@@ -4167,7 +5105,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			status:Ref<int>
 			bizType:Ref<string>
 	}
-	export interface P2ProcessCcUpdatedV2Handler extends Struct<P2ProcessCcUpdatedV2Handler>,larkevent.EventHandler{
+	export interface P2ProcessCcUpdatedV2Handler extends larkevent.EventHandler,Struct<P2ProcessCcUpdatedV2Handler>{
 
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
@@ -4194,7 +5132,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
 	}
-	export interface P2ProcessUpdatedV2 extends larkevent.EventHandlerModel,Struct<P2ProcessUpdatedV2>{
+	export interface P2ProcessUpdatedV2 extends Struct<P2ProcessUpdatedV2>,larkevent.EventHandlerModel{
 
 			eventV2Base:Ref<larkevent.EventV2Base>
 			eventReq:Ref<larkevent.EventReq>
@@ -4206,6 +5144,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			processId:Ref<string>
 			status:Ref<int>
 			bizType:Ref<string>
+			flowDefinitionId:Ref<string>
 	}
 	export interface P2ProcessUpdatedV2Handler extends Struct<P2ProcessUpdatedV2Handler>,larkevent.EventHandler{
 
@@ -4413,7 +5352,6 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			nameList:Ref<PersonName>[]
 			gender:Ref<Enum>
 			dateOfBirth:Ref<string>
-			nationalityIdV2:Ref<string>
 			race:Ref<Enum>
 			maritalStatus:Ref<Enum>
 			phoneList:Ref<Phone>[]
@@ -4452,6 +5390,14 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			firstEntryTime:Ref<string>
 			leaveTime:Ref<string>
 			religion:Ref<Enum>
+			workingYearsV2:Ref<float64>
+			createdAt:Ref<string>
+			updatedAt:Ref<string>
+			createdBy:Ref<string>
+			updatedBy:Ref<string>
+			bankAccountNumber:Ref<string>
+			passportNumber:Ref<string>
+			formerEmployer:Ref<I18n>[]
 	}
 	export interface PersonInfoBuilder extends Struct<PersonInfoBuilder>{
 
@@ -4464,7 +5410,6 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			nameList(nameList:Ref<PersonName>[]):Ref<PersonInfoBuilder>
 			gender(gender:Ref<Enum>):Ref<PersonInfoBuilder>
 			dateOfBirth(dateOfBirth:string):Ref<PersonInfoBuilder>
-			nationalityIdV2(nationalityIdV2:string):Ref<PersonInfoBuilder>
 			race(race:Ref<Enum>):Ref<PersonInfoBuilder>
 			maritalStatus(maritalStatus:Ref<Enum>):Ref<PersonInfoBuilder>
 			phoneList(phoneList:Ref<Phone>[]):Ref<PersonInfoBuilder>
@@ -4503,6 +5448,14 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			firstEntryTime(firstEntryTime:string):Ref<PersonInfoBuilder>
 			leaveTime(leaveTime:string):Ref<PersonInfoBuilder>
 			religion(religion:Ref<Enum>):Ref<PersonInfoBuilder>
+			workingYearsV2(workingYearsV2:float64):Ref<PersonInfoBuilder>
+			createdAt(createdAt:string):Ref<PersonInfoBuilder>
+			updatedAt(updatedAt:string):Ref<PersonInfoBuilder>
+			createdBy(createdBy:string):Ref<PersonInfoBuilder>
+			updatedBy(updatedBy:string):Ref<PersonInfoBuilder>
+			bankAccountNumber(bankAccountNumber:string):Ref<PersonInfoBuilder>
+			passportNumber(passportNumber:string):Ref<PersonInfoBuilder>
+			formerEmployer(formerEmployer:Ref<I18n>[]):Ref<PersonInfoBuilder>
 			build():Ref<PersonInfo>
 	}
 	export interface PersonInfoChn extends Struct<PersonInfoChn>{
@@ -4588,6 +5541,17 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			files(files:Ref<File>[]):Ref<PersonalProfileBuilder>
 			build():Ref<PersonalProfile>
 	}
+	export interface PersonalProfileForUpdate extends Struct<PersonalProfileForUpdate>{
+
+			personalProfileType:Ref<string>
+			files:Ref<File>[]
+	}
+	export interface PersonalProfileForUpdateBuilder extends Struct<PersonalProfileForUpdateBuilder>{
+
+			personalProfileType(personalProfileType:string):Ref<PersonalProfileForUpdateBuilder>
+			files(files:Ref<File>[]):Ref<PersonalProfileForUpdateBuilder>
+			build():Ref<PersonalProfileForUpdate>
+	}
 	export interface Phone extends Struct<Phone>{
 
 			internationalAreaCode:Ref<Enum>
@@ -4639,6 +5603,135 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			phoneNumber(phoneNumber:string):Ref<PhoneNumberAndAreaCodeBuilder>
 			build():Ref<PhoneNumberAndAreaCode>
 	}
+	export interface Position extends Struct<Position>{
+
+			positionId:Ref<string>
+			code:Ref<string>
+			names:Ref<I18n>[]
+			descriptions:Ref<I18n>[]
+			active:Ref<bool>
+			jobFamilyIdList:string[]
+			costCenterId:Ref<string>
+			jobId:Ref<string>
+			jobLevelIdList:string[]
+			employeeTypeIdList:string[]
+			jobGradeIdList:string[]
+			workLocationIdList:string[]
+			workingHoursTypeId:Ref<string>
+			departmentId:Ref<string>
+			directLeaderId:Ref<string>
+			dottedLineLeaderId:Ref<string>
+			isKeyPosition:Ref<bool>
+			effectiveTime:Ref<string>
+			expirationTime:Ref<string>
+			customFields:Ref<CustomFieldData>[]
+	}
+	export interface PositionBuilder extends Struct<PositionBuilder>{
+
+			positionId(positionId:string):Ref<PositionBuilder>
+			code(code:string):Ref<PositionBuilder>
+			names(names:Ref<I18n>[]):Ref<PositionBuilder>
+			descriptions(descriptions:Ref<I18n>[]):Ref<PositionBuilder>
+			active(active:bool):Ref<PositionBuilder>
+			jobFamilyIdList(jobFamilyIdList:string[]):Ref<PositionBuilder>
+			costCenterId(costCenterId:string):Ref<PositionBuilder>
+			jobId(jobId:string):Ref<PositionBuilder>
+			jobLevelIdList(jobLevelIdList:string[]):Ref<PositionBuilder>
+			employeeTypeIdList(employeeTypeIdList:string[]):Ref<PositionBuilder>
+			jobGradeIdList(jobGradeIdList:string[]):Ref<PositionBuilder>
+			workLocationIdList(workLocationIdList:string[]):Ref<PositionBuilder>
+			workingHoursTypeId(workingHoursTypeId:string):Ref<PositionBuilder>
+			departmentId(departmentId:string):Ref<PositionBuilder>
+			directLeaderId(directLeaderId:string):Ref<PositionBuilder>
+			dottedLineLeaderId(dottedLineLeaderId:string):Ref<PositionBuilder>
+			isKeyPosition(isKeyPosition:bool):Ref<PositionBuilder>
+			effectiveTime(effectiveTime:string):Ref<PositionBuilder>
+			expirationTime(expirationTime:string):Ref<PositionBuilder>
+			customFields(customFields:Ref<CustomFieldData>[]):Ref<PositionBuilder>
+			build():Ref<Position>
+	}
+	export interface PositionCreate extends Struct<PositionCreate>{
+
+			code:Ref<string>
+			names:Ref<I18n>[]
+			descriptions:Ref<I18n>[]
+			jobFamilyIds:string[]
+			costCenterId:Ref<string>
+			jobId:Ref<string>
+			jobLevelIds:string[]
+			employeeTypeIds:string[]
+			jobGradeIds:string[]
+			workLocationIds:string[]
+			workingHoursTypeId:Ref<string>
+			departmentId:Ref<string>
+			directLeaderId:Ref<string>
+			dottedLineLeaderId:Ref<string>
+			isKeyPosition:Ref<bool>
+			effectiveTime:Ref<string>
+			customFields:Ref<CustomFieldData>[]
+	}
+	export interface PositionCreateBuilder extends Struct<PositionCreateBuilder>{
+
+			code(code:string):Ref<PositionCreateBuilder>
+			names(names:Ref<I18n>[]):Ref<PositionCreateBuilder>
+			descriptions(descriptions:Ref<I18n>[]):Ref<PositionCreateBuilder>
+			jobFamilyIds(jobFamilyIds:string[]):Ref<PositionCreateBuilder>
+			costCenterId(costCenterId:string):Ref<PositionCreateBuilder>
+			jobId(jobId:string):Ref<PositionCreateBuilder>
+			jobLevelIds(jobLevelIds:string[]):Ref<PositionCreateBuilder>
+			employeeTypeIds(employeeTypeIds:string[]):Ref<PositionCreateBuilder>
+			jobGradeIds(jobGradeIds:string[]):Ref<PositionCreateBuilder>
+			workLocationIds(workLocationIds:string[]):Ref<PositionCreateBuilder>
+			workingHoursTypeId(workingHoursTypeId:string):Ref<PositionCreateBuilder>
+			departmentId(departmentId:string):Ref<PositionCreateBuilder>
+			directLeaderId(directLeaderId:string):Ref<PositionCreateBuilder>
+			dottedLineLeaderId(dottedLineLeaderId:string):Ref<PositionCreateBuilder>
+			isKeyPosition(isKeyPosition:bool):Ref<PositionCreateBuilder>
+			effectiveTime(effectiveTime:string):Ref<PositionCreateBuilder>
+			customFields(customFields:Ref<CustomFieldData>[]):Ref<PositionCreateBuilder>
+			build():Ref<PositionCreate>
+	}
+	export interface PositionUpdate extends Struct<PositionUpdate>{
+
+			code:Ref<string>
+			names:Ref<I18n>[]
+			descriptions:Ref<I18n>[]
+			jobFamilyIds:string[]
+			costCenterId:Ref<string>
+			jobId:Ref<string>
+			jobLevelIds:string[]
+			employeeTypeIds:string[]
+			jobGradeIds:string[]
+			workLocationIds:string[]
+			workingHoursTypeId:Ref<string>
+			departmentId:Ref<string>
+			directLeaderId:Ref<string>
+			dottedLineLeaderId:Ref<string>
+			isKeyPosition:Ref<bool>
+			effectiveTime:Ref<string>
+			customFields:Ref<CustomFieldData>[]
+	}
+	export interface PositionUpdateBuilder extends Struct<PositionUpdateBuilder>{
+
+			code(code:string):Ref<PositionUpdateBuilder>
+			names(names:Ref<I18n>[]):Ref<PositionUpdateBuilder>
+			descriptions(descriptions:Ref<I18n>[]):Ref<PositionUpdateBuilder>
+			jobFamilyIds(jobFamilyIds:string[]):Ref<PositionUpdateBuilder>
+			costCenterId(costCenterId:string):Ref<PositionUpdateBuilder>
+			jobId(jobId:string):Ref<PositionUpdateBuilder>
+			jobLevelIds(jobLevelIds:string[]):Ref<PositionUpdateBuilder>
+			employeeTypeIds(employeeTypeIds:string[]):Ref<PositionUpdateBuilder>
+			jobGradeIds(jobGradeIds:string[]):Ref<PositionUpdateBuilder>
+			workLocationIds(workLocationIds:string[]):Ref<PositionUpdateBuilder>
+			workingHoursTypeId(workingHoursTypeId:string):Ref<PositionUpdateBuilder>
+			departmentId(departmentId:string):Ref<PositionUpdateBuilder>
+			directLeaderId(directLeaderId:string):Ref<PositionUpdateBuilder>
+			dottedLineLeaderId(dottedLineLeaderId:string):Ref<PositionUpdateBuilder>
+			isKeyPosition(isKeyPosition:bool):Ref<PositionUpdateBuilder>
+			effectiveTime(effectiveTime:string):Ref<PositionUpdateBuilder>
+			customFields(customFields:Ref<CustomFieldData>[]):Ref<PositionUpdateBuilder>
+			build():Ref<PositionUpdate>
+	}
 	export interface PreHire extends Struct<PreHire>{
 
 			personInfo:Ref<PersonInfo>
@@ -4647,6 +5740,15 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			probationInfo:Ref<PreHireProbationInfo>
 			contractInfo:Ref<PreHireContractInfo>
 			preHireId:Ref<string>
+	}
+	export interface PreHireAbnormalReason extends Struct<PreHireAbnormalReason>{
+
+			descriptions:Ref<I18n>[]
+	}
+	export interface PreHireAbnormalReasonBuilder extends Struct<PreHireAbnormalReasonBuilder>{
+
+			descriptions(descriptions:Ref<I18n>[]):Ref<PreHireAbnormalReasonBuilder>
+			build():Ref<PreHireAbnormalReason>
 	}
 	export interface PreHireBuilder extends Struct<PreHireBuilder>{
 
@@ -4706,6 +5808,17 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			updatedAt:Ref<string>
 			suspectedRehiring:Ref<bool>
 			customFields:Ref<CustomFieldData>[]
+			positionId:Ref<string>
+			companyManualUpdated:Ref<bool>
+			payGroup:Ref<PreHirePayGroupInfo>
+			whetherTheInformationIsAbnormal:Ref<bool>
+			abnormalReason:Ref<PreHireAbnormalReason>[]
+			hasOfferSalary:Ref<bool>
+			recruitmentProjectId:Ref<string>
+			workShift:Ref<Enum>
+			createdAt:Ref<string>
+			createdBy:Ref<string>
+			updatedBy:Ref<string>
 	}
 	export interface PreHireEmploymentInfoBuilder extends Struct<PreHireEmploymentInfoBuilder>{
 
@@ -4738,6 +5851,17 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			updatedAt(updatedAt:string):Ref<PreHireEmploymentInfoBuilder>
 			suspectedRehiring(suspectedRehiring:bool):Ref<PreHireEmploymentInfoBuilder>
 			customFields(customFields:Ref<CustomFieldData>[]):Ref<PreHireEmploymentInfoBuilder>
+			positionId(positionId:string):Ref<PreHireEmploymentInfoBuilder>
+			companyManualUpdated(companyManualUpdated:bool):Ref<PreHireEmploymentInfoBuilder>
+			payGroup(payGroup:Ref<PreHirePayGroupInfo>):Ref<PreHireEmploymentInfoBuilder>
+			whetherTheInformationIsAbnormal(whetherTheInformationIsAbnormal:bool):Ref<PreHireEmploymentInfoBuilder>
+			abnormalReason(abnormalReason:Ref<PreHireAbnormalReason>[]):Ref<PreHireEmploymentInfoBuilder>
+			hasOfferSalary(hasOfferSalary:bool):Ref<PreHireEmploymentInfoBuilder>
+			recruitmentProjectId(recruitmentProjectId:string):Ref<PreHireEmploymentInfoBuilder>
+			workShift(workShift:Ref<Enum>):Ref<PreHireEmploymentInfoBuilder>
+			createdAt(createdAt:string):Ref<PreHireEmploymentInfoBuilder>
+			createdBy(createdBy:string):Ref<PreHireEmploymentInfoBuilder>
+			updatedBy(updatedBy:string):Ref<PreHireEmploymentInfoBuilder>
 			build():Ref<PreHireEmploymentInfo>
 	}
 	export interface PreHireOnboardingInfo extends Struct<PreHireOnboardingInfo>{
@@ -4754,6 +5878,9 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			onboardingTaskList:Ref<OnboardingTask>[]
 			onboardingAddress:Ref<Address>
 			flowName:Ref<I18n>[]
+			flowId:Ref<string>
+			checkInTime:Ref<string>
+			checkInMethod:Ref<Enum>
 	}
 	export interface PreHireOnboardingInfoBuilder extends Struct<PreHireOnboardingInfoBuilder>{
 
@@ -4769,7 +5896,21 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			onboardingTaskList(onboardingTaskList:Ref<OnboardingTask>[]):Ref<PreHireOnboardingInfoBuilder>
 			onboardingAddress(onboardingAddress:Ref<Address>):Ref<PreHireOnboardingInfoBuilder>
 			flowName(flowName:Ref<I18n>[]):Ref<PreHireOnboardingInfoBuilder>
+			flowId(flowId:string):Ref<PreHireOnboardingInfoBuilder>
+			checkInTime(checkInTime:string):Ref<PreHireOnboardingInfoBuilder>
+			checkInMethod(checkInMethod:Ref<Enum>):Ref<PreHireOnboardingInfoBuilder>
 			build():Ref<PreHireOnboardingInfo>
+	}
+	export interface PreHirePayGroupInfo extends Struct<PreHirePayGroupInfo>{
+
+			name:Ref<I18n>[]
+			id:Ref<string>
+	}
+	export interface PreHirePayGroupInfoBuilder extends Struct<PreHirePayGroupInfoBuilder>{
+
+			name(name:Ref<I18n>[]):Ref<PreHirePayGroupInfoBuilder>
+			id(id:string):Ref<PreHirePayGroupInfoBuilder>
+			build():Ref<PreHirePayGroupInfo>
 	}
 	export interface PreHireProbationInfo extends Struct<PreHireProbationInfo>{
 
@@ -4791,6 +5932,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			educationInfo:Ref<EducationInfo>[]
 			workExperience:Ref<WorkExperience>[]
 			atsApplicationId:Ref<string>
+			outBizId:Ref<string>
 	}
 	export interface PrehireCreateBuilder extends Struct<PrehireCreateBuilder>{
 
@@ -4799,6 +5941,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			educationInfo(educationInfo:Ref<EducationInfo>[]):Ref<PrehireCreateBuilder>
 			workExperience(workExperience:Ref<WorkExperience>[]):Ref<PrehireCreateBuilder>
 			atsApplicationId(atsApplicationId:string):Ref<PrehireCreateBuilder>
+			outBizId(outBizId:string):Ref<PrehireCreateBuilder>
 			build():Ref<PrehireCreate>
 	}
 	export interface PrehireUpdate extends Struct<PrehireUpdate>{
@@ -4807,6 +5950,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			offerInfoUpdate:Ref<OfferInfoUpdate>
 			standardUpdateFields:string[]
 			customUpdateFields:string[]
+			personCustomUpdateFields:string[]
 	}
 	export interface PrehireUpdateBuilder extends Struct<PrehireUpdateBuilder>{
 
@@ -4814,6 +5958,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			offerInfoUpdate(offerInfoUpdate:Ref<OfferInfoUpdate>):Ref<PrehireUpdateBuilder>
 			standardUpdateFields(standardUpdateFields:string[]):Ref<PrehireUpdateBuilder>
 			customUpdateFields(customUpdateFields:string[]):Ref<PrehireUpdateBuilder>
+			personCustomUpdateFields(personCustomUpdateFields:string[]):Ref<PrehireUpdateBuilder>
 			build():Ref<PrehireUpdate>
 	}
 	export interface ProbationInfo extends Struct<ProbationInfo>{
@@ -5398,6 +6543,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			jobGrade:Ref<string>
 			workLocation:Ref<string>
 			weeklyWorkingHours:Ref<int>
+			position:Ref<string>
 	}
 	export interface ProfileSettingEmploymentRecordBuilder extends Struct<ProfileSettingEmploymentRecordBuilder>{
 
@@ -5415,6 +6561,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			jobGrade(jobGrade:string):Ref<ProfileSettingEmploymentRecordBuilder>
 			workLocation(workLocation:string):Ref<ProfileSettingEmploymentRecordBuilder>
 			weeklyWorkingHours(weeklyWorkingHours:int):Ref<ProfileSettingEmploymentRecordBuilder>
+			position(position:string):Ref<ProfileSettingEmploymentRecordBuilder>
 			build():Ref<ProfileSettingEmploymentRecord>
 	}
 	export interface ProfileSettingFieldError extends Struct<ProfileSettingFieldError>,Error{
@@ -5422,7 +6569,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			fieldName:Ref<string>
 			errorMsg:Ref<string>
 	}
-	export interface ProfileSettingFieldErrorBuilder extends Struct<ProfileSettingFieldErrorBuilder>,Error{
+	export interface ProfileSettingFieldErrorBuilder extends Error,Struct<ProfileSettingFieldErrorBuilder>{
 
 			fieldName(fieldName:string):Ref<ProfileSettingFieldErrorBuilder>
 			errorMsg(errorMsg:string):Ref<ProfileSettingFieldErrorBuilder>
@@ -5793,6 +6940,149 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			pageToken:Ref<string>
 			hasMore:Ref<bool>
 	}
+	export interface QueryJobGradePathReqBodyBuilder extends Struct<QueryJobGradePathReqBodyBuilder>{
+
+			ids(ids:string[]):Ref<QueryJobGradePathReqBodyBuilder>
+			codes(codes:string[]):Ref<QueryJobGradePathReqBodyBuilder>
+			active(active:bool):Ref<QueryJobGradePathReqBodyBuilder>
+			build():Ref<QueryJobGradeReqBody>
+	}
+	export interface QueryJobGradeReq extends Struct<QueryJobGradeReq>{
+
+			body:Ref<QueryJobGradeReqBody>
+	}
+	export interface QueryJobGradeReqBody extends Struct<QueryJobGradeReqBody>{
+
+			ids:string[]
+			codes:string[]
+			active:Ref<bool>
+	}
+	export interface QueryJobGradeReqBodyBuilder extends Struct<QueryJobGradeReqBodyBuilder>{
+
+			ids(ids:string[]):Ref<QueryJobGradeReqBodyBuilder>
+			codes(codes:string[]):Ref<QueryJobGradeReqBodyBuilder>
+			active(active:bool):Ref<QueryJobGradeReqBodyBuilder>
+			build():Ref<QueryJobGradeReqBody>
+	}
+	export interface QueryJobGradeReqBuilder extends Struct<QueryJobGradeReqBuilder>{
+
+			pageSize(pageSize:int):Ref<QueryJobGradeReqBuilder>
+			pageToken(pageToken:string):Ref<QueryJobGradeReqBuilder>
+			body(body:Ref<QueryJobGradeReqBody>):Ref<QueryJobGradeReqBuilder>
+			build():Ref<QueryJobGradeReq>
+	}
+	export interface QueryJobGradeResp extends Struct<QueryJobGradeResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<QueryJobGradeRespData>
+			success():bool
+	}
+	export interface QueryJobGradeRespData extends Struct<QueryJobGradeRespData>{
+
+			items:Ref<JobGrade>[]
+			pageToken:Ref<string>
+			hasMore:Ref<bool>
+	}
+	export interface QueryMultiTimelineDepartmentPathReqBodyBuilder extends Struct<QueryMultiTimelineDepartmentPathReqBodyBuilder>{
+
+			departmentIds(departmentIds:string[]):Ref<QueryMultiTimelineDepartmentPathReqBodyBuilder>
+			effectiveDateStart(effectiveDateStart:string):Ref<QueryMultiTimelineDepartmentPathReqBodyBuilder>
+			effectiveDateEnd(effectiveDateEnd:string):Ref<QueryMultiTimelineDepartmentPathReqBodyBuilder>
+			fields(fields:string[]):Ref<QueryMultiTimelineDepartmentPathReqBodyBuilder>
+			build():Ref<QueryMultiTimelineDepartmentReqBody>
+	}
+	export interface QueryMultiTimelineDepartmentReq extends Struct<QueryMultiTimelineDepartmentReq>{
+
+			body:Ref<QueryMultiTimelineDepartmentReqBody>
+	}
+	export interface QueryMultiTimelineDepartmentReqBody extends Struct<QueryMultiTimelineDepartmentReqBody>{
+
+			departmentIds:string[]
+			effectiveDateStart:Ref<string>
+			effectiveDateEnd:Ref<string>
+			fields:string[]
+	}
+	export interface QueryMultiTimelineDepartmentReqBodyBuilder extends Struct<QueryMultiTimelineDepartmentReqBodyBuilder>{
+
+			departmentIds(departmentIds:string[]):Ref<QueryMultiTimelineDepartmentReqBodyBuilder>
+			effectiveDateStart(effectiveDateStart:string):Ref<QueryMultiTimelineDepartmentReqBodyBuilder>
+			effectiveDateEnd(effectiveDateEnd:string):Ref<QueryMultiTimelineDepartmentReqBodyBuilder>
+			fields(fields:string[]):Ref<QueryMultiTimelineDepartmentReqBodyBuilder>
+			build():Ref<QueryMultiTimelineDepartmentReqBody>
+	}
+	export interface QueryMultiTimelineDepartmentReqBuilder extends Struct<QueryMultiTimelineDepartmentReqBuilder>{
+
+			pageSize(pageSize:int):Ref<QueryMultiTimelineDepartmentReqBuilder>
+			pageToken(pageToken:string):Ref<QueryMultiTimelineDepartmentReqBuilder>
+			userIdType(userIdType:string):Ref<QueryMultiTimelineDepartmentReqBuilder>
+			departmentIdType(departmentIdType:string):Ref<QueryMultiTimelineDepartmentReqBuilder>
+			body(body:Ref<QueryMultiTimelineDepartmentReqBody>):Ref<QueryMultiTimelineDepartmentReqBuilder>
+			build():Ref<QueryMultiTimelineDepartmentReq>
+	}
+	export interface QueryMultiTimelineDepartmentResp extends Struct<QueryMultiTimelineDepartmentResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<QueryMultiTimelineDepartmentRespData>
+			success():bool
+	}
+	export interface QueryMultiTimelineDepartmentRespData extends Struct<QueryMultiTimelineDepartmentRespData>{
+
+			items:Ref<DepartmentTimeline>[]
+			pageToken:Ref<string>
+			hasMore:Ref<bool>
+	}
+	export interface QueryPreHireIterator extends Struct<QueryPreHireIterator>{
+
+			next():[bool,Ref<PreHire>]
+			nextPageToken():Ref<string>
+	}
+	export interface QueryPreHirePathReqBodyBuilder extends Struct<QueryPreHirePathReqBodyBuilder>{
+
+			preHireIds(preHireIds:string[]):Ref<QueryPreHirePathReqBodyBuilder>
+			fields(fields:string[]):Ref<QueryPreHirePathReqBodyBuilder>
+			build():Ref<QueryPreHireReqBody>
+	}
+	export interface QueryPreHireReq extends Struct<QueryPreHireReq>{
+
+			body:Ref<QueryPreHireReqBody>
+			limit:int
+	}
+	export interface QueryPreHireReqBody extends Struct<QueryPreHireReqBody>{
+
+			preHireIds:string[]
+			fields:string[]
+	}
+	export interface QueryPreHireReqBodyBuilder extends Struct<QueryPreHireReqBodyBuilder>{
+
+			preHireIds(preHireIds:string[]):Ref<QueryPreHireReqBodyBuilder>
+			fields(fields:string[]):Ref<QueryPreHireReqBodyBuilder>
+			build():Ref<QueryPreHireReqBody>
+	}
+	export interface QueryPreHireReqBuilder extends Struct<QueryPreHireReqBuilder>{
+
+			limit(limit:int):Ref<QueryPreHireReqBuilder>
+			pageSize(pageSize:int):Ref<QueryPreHireReqBuilder>
+			pageToken(pageToken:string):Ref<QueryPreHireReqBuilder>
+			userIdType(userIdType:string):Ref<QueryPreHireReqBuilder>
+			departmentIdType(departmentIdType:string):Ref<QueryPreHireReqBuilder>
+			body(body:Ref<QueryPreHireReqBody>):Ref<QueryPreHireReqBuilder>
+			build():Ref<QueryPreHireReq>
+	}
+	export interface QueryPreHireResp extends Struct<QueryPreHireResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<QueryPreHireRespData>
+			success():bool
+	}
+	export interface QueryPreHireRespData extends Struct<QueryPreHireRespData>{
+
+			items:Ref<PreHire>[]
+			pageToken:Ref<string>
+			hasMore:Ref<bool>
+	}
 	export interface QueryTimelineDepartmentPathReqBodyBuilder extends Struct<QueryTimelineDepartmentPathReqBodyBuilder>{
 
 			departmentIds(departmentIds:string[]):Ref<QueryTimelineDepartmentPathReqBodyBuilder>
@@ -5906,6 +7196,23 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			taxCountryRegionId(taxCountryRegionId:string):Ref<ResidentTaxBuilder>
 			customFields(customFields:Ref<ObjectFieldData>[]):Ref<ResidentTaxBuilder>
 			build():Ref<ResidentTax>
+	}
+	export interface ResidentTaxForUpdate extends Struct<ResidentTaxForUpdate>{
+
+			taxCountryRegion:Ref<string>
+			residentStatus:Ref<string>
+			taxAddress:Ref<AddressForUpdate>
+			residentStatusSpecification:Ref<string>
+			yearResidentTax:Ref<string>
+	}
+	export interface ResidentTaxForUpdateBuilder extends Struct<ResidentTaxForUpdateBuilder>{
+
+			taxCountryRegion(taxCountryRegion:string):Ref<ResidentTaxForUpdateBuilder>
+			residentStatus(residentStatus:string):Ref<ResidentTaxForUpdateBuilder>
+			taxAddress(taxAddress:Ref<AddressForUpdate>):Ref<ResidentTaxForUpdateBuilder>
+			residentStatusSpecification(residentStatusSpecification:string):Ref<ResidentTaxForUpdateBuilder>
+			yearResidentTax(yearResidentTax:string):Ref<ResidentTaxForUpdateBuilder>
+			build():Ref<ResidentTaxForUpdate>
 	}
 	export interface SearchBasicInfoBankBranchIterator extends Struct<SearchBasicInfoBankBranchIterator>{
 
@@ -6678,6 +7985,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			preHireIds(preHireIds:string[]):Ref<SearchPreHirePathReqBodyBuilder>
 			onboardingDateStart(onboardingDateStart:string):Ref<SearchPreHirePathReqBodyBuilder>
 			onboardingDateEnd(onboardingDateEnd:string):Ref<SearchPreHirePathReqBodyBuilder>
+			updatedDateStart(updatedDateStart:string):Ref<SearchPreHirePathReqBodyBuilder>
+			updatedDateEnd(updatedDateEnd:string):Ref<SearchPreHirePathReqBodyBuilder>
 			onboardingLocationIds(onboardingLocationIds:string[]):Ref<SearchPreHirePathReqBodyBuilder>
 			onboardingStatus(onboardingStatus:string):Ref<SearchPreHirePathReqBodyBuilder>
 			departmentIds(departmentIds:string[]):Ref<SearchPreHirePathReqBodyBuilder>
@@ -6700,6 +8009,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			preHireIds:string[]
 			onboardingDateStart:Ref<string>
 			onboardingDateEnd:Ref<string>
+			updatedDateStart:Ref<string>
+			updatedDateEnd:Ref<string>
 			onboardingLocationIds:string[]
 			onboardingStatus:Ref<string>
 			departmentIds:string[]
@@ -6716,6 +8027,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			preHireIds(preHireIds:string[]):Ref<SearchPreHireReqBodyBuilder>
 			onboardingDateStart(onboardingDateStart:string):Ref<SearchPreHireReqBodyBuilder>
 			onboardingDateEnd(onboardingDateEnd:string):Ref<SearchPreHireReqBodyBuilder>
+			updatedDateStart(updatedDateStart:string):Ref<SearchPreHireReqBodyBuilder>
+			updatedDateEnd(updatedDateEnd:string):Ref<SearchPreHireReqBodyBuilder>
 			onboardingLocationIds(onboardingLocationIds:string[]):Ref<SearchPreHireReqBodyBuilder>
 			onboardingStatus(onboardingStatus:string):Ref<SearchPreHireReqBodyBuilder>
 			departmentIds(departmentIds:string[]):Ref<SearchPreHireReqBodyBuilder>
@@ -6833,6 +8146,74 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			pageToken:Ref<string>
 			hasMore:Ref<bool>
 	}
+	export interface SignatureCustomFieldV1 extends Struct<SignatureCustomFieldV1>{
+
+			key:Ref<string>
+			value:Ref<string>
+	}
+	export interface SignatureCustomFieldV1Builder extends Struct<SignatureCustomFieldV1Builder>{
+
+			key(key:string):Ref<SignatureCustomFieldV1Builder>
+			value(value:string):Ref<SignatureCustomFieldV1Builder>
+			build():Ref<SignatureCustomFieldV1>
+	}
+	export interface SignatureCustomFieldV2 extends Struct<SignatureCustomFieldV2>{
+
+			key:Ref<string>
+			value:Ref<SignatureCustomFieldValue>
+	}
+	export interface SignatureCustomFieldV2Builder extends Struct<SignatureCustomFieldV2Builder>{
+
+			key(key:string):Ref<SignatureCustomFieldV2Builder>
+			value(value:Ref<SignatureCustomFieldValue>):Ref<SignatureCustomFieldV2Builder>
+			build():Ref<SignatureCustomFieldV2>
+	}
+	export interface SignatureCustomFieldValue extends Struct<SignatureCustomFieldValue>{
+
+			textValue:Ref<string>
+			multilingualValue:Ref<SignatureCustomFieldValueMultilingualValue>
+	}
+	export interface SignatureCustomFieldValueBuilder extends Struct<SignatureCustomFieldValueBuilder>{
+
+			textValue(textValue:string):Ref<SignatureCustomFieldValueBuilder>
+			multilingualValue(multilingualValue:Ref<SignatureCustomFieldValueMultilingualValue>):Ref<SignatureCustomFieldValueBuilder>
+			build():Ref<SignatureCustomFieldValue>
+	}
+	export interface SignatureCustomFieldValueMultilingualValue extends Struct<SignatureCustomFieldValueMultilingualValue>{
+
+			zh:Ref<string>
+			en:Ref<string>
+	}
+	export interface SignatureCustomFieldValueMultilingualValueBuilder extends Struct<SignatureCustomFieldValueMultilingualValueBuilder>{
+
+			zh(zh:string):Ref<SignatureCustomFieldValueMultilingualValueBuilder>
+			en(en:string):Ref<SignatureCustomFieldValueMultilingualValueBuilder>
+			build():Ref<SignatureCustomFieldValueMultilingualValue>
+	}
+	export interface SignatureEnumInfo extends Struct<SignatureEnumInfo>{
+
+			label:Ref<SignatureEnumInfoLabel>
+			apiname:Ref<string>
+			active:Ref<bool>
+	}
+	export interface SignatureEnumInfoBuilder extends Struct<SignatureEnumInfoBuilder>{
+
+			label(label:Ref<SignatureEnumInfoLabel>):Ref<SignatureEnumInfoBuilder>
+			apiname(apiname:string):Ref<SignatureEnumInfoBuilder>
+			active(active:bool):Ref<SignatureEnumInfoBuilder>
+			build():Ref<SignatureEnumInfo>
+	}
+	export interface SignatureEnumInfoLabel extends Struct<SignatureEnumInfoLabel>{
+
+			zh:Ref<string>
+			en:Ref<string>
+	}
+	export interface SignatureEnumInfoLabelBuilder extends Struct<SignatureEnumInfoLabelBuilder>{
+
+			zh(zh:string):Ref<SignatureEnumInfoLabelBuilder>
+			en(en:string):Ref<SignatureEnumInfoLabelBuilder>
+			build():Ref<SignatureEnumInfoLabel>
+	}
 	export interface SignatureFile extends Struct<SignatureFile>{
 
 			signatureFileId:Ref<string>
@@ -6842,6 +8223,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			employmentId:Ref<string>
 			signatureFileState:Ref<Enum>
 			contractCode:Ref<string>
+			effectiveDate:Ref<string>
+			templateId:Ref<string>
 	}
 	export interface SignatureFileBuilder extends Struct<SignatureFileBuilder>{
 
@@ -6852,7 +8235,485 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			employmentId(employmentId:string):Ref<SignatureFileBuilder>
 			signatureFileState(signatureFileState:Ref<Enum>):Ref<SignatureFileBuilder>
 			contractCode(contractCode:string):Ref<SignatureFileBuilder>
+			effectiveDate(effectiveDate:string):Ref<SignatureFileBuilder>
+			templateId(templateId:string):Ref<SignatureFileBuilder>
 			build():Ref<SignatureFile>
+	}
+	export interface SignatureFileSystemField extends Struct<SignatureFileSystemField>{
+
+			effectiveDate:Ref<string>
+			deadline:Ref<string>
+			orderedNodeKeys:string[]
+			deadlineTimestamp:Ref<string>
+			autoStampTimestamp:Ref<string>
+			approvalRole:Ref<string>
+	}
+	export interface SignatureFileSystemFieldBuilder extends Struct<SignatureFileSystemFieldBuilder>{
+
+			effectiveDate(effectiveDate:string):Ref<SignatureFileSystemFieldBuilder>
+			deadline(deadline:string):Ref<SignatureFileSystemFieldBuilder>
+			orderedNodeKeys(orderedNodeKeys:string[]):Ref<SignatureFileSystemFieldBuilder>
+			deadlineTimestamp(deadlineTimestamp:string):Ref<SignatureFileSystemFieldBuilder>
+			autoStampTimestamp(autoStampTimestamp:string):Ref<SignatureFileSystemFieldBuilder>
+			approvalRole(approvalRole:string):Ref<SignatureFileSystemFieldBuilder>
+			build():Ref<SignatureFileSystemField>
+	}
+	export interface SignatureFolder extends Struct<SignatureFolder>{
+
+			bizType:Ref<Enum>
+			ownerInfo:Ref<SignatureHumanInfo>
+			signatureTemplateFields:Ref<SignatureTemplateIdWithSystemAndCustomField>[]
+			uniqueKey:Ref<int>
+			bizProcessId:Ref<string>
+	}
+	export interface SignatureFolderBuilder extends Struct<SignatureFolderBuilder>{
+
+			bizType(bizType:Ref<Enum>):Ref<SignatureFolderBuilder>
+			ownerInfo(ownerInfo:Ref<SignatureHumanInfo>):Ref<SignatureFolderBuilder>
+			signatureTemplateFields(signatureTemplateFields:Ref<SignatureTemplateIdWithSystemAndCustomField>[]):Ref<SignatureFolderBuilder>
+			uniqueKey(uniqueKey:int):Ref<SignatureFolderBuilder>
+			bizProcessId(bizProcessId:string):Ref<SignatureFolderBuilder>
+			build():Ref<SignatureFolder>
+	}
+	export interface SignatureHumanInfo extends Struct<SignatureHumanInfo>{
+
+			id:Ref<string>
+			humanType:Ref<Enum>
+	}
+	export interface SignatureHumanInfoBuilder extends Struct<SignatureHumanInfoBuilder>{
+
+			id(id:string):Ref<SignatureHumanInfoBuilder>
+			humanType(humanType:Ref<Enum>):Ref<SignatureHumanInfoBuilder>
+			build():Ref<SignatureHumanInfo>
+	}
+	export interface SignatureMetaInfo extends Struct<SignatureMetaInfo>{
+
+			apiName:Ref<string>
+			wkId:Ref<string>
+			label:Ref<I18n>[]
+	}
+	export interface SignatureMetaInfoBuilder extends Struct<SignatureMetaInfoBuilder>{
+
+			apiName(apiName:string):Ref<SignatureMetaInfoBuilder>
+			wkId(wkId:string):Ref<SignatureMetaInfoBuilder>
+			label(label:Ref<I18n>[]):Ref<SignatureMetaInfoBuilder>
+			build():Ref<SignatureMetaInfo>
+	}
+	export interface SignatureSignatoryLabel extends Struct<SignatureSignatoryLabel>{
+
+			templateSignatoryType:Ref<Enum>
+			label:Ref<I18n>[]
+			apiname:Ref<string>
+	}
+	export interface SignatureSignatoryLabelBuilder extends Struct<SignatureSignatoryLabelBuilder>{
+
+			templateSignatoryType(templateSignatoryType:Ref<Enum>):Ref<SignatureSignatoryLabelBuilder>
+			label(label:Ref<I18n>[]):Ref<SignatureSignatoryLabelBuilder>
+			apiname(apiname:string):Ref<SignatureSignatoryLabelBuilder>
+			build():Ref<SignatureSignatoryLabel>
+	}
+	export interface SignatureTemplate extends Struct<SignatureTemplate>{
+
+			id:Ref<string>
+			briefInfo:Ref<SignatureTemplateBriefInfo>
+			contentInfo:Ref<SignatureTemplateContentInfo>
+	}
+	export interface SignatureTemplateAttachmentInfo extends Struct<SignatureTemplateAttachmentInfo>{
+
+			id:Ref<string>
+			name:Ref<string>
+			size:Ref<int>
+	}
+	export interface SignatureTemplateAttachmentInfoBuilder extends Struct<SignatureTemplateAttachmentInfoBuilder>{
+
+			id(id:string):Ref<SignatureTemplateAttachmentInfoBuilder>
+			name(name:string):Ref<SignatureTemplateAttachmentInfoBuilder>
+			size(size:int):Ref<SignatureTemplateAttachmentInfoBuilder>
+			build():Ref<SignatureTemplateAttachmentInfo>
+	}
+	export interface SignatureTemplateBriefInfo extends Struct<SignatureTemplateBriefInfo>{
+
+			id:Ref<string>
+			label:Ref<I18n>[]
+			category:Ref<Enum>
+			usage:Ref<Enum>
+			signatoryLabels:Ref<SignatureSignatoryLabel>[]
+			active:Ref<bool>
+			createBy:Ref<string>
+			modifyBy:Ref<string>
+			applicability:Ref<Enum>
+			creationMethod:Ref<string>
+			version:Ref<string>
+			updateTime:Ref<string>
+			createTime:Ref<string>
+			templateSetting:Ref<SignatureTemplateSetting>
+			templateRegionInfo:Ref<SignatureTemplateRegionInfo>
+			templateCode:Ref<string>
+			templateDesc:Ref<I18n>[]
+	}
+	export interface SignatureTemplateBriefInfoBuilder extends Struct<SignatureTemplateBriefInfoBuilder>{
+
+			id(id:string):Ref<SignatureTemplateBriefInfoBuilder>
+			label(label:Ref<I18n>[]):Ref<SignatureTemplateBriefInfoBuilder>
+			category(category:Ref<Enum>):Ref<SignatureTemplateBriefInfoBuilder>
+			usage(usage:Ref<Enum>):Ref<SignatureTemplateBriefInfoBuilder>
+			signatoryLabels(signatoryLabels:Ref<SignatureSignatoryLabel>[]):Ref<SignatureTemplateBriefInfoBuilder>
+			active(active:bool):Ref<SignatureTemplateBriefInfoBuilder>
+			createBy(createBy:string):Ref<SignatureTemplateBriefInfoBuilder>
+			modifyBy(modifyBy:string):Ref<SignatureTemplateBriefInfoBuilder>
+			applicability(applicability:Ref<Enum>):Ref<SignatureTemplateBriefInfoBuilder>
+			creationMethod(creationMethod:string):Ref<SignatureTemplateBriefInfoBuilder>
+			version(version:string):Ref<SignatureTemplateBriefInfoBuilder>
+			updateTime(updateTime:string):Ref<SignatureTemplateBriefInfoBuilder>
+			createTime(createTime:string):Ref<SignatureTemplateBriefInfoBuilder>
+			templateSetting(templateSetting:Ref<SignatureTemplateSetting>):Ref<SignatureTemplateBriefInfoBuilder>
+			templateRegionInfo(templateRegionInfo:Ref<SignatureTemplateRegionInfo>):Ref<SignatureTemplateBriefInfoBuilder>
+			templateCode(templateCode:string):Ref<SignatureTemplateBriefInfoBuilder>
+			templateDesc(templateDesc:Ref<I18n>[]):Ref<SignatureTemplateBriefInfoBuilder>
+			build():Ref<SignatureTemplateBriefInfo>
+	}
+	export interface SignatureTemplateBuilder extends Struct<SignatureTemplateBuilder>{
+
+			id(id:string):Ref<SignatureTemplateBuilder>
+			briefInfo(briefInfo:Ref<SignatureTemplateBriefInfo>):Ref<SignatureTemplateBuilder>
+			contentInfo(contentInfo:Ref<SignatureTemplateContentInfo>):Ref<SignatureTemplateBuilder>
+			build():Ref<SignatureTemplate>
+	}
+	export interface SignatureTemplateCombinationFieldInfo extends Struct<SignatureTemplateCombinationFieldInfo>{
+
+			totalApiname:Ref<string>
+			apiname:Ref<string>
+			title:Ref<I18n>[]
+			contents:Ref<SignatureTemplateCombinationSubFieldInfo>[][]
+			source:Ref<Enum>
+	}
+	export interface SignatureTemplateCombinationFieldInfoBuilder extends Struct<SignatureTemplateCombinationFieldInfoBuilder>{
+
+			totalApiname(totalApiname:string):Ref<SignatureTemplateCombinationFieldInfoBuilder>
+			apiname(apiname:string):Ref<SignatureTemplateCombinationFieldInfoBuilder>
+			title(title:Ref<I18n>[]):Ref<SignatureTemplateCombinationFieldInfoBuilder>
+			contents(contents:Ref<SignatureTemplateCombinationSubFieldInfo>[][]):Ref<SignatureTemplateCombinationFieldInfoBuilder>
+			source(source:Ref<Enum>):Ref<SignatureTemplateCombinationFieldInfoBuilder>
+			build():Ref<SignatureTemplateCombinationFieldInfo>
+	}
+	export interface SignatureTemplateCombinationFieldInfoV2 extends Struct<SignatureTemplateCombinationFieldInfoV2>{
+
+			totalApiname:Ref<string>
+			apiname:Ref<string>
+			source:Ref<Enum>
+	}
+	export interface SignatureTemplateCombinationFieldInfoV2Builder extends Struct<SignatureTemplateCombinationFieldInfoV2Builder>{
+
+			totalApiname(totalApiname:string):Ref<SignatureTemplateCombinationFieldInfoV2Builder>
+			apiname(apiname:string):Ref<SignatureTemplateCombinationFieldInfoV2Builder>
+			source(source:Ref<Enum>):Ref<SignatureTemplateCombinationFieldInfoV2Builder>
+			build():Ref<SignatureTemplateCombinationFieldInfoV2>
+	}
+	export interface SignatureTemplateCombinationSubFieldInfo extends Struct<SignatureTemplateCombinationSubFieldInfo>{
+
+			fieldType:Ref<Enum>
+			info:Ref<SignatureTemplateCommonFieldInfo>
+			label:Ref<I18n>[]
+	}
+	export interface SignatureTemplateCombinationSubFieldInfoBuilder extends Struct<SignatureTemplateCombinationSubFieldInfoBuilder>{
+
+			fieldType(fieldType:Ref<Enum>):Ref<SignatureTemplateCombinationSubFieldInfoBuilder>
+			info(info:Ref<SignatureTemplateCommonFieldInfo>):Ref<SignatureTemplateCombinationSubFieldInfoBuilder>
+			label(label:Ref<I18n>[]):Ref<SignatureTemplateCombinationSubFieldInfoBuilder>
+			build():Ref<SignatureTemplateCombinationSubFieldInfo>
+	}
+	export interface SignatureTemplateCommonFieldInfo extends Struct<SignatureTemplateCommonFieldInfo>{
+
+			source:Ref<Enum>
+			apiname:Ref<string>
+	}
+	export interface SignatureTemplateCommonFieldInfoBuilder extends Struct<SignatureTemplateCommonFieldInfoBuilder>{
+
+			source(source:Ref<Enum>):Ref<SignatureTemplateCommonFieldInfoBuilder>
+			apiname(apiname:string):Ref<SignatureTemplateCommonFieldInfoBuilder>
+			build():Ref<SignatureTemplateCommonFieldInfo>
+	}
+	export interface SignatureTemplateContentInfo extends Struct<SignatureTemplateContentInfo>{
+
+			contents:Ref<SignatureTemplateContentItem>[]
+			customFields:Ref<SignatureTemplateCustomField>[]
+			filterFields:Ref<SignatureTemplateFilter>[]
+			usingFields:Ref<SignatureTemplateCommonFieldInfo>[]
+			systemSettingFields:Ref<SignatureTemplateField>[]
+	}
+	export interface SignatureTemplateContentInfoBuilder extends Struct<SignatureTemplateContentInfoBuilder>{
+
+			contents(contents:Ref<SignatureTemplateContentItem>[]):Ref<SignatureTemplateContentInfoBuilder>
+			customFields(customFields:Ref<SignatureTemplateCustomField>[]):Ref<SignatureTemplateContentInfoBuilder>
+			filterFields(filterFields:Ref<SignatureTemplateFilter>[]):Ref<SignatureTemplateContentInfoBuilder>
+			usingFields(usingFields:Ref<SignatureTemplateCommonFieldInfo>[]):Ref<SignatureTemplateContentInfoBuilder>
+			systemSettingFields(systemSettingFields:Ref<SignatureTemplateField>[]):Ref<SignatureTemplateContentInfoBuilder>
+			build():Ref<SignatureTemplateContentInfo>
+	}
+	export interface SignatureTemplateContentItem extends Struct<SignatureTemplateContentItem>{
+
+			contentType:Ref<Enum>
+			filterApiname:Ref<string>
+			content:Ref<string>
+			label:Ref<I18n>[]
+			contentDesc:Ref<string>
+	}
+	export interface SignatureTemplateContentItemBuilder extends Struct<SignatureTemplateContentItemBuilder>{
+
+			contentType(contentType:Ref<Enum>):Ref<SignatureTemplateContentItemBuilder>
+			filterApiname(filterApiname:string):Ref<SignatureTemplateContentItemBuilder>
+			content(content:string):Ref<SignatureTemplateContentItemBuilder>
+			label(label:Ref<I18n>[]):Ref<SignatureTemplateContentItemBuilder>
+			contentDesc(contentDesc:string):Ref<SignatureTemplateContentItemBuilder>
+			build():Ref<SignatureTemplateContentItem>
+	}
+	export interface SignatureTemplateCustomField extends Struct<SignatureTemplateCustomField>{
+
+			label:Ref<I18n>[]
+			apiname:Ref<string>
+			customFieldType:Ref<Enum>
+			used:Ref<bool>
+			isRequired:Ref<bool>
+			customDesc:Ref<string>
+			commonInfo:Ref<SignatureTemplateCommonFieldInfo>
+	}
+	export interface SignatureTemplateCustomFieldBuilder extends Struct<SignatureTemplateCustomFieldBuilder>{
+
+			label(label:Ref<I18n>[]):Ref<SignatureTemplateCustomFieldBuilder>
+			apiname(apiname:string):Ref<SignatureTemplateCustomFieldBuilder>
+			customFieldType(customFieldType:Ref<Enum>):Ref<SignatureTemplateCustomFieldBuilder>
+			used(used:bool):Ref<SignatureTemplateCustomFieldBuilder>
+			isRequired(isRequired:bool):Ref<SignatureTemplateCustomFieldBuilder>
+			customDesc(customDesc:string):Ref<SignatureTemplateCustomFieldBuilder>
+			commonInfo(commonInfo:Ref<SignatureTemplateCommonFieldInfo>):Ref<SignatureTemplateCustomFieldBuilder>
+			build():Ref<SignatureTemplateCustomField>
+	}
+	export interface SignatureTemplateField extends Struct<SignatureTemplateField>{
+
+			fieldType:Ref<Enum>
+			label:Ref<I18n>[]
+			commonInfo:Ref<SignatureTemplateCommonFieldInfo>
+			combinationInfo:Ref<SignatureTemplateCombinationFieldInfo>
+			children:Ref<string>
+			combinationInfoV2:Ref<SignatureTemplateCombinationFieldInfoV2>
+	}
+	export interface SignatureTemplateFieldBuilder extends Struct<SignatureTemplateFieldBuilder>{
+
+			fieldType(fieldType:Ref<Enum>):Ref<SignatureTemplateFieldBuilder>
+			label(label:Ref<I18n>[]):Ref<SignatureTemplateFieldBuilder>
+			commonInfo(commonInfo:Ref<SignatureTemplateCommonFieldInfo>):Ref<SignatureTemplateFieldBuilder>
+			combinationInfo(combinationInfo:Ref<SignatureTemplateCombinationFieldInfo>):Ref<SignatureTemplateFieldBuilder>
+			children(children:string):Ref<SignatureTemplateFieldBuilder>
+			combinationInfoV2(combinationInfoV2:Ref<SignatureTemplateCombinationFieldInfoV2>):Ref<SignatureTemplateFieldBuilder>
+			build():Ref<SignatureTemplateField>
+	}
+	export interface SignatureTemplateFilter extends Struct<SignatureTemplateFilter>{
+
+			label:Ref<I18n>[]
+			apiname:Ref<string>
+			filters:Ref<SignatureTemplateFilterItem>[]
+			logic:Ref<Enum>
+			isChecked:Ref<bool>
+			filterDesc:Ref<string>
+			criterionList:Ref<string>
+	}
+	export interface SignatureTemplateFilterBuilder extends Struct<SignatureTemplateFilterBuilder>{
+
+			label(label:Ref<I18n>[]):Ref<SignatureTemplateFilterBuilder>
+			apiname(apiname:string):Ref<SignatureTemplateFilterBuilder>
+			filters(filters:Ref<SignatureTemplateFilterItem>[]):Ref<SignatureTemplateFilterBuilder>
+			logic(logic:Ref<Enum>):Ref<SignatureTemplateFilterBuilder>
+			isChecked(isChecked:bool):Ref<SignatureTemplateFilterBuilder>
+			filterDesc(filterDesc:string):Ref<SignatureTemplateFilterBuilder>
+			criterionList(criterionList:string):Ref<SignatureTemplateFilterBuilder>
+			build():Ref<SignatureTemplateFilter>
+	}
+	export interface SignatureTemplateFilterItem extends Struct<SignatureTemplateFilterItem>{
+
+			left:Ref<string>
+			rights:string[]
+			op:Ref<Enum>
+	}
+	export interface SignatureTemplateFilterItemBuilder extends Struct<SignatureTemplateFilterItemBuilder>{
+
+			left(left:string):Ref<SignatureTemplateFilterItemBuilder>
+			rights(rights:string[]):Ref<SignatureTemplateFilterItemBuilder>
+			op(op:Ref<Enum>):Ref<SignatureTemplateFilterItemBuilder>
+			build():Ref<SignatureTemplateFilterItem>
+	}
+	export interface SignatureTemplateIdWithSystemAndCustomField extends Struct<SignatureTemplateIdWithSystemAndCustomField>{
+
+			id:Ref<string>
+			systemFieldInfo:Ref<SignatureFileSystemField>
+			customFields:Ref<SignatureCustomFieldV1>[]
+			customFieldsV2:Ref<SignatureCustomFieldV2>[]
+	}
+	export interface SignatureTemplateIdWithSystemAndCustomFieldBuilder extends Struct<SignatureTemplateIdWithSystemAndCustomFieldBuilder>{
+
+			id(id:string):Ref<SignatureTemplateIdWithSystemAndCustomFieldBuilder>
+			systemFieldInfo(systemFieldInfo:Ref<SignatureFileSystemField>):Ref<SignatureTemplateIdWithSystemAndCustomFieldBuilder>
+			customFields(customFields:Ref<SignatureCustomFieldV1>[]):Ref<SignatureTemplateIdWithSystemAndCustomFieldBuilder>
+			customFieldsV2(customFieldsV2:Ref<SignatureCustomFieldV2>[]):Ref<SignatureTemplateIdWithSystemAndCustomFieldBuilder>
+			build():Ref<SignatureTemplateIdWithSystemAndCustomField>
+	}
+	export interface SignatureTemplateInfo extends Struct<SignatureTemplateInfo>{
+
+			id:Ref<string>
+			briefInfo:Ref<SignatureTemplateBriefInfo>
+			contentInfo:Ref<SignatureTemplateContentInfo>
+	}
+	export interface SignatureTemplateInfoBuilder extends Struct<SignatureTemplateInfoBuilder>{
+
+			id(id:string):Ref<SignatureTemplateInfoBuilder>
+			briefInfo(briefInfo:Ref<SignatureTemplateBriefInfo>):Ref<SignatureTemplateInfoBuilder>
+			contentInfo(contentInfo:Ref<SignatureTemplateContentInfo>):Ref<SignatureTemplateInfoBuilder>
+			build():Ref<SignatureTemplateInfo>
+	}
+	export interface SignatureTemplateInfoWithThumbnail extends Struct<SignatureTemplateInfoWithThumbnail>{
+
+			id:Ref<string>
+			label:Ref<I18n>[]
+			category:Ref<Enum>
+			usage:Ref<Enum>
+			createTime:Ref<string>
+			modifyTime:Ref<string>
+			createdBy:Ref<SignatureUserInfo>
+			updatedBy:Ref<SignatureUserInfo>
+			thumbnailUrl:Ref<string>
+			signatoryLabels:Ref<SignatureSignatoryLabel>[]
+			templateCode:Ref<string>
+			templateDesc:Ref<string>
+			templateRegionInfo:Ref<SignatureTemplateRegionInfo>
+	}
+	export interface SignatureTemplateInfoWithThumbnailBuilder extends Struct<SignatureTemplateInfoWithThumbnailBuilder>{
+
+			id(id:string):Ref<SignatureTemplateInfoWithThumbnailBuilder>
+			label(label:Ref<I18n>[]):Ref<SignatureTemplateInfoWithThumbnailBuilder>
+			category(category:Ref<Enum>):Ref<SignatureTemplateInfoWithThumbnailBuilder>
+			usage(usage:Ref<Enum>):Ref<SignatureTemplateInfoWithThumbnailBuilder>
+			createTime(createTime:string):Ref<SignatureTemplateInfoWithThumbnailBuilder>
+			modifyTime(modifyTime:string):Ref<SignatureTemplateInfoWithThumbnailBuilder>
+			createdBy(createdBy:Ref<SignatureUserInfo>):Ref<SignatureTemplateInfoWithThumbnailBuilder>
+			updatedBy(updatedBy:Ref<SignatureUserInfo>):Ref<SignatureTemplateInfoWithThumbnailBuilder>
+			thumbnailUrl(thumbnailUrl:string):Ref<SignatureTemplateInfoWithThumbnailBuilder>
+			signatoryLabels(signatoryLabels:Ref<SignatureSignatoryLabel>[]):Ref<SignatureTemplateInfoWithThumbnailBuilder>
+			templateCode(templateCode:string):Ref<SignatureTemplateInfoWithThumbnailBuilder>
+			templateDesc(templateDesc:string):Ref<SignatureTemplateInfoWithThumbnailBuilder>
+			templateRegionInfo(templateRegionInfo:Ref<SignatureTemplateRegionInfo>):Ref<SignatureTemplateInfoWithThumbnailBuilder>
+			build():Ref<SignatureTemplateInfoWithThumbnail>
+	}
+	export interface SignatureTemplatePermissionInfo extends Struct<SignatureTemplatePermissionInfo>{
+
+			readPermission:Ref<bool>
+			writePermission:Ref<bool>
+			switchPermission:Ref<bool>
+			copyPermission:Ref<bool>
+			deletePermission:Ref<bool>
+	}
+	export interface SignatureTemplatePermissionInfoBuilder extends Struct<SignatureTemplatePermissionInfoBuilder>{
+
+			readPermission(readPermission:bool):Ref<SignatureTemplatePermissionInfoBuilder>
+			writePermission(writePermission:bool):Ref<SignatureTemplatePermissionInfoBuilder>
+			switchPermission(switchPermission:bool):Ref<SignatureTemplatePermissionInfoBuilder>
+			copyPermission(copyPermission:bool):Ref<SignatureTemplatePermissionInfoBuilder>
+			deletePermission(deletePermission:bool):Ref<SignatureTemplatePermissionInfoBuilder>
+			build():Ref<SignatureTemplatePermissionInfo>
+	}
+	export interface SignatureTemplateRegionInfo extends Struct<SignatureTemplateRegionInfo>{
+
+			isGlobalScope:Ref<string>
+			metaInfos:Ref<SignatureMetaInfo>[]
+	}
+	export interface SignatureTemplateRegionInfoBuilder extends Struct<SignatureTemplateRegionInfoBuilder>{
+
+			isGlobalScope(isGlobalScope:string):Ref<SignatureTemplateRegionInfoBuilder>
+			metaInfos(metaInfos:Ref<SignatureMetaInfo>[]):Ref<SignatureTemplateRegionInfoBuilder>
+			build():Ref<SignatureTemplateRegionInfo>
+	}
+	export interface SignatureTemplateSetting extends Struct<SignatureTemplateSetting>{
+
+			pageSealTypes:string[]
+	}
+	export interface SignatureTemplateSettingBuilder extends Struct<SignatureTemplateSettingBuilder>{
+
+			pageSealTypes(pageSealTypes:string[]):Ref<SignatureTemplateSettingBuilder>
+			build():Ref<SignatureTemplateSetting>
+	}
+	export interface SignatureUserInfo extends Struct<SignatureUserInfo>{
+
+			id:Ref<string>
+	}
+	export interface SignatureUserInfoBuilder extends Struct<SignatureUserInfoBuilder>{
+
+			id(id:string):Ref<SignatureUserInfoBuilder>
+			build():Ref<SignatureUserInfo>
+	}
+	//2
+	export const StatusApproved:int
+	//3
+	export const StatusRejected:int
+	//"hr_submission"
+	export const SubmissionTypeHrSubmission:string
+	//"self_submission"
+	export const SubmissionTypeSelfSubmission:string
+	//"system"
+	export const SubmissionTypeSystem:string
+	export interface SubmitProbationPathReqBodyBuilder extends Struct<SubmitProbationPathReqBodyBuilder>{
+
+			employmentId(employmentId:string):Ref<SubmitProbationPathReqBodyBuilder>
+			conversionMode(conversionMode:int):Ref<SubmitProbationPathReqBodyBuilder>
+			actualProbationEndDate(actualProbationEndDate:string):Ref<SubmitProbationPathReqBodyBuilder>
+			submissionType(submissionType:string):Ref<SubmitProbationPathReqBodyBuilder>
+			initiatorId(initiatorId:string):Ref<SubmitProbationPathReqBodyBuilder>
+			notes(notes:string):Ref<SubmitProbationPathReqBodyBuilder>
+			selfReview(selfReview:string):Ref<SubmitProbationPathReqBodyBuilder>
+			customFields(customFields:Ref<CustomFieldData>[]):Ref<SubmitProbationPathReqBodyBuilder>
+			build():Ref<SubmitProbationReqBody>
+	}
+	export interface SubmitProbationReq extends Struct<SubmitProbationReq>{
+
+			body:Ref<SubmitProbationReqBody>
+	}
+	export interface SubmitProbationReqBody extends Struct<SubmitProbationReqBody>{
+
+			employmentId:Ref<string>
+			conversionMode:Ref<int>
+			actualProbationEndDate:Ref<string>
+			submissionType:Ref<string>
+			initiatorId:Ref<string>
+			notes:Ref<string>
+			selfReview:Ref<string>
+			customFields:Ref<CustomFieldData>[]
+	}
+	export interface SubmitProbationReqBodyBuilder extends Struct<SubmitProbationReqBodyBuilder>{
+
+			employmentId(employmentId:string):Ref<SubmitProbationReqBodyBuilder>
+			conversionMode(conversionMode:int):Ref<SubmitProbationReqBodyBuilder>
+			actualProbationEndDate(actualProbationEndDate:string):Ref<SubmitProbationReqBodyBuilder>
+			submissionType(submissionType:string):Ref<SubmitProbationReqBodyBuilder>
+			initiatorId(initiatorId:string):Ref<SubmitProbationReqBodyBuilder>
+			notes(notes:string):Ref<SubmitProbationReqBodyBuilder>
+			selfReview(selfReview:string):Ref<SubmitProbationReqBodyBuilder>
+			customFields(customFields:Ref<CustomFieldData>[]):Ref<SubmitProbationReqBodyBuilder>
+			build():Ref<SubmitProbationReqBody>
+	}
+	export interface SubmitProbationReqBuilder extends Struct<SubmitProbationReqBuilder>{
+
+			clientToken(clientToken:string):Ref<SubmitProbationReqBuilder>
+			userIdType(userIdType:string):Ref<SubmitProbationReqBuilder>
+			body(body:Ref<SubmitProbationReqBody>):Ref<SubmitProbationReqBuilder>
+			build():Ref<SubmitProbationReq>
+	}
+	export interface SubmitProbationResp extends Struct<SubmitProbationResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<SubmitProbationRespData>
+			success():bool
+	}
+	export interface SubmitProbationRespData extends Struct<SubmitProbationRespData>{
+
+			probationInfo:Ref<ProbationInfoForSubmit>
 	}
 	export interface TranferEmploymentInfo extends Struct<TranferEmploymentInfo>{
 
@@ -6928,6 +8789,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			targetCompensationType:Ref<string>
 			originalServiceCompany:Ref<string>
 			targetServiceCompany:Ref<string>
+			originalPosition:Ref<string>
+			targetPosition:Ref<string>
 	}
 	export interface TransferInfoBuilder extends Struct<TransferInfoBuilder>{
 
@@ -6988,7 +8851,69 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			targetCompensationType(targetCompensationType:string):Ref<TransferInfoBuilder>
 			originalServiceCompany(originalServiceCompany:string):Ref<TransferInfoBuilder>
 			targetServiceCompany(targetServiceCompany:string):Ref<TransferInfoBuilder>
+			originalPosition(originalPosition:string):Ref<TransferInfoBuilder>
+			targetPosition(targetPosition:string):Ref<TransferInfoBuilder>
 			build():Ref<TransferInfo>
+	}
+	export interface TransitTaskPreHirePathReqBodyBuilder extends Struct<TransitTaskPreHirePathReqBodyBuilder>{
+
+			taskId(taskId:string):Ref<TransitTaskPreHirePathReqBodyBuilder>
+			build():Ref<TransitTaskPreHireReqBody>
+	}
+	export interface TransitTaskPreHireReq extends Struct<TransitTaskPreHireReq>{
+
+			body:Ref<TransitTaskPreHireReqBody>
+	}
+	export interface TransitTaskPreHireReqBody extends Struct<TransitTaskPreHireReqBody>{
+
+			taskId:Ref<string>
+	}
+	export interface TransitTaskPreHireReqBodyBuilder extends Struct<TransitTaskPreHireReqBodyBuilder>{
+
+			taskId(taskId:string):Ref<TransitTaskPreHireReqBodyBuilder>
+			build():Ref<TransitTaskPreHireReqBody>
+	}
+	export interface TransitTaskPreHireReqBuilder extends Struct<TransitTaskPreHireReqBuilder>{
+
+			preHireId(preHireId:string):Ref<TransitTaskPreHireReqBuilder>
+			body(body:Ref<TransitTaskPreHireReqBody>):Ref<TransitTaskPreHireReqBuilder>
+			build():Ref<TransitTaskPreHireReq>
+	}
+	export interface TransitTaskPreHireResp extends Struct<TransitTaskPreHireResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<TransitTaskPreHireRespData>
+			success():bool
+	}
+	export interface TransitTaskPreHireRespData extends Struct<TransitTaskPreHireRespData>{
+
+			success:Ref<bool>
+	}
+	export interface UpdateProcessApproverReq extends Struct<UpdateProcessApproverReq>{
+
+			processApprover:Ref<ProcessApprover>
+	}
+	export interface UpdateProcessApproverReqBuilder extends Struct<UpdateProcessApproverReqBuilder>{
+
+			processId(processId:string):Ref<UpdateProcessApproverReqBuilder>
+			approverId(approverId:string):Ref<UpdateProcessApproverReqBuilder>
+			userIdType(userIdType:string):Ref<UpdateProcessApproverReqBuilder>
+			departmentIdType(departmentIdType:string):Ref<UpdateProcessApproverReqBuilder>
+			processApprover(processApprover:Ref<ProcessApprover>):Ref<UpdateProcessApproverReqBuilder>
+			build():Ref<UpdateProcessApproverReq>
+	}
+	export interface UpdateProcessApproverResp extends Struct<UpdateProcessApproverResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<UpdateProcessApproverRespData>
+			success():bool
+	}
+	export interface UpdateProcessApproverRespData extends Struct<UpdateProcessApproverRespData>{
+
+			code:Ref<int>
+			msg:Ref<string>
 	}
 	export interface UserContact extends Struct<UserContact>{
 
@@ -7000,6 +8925,19 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			userIds(userIds:string[]):Ref<UserContactBuilder>
 			mobile(mobile:string):Ref<UserContactBuilder>
 			build():Ref<UserContact>
+	}
+	export interface UserId extends Struct<UserId>{
+
+			userId:Ref<string>
+			openId:Ref<string>
+			unionId:Ref<string>
+	}
+	export interface UserIdBuilder extends Struct<UserIdBuilder>{
+
+			userId(userId:string):Ref<UserIdBuilder>
+			openId(openId:string):Ref<UserIdBuilder>
+			unionId(unionId:string):Ref<UserIdBuilder>
+			build():Ref<UserId>
 	}
 	//"open_id"
 	export const UserIdTypeBatchGetDepartmentOpenId:string
@@ -7059,12 +8997,16 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 	export const UserIdTypeCreateProbationAssessmentUserId:string
 	//"open_id"
 	export const UserIdTypeGetProcessFormVariableDataOpenId:string
+	//"people_corehr_id"
+	export const UserIdTypeGetProcessFormVariableDataPeopleCorehrId:string
 	//"union_id"
 	export const UserIdTypeGetProcessFormVariableDataUnionId:string
 	//"user_id"
 	export const UserIdTypeGetProcessFormVariableDataUserId:string
 	//"open_id"
 	export const UserIdTypeGetProcessOpenId:string
+	//"people_corehr_id"
+	export const UserIdTypeGetProcessPeopleCorehrId:string
 	//"union_id"
 	export const UserIdTypeGetProcessUnionId:string
 	//"user_id"
@@ -7105,6 +9047,22 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 	export const UserIdTypeQueryEmployeesJobDataUnionId:string
 	//"user_id"
 	export const UserIdTypeQueryEmployeesJobDataUserId:string
+	//"open_id"
+	export const UserIdTypeQueryMultiTimelineDepartmentOpenId:string
+	//"people_corehr_id"
+	export const UserIdTypeQueryMultiTimelineDepartmentPeopleCorehrId:string
+	//"union_id"
+	export const UserIdTypeQueryMultiTimelineDepartmentUnionId:string
+	//"user_id"
+	export const UserIdTypeQueryMultiTimelineDepartmentUserId:string
+	//"open_id"
+	export const UserIdTypeQueryPreHireOpenId:string
+	//"people_corehr_id"
+	export const UserIdTypeQueryPreHirePeopleCorehrId:string
+	//"union_id"
+	export const UserIdTypeQueryPreHireUnionId:string
+	//"user_id"
+	export const UserIdTypeQueryPreHireUserId:string
 	//"open_id"
 	export const UserIdTypeQueryTimelineDepartmentOpenId:string
 	//"people_corehr_id"
@@ -7169,10 +9127,34 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 	export const UserIdTypeSearchProbationUnionId:string
 	//"user_id"
 	export const UserIdTypeSearchProbationUserId:string
+	//"open_id"
+	export const UserIdTypeSubmitProbationOpenId:string
+	//"people_corehr_id"
+	export const UserIdTypeSubmitProbationPeopleCorehrId:string
+	//"union_id"
+	export const UserIdTypeSubmitProbationUnionId:string
+	//"user_id"
+	export const UserIdTypeSubmitProbationUserId:string
 	//"union_id"
 	export const UserIdTypeUnionId:string
+	//"open_id"
+	export const UserIdTypeUpdateProcessApproverOpenId:string
+	//"people_corehr_id"
+	export const UserIdTypeUpdateProcessApproverPeopleCorehrId:string
+	//"union_id"
+	export const UserIdTypeUpdateProcessApproverUnionId:string
+	//"user_id"
+	export const UserIdTypeUpdateProcessApproverUserId:string
 	//"user_id"
 	export const UserIdTypeUserId:string
+	//"open_id"
+	export const UserIdTypeWithdrawProbationOpenId:string
+	//"people_corehr_id"
+	export const UserIdTypeWithdrawProbationPeopleCorehrId:string
+	//"union_id"
+	export const UserIdTypeWithdrawProbationUnionId:string
+	//"user_id"
+	export const UserIdTypeWithdrawProbationUserId:string
 	export interface UserInfo extends Struct<UserInfo>{
 
 			userId:Ref<string>
@@ -7274,6 +9256,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			
 				batchGet(ctx:context.Context,req:Ref<BatchGetDepartmentReq>,...options:larkcore.RequestOptionFunc[]):Ref<BatchGetDepartmentResp>
 				parents(ctx:context.Context,req:Ref<ParentsDepartmentReq>,...options:larkcore.RequestOptionFunc[]):Ref<ParentsDepartmentResp>
+				queryMultiTimeline(ctx:context.Context,req:Ref<QueryMultiTimelineDepartmentReq>,...options:larkcore.RequestOptionFunc[]):Ref<QueryMultiTimelineDepartmentResp>
 				queryTimeline(ctx:context.Context,req:Ref<QueryTimelineDepartmentReq>,...options:larkcore.RequestOptionFunc[]):Ref<QueryTimelineDepartmentResp>
 				search(ctx:context.Context,req:Ref<SearchDepartmentReq>,...options:larkcore.RequestOptionFunc[]):Ref<SearchDepartmentResp>
 				searchByIterator(ctx:context.Context,req:Ref<SearchDepartmentReq>,...options:larkcore.RequestOptionFunc[]):Ref<SearchDepartmentIterator>
@@ -7281,6 +9264,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			employee:Ref<{
 			
 				batchGet(ctx:context.Context,req:Ref<BatchGetEmployeeReq>,...options:larkcore.RequestOptionFunc[]):Ref<BatchGetEmployeeResp>
+				create(ctx:context.Context,req:Ref<CreateEmployeeReq>,...options:larkcore.RequestOptionFunc[]):Ref<CreateEmployeeResp>
 				search(ctx:context.Context,req:Ref<SearchEmployeeReq>,...options:larkcore.RequestOptionFunc[]):Ref<SearchEmployeeResp>
 				searchByIterator(ctx:context.Context,req:Ref<SearchEmployeeReq>,...options:larkcore.RequestOptionFunc[]):Ref<SearchEmployeeIterator>
 			}>
@@ -7307,6 +9291,10 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			
 				batchGet(ctx:context.Context,req:Ref<BatchGetJobFamilyReq>,...options:larkcore.RequestOptionFunc[]):Ref<BatchGetJobFamilyResp>
 			}>
+			jobGrade:Ref<{
+			
+				query(ctx:context.Context,req:Ref<QueryJobGradeReq>,...options:larkcore.RequestOptionFunc[]):Ref<QueryJobGradeResp>
+			}>
 			jobLevel:Ref<{
 			
 				batchGet(ctx:context.Context,req:Ref<BatchGetJobLevelReq>,...options:larkcore.RequestOptionFunc[]):Ref<BatchGetJobLevelResp>
@@ -7322,17 +9310,23 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			}>
 			preHire:Ref<{
 			
+				complete(ctx:context.Context,req:Ref<CompletePreHireReq>,...options:larkcore.RequestOptionFunc[]):Ref<CompletePreHireResp>
 				create(ctx:context.Context,req:Ref<CreatePreHireReq>,...options:larkcore.RequestOptionFunc[]):Ref<CreatePreHireResp>
 				delete(ctx:context.Context,req:Ref<DeletePreHireReq>,...options:larkcore.RequestOptionFunc[]):Ref<DeletePreHireResp>
 				patch(ctx:context.Context,req:Ref<PatchPreHireReq>,...options:larkcore.RequestOptionFunc[]):Ref<PatchPreHireResp>
+				query(ctx:context.Context,req:Ref<QueryPreHireReq>,...options:larkcore.RequestOptionFunc[]):Ref<QueryPreHireResp>
+				queryByIterator(ctx:context.Context,req:Ref<QueryPreHireReq>,...options:larkcore.RequestOptionFunc[]):Ref<QueryPreHireIterator>
 				search(ctx:context.Context,req:Ref<SearchPreHireReq>,...options:larkcore.RequestOptionFunc[]):Ref<SearchPreHireResp>
 				searchByIterator(ctx:context.Context,req:Ref<SearchPreHireReq>,...options:larkcore.RequestOptionFunc[]):Ref<SearchPreHireIterator>
+				transitTask(ctx:context.Context,req:Ref<TransitTaskPreHireReq>,...options:larkcore.RequestOptionFunc[]):Ref<TransitTaskPreHireResp>
 			}>
 			probation:Ref<{
 			
 				enableDisableAssessment(ctx:context.Context,req:Ref<EnableDisableAssessmentProbationReq>,...options:larkcore.RequestOptionFunc[]):Ref<EnableDisableAssessmentProbationResp>
 				search(ctx:context.Context,req:Ref<SearchProbationReq>,...options:larkcore.RequestOptionFunc[]):Ref<SearchProbationResp>
 				searchByIterator(ctx:context.Context,req:Ref<SearchProbationReq>,...options:larkcore.RequestOptionFunc[]):Ref<SearchProbationIterator>
+				submit(ctx:context.Context,req:Ref<SubmitProbationReq>,...options:larkcore.RequestOptionFunc[]):Ref<SubmitProbationResp>
+				withdraw(ctx:context.Context,req:Ref<WithdrawProbationReq>,...options:larkcore.RequestOptionFunc[]):Ref<WithdrawProbationResp>
 			}>
 			probationAssessment:Ref<{
 			
@@ -7346,10 +9340,45 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 				list(ctx:context.Context,req:Ref<ListProcessReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListProcessResp>
 				listByIterator(ctx:context.Context,req:Ref<ListProcessReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListProcessIterator>
 			}>
+			processApprover:Ref<{
+			
+				update(ctx:context.Context,req:Ref<UpdateProcessApproverReq>,...options:larkcore.RequestOptionFunc[]):Ref<UpdateProcessApproverResp>
+			}>
 			processFormVariableData:Ref<{
 			
 				get(ctx:context.Context,req:Ref<GetProcessFormVariableDataReq>,...options:larkcore.RequestOptionFunc[]):Ref<GetProcessFormVariableDataResp>
 			}>
+	}
+	export interface WithdrawProbationPathReqBodyBuilder extends Struct<WithdrawProbationPathReqBodyBuilder>{
+
+			employmentId(employmentId:string):Ref<WithdrawProbationPathReqBodyBuilder>
+			build():Ref<WithdrawProbationReqBody>
+	}
+	export interface WithdrawProbationReq extends Struct<WithdrawProbationReq>{
+
+			body:Ref<WithdrawProbationReqBody>
+	}
+	export interface WithdrawProbationReqBody extends Struct<WithdrawProbationReqBody>{
+
+			employmentId:Ref<string>
+	}
+	export interface WithdrawProbationReqBodyBuilder extends Struct<WithdrawProbationReqBodyBuilder>{
+
+			employmentId(employmentId:string):Ref<WithdrawProbationReqBodyBuilder>
+			build():Ref<WithdrawProbationReqBody>
+	}
+	export interface WithdrawProbationReqBuilder extends Struct<WithdrawProbationReqBuilder>{
+
+			clientToken(clientToken:string):Ref<WithdrawProbationReqBuilder>
+			userIdType(userIdType:string):Ref<WithdrawProbationReqBuilder>
+			body(body:Ref<WithdrawProbationReqBody>):Ref<WithdrawProbationReqBuilder>
+			build():Ref<WithdrawProbationReq>
+	}
+	export interface WithdrawProbationResp extends Struct<WithdrawProbationResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			success():bool
 	}
 	export interface WorkEmail extends Struct<WorkEmail>{
 
@@ -7393,6 +9422,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			endTime:Ref<string>
 			jobTitle:Ref<string>
 			description:Ref<string>
+			department:Ref<string>
 	}
 	export interface WorkExperienceBuilder extends Struct<WorkExperienceBuilder>{
 
@@ -7401,6 +9431,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			endTime(endTime:string):Ref<WorkExperienceBuilder>
 			jobTitle(jobTitle:string):Ref<WorkExperienceBuilder>
 			description(description:string):Ref<WorkExperienceBuilder>
+			department(department:string):Ref<WorkExperienceBuilder>
 			build():Ref<WorkExperience>
 	}
 	export interface WorkExperienceInfo extends Struct<WorkExperienceInfo>{
@@ -7494,810 +9525,382 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 			estimatedActiveIndividuals(estimatedActiveIndividuals:string):Ref<WorkforcePlanEaiDetailBuilder>
 			build():Ref<WorkforcePlanEaiDetail>
 	}
-	export function emptyDistrict():District
-	export function emptyRefDistrict():Ref<District>
-	export function refOfDistrict(x:District,v:Ref<District>)
-	export function unRefDistrict(v:Ref<District>):District
-	export function emptyPrehireUpdate():PrehireUpdate
-	export function emptyRefPrehireUpdate():Ref<PrehireUpdate>
-	export function refOfPrehireUpdate(x:PrehireUpdate,v:Ref<PrehireUpdate>)
-	export function unRefPrehireUpdate(v:Ref<PrehireUpdate>):PrehireUpdate
-	export function emptyOnboardingFlow():OnboardingFlow
-	export function emptyRefOnboardingFlow():Ref<OnboardingFlow>
-	export function refOfOnboardingFlow(x:OnboardingFlow,v:Ref<OnboardingFlow>)
-	export function unRefOnboardingFlow(v:Ref<OnboardingFlow>):OnboardingFlow
-	export function emptyEnableDisableAssessmentProbationReq():EnableDisableAssessmentProbationReq
-	export function emptyRefEnableDisableAssessmentProbationReq():Ref<EnableDisableAssessmentProbationReq>
-	export function refOfEnableDisableAssessmentProbationReq(x:EnableDisableAssessmentProbationReq,v:Ref<EnableDisableAssessmentProbationReq>)
-	export function unRefEnableDisableAssessmentProbationReq(v:Ref<EnableDisableAssessmentProbationReq>):EnableDisableAssessmentProbationReq
-	export function emptyGetByDepartmentBpRespData():GetByDepartmentBpRespData
-	export function emptyRefGetByDepartmentBpRespData():Ref<GetByDepartmentBpRespData>
-	export function refOfGetByDepartmentBpRespData(x:GetByDepartmentBpRespData,v:Ref<GetByDepartmentBpRespData>)
-	export function unRefGetByDepartmentBpRespData(v:Ref<GetByDepartmentBpRespData>):GetByDepartmentBpRespData
-	export function emptySearchBasicInfoBankBranchIterator():SearchBasicInfoBankBranchIterator
-	export function emptyRefSearchBasicInfoBankBranchIterator():Ref<SearchBasicInfoBankBranchIterator>
-	export function refOfSearchBasicInfoBankBranchIterator(x:SearchBasicInfoBankBranchIterator,v:Ref<SearchBasicInfoBankBranchIterator>)
-	export function unRefSearchBasicInfoBankBranchIterator(v:Ref<SearchBasicInfoBankBranchIterator>):SearchBasicInfoBankBranchIterator
-	export function emptySearchPreHireResp():SearchPreHireResp
-	export function emptyRefSearchPreHireResp():Ref<SearchPreHireResp>
-	export function refOfSearchPreHireResp(x:SearchPreHireResp,v:Ref<SearchPreHireResp>)
-	export function unRefSearchPreHireResp(v:Ref<SearchPreHireResp>):SearchPreHireResp
-	export function emptySearchBasicInfoNationalityIterator():SearchBasicInfoNationalityIterator
-	export function emptyRefSearchBasicInfoNationalityIterator():Ref<SearchBasicInfoNationalityIterator>
-	export function refOfSearchBasicInfoNationalityIterator(x:SearchBasicInfoNationalityIterator,v:Ref<SearchBasicInfoNationalityIterator>)
-	export function unRefSearchBasicInfoNationalityIterator(v:Ref<SearchBasicInfoNationalityIterator>):SearchBasicInfoNationalityIterator
-	export function emptyWorkforcePlan():WorkforcePlan
-	export function emptyRefWorkforcePlan():Ref<WorkforcePlan>
-	export function refOfWorkforcePlan(x:WorkforcePlan,v:Ref<WorkforcePlan>)
-	export function unRefWorkforcePlan(v:Ref<WorkforcePlan>):WorkforcePlan
-	export function emptyAssessment():Assessment
-	export function emptyRefAssessment():Ref<Assessment>
-	export function refOfAssessment(x:Assessment,v:Ref<Assessment>)
-	export function unRefAssessment(v:Ref<Assessment>):Assessment
-	export function emptyBank():Bank
-	export function emptyRefBank():Ref<Bank>
-	export function refOfBank(x:Bank,v:Ref<Bank>)
-	export function unRefBank(v:Ref<Bank>):Bank
-	export function emptyBasicEmployee():BasicEmployee
-	export function emptyRefBasicEmployee():Ref<BasicEmployee>
-	export function refOfBasicEmployee(x:BasicEmployee,v:Ref<BasicEmployee>)
-	export function unRefBasicEmployee(v:Ref<BasicEmployee>):BasicEmployee
-	export function emptyLocation():Location
-	export function emptyRefLocation():Ref<Location>
-	export function refOfLocation(x:Location,v:Ref<Location>)
-	export function unRefLocation(v:Ref<Location>):Location
-	export function emptyProfileSettingBankAccount():ProfileSettingBankAccount
-	export function emptyRefProfileSettingBankAccount():Ref<ProfileSettingBankAccount>
-	export function refOfProfileSettingBankAccount(x:ProfileSettingBankAccount,v:Ref<ProfileSettingBankAccount>)
-	export function unRefProfileSettingBankAccount(v:Ref<ProfileSettingBankAccount>):ProfileSettingBankAccount
-	export function emptySearchContractResp():SearchContractResp
-	export function emptyRefSearchContractResp():Ref<SearchContractResp>
-	export function refOfSearchContractResp(x:SearchContractResp,v:Ref<SearchContractResp>)
-	export function unRefSearchContractResp(v:Ref<SearchContractResp>):SearchContractResp
-	export function emptyBatchGetEmployeesJobDataReqBody():BatchGetEmployeesJobDataReqBody
-	export function emptyRefBatchGetEmployeesJobDataReqBody():Ref<BatchGetEmployeesJobDataReqBody>
-	export function refOfBatchGetEmployeesJobDataReqBody(x:BatchGetEmployeesJobDataReqBody,v:Ref<BatchGetEmployeesJobDataReqBody>)
-	export function unRefBatchGetEmployeesJobDataReqBody(v:Ref<BatchGetEmployeesJobDataReqBody>):BatchGetEmployeesJobDataReqBody
-	export function emptyP2ProcessUpdatedV2Data():P2ProcessUpdatedV2Data
-	export function emptyRefP2ProcessUpdatedV2Data():Ref<P2ProcessUpdatedV2Data>
-	export function refOfP2ProcessUpdatedV2Data(x:P2ProcessUpdatedV2Data,v:Ref<P2ProcessUpdatedV2Data>)
-	export function unRefP2ProcessUpdatedV2Data(v:Ref<P2ProcessUpdatedV2Data>):P2ProcessUpdatedV2Data
-	export function emptyProfileSettingEducation():ProfileSettingEducation
-	export function emptyRefProfileSettingEducation():Ref<ProfileSettingEducation>
-	export function refOfProfileSettingEducation(x:ProfileSettingEducation,v:Ref<ProfileSettingEducation>)
-	export function unRefProfileSettingEducation(v:Ref<ProfileSettingEducation>):ProfileSettingEducation
-	export function emptyProfileSettingPhone():ProfileSettingPhone
-	export function emptyRefProfileSettingPhone():Ref<ProfileSettingPhone>
-	export function refOfProfileSettingPhone(x:ProfileSettingPhone,v:Ref<ProfileSettingPhone>)
-	export function unRefProfileSettingPhone(v:Ref<ProfileSettingPhone>):ProfileSettingPhone
-	export function emptySearchBasicInfoBankBranchRespData():SearchBasicInfoBankBranchRespData
-	export function emptyRefSearchBasicInfoBankBranchRespData():Ref<SearchBasicInfoBankBranchRespData>
-	export function refOfSearchBasicInfoBankBranchRespData(x:SearchBasicInfoBankBranchRespData,v:Ref<SearchBasicInfoBankBranchRespData>)
-	export function unRefSearchBasicInfoBankBranchRespData(v:Ref<SearchBasicInfoBankBranchRespData>):SearchBasicInfoBankBranchRespData
-	export function emptySearchCostCenterReq():SearchCostCenterReq
-	export function emptyRefSearchCostCenterReq():Ref<SearchCostCenterReq>
-	export function refOfSearchCostCenterReq(x:SearchCostCenterReq,v:Ref<SearchCostCenterReq>)
-	export function unRefSearchCostCenterReq(v:Ref<SearchCostCenterReq>):SearchCostCenterReq
-	export function emptyEnableDisableAssessmentProbationResp():EnableDisableAssessmentProbationResp
-	export function emptyRefEnableDisableAssessmentProbationResp():Ref<EnableDisableAssessmentProbationResp>
-	export function refOfEnableDisableAssessmentProbationResp(x:EnableDisableAssessmentProbationResp,v:Ref<EnableDisableAssessmentProbationResp>)
-	export function unRefEnableDisableAssessmentProbationResp(v:Ref<EnableDisableAssessmentProbationResp>):EnableDisableAssessmentProbationResp
-	export function emptyNameForUpdate():NameForUpdate
-	export function emptyRefNameForUpdate():Ref<NameForUpdate>
-	export function refOfNameForUpdate(x:NameForUpdate,v:Ref<NameForUpdate>)
-	export function unRefNameForUpdate(v:Ref<NameForUpdate>):NameForUpdate
-	export function emptyListProcessRespData():ListProcessRespData
-	export function emptyRefListProcessRespData():Ref<ListProcessRespData>
-	export function refOfListProcessRespData(x:ListProcessRespData,v:Ref<ListProcessRespData>)
-	export function unRefListProcessRespData(v:Ref<ListProcessRespData>):ListProcessRespData
-	export function emptyProcessCcItem():ProcessCcItem
-	export function emptyRefProcessCcItem():Ref<ProcessCcItem>
-	export function refOfProcessCcItem(x:ProcessCcItem,v:Ref<ProcessCcItem>)
-	export function unRefProcessCcItem(v:Ref<ProcessCcItem>):ProcessCcItem
-	export function emptyBankAccount():BankAccount
-	export function emptyRefBankAccount():Ref<BankAccount>
-	export function refOfBankAccount(x:BankAccount,v:Ref<BankAccount>)
-	export function unRefBankAccount(v:Ref<BankAccount>):BankAccount
-	export function emptyEmailForUpdate():EmailForUpdate
-	export function emptyRefEmailForUpdate():Ref<EmailForUpdate>
-	export function refOfEmailForUpdate(x:EmailForUpdate,v:Ref<EmailForUpdate>)
-	export function unRefEmailForUpdate(v:Ref<EmailForUpdate>):EmailForUpdate
-	export function emptySearchBasicInfoCountryRegionSubdivisionReqBody():SearchBasicInfoCountryRegionSubdivisionReqBody
-	export function emptyRefSearchBasicInfoCountryRegionSubdivisionReqBody():Ref<SearchBasicInfoCountryRegionSubdivisionReqBody>
-	export function refOfSearchBasicInfoCountryRegionSubdivisionReqBody(x:SearchBasicInfoCountryRegionSubdivisionReqBody,v:Ref<SearchBasicInfoCountryRegionSubdivisionReqBody>)
-	export function unRefSearchBasicInfoCountryRegionSubdivisionReqBody(v:Ref<SearchBasicInfoCountryRegionSubdivisionReqBody>):SearchBasicInfoCountryRegionSubdivisionReqBody
-	export function emptyBatchGetDepartmentReq():BatchGetDepartmentReq
-	export function emptyRefBatchGetDepartmentReq():Ref<BatchGetDepartmentReq>
-	export function refOfBatchGetDepartmentReq(x:BatchGetDepartmentReq,v:Ref<BatchGetDepartmentReq>)
-	export function unRefBatchGetDepartmentReq(v:Ref<BatchGetDepartmentReq>):BatchGetDepartmentReq
-	export function emptyInternationalAssignmentV2ForPatch():InternationalAssignmentV2ForPatch
-	export function emptyRefInternationalAssignmentV2ForPatch():Ref<InternationalAssignmentV2ForPatch>
-	export function refOfInternationalAssignmentV2ForPatch(x:InternationalAssignmentV2ForPatch,v:Ref<InternationalAssignmentV2ForPatch>)
-	export function unRefInternationalAssignmentV2ForPatch(v:Ref<InternationalAssignmentV2ForPatch>):InternationalAssignmentV2ForPatch
-	export function emptyProcessTodoItem():ProcessTodoItem
-	export function emptyRefProcessTodoItem():Ref<ProcessTodoItem>
-	export function refOfProcessTodoItem(x:ProcessTodoItem,v:Ref<ProcessTodoItem>)
-	export function unRefProcessTodoItem(v:Ref<ProcessTodoItem>):ProcessTodoItem
-	export function emptyQueryEmployeesJobDataRespData():QueryEmployeesJobDataRespData
-	export function emptyRefQueryEmployeesJobDataRespData():Ref<QueryEmployeesJobDataRespData>
-	export function refOfQueryEmployeesJobDataRespData(x:QueryEmployeesJobDataRespData,v:Ref<QueryEmployeesJobDataRespData>)
-	export function unRefQueryEmployeesJobDataRespData(v:Ref<QueryEmployeesJobDataRespData>):QueryEmployeesJobDataRespData
-	export function emptySearchBasicInfoCurrencyRespData():SearchBasicInfoCurrencyRespData
-	export function emptyRefSearchBasicInfoCurrencyRespData():Ref<SearchBasicInfoCurrencyRespData>
-	export function refOfSearchBasicInfoCurrencyRespData(x:SearchBasicInfoCurrencyRespData,v:Ref<SearchBasicInfoCurrencyRespData>)
-	export function unRefSearchBasicInfoCurrencyRespData(v:Ref<SearchBasicInfoCurrencyRespData>):SearchBasicInfoCurrencyRespData
-	export function emptyGetProcessFormVariableDataReq():GetProcessFormVariableDataReq
-	export function emptyRefGetProcessFormVariableDataReq():Ref<GetProcessFormVariableDataReq>
-	export function refOfGetProcessFormVariableDataReq(x:GetProcessFormVariableDataReq,v:Ref<GetProcessFormVariableDataReq>)
-	export function unRefGetProcessFormVariableDataReq(v:Ref<GetProcessFormVariableDataReq>):GetProcessFormVariableDataReq
-	export function emptyJobDataCostCenter():JobDataCostCenter
-	export function emptyRefJobDataCostCenter():Ref<JobDataCostCenter>
-	export function refOfJobDataCostCenter(x:JobDataCostCenter,v:Ref<JobDataCostCenter>)
-	export function unRefJobDataCostCenter(v:Ref<JobDataCostCenter>):JobDataCostCenter
-	export function emptyPatchPersonReq():PatchPersonReq
-	export function emptyRefPatchPersonReq():Ref<PatchPersonReq>
-	export function refOfPatchPersonReq(x:PatchPersonReq,v:Ref<PatchPersonReq>)
-	export function unRefPatchPersonReq(v:Ref<PatchPersonReq>):PatchPersonReq
-	export function emptyDataengineI18n():DataengineI18n
-	export function emptyRefDataengineI18n():Ref<DataengineI18n>
-	export function refOfDataengineI18n(x:DataengineI18n,v:Ref<DataengineI18n>)
-	export function unRefDataengineI18n(v:Ref<DataengineI18n>):DataengineI18n
-	export function emptyPrehireCreate():PrehireCreate
-	export function emptyRefPrehireCreate():Ref<PrehireCreate>
-	export function refOfPrehireCreate(x:PrehireCreate,v:Ref<PrehireCreate>)
-	export function unRefPrehireCreate(v:Ref<PrehireCreate>):PrehireCreate
-	export function emptyBatchGetDepartmentRespData():BatchGetDepartmentRespData
-	export function emptyRefBatchGetDepartmentRespData():Ref<BatchGetDepartmentRespData>
-	export function refOfBatchGetDepartmentRespData(x:BatchGetDepartmentRespData,v:Ref<BatchGetDepartmentRespData>)
-	export function unRefBatchGetDepartmentRespData(v:Ref<BatchGetDepartmentRespData>):BatchGetDepartmentRespData
-	export function emptyJobLevel():JobLevel
-	export function emptyRefJobLevel():Ref<JobLevel>
-	export function refOfJobLevel(x:JobLevel,v:Ref<JobLevel>)
-	export function unRefJobLevel(v:Ref<JobLevel>):JobLevel
-	export function emptyPatchPersonRespData():PatchPersonRespData
-	export function emptyRefPatchPersonRespData():Ref<PatchPersonRespData>
-	export function refOfPatchPersonRespData(x:PatchPersonRespData,v:Ref<PatchPersonRespData>)
-	export function unRefPatchPersonRespData(v:Ref<PatchPersonRespData>):PatchPersonRespData
-	export function emptyProfileSettingResidentTax():ProfileSettingResidentTax
-	export function emptyRefProfileSettingResidentTax():Ref<ProfileSettingResidentTax>
-	export function refOfProfileSettingResidentTax(x:ProfileSettingResidentTax,v:Ref<ProfileSettingResidentTax>)
-	export function unRefProfileSettingResidentTax(v:Ref<ProfileSettingResidentTax>):ProfileSettingResidentTax
-	export function emptySearchBasicInfoCountryRegionResp():SearchBasicInfoCountryRegionResp
-	export function emptyRefSearchBasicInfoCountryRegionResp():Ref<SearchBasicInfoCountryRegionResp>
-	export function refOfSearchBasicInfoCountryRegionResp(x:SearchBasicInfoCountryRegionResp,v:Ref<SearchBasicInfoCountryRegionResp>)
-	export function unRefSearchBasicInfoCountryRegionResp(v:Ref<SearchBasicInfoCountryRegionResp>):SearchBasicInfoCountryRegionResp
-	export function emptyWorkEmailCheckResult():WorkEmailCheckResult
-	export function emptyRefWorkEmailCheckResult():Ref<WorkEmailCheckResult>
-	export function refOfWorkEmailCheckResult(x:WorkEmailCheckResult,v:Ref<WorkEmailCheckResult>)
-	export function unRefWorkEmailCheckResult(v:Ref<WorkEmailCheckResult>):WorkEmailCheckResult
-	export function emptyEmployeeJobData():EmployeeJobData
-	export function emptyRefEmployeeJobData():Ref<EmployeeJobData>
-	export function refOfEmployeeJobData(x:EmployeeJobData,v:Ref<EmployeeJobData>)
-	export function unRefEmployeeJobData(v:Ref<EmployeeJobData>):EmployeeJobData
-	export function emptyMatchRule():MatchRule
-	export function emptyRefMatchRule():Ref<MatchRule>
-	export function refOfMatchRule(x:MatchRule,v:Ref<MatchRule>)
-	export function unRefMatchRule(v:Ref<MatchRule>):MatchRule
-	export function emptyOnboardingTask():OnboardingTask
-	export function emptyRefOnboardingTask():Ref<OnboardingTask>
-	export function refOfOnboardingTask(x:OnboardingTask,v:Ref<OnboardingTask>)
-	export function unRefOnboardingTask(v:Ref<OnboardingTask>):OnboardingTask
-	export function emptyProbationInfo():ProbationInfo
-	export function emptyRefProbationInfo():Ref<ProbationInfo>
-	export function refOfProbationInfo(x:ProbationInfo,v:Ref<ProbationInfo>)
-	export function unRefProbationInfo(v:Ref<ProbationInfo>):ProbationInfo
-	export function emptyProbationInfoForSubmit():ProbationInfoForSubmit
-	export function emptyRefProbationInfoForSubmit():Ref<ProbationInfoForSubmit>
-	export function refOfProbationInfoForSubmit(x:ProbationInfoForSubmit,v:Ref<ProbationInfoForSubmit>)
-	export function unRefProbationInfoForSubmit(v:Ref<ProbationInfoForSubmit>):ProbationInfoForSubmit
-	export function emptyOnboardingQrCode():OnboardingQrCode
-	export function emptyRefOnboardingQrCode():Ref<OnboardingQrCode>
-	export function refOfOnboardingQrCode(x:OnboardingQrCode,v:Ref<OnboardingQrCode>)
-	export function unRefOnboardingQrCode(v:Ref<OnboardingQrCode>):OnboardingQrCode
-	export function emptyParentsDepartmentResp():ParentsDepartmentResp
-	export function emptyRefParentsDepartmentResp():Ref<ParentsDepartmentResp>
-	export function refOfParentsDepartmentResp(x:ParentsDepartmentResp,v:Ref<ParentsDepartmentResp>)
-	export function unRefParentsDepartmentResp(v:Ref<ParentsDepartmentResp>):ParentsDepartmentResp
-	export function emptySearchEmployeeReqBody():SearchEmployeeReqBody
-	export function emptyRefSearchEmployeeReqBody():Ref<SearchEmployeeReqBody>
-	export function refOfSearchEmployeeReqBody(x:SearchEmployeeReqBody,v:Ref<SearchEmployeeReqBody>)
-	export function unRefSearchEmployeeReqBody(v:Ref<SearchEmployeeReqBody>):SearchEmployeeReqBody
-	export function emptyBatchGetEmployeeRespData():BatchGetEmployeeRespData
-	export function emptyRefBatchGetEmployeeRespData():Ref<BatchGetEmployeeRespData>
-	export function refOfBatchGetEmployeeRespData(x:BatchGetEmployeeRespData,v:Ref<BatchGetEmployeeRespData>)
-	export function unRefBatchGetEmployeeRespData(v:Ref<BatchGetEmployeeRespData>):BatchGetEmployeeRespData
-	export function emptyDepartmentId():DepartmentId
-	export function emptyRefDepartmentId():Ref<DepartmentId>
-	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
-	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptyListJobRespData():ListJobRespData
-	export function emptyRefListJobRespData():Ref<ListJobRespData>
-	export function refOfListJobRespData(x:ListJobRespData,v:Ref<ListJobRespData>)
-	export function unRefListJobRespData(v:Ref<ListJobRespData>):ListJobRespData
-	export function emptySearchBasicInfoDistrictResp():SearchBasicInfoDistrictResp
-	export function emptyRefSearchBasicInfoDistrictResp():Ref<SearchBasicInfoDistrictResp>
-	export function refOfSearchBasicInfoDistrictResp(x:SearchBasicInfoDistrictResp,v:Ref<SearchBasicInfoDistrictResp>)
-	export function unRefSearchBasicInfoDistrictResp(v:Ref<SearchBasicInfoDistrictResp>):SearchBasicInfoDistrictResp
-	export function emptyQrCodeDimensionValue():QrCodeDimensionValue
-	export function emptyRefQrCodeDimensionValue():Ref<QrCodeDimensionValue>
-	export function refOfQrCodeDimensionValue(x:QrCodeDimensionValue,v:Ref<QrCodeDimensionValue>)
-	export function unRefQrCodeDimensionValue(v:Ref<QrCodeDimensionValue>):QrCodeDimensionValue
-	export function emptyWorkforcePlanEaiDetail():WorkforcePlanEaiDetail
-	export function emptyRefWorkforcePlanEaiDetail():Ref<WorkforcePlanEaiDetail>
-	export function refOfWorkforcePlanEaiDetail(x:WorkforcePlanEaiDetail,v:Ref<WorkforcePlanEaiDetail>)
-	export function unRefWorkforcePlanEaiDetail(v:Ref<WorkforcePlanEaiDetail>):WorkforcePlanEaiDetail
-	export function emptyBatchGetJobLevelReq():BatchGetJobLevelReq
-	export function emptyRefBatchGetJobLevelReq():Ref<BatchGetJobLevelReq>
-	export function refOfBatchGetJobLevelReq(x:BatchGetJobLevelReq,v:Ref<BatchGetJobLevelReq>)
-	export function unRefBatchGetJobLevelReq(v:Ref<BatchGetJobLevelReq>):BatchGetJobLevelReq
-	export function emptyCompanyIdAndName():CompanyIdAndName
-	export function emptyRefCompanyIdAndName():Ref<CompanyIdAndName>
-	export function refOfCompanyIdAndName(x:CompanyIdAndName,v:Ref<CompanyIdAndName>)
-	export function unRefCompanyIdAndName(v:Ref<CompanyIdAndName>):CompanyIdAndName
-	export function emptyP2ProbationUpdatedV2():P2ProbationUpdatedV2
-	export function emptyRefP2ProbationUpdatedV2():Ref<P2ProbationUpdatedV2>
-	export function refOfP2ProbationUpdatedV2(x:P2ProbationUpdatedV2,v:Ref<P2ProbationUpdatedV2>)
-	export function unRefP2ProbationUpdatedV2(v:Ref<P2ProbationUpdatedV2>):P2ProbationUpdatedV2
-	export function emptyProfileSettingHukou():ProfileSettingHukou
-	export function emptyRefProfileSettingHukou():Ref<ProfileSettingHukou>
-	export function refOfProfileSettingHukou(x:ProfileSettingHukou,v:Ref<ProfileSettingHukou>)
-	export function unRefProfileSettingHukou(v:Ref<ProfileSettingHukou>):ProfileSettingHukou
-	export function emptyFieldVariableValueI18n():FieldVariableValueI18n
-	export function emptyRefFieldVariableValueI18n():Ref<FieldVariableValueI18n>
-	export function refOfFieldVariableValueI18n(x:FieldVariableValueI18n,v:Ref<FieldVariableValueI18n>)
-	export function unRefFieldVariableValueI18n(v:Ref<FieldVariableValueI18n>):FieldVariableValueI18n
-	export function emptyPatchCostCenterVersionReqBody():PatchCostCenterVersionReqBody
-	export function emptyRefPatchCostCenterVersionReqBody():Ref<PatchCostCenterVersionReqBody>
-	export function refOfPatchCostCenterVersionReqBody(x:PatchCostCenterVersionReqBody,v:Ref<PatchCostCenterVersionReqBody>)
-	export function unRefPatchCostCenterVersionReqBody(v:Ref<PatchCostCenterVersionReqBody>):PatchCostCenterVersionReqBody
-	export function emptySearchJobChangeRespData():SearchJobChangeRespData
-	export function emptyRefSearchJobChangeRespData():Ref<SearchJobChangeRespData>
-	export function refOfSearchJobChangeRespData(x:SearchJobChangeRespData,v:Ref<SearchJobChangeRespData>)
-	export function unRefSearchJobChangeRespData(v:Ref<SearchJobChangeRespData>):SearchJobChangeRespData
-	export function emptyAssessmentForCreate():AssessmentForCreate
-	export function emptyRefAssessmentForCreate():Ref<AssessmentForCreate>
-	export function refOfAssessmentForCreate(x:AssessmentForCreate,v:Ref<AssessmentForCreate>)
-	export function unRefAssessmentForCreate(v:Ref<AssessmentForCreate>):AssessmentForCreate
-	export function emptyJobChange():JobChange
-	export function emptyRefJobChange():Ref<JobChange>
-	export function refOfJobChange(x:JobChange,v:Ref<JobChange>)
-	export function unRefJobChange(v:Ref<JobChange>):JobChange
-	export function emptyQueryEmployeesJobDataReqBody():QueryEmployeesJobDataReqBody
-	export function emptyRefQueryEmployeesJobDataReqBody():Ref<QueryEmployeesJobDataReqBody>
-	export function refOfQueryEmployeesJobDataReqBody(x:QueryEmployeesJobDataReqBody,v:Ref<QueryEmployeesJobDataReqBody>)
-	export function unRefQueryEmployeesJobDataReqBody(v:Ref<QueryEmployeesJobDataReqBody>):QueryEmployeesJobDataReqBody
-	export function emptyDeleteCostCenterVersionReq():DeleteCostCenterVersionReq
-	export function emptyRefDeleteCostCenterVersionReq():Ref<DeleteCostCenterVersionReq>
-	export function refOfDeleteCostCenterVersionReq(x:DeleteCostCenterVersionReq,v:Ref<DeleteCostCenterVersionReq>)
-	export function unRefDeleteCostCenterVersionReq(v:Ref<DeleteCostCenterVersionReq>):DeleteCostCenterVersionReq
-	export function emptyFieldVariableValueToRecord():FieldVariableValueToRecord
-	export function emptyRefFieldVariableValueToRecord():Ref<FieldVariableValueToRecord>
-	export function refOfFieldVariableValueToRecord(x:FieldVariableValueToRecord,v:Ref<FieldVariableValueToRecord>)
-	export function unRefFieldVariableValueToRecord(v:Ref<FieldVariableValueToRecord>):FieldVariableValueToRecord
-	export function emptyFile():File
-	export function emptyRefFile():Ref<File>
-	export function refOfFile(x:File,v:Ref<File>)
-	export function unRefFile(v:Ref<File>):File
-	export function emptySearchCostCenterResp():SearchCostCenterResp
-	export function emptyRefSearchCostCenterResp():Ref<SearchCostCenterResp>
-	export function refOfSearchCostCenterResp(x:SearchCostCenterResp,v:Ref<SearchCostCenterResp>)
-	export function unRefSearchCostCenterResp(v:Ref<SearchCostCenterResp>):SearchCostCenterResp
-	export function emptyGetJobReq():GetJobReq
-	export function emptyRefGetJobReq():Ref<GetJobReq>
-	export function refOfGetJobReq(x:GetJobReq,v:Ref<GetJobReq>)
-	export function unRefGetJobReq(v:Ref<GetJobReq>):GetJobReq
-	export function emptyLeaveRequestDetail():LeaveRequestDetail
-	export function emptyRefLeaveRequestDetail():Ref<LeaveRequestDetail>
-	export function refOfLeaveRequestDetail(x:LeaveRequestDetail,v:Ref<LeaveRequestDetail>)
-	export function unRefLeaveRequestDetail(v:Ref<LeaveRequestDetail>):LeaveRequestDetail
-	export function emptyPatchCostCenterVersionResp():PatchCostCenterVersionResp
-	export function emptyRefPatchCostCenterVersionResp():Ref<PatchCostCenterVersionResp>
-	export function refOfPatchCostCenterVersionResp(x:PatchCostCenterVersionResp,v:Ref<PatchCostCenterVersionResp>)
-	export function unRefPatchCostCenterVersionResp(v:Ref<PatchCostCenterVersionResp>):PatchCostCenterVersionResp
-	export function emptyPatchCostCenterReqBody():PatchCostCenterReqBody
-	export function emptyRefPatchCostCenterReqBody():Ref<PatchCostCenterReqBody>
-	export function refOfPatchCostCenterReqBody(x:PatchCostCenterReqBody,v:Ref<PatchCostCenterReqBody>)
-	export function unRefPatchCostCenterReqBody(v:Ref<PatchCostCenterReqBody>):PatchCostCenterReqBody
-	export function emptyPersonalProfile():PersonalProfile
-	export function emptyRefPersonalProfile():Ref<PersonalProfile>
-	export function refOfPersonalProfile(x:PersonalProfile,v:Ref<PersonalProfile>)
-	export function unRefPersonalProfile(v:Ref<PersonalProfile>):PersonalProfile
-	export function emptySearchContractIterator():SearchContractIterator
-	export function emptyRefSearchContractIterator():Ref<SearchContractIterator>
-	export function refOfSearchContractIterator(x:SearchContractIterator,v:Ref<SearchContractIterator>)
-	export function unRefSearchContractIterator(v:Ref<SearchContractIterator>):SearchContractIterator
-	export function emptySearchBasicInfoDistrictRespData():SearchBasicInfoDistrictRespData
-	export function emptyRefSearchBasicInfoDistrictRespData():Ref<SearchBasicInfoDistrictRespData>
-	export function refOfSearchBasicInfoDistrictRespData(x:SearchBasicInfoDistrictRespData,v:Ref<SearchBasicInfoDistrictRespData>)
-	export function unRefSearchBasicInfoDistrictRespData(v:Ref<SearchBasicInfoDistrictRespData>):SearchBasicInfoDistrictRespData
-	export function emptyBasicDepartment():BasicDepartment
-	export function emptyRefBasicDepartment():Ref<BasicDepartment>
-	export function refOfBasicDepartment(x:BasicDepartment,v:Ref<BasicDepartment>)
-	export function unRefBasicDepartment(v:Ref<BasicDepartment>):BasicDepartment
-	export function emptyListBpReq():ListBpReq
-	export function emptyRefListBpReq():Ref<ListBpReq>
-	export function refOfListBpReq(x:ListBpReq,v:Ref<ListBpReq>)
-	export function unRefListBpReq(v:Ref<ListBpReq>):ListBpReq
-	export function emptySearchBasicInfoBankResp():SearchBasicInfoBankResp
-	export function emptyRefSearchBasicInfoBankResp():Ref<SearchBasicInfoBankResp>
-	export function refOfSearchBasicInfoBankResp(x:SearchBasicInfoBankResp,v:Ref<SearchBasicInfoBankResp>)
-	export function unRefSearchBasicInfoBankResp(v:Ref<SearchBasicInfoBankResp>):SearchBasicInfoBankResp
-	export function emptySearchBasicInfoCityResp():SearchBasicInfoCityResp
-	export function emptyRefSearchBasicInfoCityResp():Ref<SearchBasicInfoCityResp>
-	export function refOfSearchBasicInfoCityResp(x:SearchBasicInfoCityResp,v:Ref<SearchBasicInfoCityResp>)
-	export function unRefSearchBasicInfoCityResp(v:Ref<SearchBasicInfoCityResp>):SearchBasicInfoCityResp
-	export function emptyDimensionInfoData():DimensionInfoData
-	export function emptyRefDimensionInfoData():Ref<DimensionInfoData>
-	export function refOfDimensionInfoData(x:DimensionInfoData,v:Ref<DimensionInfoData>)
-	export function unRefDimensionInfoData(v:Ref<DimensionInfoData>):DimensionInfoData
-	export function emptyQrCode():QrCode
-	export function emptyRefQrCode():Ref<QrCode>
-	export function refOfQrCode(x:QrCode,v:Ref<QrCode>)
-	export function unRefQrCode(v:Ref<QrCode>):QrCode
-	export function emptyFieldVariableValueToForReview():FieldVariableValueToForReview
-	export function emptyRefFieldVariableValueToForReview():Ref<FieldVariableValueToForReview>
-	export function refOfFieldVariableValueToForReview(x:FieldVariableValueToForReview,v:Ref<FieldVariableValueToForReview>)
-	export function unRefFieldVariableValueToForReview(v:Ref<FieldVariableValueToForReview>):FieldVariableValueToForReview
-	export function emptyPreHireEmploymentInfo():PreHireEmploymentInfo
-	export function emptyRefPreHireEmploymentInfo():Ref<PreHireEmploymentInfo>
-	export function refOfPreHireEmploymentInfo(x:PreHireEmploymentInfo,v:Ref<PreHireEmploymentInfo>)
-	export function unRefPreHireEmploymentInfo(v:Ref<PreHireEmploymentInfo>):PreHireEmploymentInfo
-	export function emptySearchBasicInfoBankBranchReqBody():SearchBasicInfoBankBranchReqBody
-	export function emptyRefSearchBasicInfoBankBranchReqBody():Ref<SearchBasicInfoBankBranchReqBody>
-	export function refOfSearchBasicInfoBankBranchReqBody(x:SearchBasicInfoBankBranchReqBody,v:Ref<SearchBasicInfoBankBranchReqBody>)
-	export function unRefSearchBasicInfoBankBranchReqBody(v:Ref<SearchBasicInfoBankBranchReqBody>):SearchBasicInfoBankBranchReqBody
-	export function emptySearchBasicInfoCityIterator():SearchBasicInfoCityIterator
-	export function emptyRefSearchBasicInfoCityIterator():Ref<SearchBasicInfoCityIterator>
-	export function refOfSearchBasicInfoCityIterator(x:SearchBasicInfoCityIterator,v:Ref<SearchBasicInfoCityIterator>)
-	export function unRefSearchBasicInfoCityIterator(v:Ref<SearchBasicInfoCityIterator>):SearchBasicInfoCityIterator
-	export function emptyAbnormalReasonI18nElement():AbnormalReasonI18nElement
-	export function emptyRefAbnormalReasonI18nElement():Ref<AbnormalReasonI18nElement>
-	export function refOfAbnormalReasonI18nElement(x:AbnormalReasonI18nElement,v:Ref<AbnormalReasonI18nElement>)
-	export function unRefAbnormalReasonI18nElement(v:Ref<AbnormalReasonI18nElement>):AbnormalReasonI18nElement
-	export function emptySearchJobChangeReq():SearchJobChangeReq
-	export function emptyRefSearchJobChangeReq():Ref<SearchJobChangeReq>
-	export function refOfSearchJobChangeReq(x:SearchJobChangeReq,v:Ref<SearchJobChangeReq>)
-	export function unRefSearchJobChangeReq(v:Ref<SearchJobChangeReq>):SearchJobChangeReq
-	export function emptyDeleteCostCenterResp():DeleteCostCenterResp
-	export function emptyRefDeleteCostCenterResp():Ref<DeleteCostCenterResp>
-	export function refOfDeleteCostCenterResp(x:DeleteCostCenterResp,v:Ref<DeleteCostCenterResp>)
-	export function unRefDeleteCostCenterResp(v:Ref<DeleteCostCenterResp>):DeleteCostCenterResp
-	export function emptyName():Name
-	export function emptyRefName():Ref<Name>
-	export function refOfName(x:Name,v:Ref<Name>)
-	export function unRefName(v:Ref<Name>):Name
-	export function emptyPersonInfo():PersonInfo
-	export function emptyRefPersonInfo():Ref<PersonInfo>
-	export function refOfPersonInfo(x:PersonInfo,v:Ref<PersonInfo>)
-	export function unRefPersonInfo(v:Ref<PersonInfo>):PersonInfo
-	export function emptyPreHireContractInfo():PreHireContractInfo
-	export function emptyRefPreHireContractInfo():Ref<PreHireContractInfo>
-	export function refOfPreHireContractInfo(x:PreHireContractInfo,v:Ref<PreHireContractInfo>)
-	export function unRefPreHireContractInfo(v:Ref<PreHireContractInfo>):PreHireContractInfo
-	export function emptyProcessFormVariableV2():ProcessFormVariableV2
-	export function emptyRefProcessFormVariableV2():Ref<ProcessFormVariableV2>
-	export function refOfProcessFormVariableV2(x:ProcessFormVariableV2,v:Ref<ProcessFormVariableV2>)
-	export function unRefProcessFormVariableV2(v:Ref<ProcessFormVariableV2>):ProcessFormVariableV2
-	export function emptyCurrency():Currency
-	export function emptyRefCurrency():Ref<Currency>
-	export function refOfCurrency(x:Currency,v:Ref<Currency>)
-	export function unRefCurrency(v:Ref<Currency>):Currency
-	export function emptyEmail():Email
-	export function emptyRefEmail():Ref<Email>
-	export function refOfEmail(x:Email,v:Ref<Email>)
-	export function unRefEmail(v:Ref<Email>):Email
-	export function emptyPatchPreHireResp():PatchPreHireResp
-	export function emptyRefPatchPreHireResp():Ref<PatchPreHireResp>
-	export function refOfPatchPreHireResp(x:PatchPreHireResp,v:Ref<PatchPreHireResp>)
-	export function unRefPatchPreHireResp(v:Ref<PatchPreHireResp>):PatchPreHireResp
-	export function emptyCreateCostCenterVersionReq():CreateCostCenterVersionReq
-	export function emptyRefCreateCostCenterVersionReq():Ref<CreateCostCenterVersionReq>
-	export function refOfCreateCostCenterVersionReq(x:CreateCostCenterVersionReq,v:Ref<CreateCostCenterVersionReq>)
-	export function unRefCreateCostCenterVersionReq(v:Ref<CreateCostCenterVersionReq>):CreateCostCenterVersionReq
-	export function emptyCreateCostCenterVersionRespData():CreateCostCenterVersionRespData
-	export function emptyRefCreateCostCenterVersionRespData():Ref<CreateCostCenterVersionRespData>
-	export function refOfCreateCostCenterVersionRespData(x:CreateCostCenterVersionRespData,v:Ref<CreateCostCenterVersionRespData>)
-	export function unRefCreateCostCenterVersionRespData(v:Ref<CreateCostCenterVersionRespData>):CreateCostCenterVersionRespData
-	export function emptySignatureFile():SignatureFile
-	export function emptyRefSignatureFile():Ref<SignatureFile>
-	export function refOfSignatureFile(x:SignatureFile,v:Ref<SignatureFile>)
-	export function unRefSignatureFile(v:Ref<SignatureFile>):SignatureFile
-	export function emptyProfileSettingCostCenter():ProfileSettingCostCenter
-	export function emptyRefProfileSettingCostCenter():Ref<ProfileSettingCostCenter>
-	export function refOfProfileSettingCostCenter(x:ProfileSettingCostCenter,v:Ref<ProfileSettingCostCenter>)
-	export function unRefProfileSettingCostCenter(v:Ref<ProfileSettingCostCenter>):ProfileSettingCostCenter
-	export function emptyProfileSettingEmpInfoForUpdate():ProfileSettingEmpInfoForUpdate
-	export function emptyRefProfileSettingEmpInfoForUpdate():Ref<ProfileSettingEmpInfoForUpdate>
-	export function refOfProfileSettingEmpInfoForUpdate(x:ProfileSettingEmpInfoForUpdate,v:Ref<ProfileSettingEmpInfoForUpdate>)
-	export function unRefProfileSettingEmpInfoForUpdate(v:Ref<ProfileSettingEmpInfoForUpdate>):ProfileSettingEmpInfoForUpdate
-	export function emptySearchProbationReq():SearchProbationReq
-	export function emptyRefSearchProbationReq():Ref<SearchProbationReq>
-	export function refOfSearchProbationReq(x:SearchProbationReq,v:Ref<SearchProbationReq>)
-	export function unRefSearchProbationReq(v:Ref<SearchProbationReq>):SearchProbationReq
-	export function emptyParentsDepartmentRespData():ParentsDepartmentRespData
-	export function emptyRefParentsDepartmentRespData():Ref<ParentsDepartmentRespData>
-	export function refOfParentsDepartmentRespData(x:ParentsDepartmentRespData,v:Ref<ParentsDepartmentRespData>)
-	export function unRefParentsDepartmentRespData(v:Ref<ParentsDepartmentRespData>):ParentsDepartmentRespData
-	export function emptySearchDepartmentIterator():SearchDepartmentIterator
-	export function emptyRefSearchDepartmentIterator():Ref<SearchDepartmentIterator>
-	export function refOfSearchDepartmentIterator(x:SearchDepartmentIterator,v:Ref<SearchDepartmentIterator>)
-	export function unRefSearchDepartmentIterator(v:Ref<SearchDepartmentIterator>):SearchDepartmentIterator
-	export function emptyCreateCostCenterRespData():CreateCostCenterRespData
-	export function emptyRefCreateCostCenterRespData():Ref<CreateCostCenterRespData>
-	export function refOfCreateCostCenterRespData(x:CreateCostCenterRespData,v:Ref<CreateCostCenterRespData>)
-	export function unRefCreateCostCenterRespData(v:Ref<CreateCostCenterRespData>):CreateCostCenterRespData
-	export function emptyEmployee():Employee
-	export function emptyRefEmployee():Ref<Employee>
-	export function refOfEmployee(x:Employee,v:Ref<Employee>)
-	export function unRefEmployee(v:Ref<Employee>):Employee
-	export function emptyParentsDepartmentReq():ParentsDepartmentReq
-	export function emptyRefParentsDepartmentReq():Ref<ParentsDepartmentReq>
-	export function refOfParentsDepartmentReq(x:ParentsDepartmentReq,v:Ref<ParentsDepartmentReq>)
-	export function unRefParentsDepartmentReq(v:Ref<ParentsDepartmentReq>):ParentsDepartmentReq
-	export function emptyQueryTimelineDepartmentReq():QueryTimelineDepartmentReq
-	export function emptyRefQueryTimelineDepartmentReq():Ref<QueryTimelineDepartmentReq>
-	export function refOfQueryTimelineDepartmentReq(x:QueryTimelineDepartmentReq,v:Ref<QueryTimelineDepartmentReq>)
-	export function unRefQueryTimelineDepartmentReq(v:Ref<QueryTimelineDepartmentReq>):QueryTimelineDepartmentReq
-	export function emptyFormFieldVariableStringValue():FormFieldVariableStringValue
-	export function emptyRefFormFieldVariableStringValue():Ref<FormFieldVariableStringValue>
-	export function refOfFormFieldVariableStringValue(x:FormFieldVariableStringValue,v:Ref<FormFieldVariableStringValue>)
-	export function unRefFormFieldVariableStringValue(v:Ref<FormFieldVariableStringValue>):FormFieldVariableStringValue
-	export function emptyQrCodeValue():QrCodeValue
-	export function emptyRefQrCodeValue():Ref<QrCodeValue>
-	export function refOfQrCodeValue(x:QrCodeValue,v:Ref<QrCodeValue>)
-	export function unRefQrCodeValue(v:Ref<QrCodeValue>):QrCodeValue
-	export function emptyBatchGetEmployeesBpReq():BatchGetEmployeesBpReq
-	export function emptyRefBatchGetEmployeesBpReq():Ref<BatchGetEmployeesBpReq>
-	export function refOfBatchGetEmployeesBpReq(x:BatchGetEmployeesBpReq,v:Ref<BatchGetEmployeesBpReq>)
-	export function unRefBatchGetEmployeesBpReq(v:Ref<BatchGetEmployeesBpReq>):BatchGetEmployeesBpReq
-	export function emptyBatchGetLocationReqBody():BatchGetLocationReqBody
-	export function emptyRefBatchGetLocationReqBody():Ref<BatchGetLocationReqBody>
-	export function refOfBatchGetLocationReqBody(x:BatchGetLocationReqBody,v:Ref<BatchGetLocationReqBody>)
-	export function unRefBatchGetLocationReqBody(v:Ref<BatchGetLocationReqBody>):BatchGetLocationReqBody
-	export function emptyProfileSettingCustomGroupItem():ProfileSettingCustomGroupItem
-	export function emptyRefProfileSettingCustomGroupItem():Ref<ProfileSettingCustomGroupItem>
-	export function refOfProfileSettingCustomGroupItem(x:ProfileSettingCustomGroupItem,v:Ref<ProfileSettingCustomGroupItem>)
-	export function unRefProfileSettingCustomGroupItem(v:Ref<ProfileSettingCustomGroupItem>):ProfileSettingCustomGroupItem
-	export function emptySearchPreHireRespData():SearchPreHireRespData
-	export function emptyRefSearchPreHireRespData():Ref<SearchPreHireRespData>
-	export function refOfSearchPreHireRespData(x:SearchPreHireRespData,v:Ref<SearchPreHireRespData>)
-	export function unRefSearchPreHireRespData(v:Ref<SearchPreHireRespData>):SearchPreHireRespData
-	export function emptyBatchGetEmployeesJobDataResp():BatchGetEmployeesJobDataResp
-	export function emptyRefBatchGetEmployeesJobDataResp():Ref<BatchGetEmployeesJobDataResp>
-	export function refOfBatchGetEmployeesJobDataResp(x:BatchGetEmployeesJobDataResp,v:Ref<BatchGetEmployeesJobDataResp>)
-	export function unRefBatchGetEmployeesJobDataResp(v:Ref<BatchGetEmployeesJobDataResp>):BatchGetEmployeesJobDataResp
-	export function emptyDeletePreHireReq():DeletePreHireReq
-	export function emptyRefDeletePreHireReq():Ref<DeletePreHireReq>
-	export function refOfDeletePreHireReq(x:DeletePreHireReq,v:Ref<DeletePreHireReq>)
-	export function unRefDeletePreHireReq(v:Ref<DeletePreHireReq>):DeletePreHireReq
-	export function emptyJobFamily():JobFamily
-	export function emptyRefJobFamily():Ref<JobFamily>
-	export function refOfJobFamily(x:JobFamily,v:Ref<JobFamily>)
-	export function unRefJobFamily(v:Ref<JobFamily>):JobFamily
-	export function emptyLeaveRequest():LeaveRequest
-	export function emptyRefLeaveRequest():Ref<LeaveRequest>
-	export function refOfLeaveRequest(x:LeaveRequest,v:Ref<LeaveRequest>)
-	export function unRefLeaveRequest(v:Ref<LeaveRequest>):LeaveRequest
-	export function emptyWorkExperience():WorkExperience
-	export function emptyRefWorkExperience():Ref<WorkExperience>
-	export function refOfWorkExperience(x:WorkExperience,v:Ref<WorkExperience>)
-	export function unRefWorkExperience(v:Ref<WorkExperience>):WorkExperience
-	export function emptySearchBasicInfoCountryRegionReq():SearchBasicInfoCountryRegionReq
-	export function emptyRefSearchBasicInfoCountryRegionReq():Ref<SearchBasicInfoCountryRegionReq>
-	export function refOfSearchBasicInfoCountryRegionReq(x:SearchBasicInfoCountryRegionReq,v:Ref<SearchBasicInfoCountryRegionReq>)
-	export function unRefSearchBasicInfoCountryRegionReq(v:Ref<SearchBasicInfoCountryRegionReq>):SearchBasicInfoCountryRegionReq
-	export function emptySearchProbationReqBody():SearchProbationReqBody
-	export function emptyRefSearchProbationReqBody():Ref<SearchProbationReqBody>
-	export function refOfSearchProbationReqBody(x:SearchProbationReqBody,v:Ref<SearchProbationReqBody>)
-	export function unRefSearchProbationReqBody(v:Ref<SearchProbationReqBody>):SearchProbationReqBody
-	export function emptyPatchProbationAssessmentResp():PatchProbationAssessmentResp
-	export function emptyRefPatchProbationAssessmentResp():Ref<PatchProbationAssessmentResp>
-	export function refOfPatchProbationAssessmentResp(x:PatchProbationAssessmentResp,v:Ref<PatchProbationAssessmentResp>)
-	export function unRefPatchProbationAssessmentResp(v:Ref<PatchProbationAssessmentResp>):PatchProbationAssessmentResp
-	export function emptyProcessDoneItem():ProcessDoneItem
-	export function emptyRefProcessDoneItem():Ref<ProcessDoneItem>
-	export function refOfProcessDoneItem(x:ProcessDoneItem,v:Ref<ProcessDoneItem>)
-	export function unRefProcessDoneItem(v:Ref<ProcessDoneItem>):ProcessDoneItem
-	export function emptyCostCenterVersion():CostCenterVersion
-	export function emptyRefCostCenterVersion():Ref<CostCenterVersion>
-	export function refOfCostCenterVersion(x:CostCenterVersion,v:Ref<CostCenterVersion>)
-	export function unRefCostCenterVersion(v:Ref<CostCenterVersion>):CostCenterVersion
-	export function emptyDepartmentTimeline():DepartmentTimeline
-	export function emptyRefDepartmentTimeline():Ref<DepartmentTimeline>
-	export function refOfDepartmentTimeline(x:DepartmentTimeline,v:Ref<DepartmentTimeline>)
-	export function unRefDepartmentTimeline(v:Ref<DepartmentTimeline>):DepartmentTimeline
-	export function emptyP2ProcessApproverUpdatedV2Data():P2ProcessApproverUpdatedV2Data
-	export function emptyRefP2ProcessApproverUpdatedV2Data():Ref<P2ProcessApproverUpdatedV2Data>
-	export function refOfP2ProcessApproverUpdatedV2Data(x:P2ProcessApproverUpdatedV2Data,v:Ref<P2ProcessApproverUpdatedV2Data>)
-	export function unRefP2ProcessApproverUpdatedV2Data(v:Ref<P2ProcessApproverUpdatedV2Data>):P2ProcessApproverUpdatedV2Data
-	export function emptySearchBasicInfoCurrencyReq():SearchBasicInfoCurrencyReq
-	export function emptyRefSearchBasicInfoCurrencyReq():Ref<SearchBasicInfoCurrencyReq>
-	export function refOfSearchBasicInfoCurrencyReq(x:SearchBasicInfoCurrencyReq,v:Ref<SearchBasicInfoCurrencyReq>)
-	export function unRefSearchBasicInfoCurrencyReq(v:Ref<SearchBasicInfoCurrencyReq>):SearchBasicInfoCurrencyReq
-	export function emptyPatchCostCenterRespData():PatchCostCenterRespData
-	export function emptyRefPatchCostCenterRespData():Ref<PatchCostCenterRespData>
-	export function refOfPatchCostCenterRespData(x:PatchCostCenterRespData,v:Ref<PatchCostCenterRespData>)
-	export function unRefPatchCostCenterRespData(v:Ref<PatchCostCenterRespData>):PatchCostCenterRespData
-	export function emptyCreateProbationAssessmentRespData():CreateProbationAssessmentRespData
-	export function emptyRefCreateProbationAssessmentRespData():Ref<CreateProbationAssessmentRespData>
-	export function refOfCreateProbationAssessmentRespData(x:CreateProbationAssessmentRespData,v:Ref<CreateProbationAssessmentRespData>)
-	export function unRefCreateProbationAssessmentRespData(v:Ref<CreateProbationAssessmentRespData>):CreateProbationAssessmentRespData
-	export function emptyListProcessReq():ListProcessReq
-	export function emptyRefListProcessReq():Ref<ListProcessReq>
-	export function refOfListProcessReq(x:ListProcessReq,v:Ref<ListProcessReq>)
-	export function unRefListProcessReq(v:Ref<ListProcessReq>):ListProcessReq
 	export function emptyOrgRoleUpdate():OrgRoleUpdate
 	export function emptyRefOrgRoleUpdate():Ref<OrgRoleUpdate>
 	export function refOfOrgRoleUpdate(x:OrgRoleUpdate,v:Ref<OrgRoleUpdate>)
 	export function unRefOrgRoleUpdate(v:Ref<OrgRoleUpdate>):OrgRoleUpdate
-	export function emptyProfileSettingDependent():ProfileSettingDependent
-	export function emptyRefProfileSettingDependent():Ref<ProfileSettingDependent>
-	export function refOfProfileSettingDependent(x:ProfileSettingDependent,v:Ref<ProfileSettingDependent>)
-	export function unRefProfileSettingDependent(v:Ref<ProfileSettingDependent>):ProfileSettingDependent
-	export function emptyBatchGetJobLevelResp():BatchGetJobLevelResp
-	export function emptyRefBatchGetJobLevelResp():Ref<BatchGetJobLevelResp>
-	export function refOfBatchGetJobLevelResp(x:BatchGetJobLevelResp,v:Ref<BatchGetJobLevelResp>)
-	export function unRefBatchGetJobLevelResp(v:Ref<BatchGetJobLevelResp>):BatchGetJobLevelResp
-	export function emptyCreatePreHireRespData():CreatePreHireRespData
-	export function emptyRefCreatePreHireRespData():Ref<CreatePreHireRespData>
-	export function refOfCreatePreHireRespData(x:CreatePreHireRespData,v:Ref<CreatePreHireRespData>)
-	export function unRefCreatePreHireRespData(v:Ref<CreatePreHireRespData>):CreatePreHireRespData
-	export function emptyInternationalAssignmentV2():InternationalAssignmentV2
-	export function emptyRefInternationalAssignmentV2():Ref<InternationalAssignmentV2>
-	export function refOfInternationalAssignmentV2(x:InternationalAssignmentV2,v:Ref<InternationalAssignmentV2>)
-	export function unRefInternationalAssignmentV2(v:Ref<InternationalAssignmentV2>):InternationalAssignmentV2
-	export function emptyListJobReq():ListJobReq
-	export function emptyRefListJobReq():Ref<ListJobReq>
-	export function refOfListJobReq(x:ListJobReq,v:Ref<ListJobReq>)
-	export function unRefListJobReq(v:Ref<ListJobReq>):ListJobReq
-	export function emptyPreHireProbationInfo():PreHireProbationInfo
-	export function emptyRefPreHireProbationInfo():Ref<PreHireProbationInfo>
-	export function refOfPreHireProbationInfo(x:PreHireProbationInfo,v:Ref<PreHireProbationInfo>)
-	export function unRefPreHireProbationInfo(v:Ref<PreHireProbationInfo>):PreHireProbationInfo
-	export function emptyProfileSettingFile():ProfileSettingFile
-	export function emptyRefProfileSettingFile():Ref<ProfileSettingFile>
-	export function refOfProfileSettingFile(x:ProfileSettingFile,v:Ref<ProfileSettingFile>)
-	export function unRefProfileSettingFile(v:Ref<ProfileSettingFile>):ProfileSettingFile
-	export function emptyTransferInfo():TransferInfo
-	export function emptyRefTransferInfo():Ref<TransferInfo>
-	export function refOfTransferInfo(x:TransferInfo,v:Ref<TransferInfo>)
-	export function unRefTransferInfo(v:Ref<TransferInfo>):TransferInfo
-	export function emptyDimension():Dimension
-	export function emptyRefDimension():Ref<Dimension>
-	export function refOfDimension(x:Dimension,v:Ref<Dimension>)
-	export function unRefDimension(v:Ref<Dimension>):Dimension
-	export function emptySearchDepartmentResp():SearchDepartmentResp
-	export function emptyRefSearchDepartmentResp():Ref<SearchDepartmentResp>
-	export function refOfSearchDepartmentResp(x:SearchDepartmentResp,v:Ref<SearchDepartmentResp>)
-	export function unRefSearchDepartmentResp(v:Ref<SearchDepartmentResp>):SearchDepartmentResp
-	export function emptyBatchGetEmployeesJobDataRespData():BatchGetEmployeesJobDataRespData
-	export function emptyRefBatchGetEmployeesJobDataRespData():Ref<BatchGetEmployeesJobDataRespData>
-	export function refOfBatchGetEmployeesJobDataRespData(x:BatchGetEmployeesJobDataRespData,v:Ref<BatchGetEmployeesJobDataRespData>)
-	export function unRefBatchGetEmployeesJobDataRespData(v:Ref<BatchGetEmployeesJobDataRespData>):BatchGetEmployeesJobDataRespData
-	export function emptyOnboardingFlowChange():OnboardingFlowChange
-	export function emptyRefOnboardingFlowChange():Ref<OnboardingFlowChange>
-	export function refOfOnboardingFlowChange(x:OnboardingFlowChange,v:Ref<OnboardingFlowChange>)
-	export function unRefOnboardingFlowChange(v:Ref<OnboardingFlowChange>):OnboardingFlowChange
-	export function emptyResidentTax():ResidentTax
-	export function emptyRefResidentTax():Ref<ResidentTax>
-	export function refOfResidentTax(x:ResidentTax,v:Ref<ResidentTax>)
-	export function unRefResidentTax(v:Ref<ResidentTax>):ResidentTax
-	export function emptySearchContractRespData():SearchContractRespData
-	export function emptyRefSearchContractRespData():Ref<SearchContractRespData>
-	export function refOfSearchContractRespData(x:SearchContractRespData,v:Ref<SearchContractRespData>)
-	export function unRefSearchContractRespData(v:Ref<SearchContractRespData>):SearchContractRespData
-	export function emptyCreatePersonRespData():CreatePersonRespData
-	export function emptyRefCreatePersonRespData():Ref<CreatePersonRespData>
-	export function refOfCreatePersonRespData(x:CreatePersonRespData,v:Ref<CreatePersonRespData>)
-	export function unRefCreatePersonRespData(v:Ref<CreatePersonRespData>):CreatePersonRespData
-	export function emptyFormFieldVariableBoolValue():FormFieldVariableBoolValue
-	export function emptyRefFormFieldVariableBoolValue():Ref<FormFieldVariableBoolValue>
-	export function refOfFormFieldVariableBoolValue(x:FormFieldVariableBoolValue,v:Ref<FormFieldVariableBoolValue>)
-	export function unRefFormFieldVariableBoolValue(v:Ref<FormFieldVariableBoolValue>):FormFieldVariableBoolValue
-	export function emptyP2ProcessCcUpdatedV2():P2ProcessCcUpdatedV2
-	export function emptyRefP2ProcessCcUpdatedV2():Ref<P2ProcessCcUpdatedV2>
-	export function refOfP2ProcessCcUpdatedV2(x:P2ProcessCcUpdatedV2,v:Ref<P2ProcessCcUpdatedV2>)
-	export function unRefP2ProcessCcUpdatedV2(v:Ref<P2ProcessCcUpdatedV2>):P2ProcessCcUpdatedV2
-	export function emptyDepartmentHrbp():DepartmentHrbp
-	export function emptyRefDepartmentHrbp():Ref<DepartmentHrbp>
-	export function refOfDepartmentHrbp(x:DepartmentHrbp,v:Ref<DepartmentHrbp>)
-	export function unRefDepartmentHrbp(v:Ref<DepartmentHrbp>):DepartmentHrbp
-	export function emptyProfileSettingCustomField():ProfileSettingCustomField
-	export function emptyRefProfileSettingCustomField():Ref<ProfileSettingCustomField>
-	export function refOfProfileSettingCustomField(x:ProfileSettingCustomField,v:Ref<ProfileSettingCustomField>)
-	export function unRefProfileSettingCustomField(v:Ref<ProfileSettingCustomField>):ProfileSettingCustomField
-	export function emptyCity():City
-	export function emptyRefCity():Ref<City>
-	export function refOfCity(x:City,v:Ref<City>)
-	export function unRefCity(v:Ref<City>):City
-	export function emptyFormFieldVariableNumberValue():FormFieldVariableNumberValue
-	export function emptyRefFormFieldVariableNumberValue():Ref<FormFieldVariableNumberValue>
-	export function refOfFormFieldVariableNumberValue(x:FormFieldVariableNumberValue,v:Ref<FormFieldVariableNumberValue>)
-	export function unRefFormFieldVariableNumberValue(v:Ref<FormFieldVariableNumberValue>):FormFieldVariableNumberValue
-	export function emptyPatchPreHireRespData():PatchPreHireRespData
-	export function emptyRefPatchPreHireRespData():Ref<PatchPreHireRespData>
-	export function refOfPatchPreHireRespData(x:PatchPreHireRespData,v:Ref<PatchPreHireRespData>)
-	export function unRefPatchPreHireRespData(v:Ref<PatchPreHireRespData>):PatchPreHireRespData
-	export function emptyBatchGetEmployeesBpRespData():BatchGetEmployeesBpRespData
-	export function emptyRefBatchGetEmployeesBpRespData():Ref<BatchGetEmployeesBpRespData>
-	export function refOfBatchGetEmployeesBpRespData(x:BatchGetEmployeesBpRespData,v:Ref<BatchGetEmployeesBpRespData>)
-	export function unRefBatchGetEmployeesBpRespData(v:Ref<BatchGetEmployeesBpRespData>):BatchGetEmployeesBpRespData
-	export function emptyDimensionIdInData():DimensionIdInData
-	export function emptyRefDimensionIdInData():Ref<DimensionIdInData>
-	export function refOfDimensionIdInData(x:DimensionIdInData,v:Ref<DimensionIdInData>)
-	export function unRefDimensionIdInData(v:Ref<DimensionIdInData>):DimensionIdInData
-	export function emptyGetProcessRespData():GetProcessRespData
-	export function emptyRefGetProcessRespData():Ref<GetProcessRespData>
-	export function refOfGetProcessRespData(x:GetProcessRespData,v:Ref<GetProcessRespData>)
-	export function unRefGetProcessRespData(v:Ref<GetProcessRespData>):GetProcessRespData
-	export function emptyListProcessResp():ListProcessResp
-	export function emptyRefListProcessResp():Ref<ListProcessResp>
-	export function refOfListProcessResp(x:ListProcessResp,v:Ref<ListProcessResp>)
-	export function unRefListProcessResp(v:Ref<ListProcessResp>):ListProcessResp
-	export function emptyOrgdraftDepartmentId():OrgdraftDepartmentId
-	export function emptyRefOrgdraftDepartmentId():Ref<OrgdraftDepartmentId>
-	export function refOfOrgdraftDepartmentId(x:OrgdraftDepartmentId,v:Ref<OrgdraftDepartmentId>)
-	export function unRefOrgdraftDepartmentId(v:Ref<OrgdraftDepartmentId>):OrgdraftDepartmentId
-	export function emptyOfferInfoUpdate():OfferInfoUpdate
-	export function emptyRefOfferInfoUpdate():Ref<OfferInfoUpdate>
-	export function refOfOfferInfoUpdate(x:OfferInfoUpdate,v:Ref<OfferInfoUpdate>)
-	export function unRefOfferInfoUpdate(v:Ref<OfferInfoUpdate>):OfferInfoUpdate
-	export function emptyProfileSettingCareer():ProfileSettingCareer
-	export function emptyRefProfileSettingCareer():Ref<ProfileSettingCareer>
-	export function refOfProfileSettingCareer(x:ProfileSettingCareer,v:Ref<ProfileSettingCareer>)
-	export function unRefProfileSettingCareer(v:Ref<ProfileSettingCareer>):ProfileSettingCareer
-	export function emptySearchBasicInfoNationalityReq():SearchBasicInfoNationalityReq
-	export function emptyRefSearchBasicInfoNationalityReq():Ref<SearchBasicInfoNationalityReq>
-	export function refOfSearchBasicInfoNationalityReq(x:SearchBasicInfoNationalityReq,v:Ref<SearchBasicInfoNationalityReq>)
-	export function unRefSearchBasicInfoNationalityReq(v:Ref<SearchBasicInfoNationalityReq>):SearchBasicInfoNationalityReq
-	export function emptyProfileSettingPersonalInfo():ProfileSettingPersonalInfo
-	export function emptyRefProfileSettingPersonalInfo():Ref<ProfileSettingPersonalInfo>
-	export function refOfProfileSettingPersonalInfo(x:ProfileSettingPersonalInfo,v:Ref<ProfileSettingPersonalInfo>)
-	export function unRefProfileSettingPersonalInfo(v:Ref<ProfileSettingPersonalInfo>):ProfileSettingPersonalInfo
-	export function emptyFieldVariableSubVlaueForReview():FieldVariableSubVlaueForReview
-	export function emptyRefFieldVariableSubVlaueForReview():Ref<FieldVariableSubVlaueForReview>
-	export function refOfFieldVariableSubVlaueForReview(x:FieldVariableSubVlaueForReview,v:Ref<FieldVariableSubVlaueForReview>)
-	export function unRefFieldVariableSubVlaueForReview(v:Ref<FieldVariableSubVlaueForReview>):FieldVariableSubVlaueForReview
-	export function emptyFieldVariableValueToEnum():FieldVariableValueToEnum
-	export function emptyRefFieldVariableValueToEnum():Ref<FieldVariableValueToEnum>
-	export function refOfFieldVariableValueToEnum(x:FieldVariableValueToEnum,v:Ref<FieldVariableValueToEnum>)
-	export function unRefFieldVariableValueToEnum(v:Ref<FieldVariableValueToEnum>):FieldVariableValueToEnum
-	export function emptyListBpRespData():ListBpRespData
-	export function emptyRefListBpRespData():Ref<ListBpRespData>
-	export function refOfListBpRespData(x:ListBpRespData,v:Ref<ListBpRespData>)
-	export function unRefListBpRespData(v:Ref<ListBpRespData>):ListBpRespData
-	export function emptyNationality():Nationality
-	export function emptyRefNationality():Ref<Nationality>
-	export function refOfNationality(x:Nationality,v:Ref<Nationality>)
-	export function unRefNationality(v:Ref<Nationality>):Nationality
-	export function emptySearchBasicInfoCountryRegionIterator():SearchBasicInfoCountryRegionIterator
-	export function emptyRefSearchBasicInfoCountryRegionIterator():Ref<SearchBasicInfoCountryRegionIterator>
-	export function refOfSearchBasicInfoCountryRegionIterator(x:SearchBasicInfoCountryRegionIterator,v:Ref<SearchBasicInfoCountryRegionIterator>)
-	export function unRefSearchBasicInfoCountryRegionIterator(v:Ref<SearchBasicInfoCountryRegionIterator>):SearchBasicInfoCountryRegionIterator
-	export function emptySearchBasicInfoNationalityRespData():SearchBasicInfoNationalityRespData
-	export function emptyRefSearchBasicInfoNationalityRespData():Ref<SearchBasicInfoNationalityRespData>
-	export function refOfSearchBasicInfoNationalityRespData(x:SearchBasicInfoNationalityRespData,v:Ref<SearchBasicInfoNationalityRespData>)
-	export function unRefSearchBasicInfoNationalityRespData(v:Ref<SearchBasicInfoNationalityRespData>):SearchBasicInfoNationalityRespData
-	export function emptyBp():Bp
-	export function emptyRefBp():Ref<Bp>
-	export function refOfBp(x:Bp,v:Ref<Bp>)
-	export function unRefBp(v:Ref<Bp>):Bp
-	export function emptyMatchRules():MatchRules
-	export function emptyRefMatchRules():Ref<MatchRules>
-	export function refOfMatchRules(x:MatchRules,v:Ref<MatchRules>)
-	export function unRefMatchRules(v:Ref<MatchRules>):MatchRules
-	export function emptyProfileSettingCustomGroup():ProfileSettingCustomGroup
-	export function emptyRefProfileSettingCustomGroup():Ref<ProfileSettingCustomGroup>
-	export function refOfProfileSettingCustomGroup(x:ProfileSettingCustomGroup,v:Ref<ProfileSettingCustomGroup>)
-	export function unRefProfileSettingCustomGroup(v:Ref<ProfileSettingCustomGroup>):ProfileSettingCustomGroup
-	export function emptySearchBasicInfoCurrencyResp():SearchBasicInfoCurrencyResp
-	export function emptyRefSearchBasicInfoCurrencyResp():Ref<SearchBasicInfoCurrencyResp>
-	export function refOfSearchBasicInfoCurrencyResp(x:SearchBasicInfoCurrencyResp,v:Ref<SearchBasicInfoCurrencyResp>)
-	export function unRefSearchBasicInfoCurrencyResp(v:Ref<SearchBasicInfoCurrencyResp>):SearchBasicInfoCurrencyResp
-	export function emptyLeaveGrantingRecord():LeaveGrantingRecord
-	export function emptyRefLeaveGrantingRecord():Ref<LeaveGrantingRecord>
-	export function refOfLeaveGrantingRecord(x:LeaveGrantingRecord,v:Ref<LeaveGrantingRecord>)
-	export function unRefLeaveGrantingRecord(v:Ref<LeaveGrantingRecord>):LeaveGrantingRecord
-	export function emptyP2ProcessApproverUpdatedV2():P2ProcessApproverUpdatedV2
-	export function emptyRefP2ProcessApproverUpdatedV2():Ref<P2ProcessApproverUpdatedV2>
-	export function refOfP2ProcessApproverUpdatedV2(x:P2ProcessApproverUpdatedV2,v:Ref<P2ProcessApproverUpdatedV2>)
-	export function unRefP2ProcessApproverUpdatedV2(v:Ref<P2ProcessApproverUpdatedV2>):P2ProcessApproverUpdatedV2
-	export function emptyProfileSettingEmploymentBasicInfo():ProfileSettingEmploymentBasicInfo
-	export function emptyRefProfileSettingEmploymentBasicInfo():Ref<ProfileSettingEmploymentBasicInfo>
-	export function refOfProfileSettingEmploymentBasicInfo(x:ProfileSettingEmploymentBasicInfo,v:Ref<ProfileSettingEmploymentBasicInfo>)
-	export function unRefProfileSettingEmploymentBasicInfo(v:Ref<ProfileSettingEmploymentBasicInfo>):ProfileSettingEmploymentBasicInfo
-	export function emptySearchProbationResp():SearchProbationResp
-	export function emptyRefSearchProbationResp():Ref<SearchProbationResp>
-	export function refOfSearchProbationResp(x:SearchProbationResp,v:Ref<SearchProbationResp>)
-	export function unRefSearchProbationResp(v:Ref<SearchProbationResp>):SearchProbationResp
-	export function emptyWorkEmail():WorkEmail
-	export function emptyRefWorkEmail():Ref<WorkEmail>
-	export function refOfWorkEmail(x:WorkEmail,v:Ref<WorkEmail>)
-	export function unRefWorkEmail(v:Ref<WorkEmail>):WorkEmail
-	export function emptyUserContact():UserContact
-	export function emptyRefUserContact():Ref<UserContact>
-	export function refOfUserContact(x:UserContact,v:Ref<UserContact>)
-	export function unRefUserContact(v:Ref<UserContact>):UserContact
-	export function emptyGetByDepartmentBpReqBody():GetByDepartmentBpReqBody
-	export function emptyRefGetByDepartmentBpReqBody():Ref<GetByDepartmentBpReqBody>
-	export function refOfGetByDepartmentBpReqBody(x:GetByDepartmentBpReqBody,v:Ref<GetByDepartmentBpReqBody>)
-	export function unRefGetByDepartmentBpReqBody(v:Ref<GetByDepartmentBpReqBody>):GetByDepartmentBpReqBody
-	export function emptySearchBasicInfoCityRespData():SearchBasicInfoCityRespData
-	export function emptyRefSearchBasicInfoCityRespData():Ref<SearchBasicInfoCityRespData>
-	export function refOfSearchBasicInfoCityRespData(x:SearchBasicInfoCityRespData,v:Ref<SearchBasicInfoCityRespData>)
-	export function unRefSearchBasicInfoCityRespData(v:Ref<SearchBasicInfoCityRespData>):SearchBasicInfoCityRespData
-	export function emptySearchBasicInfoNationalityResp():SearchBasicInfoNationalityResp
-	export function emptyRefSearchBasicInfoNationalityResp():Ref<SearchBasicInfoNationalityResp>
-	export function refOfSearchBasicInfoNationalityResp(x:SearchBasicInfoNationalityResp,v:Ref<SearchBasicInfoNationalityResp>)
-	export function unRefSearchBasicInfoNationalityResp(v:Ref<SearchBasicInfoNationalityResp>):SearchBasicInfoNationalityResp
-	export function emptyPatchCostCenterVersionRespData():PatchCostCenterVersionRespData
-	export function emptyRefPatchCostCenterVersionRespData():Ref<PatchCostCenterVersionRespData>
-	export function refOfPatchCostCenterVersionRespData(x:PatchCostCenterVersionRespData,v:Ref<PatchCostCenterVersionRespData>)
-	export function unRefPatchCostCenterVersionRespData(v:Ref<PatchCostCenterVersionRespData>):PatchCostCenterVersionRespData
-	export function emptySearchDepartmentReqBody():SearchDepartmentReqBody
-	export function emptyRefSearchDepartmentReqBody():Ref<SearchDepartmentReqBody>
-	export function refOfSearchDepartmentReqBody(x:SearchDepartmentReqBody,v:Ref<SearchDepartmentReqBody>)
-	export function unRefSearchDepartmentReqBody(v:Ref<SearchDepartmentReqBody>):SearchDepartmentReqBody
-	export function emptyBatchGetCompanyRespData():BatchGetCompanyRespData
-	export function emptyRefBatchGetCompanyRespData():Ref<BatchGetCompanyRespData>
-	export function refOfBatchGetCompanyRespData(x:BatchGetCompanyRespData,v:Ref<BatchGetCompanyRespData>)
-	export function unRefBatchGetCompanyRespData(v:Ref<BatchGetCompanyRespData>):BatchGetCompanyRespData
-	export function emptyDeletePreHireResp():DeletePreHireResp
-	export function emptyRefDeletePreHireResp():Ref<DeletePreHireResp>
-	export function refOfDeletePreHireResp(x:DeletePreHireResp,v:Ref<DeletePreHireResp>)
-	export function unRefDeletePreHireResp(v:Ref<DeletePreHireResp>):DeletePreHireResp
-	export function emptyGetByDepartmentBpReq():GetByDepartmentBpReq
-	export function emptyRefGetByDepartmentBpReq():Ref<GetByDepartmentBpReq>
-	export function refOfGetByDepartmentBpReq(x:GetByDepartmentBpReq,v:Ref<GetByDepartmentBpReq>)
-	export function unRefGetByDepartmentBpReq(v:Ref<GetByDepartmentBpReq>):GetByDepartmentBpReq
-	export function emptyPatchProbationAssessmentReq():PatchProbationAssessmentReq
-	export function emptyRefPatchProbationAssessmentReq():Ref<PatchProbationAssessmentReq>
-	export function refOfPatchProbationAssessmentReq(x:PatchProbationAssessmentReq,v:Ref<PatchProbationAssessmentReq>)
-	export function unRefPatchProbationAssessmentReq(v:Ref<PatchProbationAssessmentReq>):PatchProbationAssessmentReq
-	export function emptyProfileSettingName():ProfileSettingName
-	export function emptyRefProfileSettingName():Ref<ProfileSettingName>
-	export function refOfProfileSettingName(x:ProfileSettingName,v:Ref<ProfileSettingName>)
-	export function unRefProfileSettingName(v:Ref<ProfileSettingName>):ProfileSettingName
-	export function emptyOrgRole():OrgRole
-	export function emptyRefOrgRole():Ref<OrgRole>
-	export function refOfOrgRole(x:OrgRole,v:Ref<OrgRole>)
-	export function unRefOrgRole(v:Ref<OrgRole>):OrgRole
-	export function emptyProcessLink():ProcessLink
-	export function emptyRefProcessLink():Ref<ProcessLink>
-	export function refOfProcessLink(x:ProcessLink,v:Ref<ProcessLink>)
-	export function unRefProcessLink(v:Ref<ProcessLink>):ProcessLink
+	export function emptyFieldVariableSubVlaue():FieldVariableSubVlaue
+	export function emptyRefFieldVariableSubVlaue():Ref<FieldVariableSubVlaue>
+	export function refOfFieldVariableSubVlaue(x:FieldVariableSubVlaue,v:Ref<FieldVariableSubVlaue>)
+	export function unRefFieldVariableSubVlaue(v:Ref<FieldVariableSubVlaue>):FieldVariableSubVlaue
+	export function emptyP2ProcessCcUpdatedV2Data():P2ProcessCcUpdatedV2Data
+	export function emptyRefP2ProcessCcUpdatedV2Data():Ref<P2ProcessCcUpdatedV2Data>
+	export function refOfP2ProcessCcUpdatedV2Data(x:P2ProcessCcUpdatedV2Data,v:Ref<P2ProcessCcUpdatedV2Data>)
+	export function unRefP2ProcessCcUpdatedV2Data(v:Ref<P2ProcessCcUpdatedV2Data>):P2ProcessCcUpdatedV2Data
+	export function emptyLeaveBalance():LeaveBalance
+	export function emptyRefLeaveBalance():Ref<LeaveBalance>
+	export function refOfLeaveBalance(x:LeaveBalance,v:Ref<LeaveBalance>)
+	export function unRefLeaveBalance(v:Ref<LeaveBalance>):LeaveBalance
+	export function emptyWorkExperience():WorkExperience
+	export function emptyRefWorkExperience():Ref<WorkExperience>
+	export function refOfWorkExperience(x:WorkExperience,v:Ref<WorkExperience>)
+	export function unRefWorkExperience(v:Ref<WorkExperience>):WorkExperience
+	export function emptyProbationInfoForSubmit():ProbationInfoForSubmit
+	export function emptyRefProbationInfoForSubmit():Ref<ProbationInfoForSubmit>
+	export function refOfProbationInfoForSubmit(x:ProbationInfoForSubmit,v:Ref<ProbationInfoForSubmit>)
+	export function unRefProbationInfoForSubmit(v:Ref<ProbationInfoForSubmit>):ProbationInfoForSubmit
+	export function emptyListProcessIterator():ListProcessIterator
+	export function emptyRefListProcessIterator():Ref<ListProcessIterator>
+	export function refOfListProcessIterator(x:ListProcessIterator,v:Ref<ListProcessIterator>)
+	export function unRefListProcessIterator(v:Ref<ListProcessIterator>):ListProcessIterator
+	export function emptyPreHireContractInfo():PreHireContractInfo
+	export function emptyRefPreHireContractInfo():Ref<PreHireContractInfo>
+	export function refOfPreHireContractInfo(x:PreHireContractInfo,v:Ref<PreHireContractInfo>)
+	export function unRefPreHireContractInfo(v:Ref<PreHireContractInfo>):PreHireContractInfo
+	export function emptySignatureHumanInfo():SignatureHumanInfo
+	export function emptyRefSignatureHumanInfo():Ref<SignatureHumanInfo>
+	export function refOfSignatureHumanInfo(x:SignatureHumanInfo,v:Ref<SignatureHumanInfo>)
+	export function unRefSignatureHumanInfo(v:Ref<SignatureHumanInfo>):SignatureHumanInfo
 	export function emptyBatchGetLocationResp():BatchGetLocationResp
 	export function emptyRefBatchGetLocationResp():Ref<BatchGetLocationResp>
 	export function refOfBatchGetLocationResp(x:BatchGetLocationResp,v:Ref<BatchGetLocationResp>)
 	export function unRefBatchGetLocationResp(v:Ref<BatchGetLocationResp>):BatchGetLocationResp
+	export function emptyCustomOrgCreate():CustomOrgCreate
+	export function emptyRefCustomOrgCreate():Ref<CustomOrgCreate>
+	export function refOfCustomOrgCreate(x:CustomOrgCreate,v:Ref<CustomOrgCreate>)
+	export function unRefCustomOrgCreate(v:Ref<CustomOrgCreate>):CustomOrgCreate
+	export function emptyDepartmentTimeline():DepartmentTimeline
+	export function emptyRefDepartmentTimeline():Ref<DepartmentTimeline>
+	export function refOfDepartmentTimeline(x:DepartmentTimeline,v:Ref<DepartmentTimeline>)
+	export function unRefDepartmentTimeline(v:Ref<DepartmentTimeline>):DepartmentTimeline
+	export function emptyGetJobResp():GetJobResp
+	export function emptyRefGetJobResp():Ref<GetJobResp>
+	export function refOfGetJobResp(x:GetJobResp,v:Ref<GetJobResp>)
+	export function unRefGetJobResp(v:Ref<GetJobResp>):GetJobResp
+	export function emptyPhone():Phone
+	export function emptyRefPhone():Ref<Phone>
+	export function refOfPhone(x:Phone,v:Ref<Phone>)
+	export function unRefPhone(v:Ref<Phone>):Phone
+	export function emptyQueryMultiTimelineDepartmentReqBody():QueryMultiTimelineDepartmentReqBody
+	export function emptyRefQueryMultiTimelineDepartmentReqBody():Ref<QueryMultiTimelineDepartmentReqBody>
+	export function refOfQueryMultiTimelineDepartmentReqBody(x:QueryMultiTimelineDepartmentReqBody,v:Ref<QueryMultiTimelineDepartmentReqBody>)
+	export function unRefQueryMultiTimelineDepartmentReqBody(v:Ref<QueryMultiTimelineDepartmentReqBody>):QueryMultiTimelineDepartmentReqBody
+	export function emptyDeleteProbationAssessmentReq():DeleteProbationAssessmentReq
+	export function emptyRefDeleteProbationAssessmentReq():Ref<DeleteProbationAssessmentReq>
+	export function refOfDeleteProbationAssessmentReq(x:DeleteProbationAssessmentReq,v:Ref<DeleteProbationAssessmentReq>)
+	export function unRefDeleteProbationAssessmentReq(v:Ref<DeleteProbationAssessmentReq>):DeleteProbationAssessmentReq
+	export function emptySignatureUserInfo():SignatureUserInfo
+	export function emptyRefSignatureUserInfo():Ref<SignatureUserInfo>
+	export function refOfSignatureUserInfo(x:SignatureUserInfo,v:Ref<SignatureUserInfo>)
+	export function unRefSignatureUserInfo(v:Ref<SignatureUserInfo>):SignatureUserInfo
+	export function emptyEnableDisableAssessmentProbationReq():EnableDisableAssessmentProbationReq
+	export function emptyRefEnableDisableAssessmentProbationReq():Ref<EnableDisableAssessmentProbationReq>
+	export function refOfEnableDisableAssessmentProbationReq(x:EnableDisableAssessmentProbationReq,v:Ref<EnableDisableAssessmentProbationReq>)
+	export function unRefEnableDisableAssessmentProbationReq(v:Ref<EnableDisableAssessmentProbationReq>):EnableDisableAssessmentProbationReq
+	export function emptySignatureMetaInfo():SignatureMetaInfo
+	export function emptyRefSignatureMetaInfo():Ref<SignatureMetaInfo>
+	export function refOfSignatureMetaInfo(x:SignatureMetaInfo,v:Ref<SignatureMetaInfo>)
+	export function unRefSignatureMetaInfo(v:Ref<SignatureMetaInfo>):SignatureMetaInfo
+	export function emptyProfileSettingDataAttachment():ProfileSettingDataAttachment
+	export function emptyRefProfileSettingDataAttachment():Ref<ProfileSettingDataAttachment>
+	export function refOfProfileSettingDataAttachment(x:ProfileSettingDataAttachment,v:Ref<ProfileSettingDataAttachment>)
+	export function unRefProfileSettingDataAttachment(v:Ref<ProfileSettingDataAttachment>):ProfileSettingDataAttachment
+	export function emptySearchBasicInfoCountryRegionReq():SearchBasicInfoCountryRegionReq
+	export function emptyRefSearchBasicInfoCountryRegionReq():Ref<SearchBasicInfoCountryRegionReq>
+	export function refOfSearchBasicInfoCountryRegionReq(x:SearchBasicInfoCountryRegionReq,v:Ref<SearchBasicInfoCountryRegionReq>)
+	export function unRefSearchBasicInfoCountryRegionReq(v:Ref<SearchBasicInfoCountryRegionReq>):SearchBasicInfoCountryRegionReq
+	export function emptySignatureTemplateAttachmentInfo():SignatureTemplateAttachmentInfo
+	export function emptyRefSignatureTemplateAttachmentInfo():Ref<SignatureTemplateAttachmentInfo>
+	export function refOfSignatureTemplateAttachmentInfo(x:SignatureTemplateAttachmentInfo,v:Ref<SignatureTemplateAttachmentInfo>)
+	export function unRefSignatureTemplateAttachmentInfo(v:Ref<SignatureTemplateAttachmentInfo>):SignatureTemplateAttachmentInfo
+	export function emptyQueryTimelineDepartmentReqBody():QueryTimelineDepartmentReqBody
+	export function emptyRefQueryTimelineDepartmentReqBody():Ref<QueryTimelineDepartmentReqBody>
+	export function refOfQueryTimelineDepartmentReqBody(x:QueryTimelineDepartmentReqBody,v:Ref<QueryTimelineDepartmentReqBody>)
+	export function unRefQueryTimelineDepartmentReqBody(v:Ref<QueryTimelineDepartmentReqBody>):QueryTimelineDepartmentReqBody
+	export function emptyBankAccount():BankAccount
+	export function emptyRefBankAccount():Ref<BankAccount>
+	export function refOfBankAccount(x:BankAccount,v:Ref<BankAccount>)
+	export function unRefBankAccount(v:Ref<BankAccount>):BankAccount
+	export function emptyBatchGetEmployeesBpResp():BatchGetEmployeesBpResp
+	export function emptyRefBatchGetEmployeesBpResp():Ref<BatchGetEmployeesBpResp>
+	export function refOfBatchGetEmployeesBpResp(x:BatchGetEmployeesBpResp,v:Ref<BatchGetEmployeesBpResp>)
+	export function unRefBatchGetEmployeesBpResp(v:Ref<BatchGetEmployeesBpResp>):BatchGetEmployeesBpResp
+	export function emptyLeaveRequestDetail():LeaveRequestDetail
+	export function emptyRefLeaveRequestDetail():Ref<LeaveRequestDetail>
+	export function refOfLeaveRequestDetail(x:LeaveRequestDetail,v:Ref<LeaveRequestDetail>)
+	export function unRefLeaveRequestDetail(v:Ref<LeaveRequestDetail>):LeaveRequestDetail
+	export function emptyAssessmentForCreate():AssessmentForCreate
+	export function emptyRefAssessmentForCreate():Ref<AssessmentForCreate>
+	export function refOfAssessmentForCreate(x:AssessmentForCreate,v:Ref<AssessmentForCreate>)
+	export function unRefAssessmentForCreate(v:Ref<AssessmentForCreate>):AssessmentForCreate
+	export function emptyOnboardingTask():OnboardingTask
+	export function emptyRefOnboardingTask():Ref<OnboardingTask>
+	export function refOfOnboardingTask(x:OnboardingTask,v:Ref<OnboardingTask>)
+	export function unRefOnboardingTask(v:Ref<OnboardingTask>):OnboardingTask
+	export function emptyProfileSettingResidentTax():ProfileSettingResidentTax
+	export function emptyRefProfileSettingResidentTax():Ref<ProfileSettingResidentTax>
+	export function refOfProfileSettingResidentTax(x:ProfileSettingResidentTax,v:Ref<ProfileSettingResidentTax>)
+	export function unRefProfileSettingResidentTax(v:Ref<ProfileSettingResidentTax>):ProfileSettingResidentTax
+	export function emptyJobChange():JobChange
+	export function emptyRefJobChange():Ref<JobChange>
+	export function refOfJobChange(x:JobChange,v:Ref<JobChange>)
+	export function unRefJobChange(v:Ref<JobChange>):JobChange
+	export function emptyWorkforcePlanEaiDetail():WorkforcePlanEaiDetail
+	export function emptyRefWorkforcePlanEaiDetail():Ref<WorkforcePlanEaiDetail>
+	export function refOfWorkforcePlanEaiDetail(x:WorkforcePlanEaiDetail,v:Ref<WorkforcePlanEaiDetail>)
+	export function unRefWorkforcePlanEaiDetail(v:Ref<WorkforcePlanEaiDetail>):WorkforcePlanEaiDetail
+	export function emptyBasicInfoUpdate():BasicInfoUpdate
+	export function emptyRefBasicInfoUpdate():Ref<BasicInfoUpdate>
+	export function refOfBasicInfoUpdate(x:BasicInfoUpdate,v:Ref<BasicInfoUpdate>)
+	export function unRefBasicInfoUpdate(v:Ref<BasicInfoUpdate>):BasicInfoUpdate
+	export function emptyBatchGetJobFamilyRespData():BatchGetJobFamilyRespData
+	export function emptyRefBatchGetJobFamilyRespData():Ref<BatchGetJobFamilyRespData>
+	export function refOfBatchGetJobFamilyRespData(x:BatchGetJobFamilyRespData,v:Ref<BatchGetJobFamilyRespData>)
+	export function unRefBatchGetJobFamilyRespData(v:Ref<BatchGetJobFamilyRespData>):BatchGetJobFamilyRespData
 	export function emptyEmployeeInternationalAssignment():EmployeeInternationalAssignment
 	export function emptyRefEmployeeInternationalAssignment():Ref<EmployeeInternationalAssignment>
 	export function refOfEmployeeInternationalAssignment(x:EmployeeInternationalAssignment,v:Ref<EmployeeInternationalAssignment>)
 	export function unRefEmployeeInternationalAssignment(v:Ref<EmployeeInternationalAssignment>):EmployeeInternationalAssignment
-	export function emptyQueryEmployeesJobDataReq():QueryEmployeesJobDataReq
-	export function emptyRefQueryEmployeesJobDataReq():Ref<QueryEmployeesJobDataReq>
-	export function refOfQueryEmployeesJobDataReq(x:QueryEmployeesJobDataReq,v:Ref<QueryEmployeesJobDataReq>)
-	export function unRefQueryEmployeesJobDataReq(v:Ref<QueryEmployeesJobDataReq>):QueryEmployeesJobDataReq
-	export function emptyWorkExperienceInfo():WorkExperienceInfo
-	export function emptyRefWorkExperienceInfo():Ref<WorkExperienceInfo>
-	export function refOfWorkExperienceInfo(x:WorkExperienceInfo,v:Ref<WorkExperienceInfo>)
-	export function unRefWorkExperienceInfo(v:Ref<WorkExperienceInfo>):WorkExperienceInfo
-	export function emptyCreateProbationAssessmentReq():CreateProbationAssessmentReq
-	export function emptyRefCreateProbationAssessmentReq():Ref<CreateProbationAssessmentReq>
-	export function refOfCreateProbationAssessmentReq(x:CreateProbationAssessmentReq,v:Ref<CreateProbationAssessmentReq>)
-	export function unRefCreateProbationAssessmentReq(v:Ref<CreateProbationAssessmentReq>):CreateProbationAssessmentReq
-	export function emptyJobData():JobData
-	export function emptyRefJobData():Ref<JobData>
-	export function refOfJobData(x:JobData,v:Ref<JobData>)
-	export function unRefJobData(v:Ref<JobData>):JobData
-	export function emptyAbnormalReason():AbnormalReason
-	export function emptyRefAbnormalReason():Ref<AbnormalReason>
-	export function refOfAbnormalReason(x:AbnormalReason,v:Ref<AbnormalReason>)
-	export function unRefAbnormalReason(v:Ref<AbnormalReason>):AbnormalReason
-	export function emptyFormFieldVariableI18nValue():FormFieldVariableI18nValue
-	export function emptyRefFormFieldVariableI18nValue():Ref<FormFieldVariableI18nValue>
-	export function refOfFormFieldVariableI18nValue(x:FormFieldVariableI18nValue,v:Ref<FormFieldVariableI18nValue>)
-	export function unRefFormFieldVariableI18nValue(v:Ref<FormFieldVariableI18nValue>):FormFieldVariableI18nValue
+	export function emptyProfileSettingEmergencyContact():ProfileSettingEmergencyContact
+	export function emptyRefProfileSettingEmergencyContact():Ref<ProfileSettingEmergencyContact>
+	export function refOfProfileSettingEmergencyContact(x:ProfileSettingEmergencyContact,v:Ref<ProfileSettingEmergencyContact>)
+	export function unRefProfileSettingEmergencyContact(v:Ref<ProfileSettingEmergencyContact>):ProfileSettingEmergencyContact
+	export function emptySearchContractIterator():SearchContractIterator
+	export function emptyRefSearchContractIterator():Ref<SearchContractIterator>
+	export function refOfSearchContractIterator(x:SearchContractIterator,v:Ref<SearchContractIterator>)
+	export function unRefSearchContractIterator(v:Ref<SearchContractIterator>):SearchContractIterator
+	export function emptyAddress():Address
+	export function emptyRefAddress():Ref<Address>
+	export function refOfAddress(x:Address,v:Ref<Address>)
+	export function unRefAddress(v:Ref<Address>):Address
+	export function emptyDimensionInfo():DimensionInfo
+	export function emptyRefDimensionInfo():Ref<DimensionInfo>
+	export function refOfDimensionInfo(x:DimensionInfo,v:Ref<DimensionInfo>)
+	export function unRefDimensionInfo(v:Ref<DimensionInfo>):DimensionInfo
+	export function emptyCustomFieldData():CustomFieldData
+	export function emptyRefCustomFieldData():Ref<CustomFieldData>
+	export function refOfCustomFieldData(x:CustomFieldData,v:Ref<CustomFieldData>)
+	export function unRefCustomFieldData(v:Ref<CustomFieldData>):CustomFieldData
+	export function emptyDepartmentHrbp():DepartmentHrbp
+	export function emptyRefDepartmentHrbp():Ref<DepartmentHrbp>
+	export function refOfDepartmentHrbp(x:DepartmentHrbp,v:Ref<DepartmentHrbp>)
+	export function unRefDepartmentHrbp(v:Ref<DepartmentHrbp>):DepartmentHrbp
+	export function emptyProcessLink():ProcessLink
+	export function emptyRefProcessLink():Ref<ProcessLink>
+	export function refOfProcessLink(x:ProcessLink,v:Ref<ProcessLink>)
+	export function unRefProcessLink(v:Ref<ProcessLink>):ProcessLink
+	export function emptySearchJobChangeReqBody():SearchJobChangeReqBody
+	export function emptyRefSearchJobChangeReqBody():Ref<SearchJobChangeReqBody>
+	export function refOfSearchJobChangeReqBody(x:SearchJobChangeReqBody,v:Ref<SearchJobChangeReqBody>)
+	export function unRefSearchJobChangeReqBody(v:Ref<SearchJobChangeReqBody>):SearchJobChangeReqBody
+	export function emptySearchProbationRespData():SearchProbationRespData
+	export function emptyRefSearchProbationRespData():Ref<SearchProbationRespData>
+	export function refOfSearchProbationRespData(x:SearchProbationRespData,v:Ref<SearchProbationRespData>)
+	export function unRefSearchProbationRespData(v:Ref<SearchProbationRespData>):SearchProbationRespData
+	export function emptyCountryRegion():CountryRegion
+	export function emptyRefCountryRegion():Ref<CountryRegion>
+	export function refOfCountryRegion(x:CountryRegion,v:Ref<CountryRegion>)
+	export function unRefCountryRegion(v:Ref<CountryRegion>):CountryRegion
+	export function emptyGetProcessRespData():GetProcessRespData
+	export function emptyRefGetProcessRespData():Ref<GetProcessRespData>
+	export function refOfGetProcessRespData(x:GetProcessRespData,v:Ref<GetProcessRespData>)
+	export function unRefGetProcessRespData(v:Ref<GetProcessRespData>):GetProcessRespData
+	export function emptySearchBasicInfoCountryRegionSubdivisionResp():SearchBasicInfoCountryRegionSubdivisionResp
+	export function emptyRefSearchBasicInfoCountryRegionSubdivisionResp():Ref<SearchBasicInfoCountryRegionSubdivisionResp>
+	export function refOfSearchBasicInfoCountryRegionSubdivisionResp(x:SearchBasicInfoCountryRegionSubdivisionResp,v:Ref<SearchBasicInfoCountryRegionSubdivisionResp>)
+	export function unRefSearchBasicInfoCountryRegionSubdivisionResp(v:Ref<SearchBasicInfoCountryRegionSubdivisionResp>):SearchBasicInfoCountryRegionSubdivisionResp
+	export function emptySearchDepartmentResp():SearchDepartmentResp
+	export function emptyRefSearchDepartmentResp():Ref<SearchDepartmentResp>
+	export function refOfSearchDepartmentResp(x:SearchDepartmentResp,v:Ref<SearchDepartmentResp>)
+	export function unRefSearchDepartmentResp(v:Ref<SearchDepartmentResp>):SearchDepartmentResp
+	export function emptySignatureTemplateIdWithSystemAndCustomField():SignatureTemplateIdWithSystemAndCustomField
+	export function emptyRefSignatureTemplateIdWithSystemAndCustomField():Ref<SignatureTemplateIdWithSystemAndCustomField>
+	export function refOfSignatureTemplateIdWithSystemAndCustomField(x:SignatureTemplateIdWithSystemAndCustomField,v:Ref<SignatureTemplateIdWithSystemAndCustomField>)
+	export function unRefSignatureTemplateIdWithSystemAndCustomField(v:Ref<SignatureTemplateIdWithSystemAndCustomField>):SignatureTemplateIdWithSystemAndCustomField
+	export function emptyBatchGetEmployeesJobDataReq():BatchGetEmployeesJobDataReq
+	export function emptyRefBatchGetEmployeesJobDataReq():Ref<BatchGetEmployeesJobDataReq>
+	export function refOfBatchGetEmployeesJobDataReq(x:BatchGetEmployeesJobDataReq,v:Ref<BatchGetEmployeesJobDataReq>)
+	export function unRefBatchGetEmployeesJobDataReq(v:Ref<BatchGetEmployeesJobDataReq>):BatchGetEmployeesJobDataReq
+	export function emptyBatchGetJobFamilyReqBody():BatchGetJobFamilyReqBody
+	export function emptyRefBatchGetJobFamilyReqBody():Ref<BatchGetJobFamilyReqBody>
+	export function refOfBatchGetJobFamilyReqBody(x:BatchGetJobFamilyReqBody,v:Ref<BatchGetJobFamilyReqBody>)
+	export function unRefBatchGetJobFamilyReqBody(v:Ref<BatchGetJobFamilyReqBody>):BatchGetJobFamilyReqBody
+	export function emptyBatchGetDepartmentRespData():BatchGetDepartmentRespData
+	export function emptyRefBatchGetDepartmentRespData():Ref<BatchGetDepartmentRespData>
+	export function refOfBatchGetDepartmentRespData(x:BatchGetDepartmentRespData,v:Ref<BatchGetDepartmentRespData>)
+	export function unRefBatchGetDepartmentRespData(v:Ref<BatchGetDepartmentRespData>):BatchGetDepartmentRespData
+	export function emptySearchBasicInfoCountryRegionIterator():SearchBasicInfoCountryRegionIterator
+	export function emptyRefSearchBasicInfoCountryRegionIterator():Ref<SearchBasicInfoCountryRegionIterator>
+	export function refOfSearchBasicInfoCountryRegionIterator(x:SearchBasicInfoCountryRegionIterator,v:Ref<SearchBasicInfoCountryRegionIterator>)
+	export function unRefSearchBasicInfoCountryRegionIterator(v:Ref<SearchBasicInfoCountryRegionIterator>):SearchBasicInfoCountryRegionIterator
+	export function emptyTransferInfo():TransferInfo
+	export function emptyRefTransferInfo():Ref<TransferInfo>
+	export function refOfTransferInfo(x:TransferInfo,v:Ref<TransferInfo>)
+	export function unRefTransferInfo(v:Ref<TransferInfo>):TransferInfo
+	export function emptyInternationalAssignmentV2ForCreate():InternationalAssignmentV2ForCreate
+	export function emptyRefInternationalAssignmentV2ForCreate():Ref<InternationalAssignmentV2ForCreate>
+	export function refOfInternationalAssignmentV2ForCreate(x:InternationalAssignmentV2ForCreate,v:Ref<InternationalAssignmentV2ForCreate>)
+	export function unRefInternationalAssignmentV2ForCreate(v:Ref<InternationalAssignmentV2ForCreate>):InternationalAssignmentV2ForCreate
+	export function emptyP2JobChangeUpdatedV2():P2JobChangeUpdatedV2
+	export function emptyRefP2JobChangeUpdatedV2():Ref<P2JobChangeUpdatedV2>
+	export function refOfP2JobChangeUpdatedV2(x:P2JobChangeUpdatedV2,v:Ref<P2JobChangeUpdatedV2>)
+	export function unRefP2JobChangeUpdatedV2(v:Ref<P2JobChangeUpdatedV2>):P2JobChangeUpdatedV2
+	export function emptyBatchGetJobLevelResp():BatchGetJobLevelResp
+	export function emptyRefBatchGetJobLevelResp():Ref<BatchGetJobLevelResp>
+	export function refOfBatchGetJobLevelResp(x:BatchGetJobLevelResp,v:Ref<BatchGetJobLevelResp>)
+	export function unRefBatchGetJobLevelResp(v:Ref<BatchGetJobLevelResp>):BatchGetJobLevelResp
+	export function emptyBatchGetDepartmentReqBody():BatchGetDepartmentReqBody
+	export function emptyRefBatchGetDepartmentReqBody():Ref<BatchGetDepartmentReqBody>
+	export function refOfBatchGetDepartmentReqBody(x:BatchGetDepartmentReqBody,v:Ref<BatchGetDepartmentReqBody>)
+	export function unRefBatchGetDepartmentReqBody(v:Ref<BatchGetDepartmentReqBody>):BatchGetDepartmentReqBody
+	export function emptyFormFieldVariableStringValue():FormFieldVariableStringValue
+	export function emptyRefFormFieldVariableStringValue():Ref<FormFieldVariableStringValue>
+	export function refOfFormFieldVariableStringValue(x:FormFieldVariableStringValue,v:Ref<FormFieldVariableStringValue>)
+	export function unRefFormFieldVariableStringValue(v:Ref<FormFieldVariableStringValue>):FormFieldVariableStringValue
+	export function emptyPatchPersonResp():PatchPersonResp
+	export function emptyRefPatchPersonResp():Ref<PatchPersonResp>
+	export function refOfPatchPersonResp(x:PatchPersonResp,v:Ref<PatchPersonResp>)
+	export function unRefPatchPersonResp(v:Ref<PatchPersonResp>):PatchPersonResp
+	export function emptyBasicDepartment():BasicDepartment
+	export function emptyRefBasicDepartment():Ref<BasicDepartment>
+	export function refOfBasicDepartment(x:BasicDepartment,v:Ref<BasicDepartment>)
+	export function unRefBasicDepartment(v:Ref<BasicDepartment>):BasicDepartment
+	export function emptySearchBasicInfoCountryRegionSubdivisionReqBody():SearchBasicInfoCountryRegionSubdivisionReqBody
+	export function emptyRefSearchBasicInfoCountryRegionSubdivisionReqBody():Ref<SearchBasicInfoCountryRegionSubdivisionReqBody>
+	export function refOfSearchBasicInfoCountryRegionSubdivisionReqBody(x:SearchBasicInfoCountryRegionSubdivisionReqBody,v:Ref<SearchBasicInfoCountryRegionSubdivisionReqBody>)
+	export function unRefSearchBasicInfoCountryRegionSubdivisionReqBody(v:Ref<SearchBasicInfoCountryRegionSubdivisionReqBody>):SearchBasicInfoCountryRegionSubdivisionReqBody
+	export function emptyBatchGetEmployeesBpReq():BatchGetEmployeesBpReq
+	export function emptyRefBatchGetEmployeesBpReq():Ref<BatchGetEmployeesBpReq>
+	export function refOfBatchGetEmployeesBpReq(x:BatchGetEmployeesBpReq,v:Ref<BatchGetEmployeesBpReq>)
+	export function unRefBatchGetEmployeesBpReq(v:Ref<BatchGetEmployeesBpReq>):BatchGetEmployeesBpReq
+	export function emptySearchBasicInfoCityResp():SearchBasicInfoCityResp
+	export function emptyRefSearchBasicInfoCityResp():Ref<SearchBasicInfoCityResp>
+	export function refOfSearchBasicInfoCityResp(x:SearchBasicInfoCityResp,v:Ref<SearchBasicInfoCityResp>)
+	export function unRefSearchBasicInfoCityResp(v:Ref<SearchBasicInfoCityResp>):SearchBasicInfoCityResp
+	export function emptySearchBasicInfoCurrencyRespData():SearchBasicInfoCurrencyRespData
+	export function emptyRefSearchBasicInfoCurrencyRespData():Ref<SearchBasicInfoCurrencyRespData>
+	export function refOfSearchBasicInfoCurrencyRespData(x:SearchBasicInfoCurrencyRespData,v:Ref<SearchBasicInfoCurrencyRespData>)
+	export function unRefSearchBasicInfoCurrencyRespData(v:Ref<SearchBasicInfoCurrencyRespData>):SearchBasicInfoCurrencyRespData
+	export function emptySignatureTemplateRegionInfo():SignatureTemplateRegionInfo
+	export function emptyRefSignatureTemplateRegionInfo():Ref<SignatureTemplateRegionInfo>
+	export function refOfSignatureTemplateRegionInfo(x:SignatureTemplateRegionInfo,v:Ref<SignatureTemplateRegionInfo>)
+	export function unRefSignatureTemplateRegionInfo(v:Ref<SignatureTemplateRegionInfo>):SignatureTemplateRegionInfo
+	export function emptyBatchGetJobLevelReq():BatchGetJobLevelReq
+	export function emptyRefBatchGetJobLevelReq():Ref<BatchGetJobLevelReq>
+	export function refOfBatchGetJobLevelReq(x:BatchGetJobLevelReq,v:Ref<BatchGetJobLevelReq>)
+	export function unRefBatchGetJobLevelReq(v:Ref<BatchGetJobLevelReq>):BatchGetJobLevelReq
+	export function emptyP2ProbationUpdatedV2():P2ProbationUpdatedV2
+	export function emptyRefP2ProbationUpdatedV2():Ref<P2ProbationUpdatedV2>
+	export function refOfP2ProbationUpdatedV2(x:P2ProbationUpdatedV2,v:Ref<P2ProbationUpdatedV2>)
+	export function unRefP2ProbationUpdatedV2(v:Ref<P2ProbationUpdatedV2>):P2ProbationUpdatedV2
+	export function emptyPreHirePayGroupInfo():PreHirePayGroupInfo
+	export function emptyRefPreHirePayGroupInfo():Ref<PreHirePayGroupInfo>
+	export function refOfPreHirePayGroupInfo(x:PreHirePayGroupInfo,v:Ref<PreHirePayGroupInfo>)
+	export function unRefPreHirePayGroupInfo(v:Ref<PreHirePayGroupInfo>):PreHirePayGroupInfo
+	export function emptyQrCodeDimensionValue():QrCodeDimensionValue
+	export function emptyRefQrCodeDimensionValue():Ref<QrCodeDimensionValue>
+	export function refOfQrCodeDimensionValue(x:QrCodeDimensionValue,v:Ref<QrCodeDimensionValue>)
+	export function unRefQrCodeDimensionValue(v:Ref<QrCodeDimensionValue>):QrCodeDimensionValue
+	export function emptySearchBasicInfoBankBranchResp():SearchBasicInfoBankBranchResp
+	export function emptyRefSearchBasicInfoBankBranchResp():Ref<SearchBasicInfoBankBranchResp>
+	export function refOfSearchBasicInfoBankBranchResp(x:SearchBasicInfoBankBranchResp,v:Ref<SearchBasicInfoBankBranchResp>)
+	export function unRefSearchBasicInfoBankBranchResp(v:Ref<SearchBasicInfoBankBranchResp>):SearchBasicInfoBankBranchResp
+	export function emptyCostCenterVersion():CostCenterVersion
+	export function emptyRefCostCenterVersion():Ref<CostCenterVersion>
+	export function refOfCostCenterVersion(x:CostCenterVersion,v:Ref<CostCenterVersion>)
+	export function unRefCostCenterVersion(v:Ref<CostCenterVersion>):CostCenterVersion
+	export function emptyCreateCostCenterVersionResp():CreateCostCenterVersionResp
+	export function emptyRefCreateCostCenterVersionResp():Ref<CreateCostCenterVersionResp>
+	export function refOfCreateCostCenterVersionResp(x:CreateCostCenterVersionResp,v:Ref<CreateCostCenterVersionResp>)
+	export function unRefCreateCostCenterVersionResp(v:Ref<CreateCostCenterVersionResp>):CreateCostCenterVersionResp
+	export function emptySearchProbationResp():SearchProbationResp
+	export function emptyRefSearchProbationResp():Ref<SearchProbationResp>
+	export function refOfSearchProbationResp(x:SearchProbationResp,v:Ref<SearchProbationResp>)
+	export function unRefSearchProbationResp(v:Ref<SearchProbationResp>):SearchProbationResp
+	export function emptyTransitTaskPreHireReq():TransitTaskPreHireReq
+	export function emptyRefTransitTaskPreHireReq():Ref<TransitTaskPreHireReq>
+	export function refOfTransitTaskPreHireReq(x:TransitTaskPreHireReq,v:Ref<TransitTaskPreHireReq>)
+	export function unRefTransitTaskPreHireReq(v:Ref<TransitTaskPreHireReq>):TransitTaskPreHireReq
+	export function emptyListBpReq():ListBpReq
+	export function emptyRefListBpReq():Ref<ListBpReq>
+	export function refOfListBpReq(x:ListBpReq,v:Ref<ListBpReq>)
+	export function unRefListBpReq(v:Ref<ListBpReq>):ListBpReq
+	export function emptySearchDepartmentReq():SearchDepartmentReq
+	export function emptyRefSearchDepartmentReq():Ref<SearchDepartmentReq>
+	export function refOfSearchDepartmentReq(x:SearchDepartmentReq,v:Ref<SearchDepartmentReq>)
+	export function unRefSearchDepartmentReq(v:Ref<SearchDepartmentReq>):SearchDepartmentReq
+	export function emptyCreateCostCenterVersionReq():CreateCostCenterVersionReq
+	export function emptyRefCreateCostCenterVersionReq():Ref<CreateCostCenterVersionReq>
+	export function refOfCreateCostCenterVersionReq(x:CreateCostCenterVersionReq,v:Ref<CreateCostCenterVersionReq>)
+	export function unRefCreateCostCenterVersionReq(v:Ref<CreateCostCenterVersionReq>):CreateCostCenterVersionReq
+	export function emptyPreHireAbnormalReason():PreHireAbnormalReason
+	export function emptyRefPreHireAbnormalReason():Ref<PreHireAbnormalReason>
+	export function refOfPreHireAbnormalReason(x:PreHireAbnormalReason,v:Ref<PreHireAbnormalReason>)
+	export function unRefPreHireAbnormalReason(v:Ref<PreHireAbnormalReason>):PreHireAbnormalReason
+	export function emptyLeaveGrantingRecord():LeaveGrantingRecord
+	export function emptyRefLeaveGrantingRecord():Ref<LeaveGrantingRecord>
+	export function refOfLeaveGrantingRecord(x:LeaveGrantingRecord,v:Ref<LeaveGrantingRecord>)
+	export function unRefLeaveGrantingRecord(v:Ref<LeaveGrantingRecord>):LeaveGrantingRecord
+	export function emptyPatchCostCenterVersionRespData():PatchCostCenterVersionRespData
+	export function emptyRefPatchCostCenterVersionRespData():Ref<PatchCostCenterVersionRespData>
+	export function refOfPatchCostCenterVersionRespData(x:PatchCostCenterVersionRespData,v:Ref<PatchCostCenterVersionRespData>)
+	export function unRefPatchCostCenterVersionRespData(v:Ref<PatchCostCenterVersionRespData>):PatchCostCenterVersionRespData
+	export function emptySearchDepartmentIterator():SearchDepartmentIterator
+	export function emptyRefSearchDepartmentIterator():Ref<SearchDepartmentIterator>
+	export function refOfSearchDepartmentIterator(x:SearchDepartmentIterator,v:Ref<SearchDepartmentIterator>)
+	export function unRefSearchDepartmentIterator(v:Ref<SearchDepartmentIterator>):SearchDepartmentIterator
+	export function emptyTranferEmploymentInfo():TranferEmploymentInfo
+	export function emptyRefTranferEmploymentInfo():Ref<TranferEmploymentInfo>
+	export function refOfTranferEmploymentInfo(x:TranferEmploymentInfo,v:Ref<TranferEmploymentInfo>)
+	export function unRefTranferEmploymentInfo(v:Ref<TranferEmploymentInfo>):TranferEmploymentInfo
+	export function emptyP2OffboardingChecklistUpdatedV2Data():P2OffboardingChecklistUpdatedV2Data
+	export function emptyRefP2OffboardingChecklistUpdatedV2Data():Ref<P2OffboardingChecklistUpdatedV2Data>
+	export function refOfP2OffboardingChecklistUpdatedV2Data(x:P2OffboardingChecklistUpdatedV2Data,v:Ref<P2OffboardingChecklistUpdatedV2Data>)
+	export function unRefP2OffboardingChecklistUpdatedV2Data(v:Ref<P2OffboardingChecklistUpdatedV2Data>):P2OffboardingChecklistUpdatedV2Data
+	export function emptyPreHire():PreHire
+	export function emptyRefPreHire():Ref<PreHire>
+	export function refOfPreHire(x:PreHire,v:Ref<PreHire>)
+	export function unRefPreHire(v:Ref<PreHire>):PreHire
+	export function emptySearchBasicInfoCountryRegionResp():SearchBasicInfoCountryRegionResp
+	export function emptyRefSearchBasicInfoCountryRegionResp():Ref<SearchBasicInfoCountryRegionResp>
+	export function refOfSearchBasicInfoCountryRegionResp(x:SearchBasicInfoCountryRegionResp,v:Ref<SearchBasicInfoCountryRegionResp>)
+	export function unRefSearchBasicInfoCountryRegionResp(v:Ref<SearchBasicInfoCountryRegionResp>):SearchBasicInfoCountryRegionResp
+	export function emptyOfferInfo():OfferInfo
+	export function emptyRefOfferInfo():Ref<OfferInfo>
+	export function refOfOfferInfo(x:OfferInfo,v:Ref<OfferInfo>)
+	export function unRefOfferInfo(v:Ref<OfferInfo>):OfferInfo
+	export function emptyQueryMultiTimelineDepartmentRespData():QueryMultiTimelineDepartmentRespData
+	export function emptyRefQueryMultiTimelineDepartmentRespData():Ref<QueryMultiTimelineDepartmentRespData>
+	export function refOfQueryMultiTimelineDepartmentRespData(x:QueryMultiTimelineDepartmentRespData,v:Ref<QueryMultiTimelineDepartmentRespData>)
+	export function unRefQueryMultiTimelineDepartmentRespData(v:Ref<QueryMultiTimelineDepartmentRespData>):QueryMultiTimelineDepartmentRespData
+	export function emptyProfileSettingPersonalRecord():ProfileSettingPersonalRecord
+	export function emptyRefProfileSettingPersonalRecord():Ref<ProfileSettingPersonalRecord>
+	export function refOfProfileSettingPersonalRecord(x:ProfileSettingPersonalRecord,v:Ref<ProfileSettingPersonalRecord>)
+	export function unRefProfileSettingPersonalRecord(v:Ref<ProfileSettingPersonalRecord>):ProfileSettingPersonalRecord
+	export function emptySignatureFile():SignatureFile
+	export function emptyRefSignatureFile():Ref<SignatureFile>
+	export function refOfSignatureFile(x:SignatureFile,v:Ref<SignatureFile>)
+	export function unRefSignatureFile(v:Ref<SignatureFile>):SignatureFile
+	export function emptySearchEmployeeIterator():SearchEmployeeIterator
+	export function emptyRefSearchEmployeeIterator():Ref<SearchEmployeeIterator>
+	export function refOfSearchEmployeeIterator(x:SearchEmployeeIterator,v:Ref<SearchEmployeeIterator>)
+	export function unRefSearchEmployeeIterator(v:Ref<SearchEmployeeIterator>):SearchEmployeeIterator
+	export function emptySearchJobChangeIterator():SearchJobChangeIterator
+	export function emptyRefSearchJobChangeIterator():Ref<SearchJobChangeIterator>
+	export function refOfSearchJobChangeIterator(x:SearchJobChangeIterator,v:Ref<SearchJobChangeIterator>)
+	export function unRefSearchJobChangeIterator(v:Ref<SearchJobChangeIterator>):SearchJobChangeIterator
+	export function emptyListBpIterator():ListBpIterator
+	export function emptyRefListBpIterator():Ref<ListBpIterator>
+	export function refOfListBpIterator(x:ListBpIterator,v:Ref<ListBpIterator>)
+	export function unRefListBpIterator(v:Ref<ListBpIterator>):ListBpIterator
+	export function emptyPreHireOnboardingInfo():PreHireOnboardingInfo
+	export function emptyRefPreHireOnboardingInfo():Ref<PreHireOnboardingInfo>
+	export function refOfPreHireOnboardingInfo(x:PreHireOnboardingInfo,v:Ref<PreHireOnboardingInfo>)
+	export function unRefPreHireOnboardingInfo(v:Ref<PreHireOnboardingInfo>):PreHireOnboardingInfo
+	export function emptySearchBasicInfoCountryRegionReqBody():SearchBasicInfoCountryRegionReqBody
+	export function emptyRefSearchBasicInfoCountryRegionReqBody():Ref<SearchBasicInfoCountryRegionReqBody>
+	export function refOfSearchBasicInfoCountryRegionReqBody(x:SearchBasicInfoCountryRegionReqBody,v:Ref<SearchBasicInfoCountryRegionReqBody>)
+	export function unRefSearchBasicInfoCountryRegionReqBody(v:Ref<SearchBasicInfoCountryRegionReqBody>):SearchBasicInfoCountryRegionReqBody
 	export function emptyBatchGetLocationRespData():BatchGetLocationRespData
 	export function emptyRefBatchGetLocationRespData():Ref<BatchGetLocationRespData>
 	export function refOfBatchGetLocationRespData(x:BatchGetLocationRespData,v:Ref<BatchGetLocationRespData>)
@@ -8306,446 +9909,630 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 	export function emptyRefDependent():Ref<Dependent>
 	export function refOfDependent(x:Dependent,v:Ref<Dependent>)
 	export function unRefDependent(v:Ref<Dependent>):Dependent
-	export function emptyDeleteProbationAssessmentReq():DeleteProbationAssessmentReq
-	export function emptyRefDeleteProbationAssessmentReq():Ref<DeleteProbationAssessmentReq>
-	export function refOfDeleteProbationAssessmentReq(x:DeleteProbationAssessmentReq,v:Ref<DeleteProbationAssessmentReq>)
-	export function unRefDeleteProbationAssessmentReq(v:Ref<DeleteProbationAssessmentReq>):DeleteProbationAssessmentReq
-	export function emptyP2ProcessNodeUpdatedV2():P2ProcessNodeUpdatedV2
-	export function emptyRefP2ProcessNodeUpdatedV2():Ref<P2ProcessNodeUpdatedV2>
-	export function refOfP2ProcessNodeUpdatedV2(x:P2ProcessNodeUpdatedV2,v:Ref<P2ProcessNodeUpdatedV2>)
-	export function unRefP2ProcessNodeUpdatedV2(v:Ref<P2ProcessNodeUpdatedV2>):P2ProcessNodeUpdatedV2
-	export function emptyPatchCostCenterResp():PatchCostCenterResp
-	export function emptyRefPatchCostCenterResp():Ref<PatchCostCenterResp>
-	export function refOfPatchCostCenterResp(x:PatchCostCenterResp,v:Ref<PatchCostCenterResp>)
-	export function unRefPatchCostCenterResp(v:Ref<PatchCostCenterResp>):PatchCostCenterResp
-	export function emptyProfileSettingPersonalBasicInfo():ProfileSettingPersonalBasicInfo
-	export function emptyRefProfileSettingPersonalBasicInfo():Ref<ProfileSettingPersonalBasicInfo>
-	export function refOfProfileSettingPersonalBasicInfo(x:ProfileSettingPersonalBasicInfo,v:Ref<ProfileSettingPersonalBasicInfo>)
-	export function unRefProfileSettingPersonalBasicInfo(v:Ref<ProfileSettingPersonalBasicInfo>):ProfileSettingPersonalBasicInfo
-	export function emptyApprovalGroup():ApprovalGroup
-	export function emptyRefApprovalGroup():Ref<ApprovalGroup>
-	export function refOfApprovalGroup(x:ApprovalGroup,v:Ref<ApprovalGroup>)
-	export function unRefApprovalGroup(v:Ref<ApprovalGroup>):ApprovalGroup
-	export function emptyCreateCostCenterReq():CreateCostCenterReq
-	export function emptyRefCreateCostCenterReq():Ref<CreateCostCenterReq>
-	export function refOfCreateCostCenterReq(x:CreateCostCenterReq,v:Ref<CreateCostCenterReq>)
-	export function unRefCreateCostCenterReq(v:Ref<CreateCostCenterReq>):CreateCostCenterReq
-	export function emptyGetProcessReq():GetProcessReq
-	export function emptyRefGetProcessReq():Ref<GetProcessReq>
-	export function refOfGetProcessReq(x:GetProcessReq,v:Ref<GetProcessReq>)
-	export function unRefGetProcessReq(v:Ref<GetProcessReq>):GetProcessReq
-	export function emptyLangText():LangText
-	export function emptyRefLangText():Ref<LangText>
-	export function refOfLangText(x:LangText,v:Ref<LangText>)
-	export function unRefLangText(v:Ref<LangText>):LangText
-	export function emptySearchJobChangeReqBody():SearchJobChangeReqBody
-	export function emptyRefSearchJobChangeReqBody():Ref<SearchJobChangeReqBody>
-	export function refOfSearchJobChangeReqBody(x:SearchJobChangeReqBody,v:Ref<SearchJobChangeReqBody>)
-	export function unRefSearchJobChangeReqBody(v:Ref<SearchJobChangeReqBody>):SearchJobChangeReqBody
-	export function emptyBatchGetEmployeeReq():BatchGetEmployeeReq
-	export function emptyRefBatchGetEmployeeReq():Ref<BatchGetEmployeeReq>
-	export function refOfBatchGetEmployeeReq(x:BatchGetEmployeeReq,v:Ref<BatchGetEmployeeReq>)
-	export function unRefBatchGetEmployeeReq(v:Ref<BatchGetEmployeeReq>):BatchGetEmployeeReq
-	export function emptyCustomName():CustomName
-	export function emptyRefCustomName():Ref<CustomName>
-	export function refOfCustomName(x:CustomName,v:Ref<CustomName>)
-	export function unRefCustomName(v:Ref<CustomName>):CustomName
-	export function emptyJobGrade():JobGrade
-	export function emptyRefJobGrade():Ref<JobGrade>
-	export function refOfJobGrade(x:JobGrade,v:Ref<JobGrade>)
-	export function unRefJobGrade(v:Ref<JobGrade>):JobGrade
-	export function emptyBatchGetJobFamilyResp():BatchGetJobFamilyResp
-	export function emptyRefBatchGetJobFamilyResp():Ref<BatchGetJobFamilyResp>
-	export function refOfBatchGetJobFamilyResp(x:BatchGetJobFamilyResp,v:Ref<BatchGetJobFamilyResp>)
-	export function unRefBatchGetJobFamilyResp(v:Ref<BatchGetJobFamilyResp>):BatchGetJobFamilyResp
-	export function emptyInternationalAssignmentV2ForCreate():InternationalAssignmentV2ForCreate
-	export function emptyRefInternationalAssignmentV2ForCreate():Ref<InternationalAssignmentV2ForCreate>
-	export function refOfInternationalAssignmentV2ForCreate(x:InternationalAssignmentV2ForCreate,v:Ref<InternationalAssignmentV2ForCreate>)
-	export function unRefInternationalAssignmentV2ForCreate(v:Ref<InternationalAssignmentV2ForCreate>):InternationalAssignmentV2ForCreate
-	export function emptyCreatePersonResp():CreatePersonResp
-	export function emptyRefCreatePersonResp():Ref<CreatePersonResp>
-	export function refOfCreatePersonResp(x:CreatePersonResp,v:Ref<CreatePersonResp>)
-	export function unRefCreatePersonResp(v:Ref<CreatePersonResp>):CreatePersonResp
-	export function emptyDeleteCostCenterVersionReqBody():DeleteCostCenterVersionReqBody
-	export function emptyRefDeleteCostCenterVersionReqBody():Ref<DeleteCostCenterVersionReqBody>
-	export function refOfDeleteCostCenterVersionReqBody(x:DeleteCostCenterVersionReqBody,v:Ref<DeleteCostCenterVersionReqBody>)
-	export function unRefDeleteCostCenterVersionReqBody(v:Ref<DeleteCostCenterVersionReqBody>):DeleteCostCenterVersionReqBody
-	export function emptyProfileSettingWorkExperience():ProfileSettingWorkExperience
-	export function emptyRefProfileSettingWorkExperience():Ref<ProfileSettingWorkExperience>
-	export function refOfProfileSettingWorkExperience(x:ProfileSettingWorkExperience,v:Ref<ProfileSettingWorkExperience>)
-	export function unRefProfileSettingWorkExperience(v:Ref<ProfileSettingWorkExperience>):ProfileSettingWorkExperience
-	export function emptyCreatePreHireReq():CreatePreHireReq
-	export function emptyRefCreatePreHireReq():Ref<CreatePreHireReq>
-	export function refOfCreatePreHireReq(x:CreatePreHireReq,v:Ref<CreatePreHireReq>)
-	export function unRefCreatePreHireReq(v:Ref<CreatePreHireReq>):CreatePreHireReq
-	export function emptyDeleteCostCenterVersionResp():DeleteCostCenterVersionResp
-	export function emptyRefDeleteCostCenterVersionResp():Ref<DeleteCostCenterVersionResp>
-	export function refOfDeleteCostCenterVersionResp(x:DeleteCostCenterVersionResp,v:Ref<DeleteCostCenterVersionResp>)
-	export function unRefDeleteCostCenterVersionResp(v:Ref<DeleteCostCenterVersionResp>):DeleteCostCenterVersionResp
-	export function emptyEmployeeDomainEventData():EmployeeDomainEventData
-	export function emptyRefEmployeeDomainEventData():Ref<EmployeeDomainEventData>
-	export function refOfEmployeeDomainEventData(x:EmployeeDomainEventData,v:Ref<EmployeeDomainEventData>)
-	export function unRefEmployeeDomainEventData(v:Ref<EmployeeDomainEventData>):EmployeeDomainEventData
-	export function emptyPhoneForUpdate():PhoneForUpdate
-	export function emptyRefPhoneForUpdate():Ref<PhoneForUpdate>
-	export function refOfPhoneForUpdate(x:PhoneForUpdate,v:Ref<PhoneForUpdate>)
-	export function unRefPhoneForUpdate(v:Ref<PhoneForUpdate>):PhoneForUpdate
-	export function emptyProfileSettingEmpBasicInfoForUpdate():ProfileSettingEmpBasicInfoForUpdate
-	export function emptyRefProfileSettingEmpBasicInfoForUpdate():Ref<ProfileSettingEmpBasicInfoForUpdate>
-	export function refOfProfileSettingEmpBasicInfoForUpdate(x:ProfileSettingEmpBasicInfoForUpdate,v:Ref<ProfileSettingEmpBasicInfoForUpdate>)
-	export function unRefProfileSettingEmpBasicInfoForUpdate(v:Ref<ProfileSettingEmpBasicInfoForUpdate>):ProfileSettingEmpBasicInfoForUpdate
-	export function emptyBasicPersonInfo():BasicPersonInfo
-	export function emptyRefBasicPersonInfo():Ref<BasicPersonInfo>
-	export function refOfBasicPersonInfo(x:BasicPersonInfo,v:Ref<BasicPersonInfo>)
-	export function unRefBasicPersonInfo(v:Ref<BasicPersonInfo>):BasicPersonInfo
-	export function emptyCompany():Company
-	export function emptyRefCompany():Ref<Company>
-	export function refOfCompany(x:Company,v:Ref<Company>)
-	export function unRefCompany(v:Ref<Company>):Company
-	export function emptyDepartmentParentInfo():DepartmentParentInfo
-	export function emptyRefDepartmentParentInfo():Ref<DepartmentParentInfo>
-	export function refOfDepartmentParentInfo(x:DepartmentParentInfo,v:Ref<DepartmentParentInfo>)
-	export function unRefDepartmentParentInfo(v:Ref<DepartmentParentInfo>):DepartmentParentInfo
-	export function emptyEducationInfo():EducationInfo
-	export function emptyRefEducationInfo():Ref<EducationInfo>
-	export function refOfEducationInfo(x:EducationInfo,v:Ref<EducationInfo>)
-	export function unRefEducationInfo(v:Ref<EducationInfo>):EducationInfo
-	export function emptyProcessApprover():ProcessApprover
-	export function emptyRefProcessApprover():Ref<ProcessApprover>
-	export function refOfProcessApprover(x:ProcessApprover,v:Ref<ProcessApprover>)
-	export function unRefProcessApprover(v:Ref<ProcessApprover>):ProcessApprover
-	export function emptyFormVariableValueInfo():FormVariableValueInfo
-	export function emptyRefFormVariableValueInfo():Ref<FormVariableValueInfo>
-	export function refOfFormVariableValueInfo(x:FormVariableValueInfo,v:Ref<FormVariableValueInfo>)
-	export function unRefFormVariableValueInfo(v:Ref<FormVariableValueInfo>):FormVariableValueInfo
-	export function emptyProfileSettingI18n():ProfileSettingI18n
-	export function emptyRefProfileSettingI18n():Ref<ProfileSettingI18n>
-	export function refOfProfileSettingI18n(x:ProfileSettingI18n,v:Ref<ProfileSettingI18n>)
-	export function unRefProfileSettingI18n(v:Ref<ProfileSettingI18n>):ProfileSettingI18n
-	export function emptyBatchGetEmployeesJobDataReq():BatchGetEmployeesJobDataReq
-	export function emptyRefBatchGetEmployeesJobDataReq():Ref<BatchGetEmployeesJobDataReq>
-	export function refOfBatchGetEmployeesJobDataReq(x:BatchGetEmployeesJobDataReq,v:Ref<BatchGetEmployeesJobDataReq>)
-	export function unRefBatchGetEmployeesJobDataReq(v:Ref<BatchGetEmployeesJobDataReq>):BatchGetEmployeesJobDataReq
-	export function emptySearchBasicInfoBankBranchReq():SearchBasicInfoBankBranchReq
-	export function emptyRefSearchBasicInfoBankBranchReq():Ref<SearchBasicInfoBankBranchReq>
-	export function refOfSearchBasicInfoBankBranchReq(x:SearchBasicInfoBankBranchReq,v:Ref<SearchBasicInfoBankBranchReq>)
-	export function unRefSearchBasicInfoBankBranchReq(v:Ref<SearchBasicInfoBankBranchReq>):SearchBasicInfoBankBranchReq
-	export function emptyLeaveEmployExpireRecord():LeaveEmployExpireRecord
-	export function emptyRefLeaveEmployExpireRecord():Ref<LeaveEmployExpireRecord>
-	export function refOfLeaveEmployExpireRecord(x:LeaveEmployExpireRecord,v:Ref<LeaveEmployExpireRecord>)
-	export function unRefLeaveEmployExpireRecord(v:Ref<LeaveEmployExpireRecord>):LeaveEmployExpireRecord
-	export function emptySearchBasicInfoCurrencyReqBody():SearchBasicInfoCurrencyReqBody
-	export function emptyRefSearchBasicInfoCurrencyReqBody():Ref<SearchBasicInfoCurrencyReqBody>
-	export function refOfSearchBasicInfoCurrencyReqBody(x:SearchBasicInfoCurrencyReqBody,v:Ref<SearchBasicInfoCurrencyReqBody>)
-	export function unRefSearchBasicInfoCurrencyReqBody(v:Ref<SearchBasicInfoCurrencyReqBody>):SearchBasicInfoCurrencyReqBody
-	export function emptyQueryTimelineDepartmentReqBody():QueryTimelineDepartmentReqBody
-	export function emptyRefQueryTimelineDepartmentReqBody():Ref<QueryTimelineDepartmentReqBody>
-	export function refOfQueryTimelineDepartmentReqBody(x:QueryTimelineDepartmentReqBody,v:Ref<QueryTimelineDepartmentReqBody>)
-	export function unRefQueryTimelineDepartmentReqBody(v:Ref<QueryTimelineDepartmentReqBody>):QueryTimelineDepartmentReqBody
-	export function emptySearchBasicInfoCountryRegionReqBody():SearchBasicInfoCountryRegionReqBody
-	export function emptyRefSearchBasicInfoCountryRegionReqBody():Ref<SearchBasicInfoCountryRegionReqBody>
-	export function refOfSearchBasicInfoCountryRegionReqBody(x:SearchBasicInfoCountryRegionReqBody,v:Ref<SearchBasicInfoCountryRegionReqBody>)
-	export function unRefSearchBasicInfoCountryRegionReqBody(v:Ref<SearchBasicInfoCountryRegionReqBody>):SearchBasicInfoCountryRegionReqBody
-	export function emptyBankBranch():BankBranch
-	export function emptyRefBankBranch():Ref<BankBranch>
-	export function refOfBankBranch(x:BankBranch,v:Ref<BankBranch>)
-	export function unRefBankBranch(v:Ref<BankBranch>):BankBranch
-	export function emptyBatchGetEmployeeReqBody():BatchGetEmployeeReqBody
-	export function emptyRefBatchGetEmployeeReqBody():Ref<BatchGetEmployeeReqBody>
-	export function refOfBatchGetEmployeeReqBody(x:BatchGetEmployeeReqBody,v:Ref<BatchGetEmployeeReqBody>)
-	export function unRefBatchGetEmployeeReqBody(v:Ref<BatchGetEmployeeReqBody>):BatchGetEmployeeReqBody
-	export function emptyBatchGetLocationReq():BatchGetLocationReq
-	export function emptyRefBatchGetLocationReq():Ref<BatchGetLocationReq>
-	export function refOfBatchGetLocationReq(x:BatchGetLocationReq,v:Ref<BatchGetLocationReq>)
-	export function unRefBatchGetLocationReq(v:Ref<BatchGetLocationReq>):BatchGetLocationReq
-	export function emptyDeleteCostCenterReq():DeleteCostCenterReq
-	export function emptyRefDeleteCostCenterReq():Ref<DeleteCostCenterReq>
-	export function refOfDeleteCostCenterReq(x:DeleteCostCenterReq,v:Ref<DeleteCostCenterReq>)
-	export function unRefDeleteCostCenterReq(v:Ref<DeleteCostCenterReq>):DeleteCostCenterReq
-	export function emptyFieldVariableValue():FieldVariableValue
-	export function emptyRefFieldVariableValue():Ref<FieldVariableValue>
-	export function refOfFieldVariableValue(x:FieldVariableValue,v:Ref<FieldVariableValue>)
-	export function unRefFieldVariableValue(v:Ref<FieldVariableValue>):FieldVariableValue
-	export function emptyLeaveBalance():LeaveBalance
-	export function emptyRefLeaveBalance():Ref<LeaveBalance>
-	export function refOfLeaveBalance(x:LeaveBalance,v:Ref<LeaveBalance>)
-	export function unRefLeaveBalance(v:Ref<LeaveBalance>):LeaveBalance
-	export function emptyPatchCostCenterVersionReq():PatchCostCenterVersionReq
-	export function emptyRefPatchCostCenterVersionReq():Ref<PatchCostCenterVersionReq>
-	export function refOfPatchCostCenterVersionReq(x:PatchCostCenterVersionReq,v:Ref<PatchCostCenterVersionReq>)
-	export function unRefPatchCostCenterVersionReq(v:Ref<PatchCostCenterVersionReq>):PatchCostCenterVersionReq
-	export function emptySearchBasicInfoCityReqBody():SearchBasicInfoCityReqBody
-	export function emptyRefSearchBasicInfoCityReqBody():Ref<SearchBasicInfoCityReqBody>
-	export function refOfSearchBasicInfoCityReqBody(x:SearchBasicInfoCityReqBody,v:Ref<SearchBasicInfoCityReqBody>)
-	export function unRefSearchBasicInfoCityReqBody(v:Ref<SearchBasicInfoCityReqBody>):SearchBasicInfoCityReqBody
-	export function emptySearchEmployeeReq():SearchEmployeeReq
-	export function emptyRefSearchEmployeeReq():Ref<SearchEmployeeReq>
-	export function refOfSearchEmployeeReq(x:SearchEmployeeReq,v:Ref<SearchEmployeeReq>)
-	export function unRefSearchEmployeeReq(v:Ref<SearchEmployeeReq>):SearchEmployeeReq
-	export function emptyHiberarchyCommon():HiberarchyCommon
-	export function emptyRefHiberarchyCommon():Ref<HiberarchyCommon>
-	export function refOfHiberarchyCommon(x:HiberarchyCommon,v:Ref<HiberarchyCommon>)
-	export function unRefHiberarchyCommon(v:Ref<HiberarchyCommon>):HiberarchyCommon
-	export function emptyPersonInfoChn():PersonInfoChn
-	export function emptyRefPersonInfoChn():Ref<PersonInfoChn>
-	export function refOfPersonInfoChn(x:PersonInfoChn,v:Ref<PersonInfoChn>)
-	export function unRefPersonInfoChn(v:Ref<PersonInfoChn>):PersonInfoChn
-	export function emptyPersonName():PersonName
-	export function emptyRefPersonName():Ref<PersonName>
-	export function refOfPersonName(x:PersonName,v:Ref<PersonName>)
-	export function unRefPersonName(v:Ref<PersonName>):PersonName
-	export function emptyPreHireOnboardingInfo():PreHireOnboardingInfo
-	export function emptyRefPreHireOnboardingInfo():Ref<PreHireOnboardingInfo>
-	export function refOfPreHireOnboardingInfo(x:PreHireOnboardingInfo,v:Ref<PreHireOnboardingInfo>)
-	export function unRefPreHireOnboardingInfo(v:Ref<PreHireOnboardingInfo>):PreHireOnboardingInfo
-	export function emptyEmploymentBp():EmploymentBp
-	export function emptyRefEmploymentBp():Ref<EmploymentBp>
-	export function refOfEmploymentBp(x:EmploymentBp,v:Ref<EmploymentBp>)
-	export function unRefEmploymentBp(v:Ref<EmploymentBp>):EmploymentBp
-	export function emptyQueryEmployeesJobDataResp():QueryEmployeesJobDataResp
-	export function emptyRefQueryEmployeesJobDataResp():Ref<QueryEmployeesJobDataResp>
-	export function refOfQueryEmployeesJobDataResp(x:QueryEmployeesJobDataResp,v:Ref<QueryEmployeesJobDataResp>)
-	export function unRefQueryEmployeesJobDataResp(v:Ref<QueryEmployeesJobDataResp>):QueryEmployeesJobDataResp
-	export function emptySearchCostCenterReqBody():SearchCostCenterReqBody
-	export function emptyRefSearchCostCenterReqBody():Ref<SearchCostCenterReqBody>
-	export function refOfSearchCostCenterReqBody(x:SearchCostCenterReqBody,v:Ref<SearchCostCenterReqBody>)
-	export function unRefSearchCostCenterReqBody(v:Ref<SearchCostCenterReqBody>):SearchCostCenterReqBody
-	export function emptySearchBasicInfoNationalityReqBody():SearchBasicInfoNationalityReqBody
-	export function emptyRefSearchBasicInfoNationalityReqBody():Ref<SearchBasicInfoNationalityReqBody>
-	export function refOfSearchBasicInfoNationalityReqBody(x:SearchBasicInfoNationalityReqBody,v:Ref<SearchBasicInfoNationalityReqBody>)
-	export function unRefSearchBasicInfoNationalityReqBody(v:Ref<SearchBasicInfoNationalityReqBody>):SearchBasicInfoNationalityReqBody
+	export function emptyProfileSettingBankAccount():ProfileSettingBankAccount
+	export function emptyRefProfileSettingBankAccount():Ref<ProfileSettingBankAccount>
+	export function refOfProfileSettingBankAccount(x:ProfileSettingBankAccount,v:Ref<ProfileSettingBankAccount>)
+	export function unRefProfileSettingBankAccount(v:Ref<ProfileSettingBankAccount>):ProfileSettingBankAccount
+	export function emptyQueryJobGradeResp():QueryJobGradeResp
+	export function emptyRefQueryJobGradeResp():Ref<QueryJobGradeResp>
+	export function refOfQueryJobGradeResp(x:QueryJobGradeResp,v:Ref<QueryJobGradeResp>)
+	export function unRefQueryJobGradeResp(v:Ref<QueryJobGradeResp>):QueryJobGradeResp
 	export function emptySearchEmployeeRespData():SearchEmployeeRespData
 	export function emptyRefSearchEmployeeRespData():Ref<SearchEmployeeRespData>
 	export function refOfSearchEmployeeRespData(x:SearchEmployeeRespData,v:Ref<SearchEmployeeRespData>)
 	export function unRefSearchEmployeeRespData(v:Ref<SearchEmployeeRespData>):SearchEmployeeRespData
-	export function emptyCustomOrgUpdate():CustomOrgUpdate
-	export function emptyRefCustomOrgUpdate():Ref<CustomOrgUpdate>
-	export function refOfCustomOrgUpdate(x:CustomOrgUpdate,v:Ref<CustomOrgUpdate>)
-	export function unRefCustomOrgUpdate(v:Ref<CustomOrgUpdate>):CustomOrgUpdate
-	export function emptyOfferInfo():OfferInfo
-	export function emptyRefOfferInfo():Ref<OfferInfo>
-	export function refOfOfferInfo(x:OfferInfo,v:Ref<OfferInfo>)
-	export function unRefOfferInfo(v:Ref<OfferInfo>):OfferInfo
-	export function emptySearchProbationIterator():SearchProbationIterator
-	export function emptyRefSearchProbationIterator():Ref<SearchProbationIterator>
-	export function refOfSearchProbationIterator(x:SearchProbationIterator,v:Ref<SearchProbationIterator>)
-	export function unRefSearchProbationIterator(v:Ref<SearchProbationIterator>):SearchProbationIterator
-	export function emptyWorkforcePlanDetail():WorkforcePlanDetail
-	export function emptyRefWorkforcePlanDetail():Ref<WorkforcePlanDetail>
-	export function refOfWorkforcePlanDetail(x:WorkforcePlanDetail,v:Ref<WorkforcePlanDetail>)
-	export function unRefWorkforcePlanDetail(v:Ref<WorkforcePlanDetail>):WorkforcePlanDetail
-	export function emptyAbnormalReasonElement():AbnormalReasonElement
-	export function emptyRefAbnormalReasonElement():Ref<AbnormalReasonElement>
-	export function refOfAbnormalReasonElement(x:AbnormalReasonElement,v:Ref<AbnormalReasonElement>)
-	export function unRefAbnormalReasonElement(v:Ref<AbnormalReasonElement>):AbnormalReasonElement
-	export function emptyBatchGetEmployeesBpResp():BatchGetEmployeesBpResp
-	export function emptyRefBatchGetEmployeesBpResp():Ref<BatchGetEmployeesBpResp>
-	export function refOfBatchGetEmployeesBpResp(x:BatchGetEmployeesBpResp,v:Ref<BatchGetEmployeesBpResp>)
-	export function unRefBatchGetEmployeesBpResp(v:Ref<BatchGetEmployeesBpResp>):BatchGetEmployeesBpResp
-	export function emptyObjectFieldData():ObjectFieldData
-	export function emptyRefObjectFieldData():Ref<ObjectFieldData>
-	export function refOfObjectFieldData(x:ObjectFieldData,v:Ref<ObjectFieldData>)
-	export function unRefObjectFieldData(v:Ref<ObjectFieldData>):ObjectFieldData
-	export function emptySearchEmployeeIterator():SearchEmployeeIterator
-	export function emptyRefSearchEmployeeIterator():Ref<SearchEmployeeIterator>
-	export function refOfSearchEmployeeIterator(x:SearchEmployeeIterator,v:Ref<SearchEmployeeIterator>)
-	export function unRefSearchEmployeeIterator(v:Ref<SearchEmployeeIterator>):SearchEmployeeIterator
-	export function emptySearchBasicInfoBankRespData():SearchBasicInfoBankRespData
-	export function emptyRefSearchBasicInfoBankRespData():Ref<SearchBasicInfoBankRespData>
-	export function refOfSearchBasicInfoBankRespData(x:SearchBasicInfoBankRespData,v:Ref<SearchBasicInfoBankRespData>)
-	export function unRefSearchBasicInfoBankRespData(v:Ref<SearchBasicInfoBankRespData>):SearchBasicInfoBankRespData
-	export function emptySearchBasicInfoDistrictReq():SearchBasicInfoDistrictReq
-	export function emptyRefSearchBasicInfoDistrictReq():Ref<SearchBasicInfoDistrictReq>
-	export function refOfSearchBasicInfoDistrictReq(x:SearchBasicInfoDistrictReq,v:Ref<SearchBasicInfoDistrictReq>)
-	export function unRefSearchBasicInfoDistrictReq(v:Ref<SearchBasicInfoDistrictReq>):SearchBasicInfoDistrictReq
-	export function emptySearchEmployeeResp():SearchEmployeeResp
-	export function emptyRefSearchEmployeeResp():Ref<SearchEmployeeResp>
-	export function refOfSearchEmployeeResp(x:SearchEmployeeResp,v:Ref<SearchEmployeeResp>)
-	export function unRefSearchEmployeeResp(v:Ref<SearchEmployeeResp>):SearchEmployeeResp
-	export function emptyCountryRegionSubdivision():CountryRegionSubdivision
-	export function emptyRefCountryRegionSubdivision():Ref<CountryRegionSubdivision>
-	export function refOfCountryRegionSubdivision(x:CountryRegionSubdivision,v:Ref<CountryRegionSubdivision>)
-	export function unRefCountryRegionSubdivision(v:Ref<CountryRegionSubdivision>):CountryRegionSubdivision
-	export function emptyJob():Job
-	export function emptyRefJob():Ref<Job>
-	export function refOfJob(x:Job,v:Ref<Job>)
-	export function unRefJob(v:Ref<Job>):Job
-	export function emptyP2ProcessUpdatedV2():P2ProcessUpdatedV2
-	export function emptyRefP2ProcessUpdatedV2():Ref<P2ProcessUpdatedV2>
-	export function refOfP2ProcessUpdatedV2(x:P2ProcessUpdatedV2,v:Ref<P2ProcessUpdatedV2>)
-	export function unRefP2ProcessUpdatedV2(v:Ref<P2ProcessUpdatedV2>):P2ProcessUpdatedV2
-	export function emptyPreHire():PreHire
-	export function emptyRefPreHire():Ref<PreHire>
-	export function refOfPreHire(x:PreHire,v:Ref<PreHire>)
-	export function unRefPreHire(v:Ref<PreHire>):PreHire
+	export function emptyEmployeeDomainEventData():EmployeeDomainEventData
+	export function emptyRefEmployeeDomainEventData():Ref<EmployeeDomainEventData>
+	export function refOfEmployeeDomainEventData(x:EmployeeDomainEventData,v:Ref<EmployeeDomainEventData>)
+	export function unRefEmployeeDomainEventData(v:Ref<EmployeeDomainEventData>):EmployeeDomainEventData
+	export function emptyEmployeeJobLevel():EmployeeJobLevel
+	export function emptyRefEmployeeJobLevel():Ref<EmployeeJobLevel>
+	export function refOfEmployeeJobLevel(x:EmployeeJobLevel,v:Ref<EmployeeJobLevel>)
+	export function unRefEmployeeJobLevel(v:Ref<EmployeeJobLevel>):EmployeeJobLevel
+	export function emptyCompletePreHireRespData():CompletePreHireRespData
+	export function emptyRefCompletePreHireRespData():Ref<CompletePreHireRespData>
+	export function refOfCompletePreHireRespData(x:CompletePreHireRespData,v:Ref<CompletePreHireRespData>)
+	export function unRefCompletePreHireRespData(v:Ref<CompletePreHireRespData>):CompletePreHireRespData
 	export function emptyLocationV2():LocationV2
 	export function emptyRefLocationV2():Ref<LocationV2>
 	export function refOfLocationV2(x:LocationV2,v:Ref<LocationV2>)
 	export function unRefLocationV2(v:Ref<LocationV2>):LocationV2
-	export function emptyProfileSettingEmpContractRecord():ProfileSettingEmpContractRecord
-	export function emptyRefProfileSettingEmpContractRecord():Ref<ProfileSettingEmpContractRecord>
-	export function refOfProfileSettingEmpContractRecord(x:ProfileSettingEmpContractRecord,v:Ref<ProfileSettingEmpContractRecord>)
-	export function unRefProfileSettingEmpContractRecord(v:Ref<ProfileSettingEmpContractRecord>):ProfileSettingEmpContractRecord
-	export function emptyEmployment():Employment
-	export function emptyRefEmployment():Ref<Employment>
-	export function refOfEmployment(x:Employment,v:Ref<Employment>)
-	export function unRefEmployment(v:Ref<Employment>):Employment
-	export function emptyCustomOrg():CustomOrg
-	export function emptyRefCustomOrg():Ref<CustomOrg>
-	export function refOfCustomOrg(x:CustomOrg,v:Ref<CustomOrg>)
-	export function unRefCustomOrg(v:Ref<CustomOrg>):CustomOrg
-	export function emptyEmergencyContact():EmergencyContact
-	export function emptyRefEmergencyContact():Ref<EmergencyContact>
-	export function refOfEmergencyContact(x:EmergencyContact,v:Ref<EmergencyContact>)
-	export function unRefEmergencyContact(v:Ref<EmergencyContact>):EmergencyContact
-	export function emptySearchDepartmentRespData():SearchDepartmentRespData
-	export function emptyRefSearchDepartmentRespData():Ref<SearchDepartmentRespData>
-	export function refOfSearchDepartmentRespData(x:SearchDepartmentRespData,v:Ref<SearchDepartmentRespData>)
-	export function unRefSearchDepartmentRespData(v:Ref<SearchDepartmentRespData>):SearchDepartmentRespData
-	export function emptyFieldVariableValueTo():FieldVariableValueTo
-	export function emptyRefFieldVariableValueTo():Ref<FieldVariableValueTo>
-	export function refOfFieldVariableValueTo(x:FieldVariableValueTo,v:Ref<FieldVariableValueTo>)
-	export function unRefFieldVariableValueTo(v:Ref<FieldVariableValueTo>):FieldVariableValueTo
-	export function emptySearchBasicInfoDistrictIterator():SearchBasicInfoDistrictIterator
-	export function emptyRefSearchBasicInfoDistrictIterator():Ref<SearchBasicInfoDistrictIterator>
-	export function refOfSearchBasicInfoDistrictIterator(x:SearchBasicInfoDistrictIterator,v:Ref<SearchBasicInfoDistrictIterator>)
-	export function unRefSearchBasicInfoDistrictIterator(v:Ref<SearchBasicInfoDistrictIterator>):SearchBasicInfoDistrictIterator
-	export function emptyQueryTimelineDepartmentRespData():QueryTimelineDepartmentRespData
-	export function emptyRefQueryTimelineDepartmentRespData():Ref<QueryTimelineDepartmentRespData>
-	export function refOfQueryTimelineDepartmentRespData(x:QueryTimelineDepartmentRespData,v:Ref<QueryTimelineDepartmentRespData>)
-	export function unRefQueryTimelineDepartmentRespData(v:Ref<QueryTimelineDepartmentRespData>):QueryTimelineDepartmentRespData
-	export function emptySearchBasicInfoCountryRegionSubdivisionResp():SearchBasicInfoCountryRegionSubdivisionResp
-	export function emptyRefSearchBasicInfoCountryRegionSubdivisionResp():Ref<SearchBasicInfoCountryRegionSubdivisionResp>
-	export function refOfSearchBasicInfoCountryRegionSubdivisionResp(x:SearchBasicInfoCountryRegionSubdivisionResp,v:Ref<SearchBasicInfoCountryRegionSubdivisionResp>)
-	export function unRefSearchBasicInfoCountryRegionSubdivisionResp(v:Ref<SearchBasicInfoCountryRegionSubdivisionResp>):SearchBasicInfoCountryRegionSubdivisionResp
-	export function emptyAddress():Address
-	export function emptyRefAddress():Ref<Address>
-	export function refOfAddress(x:Address,v:Ref<Address>)
-	export function unRefAddress(v:Ref<Address>):Address
-	export function emptyCalculateParam():CalculateParam
-	export function emptyRefCalculateParam():Ref<CalculateParam>
-	export function refOfCalculateParam(x:CalculateParam,v:Ref<CalculateParam>)
-	export function unRefCalculateParam(v:Ref<CalculateParam>):CalculateParam
-	export function emptyCitizenshipStatus():CitizenshipStatus
-	export function emptyRefCitizenshipStatus():Ref<CitizenshipStatus>
-	export function refOfCitizenshipStatus(x:CitizenshipStatus,v:Ref<CitizenshipStatus>)
-	export function unRefCitizenshipStatus(v:Ref<CitizenshipStatus>):CitizenshipStatus
-	export function emptyPatchCostCenterReq():PatchCostCenterReq
-	export function emptyRefPatchCostCenterReq():Ref<PatchCostCenterReq>
-	export function refOfPatchCostCenterReq(x:PatchCostCenterReq,v:Ref<PatchCostCenterReq>)
-	export function unRefPatchCostCenterReq(v:Ref<PatchCostCenterReq>):PatchCostCenterReq
-	export function emptyProcessFormVariable():ProcessFormVariable
-	export function emptyRefProcessFormVariable():Ref<ProcessFormVariable>
-	export function refOfProcessFormVariable(x:ProcessFormVariable,v:Ref<ProcessFormVariable>)
-	export function unRefProcessFormVariable(v:Ref<ProcessFormVariable>):ProcessFormVariable
-	export function emptyCustomFieldData():CustomFieldData
-	export function emptyRefCustomFieldData():Ref<CustomFieldData>
-	export function refOfCustomFieldData(x:CustomFieldData,v:Ref<CustomFieldData>)
-	export function unRefCustomFieldData(v:Ref<CustomFieldData>):CustomFieldData
-	export function emptyReorganizationInfo():ReorganizationInfo
-	export function emptyRefReorganizationInfo():Ref<ReorganizationInfo>
-	export function refOfReorganizationInfo(x:ReorganizationInfo,v:Ref<ReorganizationInfo>)
-	export function unRefReorganizationInfo(v:Ref<ReorganizationInfo>):ReorganizationInfo
-	export function emptyGetProcessResp():GetProcessResp
-	export function emptyRefGetProcessResp():Ref<GetProcessResp>
-	export function refOfGetProcessResp(x:GetProcessResp,v:Ref<GetProcessResp>)
-	export function unRefGetProcessResp(v:Ref<GetProcessResp>):GetProcessResp
-	export function emptyI18n():I18n
-	export function emptyRefI18n():Ref<I18n>
-	export function refOfI18n(x:I18n,v:Ref<I18n>)
-	export function unRefI18n(v:Ref<I18n>):I18n
-	export function emptySearchBasicInfoCountryRegionRespData():SearchBasicInfoCountryRegionRespData
-	export function emptyRefSearchBasicInfoCountryRegionRespData():Ref<SearchBasicInfoCountryRegionRespData>
-	export function refOfSearchBasicInfoCountryRegionRespData(x:SearchBasicInfoCountryRegionRespData,v:Ref<SearchBasicInfoCountryRegionRespData>)
-	export function unRefSearchBasicInfoCountryRegionRespData(v:Ref<SearchBasicInfoCountryRegionRespData>):SearchBasicInfoCountryRegionRespData
-	export function emptySearchBasicInfoCountryRegionSubdivisionRespData():SearchBasicInfoCountryRegionSubdivisionRespData
-	export function emptyRefSearchBasicInfoCountryRegionSubdivisionRespData():Ref<SearchBasicInfoCountryRegionSubdivisionRespData>
-	export function refOfSearchBasicInfoCountryRegionSubdivisionRespData(x:SearchBasicInfoCountryRegionSubdivisionRespData,v:Ref<SearchBasicInfoCountryRegionSubdivisionRespData>)
-	export function unRefSearchBasicInfoCountryRegionSubdivisionRespData(v:Ref<SearchBasicInfoCountryRegionSubdivisionRespData>):SearchBasicInfoCountryRegionSubdivisionRespData
-	export function emptyProcessAbstractItem():ProcessAbstractItem
-	export function emptyRefProcessAbstractItem():Ref<ProcessAbstractItem>
-	export function refOfProcessAbstractItem(x:ProcessAbstractItem,v:Ref<ProcessAbstractItem>)
-	export function unRefProcessAbstractItem(v:Ref<ProcessAbstractItem>):ProcessAbstractItem
-	export function emptySearchBasicInfoDistrictReqBody():SearchBasicInfoDistrictReqBody
-	export function emptyRefSearchBasicInfoDistrictReqBody():Ref<SearchBasicInfoDistrictReqBody>
-	export function refOfSearchBasicInfoDistrictReqBody(x:SearchBasicInfoDistrictReqBody,v:Ref<SearchBasicInfoDistrictReqBody>)
-	export function unRefSearchBasicInfoDistrictReqBody(v:Ref<SearchBasicInfoDistrictReqBody>):SearchBasicInfoDistrictReqBody
-	export function emptyCreateCostCenterVersionResp():CreateCostCenterVersionResp
-	export function emptyRefCreateCostCenterVersionResp():Ref<CreateCostCenterVersionResp>
-	export function refOfCreateCostCenterVersionResp(x:CreateCostCenterVersionResp,v:Ref<CreateCostCenterVersionResp>)
-	export function unRefCreateCostCenterVersionResp(v:Ref<CreateCostCenterVersionResp>):CreateCostCenterVersionResp
-	export function emptyBatchGetCompanyResp():BatchGetCompanyResp
-	export function emptyRefBatchGetCompanyResp():Ref<BatchGetCompanyResp>
-	export function refOfBatchGetCompanyResp(x:BatchGetCompanyResp,v:Ref<BatchGetCompanyResp>)
-	export function unRefBatchGetCompanyResp(v:Ref<BatchGetCompanyResp>):BatchGetCompanyResp
-	export function emptyP2ProcessCcUpdatedV2Data():P2ProcessCcUpdatedV2Data
-	export function emptyRefP2ProcessCcUpdatedV2Data():Ref<P2ProcessCcUpdatedV2Data>
-	export function refOfP2ProcessCcUpdatedV2Data(x:P2ProcessCcUpdatedV2Data,v:Ref<P2ProcessCcUpdatedV2Data>)
-	export function unRefP2ProcessCcUpdatedV2Data(v:Ref<P2ProcessCcUpdatedV2Data>):P2ProcessCcUpdatedV2Data
-	export function emptySearchDepartmentReq():SearchDepartmentReq
-	export function emptyRefSearchDepartmentReq():Ref<SearchDepartmentReq>
-	export function refOfSearchDepartmentReq(x:SearchDepartmentReq,v:Ref<SearchDepartmentReq>)
-	export function unRefSearchDepartmentReq(v:Ref<SearchDepartmentReq>):SearchDepartmentReq
-	export function emptySearchContractReq():SearchContractReq
-	export function emptyRefSearchContractReq():Ref<SearchContractReq>
-	export function refOfSearchContractReq(x:SearchContractReq,v:Ref<SearchContractReq>)
-	export function unRefSearchContractReq(v:Ref<SearchContractReq>):SearchContractReq
-	export function emptyBatchGetEmployeeResp():BatchGetEmployeeResp
-	export function emptyRefBatchGetEmployeeResp():Ref<BatchGetEmployeeResp>
-	export function refOfBatchGetEmployeeResp(x:BatchGetEmployeeResp,v:Ref<BatchGetEmployeeResp>)
-	export function unRefBatchGetEmployeeResp(v:Ref<BatchGetEmployeeResp>):BatchGetEmployeeResp
-	export function emptyCreatePreHireResp():CreatePreHireResp
-	export function emptyRefCreatePreHireResp():Ref<CreatePreHireResp>
-	export function refOfCreatePreHireResp(x:CreatePreHireResp,v:Ref<CreatePreHireResp>)
-	export function unRefCreatePreHireResp(v:Ref<CreatePreHireResp>):CreatePreHireResp
-	export function emptyCreateProbationAssessmentReqBody():CreateProbationAssessmentReqBody
-	export function emptyRefCreateProbationAssessmentReqBody():Ref<CreateProbationAssessmentReqBody>
-	export function refOfCreateProbationAssessmentReqBody(x:CreateProbationAssessmentReqBody,v:Ref<CreateProbationAssessmentReqBody>)
-	export function unRefCreateProbationAssessmentReqBody(v:Ref<CreateProbationAssessmentReqBody>):CreateProbationAssessmentReqBody
-	export function emptyProfileSettingProbationInfo():ProfileSettingProbationInfo
-	export function emptyRefProfileSettingProbationInfo():Ref<ProfileSettingProbationInfo>
-	export function refOfProfileSettingProbationInfo(x:ProfileSettingProbationInfo,v:Ref<ProfileSettingProbationInfo>)
-	export function unRefProfileSettingProbationInfo(v:Ref<ProfileSettingProbationInfo>):ProfileSettingProbationInfo
-	export function emptyListJobResp():ListJobResp
-	export function emptyRefListJobResp():Ref<ListJobResp>
-	export function refOfListJobResp(x:ListJobResp,v:Ref<ListJobResp>)
-	export function unRefListJobResp(v:Ref<ListJobResp>):ListJobResp
-	export function emptySearchBasicInfoBankBranchResp():SearchBasicInfoBankBranchResp
-	export function emptyRefSearchBasicInfoBankBranchResp():Ref<SearchBasicInfoBankBranchResp>
-	export function refOfSearchBasicInfoBankBranchResp(x:SearchBasicInfoBankBranchResp,v:Ref<SearchBasicInfoBankBranchResp>)
-	export function unRefSearchBasicInfoBankBranchResp(v:Ref<SearchBasicInfoBankBranchResp>):SearchBasicInfoBankBranchResp
-	export function emptyChangeFieldPair():ChangeFieldPair
-	export function emptyRefChangeFieldPair():Ref<ChangeFieldPair>
-	export function refOfChangeFieldPair(x:ChangeFieldPair,v:Ref<ChangeFieldPair>)
-	export function unRefChangeFieldPair(v:Ref<ChangeFieldPair>):ChangeFieldPair
+	export function emptyOperationLogEntity():OperationLogEntity
+	export function emptyRefOperationLogEntity():Ref<OperationLogEntity>
+	export function refOfOperationLogEntity(x:OperationLogEntity,v:Ref<OperationLogEntity>)
+	export function unRefOperationLogEntity(v:Ref<OperationLogEntity>):OperationLogEntity
+	export function emptyProfileSettingWorkExperience():ProfileSettingWorkExperience
+	export function emptyRefProfileSettingWorkExperience():Ref<ProfileSettingWorkExperience>
+	export function refOfProfileSettingWorkExperience(x:ProfileSettingWorkExperience,v:Ref<ProfileSettingWorkExperience>)
+	export function unRefProfileSettingWorkExperience(v:Ref<ProfileSettingWorkExperience>):ProfileSettingWorkExperience
+	export function emptyListProcessResp():ListProcessResp
+	export function emptyRefListProcessResp():Ref<ListProcessResp>
+	export function refOfListProcessResp(x:ListProcessResp,v:Ref<ListProcessResp>)
+	export function unRefListProcessResp(v:Ref<ListProcessResp>):ListProcessResp
+	export function emptyNationalId():NationalId
+	export function emptyRefNationalId():Ref<NationalId>
+	export function refOfNationalId(x:NationalId,v:Ref<NationalId>)
+	export function unRefNationalId(v:Ref<NationalId>):NationalId
+	export function emptyGetByDepartmentBpRespData():GetByDepartmentBpRespData
+	export function emptyRefGetByDepartmentBpRespData():Ref<GetByDepartmentBpRespData>
+	export function refOfGetByDepartmentBpRespData(x:GetByDepartmentBpRespData,v:Ref<GetByDepartmentBpRespData>)
+	export function unRefGetByDepartmentBpRespData(v:Ref<GetByDepartmentBpRespData>):GetByDepartmentBpRespData
+	export function emptyWithdrawProbationResp():WithdrawProbationResp
+	export function emptyRefWithdrawProbationResp():Ref<WithdrawProbationResp>
+	export function refOfWithdrawProbationResp(x:WithdrawProbationResp,v:Ref<WithdrawProbationResp>)
+	export function unRefWithdrawProbationResp(v:Ref<WithdrawProbationResp>):WithdrawProbationResp
+	export function emptyAssessment():Assessment
+	export function emptyRefAssessment():Ref<Assessment>
+	export function refOfAssessment(x:Assessment,v:Ref<Assessment>)
+	export function unRefAssessment(v:Ref<Assessment>):Assessment
 	export function emptyP2ProbationUpdatedV2Data():P2ProbationUpdatedV2Data
 	export function emptyRefP2ProbationUpdatedV2Data():Ref<P2ProbationUpdatedV2Data>
 	export function refOfP2ProbationUpdatedV2Data(x:P2ProbationUpdatedV2Data,v:Ref<P2ProbationUpdatedV2Data>)
 	export function unRefP2ProbationUpdatedV2Data(v:Ref<P2ProbationUpdatedV2Data>):P2ProbationUpdatedV2Data
-	export function emptyLeaveAccrualRecord():LeaveAccrualRecord
-	export function emptyRefLeaveAccrualRecord():Ref<LeaveAccrualRecord>
-	export function refOfLeaveAccrualRecord(x:LeaveAccrualRecord,v:Ref<LeaveAccrualRecord>)
-	export function unRefLeaveAccrualRecord(v:Ref<LeaveAccrualRecord>):LeaveAccrualRecord
+	export function emptySearchPreHireResp():SearchPreHireResp
+	export function emptyRefSearchPreHireResp():Ref<SearchPreHireResp>
+	export function refOfSearchPreHireResp(x:SearchPreHireResp,v:Ref<SearchPreHireResp>)
+	export function unRefSearchPreHireResp(v:Ref<SearchPreHireResp>):SearchPreHireResp
+	export function emptyOperationLogListReq():OperationLogListReq
+	export function emptyRefOperationLogListReq():Ref<OperationLogListReq>
+	export function refOfOperationLogListReq(x:OperationLogListReq,v:Ref<OperationLogListReq>)
+	export function unRefOperationLogListReq(v:Ref<OperationLogListReq>):OperationLogListReq
+	export function emptyP2OffboardingStatusUpdatedV2Data():P2OffboardingStatusUpdatedV2Data
+	export function emptyRefP2OffboardingStatusUpdatedV2Data():Ref<P2OffboardingStatusUpdatedV2Data>
+	export function refOfP2OffboardingStatusUpdatedV2Data(x:P2OffboardingStatusUpdatedV2Data,v:Ref<P2OffboardingStatusUpdatedV2Data>)
+	export function unRefP2OffboardingStatusUpdatedV2Data(v:Ref<P2OffboardingStatusUpdatedV2Data>):P2OffboardingStatusUpdatedV2Data
+	export function emptyGetByDepartmentBpReq():GetByDepartmentBpReq
+	export function emptyRefGetByDepartmentBpReq():Ref<GetByDepartmentBpReq>
+	export function refOfGetByDepartmentBpReq(x:GetByDepartmentBpReq,v:Ref<GetByDepartmentBpReq>)
+	export function unRefGetByDepartmentBpReq(v:Ref<GetByDepartmentBpReq>):GetByDepartmentBpReq
+	export function emptyQueryEmployeesJobDataReqBody():QueryEmployeesJobDataReqBody
+	export function emptyRefQueryEmployeesJobDataReqBody():Ref<QueryEmployeesJobDataReqBody>
+	export function refOfQueryEmployeesJobDataReqBody(x:QueryEmployeesJobDataReqBody,v:Ref<QueryEmployeesJobDataReqBody>)
+	export function unRefQueryEmployeesJobDataReqBody(v:Ref<QueryEmployeesJobDataReqBody>):QueryEmployeesJobDataReqBody
+	export function emptySearchJobChangeReq():SearchJobChangeReq
+	export function emptyRefSearchJobChangeReq():Ref<SearchJobChangeReq>
+	export function refOfSearchJobChangeReq(x:SearchJobChangeReq,v:Ref<SearchJobChangeReq>)
+	export function unRefSearchJobChangeReq(v:Ref<SearchJobChangeReq>):SearchJobChangeReq
+	export function emptySearchContractRespData():SearchContractRespData
+	export function emptyRefSearchContractRespData():Ref<SearchContractRespData>
+	export function refOfSearchContractRespData(x:SearchContractRespData,v:Ref<SearchContractRespData>)
+	export function unRefSearchContractRespData(v:Ref<SearchContractRespData>):SearchContractRespData
+	export function emptyTransitTaskPreHireReqBody():TransitTaskPreHireReqBody
+	export function emptyRefTransitTaskPreHireReqBody():Ref<TransitTaskPreHireReqBody>
+	export function refOfTransitTaskPreHireReqBody(x:TransitTaskPreHireReqBody,v:Ref<TransitTaskPreHireReqBody>)
+	export function unRefTransitTaskPreHireReqBody(v:Ref<TransitTaskPreHireReqBody>):TransitTaskPreHireReqBody
+	export function emptyBasicPersonInfo():BasicPersonInfo
+	export function emptyRefBasicPersonInfo():Ref<BasicPersonInfo>
+	export function refOfBasicPersonInfo(x:BasicPersonInfo,v:Ref<BasicPersonInfo>)
+	export function unRefBasicPersonInfo(v:Ref<BasicPersonInfo>):BasicPersonInfo
+	export function emptyGetProcessFormVariableDataResp():GetProcessFormVariableDataResp
+	export function emptyRefGetProcessFormVariableDataResp():Ref<GetProcessFormVariableDataResp>
+	export function refOfGetProcessFormVariableDataResp(x:GetProcessFormVariableDataResp,v:Ref<GetProcessFormVariableDataResp>)
+	export function unRefGetProcessFormVariableDataResp(v:Ref<GetProcessFormVariableDataResp>):GetProcessFormVariableDataResp
+	export function emptyFieldVariableValueToObject():FieldVariableValueToObject
+	export function emptyRefFieldVariableValueToObject():Ref<FieldVariableValueToObject>
+	export function refOfFieldVariableValueToObject(x:FieldVariableValueToObject,v:Ref<FieldVariableValueToObject>)
+	export function unRefFieldVariableValueToObject(v:Ref<FieldVariableValueToObject>):FieldVariableValueToObject
+	export function emptyPatchPreHireRespData():PatchPreHireRespData
+	export function emptyRefPatchPreHireRespData():Ref<PatchPreHireRespData>
+	export function refOfPatchPreHireRespData(x:PatchPreHireRespData,v:Ref<PatchPreHireRespData>)
+	export function unRefPatchPreHireRespData(v:Ref<PatchPreHireRespData>):PatchPreHireRespData
+	export function emptyProfileSettingEmpInfoForUpdate():ProfileSettingEmpInfoForUpdate
+	export function emptyRefProfileSettingEmpInfoForUpdate():Ref<ProfileSettingEmpInfoForUpdate>
+	export function refOfProfileSettingEmpInfoForUpdate(x:ProfileSettingEmpInfoForUpdate,v:Ref<ProfileSettingEmpInfoForUpdate>)
+	export function unRefProfileSettingEmpInfoForUpdate(v:Ref<ProfileSettingEmpInfoForUpdate>):ProfileSettingEmpInfoForUpdate
+	export function emptySearchProbationReqBody():SearchProbationReqBody
+	export function emptyRefSearchProbationReqBody():Ref<SearchProbationReqBody>
+	export function refOfSearchProbationReqBody(x:SearchProbationReqBody,v:Ref<SearchProbationReqBody>)
+	export function unRefSearchProbationReqBody(v:Ref<SearchProbationReqBody>):SearchProbationReqBody
+	export function emptyEducation():Education
+	export function emptyRefEducation():Ref<Education>
+	export function refOfEducation(x:Education,v:Ref<Education>)
+	export function unRefEducation(v:Ref<Education>):Education
+	export function emptyProfileSettingPhone():ProfileSettingPhone
+	export function emptyRefProfileSettingPhone():Ref<ProfileSettingPhone>
+	export function refOfProfileSettingPhone(x:ProfileSettingPhone,v:Ref<ProfileSettingPhone>)
+	export function unRefProfileSettingPhone(v:Ref<ProfileSettingPhone>):ProfileSettingPhone
+	export function emptyReorganizationInfo():ReorganizationInfo
+	export function emptyRefReorganizationInfo():Ref<ReorganizationInfo>
+	export function refOfReorganizationInfo(x:ReorganizationInfo,v:Ref<ReorganizationInfo>)
+	export function unRefReorganizationInfo(v:Ref<ReorganizationInfo>):ReorganizationInfo
+	export function emptyPatchProbationAssessmentResp():PatchProbationAssessmentResp
+	export function emptyRefPatchProbationAssessmentResp():Ref<PatchProbationAssessmentResp>
+	export function refOfPatchProbationAssessmentResp(x:PatchProbationAssessmentResp,v:Ref<PatchProbationAssessmentResp>)
+	export function unRefPatchProbationAssessmentResp(v:Ref<PatchProbationAssessmentResp>):PatchProbationAssessmentResp
+	export function emptyCreateProbationAssessmentReq():CreateProbationAssessmentReq
+	export function emptyRefCreateProbationAssessmentReq():Ref<CreateProbationAssessmentReq>
+	export function refOfCreateProbationAssessmentReq(x:CreateProbationAssessmentReq,v:Ref<CreateProbationAssessmentReq>)
+	export function unRefCreateProbationAssessmentReq(v:Ref<CreateProbationAssessmentReq>):CreateProbationAssessmentReq
+	export function emptyCompany():Company
+	export function emptyRefCompany():Ref<Company>
+	export function refOfCompany(x:Company,v:Ref<Company>)
+	export function unRefCompany(v:Ref<Company>):Company
+	export function emptyPatchProbationAssessmentReq():PatchProbationAssessmentReq
+	export function emptyRefPatchProbationAssessmentReq():Ref<PatchProbationAssessmentReq>
+	export function refOfPatchProbationAssessmentReq(x:PatchProbationAssessmentReq,v:Ref<PatchProbationAssessmentReq>)
+	export function unRefPatchProbationAssessmentReq(v:Ref<PatchProbationAssessmentReq>):PatchProbationAssessmentReq
+	export function emptySearchDepartmentRespData():SearchDepartmentRespData
+	export function emptyRefSearchDepartmentRespData():Ref<SearchDepartmentRespData>
+	export function refOfSearchDepartmentRespData(x:SearchDepartmentRespData,v:Ref<SearchDepartmentRespData>)
+	export function unRefSearchDepartmentRespData(v:Ref<SearchDepartmentRespData>):SearchDepartmentRespData
+	export function emptyPersonalProfileForUpdate():PersonalProfileForUpdate
+	export function emptyRefPersonalProfileForUpdate():Ref<PersonalProfileForUpdate>
+	export function refOfPersonalProfileForUpdate(x:PersonalProfileForUpdate,v:Ref<PersonalProfileForUpdate>)
+	export function unRefPersonalProfileForUpdate(v:Ref<PersonalProfileForUpdate>):PersonalProfileForUpdate
+	export function emptySearchBasicInfoCurrencyIterator():SearchBasicInfoCurrencyIterator
+	export function emptyRefSearchBasicInfoCurrencyIterator():Ref<SearchBasicInfoCurrencyIterator>
+	export function refOfSearchBasicInfoCurrencyIterator(x:SearchBasicInfoCurrencyIterator,v:Ref<SearchBasicInfoCurrencyIterator>)
+	export function unRefSearchBasicInfoCurrencyIterator(v:Ref<SearchBasicInfoCurrencyIterator>):SearchBasicInfoCurrencyIterator
+	export function emptyEmployeeJobFamily():EmployeeJobFamily
+	export function emptyRefEmployeeJobFamily():Ref<EmployeeJobFamily>
+	export function refOfEmployeeJobFamily(x:EmployeeJobFamily,v:Ref<EmployeeJobFamily>)
+	export function unRefEmployeeJobFamily(v:Ref<EmployeeJobFamily>):EmployeeJobFamily
+	export function emptyP2OffboardingUpdatedV2Data():P2OffboardingUpdatedV2Data
+	export function emptyRefP2OffboardingUpdatedV2Data():Ref<P2OffboardingUpdatedV2Data>
+	export function refOfP2OffboardingUpdatedV2Data(x:P2OffboardingUpdatedV2Data,v:Ref<P2OffboardingUpdatedV2Data>)
+	export function unRefP2OffboardingUpdatedV2Data(v:Ref<P2OffboardingUpdatedV2Data>):P2OffboardingUpdatedV2Data
+	export function emptySignatureFileSystemField():SignatureFileSystemField
+	export function emptyRefSignatureFileSystemField():Ref<SignatureFileSystemField>
+	export function refOfSignatureFileSystemField(x:SignatureFileSystemField,v:Ref<SignatureFileSystemField>)
+	export function unRefSignatureFileSystemField(v:Ref<SignatureFileSystemField>):SignatureFileSystemField
+	export function emptyProfileSettingProbationInfo():ProfileSettingProbationInfo
+	export function emptyRefProfileSettingProbationInfo():Ref<ProfileSettingProbationInfo>
+	export function refOfProfileSettingProbationInfo(x:ProfileSettingProbationInfo,v:Ref<ProfileSettingProbationInfo>)
+	export function unRefProfileSettingProbationInfo(v:Ref<ProfileSettingProbationInfo>):ProfileSettingProbationInfo
+	export function emptySearchBasicInfoCountryRegionRespData():SearchBasicInfoCountryRegionRespData
+	export function emptyRefSearchBasicInfoCountryRegionRespData():Ref<SearchBasicInfoCountryRegionRespData>
+	export function refOfSearchBasicInfoCountryRegionRespData(x:SearchBasicInfoCountryRegionRespData,v:Ref<SearchBasicInfoCountryRegionRespData>)
+	export function unRefSearchBasicInfoCountryRegionRespData(v:Ref<SearchBasicInfoCountryRegionRespData>):SearchBasicInfoCountryRegionRespData
+	export function emptySignatureTemplateField():SignatureTemplateField
+	export function emptyRefSignatureTemplateField():Ref<SignatureTemplateField>
+	export function refOfSignatureTemplateField(x:SignatureTemplateField,v:Ref<SignatureTemplateField>)
+	export function unRefSignatureTemplateField(v:Ref<SignatureTemplateField>):SignatureTemplateField
+	export function emptyNationality():Nationality
+	export function emptyRefNationality():Ref<Nationality>
+	export function refOfNationality(x:Nationality,v:Ref<Nationality>)
+	export function unRefNationality(v:Ref<Nationality>):Nationality
+	export function emptyPatchCostCenterRespData():PatchCostCenterRespData
+	export function emptyRefPatchCostCenterRespData():Ref<PatchCostCenterRespData>
+	export function refOfPatchCostCenterRespData(x:PatchCostCenterRespData,v:Ref<PatchCostCenterRespData>)
+	export function unRefPatchCostCenterRespData(v:Ref<PatchCostCenterRespData>):PatchCostCenterRespData
+	export function emptyOrgdraftDepartmentId():OrgdraftDepartmentId
+	export function emptyRefOrgdraftDepartmentId():Ref<OrgdraftDepartmentId>
+	export function refOfOrgdraftDepartmentId(x:OrgdraftDepartmentId,v:Ref<OrgdraftDepartmentId>)
+	export function unRefOrgdraftDepartmentId(v:Ref<OrgdraftDepartmentId>):OrgdraftDepartmentId
+	export function emptySearchPreHireRespData():SearchPreHireRespData
+	export function emptyRefSearchPreHireRespData():Ref<SearchPreHireRespData>
+	export function refOfSearchPreHireRespData(x:SearchPreHireRespData,v:Ref<SearchPreHireRespData>)
+	export function unRefSearchPreHireRespData(v:Ref<SearchPreHireRespData>):SearchPreHireRespData
+	export function emptyOnboardingFlowChange():OnboardingFlowChange
+	export function emptyRefOnboardingFlowChange():Ref<OnboardingFlowChange>
+	export function refOfOnboardingFlowChange(x:OnboardingFlowChange,v:Ref<OnboardingFlowChange>)
+	export function unRefOnboardingFlowChange(v:Ref<OnboardingFlowChange>):OnboardingFlowChange
+	export function emptyPatchPersonReq():PatchPersonReq
+	export function emptyRefPatchPersonReq():Ref<PatchPersonReq>
+	export function refOfPatchPersonReq(x:PatchPersonReq,v:Ref<PatchPersonReq>)
+	export function unRefPatchPersonReq(v:Ref<PatchPersonReq>):PatchPersonReq
+	export function emptyName():Name
+	export function emptyRefName():Ref<Name>
+	export function refOfName(x:Name,v:Ref<Name>)
+	export function unRefName(v:Ref<Name>):Name
+	export function emptyQueryEmployeesJobDataReq():QueryEmployeesJobDataReq
+	export function emptyRefQueryEmployeesJobDataReq():Ref<QueryEmployeesJobDataReq>
+	export function refOfQueryEmployeesJobDataReq(x:QueryEmployeesJobDataReq,v:Ref<QueryEmployeesJobDataReq>)
+	export function unRefQueryEmployeesJobDataReq(v:Ref<QueryEmployeesJobDataReq>):QueryEmployeesJobDataReq
+	export function emptyFormFieldVariableI18nValue():FormFieldVariableI18nValue
+	export function emptyRefFormFieldVariableI18nValue():Ref<FormFieldVariableI18nValue>
+	export function refOfFormFieldVariableI18nValue(x:FormFieldVariableI18nValue,v:Ref<FormFieldVariableI18nValue>)
+	export function unRefFormFieldVariableI18nValue(v:Ref<FormFieldVariableI18nValue>):FormFieldVariableI18nValue
+	export function emptyJobLevel():JobLevel
+	export function emptyRefJobLevel():Ref<JobLevel>
+	export function refOfJobLevel(x:JobLevel,v:Ref<JobLevel>)
+	export function unRefJobLevel(v:Ref<JobLevel>):JobLevel
+	export function emptyOnboardingFlow():OnboardingFlow
+	export function emptyRefOnboardingFlow():Ref<OnboardingFlow>
+	export function refOfOnboardingFlow(x:OnboardingFlow,v:Ref<OnboardingFlow>)
+	export function unRefOnboardingFlow(v:Ref<OnboardingFlow>):OnboardingFlow
+	export function emptyBasicJobData():BasicJobData
+	export function emptyRefBasicJobData():Ref<BasicJobData>
+	export function refOfBasicJobData(x:BasicJobData,v:Ref<BasicJobData>)
+	export function unRefBasicJobData(v:Ref<BasicJobData>):BasicJobData
+	export function emptyDistrict():District
+	export function emptyRefDistrict():Ref<District>
+	export function refOfDistrict(x:District,v:Ref<District>)
+	export function unRefDistrict(v:Ref<District>):District
+	export function emptyJobGrade():JobGrade
+	export function emptyRefJobGrade():Ref<JobGrade>
+	export function refOfJobGrade(x:JobGrade,v:Ref<JobGrade>)
+	export function unRefJobGrade(v:Ref<JobGrade>):JobGrade
+	export function emptySubmitProbationReq():SubmitProbationReq
+	export function emptyRefSubmitProbationReq():Ref<SubmitProbationReq>
+	export function refOfSubmitProbationReq(x:SubmitProbationReq,v:Ref<SubmitProbationReq>)
+	export function unRefSubmitProbationReq(v:Ref<SubmitProbationReq>):SubmitProbationReq
+	export function emptyBatchGetDepartmentReq():BatchGetDepartmentReq
+	export function emptyRefBatchGetDepartmentReq():Ref<BatchGetDepartmentReq>
+	export function refOfBatchGetDepartmentReq(x:BatchGetDepartmentReq,v:Ref<BatchGetDepartmentReq>)
+	export function unRefBatchGetDepartmentReq(v:Ref<BatchGetDepartmentReq>):BatchGetDepartmentReq
+	export function emptyBatchGetEmployeeReq():BatchGetEmployeeReq
+	export function emptyRefBatchGetEmployeeReq():Ref<BatchGetEmployeeReq>
+	export function refOfBatchGetEmployeeReq(x:BatchGetEmployeeReq,v:Ref<BatchGetEmployeeReq>)
+	export function unRefBatchGetEmployeeReq(v:Ref<BatchGetEmployeeReq>):BatchGetEmployeeReq
+	export function emptyCreateEmployeeResp():CreateEmployeeResp
+	export function emptyRefCreateEmployeeResp():Ref<CreateEmployeeResp>
+	export function refOfCreateEmployeeResp(x:CreateEmployeeResp,v:Ref<CreateEmployeeResp>)
+	export function unRefCreateEmployeeResp(v:Ref<CreateEmployeeResp>):CreateEmployeeResp
+	export function emptyPersonInfoChn():PersonInfoChn
+	export function emptyRefPersonInfoChn():Ref<PersonInfoChn>
+	export function refOfPersonInfoChn(x:PersonInfoChn,v:Ref<PersonInfoChn>)
+	export function unRefPersonInfoChn(v:Ref<PersonInfoChn>):PersonInfoChn
+	export function emptyDimensionIdInData():DimensionIdInData
+	export function emptyRefDimensionIdInData():Ref<DimensionIdInData>
+	export function refOfDimensionIdInData(x:DimensionIdInData,v:Ref<DimensionIdInData>)
+	export function unRefDimensionIdInData(v:Ref<DimensionIdInData>):DimensionIdInData
+	export function emptyBatchGetCompanyRespData():BatchGetCompanyRespData
+	export function emptyRefBatchGetCompanyRespData():Ref<BatchGetCompanyRespData>
+	export function refOfBatchGetCompanyRespData(x:BatchGetCompanyRespData,v:Ref<BatchGetCompanyRespData>)
+	export function unRefBatchGetCompanyRespData(v:Ref<BatchGetCompanyRespData>):BatchGetCompanyRespData
+	export function emptyInternationalAssignmentV2ForPatch():InternationalAssignmentV2ForPatch
+	export function emptyRefInternationalAssignmentV2ForPatch():Ref<InternationalAssignmentV2ForPatch>
+	export function refOfInternationalAssignmentV2ForPatch(x:InternationalAssignmentV2ForPatch,v:Ref<InternationalAssignmentV2ForPatch>)
+	export function unRefInternationalAssignmentV2ForPatch(v:Ref<InternationalAssignmentV2ForPatch>):InternationalAssignmentV2ForPatch
+	export function emptySearchBasicInfoBankBranchRespData():SearchBasicInfoBankBranchRespData
+	export function emptyRefSearchBasicInfoBankBranchRespData():Ref<SearchBasicInfoBankBranchRespData>
+	export function refOfSearchBasicInfoBankBranchRespData(x:SearchBasicInfoBankBranchRespData,v:Ref<SearchBasicInfoBankBranchRespData>)
+	export function unRefSearchBasicInfoBankBranchRespData(v:Ref<SearchBasicInfoBankBranchRespData>):SearchBasicInfoBankBranchRespData
 	export function emptySearchPreHireIterator():SearchPreHireIterator
 	export function emptyRefSearchPreHireIterator():Ref<SearchPreHireIterator>
 	export function refOfSearchPreHireIterator(x:SearchPreHireIterator,v:Ref<SearchPreHireIterator>)
 	export function unRefSearchPreHireIterator(v:Ref<SearchPreHireIterator>):SearchPreHireIterator
-	export function emptyWorkforcePlanDetailV2():WorkforcePlanDetailV2
-	export function emptyRefWorkforcePlanDetailV2():Ref<WorkforcePlanDetailV2>
-	export function refOfWorkforcePlanDetailV2(x:WorkforcePlanDetailV2,v:Ref<WorkforcePlanDetailV2>)
-	export function unRefWorkforcePlanDetailV2(v:Ref<WorkforcePlanDetailV2>):WorkforcePlanDetailV2
-	export function emptyBpmDataengineI18n():BpmDataengineI18n
-	export function emptyRefBpmDataengineI18n():Ref<BpmDataengineI18n>
-	export function refOfBpmDataengineI18n(x:BpmDataengineI18n,v:Ref<BpmDataengineI18n>)
-	export function unRefBpmDataengineI18n(v:Ref<BpmDataengineI18n>):BpmDataengineI18n
-	export function emptyDimensionInfo():DimensionInfo
-	export function emptyRefDimensionInfo():Ref<DimensionInfo>
-	export function refOfDimensionInfo(x:DimensionInfo,v:Ref<DimensionInfo>)
-	export function unRefDimensionInfo(v:Ref<DimensionInfo>):DimensionInfo
-	export function emptyProfileSettingEmploymentRecord():ProfileSettingEmploymentRecord
-	export function emptyRefProfileSettingEmploymentRecord():Ref<ProfileSettingEmploymentRecord>
-	export function refOfProfileSettingEmploymentRecord(x:ProfileSettingEmploymentRecord,v:Ref<ProfileSettingEmploymentRecord>)
-	export function unRefProfileSettingEmploymentRecord(v:Ref<ProfileSettingEmploymentRecord>):ProfileSettingEmploymentRecord
+	export function emptyEducationInfo():EducationInfo
+	export function emptyRefEducationInfo():Ref<EducationInfo>
+	export function refOfEducationInfo(x:EducationInfo,v:Ref<EducationInfo>)
+	export function unRefEducationInfo(v:Ref<EducationInfo>):EducationInfo
+	export function emptyEmployee():Employee
+	export function emptyRefEmployee():Ref<Employee>
+	export function refOfEmployee(x:Employee,v:Ref<Employee>)
+	export function unRefEmployee(v:Ref<Employee>):Employee
+	export function emptyPrehireUpdate():PrehireUpdate
+	export function emptyRefPrehireUpdate():Ref<PrehireUpdate>
+	export function refOfPrehireUpdate(x:PrehireUpdate,v:Ref<PrehireUpdate>)
+	export function unRefPrehireUpdate(v:Ref<PrehireUpdate>):PrehireUpdate
+	export function emptyQueryTimelineDepartmentReq():QueryTimelineDepartmentReq
+	export function emptyRefQueryTimelineDepartmentReq():Ref<QueryTimelineDepartmentReq>
+	export function refOfQueryTimelineDepartmentReq(x:QueryTimelineDepartmentReq,v:Ref<QueryTimelineDepartmentReq>)
+	export function unRefQueryTimelineDepartmentReq(v:Ref<QueryTimelineDepartmentReq>):QueryTimelineDepartmentReq
+	export function emptyUserContact():UserContact
+	export function emptyRefUserContact():Ref<UserContact>
+	export function refOfUserContact(x:UserContact,v:Ref<UserContact>)
+	export function unRefUserContact(v:Ref<UserContact>):UserContact
+	export function emptyBatchGetCompanyReqBody():BatchGetCompanyReqBody
+	export function emptyRefBatchGetCompanyReqBody():Ref<BatchGetCompanyReqBody>
+	export function refOfBatchGetCompanyReqBody(x:BatchGetCompanyReqBody,v:Ref<BatchGetCompanyReqBody>)
+	export function unRefBatchGetCompanyReqBody(v:Ref<BatchGetCompanyReqBody>):BatchGetCompanyReqBody
+	export function emptyP2OffboardingUpdatedV2():P2OffboardingUpdatedV2
+	export function emptyRefP2OffboardingUpdatedV2():Ref<P2OffboardingUpdatedV2>
+	export function refOfP2OffboardingUpdatedV2(x:P2OffboardingUpdatedV2,v:Ref<P2OffboardingUpdatedV2>)
+	export function unRefP2OffboardingUpdatedV2(v:Ref<P2OffboardingUpdatedV2>):P2OffboardingUpdatedV2
+	export function emptyPreHireProbationInfo():PreHireProbationInfo
+	export function emptyRefPreHireProbationInfo():Ref<PreHireProbationInfo>
+	export function refOfPreHireProbationInfo(x:PreHireProbationInfo,v:Ref<PreHireProbationInfo>)
+	export function unRefPreHireProbationInfo(v:Ref<PreHireProbationInfo>):PreHireProbationInfo
+	export function emptyEmail():Email
+	export function emptyRefEmail():Ref<Email>
+	export function refOfEmail(x:Email,v:Ref<Email>)
+	export function unRefEmail(v:Ref<Email>):Email
+	export function emptyListProcessReq():ListProcessReq
+	export function emptyRefListProcessReq():Ref<ListProcessReq>
+	export function refOfListProcessReq(x:ListProcessReq,v:Ref<ListProcessReq>)
+	export function unRefListProcessReq(v:Ref<ListProcessReq>):ListProcessReq
+	export function emptyParentsDepartmentReqBody():ParentsDepartmentReqBody
+	export function emptyRefParentsDepartmentReqBody():Ref<ParentsDepartmentReqBody>
+	export function refOfParentsDepartmentReqBody(x:ParentsDepartmentReqBody,v:Ref<ParentsDepartmentReqBody>)
+	export function unRefParentsDepartmentReqBody(v:Ref<ParentsDepartmentReqBody>):ParentsDepartmentReqBody
+	export function emptyDepartmentChange():DepartmentChange
+	export function emptyRefDepartmentChange():Ref<DepartmentChange>
+	export function refOfDepartmentChange(x:DepartmentChange,v:Ref<DepartmentChange>)
+	export function unRefDepartmentChange(v:Ref<DepartmentChange>):DepartmentChange
+	export function emptySearchCostCenterRespData():SearchCostCenterRespData
+	export function emptyRefSearchCostCenterRespData():Ref<SearchCostCenterRespData>
+	export function refOfSearchCostCenterRespData(x:SearchCostCenterRespData,v:Ref<SearchCostCenterRespData>)
+	export function unRefSearchCostCenterRespData(v:Ref<SearchCostCenterRespData>):SearchCostCenterRespData
+	export function emptySignatureTemplate():SignatureTemplate
+	export function emptyRefSignatureTemplate():Ref<SignatureTemplate>
+	export function refOfSignatureTemplate(x:SignatureTemplate,v:Ref<SignatureTemplate>)
+	export function unRefSignatureTemplate(v:Ref<SignatureTemplate>):SignatureTemplate
+	export function emptySignatureTemplateBriefInfo():SignatureTemplateBriefInfo
+	export function emptyRefSignatureTemplateBriefInfo():Ref<SignatureTemplateBriefInfo>
+	export function refOfSignatureTemplateBriefInfo(x:SignatureTemplateBriefInfo,v:Ref<SignatureTemplateBriefInfo>)
+	export function unRefSignatureTemplateBriefInfo(v:Ref<SignatureTemplateBriefInfo>):SignatureTemplateBriefInfo
+	export function emptyParentsDepartmentResp():ParentsDepartmentResp
+	export function emptyRefParentsDepartmentResp():Ref<ParentsDepartmentResp>
+	export function refOfParentsDepartmentResp(x:ParentsDepartmentResp,v:Ref<ParentsDepartmentResp>)
+	export function unRefParentsDepartmentResp(v:Ref<ParentsDepartmentResp>):ParentsDepartmentResp
+	export function emptyBatchGetJobLevelReqBody():BatchGetJobLevelReqBody
+	export function emptyRefBatchGetJobLevelReqBody():Ref<BatchGetJobLevelReqBody>
+	export function refOfBatchGetJobLevelReqBody(x:BatchGetJobLevelReqBody,v:Ref<BatchGetJobLevelReqBody>)
+	export function unRefBatchGetJobLevelReqBody(v:Ref<BatchGetJobLevelReqBody>):BatchGetJobLevelReqBody
+	export function emptyDimension():Dimension
+	export function emptyRefDimension():Ref<Dimension>
+	export function refOfDimension(x:Dimension,v:Ref<Dimension>)
+	export function unRefDimension(v:Ref<Dimension>):Dimension
+	export function emptyDeleteCostCenterVersionResp():DeleteCostCenterVersionResp
+	export function emptyRefDeleteCostCenterVersionResp():Ref<DeleteCostCenterVersionResp>
+	export function refOfDeleteCostCenterVersionResp(x:DeleteCostCenterVersionResp,v:Ref<DeleteCostCenterVersionResp>)
+	export function unRefDeleteCostCenterVersionResp(v:Ref<DeleteCostCenterVersionResp>):DeleteCostCenterVersionResp
+	export function emptyProbationInfo():ProbationInfo
+	export function emptyRefProbationInfo():Ref<ProbationInfo>
+	export function refOfProbationInfo(x:ProbationInfo,v:Ref<ProbationInfo>)
+	export function unRefProbationInfo(v:Ref<ProbationInfo>):ProbationInfo
+	export function emptyQueryPreHireIterator():QueryPreHireIterator
+	export function emptyRefQueryPreHireIterator():Ref<QueryPreHireIterator>
+	export function refOfQueryPreHireIterator(x:QueryPreHireIterator,v:Ref<QueryPreHireIterator>)
+	export function unRefQueryPreHireIterator(v:Ref<QueryPreHireIterator>):QueryPreHireIterator
+	export function emptyWorkforcePlan():WorkforcePlan
+	export function emptyRefWorkforcePlan():Ref<WorkforcePlan>
+	export function refOfWorkforcePlan(x:WorkforcePlan,v:Ref<WorkforcePlan>)
+	export function unRefWorkforcePlan(v:Ref<WorkforcePlan>):WorkforcePlan
+	export function emptyEmploymentLeaveBalance():EmploymentLeaveBalance
+	export function emptyRefEmploymentLeaveBalance():Ref<EmploymentLeaveBalance>
+	export function refOfEmploymentLeaveBalance(x:EmploymentLeaveBalance,v:Ref<EmploymentLeaveBalance>)
+	export function unRefEmploymentLeaveBalance(v:Ref<EmploymentLeaveBalance>):EmploymentLeaveBalance
+	export function emptyFormFieldVariableNumberValue():FormFieldVariableNumberValue
+	export function emptyRefFormFieldVariableNumberValue():Ref<FormFieldVariableNumberValue>
+	export function refOfFormFieldVariableNumberValue(x:FormFieldVariableNumberValue,v:Ref<FormFieldVariableNumberValue>)
+	export function unRefFormFieldVariableNumberValue(v:Ref<FormFieldVariableNumberValue>):FormFieldVariableNumberValue
+	export function emptyProcessApprover():ProcessApprover
+	export function emptyRefProcessApprover():Ref<ProcessApprover>
+	export function refOfProcessApprover(x:ProcessApprover,v:Ref<ProcessApprover>)
+	export function unRefProcessApprover(v:Ref<ProcessApprover>):ProcessApprover
+	export function emptyGetProcessReq():GetProcessReq
+	export function emptyRefGetProcessReq():Ref<GetProcessReq>
+	export function refOfGetProcessReq(x:GetProcessReq,v:Ref<GetProcessReq>)
+	export function unRefGetProcessReq(v:Ref<GetProcessReq>):GetProcessReq
+	export function emptyAddressForUpdate():AddressForUpdate
+	export function emptyRefAddressForUpdate():Ref<AddressForUpdate>
+	export function refOfAddressForUpdate(x:AddressForUpdate,v:Ref<AddressForUpdate>)
+	export function unRefAddressForUpdate(v:Ref<AddressForUpdate>):AddressForUpdate
+	export function emptyCreateProbationAssessmentRespData():CreateProbationAssessmentRespData
+	export function emptyRefCreateProbationAssessmentRespData():Ref<CreateProbationAssessmentRespData>
+	export function refOfCreateProbationAssessmentRespData(x:CreateProbationAssessmentRespData,v:Ref<CreateProbationAssessmentRespData>)
+	export function unRefCreateProbationAssessmentRespData(v:Ref<CreateProbationAssessmentRespData>):CreateProbationAssessmentRespData
+	export function emptySearchBasicInfoNationalityReq():SearchBasicInfoNationalityReq
+	export function emptyRefSearchBasicInfoNationalityReq():Ref<SearchBasicInfoNationalityReq>
+	export function refOfSearchBasicInfoNationalityReq(x:SearchBasicInfoNationalityReq,v:Ref<SearchBasicInfoNationalityReq>)
+	export function unRefSearchBasicInfoNationalityReq(v:Ref<SearchBasicInfoNationalityReq>):SearchBasicInfoNationalityReq
+	export function emptyCreateCostCenterRespData():CreateCostCenterRespData
+	export function emptyRefCreateCostCenterRespData():Ref<CreateCostCenterRespData>
+	export function refOfCreateCostCenterRespData(x:CreateCostCenterRespData,v:Ref<CreateCostCenterRespData>)
+	export function unRefCreateCostCenterRespData(v:Ref<CreateCostCenterRespData>):CreateCostCenterRespData
+	export function emptyCurrency():Currency
+	export function emptyRefCurrency():Ref<Currency>
+	export function refOfCurrency(x:Currency,v:Ref<Currency>)
+	export function unRefCurrency(v:Ref<Currency>):Currency
+	export function emptyI18n():I18n
+	export function emptyRefI18n():Ref<I18n>
+	export function refOfI18n(x:I18n,v:Ref<I18n>)
+	export function unRefI18n(v:Ref<I18n>):I18n
+	export function emptyBp():Bp
+	export function emptyRefBp():Ref<Bp>
+	export function refOfBp(x:Bp,v:Ref<Bp>)
+	export function unRefBp(v:Ref<Bp>):Bp
+	export function emptySearchBasicInfoDistrictReqBody():SearchBasicInfoDistrictReqBody
+	export function emptyRefSearchBasicInfoDistrictReqBody():Ref<SearchBasicInfoDistrictReqBody>
+	export function refOfSearchBasicInfoDistrictReqBody(x:SearchBasicInfoDistrictReqBody,v:Ref<SearchBasicInfoDistrictReqBody>)
+	export function unRefSearchBasicInfoDistrictReqBody(v:Ref<SearchBasicInfoDistrictReqBody>):SearchBasicInfoDistrictReqBody
+	export function emptyPhoneForUpdate():PhoneForUpdate
+	export function emptyRefPhoneForUpdate():Ref<PhoneForUpdate>
+	export function refOfPhoneForUpdate(x:PhoneForUpdate,v:Ref<PhoneForUpdate>)
+	export function unRefPhoneForUpdate(v:Ref<PhoneForUpdate>):PhoneForUpdate
+	export function emptyProfileSettingAddress():ProfileSettingAddress
+	export function emptyRefProfileSettingAddress():Ref<ProfileSettingAddress>
+	export function refOfProfileSettingAddress(x:ProfileSettingAddress,v:Ref<ProfileSettingAddress>)
+	export function unRefProfileSettingAddress(v:Ref<ProfileSettingAddress>):ProfileSettingAddress
+	export function emptyQueryPreHireReqBody():QueryPreHireReqBody
+	export function emptyRefQueryPreHireReqBody():Ref<QueryPreHireReqBody>
+	export function refOfQueryPreHireReqBody(x:QueryPreHireReqBody,v:Ref<QueryPreHireReqBody>)
+	export function unRefQueryPreHireReqBody(v:Ref<QueryPreHireReqBody>):QueryPreHireReqBody
+	export function emptyBatchGetEmployeesJobDataRespData():BatchGetEmployeesJobDataRespData
+	export function emptyRefBatchGetEmployeesJobDataRespData():Ref<BatchGetEmployeesJobDataRespData>
+	export function refOfBatchGetEmployeesJobDataRespData(x:BatchGetEmployeesJobDataRespData,v:Ref<BatchGetEmployeesJobDataRespData>)
+	export function unRefBatchGetEmployeesJobDataRespData(v:Ref<BatchGetEmployeesJobDataRespData>):BatchGetEmployeesJobDataRespData
+	export function emptyQueryJobGradeReqBody():QueryJobGradeReqBody
+	export function emptyRefQueryJobGradeReqBody():Ref<QueryJobGradeReqBody>
+	export function refOfQueryJobGradeReqBody(x:QueryJobGradeReqBody,v:Ref<QueryJobGradeReqBody>)
+	export function unRefQueryJobGradeReqBody(v:Ref<QueryJobGradeReqBody>):QueryJobGradeReqBody
+	export function emptyPatchPersonRespData():PatchPersonRespData
+	export function emptyRefPatchPersonRespData():Ref<PatchPersonRespData>
+	export function refOfPatchPersonRespData(x:PatchPersonRespData,v:Ref<PatchPersonRespData>)
+	export function unRefPatchPersonRespData(v:Ref<PatchPersonRespData>):PatchPersonRespData
+	export function emptyEmergencyContactForUpdate():EmergencyContactForUpdate
+	export function emptyRefEmergencyContactForUpdate():Ref<EmergencyContactForUpdate>
+	export function refOfEmergencyContactForUpdate(x:EmergencyContactForUpdate,v:Ref<EmergencyContactForUpdate>)
+	export function unRefEmergencyContactForUpdate(v:Ref<EmergencyContactForUpdate>):EmergencyContactForUpdate
+	export function emptyUserId():UserId
+	export function emptyRefUserId():Ref<UserId>
+	export function refOfUserId(x:UserId,v:Ref<UserId>)
+	export function unRefUserId(v:Ref<UserId>):UserId
+	export function emptyApprovalGroup():ApprovalGroup
+	export function emptyRefApprovalGroup():Ref<ApprovalGroup>
+	export function refOfApprovalGroup(x:ApprovalGroup,v:Ref<ApprovalGroup>)
+	export function unRefApprovalGroup(v:Ref<ApprovalGroup>):ApprovalGroup
+	export function emptySearchBasicInfoBankReq():SearchBasicInfoBankReq
+	export function emptyRefSearchBasicInfoBankReq():Ref<SearchBasicInfoBankReq>
+	export function refOfSearchBasicInfoBankReq(x:SearchBasicInfoBankReq,v:Ref<SearchBasicInfoBankReq>)
+	export function unRefSearchBasicInfoBankReq(v:Ref<SearchBasicInfoBankReq>):SearchBasicInfoBankReq
+	export function emptyEmployeeJobData():EmployeeJobData
+	export function emptyRefEmployeeJobData():Ref<EmployeeJobData>
+	export function refOfEmployeeJobData(x:EmployeeJobData,v:Ref<EmployeeJobData>)
+	export function unRefEmployeeJobData(v:Ref<EmployeeJobData>):EmployeeJobData
+	export function emptyBank():Bank
+	export function emptyRefBank():Ref<Bank>
+	export function refOfBank(x:Bank,v:Ref<Bank>)
+	export function unRefBank(v:Ref<Bank>):Bank
+	export function emptyPatchCostCenterVersionResp():PatchCostCenterVersionResp
+	export function emptyRefPatchCostCenterVersionResp():Ref<PatchCostCenterVersionResp>
+	export function refOfPatchCostCenterVersionResp(x:PatchCostCenterVersionResp,v:Ref<PatchCostCenterVersionResp>)
+	export function unRefPatchCostCenterVersionResp(v:Ref<PatchCostCenterVersionResp>):PatchCostCenterVersionResp
+	export function emptySearchBasicInfoBankBranchReq():SearchBasicInfoBankBranchReq
+	export function emptyRefSearchBasicInfoBankBranchReq():Ref<SearchBasicInfoBankBranchReq>
+	export function refOfSearchBasicInfoBankBranchReq(x:SearchBasicInfoBankBranchReq,v:Ref<SearchBasicInfoBankBranchReq>)
+	export function unRefSearchBasicInfoBankBranchReq(v:Ref<SearchBasicInfoBankBranchReq>):SearchBasicInfoBankBranchReq
+	export function emptyProcessDoneItem():ProcessDoneItem
+	export function emptyRefProcessDoneItem():Ref<ProcessDoneItem>
+	export function refOfProcessDoneItem(x:ProcessDoneItem,v:Ref<ProcessDoneItem>)
+	export function unRefProcessDoneItem(v:Ref<ProcessDoneItem>):ProcessDoneItem
+	export function emptyFieldVariableValue():FieldVariableValue
+	export function emptyRefFieldVariableValue():Ref<FieldVariableValue>
+	export function refOfFieldVariableValue(x:FieldVariableValue,v:Ref<FieldVariableValue>)
+	export function unRefFieldVariableValue(v:Ref<FieldVariableValue>):FieldVariableValue
+	export function emptySearchCostCenterReq():SearchCostCenterReq
+	export function emptyRefSearchCostCenterReq():Ref<SearchCostCenterReq>
+	export function refOfSearchCostCenterReq(x:SearchCostCenterReq,v:Ref<SearchCostCenterReq>)
+	export function unRefSearchCostCenterReq(v:Ref<SearchCostCenterReq>):SearchCostCenterReq
+	export function emptyDepartmentParents():DepartmentParents
+	export function emptyRefDepartmentParents():Ref<DepartmentParents>
+	export function refOfDepartmentParents(x:DepartmentParents,v:Ref<DepartmentParents>)
+	export function unRefDepartmentParents(v:Ref<DepartmentParents>):DepartmentParents
+	export function emptyDimensionValue():DimensionValue
+	export function emptyRefDimensionValue():Ref<DimensionValue>
+	export function refOfDimensionValue(x:DimensionValue,v:Ref<DimensionValue>)
+	export function unRefDimensionValue(v:Ref<DimensionValue>):DimensionValue
+	export function emptyGetByDepartmentBpResp():GetByDepartmentBpResp
+	export function emptyRefGetByDepartmentBpResp():Ref<GetByDepartmentBpResp>
+	export function refOfGetByDepartmentBpResp(x:GetByDepartmentBpResp,v:Ref<GetByDepartmentBpResp>)
+	export function unRefGetByDepartmentBpResp(v:Ref<GetByDepartmentBpResp>):GetByDepartmentBpResp
+	export function emptyGetJobReq():GetJobReq
+	export function emptyRefGetJobReq():Ref<GetJobReq>
+	export function refOfGetJobReq(x:GetJobReq,v:Ref<GetJobReq>)
+	export function unRefGetJobReq(v:Ref<GetJobReq>):GetJobReq
+	export function emptyProfileSettingHukou():ProfileSettingHukou
+	export function emptyRefProfileSettingHukou():Ref<ProfileSettingHukou>
+	export function refOfProfileSettingHukou(x:ProfileSettingHukou,v:Ref<ProfileSettingHukou>)
+	export function unRefProfileSettingHukou(v:Ref<ProfileSettingHukou>):ProfileSettingHukou
+	export function emptyContract():Contract
+	export function emptyRefContract():Ref<Contract>
+	export function refOfContract(x:Contract,v:Ref<Contract>)
+	export function unRefContract(v:Ref<Contract>):Contract
+	export function emptyJob():Job
+	export function emptyRefJob():Ref<Job>
+	export function refOfJob(x:Job,v:Ref<Job>)
+	export function unRefJob(v:Ref<Job>):Job
+	export function emptyFieldVariableValueToForReview():FieldVariableValueToForReview
+	export function emptyRefFieldVariableValueToForReview():Ref<FieldVariableValueToForReview>
+	export function refOfFieldVariableValueToForReview(x:FieldVariableValueToForReview,v:Ref<FieldVariableValueToForReview>)
+	export function unRefFieldVariableValueToForReview(v:Ref<FieldVariableValueToForReview>):FieldVariableValueToForReview
+	export function emptyAbnormalReasonI18nElement():AbnormalReasonI18nElement
+	export function emptyRefAbnormalReasonI18nElement():Ref<AbnormalReasonI18nElement>
+	export function refOfAbnormalReasonI18nElement(x:AbnormalReasonI18nElement,v:Ref<AbnormalReasonI18nElement>)
+	export function unRefAbnormalReasonI18nElement(v:Ref<AbnormalReasonI18nElement>):AbnormalReasonI18nElement
+	export function emptyP2ProcessNodeUpdatedV2():P2ProcessNodeUpdatedV2
+	export function emptyRefP2ProcessNodeUpdatedV2():Ref<P2ProcessNodeUpdatedV2>
+	export function refOfP2ProcessNodeUpdatedV2(x:P2ProcessNodeUpdatedV2,v:Ref<P2ProcessNodeUpdatedV2>)
+	export function unRefP2ProcessNodeUpdatedV2(v:Ref<P2ProcessNodeUpdatedV2>):P2ProcessNodeUpdatedV2
+	export function emptyPatchCostCenterVersionReqBody():PatchCostCenterVersionReqBody
+	export function emptyRefPatchCostCenterVersionReqBody():Ref<PatchCostCenterVersionReqBody>
+	export function refOfPatchCostCenterVersionReqBody(x:PatchCostCenterVersionReqBody,v:Ref<PatchCostCenterVersionReqBody>)
+	export function unRefPatchCostCenterVersionReqBody(v:Ref<PatchCostCenterVersionReqBody>):PatchCostCenterVersionReqBody
+	export function emptyProfileSettingEmploymentBasicInfo():ProfileSettingEmploymentBasicInfo
+	export function emptyRefProfileSettingEmploymentBasicInfo():Ref<ProfileSettingEmploymentBasicInfo>
+	export function refOfProfileSettingEmploymentBasicInfo(x:ProfileSettingEmploymentBasicInfo,v:Ref<ProfileSettingEmploymentBasicInfo>)
+	export function unRefProfileSettingEmploymentBasicInfo(v:Ref<ProfileSettingEmploymentBasicInfo>):ProfileSettingEmploymentBasicInfo
+	export function emptyQrCode():QrCode
+	export function emptyRefQrCode():Ref<QrCode>
+	export function refOfQrCode(x:QrCode,v:Ref<QrCode>)
+	export function unRefQrCode(v:Ref<QrCode>):QrCode
+	export function emptySearchContractReqBody():SearchContractReqBody
+	export function emptyRefSearchContractReqBody():Ref<SearchContractReqBody>
+	export function refOfSearchContractReqBody(x:SearchContractReqBody,v:Ref<SearchContractReqBody>)
+	export function unRefSearchContractReqBody(v:Ref<SearchContractReqBody>):SearchContractReqBody
+	export function emptyNameForUpdate():NameForUpdate
+	export function emptyRefNameForUpdate():Ref<NameForUpdate>
+	export function refOfNameForUpdate(x:NameForUpdate,v:Ref<NameForUpdate>)
+	export function unRefNameForUpdate(v:Ref<NameForUpdate>):NameForUpdate
+	export function emptyTransitTaskPreHireResp():TransitTaskPreHireResp
+	export function emptyRefTransitTaskPreHireResp():Ref<TransitTaskPreHireResp>
+	export function refOfTransitTaskPreHireResp(x:TransitTaskPreHireResp,v:Ref<TransitTaskPreHireResp>)
+	export function unRefTransitTaskPreHireResp(v:Ref<TransitTaskPreHireResp>):TransitTaskPreHireResp
+	export function emptyP2ProcessUpdatedV2():P2ProcessUpdatedV2
+	export function emptyRefP2ProcessUpdatedV2():Ref<P2ProcessUpdatedV2>
+	export function refOfP2ProcessUpdatedV2(x:P2ProcessUpdatedV2,v:Ref<P2ProcessUpdatedV2>)
+	export function unRefP2ProcessUpdatedV2(v:Ref<P2ProcessUpdatedV2>):P2ProcessUpdatedV2
+	export function emptyUpdateProcessApproverReq():UpdateProcessApproverReq
+	export function emptyRefUpdateProcessApproverReq():Ref<UpdateProcessApproverReq>
+	export function refOfUpdateProcessApproverReq(x:UpdateProcessApproverReq,v:Ref<UpdateProcessApproverReq>)
+	export function unRefUpdateProcessApproverReq(v:Ref<UpdateProcessApproverReq>):UpdateProcessApproverReq
+	export function emptyDeletePreHireResp():DeletePreHireResp
+	export function emptyRefDeletePreHireResp():Ref<DeletePreHireResp>
+	export function refOfDeletePreHireResp(x:DeletePreHireResp,v:Ref<DeletePreHireResp>)
+	export function unRefDeletePreHireResp(v:Ref<DeletePreHireResp>):DeletePreHireResp
+	export function emptyP2EmployeeDomainEventV2Data():P2EmployeeDomainEventV2Data
+	export function emptyRefP2EmployeeDomainEventV2Data():Ref<P2EmployeeDomainEventV2Data>
+	export function refOfP2EmployeeDomainEventV2Data(x:P2EmployeeDomainEventV2Data,v:Ref<P2EmployeeDomainEventV2Data>)
+	export function unRefP2EmployeeDomainEventV2Data(v:Ref<P2EmployeeDomainEventV2Data>):P2EmployeeDomainEventV2Data
+	export function emptyP2OffboardingStatusUpdatedV2():P2OffboardingStatusUpdatedV2
+	export function emptyRefP2OffboardingStatusUpdatedV2():Ref<P2OffboardingStatusUpdatedV2>
+	export function refOfP2OffboardingStatusUpdatedV2(x:P2OffboardingStatusUpdatedV2,v:Ref<P2OffboardingStatusUpdatedV2>)
+	export function unRefP2OffboardingStatusUpdatedV2(v:Ref<P2OffboardingStatusUpdatedV2>):P2OffboardingStatusUpdatedV2
+	export function emptyBasicEmployee():BasicEmployee
+	export function emptyRefBasicEmployee():Ref<BasicEmployee>
+	export function refOfBasicEmployee(x:BasicEmployee,v:Ref<BasicEmployee>)
+	export function unRefBasicEmployee(v:Ref<BasicEmployee>):BasicEmployee
+	export function emptySearchBasicInfoNationalityIterator():SearchBasicInfoNationalityIterator
+	export function emptyRefSearchBasicInfoNationalityIterator():Ref<SearchBasicInfoNationalityIterator>
+	export function refOfSearchBasicInfoNationalityIterator(x:SearchBasicInfoNationalityIterator,v:Ref<SearchBasicInfoNationalityIterator>)
+	export function unRefSearchBasicInfoNationalityIterator(v:Ref<SearchBasicInfoNationalityIterator>):SearchBasicInfoNationalityIterator
+	export function emptySearchEmployeeResp():SearchEmployeeResp
+	export function emptyRefSearchEmployeeResp():Ref<SearchEmployeeResp>
+	export function refOfSearchEmployeeResp(x:SearchEmployeeResp,v:Ref<SearchEmployeeResp>)
+	export function unRefSearchEmployeeResp(v:Ref<SearchEmployeeResp>):SearchEmployeeResp
+	export function emptyListBpRespData():ListBpRespData
+	export function emptyRefListBpRespData():Ref<ListBpRespData>
+	export function refOfListBpRespData(x:ListBpRespData,v:Ref<ListBpRespData>)
+	export function unRefListBpRespData(v:Ref<ListBpRespData>):ListBpRespData
+	export function emptyUserInfo():UserInfo
+	export function emptyRefUserInfo():Ref<UserInfo>
+	export function refOfUserInfo(x:UserInfo,v:Ref<UserInfo>)
+	export function unRefUserInfo(v:Ref<UserInfo>):UserInfo
+	export function emptyMatchRules():MatchRules
+	export function emptyRefMatchRules():Ref<MatchRules>
+	export function refOfMatchRules(x:MatchRules,v:Ref<MatchRules>)
+	export function unRefMatchRules(v:Ref<MatchRules>):MatchRules
+	export function emptyProcessAbstractItem():ProcessAbstractItem
+	export function emptyRefProcessAbstractItem():Ref<ProcessAbstractItem>
+	export function refOfProcessAbstractItem(x:ProcessAbstractItem,v:Ref<ProcessAbstractItem>)
+	export function unRefProcessAbstractItem(v:Ref<ProcessAbstractItem>):ProcessAbstractItem
+	export function emptyProfileSettingPersonalBasicInfo():ProfileSettingPersonalBasicInfo
+	export function emptyRefProfileSettingPersonalBasicInfo():Ref<ProfileSettingPersonalBasicInfo>
+	export function refOfProfileSettingPersonalBasicInfo(x:ProfileSettingPersonalBasicInfo,v:Ref<ProfileSettingPersonalBasicInfo>)
+	export function unRefProfileSettingPersonalBasicInfo(v:Ref<ProfileSettingPersonalBasicInfo>):ProfileSettingPersonalBasicInfo
+	export function emptyP2ProcessCcUpdatedV2():P2ProcessCcUpdatedV2
+	export function emptyRefP2ProcessCcUpdatedV2():Ref<P2ProcessCcUpdatedV2>
+	export function refOfP2ProcessCcUpdatedV2(x:P2ProcessCcUpdatedV2,v:Ref<P2ProcessCcUpdatedV2>)
+	export function unRefP2ProcessCcUpdatedV2(v:Ref<P2ProcessCcUpdatedV2>):P2ProcessCcUpdatedV2
+	export function emptySearchBasicInfoBankResp():SearchBasicInfoBankResp
+	export function emptyRefSearchBasicInfoBankResp():Ref<SearchBasicInfoBankResp>
+	export function refOfSearchBasicInfoBankResp(x:SearchBasicInfoBankResp,v:Ref<SearchBasicInfoBankResp>)
+	export function unRefSearchBasicInfoBankResp(v:Ref<SearchBasicInfoBankResp>):SearchBasicInfoBankResp
+	export function emptyBatchGetEmployeesBpRespData():BatchGetEmployeesBpRespData
+	export function emptyRefBatchGetEmployeesBpRespData():Ref<BatchGetEmployeesBpRespData>
+	export function refOfBatchGetEmployeesBpRespData(x:BatchGetEmployeesBpRespData,v:Ref<BatchGetEmployeesBpRespData>)
+	export function unRefBatchGetEmployeesBpRespData(v:Ref<BatchGetEmployeesBpRespData>):BatchGetEmployeesBpRespData
+	export function emptyUpdateProcessApproverResp():UpdateProcessApproverResp
+	export function emptyRefUpdateProcessApproverResp():Ref<UpdateProcessApproverResp>
+	export function refOfUpdateProcessApproverResp(x:UpdateProcessApproverResp,v:Ref<UpdateProcessApproverResp>)
+	export function unRefUpdateProcessApproverResp(v:Ref<UpdateProcessApproverResp>):UpdateProcessApproverResp
+	export function emptyFieldVariableValueI18n():FieldVariableValueI18n
+	export function emptyRefFieldVariableValueI18n():Ref<FieldVariableValueI18n>
+	export function refOfFieldVariableValueI18n(x:FieldVariableValueI18n,v:Ref<FieldVariableValueI18n>)
+	export function unRefFieldVariableValueI18n(v:Ref<FieldVariableValueI18n>):FieldVariableValueI18n
+	export function emptyOnboardingQrCode():OnboardingQrCode
+	export function emptyRefOnboardingQrCode():Ref<OnboardingQrCode>
+	export function refOfOnboardingQrCode(x:OnboardingQrCode,v:Ref<OnboardingQrCode>)
+	export function unRefOnboardingQrCode(v:Ref<OnboardingQrCode>):OnboardingQrCode
+	export function emptyQueryMultiTimelineDepartmentReq():QueryMultiTimelineDepartmentReq
+	export function emptyRefQueryMultiTimelineDepartmentReq():Ref<QueryMultiTimelineDepartmentReq>
+	export function refOfQueryMultiTimelineDepartmentReq(x:QueryMultiTimelineDepartmentReq,v:Ref<QueryMultiTimelineDepartmentReq>)
+	export function unRefQueryMultiTimelineDepartmentReq(v:Ref<QueryMultiTimelineDepartmentReq>):QueryMultiTimelineDepartmentReq
 	export function emptyBasicInfo():BasicInfo
 	export function emptyRefBasicInfo():Ref<BasicInfo>
 	export function refOfBasicInfo(x:BasicInfo,v:Ref<BasicInfo>)
@@ -8754,308 +10541,944 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'{
 	export function emptyRefBatchGetJobFamilyReq():Ref<BatchGetJobFamilyReq>
 	export function refOfBatchGetJobFamilyReq(x:BatchGetJobFamilyReq,v:Ref<BatchGetJobFamilyReq>)
 	export function unRefBatchGetJobFamilyReq(v:Ref<BatchGetJobFamilyReq>):BatchGetJobFamilyReq
-	export function emptySearchContractReqBody():SearchContractReqBody
-	export function emptyRefSearchContractReqBody():Ref<SearchContractReqBody>
-	export function refOfSearchContractReqBody(x:SearchContractReqBody,v:Ref<SearchContractReqBody>)
-	export function unRefSearchContractReqBody(v:Ref<SearchContractReqBody>):SearchContractReqBody
-	export function emptyDepartmentParents():DepartmentParents
-	export function emptyRefDepartmentParents():Ref<DepartmentParents>
-	export function refOfDepartmentParents(x:DepartmentParents,v:Ref<DepartmentParents>)
-	export function unRefDepartmentParents(v:Ref<DepartmentParents>):DepartmentParents
-	export function emptyGetByDepartmentBpResp():GetByDepartmentBpResp
-	export function emptyRefGetByDepartmentBpResp():Ref<GetByDepartmentBpResp>
-	export function refOfGetByDepartmentBpResp(x:GetByDepartmentBpResp,v:Ref<GetByDepartmentBpResp>)
-	export function unRefGetByDepartmentBpResp(v:Ref<GetByDepartmentBpResp>):GetByDepartmentBpResp
-	export function emptyParentsDepartmentReqBody():ParentsDepartmentReqBody
-	export function emptyRefParentsDepartmentReqBody():Ref<ParentsDepartmentReqBody>
-	export function refOfParentsDepartmentReqBody(x:ParentsDepartmentReqBody,v:Ref<ParentsDepartmentReqBody>)
-	export function unRefParentsDepartmentReqBody(v:Ref<ParentsDepartmentReqBody>):ParentsDepartmentReqBody
-	export function emptyBasicInfoUpdate():BasicInfoUpdate
-	export function emptyRefBasicInfoUpdate():Ref<BasicInfoUpdate>
-	export function refOfBasicInfoUpdate(x:BasicInfoUpdate,v:Ref<BasicInfoUpdate>)
-	export function unRefBasicInfoUpdate(v:Ref<BasicInfoUpdate>):BasicInfoUpdate
-	export function emptyCreateCostCenterResp():CreateCostCenterResp
-	export function emptyRefCreateCostCenterResp():Ref<CreateCostCenterResp>
-	export function refOfCreateCostCenterResp(x:CreateCostCenterResp,v:Ref<CreateCostCenterResp>)
-	export function unRefCreateCostCenterResp(v:Ref<CreateCostCenterResp>):CreateCostCenterResp
-	export function emptyV2():V2
-	export function emptyRefV2():Ref<V2>
-	export function refOfV2(x:V2,v:Ref<V2>)
-	export function unRefV2(v:Ref<V2>):V2
-	export function emptyWorkEmailInfoList():WorkEmailInfoList
-	export function emptyRefWorkEmailInfoList():Ref<WorkEmailInfoList>
-	export function refOfWorkEmailInfoList(x:WorkEmailInfoList,v:Ref<WorkEmailInfoList>)
-	export function unRefWorkEmailInfoList(v:Ref<WorkEmailInfoList>):WorkEmailInfoList
-	export function emptyEnum():Enum
-	export function emptyRefEnum():Ref<Enum>
-	export function refOfEnum(x:Enum,v:Ref<Enum>)
-	export function unRefEnum(v:Ref<Enum>):Enum
-	export function emptyListProcessIterator():ListProcessIterator
-	export function emptyRefListProcessIterator():Ref<ListProcessIterator>
-	export function refOfListProcessIterator(x:ListProcessIterator,v:Ref<ListProcessIterator>)
-	export function unRefListProcessIterator(v:Ref<ListProcessIterator>):ListProcessIterator
-	export function emptyContract():Contract
-	export function emptyRefContract():Ref<Contract>
-	export function refOfContract(x:Contract,v:Ref<Contract>)
-	export function unRefContract(v:Ref<Contract>):Contract
-	export function emptyInternationalAssignment():InternationalAssignment
-	export function emptyRefInternationalAssignment():Ref<InternationalAssignment>
-	export function refOfInternationalAssignment(x:InternationalAssignment,v:Ref<InternationalAssignment>)
-	export function unRefInternationalAssignment(v:Ref<InternationalAssignment>):InternationalAssignment
-	export function emptyProfileSettingEmploymentInfo():ProfileSettingEmploymentInfo
-	export function emptyRefProfileSettingEmploymentInfo():Ref<ProfileSettingEmploymentInfo>
-	export function refOfProfileSettingEmploymentInfo(x:ProfileSettingEmploymentInfo,v:Ref<ProfileSettingEmploymentInfo>)
-	export function unRefProfileSettingEmploymentInfo(v:Ref<ProfileSettingEmploymentInfo>):ProfileSettingEmploymentInfo
-	export function emptyDepartmentForPatch():DepartmentForPatch
-	export function emptyRefDepartmentForPatch():Ref<DepartmentForPatch>
-	export function refOfDepartmentForPatch(x:DepartmentForPatch,v:Ref<DepartmentForPatch>)
-	export function unRefDepartmentForPatch(v:Ref<DepartmentForPatch>):DepartmentForPatch
-	export function emptyTranferEmploymentInfo():TranferEmploymentInfo
-	export function emptyRefTranferEmploymentInfo():Ref<TranferEmploymentInfo>
-	export function refOfTranferEmploymentInfo(x:TranferEmploymentInfo,v:Ref<TranferEmploymentInfo>)
-	export function unRefTranferEmploymentInfo(v:Ref<TranferEmploymentInfo>):TranferEmploymentInfo
-	export function emptyEmploymentLeaveBalance():EmploymentLeaveBalance
-	export function emptyRefEmploymentLeaveBalance():Ref<EmploymentLeaveBalance>
-	export function refOfEmploymentLeaveBalance(x:EmploymentLeaveBalance,v:Ref<EmploymentLeaveBalance>)
-	export function unRefEmploymentLeaveBalance(v:Ref<EmploymentLeaveBalance>):EmploymentLeaveBalance
-	export function emptyProfileSettingDataAttachment():ProfileSettingDataAttachment
-	export function emptyRefProfileSettingDataAttachment():Ref<ProfileSettingDataAttachment>
-	export function refOfProfileSettingDataAttachment(x:ProfileSettingDataAttachment,v:Ref<ProfileSettingDataAttachment>)
-	export function unRefProfileSettingDataAttachment(v:Ref<ProfileSettingDataAttachment>):ProfileSettingDataAttachment
-	export function emptySearchBasicInfoCityReq():SearchBasicInfoCityReq
-	export function emptyRefSearchBasicInfoCityReq():Ref<SearchBasicInfoCityReq>
-	export function refOfSearchBasicInfoCityReq(x:SearchBasicInfoCityReq,v:Ref<SearchBasicInfoCityReq>)
-	export function unRefSearchBasicInfoCityReq(v:Ref<SearchBasicInfoCityReq>):SearchBasicInfoCityReq
-	export function emptyBasicJobData():BasicJobData
-	export function emptyRefBasicJobData():Ref<BasicJobData>
-	export function refOfBasicJobData(x:BasicJobData,v:Ref<BasicJobData>)
-	export function unRefBasicJobData(v:Ref<BasicJobData>):BasicJobData
-	export function emptyDimensionValue():DimensionValue
-	export function emptyRefDimensionValue():Ref<DimensionValue>
-	export function refOfDimensionValue(x:DimensionValue,v:Ref<DimensionValue>)
-	export function unRefDimensionValue(v:Ref<DimensionValue>):DimensionValue
-	export function emptyProfileSettingEmergencyContact():ProfileSettingEmergencyContact
-	export function emptyRefProfileSettingEmergencyContact():Ref<ProfileSettingEmergencyContact>
-	export function refOfProfileSettingEmergencyContact(x:ProfileSettingEmergencyContact,v:Ref<ProfileSettingEmergencyContact>)
-	export function unRefProfileSettingEmergencyContact(v:Ref<ProfileSettingEmergencyContact>):ProfileSettingEmergencyContact
-	export function emptyBatchGetDepartmentResp():BatchGetDepartmentResp
-	export function emptyRefBatchGetDepartmentResp():Ref<BatchGetDepartmentResp>
-	export function refOfBatchGetDepartmentResp(x:BatchGetDepartmentResp,v:Ref<BatchGetDepartmentResp>)
-	export function unRefBatchGetDepartmentResp(v:Ref<BatchGetDepartmentResp>):BatchGetDepartmentResp
-	export function emptyCountryRegion():CountryRegion
-	export function emptyRefCountryRegion():Ref<CountryRegion>
-	export function refOfCountryRegion(x:CountryRegion,v:Ref<CountryRegion>)
-	export function unRefCountryRegion(v:Ref<CountryRegion>):CountryRegion
-	export function emptyDeleteCostCenterReqBody():DeleteCostCenterReqBody
-	export function emptyRefDeleteCostCenterReqBody():Ref<DeleteCostCenterReqBody>
-	export function refOfDeleteCostCenterReqBody(x:DeleteCostCenterReqBody,v:Ref<DeleteCostCenterReqBody>)
-	export function unRefDeleteCostCenterReqBody(v:Ref<DeleteCostCenterReqBody>):DeleteCostCenterReqBody
-	export function emptySearchPreHireReq():SearchPreHireReq
-	export function emptyRefSearchPreHireReq():Ref<SearchPreHireReq>
-	export function refOfSearchPreHireReq(x:SearchPreHireReq,v:Ref<SearchPreHireReq>)
-	export function unRefSearchPreHireReq(v:Ref<SearchPreHireReq>):SearchPreHireReq
-	export function emptyBatchGetCompanyReqBody():BatchGetCompanyReqBody
-	export function emptyRefBatchGetCompanyReqBody():Ref<BatchGetCompanyReqBody>
-	export function refOfBatchGetCompanyReqBody(x:BatchGetCompanyReqBody,v:Ref<BatchGetCompanyReqBody>)
-	export function unRefBatchGetCompanyReqBody(v:Ref<BatchGetCompanyReqBody>):BatchGetCompanyReqBody
-	export function emptyBatchGetEmployeesBpReqBody():BatchGetEmployeesBpReqBody
-	export function emptyRefBatchGetEmployeesBpReqBody():Ref<BatchGetEmployeesBpReqBody>
-	export function refOfBatchGetEmployeesBpReqBody(x:BatchGetEmployeesBpReqBody,v:Ref<BatchGetEmployeesBpReqBody>)
-	export function unRefBatchGetEmployeesBpReqBody(v:Ref<BatchGetEmployeesBpReqBody>):BatchGetEmployeesBpReqBody
-	export function emptyCustomValue():CustomValue
-	export function emptyRefCustomValue():Ref<CustomValue>
-	export function refOfCustomValue(x:CustomValue,v:Ref<CustomValue>)
-	export function unRefCustomValue(v:Ref<CustomValue>):CustomValue
-	export function emptyPatchPersonResp():PatchPersonResp
-	export function emptyRefPatchPersonResp():Ref<PatchPersonResp>
-	export function refOfPatchPersonResp(x:PatchPersonResp,v:Ref<PatchPersonResp>)
-	export function unRefPatchPersonResp(v:Ref<PatchPersonResp>):PatchPersonResp
-	export function emptyQueryTimelineDepartmentResp():QueryTimelineDepartmentResp
-	export function emptyRefQueryTimelineDepartmentResp():Ref<QueryTimelineDepartmentResp>
-	export function refOfQueryTimelineDepartmentResp(x:QueryTimelineDepartmentResp,v:Ref<QueryTimelineDepartmentResp>)
-	export function unRefQueryTimelineDepartmentResp(v:Ref<QueryTimelineDepartmentResp>):QueryTimelineDepartmentResp
-	export function emptyCostCenter():CostCenter
-	export function emptyRefCostCenter():Ref<CostCenter>
-	export function refOfCostCenter(x:CostCenter,v:Ref<CostCenter>)
-	export function unRefCostCenter(v:Ref<CostCenter>):CostCenter
-	export function emptyListBpResp():ListBpResp
-	export function emptyRefListBpResp():Ref<ListBpResp>
-	export function refOfListBpResp(x:ListBpResp,v:Ref<ListBpResp>)
-	export function unRefListBpResp(v:Ref<ListBpResp>):ListBpResp
-	export function emptySearchBasicInfoBankReq():SearchBasicInfoBankReq
-	export function emptyRefSearchBasicInfoBankReq():Ref<SearchBasicInfoBankReq>
-	export function refOfSearchBasicInfoBankReq(x:SearchBasicInfoBankReq,v:Ref<SearchBasicInfoBankReq>)
-	export function unRefSearchBasicInfoBankReq(v:Ref<SearchBasicInfoBankReq>):SearchBasicInfoBankReq
-	export function emptyListBpIterator():ListBpIterator
-	export function emptyRefListBpIterator():Ref<ListBpIterator>
-	export function refOfListBpIterator(x:ListBpIterator,v:Ref<ListBpIterator>)
-	export function unRefListBpIterator(v:Ref<ListBpIterator>):ListBpIterator
-	export function emptyNationalId():NationalId
-	export function emptyRefNationalId():Ref<NationalId>
-	export function refOfNationalId(x:NationalId,v:Ref<NationalId>)
-	export function unRefNationalId(v:Ref<NationalId>):NationalId
-	export function emptyDeleteProbationAssessmentResp():DeleteProbationAssessmentResp
-	export function emptyRefDeleteProbationAssessmentResp():Ref<DeleteProbationAssessmentResp>
-	export function refOfDeleteProbationAssessmentResp(x:DeleteProbationAssessmentResp,v:Ref<DeleteProbationAssessmentResp>)
-	export function unRefDeleteProbationAssessmentResp(v:Ref<DeleteProbationAssessmentResp>):DeleteProbationAssessmentResp
-	export function emptyDepartmentChange():DepartmentChange
-	export function emptyRefDepartmentChange():Ref<DepartmentChange>
-	export function refOfDepartmentChange(x:DepartmentChange,v:Ref<DepartmentChange>)
-	export function unRefDepartmentChange(v:Ref<DepartmentChange>):DepartmentChange
-	export function emptyGetProcessFormVariableDataRespData():GetProcessFormVariableDataRespData
-	export function emptyRefGetProcessFormVariableDataRespData():Ref<GetProcessFormVariableDataRespData>
-	export function refOfGetProcessFormVariableDataRespData(x:GetProcessFormVariableDataRespData,v:Ref<GetProcessFormVariableDataRespData>)
-	export function unRefGetProcessFormVariableDataRespData(v:Ref<GetProcessFormVariableDataRespData>):GetProcessFormVariableDataRespData
-	export function emptyProfileSettingAddress():ProfileSettingAddress
-	export function emptyRefProfileSettingAddress():Ref<ProfileSettingAddress>
-	export function refOfProfileSettingAddress(x:ProfileSettingAddress,v:Ref<ProfileSettingAddress>)
-	export function unRefProfileSettingAddress(v:Ref<ProfileSettingAddress>):ProfileSettingAddress
-	export function emptySearchBasicInfoBankIterator():SearchBasicInfoBankIterator
-	export function emptyRefSearchBasicInfoBankIterator():Ref<SearchBasicInfoBankIterator>
-	export function refOfSearchBasicInfoBankIterator(x:SearchBasicInfoBankIterator,v:Ref<SearchBasicInfoBankIterator>)
-	export function unRefSearchBasicInfoBankIterator(v:Ref<SearchBasicInfoBankIterator>):SearchBasicInfoBankIterator
-	export function emptySearchProbationRespData():SearchProbationRespData
-	export function emptyRefSearchProbationRespData():Ref<SearchProbationRespData>
-	export function refOfSearchProbationRespData(x:SearchProbationRespData,v:Ref<SearchProbationRespData>)
-	export function unRefSearchProbationRespData(v:Ref<SearchProbationRespData>):SearchProbationRespData
-	export function emptyBatchGetJobFamilyRespData():BatchGetJobFamilyRespData
-	export function emptyRefBatchGetJobFamilyRespData():Ref<BatchGetJobFamilyRespData>
-	export function refOfBatchGetJobFamilyRespData(x:BatchGetJobFamilyRespData,v:Ref<BatchGetJobFamilyRespData>)
-	export function unRefBatchGetJobFamilyRespData(v:Ref<BatchGetJobFamilyRespData>):BatchGetJobFamilyRespData
-	export function emptyProfileSettingPersonalRecord():ProfileSettingPersonalRecord
-	export function emptyRefProfileSettingPersonalRecord():Ref<ProfileSettingPersonalRecord>
-	export function refOfProfileSettingPersonalRecord(x:ProfileSettingPersonalRecord,v:Ref<ProfileSettingPersonalRecord>)
-	export function unRefProfileSettingPersonalRecord(v:Ref<ProfileSettingPersonalRecord>):ProfileSettingPersonalRecord
-	export function emptySearchPreHireReqBody():SearchPreHireReqBody
-	export function emptyRefSearchPreHireReqBody():Ref<SearchPreHireReqBody>
-	export function refOfSearchPreHireReqBody(x:SearchPreHireReqBody,v:Ref<SearchPreHireReqBody>)
-	export function unRefSearchPreHireReqBody(v:Ref<SearchPreHireReqBody>):SearchPreHireReqBody
-	export function emptyCustomOrgCreate():CustomOrgCreate
-	export function emptyRefCustomOrgCreate():Ref<CustomOrgCreate>
-	export function refOfCustomOrgCreate(x:CustomOrgCreate,v:Ref<CustomOrgCreate>)
-	export function unRefCustomOrgCreate(v:Ref<CustomOrgCreate>):CustomOrgCreate
-	export function emptyFieldVariableValueToObject():FieldVariableValueToObject
-	export function emptyRefFieldVariableValueToObject():Ref<FieldVariableValueToObject>
-	export function refOfFieldVariableValueToObject(x:FieldVariableValueToObject,v:Ref<FieldVariableValueToObject>)
-	export function unRefFieldVariableValueToObject(v:Ref<FieldVariableValueToObject>):FieldVariableValueToObject
-	export function emptyGetProcessFormVariableDataResp():GetProcessFormVariableDataResp
-	export function emptyRefGetProcessFormVariableDataResp():Ref<GetProcessFormVariableDataResp>
-	export function refOfGetProcessFormVariableDataResp(x:GetProcessFormVariableDataResp,v:Ref<GetProcessFormVariableDataResp>)
-	export function unRefGetProcessFormVariableDataResp(v:Ref<GetProcessFormVariableDataResp>):GetProcessFormVariableDataResp
-	export function emptyQrCodeDimension():QrCodeDimension
-	export function emptyRefQrCodeDimension():Ref<QrCodeDimension>
-	export function refOfQrCodeDimension(x:QrCodeDimension,v:Ref<QrCodeDimension>)
-	export function unRefQrCodeDimension(v:Ref<QrCodeDimension>):QrCodeDimension
-	export function emptyPhoneNumberAndAreaCode():PhoneNumberAndAreaCode
-	export function emptyRefPhoneNumberAndAreaCode():Ref<PhoneNumberAndAreaCode>
-	export function refOfPhoneNumberAndAreaCode(x:PhoneNumberAndAreaCode,v:Ref<PhoneNumberAndAreaCode>)
-	export function unRefPhoneNumberAndAreaCode(v:Ref<PhoneNumberAndAreaCode>):PhoneNumberAndAreaCode
-	export function emptyBatchGetJobFamilyReqBody():BatchGetJobFamilyReqBody
-	export function emptyRefBatchGetJobFamilyReqBody():Ref<BatchGetJobFamilyReqBody>
-	export function refOfBatchGetJobFamilyReqBody(x:BatchGetJobFamilyReqBody,v:Ref<BatchGetJobFamilyReqBody>)
-	export function unRefBatchGetJobFamilyReqBody(v:Ref<BatchGetJobFamilyReqBody>):BatchGetJobFamilyReqBody
-	export function emptyBatchGetJobLevelReqBody():BatchGetJobLevelReqBody
-	export function emptyRefBatchGetJobLevelReqBody():Ref<BatchGetJobLevelReqBody>
-	export function refOfBatchGetJobLevelReqBody(x:BatchGetJobLevelReqBody,v:Ref<BatchGetJobLevelReqBody>)
-	export function unRefBatchGetJobLevelReqBody(v:Ref<BatchGetJobLevelReqBody>):BatchGetJobLevelReqBody
-	export function emptyDepartment():Department
-	export function emptyRefDepartment():Ref<Department>
-	export function refOfDepartment(x:Department,v:Ref<Department>)
-	export function unRefDepartment(v:Ref<Department>):Department
-	export function emptySearchBasicInfoCountryRegionSubdivisionIterator():SearchBasicInfoCountryRegionSubdivisionIterator
-	export function emptyRefSearchBasicInfoCountryRegionSubdivisionIterator():Ref<SearchBasicInfoCountryRegionSubdivisionIterator>
-	export function refOfSearchBasicInfoCountryRegionSubdivisionIterator(x:SearchBasicInfoCountryRegionSubdivisionIterator,v:Ref<SearchBasicInfoCountryRegionSubdivisionIterator>)
-	export function unRefSearchBasicInfoCountryRegionSubdivisionIterator(v:Ref<SearchBasicInfoCountryRegionSubdivisionIterator>):SearchBasicInfoCountryRegionSubdivisionIterator
-	export function emptySearchCostCenterRespData():SearchCostCenterRespData
-	export function emptyRefSearchCostCenterRespData():Ref<SearchCostCenterRespData>
-	export function refOfSearchCostCenterRespData(x:SearchCostCenterRespData,v:Ref<SearchCostCenterRespData>)
-	export function unRefSearchCostCenterRespData(v:Ref<SearchCostCenterRespData>):SearchCostCenterRespData
-	export function emptyGetJobRespData():GetJobRespData
-	export function emptyRefGetJobRespData():Ref<GetJobRespData>
-	export function refOfGetJobRespData(x:GetJobRespData,v:Ref<GetJobRespData>)
-	export function unRefGetJobRespData(v:Ref<GetJobRespData>):GetJobRespData
-	export function emptyUserInfo():UserInfo
-	export function emptyRefUserInfo():Ref<UserInfo>
-	export function refOfUserInfo(x:UserInfo,v:Ref<UserInfo>)
-	export function unRefUserInfo(v:Ref<UserInfo>):UserInfo
-	export function emptyP2ProcessNodeUpdatedV2Data():P2ProcessNodeUpdatedV2Data
-	export function emptyRefP2ProcessNodeUpdatedV2Data():Ref<P2ProcessNodeUpdatedV2Data>
-	export function refOfP2ProcessNodeUpdatedV2Data(x:P2ProcessNodeUpdatedV2Data,v:Ref<P2ProcessNodeUpdatedV2Data>)
-	export function unRefP2ProcessNodeUpdatedV2Data(v:Ref<P2ProcessNodeUpdatedV2Data>):P2ProcessNodeUpdatedV2Data
-	export function emptySearchBasicInfoCurrencyIterator():SearchBasicInfoCurrencyIterator
-	export function emptyRefSearchBasicInfoCurrencyIterator():Ref<SearchBasicInfoCurrencyIterator>
-	export function refOfSearchBasicInfoCurrencyIterator(x:SearchBasicInfoCurrencyIterator,v:Ref<SearchBasicInfoCurrencyIterator>)
-	export function unRefSearchBasicInfoCurrencyIterator(v:Ref<SearchBasicInfoCurrencyIterator>):SearchBasicInfoCurrencyIterator
+	export function emptyPersonInfo():PersonInfo
+	export function emptyRefPersonInfo():Ref<PersonInfo>
+	export function refOfPersonInfo(x:PersonInfo,v:Ref<PersonInfo>)
+	export function unRefPersonInfo(v:Ref<PersonInfo>):PersonInfo
 	export function emptySearchBasicInfoCountryRegionSubdivisionReq():SearchBasicInfoCountryRegionSubdivisionReq
 	export function emptyRefSearchBasicInfoCountryRegionSubdivisionReq():Ref<SearchBasicInfoCountryRegionSubdivisionReq>
 	export function refOfSearchBasicInfoCountryRegionSubdivisionReq(x:SearchBasicInfoCountryRegionSubdivisionReq,v:Ref<SearchBasicInfoCountryRegionSubdivisionReq>)
 	export function unRefSearchBasicInfoCountryRegionSubdivisionReq(v:Ref<SearchBasicInfoCountryRegionSubdivisionReq>):SearchBasicInfoCountryRegionSubdivisionReq
+	export function emptySearchBasicInfoCountryRegionSubdivisionRespData():SearchBasicInfoCountryRegionSubdivisionRespData
+	export function emptyRefSearchBasicInfoCountryRegionSubdivisionRespData():Ref<SearchBasicInfoCountryRegionSubdivisionRespData>
+	export function refOfSearchBasicInfoCountryRegionSubdivisionRespData(x:SearchBasicInfoCountryRegionSubdivisionRespData,v:Ref<SearchBasicInfoCountryRegionSubdivisionRespData>)
+	export function unRefSearchBasicInfoCountryRegionSubdivisionRespData(v:Ref<SearchBasicInfoCountryRegionSubdivisionRespData>):SearchBasicInfoCountryRegionSubdivisionRespData
 	export function emptyBatchGetCompanyReq():BatchGetCompanyReq
 	export function emptyRefBatchGetCompanyReq():Ref<BatchGetCompanyReq>
 	export function refOfBatchGetCompanyReq(x:BatchGetCompanyReq,v:Ref<BatchGetCompanyReq>)
 	export function unRefBatchGetCompanyReq(v:Ref<BatchGetCompanyReq>):BatchGetCompanyReq
-	export function emptyBatchGetJobLevelRespData():BatchGetJobLevelRespData
-	export function emptyRefBatchGetJobLevelRespData():Ref<BatchGetJobLevelRespData>
-	export function refOfBatchGetJobLevelRespData(x:BatchGetJobLevelRespData,v:Ref<BatchGetJobLevelRespData>)
-	export function unRefBatchGetJobLevelRespData(v:Ref<BatchGetJobLevelRespData>):BatchGetJobLevelRespData
-	export function emptyFieldVariableSubVlaue():FieldVariableSubVlaue
-	export function emptyRefFieldVariableSubVlaue():Ref<FieldVariableSubVlaue>
-	export function refOfFieldVariableSubVlaue(x:FieldVariableSubVlaue,v:Ref<FieldVariableSubVlaue>)
-	export function unRefFieldVariableSubVlaue(v:Ref<FieldVariableSubVlaue>):FieldVariableSubVlaue
-	export function emptyCreatePersonReq():CreatePersonReq
-	export function emptyRefCreatePersonReq():Ref<CreatePersonReq>
-	export function refOfCreatePersonReq(x:CreatePersonReq,v:Ref<CreatePersonReq>)
-	export function unRefCreatePersonReq(v:Ref<CreatePersonReq>):CreatePersonReq
-	export function emptyProfileSettingNational():ProfileSettingNational
-	export function emptyRefProfileSettingNational():Ref<ProfileSettingNational>
-	export function refOfProfileSettingNational(x:ProfileSettingNational,v:Ref<ProfileSettingNational>)
-	export function unRefProfileSettingNational(v:Ref<ProfileSettingNational>):ProfileSettingNational
-	export function emptySearchJobChangeResp():SearchJobChangeResp
-	export function emptyRefSearchJobChangeResp():Ref<SearchJobChangeResp>
-	export function refOfSearchJobChangeResp(x:SearchJobChangeResp,v:Ref<SearchJobChangeResp>)
-	export function unRefSearchJobChangeResp(v:Ref<SearchJobChangeResp>):SearchJobChangeResp
-	export function emptyGetJobResp():GetJobResp
-	export function emptyRefGetJobResp():Ref<GetJobResp>
-	export function refOfGetJobResp(x:GetJobResp,v:Ref<GetJobResp>)
-	export function unRefGetJobResp(v:Ref<GetJobResp>):GetJobResp
-	export function emptyOnboardingTaskChange():OnboardingTaskChange
-	export function emptyRefOnboardingTaskChange():Ref<OnboardingTaskChange>
-	export function refOfOnboardingTaskChange(x:OnboardingTaskChange,v:Ref<OnboardingTaskChange>)
-	export function unRefOnboardingTaskChange(v:Ref<OnboardingTaskChange>):OnboardingTaskChange
-	export function emptyPhone():Phone
-	export function emptyRefPhone():Ref<Phone>
-	export function refOfPhone(x:Phone,v:Ref<Phone>)
-	export function unRefPhone(v:Ref<Phone>):Phone
-	export function emptyBatchGetDepartmentReqBody():BatchGetDepartmentReqBody
-	export function emptyRefBatchGetDepartmentReqBody():Ref<BatchGetDepartmentReqBody>
-	export function refOfBatchGetDepartmentReqBody(x:BatchGetDepartmentReqBody,v:Ref<BatchGetDepartmentReqBody>)
-	export function unRefBatchGetDepartmentReqBody(v:Ref<BatchGetDepartmentReqBody>):BatchGetDepartmentReqBody
-	export function emptySearchBasicInfoBankReqBody():SearchBasicInfoBankReqBody
-	export function emptyRefSearchBasicInfoBankReqBody():Ref<SearchBasicInfoBankReqBody>
-	export function refOfSearchBasicInfoBankReqBody(x:SearchBasicInfoBankReqBody,v:Ref<SearchBasicInfoBankReqBody>)
-	export function unRefSearchBasicInfoBankReqBody(v:Ref<SearchBasicInfoBankReqBody>):SearchBasicInfoBankReqBody
-	export function emptySearchJobChangeIterator():SearchJobChangeIterator
-	export function emptyRefSearchJobChangeIterator():Ref<SearchJobChangeIterator>
-	export function refOfSearchJobChangeIterator(x:SearchJobChangeIterator,v:Ref<SearchJobChangeIterator>)
-	export function unRefSearchJobChangeIterator(v:Ref<SearchJobChangeIterator>):SearchJobChangeIterator
-	export function emptyCreateProbationAssessmentResp():CreateProbationAssessmentResp
-	export function emptyRefCreateProbationAssessmentResp():Ref<CreateProbationAssessmentResp>
-	export function refOfCreateProbationAssessmentResp(x:CreateProbationAssessmentResp,v:Ref<CreateProbationAssessmentResp>)
-	export function unRefCreateProbationAssessmentResp(v:Ref<CreateProbationAssessmentResp>):CreateProbationAssessmentResp
-	export function emptyEducation():Education
-	export function emptyRefEducation():Ref<Education>
-	export function refOfEducation(x:Education,v:Ref<Education>)
-	export function unRefEducation(v:Ref<Education>):Education
-	export function emptyEnableDisableAssessmentProbationReqBody():EnableDisableAssessmentProbationReqBody
-	export function emptyRefEnableDisableAssessmentProbationReqBody():Ref<EnableDisableAssessmentProbationReqBody>
-	export function refOfEnableDisableAssessmentProbationReqBody(x:EnableDisableAssessmentProbationReqBody,v:Ref<EnableDisableAssessmentProbationReqBody>)
-	export function unRefEnableDisableAssessmentProbationReqBody(v:Ref<EnableDisableAssessmentProbationReqBody>):EnableDisableAssessmentProbationReqBody
+	export function emptyDependentForUpdate():DependentForUpdate
+	export function emptyRefDependentForUpdate():Ref<DependentForUpdate>
+	export function refOfDependentForUpdate(x:DependentForUpdate,v:Ref<DependentForUpdate>)
+	export function unRefDependentForUpdate(v:Ref<DependentForUpdate>):DependentForUpdate
+	export function emptyInternationalAssignment():InternationalAssignment
+	export function emptyRefInternationalAssignment():Ref<InternationalAssignment>
+	export function refOfInternationalAssignment(x:InternationalAssignment,v:Ref<InternationalAssignment>)
+	export function unRefInternationalAssignment(v:Ref<InternationalAssignment>):InternationalAssignment
+	export function emptyChangeFieldPair():ChangeFieldPair
+	export function emptyRefChangeFieldPair():Ref<ChangeFieldPair>
+	export function refOfChangeFieldPair(x:ChangeFieldPair,v:Ref<ChangeFieldPair>)
+	export function unRefChangeFieldPair(v:Ref<ChangeFieldPair>):ChangeFieldPair
+	export function emptySignatureTemplateCustomField():SignatureTemplateCustomField
+	export function emptyRefSignatureTemplateCustomField():Ref<SignatureTemplateCustomField>
+	export function refOfSignatureTemplateCustomField(x:SignatureTemplateCustomField,v:Ref<SignatureTemplateCustomField>)
+	export function unRefSignatureTemplateCustomField(v:Ref<SignatureTemplateCustomField>):SignatureTemplateCustomField
+	export function emptyProfileSettingI18n():ProfileSettingI18n
+	export function emptyRefProfileSettingI18n():Ref<ProfileSettingI18n>
+	export function refOfProfileSettingI18n(x:ProfileSettingI18n,v:Ref<ProfileSettingI18n>)
+	export function unRefProfileSettingI18n(v:Ref<ProfileSettingI18n>):ProfileSettingI18n
+	export function emptySignatureFolder():SignatureFolder
+	export function emptyRefSignatureFolder():Ref<SignatureFolder>
+	export function refOfSignatureFolder(x:SignatureFolder,v:Ref<SignatureFolder>)
+	export function unRefSignatureFolder(v:Ref<SignatureFolder>):SignatureFolder
+	export function emptyGetProcessFormVariableDataReq():GetProcessFormVariableDataReq
+	export function emptyRefGetProcessFormVariableDataReq():Ref<GetProcessFormVariableDataReq>
+	export function refOfGetProcessFormVariableDataReq(x:GetProcessFormVariableDataReq,v:Ref<GetProcessFormVariableDataReq>)
+	export function unRefGetProcessFormVariableDataReq(v:Ref<GetProcessFormVariableDataReq>):GetProcessFormVariableDataReq
+	export function emptyGetProcessResp():GetProcessResp
+	export function emptyRefGetProcessResp():Ref<GetProcessResp>
+	export function refOfGetProcessResp(x:GetProcessResp,v:Ref<GetProcessResp>)
+	export function unRefGetProcessResp(v:Ref<GetProcessResp>):GetProcessResp
+	export function emptySearchBasicInfoCurrencyReq():SearchBasicInfoCurrencyReq
+	export function emptyRefSearchBasicInfoCurrencyReq():Ref<SearchBasicInfoCurrencyReq>
+	export function refOfSearchBasicInfoCurrencyReq(x:SearchBasicInfoCurrencyReq,v:Ref<SearchBasicInfoCurrencyReq>)
+	export function unRefSearchBasicInfoCurrencyReq(v:Ref<SearchBasicInfoCurrencyReq>):SearchBasicInfoCurrencyReq
+	export function emptySignatureTemplateInfo():SignatureTemplateInfo
+	export function emptyRefSignatureTemplateInfo():Ref<SignatureTemplateInfo>
+	export function refOfSignatureTemplateInfo(x:SignatureTemplateInfo,v:Ref<SignatureTemplateInfo>)
+	export function unRefSignatureTemplateInfo(v:Ref<SignatureTemplateInfo>):SignatureTemplateInfo
+	export function emptySearchBasicInfoCurrencyResp():SearchBasicInfoCurrencyResp
+	export function emptyRefSearchBasicInfoCurrencyResp():Ref<SearchBasicInfoCurrencyResp>
+	export function refOfSearchBasicInfoCurrencyResp(x:SearchBasicInfoCurrencyResp,v:Ref<SearchBasicInfoCurrencyResp>)
+	export function unRefSearchBasicInfoCurrencyResp(v:Ref<SearchBasicInfoCurrencyResp>):SearchBasicInfoCurrencyResp
+	export function emptyDeleteCostCenterVersionReq():DeleteCostCenterVersionReq
+	export function emptyRefDeleteCostCenterVersionReq():Ref<DeleteCostCenterVersionReq>
+	export function refOfDeleteCostCenterVersionReq(x:DeleteCostCenterVersionReq,v:Ref<DeleteCostCenterVersionReq>)
+	export function unRefDeleteCostCenterVersionReq(v:Ref<DeleteCostCenterVersionReq>):DeleteCostCenterVersionReq
+	export function emptyCompletePreHireReq():CompletePreHireReq
+	export function emptyRefCompletePreHireReq():Ref<CompletePreHireReq>
+	export function refOfCompletePreHireReq(x:CompletePreHireReq,v:Ref<CompletePreHireReq>)
+	export function unRefCompletePreHireReq(v:Ref<CompletePreHireReq>):CompletePreHireReq
+	export function emptySearchBasicInfoDistrictResp():SearchBasicInfoDistrictResp
+	export function emptyRefSearchBasicInfoDistrictResp():Ref<SearchBasicInfoDistrictResp>
+	export function refOfSearchBasicInfoDistrictResp(x:SearchBasicInfoDistrictResp,v:Ref<SearchBasicInfoDistrictResp>)
+	export function unRefSearchBasicInfoDistrictResp(v:Ref<SearchBasicInfoDistrictResp>):SearchBasicInfoDistrictResp
+	export function emptySearchBasicInfoNationalityResp():SearchBasicInfoNationalityResp
+	export function emptyRefSearchBasicInfoNationalityResp():Ref<SearchBasicInfoNationalityResp>
+	export function refOfSearchBasicInfoNationalityResp(x:SearchBasicInfoNationalityResp,v:Ref<SearchBasicInfoNationalityResp>)
+	export function unRefSearchBasicInfoNationalityResp(v:Ref<SearchBasicInfoNationalityResp>):SearchBasicInfoNationalityResp
+	export function emptySearchEmployeeReq():SearchEmployeeReq
+	export function emptyRefSearchEmployeeReq():Ref<SearchEmployeeReq>
+	export function refOfSearchEmployeeReq(x:SearchEmployeeReq,v:Ref<SearchEmployeeReq>)
+	export function unRefSearchEmployeeReq(v:Ref<SearchEmployeeReq>):SearchEmployeeReq
+	export function emptyWorkEmailInfoList():WorkEmailInfoList
+	export function emptyRefWorkEmailInfoList():Ref<WorkEmailInfoList>
+	export function refOfWorkEmailInfoList(x:WorkEmailInfoList,v:Ref<WorkEmailInfoList>)
+	export function unRefWorkEmailInfoList(v:Ref<WorkEmailInfoList>):WorkEmailInfoList
+	export function emptyEmploymentBp():EmploymentBp
+	export function emptyRefEmploymentBp():Ref<EmploymentBp>
+	export function refOfEmploymentBp(x:EmploymentBp,v:Ref<EmploymentBp>)
+	export function unRefEmploymentBp(v:Ref<EmploymentBp>):EmploymentBp
+	export function emptyQueryTimelineDepartmentRespData():QueryTimelineDepartmentRespData
+	export function emptyRefQueryTimelineDepartmentRespData():Ref<QueryTimelineDepartmentRespData>
+	export function refOfQueryTimelineDepartmentRespData(x:QueryTimelineDepartmentRespData,v:Ref<QueryTimelineDepartmentRespData>)
+	export function unRefQueryTimelineDepartmentRespData(v:Ref<QueryTimelineDepartmentRespData>):QueryTimelineDepartmentRespData
+	export function emptyCity():City
+	export function emptyRefCity():Ref<City>
+	export function refOfCity(x:City,v:Ref<City>)
+	export function unRefCity(v:Ref<City>):City
+	export function emptyOrgRole():OrgRole
+	export function emptyRefOrgRole():Ref<OrgRole>
+	export function refOfOrgRole(x:OrgRole,v:Ref<OrgRole>)
+	export function unRefOrgRole(v:Ref<OrgRole>):OrgRole
+	export function emptyPatchCostCenterReq():PatchCostCenterReq
+	export function emptyRefPatchCostCenterReq():Ref<PatchCostCenterReq>
+	export function refOfPatchCostCenterReq(x:PatchCostCenterReq,v:Ref<PatchCostCenterReq>)
+	export function unRefPatchCostCenterReq(v:Ref<PatchCostCenterReq>):PatchCostCenterReq
+	export function emptyEmployment():Employment
+	export function emptyRefEmployment():Ref<Employment>
+	export function refOfEmployment(x:Employment,v:Ref<Employment>)
+	export function unRefEmployment(v:Ref<Employment>):Employment
+	export function emptyEnableDisableAssessmentProbationResp():EnableDisableAssessmentProbationResp
+	export function emptyRefEnableDisableAssessmentProbationResp():Ref<EnableDisableAssessmentProbationResp>
+	export function refOfEnableDisableAssessmentProbationResp(x:EnableDisableAssessmentProbationResp,v:Ref<EnableDisableAssessmentProbationResp>)
+	export function unRefEnableDisableAssessmentProbationResp(v:Ref<EnableDisableAssessmentProbationResp>):EnableDisableAssessmentProbationResp
+	export function emptyFieldVariableValueTo():FieldVariableValueTo
+	export function emptyRefFieldVariableValueTo():Ref<FieldVariableValueTo>
+	export function refOfFieldVariableValueTo(x:FieldVariableValueTo,v:Ref<FieldVariableValueTo>)
+	export function unRefFieldVariableValueTo(v:Ref<FieldVariableValueTo>):FieldVariableValueTo
+	export function emptyProcessFormVariable():ProcessFormVariable
+	export function emptyRefProcessFormVariable():Ref<ProcessFormVariable>
+	export function refOfProcessFormVariable(x:ProcessFormVariable,v:Ref<ProcessFormVariable>)
+	export function unRefProcessFormVariable(v:Ref<ProcessFormVariable>):ProcessFormVariable
+	export function emptyBatchGetLocationReq():BatchGetLocationReq
+	export function emptyRefBatchGetLocationReq():Ref<BatchGetLocationReq>
+	export function refOfBatchGetLocationReq(x:BatchGetLocationReq,v:Ref<BatchGetLocationReq>)
+	export function unRefBatchGetLocationReq(v:Ref<BatchGetLocationReq>):BatchGetLocationReq
+	export function emptyProcessCcItem():ProcessCcItem
+	export function emptyRefProcessCcItem():Ref<ProcessCcItem>
+	export function refOfProcessCcItem(x:ProcessCcItem,v:Ref<ProcessCcItem>)
+	export function unRefProcessCcItem(v:Ref<ProcessCcItem>):ProcessCcItem
+	export function emptyProfileSettingEmpContractRecord():ProfileSettingEmpContractRecord
+	export function emptyRefProfileSettingEmpContractRecord():Ref<ProfileSettingEmpContractRecord>
+	export function refOfProfileSettingEmpContractRecord(x:ProfileSettingEmpContractRecord,v:Ref<ProfileSettingEmpContractRecord>)
+	export function unRefProfileSettingEmpContractRecord(v:Ref<ProfileSettingEmpContractRecord>):ProfileSettingEmpContractRecord
+	export function emptySignatureTemplatePermissionInfo():SignatureTemplatePermissionInfo
+	export function emptyRefSignatureTemplatePermissionInfo():Ref<SignatureTemplatePermissionInfo>
+	export function refOfSignatureTemplatePermissionInfo(x:SignatureTemplatePermissionInfo,v:Ref<SignatureTemplatePermissionInfo>)
+	export function unRefSignatureTemplatePermissionInfo(v:Ref<SignatureTemplatePermissionInfo>):SignatureTemplatePermissionInfo
+	export function emptyParentsDepartmentRespData():ParentsDepartmentRespData
+	export function emptyRefParentsDepartmentRespData():Ref<ParentsDepartmentRespData>
+	export function refOfParentsDepartmentRespData(x:ParentsDepartmentRespData,v:Ref<ParentsDepartmentRespData>)
+	export function unRefParentsDepartmentRespData(v:Ref<ParentsDepartmentRespData>):ParentsDepartmentRespData
+	export function emptyCitizenshipStatus():CitizenshipStatus
+	export function emptyRefCitizenshipStatus():Ref<CitizenshipStatus>
+	export function refOfCitizenshipStatus(x:CitizenshipStatus,v:Ref<CitizenshipStatus>)
+	export function unRefCitizenshipStatus(v:Ref<CitizenshipStatus>):CitizenshipStatus
+	export function emptyProfileSettingDependent():ProfileSettingDependent
+	export function emptyRefProfileSettingDependent():Ref<ProfileSettingDependent>
+	export function refOfProfileSettingDependent(x:ProfileSettingDependent,v:Ref<ProfileSettingDependent>)
+	export function unRefProfileSettingDependent(v:Ref<ProfileSettingDependent>):ProfileSettingDependent
+	export function emptyDeleteProbationAssessmentResp():DeleteProbationAssessmentResp
+	export function emptyRefDeleteProbationAssessmentResp():Ref<DeleteProbationAssessmentResp>
+	export function refOfDeleteProbationAssessmentResp(x:DeleteProbationAssessmentResp,v:Ref<DeleteProbationAssessmentResp>)
+	export function unRefDeleteProbationAssessmentResp(v:Ref<DeleteProbationAssessmentResp>):DeleteProbationAssessmentResp
+	export function emptyAbnormalReason():AbnormalReason
+	export function emptyRefAbnormalReason():Ref<AbnormalReason>
+	export function refOfAbnormalReason(x:AbnormalReason,v:Ref<AbnormalReason>)
+	export function unRefAbnormalReason(v:Ref<AbnormalReason>):AbnormalReason
+	export function emptyBatchGetEmployeeResp():BatchGetEmployeeResp
+	export function emptyRefBatchGetEmployeeResp():Ref<BatchGetEmployeeResp>
+	export function refOfBatchGetEmployeeResp(x:BatchGetEmployeeResp,v:Ref<BatchGetEmployeeResp>)
+	export function unRefBatchGetEmployeeResp(v:Ref<BatchGetEmployeeResp>):BatchGetEmployeeResp
+	export function emptyP2OffboardingChecklistUpdatedV2():P2OffboardingChecklistUpdatedV2
+	export function emptyRefP2OffboardingChecklistUpdatedV2():Ref<P2OffboardingChecklistUpdatedV2>
+	export function refOfP2OffboardingChecklistUpdatedV2(x:P2OffboardingChecklistUpdatedV2,v:Ref<P2OffboardingChecklistUpdatedV2>)
+	export function unRefP2OffboardingChecklistUpdatedV2(v:Ref<P2OffboardingChecklistUpdatedV2>):P2OffboardingChecklistUpdatedV2
+	export function emptySearchBasicInfoNationalityReqBody():SearchBasicInfoNationalityReqBody
+	export function emptyRefSearchBasicInfoNationalityReqBody():Ref<SearchBasicInfoNationalityReqBody>
+	export function refOfSearchBasicInfoNationalityReqBody(x:SearchBasicInfoNationalityReqBody,v:Ref<SearchBasicInfoNationalityReqBody>)
+	export function unRefSearchBasicInfoNationalityReqBody(v:Ref<SearchBasicInfoNationalityReqBody>):SearchBasicInfoNationalityReqBody
+	export function emptyP2ProcessApproverUpdatedV2Data():P2ProcessApproverUpdatedV2Data
+	export function emptyRefP2ProcessApproverUpdatedV2Data():Ref<P2ProcessApproverUpdatedV2Data>
+	export function refOfP2ProcessApproverUpdatedV2Data(x:P2ProcessApproverUpdatedV2Data,v:Ref<P2ProcessApproverUpdatedV2Data>)
+	export function unRefP2ProcessApproverUpdatedV2Data(v:Ref<P2ProcessApproverUpdatedV2Data>):P2ProcessApproverUpdatedV2Data
+	export function emptyProfileSettingName():ProfileSettingName
+	export function emptyRefProfileSettingName():Ref<ProfileSettingName>
+	export function refOfProfileSettingName(x:ProfileSettingName,v:Ref<ProfileSettingName>)
+	export function unRefProfileSettingName(v:Ref<ProfileSettingName>):ProfileSettingName
+	export function emptyFormFieldVariableBoolValue():FormFieldVariableBoolValue
+	export function emptyRefFormFieldVariableBoolValue():Ref<FormFieldVariableBoolValue>
+	export function refOfFormFieldVariableBoolValue(x:FormFieldVariableBoolValue,v:Ref<FormFieldVariableBoolValue>)
+	export function unRefFormFieldVariableBoolValue(v:Ref<FormFieldVariableBoolValue>):FormFieldVariableBoolValue
+	export function emptyJobFamily():JobFamily
+	export function emptyRefJobFamily():Ref<JobFamily>
+	export function refOfJobFamily(x:JobFamily,v:Ref<JobFamily>)
+	export function unRefJobFamily(v:Ref<JobFamily>):JobFamily
+	export function emptyLeaveRequest():LeaveRequest
+	export function emptyRefLeaveRequest():Ref<LeaveRequest>
+	export function refOfLeaveRequest(x:LeaveRequest,v:Ref<LeaveRequest>)
+	export function unRefLeaveRequest(v:Ref<LeaveRequest>):LeaveRequest
+	export function emptyWorkforcePlanDetailV2():WorkforcePlanDetailV2
+	export function emptyRefWorkforcePlanDetailV2():Ref<WorkforcePlanDetailV2>
+	export function refOfWorkforcePlanDetailV2(x:WorkforcePlanDetailV2,v:Ref<WorkforcePlanDetailV2>)
+	export function unRefWorkforcePlanDetailV2(v:Ref<WorkforcePlanDetailV2>):WorkforcePlanDetailV2
+	export function emptyEmployeesAdditionalJobBatchReqDate():EmployeesAdditionalJobBatchReqDate
+	export function emptyRefEmployeesAdditionalJobBatchReqDate():Ref<EmployeesAdditionalJobBatchReqDate>
+	export function refOfEmployeesAdditionalJobBatchReqDate(x:EmployeesAdditionalJobBatchReqDate,v:Ref<EmployeesAdditionalJobBatchReqDate>)
+	export function unRefEmployeesAdditionalJobBatchReqDate(v:Ref<EmployeesAdditionalJobBatchReqDate>):EmployeesAdditionalJobBatchReqDate
+	export function emptyCreateEmployeeReqBody():CreateEmployeeReqBody
+	export function emptyRefCreateEmployeeReqBody():Ref<CreateEmployeeReqBody>
+	export function refOfCreateEmployeeReqBody(x:CreateEmployeeReqBody,v:Ref<CreateEmployeeReqBody>)
+	export function unRefCreateEmployeeReqBody(v:Ref<CreateEmployeeReqBody>):CreateEmployeeReqBody
+	export function emptySignatureTemplateFilter():SignatureTemplateFilter
+	export function emptyRefSignatureTemplateFilter():Ref<SignatureTemplateFilter>
+	export function refOfSignatureTemplateFilter(x:SignatureTemplateFilter,v:Ref<SignatureTemplateFilter>)
+	export function unRefSignatureTemplateFilter(v:Ref<SignatureTemplateFilter>):SignatureTemplateFilter
+	export function emptyUpdateProcessApproverRespData():UpdateProcessApproverRespData
+	export function emptyRefUpdateProcessApproverRespData():Ref<UpdateProcessApproverRespData>
+	export function refOfUpdateProcessApproverRespData(x:UpdateProcessApproverRespData,v:Ref<UpdateProcessApproverRespData>)
+	export function unRefUpdateProcessApproverRespData(v:Ref<UpdateProcessApproverRespData>):UpdateProcessApproverRespData
+	export function emptyPreHireEmploymentInfo():PreHireEmploymentInfo
+	export function emptyRefPreHireEmploymentInfo():Ref<PreHireEmploymentInfo>
+	export function refOfPreHireEmploymentInfo(x:PreHireEmploymentInfo,v:Ref<PreHireEmploymentInfo>)
+	export function unRefPreHireEmploymentInfo(v:Ref<PreHireEmploymentInfo>):PreHireEmploymentInfo
+	export function emptyCustomValue():CustomValue
+	export function emptyRefCustomValue():Ref<CustomValue>
+	export function refOfCustomValue(x:CustomValue,v:Ref<CustomValue>)
+	export function unRefCustomValue(v:Ref<CustomValue>):CustomValue
+	export function emptyEmployeesAdditionalJobWriteResp():EmployeesAdditionalJobWriteResp
+	export function emptyRefEmployeesAdditionalJobWriteResp():Ref<EmployeesAdditionalJobWriteResp>
+	export function refOfEmployeesAdditionalJobWriteResp(x:EmployeesAdditionalJobWriteResp,v:Ref<EmployeesAdditionalJobWriteResp>)
+	export function unRefEmployeesAdditionalJobWriteResp(v:Ref<EmployeesAdditionalJobWriteResp>):EmployeesAdditionalJobWriteResp
 	export function emptyI18nV2():I18nV2
 	export function emptyRefI18nV2():Ref<I18nV2>
 	export function refOfI18nV2(x:I18nV2,v:Ref<I18nV2>)
 	export function unRefI18nV2(v:Ref<I18nV2>):I18nV2
+	export function emptyCreateProbationAssessmentResp():CreateProbationAssessmentResp
+	export function emptyRefCreateProbationAssessmentResp():Ref<CreateProbationAssessmentResp>
+	export function refOfCreateProbationAssessmentResp(x:CreateProbationAssessmentResp,v:Ref<CreateProbationAssessmentResp>)
+	export function unRefCreateProbationAssessmentResp(v:Ref<CreateProbationAssessmentResp>):CreateProbationAssessmentResp
+	export function emptyEmployeesAdditionalJob():EmployeesAdditionalJob
+	export function emptyRefEmployeesAdditionalJob():Ref<EmployeesAdditionalJob>
+	export function refOfEmployeesAdditionalJob(x:EmployeesAdditionalJob,v:Ref<EmployeesAdditionalJob>)
+	export function unRefEmployeesAdditionalJob(v:Ref<EmployeesAdditionalJob>):EmployeesAdditionalJob
+	export function emptyListJobResp():ListJobResp
+	export function emptyRefListJobResp():Ref<ListJobResp>
+	export function refOfListJobResp(x:ListJobResp,v:Ref<ListJobResp>)
+	export function unRefListJobResp(v:Ref<ListJobResp>):ListJobResp
+	export function emptyResidentTax():ResidentTax
+	export function emptyRefResidentTax():Ref<ResidentTax>
+	export function refOfResidentTax(x:ResidentTax,v:Ref<ResidentTax>)
+	export function unRefResidentTax(v:Ref<ResidentTax>):ResidentTax
+	export function emptyWorkforcePlanDetail():WorkforcePlanDetail
+	export function emptyRefWorkforcePlanDetail():Ref<WorkforcePlanDetail>
+	export function refOfWorkforcePlanDetail(x:WorkforcePlanDetail,v:Ref<WorkforcePlanDetail>)
+	export function unRefWorkforcePlanDetail(v:Ref<WorkforcePlanDetail>):WorkforcePlanDetail
+	export function emptyParentsDepartmentReq():ParentsDepartmentReq
+	export function emptyRefParentsDepartmentReq():Ref<ParentsDepartmentReq>
+	export function refOfParentsDepartmentReq(x:ParentsDepartmentReq,v:Ref<ParentsDepartmentReq>)
+	export function unRefParentsDepartmentReq(v:Ref<ParentsDepartmentReq>):ParentsDepartmentReq
+	export function emptyResidentTaxForUpdate():ResidentTaxForUpdate
+	export function emptyRefResidentTaxForUpdate():Ref<ResidentTaxForUpdate>
+	export function refOfResidentTaxForUpdate(x:ResidentTaxForUpdate,v:Ref<ResidentTaxForUpdate>)
+	export function unRefResidentTaxForUpdate(v:Ref<ResidentTaxForUpdate>):ResidentTaxForUpdate
+	export function emptySignatureTemplateContentInfo():SignatureTemplateContentInfo
+	export function emptyRefSignatureTemplateContentInfo():Ref<SignatureTemplateContentInfo>
+	export function refOfSignatureTemplateContentInfo(x:SignatureTemplateContentInfo,v:Ref<SignatureTemplateContentInfo>)
+	export function unRefSignatureTemplateContentInfo(v:Ref<SignatureTemplateContentInfo>):SignatureTemplateContentInfo
+	export function emptyCreatePreHireReq():CreatePreHireReq
+	export function emptyRefCreatePreHireReq():Ref<CreatePreHireReq>
+	export function refOfCreatePreHireReq(x:CreatePreHireReq,v:Ref<CreatePreHireReq>)
+	export function unRefCreatePreHireReq(v:Ref<CreatePreHireReq>):CreatePreHireReq
+	export function emptyListJobRespData():ListJobRespData
+	export function emptyRefListJobRespData():Ref<ListJobRespData>
+	export function refOfListJobRespData(x:ListJobRespData,v:Ref<ListJobRespData>)
+	export function unRefListJobRespData(v:Ref<ListJobRespData>):ListJobRespData
+	export function emptySearchBasicInfoDistrictReq():SearchBasicInfoDistrictReq
+	export function emptyRefSearchBasicInfoDistrictReq():Ref<SearchBasicInfoDistrictReq>
+	export function refOfSearchBasicInfoDistrictReq(x:SearchBasicInfoDistrictReq,v:Ref<SearchBasicInfoDistrictReq>)
+	export function unRefSearchBasicInfoDistrictReq(v:Ref<SearchBasicInfoDistrictReq>):SearchBasicInfoDistrictReq
+	export function emptySignatureEnumInfo():SignatureEnumInfo
+	export function emptyRefSignatureEnumInfo():Ref<SignatureEnumInfo>
+	export function refOfSignatureEnumInfo(x:SignatureEnumInfo,v:Ref<SignatureEnumInfo>)
+	export function unRefSignatureEnumInfo(v:Ref<SignatureEnumInfo>):SignatureEnumInfo
+	export function emptyProfileSettingCareer():ProfileSettingCareer
+	export function emptyRefProfileSettingCareer():Ref<ProfileSettingCareer>
+	export function refOfProfileSettingCareer(x:ProfileSettingCareer,v:Ref<ProfileSettingCareer>)
+	export function unRefProfileSettingCareer(v:Ref<ProfileSettingCareer>):ProfileSettingCareer
+	export function emptyWithdrawProbationReq():WithdrawProbationReq
+	export function emptyRefWithdrawProbationReq():Ref<WithdrawProbationReq>
+	export function refOfWithdrawProbationReq(x:WithdrawProbationReq,v:Ref<WithdrawProbationReq>)
+	export function unRefWithdrawProbationReq(v:Ref<WithdrawProbationReq>):WithdrawProbationReq
+	export function emptyDepartmentForPatch():DepartmentForPatch
+	export function emptyRefDepartmentForPatch():Ref<DepartmentForPatch>
+	export function refOfDepartmentForPatch(x:DepartmentForPatch,v:Ref<DepartmentForPatch>)
+	export function unRefDepartmentForPatch(v:Ref<DepartmentForPatch>):DepartmentForPatch
+	export function emptyProfileSettingFile():ProfileSettingFile
+	export function emptyRefProfileSettingFile():Ref<ProfileSettingFile>
+	export function refOfProfileSettingFile(x:ProfileSettingFile,v:Ref<ProfileSettingFile>)
+	export function unRefProfileSettingFile(v:Ref<ProfileSettingFile>):ProfileSettingFile
+	export function emptyDeleteCostCenterVersionReqBody():DeleteCostCenterVersionReqBody
+	export function emptyRefDeleteCostCenterVersionReqBody():Ref<DeleteCostCenterVersionReqBody>
+	export function refOfDeleteCostCenterVersionReqBody(x:DeleteCostCenterVersionReqBody,v:Ref<DeleteCostCenterVersionReqBody>)
+	export function unRefDeleteCostCenterVersionReqBody(v:Ref<DeleteCostCenterVersionReqBody>):DeleteCostCenterVersionReqBody
+	export function emptyEmailForUpdate():EmailForUpdate
+	export function emptyRefEmailForUpdate():Ref<EmailForUpdate>
+	export function refOfEmailForUpdate(x:EmailForUpdate,v:Ref<EmailForUpdate>)
+	export function unRefEmailForUpdate(v:Ref<EmailForUpdate>):EmailForUpdate
+	export function emptyDataengineI18n():DataengineI18n
+	export function emptyRefDataengineI18n():Ref<DataengineI18n>
+	export function refOfDataengineI18n(x:DataengineI18n,v:Ref<DataengineI18n>)
+	export function unRefDataengineI18n(v:Ref<DataengineI18n>):DataengineI18n
+	export function emptyOperationLogEntityField():OperationLogEntityField
+	export function emptyRefOperationLogEntityField():Ref<OperationLogEntityField>
+	export function refOfOperationLogEntityField(x:OperationLogEntityField,v:Ref<OperationLogEntityField>)
+	export function unRefOperationLogEntityField(v:Ref<OperationLogEntityField>):OperationLogEntityField
+	export function emptyBankBranch():BankBranch
+	export function emptyRefBankBranch():Ref<BankBranch>
+	export function refOfBankBranch(x:BankBranch,v:Ref<BankBranch>)
+	export function unRefBankBranch(v:Ref<BankBranch>):BankBranch
+	export function emptyCreateCostCenterVersionRespData():CreateCostCenterVersionRespData
+	export function emptyRefCreateCostCenterVersionRespData():Ref<CreateCostCenterVersionRespData>
+	export function refOfCreateCostCenterVersionRespData(x:CreateCostCenterVersionRespData,v:Ref<CreateCostCenterVersionRespData>)
+	export function unRefCreateCostCenterVersionRespData(v:Ref<CreateCostCenterVersionRespData>):CreateCostCenterVersionRespData
+	export function emptyQueryEmployeesJobDataResp():QueryEmployeesJobDataResp
+	export function emptyRefQueryEmployeesJobDataResp():Ref<QueryEmployeesJobDataResp>
+	export function refOfQueryEmployeesJobDataResp(x:QueryEmployeesJobDataResp,v:Ref<QueryEmployeesJobDataResp>)
+	export function unRefQueryEmployeesJobDataResp(v:Ref<QueryEmployeesJobDataResp>):QueryEmployeesJobDataResp
+	export function emptyBatchGetJobFamilyResp():BatchGetJobFamilyResp
+	export function emptyRefBatchGetJobFamilyResp():Ref<BatchGetJobFamilyResp>
+	export function refOfBatchGetJobFamilyResp(x:BatchGetJobFamilyResp,v:Ref<BatchGetJobFamilyResp>)
+	export function unRefBatchGetJobFamilyResp(v:Ref<BatchGetJobFamilyResp>):BatchGetJobFamilyResp
+	export function emptyProfileSettingCustomField():ProfileSettingCustomField
+	export function emptyRefProfileSettingCustomField():Ref<ProfileSettingCustomField>
+	export function refOfProfileSettingCustomField(x:ProfileSettingCustomField,v:Ref<ProfileSettingCustomField>)
+	export function unRefProfileSettingCustomField(v:Ref<ProfileSettingCustomField>):ProfileSettingCustomField
+	export function emptyProfileSettingEmpBasicInfoForUpdate():ProfileSettingEmpBasicInfoForUpdate
+	export function emptyRefProfileSettingEmpBasicInfoForUpdate():Ref<ProfileSettingEmpBasicInfoForUpdate>
+	export function refOfProfileSettingEmpBasicInfoForUpdate(x:ProfileSettingEmpBasicInfoForUpdate,v:Ref<ProfileSettingEmpBasicInfoForUpdate>)
+	export function unRefProfileSettingEmpBasicInfoForUpdate(v:Ref<ProfileSettingEmpBasicInfoForUpdate>):ProfileSettingEmpBasicInfoForUpdate
+	export function emptySearchBasicInfoBankIterator():SearchBasicInfoBankIterator
+	export function emptyRefSearchBasicInfoBankIterator():Ref<SearchBasicInfoBankIterator>
+	export function refOfSearchBasicInfoBankIterator(x:SearchBasicInfoBankIterator,v:Ref<SearchBasicInfoBankIterator>)
+	export function unRefSearchBasicInfoBankIterator(v:Ref<SearchBasicInfoBankIterator>):SearchBasicInfoBankIterator
+	export function emptySearchCostCenterResp():SearchCostCenterResp
+	export function emptyRefSearchCostCenterResp():Ref<SearchCostCenterResp>
+	export function refOfSearchCostCenterResp(x:SearchCostCenterResp,v:Ref<SearchCostCenterResp>)
+	export function unRefSearchCostCenterResp(v:Ref<SearchCostCenterResp>):SearchCostCenterResp
+	export function emptyCompletePreHireResp():CompletePreHireResp
+	export function emptyRefCompletePreHireResp():Ref<CompletePreHireResp>
+	export function refOfCompletePreHireResp(x:CompletePreHireResp,v:Ref<CompletePreHireResp>)
+	export function unRefCompletePreHireResp(v:Ref<CompletePreHireResp>):CompletePreHireResp
+	export function emptyDimensionInfoData():DimensionInfoData
+	export function emptyRefDimensionInfoData():Ref<DimensionInfoData>
+	export function refOfDimensionInfoData(x:DimensionInfoData,v:Ref<DimensionInfoData>)
+	export function unRefDimensionInfoData(v:Ref<DimensionInfoData>):DimensionInfoData
+	export function emptyListJobReq():ListJobReq
+	export function emptyRefListJobReq():Ref<ListJobReq>
+	export function refOfListJobReq(x:ListJobReq,v:Ref<ListJobReq>)
+	export function unRefListJobReq(v:Ref<ListJobReq>):ListJobReq
+	export function emptyListProcessRespData():ListProcessRespData
+	export function emptyRefListProcessRespData():Ref<ListProcessRespData>
+	export function refOfListProcessRespData(x:ListProcessRespData,v:Ref<ListProcessRespData>)
+	export function unRefListProcessRespData(v:Ref<ListProcessRespData>):ListProcessRespData
+	export function emptyMatchRule():MatchRule
+	export function emptyRefMatchRule():Ref<MatchRule>
+	export function refOfMatchRule(x:MatchRule,v:Ref<MatchRule>)
+	export function unRefMatchRule(v:Ref<MatchRule>):MatchRule
+	export function emptyBatchGetEmployeesJobDataResp():BatchGetEmployeesJobDataResp
+	export function emptyRefBatchGetEmployeesJobDataResp():Ref<BatchGetEmployeesJobDataResp>
+	export function refOfBatchGetEmployeesJobDataResp(x:BatchGetEmployeesJobDataResp,v:Ref<BatchGetEmployeesJobDataResp>)
+	export function unRefBatchGetEmployeesJobDataResp(v:Ref<BatchGetEmployeesJobDataResp>):BatchGetEmployeesJobDataResp
+	export function emptyEmergencyContact():EmergencyContact
+	export function emptyRefEmergencyContact():Ref<EmergencyContact>
+	export function refOfEmergencyContact(x:EmergencyContact,v:Ref<EmergencyContact>)
+	export function unRefEmergencyContact(v:Ref<EmergencyContact>):EmergencyContact
+	export function emptyGetByDepartmentBpReqBody():GetByDepartmentBpReqBody
+	export function emptyRefGetByDepartmentBpReqBody():Ref<GetByDepartmentBpReqBody>
+	export function refOfGetByDepartmentBpReqBody(x:GetByDepartmentBpReqBody,v:Ref<GetByDepartmentBpReqBody>)
+	export function unRefGetByDepartmentBpReqBody(v:Ref<GetByDepartmentBpReqBody>):GetByDepartmentBpReqBody
+	export function emptySignatureSignatoryLabel():SignatureSignatoryLabel
+	export function emptyRefSignatureSignatoryLabel():Ref<SignatureSignatoryLabel>
+	export function refOfSignatureSignatoryLabel(x:SignatureSignatoryLabel,v:Ref<SignatureSignatoryLabel>)
+	export function unRefSignatureSignatoryLabel(v:Ref<SignatureSignatoryLabel>):SignatureSignatoryLabel
+	export function emptyWorkEmailCheckResult():WorkEmailCheckResult
+	export function emptyRefWorkEmailCheckResult():Ref<WorkEmailCheckResult>
+	export function refOfWorkEmailCheckResult(x:WorkEmailCheckResult,v:Ref<WorkEmailCheckResult>)
+	export function unRefWorkEmailCheckResult(v:Ref<WorkEmailCheckResult>):WorkEmailCheckResult
+	export function emptyCreatePersonResp():CreatePersonResp
+	export function emptyRefCreatePersonResp():Ref<CreatePersonResp>
+	export function refOfCreatePersonResp(x:CreatePersonResp,v:Ref<CreatePersonResp>)
+	export function unRefCreatePersonResp(v:Ref<CreatePersonResp>):CreatePersonResp
+	export function emptyProfileSettingCustomGroup():ProfileSettingCustomGroup
+	export function emptyRefProfileSettingCustomGroup():Ref<ProfileSettingCustomGroup>
+	export function refOfProfileSettingCustomGroup(x:ProfileSettingCustomGroup,v:Ref<ProfileSettingCustomGroup>)
+	export function unRefProfileSettingCustomGroup(v:Ref<ProfileSettingCustomGroup>):ProfileSettingCustomGroup
+	export function emptySignatureTemplateCommonFieldInfo():SignatureTemplateCommonFieldInfo
+	export function emptyRefSignatureTemplateCommonFieldInfo():Ref<SignatureTemplateCommonFieldInfo>
+	export function refOfSignatureTemplateCommonFieldInfo(x:SignatureTemplateCommonFieldInfo,v:Ref<SignatureTemplateCommonFieldInfo>)
+	export function unRefSignatureTemplateCommonFieldInfo(v:Ref<SignatureTemplateCommonFieldInfo>):SignatureTemplateCommonFieldInfo
+	export function emptySearchBasicInfoDistrictIterator():SearchBasicInfoDistrictIterator
+	export function emptyRefSearchBasicInfoDistrictIterator():Ref<SearchBasicInfoDistrictIterator>
+	export function refOfSearchBasicInfoDistrictIterator(x:SearchBasicInfoDistrictIterator,v:Ref<SearchBasicInfoDistrictIterator>)
+	export function unRefSearchBasicInfoDistrictIterator(v:Ref<SearchBasicInfoDistrictIterator>):SearchBasicInfoDistrictIterator
+	export function emptyV2():V2
+	export function emptyRefV2():Ref<V2>
+	export function refOfV2(x:V2,v:Ref<V2>)
+	export function unRefV2(v:Ref<V2>):V2
+	export function emptyDeleteCostCenterReqBody():DeleteCostCenterReqBody
+	export function emptyRefDeleteCostCenterReqBody():Ref<DeleteCostCenterReqBody>
+	export function refOfDeleteCostCenterReqBody(x:DeleteCostCenterReqBody,v:Ref<DeleteCostCenterReqBody>)
+	export function unRefDeleteCostCenterReqBody(v:Ref<DeleteCostCenterReqBody>):DeleteCostCenterReqBody
+	export function emptyObjectFieldData():ObjectFieldData
+	export function emptyRefObjectFieldData():Ref<ObjectFieldData>
+	export function refOfObjectFieldData(x:ObjectFieldData,v:Ref<ObjectFieldData>)
+	export function unRefObjectFieldData(v:Ref<ObjectFieldData>):ObjectFieldData
+	export function emptyDepartmentParentInfo():DepartmentParentInfo
+	export function emptyRefDepartmentParentInfo():Ref<DepartmentParentInfo>
+	export function refOfDepartmentParentInfo(x:DepartmentParentInfo,v:Ref<DepartmentParentInfo>)
+	export function unRefDepartmentParentInfo(v:Ref<DepartmentParentInfo>):DepartmentParentInfo
+	export function emptySignatureCustomFieldV2():SignatureCustomFieldV2
+	export function emptyRefSignatureCustomFieldV2():Ref<SignatureCustomFieldV2>
+	export function refOfSignatureCustomFieldV2(x:SignatureCustomFieldV2,v:Ref<SignatureCustomFieldV2>)
+	export function unRefSignatureCustomFieldV2(v:Ref<SignatureCustomFieldV2>):SignatureCustomFieldV2
+	export function emptyBatchGetEmployeesBpReqBody():BatchGetEmployeesBpReqBody
+	export function emptyRefBatchGetEmployeesBpReqBody():Ref<BatchGetEmployeesBpReqBody>
+	export function refOfBatchGetEmployeesBpReqBody(x:BatchGetEmployeesBpReqBody,v:Ref<BatchGetEmployeesBpReqBody>)
+	export function unRefBatchGetEmployeesBpReqBody(v:Ref<BatchGetEmployeesBpReqBody>):BatchGetEmployeesBpReqBody
+	export function emptySearchBasicInfoBankReqBody():SearchBasicInfoBankReqBody
+	export function emptyRefSearchBasicInfoBankReqBody():Ref<SearchBasicInfoBankReqBody>
+	export function refOfSearchBasicInfoBankReqBody(x:SearchBasicInfoBankReqBody,v:Ref<SearchBasicInfoBankReqBody>)
+	export function unRefSearchBasicInfoBankReqBody(v:Ref<SearchBasicInfoBankReqBody>):SearchBasicInfoBankReqBody
+	export function emptyBatchGetEmployeeReqBody():BatchGetEmployeeReqBody
+	export function emptyRefBatchGetEmployeeReqBody():Ref<BatchGetEmployeeReqBody>
+	export function refOfBatchGetEmployeeReqBody(x:BatchGetEmployeeReqBody,v:Ref<BatchGetEmployeeReqBody>)
+	export function unRefBatchGetEmployeeReqBody(v:Ref<BatchGetEmployeeReqBody>):BatchGetEmployeeReqBody
+	export function emptyP2ProcessApproverUpdatedV2():P2ProcessApproverUpdatedV2
+	export function emptyRefP2ProcessApproverUpdatedV2():Ref<P2ProcessApproverUpdatedV2>
+	export function refOfP2ProcessApproverUpdatedV2(x:P2ProcessApproverUpdatedV2,v:Ref<P2ProcessApproverUpdatedV2>)
+	export function unRefP2ProcessApproverUpdatedV2(v:Ref<P2ProcessApproverUpdatedV2>):P2ProcessApproverUpdatedV2
+	export function emptyPatchPreHireResp():PatchPreHireResp
+	export function emptyRefPatchPreHireResp():Ref<PatchPreHireResp>
+	export function refOfPatchPreHireResp(x:PatchPreHireResp,v:Ref<PatchPreHireResp>)
+	export function unRefPatchPreHireResp(v:Ref<PatchPreHireResp>):PatchPreHireResp
+	export function emptySubmitProbationResp():SubmitProbationResp
+	export function emptyRefSubmitProbationResp():Ref<SubmitProbationResp>
+	export function refOfSubmitProbationResp(x:SubmitProbationResp,v:Ref<SubmitProbationResp>)
+	export function unRefSubmitProbationResp(v:Ref<SubmitProbationResp>):SubmitProbationResp
+	export function emptyCreateEmployeeRespData():CreateEmployeeRespData
+	export function emptyRefCreateEmployeeRespData():Ref<CreateEmployeeRespData>
+	export function refOfCreateEmployeeRespData(x:CreateEmployeeRespData,v:Ref<CreateEmployeeRespData>)
+	export function unRefCreateEmployeeRespData(v:Ref<CreateEmployeeRespData>):CreateEmployeeRespData
+	export function emptyFormVariableValueInfo():FormVariableValueInfo
+	export function emptyRefFormVariableValueInfo():Ref<FormVariableValueInfo>
+	export function refOfFormVariableValueInfo(x:FormVariableValueInfo,v:Ref<FormVariableValueInfo>)
+	export function unRefFormVariableValueInfo(v:Ref<FormVariableValueInfo>):FormVariableValueInfo
+	export function emptyHiberarchyCommon():HiberarchyCommon
+	export function emptyRefHiberarchyCommon():Ref<HiberarchyCommon>
+	export function refOfHiberarchyCommon(x:HiberarchyCommon,v:Ref<HiberarchyCommon>)
+	export function unRefHiberarchyCommon(v:Ref<HiberarchyCommon>):HiberarchyCommon
+	export function emptySignatureTemplateFilterItem():SignatureTemplateFilterItem
+	export function emptyRefSignatureTemplateFilterItem():Ref<SignatureTemplateFilterItem>
+	export function refOfSignatureTemplateFilterItem(x:SignatureTemplateFilterItem,v:Ref<SignatureTemplateFilterItem>)
+	export function unRefSignatureTemplateFilterItem(v:Ref<SignatureTemplateFilterItem>):SignatureTemplateFilterItem
+	export function emptyCompanyIdAndName():CompanyIdAndName
+	export function emptyRefCompanyIdAndName():Ref<CompanyIdAndName>
+	export function refOfCompanyIdAndName(x:CompanyIdAndName,v:Ref<CompanyIdAndName>)
+	export function unRefCompanyIdAndName(v:Ref<CompanyIdAndName>):CompanyIdAndName
+	export function emptySignatureTemplateCombinationFieldInfoV2():SignatureTemplateCombinationFieldInfoV2
+	export function emptyRefSignatureTemplateCombinationFieldInfoV2():Ref<SignatureTemplateCombinationFieldInfoV2>
+	export function refOfSignatureTemplateCombinationFieldInfoV2(x:SignatureTemplateCombinationFieldInfoV2,v:Ref<SignatureTemplateCombinationFieldInfoV2>)
+	export function unRefSignatureTemplateCombinationFieldInfoV2(v:Ref<SignatureTemplateCombinationFieldInfoV2>):SignatureTemplateCombinationFieldInfoV2
+	export function emptySignatureCustomFieldV1():SignatureCustomFieldV1
+	export function emptyRefSignatureCustomFieldV1():Ref<SignatureCustomFieldV1>
+	export function refOfSignatureCustomFieldV1(x:SignatureCustomFieldV1,v:Ref<SignatureCustomFieldV1>)
+	export function unRefSignatureCustomFieldV1(v:Ref<SignatureCustomFieldV1>):SignatureCustomFieldV1
+	export function emptySearchCostCenterReqBody():SearchCostCenterReqBody
+	export function emptyRefSearchCostCenterReqBody():Ref<SearchCostCenterReqBody>
+	export function refOfSearchCostCenterReqBody(x:SearchCostCenterReqBody,v:Ref<SearchCostCenterReqBody>)
+	export function unRefSearchCostCenterReqBody(v:Ref<SearchCostCenterReqBody>):SearchCostCenterReqBody
+	export function emptyProfileSettingCostCenter():ProfileSettingCostCenter
+	export function emptyRefProfileSettingCostCenter():Ref<ProfileSettingCostCenter>
+	export function refOfProfileSettingCostCenter(x:ProfileSettingCostCenter,v:Ref<ProfileSettingCostCenter>)
+	export function unRefProfileSettingCostCenter(v:Ref<ProfileSettingCostCenter>):ProfileSettingCostCenter
+	export function emptySearchProbationReq():SearchProbationReq
+	export function emptyRefSearchProbationReq():Ref<SearchProbationReq>
+	export function refOfSearchProbationReq(x:SearchProbationReq,v:Ref<SearchProbationReq>)
+	export function unRefSearchProbationReq(v:Ref<SearchProbationReq>):SearchProbationReq
+	export function emptyQrCodeDimension():QrCodeDimension
+	export function emptyRefQrCodeDimension():Ref<QrCodeDimension>
+	export function refOfQrCodeDimension(x:QrCodeDimension,v:Ref<QrCodeDimension>)
+	export function unRefQrCodeDimension(v:Ref<QrCodeDimension>):QrCodeDimension
+	export function emptySignatureTemplateCombinationSubFieldInfo():SignatureTemplateCombinationSubFieldInfo
+	export function emptyRefSignatureTemplateCombinationSubFieldInfo():Ref<SignatureTemplateCombinationSubFieldInfo>
+	export function refOfSignatureTemplateCombinationSubFieldInfo(x:SignatureTemplateCombinationSubFieldInfo,v:Ref<SignatureTemplateCombinationSubFieldInfo>)
+	export function unRefSignatureTemplateCombinationSubFieldInfo(v:Ref<SignatureTemplateCombinationSubFieldInfo>):SignatureTemplateCombinationSubFieldInfo
+	export function emptyEnableDisableAssessmentProbationReqBody():EnableDisableAssessmentProbationReqBody
+	export function emptyRefEnableDisableAssessmentProbationReqBody():Ref<EnableDisableAssessmentProbationReqBody>
+	export function refOfEnableDisableAssessmentProbationReqBody(x:EnableDisableAssessmentProbationReqBody,v:Ref<EnableDisableAssessmentProbationReqBody>)
+	export function unRefEnableDisableAssessmentProbationReqBody(v:Ref<EnableDisableAssessmentProbationReqBody>):EnableDisableAssessmentProbationReqBody
+	export function emptySignatureCustomFieldValue():SignatureCustomFieldValue
+	export function emptyRefSignatureCustomFieldValue():Ref<SignatureCustomFieldValue>
+	export function refOfSignatureCustomFieldValue(x:SignatureCustomFieldValue,v:Ref<SignatureCustomFieldValue>)
+	export function unRefSignatureCustomFieldValue(v:Ref<SignatureCustomFieldValue>):SignatureCustomFieldValue
+	export function emptyFieldVariableValueToRecord():FieldVariableValueToRecord
+	export function emptyRefFieldVariableValueToRecord():Ref<FieldVariableValueToRecord>
+	export function refOfFieldVariableValueToRecord(x:FieldVariableValueToRecord,v:Ref<FieldVariableValueToRecord>)
+	export function unRefFieldVariableValueToRecord(v:Ref<FieldVariableValueToRecord>):FieldVariableValueToRecord
+	export function emptyOperationLogListRespItem():OperationLogListRespItem
+	export function emptyRefOperationLogListRespItem():Ref<OperationLogListRespItem>
+	export function refOfOperationLogListRespItem(x:OperationLogListRespItem,v:Ref<OperationLogListRespItem>)
+	export function unRefOperationLogListRespItem(v:Ref<OperationLogListRespItem>):OperationLogListRespItem
+	export function emptyPositionUpdate():PositionUpdate
+	export function emptyRefPositionUpdate():Ref<PositionUpdate>
+	export function refOfPositionUpdate(x:PositionUpdate,v:Ref<PositionUpdate>)
+	export function unRefPositionUpdate(v:Ref<PositionUpdate>):PositionUpdate
+	export function emptyCalculateParam():CalculateParam
+	export function emptyRefCalculateParam():Ref<CalculateParam>
+	export function refOfCalculateParam(x:CalculateParam,v:Ref<CalculateParam>)
+	export function unRefCalculateParam(v:Ref<CalculateParam>):CalculateParam
+	export function emptyEmployeesAdditionalJobEdit():EmployeesAdditionalJobEdit
+	export function emptyRefEmployeesAdditionalJobEdit():Ref<EmployeesAdditionalJobEdit>
+	export function refOfEmployeesAdditionalJobEdit(x:EmployeesAdditionalJobEdit,v:Ref<EmployeesAdditionalJobEdit>)
+	export function unRefEmployeesAdditionalJobEdit(v:Ref<EmployeesAdditionalJobEdit>):EmployeesAdditionalJobEdit
+	export function emptySearchBasicInfoNationalityRespData():SearchBasicInfoNationalityRespData
+	export function emptyRefSearchBasicInfoNationalityRespData():Ref<SearchBasicInfoNationalityRespData>
+	export function refOfSearchBasicInfoNationalityRespData(x:SearchBasicInfoNationalityRespData,v:Ref<SearchBasicInfoNationalityRespData>)
+	export function unRefSearchBasicInfoNationalityRespData(v:Ref<SearchBasicInfoNationalityRespData>):SearchBasicInfoNationalityRespData
+	export function emptySearchJobChangeRespData():SearchJobChangeRespData
+	export function emptyRefSearchJobChangeRespData():Ref<SearchJobChangeRespData>
+	export function refOfSearchJobChangeRespData(x:SearchJobChangeRespData,v:Ref<SearchJobChangeRespData>)
+	export function unRefSearchJobChangeRespData(v:Ref<SearchJobChangeRespData>):SearchJobChangeRespData
+	export function emptyWithdrawProbationReqBody():WithdrawProbationReqBody
+	export function emptyRefWithdrawProbationReqBody():Ref<WithdrawProbationReqBody>
+	export function refOfWithdrawProbationReqBody(x:WithdrawProbationReqBody,v:Ref<WithdrawProbationReqBody>)
+	export function unRefWithdrawProbationReqBody(v:Ref<WithdrawProbationReqBody>):WithdrawProbationReqBody
+	export function emptyBatchGetLocationReqBody():BatchGetLocationReqBody
+	export function emptyRefBatchGetLocationReqBody():Ref<BatchGetLocationReqBody>
+	export function refOfBatchGetLocationReqBody(x:BatchGetLocationReqBody,v:Ref<BatchGetLocationReqBody>)
+	export function unRefBatchGetLocationReqBody(v:Ref<BatchGetLocationReqBody>):BatchGetLocationReqBody
+	export function emptyFieldVariableValueToEnum():FieldVariableValueToEnum
+	export function emptyRefFieldVariableValueToEnum():Ref<FieldVariableValueToEnum>
+	export function refOfFieldVariableValueToEnum(x:FieldVariableValueToEnum,v:Ref<FieldVariableValueToEnum>)
+	export function unRefFieldVariableValueToEnum(v:Ref<FieldVariableValueToEnum>):FieldVariableValueToEnum
+	export function emptyGetJobRespData():GetJobRespData
+	export function emptyRefGetJobRespData():Ref<GetJobRespData>
+	export function refOfGetJobRespData(x:GetJobRespData,v:Ref<GetJobRespData>)
+	export function unRefGetJobRespData(v:Ref<GetJobRespData>):GetJobRespData
+	export function emptyPersonalProfile():PersonalProfile
+	export function emptyRefPersonalProfile():Ref<PersonalProfile>
+	export function refOfPersonalProfile(x:PersonalProfile,v:Ref<PersonalProfile>)
+	export function unRefPersonalProfile(v:Ref<PersonalProfile>):PersonalProfile
+	export function emptyDepartment():Department
+	export function emptyRefDepartment():Ref<Department>
+	export function refOfDepartment(x:Department,v:Ref<Department>)
+	export function unRefDepartment(v:Ref<Department>):Department
+	export function emptyQueryJobGradeReq():QueryJobGradeReq
+	export function emptyRefQueryJobGradeReq():Ref<QueryJobGradeReq>
+	export function refOfQueryJobGradeReq(x:QueryJobGradeReq,v:Ref<QueryJobGradeReq>)
+	export function unRefQueryJobGradeReq(v:Ref<QueryJobGradeReq>):QueryJobGradeReq
+	export function emptyLangText():LangText
+	export function emptyRefLangText():Ref<LangText>
+	export function refOfLangText(x:LangText,v:Ref<LangText>)
+	export function unRefLangText(v:Ref<LangText>):LangText
+	export function emptyQueryTimelineDepartmentResp():QueryTimelineDepartmentResp
+	export function emptyRefQueryTimelineDepartmentResp():Ref<QueryTimelineDepartmentResp>
+	export function refOfQueryTimelineDepartmentResp(x:QueryTimelineDepartmentResp,v:Ref<QueryTimelineDepartmentResp>)
+	export function unRefQueryTimelineDepartmentResp(v:Ref<QueryTimelineDepartmentResp>):QueryTimelineDepartmentResp
+	export function emptySearchBasicInfoCityIterator():SearchBasicInfoCityIterator
+	export function emptyRefSearchBasicInfoCityIterator():Ref<SearchBasicInfoCityIterator>
+	export function refOfSearchBasicInfoCityIterator(x:SearchBasicInfoCityIterator,v:Ref<SearchBasicInfoCityIterator>)
+	export function unRefSearchBasicInfoCityIterator(v:Ref<SearchBasicInfoCityIterator>):SearchBasicInfoCityIterator
+	export function emptyJobData():JobData
+	export function emptyRefJobData():Ref<JobData>
+	export function refOfJobData(x:JobData,v:Ref<JobData>)
+	export function unRefJobData(v:Ref<JobData>):JobData
+	export function emptyProfileSettingCustomGroupItem():ProfileSettingCustomGroupItem
+	export function emptyRefProfileSettingCustomGroupItem():Ref<ProfileSettingCustomGroupItem>
+	export function refOfProfileSettingCustomGroupItem(x:ProfileSettingCustomGroupItem,v:Ref<ProfileSettingCustomGroupItem>)
+	export function unRefProfileSettingCustomGroupItem(v:Ref<ProfileSettingCustomGroupItem>):ProfileSettingCustomGroupItem
+	export function emptySearchProbationIterator():SearchProbationIterator
+	export function emptyRefSearchProbationIterator():Ref<SearchProbationIterator>
+	export function refOfSearchProbationIterator(x:SearchProbationIterator,v:Ref<SearchProbationIterator>)
+	export function unRefSearchProbationIterator(v:Ref<SearchProbationIterator>):SearchProbationIterator
+	export function emptyOfferInfoUpdate():OfferInfoUpdate
+	export function emptyRefOfferInfoUpdate():Ref<OfferInfoUpdate>
+	export function refOfOfferInfoUpdate(x:OfferInfoUpdate,v:Ref<OfferInfoUpdate>)
+	export function unRefOfferInfoUpdate(v:Ref<OfferInfoUpdate>):OfferInfoUpdate
+	export function emptyPatchCostCenterResp():PatchCostCenterResp
+	export function emptyRefPatchCostCenterResp():Ref<PatchCostCenterResp>
+	export function refOfPatchCostCenterResp(x:PatchCostCenterResp,v:Ref<PatchCostCenterResp>)
+	export function unRefPatchCostCenterResp(v:Ref<PatchCostCenterResp>):PatchCostCenterResp
+	export function emptySearchBasicInfoCityReqBody():SearchBasicInfoCityReqBody
+	export function emptyRefSearchBasicInfoCityReqBody():Ref<SearchBasicInfoCityReqBody>
+	export function refOfSearchBasicInfoCityReqBody(x:SearchBasicInfoCityReqBody,v:Ref<SearchBasicInfoCityReqBody>)
+	export function unRefSearchBasicInfoCityReqBody(v:Ref<SearchBasicInfoCityReqBody>):SearchBasicInfoCityReqBody
+	export function emptyLeaveEmployExpireRecord():LeaveEmployExpireRecord
+	export function emptyRefLeaveEmployExpireRecord():Ref<LeaveEmployExpireRecord>
+	export function refOfLeaveEmployExpireRecord(x:LeaveEmployExpireRecord,v:Ref<LeaveEmployExpireRecord>)
+	export function unRefLeaveEmployExpireRecord(v:Ref<LeaveEmployExpireRecord>):LeaveEmployExpireRecord
+	export function emptySearchBasicInfoBankRespData():SearchBasicInfoBankRespData
+	export function emptyRefSearchBasicInfoBankRespData():Ref<SearchBasicInfoBankRespData>
+	export function refOfSearchBasicInfoBankRespData(x:SearchBasicInfoBankRespData,v:Ref<SearchBasicInfoBankRespData>)
+	export function unRefSearchBasicInfoBankRespData(v:Ref<SearchBasicInfoBankRespData>):SearchBasicInfoBankRespData
+	export function emptyCreatePreHireRespData():CreatePreHireRespData
+	export function emptyRefCreatePreHireRespData():Ref<CreatePreHireRespData>
+	export function refOfCreatePreHireRespData(x:CreatePreHireRespData,v:Ref<CreatePreHireRespData>)
+	export function unRefCreatePreHireRespData(v:Ref<CreatePreHireRespData>):CreatePreHireRespData
+	export function emptyDeleteCostCenterReq():DeleteCostCenterReq
+	export function emptyRefDeleteCostCenterReq():Ref<DeleteCostCenterReq>
+	export function refOfDeleteCostCenterReq(x:DeleteCostCenterReq,v:Ref<DeleteCostCenterReq>)
+	export function unRefDeleteCostCenterReq(v:Ref<DeleteCostCenterReq>):DeleteCostCenterReq
+	export function emptySearchBasicInfoCountryRegionSubdivisionIterator():SearchBasicInfoCountryRegionSubdivisionIterator
+	export function emptyRefSearchBasicInfoCountryRegionSubdivisionIterator():Ref<SearchBasicInfoCountryRegionSubdivisionIterator>
+	export function refOfSearchBasicInfoCountryRegionSubdivisionIterator(x:SearchBasicInfoCountryRegionSubdivisionIterator,v:Ref<SearchBasicInfoCountryRegionSubdivisionIterator>)
+	export function unRefSearchBasicInfoCountryRegionSubdivisionIterator(v:Ref<SearchBasicInfoCountryRegionSubdivisionIterator>):SearchBasicInfoCountryRegionSubdivisionIterator
+	export function emptyTransitTaskPreHireRespData():TransitTaskPreHireRespData
+	export function emptyRefTransitTaskPreHireRespData():Ref<TransitTaskPreHireRespData>
+	export function refOfTransitTaskPreHireRespData(x:TransitTaskPreHireRespData,v:Ref<TransitTaskPreHireRespData>)
+	export function unRefTransitTaskPreHireRespData(v:Ref<TransitTaskPreHireRespData>):TransitTaskPreHireRespData
+	export function emptyEnum():Enum
+	export function emptyRefEnum():Ref<Enum>
+	export function refOfEnum(x:Enum,v:Ref<Enum>)
+	export function unRefEnum(v:Ref<Enum>):Enum
+	export function emptyNationalIdForUpdate():NationalIdForUpdate
+	export function emptyRefNationalIdForUpdate():Ref<NationalIdForUpdate>
+	export function refOfNationalIdForUpdate(x:NationalIdForUpdate,v:Ref<NationalIdForUpdate>)
+	export function unRefNationalIdForUpdate(v:Ref<NationalIdForUpdate>):NationalIdForUpdate
+	export function emptySearchContractResp():SearchContractResp
+	export function emptyRefSearchContractResp():Ref<SearchContractResp>
+	export function refOfSearchContractResp(x:SearchContractResp,v:Ref<SearchContractResp>)
+	export function unRefSearchContractResp(v:Ref<SearchContractResp>):SearchContractResp
+	export function emptySearchContractReq():SearchContractReq
+	export function emptyRefSearchContractReq():Ref<SearchContractReq>
+	export function refOfSearchContractReq(x:SearchContractReq,v:Ref<SearchContractReq>)
+	export function unRefSearchContractReq(v:Ref<SearchContractReq>):SearchContractReq
+	export function emptyWorkEmail():WorkEmail
+	export function emptyRefWorkEmail():Ref<WorkEmail>
+	export function refOfWorkEmail(x:WorkEmail,v:Ref<WorkEmail>)
+	export function unRefWorkEmail(v:Ref<WorkEmail>):WorkEmail
+	export function emptyBpmDataengineI18n():BpmDataengineI18n
+	export function emptyRefBpmDataengineI18n():Ref<BpmDataengineI18n>
+	export function refOfBpmDataengineI18n(x:BpmDataengineI18n,v:Ref<BpmDataengineI18n>)
+	export function unRefBpmDataengineI18n(v:Ref<BpmDataengineI18n>):BpmDataengineI18n
+	export function emptyPersonName():PersonName
+	export function emptyRefPersonName():Ref<PersonName>
+	export function refOfPersonName(x:PersonName,v:Ref<PersonName>)
+	export function unRefPersonName(v:Ref<PersonName>):PersonName
+	export function emptyQueryEmployeesJobDataRespData():QueryEmployeesJobDataRespData
+	export function emptyRefQueryEmployeesJobDataRespData():Ref<QueryEmployeesJobDataRespData>
+	export function refOfQueryEmployeesJobDataRespData(x:QueryEmployeesJobDataRespData,v:Ref<QueryEmployeesJobDataRespData>)
+	export function unRefQueryEmployeesJobDataRespData(v:Ref<QueryEmployeesJobDataRespData>):QueryEmployeesJobDataRespData
+	export function emptySearchBasicInfoCurrencyReqBody():SearchBasicInfoCurrencyReqBody
+	export function emptyRefSearchBasicInfoCurrencyReqBody():Ref<SearchBasicInfoCurrencyReqBody>
+	export function refOfSearchBasicInfoCurrencyReqBody(x:SearchBasicInfoCurrencyReqBody,v:Ref<SearchBasicInfoCurrencyReqBody>)
+	export function unRefSearchBasicInfoCurrencyReqBody(v:Ref<SearchBasicInfoCurrencyReqBody>):SearchBasicInfoCurrencyReqBody
+	export function emptyCreatePersonReq():CreatePersonReq
+	export function emptyRefCreatePersonReq():Ref<CreatePersonReq>
+	export function refOfCreatePersonReq(x:CreatePersonReq,v:Ref<CreatePersonReq>)
+	export function unRefCreatePersonReq(v:Ref<CreatePersonReq>):CreatePersonReq
+	export function emptyProfileSettingEmploymentRecord():ProfileSettingEmploymentRecord
+	export function emptyRefProfileSettingEmploymentRecord():Ref<ProfileSettingEmploymentRecord>
+	export function refOfProfileSettingEmploymentRecord(x:ProfileSettingEmploymentRecord,v:Ref<ProfileSettingEmploymentRecord>)
+	export function unRefProfileSettingEmploymentRecord(v:Ref<ProfileSettingEmploymentRecord>):ProfileSettingEmploymentRecord
+	export function emptySignatureTemplateCombinationFieldInfo():SignatureTemplateCombinationFieldInfo
+	export function emptyRefSignatureTemplateCombinationFieldInfo():Ref<SignatureTemplateCombinationFieldInfo>
+	export function refOfSignatureTemplateCombinationFieldInfo(x:SignatureTemplateCombinationFieldInfo,v:Ref<SignatureTemplateCombinationFieldInfo>)
+	export function unRefSignatureTemplateCombinationFieldInfo(v:Ref<SignatureTemplateCombinationFieldInfo>):SignatureTemplateCombinationFieldInfo
+	export function emptyListBpResp():ListBpResp
+	export function emptyRefListBpResp():Ref<ListBpResp>
+	export function refOfListBpResp(x:ListBpResp,v:Ref<ListBpResp>)
+	export function unRefListBpResp(v:Ref<ListBpResp>):ListBpResp
+	export function emptyLocation():Location
+	export function emptyRefLocation():Ref<Location>
+	export function refOfLocation(x:Location,v:Ref<Location>)
+	export function unRefLocation(v:Ref<Location>):Location
+	export function emptyDeletePreHireReq():DeletePreHireReq
+	export function emptyRefDeletePreHireReq():Ref<DeletePreHireReq>
+	export function refOfDeletePreHireReq(x:DeletePreHireReq,v:Ref<DeletePreHireReq>)
+	export function unRefDeletePreHireReq(v:Ref<DeletePreHireReq>):DeletePreHireReq
+	export function emptyFile():File
+	export function emptyRefFile():Ref<File>
+	export function refOfFile(x:File,v:Ref<File>)
+	export function unRefFile(v:Ref<File>):File
+	export function emptySignatureTemplateSetting():SignatureTemplateSetting
+	export function emptyRefSignatureTemplateSetting():Ref<SignatureTemplateSetting>
+	export function refOfSignatureTemplateSetting(x:SignatureTemplateSetting,v:Ref<SignatureTemplateSetting>)
+	export function unRefSignatureTemplateSetting(v:Ref<SignatureTemplateSetting>):SignatureTemplateSetting
+	export function emptyCreatePersonRespData():CreatePersonRespData
+	export function emptyRefCreatePersonRespData():Ref<CreatePersonRespData>
+	export function refOfCreatePersonRespData(x:CreatePersonRespData,v:Ref<CreatePersonRespData>)
+	export function unRefCreatePersonRespData(v:Ref<CreatePersonRespData>):CreatePersonRespData
+	export function emptySearchEmployeeReqBody():SearchEmployeeReqBody
+	export function emptyRefSearchEmployeeReqBody():Ref<SearchEmployeeReqBody>
+	export function refOfSearchEmployeeReqBody(x:SearchEmployeeReqBody,v:Ref<SearchEmployeeReqBody>)
+	export function unRefSearchEmployeeReqBody(v:Ref<SearchEmployeeReqBody>):SearchEmployeeReqBody
+	export function emptyQueryMultiTimelineDepartmentResp():QueryMultiTimelineDepartmentResp
+	export function emptyRefQueryMultiTimelineDepartmentResp():Ref<QueryMultiTimelineDepartmentResp>
+	export function refOfQueryMultiTimelineDepartmentResp(x:QueryMultiTimelineDepartmentResp,v:Ref<QueryMultiTimelineDepartmentResp>)
+	export function unRefQueryMultiTimelineDepartmentResp(v:Ref<QueryMultiTimelineDepartmentResp>):QueryMultiTimelineDepartmentResp
+	export function emptyPatchCostCenterVersionReq():PatchCostCenterVersionReq
+	export function emptyRefPatchCostCenterVersionReq():Ref<PatchCostCenterVersionReq>
+	export function refOfPatchCostCenterVersionReq(x:PatchCostCenterVersionReq,v:Ref<PatchCostCenterVersionReq>)
+	export function unRefPatchCostCenterVersionReq(v:Ref<PatchCostCenterVersionReq>):PatchCostCenterVersionReq
+	export function emptyProcessTodoItem():ProcessTodoItem
+	export function emptyRefProcessTodoItem():Ref<ProcessTodoItem>
+	export function refOfProcessTodoItem(x:ProcessTodoItem,v:Ref<ProcessTodoItem>)
+	export function unRefProcessTodoItem(v:Ref<ProcessTodoItem>):ProcessTodoItem
+	export function emptyProcessFormVariableV2():ProcessFormVariableV2
+	export function emptyRefProcessFormVariableV2():Ref<ProcessFormVariableV2>
+	export function refOfProcessFormVariableV2(x:ProcessFormVariableV2,v:Ref<ProcessFormVariableV2>)
+	export function unRefProcessFormVariableV2(v:Ref<ProcessFormVariableV2>):ProcessFormVariableV2
+	export function emptySignatureCustomFieldValueMultilingualValue():SignatureCustomFieldValueMultilingualValue
+	export function emptyRefSignatureCustomFieldValueMultilingualValue():Ref<SignatureCustomFieldValueMultilingualValue>
+	export function refOfSignatureCustomFieldValueMultilingualValue(x:SignatureCustomFieldValueMultilingualValue,v:Ref<SignatureCustomFieldValueMultilingualValue>)
+	export function unRefSignatureCustomFieldValueMultilingualValue(v:Ref<SignatureCustomFieldValueMultilingualValue>):SignatureCustomFieldValueMultilingualValue
+	export function emptyAbnormalReasonElement():AbnormalReasonElement
+	export function emptyRefAbnormalReasonElement():Ref<AbnormalReasonElement>
+	export function refOfAbnormalReasonElement(x:AbnormalReasonElement,v:Ref<AbnormalReasonElement>)
+	export function unRefAbnormalReasonElement(v:Ref<AbnormalReasonElement>):AbnormalReasonElement
+	export function emptyCustomOrg():CustomOrg
+	export function emptyRefCustomOrg():Ref<CustomOrg>
+	export function refOfCustomOrg(x:CustomOrg,v:Ref<CustomOrg>)
+	export function unRefCustomOrg(v:Ref<CustomOrg>):CustomOrg
+	export function emptyBatchGetJobLevelRespData():BatchGetJobLevelRespData
+	export function emptyRefBatchGetJobLevelRespData():Ref<BatchGetJobLevelRespData>
+	export function refOfBatchGetJobLevelRespData(x:BatchGetJobLevelRespData,v:Ref<BatchGetJobLevelRespData>)
+	export function unRefBatchGetJobLevelRespData(v:Ref<BatchGetJobLevelRespData>):BatchGetJobLevelRespData
+	export function emptyP2EmployeeDomainEventV2():P2EmployeeDomainEventV2
+	export function emptyRefP2EmployeeDomainEventV2():Ref<P2EmployeeDomainEventV2>
+	export function refOfP2EmployeeDomainEventV2(x:P2EmployeeDomainEventV2,v:Ref<P2EmployeeDomainEventV2>)
+	export function unRefP2EmployeeDomainEventV2(v:Ref<P2EmployeeDomainEventV2>):P2EmployeeDomainEventV2
+	export function emptyQueryPreHireRespData():QueryPreHireRespData
+	export function emptyRefQueryPreHireRespData():Ref<QueryPreHireRespData>
+	export function refOfQueryPreHireRespData(x:QueryPreHireRespData,v:Ref<QueryPreHireRespData>)
+	export function unRefQueryPreHireRespData(v:Ref<QueryPreHireRespData>):QueryPreHireRespData
+	export function emptySignatureTemplateContentItem():SignatureTemplateContentItem
+	export function emptyRefSignatureTemplateContentItem():Ref<SignatureTemplateContentItem>
+	export function refOfSignatureTemplateContentItem(x:SignatureTemplateContentItem,v:Ref<SignatureTemplateContentItem>)
+	export function unRefSignatureTemplateContentItem(v:Ref<SignatureTemplateContentItem>):SignatureTemplateContentItem
+	export function emptyCreateCostCenterResp():CreateCostCenterResp
+	export function emptyRefCreateCostCenterResp():Ref<CreateCostCenterResp>
+	export function refOfCreateCostCenterResp(x:CreateCostCenterResp,v:Ref<CreateCostCenterResp>)
+	export function unRefCreateCostCenterResp(v:Ref<CreateCostCenterResp>):CreateCostCenterResp
+	export function emptyProfileSettingEmploymentInfo():ProfileSettingEmploymentInfo
+	export function emptyRefProfileSettingEmploymentInfo():Ref<ProfileSettingEmploymentInfo>
+	export function refOfProfileSettingEmploymentInfo(x:ProfileSettingEmploymentInfo,v:Ref<ProfileSettingEmploymentInfo>)
+	export function unRefProfileSettingEmploymentInfo(v:Ref<ProfileSettingEmploymentInfo>):ProfileSettingEmploymentInfo
+	export function emptyWorkExperienceInfo():WorkExperienceInfo
+	export function emptyRefWorkExperienceInfo():Ref<WorkExperienceInfo>
+	export function refOfWorkExperienceInfo(x:WorkExperienceInfo,v:Ref<WorkExperienceInfo>)
+	export function unRefWorkExperienceInfo(v:Ref<WorkExperienceInfo>):WorkExperienceInfo
+	export function emptyBatchGetDepartmentResp():BatchGetDepartmentResp
+	export function emptyRefBatchGetDepartmentResp():Ref<BatchGetDepartmentResp>
+	export function refOfBatchGetDepartmentResp(x:BatchGetDepartmentResp,v:Ref<BatchGetDepartmentResp>)
+	export function unRefBatchGetDepartmentResp(v:Ref<BatchGetDepartmentResp>):BatchGetDepartmentResp
+	export function emptyProfileSettingEducation():ProfileSettingEducation
+	export function emptyRefProfileSettingEducation():Ref<ProfileSettingEducation>
+	export function refOfProfileSettingEducation(x:ProfileSettingEducation,v:Ref<ProfileSettingEducation>)
+	export function unRefProfileSettingEducation(v:Ref<ProfileSettingEducation>):ProfileSettingEducation
+	export function emptyCreatePreHireResp():CreatePreHireResp
+	export function emptyRefCreatePreHireResp():Ref<CreatePreHireResp>
+	export function refOfCreatePreHireResp(x:CreatePreHireResp,v:Ref<CreatePreHireResp>)
+	export function unRefCreatePreHireResp(v:Ref<CreatePreHireResp>):CreatePreHireResp
+	export function emptyBatchGetEmployeesJobDataReqBody():BatchGetEmployeesJobDataReqBody
+	export function emptyRefBatchGetEmployeesJobDataReqBody():Ref<BatchGetEmployeesJobDataReqBody>
+	export function refOfBatchGetEmployeesJobDataReqBody(x:BatchGetEmployeesJobDataReqBody,v:Ref<BatchGetEmployeesJobDataReqBody>)
+	export function unRefBatchGetEmployeesJobDataReqBody(v:Ref<BatchGetEmployeesJobDataReqBody>):BatchGetEmployeesJobDataReqBody
+	export function emptySearchBasicInfoCityReq():SearchBasicInfoCityReq
+	export function emptyRefSearchBasicInfoCityReq():Ref<SearchBasicInfoCityReq>
+	export function refOfSearchBasicInfoCityReq(x:SearchBasicInfoCityReq,v:Ref<SearchBasicInfoCityReq>)
+	export function unRefSearchBasicInfoCityReq(v:Ref<SearchBasicInfoCityReq>):SearchBasicInfoCityReq
+	export function emptySearchBasicInfoDistrictRespData():SearchBasicInfoDistrictRespData
+	export function emptyRefSearchBasicInfoDistrictRespData():Ref<SearchBasicInfoDistrictRespData>
+	export function refOfSearchBasicInfoDistrictRespData(x:SearchBasicInfoDistrictRespData,v:Ref<SearchBasicInfoDistrictRespData>)
+	export function unRefSearchBasicInfoDistrictRespData(v:Ref<SearchBasicInfoDistrictRespData>):SearchBasicInfoDistrictRespData
+	export function emptyJobDataCostCenter():JobDataCostCenter
+	export function emptyRefJobDataCostCenter():Ref<JobDataCostCenter>
+	export function refOfJobDataCostCenter(x:JobDataCostCenter,v:Ref<JobDataCostCenter>)
+	export function unRefJobDataCostCenter(v:Ref<JobDataCostCenter>):JobDataCostCenter
+	export function emptyPositionCreate():PositionCreate
+	export function emptyRefPositionCreate():Ref<PositionCreate>
+	export function refOfPositionCreate(x:PositionCreate,v:Ref<PositionCreate>)
+	export function unRefPositionCreate(v:Ref<PositionCreate>):PositionCreate
+	export function emptyFieldVariableSubVlaueForReview():FieldVariableSubVlaueForReview
+	export function emptyRefFieldVariableSubVlaueForReview():Ref<FieldVariableSubVlaueForReview>
+	export function refOfFieldVariableSubVlaueForReview(x:FieldVariableSubVlaueForReview,v:Ref<FieldVariableSubVlaueForReview>)
+	export function unRefFieldVariableSubVlaueForReview(v:Ref<FieldVariableSubVlaueForReview>):FieldVariableSubVlaueForReview
+	export function emptyQueryJobGradeRespData():QueryJobGradeRespData
+	export function emptyRefQueryJobGradeRespData():Ref<QueryJobGradeRespData>
+	export function refOfQueryJobGradeRespData(x:QueryJobGradeRespData,v:Ref<QueryJobGradeRespData>)
+	export function unRefQueryJobGradeRespData(v:Ref<QueryJobGradeRespData>):QueryJobGradeRespData
+	export function emptySearchDepartmentReqBody():SearchDepartmentReqBody
+	export function emptyRefSearchDepartmentReqBody():Ref<SearchDepartmentReqBody>
+	export function refOfSearchDepartmentReqBody(x:SearchDepartmentReqBody,v:Ref<SearchDepartmentReqBody>)
+	export function unRefSearchDepartmentReqBody(v:Ref<SearchDepartmentReqBody>):SearchDepartmentReqBody
+	export function emptyCostCenter():CostCenter
+	export function emptyRefCostCenter():Ref<CostCenter>
+	export function refOfCostCenter(x:CostCenter,v:Ref<CostCenter>)
+	export function unRefCostCenter(v:Ref<CostCenter>):CostCenter
+	export function emptyCreateEmployeeReq():CreateEmployeeReq
+	export function emptyRefCreateEmployeeReq():Ref<CreateEmployeeReq>
+	export function refOfCreateEmployeeReq(x:CreateEmployeeReq,v:Ref<CreateEmployeeReq>)
+	export function unRefCreateEmployeeReq(v:Ref<CreateEmployeeReq>):CreateEmployeeReq
+	export function emptySearchJobChangeResp():SearchJobChangeResp
+	export function emptyRefSearchJobChangeResp():Ref<SearchJobChangeResp>
+	export function refOfSearchJobChangeResp(x:SearchJobChangeResp,v:Ref<SearchJobChangeResp>)
+	export function unRefSearchJobChangeResp(v:Ref<SearchJobChangeResp>):SearchJobChangeResp
+	export function emptyBankAccountForUpdate():BankAccountForUpdate
+	export function emptyRefBankAccountForUpdate():Ref<BankAccountForUpdate>
+	export function refOfBankAccountForUpdate(x:BankAccountForUpdate,v:Ref<BankAccountForUpdate>)
+	export function unRefBankAccountForUpdate(v:Ref<BankAccountForUpdate>):BankAccountForUpdate
 	export function emptyPatchPreHireReq():PatchPreHireReq
 	export function emptyRefPatchPreHireReq():Ref<PatchPreHireReq>
 	export function refOfPatchPreHireReq(x:PatchPreHireReq,v:Ref<PatchPreHireReq>)
 	export function unRefPatchPreHireReq(v:Ref<PatchPreHireReq>):PatchPreHireReq
+	export function emptyPhoneNumberAndAreaCode():PhoneNumberAndAreaCode
+	export function emptyRefPhoneNumberAndAreaCode():Ref<PhoneNumberAndAreaCode>
+	export function refOfPhoneNumberAndAreaCode(x:PhoneNumberAndAreaCode,v:Ref<PhoneNumberAndAreaCode>)
+	export function unRefPhoneNumberAndAreaCode(v:Ref<PhoneNumberAndAreaCode>):PhoneNumberAndAreaCode
+	export function emptyPrehireCreate():PrehireCreate
+	export function emptyRefPrehireCreate():Ref<PrehireCreate>
+	export function refOfPrehireCreate(x:PrehireCreate,v:Ref<PrehireCreate>)
+	export function unRefPrehireCreate(v:Ref<PrehireCreate>):PrehireCreate
+	export function emptyQrCodeValue():QrCodeValue
+	export function emptyRefQrCodeValue():Ref<QrCodeValue>
+	export function refOfQrCodeValue(x:QrCodeValue,v:Ref<QrCodeValue>)
+	export function unRefQrCodeValue(v:Ref<QrCodeValue>):QrCodeValue
+	export function emptyInternationalAssignmentV2():InternationalAssignmentV2
+	export function emptyRefInternationalAssignmentV2():Ref<InternationalAssignmentV2>
+	export function refOfInternationalAssignmentV2(x:InternationalAssignmentV2,v:Ref<InternationalAssignmentV2>)
+	export function unRefInternationalAssignmentV2(v:Ref<InternationalAssignmentV2>):InternationalAssignmentV2
+	export function emptySubmitProbationRespData():SubmitProbationRespData
+	export function emptyRefSubmitProbationRespData():Ref<SubmitProbationRespData>
+	export function refOfSubmitProbationRespData(x:SubmitProbationRespData,v:Ref<SubmitProbationRespData>)
+	export function unRefSubmitProbationRespData(v:Ref<SubmitProbationRespData>):SubmitProbationRespData
+	export function emptyBatchGetEmployeeRespData():BatchGetEmployeeRespData
+	export function emptyRefBatchGetEmployeeRespData():Ref<BatchGetEmployeeRespData>
+	export function refOfBatchGetEmployeeRespData(x:BatchGetEmployeeRespData,v:Ref<BatchGetEmployeeRespData>)
+	export function unRefBatchGetEmployeeRespData(v:Ref<BatchGetEmployeeRespData>):BatchGetEmployeeRespData
+	export function emptySearchBasicInfoBankBranchReqBody():SearchBasicInfoBankBranchReqBody
+	export function emptyRefSearchBasicInfoBankBranchReqBody():Ref<SearchBasicInfoBankBranchReqBody>
+	export function refOfSearchBasicInfoBankBranchReqBody(x:SearchBasicInfoBankBranchReqBody,v:Ref<SearchBasicInfoBankBranchReqBody>)
+	export function unRefSearchBasicInfoBankBranchReqBody(v:Ref<SearchBasicInfoBankBranchReqBody>):SearchBasicInfoBankBranchReqBody
+	export function emptyQueryPreHireReq():QueryPreHireReq
+	export function emptyRefQueryPreHireReq():Ref<QueryPreHireReq>
+	export function refOfQueryPreHireReq(x:QueryPreHireReq,v:Ref<QueryPreHireReq>)
+	export function unRefQueryPreHireReq(v:Ref<QueryPreHireReq>):QueryPreHireReq
+	export function emptySearchBasicInfoCityRespData():SearchBasicInfoCityRespData
+	export function emptyRefSearchBasicInfoCityRespData():Ref<SearchBasicInfoCityRespData>
+	export function refOfSearchBasicInfoCityRespData(x:SearchBasicInfoCityRespData,v:Ref<SearchBasicInfoCityRespData>)
+	export function unRefSearchBasicInfoCityRespData(v:Ref<SearchBasicInfoCityRespData>):SearchBasicInfoCityRespData
+	export function emptySearchPreHireReqBody():SearchPreHireReqBody
+	export function emptyRefSearchPreHireReqBody():Ref<SearchPreHireReqBody>
+	export function refOfSearchPreHireReqBody(x:SearchPreHireReqBody,v:Ref<SearchPreHireReqBody>)
+	export function unRefSearchPreHireReqBody(v:Ref<SearchPreHireReqBody>):SearchPreHireReqBody
+	export function emptyLeaveAccrualRecord():LeaveAccrualRecord
+	export function emptyRefLeaveAccrualRecord():Ref<LeaveAccrualRecord>
+	export function refOfLeaveAccrualRecord(x:LeaveAccrualRecord,v:Ref<LeaveAccrualRecord>)
+	export function unRefLeaveAccrualRecord(v:Ref<LeaveAccrualRecord>):LeaveAccrualRecord
+	export function emptyP2ProcessUpdatedV2Data():P2ProcessUpdatedV2Data
+	export function emptyRefP2ProcessUpdatedV2Data():Ref<P2ProcessUpdatedV2Data>
+	export function refOfP2ProcessUpdatedV2Data(x:P2ProcessUpdatedV2Data,v:Ref<P2ProcessUpdatedV2Data>)
+	export function unRefP2ProcessUpdatedV2Data(v:Ref<P2ProcessUpdatedV2Data>):P2ProcessUpdatedV2Data
+	export function emptySearchPreHireReq():SearchPreHireReq
+	export function emptyRefSearchPreHireReq():Ref<SearchPreHireReq>
+	export function refOfSearchPreHireReq(x:SearchPreHireReq,v:Ref<SearchPreHireReq>)
+	export function unRefSearchPreHireReq(v:Ref<SearchPreHireReq>):SearchPreHireReq
+	export function emptySubmitProbationReqBody():SubmitProbationReqBody
+	export function emptyRefSubmitProbationReqBody():Ref<SubmitProbationReqBody>
+	export function refOfSubmitProbationReqBody(x:SubmitProbationReqBody,v:Ref<SubmitProbationReqBody>)
+	export function unRefSubmitProbationReqBody(v:Ref<SubmitProbationReqBody>):SubmitProbationReqBody
+	export function emptySignatureTemplateInfoWithThumbnail():SignatureTemplateInfoWithThumbnail
+	export function emptyRefSignatureTemplateInfoWithThumbnail():Ref<SignatureTemplateInfoWithThumbnail>
+	export function refOfSignatureTemplateInfoWithThumbnail(x:SignatureTemplateInfoWithThumbnail,v:Ref<SignatureTemplateInfoWithThumbnail>)
+	export function unRefSignatureTemplateInfoWithThumbnail(v:Ref<SignatureTemplateInfoWithThumbnail>):SignatureTemplateInfoWithThumbnail
+	export function emptyQueryPreHireResp():QueryPreHireResp
+	export function emptyRefQueryPreHireResp():Ref<QueryPreHireResp>
+	export function refOfQueryPreHireResp(x:QueryPreHireResp,v:Ref<QueryPreHireResp>)
+	export function unRefQueryPreHireResp(v:Ref<QueryPreHireResp>):QueryPreHireResp
+	export function emptyPosition():Position
+	export function emptyRefPosition():Ref<Position>
+	export function refOfPosition(x:Position,v:Ref<Position>)
+	export function unRefPosition(v:Ref<Position>):Position
+	export function emptyProfileSettingNational():ProfileSettingNational
+	export function emptyRefProfileSettingNational():Ref<ProfileSettingNational>
+	export function refOfProfileSettingNational(x:ProfileSettingNational,v:Ref<ProfileSettingNational>)
+	export function unRefProfileSettingNational(v:Ref<ProfileSettingNational>):ProfileSettingNational
+	export function emptyCountryRegionSubdivision():CountryRegionSubdivision
+	export function emptyRefCountryRegionSubdivision():Ref<CountryRegionSubdivision>
+	export function refOfCountryRegionSubdivision(x:CountryRegionSubdivision,v:Ref<CountryRegionSubdivision>)
+	export function unRefCountryRegionSubdivision(v:Ref<CountryRegionSubdivision>):CountryRegionSubdivision
+	export function emptyP2JobChangeUpdatedV2Data():P2JobChangeUpdatedV2Data
+	export function emptyRefP2JobChangeUpdatedV2Data():Ref<P2JobChangeUpdatedV2Data>
+	export function refOfP2JobChangeUpdatedV2Data(x:P2JobChangeUpdatedV2Data,v:Ref<P2JobChangeUpdatedV2Data>)
+	export function unRefP2JobChangeUpdatedV2Data(v:Ref<P2JobChangeUpdatedV2Data>):P2JobChangeUpdatedV2Data
+	export function emptyDeleteCostCenterResp():DeleteCostCenterResp
+	export function emptyRefDeleteCostCenterResp():Ref<DeleteCostCenterResp>
+	export function refOfDeleteCostCenterResp(x:DeleteCostCenterResp,v:Ref<DeleteCostCenterResp>)
+	export function unRefDeleteCostCenterResp(v:Ref<DeleteCostCenterResp>):DeleteCostCenterResp
+	export function emptyDepartmentId():DepartmentId
+	export function emptyRefDepartmentId():Ref<DepartmentId>
+	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
+	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
+	export function emptyBatchGetCompanyResp():BatchGetCompanyResp
+	export function emptyRefBatchGetCompanyResp():Ref<BatchGetCompanyResp>
+	export function refOfBatchGetCompanyResp(x:BatchGetCompanyResp,v:Ref<BatchGetCompanyResp>)
+	export function unRefBatchGetCompanyResp(v:Ref<BatchGetCompanyResp>):BatchGetCompanyResp
+	export function emptyCreateCostCenterReq():CreateCostCenterReq
+	export function emptyRefCreateCostCenterReq():Ref<CreateCostCenterReq>
+	export function refOfCreateCostCenterReq(x:CreateCostCenterReq,v:Ref<CreateCostCenterReq>)
+	export function unRefCreateCostCenterReq(v:Ref<CreateCostCenterReq>):CreateCostCenterReq
+	export function emptyCustomName():CustomName
+	export function emptyRefCustomName():Ref<CustomName>
+	export function refOfCustomName(x:CustomName,v:Ref<CustomName>)
+	export function unRefCustomName(v:Ref<CustomName>):CustomName
+	export function emptyP2ProcessNodeUpdatedV2Data():P2ProcessNodeUpdatedV2Data
+	export function emptyRefP2ProcessNodeUpdatedV2Data():Ref<P2ProcessNodeUpdatedV2Data>
+	export function refOfP2ProcessNodeUpdatedV2Data(x:P2ProcessNodeUpdatedV2Data,v:Ref<P2ProcessNodeUpdatedV2Data>)
+	export function unRefP2ProcessNodeUpdatedV2Data(v:Ref<P2ProcessNodeUpdatedV2Data>):P2ProcessNodeUpdatedV2Data
+	export function emptyProfileSettingPersonalInfo():ProfileSettingPersonalInfo
+	export function emptyRefProfileSettingPersonalInfo():Ref<ProfileSettingPersonalInfo>
+	export function refOfProfileSettingPersonalInfo(x:ProfileSettingPersonalInfo,v:Ref<ProfileSettingPersonalInfo>)
+	export function unRefProfileSettingPersonalInfo(v:Ref<ProfileSettingPersonalInfo>):ProfileSettingPersonalInfo
+	export function emptyCreateProbationAssessmentReqBody():CreateProbationAssessmentReqBody
+	export function emptyRefCreateProbationAssessmentReqBody():Ref<CreateProbationAssessmentReqBody>
+	export function refOfCreateProbationAssessmentReqBody(x:CreateProbationAssessmentReqBody,v:Ref<CreateProbationAssessmentReqBody>)
+	export function unRefCreateProbationAssessmentReqBody(v:Ref<CreateProbationAssessmentReqBody>):CreateProbationAssessmentReqBody
+	export function emptyOnboardingTaskChange():OnboardingTaskChange
+	export function emptyRefOnboardingTaskChange():Ref<OnboardingTaskChange>
+	export function refOfOnboardingTaskChange(x:OnboardingTaskChange,v:Ref<OnboardingTaskChange>)
+	export function unRefOnboardingTaskChange(v:Ref<OnboardingTaskChange>):OnboardingTaskChange
+	export function emptySearchBasicInfoBankBranchIterator():SearchBasicInfoBankBranchIterator
+	export function emptyRefSearchBasicInfoBankBranchIterator():Ref<SearchBasicInfoBankBranchIterator>
+	export function refOfSearchBasicInfoBankBranchIterator(x:SearchBasicInfoBankBranchIterator,v:Ref<SearchBasicInfoBankBranchIterator>)
+	export function unRefSearchBasicInfoBankBranchIterator(v:Ref<SearchBasicInfoBankBranchIterator>):SearchBasicInfoBankBranchIterator
+	export function emptyCustomOrgUpdate():CustomOrgUpdate
+	export function emptyRefCustomOrgUpdate():Ref<CustomOrgUpdate>
+	export function refOfCustomOrgUpdate(x:CustomOrgUpdate,v:Ref<CustomOrgUpdate>)
+	export function unRefCustomOrgUpdate(v:Ref<CustomOrgUpdate>):CustomOrgUpdate
+	export function emptyPatchCostCenterReqBody():PatchCostCenterReqBody
+	export function emptyRefPatchCostCenterReqBody():Ref<PatchCostCenterReqBody>
+	export function refOfPatchCostCenterReqBody(x:PatchCostCenterReqBody,v:Ref<PatchCostCenterReqBody>)
+	export function unRefPatchCostCenterReqBody(v:Ref<PatchCostCenterReqBody>):PatchCostCenterReqBody
+	export function emptyGetProcessFormVariableDataRespData():GetProcessFormVariableDataRespData
+	export function emptyRefGetProcessFormVariableDataRespData():Ref<GetProcessFormVariableDataRespData>
+	export function refOfGetProcessFormVariableDataRespData(x:GetProcessFormVariableDataRespData,v:Ref<GetProcessFormVariableDataRespData>)
+	export function unRefGetProcessFormVariableDataRespData(v:Ref<GetProcessFormVariableDataRespData>):GetProcessFormVariableDataRespData
+	export function emptySignatureEnumInfoLabel():SignatureEnumInfoLabel
+	export function emptyRefSignatureEnumInfoLabel():Ref<SignatureEnumInfoLabel>
+	export function refOfSignatureEnumInfoLabel(x:SignatureEnumInfoLabel,v:Ref<SignatureEnumInfoLabel>)
+	export function unRefSignatureEnumInfoLabel(v:Ref<SignatureEnumInfoLabel>):SignatureEnumInfoLabel
 }

@@ -11,7 +11,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/helpdesk/v1'{
 	// @ts-ignore
 	import * as larkevent from 'github.com/larksuite/oapi-sdk-go/v3/event'
 	// @ts-ignore
-	import type {int64,float64,Ref,Struct,bool,int,error} from 'go'
+	import type {int,error,int64,float64,Ref,Struct,bool} from 'go'
 	export interface Agent extends Struct<Agent>{
 
 			id:Ref<string>
@@ -399,7 +399,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/helpdesk/v1'{
 	}
 	export interface CreateFaqPathReqBodyBuilder extends Struct<CreateFaqPathReqBodyBuilder>{
 
-			faq(faq:Ref<FaqUpdateInfo>):Ref<CreateFaqPathReqBodyBuilder>
+			faq(faq:Ref<FaqCreateInfo>):Ref<CreateFaqPathReqBodyBuilder>
 			build():Ref<CreateFaqReqBody>
 	}
 	export interface CreateFaqReq extends Struct<CreateFaqReq>{
@@ -408,11 +408,11 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/helpdesk/v1'{
 	}
 	export interface CreateFaqReqBody extends Struct<CreateFaqReqBody>{
 
-			faq:Ref<FaqUpdateInfo>
+			faq:Ref<FaqCreateInfo>
 	}
 	export interface CreateFaqReqBodyBuilder extends Struct<CreateFaqReqBodyBuilder>{
 
-			faq(faq:Ref<FaqUpdateInfo>):Ref<CreateFaqReqBodyBuilder>
+			faq(faq:Ref<FaqCreateInfo>):Ref<CreateFaqReqBodyBuilder>
 			build():Ref<CreateFaqReqBody>
 	}
 	export interface CreateFaqReqBuilder extends Struct<CreateFaqReqBuilder>{
@@ -702,6 +702,23 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/helpdesk/v1'{
 			createUser(createUser:Ref<TicketUser>):Ref<FaqBuilder>
 			build():Ref<Faq>
 	}
+	export interface FaqCreateInfo extends Struct<FaqCreateInfo>{
+
+			categoryId:Ref<string>
+			question:Ref<string>
+			answer:Ref<string>
+			answerRichtext:Ref<string>
+			tags:string[]
+	}
+	export interface FaqCreateInfoBuilder extends Struct<FaqCreateInfoBuilder>{
+
+			categoryId(categoryId:string):Ref<FaqCreateInfoBuilder>
+			question(question:string):Ref<FaqCreateInfoBuilder>
+			answer(answer:string):Ref<FaqCreateInfoBuilder>
+			answerRichtext(answerRichtext:string):Ref<FaqCreateInfoBuilder>
+			tags(tags:string[]):Ref<FaqCreateInfoBuilder>
+			build():Ref<FaqCreateInfo>
+	}
 	export interface FaqImageFaqReq extends Struct<FaqImageFaqReq>{
 
 	}
@@ -725,7 +742,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/helpdesk/v1'{
 			categoryId:Ref<string>
 			question:Ref<string>
 			answer:Ref<string>
-			answerRichtext:Ref<string>
+			answerRichtext:Ref<Richtext>[]
 			tags:string[]
 	}
 	export interface FaqUpdateInfoBuilder extends Struct<FaqUpdateInfoBuilder>{
@@ -733,7 +750,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/helpdesk/v1'{
 			categoryId(categoryId:string):Ref<FaqUpdateInfoBuilder>
 			question(question:string):Ref<FaqUpdateInfoBuilder>
 			answer(answer:string):Ref<FaqUpdateInfoBuilder>
-			answerRichtext(answerRichtext:string):Ref<FaqUpdateInfoBuilder>
+			answerRichtext(answerRichtext:Ref<Richtext>[]):Ref<FaqUpdateInfoBuilder>
 			tags(tags:string[]):Ref<FaqUpdateInfoBuilder>
 			build():Ref<FaqUpdateInfo>
 	}
@@ -1201,6 +1218,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/helpdesk/v1'{
 
 	export function newFaqBuilder():Ref<FaqBuilder>
 
+	export function newFaqCreateInfoBuilder():Ref<FaqCreateInfoBuilder>
+
 	export function newFaqImageFaqReqBuilder():Ref<FaqImageFaqReqBuilder>
 
 	export function newFaqUpdateInfoBuilder():Ref<FaqUpdateInfoBuilder>
@@ -1442,7 +1461,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/helpdesk/v1'{
 			helpdeskId:Ref<string>
 			approveStatus:Ref<string>
 	}
-	export interface P2NotificationApproveV1Handler extends larkevent.EventHandler,Struct<P2NotificationApproveV1Handler>{
+	export interface P2NotificationApproveV1Handler extends Struct<P2NotificationApproveV1Handler>,larkevent.EventHandler{
 
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
@@ -1470,7 +1489,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/helpdesk/v1'{
 			customizedFields:Ref<CustomizedFieldDisplayItem>[]
 			chatId:Ref<string>
 	}
-	export interface P2TicketCreatedV1Handler extends Struct<P2TicketCreatedV1Handler>,larkevent.EventHandler{
+	export interface P2TicketCreatedV1Handler extends larkevent.EventHandler,Struct<P2TicketCreatedV1Handler>{
 
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
@@ -1501,7 +1520,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/helpdesk/v1'{
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
 	}
-	export interface P2TicketUpdatedV1 extends larkevent.EventHandlerModel,Struct<P2TicketUpdatedV1>{
+	export interface P2TicketUpdatedV1 extends Struct<P2TicketUpdatedV1>,larkevent.EventHandlerModel{
 
 			eventV2Base:Ref<larkevent.EventV2Base>
 			eventReq:Ref<larkevent.EventReq>
@@ -2389,230 +2408,406 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/helpdesk/v1'{
 			weekday(weekday:int):Ref<WeekdayScheduleBuilder>
 			build():Ref<WeekdaySchedule>
 	}
-	export function emptyFaqImageFaqResp():FaqImageFaqResp
-	export function emptyRefFaqImageFaqResp():Ref<FaqImageFaqResp>
-	export function refOfFaqImageFaqResp(x:FaqImageFaqResp,v:Ref<FaqImageFaqResp>)
-	export function unRefFaqImageFaqResp(v:Ref<FaqImageFaqResp>):FaqImageFaqResp
-	export function emptyPatchFaqResp():PatchFaqResp
-	export function emptyRefPatchFaqResp():Ref<PatchFaqResp>
-	export function refOfPatchFaqResp(x:PatchFaqResp,v:Ref<PatchFaqResp>)
-	export function unRefPatchFaqResp(v:Ref<PatchFaqResp>):PatchFaqResp
-	export function emptyTicketCustomizedField():TicketCustomizedField
-	export function emptyRefTicketCustomizedField():Ref<TicketCustomizedField>
-	export function refOfTicketCustomizedField(x:TicketCustomizedField,v:Ref<TicketCustomizedField>)
-	export function unRefTicketCustomizedField(v:Ref<TicketCustomizedField>):TicketCustomizedField
-	export function emptyTicketEventUpdateInfo():TicketEventUpdateInfo
-	export function emptyRefTicketEventUpdateInfo():Ref<TicketEventUpdateInfo>
-	export function refOfTicketEventUpdateInfo(x:TicketEventUpdateInfo,v:Ref<TicketEventUpdateInfo>)
-	export function unRefTicketEventUpdateInfo(v:Ref<TicketEventUpdateInfo>):TicketEventUpdateInfo
-	export function emptyP2TicketCreatedV1Data():P2TicketCreatedV1Data
-	export function emptyRefP2TicketCreatedV1Data():Ref<P2TicketCreatedV1Data>
-	export function refOfP2TicketCreatedV1Data(x:P2TicketCreatedV1Data,v:Ref<P2TicketCreatedV1Data>)
-	export function unRefP2TicketCreatedV1Data(v:Ref<P2TicketCreatedV1Data>):P2TicketCreatedV1Data
-	export function emptyWeekdaySchedule():WeekdaySchedule
-	export function emptyRefWeekdaySchedule():Ref<WeekdaySchedule>
-	export function refOfWeekdaySchedule(x:WeekdaySchedule,v:Ref<WeekdaySchedule>)
-	export function unRefWeekdaySchedule(v:Ref<WeekdaySchedule>):WeekdaySchedule
-	export function emptyAnswerUserQueryTicketResp():AnswerUserQueryTicketResp
-	export function emptyRefAnswerUserQueryTicketResp():Ref<AnswerUserQueryTicketResp>
-	export function refOfAnswerUserQueryTicketResp(x:AnswerUserQueryTicketResp,v:Ref<AnswerUserQueryTicketResp>)
-	export function unRefAnswerUserQueryTicketResp(v:Ref<AnswerUserQueryTicketResp>):AnswerUserQueryTicketResp
-	export function emptyListCategoryReq():ListCategoryReq
-	export function emptyRefListCategoryReq():Ref<ListCategoryReq>
-	export function refOfListCategoryReq(x:ListCategoryReq,v:Ref<ListCategoryReq>)
-	export function unRefListCategoryReq(v:Ref<ListCategoryReq>):ListCategoryReq
-	export function emptyListTicketResp():ListTicketResp
-	export function emptyRefListTicketResp():Ref<ListTicketResp>
-	export function refOfListTicketResp(x:ListTicketResp,v:Ref<ListTicketResp>)
-	export function unRefListTicketResp(v:Ref<ListTicketResp>):ListTicketResp
-	export function emptyPatchAgentReqBody():PatchAgentReqBody
-	export function emptyRefPatchAgentReqBody():Ref<PatchAgentReqBody>
-	export function refOfPatchAgentReqBody(x:PatchAgentReqBody,v:Ref<PatchAgentReqBody>)
-	export function unRefPatchAgentReqBody(v:Ref<PatchAgentReqBody>):PatchAgentReqBody
-	export function emptyPatchAgentResp():PatchAgentResp
-	export function emptyRefPatchAgentResp():Ref<PatchAgentResp>
-	export function refOfPatchAgentResp(x:PatchAgentResp,v:Ref<PatchAgentResp>)
-	export function unRefPatchAgentResp(v:Ref<PatchAgentResp>):PatchAgentResp
-	export function emptySubscribeEventReq():SubscribeEventReq
-	export function emptyRefSubscribeEventReq():Ref<SubscribeEventReq>
-	export function refOfSubscribeEventReq(x:SubscribeEventReq,v:Ref<SubscribeEventReq>)
-	export function unRefSubscribeEventReq(v:Ref<SubscribeEventReq>):SubscribeEventReq
-	export function emptyUpdateTicketResp():UpdateTicketResp
-	export function emptyRefUpdateTicketResp():Ref<UpdateTicketResp>
-	export function refOfUpdateTicketResp(x:UpdateTicketResp,v:Ref<UpdateTicketResp>)
-	export function unRefUpdateTicketResp(v:Ref<UpdateTicketResp>):UpdateTicketResp
-	export function emptyCreateNotificationResp():CreateNotificationResp
-	export function emptyRefCreateNotificationResp():Ref<CreateNotificationResp>
-	export function refOfCreateNotificationResp(x:CreateNotificationResp,v:Ref<CreateNotificationResp>)
-	export function unRefCreateNotificationResp(v:Ref<CreateNotificationResp>):CreateNotificationResp
-	export function emptyListAgentScheduleReq():ListAgentScheduleReq
-	export function emptyRefListAgentScheduleReq():Ref<ListAgentScheduleReq>
-	export function refOfListAgentScheduleReq(x:ListAgentScheduleReq,v:Ref<ListAgentScheduleReq>)
-	export function unRefListAgentScheduleReq(v:Ref<ListAgentScheduleReq>):ListAgentScheduleReq
-	export function emptyListAgentSkillRuleRespData():ListAgentSkillRuleRespData
-	export function emptyRefListAgentSkillRuleRespData():Ref<ListAgentSkillRuleRespData>
-	export function refOfListAgentSkillRuleRespData(x:ListAgentSkillRuleRespData,v:Ref<ListAgentSkillRuleRespData>)
-	export function unRefListAgentSkillRuleRespData(v:Ref<ListAgentSkillRuleRespData>):ListAgentSkillRuleRespData
-	export function emptyListTicketRespData():ListTicketRespData
-	export function emptyRefListTicketRespData():Ref<ListTicketRespData>
-	export function refOfListTicketRespData(x:ListTicketRespData,v:Ref<ListTicketRespData>)
-	export function unRefListTicketRespData(v:Ref<ListTicketRespData>):ListTicketRespData
-	export function emptyExecuteSendNotificationResp():ExecuteSendNotificationResp
-	export function emptyRefExecuteSendNotificationResp():Ref<ExecuteSendNotificationResp>
-	export function refOfExecuteSendNotificationResp(x:ExecuteSendNotificationResp,v:Ref<ExecuteSendNotificationResp>)
-	export function unRefExecuteSendNotificationResp(v:Ref<ExecuteSendNotificationResp>):ExecuteSendNotificationResp
-	export function emptyFaqUpdateInfo():FaqUpdateInfo
-	export function emptyRefFaqUpdateInfo():Ref<FaqUpdateInfo>
-	export function refOfFaqUpdateInfo(x:FaqUpdateInfo,v:Ref<FaqUpdateInfo>)
-	export function unRefFaqUpdateInfo(v:Ref<FaqUpdateInfo>):FaqUpdateInfo
-	export function emptyGetAgentSchedulesRespData():GetAgentSchedulesRespData
-	export function emptyRefGetAgentSchedulesRespData():Ref<GetAgentSchedulesRespData>
-	export function refOfGetAgentSchedulesRespData(x:GetAgentSchedulesRespData,v:Ref<GetAgentSchedulesRespData>)
-	export function unRefGetAgentSchedulesRespData(v:Ref<GetAgentSchedulesRespData>):GetAgentSchedulesRespData
-	export function emptyGetTicketCustomizedFieldResp():GetTicketCustomizedFieldResp
-	export function emptyRefGetTicketCustomizedFieldResp():Ref<GetTicketCustomizedFieldResp>
-	export function refOfGetTicketCustomizedFieldResp(x:GetTicketCustomizedFieldResp,v:Ref<GetTicketCustomizedFieldResp>)
-	export function unRefGetTicketCustomizedFieldResp(v:Ref<GetTicketCustomizedFieldResp>):GetTicketCustomizedFieldResp
-	export function emptyCreateTicketMessageRespData():CreateTicketMessageRespData
-	export function emptyRefCreateTicketMessageRespData():Ref<CreateTicketMessageRespData>
-	export function refOfCreateTicketMessageRespData(x:CreateTicketMessageRespData,v:Ref<CreateTicketMessageRespData>)
-	export function unRefCreateTicketMessageRespData(v:Ref<CreateTicketMessageRespData>):CreateTicketMessageRespData
+	export function emptyPatchTicketCustomizedFieldResp():PatchTicketCustomizedFieldResp
+	export function emptyRefPatchTicketCustomizedFieldResp():Ref<PatchTicketCustomizedFieldResp>
+	export function refOfPatchTicketCustomizedFieldResp(x:PatchTicketCustomizedFieldResp,v:Ref<PatchTicketCustomizedFieldResp>)
+	export function unRefPatchTicketCustomizedFieldResp(v:Ref<PatchTicketCustomizedFieldResp>):PatchTicketCustomizedFieldResp
 	export function emptyDeleteTicketCustomizedFieldReq():DeleteTicketCustomizedFieldReq
 	export function emptyRefDeleteTicketCustomizedFieldReq():Ref<DeleteTicketCustomizedFieldReq>
 	export function refOfDeleteTicketCustomizedFieldReq(x:DeleteTicketCustomizedFieldReq,v:Ref<DeleteTicketCustomizedFieldReq>)
 	export function unRefDeleteTicketCustomizedFieldReq(v:Ref<DeleteTicketCustomizedFieldReq>):DeleteTicketCustomizedFieldReq
-	export function emptyNotificationDepartment():NotificationDepartment
-	export function emptyRefNotificationDepartment():Ref<NotificationDepartment>
-	export function refOfNotificationDepartment(x:NotificationDepartment,v:Ref<NotificationDepartment>)
-	export function unRefNotificationDepartment(v:Ref<NotificationDepartment>):NotificationDepartment
-	export function emptyStartServiceTicketResp():StartServiceTicketResp
-	export function emptyRefStartServiceTicketResp():Ref<StartServiceTicketResp>
-	export function refOfStartServiceTicketResp(x:StartServiceTicketResp,v:Ref<StartServiceTicketResp>)
-	export function unRefStartServiceTicketResp(v:Ref<StartServiceTicketResp>):StartServiceTicketResp
-	export function emptyPatchAgentSkillReqBody():PatchAgentSkillReqBody
-	export function emptyRefPatchAgentSkillReqBody():Ref<PatchAgentSkillReqBody>
-	export function refOfPatchAgentSkillReqBody(x:PatchAgentSkillReqBody,v:Ref<PatchAgentSkillReqBody>)
-	export function unRefPatchAgentSkillReqBody(v:Ref<PatchAgentSkillReqBody>):PatchAgentSkillReqBody
-	export function emptyPatchAgentSkillResp():PatchAgentSkillResp
-	export function emptyRefPatchAgentSkillResp():Ref<PatchAgentSkillResp>
-	export function refOfPatchAgentSkillResp(x:PatchAgentSkillResp,v:Ref<PatchAgentSkillResp>)
-	export function unRefPatchAgentSkillResp(v:Ref<PatchAgentSkillResp>):PatchAgentSkillResp
-	export function emptyStartServiceTicketRespData():StartServiceTicketRespData
-	export function emptyRefStartServiceTicketRespData():Ref<StartServiceTicketRespData>
-	export function refOfStartServiceTicketRespData(x:StartServiceTicketRespData,v:Ref<StartServiceTicketRespData>)
-	export function unRefStartServiceTicketRespData(v:Ref<StartServiceTicketRespData>):StartServiceTicketRespData
-	export function emptyUserQueryFaqInfo():UserQueryFaqInfo
-	export function emptyRefUserQueryFaqInfo():Ref<UserQueryFaqInfo>
-	export function refOfUserQueryFaqInfo(x:UserQueryFaqInfo,v:Ref<UserQueryFaqInfo>)
-	export function unRefUserQueryFaqInfo(v:Ref<UserQueryFaqInfo>):UserQueryFaqInfo
-	export function emptyCreateBotMessageRespData():CreateBotMessageRespData
-	export function emptyRefCreateBotMessageRespData():Ref<CreateBotMessageRespData>
-	export function refOfCreateBotMessageRespData(x:CreateBotMessageRespData,v:Ref<CreateBotMessageRespData>)
-	export function unRefCreateBotMessageRespData(v:Ref<CreateBotMessageRespData>):CreateBotMessageRespData
-	export function emptyGetNotificationReq():GetNotificationReq
-	export function emptyRefGetNotificationReq():Ref<GetNotificationReq>
-	export function refOfGetNotificationReq(x:GetNotificationReq,v:Ref<GetNotificationReq>)
-	export function unRefGetNotificationReq(v:Ref<GetNotificationReq>):GetNotificationReq
-	export function emptyUpdateTicketReqBody():UpdateTicketReqBody
-	export function emptyRefUpdateTicketReqBody():Ref<UpdateTicketReqBody>
-	export function refOfUpdateTicketReqBody(x:UpdateTicketReqBody,v:Ref<UpdateTicketReqBody>)
-	export function unRefUpdateTicketReqBody(v:Ref<UpdateTicketReqBody>):UpdateTicketReqBody
-	export function emptyComments():Comments
-	export function emptyRefComments():Ref<Comments>
-	export function refOfComments(x:Comments,v:Ref<Comments>)
-	export function unRefComments(v:Ref<Comments>):Comments
-	export function emptyCreateAgentScheduleResp():CreateAgentScheduleResp
-	export function emptyRefCreateAgentScheduleResp():Ref<CreateAgentScheduleResp>
-	export function refOfCreateAgentScheduleResp(x:CreateAgentScheduleResp,v:Ref<CreateAgentScheduleResp>)
-	export function unRefCreateAgentScheduleResp(v:Ref<CreateAgentScheduleResp>):CreateAgentScheduleResp
-	export function emptyGetCategoryRespData():GetCategoryRespData
-	export function emptyRefGetCategoryRespData():Ref<GetCategoryRespData>
-	export function refOfGetCategoryRespData(x:GetCategoryRespData,v:Ref<GetCategoryRespData>)
-	export function unRefGetCategoryRespData(v:Ref<GetCategoryRespData>):GetCategoryRespData
-	export function emptyCustomizedFieldsTicketRespData():CustomizedFieldsTicketRespData
-	export function emptyRefCustomizedFieldsTicketRespData():Ref<CustomizedFieldsTicketRespData>
-	export function refOfCustomizedFieldsTicketRespData(x:CustomizedFieldsTicketRespData,v:Ref<CustomizedFieldsTicketRespData>)
-	export function unRefCustomizedFieldsTicketRespData(v:Ref<CustomizedFieldsTicketRespData>):CustomizedFieldsTicketRespData
-	export function emptyListFaqReq():ListFaqReq
-	export function emptyRefListFaqReq():Ref<ListFaqReq>
-	export function refOfListFaqReq(x:ListFaqReq,v:Ref<ListFaqReq>)
-	export function unRefListFaqReq(v:Ref<ListFaqReq>):ListFaqReq
+	export function emptyListAgentScheduleRespData():ListAgentScheduleRespData
+	export function emptyRefListAgentScheduleRespData():Ref<ListAgentScheduleRespData>
+	export function refOfListAgentScheduleRespData(x:ListAgentScheduleRespData,v:Ref<ListAgentScheduleRespData>)
+	export function unRefListAgentScheduleRespData(v:Ref<ListAgentScheduleRespData>):ListAgentScheduleRespData
+	export function emptyP2TicketUpdatedV1Data():P2TicketUpdatedV1Data
+	export function emptyRefP2TicketUpdatedV1Data():Ref<P2TicketUpdatedV1Data>
+	export function refOfP2TicketUpdatedV1Data(x:P2TicketUpdatedV1Data,v:Ref<P2TicketUpdatedV1Data>)
+	export function unRefP2TicketUpdatedV1Data(v:Ref<P2TicketUpdatedV1Data>):P2TicketUpdatedV1Data
+	export function emptyCreateTicketMessageResp():CreateTicketMessageResp
+	export function emptyRefCreateTicketMessageResp():Ref<CreateTicketMessageResp>
+	export function refOfCreateTicketMessageResp(x:CreateTicketMessageResp,v:Ref<CreateTicketMessageResp>)
+	export function unRefCreateTicketMessageResp(v:Ref<CreateTicketMessageResp>):CreateTicketMessageResp
+	export function emptyPatchAgentSchedulesReq():PatchAgentSchedulesReq
+	export function emptyRefPatchAgentSchedulesReq():Ref<PatchAgentSchedulesReq>
+	export function refOfPatchAgentSchedulesReq(x:PatchAgentSchedulesReq,v:Ref<PatchAgentSchedulesReq>)
+	export function unRefPatchAgentSchedulesReq(v:Ref<PatchAgentSchedulesReq>):PatchAgentSchedulesReq
+	export function emptySubmitApproveNotificationReq():SubmitApproveNotificationReq
+	export function emptyRefSubmitApproveNotificationReq():Ref<SubmitApproveNotificationReq>
+	export function refOfSubmitApproveNotificationReq(x:SubmitApproveNotificationReq,v:Ref<SubmitApproveNotificationReq>)
+	export function unRefSubmitApproveNotificationReq(v:Ref<SubmitApproveNotificationReq>):SubmitApproveNotificationReq
+	export function emptySubscribeEventReqBody():SubscribeEventReqBody
+	export function emptyRefSubscribeEventReqBody():Ref<SubscribeEventReqBody>
+	export function refOfSubscribeEventReqBody(x:SubscribeEventReqBody,v:Ref<SubscribeEventReqBody>)
+	export function unRefSubscribeEventReqBody(v:Ref<SubscribeEventReqBody>):SubscribeEventReqBody
 	export function emptyNotification():Notification
 	export function emptyRefNotification():Ref<Notification>
 	export function refOfNotification(x:Notification,v:Ref<Notification>)
 	export function unRefNotification(v:Ref<Notification>):Notification
-	export function emptyP2TicketMessageCreatedV1Data():P2TicketMessageCreatedV1Data
-	export function emptyRefP2TicketMessageCreatedV1Data():Ref<P2TicketMessageCreatedV1Data>
-	export function refOfP2TicketMessageCreatedV1Data(x:P2TicketMessageCreatedV1Data,v:Ref<P2TicketMessageCreatedV1Data>)
-	export function unRefP2TicketMessageCreatedV1Data(v:Ref<P2TicketMessageCreatedV1Data>):P2TicketMessageCreatedV1Data
-	export function emptyUnsubscribeEventReq():UnsubscribeEventReq
-	export function emptyRefUnsubscribeEventReq():Ref<UnsubscribeEventReq>
-	export function refOfUnsubscribeEventReq(x:UnsubscribeEventReq,v:Ref<UnsubscribeEventReq>)
-	export function unRefUnsubscribeEventReq(v:Ref<UnsubscribeEventReq>):UnsubscribeEventReq
-	export function emptyCreateAgentSkillResp():CreateAgentSkillResp
-	export function emptyRefCreateAgentSkillResp():Ref<CreateAgentSkillResp>
-	export function refOfCreateAgentSkillResp(x:CreateAgentSkillResp,v:Ref<CreateAgentSkillResp>)
-	export function unRefCreateAgentSkillResp(v:Ref<CreateAgentSkillResp>):CreateAgentSkillResp
-	export function emptyGetFaqResp():GetFaqResp
-	export function emptyRefGetFaqResp():Ref<GetFaqResp>
-	export function refOfGetFaqResp(x:GetFaqResp,v:Ref<GetFaqResp>)
-	export function unRefGetFaqResp(v:Ref<GetFaqResp>):GetFaqResp
-	export function emptyPatchAgentSchedulesResp():PatchAgentSchedulesResp
-	export function emptyRefPatchAgentSchedulesResp():Ref<PatchAgentSchedulesResp>
-	export function refOfPatchAgentSchedulesResp(x:PatchAgentSchedulesResp,v:Ref<PatchAgentSchedulesResp>)
-	export function unRefPatchAgentSchedulesResp(v:Ref<PatchAgentSchedulesResp>):PatchAgentSchedulesResp
-	export function emptyDepartmentId():DepartmentId
-	export function emptyRefDepartmentId():Ref<DepartmentId>
-	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
-	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptyGetFaqReq():GetFaqReq
-	export function emptyRefGetFaqReq():Ref<GetFaqReq>
-	export function refOfGetFaqReq(x:GetFaqReq,v:Ref<GetFaqReq>)
-	export function unRefGetFaqReq(v:Ref<GetFaqReq>):GetFaqReq
-	export function emptyGetNotificationResp():GetNotificationResp
-	export function emptyRefGetNotificationResp():Ref<GetNotificationResp>
-	export function refOfGetNotificationResp(x:GetNotificationResp,v:Ref<GetNotificationResp>)
-	export function unRefGetNotificationResp(v:Ref<GetNotificationResp>):GetNotificationResp
-	export function emptyListAgentScheduleResp():ListAgentScheduleResp
-	export function emptyRefListAgentScheduleResp():Ref<ListAgentScheduleResp>
-	export function refOfListAgentScheduleResp(x:ListAgentScheduleResp,v:Ref<ListAgentScheduleResp>)
-	export function unRefListAgentScheduleResp(v:Ref<ListAgentScheduleResp>):ListAgentScheduleResp
-	export function emptyCreateAgentSkillRespData():CreateAgentSkillRespData
-	export function emptyRefCreateAgentSkillRespData():Ref<CreateAgentSkillRespData>
-	export function refOfCreateAgentSkillRespData(x:CreateAgentSkillRespData,v:Ref<CreateAgentSkillRespData>)
-	export function unRefCreateAgentSkillRespData(v:Ref<CreateAgentSkillRespData>):CreateAgentSkillRespData
-	export function emptyCreateTicketCustomizedFieldResp():CreateTicketCustomizedFieldResp
-	export function emptyRefCreateTicketCustomizedFieldResp():Ref<CreateTicketCustomizedFieldResp>
-	export function refOfCreateTicketCustomizedFieldResp(x:CreateTicketCustomizedFieldResp,v:Ref<CreateTicketCustomizedFieldResp>)
-	export function unRefCreateTicketCustomizedFieldResp(v:Ref<CreateTicketCustomizedFieldResp>):CreateTicketCustomizedFieldResp
-	export function emptyAgentSkillRule():AgentSkillRule
-	export function emptyRefAgentSkillRule():Ref<AgentSkillRule>
-	export function refOfAgentSkillRule(x:AgentSkillRule,v:Ref<AgentSkillRule>)
-	export function unRefAgentSkillRule(v:Ref<AgentSkillRule>):AgentSkillRule
+	export function emptyCreateNotificationReq():CreateNotificationReq
+	export function emptyRefCreateNotificationReq():Ref<CreateNotificationReq>
+	export function refOfCreateNotificationReq(x:CreateNotificationReq,v:Ref<CreateNotificationReq>)
+	export function unRefCreateNotificationReq(v:Ref<CreateNotificationReq>):CreateNotificationReq
+	export function emptyI18n():I18n
+	export function emptyRefI18n():Ref<I18n>
+	export function refOfI18n(x:I18n,v:Ref<I18n>)
+	export function unRefI18n(v:Ref<I18n>):I18n
+	export function emptyP2NotificationApproveV1():P2NotificationApproveV1
+	export function emptyRefP2NotificationApproveV1():Ref<P2NotificationApproveV1>
+	export function refOfP2NotificationApproveV1(x:P2NotificationApproveV1,v:Ref<P2NotificationApproveV1>)
+	export function unRefP2NotificationApproveV1(v:Ref<P2NotificationApproveV1>):P2NotificationApproveV1
+	export function emptyCancelSendNotificationReqBody():CancelSendNotificationReqBody
+	export function emptyRefCancelSendNotificationReqBody():Ref<CancelSendNotificationReqBody>
+	export function refOfCancelSendNotificationReqBody(x:CancelSendNotificationReqBody,v:Ref<CancelSendNotificationReqBody>)
+	export function unRefCancelSendNotificationReqBody(v:Ref<CancelSendNotificationReqBody>):CancelSendNotificationReqBody
+	export function emptyDeleteAgentSkillReq():DeleteAgentSkillReq
+	export function emptyRefDeleteAgentSkillReq():Ref<DeleteAgentSkillReq>
+	export function refOfDeleteAgentSkillReq(x:DeleteAgentSkillReq,v:Ref<DeleteAgentSkillReq>)
+	export function unRefDeleteAgentSkillReq(v:Ref<DeleteAgentSkillReq>):DeleteAgentSkillReq
 	export function emptyAnswerUserQueryTicketReqBody():AnswerUserQueryTicketReqBody
 	export function emptyRefAnswerUserQueryTicketReqBody():Ref<AnswerUserQueryTicketReqBody>
 	export function refOfAnswerUserQueryTicketReqBody(x:AnswerUserQueryTicketReqBody,v:Ref<AnswerUserQueryTicketReqBody>)
 	export function unRefAnswerUserQueryTicketReqBody(v:Ref<AnswerUserQueryTicketReqBody>):AnswerUserQueryTicketReqBody
+	export function emptyListFaqReq():ListFaqReq
+	export function emptyRefListFaqReq():Ref<ListFaqReq>
+	export function refOfListFaqReq(x:ListFaqReq,v:Ref<ListFaqReq>)
+	export function unRefListFaqReq(v:Ref<ListFaqReq>):ListFaqReq
+	export function emptyUnsubscribeEventReqBody():UnsubscribeEventReqBody
+	export function emptyRefUnsubscribeEventReqBody():Ref<UnsubscribeEventReqBody>
+	export function refOfUnsubscribeEventReqBody(x:UnsubscribeEventReqBody,v:Ref<UnsubscribeEventReqBody>)
+	export function unRefUnsubscribeEventReqBody(v:Ref<UnsubscribeEventReqBody>):UnsubscribeEventReqBody
+	export function emptyNotificationUser():NotificationUser
+	export function emptyRefNotificationUser():Ref<NotificationUser>
+	export function refOfNotificationUser(x:NotificationUser,v:Ref<NotificationUser>)
+	export function unRefNotificationUser(v:Ref<NotificationUser>):NotificationUser
+	export function emptyDeleteAgentSchedulesResp():DeleteAgentSchedulesResp
+	export function emptyRefDeleteAgentSchedulesResp():Ref<DeleteAgentSchedulesResp>
+	export function refOfDeleteAgentSchedulesResp(x:DeleteAgentSchedulesResp,v:Ref<DeleteAgentSchedulesResp>)
+	export function unRefDeleteAgentSchedulesResp(v:Ref<DeleteAgentSchedulesResp>):DeleteAgentSchedulesResp
+	export function emptyUnsubscribeEventReq():UnsubscribeEventReq
+	export function emptyRefUnsubscribeEventReq():Ref<UnsubscribeEventReq>
+	export function refOfUnsubscribeEventReq(x:UnsubscribeEventReq,v:Ref<UnsubscribeEventReq>)
+	export function unRefUnsubscribeEventReq(v:Ref<UnsubscribeEventReq>):UnsubscribeEventReq
+	export function emptyAgentSkillLessInfo():AgentSkillLessInfo
+	export function emptyRefAgentSkillLessInfo():Ref<AgentSkillLessInfo>
+	export function refOfAgentSkillLessInfo(x:AgentSkillLessInfo,v:Ref<AgentSkillLessInfo>)
+	export function unRefAgentSkillLessInfo(v:Ref<AgentSkillLessInfo>):AgentSkillLessInfo
 	export function emptyEvent():Event
 	export function emptyRefEvent():Ref<Event>
 	export function refOfEvent(x:Event,v:Ref<Event>)
 	export function unRefEvent(v:Ref<Event>):Event
+	export function emptyCreateAgentScheduleResp():CreateAgentScheduleResp
+	export function emptyRefCreateAgentScheduleResp():Ref<CreateAgentScheduleResp>
+	export function refOfCreateAgentScheduleResp(x:CreateAgentScheduleResp,v:Ref<CreateAgentScheduleResp>)
+	export function unRefCreateAgentScheduleResp(v:Ref<CreateAgentScheduleResp>):CreateAgentScheduleResp
+	export function emptyGetTicketReq():GetTicketReq
+	export function emptyRefGetTicketReq():Ref<GetTicketReq>
+	export function refOfGetTicketReq(x:GetTicketReq,v:Ref<GetTicketReq>)
+	export function unRefGetTicketReq(v:Ref<GetTicketReq>):GetTicketReq
+	export function emptyPatchAgentReqBody():PatchAgentReqBody
+	export function emptyRefPatchAgentReqBody():Ref<PatchAgentReqBody>
+	export function refOfPatchAgentReqBody(x:PatchAgentReqBody,v:Ref<PatchAgentReqBody>)
+	export function unRefPatchAgentReqBody(v:Ref<PatchAgentReqBody>):PatchAgentReqBody
+	export function emptyDeleteFaqReq():DeleteFaqReq
+	export function emptyRefDeleteFaqReq():Ref<DeleteFaqReq>
+	export function refOfDeleteFaqReq(x:DeleteFaqReq,v:Ref<DeleteFaqReq>)
+	export function unRefDeleteFaqReq(v:Ref<DeleteFaqReq>):DeleteFaqReq
+	export function emptyExecuteSendNotificationReqBody():ExecuteSendNotificationReqBody
+	export function emptyRefExecuteSendNotificationReqBody():Ref<ExecuteSendNotificationReqBody>
+	export function refOfExecuteSendNotificationReqBody(x:ExecuteSendNotificationReqBody,v:Ref<ExecuteSendNotificationReqBody>)
+	export function unRefExecuteSendNotificationReqBody(v:Ref<ExecuteSendNotificationReqBody>):ExecuteSendNotificationReqBody
+	export function emptyExecuteSendNotificationResp():ExecuteSendNotificationResp
+	export function emptyRefExecuteSendNotificationResp():Ref<ExecuteSendNotificationResp>
+	export function refOfExecuteSendNotificationResp(x:ExecuteSendNotificationResp,v:Ref<ExecuteSendNotificationResp>)
+	export function unRefExecuteSendNotificationResp(v:Ref<ExecuteSendNotificationResp>):ExecuteSendNotificationResp
+	export function emptyPatchAgentSkillReq():PatchAgentSkillReq
+	export function emptyRefPatchAgentSkillReq():Ref<PatchAgentSkillReq>
+	export function refOfPatchAgentSkillReq(x:PatchAgentSkillReq,v:Ref<PatchAgentSkillReq>)
+	export function unRefPatchAgentSkillReq(v:Ref<PatchAgentSkillReq>):PatchAgentSkillReq
+	export function emptyGetFaqRespData():GetFaqRespData
+	export function emptyRefGetFaqRespData():Ref<GetFaqRespData>
+	export function refOfGetFaqRespData(x:GetFaqRespData,v:Ref<GetFaqRespData>)
+	export function unRefGetFaqRespData(v:Ref<GetFaqRespData>):GetFaqRespData
+	export function emptyTicketMessage():TicketMessage
+	export function emptyRefTicketMessage():Ref<TicketMessage>
+	export function refOfTicketMessage(x:TicketMessage,v:Ref<TicketMessage>)
+	export function unRefTicketMessage(v:Ref<TicketMessage>):TicketMessage
+	export function emptyCreateAgentScheduleReq():CreateAgentScheduleReq
+	export function emptyRefCreateAgentScheduleReq():Ref<CreateAgentScheduleReq>
+	export function refOfCreateAgentScheduleReq(x:CreateAgentScheduleReq,v:Ref<CreateAgentScheduleReq>)
+	export function unRefCreateAgentScheduleReq(v:Ref<CreateAgentScheduleReq>):CreateAgentScheduleReq
+	export function emptyNotificationChat():NotificationChat
+	export function emptyRefNotificationChat():Ref<NotificationChat>
+	export function refOfNotificationChat(x:NotificationChat,v:Ref<NotificationChat>)
+	export function unRefNotificationChat(v:Ref<NotificationChat>):NotificationChat
+	export function emptyCreateBotMessageRespData():CreateBotMessageRespData
+	export function emptyRefCreateBotMessageRespData():Ref<CreateBotMessageRespData>
+	export function refOfCreateBotMessageRespData(x:CreateBotMessageRespData,v:Ref<CreateBotMessageRespData>)
+	export function unRefCreateBotMessageRespData(v:Ref<CreateBotMessageRespData>):CreateBotMessageRespData
+	export function emptyListTicketCustomizedFieldReqBody():ListTicketCustomizedFieldReqBody
+	export function emptyRefListTicketCustomizedFieldReqBody():Ref<ListTicketCustomizedFieldReqBody>
+	export function refOfListTicketCustomizedFieldReqBody(x:ListTicketCustomizedFieldReqBody,v:Ref<ListTicketCustomizedFieldReqBody>)
+	export function unRefListTicketCustomizedFieldReqBody(v:Ref<ListTicketCustomizedFieldReqBody>):ListTicketCustomizedFieldReqBody
+	export function emptyCustomizedFieldsTicketResp():CustomizedFieldsTicketResp
+	export function emptyRefCustomizedFieldsTicketResp():Ref<CustomizedFieldsTicketResp>
+	export function refOfCustomizedFieldsTicketResp(x:CustomizedFieldsTicketResp,v:Ref<CustomizedFieldsTicketResp>)
+	export function unRefCustomizedFieldsTicketResp(v:Ref<CustomizedFieldsTicketResp>):CustomizedFieldsTicketResp
+	export function emptyListTicketCustomizedFieldResp():ListTicketCustomizedFieldResp
+	export function emptyRefListTicketCustomizedFieldResp():Ref<ListTicketCustomizedFieldResp>
+	export function refOfListTicketCustomizedFieldResp(x:ListTicketCustomizedFieldResp,v:Ref<ListTicketCustomizedFieldResp>)
+	export function unRefListTicketCustomizedFieldResp(v:Ref<ListTicketCustomizedFieldResp>):ListTicketCustomizedFieldResp
+	export function emptyP2TicketCreatedV1():P2TicketCreatedV1
+	export function emptyRefP2TicketCreatedV1():Ref<P2TicketCreatedV1>
+	export function refOfP2TicketCreatedV1(x:P2TicketCreatedV1,v:Ref<P2TicketCreatedV1>)
+	export function unRefP2TicketCreatedV1(v:Ref<P2TicketCreatedV1>):P2TicketCreatedV1
+	export function emptyAgentScheduleUpdateInfo():AgentScheduleUpdateInfo
+	export function emptyRefAgentScheduleUpdateInfo():Ref<AgentScheduleUpdateInfo>
+	export function refOfAgentScheduleUpdateInfo(x:AgentScheduleUpdateInfo,v:Ref<AgentScheduleUpdateInfo>)
+	export function unRefAgentScheduleUpdateInfo(v:Ref<AgentScheduleUpdateInfo>):AgentScheduleUpdateInfo
+	export function emptyWeekdaySchedule():WeekdaySchedule
+	export function emptyRefWeekdaySchedule():Ref<WeekdaySchedule>
+	export function refOfWeekdaySchedule(x:WeekdaySchedule,v:Ref<WeekdaySchedule>)
+	export function unRefWeekdaySchedule(v:Ref<WeekdaySchedule>):WeekdaySchedule
+	export function emptySubscribeEventReq():SubscribeEventReq
+	export function emptyRefSubscribeEventReq():Ref<SubscribeEventReq>
+	export function refOfSubscribeEventReq(x:SubscribeEventReq,v:Ref<SubscribeEventReq>)
+	export function unRefSubscribeEventReq(v:Ref<SubscribeEventReq>):SubscribeEventReq
+	export function emptyCreateAgentScheduleReqBody():CreateAgentScheduleReqBody
+	export function emptyRefCreateAgentScheduleReqBody():Ref<CreateAgentScheduleReqBody>
+	export function refOfCreateAgentScheduleReqBody(x:CreateAgentScheduleReqBody,v:Ref<CreateAgentScheduleReqBody>)
+	export function unRefCreateAgentScheduleReqBody(v:Ref<CreateAgentScheduleReqBody>):CreateAgentScheduleReqBody
+	export function emptyFaqImageFaqReq():FaqImageFaqReq
+	export function emptyRefFaqImageFaqReq():Ref<FaqImageFaqReq>
+	export function refOfFaqImageFaqReq(x:FaqImageFaqReq,v:Ref<FaqImageFaqReq>)
+	export function unRefFaqImageFaqReq(v:Ref<FaqImageFaqReq>):FaqImageFaqReq
+	export function emptyListTicketResp():ListTicketResp
+	export function emptyRefListTicketResp():Ref<ListTicketResp>
+	export function refOfListTicketResp(x:ListTicketResp,v:Ref<ListTicketResp>)
+	export function unRefListTicketResp(v:Ref<ListTicketResp>):ListTicketResp
+	export function emptyTicket():Ticket
+	export function emptyRefTicket():Ref<Ticket>
+	export function refOfTicket(x:Ticket,v:Ref<Ticket>)
+	export function unRefTicket(v:Ref<Ticket>):Ticket
+	export function emptyGetAgentSchedulesResp():GetAgentSchedulesResp
+	export function emptyRefGetAgentSchedulesResp():Ref<GetAgentSchedulesResp>
+	export function refOfGetAgentSchedulesResp(x:GetAgentSchedulesResp,v:Ref<GetAgentSchedulesResp>)
+	export function unRefGetAgentSchedulesResp(v:Ref<GetAgentSchedulesResp>):GetAgentSchedulesResp
+	export function emptyGetTicketResp():GetTicketResp
+	export function emptyRefGetTicketResp():Ref<GetTicketResp>
+	export function refOfGetTicketResp(x:GetTicketResp,v:Ref<GetTicketResp>)
+	export function unRefGetTicketResp(v:Ref<GetTicketResp>):GetTicketResp
+	export function emptyPatchNotificationReq():PatchNotificationReq
+	export function emptyRefPatchNotificationReq():Ref<PatchNotificationReq>
+	export function refOfPatchNotificationReq(x:PatchNotificationReq,v:Ref<PatchNotificationReq>)
+	export function unRefPatchNotificationReq(v:Ref<PatchNotificationReq>):PatchNotificationReq
+	export function emptySubscribeEventResp():SubscribeEventResp
+	export function emptyRefSubscribeEventResp():Ref<SubscribeEventResp>
+	export function refOfSubscribeEventResp(x:SubscribeEventResp,v:Ref<SubscribeEventResp>)
+	export function unRefSubscribeEventResp(v:Ref<SubscribeEventResp>):SubscribeEventResp
+	export function emptyCreateNotificationRespData():CreateNotificationRespData
+	export function emptyRefCreateNotificationRespData():Ref<CreateNotificationRespData>
+	export function refOfCreateNotificationRespData(x:CreateNotificationRespData,v:Ref<CreateNotificationRespData>)
+	export function unRefCreateNotificationRespData(v:Ref<CreateNotificationRespData>):CreateNotificationRespData
+	export function emptyCreateAgentSkillResp():CreateAgentSkillResp
+	export function emptyRefCreateAgentSkillResp():Ref<CreateAgentSkillResp>
+	export function refOfCreateAgentSkillResp(x:CreateAgentSkillResp,v:Ref<CreateAgentSkillResp>)
+	export function unRefCreateAgentSkillResp(v:Ref<CreateAgentSkillResp>):CreateAgentSkillResp
+	export function emptyListFaqResp():ListFaqResp
+	export function emptyRefListFaqResp():Ref<ListFaqResp>
+	export function refOfListFaqResp(x:ListFaqResp,v:Ref<ListFaqResp>)
+	export function unRefListFaqResp(v:Ref<ListFaqResp>):ListFaqResp
+	export function emptyGetTicketCustomizedFieldResp():GetTicketCustomizedFieldResp
+	export function emptyRefGetTicketCustomizedFieldResp():Ref<GetTicketCustomizedFieldResp>
+	export function refOfGetTicketCustomizedFieldResp(x:GetTicketCustomizedFieldResp,v:Ref<GetTicketCustomizedFieldResp>)
+	export function unRefGetTicketCustomizedFieldResp(v:Ref<GetTicketCustomizedFieldResp>):GetTicketCustomizedFieldResp
+	export function emptyUserQueryFaqInfo():UserQueryFaqInfo
+	export function emptyRefUserQueryFaqInfo():Ref<UserQueryFaqInfo>
+	export function refOfUserQueryFaqInfo(x:UserQueryFaqInfo,v:Ref<UserQueryFaqInfo>)
+	export function unRefUserQueryFaqInfo(v:Ref<UserQueryFaqInfo>):UserQueryFaqInfo
 	export function emptyP2NotificationApproveV1Data():P2NotificationApproveV1Data
 	export function emptyRefP2NotificationApproveV1Data():Ref<P2NotificationApproveV1Data>
 	export function refOfP2NotificationApproveV1Data(x:P2NotificationApproveV1Data,v:Ref<P2NotificationApproveV1Data>)
 	export function unRefP2NotificationApproveV1Data(v:Ref<P2NotificationApproveV1Data>):P2NotificationApproveV1Data
-	export function emptyPatchAgentReq():PatchAgentReq
-	export function emptyRefPatchAgentReq():Ref<PatchAgentReq>
-	export function refOfPatchAgentReq(x:PatchAgentReq,v:Ref<PatchAgentReq>)
-	export function unRefPatchAgentReq(v:Ref<PatchAgentReq>):PatchAgentReq
+	export function emptyPatchFaqReq():PatchFaqReq
+	export function emptyRefPatchFaqReq():Ref<PatchFaqReq>
+	export function refOfPatchFaqReq(x:PatchFaqReq,v:Ref<PatchFaqReq>)
+	export function unRefPatchFaqReq(v:Ref<PatchFaqReq>):PatchFaqReq
+	export function emptyTicketEvent():TicketEvent
+	export function emptyRefTicketEvent():Ref<TicketEvent>
+	export function refOfTicketEvent(x:TicketEvent,v:Ref<TicketEvent>)
+	export function unRefTicketEvent(v:Ref<TicketEvent>):TicketEvent
+	export function emptyTicketUserEvent():TicketUserEvent
+	export function emptyRefTicketUserEvent():Ref<TicketUserEvent>
+	export function refOfTicketUserEvent(x:TicketUserEvent,v:Ref<TicketUserEvent>)
+	export function unRefTicketUserEvent(v:Ref<TicketUserEvent>):TicketUserEvent
 	export function emptyUserId():UserId
 	export function emptyRefUserId():Ref<UserId>
 	export function refOfUserId(x:UserId,v:Ref<UserId>)
 	export function unRefUserId(v:Ref<UserId>):UserId
+	export function emptyGetAgentSkillRespData():GetAgentSkillRespData
+	export function emptyRefGetAgentSkillRespData():Ref<GetAgentSkillRespData>
+	export function refOfGetAgentSkillRespData(x:GetAgentSkillRespData,v:Ref<GetAgentSkillRespData>)
+	export function unRefGetAgentSkillRespData(v:Ref<GetAgentSkillRespData>):GetAgentSkillRespData
+	export function emptySearchFaqRespData():SearchFaqRespData
+	export function emptyRefSearchFaqRespData():Ref<SearchFaqRespData>
+	export function refOfSearchFaqRespData(x:SearchFaqRespData,v:Ref<SearchFaqRespData>)
+	export function unRefSearchFaqRespData(v:Ref<SearchFaqRespData>):SearchFaqRespData
 	export function emptyCreateFaqRespData():CreateFaqRespData
 	export function emptyRefCreateFaqRespData():Ref<CreateFaqRespData>
 	export function refOfCreateFaqRespData(x:CreateFaqRespData,v:Ref<CreateFaqRespData>)
 	export function unRefCreateFaqRespData(v:Ref<CreateFaqRespData>):CreateFaqRespData
+	export function emptyGetNotificationReq():GetNotificationReq
+	export function emptyRefGetNotificationReq():Ref<GetNotificationReq>
+	export function refOfGetNotificationReq(x:GetNotificationReq,v:Ref<GetNotificationReq>)
+	export function unRefGetNotificationReq(v:Ref<GetNotificationReq>):GetNotificationReq
+	export function emptyPatchAgentSchedulesReqBody():PatchAgentSchedulesReqBody
+	export function emptyRefPatchAgentSchedulesReqBody():Ref<PatchAgentSchedulesReqBody>
+	export function refOfPatchAgentSchedulesReqBody(x:PatchAgentSchedulesReqBody,v:Ref<PatchAgentSchedulesReqBody>)
+	export function unRefPatchAgentSchedulesReqBody(v:Ref<PatchAgentSchedulesReqBody>):PatchAgentSchedulesReqBody
+	export function emptySearchFaqIterator():SearchFaqIterator
+	export function emptyRefSearchFaqIterator():Ref<SearchFaqIterator>
+	export function refOfSearchFaqIterator(x:SearchFaqIterator,v:Ref<SearchFaqIterator>)
+	export function unRefSearchFaqIterator(v:Ref<SearchFaqIterator>):SearchFaqIterator
+	export function emptySearchFaqReq():SearchFaqReq
+	export function emptyRefSearchFaqReq():Ref<SearchFaqReq>
+	export function refOfSearchFaqReq(x:SearchFaqReq,v:Ref<SearchFaqReq>)
+	export function unRefSearchFaqReq(v:Ref<SearchFaqReq>):SearchFaqReq
+	export function emptyCreateFaqResp():CreateFaqResp
+	export function emptyRefCreateFaqResp():Ref<CreateFaqResp>
+	export function refOfCreateFaqResp(x:CreateFaqResp,v:Ref<CreateFaqResp>)
+	export function unRefCreateFaqResp(v:Ref<CreateFaqResp>):CreateFaqResp
+	export function emptyPatchAgentResp():PatchAgentResp
+	export function emptyRefPatchAgentResp():Ref<PatchAgentResp>
+	export function refOfPatchAgentResp(x:PatchAgentResp,v:Ref<PatchAgentResp>)
+	export function unRefPatchAgentResp(v:Ref<PatchAgentResp>):PatchAgentResp
+	export function emptySubmitApproveNotificationResp():SubmitApproveNotificationResp
+	export function emptyRefSubmitApproveNotificationResp():Ref<SubmitApproveNotificationResp>
+	export function refOfSubmitApproveNotificationResp(x:SubmitApproveNotificationResp,v:Ref<SubmitApproveNotificationResp>)
+	export function unRefSubmitApproveNotificationResp(v:Ref<SubmitApproveNotificationResp>):SubmitApproveNotificationResp
+	export function emptyTicketImageTicketResp():TicketImageTicketResp
+	export function emptyRefTicketImageTicketResp():Ref<TicketImageTicketResp>
+	export function refOfTicketImageTicketResp(x:TicketImageTicketResp,v:Ref<TicketImageTicketResp>)
+	export function unRefTicketImageTicketResp(v:Ref<TicketImageTicketResp>):TicketImageTicketResp
+	export function emptyCustomizedFieldsTicketReq():CustomizedFieldsTicketReq
+	export function emptyRefCustomizedFieldsTicketReq():Ref<CustomizedFieldsTicketReq>
+	export function refOfCustomizedFieldsTicketReq(x:CustomizedFieldsTicketReq,v:Ref<CustomizedFieldsTicketReq>)
+	export function unRefCustomizedFieldsTicketReq(v:Ref<CustomizedFieldsTicketReq>):CustomizedFieldsTicketReq
+	export function emptyGetFaqResp():GetFaqResp
+	export function emptyRefGetFaqResp():Ref<GetFaqResp>
+	export function refOfGetFaqResp(x:GetFaqResp,v:Ref<GetFaqResp>)
+	export function unRefGetFaqResp(v:Ref<GetFaqResp>):GetFaqResp
+	export function emptyListFaqRespData():ListFaqRespData
+	export function emptyRefListFaqRespData():Ref<ListFaqRespData>
+	export function refOfListFaqRespData(x:ListFaqRespData,v:Ref<ListFaqRespData>)
+	export function unRefListFaqRespData(v:Ref<ListFaqRespData>):ListFaqRespData
+	export function emptyListTicketCustomizedFieldRespData():ListTicketCustomizedFieldRespData
+	export function emptyRefListTicketCustomizedFieldRespData():Ref<ListTicketCustomizedFieldRespData>
+	export function refOfListTicketCustomizedFieldRespData(x:ListTicketCustomizedFieldRespData,v:Ref<ListTicketCustomizedFieldRespData>)
+	export function unRefListTicketCustomizedFieldRespData(v:Ref<ListTicketCustomizedFieldRespData>):ListTicketCustomizedFieldRespData
+	export function emptyNotificationDepartment():NotificationDepartment
+	export function emptyRefNotificationDepartment():Ref<NotificationDepartment>
+	export function refOfNotificationDepartment(x:NotificationDepartment,v:Ref<NotificationDepartment>)
+	export function unRefNotificationDepartment(v:Ref<NotificationDepartment>):NotificationDepartment
+	export function emptyPatchAgentSkillResp():PatchAgentSkillResp
+	export function emptyRefPatchAgentSkillResp():Ref<PatchAgentSkillResp>
+	export function refOfPatchAgentSkillResp(x:PatchAgentSkillResp,v:Ref<PatchAgentSkillResp>)
+	export function unRefPatchAgentSkillResp(v:Ref<PatchAgentSkillResp>):PatchAgentSkillResp
+	export function emptyRichtext():Richtext
+	export function emptyRefRichtext():Ref<Richtext>
+	export function refOfRichtext(x:Richtext,v:Ref<Richtext>)
+	export function unRefRichtext(v:Ref<Richtext>):Richtext
+	export function emptyStartServiceTicketResp():StartServiceTicketResp
+	export function emptyRefStartServiceTicketResp():Ref<StartServiceTicketResp>
+	export function refOfStartServiceTicketResp(x:StartServiceTicketResp,v:Ref<StartServiceTicketResp>)
+	export function unRefStartServiceTicketResp(v:Ref<StartServiceTicketResp>):StartServiceTicketResp
+	export function emptyUserCustomizedField():UserCustomizedField
+	export function emptyRefUserCustomizedField():Ref<UserCustomizedField>
+	export function refOfUserCustomizedField(x:UserCustomizedField,v:Ref<UserCustomizedField>)
+	export function unRefUserCustomizedField(v:Ref<UserCustomizedField>):UserCustomizedField
+	export function emptyCreateTicketMessageRespData():CreateTicketMessageRespData
+	export function emptyRefCreateTicketMessageRespData():Ref<CreateTicketMessageRespData>
+	export function refOfCreateTicketMessageRespData(x:CreateTicketMessageRespData,v:Ref<CreateTicketMessageRespData>)
+	export function unRefCreateTicketMessageRespData(v:Ref<CreateTicketMessageRespData>):CreateTicketMessageRespData
+	export function emptyFaqImageFaqResp():FaqImageFaqResp
+	export function emptyRefFaqImageFaqResp():Ref<FaqImageFaqResp>
+	export function refOfFaqImageFaqResp(x:FaqImageFaqResp,v:Ref<FaqImageFaqResp>)
+	export function unRefFaqImageFaqResp(v:Ref<FaqImageFaqResp>):FaqImageFaqResp
+	export function emptyGetAgentSkillReq():GetAgentSkillReq
+	export function emptyRefGetAgentSkillReq():Ref<GetAgentSkillReq>
+	export function refOfGetAgentSkillReq(x:GetAgentSkillReq,v:Ref<GetAgentSkillReq>)
+	export function unRefGetAgentSkillReq(v:Ref<GetAgentSkillReq>):GetAgentSkillReq
+	export function emptyCreateCategoryResp():CreateCategoryResp
+	export function emptyRefCreateCategoryResp():Ref<CreateCategoryResp>
+	export function refOfCreateCategoryResp(x:CreateCategoryResp,v:Ref<CreateCategoryResp>)
+	export function unRefCreateCategoryResp(v:Ref<CreateCategoryResp>):CreateCategoryResp
+	export function emptyCancelApproveNotificationResp():CancelApproveNotificationResp
+	export function emptyRefCancelApproveNotificationResp():Ref<CancelApproveNotificationResp>
+	export function refOfCancelApproveNotificationResp(x:CancelApproveNotificationResp,v:Ref<CancelApproveNotificationResp>)
+	export function unRefCancelApproveNotificationResp(v:Ref<CancelApproveNotificationResp>):CancelApproveNotificationResp
+	export function emptyDeleteAgentSchedulesReq():DeleteAgentSchedulesReq
+	export function emptyRefDeleteAgentSchedulesReq():Ref<DeleteAgentSchedulesReq>
+	export function refOfDeleteAgentSchedulesReq(x:DeleteAgentSchedulesReq,v:Ref<DeleteAgentSchedulesReq>)
+	export function unRefDeleteAgentSchedulesReq(v:Ref<DeleteAgentSchedulesReq>):DeleteAgentSchedulesReq
+	export function emptyListTicketMessageRespData():ListTicketMessageRespData
+	export function emptyRefListTicketMessageRespData():Ref<ListTicketMessageRespData>
+	export function refOfListTicketMessageRespData(x:ListTicketMessageRespData,v:Ref<ListTicketMessageRespData>)
+	export function unRefListTicketMessageRespData(v:Ref<ListTicketMessageRespData>):ListTicketMessageRespData
+	export function emptyPatchAgentSchedulesResp():PatchAgentSchedulesResp
+	export function emptyRefPatchAgentSchedulesResp():Ref<PatchAgentSchedulesResp>
+	export function refOfPatchAgentSchedulesResp(x:PatchAgentSchedulesResp,v:Ref<PatchAgentSchedulesResp>)
+	export function unRefPatchAgentSchedulesResp(v:Ref<PatchAgentSchedulesResp>):PatchAgentSchedulesResp
+	export function emptyPatchFaqResp():PatchFaqResp
+	export function emptyRefPatchFaqResp():Ref<PatchFaqResp>
+	export function refOfPatchFaqResp(x:PatchFaqResp,v:Ref<PatchFaqResp>)
+	export function unRefPatchFaqResp(v:Ref<PatchFaqResp>):PatchFaqResp
+	export function emptyPreviewNotificationReq():PreviewNotificationReq
+	export function emptyRefPreviewNotificationReq():Ref<PreviewNotificationReq>
+	export function refOfPreviewNotificationReq(x:PreviewNotificationReq,v:Ref<PreviewNotificationReq>)
+	export function unRefPreviewNotificationReq(v:Ref<PreviewNotificationReq>):PreviewNotificationReq
+	export function emptyAgentSkillRule():AgentSkillRule
+	export function emptyRefAgentSkillRule():Ref<AgentSkillRule>
+	export function refOfAgentSkillRule(x:AgentSkillRule,v:Ref<AgentSkillRule>)
+	export function unRefAgentSkillRule(v:Ref<AgentSkillRule>):AgentSkillRule
+	export function emptyDeleteAgentSkillResp():DeleteAgentSkillResp
+	export function emptyRefDeleteAgentSkillResp():Ref<DeleteAgentSkillResp>
+	export function refOfDeleteAgentSkillResp(x:DeleteAgentSkillResp,v:Ref<DeleteAgentSkillResp>)
+	export function unRefDeleteAgentSkillResp(v:Ref<DeleteAgentSkillResp>):DeleteAgentSkillResp
+	export function emptyFaqCreateInfo():FaqCreateInfo
+	export function emptyRefFaqCreateInfo():Ref<FaqCreateInfo>
+	export function refOfFaqCreateInfo(x:FaqCreateInfo,v:Ref<FaqCreateInfo>)
+	export function unRefFaqCreateInfo(v:Ref<FaqCreateInfo>):FaqCreateInfo
+	export function emptyPatchAgentSkillReqBody():PatchAgentSkillReqBody
+	export function emptyRefPatchAgentSkillReqBody():Ref<PatchAgentSkillReqBody>
+	export function refOfPatchAgentSkillReqBody(x:PatchAgentSkillReqBody,v:Ref<PatchAgentSkillReqBody>)
+	export function unRefPatchAgentSkillReqBody(v:Ref<PatchAgentSkillReqBody>):PatchAgentSkillReqBody
+	export function emptyCreateTicketCustomizedFieldResp():CreateTicketCustomizedFieldResp
+	export function emptyRefCreateTicketCustomizedFieldResp():Ref<CreateTicketCustomizedFieldResp>
+	export function refOfCreateTicketCustomizedFieldResp(x:CreateTicketCustomizedFieldResp,v:Ref<CreateTicketCustomizedFieldResp>)
+	export function unRefCreateTicketCustomizedFieldResp(v:Ref<CreateTicketCustomizedFieldResp>):CreateTicketCustomizedFieldResp
+	export function emptyUnsubscribeEventResp():UnsubscribeEventResp
+	export function emptyRefUnsubscribeEventResp():Ref<UnsubscribeEventResp>
+	export function refOfUnsubscribeEventResp(x:UnsubscribeEventResp,v:Ref<UnsubscribeEventResp>)
+	export function unRefUnsubscribeEventResp(v:Ref<UnsubscribeEventResp>):UnsubscribeEventResp
+	export function emptyListAgentScheduleResp():ListAgentScheduleResp
+	export function emptyRefListAgentScheduleResp():Ref<ListAgentScheduleResp>
+	export function refOfListAgentScheduleResp(x:ListAgentScheduleResp,v:Ref<ListAgentScheduleResp>)
+	export function unRefListAgentScheduleResp(v:Ref<ListAgentScheduleResp>):ListAgentScheduleResp
+	export function emptyFaq():Faq
+	export function emptyRefFaq():Ref<Faq>
+	export function refOfFaq(x:Faq,v:Ref<Faq>)
+	export function unRefFaq(v:Ref<Faq>):Faq
+	export function emptyGetAgentSchedulesRespData():GetAgentSchedulesRespData
+	export function emptyRefGetAgentSchedulesRespData():Ref<GetAgentSchedulesRespData>
+	export function refOfGetAgentSchedulesRespData(x:GetAgentSchedulesRespData,v:Ref<GetAgentSchedulesRespData>)
+	export function unRefGetAgentSchedulesRespData(v:Ref<GetAgentSchedulesRespData>):GetAgentSchedulesRespData
+	export function emptyCancelApproveNotificationReq():CancelApproveNotificationReq
+	export function emptyRefCancelApproveNotificationReq():Ref<CancelApproveNotificationReq>
+	export function refOfCancelApproveNotificationReq(x:CancelApproveNotificationReq,v:Ref<CancelApproveNotificationReq>)
+	export function unRefCancelApproveNotificationReq(v:Ref<CancelApproveNotificationReq>):CancelApproveNotificationReq
+	export function emptyCreateNotificationResp():CreateNotificationResp
+	export function emptyRefCreateNotificationResp():Ref<CreateNotificationResp>
+	export function refOfCreateNotificationResp(x:CreateNotificationResp,v:Ref<CreateNotificationResp>)
+	export function unRefCreateNotificationResp(v:Ref<CreateNotificationResp>):CreateNotificationResp
 	export function emptyGetCategoryResp():GetCategoryResp
 	export function emptyRefGetCategoryResp():Ref<GetCategoryResp>
 	export function refOfGetCategoryResp(x:GetCategoryResp,v:Ref<GetCategoryResp>)
@@ -2621,262 +2816,330 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/helpdesk/v1'{
 	export function emptyRefGetTicketCustomizedFieldReq():Ref<GetTicketCustomizedFieldReq>
 	export function refOfGetTicketCustomizedFieldReq(x:GetTicketCustomizedFieldReq,v:Ref<GetTicketCustomizedFieldReq>)
 	export function unRefGetTicketCustomizedFieldReq(v:Ref<GetTicketCustomizedFieldReq>):GetTicketCustomizedFieldReq
-	export function emptyListTicketCustomizedFieldRespData():ListTicketCustomizedFieldRespData
-	export function emptyRefListTicketCustomizedFieldRespData():Ref<ListTicketCustomizedFieldRespData>
-	export function refOfListTicketCustomizedFieldRespData(x:ListTicketCustomizedFieldRespData,v:Ref<ListTicketCustomizedFieldRespData>)
-	export function unRefListTicketCustomizedFieldRespData(v:Ref<ListTicketCustomizedFieldRespData>):ListTicketCustomizedFieldRespData
-	export function emptyDeleteAgentSchedulesResp():DeleteAgentSchedulesResp
-	export function emptyRefDeleteAgentSchedulesResp():Ref<DeleteAgentSchedulesResp>
-	export function refOfDeleteAgentSchedulesResp(x:DeleteAgentSchedulesResp,v:Ref<DeleteAgentSchedulesResp>)
-	export function unRefDeleteAgentSchedulesResp(v:Ref<DeleteAgentSchedulesResp>):DeleteAgentSchedulesResp
-	export function emptySubmitApproveNotificationRespData():SubmitApproveNotificationRespData
-	export function emptyRefSubmitApproveNotificationRespData():Ref<SubmitApproveNotificationRespData>
-	export function refOfSubmitApproveNotificationRespData(x:SubmitApproveNotificationRespData,v:Ref<SubmitApproveNotificationRespData>)
-	export function unRefSubmitApproveNotificationRespData(v:Ref<SubmitApproveNotificationRespData>):SubmitApproveNotificationRespData
-	export function emptyP2TicketCreatedV1():P2TicketCreatedV1
-	export function emptyRefP2TicketCreatedV1():Ref<P2TicketCreatedV1>
-	export function refOfP2TicketCreatedV1(x:P2TicketCreatedV1,v:Ref<P2TicketCreatedV1>)
-	export function unRefP2TicketCreatedV1(v:Ref<P2TicketCreatedV1>):P2TicketCreatedV1
-	export function emptyPreviewNotificationReq():PreviewNotificationReq
-	export function emptyRefPreviewNotificationReq():Ref<PreviewNotificationReq>
-	export function refOfPreviewNotificationReq(x:PreviewNotificationReq,v:Ref<PreviewNotificationReq>)
-	export function unRefPreviewNotificationReq(v:Ref<PreviewNotificationReq>):PreviewNotificationReq
-	export function emptyAgentSkill():AgentSkill
-	export function emptyRefAgentSkill():Ref<AgentSkill>
-	export function refOfAgentSkill(x:AgentSkill,v:Ref<AgentSkill>)
-	export function unRefAgentSkill(v:Ref<AgentSkill>):AgentSkill
-	export function emptyCreateTicketMessageReq():CreateTicketMessageReq
-	export function emptyRefCreateTicketMessageReq():Ref<CreateTicketMessageReq>
-	export function refOfCreateTicketMessageReq(x:CreateTicketMessageReq,v:Ref<CreateTicketMessageReq>)
-	export function unRefCreateTicketMessageReq(v:Ref<CreateTicketMessageReq>):CreateTicketMessageReq
-	export function emptyListTicketReq():ListTicketReq
-	export function emptyRefListTicketReq():Ref<ListTicketReq>
-	export function refOfListTicketReq(x:ListTicketReq,v:Ref<ListTicketReq>)
-	export function unRefListTicketReq(v:Ref<ListTicketReq>):ListTicketReq
-	export function emptyNotificationChat():NotificationChat
-	export function emptyRefNotificationChat():Ref<NotificationChat>
-	export function refOfNotificationChat(x:NotificationChat,v:Ref<NotificationChat>)
-	export function unRefNotificationChat(v:Ref<NotificationChat>):NotificationChat
-	export function emptyTicketImageTicketResp():TicketImageTicketResp
-	export function emptyRefTicketImageTicketResp():Ref<TicketImageTicketResp>
-	export function refOfTicketImageTicketResp(x:TicketImageTicketResp,v:Ref<TicketImageTicketResp>)
-	export function unRefTicketImageTicketResp(v:Ref<TicketImageTicketResp>):TicketImageTicketResp
-	export function emptyGetFaqRespData():GetFaqRespData
-	export function emptyRefGetFaqRespData():Ref<GetFaqRespData>
-	export function refOfGetFaqRespData(x:GetFaqRespData,v:Ref<GetFaqRespData>)
-	export function unRefGetFaqRespData(v:Ref<GetFaqRespData>):GetFaqRespData
-	export function emptyDeleteFaqReq():DeleteFaqReq
-	export function emptyRefDeleteFaqReq():Ref<DeleteFaqReq>
-	export function refOfDeleteFaqReq(x:DeleteFaqReq,v:Ref<DeleteFaqReq>)
-	export function unRefDeleteFaqReq(v:Ref<DeleteFaqReq>):DeleteFaqReq
-	export function emptyPatchAgentSkillReq():PatchAgentSkillReq
-	export function emptyRefPatchAgentSkillReq():Ref<PatchAgentSkillReq>
-	export function refOfPatchAgentSkillReq(x:PatchAgentSkillReq,v:Ref<PatchAgentSkillReq>)
-	export function unRefPatchAgentSkillReq(v:Ref<PatchAgentSkillReq>):PatchAgentSkillReq
-	export function emptyCancelApproveNotificationReq():CancelApproveNotificationReq
-	export function emptyRefCancelApproveNotificationReq():Ref<CancelApproveNotificationReq>
-	export function refOfCancelApproveNotificationReq(x:CancelApproveNotificationReq,v:Ref<CancelApproveNotificationReq>)
-	export function unRefCancelApproveNotificationReq(v:Ref<CancelApproveNotificationReq>):CancelApproveNotificationReq
-	export function emptyCreateCategoryResp():CreateCategoryResp
-	export function emptyRefCreateCategoryResp():Ref<CreateCategoryResp>
-	export function refOfCreateCategoryResp(x:CreateCategoryResp,v:Ref<CreateCategoryResp>)
-	export function unRefCreateCategoryResp(v:Ref<CreateCategoryResp>):CreateCategoryResp
-	export function emptyCreateCategoryRespData():CreateCategoryRespData
-	export function emptyRefCreateCategoryRespData():Ref<CreateCategoryRespData>
-	export function refOfCreateCategoryRespData(x:CreateCategoryRespData,v:Ref<CreateCategoryRespData>)
-	export function unRefCreateCategoryRespData(v:Ref<CreateCategoryRespData>):CreateCategoryRespData
-	export function emptyGetAgentSkillResp():GetAgentSkillResp
-	export function emptyRefGetAgentSkillResp():Ref<GetAgentSkillResp>
-	export function refOfGetAgentSkillResp(x:GetAgentSkillResp,v:Ref<GetAgentSkillResp>)
-	export function unRefGetAgentSkillResp(v:Ref<GetAgentSkillResp>):GetAgentSkillResp
-	export function emptyListTicketMessageReq():ListTicketMessageReq
-	export function emptyRefListTicketMessageReq():Ref<ListTicketMessageReq>
-	export function refOfListTicketMessageReq(x:ListTicketMessageReq,v:Ref<ListTicketMessageReq>)
-	export function unRefListTicketMessageReq(v:Ref<ListTicketMessageReq>):ListTicketMessageReq
-	export function emptyPatchFaqReqBody():PatchFaqReqBody
-	export function emptyRefPatchFaqReqBody():Ref<PatchFaqReqBody>
-	export function refOfPatchFaqReqBody(x:PatchFaqReqBody,v:Ref<PatchFaqReqBody>)
-	export function unRefPatchFaqReqBody(v:Ref<PatchFaqReqBody>):PatchFaqReqBody
-	export function emptyAgentUser():AgentUser
-	export function emptyRefAgentUser():Ref<AgentUser>
-	export function refOfAgentUser(x:AgentUser,v:Ref<AgentUser>)
-	export function unRefAgentUser(v:Ref<AgentUser>):AgentUser
-	export function emptyExecuteSendNotificationReq():ExecuteSendNotificationReq
-	export function emptyRefExecuteSendNotificationReq():Ref<ExecuteSendNotificationReq>
-	export function refOfExecuteSendNotificationReq(x:ExecuteSendNotificationReq,v:Ref<ExecuteSendNotificationReq>)
-	export function unRefExecuteSendNotificationReq(v:Ref<ExecuteSendNotificationReq>):ExecuteSendNotificationReq
-	export function emptyListAgentSkillRespData():ListAgentSkillRespData
-	export function emptyRefListAgentSkillRespData():Ref<ListAgentSkillRespData>
-	export function refOfListAgentSkillRespData(x:ListAgentSkillRespData,v:Ref<ListAgentSkillRespData>)
-	export function unRefListAgentSkillRespData(v:Ref<ListAgentSkillRespData>):ListAgentSkillRespData
-	export function emptyPatchAgentSchedulesReq():PatchAgentSchedulesReq
-	export function emptyRefPatchAgentSchedulesReq():Ref<PatchAgentSchedulesReq>
-	export function refOfPatchAgentSchedulesReq(x:PatchAgentSchedulesReq,v:Ref<PatchAgentSchedulesReq>)
-	export function unRefPatchAgentSchedulesReq(v:Ref<PatchAgentSchedulesReq>):PatchAgentSchedulesReq
-	export function emptyCancelApproveNotificationResp():CancelApproveNotificationResp
-	export function emptyRefCancelApproveNotificationResp():Ref<CancelApproveNotificationResp>
-	export function refOfCancelApproveNotificationResp(x:CancelApproveNotificationResp,v:Ref<CancelApproveNotificationResp>)
-	export function unRefCancelApproveNotificationResp(v:Ref<CancelApproveNotificationResp>):CancelApproveNotificationResp
-	export function emptyFaq():Faq
-	export function emptyRefFaq():Ref<Faq>
-	export function refOfFaq(x:Faq,v:Ref<Faq>)
-	export function unRefFaq(v:Ref<Faq>):Faq
-	export function emptyGetAgentSchedulesReq():GetAgentSchedulesReq
-	export function emptyRefGetAgentSchedulesReq():Ref<GetAgentSchedulesReq>
-	export function refOfGetAgentSchedulesReq(x:GetAgentSchedulesReq,v:Ref<GetAgentSchedulesReq>)
-	export function unRefGetAgentSchedulesReq(v:Ref<GetAgentSchedulesReq>):GetAgentSchedulesReq
-	export function emptyExecuteSendNotificationReqBody():ExecuteSendNotificationReqBody
-	export function emptyRefExecuteSendNotificationReqBody():Ref<ExecuteSendNotificationReqBody>
-	export function refOfExecuteSendNotificationReqBody(x:ExecuteSendNotificationReqBody,v:Ref<ExecuteSendNotificationReqBody>)
-	export function unRefExecuteSendNotificationReqBody(v:Ref<ExecuteSendNotificationReqBody>):ExecuteSendNotificationReqBody
-	export function emptyListTicketCustomizedFieldReqBody():ListTicketCustomizedFieldReqBody
-	export function emptyRefListTicketCustomizedFieldReqBody():Ref<ListTicketCustomizedFieldReqBody>
-	export function refOfListTicketCustomizedFieldReqBody(x:ListTicketCustomizedFieldReqBody,v:Ref<ListTicketCustomizedFieldReqBody>)
-	export function unRefListTicketCustomizedFieldReqBody(v:Ref<ListTicketCustomizedFieldReqBody>):ListTicketCustomizedFieldReqBody
-	export function emptyCreateFaqResp():CreateFaqResp
-	export function emptyRefCreateFaqResp():Ref<CreateFaqResp>
-	export function refOfCreateFaqResp(x:CreateFaqResp,v:Ref<CreateFaqResp>)
-	export function unRefCreateFaqResp(v:Ref<CreateFaqResp>):CreateFaqResp
-	export function emptyGetAgentSkillRespData():GetAgentSkillRespData
-	export function emptyRefGetAgentSkillRespData():Ref<GetAgentSkillRespData>
-	export function refOfGetAgentSkillRespData(x:GetAgentSkillRespData,v:Ref<GetAgentSkillRespData>)
-	export function unRefGetAgentSkillRespData(v:Ref<GetAgentSkillRespData>):GetAgentSkillRespData
-	export function emptyCreateBotMessageResp():CreateBotMessageResp
-	export function emptyRefCreateBotMessageResp():Ref<CreateBotMessageResp>
-	export function refOfCreateBotMessageResp(x:CreateBotMessageResp,v:Ref<CreateBotMessageResp>)
-	export function unRefCreateBotMessageResp(v:Ref<CreateBotMessageResp>):CreateBotMessageResp
-	export function emptyGetTicketResp():GetTicketResp
-	export function emptyRefGetTicketResp():Ref<GetTicketResp>
-	export function refOfGetTicketResp(x:GetTicketResp,v:Ref<GetTicketResp>)
-	export function unRefGetTicketResp(v:Ref<GetTicketResp>):GetTicketResp
-	export function emptySubscribeEventResp():SubscribeEventResp
-	export function emptyRefSubscribeEventResp():Ref<SubscribeEventResp>
-	export function refOfSubscribeEventResp(x:SubscribeEventResp,v:Ref<SubscribeEventResp>)
-	export function unRefSubscribeEventResp(v:Ref<SubscribeEventResp>):SubscribeEventResp
-	export function emptyCreateTicketMessageResp():CreateTicketMessageResp
-	export function emptyRefCreateTicketMessageResp():Ref<CreateTicketMessageResp>
-	export function refOfCreateTicketMessageResp(x:CreateTicketMessageResp,v:Ref<CreateTicketMessageResp>)
-	export function unRefCreateTicketMessageResp(v:Ref<CreateTicketMessageResp>):CreateTicketMessageResp
-	export function emptySearchFaqRespData():SearchFaqRespData
-	export function emptyRefSearchFaqRespData():Ref<SearchFaqRespData>
-	export function refOfSearchFaqRespData(x:SearchFaqRespData,v:Ref<SearchFaqRespData>)
-	export function unRefSearchFaqRespData(v:Ref<SearchFaqRespData>):SearchFaqRespData
-	export function emptySubmitApproveNotificationReqBody():SubmitApproveNotificationReqBody
-	export function emptyRefSubmitApproveNotificationReqBody():Ref<SubmitApproveNotificationReqBody>
-	export function refOfSubmitApproveNotificationReqBody(x:SubmitApproveNotificationReqBody,v:Ref<SubmitApproveNotificationReqBody>)
-	export function unRefSubmitApproveNotificationReqBody(v:Ref<SubmitApproveNotificationReqBody>):SubmitApproveNotificationReqBody
-	export function emptyCreateFaqReq():CreateFaqReq
-	export function emptyRefCreateFaqReq():Ref<CreateFaqReq>
-	export function refOfCreateFaqReq(x:CreateFaqReq,v:Ref<CreateFaqReq>)
-	export function unRefCreateFaqReq(v:Ref<CreateFaqReq>):CreateFaqReq
-	export function emptyGetTicketRespData():GetTicketRespData
-	export function emptyRefGetTicketRespData():Ref<GetTicketRespData>
-	export function refOfGetTicketRespData(x:GetTicketRespData,v:Ref<GetTicketRespData>)
-	export function unRefGetTicketRespData(v:Ref<GetTicketRespData>):GetTicketRespData
-	export function emptyListFaqResp():ListFaqResp
-	export function emptyRefListFaqResp():Ref<ListFaqResp>
-	export function refOfListFaqResp(x:ListFaqResp,v:Ref<ListFaqResp>)
-	export function unRefListFaqResp(v:Ref<ListFaqResp>):ListFaqResp
-	export function emptyUnsubscribeEventResp():UnsubscribeEventResp
-	export function emptyRefUnsubscribeEventResp():Ref<UnsubscribeEventResp>
-	export function refOfUnsubscribeEventResp(x:UnsubscribeEventResp,v:Ref<UnsubscribeEventResp>)
-	export function unRefUnsubscribeEventResp(v:Ref<UnsubscribeEventResp>):UnsubscribeEventResp
-	export function emptyAnswerUserQueryTicketReq():AnswerUserQueryTicketReq
-	export function emptyRefAnswerUserQueryTicketReq():Ref<AnswerUserQueryTicketReq>
-	export function refOfAnswerUserQueryTicketReq(x:AnswerUserQueryTicketReq,v:Ref<AnswerUserQueryTicketReq>)
-	export function unRefAnswerUserQueryTicketReq(v:Ref<AnswerUserQueryTicketReq>):AnswerUserQueryTicketReq
-	export function emptyCreateAgentSkillReqBody():CreateAgentSkillReqBody
-	export function emptyRefCreateAgentSkillReqBody():Ref<CreateAgentSkillReqBody>
-	export function refOfCreateAgentSkillReqBody(x:CreateAgentSkillReqBody,v:Ref<CreateAgentSkillReqBody>)
-	export function unRefCreateAgentSkillReqBody(v:Ref<CreateAgentSkillReqBody>):CreateAgentSkillReqBody
-	export function emptyCustomizedFieldDisplayItem():CustomizedFieldDisplayItem
-	export function emptyRefCustomizedFieldDisplayItem():Ref<CustomizedFieldDisplayItem>
-	export function refOfCustomizedFieldDisplayItem(x:CustomizedFieldDisplayItem,v:Ref<CustomizedFieldDisplayItem>)
-	export function unRefCustomizedFieldDisplayItem(v:Ref<CustomizedFieldDisplayItem>):CustomizedFieldDisplayItem
-	export function emptyDeleteAgentSkillReq():DeleteAgentSkillReq
-	export function emptyRefDeleteAgentSkillReq():Ref<DeleteAgentSkillReq>
-	export function refOfDeleteAgentSkillReq(x:DeleteAgentSkillReq,v:Ref<DeleteAgentSkillReq>)
-	export function unRefDeleteAgentSkillReq(v:Ref<DeleteAgentSkillReq>):DeleteAgentSkillReq
-	export function emptyTicketMessageContent():TicketMessageContent
-	export function emptyRefTicketMessageContent():Ref<TicketMessageContent>
-	export function refOfTicketMessageContent(x:TicketMessageContent,v:Ref<TicketMessageContent>)
-	export function unRefTicketMessageContent(v:Ref<TicketMessageContent>):TicketMessageContent
-	export function emptyListTicketCustomizedFieldResp():ListTicketCustomizedFieldResp
-	export function emptyRefListTicketCustomizedFieldResp():Ref<ListTicketCustomizedFieldResp>
-	export function refOfListTicketCustomizedFieldResp(x:ListTicketCustomizedFieldResp,v:Ref<ListTicketCustomizedFieldResp>)
-	export function unRefListTicketCustomizedFieldResp(v:Ref<ListTicketCustomizedFieldResp>):ListTicketCustomizedFieldResp
-	export function emptyPatchCategoryReq():PatchCategoryReq
-	export function emptyRefPatchCategoryReq():Ref<PatchCategoryReq>
-	export function refOfPatchCategoryReq(x:PatchCategoryReq,v:Ref<PatchCategoryReq>)
-	export function unRefPatchCategoryReq(v:Ref<PatchCategoryReq>):PatchCategoryReq
 	export function emptyPatchCategoryResp():PatchCategoryResp
 	export function emptyRefPatchCategoryResp():Ref<PatchCategoryResp>
 	export function refOfPatchCategoryResp(x:PatchCategoryResp,v:Ref<PatchCategoryResp>)
 	export function unRefPatchCategoryResp(v:Ref<PatchCategoryResp>):PatchCategoryResp
+	export function emptyCustomizedFieldsTicketRespData():CustomizedFieldsTicketRespData
+	export function emptyRefCustomizedFieldsTicketRespData():Ref<CustomizedFieldsTicketRespData>
+	export function refOfCustomizedFieldsTicketRespData(x:CustomizedFieldsTicketRespData,v:Ref<CustomizedFieldsTicketRespData>)
+	export function unRefCustomizedFieldsTicketRespData(v:Ref<CustomizedFieldsTicketRespData>):CustomizedFieldsTicketRespData
+	export function emptyGetTicketRespData():GetTicketRespData
+	export function emptyRefGetTicketRespData():Ref<GetTicketRespData>
+	export function refOfGetTicketRespData(x:GetTicketRespData,v:Ref<GetTicketRespData>)
+	export function unRefGetTicketRespData(v:Ref<GetTicketRespData>):GetTicketRespData
+	export function emptyListTicketRespData():ListTicketRespData
+	export function emptyRefListTicketRespData():Ref<ListTicketRespData>
+	export function refOfListTicketRespData(x:ListTicketRespData,v:Ref<ListTicketRespData>)
+	export function unRefListTicketRespData(v:Ref<ListTicketRespData>):ListTicketRespData
+	export function emptyCreateAgentSkillReq():CreateAgentSkillReq
+	export function emptyRefCreateAgentSkillReq():Ref<CreateAgentSkillReq>
+	export function refOfCreateAgentSkillReq(x:CreateAgentSkillReq,v:Ref<CreateAgentSkillReq>)
+	export function unRefCreateAgentSkillReq(v:Ref<CreateAgentSkillReq>):CreateAgentSkillReq
+	export function emptyCustomizedFieldDisplayItem():CustomizedFieldDisplayItem
+	export function emptyRefCustomizedFieldDisplayItem():Ref<CustomizedFieldDisplayItem>
+	export function refOfCustomizedFieldDisplayItem(x:CustomizedFieldDisplayItem,v:Ref<CustomizedFieldDisplayItem>)
+	export function unRefCustomizedFieldDisplayItem(v:Ref<CustomizedFieldDisplayItem>):CustomizedFieldDisplayItem
+	export function emptyCreateAgentSkillReqBody():CreateAgentSkillReqBody
+	export function emptyRefCreateAgentSkillReqBody():Ref<CreateAgentSkillReqBody>
+	export function refOfCreateAgentSkillReqBody(x:CreateAgentSkillReqBody,v:Ref<CreateAgentSkillReqBody>)
+	export function unRefCreateAgentSkillReqBody(v:Ref<CreateAgentSkillReqBody>):CreateAgentSkillReqBody
 	export function emptyCategory():Category
 	export function emptyRefCategory():Ref<Category>
 	export function refOfCategory(x:Category,v:Ref<Category>)
 	export function unRefCategory(v:Ref<Category>):Category
-	export function emptyListCategoryResp():ListCategoryResp
-	export function emptyRefListCategoryResp():Ref<ListCategoryResp>
-	export function refOfListCategoryResp(x:ListCategoryResp,v:Ref<ListCategoryResp>)
-	export function unRefListCategoryResp(v:Ref<ListCategoryResp>):ListCategoryResp
-	export function emptyNotificationUser():NotificationUser
-	export function emptyRefNotificationUser():Ref<NotificationUser>
-	export function refOfNotificationUser(x:NotificationUser,v:Ref<NotificationUser>)
-	export function unRefNotificationUser(v:Ref<NotificationUser>):NotificationUser
-	export function emptyI18n():I18n
-	export function emptyRefI18n():Ref<I18n>
-	export function refOfI18n(x:I18n,v:Ref<I18n>)
-	export function unRefI18n(v:Ref<I18n>):I18n
-	export function emptyRichtext():Richtext
-	export function emptyRefRichtext():Ref<Richtext>
-	export function refOfRichtext(x:Richtext,v:Ref<Richtext>)
-	export function unRefRichtext(v:Ref<Richtext>):Richtext
-	export function emptyV1():V1
-	export function emptyRefV1():Ref<V1>
-	export function refOfV1(x:V1,v:Ref<V1>)
-	export function unRefV1(v:Ref<V1>):V1
-	export function emptyAgentSchedule():AgentSchedule
-	export function emptyRefAgentSchedule():Ref<AgentSchedule>
-	export function refOfAgentSchedule(x:AgentSchedule,v:Ref<AgentSchedule>)
-	export function unRefAgentSchedule(v:Ref<AgentSchedule>):AgentSchedule
-	export function emptyAgentSchedules():AgentSchedules
-	export function emptyRefAgentSchedules():Ref<AgentSchedules>
-	export function refOfAgentSchedules(x:AgentSchedules,v:Ref<AgentSchedules>)
-	export function unRefAgentSchedules(v:Ref<AgentSchedules>):AgentSchedules
-	export function emptyP2TicketUpdatedV1Data():P2TicketUpdatedV1Data
-	export function emptyRefP2TicketUpdatedV1Data():Ref<P2TicketUpdatedV1Data>
-	export function refOfP2TicketUpdatedV1Data(x:P2TicketUpdatedV1Data,v:Ref<P2TicketUpdatedV1Data>)
-	export function unRefP2TicketUpdatedV1Data(v:Ref<P2TicketUpdatedV1Data>):P2TicketUpdatedV1Data
+	export function emptyCreateAgentSkillRespData():CreateAgentSkillRespData
+	export function emptyRefCreateAgentSkillRespData():Ref<CreateAgentSkillRespData>
+	export function refOfCreateAgentSkillRespData(x:CreateAgentSkillRespData,v:Ref<CreateAgentSkillRespData>)
+	export function unRefCreateAgentSkillRespData(v:Ref<CreateAgentSkillRespData>):CreateAgentSkillRespData
+	export function emptyListAgentScheduleReq():ListAgentScheduleReq
+	export function emptyRefListAgentScheduleReq():Ref<ListAgentScheduleReq>
+	export function refOfListAgentScheduleReq(x:ListAgentScheduleReq,v:Ref<ListAgentScheduleReq>)
+	export function unRefListAgentScheduleReq(v:Ref<ListAgentScheduleReq>):ListAgentScheduleReq
+	export function emptySubmitApproveNotificationReqBody():SubmitApproveNotificationReqBody
+	export function emptyRefSubmitApproveNotificationReqBody():Ref<SubmitApproveNotificationReqBody>
+	export function refOfSubmitApproveNotificationReqBody(x:SubmitApproveNotificationReqBody,v:Ref<SubmitApproveNotificationReqBody>)
+	export function unRefSubmitApproveNotificationReqBody(v:Ref<SubmitApproveNotificationReqBody>):SubmitApproveNotificationReqBody
+	export function emptyAnswerUserQueryTicketResp():AnswerUserQueryTicketResp
+	export function emptyRefAnswerUserQueryTicketResp():Ref<AnswerUserQueryTicketResp>
+	export function refOfAnswerUserQueryTicketResp(x:AnswerUserQueryTicketResp,v:Ref<AnswerUserQueryTicketResp>)
+	export function unRefAnswerUserQueryTicketResp(v:Ref<AnswerUserQueryTicketResp>):AnswerUserQueryTicketResp
+	export function emptyTicketEventUpdateInfo():TicketEventUpdateInfo
+	export function emptyRefTicketEventUpdateInfo():Ref<TicketEventUpdateInfo>
+	export function refOfTicketEventUpdateInfo(x:TicketEventUpdateInfo,v:Ref<TicketEventUpdateInfo>)
+	export function unRefTicketEventUpdateInfo(v:Ref<TicketEventUpdateInfo>):TicketEventUpdateInfo
+	export function emptyAgentEmailAgentResp():AgentEmailAgentResp
+	export function emptyRefAgentEmailAgentResp():Ref<AgentEmailAgentResp>
+	export function refOfAgentEmailAgentResp(x:AgentEmailAgentResp,v:Ref<AgentEmailAgentResp>)
+	export function unRefAgentEmailAgentResp(v:Ref<AgentEmailAgentResp>):AgentEmailAgentResp
+	export function emptyStartServiceTicketReqBody():StartServiceTicketReqBody
+	export function emptyRefStartServiceTicketReqBody():Ref<StartServiceTicketReqBody>
+	export function refOfStartServiceTicketReqBody(x:StartServiceTicketReqBody,v:Ref<StartServiceTicketReqBody>)
+	export function unRefStartServiceTicketReqBody(v:Ref<StartServiceTicketReqBody>):StartServiceTicketReqBody
+	export function emptyGetCategoryReq():GetCategoryReq
+	export function emptyRefGetCategoryReq():Ref<GetCategoryReq>
+	export function refOfGetCategoryReq(x:GetCategoryReq,v:Ref<GetCategoryReq>)
+	export function unRefGetCategoryReq(v:Ref<GetCategoryReq>):GetCategoryReq
 	export function emptyStartServiceTicketReq():StartServiceTicketReq
 	export function emptyRefStartServiceTicketReq():Ref<StartServiceTicketReq>
 	export function refOfStartServiceTicketReq(x:StartServiceTicketReq,v:Ref<StartServiceTicketReq>)
 	export function unRefStartServiceTicketReq(v:Ref<StartServiceTicketReq>):StartServiceTicketReq
-	export function emptyTicketMessage():TicketMessage
-	export function emptyRefTicketMessage():Ref<TicketMessage>
-	export function refOfTicketMessage(x:TicketMessage,v:Ref<TicketMessage>)
-	export function unRefTicketMessage(v:Ref<TicketMessage>):TicketMessage
-	export function emptyDeleteAgentSchedulesReq():DeleteAgentSchedulesReq
-	export function emptyRefDeleteAgentSchedulesReq():Ref<DeleteAgentSchedulesReq>
-	export function refOfDeleteAgentSchedulesReq(x:DeleteAgentSchedulesReq,v:Ref<DeleteAgentSchedulesReq>)
-	export function unRefDeleteAgentSchedulesReq(v:Ref<DeleteAgentSchedulesReq>):DeleteAgentSchedulesReq
-	export function emptyPreviewNotificationResp():PreviewNotificationResp
-	export function emptyRefPreviewNotificationResp():Ref<PreviewNotificationResp>
-	export function refOfPreviewNotificationResp(x:PreviewNotificationResp,v:Ref<PreviewNotificationResp>)
-	export function unRefPreviewNotificationResp(v:Ref<PreviewNotificationResp>):PreviewNotificationResp
-	export function emptySearchFaqReq():SearchFaqReq
-	export function emptyRefSearchFaqReq():Ref<SearchFaqReq>
-	export function refOfSearchFaqReq(x:SearchFaqReq,v:Ref<SearchFaqReq>)
-	export function unRefSearchFaqReq(v:Ref<SearchFaqReq>):SearchFaqReq
+	export function emptyListTicketMessageResp():ListTicketMessageResp
+	export function emptyRefListTicketMessageResp():Ref<ListTicketMessageResp>
+	export function refOfListTicketMessageResp(x:ListTicketMessageResp,v:Ref<ListTicketMessageResp>)
+	export function unRefListTicketMessageResp(v:Ref<ListTicketMessageResp>):ListTicketMessageResp
+	export function emptyTicketImageTicketReq():TicketImageTicketReq
+	export function emptyRefTicketImageTicketReq():Ref<TicketImageTicketReq>
+	export function refOfTicketImageTicketReq(x:TicketImageTicketReq,v:Ref<TicketImageTicketReq>)
+	export function unRefTicketImageTicketReq(v:Ref<TicketImageTicketReq>):TicketImageTicketReq
+	export function emptyAgentSkill():AgentSkill
+	export function emptyRefAgentSkill():Ref<AgentSkill>
+	export function refOfAgentSkill(x:AgentSkill,v:Ref<AgentSkill>)
+	export function unRefAgentSkill(v:Ref<AgentSkill>):AgentSkill
+	export function emptyUpdateTicketReq():UpdateTicketReq
+	export function emptyRefUpdateTicketReq():Ref<UpdateTicketReq>
+	export function refOfUpdateTicketReq(x:UpdateTicketReq,v:Ref<UpdateTicketReq>)
+	export function unRefUpdateTicketReq(v:Ref<UpdateTicketReq>):UpdateTicketReq
+	export function emptyTicketCustomizedField():TicketCustomizedField
+	export function emptyRefTicketCustomizedField():Ref<TicketCustomizedField>
+	export function refOfTicketCustomizedField(x:TicketCustomizedField,v:Ref<TicketCustomizedField>)
+	export function unRefTicketCustomizedField(v:Ref<TicketCustomizedField>):TicketCustomizedField
+	export function emptyGetTicketCustomizedFieldRespData():GetTicketCustomizedFieldRespData
+	export function emptyRefGetTicketCustomizedFieldRespData():Ref<GetTicketCustomizedFieldRespData>
+	export function refOfGetTicketCustomizedFieldRespData(x:GetTicketCustomizedFieldRespData,v:Ref<GetTicketCustomizedFieldRespData>)
+	export function unRefGetTicketCustomizedFieldRespData(v:Ref<GetTicketCustomizedFieldRespData>):GetTicketCustomizedFieldRespData
+	export function emptyDeleteFaqResp():DeleteFaqResp
+	export function emptyRefDeleteFaqResp():Ref<DeleteFaqResp>
+	export function refOfDeleteFaqResp(x:DeleteFaqResp,v:Ref<DeleteFaqResp>)
+	export function unRefDeleteFaqResp(v:Ref<DeleteFaqResp>):DeleteFaqResp
 	export function emptyDeleteTicketCustomizedFieldResp():DeleteTicketCustomizedFieldResp
 	export function emptyRefDeleteTicketCustomizedFieldResp():Ref<DeleteTicketCustomizedFieldResp>
 	export function refOfDeleteTicketCustomizedFieldResp(x:DeleteTicketCustomizedFieldResp,v:Ref<DeleteTicketCustomizedFieldResp>)
 	export function unRefDeleteTicketCustomizedFieldResp(v:Ref<DeleteTicketCustomizedFieldResp>):DeleteTicketCustomizedFieldResp
+	export function emptyP2TicketMessageCreatedV1():P2TicketMessageCreatedV1
+	export function emptyRefP2TicketMessageCreatedV1():Ref<P2TicketMessageCreatedV1>
+	export function refOfP2TicketMessageCreatedV1(x:P2TicketMessageCreatedV1,v:Ref<P2TicketMessageCreatedV1>)
+	export function unRefP2TicketMessageCreatedV1(v:Ref<P2TicketMessageCreatedV1>):P2TicketMessageCreatedV1
+	export function emptyPatchFaqReqBody():PatchFaqReqBody
+	export function emptyRefPatchFaqReqBody():Ref<PatchFaqReqBody>
+	export function refOfPatchFaqReqBody(x:PatchFaqReqBody,v:Ref<PatchFaqReqBody>)
+	export function unRefPatchFaqReqBody(v:Ref<PatchFaqReqBody>):PatchFaqReqBody
+	export function emptyV1():V1
+	export function emptyRefV1():Ref<V1>
+	export function refOfV1(x:V1,v:Ref<V1>)
+	export function unRefV1(v:Ref<V1>):V1
+	export function emptyAgentSchedules():AgentSchedules
+	export function emptyRefAgentSchedules():Ref<AgentSchedules>
+	export function refOfAgentSchedules(x:AgentSchedules,v:Ref<AgentSchedules>)
+	export function unRefAgentSchedules(v:Ref<AgentSchedules>):AgentSchedules
+	export function emptyP2TicketCreatedV1Data():P2TicketCreatedV1Data
+	export function emptyRefP2TicketCreatedV1Data():Ref<P2TicketCreatedV1Data>
+	export function refOfP2TicketCreatedV1Data(x:P2TicketCreatedV1Data,v:Ref<P2TicketCreatedV1Data>)
+	export function unRefP2TicketCreatedV1Data(v:Ref<P2TicketCreatedV1Data>):P2TicketCreatedV1Data
+	export function emptyStartServiceTicketRespData():StartServiceTicketRespData
+	export function emptyRefStartServiceTicketRespData():Ref<StartServiceTicketRespData>
+	export function refOfStartServiceTicketRespData(x:StartServiceTicketRespData,v:Ref<StartServiceTicketRespData>)
+	export function unRefStartServiceTicketRespData(v:Ref<StartServiceTicketRespData>):StartServiceTicketRespData
+	export function emptyAgentUser():AgentUser
+	export function emptyRefAgentUser():Ref<AgentUser>
+	export function refOfAgentUser(x:AgentUser,v:Ref<AgentUser>)
+	export function unRefAgentUser(v:Ref<AgentUser>):AgentUser
+	export function emptyListFaqIterator():ListFaqIterator
+	export function emptyRefListFaqIterator():Ref<ListFaqIterator>
+	export function refOfListFaqIterator(x:ListFaqIterator,v:Ref<ListFaqIterator>)
+	export function unRefListFaqIterator(v:Ref<ListFaqIterator>):ListFaqIterator
+	export function emptyBotMessage():BotMessage
+	export function emptyRefBotMessage():Ref<BotMessage>
+	export function refOfBotMessage(x:BotMessage,v:Ref<BotMessage>)
+	export function unRefBotMessage(v:Ref<BotMessage>):BotMessage
+	export function emptyComments():Comments
+	export function emptyRefComments():Ref<Comments>
+	export function refOfComments(x:Comments,v:Ref<Comments>)
+	export function unRefComments(v:Ref<Comments>):Comments
+	export function emptyCreateTicketMessageReq():CreateTicketMessageReq
+	export function emptyRefCreateTicketMessageReq():Ref<CreateTicketMessageReq>
+	export function refOfCreateTicketMessageReq(x:CreateTicketMessageReq,v:Ref<CreateTicketMessageReq>)
+	export function unRefCreateTicketMessageReq(v:Ref<CreateTicketMessageReq>):CreateTicketMessageReq
+	export function emptyListTicketCustomizedFieldReq():ListTicketCustomizedFieldReq
+	export function emptyRefListTicketCustomizedFieldReq():Ref<ListTicketCustomizedFieldReq>
+	export function refOfListTicketCustomizedFieldReq(x:ListTicketCustomizedFieldReq,v:Ref<ListTicketCustomizedFieldReq>)
+	export function unRefListTicketCustomizedFieldReq(v:Ref<ListTicketCustomizedFieldReq>):ListTicketCustomizedFieldReq
+	export function emptyListTicketMessageReq():ListTicketMessageReq
+	export function emptyRefListTicketMessageReq():Ref<ListTicketMessageReq>
+	export function refOfListTicketMessageReq(x:ListTicketMessageReq,v:Ref<ListTicketMessageReq>)
+	export function unRefListTicketMessageReq(v:Ref<ListTicketMessageReq>):ListTicketMessageReq
+	export function emptyAgent():Agent
+	export function emptyRefAgent():Ref<Agent>
+	export function refOfAgent(x:Agent,v:Ref<Agent>)
+	export function unRefAgent(v:Ref<Agent>):Agent
+	export function emptyAnswerUserQueryTicketReq():AnswerUserQueryTicketReq
+	export function emptyRefAnswerUserQueryTicketReq():Ref<AnswerUserQueryTicketReq>
+	export function refOfAnswerUserQueryTicketReq(x:AnswerUserQueryTicketReq,v:Ref<AnswerUserQueryTicketReq>)
+	export function unRefAnswerUserQueryTicketReq(v:Ref<AnswerUserQueryTicketReq>):AnswerUserQueryTicketReq
+	export function emptyCreateCategoryRespData():CreateCategoryRespData
+	export function emptyRefCreateCategoryRespData():Ref<CreateCategoryRespData>
+	export function refOfCreateCategoryRespData(x:CreateCategoryRespData,v:Ref<CreateCategoryRespData>)
+	export function unRefCreateCategoryRespData(v:Ref<CreateCategoryRespData>):CreateCategoryRespData
+	export function emptyGetAgentSchedulesReq():GetAgentSchedulesReq
+	export function emptyRefGetAgentSchedulesReq():Ref<GetAgentSchedulesReq>
+	export function refOfGetAgentSchedulesReq(x:GetAgentSchedulesReq,v:Ref<GetAgentSchedulesReq>)
+	export function unRefGetAgentSchedulesReq(v:Ref<GetAgentSchedulesReq>):GetAgentSchedulesReq
+	export function emptyListCategoryResp():ListCategoryResp
+	export function emptyRefListCategoryResp():Ref<ListCategoryResp>
+	export function refOfListCategoryResp(x:ListCategoryResp,v:Ref<ListCategoryResp>)
+	export function unRefListCategoryResp(v:Ref<ListCategoryResp>):ListCategoryResp
 	export function emptyP2TicketUpdatedV1():P2TicketUpdatedV1
 	export function emptyRefP2TicketUpdatedV1():Ref<P2TicketUpdatedV1>
 	export function refOfP2TicketUpdatedV1(x:P2TicketUpdatedV1,v:Ref<P2TicketUpdatedV1>)
 	export function unRefP2TicketUpdatedV1(v:Ref<P2TicketUpdatedV1>):P2TicketUpdatedV1
+	export function emptyCreateTicketCustomizedFieldReq():CreateTicketCustomizedFieldReq
+	export function emptyRefCreateTicketCustomizedFieldReq():Ref<CreateTicketCustomizedFieldReq>
+	export function refOfCreateTicketCustomizedFieldReq(x:CreateTicketCustomizedFieldReq,v:Ref<CreateTicketCustomizedFieldReq>)
+	export function unRefCreateTicketCustomizedFieldReq(v:Ref<CreateTicketCustomizedFieldReq>):CreateTicketCustomizedFieldReq
+	export function emptyDeleteCategoryReq():DeleteCategoryReq
+	export function emptyRefDeleteCategoryReq():Ref<DeleteCategoryReq>
+	export function refOfDeleteCategoryReq(x:DeleteCategoryReq,v:Ref<DeleteCategoryReq>)
+	export function unRefDeleteCategoryReq(v:Ref<DeleteCategoryReq>):DeleteCategoryReq
+	export function emptyAgentSchedule():AgentSchedule
+	export function emptyRefAgentSchedule():Ref<AgentSchedule>
+	export function refOfAgentSchedule(x:AgentSchedule,v:Ref<AgentSchedule>)
+	export function unRefAgentSchedule(v:Ref<AgentSchedule>):AgentSchedule
+	export function emptyListAgentSkillRespData():ListAgentSkillRespData
+	export function emptyRefListAgentSkillRespData():Ref<ListAgentSkillRespData>
+	export function refOfListAgentSkillRespData(x:ListAgentSkillRespData,v:Ref<ListAgentSkillRespData>)
+	export function unRefListAgentSkillRespData(v:Ref<ListAgentSkillRespData>):ListAgentSkillRespData
+	export function emptyP2TicketMessageCreatedV1Data():P2TicketMessageCreatedV1Data
+	export function emptyRefP2TicketMessageCreatedV1Data():Ref<P2TicketMessageCreatedV1Data>
+	export function refOfP2TicketMessageCreatedV1Data(x:P2TicketMessageCreatedV1Data,v:Ref<P2TicketMessageCreatedV1Data>)
+	export function unRefP2TicketMessageCreatedV1Data(v:Ref<P2TicketMessageCreatedV1Data>):P2TicketMessageCreatedV1Data
+	export function emptyDeleteCategoryResp():DeleteCategoryResp
+	export function emptyRefDeleteCategoryResp():Ref<DeleteCategoryResp>
+	export function refOfDeleteCategoryResp(x:DeleteCategoryResp,v:Ref<DeleteCategoryResp>)
+	export function unRefDeleteCategoryResp(v:Ref<DeleteCategoryResp>):DeleteCategoryResp
+	export function emptyCreateBotMessageReq():CreateBotMessageReq
+	export function emptyRefCreateBotMessageReq():Ref<CreateBotMessageReq>
+	export function refOfCreateBotMessageReq(x:CreateBotMessageReq,v:Ref<CreateBotMessageReq>)
+	export function unRefCreateBotMessageReq(v:Ref<CreateBotMessageReq>):CreateBotMessageReq
+	export function emptyCreateBotMessageResp():CreateBotMessageResp
+	export function emptyRefCreateBotMessageResp():Ref<CreateBotMessageResp>
+	export function refOfCreateBotMessageResp(x:CreateBotMessageResp,v:Ref<CreateBotMessageResp>)
+	export function unRefCreateBotMessageResp(v:Ref<CreateBotMessageResp>):CreateBotMessageResp
+	export function emptyListAgentSkillResp():ListAgentSkillResp
+	export function emptyRefListAgentSkillResp():Ref<ListAgentSkillResp>
+	export function refOfListAgentSkillResp(x:ListAgentSkillResp,v:Ref<ListAgentSkillResp>)
+	export function unRefListAgentSkillResp(v:Ref<ListAgentSkillResp>):ListAgentSkillResp
+	export function emptyListTicketReq():ListTicketReq
+	export function emptyRefListTicketReq():Ref<ListTicketReq>
+	export function refOfListTicketReq(x:ListTicketReq,v:Ref<ListTicketReq>)
+	export function unRefListTicketReq(v:Ref<ListTicketReq>):ListTicketReq
+	export function emptyListAgentSkillRuleRespData():ListAgentSkillRuleRespData
+	export function emptyRefListAgentSkillRuleRespData():Ref<ListAgentSkillRuleRespData>
+	export function refOfListAgentSkillRuleRespData(x:ListAgentSkillRuleRespData,v:Ref<ListAgentSkillRuleRespData>)
+	export function unRefListAgentSkillRuleRespData(v:Ref<ListAgentSkillRuleRespData>):ListAgentSkillRuleRespData
+	export function emptyPreviewNotificationResp():PreviewNotificationResp
+	export function emptyRefPreviewNotificationResp():Ref<PreviewNotificationResp>
+	export function refOfPreviewNotificationResp(x:PreviewNotificationResp,v:Ref<PreviewNotificationResp>)
+	export function unRefPreviewNotificationResp(v:Ref<PreviewNotificationResp>):PreviewNotificationResp
+	export function emptyGetCategoryRespData():GetCategoryRespData
+	export function emptyRefGetCategoryRespData():Ref<GetCategoryRespData>
+	export function refOfGetCategoryRespData(x:GetCategoryRespData,v:Ref<GetCategoryRespData>)
+	export function unRefGetCategoryRespData(v:Ref<GetCategoryRespData>):GetCategoryRespData
+	export function emptyListCategoryReq():ListCategoryReq
+	export function emptyRefListCategoryReq():Ref<ListCategoryReq>
+	export function refOfListCategoryReq(x:ListCategoryReq,v:Ref<ListCategoryReq>)
+	export function unRefListCategoryReq(v:Ref<ListCategoryReq>):ListCategoryReq
+	export function emptyPatchCategoryReq():PatchCategoryReq
+	export function emptyRefPatchCategoryReq():Ref<PatchCategoryReq>
+	export function refOfPatchCategoryReq(x:PatchCategoryReq,v:Ref<PatchCategoryReq>)
+	export function unRefPatchCategoryReq(v:Ref<PatchCategoryReq>):PatchCategoryReq
+	export function emptyTicketUser():TicketUser
+	export function emptyRefTicketUser():Ref<TicketUser>
+	export function refOfTicketUser(x:TicketUser,v:Ref<TicketUser>)
+	export function unRefTicketUser(v:Ref<TicketUser>):TicketUser
+	export function emptyCancelSendNotificationReq():CancelSendNotificationReq
+	export function emptyRefCancelSendNotificationReq():Ref<CancelSendNotificationReq>
+	export function refOfCancelSendNotificationReq(x:CancelSendNotificationReq,v:Ref<CancelSendNotificationReq>)
+	export function unRefCancelSendNotificationReq(v:Ref<CancelSendNotificationReq>):CancelSendNotificationReq
+	export function emptyGetAgentSkillResp():GetAgentSkillResp
+	export function emptyRefGetAgentSkillResp():Ref<GetAgentSkillResp>
+	export function refOfGetAgentSkillResp(x:GetAgentSkillResp,v:Ref<GetAgentSkillResp>)
+	export function unRefGetAgentSkillResp(v:Ref<GetAgentSkillResp>):GetAgentSkillResp
+	export function emptyPatchNotificationResp():PatchNotificationResp
+	export function emptyRefPatchNotificationResp():Ref<PatchNotificationResp>
+	export function refOfPatchNotificationResp(x:PatchNotificationResp,v:Ref<PatchNotificationResp>)
+	export function unRefPatchNotificationResp(v:Ref<PatchNotificationResp>):PatchNotificationResp
+	export function emptyCancelSendNotificationResp():CancelSendNotificationResp
+	export function emptyRefCancelSendNotificationResp():Ref<CancelSendNotificationResp>
+	export function refOfCancelSendNotificationResp(x:CancelSendNotificationResp,v:Ref<CancelSendNotificationResp>)
+	export function unRefCancelSendNotificationResp(v:Ref<CancelSendNotificationResp>):CancelSendNotificationResp
+	export function emptyFaqUpdateInfo():FaqUpdateInfo
+	export function emptyRefFaqUpdateInfo():Ref<FaqUpdateInfo>
+	export function refOfFaqUpdateInfo(x:FaqUpdateInfo,v:Ref<FaqUpdateInfo>)
+	export function unRefFaqUpdateInfo(v:Ref<FaqUpdateInfo>):FaqUpdateInfo
+	export function emptyGetNotificationResp():GetNotificationResp
+	export function emptyRefGetNotificationResp():Ref<GetNotificationResp>
+	export function refOfGetNotificationResp(x:GetNotificationResp,v:Ref<GetNotificationResp>)
+	export function unRefGetNotificationResp(v:Ref<GetNotificationResp>):GetNotificationResp
+	export function emptyUpdateTicketResp():UpdateTicketResp
+	export function emptyRefUpdateTicketResp():Ref<UpdateTicketResp>
+	export function refOfUpdateTicketResp(x:UpdateTicketResp,v:Ref<UpdateTicketResp>)
+	export function unRefUpdateTicketResp(v:Ref<UpdateTicketResp>):UpdateTicketResp
+	export function emptyCreateFaqReqBody():CreateFaqReqBody
+	export function emptyRefCreateFaqReqBody():Ref<CreateFaqReqBody>
+	export function refOfCreateFaqReqBody(x:CreateFaqReqBody,v:Ref<CreateFaqReqBody>)
+	export function unRefCreateFaqReqBody(v:Ref<CreateFaqReqBody>):CreateFaqReqBody
+	export function emptyUpdateTicketReqBody():UpdateTicketReqBody
+	export function emptyRefUpdateTicketReqBody():Ref<UpdateTicketReqBody>
+	export function refOfUpdateTicketReqBody(x:UpdateTicketReqBody,v:Ref<UpdateTicketReqBody>)
+	export function unRefUpdateTicketReqBody(v:Ref<UpdateTicketReqBody>):UpdateTicketReqBody
+	export function emptyExecuteSendNotificationReq():ExecuteSendNotificationReq
+	export function emptyRefExecuteSendNotificationReq():Ref<ExecuteSendNotificationReq>
+	export function refOfExecuteSendNotificationReq(x:ExecuteSendNotificationReq,v:Ref<ExecuteSendNotificationReq>)
+	export function unRefExecuteSendNotificationReq(v:Ref<ExecuteSendNotificationReq>):ExecuteSendNotificationReq
+	export function emptyCreateFaqReq():CreateFaqReq
+	export function emptyRefCreateFaqReq():Ref<CreateFaqReq>
+	export function refOfCreateFaqReq(x:CreateFaqReq,v:Ref<CreateFaqReq>)
+	export function unRefCreateFaqReq(v:Ref<CreateFaqReq>):CreateFaqReq
+	export function emptyCreateTicketMessageReqBody():CreateTicketMessageReqBody
+	export function emptyRefCreateTicketMessageReqBody():Ref<CreateTicketMessageReqBody>
+	export function refOfCreateTicketMessageReqBody(x:CreateTicketMessageReqBody,v:Ref<CreateTicketMessageReqBody>)
+	export function unRefCreateTicketMessageReqBody(v:Ref<CreateTicketMessageReqBody>):CreateTicketMessageReqBody
+	export function emptyCreateCategoryReq():CreateCategoryReq
+	export function emptyRefCreateCategoryReq():Ref<CreateCategoryReq>
+	export function refOfCreateCategoryReq(x:CreateCategoryReq,v:Ref<CreateCategoryReq>)
+	export function unRefCreateCategoryReq(v:Ref<CreateCategoryReq>):CreateCategoryReq
+	export function emptyDepartmentId():DepartmentId
+	export function emptyRefDepartmentId():Ref<DepartmentId>
+	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
+	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
+	export function emptyListAgentSkillRuleResp():ListAgentSkillRuleResp
+	export function emptyRefListAgentSkillRuleResp():Ref<ListAgentSkillRuleResp>
+	export function refOfListAgentSkillRuleResp(x:ListAgentSkillRuleResp,v:Ref<ListAgentSkillRuleResp>)
+	export function unRefListAgentSkillRuleResp(v:Ref<ListAgentSkillRuleResp>):ListAgentSkillRuleResp
+	export function emptySearchFaqResp():SearchFaqResp
+	export function emptyRefSearchFaqResp():Ref<SearchFaqResp>
+	export function refOfSearchFaqResp(x:SearchFaqResp,v:Ref<SearchFaqResp>)
+	export function unRefSearchFaqResp(v:Ref<SearchFaqResp>):SearchFaqResp
+	export function emptyTicketMessageContent():TicketMessageContent
+	export function emptyRefTicketMessageContent():Ref<TicketMessageContent>
+	export function refOfTicketMessageContent(x:TicketMessageContent,v:Ref<TicketMessageContent>)
+	export function unRefTicketMessageContent(v:Ref<TicketMessageContent>):TicketMessageContent
+	export function emptyListCategoryRespData():ListCategoryRespData
+	export function emptyRefListCategoryRespData():Ref<ListCategoryRespData>
+	export function refOfListCategoryRespData(x:ListCategoryRespData,v:Ref<ListCategoryRespData>)
+	export function unRefListCategoryRespData(v:Ref<ListCategoryRespData>):ListCategoryRespData
+	export function emptyTicketMessageEvent():TicketMessageEvent
+	export function emptyRefTicketMessageEvent():Ref<TicketMessageEvent>
+	export function refOfTicketMessageEvent(x:TicketMessageEvent,v:Ref<TicketMessageEvent>)
+	export function unRefTicketMessageEvent(v:Ref<TicketMessageEvent>):TicketMessageEvent
+	export function emptyGetNotificationRespData():GetNotificationRespData
+	export function emptyRefGetNotificationRespData():Ref<GetNotificationRespData>
+	export function refOfGetNotificationRespData(x:GetNotificationRespData,v:Ref<GetNotificationRespData>)
+	export function unRefGetNotificationRespData(v:Ref<GetNotificationRespData>):GetNotificationRespData
+	export function emptyPatchAgentReq():PatchAgentReq
+	export function emptyRefPatchAgentReq():Ref<PatchAgentReq>
+	export function refOfPatchAgentReq(x:PatchAgentReq,v:Ref<PatchAgentReq>)
+	export function unRefPatchAgentReq(v:Ref<PatchAgentReq>):PatchAgentReq
 	export function emptyPatchTicketCustomizedFieldReq():PatchTicketCustomizedFieldReq
 	export function emptyRefPatchTicketCustomizedFieldReq():Ref<PatchTicketCustomizedFieldReq>
 	export function refOfPatchTicketCustomizedFieldReq(x:PatchTicketCustomizedFieldReq,v:Ref<PatchTicketCustomizedFieldReq>)
@@ -2885,252 +3148,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/helpdesk/v1'{
 	export function emptyRefAgentEmailAgentRespData():Ref<AgentEmailAgentRespData>
 	export function refOfAgentEmailAgentRespData(x:AgentEmailAgentRespData,v:Ref<AgentEmailAgentRespData>)
 	export function unRefAgentEmailAgentRespData(v:Ref<AgentEmailAgentRespData>):AgentEmailAgentRespData
-	export function emptyListAgentSkillRuleResp():ListAgentSkillRuleResp
-	export function emptyRefListAgentSkillRuleResp():Ref<ListAgentSkillRuleResp>
-	export function refOfListAgentSkillRuleResp(x:ListAgentSkillRuleResp,v:Ref<ListAgentSkillRuleResp>)
-	export function unRefListAgentSkillRuleResp(v:Ref<ListAgentSkillRuleResp>):ListAgentSkillRuleResp
-	export function emptySearchFaqIterator():SearchFaqIterator
-	export function emptyRefSearchFaqIterator():Ref<SearchFaqIterator>
-	export function refOfSearchFaqIterator(x:SearchFaqIterator,v:Ref<SearchFaqIterator>)
-	export function unRefSearchFaqIterator(v:Ref<SearchFaqIterator>):SearchFaqIterator
-	export function emptySubmitApproveNotificationReq():SubmitApproveNotificationReq
-	export function emptyRefSubmitApproveNotificationReq():Ref<SubmitApproveNotificationReq>
-	export function refOfSubmitApproveNotificationReq(x:SubmitApproveNotificationReq,v:Ref<SubmitApproveNotificationReq>)
-	export function unRefSubmitApproveNotificationReq(v:Ref<SubmitApproveNotificationReq>):SubmitApproveNotificationReq
-	export function emptyCreateTicketMessageReqBody():CreateTicketMessageReqBody
-	export function emptyRefCreateTicketMessageReqBody():Ref<CreateTicketMessageReqBody>
-	export function refOfCreateTicketMessageReqBody(x:CreateTicketMessageReqBody,v:Ref<CreateTicketMessageReqBody>)
-	export function unRefCreateTicketMessageReqBody(v:Ref<CreateTicketMessageReqBody>):CreateTicketMessageReqBody
-	export function emptySearchFaqResp():SearchFaqResp
-	export function emptyRefSearchFaqResp():Ref<SearchFaqResp>
-	export function refOfSearchFaqResp(x:SearchFaqResp,v:Ref<SearchFaqResp>)
-	export function unRefSearchFaqResp(v:Ref<SearchFaqResp>):SearchFaqResp
-	export function emptyStartServiceTicketReqBody():StartServiceTicketReqBody
-	export function emptyRefStartServiceTicketReqBody():Ref<StartServiceTicketReqBody>
-	export function refOfStartServiceTicketReqBody(x:StartServiceTicketReqBody,v:Ref<StartServiceTicketReqBody>)
-	export function unRefStartServiceTicketReqBody(v:Ref<StartServiceTicketReqBody>):StartServiceTicketReqBody
-	export function emptyPatchNotificationResp():PatchNotificationResp
-	export function emptyRefPatchNotificationResp():Ref<PatchNotificationResp>
-	export function refOfPatchNotificationResp(x:PatchNotificationResp,v:Ref<PatchNotificationResp>)
-	export function unRefPatchNotificationResp(v:Ref<PatchNotificationResp>):PatchNotificationResp
-	export function emptyAgentScheduleUpdateInfo():AgentScheduleUpdateInfo
-	export function emptyRefAgentScheduleUpdateInfo():Ref<AgentScheduleUpdateInfo>
-	export function refOfAgentScheduleUpdateInfo(x:AgentScheduleUpdateInfo,v:Ref<AgentScheduleUpdateInfo>)
-	export function unRefAgentScheduleUpdateInfo(v:Ref<AgentScheduleUpdateInfo>):AgentScheduleUpdateInfo
-	export function emptyCreateAgentScheduleReq():CreateAgentScheduleReq
-	export function emptyRefCreateAgentScheduleReq():Ref<CreateAgentScheduleReq>
-	export function refOfCreateAgentScheduleReq(x:CreateAgentScheduleReq,v:Ref<CreateAgentScheduleReq>)
-	export function unRefCreateAgentScheduleReq(v:Ref<CreateAgentScheduleReq>):CreateAgentScheduleReq
-	export function emptyGetCategoryReq():GetCategoryReq
-	export function emptyRefGetCategoryReq():Ref<GetCategoryReq>
-	export function refOfGetCategoryReq(x:GetCategoryReq,v:Ref<GetCategoryReq>)
-	export function unRefGetCategoryReq(v:Ref<GetCategoryReq>):GetCategoryReq
-	export function emptyGetNotificationRespData():GetNotificationRespData
-	export function emptyRefGetNotificationRespData():Ref<GetNotificationRespData>
-	export function refOfGetNotificationRespData(x:GetNotificationRespData,v:Ref<GetNotificationRespData>)
-	export function unRefGetNotificationRespData(v:Ref<GetNotificationRespData>):GetNotificationRespData
-	export function emptyUserCustomizedField():UserCustomizedField
-	export function emptyRefUserCustomizedField():Ref<UserCustomizedField>
-	export function refOfUserCustomizedField(x:UserCustomizedField,v:Ref<UserCustomizedField>)
-	export function unRefUserCustomizedField(v:Ref<UserCustomizedField>):UserCustomizedField
-	export function emptyCreateNotificationReq():CreateNotificationReq
-	export function emptyRefCreateNotificationReq():Ref<CreateNotificationReq>
-	export function refOfCreateNotificationReq(x:CreateNotificationReq,v:Ref<CreateNotificationReq>)
-	export function unRefCreateNotificationReq(v:Ref<CreateNotificationReq>):CreateNotificationReq
-	export function emptyDeleteAgentSkillResp():DeleteAgentSkillResp
-	export function emptyRefDeleteAgentSkillResp():Ref<DeleteAgentSkillResp>
-	export function refOfDeleteAgentSkillResp(x:DeleteAgentSkillResp,v:Ref<DeleteAgentSkillResp>)
-	export function unRefDeleteAgentSkillResp(v:Ref<DeleteAgentSkillResp>):DeleteAgentSkillResp
-	export function emptyTicketImageTicketReq():TicketImageTicketReq
-	export function emptyRefTicketImageTicketReq():Ref<TicketImageTicketReq>
-	export function refOfTicketImageTicketReq(x:TicketImageTicketReq,v:Ref<TicketImageTicketReq>)
-	export function unRefTicketImageTicketReq(v:Ref<TicketImageTicketReq>):TicketImageTicketReq
-	export function emptyTicketUser():TicketUser
-	export function emptyRefTicketUser():Ref<TicketUser>
-	export function refOfTicketUser(x:TicketUser,v:Ref<TicketUser>)
-	export function unRefTicketUser(v:Ref<TicketUser>):TicketUser
-	export function emptyUpdateTicketReq():UpdateTicketReq
-	export function emptyRefUpdateTicketReq():Ref<UpdateTicketReq>
-	export function refOfUpdateTicketReq(x:UpdateTicketReq,v:Ref<UpdateTicketReq>)
-	export function unRefUpdateTicketReq(v:Ref<UpdateTicketReq>):UpdateTicketReq
-	export function emptyAgentEmailAgentResp():AgentEmailAgentResp
-	export function emptyRefAgentEmailAgentResp():Ref<AgentEmailAgentResp>
-	export function refOfAgentEmailAgentResp(x:AgentEmailAgentResp,v:Ref<AgentEmailAgentResp>)
-	export function unRefAgentEmailAgentResp(v:Ref<AgentEmailAgentResp>):AgentEmailAgentResp
-	export function emptySubmitApproveNotificationResp():SubmitApproveNotificationResp
-	export function emptyRefSubmitApproveNotificationResp():Ref<SubmitApproveNotificationResp>
-	export function refOfSubmitApproveNotificationResp(x:SubmitApproveNotificationResp,v:Ref<SubmitApproveNotificationResp>)
-	export function unRefSubmitApproveNotificationResp(v:Ref<SubmitApproveNotificationResp>):SubmitApproveNotificationResp
-	export function emptyListTicketCustomizedFieldReq():ListTicketCustomizedFieldReq
-	export function emptyRefListTicketCustomizedFieldReq():Ref<ListTicketCustomizedFieldReq>
-	export function refOfListTicketCustomizedFieldReq(x:ListTicketCustomizedFieldReq,v:Ref<ListTicketCustomizedFieldReq>)
-	export function unRefListTicketCustomizedFieldReq(v:Ref<ListTicketCustomizedFieldReq>):ListTicketCustomizedFieldReq
-	export function emptyListTicketMessageResp():ListTicketMessageResp
-	export function emptyRefListTicketMessageResp():Ref<ListTicketMessageResp>
-	export function refOfListTicketMessageResp(x:ListTicketMessageResp,v:Ref<ListTicketMessageResp>)
-	export function unRefListTicketMessageResp(v:Ref<ListTicketMessageResp>):ListTicketMessageResp
-	export function emptyCreateNotificationRespData():CreateNotificationRespData
-	export function emptyRefCreateNotificationRespData():Ref<CreateNotificationRespData>
-	export function refOfCreateNotificationRespData(x:CreateNotificationRespData,v:Ref<CreateNotificationRespData>)
-	export function unRefCreateNotificationRespData(v:Ref<CreateNotificationRespData>):CreateNotificationRespData
-	export function emptyP2TicketMessageCreatedV1():P2TicketMessageCreatedV1
-	export function emptyRefP2TicketMessageCreatedV1():Ref<P2TicketMessageCreatedV1>
-	export function refOfP2TicketMessageCreatedV1(x:P2TicketMessageCreatedV1,v:Ref<P2TicketMessageCreatedV1>)
-	export function unRefP2TicketMessageCreatedV1(v:Ref<P2TicketMessageCreatedV1>):P2TicketMessageCreatedV1
-	export function emptyAgentSkillLessInfo():AgentSkillLessInfo
-	export function emptyRefAgentSkillLessInfo():Ref<AgentSkillLessInfo>
-	export function refOfAgentSkillLessInfo(x:AgentSkillLessInfo,v:Ref<AgentSkillLessInfo>)
-	export function unRefAgentSkillLessInfo(v:Ref<AgentSkillLessInfo>):AgentSkillLessInfo
-	export function emptyListFaqIterator():ListFaqIterator
-	export function emptyRefListFaqIterator():Ref<ListFaqIterator>
-	export function refOfListFaqIterator(x:ListFaqIterator,v:Ref<ListFaqIterator>)
-	export function unRefListFaqIterator(v:Ref<ListFaqIterator>):ListFaqIterator
-	export function emptyDeleteFaqResp():DeleteFaqResp
-	export function emptyRefDeleteFaqResp():Ref<DeleteFaqResp>
-	export function refOfDeleteFaqResp(x:DeleteFaqResp,v:Ref<DeleteFaqResp>)
-	export function unRefDeleteFaqResp(v:Ref<DeleteFaqResp>):DeleteFaqResp
-	export function emptyAgent():Agent
-	export function emptyRefAgent():Ref<Agent>
-	export function refOfAgent(x:Agent,v:Ref<Agent>)
-	export function unRefAgent(v:Ref<Agent>):Agent
-	export function emptyCancelSendNotificationReqBody():CancelSendNotificationReqBody
-	export function emptyRefCancelSendNotificationReqBody():Ref<CancelSendNotificationReqBody>
-	export function refOfCancelSendNotificationReqBody(x:CancelSendNotificationReqBody,v:Ref<CancelSendNotificationReqBody>)
-	export function unRefCancelSendNotificationReqBody(v:Ref<CancelSendNotificationReqBody>):CancelSendNotificationReqBody
-	export function emptyCreateAgentScheduleReqBody():CreateAgentScheduleReqBody
-	export function emptyRefCreateAgentScheduleReqBody():Ref<CreateAgentScheduleReqBody>
-	export function refOfCreateAgentScheduleReqBody(x:CreateAgentScheduleReqBody,v:Ref<CreateAgentScheduleReqBody>)
-	export function unRefCreateAgentScheduleReqBody(v:Ref<CreateAgentScheduleReqBody>):CreateAgentScheduleReqBody
-	export function emptyGetAgentSchedulesResp():GetAgentSchedulesResp
-	export function emptyRefGetAgentSchedulesResp():Ref<GetAgentSchedulesResp>
-	export function refOfGetAgentSchedulesResp(x:GetAgentSchedulesResp,v:Ref<GetAgentSchedulesResp>)
-	export function unRefGetAgentSchedulesResp(v:Ref<GetAgentSchedulesResp>):GetAgentSchedulesResp
-	export function emptyGetAgentSkillReq():GetAgentSkillReq
-	export function emptyRefGetAgentSkillReq():Ref<GetAgentSkillReq>
-	export function refOfGetAgentSkillReq(x:GetAgentSkillReq,v:Ref<GetAgentSkillReq>)
-	export function unRefGetAgentSkillReq(v:Ref<GetAgentSkillReq>):GetAgentSkillReq
-	export function emptyPatchFaqReq():PatchFaqReq
-	export function emptyRefPatchFaqReq():Ref<PatchFaqReq>
-	export function refOfPatchFaqReq(x:PatchFaqReq,v:Ref<PatchFaqReq>)
-	export function unRefPatchFaqReq(v:Ref<PatchFaqReq>):PatchFaqReq
-	export function emptyPatchNotificationReq():PatchNotificationReq
-	export function emptyRefPatchNotificationReq():Ref<PatchNotificationReq>
-	export function refOfPatchNotificationReq(x:PatchNotificationReq,v:Ref<PatchNotificationReq>)
-	export function unRefPatchNotificationReq(v:Ref<PatchNotificationReq>):PatchNotificationReq
-	export function emptyCancelSendNotificationResp():CancelSendNotificationResp
-	export function emptyRefCancelSendNotificationResp():Ref<CancelSendNotificationResp>
-	export function refOfCancelSendNotificationResp(x:CancelSendNotificationResp,v:Ref<CancelSendNotificationResp>)
-	export function unRefCancelSendNotificationResp(v:Ref<CancelSendNotificationResp>):CancelSendNotificationResp
-	export function emptyFaqImageFaqReq():FaqImageFaqReq
-	export function emptyRefFaqImageFaqReq():Ref<FaqImageFaqReq>
-	export function refOfFaqImageFaqReq(x:FaqImageFaqReq,v:Ref<FaqImageFaqReq>)
-	export function unRefFaqImageFaqReq(v:Ref<FaqImageFaqReq>):FaqImageFaqReq
-	export function emptyTicket():Ticket
-	export function emptyRefTicket():Ref<Ticket>
-	export function refOfTicket(x:Ticket,v:Ref<Ticket>)
-	export function unRefTicket(v:Ref<Ticket>):Ticket
-	export function emptyCreateBotMessageReq():CreateBotMessageReq
-	export function emptyRefCreateBotMessageReq():Ref<CreateBotMessageReq>
-	export function refOfCreateBotMessageReq(x:CreateBotMessageReq,v:Ref<CreateBotMessageReq>)
-	export function unRefCreateBotMessageReq(v:Ref<CreateBotMessageReq>):CreateBotMessageReq
-	export function emptyCustomizedFieldsTicketReq():CustomizedFieldsTicketReq
-	export function emptyRefCustomizedFieldsTicketReq():Ref<CustomizedFieldsTicketReq>
-	export function refOfCustomizedFieldsTicketReq(x:CustomizedFieldsTicketReq,v:Ref<CustomizedFieldsTicketReq>)
-	export function unRefCustomizedFieldsTicketReq(v:Ref<CustomizedFieldsTicketReq>):CustomizedFieldsTicketReq
-	export function emptyDeleteCategoryReq():DeleteCategoryReq
-	export function emptyRefDeleteCategoryReq():Ref<DeleteCategoryReq>
-	export function refOfDeleteCategoryReq(x:DeleteCategoryReq,v:Ref<DeleteCategoryReq>)
-	export function unRefDeleteCategoryReq(v:Ref<DeleteCategoryReq>):DeleteCategoryReq
-	export function emptyDeleteCategoryResp():DeleteCategoryResp
-	export function emptyRefDeleteCategoryResp():Ref<DeleteCategoryResp>
-	export function refOfDeleteCategoryResp(x:DeleteCategoryResp,v:Ref<DeleteCategoryResp>)
-	export function unRefDeleteCategoryResp(v:Ref<DeleteCategoryResp>):DeleteCategoryResp
-	export function emptyCreateFaqReqBody():CreateFaqReqBody
-	export function emptyRefCreateFaqReqBody():Ref<CreateFaqReqBody>
-	export function refOfCreateFaqReqBody(x:CreateFaqReqBody,v:Ref<CreateFaqReqBody>)
-	export function unRefCreateFaqReqBody(v:Ref<CreateFaqReqBody>):CreateFaqReqBody
-	export function emptyCustomizedFieldsTicketResp():CustomizedFieldsTicketResp
-	export function emptyRefCustomizedFieldsTicketResp():Ref<CustomizedFieldsTicketResp>
-	export function refOfCustomizedFieldsTicketResp(x:CustomizedFieldsTicketResp,v:Ref<CustomizedFieldsTicketResp>)
-	export function unRefCustomizedFieldsTicketResp(v:Ref<CustomizedFieldsTicketResp>):CustomizedFieldsTicketResp
-	export function emptySubscribeEventReqBody():SubscribeEventReqBody
-	export function emptyRefSubscribeEventReqBody():Ref<SubscribeEventReqBody>
-	export function refOfSubscribeEventReqBody(x:SubscribeEventReqBody,v:Ref<SubscribeEventReqBody>)
-	export function unRefSubscribeEventReqBody(v:Ref<SubscribeEventReqBody>):SubscribeEventReqBody
-	export function emptyUnsubscribeEventReqBody():UnsubscribeEventReqBody
-	export function emptyRefUnsubscribeEventReqBody():Ref<UnsubscribeEventReqBody>
-	export function refOfUnsubscribeEventReqBody(x:UnsubscribeEventReqBody,v:Ref<UnsubscribeEventReqBody>)
-	export function unRefUnsubscribeEventReqBody(v:Ref<UnsubscribeEventReqBody>):UnsubscribeEventReqBody
-	export function emptyCreateCategoryReq():CreateCategoryReq
-	export function emptyRefCreateCategoryReq():Ref<CreateCategoryReq>
-	export function refOfCreateCategoryReq(x:CreateCategoryReq,v:Ref<CreateCategoryReq>)
-	export function unRefCreateCategoryReq(v:Ref<CreateCategoryReq>):CreateCategoryReq
-	export function emptyGetTicketCustomizedFieldRespData():GetTicketCustomizedFieldRespData
-	export function emptyRefGetTicketCustomizedFieldRespData():Ref<GetTicketCustomizedFieldRespData>
-	export function refOfGetTicketCustomizedFieldRespData(x:GetTicketCustomizedFieldRespData,v:Ref<GetTicketCustomizedFieldRespData>)
-	export function unRefGetTicketCustomizedFieldRespData(v:Ref<GetTicketCustomizedFieldRespData>):GetTicketCustomizedFieldRespData
-	export function emptyTicketEvent():TicketEvent
-	export function emptyRefTicketEvent():Ref<TicketEvent>
-	export function refOfTicketEvent(x:TicketEvent,v:Ref<TicketEvent>)
-	export function unRefTicketEvent(v:Ref<TicketEvent>):TicketEvent
-	export function emptyCreateAgentSkillReq():CreateAgentSkillReq
-	export function emptyRefCreateAgentSkillReq():Ref<CreateAgentSkillReq>
-	export function refOfCreateAgentSkillReq(x:CreateAgentSkillReq,v:Ref<CreateAgentSkillReq>)
-	export function unRefCreateAgentSkillReq(v:Ref<CreateAgentSkillReq>):CreateAgentSkillReq
-	export function emptyGetTicketReq():GetTicketReq
-	export function emptyRefGetTicketReq():Ref<GetTicketReq>
-	export function refOfGetTicketReq(x:GetTicketReq,v:Ref<GetTicketReq>)
-	export function unRefGetTicketReq(v:Ref<GetTicketReq>):GetTicketReq
-	export function emptyListTicketMessageRespData():ListTicketMessageRespData
-	export function emptyRefListTicketMessageRespData():Ref<ListTicketMessageRespData>
-	export function refOfListTicketMessageRespData(x:ListTicketMessageRespData,v:Ref<ListTicketMessageRespData>)
-	export function unRefListTicketMessageRespData(v:Ref<ListTicketMessageRespData>):ListTicketMessageRespData
-	export function emptyP2NotificationApproveV1():P2NotificationApproveV1
-	export function emptyRefP2NotificationApproveV1():Ref<P2NotificationApproveV1>
-	export function refOfP2NotificationApproveV1(x:P2NotificationApproveV1,v:Ref<P2NotificationApproveV1>)
-	export function unRefP2NotificationApproveV1(v:Ref<P2NotificationApproveV1>):P2NotificationApproveV1
-	export function emptyBotMessage():BotMessage
-	export function emptyRefBotMessage():Ref<BotMessage>
-	export function refOfBotMessage(x:BotMessage,v:Ref<BotMessage>)
-	export function unRefBotMessage(v:Ref<BotMessage>):BotMessage
-	export function emptyCreateTicketCustomizedFieldReq():CreateTicketCustomizedFieldReq
-	export function emptyRefCreateTicketCustomizedFieldReq():Ref<CreateTicketCustomizedFieldReq>
-	export function refOfCreateTicketCustomizedFieldReq(x:CreateTicketCustomizedFieldReq,v:Ref<CreateTicketCustomizedFieldReq>)
-	export function unRefCreateTicketCustomizedFieldReq(v:Ref<CreateTicketCustomizedFieldReq>):CreateTicketCustomizedFieldReq
-	export function emptyListFaqRespData():ListFaqRespData
-	export function emptyRefListFaqRespData():Ref<ListFaqRespData>
-	export function refOfListFaqRespData(x:ListFaqRespData,v:Ref<ListFaqRespData>)
-	export function unRefListFaqRespData(v:Ref<ListFaqRespData>):ListFaqRespData
-	export function emptyPatchAgentSchedulesReqBody():PatchAgentSchedulesReqBody
-	export function emptyRefPatchAgentSchedulesReqBody():Ref<PatchAgentSchedulesReqBody>
-	export function refOfPatchAgentSchedulesReqBody(x:PatchAgentSchedulesReqBody,v:Ref<PatchAgentSchedulesReqBody>)
-	export function unRefPatchAgentSchedulesReqBody(v:Ref<PatchAgentSchedulesReqBody>):PatchAgentSchedulesReqBody
-	export function emptyTicketMessageEvent():TicketMessageEvent
-	export function emptyRefTicketMessageEvent():Ref<TicketMessageEvent>
-	export function refOfTicketMessageEvent(x:TicketMessageEvent,v:Ref<TicketMessageEvent>)
-	export function unRefTicketMessageEvent(v:Ref<TicketMessageEvent>):TicketMessageEvent
-	export function emptyCancelSendNotificationReq():CancelSendNotificationReq
-	export function emptyRefCancelSendNotificationReq():Ref<CancelSendNotificationReq>
-	export function refOfCancelSendNotificationReq(x:CancelSendNotificationReq,v:Ref<CancelSendNotificationReq>)
-	export function unRefCancelSendNotificationReq(v:Ref<CancelSendNotificationReq>):CancelSendNotificationReq
-	export function emptyListAgentScheduleRespData():ListAgentScheduleRespData
-	export function emptyRefListAgentScheduleRespData():Ref<ListAgentScheduleRespData>
-	export function refOfListAgentScheduleRespData(x:ListAgentScheduleRespData,v:Ref<ListAgentScheduleRespData>)
-	export function unRefListAgentScheduleRespData(v:Ref<ListAgentScheduleRespData>):ListAgentScheduleRespData
-	export function emptyListAgentSkillResp():ListAgentSkillResp
-	export function emptyRefListAgentSkillResp():Ref<ListAgentSkillResp>
-	export function refOfListAgentSkillResp(x:ListAgentSkillResp,v:Ref<ListAgentSkillResp>)
-	export function unRefListAgentSkillResp(v:Ref<ListAgentSkillResp>):ListAgentSkillResp
-	export function emptyListCategoryRespData():ListCategoryRespData
-	export function emptyRefListCategoryRespData():Ref<ListCategoryRespData>
-	export function refOfListCategoryRespData(x:ListCategoryRespData,v:Ref<ListCategoryRespData>)
-	export function unRefListCategoryRespData(v:Ref<ListCategoryRespData>):ListCategoryRespData
-	export function emptyPatchTicketCustomizedFieldResp():PatchTicketCustomizedFieldResp
-	export function emptyRefPatchTicketCustomizedFieldResp():Ref<PatchTicketCustomizedFieldResp>
-	export function refOfPatchTicketCustomizedFieldResp(x:PatchTicketCustomizedFieldResp,v:Ref<PatchTicketCustomizedFieldResp>)
-	export function unRefPatchTicketCustomizedFieldResp(v:Ref<PatchTicketCustomizedFieldResp>):PatchTicketCustomizedFieldResp
-	export function emptyTicketUserEvent():TicketUserEvent
-	export function emptyRefTicketUserEvent():Ref<TicketUserEvent>
-	export function refOfTicketUserEvent(x:TicketUserEvent,v:Ref<TicketUserEvent>)
-	export function unRefTicketUserEvent(v:Ref<TicketUserEvent>):TicketUserEvent
+	export function emptyGetFaqReq():GetFaqReq
+	export function emptyRefGetFaqReq():Ref<GetFaqReq>
+	export function refOfGetFaqReq(x:GetFaqReq,v:Ref<GetFaqReq>)
+	export function unRefGetFaqReq(v:Ref<GetFaqReq>):GetFaqReq
+	export function emptySubmitApproveNotificationRespData():SubmitApproveNotificationRespData
+	export function emptyRefSubmitApproveNotificationRespData():Ref<SubmitApproveNotificationRespData>
+	export function refOfSubmitApproveNotificationRespData(x:SubmitApproveNotificationRespData,v:Ref<SubmitApproveNotificationRespData>)
+	export function unRefSubmitApproveNotificationRespData(v:Ref<SubmitApproveNotificationRespData>):SubmitApproveNotificationRespData
 }

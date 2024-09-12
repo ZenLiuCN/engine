@@ -14,16 +14,20 @@ var (
 	//go:embed github_com_larksuite_oapi-sdk-go_v3_service_optical_char_recognition_v1.d.ts
 	GithubComLarksuiteOapiSdkGo3ServiceOptical_char_recognition1Define   []byte
 	GithubComLarksuiteOapiSdkGo3ServiceOptical_char_recognition1Declared = map[string]any{
-		"newDepartmentIdBuilder": larkoptical_char_recognition.NewDepartmentIdBuilder,
-		"New":                    larkoptical_char_recognition.New,
+		"New": larkoptical_char_recognition.New,
 		"newBasicRecognizeImagePathReqBodyBuilder": larkoptical_char_recognition.NewBasicRecognizeImagePathReqBodyBuilder,
 		"newBasicRecognizeImageReqBodyBuilder":     larkoptical_char_recognition.NewBasicRecognizeImageReqBodyBuilder,
 		"newBasicRecognizeImageReqBuilder":         larkoptical_char_recognition.NewBasicRecognizeImageReqBuilder,
+		"newDepartmentIdBuilder":                   larkoptical_char_recognition.NewDepartmentIdBuilder,
 
-		"emptyBasicRecognizeImageReqBody":     engine.Empty[larkoptical_char_recognition.BasicRecognizeImageReqBody],
-		"emptyRefBasicRecognizeImageReqBody":  engine.EmptyRefer[larkoptical_char_recognition.BasicRecognizeImageReqBody],
-		"refOfBasicRecognizeImageReqBody":     engine.ReferOf[larkoptical_char_recognition.BasicRecognizeImageReqBody],
-		"unRefBasicRecognizeImageReqBody":     engine.UnRefer[larkoptical_char_recognition.BasicRecognizeImageReqBody],
+		"emptyDepartmentId":                   engine.Empty[larkoptical_char_recognition.DepartmentId],
+		"emptyRefDepartmentId":                engine.EmptyRefer[larkoptical_char_recognition.DepartmentId],
+		"refOfDepartmentId":                   engine.ReferOf[larkoptical_char_recognition.DepartmentId],
+		"unRefDepartmentId":                   engine.UnRefer[larkoptical_char_recognition.DepartmentId],
+		"emptyV1":                             engine.Empty[larkoptical_char_recognition.V1],
+		"emptyRefV1":                          engine.EmptyRefer[larkoptical_char_recognition.V1],
+		"refOfV1":                             engine.ReferOf[larkoptical_char_recognition.V1],
+		"unRefV1":                             engine.UnRefer[larkoptical_char_recognition.V1],
 		"emptyBasicRecognizeImageResp":        engine.Empty[larkoptical_char_recognition.BasicRecognizeImageResp],
 		"emptyRefBasicRecognizeImageResp":     engine.EmptyRefer[larkoptical_char_recognition.BasicRecognizeImageResp],
 		"refOfBasicRecognizeImageResp":        engine.ReferOf[larkoptical_char_recognition.BasicRecognizeImageResp],
@@ -32,18 +36,14 @@ var (
 		"emptyRefBasicRecognizeImageRespData": engine.EmptyRefer[larkoptical_char_recognition.BasicRecognizeImageRespData],
 		"refOfBasicRecognizeImageRespData":    engine.ReferOf[larkoptical_char_recognition.BasicRecognizeImageRespData],
 		"unRefBasicRecognizeImageRespData":    engine.UnRefer[larkoptical_char_recognition.BasicRecognizeImageRespData],
-		"emptyV1":                             engine.Empty[larkoptical_char_recognition.V1],
-		"emptyRefV1":                          engine.EmptyRefer[larkoptical_char_recognition.V1],
-		"refOfV1":                             engine.ReferOf[larkoptical_char_recognition.V1],
-		"unRefV1":                             engine.UnRefer[larkoptical_char_recognition.V1],
 		"emptyBasicRecognizeImageReq":         engine.Empty[larkoptical_char_recognition.BasicRecognizeImageReq],
 		"emptyRefBasicRecognizeImageReq":      engine.EmptyRefer[larkoptical_char_recognition.BasicRecognizeImageReq],
 		"refOfBasicRecognizeImageReq":         engine.ReferOf[larkoptical_char_recognition.BasicRecognizeImageReq],
 		"unRefBasicRecognizeImageReq":         engine.UnRefer[larkoptical_char_recognition.BasicRecognizeImageReq],
-		"emptyDepartmentId":                   engine.Empty[larkoptical_char_recognition.DepartmentId],
-		"emptyRefDepartmentId":                engine.EmptyRefer[larkoptical_char_recognition.DepartmentId],
-		"refOfDepartmentId":                   engine.ReferOf[larkoptical_char_recognition.DepartmentId],
-		"unRefDepartmentId":                   engine.UnRefer[larkoptical_char_recognition.DepartmentId]}
+		"emptyBasicRecognizeImageReqBody":     engine.Empty[larkoptical_char_recognition.BasicRecognizeImageReqBody],
+		"emptyRefBasicRecognizeImageReqBody":  engine.EmptyRefer[larkoptical_char_recognition.BasicRecognizeImageReqBody],
+		"refOfBasicRecognizeImageReqBody":     engine.ReferOf[larkoptical_char_recognition.BasicRecognizeImageReqBody],
+		"unRefBasicRecognizeImageReqBody":     engine.UnRefer[larkoptical_char_recognition.BasicRecognizeImageReqBody]}
 )
 
 func init() {

@@ -7,7 +7,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/verification/v1'{
 	// @ts-ignore
 	import * as context from 'golang/context'
 	// @ts-ignore
-	import type {Ref,Struct,bool,error} from 'go'
+	import type {error,int,Ref,Struct,bool} from 'go'
 	export interface DepartmentId extends Struct<DepartmentId>{
 
 			departmentId:Ref<string>
@@ -36,6 +36,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/verification/v1'{
 
 	export function newVerificationBuilder():Ref<VerificationBuilder>
 
+	export function newVerificationDetailBuilder():Ref<VerificationDetailBuilder>
+
 	export interface V1 extends Struct<V1>{
 
 			verification:Ref<{
@@ -54,18 +56,33 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/verification/v1'{
 			hasVerification(hasVerification:bool):Ref<VerificationBuilder>
 			build():Ref<Verification>
 	}
-	export function emptyVerification():Verification
-	export function emptyRefVerification():Ref<Verification>
-	export function refOfVerification(x:Verification,v:Ref<Verification>)
-	export function unRefVerification(v:Ref<Verification>):Verification
+	export interface VerificationDetail extends Struct<VerificationDetail>{
+
+			verificationType:Ref<int>
+			verificationSource:Ref<int>
+			orgName:Ref<string>
+			usci:Ref<string>
+			orgType:Ref<int>
+			legalPersonName:Ref<string>
+			enterpriseLicense:Ref<string>
+			verificationLetter:Ref<string>
+	}
+	export interface VerificationDetailBuilder extends Struct<VerificationDetailBuilder>{
+
+			verificationType(verificationType:int):Ref<VerificationDetailBuilder>
+			verificationSource(verificationSource:int):Ref<VerificationDetailBuilder>
+			orgName(orgName:string):Ref<VerificationDetailBuilder>
+			usci(usci:string):Ref<VerificationDetailBuilder>
+			orgType(orgType:int):Ref<VerificationDetailBuilder>
+			legalPersonName(legalPersonName:string):Ref<VerificationDetailBuilder>
+			enterpriseLicense(enterpriseLicense:string):Ref<VerificationDetailBuilder>
+			verificationLetter(verificationLetter:string):Ref<VerificationDetailBuilder>
+			build():Ref<VerificationDetail>
+	}
 	export function emptyDepartmentId():DepartmentId
 	export function emptyRefDepartmentId():Ref<DepartmentId>
 	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
 	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptyGetVerificationResp():GetVerificationResp
-	export function emptyRefGetVerificationResp():Ref<GetVerificationResp>
-	export function refOfGetVerificationResp(x:GetVerificationResp,v:Ref<GetVerificationResp>)
-	export function unRefGetVerificationResp(v:Ref<GetVerificationResp>):GetVerificationResp
 	export function emptyGetVerificationRespData():GetVerificationRespData
 	export function emptyRefGetVerificationRespData():Ref<GetVerificationRespData>
 	export function refOfGetVerificationRespData(x:GetVerificationRespData,v:Ref<GetVerificationRespData>)
@@ -74,4 +91,16 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/verification/v1'{
 	export function emptyRefV1():Ref<V1>
 	export function refOfV1(x:V1,v:Ref<V1>)
 	export function unRefV1(v:Ref<V1>):V1
+	export function emptyVerification():Verification
+	export function emptyRefVerification():Ref<Verification>
+	export function refOfVerification(x:Verification,v:Ref<Verification>)
+	export function unRefVerification(v:Ref<Verification>):Verification
+	export function emptyGetVerificationResp():GetVerificationResp
+	export function emptyRefGetVerificationResp():Ref<GetVerificationResp>
+	export function refOfGetVerificationResp(x:GetVerificationResp,v:Ref<GetVerificationResp>)
+	export function unRefGetVerificationResp(v:Ref<GetVerificationResp>):GetVerificationResp
+	export function emptyVerificationDetail():VerificationDetail
+	export function emptyRefVerificationDetail():Ref<VerificationDetail>
+	export function refOfVerificationDetail(x:VerificationDetail,v:Ref<VerificationDetail>)
+	export function unRefVerificationDetail(v:Ref<VerificationDetail>):VerificationDetail
 }

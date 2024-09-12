@@ -3,13 +3,13 @@
 declare module 'github.com/larksuite/oapi-sdk-go/v3/service/ehr/v1'{
 
 	// @ts-ignore
+	import * as larkcore from 'github.com/larksuite/oapi-sdk-go/v3/core'
+	// @ts-ignore
 	import * as io from 'golang/io'
 	// @ts-ignore
 	import * as context from 'golang/context'
 	// @ts-ignore
-	import * as larkcore from 'github.com/larksuite/oapi-sdk-go/v3/core'
-	// @ts-ignore
-	import type {int64,Struct,int,bool,error,float64,Ref} from 'go'
+	import type {float64,Ref,int64,Struct,int,bool,error} from 'go'
 	export interface Attachment extends Struct<Attachment>{
 
 			id:Ref<string>
@@ -421,78 +421,30 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/ehr/v1'{
 			name(name:string):Ref<WorkLocationBuilder>
 			build():Ref<WorkLocation>
 	}
-	export function emptyEmployee():Employee
-	export function emptyRefEmployee():Ref<Employee>
-	export function refOfEmployee(x:Employee,v:Ref<Employee>)
-	export function unRefEmployee(v:Ref<Employee>):Employee
-	export function emptyJob():Job
-	export function emptyRefJob():Ref<Job>
-	export function refOfJob(x:Job,v:Ref<Job>)
-	export function unRefJob(v:Ref<Job>):Job
-	export function emptyV1():V1
-	export function emptyRefV1():Ref<V1>
-	export function refOfV1(x:V1,v:Ref<V1>)
-	export function unRefV1(v:Ref<V1>):V1
-	export function emptyCustomFields():CustomFields
-	export function emptyRefCustomFields():Ref<CustomFields>
-	export function refOfCustomFields(x:CustomFields,v:Ref<CustomFields>)
-	export function unRefCustomFields(v:Ref<CustomFields>):CustomFields
 	export function emptyDepartmentId():DepartmentId
 	export function emptyRefDepartmentId():Ref<DepartmentId>
 	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
 	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptyManager():Manager
-	export function emptyRefManager():Ref<Manager>
-	export function refOfManager(x:Manager,v:Ref<Manager>)
-	export function unRefManager(v:Ref<Manager>):Manager
-	export function emptySystemFields():SystemFields
-	export function emptyRefSystemFields():Ref<SystemFields>
-	export function refOfSystemFields(x:SystemFields,v:Ref<SystemFields>)
-	export function unRefSystemFields(v:Ref<SystemFields>):SystemFields
-	export function emptyWorkExperience():WorkExperience
-	export function emptyRefWorkExperience():Ref<WorkExperience>
-	export function refOfWorkExperience(x:WorkExperience,v:Ref<WorkExperience>)
-	export function unRefWorkExperience(v:Ref<WorkExperience>):WorkExperience
-	export function emptyContractCompany():ContractCompany
-	export function emptyRefContractCompany():Ref<ContractCompany>
-	export function refOfContractCompany(x:ContractCompany,v:Ref<ContractCompany>)
-	export function unRefContractCompany(v:Ref<ContractCompany>):ContractCompany
-	export function emptyListEmployeeIterator():ListEmployeeIterator
-	export function emptyRefListEmployeeIterator():Ref<ListEmployeeIterator>
-	export function refOfListEmployeeIterator(x:ListEmployeeIterator,v:Ref<ListEmployeeIterator>)
-	export function unRefListEmployeeIterator(v:Ref<ListEmployeeIterator>):ListEmployeeIterator
-	export function emptyWorkLocation():WorkLocation
-	export function emptyRefWorkLocation():Ref<WorkLocation>
-	export function refOfWorkLocation(x:WorkLocation,v:Ref<WorkLocation>)
-	export function unRefWorkLocation(v:Ref<WorkLocation>):WorkLocation
-	export function emptyEmergencyContact():EmergencyContact
-	export function emptyRefEmergencyContact():Ref<EmergencyContact>
-	export function refOfEmergencyContact(x:EmergencyContact,v:Ref<EmergencyContact>)
-	export function unRefEmergencyContact(v:Ref<EmergencyContact>):EmergencyContact
-	export function emptyGetAttachmentReq():GetAttachmentReq
-	export function emptyRefGetAttachmentReq():Ref<GetAttachmentReq>
-	export function refOfGetAttachmentReq(x:GetAttachmentReq,v:Ref<GetAttachmentReq>)
-	export function unRefGetAttachmentReq(v:Ref<GetAttachmentReq>):GetAttachmentReq
-	export function emptyGetAttachmentResp():GetAttachmentResp
-	export function emptyRefGetAttachmentResp():Ref<GetAttachmentResp>
-	export function refOfGetAttachmentResp(x:GetAttachmentResp,v:Ref<GetAttachmentResp>)
-	export function unRefGetAttachmentResp(v:Ref<GetAttachmentResp>):GetAttachmentResp
 	export function emptyNativeRegion():NativeRegion
 	export function emptyRefNativeRegion():Ref<NativeRegion>
 	export function refOfNativeRegion(x:NativeRegion,v:Ref<NativeRegion>)
 	export function unRefNativeRegion(v:Ref<NativeRegion>):NativeRegion
-	export function emptyEducation():Education
-	export function emptyRefEducation():Ref<Education>
-	export function refOfEducation(x:Education,v:Ref<Education>)
-	export function unRefEducation(v:Ref<Education>):Education
+	export function emptyWorkLocation():WorkLocation
+	export function emptyRefWorkLocation():Ref<WorkLocation>
+	export function refOfWorkLocation(x:WorkLocation,v:Ref<WorkLocation>)
+	export function unRefWorkLocation(v:Ref<WorkLocation>):WorkLocation
 	export function emptyListEmployeeResp():ListEmployeeResp
 	export function emptyRefListEmployeeResp():Ref<ListEmployeeResp>
 	export function refOfListEmployeeResp(x:ListEmployeeResp,v:Ref<ListEmployeeResp>)
 	export function unRefListEmployeeResp(v:Ref<ListEmployeeResp>):ListEmployeeResp
-	export function emptyListEmployeeReq():ListEmployeeReq
-	export function emptyRefListEmployeeReq():Ref<ListEmployeeReq>
-	export function refOfListEmployeeReq(x:ListEmployeeReq,v:Ref<ListEmployeeReq>)
-	export function unRefListEmployeeReq(v:Ref<ListEmployeeReq>):ListEmployeeReq
+	export function emptyWorkExperience():WorkExperience
+	export function emptyRefWorkExperience():Ref<WorkExperience>
+	export function refOfWorkExperience(x:WorkExperience,v:Ref<WorkExperience>)
+	export function unRefWorkExperience(v:Ref<WorkExperience>):WorkExperience
+	export function emptyCustomFields():CustomFields
+	export function emptyRefCustomFields():Ref<CustomFields>
+	export function refOfCustomFields(x:CustomFields,v:Ref<CustomFields>)
+	export function unRefCustomFields(v:Ref<CustomFields>):CustomFields
 	export function emptyListEmployeeRespData():ListEmployeeRespData
 	export function emptyRefListEmployeeRespData():Ref<ListEmployeeRespData>
 	export function refOfListEmployeeRespData(x:ListEmployeeRespData,v:Ref<ListEmployeeRespData>)
@@ -501,8 +453,56 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/ehr/v1'{
 	export function emptyRefAttachment():Ref<Attachment>
 	export function refOfAttachment(x:Attachment,v:Ref<Attachment>)
 	export function unRefAttachment(v:Ref<Attachment>):Attachment
+	export function emptyContractCompany():ContractCompany
+	export function emptyRefContractCompany():Ref<ContractCompany>
+	export function refOfContractCompany(x:ContractCompany,v:Ref<ContractCompany>)
+	export function unRefContractCompany(v:Ref<ContractCompany>):ContractCompany
+	export function emptyV1():V1
+	export function emptyRefV1():Ref<V1>
+	export function refOfV1(x:V1,v:Ref<V1>)
+	export function unRefV1(v:Ref<V1>):V1
+	export function emptyJob():Job
+	export function emptyRefJob():Ref<Job>
+	export function refOfJob(x:Job,v:Ref<Job>)
+	export function unRefJob(v:Ref<Job>):Job
+	export function emptyListEmployeeIterator():ListEmployeeIterator
+	export function emptyRefListEmployeeIterator():Ref<ListEmployeeIterator>
+	export function refOfListEmployeeIterator(x:ListEmployeeIterator,v:Ref<ListEmployeeIterator>)
+	export function unRefListEmployeeIterator(v:Ref<ListEmployeeIterator>):ListEmployeeIterator
+	export function emptyGetAttachmentReq():GetAttachmentReq
+	export function emptyRefGetAttachmentReq():Ref<GetAttachmentReq>
+	export function refOfGetAttachmentReq(x:GetAttachmentReq,v:Ref<GetAttachmentReq>)
+	export function unRefGetAttachmentReq(v:Ref<GetAttachmentReq>):GetAttachmentReq
+	export function emptyEducation():Education
+	export function emptyRefEducation():Ref<Education>
+	export function refOfEducation(x:Education,v:Ref<Education>)
+	export function unRefEducation(v:Ref<Education>):Education
+	export function emptyEmergencyContact():EmergencyContact
+	export function emptyRefEmergencyContact():Ref<EmergencyContact>
+	export function refOfEmergencyContact(x:EmergencyContact,v:Ref<EmergencyContact>)
+	export function unRefEmergencyContact(v:Ref<EmergencyContact>):EmergencyContact
+	export function emptyEmployee():Employee
+	export function emptyRefEmployee():Ref<Employee>
+	export function refOfEmployee(x:Employee,v:Ref<Employee>)
+	export function unRefEmployee(v:Ref<Employee>):Employee
 	export function emptyJobLevel():JobLevel
 	export function emptyRefJobLevel():Ref<JobLevel>
 	export function refOfJobLevel(x:JobLevel,v:Ref<JobLevel>)
 	export function unRefJobLevel(v:Ref<JobLevel>):JobLevel
+	export function emptyListEmployeeReq():ListEmployeeReq
+	export function emptyRefListEmployeeReq():Ref<ListEmployeeReq>
+	export function refOfListEmployeeReq(x:ListEmployeeReq,v:Ref<ListEmployeeReq>)
+	export function unRefListEmployeeReq(v:Ref<ListEmployeeReq>):ListEmployeeReq
+	export function emptySystemFields():SystemFields
+	export function emptyRefSystemFields():Ref<SystemFields>
+	export function refOfSystemFields(x:SystemFields,v:Ref<SystemFields>)
+	export function unRefSystemFields(v:Ref<SystemFields>):SystemFields
+	export function emptyManager():Manager
+	export function emptyRefManager():Ref<Manager>
+	export function refOfManager(x:Manager,v:Ref<Manager>)
+	export function unRefManager(v:Ref<Manager>):Manager
+	export function emptyGetAttachmentResp():GetAttachmentResp
+	export function emptyRefGetAttachmentResp():Ref<GetAttachmentResp>
+	export function refOfGetAttachmentResp(x:GetAttachmentResp,v:Ref<GetAttachmentResp>)
+	export function unRefGetAttachmentResp(v:Ref<GetAttachmentResp>):GetAttachmentResp
 }

@@ -3,8 +3,6 @@
 declare module 'github.com/larksuite/base-sdk-go/v3/core'{
 
 	// @ts-ignore
-	import * as json from 'golang/encoding/json'
-	// @ts-ignore
 	import * as http from 'golang/net/http'
 	// @ts-ignore
 	import * as fmt from 'golang/fmt'
@@ -15,13 +13,15 @@ declare module 'github.com/larksuite/base-sdk-go/v3/core'{
 	// @ts-ignore
 	import * as context from 'golang/context'
 	// @ts-ignore
-	import type {Alias,map,Ref,int,error,GoError,bool,Nothing,Struct} from 'go'
+	import * as json from 'golang/encoding/json'
+	// @ts-ignore
+	import type {int,Ref,error,GoError,bool,Nothing,map,Struct,Alias} from 'go'
 	export interface AccessTokenType extends string{
 
 	}
 	export const AccessTokenTypeNone:AccessTokenType
 	export const AccessTokenTypePersonal:AccessTokenType
-	export interface ApiReq extends json.Token,Struct<ApiReq>{
+	export interface ApiReq extends Struct<ApiReq>,json.Token{
 
 			httpMethod:string
 			apiPath:string
@@ -30,7 +30,7 @@ declare module 'github.com/larksuite/base-sdk-go/v3/core'{
 			pathParams:PathParams
 			supportedAccessTokenTypes:AccessTokenType[]
 	}
-	export interface ApiResp extends Struct<ApiResp>,fmt.Stringer,json.Token{
+	export interface ApiResp extends Struct<ApiResp>,json.Token,fmt.Stringer{
 
 			statusCode:int
 			header:http.Header
@@ -40,11 +40,11 @@ declare module 'github.com/larksuite/base-sdk-go/v3/core'{
 			requestId():string
 			string():string
 	}
-	export interface ClientTimeoutError extends Struct<ClientTimeoutError>,Error,GoError{
+	export interface ClientTimeoutError extends Error,GoError,Struct<ClientTimeoutError>{
 
 			error():string
 	}
-	export interface CodeError extends Struct<CodeError>,Error,GoError{
+	export interface CodeError extends Error,GoError,Struct<CodeError>{
 
 			code:int
 			msg:string
@@ -57,12 +57,12 @@ declare module 'github.com/larksuite/base-sdk-go/v3/core'{
 			error():string
 			string():string
 	}
-	export interface CodeErrorDetail extends Error,Struct<CodeErrorDetail>{
+	export interface CodeErrorDetail extends Struct<CodeErrorDetail>,Error{
 
 			key:string
 			value:string
 	}
-	export interface CodeErrorFieldViolation extends Struct<CodeErrorFieldViolation>,Error{
+	export interface CodeErrorFieldViolation extends Error,Struct<CodeErrorFieldViolation>{
 
 			field:string
 			value:string
@@ -74,7 +74,7 @@ declare module 'github.com/larksuite/base-sdk-go/v3/core'{
 			subject:string
 			description:string
 	}
-	export interface Config extends json.Token,Struct<Config>{
+	export interface Config extends Struct<Config>,json.Token{
 
 			baseUrl:string
 			personalBaseToken:string
@@ -100,7 +100,7 @@ declare module 'github.com/larksuite/base-sdk-go/v3/core'{
 
 	export function fileNameByHeader(header:http.Header):string
 
-	export interface Formdata extends json.Token,Struct<Formdata>{
+	export interface Formdata extends Struct<Formdata>,json.Token{
 
 			addField(field:string,val:any):Ref<Formdata>
 			addFile(field:string,r:io.Reader):Ref<Formdata>
@@ -188,32 +188,32 @@ declare module 'github.com/larksuite/base-sdk-go/v3/core'{
 
 	export function withRequestId(requestId:string):RequestOptionFunc
 
-	export function emptyCodeErrorDetail():CodeErrorDetail
-	export function emptyRefCodeErrorDetail():Ref<CodeErrorDetail>
-	export function refOfCodeErrorDetail(x:CodeErrorDetail,v:Ref<CodeErrorDetail>)
-	export function unRefCodeErrorDetail(v:Ref<CodeErrorDetail>):CodeErrorDetail
-	export function emptyConfig():Config
-	export function emptyRefConfig():Ref<Config>
-	export function refOfConfig(x:Config,v:Ref<Config>)
-	export function unRefConfig(v:Ref<Config>):Config
-	export function emptyApiReq():ApiReq
-	export function emptyRefApiReq():Ref<ApiReq>
-	export function refOfApiReq(x:ApiReq,v:Ref<ApiReq>)
-	export function unRefApiReq(v:Ref<ApiReq>):ApiReq
-	export function emptyCodeErrorFieldViolation():CodeErrorFieldViolation
-	export function emptyRefCodeErrorFieldViolation():Ref<CodeErrorFieldViolation>
-	export function refOfCodeErrorFieldViolation(x:CodeErrorFieldViolation,v:Ref<CodeErrorFieldViolation>)
-	export function unRefCodeErrorFieldViolation(v:Ref<CodeErrorFieldViolation>):CodeErrorFieldViolation
 	export function emptyCodeErrorPermissionViolation():CodeErrorPermissionViolation
 	export function emptyRefCodeErrorPermissionViolation():Ref<CodeErrorPermissionViolation>
 	export function refOfCodeErrorPermissionViolation(x:CodeErrorPermissionViolation,v:Ref<CodeErrorPermissionViolation>)
 	export function unRefCodeErrorPermissionViolation(v:Ref<CodeErrorPermissionViolation>):CodeErrorPermissionViolation
-	export function emptyApiResp():ApiResp
-	export function emptyRefApiResp():Ref<ApiResp>
-	export function refOfApiResp(x:ApiResp,v:Ref<ApiResp>)
-	export function unRefApiResp(v:Ref<ApiResp>):ApiResp
+	export function emptyConfig():Config
+	export function emptyRefConfig():Ref<Config>
+	export function refOfConfig(x:Config,v:Ref<Config>)
+	export function unRefConfig(v:Ref<Config>):Config
+	export function emptyCodeErrorDetail():CodeErrorDetail
+	export function emptyRefCodeErrorDetail():Ref<CodeErrorDetail>
+	export function refOfCodeErrorDetail(x:CodeErrorDetail,v:Ref<CodeErrorDetail>)
+	export function unRefCodeErrorDetail(v:Ref<CodeErrorDetail>):CodeErrorDetail
+	export function emptyCodeErrorFieldViolation():CodeErrorFieldViolation
+	export function emptyRefCodeErrorFieldViolation():Ref<CodeErrorFieldViolation>
+	export function refOfCodeErrorFieldViolation(x:CodeErrorFieldViolation,v:Ref<CodeErrorFieldViolation>)
+	export function unRefCodeErrorFieldViolation(v:Ref<CodeErrorFieldViolation>):CodeErrorFieldViolation
 	export function emptyRequestOption():RequestOption
 	export function emptyRefRequestOption():Ref<RequestOption>
 	export function refOfRequestOption(x:RequestOption,v:Ref<RequestOption>)
 	export function unRefRequestOption(v:Ref<RequestOption>):RequestOption
+	export function emptyApiResp():ApiResp
+	export function emptyRefApiResp():Ref<ApiResp>
+	export function refOfApiResp(x:ApiResp,v:Ref<ApiResp>)
+	export function unRefApiResp(v:Ref<ApiResp>):ApiResp
+	export function emptyApiReq():ApiReq
+	export function emptyRefApiReq():Ref<ApiReq>
+	export function refOfApiReq(x:ApiReq,v:Ref<ApiReq>)
+	export function unRefApiReq(v:Ref<ApiReq>):ApiReq
 }

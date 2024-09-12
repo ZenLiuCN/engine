@@ -18,17 +18,17 @@ var (
 	//go:embed github_com_larksuite_base-sdk-go_v3.d.ts
 	GithubComLarksuiteBaseSdkGo3Define   []byte
 	GithubComLarksuiteBaseSdkGo3Declared = map[string]any{
-		"newClient":         lark.NewClient,
-		"withHeaders":       lark.WithHeaders,
-		"withLogReqAtDebug": lark.WithLogReqAtDebug,
+		"withLogLevel":      lark.WithLogLevel,
 		"withLogger":        lark.WithLogger,
-		"withReqTimeout":    lark.WithReqTimeout,
+		"withOpenBaseUrl":   lark.WithOpenBaseUrl,
 		"withSerialization": lark.WithSerialization,
 		"FeishuBaseUrl":     lark.FeishuBaseUrl,
-		"LarkBaseUrl":       lark.LarkBaseUrl,
+		"newClient":         lark.NewClient,
+		"withHeaders":       lark.WithHeaders,
 		"withHttpClient":    lark.WithHttpClient,
-		"withLogLevel":      lark.WithLogLevel,
-		"withOpenBaseUrl":   lark.WithOpenBaseUrl,
+		"LarkBaseUrl":       lark.LarkBaseUrl,
+		"withLogReqAtDebug": lark.WithLogReqAtDebug,
+		"withReqTimeout":    lark.WithReqTimeout,
 	}
 )
 

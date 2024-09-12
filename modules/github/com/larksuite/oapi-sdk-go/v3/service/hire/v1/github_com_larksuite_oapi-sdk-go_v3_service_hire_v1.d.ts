@@ -3,13 +3,13 @@
 declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 
 	// @ts-ignore
-	import * as larkevent from 'github.com/larksuite/oapi-sdk-go/v3/event'
-	// @ts-ignore
 	import * as larkcore from 'github.com/larksuite/oapi-sdk-go/v3/core'
 	// @ts-ignore
 	import * as context from 'golang/context'
 	// @ts-ignore
-	import type {Ref,Struct,int,error,bool,float64,Alias,Nothing} from 'go'
+	import * as larkevent from 'github.com/larksuite/oapi-sdk-go/v3/event'
+	// @ts-ignore
+	import type {Nothing,Ref,Struct,int,error,bool,float64,Alias} from 'go'
 	export interface Ability extends Struct<Ability>{
 
 			id:Ref<string>
@@ -22,6 +22,21 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			name(name:Ref<I18n>):Ref<AbilityBuilder>
 			description(description:Ref<I18n>):Ref<AbilityBuilder>
 			build():Ref<Ability>
+	}
+	export interface Acceptance extends Struct<Acceptance>{
+
+			operatorType:Ref<int>
+			conclusion:Ref<int>
+			memo:Ref<string>
+			operateTime:Ref<string>
+	}
+	export interface AcceptanceBuilder extends Struct<AcceptanceBuilder>{
+
+			operatorType(operatorType:int):Ref<AcceptanceBuilder>
+			conclusion(conclusion:int):Ref<AcceptanceBuilder>
+			memo(memo:string):Ref<AcceptanceBuilder>
+			operateTime(operateTime:string):Ref<AcceptanceBuilder>
+			build():Ref<Acceptance>
 	}
 	export interface Account extends Struct<Account>{
 
@@ -36,6 +51,24 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			status(status:int):Ref<AccountBuilder>
 			build():Ref<Account>
 	}
+	//2
+	export const ActivityStatusListExamMarkingTask已阅卷:int
+	//1
+	export const ActivityStatusListExamMarkingTask待阅卷:int
+	//5
+	export const ActivityStatusListInterviewTask已终止:int
+	//3
+	export const ActivityStatusListInterviewTask已评价:int
+	//1
+	export const ActivityStatusListInterviewTask未开始:int
+	//2
+	export const ActivityStatusListInterviewTask未评价:int
+	//2
+	export const ActivityStatus已评估:int
+	//1
+	export const ActivityStatus待评估:int
+	//3
+	export const ActivityStatus无需评估:int
 	export interface AddToFolderTalentPathReqBodyBuilder extends Struct<AddToFolderTalentPathReqBodyBuilder>{
 
 			talentIdList(talentIdList:string[]):Ref<AddToFolderTalentPathReqBodyBuilder>
@@ -74,6 +107,10 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			talentIdList:string[]
 			folderId:Ref<string>
 	}
+	//2
+	export const AddTypeAddAndRemoveFromOrigin:int
+	//1
+	export const AddTypeOnlyAdd:int
 	export interface Agency extends Struct<Agency>{
 
 			id:Ref<string>
@@ -421,6 +458,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			offerStatus:Ref<int>
 			jobInfo:Ref<OfferJobInfo>
 			customizedModuleList:Ref<ApplicationOfferCustomModule>[]
+			jobRequirementId:Ref<string>
 	}
 	export interface ApplicationOfferAttachment extends Struct<ApplicationOfferAttachment>{
 
@@ -543,6 +581,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			offerStatus(offerStatus:int):Ref<ApplicationOfferBuilder>
 			jobInfo(jobInfo:Ref<OfferJobInfo>):Ref<ApplicationOfferBuilder>
 			customizedModuleList(customizedModuleList:Ref<ApplicationOfferCustomModule>[]):Ref<ApplicationOfferBuilder>
+			jobRequirementId(jobRequirementId:string):Ref<ApplicationOfferBuilder>
 			build():Ref<ApplicationOffer>
 	}
 	export interface ApplicationOfferCustomModule extends Struct<ApplicationOfferCustomModule>{
@@ -1700,6 +1739,54 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			codeError:larkcore.CodeError
 			success():bool
 	}
+	export interface BatchUpdateJobManagerPathReqBodyBuilder extends Struct<BatchUpdateJobManagerPathReqBodyBuilder>{
+
+			recruiterId(recruiterId:string):Ref<BatchUpdateJobManagerPathReqBodyBuilder>
+			assistantIdList(assistantIdList:string[]):Ref<BatchUpdateJobManagerPathReqBodyBuilder>
+			hiringManagerIdList(hiringManagerIdList:string[]):Ref<BatchUpdateJobManagerPathReqBodyBuilder>
+			updateOptionList(updateOptionList:int[]):Ref<BatchUpdateJobManagerPathReqBodyBuilder>
+			creatorId(creatorId:string):Ref<BatchUpdateJobManagerPathReqBodyBuilder>
+			build():Ref<BatchUpdateJobManagerReqBody>
+	}
+	export interface BatchUpdateJobManagerReq extends Struct<BatchUpdateJobManagerReq>{
+
+			body:Ref<BatchUpdateJobManagerReqBody>
+	}
+	export interface BatchUpdateJobManagerReqBody extends Struct<BatchUpdateJobManagerReqBody>{
+
+			recruiterId:Ref<string>
+			assistantIdList:string[]
+			hiringManagerIdList:string[]
+			updateOptionList:int[]
+			creatorId:Ref<string>
+	}
+	export interface BatchUpdateJobManagerReqBodyBuilder extends Struct<BatchUpdateJobManagerReqBodyBuilder>{
+
+			recruiterId(recruiterId:string):Ref<BatchUpdateJobManagerReqBodyBuilder>
+			assistantIdList(assistantIdList:string[]):Ref<BatchUpdateJobManagerReqBodyBuilder>
+			hiringManagerIdList(hiringManagerIdList:string[]):Ref<BatchUpdateJobManagerReqBodyBuilder>
+			updateOptionList(updateOptionList:int[]):Ref<BatchUpdateJobManagerReqBodyBuilder>
+			creatorId(creatorId:string):Ref<BatchUpdateJobManagerReqBodyBuilder>
+			build():Ref<BatchUpdateJobManagerReqBody>
+	}
+	export interface BatchUpdateJobManagerReqBuilder extends Struct<BatchUpdateJobManagerReqBuilder>{
+
+			jobId(jobId:string):Ref<BatchUpdateJobManagerReqBuilder>
+			userIdType(userIdType:string):Ref<BatchUpdateJobManagerReqBuilder>
+			body(body:Ref<BatchUpdateJobManagerReqBody>):Ref<BatchUpdateJobManagerReqBuilder>
+			build():Ref<BatchUpdateJobManagerReq>
+	}
+	export interface BatchUpdateJobManagerResp extends Struct<BatchUpdateJobManagerResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<BatchUpdateJobManagerRespData>
+			success():bool
+	}
+	export interface BatchUpdateJobManagerRespData extends Struct<BatchUpdateJobManagerRespData>{
+
+			jobManager:Ref<JobManager>
+	}
 	export interface BonusAmount extends Struct<BonusAmount>{
 
 			pointBonus:Ref<int>
@@ -1748,6 +1835,17 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			apiResp:Ref<larkcore.ApiResp>
 			codeError:larkcore.CodeError
 			success():bool
+	}
+	export interface CandidateTagFilter extends Struct<CandidateTagFilter>{
+
+			matchType:Ref<int>
+			candidateTagId:string[]
+	}
+	export interface CandidateTagFilterBuilder extends Struct<CandidateTagFilterBuilder>{
+
+			matchType(matchType:int):Ref<CandidateTagFilterBuilder>
+			candidateTagId(candidateTagId:string[]):Ref<CandidateTagFilterBuilder>
+			build():Ref<CandidateTagFilter>
 	}
 	export interface CareerInfo extends Struct<CareerInfo>{
 
@@ -1839,6 +1937,20 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			country(country:Ref<Country>):Ref<CityBuilder>
 			build():Ref<City>
 	}
+	export interface CloseJobReq extends Struct<CloseJobReq>{
+
+	}
+	export interface CloseJobReqBuilder extends Struct<CloseJobReqBuilder>{
+
+			jobId(jobId:string):Ref<CloseJobReqBuilder>
+			build():Ref<CloseJobReq>
+	}
+	export interface CloseJobResp extends Struct<CloseJobResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			success():bool
+	}
 	export interface CodeNameObject extends Struct<CodeNameObject>{
 
 			code:Ref<string>
@@ -1878,6 +1990,91 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			interviewRegistrationSchemaInfo:Ref<RegistrationSchemaInfo>
 			onboardRegistrationSchemaInfo:Ref<RegistrationSchemaInfo>
 			targetMajorList:Ref<TargetMajorInfo>[]
+	}
+	export interface CombinedCreateTalentPathReqBodyBuilder extends Struct<CombinedCreateTalentPathReqBodyBuilder>{
+
+			initSourceId(initSourceId:string):Ref<CombinedCreateTalentPathReqBodyBuilder>
+			resumeSourceId(resumeSourceId:string):Ref<CombinedCreateTalentPathReqBodyBuilder>
+			folderIdList(folderIdList:string[]):Ref<CombinedCreateTalentPathReqBodyBuilder>
+			creatorId(creatorId:string):Ref<CombinedCreateTalentPathReqBodyBuilder>
+			creatorAccountType(creatorAccountType:int):Ref<CombinedCreateTalentPathReqBodyBuilder>
+			resumeAttachmentId(resumeAttachmentId:string):Ref<CombinedCreateTalentPathReqBodyBuilder>
+			basicInfo(basicInfo:Ref<TalentCombinedBasicInfo>):Ref<CombinedCreateTalentPathReqBodyBuilder>
+			educationList(educationList:Ref<TalentCombinedEducationInfo>[]):Ref<CombinedCreateTalentPathReqBodyBuilder>
+			careerList(careerList:Ref<TalentCombinedCareerInfo>[]):Ref<CombinedCreateTalentPathReqBodyBuilder>
+			projectList(projectList:Ref<TalentCombinedProjectInfo>[]):Ref<CombinedCreateTalentPathReqBodyBuilder>
+			worksList(worksList:Ref<TalentCombinedWorkInfo>[]):Ref<CombinedCreateTalentPathReqBodyBuilder>
+			awardList(awardList:Ref<TalentCombinedAwardInfo>[]):Ref<CombinedCreateTalentPathReqBodyBuilder>
+			languageList(languageList:Ref<TalentCombinedLanguageInfo>[]):Ref<CombinedCreateTalentPathReqBodyBuilder>
+			snsList(snsList:Ref<TalentCombinedSnsInfo>[]):Ref<CombinedCreateTalentPathReqBodyBuilder>
+			preferredCityCodeList(preferredCityCodeList:string[]):Ref<CombinedCreateTalentPathReqBodyBuilder>
+			selfEvaluation(selfEvaluation:Ref<TalentSelfEvaluation>):Ref<CombinedCreateTalentPathReqBodyBuilder>
+			customizedData(customizedData:Ref<TalentCustomizedDataObjectValue>[]):Ref<CombinedCreateTalentPathReqBodyBuilder>
+			build():Ref<CombinedCreateTalentReqBody>
+	}
+	export interface CombinedCreateTalentReq extends Struct<CombinedCreateTalentReq>{
+
+			body:Ref<CombinedCreateTalentReqBody>
+	}
+	export interface CombinedCreateTalentReqBody extends Struct<CombinedCreateTalentReqBody>{
+
+			initSourceId:Ref<string>
+			resumeSourceId:Ref<string>
+			folderIdList:string[]
+			creatorId:Ref<string>
+			creatorAccountType:Ref<int>
+			resumeAttachmentId:Ref<string>
+			basicInfo:Ref<TalentCombinedBasicInfo>
+			educationList:Ref<TalentCombinedEducationInfo>[]
+			careerList:Ref<TalentCombinedCareerInfo>[]
+			projectList:Ref<TalentCombinedProjectInfo>[]
+			worksList:Ref<TalentCombinedWorkInfo>[]
+			awardList:Ref<TalentCombinedAwardInfo>[]
+			languageList:Ref<TalentCombinedLanguageInfo>[]
+			snsList:Ref<TalentCombinedSnsInfo>[]
+			preferredCityCodeList:string[]
+			selfEvaluation:Ref<TalentSelfEvaluation>
+			customizedData:Ref<TalentCustomizedDataObjectValue>[]
+	}
+	export interface CombinedCreateTalentReqBodyBuilder extends Struct<CombinedCreateTalentReqBodyBuilder>{
+
+			initSourceId(initSourceId:string):Ref<CombinedCreateTalentReqBodyBuilder>
+			resumeSourceId(resumeSourceId:string):Ref<CombinedCreateTalentReqBodyBuilder>
+			folderIdList(folderIdList:string[]):Ref<CombinedCreateTalentReqBodyBuilder>
+			creatorId(creatorId:string):Ref<CombinedCreateTalentReqBodyBuilder>
+			creatorAccountType(creatorAccountType:int):Ref<CombinedCreateTalentReqBodyBuilder>
+			resumeAttachmentId(resumeAttachmentId:string):Ref<CombinedCreateTalentReqBodyBuilder>
+			basicInfo(basicInfo:Ref<TalentCombinedBasicInfo>):Ref<CombinedCreateTalentReqBodyBuilder>
+			educationList(educationList:Ref<TalentCombinedEducationInfo>[]):Ref<CombinedCreateTalentReqBodyBuilder>
+			careerList(careerList:Ref<TalentCombinedCareerInfo>[]):Ref<CombinedCreateTalentReqBodyBuilder>
+			projectList(projectList:Ref<TalentCombinedProjectInfo>[]):Ref<CombinedCreateTalentReqBodyBuilder>
+			worksList(worksList:Ref<TalentCombinedWorkInfo>[]):Ref<CombinedCreateTalentReqBodyBuilder>
+			awardList(awardList:Ref<TalentCombinedAwardInfo>[]):Ref<CombinedCreateTalentReqBodyBuilder>
+			languageList(languageList:Ref<TalentCombinedLanguageInfo>[]):Ref<CombinedCreateTalentReqBodyBuilder>
+			snsList(snsList:Ref<TalentCombinedSnsInfo>[]):Ref<CombinedCreateTalentReqBodyBuilder>
+			preferredCityCodeList(preferredCityCodeList:string[]):Ref<CombinedCreateTalentReqBodyBuilder>
+			selfEvaluation(selfEvaluation:Ref<TalentSelfEvaluation>):Ref<CombinedCreateTalentReqBodyBuilder>
+			customizedData(customizedData:Ref<TalentCustomizedDataObjectValue>[]):Ref<CombinedCreateTalentReqBodyBuilder>
+			build():Ref<CombinedCreateTalentReqBody>
+	}
+	export interface CombinedCreateTalentReqBuilder extends Struct<CombinedCreateTalentReqBuilder>{
+
+			userIdType(userIdType:string):Ref<CombinedCreateTalentReqBuilder>
+			body(body:Ref<CombinedCreateTalentReqBody>):Ref<CombinedCreateTalentReqBuilder>
+			build():Ref<CombinedCreateTalentReq>
+	}
+	export interface CombinedCreateTalentResp extends Struct<CombinedCreateTalentResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<CombinedCreateTalentRespData>
+			success():bool
+	}
+	export interface CombinedCreateTalentRespData extends Struct<CombinedCreateTalentRespData>{
+
+			talentId:Ref<string>
+			creatorId:Ref<string>
+			creatorAccountType:Ref<int>
 	}
 	export interface CombinedJob extends Struct<CombinedJob>{
 
@@ -2017,6 +2214,91 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			onboardRegistrationSchemaInfo:Ref<RegistrationSchemaInfo>
 			targetMajorList:Ref<TargetMajorInfo>[]
 	}
+	export interface CombinedUpdateTalentPathReqBodyBuilder extends Struct<CombinedUpdateTalentPathReqBodyBuilder>{
+
+			talentId(talentId:string):Ref<CombinedUpdateTalentPathReqBodyBuilder>
+			initSourceId(initSourceId:string):Ref<CombinedUpdateTalentPathReqBodyBuilder>
+			folderIdList(folderIdList:string[]):Ref<CombinedUpdateTalentPathReqBodyBuilder>
+			operatorId(operatorId:string):Ref<CombinedUpdateTalentPathReqBodyBuilder>
+			operatorAccountType(operatorAccountType:int):Ref<CombinedUpdateTalentPathReqBodyBuilder>
+			resumeAttachmentId(resumeAttachmentId:string):Ref<CombinedUpdateTalentPathReqBodyBuilder>
+			basicInfo(basicInfo:Ref<TalentCombinedBasicInfo>):Ref<CombinedUpdateTalentPathReqBodyBuilder>
+			educationList(educationList:Ref<TalentCombinedEducationInfo>[]):Ref<CombinedUpdateTalentPathReqBodyBuilder>
+			careerList(careerList:Ref<TalentCombinedCareerInfo>[]):Ref<CombinedUpdateTalentPathReqBodyBuilder>
+			projectList(projectList:Ref<TalentCombinedProjectInfo>[]):Ref<CombinedUpdateTalentPathReqBodyBuilder>
+			worksList(worksList:Ref<TalentCombinedWorkInfo>[]):Ref<CombinedUpdateTalentPathReqBodyBuilder>
+			awardList(awardList:Ref<TalentCombinedAwardInfo>[]):Ref<CombinedUpdateTalentPathReqBodyBuilder>
+			languageList(languageList:Ref<TalentCombinedLanguageInfo>[]):Ref<CombinedUpdateTalentPathReqBodyBuilder>
+			snsList(snsList:Ref<TalentCombinedSnsInfo>[]):Ref<CombinedUpdateTalentPathReqBodyBuilder>
+			preferredCityCodeList(preferredCityCodeList:string[]):Ref<CombinedUpdateTalentPathReqBodyBuilder>
+			selfEvaluation(selfEvaluation:Ref<TalentSelfEvaluation>):Ref<CombinedUpdateTalentPathReqBodyBuilder>
+			customizedData(customizedData:Ref<TalentCustomizedDataObjectValue>[]):Ref<CombinedUpdateTalentPathReqBodyBuilder>
+			build():Ref<CombinedUpdateTalentReqBody>
+	}
+	export interface CombinedUpdateTalentReq extends Struct<CombinedUpdateTalentReq>{
+
+			body:Ref<CombinedUpdateTalentReqBody>
+	}
+	export interface CombinedUpdateTalentReqBody extends Struct<CombinedUpdateTalentReqBody>{
+
+			talentId:Ref<string>
+			initSourceId:Ref<string>
+			folderIdList:string[]
+			operatorId:Ref<string>
+			operatorAccountType:Ref<int>
+			resumeAttachmentId:Ref<string>
+			basicInfo:Ref<TalentCombinedBasicInfo>
+			educationList:Ref<TalentCombinedEducationInfo>[]
+			careerList:Ref<TalentCombinedCareerInfo>[]
+			projectList:Ref<TalentCombinedProjectInfo>[]
+			worksList:Ref<TalentCombinedWorkInfo>[]
+			awardList:Ref<TalentCombinedAwardInfo>[]
+			languageList:Ref<TalentCombinedLanguageInfo>[]
+			snsList:Ref<TalentCombinedSnsInfo>[]
+			preferredCityCodeList:string[]
+			selfEvaluation:Ref<TalentSelfEvaluation>
+			customizedData:Ref<TalentCustomizedDataObjectValue>[]
+	}
+	export interface CombinedUpdateTalentReqBodyBuilder extends Struct<CombinedUpdateTalentReqBodyBuilder>{
+
+			talentId(talentId:string):Ref<CombinedUpdateTalentReqBodyBuilder>
+			initSourceId(initSourceId:string):Ref<CombinedUpdateTalentReqBodyBuilder>
+			folderIdList(folderIdList:string[]):Ref<CombinedUpdateTalentReqBodyBuilder>
+			operatorId(operatorId:string):Ref<CombinedUpdateTalentReqBodyBuilder>
+			operatorAccountType(operatorAccountType:int):Ref<CombinedUpdateTalentReqBodyBuilder>
+			resumeAttachmentId(resumeAttachmentId:string):Ref<CombinedUpdateTalentReqBodyBuilder>
+			basicInfo(basicInfo:Ref<TalentCombinedBasicInfo>):Ref<CombinedUpdateTalentReqBodyBuilder>
+			educationList(educationList:Ref<TalentCombinedEducationInfo>[]):Ref<CombinedUpdateTalentReqBodyBuilder>
+			careerList(careerList:Ref<TalentCombinedCareerInfo>[]):Ref<CombinedUpdateTalentReqBodyBuilder>
+			projectList(projectList:Ref<TalentCombinedProjectInfo>[]):Ref<CombinedUpdateTalentReqBodyBuilder>
+			worksList(worksList:Ref<TalentCombinedWorkInfo>[]):Ref<CombinedUpdateTalentReqBodyBuilder>
+			awardList(awardList:Ref<TalentCombinedAwardInfo>[]):Ref<CombinedUpdateTalentReqBodyBuilder>
+			languageList(languageList:Ref<TalentCombinedLanguageInfo>[]):Ref<CombinedUpdateTalentReqBodyBuilder>
+			snsList(snsList:Ref<TalentCombinedSnsInfo>[]):Ref<CombinedUpdateTalentReqBodyBuilder>
+			preferredCityCodeList(preferredCityCodeList:string[]):Ref<CombinedUpdateTalentReqBodyBuilder>
+			selfEvaluation(selfEvaluation:Ref<TalentSelfEvaluation>):Ref<CombinedUpdateTalentReqBodyBuilder>
+			customizedData(customizedData:Ref<TalentCustomizedDataObjectValue>[]):Ref<CombinedUpdateTalentReqBodyBuilder>
+			build():Ref<CombinedUpdateTalentReqBody>
+	}
+	export interface CombinedUpdateTalentReqBuilder extends Struct<CombinedUpdateTalentReqBuilder>{
+
+			userIdType(userIdType:string):Ref<CombinedUpdateTalentReqBuilder>
+			body(body:Ref<CombinedUpdateTalentReqBody>):Ref<CombinedUpdateTalentReqBuilder>
+			build():Ref<CombinedUpdateTalentReq>
+	}
+	export interface CombinedUpdateTalentResp extends Struct<CombinedUpdateTalentResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<CombinedUpdateTalentRespData>
+			success():bool
+	}
+	export interface CombinedUpdateTalentRespData extends Struct<CombinedUpdateTalentRespData>{
+
+			talentId:Ref<string>
+			operatorId:Ref<string>
+			operatorAccountType:Ref<int>
+	}
 	export interface CommonAddress extends Struct<CommonAddress>{
 
 			id:Ref<string>
@@ -2136,6 +2418,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 	export const ConclusionFail:int
 	//2
 	export const ConclusionPass:int
+	//1
+	export const ConclusionPatchExternalInterviewAssessmentFail:int
+	//2
+	export const ConclusionPatchExternalInterviewAssessmentPass:int
+	//3
+	export const ConclusionPatchExternalInterviewAssessmentToBeDetermined:int
 	//3
 	export const ConclusionToBeDetermined:int
 	export interface ConfigJobReq extends Struct<ConfigJobReq>{
@@ -2229,6 +2517,60 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 
 			id:Ref<string>
 	}
+	export interface CreateAttachmentResp extends Struct<CreateAttachmentResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<CreateAttachmentRespData>
+			success():bool
+	}
+	export interface CreateAttachmentRespData extends Struct<CreateAttachmentRespData>{
+
+			id:Ref<string>
+	}
+	export interface CreateByAttachmentWebsiteDeliveryReq extends Struct<CreateByAttachmentWebsiteDeliveryReq>{
+
+			websiteDeliveryAttachment:Ref<WebsiteDeliveryAttachment>
+	}
+	export interface CreateByAttachmentWebsiteDeliveryReqBuilder extends Struct<CreateByAttachmentWebsiteDeliveryReqBuilder>{
+
+			websiteId(websiteId:string):Ref<CreateByAttachmentWebsiteDeliveryReqBuilder>
+			websiteDeliveryAttachment(websiteDeliveryAttachment:Ref<WebsiteDeliveryAttachment>):Ref<CreateByAttachmentWebsiteDeliveryReqBuilder>
+			build():Ref<CreateByAttachmentWebsiteDeliveryReq>
+	}
+	export interface CreateByAttachmentWebsiteDeliveryResp extends Struct<CreateByAttachmentWebsiteDeliveryResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<CreateByAttachmentWebsiteDeliveryRespData>
+			success():bool
+	}
+	export interface CreateByAttachmentWebsiteDeliveryRespData extends Struct<CreateByAttachmentWebsiteDeliveryRespData>{
+
+			taskId:Ref<string>
+	}
+	export interface CreateByResumeWebsiteDeliveryReq extends Struct<CreateByResumeWebsiteDeliveryReq>{
+
+			websiteDelivery:Ref<WebsiteDelivery>
+	}
+	export interface CreateByResumeWebsiteDeliveryReqBuilder extends Struct<CreateByResumeWebsiteDeliveryReqBuilder>{
+
+			websiteId(websiteId:string):Ref<CreateByResumeWebsiteDeliveryReqBuilder>
+			userIdType(userIdType:string):Ref<CreateByResumeWebsiteDeliveryReqBuilder>
+			websiteDelivery(websiteDelivery:Ref<WebsiteDelivery>):Ref<CreateByResumeWebsiteDeliveryReqBuilder>
+			build():Ref<CreateByResumeWebsiteDeliveryReq>
+	}
+	export interface CreateByResumeWebsiteDeliveryResp extends Struct<CreateByResumeWebsiteDeliveryResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<CreateByResumeWebsiteDeliveryRespData>
+			success():bool
+	}
+	export interface CreateByResumeWebsiteDeliveryRespData extends Struct<CreateByResumeWebsiteDeliveryRespData>{
+
+			delivery:Ref<WebsiteDeliveryDto>
+	}
 	export interface CreateEcoAccountCustomFieldReq extends Struct<CreateEcoAccountCustomFieldReq>{
 
 			ecoAccountCustomField:Ref<EcoAccountCustomField>
@@ -2288,6 +2630,59 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			apiResp:Ref<larkcore.ApiResp>
 			codeError:larkcore.CodeError
 			success():bool
+	}
+	export interface CreateExamPathReqBodyBuilder extends Struct<CreateExamPathReqBodyBuilder>{
+
+			applicationId(applicationId:string):Ref<CreateExamPathReqBodyBuilder>
+			examResourceName(examResourceName:string):Ref<CreateExamPathReqBodyBuilder>
+			score(score:float64):Ref<CreateExamPathReqBodyBuilder>
+			uuid(uuid:string):Ref<CreateExamPathReqBodyBuilder>
+			operatorId(operatorId:string):Ref<CreateExamPathReqBodyBuilder>
+			build():Ref<CreateExamReqBody>
+	}
+	export interface CreateExamReq extends Struct<CreateExamReq>{
+
+			body:Ref<CreateExamReqBody>
+	}
+	export interface CreateExamReqBody extends Struct<CreateExamReqBody>{
+
+			applicationId:Ref<string>
+			examResourceName:Ref<string>
+			score:Ref<float64>
+			uuid:Ref<string>
+			operatorId:Ref<string>
+	}
+	export interface CreateExamReqBodyBuilder extends Struct<CreateExamReqBodyBuilder>{
+
+			applicationId(applicationId:string):Ref<CreateExamReqBodyBuilder>
+			examResourceName(examResourceName:string):Ref<CreateExamReqBodyBuilder>
+			score(score:float64):Ref<CreateExamReqBodyBuilder>
+			uuid(uuid:string):Ref<CreateExamReqBodyBuilder>
+			operatorId(operatorId:string):Ref<CreateExamReqBodyBuilder>
+			build():Ref<CreateExamReqBody>
+	}
+	export interface CreateExamReqBuilder extends Struct<CreateExamReqBuilder>{
+
+			userIdType(userIdType:string):Ref<CreateExamReqBuilder>
+			body(body:Ref<CreateExamReqBody>):Ref<CreateExamReqBuilder>
+			build():Ref<CreateExamReq>
+	}
+	export interface CreateExamResp extends Struct<CreateExamResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<CreateExamRespData>
+			success():bool
+	}
+	export interface CreateExamRespData extends Struct<CreateExamRespData>{
+
+			examId:Ref<string>
+			applicationId:Ref<string>
+			examResourceName:Ref<string>
+			score:Ref<float64>
+			uuid:Ref<string>
+			operatorId:Ref<string>
+			operateTime:Ref<string>
 	}
 	export interface CreateExternalApplicationReq extends Struct<CreateExternalApplicationReq>{
 
@@ -2368,6 +2763,27 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 	export interface CreateExternalInterviewRespData extends Struct<CreateExternalInterviewRespData>{
 
 			externalInterview:Ref<ExternalInterview>
+	}
+	export interface CreateExternalReferralRewardReq extends Struct<CreateExternalReferralRewardReq>{
+
+			externalReward:Ref<ExternalReward>
+	}
+	export interface CreateExternalReferralRewardReqBuilder extends Struct<CreateExternalReferralRewardReqBuilder>{
+
+			userIdType(userIdType:string):Ref<CreateExternalReferralRewardReqBuilder>
+			externalReward(externalReward:Ref<ExternalReward>):Ref<CreateExternalReferralRewardReqBuilder>
+			build():Ref<CreateExternalReferralRewardReq>
+	}
+	export interface CreateExternalReferralRewardResp extends Struct<CreateExternalReferralRewardResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<CreateExternalReferralRewardRespData>
+			success():bool
+	}
+	export interface CreateExternalReferralRewardRespData extends Struct<CreateExternalReferralRewardRespData>{
+
+			id:Ref<string>
 	}
 	export interface CreateJobRequirementReq extends Struct<CreateJobRequirementReq>{
 
@@ -2483,6 +2899,124 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 
 			account:Ref<Account>
 	}
+	export interface CreateTalentExternalInfoPathReqBodyBuilder extends Struct<CreateTalentExternalInfoPathReqBodyBuilder>{
+
+			externalCreateTime(externalCreateTime:string):Ref<CreateTalentExternalInfoPathReqBodyBuilder>
+			build():Ref<CreateTalentExternalInfoReqBody>
+	}
+	export interface CreateTalentExternalInfoReq extends Struct<CreateTalentExternalInfoReq>{
+
+			body:Ref<CreateTalentExternalInfoReqBody>
+	}
+	export interface CreateTalentExternalInfoReqBody extends Struct<CreateTalentExternalInfoReqBody>{
+
+			externalCreateTime:Ref<string>
+	}
+	export interface CreateTalentExternalInfoReqBodyBuilder extends Struct<CreateTalentExternalInfoReqBodyBuilder>{
+
+			externalCreateTime(externalCreateTime:string):Ref<CreateTalentExternalInfoReqBodyBuilder>
+			build():Ref<CreateTalentExternalInfoReqBody>
+	}
+	export interface CreateTalentExternalInfoReqBuilder extends Struct<CreateTalentExternalInfoReqBuilder>{
+
+			talentId(talentId:string):Ref<CreateTalentExternalInfoReqBuilder>
+			body(body:Ref<CreateTalentExternalInfoReqBody>):Ref<CreateTalentExternalInfoReqBuilder>
+			build():Ref<CreateTalentExternalInfoReq>
+	}
+	export interface CreateTalentExternalInfoResp extends Struct<CreateTalentExternalInfoResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<CreateTalentExternalInfoRespData>
+			success():bool
+	}
+	export interface CreateTalentExternalInfoRespData extends Struct<CreateTalentExternalInfoRespData>{
+
+			externalInfo:Ref<TalentExternalInfo>
+	}
+	export interface CreateTripartiteAgreementReq extends Struct<CreateTripartiteAgreementReq>{
+
+			tripartiteAgreementInfo:Ref<TripartiteAgreementInfo>
+	}
+	export interface CreateTripartiteAgreementReqBuilder extends Struct<CreateTripartiteAgreementReqBuilder>{
+
+			tripartiteAgreementInfo(tripartiteAgreementInfo:Ref<TripartiteAgreementInfo>):Ref<CreateTripartiteAgreementReqBuilder>
+			build():Ref<CreateTripartiteAgreementReq>
+	}
+	export interface CreateTripartiteAgreementResp extends Struct<CreateTripartiteAgreementResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<CreateTripartiteAgreementRespData>
+			success():bool
+	}
+	export interface CreateTripartiteAgreementRespData extends Struct<CreateTripartiteAgreementRespData>{
+
+			id:Ref<string>
+	}
+	export interface CreateWebsiteChannelPathReqBodyBuilder extends Struct<CreateWebsiteChannelPathReqBodyBuilder>{
+
+			channelName(channelName:string):Ref<CreateWebsiteChannelPathReqBodyBuilder>
+			build():Ref<CreateWebsiteChannelReqBody>
+	}
+	export interface CreateWebsiteChannelReq extends Struct<CreateWebsiteChannelReq>{
+
+			body:Ref<CreateWebsiteChannelReqBody>
+	}
+	export interface CreateWebsiteChannelReqBody extends Struct<CreateWebsiteChannelReqBody>{
+
+			channelName:Ref<string>
+	}
+	export interface CreateWebsiteChannelReqBodyBuilder extends Struct<CreateWebsiteChannelReqBodyBuilder>{
+
+			channelName(channelName:string):Ref<CreateWebsiteChannelReqBodyBuilder>
+			build():Ref<CreateWebsiteChannelReqBody>
+	}
+	export interface CreateWebsiteChannelReqBuilder extends Struct<CreateWebsiteChannelReqBuilder>{
+
+			websiteId(websiteId:string):Ref<CreateWebsiteChannelReqBuilder>
+			body(body:Ref<CreateWebsiteChannelReqBody>):Ref<CreateWebsiteChannelReqBuilder>
+			build():Ref<CreateWebsiteChannelReq>
+	}
+	export interface CreateWebsiteChannelResp extends Struct<CreateWebsiteChannelResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<CreateWebsiteChannelRespData>
+			success():bool
+	}
+	export interface CreateWebsiteChannelRespData extends Struct<CreateWebsiteChannelRespData>{
+
+			id:Ref<string>
+			name:Ref<string>
+			link:Ref<string>
+			code:Ref<string>
+	}
+	export interface CreateWebsiteSiteUserReq extends Struct<CreateWebsiteSiteUserReq>{
+
+			websiteUser:Ref<WebsiteUser>
+	}
+	export interface CreateWebsiteSiteUserReqBuilder extends Struct<CreateWebsiteSiteUserReqBuilder>{
+
+			websiteId(websiteId:string):Ref<CreateWebsiteSiteUserReqBuilder>
+			websiteUser(websiteUser:Ref<WebsiteUser>):Ref<CreateWebsiteSiteUserReqBuilder>
+			build():Ref<CreateWebsiteSiteUserReq>
+	}
+	export interface CreateWebsiteSiteUserResp extends Struct<CreateWebsiteSiteUserResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<CreateWebsiteSiteUserRespData>
+			success():bool
+	}
+	export interface CreateWebsiteSiteUserRespData extends Struct<CreateWebsiteSiteUserRespData>{
+
+			siteUser:Ref<WebsiteUser>
+	}
+	//1
+	export const CreatorAccountType员工体系:int
+	//3
+	export const CreatorAccountType系统:int
 	export interface DataPermission extends Struct<DataPermission>{
 
 			id:Ref<string>
@@ -2515,6 +3049,17 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 
 			account:Ref<Account>
 	}
+	export interface DegreeFilter extends Struct<DegreeFilter>{
+
+			hideOption:Ref<int>
+			degree:string[]
+	}
+	export interface DegreeFilterBuilder extends Struct<DegreeFilterBuilder>{
+
+			hideOption(hideOption:int):Ref<DegreeFilterBuilder>
+			degree(degree:string[]):Ref<DegreeFilterBuilder>
+			build():Ref<DegreeFilter>
+	}
 	export interface DeleteExternalApplicationReq extends Struct<DeleteExternalApplicationReq>{
 
 	}
@@ -2535,6 +3080,20 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 
 			externalApplication:Ref<ExternalApplication>
 	}
+	export interface DeleteExternalReferralRewardReq extends Struct<DeleteExternalReferralRewardReq>{
+
+	}
+	export interface DeleteExternalReferralRewardReqBuilder extends Struct<DeleteExternalReferralRewardReqBuilder>{
+
+			externalReferralRewardId(externalReferralRewardId:string):Ref<DeleteExternalReferralRewardReqBuilder>
+			build():Ref<DeleteExternalReferralRewardReq>
+	}
+	export interface DeleteExternalReferralRewardResp extends Struct<DeleteExternalReferralRewardResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			success():bool
+	}
 	export interface DeleteJobRequirementReq extends Struct<DeleteJobRequirementReq>{
 
 	}
@@ -2544,6 +3103,49 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			build():Ref<DeleteJobRequirementReq>
 	}
 	export interface DeleteJobRequirementResp extends Struct<DeleteJobRequirementResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			success():bool
+	}
+	export interface DeleteNoteReq extends Struct<DeleteNoteReq>{
+
+	}
+	export interface DeleteNoteReqBuilder extends Struct<DeleteNoteReqBuilder>{
+
+			noteId(noteId:string):Ref<DeleteNoteReqBuilder>
+			build():Ref<DeleteNoteReq>
+	}
+	export interface DeleteNoteResp extends Struct<DeleteNoteResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			success():bool
+	}
+	export interface DeleteTripartiteAgreementReq extends Struct<DeleteTripartiteAgreementReq>{
+
+	}
+	export interface DeleteTripartiteAgreementReqBuilder extends Struct<DeleteTripartiteAgreementReqBuilder>{
+
+			tripartiteAgreementId(tripartiteAgreementId:string):Ref<DeleteTripartiteAgreementReqBuilder>
+			build():Ref<DeleteTripartiteAgreementReq>
+	}
+	export interface DeleteTripartiteAgreementResp extends Struct<DeleteTripartiteAgreementResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			success():bool
+	}
+	export interface DeleteWebsiteChannelReq extends Struct<DeleteWebsiteChannelReq>{
+
+	}
+	export interface DeleteWebsiteChannelReqBuilder extends Struct<DeleteWebsiteChannelReqBuilder>{
+
+			websiteId(websiteId:string):Ref<DeleteWebsiteChannelReqBuilder>
+			channelId(channelId:string):Ref<DeleteWebsiteChannelReqBuilder>
+			build():Ref<DeleteWebsiteChannelReq>
+	}
+	export interface DeleteWebsiteChannelResp extends Struct<DeleteWebsiteChannelResp>{
 
 			apiResp:Ref<larkcore.ApiResp>
 			codeError:larkcore.CodeError
@@ -2632,6 +3234,10 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 	//"open_department_id"
 	export const DepartmentIdTypeGetReferralWebsiteJobPostOpenDepartmentId:string
 	//"department_id"
+	export const DepartmentIdTypeGetWebsiteJobPostDepartmentId:string
+	//"open_department_id"
+	export const DepartmentIdTypeGetWebsiteJobPostOpenDepartmentId:string
+	//"department_id"
 	export const DepartmentIdTypeListByIdJobRequirementDepartmentId:string
 	//"open_department_id"
 	export const DepartmentIdTypeListByIdJobRequirementOpenDepartmentId:string
@@ -2647,6 +3253,10 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 	export const DepartmentIdTypeListReferralWebsiteJobPostDepartmentId:string
 	//"open_department_id"
 	export const DepartmentIdTypeListReferralWebsiteJobPostOpenDepartmentId:string
+	//"department_id"
+	export const DepartmentIdTypeListWebsiteJobPostDepartmentId:string
+	//"open_department_id"
+	export const DepartmentIdTypeListWebsiteJobPostOpenDepartmentId:string
 	//"open_department_id"
 	export const DepartmentIdTypeOpenDepartmentId:string
 	//"department_id"
@@ -2655,6 +3265,14 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 	export const DepartmentIdTypePatchEmployeeOpenDepartmentId:string
 	//"people_admin_department_id"
 	export const DepartmentIdTypePatchEmployeePeopleAdminDepartmentId:string
+	//"department_id"
+	export const DepartmentIdTypeSearchJobPublishRecordDepartmentId:string
+	//"open_department_id"
+	export const DepartmentIdTypeSearchJobPublishRecordOpenDepartmentId:string
+	//"department_id"
+	export const DepartmentIdTypeSearchWebsiteJobPostDepartmentId:string
+	//"open_department_id"
+	export const DepartmentIdTypeSearchWebsiteJobPostOpenDepartmentId:string
 	//"department_id"
 	export const DepartmentIdTypeTransferOnboardApplicationDepartmentId:string
 	//"open_department_id"
@@ -3088,6 +3706,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			sequence:Ref<string>
 			level:Ref<string>
 			employeeType:Ref<string>
+			jobRequirementId:Ref<string>
 	}
 	export interface EmployeeBuilder extends Struct<EmployeeBuilder>{
 
@@ -3106,6 +3725,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			sequence(sequence:string):Ref<EmployeeBuilder>
 			level(level:string):Ref<EmployeeBuilder>
 			employeeType(employeeType:string):Ref<EmployeeBuilder>
+			jobRequirementId(jobRequirementId:string):Ref<EmployeeBuilder>
 			build():Ref<Employee>
 	}
 	export interface EmployeeConversionInfo extends Struct<EmployeeConversionInfo>{
@@ -3464,6 +4084,25 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			comment(comment:string):Ref<ExternalRewardBuilder>
 			build():Ref<ExternalReward>
 	}
+	export interface Filter extends Struct<Filter>{
+
+			key:Ref<string>
+			valueType:Ref<int>
+			valueList:string[]
+			rangeFilter:Ref<RangeFilter>
+			candidateTagFilter:Ref<CandidateTagFilter>
+			degreeFilter:Ref<DegreeFilter>
+	}
+	export interface FilterBuilder extends Struct<FilterBuilder>{
+
+			key(key:string):Ref<FilterBuilder>
+			valueType(valueType:int):Ref<FilterBuilder>
+			valueList(valueList:string[]):Ref<FilterBuilder>
+			rangeFilter(rangeFilter:Ref<RangeFilter>):Ref<FilterBuilder>
+			candidateTagFilter(candidateTagFilter:Ref<CandidateTagFilter>):Ref<FilterBuilder>
+			degreeFilter(degreeFilter:Ref<DegreeFilter>):Ref<FilterBuilder>
+			build():Ref<Filter>
+	}
 	export interface FiveStartScoringResult extends Struct<FiveStartScoringResult>{
 
 			highestScoreDesc:Ref<string>
@@ -3480,6 +4119,26 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			lowestScoreEnDesc(lowestScoreEnDesc:string):Ref<FiveStartScoringResultBuilder>
 			scoreResult(scoreResult:float64):Ref<FiveStartScoringResultBuilder>
 			build():Ref<FiveStartScoringResult>
+	}
+	export interface GetAgencyReq extends Struct<GetAgencyReq>{
+
+	}
+	export interface GetAgencyReqBuilder extends Struct<GetAgencyReqBuilder>{
+
+			agencyId(agencyId:string):Ref<GetAgencyReqBuilder>
+			userIdType(userIdType:string):Ref<GetAgencyReqBuilder>
+			build():Ref<GetAgencyReq>
+	}
+	export interface GetAgencyResp extends Struct<GetAgencyResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<GetAgencyRespData>
+			success():bool
+	}
+	export interface GetAgencyRespData extends Struct<GetAgencyRespData>{
+
+			agency:Ref<Agency>
 	}
 	export interface GetApplicationReq extends Struct<GetApplicationReq>{
 
@@ -3566,6 +4225,27 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 
 			referral:Ref<Referral>
 	}
+	export interface GetByTalentInterviewReq extends Struct<GetByTalentInterviewReq>{
+
+	}
+	export interface GetByTalentInterviewReqBuilder extends Struct<GetByTalentInterviewReqBuilder>{
+
+			talentId(talentId:string):Ref<GetByTalentInterviewReqBuilder>
+			userIdType(userIdType:string):Ref<GetByTalentInterviewReqBuilder>
+			jobLevelIdType(jobLevelIdType:string):Ref<GetByTalentInterviewReqBuilder>
+			build():Ref<GetByTalentInterviewReq>
+	}
+	export interface GetByTalentInterviewResp extends Struct<GetByTalentInterviewResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<GetByTalentInterviewRespData>
+			success():bool
+	}
+	export interface GetByTalentInterviewRespData extends Struct<GetByTalentInterviewRespData>{
+
+			items:Ref<TalentInterview>[]
+	}
 	export interface GetEmployeeReq extends Struct<GetEmployeeReq>{
 
 	}
@@ -3589,6 +4269,47 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 	export interface GetEmployeeRespData extends Struct<GetEmployeeRespData>{
 
 			employee:Ref<Employee>
+	}
+	export interface GetInterviewRecordAttachmentReq extends Struct<GetInterviewRecordAttachmentReq>{
+
+	}
+	export interface GetInterviewRecordAttachmentReqBuilder extends Struct<GetInterviewRecordAttachmentReqBuilder>{
+
+			applicationId(applicationId:string):Ref<GetInterviewRecordAttachmentReqBuilder>
+			interviewRecordId(interviewRecordId:string):Ref<GetInterviewRecordAttachmentReqBuilder>
+			language(language:int):Ref<GetInterviewRecordAttachmentReqBuilder>
+			build():Ref<GetInterviewRecordAttachmentReq>
+	}
+	export interface GetInterviewRecordAttachmentResp extends Struct<GetInterviewRecordAttachmentResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<GetInterviewRecordAttachmentRespData>
+			success():bool
+	}
+	export interface GetInterviewRecordAttachmentRespData extends Struct<GetInterviewRecordAttachmentRespData>{
+
+			attachment:Ref<AttachmentInfo>
+	}
+	export interface GetInterviewRecordReq extends Struct<GetInterviewRecordReq>{
+
+	}
+	export interface GetInterviewRecordReqBuilder extends Struct<GetInterviewRecordReqBuilder>{
+
+			interviewRecordId(interviewRecordId:string):Ref<GetInterviewRecordReqBuilder>
+			userIdType(userIdType:string):Ref<GetInterviewRecordReqBuilder>
+			build():Ref<GetInterviewRecordReq>
+	}
+	export interface GetInterviewRecordResp extends Struct<GetInterviewRecordResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<GetInterviewRecordRespData>
+			success():bool
+	}
+	export interface GetInterviewRecordRespData extends Struct<GetInterviewRecordRespData>{
+
+			interviewRecord:Ref<InterviewRecord>
 	}
 	export interface GetJobManagerReq extends Struct<GetJobManagerReq>{
 
@@ -3653,6 +4374,25 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 	export interface GetNoteRespData extends Struct<GetNoteRespData>{
 
 			note:Ref<Note>
+	}
+	export interface GetOfferApplicationFormReq extends Struct<GetOfferApplicationFormReq>{
+
+	}
+	export interface GetOfferApplicationFormReqBuilder extends Struct<GetOfferApplicationFormReqBuilder>{
+
+			offerApplicationFormId(offerApplicationFormId:string):Ref<GetOfferApplicationFormReqBuilder>
+			build():Ref<GetOfferApplicationFormReq>
+	}
+	export interface GetOfferApplicationFormResp extends Struct<GetOfferApplicationFormResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<GetOfferApplicationFormRespData>
+			success():bool
+	}
+	export interface GetOfferApplicationFormRespData extends Struct<GetOfferApplicationFormRespData>{
+
+			offerApplyForm:Ref<OfferApplyFormInfo>
 	}
 	export interface GetOfferReq extends Struct<GetOfferReq>{
 
@@ -3722,6 +4462,25 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 
 			jobPost:Ref<PortalJobPost>
 	}
+	export interface GetRoleReq extends Struct<GetRoleReq>{
+
+	}
+	export interface GetRoleReqBuilder extends Struct<GetRoleReqBuilder>{
+
+			roleId(roleId:string):Ref<GetRoleReqBuilder>
+			build():Ref<GetRoleReq>
+	}
+	export interface GetRoleResp extends Struct<GetRoleResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<GetRoleRespData>
+			success():bool
+	}
+	export interface GetRoleRespData extends Struct<GetRoleRespData>{
+
+			role:Ref<RoleDetail>
+	}
 	export interface GetTalentReq extends Struct<GetTalentReq>{
 
 	}
@@ -3741,6 +4500,52 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 	export interface GetTalentRespData extends Struct<GetTalentRespData>{
 
 			talent:Ref<Talent>
+	}
+	export interface GetWebsiteDeliveryTaskReq extends Struct<GetWebsiteDeliveryTaskReq>{
+
+	}
+	export interface GetWebsiteDeliveryTaskReqBuilder extends Struct<GetWebsiteDeliveryTaskReqBuilder>{
+
+			websiteId(websiteId:string):Ref<GetWebsiteDeliveryTaskReqBuilder>
+			deliveryTaskId(deliveryTaskId:string):Ref<GetWebsiteDeliveryTaskReqBuilder>
+			build():Ref<GetWebsiteDeliveryTaskReq>
+	}
+	export interface GetWebsiteDeliveryTaskResp extends Struct<GetWebsiteDeliveryTaskResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<GetWebsiteDeliveryTaskRespData>
+			success():bool
+	}
+	export interface GetWebsiteDeliveryTaskRespData extends Struct<GetWebsiteDeliveryTaskRespData>{
+
+			status:Ref<int>
+			delivery:Ref<WebsiteDeliveryDto>
+			statusMsg:Ref<string>
+			extraInfo:Ref<string>
+	}
+	export interface GetWebsiteJobPostReq extends Struct<GetWebsiteJobPostReq>{
+
+	}
+	export interface GetWebsiteJobPostReqBuilder extends Struct<GetWebsiteJobPostReqBuilder>{
+
+			websiteId(websiteId:string):Ref<GetWebsiteJobPostReqBuilder>
+			jobPostId(jobPostId:string):Ref<GetWebsiteJobPostReqBuilder>
+			userIdType(userIdType:string):Ref<GetWebsiteJobPostReqBuilder>
+			departmentIdType(departmentIdType:string):Ref<GetWebsiteJobPostReqBuilder>
+			jobLevelIdType(jobLevelIdType:string):Ref<GetWebsiteJobPostReqBuilder>
+			build():Ref<GetWebsiteJobPostReq>
+	}
+	export interface GetWebsiteJobPostResp extends Struct<GetWebsiteJobPostResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<GetWebsiteJobPostRespData>
+			success():bool
+	}
+	export interface GetWebsiteJobPostRespData extends Struct<GetWebsiteJobPostRespData>{
+
+			jobPost:Ref<WebsiteJobPost>
 	}
 	export interface I18n extends Struct<I18n>{
 
@@ -4354,6 +5159,17 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			activityStatus(activityStatus:int):Ref<InterviewTaskBuilder>
 			build():Ref<InterviewTask>
 	}
+	export interface Interviewer extends Struct<Interviewer>{
+
+			userId:Ref<string>
+			verifyStatus:Ref<int>
+	}
+	export interface InterviewerBuilder extends Struct<InterviewerBuilder>{
+
+			userId(userId:string):Ref<InterviewerBuilder>
+			verifyStatus(verifyStatus:int):Ref<InterviewerBuilder>
+			build():Ref<Interviewer>
+	}
 	export interface Job extends Struct<Job>{
 
 			id:Ref<string>
@@ -4699,6 +5515,10 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 	//"people_admin_job_category_id"
 	export const JobFamilyIdTypePeopleAdminJobCategoryId:string
 	//"job_family_id"
+	export const JobFamilyIdTypeSearchJobPublishRecordJobFamilyId:string
+	//"people_admin_job_category_id"
+	export const JobFamilyIdTypeSearchJobPublishRecordPeopleAdminJobCategoryId:string
+	//"job_family_id"
 	export const JobFamilyIdTypeTransferOnboardApplicationJobFamilyId:string
 	//"people_admin_job_category_id"
 	export const JobFamilyIdTypeTransferOnboardApplicationPeopleAdminJobCategoryId:string
@@ -4774,6 +5594,10 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 	//"people_admin_job_level_id"
 	export const JobLevelIdTypeGetByApplicationEmployeePeopleAdminJobLevelId:string
 	//"job_level_id"
+	export const JobLevelIdTypeGetByTalentInterviewJobLevelId:string
+	//"people_admin_job_level_id"
+	export const JobLevelIdTypeGetByTalentInterviewPeopleAdminJobLevelId:string
+	//"job_level_id"
 	export const JobLevelIdTypeGetEmployeeJobLevelId:string
 	//"people_admin_job_level_id"
 	export const JobLevelIdTypeGetEmployeePeopleAdminJobLevelId:string
@@ -4789,6 +5613,10 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 	export const JobLevelIdTypeGetReferralWebsiteJobPostJobLevelId:string
 	//"people_admin_job_level_id"
 	export const JobLevelIdTypeGetReferralWebsiteJobPostPeopleAdminJobLevelId:string
+	//"job_level_id"
+	export const JobLevelIdTypeGetWebsiteJobPostJobLevelId:string
+	//"people_admin_job_level_id"
+	export const JobLevelIdTypeGetWebsiteJobPostPeopleAdminJobLevelId:string
 	//"job_level_id"
 	export const JobLevelIdTypeJobLevelId:string
 	//"job_level_id"
@@ -4816,11 +5644,23 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 	//"people_admin_job_level_id"
 	export const JobLevelIdTypeListReferralWebsiteJobPostPeopleAdminJobLevelId:string
 	//"job_level_id"
+	export const JobLevelIdTypeListWebsiteJobPostJobLevelId:string
+	//"people_admin_job_level_id"
+	export const JobLevelIdTypeListWebsiteJobPostPeopleAdminJobLevelId:string
+	//"job_level_id"
 	export const JobLevelIdTypePatchEmployeeJobLevelId:string
 	//"people_admin_job_level_id"
 	export const JobLevelIdTypePatchEmployeePeopleAdminJobLevelId:string
 	//"people_admin_job_level_id"
 	export const JobLevelIdTypePeopleAdminJobLevelId:string
+	//"job_level_id"
+	export const JobLevelIdTypeSearchJobPublishRecordJobLevelId:string
+	//"people_admin_job_level_id"
+	export const JobLevelIdTypeSearchJobPublishRecordPeopleAdminJobLevelId:string
+	//"job_level_id"
+	export const JobLevelIdTypeSearchWebsiteJobPostJobLevelId:string
+	//"people_admin_job_level_id"
+	export const JobLevelIdTypeSearchWebsiteJobPostPeopleAdminJobLevelId:string
 	//"job_level_id"
 	export const JobLevelIdTypeTransferOnboardApplicationJobLevelId:string
 	//"people_admin_job_level_id"
@@ -5095,6 +5935,9 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			jobIdList:string[]
 			processType:Ref<int>
 			jobType:Ref<JobTypeInfo>
+			createTime:Ref<string>
+			creatorId:Ref<string>
+			updateTime:Ref<string>
 	}
 	export interface JobRequirementDtoBuilder extends Struct<JobRequirementDtoBuilder>{
 
@@ -5125,6 +5968,9 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			jobIdList(jobIdList:string[]):Ref<JobRequirementDtoBuilder>
 			processType(processType:int):Ref<JobRequirementDtoBuilder>
 			jobType(jobType:Ref<JobTypeInfo>):Ref<JobRequirementDtoBuilder>
+			createTime(createTime:string):Ref<JobRequirementDtoBuilder>
+			creatorId(creatorId:string):Ref<JobRequirementDtoBuilder>
+			updateTime(updateTime:string):Ref<JobRequirementDtoBuilder>
 			build():Ref<JobRequirementDto>
 	}
 	export interface JobRequirementSchema extends Struct<JobRequirementSchema>{
@@ -5181,6 +6027,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			parentId(parentId:string):Ref<JobTypeInfoBuilder>
 			build():Ref<JobTypeInfo>
 	}
+	//2
+	export const LanguageEn:int
 	export interface LanguageInfo extends Struct<LanguageInfo>{
 
 			language:Ref<int>
@@ -5192,6 +6040,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			proficiency(proficiency:int):Ref<LanguageInfoBuilder>
 			build():Ref<LanguageInfo>
 	}
+	//1
+	export const LanguageZh:int
 	export interface Level extends Struct<Level>{
 
 			id:Ref<string>
@@ -5258,6 +6108,32 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			items:string[]
 			pageToken:Ref<string>
 			hasMore:Ref<bool>
+	}
+	export interface ListBackgroundCheckOrderReq extends Struct<ListBackgroundCheckOrderReq>{
+
+	}
+	export interface ListBackgroundCheckOrderReqBuilder extends Struct<ListBackgroundCheckOrderReqBuilder>{
+
+			userIdType(userIdType:string):Ref<ListBackgroundCheckOrderReqBuilder>
+			pageToken(pageToken:string):Ref<ListBackgroundCheckOrderReqBuilder>
+			pageSize(pageSize:int):Ref<ListBackgroundCheckOrderReqBuilder>
+			applicationId(applicationId:string):Ref<ListBackgroundCheckOrderReqBuilder>
+			updateStartTime(updateStartTime:string):Ref<ListBackgroundCheckOrderReqBuilder>
+			updateEndTime(updateEndTime:string):Ref<ListBackgroundCheckOrderReqBuilder>
+			build():Ref<ListBackgroundCheckOrderReq>
+	}
+	export interface ListBackgroundCheckOrderResp extends Struct<ListBackgroundCheckOrderResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<ListBackgroundCheckOrderRespData>
+			success():bool
+	}
+	export interface ListBackgroundCheckOrderRespData extends Struct<ListBackgroundCheckOrderRespData>{
+
+			hasMore:Ref<bool>
+			pageToken:Ref<string>
+			items:Ref<BackgroundCheckOrder>[]
 	}
 	export interface ListByIdJobRequirementPathReqBodyBuilder extends Struct<ListByIdJobRequirementPathReqBodyBuilder>{
 
@@ -5331,6 +6207,190 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			pageToken:Ref<string>
 			items:Ref<Evaluation>[]
 	}
+	export interface ListEvaluationTaskIterator extends Struct<ListEvaluationTaskIterator>{
+
+			next():[bool,Ref<EvaluationTask>]
+			nextPageToken():Ref<string>
+	}
+	export interface ListEvaluationTaskReq extends Struct<ListEvaluationTaskReq>{
+
+			limit:int
+	}
+	export interface ListEvaluationTaskReqBuilder extends Struct<ListEvaluationTaskReqBuilder>{
+
+			limit(limit:int):Ref<ListEvaluationTaskReqBuilder>
+			pageSize(pageSize:int):Ref<ListEvaluationTaskReqBuilder>
+			pageToken(pageToken:string):Ref<ListEvaluationTaskReqBuilder>
+			userId(userId:string):Ref<ListEvaluationTaskReqBuilder>
+			activityStatus(activityStatus:int):Ref<ListEvaluationTaskReqBuilder>
+			userIdType(userIdType:string):Ref<ListEvaluationTaskReqBuilder>
+			build():Ref<ListEvaluationTaskReq>
+	}
+	export interface ListEvaluationTaskResp extends Struct<ListEvaluationTaskResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<ListEvaluationTaskRespData>
+			success():bool
+	}
+	export interface ListEvaluationTaskRespData extends Struct<ListEvaluationTaskRespData>{
+
+			hasMore:Ref<bool>
+			pageToken:Ref<string>
+			items:Ref<EvaluationTask>[]
+	}
+	export interface ListExamMarkingTaskIterator extends Struct<ListExamMarkingTaskIterator>{
+
+			next():[bool,Ref<ExamMarkingTask>]
+			nextPageToken():Ref<string>
+	}
+	export interface ListExamMarkingTaskReq extends Struct<ListExamMarkingTaskReq>{
+
+			limit:int
+	}
+	export interface ListExamMarkingTaskReqBuilder extends Struct<ListExamMarkingTaskReqBuilder>{
+
+			limit(limit:int):Ref<ListExamMarkingTaskReqBuilder>
+			pageSize(pageSize:int):Ref<ListExamMarkingTaskReqBuilder>
+			pageToken(pageToken:string):Ref<ListExamMarkingTaskReqBuilder>
+			userId(userId:string):Ref<ListExamMarkingTaskReqBuilder>
+			activityStatus(activityStatus:int):Ref<ListExamMarkingTaskReqBuilder>
+			userIdType(userIdType:string):Ref<ListExamMarkingTaskReqBuilder>
+			build():Ref<ListExamMarkingTaskReq>
+	}
+	export interface ListExamMarkingTaskResp extends Struct<ListExamMarkingTaskResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<ListExamMarkingTaskRespData>
+			success():bool
+	}
+	export interface ListExamMarkingTaskRespData extends Struct<ListExamMarkingTaskRespData>{
+
+			hasMore:Ref<bool>
+			pageToken:Ref<string>
+			items:Ref<ExamMarkingTask>[]
+	}
+	export interface ListExternalApplicationIterator extends Struct<ListExternalApplicationIterator>{
+
+			next():[bool,Ref<ExternalApplication>]
+			nextPageToken():Ref<string>
+	}
+	export interface ListExternalApplicationReq extends Struct<ListExternalApplicationReq>{
+
+			limit:int
+	}
+	export interface ListExternalApplicationReqBuilder extends Struct<ListExternalApplicationReqBuilder>{
+
+			limit(limit:int):Ref<ListExternalApplicationReqBuilder>
+			talentId(talentId:string):Ref<ListExternalApplicationReqBuilder>
+			pageSize(pageSize:int):Ref<ListExternalApplicationReqBuilder>
+			pageToken(pageToken:string):Ref<ListExternalApplicationReqBuilder>
+			build():Ref<ListExternalApplicationReq>
+	}
+	export interface ListExternalApplicationResp extends Struct<ListExternalApplicationResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<ListExternalApplicationRespData>
+			success():bool
+	}
+	export interface ListExternalApplicationRespData extends Struct<ListExternalApplicationRespData>{
+
+			items:Ref<ExternalApplication>[]
+			hasMore:Ref<bool>
+			pageToken:Ref<string>
+	}
+	export interface ListInterviewFeedbackFormIterator extends Struct<ListInterviewFeedbackFormIterator>{
+
+			next():[bool,Ref<InterviewFeedbackForm>]
+			nextPageToken():Ref<string>
+	}
+	export interface ListInterviewFeedbackFormReq extends Struct<ListInterviewFeedbackFormReq>{
+
+			limit:int
+	}
+	export interface ListInterviewFeedbackFormReqBuilder extends Struct<ListInterviewFeedbackFormReqBuilder>{
+
+			limit(limit:int):Ref<ListInterviewFeedbackFormReqBuilder>
+			interviewFeedbackFormIds(interviewFeedbackFormIds:string[]):Ref<ListInterviewFeedbackFormReqBuilder>
+			pageSize(pageSize:int):Ref<ListInterviewFeedbackFormReqBuilder>
+			pageToken(pageToken:string):Ref<ListInterviewFeedbackFormReqBuilder>
+			build():Ref<ListInterviewFeedbackFormReq>
+	}
+	export interface ListInterviewFeedbackFormResp extends Struct<ListInterviewFeedbackFormResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<ListInterviewFeedbackFormRespData>
+			success():bool
+	}
+	export interface ListInterviewFeedbackFormRespData extends Struct<ListInterviewFeedbackFormRespData>{
+
+			items:Ref<InterviewFeedbackForm>[]
+			pageToken:Ref<string>
+			hasMore:Ref<bool>
+	}
+	export interface ListInterviewRecordIterator extends Struct<ListInterviewRecordIterator>{
+
+			next():[bool,Ref<InterviewRecord>]
+			nextPageToken():Ref<string>
+	}
+	export interface ListInterviewRecordReq extends Struct<ListInterviewRecordReq>{
+
+			limit:int
+	}
+	export interface ListInterviewRecordReqBuilder extends Struct<ListInterviewRecordReqBuilder>{
+
+			limit(limit:int):Ref<ListInterviewRecordReqBuilder>
+			pageSize(pageSize:int):Ref<ListInterviewRecordReqBuilder>
+			pageToken(pageToken:string):Ref<ListInterviewRecordReqBuilder>
+			ids(ids:string[]):Ref<ListInterviewRecordReqBuilder>
+			userIdType(userIdType:string):Ref<ListInterviewRecordReqBuilder>
+			build():Ref<ListInterviewRecordReq>
+	}
+	export interface ListInterviewRecordResp extends Struct<ListInterviewRecordResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<ListInterviewRecordRespData>
+			success():bool
+	}
+	export interface ListInterviewRecordRespData extends Struct<ListInterviewRecordRespData>{
+
+			items:Ref<InterviewRecord>[]
+			pageToken:Ref<string>
+			hasMore:Ref<bool>
+	}
+	export interface ListInterviewRegistrationSchemaIterator extends Struct<ListInterviewRegistrationSchemaIterator>{
+
+			next():[bool,Ref<InterviewRegistrationSchema>]
+			nextPageToken():Ref<string>
+	}
+	export interface ListInterviewRegistrationSchemaReq extends Struct<ListInterviewRegistrationSchemaReq>{
+
+			limit:int
+	}
+	export interface ListInterviewRegistrationSchemaReqBuilder extends Struct<ListInterviewRegistrationSchemaReqBuilder>{
+
+			limit(limit:int):Ref<ListInterviewRegistrationSchemaReqBuilder>
+			pageToken(pageToken:string):Ref<ListInterviewRegistrationSchemaReqBuilder>
+			pageSize(pageSize:int):Ref<ListInterviewRegistrationSchemaReqBuilder>
+			build():Ref<ListInterviewRegistrationSchemaReq>
+	}
+	export interface ListInterviewRegistrationSchemaResp extends Struct<ListInterviewRegistrationSchemaResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<ListInterviewRegistrationSchemaRespData>
+			success():bool
+	}
+	export interface ListInterviewRegistrationSchemaRespData extends Struct<ListInterviewRegistrationSchemaRespData>{
+
+			items:Ref<InterviewRegistrationSchema>[]
+			hasMore:Ref<bool>
+			pageToken:Ref<string>
+	}
 	export interface ListInterviewReq extends Struct<ListInterviewReq>{
 
 	}
@@ -5358,6 +6418,87 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			items:Ref<InterviewExtend>[]
 			hasMore:Ref<bool>
 			pageToken:Ref<string>
+	}
+	export interface ListInterviewRoundTypeReq extends Struct<ListInterviewRoundTypeReq>{
+
+	}
+	export interface ListInterviewRoundTypeReqBuilder extends Struct<ListInterviewRoundTypeReqBuilder>{
+
+			processType(processType:int):Ref<ListInterviewRoundTypeReqBuilder>
+			build():Ref<ListInterviewRoundTypeReq>
+	}
+	export interface ListInterviewRoundTypeResp extends Struct<ListInterviewRoundTypeResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<ListInterviewRoundTypeRespData>
+			success():bool
+	}
+	export interface ListInterviewRoundTypeRespData extends Struct<ListInterviewRoundTypeRespData>{
+
+			activeStatus:Ref<int>
+			items:Ref<InterviewRoundType>[]
+	}
+	export interface ListInterviewTaskIterator extends Struct<ListInterviewTaskIterator>{
+
+			next():[bool,Ref<InterviewTask>]
+			nextPageToken():Ref<string>
+	}
+	export interface ListInterviewTaskReq extends Struct<ListInterviewTaskReq>{
+
+			limit:int
+	}
+	export interface ListInterviewTaskReqBuilder extends Struct<ListInterviewTaskReqBuilder>{
+
+			limit(limit:int):Ref<ListInterviewTaskReqBuilder>
+			pageSize(pageSize:int):Ref<ListInterviewTaskReqBuilder>
+			pageToken(pageToken:string):Ref<ListInterviewTaskReqBuilder>
+			userId(userId:string):Ref<ListInterviewTaskReqBuilder>
+			activityStatus(activityStatus:int):Ref<ListInterviewTaskReqBuilder>
+			userIdType(userIdType:string):Ref<ListInterviewTaskReqBuilder>
+			build():Ref<ListInterviewTaskReq>
+	}
+	export interface ListInterviewTaskResp extends Struct<ListInterviewTaskResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<ListInterviewTaskRespData>
+			success():bool
+	}
+	export interface ListInterviewTaskRespData extends Struct<ListInterviewTaskRespData>{
+
+			hasMore:Ref<bool>
+			pageToken:Ref<string>
+			items:Ref<InterviewTask>[]
+	}
+	export interface ListJobFunctionIterator extends Struct<ListJobFunctionIterator>{
+
+			next():[bool,Ref<JobFunction>]
+			nextPageToken():Ref<string>
+	}
+	export interface ListJobFunctionReq extends Struct<ListJobFunctionReq>{
+
+			limit:int
+	}
+	export interface ListJobFunctionReqBuilder extends Struct<ListJobFunctionReqBuilder>{
+
+			limit(limit:int):Ref<ListJobFunctionReqBuilder>
+			pageSize(pageSize:int):Ref<ListJobFunctionReqBuilder>
+			pageToken(pageToken:string):Ref<ListJobFunctionReqBuilder>
+			build():Ref<ListJobFunctionReq>
+	}
+	export interface ListJobFunctionResp extends Struct<ListJobFunctionResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<ListJobFunctionRespData>
+			success():bool
+	}
+	export interface ListJobFunctionRespData extends Struct<ListJobFunctionRespData>{
+
+			hasMore:Ref<bool>
+			pageToken:Ref<string>
+			items:Ref<JobFunction>[]
 	}
 	export interface ListJobProcessReq extends Struct<ListJobProcessReq>{
 
@@ -5463,6 +6604,29 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			pageToken:Ref<string>
 			items:Ref<Job>[]
 	}
+	export interface ListJobSchemaReq extends Struct<ListJobSchemaReq>{
+
+	}
+	export interface ListJobSchemaReqBuilder extends Struct<ListJobSchemaReqBuilder>{
+
+			pageToken(pageToken:string):Ref<ListJobSchemaReqBuilder>
+			pageSize(pageSize:int):Ref<ListJobSchemaReqBuilder>
+			scenario(scenario:int):Ref<ListJobSchemaReqBuilder>
+			build():Ref<ListJobSchemaReq>
+	}
+	export interface ListJobSchemaResp extends Struct<ListJobSchemaResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<ListJobSchemaRespData>
+			success():bool
+	}
+	export interface ListJobSchemaRespData extends Struct<ListJobSchemaRespData>{
+
+			items:Ref<JobSchema>[]
+			hasMore:Ref<bool>
+			pageToken:Ref<string>
+	}
 	export interface ListJobTypeIterator extends Struct<ListJobTypeIterator>{
 
 			next():[bool,Ref<JobTypeInfo>]
@@ -5492,6 +6656,36 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			pageToken:Ref<string>
 			hasMore:Ref<bool>
 	}
+	export interface ListLocationIterator extends Struct<ListLocationIterator>{
+
+			next():[bool,Ref<Location>]
+			nextPageToken():Ref<string>
+	}
+	export interface ListLocationReq extends Struct<ListLocationReq>{
+
+			limit:int
+	}
+	export interface ListLocationReqBuilder extends Struct<ListLocationReqBuilder>{
+
+			limit(limit:int):Ref<ListLocationReqBuilder>
+			pageToken(pageToken:string):Ref<ListLocationReqBuilder>
+			pageSize(pageSize:int):Ref<ListLocationReqBuilder>
+			usage(usage:string):Ref<ListLocationReqBuilder>
+			build():Ref<ListLocationReq>
+	}
+	export interface ListLocationResp extends Struct<ListLocationResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<ListLocationRespData>
+			success():bool
+	}
+	export interface ListLocationRespData extends Struct<ListLocationRespData>{
+
+			items:Ref<Location>[]
+			hasMore:Ref<bool>
+			pageToken:Ref<string>
+	}
 	export interface ListNoteReq extends Struct<ListNoteReq>{
 
 	}
@@ -5515,6 +6709,28 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			items:Ref<Note>[]
 			hasMore:Ref<bool>
 			pageToken:Ref<string>
+	}
+	export interface ListOfferApplicationFormReq extends Struct<ListOfferApplicationFormReq>{
+
+	}
+	export interface ListOfferApplicationFormReqBuilder extends Struct<ListOfferApplicationFormReqBuilder>{
+
+			pageToken(pageToken:string):Ref<ListOfferApplicationFormReqBuilder>
+			pageSize(pageSize:int):Ref<ListOfferApplicationFormReqBuilder>
+			build():Ref<ListOfferApplicationFormReq>
+	}
+	export interface ListOfferApplicationFormResp extends Struct<ListOfferApplicationFormResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<ListOfferApplicationFormRespData>
+			success():bool
+	}
+	export interface ListOfferApplicationFormRespData extends Struct<ListOfferApplicationFormRespData>{
+
+			hasMore:Ref<bool>
+			pageToken:Ref<string>
+			items:Ref<OfferApplyForm>[]
 	}
 	export interface ListOfferReq extends Struct<ListOfferReq>{
 
@@ -5659,6 +6875,59 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			pageToken:Ref<string>
 			hasMore:Ref<bool>
 	}
+	export interface ListRoleIterator extends Struct<ListRoleIterator>{
+
+			next():[bool,Ref<Role>]
+			nextPageToken():Ref<string>
+	}
+	export interface ListRoleReq extends Struct<ListRoleReq>{
+
+			limit:int
+	}
+	export interface ListRoleReqBuilder extends Struct<ListRoleReqBuilder>{
+
+			limit(limit:int):Ref<ListRoleReqBuilder>
+			pageToken(pageToken:string):Ref<ListRoleReqBuilder>
+			pageSize(pageSize:int):Ref<ListRoleReqBuilder>
+			build():Ref<ListRoleReq>
+	}
+	export interface ListRoleResp extends Struct<ListRoleResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<ListRoleRespData>
+			success():bool
+	}
+	export interface ListRoleRespData extends Struct<ListRoleRespData>{
+
+			items:Ref<Role>[]
+			hasMore:Ref<bool>
+			pageToken:Ref<string>
+	}
+	export interface ListSubjectReq extends Struct<ListSubjectReq>{
+
+	}
+	export interface ListSubjectReqBuilder extends Struct<ListSubjectReqBuilder>{
+
+			userIdType(userIdType:string):Ref<ListSubjectReqBuilder>
+			subjectIds(subjectIds:string[]):Ref<ListSubjectReqBuilder>
+			pageToken(pageToken:string):Ref<ListSubjectReqBuilder>
+			pageSize(pageSize:int):Ref<ListSubjectReqBuilder>
+			build():Ref<ListSubjectReq>
+	}
+	export interface ListSubjectResp extends Struct<ListSubjectResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<ListSubjectRespData>
+			success():bool
+	}
+	export interface ListSubjectRespData extends Struct<ListSubjectRespData>{
+
+			hasMore:Ref<bool>
+			pageToken:Ref<string>
+			items:Ref<Subject>[]
+	}
 	export interface ListTalentFolderIterator extends Struct<ListTalentFolderIterator>{
 
 			next():[bool,Ref<TalentFolderForList>]
@@ -5715,6 +6984,187 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			pageToken:Ref<string>
 			items:Ref<Talent>[]
 	}
+	export interface ListTerminationReasonIterator extends Struct<ListTerminationReasonIterator>{
+
+			next():[bool,Ref<TerminationReason>]
+			nextPageToken():Ref<string>
+	}
+	export interface ListTerminationReasonReq extends Struct<ListTerminationReasonReq>{
+
+			limit:int
+	}
+	export interface ListTerminationReasonReqBuilder extends Struct<ListTerminationReasonReqBuilder>{
+
+			limit(limit:int):Ref<ListTerminationReasonReqBuilder>
+			pageToken(pageToken:string):Ref<ListTerminationReasonReqBuilder>
+			pageSize(pageSize:int):Ref<ListTerminationReasonReqBuilder>
+			build():Ref<ListTerminationReasonReq>
+	}
+	export interface ListTerminationReasonResp extends Struct<ListTerminationReasonResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<ListTerminationReasonRespData>
+			success():bool
+	}
+	export interface ListTerminationReasonRespData extends Struct<ListTerminationReasonRespData>{
+
+			items:Ref<TerminationReason>[]
+			hasMore:Ref<bool>
+			pageToken:Ref<string>
+	}
+	export interface ListTodoIterator extends Struct<ListTodoIterator>{
+
+			next():[bool,Ref<Todo>]
+			nextPageToken():Ref<string>
+	}
+	export interface ListTodoReq extends Struct<ListTodoReq>{
+
+			limit:int
+	}
+	export interface ListTodoReqBuilder extends Struct<ListTodoReqBuilder>{
+
+			limit(limit:int):Ref<ListTodoReqBuilder>
+			pageToken(pageToken:string):Ref<ListTodoReqBuilder>
+			pageSize(pageSize:string):Ref<ListTodoReqBuilder>
+			userId(userId:string):Ref<ListTodoReqBuilder>
+			userIdType(userIdType:string):Ref<ListTodoReqBuilder>
+			type(type_:string):Ref<ListTodoReqBuilder>
+			build():Ref<ListTodoReq>
+	}
+	export interface ListTodoResp extends Struct<ListTodoResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<ListTodoRespData>
+			success():bool
+	}
+	export interface ListTodoRespData extends Struct<ListTodoRespData>{
+
+			items:Ref<Todo>[]
+			hasMore:Ref<bool>
+			pageToken:Ref<string>
+	}
+	export interface ListTripartiteAgreementIterator extends Struct<ListTripartiteAgreementIterator>{
+
+			next():[bool,Ref<TripartiteAgreementInfo>]
+			nextPageToken():Ref<string>
+	}
+	export interface ListTripartiteAgreementReq extends Struct<ListTripartiteAgreementReq>{
+
+			limit:int
+	}
+	export interface ListTripartiteAgreementReqBuilder extends Struct<ListTripartiteAgreementReqBuilder>{
+
+			limit(limit:int):Ref<ListTripartiteAgreementReqBuilder>
+			pageSize(pageSize:int):Ref<ListTripartiteAgreementReqBuilder>
+			pageToken(pageToken:string):Ref<ListTripartiteAgreementReqBuilder>
+			applicationId(applicationId:string):Ref<ListTripartiteAgreementReqBuilder>
+			tripartiteAgreementId(tripartiteAgreementId:string):Ref<ListTripartiteAgreementReqBuilder>
+			build():Ref<ListTripartiteAgreementReq>
+	}
+	export interface ListTripartiteAgreementResp extends Struct<ListTripartiteAgreementResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<ListTripartiteAgreementRespData>
+			success():bool
+	}
+	export interface ListTripartiteAgreementRespData extends Struct<ListTripartiteAgreementRespData>{
+
+			items:Ref<TripartiteAgreementInfo>[]
+			pageToken:Ref<string>
+			hasMore:Ref<bool>
+	}
+	export interface ListWebsiteChannelReq extends Struct<ListWebsiteChannelReq>{
+
+	}
+	export interface ListWebsiteChannelReqBuilder extends Struct<ListWebsiteChannelReqBuilder>{
+
+			websiteId(websiteId:string):Ref<ListWebsiteChannelReqBuilder>
+			pageSize(pageSize:string):Ref<ListWebsiteChannelReqBuilder>
+			pageToken(pageToken:string):Ref<ListWebsiteChannelReqBuilder>
+			build():Ref<ListWebsiteChannelReq>
+	}
+	export interface ListWebsiteChannelResp extends Struct<ListWebsiteChannelResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<ListWebsiteChannelRespData>
+			success():bool
+	}
+	export interface ListWebsiteChannelRespData extends Struct<ListWebsiteChannelRespData>{
+
+			hasMore:Ref<bool>
+			pageToken:Ref<string>
+			websiteChannelList:Ref<WebsiteChannelInfo>[]
+	}
+	export interface ListWebsiteIterator extends Struct<ListWebsiteIterator>{
+
+			next():[bool,Ref<Website>]
+			nextPageToken():Ref<string>
+	}
+	export interface ListWebsiteJobPostIterator extends Struct<ListWebsiteJobPostIterator>{
+
+			next():[bool,Ref<WebsiteJobPost>]
+			nextPageToken():Ref<string>
+	}
+	export interface ListWebsiteJobPostReq extends Struct<ListWebsiteJobPostReq>{
+
+			limit:int
+	}
+	export interface ListWebsiteJobPostReqBuilder extends Struct<ListWebsiteJobPostReqBuilder>{
+
+			limit(limit:int):Ref<ListWebsiteJobPostReqBuilder>
+			websiteId(websiteId:string):Ref<ListWebsiteJobPostReqBuilder>
+			pageToken(pageToken:string):Ref<ListWebsiteJobPostReqBuilder>
+			pageSize(pageSize:int):Ref<ListWebsiteJobPostReqBuilder>
+			userIdType(userIdType:string):Ref<ListWebsiteJobPostReqBuilder>
+			departmentIdType(departmentIdType:string):Ref<ListWebsiteJobPostReqBuilder>
+			jobLevelIdType(jobLevelIdType:string):Ref<ListWebsiteJobPostReqBuilder>
+			updateStartTime(updateStartTime:string):Ref<ListWebsiteJobPostReqBuilder>
+			updateEndTime(updateEndTime:string):Ref<ListWebsiteJobPostReqBuilder>
+			createStartTime(createStartTime:string):Ref<ListWebsiteJobPostReqBuilder>
+			createEndTime(createEndTime:string):Ref<ListWebsiteJobPostReqBuilder>
+			build():Ref<ListWebsiteJobPostReq>
+	}
+	export interface ListWebsiteJobPostResp extends Struct<ListWebsiteJobPostResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<ListWebsiteJobPostRespData>
+			success():bool
+	}
+	export interface ListWebsiteJobPostRespData extends Struct<ListWebsiteJobPostRespData>{
+
+			items:Ref<WebsiteJobPost>[]
+			hasMore:Ref<bool>
+			pageToken:Ref<string>
+	}
+	export interface ListWebsiteReq extends Struct<ListWebsiteReq>{
+
+			limit:int
+	}
+	export interface ListWebsiteReqBuilder extends Struct<ListWebsiteReqBuilder>{
+
+			limit(limit:int):Ref<ListWebsiteReqBuilder>
+			pageToken(pageToken:string):Ref<ListWebsiteReqBuilder>
+			pageSize(pageSize:int):Ref<ListWebsiteReqBuilder>
+			build():Ref<ListWebsiteReq>
+	}
+	export interface ListWebsiteResp extends Struct<ListWebsiteResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<ListWebsiteRespData>
+			success():bool
+	}
+	export interface ListWebsiteRespData extends Struct<ListWebsiteRespData>{
+
+			items:Ref<Website>[]
+			hasMore:Ref<bool>
+			pageToken:Ref<string>
+	}
 	export interface Location extends Struct<Location>{
 
 			id:Ref<string>
@@ -5755,6 +7205,98 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			activeStatus(activeStatus:int):Ref<LocationBuilder>
 			build():Ref<Location>
 	}
+	export interface LocationCity extends Struct<LocationCity>{
+
+			cityCode:Ref<string>
+			stateCode:Ref<string>
+			countryCode:Ref<string>
+			cityNameInfo:Ref<LocationNameInfo>
+	}
+	export interface LocationCityBuilder extends Struct<LocationCityBuilder>{
+
+			cityCode(cityCode:string):Ref<LocationCityBuilder>
+			stateCode(stateCode:string):Ref<LocationCityBuilder>
+			countryCode(countryCode:string):Ref<LocationCityBuilder>
+			cityNameInfo(cityNameInfo:Ref<LocationNameInfo>):Ref<LocationCityBuilder>
+			build():Ref<LocationCity>
+	}
+	export interface LocationCountry extends Struct<LocationCountry>{
+
+			countryCode:Ref<string>
+			countryNameInfo:Ref<LocationNameInfo>
+	}
+	export interface LocationCountryBuilder extends Struct<LocationCountryBuilder>{
+
+			countryCode(countryCode:string):Ref<LocationCountryBuilder>
+			countryNameInfo(countryNameInfo:Ref<LocationNameInfo>):Ref<LocationCountryBuilder>
+			build():Ref<LocationCountry>
+	}
+	export interface LocationDistrict extends Struct<LocationDistrict>{
+
+			districtCode:Ref<string>
+			cityCode:Ref<string>
+			stateCode:Ref<string>
+			countryCode:Ref<string>
+			districtNameInfo:Ref<LocationNameInfo>
+	}
+	export interface LocationDistrictBuilder extends Struct<LocationDistrictBuilder>{
+
+			districtCode(districtCode:string):Ref<LocationDistrictBuilder>
+			cityCode(cityCode:string):Ref<LocationDistrictBuilder>
+			stateCode(stateCode:string):Ref<LocationDistrictBuilder>
+			countryCode(countryCode:string):Ref<LocationDistrictBuilder>
+			districtNameInfo(districtNameInfo:Ref<LocationNameInfo>):Ref<LocationDistrictBuilder>
+			build():Ref<LocationDistrict>
+	}
+	export interface LocationDto extends Struct<LocationDto>{
+
+			country:Ref<LocationCountry>
+			state:Ref<LocationState>
+			city:Ref<LocationCity>
+			district:Ref<LocationDistrict>
+	}
+	export interface LocationDtoBuilder extends Struct<LocationDtoBuilder>{
+
+			country(country:Ref<LocationCountry>):Ref<LocationDtoBuilder>
+			state(state:Ref<LocationState>):Ref<LocationDtoBuilder>
+			city(city:Ref<LocationCity>):Ref<LocationDtoBuilder>
+			district(district:Ref<LocationDistrict>):Ref<LocationDtoBuilder>
+			build():Ref<LocationDto>
+	}
+	export interface LocationNameInfo extends Struct<LocationNameInfo>{
+
+			zhName:Ref<string>
+			enName:Ref<string>
+			pyName:Ref<string>
+	}
+	export interface LocationNameInfoBuilder extends Struct<LocationNameInfoBuilder>{
+
+			zhName(zhName:string):Ref<LocationNameInfoBuilder>
+			enName(enName:string):Ref<LocationNameInfoBuilder>
+			pyName(pyName:string):Ref<LocationNameInfoBuilder>
+			build():Ref<LocationNameInfo>
+	}
+	export interface LocationState extends Struct<LocationState>{
+
+			stateCode:Ref<string>
+			countryCode:Ref<string>
+			stateNameInfo:Ref<LocationNameInfo>
+	}
+	export interface LocationStateBuilder extends Struct<LocationStateBuilder>{
+
+			stateCode(stateCode:string):Ref<LocationStateBuilder>
+			countryCode(countryCode:string):Ref<LocationStateBuilder>
+			stateNameInfo(stateNameInfo:Ref<LocationNameInfo>):Ref<LocationStateBuilder>
+			build():Ref<LocationState>
+	}
+	//1
+	export const LocationType1:int
+	//2
+	export const LocationType2:int
+	//3
+	export const LocationType3:int
+	//4
+	export const LocationType4:int
 	export interface LoginInfoEcoExamPathReqBodyBuilder extends Struct<LoginInfoEcoExamPathReqBodyBuilder>{
 
 			result(result:int):Ref<LoginInfoEcoExamPathReqBodyBuilder>
@@ -5815,6 +7357,17 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			enName(enName:string):Ref<MasterLocationInfoBuilder>
 			build():Ref<MasterLocationInfo>
 	}
+	export interface MentionEntity extends Struct<MentionEntity>{
+
+			offset:Ref<int>
+			userId:Ref<string>
+	}
+	export interface MentionEntityBuilder extends Struct<MentionEntityBuilder>{
+
+			offset(offset:int):Ref<MentionEntityBuilder>
+			userId(userId:string):Ref<MentionEntityBuilder>
+			build():Ref<MentionEntity>
+	}
 	export interface Mobile extends Struct<Mobile>{
 
 			code:Ref<string>
@@ -5825,6 +7378,45 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			code(code:string):Ref<MobileBuilder>
 			number(number:string):Ref<MobileBuilder>
 			build():Ref<Mobile>
+	}
+	export interface MoveTalentTalentPoolPathReqBodyBuilder extends Struct<MoveTalentTalentPoolPathReqBodyBuilder>{
+
+			talentId(talentId:string):Ref<MoveTalentTalentPoolPathReqBodyBuilder>
+			addType(addType:int):Ref<MoveTalentTalentPoolPathReqBodyBuilder>
+			build():Ref<MoveTalentTalentPoolReqBody>
+	}
+	export interface MoveTalentTalentPoolReq extends Struct<MoveTalentTalentPoolReq>{
+
+			body:Ref<MoveTalentTalentPoolReqBody>
+	}
+	export interface MoveTalentTalentPoolReqBody extends Struct<MoveTalentTalentPoolReqBody>{
+
+			talentId:Ref<string>
+			addType:Ref<int>
+	}
+	export interface MoveTalentTalentPoolReqBodyBuilder extends Struct<MoveTalentTalentPoolReqBodyBuilder>{
+
+			talentId(talentId:string):Ref<MoveTalentTalentPoolReqBodyBuilder>
+			addType(addType:int):Ref<MoveTalentTalentPoolReqBodyBuilder>
+			build():Ref<MoveTalentTalentPoolReqBody>
+	}
+	export interface MoveTalentTalentPoolReqBuilder extends Struct<MoveTalentTalentPoolReqBuilder>{
+
+			talentPoolId(talentPoolId:string):Ref<MoveTalentTalentPoolReqBuilder>
+			body(body:Ref<MoveTalentTalentPoolReqBody>):Ref<MoveTalentTalentPoolReqBuilder>
+			build():Ref<MoveTalentTalentPoolReq>
+	}
+	export interface MoveTalentTalentPoolResp extends Struct<MoveTalentTalentPoolResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<MoveTalentTalentPoolRespData>
+			success():bool
+	}
+	export interface MoveTalentTalentPoolRespData extends Struct<MoveTalentTalentPoolRespData>{
+
+			talentPoolId:Ref<string>
+			talentId:Ref<string>
 	}
 	export interface Nationality extends Struct<Nationality>{
 
@@ -5842,6 +7434,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 	export function New(config:Ref<larkcore.Config>):Ref<V1>
 
 	export function newAbilityBuilder():Ref<AbilityBuilder>
+
+	export function newAcceptanceBuilder():Ref<AcceptanceBuilder>
 
 	export function newAccountBuilder():Ref<AccountBuilder>
 
@@ -6041,6 +7635,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 
 	export function newBatchUpdateEcoExamPaperReqBuilder():Ref<BatchUpdateEcoExamPaperReqBuilder>
 
+	export function newBatchUpdateJobManagerPathReqBodyBuilder():Ref<BatchUpdateJobManagerPathReqBodyBuilder>
+
+	export function newBatchUpdateJobManagerReqBodyBuilder():Ref<BatchUpdateJobManagerReqBodyBuilder>
+
+	export function newBatchUpdateJobManagerReqBuilder():Ref<BatchUpdateJobManagerReqBuilder>
+
 	export function newBonusAmountBuilder():Ref<BonusAmountBuilder>
 
 	export function newBusinessManagementScopeBuilder():Ref<BusinessManagementScopeBuilder>
@@ -6050,6 +7650,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 	export function newCancelEcoBackgroundCheckReqBodyBuilder():Ref<CancelEcoBackgroundCheckReqBodyBuilder>
 
 	export function newCancelEcoBackgroundCheckReqBuilder():Ref<CancelEcoBackgroundCheckReqBuilder>
+
+	export function newCandidateTagFilterBuilder():Ref<CandidateTagFilterBuilder>
 
 	export function newCareerInfoBuilder():Ref<CareerInfoBuilder>
 
@@ -6063,9 +7665,17 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 
 	export function newCityBuilder():Ref<CityBuilder>
 
+	export function newCloseJobReqBuilder():Ref<CloseJobReqBuilder>
+
 	export function newCodeNameObjectBuilder():Ref<CodeNameObjectBuilder>
 
 	export function newCombinedCreateJobReqBuilder():Ref<CombinedCreateJobReqBuilder>
+
+	export function newCombinedCreateTalentPathReqBodyBuilder():Ref<CombinedCreateTalentPathReqBodyBuilder>
+
+	export function newCombinedCreateTalentReqBodyBuilder():Ref<CombinedCreateTalentReqBodyBuilder>
+
+	export function newCombinedCreateTalentReqBuilder():Ref<CombinedCreateTalentReqBuilder>
 
 	export function newCombinedJobBuilder():Ref<CombinedJobBuilder>
 
@@ -6076,6 +7686,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 	export function newCombinedJobResultDefaultJobPostBuilder():Ref<CombinedJobResultDefaultJobPostBuilder>
 
 	export function newCombinedUpdateJobReqBuilder():Ref<CombinedUpdateJobReqBuilder>
+
+	export function newCombinedUpdateTalentPathReqBodyBuilder():Ref<CombinedUpdateTalentPathReqBodyBuilder>
+
+	export function newCombinedUpdateTalentReqBodyBuilder():Ref<CombinedUpdateTalentReqBodyBuilder>
+
+	export function newCombinedUpdateTalentReqBuilder():Ref<CombinedUpdateTalentReqBuilder>
 
 	export function newCommonAddressBuilder():Ref<CommonAddressBuilder>
 
@@ -6103,6 +7719,10 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 
 	export function newCreateApplicationReqBuilder():Ref<CreateApplicationReqBuilder>
 
+	export function newCreateByAttachmentWebsiteDeliveryReqBuilder():Ref<CreateByAttachmentWebsiteDeliveryReqBuilder>
+
+	export function newCreateByResumeWebsiteDeliveryReqBuilder():Ref<CreateByResumeWebsiteDeliveryReqBuilder>
+
 	export function newCreateEcoAccountCustomFieldReqBuilder():Ref<CreateEcoAccountCustomFieldReqBuilder>
 
 	export function newCreateEcoBackgroundCheckCustomFieldReqBuilder():Ref<CreateEcoBackgroundCheckCustomFieldReqBuilder>
@@ -6111,6 +7731,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 
 	export function newCreateEcoExamPaperReqBuilder():Ref<CreateEcoExamPaperReqBuilder>
 
+	export function newCreateExamPathReqBodyBuilder():Ref<CreateExamPathReqBodyBuilder>
+
+	export function newCreateExamReqBodyBuilder():Ref<CreateExamReqBodyBuilder>
+
+	export function newCreateExamReqBuilder():Ref<CreateExamReqBuilder>
+
 	export function newCreateExternalApplicationReqBuilder():Ref<CreateExternalApplicationReqBuilder>
 
 	export function newCreateExternalBackgroundCheckReqBuilder():Ref<CreateExternalBackgroundCheckReqBuilder>
@@ -6118,6 +7744,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 	export function newCreateExternalInterviewAssessmentReqBuilder():Ref<CreateExternalInterviewAssessmentReqBuilder>
 
 	export function newCreateExternalInterviewReqBuilder():Ref<CreateExternalInterviewReqBuilder>
+
+	export function newCreateExternalReferralRewardReqBuilder():Ref<CreateExternalReferralRewardReqBuilder>
 
 	export function newCreateJobRequirementReqBuilder():Ref<CreateJobRequirementReqBuilder>
 
@@ -6131,13 +7759,39 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 
 	export function newCreateReferralAccountReqBuilder():Ref<CreateReferralAccountReqBuilder>
 
+	export function newCreateTalentExternalInfoPathReqBodyBuilder():Ref<CreateTalentExternalInfoPathReqBodyBuilder>
+
+	export function newCreateTalentExternalInfoReqBodyBuilder():Ref<CreateTalentExternalInfoReqBodyBuilder>
+
+	export function newCreateTalentExternalInfoReqBuilder():Ref<CreateTalentExternalInfoReqBuilder>
+
+	export function newCreateTripartiteAgreementReqBuilder():Ref<CreateTripartiteAgreementReqBuilder>
+
+	export function newCreateWebsiteChannelPathReqBodyBuilder():Ref<CreateWebsiteChannelPathReqBodyBuilder>
+
+	export function newCreateWebsiteChannelReqBodyBuilder():Ref<CreateWebsiteChannelReqBodyBuilder>
+
+	export function newCreateWebsiteChannelReqBuilder():Ref<CreateWebsiteChannelReqBuilder>
+
+	export function newCreateWebsiteSiteUserReqBuilder():Ref<CreateWebsiteSiteUserReqBuilder>
+
 	export function newDataPermissionBuilder():Ref<DataPermissionBuilder>
 
 	export function newDeactivateReferralAccountReqBuilder():Ref<DeactivateReferralAccountReqBuilder>
 
+	export function newDegreeFilterBuilder():Ref<DegreeFilterBuilder>
+
 	export function newDeleteExternalApplicationReqBuilder():Ref<DeleteExternalApplicationReqBuilder>
 
+	export function newDeleteExternalReferralRewardReqBuilder():Ref<DeleteExternalReferralRewardReqBuilder>
+
 	export function newDeleteJobRequirementReqBuilder():Ref<DeleteJobRequirementReqBuilder>
+
+	export function newDeleteNoteReqBuilder():Ref<DeleteNoteReqBuilder>
+
+	export function newDeleteTripartiteAgreementReqBuilder():Ref<DeleteTripartiteAgreementReqBuilder>
+
+	export function newDeleteWebsiteChannelReqBuilder():Ref<DeleteWebsiteChannelReqBuilder>
 
 	export function newDepartmentBuilder():Ref<DepartmentBuilder>
 
@@ -6229,7 +7883,11 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 
 	export function newExternalRewardBuilder():Ref<ExternalRewardBuilder>
 
+	export function newFilterBuilder():Ref<FilterBuilder>
+
 	export function newFiveStartScoringResultBuilder():Ref<FiveStartScoringResultBuilder>
+
+	export function newGetAgencyReqBuilder():Ref<GetAgencyReqBuilder>
 
 	export function newGetApplicationReqBuilder():Ref<GetApplicationReqBuilder>
 
@@ -6239,7 +7897,13 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 
 	export function newGetByApplicationReferralReqBuilder():Ref<GetByApplicationReferralReqBuilder>
 
+	export function newGetByTalentInterviewReqBuilder():Ref<GetByTalentInterviewReqBuilder>
+
 	export function newGetEmployeeReqBuilder():Ref<GetEmployeeReqBuilder>
+
+	export function newGetInterviewRecordAttachmentReqBuilder():Ref<GetInterviewRecordAttachmentReqBuilder>
+
+	export function newGetInterviewRecordReqBuilder():Ref<GetInterviewRecordReqBuilder>
 
 	export function newGetJobManagerReqBuilder():Ref<GetJobManagerReqBuilder>
 
@@ -6247,13 +7911,21 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 
 	export function newGetNoteReqBuilder():Ref<GetNoteReqBuilder>
 
+	export function newGetOfferApplicationFormReqBuilder():Ref<GetOfferApplicationFormReqBuilder>
+
 	export function newGetOfferReqBuilder():Ref<GetOfferReqBuilder>
 
 	export function newGetOfferSchemaReqBuilder():Ref<GetOfferSchemaReqBuilder>
 
 	export function newGetReferralWebsiteJobPostReqBuilder():Ref<GetReferralWebsiteJobPostReqBuilder>
 
+	export function newGetRoleReqBuilder():Ref<GetRoleReqBuilder>
+
 	export function newGetTalentReqBuilder():Ref<GetTalentReqBuilder>
+
+	export function newGetWebsiteDeliveryTaskReqBuilder():Ref<GetWebsiteDeliveryTaskReqBuilder>
+
+	export function newGetWebsiteJobPostReqBuilder():Ref<GetWebsiteJobPostReqBuilder>
 
 	export function newI18nBuilder():Ref<I18nBuilder>
 
@@ -6320,6 +7992,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 	export function newInterviewScoreBuilder():Ref<InterviewScoreBuilder>
 
 	export function newInterviewTaskBuilder():Ref<InterviewTaskBuilder>
+
+	export function newInterviewerBuilder():Ref<InterviewerBuilder>
 
 	export function newJobBuilder():Ref<JobBuilder>
 
@@ -6399,6 +8073,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 
 	export function newListApplicationReqBuilder():Ref<ListApplicationReqBuilder>
 
+	export function newListBackgroundCheckOrderReqBuilder():Ref<ListBackgroundCheckOrderReqBuilder>
+
 	export function newListByIdJobRequirementPathReqBodyBuilder():Ref<ListByIdJobRequirementPathReqBodyBuilder>
 
 	export function newListByIdJobRequirementReqBodyBuilder():Ref<ListByIdJobRequirementReqBodyBuilder>
@@ -6407,7 +8083,25 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 
 	export function newListEvaluationReqBuilder():Ref<ListEvaluationReqBuilder>
 
+	export function newListEvaluationTaskReqBuilder():Ref<ListEvaluationTaskReqBuilder>
+
+	export function newListExamMarkingTaskReqBuilder():Ref<ListExamMarkingTaskReqBuilder>
+
+	export function newListExternalApplicationReqBuilder():Ref<ListExternalApplicationReqBuilder>
+
+	export function newListInterviewFeedbackFormReqBuilder():Ref<ListInterviewFeedbackFormReqBuilder>
+
+	export function newListInterviewRecordReqBuilder():Ref<ListInterviewRecordReqBuilder>
+
+	export function newListInterviewRegistrationSchemaReqBuilder():Ref<ListInterviewRegistrationSchemaReqBuilder>
+
 	export function newListInterviewReqBuilder():Ref<ListInterviewReqBuilder>
+
+	export function newListInterviewRoundTypeReqBuilder():Ref<ListInterviewRoundTypeReqBuilder>
+
+	export function newListInterviewTaskReqBuilder():Ref<ListInterviewTaskReqBuilder>
+
+	export function newListJobFunctionReqBuilder():Ref<ListJobFunctionReqBuilder>
 
 	export function newListJobProcessReqBuilder():Ref<ListJobProcessReqBuilder>
 
@@ -6417,9 +8111,15 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 
 	export function newListJobRequirementSchemaReqBuilder():Ref<ListJobRequirementSchemaReqBuilder>
 
+	export function newListJobSchemaReqBuilder():Ref<ListJobSchemaReqBuilder>
+
 	export function newListJobTypeReqBuilder():Ref<ListJobTypeReqBuilder>
 
+	export function newListLocationReqBuilder():Ref<ListLocationReqBuilder>
+
 	export function newListNoteReqBuilder():Ref<ListNoteReqBuilder>
+
+	export function newListOfferApplicationFormReqBuilder():Ref<ListOfferApplicationFormReqBuilder>
 
 	export function newListOfferReqBuilder():Ref<ListOfferReqBuilder>
 
@@ -6431,13 +8131,41 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 
 	export function newListResumeSourceReqBuilder():Ref<ListResumeSourceReqBuilder>
 
+	export function newListRoleReqBuilder():Ref<ListRoleReqBuilder>
+
+	export function newListSubjectReqBuilder():Ref<ListSubjectReqBuilder>
+
 	export function newListTalentFolderReqBuilder():Ref<ListTalentFolderReqBuilder>
 
 	export function newListTalentReqBuilder():Ref<ListTalentReqBuilder>
 
+	export function newListTerminationReasonReqBuilder():Ref<ListTerminationReasonReqBuilder>
+
+	export function newListTodoReqBuilder():Ref<ListTodoReqBuilder>
+
+	export function newListTripartiteAgreementReqBuilder():Ref<ListTripartiteAgreementReqBuilder>
+
+	export function newListWebsiteChannelReqBuilder():Ref<ListWebsiteChannelReqBuilder>
+
+	export function newListWebsiteJobPostReqBuilder():Ref<ListWebsiteJobPostReqBuilder>
+
+	export function newListWebsiteReqBuilder():Ref<ListWebsiteReqBuilder>
+
 	export function newLocationBaseInfoBuilder():Ref<LocationBaseInfoBuilder>
 
 	export function newLocationBuilder():Ref<LocationBuilder>
+
+	export function newLocationCityBuilder():Ref<LocationCityBuilder>
+
+	export function newLocationCountryBuilder():Ref<LocationCountryBuilder>
+
+	export function newLocationDistrictBuilder():Ref<LocationDistrictBuilder>
+
+	export function newLocationDtoBuilder():Ref<LocationDtoBuilder>
+
+	export function newLocationNameInfoBuilder():Ref<LocationNameInfoBuilder>
+
+	export function newLocationStateBuilder():Ref<LocationStateBuilder>
 
 	export function newLoginInfoEcoExamPathReqBodyBuilder():Ref<LoginInfoEcoExamPathReqBodyBuilder>
 
@@ -6449,7 +8177,15 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 
 	export function newMasterLocationInfoBuilder():Ref<MasterLocationInfoBuilder>
 
+	export function newMentionEntityBuilder():Ref<MentionEntityBuilder>
+
 	export function newMobileBuilder():Ref<MobileBuilder>
+
+	export function newMoveTalentTalentPoolPathReqBodyBuilder():Ref<MoveTalentTalentPoolPathReqBodyBuilder>
+
+	export function newMoveTalentTalentPoolReqBodyBuilder():Ref<MoveTalentTalentPoolReqBodyBuilder>
+
+	export function newMoveTalentTalentPoolReqBuilder():Ref<MoveTalentTalentPoolReqBuilder>
 
 	export function newNationalityBuilder():Ref<NationalityBuilder>
 
@@ -6495,6 +8231,10 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 
 	export function newOfferCustomizedInfoBuilder():Ref<OfferCustomizedInfoBuilder>
 
+	export function newOfferEmailInfoBuilder():Ref<OfferEmailInfoBuilder>
+
+	export function newOfferFileBuilder():Ref<OfferFileBuilder>
+
 	export function newOfferInfoBuilder():Ref<OfferInfoBuilder>
 
 	export function newOfferJobInfoBuilder():Ref<OfferJobInfoBuilder>
@@ -6517,11 +8257,27 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 
 	export function newOfferSelectionObjectBuilder():Ref<OfferSelectionObjectBuilder>
 
+	export function newOfferSendRecordBuilder():Ref<OfferSendRecordBuilder>
+
+	export function newOfferSignatureInfoBuilder():Ref<OfferSignatureInfoBuilder>
+
 	export function newOfferStatusOfferPathReqBodyBuilder():Ref<OfferStatusOfferPathReqBodyBuilder>
 
 	export function newOfferStatusOfferReqBodyBuilder():Ref<OfferStatusOfferReqBodyBuilder>
 
 	export function newOfferStatusOfferReqBuilder():Ref<OfferStatusOfferReqBuilder>
+
+	export function newOnboardStatusTalentPathReqBodyBuilder():Ref<OnboardStatusTalentPathReqBodyBuilder>
+
+	export function newOnboardStatusTalentReqBodyBuilder():Ref<OnboardStatusTalentReqBodyBuilder>
+
+	export function newOnboardStatusTalentReqBuilder():Ref<OnboardStatusTalentReqBuilder>
+
+	export function newOpenJobPathReqBodyBuilder():Ref<OpenJobPathReqBodyBuilder>
+
+	export function newOpenJobReqBodyBuilder():Ref<OpenJobReqBodyBuilder>
+
+	export function newOpenJobReqBuilder():Ref<OpenJobReqBuilder>
 
 	export function newP2ApplicationDeletedV1Handler(v1:(v2:context.Context,v1:Ref<P2ApplicationDeletedV1>)=>void/*error*/):Ref<P2ApplicationDeletedV1Handler>
 
@@ -6543,9 +8299,13 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 
 	export function newP2ReferralAccountAssetsUpdateV1Handler(v1:(v2:context.Context,v1:Ref<P2ReferralAccountAssetsUpdateV1>)=>void/*error*/):Ref<P2ReferralAccountAssetsUpdateV1Handler>
 
+	export function newP2TalentDeletedV1Handler(v1:(v2:context.Context,v1:Ref<P2TalentDeletedV1>)=>void/*error*/):Ref<P2TalentDeletedV1Handler>
+
 	export function newPatchEhrImportTaskReqBuilder():Ref<PatchEhrImportTaskReqBuilder>
 
 	export function newPatchEmployeeReqBuilder():Ref<PatchEmployeeReqBuilder>
+
+	export function newPatchExternalInterviewAssessmentReqBuilder():Ref<PatchExternalInterviewAssessmentReqBuilder>
 
 	export function newPatchNotePathReqBodyBuilder():Ref<PatchNotePathReqBodyBuilder>
 
@@ -6567,17 +8327,47 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 
 	export function newProjectInfoBuilder():Ref<ProjectInfoBuilder>
 
+	export function newProtectAgencyPathReqBodyBuilder():Ref<ProtectAgencyPathReqBodyBuilder>
+
+	export function newProtectAgencyReqBodyBuilder():Ref<ProtectAgencyReqBodyBuilder>
+
+	export function newProtectAgencyReqBuilder():Ref<ProtectAgencyReqBuilder>
+
+	export function newProtectSearchAgencyPathReqBodyBuilder():Ref<ProtectSearchAgencyPathReqBodyBuilder>
+
+	export function newProtectSearchAgencyReqBodyBuilder():Ref<ProtectSearchAgencyReqBodyBuilder>
+
+	export function newProtectSearchAgencyReqBuilder():Ref<ProtectSearchAgencyReqBuilder>
+
 	export function newProviderIdNameObjectBuilder():Ref<ProviderIdNameObjectBuilder>
+
+	export function newPublishAdvertisementPathReqBodyBuilder():Ref<PublishAdvertisementPathReqBodyBuilder>
+
+	export function newPublishAdvertisementReqBodyBuilder():Ref<PublishAdvertisementReqBodyBuilder>
+
+	export function newPublishAdvertisementReqBuilder():Ref<PublishAdvertisementReqBuilder>
+
+	export function newQueryAgencyReqBuilder():Ref<QueryAgencyReqBuilder>
+
+	export function newQueryLocationPathReqBodyBuilder():Ref<QueryLocationPathReqBodyBuilder>
+
+	export function newQueryLocationReqBodyBuilder():Ref<QueryLocationReqBodyBuilder>
+
+	export function newQueryLocationReqBuilder():Ref<QueryLocationReqBuilder>
 
 	export function newQuestionBuilder():Ref<QuestionBuilder>
 
 	export function newQuestionnaireBuilder():Ref<QuestionnaireBuilder>
+
+	export function newRangeFilterBuilder():Ref<RangeFilterBuilder>
 
 	export function newReconciliationReferralAccountPathReqBodyBuilder():Ref<ReconciliationReferralAccountPathReqBodyBuilder>
 
 	export function newReconciliationReferralAccountReqBodyBuilder():Ref<ReconciliationReferralAccountReqBodyBuilder>
 
 	export function newReconciliationReferralAccountReqBuilder():Ref<ReconciliationReferralAccountReqBuilder>
+
+	export function newRecoverApplicationReqBuilder():Ref<RecoverApplicationReqBuilder>
 
 	export function newRecruiterJobReqBuilder():Ref<RecruiterJobReqBuilder>
 
@@ -6607,9 +8397,49 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 
 	export function newScoreDimensionConfigBuilder():Ref<ScoreDimensionConfigBuilder>
 
+	export function newSearchDiversityInclusionPathReqBodyBuilder():Ref<SearchDiversityInclusionPathReqBodyBuilder>
+
+	export function newSearchDiversityInclusionReqBodyBuilder():Ref<SearchDiversityInclusionReqBodyBuilder>
+
+	export function newSearchDiversityInclusionReqBuilder():Ref<SearchDiversityInclusionReqBuilder>
+
+	export function newSearchJobPublishRecordPathReqBodyBuilder():Ref<SearchJobPublishRecordPathReqBodyBuilder>
+
+	export function newSearchJobPublishRecordReqBodyBuilder():Ref<SearchJobPublishRecordReqBodyBuilder>
+
+	export function newSearchJobPublishRecordReqBuilder():Ref<SearchJobPublishRecordReqBuilder>
+
+	export function newSearchReferralPathReqBodyBuilder():Ref<SearchReferralPathReqBodyBuilder>
+
+	export function newSearchReferralReqBodyBuilder():Ref<SearchReferralReqBodyBuilder>
+
+	export function newSearchReferralReqBuilder():Ref<SearchReferralReqBuilder>
+
+	export function newSearchTalentOperationLogPathReqBodyBuilder():Ref<SearchTalentOperationLogPathReqBodyBuilder>
+
+	export function newSearchTalentOperationLogReqBodyBuilder():Ref<SearchTalentOperationLogReqBodyBuilder>
+
+	export function newSearchTalentOperationLogReqBuilder():Ref<SearchTalentOperationLogReqBuilder>
+
+	export function newSearchTalentPoolReqBuilder():Ref<SearchTalentPoolReqBuilder>
+
+	export function newSearchTestPathReqBodyBuilder():Ref<SearchTestPathReqBodyBuilder>
+
+	export function newSearchTestReqBodyBuilder():Ref<SearchTestReqBodyBuilder>
+
+	export function newSearchTestReqBuilder():Ref<SearchTestReqBuilder>
+
+	export function newSearchWebsiteJobPostPathReqBodyBuilder():Ref<SearchWebsiteJobPostPathReqBodyBuilder>
+
+	export function newSearchWebsiteJobPostReqBodyBuilder():Ref<SearchWebsiteJobPostReqBodyBuilder>
+
+	export function newSearchWebsiteJobPostReqBuilder():Ref<SearchWebsiteJobPostReqBuilder>
+
 	export function newSelectOptionResultBuilder():Ref<SelectOptionResultBuilder>
 
 	export function newSequenceBuilder():Ref<SequenceBuilder>
+
+	export function newSignatureAttachmentBuilder():Ref<SignatureAttachmentBuilder>
 
 	export function newSiteApplicationBuilder():Ref<SiteApplicationBuilder>
 
@@ -6775,6 +8605,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 
 	export function newTransferOnboardApplicationReqBuilder():Ref<TransferOnboardApplicationReqBuilder>
 
+	export function newTransferStageApplicationPathReqBodyBuilder():Ref<TransferStageApplicationPathReqBodyBuilder>
+
+	export function newTransferStageApplicationReqBodyBuilder():Ref<TransferStageApplicationReqBodyBuilder>
+
+	export function newTransferStageApplicationReqBuilder():Ref<TransferStageApplicationReqBuilder>
+
 	export function newTripartiteAgreementInfoBuilder():Ref<TripartiteAgreementInfoBuilder>
 
 	export function newUpdateConfigJobReqBuilder():Ref<UpdateConfigJobReqBuilder>
@@ -6782,6 +8618,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 	export function newUpdateExternalApplicationReqBuilder():Ref<UpdateExternalApplicationReqBuilder>
 
 	export function newUpdateJobRequirementReqBuilder():Ref<UpdateJobRequirementReqBuilder>
+
+	export function newUpdateOfferCustomFieldReqBuilder():Ref<UpdateOfferCustomFieldReqBuilder>
 
 	export function newUpdateOfferReqBuilder():Ref<UpdateOfferReqBuilder>
 
@@ -6798,6 +8636,20 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 	export function newUpdateResultEcoBackgroundCheckReqBuilder():Ref<UpdateResultEcoBackgroundCheckReqBuilder>
 
 	export function newUpdateResultEcoExamReqBuilder():Ref<UpdateResultEcoExamReqBuilder>
+
+	export function newUpdateTalentExternalInfoPathReqBodyBuilder():Ref<UpdateTalentExternalInfoPathReqBodyBuilder>
+
+	export function newUpdateTalentExternalInfoReqBodyBuilder():Ref<UpdateTalentExternalInfoReqBodyBuilder>
+
+	export function newUpdateTalentExternalInfoReqBuilder():Ref<UpdateTalentExternalInfoReqBuilder>
+
+	export function newUpdateTripartiteAgreementReqBuilder():Ref<UpdateTripartiteAgreementReqBuilder>
+
+	export function newUpdateWebsiteChannelPathReqBodyBuilder():Ref<UpdateWebsiteChannelPathReqBodyBuilder>
+
+	export function newUpdateWebsiteChannelReqBodyBuilder():Ref<UpdateWebsiteChannelReqBodyBuilder>
+
+	export function newUpdateWebsiteChannelReqBuilder():Ref<UpdateWebsiteChannelReqBuilder>
 
 	export function newUserBusinessManagementScopeBuilder():Ref<UserBusinessManagementScopeBuilder>
 
@@ -6884,6 +8736,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			creatorId:Ref<string>
 			content:Ref<string>
 			privacy:Ref<int>
+			notifyMentionedUser:Ref<bool>
+			mentionEntityList:Ref<MentionEntity>[]
 	}
 	export interface NoteBuilder extends Struct<NoteBuilder>{
 
@@ -6896,6 +8750,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			creatorId(creatorId:string):Ref<NoteBuilder>
 			content(content:string):Ref<NoteBuilder>
 			privacy(privacy:int):Ref<NoteBuilder>
+			notifyMentionedUser(notifyMentionedUser:bool):Ref<NoteBuilder>
+			mentionEntityList(mentionEntityList:Ref<MentionEntity>[]):Ref<NoteBuilder>
 			build():Ref<Note>
 	}
 	export interface ObjectAttribute extends Struct<ObjectAttribute>{
@@ -6928,6 +8784,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			offerType:Ref<int>
 			jobInfo:Ref<OfferJobInfo>
 			customizedModuleList:Ref<ApplicationOfferCustomModule>[]
+			jobRequirementId:Ref<string>
+			offerSendRecordList:Ref<OfferSendRecord>[]
 	}
 	export interface OfferApplicationReq extends Struct<OfferApplicationReq>{
 
@@ -7185,6 +9043,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			offerType(offerType:int):Ref<OfferBuilder>
 			jobInfo(jobInfo:Ref<OfferJobInfo>):Ref<OfferBuilder>
 			customizedModuleList(customizedModuleList:Ref<ApplicationOfferCustomModule>[]):Ref<OfferBuilder>
+			jobRequirementId(jobRequirementId:string):Ref<OfferBuilder>
+			offerSendRecordList(offerSendRecordList:Ref<OfferSendRecord>[]):Ref<OfferBuilder>
 			build():Ref<Offer>
 	}
 	export interface OfferCustomField extends Struct<OfferCustomField>{
@@ -7228,6 +9088,36 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			id(id:string):Ref<OfferCustomizedInfoBuilder>
 			value(value:string):Ref<OfferCustomizedInfoBuilder>
 			build():Ref<OfferCustomizedInfo>
+	}
+	export interface OfferEmailInfo extends Struct<OfferEmailInfo>{
+
+			ccEmailList:string[]
+			receiverEmailList:string[]
+			content:Ref<string>
+	}
+	export interface OfferEmailInfoBuilder extends Struct<OfferEmailInfoBuilder>{
+
+			ccEmailList(ccEmailList:string[]):Ref<OfferEmailInfoBuilder>
+			receiverEmailList(receiverEmailList:string[]):Ref<OfferEmailInfoBuilder>
+			content(content:string):Ref<OfferEmailInfoBuilder>
+			build():Ref<OfferEmailInfo>
+	}
+	export interface OfferFile extends Struct<OfferFile>{
+
+			id:Ref<string>
+			fileTemplateId:Ref<string>
+			fileTemplateName:Ref<string>
+			fileTemplateTypeId:Ref<string>
+			fileTemplateTypeName:Ref<string>
+	}
+	export interface OfferFileBuilder extends Struct<OfferFileBuilder>{
+
+			id(id:string):Ref<OfferFileBuilder>
+			fileTemplateId(fileTemplateId:string):Ref<OfferFileBuilder>
+			fileTemplateName(fileTemplateName:string):Ref<OfferFileBuilder>
+			fileTemplateTypeId(fileTemplateTypeId:string):Ref<OfferFileBuilder>
+			fileTemplateTypeName(fileTemplateTypeName:string):Ref<OfferFileBuilder>
+			build():Ref<OfferFile>
 	}
 	export interface OfferInfo extends Struct<OfferInfo>{
 
@@ -7394,10 +9284,48 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			optionList(optionList:Ref<OfferSchemaDetailOption>[]):Ref<OfferSelectionObjectBuilder>
 			build():Ref<OfferSelectionObject>
 	}
+	export interface OfferSendRecord extends Struct<OfferSendRecord>{
+
+			offerSendRecordId:Ref<string>
+			operatorUserId:Ref<string>
+			sendTime:Ref<string>
+			offerLetterStatus:Ref<int>
+			emailInfo:Ref<OfferEmailInfo>
+			acceptanceList:Ref<Acceptance>[]
+			offerFileList:Ref<OfferFile>[]
+			offerSignatureInfo:Ref<OfferSignatureInfo>
+	}
+	export interface OfferSendRecordBuilder extends Struct<OfferSendRecordBuilder>{
+
+			offerSendRecordId(offerSendRecordId:string):Ref<OfferSendRecordBuilder>
+			operatorUserId(operatorUserId:string):Ref<OfferSendRecordBuilder>
+			sendTime(sendTime:string):Ref<OfferSendRecordBuilder>
+			offerLetterStatus(offerLetterStatus:int):Ref<OfferSendRecordBuilder>
+			emailInfo(emailInfo:Ref<OfferEmailInfo>):Ref<OfferSendRecordBuilder>
+			acceptanceList(acceptanceList:Ref<Acceptance>[]):Ref<OfferSendRecordBuilder>
+			offerFileList(offerFileList:Ref<OfferFile>[]):Ref<OfferSendRecordBuilder>
+			offerSignatureInfo(offerSignatureInfo:Ref<OfferSignatureInfo>):Ref<OfferSendRecordBuilder>
+			build():Ref<OfferSendRecord>
+	}
+	export interface OfferSignatureInfo extends Struct<OfferSignatureInfo>{
+
+			id:Ref<string>
+			signatureStatus:Ref<int>
+			attachmentList:Ref<SignatureAttachment>[]
+	}
+	export interface OfferSignatureInfoBuilder extends Struct<OfferSignatureInfoBuilder>{
+
+			id(id:string):Ref<OfferSignatureInfoBuilder>
+			signatureStatus(signatureStatus:int):Ref<OfferSignatureInfoBuilder>
+			attachmentList(attachmentList:Ref<SignatureAttachment>[]):Ref<OfferSignatureInfoBuilder>
+			build():Ref<OfferSignatureInfo>
+	}
 	//4
 	export const OfferStatusApproved:int
 	//2
 	export const OfferStatusApproving:int
+	//10
+	export const OfferStatusNoApproval:int
 	//9
 	export const OfferStatusObsolete:int
 	//7
@@ -7453,6 +9381,75 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 	export const OfferType实习Offer:int
 	//1
 	export const OfferType正式Offer:int
+	export interface OnboardStatusTalentPathReqBodyBuilder extends Struct<OnboardStatusTalentPathReqBodyBuilder>{
+
+			operation(operation:int):Ref<OnboardStatusTalentPathReqBodyBuilder>
+			onboardTime(onboardTime:string):Ref<OnboardStatusTalentPathReqBodyBuilder>
+			overboardTime(overboardTime:string):Ref<OnboardStatusTalentPathReqBodyBuilder>
+			build():Ref<OnboardStatusTalentReqBody>
+	}
+	export interface OnboardStatusTalentReq extends Struct<OnboardStatusTalentReq>{
+
+			body:Ref<OnboardStatusTalentReqBody>
+	}
+	export interface OnboardStatusTalentReqBody extends Struct<OnboardStatusTalentReqBody>{
+
+			operation:Ref<int>
+			onboardTime:Ref<string>
+			overboardTime:Ref<string>
+	}
+	export interface OnboardStatusTalentReqBodyBuilder extends Struct<OnboardStatusTalentReqBodyBuilder>{
+
+			operation(operation:int):Ref<OnboardStatusTalentReqBodyBuilder>
+			onboardTime(onboardTime:string):Ref<OnboardStatusTalentReqBodyBuilder>
+			overboardTime(overboardTime:string):Ref<OnboardStatusTalentReqBodyBuilder>
+			build():Ref<OnboardStatusTalentReqBody>
+	}
+	export interface OnboardStatusTalentReqBuilder extends Struct<OnboardStatusTalentReqBuilder>{
+
+			talentId(talentId:string):Ref<OnboardStatusTalentReqBuilder>
+			body(body:Ref<OnboardStatusTalentReqBody>):Ref<OnboardStatusTalentReqBuilder>
+			build():Ref<OnboardStatusTalentReq>
+	}
+	export interface OnboardStatusTalentResp extends Struct<OnboardStatusTalentResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			success():bool
+	}
+	export interface OpenJobPathReqBodyBuilder extends Struct<OpenJobPathReqBodyBuilder>{
+
+			expiryTime(expiryTime:int):Ref<OpenJobPathReqBodyBuilder>
+			isNeverExpired(isNeverExpired:bool):Ref<OpenJobPathReqBodyBuilder>
+			build():Ref<OpenJobReqBody>
+	}
+	export interface OpenJobReq extends Struct<OpenJobReq>{
+
+			body:Ref<OpenJobReqBody>
+	}
+	export interface OpenJobReqBody extends Struct<OpenJobReqBody>{
+
+			expiryTime:Ref<int>
+			isNeverExpired:Ref<bool>
+	}
+	export interface OpenJobReqBodyBuilder extends Struct<OpenJobReqBodyBuilder>{
+
+			expiryTime(expiryTime:int):Ref<OpenJobReqBodyBuilder>
+			isNeverExpired(isNeverExpired:bool):Ref<OpenJobReqBodyBuilder>
+			build():Ref<OpenJobReqBody>
+	}
+	export interface OpenJobReqBuilder extends Struct<OpenJobReqBuilder>{
+
+			jobId(jobId:string):Ref<OpenJobReqBuilder>
+			body(body:Ref<OpenJobReqBody>):Ref<OpenJobReqBuilder>
+			build():Ref<OpenJobReq>
+	}
+	export interface OpenJobResp extends Struct<OpenJobResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			success():bool
+	}
 	//1
 	export const OperationConvert:int
 	//"cancel_onboarding"
@@ -7461,8 +9458,16 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 	export const OperationInternOfferStatusOfferConfirmOnboarding:string
 	//"offboard"
 	export const OperationInternOfferStatusOfferOffboard:string
+	//1
+	export const OperationOnboardStatusTalentOnboard:int
+	//2
+	export const OperationOnboardStatusTalentOverboard:int
 	//2
 	export const OperationOverboard:int
+	//1
+	export const OperatorAccountType员工体系:int
+	//3
+	export const OperatorAccountType系统:int
 	export interface P2ApplicationDeletedV1 extends Struct<P2ApplicationDeletedV1>,larkevent.EventHandlerModel{
 
 			eventV2Base:Ref<larkevent.EventV2Base>
@@ -7513,7 +9518,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			usageList:int[]
 			customFieldList:Ref<EcoAccountCustomFieldEventData>[]
 	}
-	export interface P2EcoAccountCreatedV1Handler extends larkevent.EventHandler,Struct<P2EcoAccountCreatedV1Handler>{
+	export interface P2EcoAccountCreatedV1Handler extends Struct<P2EcoAccountCreatedV1Handler>,larkevent.EventHandler{
 
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
@@ -7530,12 +9535,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			backgroundCheckId:Ref<string>
 			terminationReason:Ref<string>
 	}
-	export interface P2EcoBackgroundCheckCanceledV1Handler extends Struct<P2EcoBackgroundCheckCanceledV1Handler>,larkevent.EventHandler{
+	export interface P2EcoBackgroundCheckCanceledV1Handler extends larkevent.EventHandler,Struct<P2EcoBackgroundCheckCanceledV1Handler>{
 
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
 	}
-	export interface P2EcoBackgroundCheckCreatedV1 extends Struct<P2EcoBackgroundCheckCreatedV1>,larkevent.EventHandlerModel{
+	export interface P2EcoBackgroundCheckCreatedV1 extends larkevent.EventHandlerModel,Struct<P2EcoBackgroundCheckCreatedV1>{
 
 			eventV2Base:Ref<larkevent.EventV2Base>
 			eventReq:Ref<larkevent.EventReq>
@@ -7633,7 +9638,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 
 			offerId:Ref<string>
 	}
-	export interface P2OfferStatusChangedV1Handler extends larkevent.EventHandler,Struct<P2OfferStatusChangedV1Handler>{
+	export interface P2OfferStatusChangedV1Handler extends Struct<P2OfferStatusChangedV1Handler>,larkevent.EventHandler{
 
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
@@ -7652,6 +9657,22 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			modifyTime:Ref<string>
 	}
 	export interface P2ReferralAccountAssetsUpdateV1Handler extends Struct<P2ReferralAccountAssetsUpdateV1Handler>,larkevent.EventHandler{
+
+			event():any
+			handle(ctx:context.Context,event:any)/*error*/
+	}
+	export interface P2TalentDeletedV1 extends larkevent.EventHandlerModel,Struct<P2TalentDeletedV1>{
+
+			eventV2Base:Ref<larkevent.EventV2Base>
+			eventReq:Ref<larkevent.EventReq>
+			event:Ref<P2TalentDeletedV1Data>
+			rawReq(req:Ref<larkevent.EventReq>):void
+	}
+	export interface P2TalentDeletedV1Data extends Struct<P2TalentDeletedV1Data>{
+
+			talentId:Ref<string>
+	}
+	export interface P2TalentDeletedV1Handler extends Struct<P2TalentDeletedV1Handler>,larkevent.EventHandler{
 
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
@@ -7704,9 +9725,33 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 
 			employee:Ref<Employee>
 	}
+	export interface PatchExternalInterviewAssessmentReq extends Struct<PatchExternalInterviewAssessmentReq>{
+
+			externalInterviewAssessment:Ref<ExternalInterviewAssessment>
+	}
+	export interface PatchExternalInterviewAssessmentReqBuilder extends Struct<PatchExternalInterviewAssessmentReqBuilder>{
+
+			externalInterviewAssessmentId(externalInterviewAssessmentId:string):Ref<PatchExternalInterviewAssessmentReqBuilder>
+			externalInterviewAssessment(externalInterviewAssessment:Ref<ExternalInterviewAssessment>):Ref<PatchExternalInterviewAssessmentReqBuilder>
+			build():Ref<PatchExternalInterviewAssessmentReq>
+	}
+	export interface PatchExternalInterviewAssessmentResp extends Struct<PatchExternalInterviewAssessmentResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<PatchExternalInterviewAssessmentRespData>
+			success():bool
+	}
+	export interface PatchExternalInterviewAssessmentRespData extends Struct<PatchExternalInterviewAssessmentRespData>{
+
+			externalInterviewAssessment:Ref<ExternalInterviewAssessment>
+	}
 	export interface PatchNotePathReqBodyBuilder extends Struct<PatchNotePathReqBodyBuilder>{
 
 			content(content:string):Ref<PatchNotePathReqBodyBuilder>
+			operatorId(operatorId:string):Ref<PatchNotePathReqBodyBuilder>
+			notifyMentionedUser(notifyMentionedUser:bool):Ref<PatchNotePathReqBodyBuilder>
+			mentionEntityList(mentionEntityList:Ref<MentionEntity>[]):Ref<PatchNotePathReqBodyBuilder>
 			build():Ref<PatchNoteReqBody>
 	}
 	export interface PatchNoteReq extends Struct<PatchNoteReq>{
@@ -7716,10 +9761,16 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 	export interface PatchNoteReqBody extends Struct<PatchNoteReqBody>{
 
 			content:Ref<string>
+			operatorId:Ref<string>
+			notifyMentionedUser:Ref<bool>
+			mentionEntityList:Ref<MentionEntity>[]
 	}
 	export interface PatchNoteReqBodyBuilder extends Struct<PatchNoteReqBodyBuilder>{
 
 			content(content:string):Ref<PatchNoteReqBodyBuilder>
+			operatorId(operatorId:string):Ref<PatchNoteReqBodyBuilder>
+			notifyMentionedUser(notifyMentionedUser:bool):Ref<PatchNoteReqBodyBuilder>
+			mentionEntityList(mentionEntityList:Ref<MentionEntity>[]):Ref<PatchNoteReqBodyBuilder>
 			build():Ref<PatchNoteReqBody>
 	}
 	export interface PatchNoteReqBuilder extends Struct<PatchNoteReqBuilder>{
@@ -7883,7 +9934,9 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 	//2
 	export const PrivacyPublic:int
 	//2
-	export const ProcessTypeCampusProcess:int
+	export const ProcessTypeCombinedCreateJobCampusProcess:int
+	//1
+	export const ProcessTypeCombinedCreateJobSocialProcess:int
 	//2
 	export const ProcessTypeCreateJobRequirementCampus:int
 	//1
@@ -7892,12 +9945,14 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 	export const ProcessTypeListReferralWebsiteJobPostCampusProcess:int
 	//1
 	export const ProcessTypeListReferralWebsiteJobPostSocialProcess:int
-	//1
-	export const ProcessTypeSocialProcess:int
 	//2
 	export const ProcessTypeUpdateJobRequirementCampus:int
 	//1
 	export const ProcessTypeUpdateJobRequirementSocial:int
+	//2
+	export const ProcessType校招流程:int
+	//1
+	export const ProcessType社招流程:int
 	export interface ProjectInfo extends Struct<ProjectInfo>{
 
 			desc:Ref<string>
@@ -7917,6 +9972,94 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			startTime(startTime:int):Ref<ProjectInfoBuilder>
 			build():Ref<ProjectInfo>
 	}
+	export interface ProtectAgencyPathReqBodyBuilder extends Struct<ProtectAgencyPathReqBodyBuilder>{
+
+			talentId(talentId:string):Ref<ProtectAgencyPathReqBodyBuilder>
+			supplierId(supplierId:string):Ref<ProtectAgencyPathReqBodyBuilder>
+			consultantId(consultantId:string):Ref<ProtectAgencyPathReqBodyBuilder>
+			protectCreateTime(protectCreateTime:int):Ref<ProtectAgencyPathReqBodyBuilder>
+			protectExpireTime(protectExpireTime:int):Ref<ProtectAgencyPathReqBodyBuilder>
+			comment(comment:string):Ref<ProtectAgencyPathReqBodyBuilder>
+			currentSalary(currentSalary:string):Ref<ProtectAgencyPathReqBodyBuilder>
+			expectedSalary(expectedSalary:string):Ref<ProtectAgencyPathReqBodyBuilder>
+			build():Ref<ProtectAgencyReqBody>
+	}
+	export interface ProtectAgencyReq extends Struct<ProtectAgencyReq>{
+
+			body:Ref<ProtectAgencyReqBody>
+	}
+	export interface ProtectAgencyReqBody extends Struct<ProtectAgencyReqBody>{
+
+			talentId:Ref<string>
+			supplierId:Ref<string>
+			consultantId:Ref<string>
+			protectCreateTime:Ref<int>
+			protectExpireTime:Ref<int>
+			comment:Ref<string>
+			currentSalary:Ref<string>
+			expectedSalary:Ref<string>
+	}
+	export interface ProtectAgencyReqBodyBuilder extends Struct<ProtectAgencyReqBodyBuilder>{
+
+			talentId(talentId:string):Ref<ProtectAgencyReqBodyBuilder>
+			supplierId(supplierId:string):Ref<ProtectAgencyReqBodyBuilder>
+			consultantId(consultantId:string):Ref<ProtectAgencyReqBodyBuilder>
+			protectCreateTime(protectCreateTime:int):Ref<ProtectAgencyReqBodyBuilder>
+			protectExpireTime(protectExpireTime:int):Ref<ProtectAgencyReqBodyBuilder>
+			comment(comment:string):Ref<ProtectAgencyReqBodyBuilder>
+			currentSalary(currentSalary:string):Ref<ProtectAgencyReqBodyBuilder>
+			expectedSalary(expectedSalary:string):Ref<ProtectAgencyReqBodyBuilder>
+			build():Ref<ProtectAgencyReqBody>
+	}
+	export interface ProtectAgencyReqBuilder extends Struct<ProtectAgencyReqBuilder>{
+
+			userIdType(userIdType:string):Ref<ProtectAgencyReqBuilder>
+			body(body:Ref<ProtectAgencyReqBody>):Ref<ProtectAgencyReqBuilder>
+			build():Ref<ProtectAgencyReq>
+	}
+	export interface ProtectAgencyResp extends Struct<ProtectAgencyResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			success():bool
+	}
+	export interface ProtectSearchAgencyPathReqBodyBuilder extends Struct<ProtectSearchAgencyPathReqBodyBuilder>{
+
+			talentId(talentId:string):Ref<ProtectSearchAgencyPathReqBodyBuilder>
+			build():Ref<ProtectSearchAgencyReqBody>
+	}
+	export interface ProtectSearchAgencyReq extends Struct<ProtectSearchAgencyReq>{
+
+			body:Ref<ProtectSearchAgencyReqBody>
+	}
+	export interface ProtectSearchAgencyReqBody extends Struct<ProtectSearchAgencyReqBody>{
+
+			talentId:Ref<string>
+	}
+	export interface ProtectSearchAgencyReqBodyBuilder extends Struct<ProtectSearchAgencyReqBodyBuilder>{
+
+			talentId(talentId:string):Ref<ProtectSearchAgencyReqBodyBuilder>
+			build():Ref<ProtectSearchAgencyReqBody>
+	}
+	export interface ProtectSearchAgencyReqBuilder extends Struct<ProtectSearchAgencyReqBuilder>{
+
+			body(body:Ref<ProtectSearchAgencyReqBody>):Ref<ProtectSearchAgencyReqBuilder>
+			build():Ref<ProtectSearchAgencyReq>
+	}
+	export interface ProtectSearchAgencyResp extends Struct<ProtectSearchAgencyResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<ProtectSearchAgencyRespData>
+			success():bool
+	}
+	export interface ProtectSearchAgencyRespData extends Struct<ProtectSearchAgencyRespData>{
+
+			isOnboarded:Ref<bool>
+			onboardedInProtection:Ref<bool>
+			onboardedProtection:Ref<AgencyProtection>
+			protectionList:Ref<AgencyProtection>[]
+	}
 	export interface ProviderIdNameObject extends Struct<ProviderIdNameObject>{
 
 			providerId:Ref<string>
@@ -7928,8 +10071,99 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			providerName(providerName:Ref<I18n>):Ref<ProviderIdNameObjectBuilder>
 			build():Ref<ProviderIdNameObject>
 	}
+	export interface PublishAdvertisementPathReqBodyBuilder extends Struct<PublishAdvertisementPathReqBodyBuilder>{
+
+			jobChannelId(jobChannelId:string):Ref<PublishAdvertisementPathReqBodyBuilder>
+			build():Ref<PublishAdvertisementReqBody>
+	}
+	export interface PublishAdvertisementReq extends Struct<PublishAdvertisementReq>{
+
+			body:Ref<PublishAdvertisementReqBody>
+	}
+	export interface PublishAdvertisementReqBody extends Struct<PublishAdvertisementReqBody>{
+
+			jobChannelId:Ref<string>
+	}
+	export interface PublishAdvertisementReqBodyBuilder extends Struct<PublishAdvertisementReqBodyBuilder>{
+
+			jobChannelId(jobChannelId:string):Ref<PublishAdvertisementReqBodyBuilder>
+			build():Ref<PublishAdvertisementReqBody>
+	}
+	export interface PublishAdvertisementReqBuilder extends Struct<PublishAdvertisementReqBuilder>{
+
+			advertisementId(advertisementId:string):Ref<PublishAdvertisementReqBuilder>
+			body(body:Ref<PublishAdvertisementReqBody>):Ref<PublishAdvertisementReqBuilder>
+			build():Ref<PublishAdvertisementReq>
+	}
+	export interface PublishAdvertisementResp extends Struct<PublishAdvertisementResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			success():bool
+	}
 	export interface PushStage extends Alias<Nothing>{
 
+	}
+	export interface QueryAgencyReq extends Struct<QueryAgencyReq>{
+
+	}
+	export interface QueryAgencyReqBuilder extends Struct<QueryAgencyReqBuilder>{
+
+			name(name:string):Ref<QueryAgencyReqBuilder>
+			userIdType(userIdType:string):Ref<QueryAgencyReqBuilder>
+			build():Ref<QueryAgencyReq>
+	}
+	export interface QueryAgencyResp extends Struct<QueryAgencyResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<QueryAgencyRespData>
+			success():bool
+	}
+	export interface QueryAgencyRespData extends Struct<QueryAgencyRespData>{
+
+			items:Ref<Agency>[]
+	}
+	export interface QueryLocationPathReqBodyBuilder extends Struct<QueryLocationPathReqBodyBuilder>{
+
+			codeList(codeList:string[]):Ref<QueryLocationPathReqBodyBuilder>
+			locationType(locationType:int):Ref<QueryLocationPathReqBodyBuilder>
+			build():Ref<QueryLocationReqBody>
+	}
+	export interface QueryLocationReq extends Struct<QueryLocationReq>{
+
+			body:Ref<QueryLocationReqBody>
+	}
+	export interface QueryLocationReqBody extends Struct<QueryLocationReqBody>{
+
+			codeList:string[]
+			locationType:Ref<int>
+	}
+	export interface QueryLocationReqBodyBuilder extends Struct<QueryLocationReqBodyBuilder>{
+
+			codeList(codeList:string[]):Ref<QueryLocationReqBodyBuilder>
+			locationType(locationType:int):Ref<QueryLocationReqBodyBuilder>
+			build():Ref<QueryLocationReqBody>
+	}
+	export interface QueryLocationReqBuilder extends Struct<QueryLocationReqBuilder>{
+
+			pageToken(pageToken:string):Ref<QueryLocationReqBuilder>
+			pageSize(pageSize:int):Ref<QueryLocationReqBuilder>
+			body(body:Ref<QueryLocationReqBody>):Ref<QueryLocationReqBuilder>
+			build():Ref<QueryLocationReq>
+	}
+	export interface QueryLocationResp extends Struct<QueryLocationResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<QueryLocationRespData>
+			success():bool
+	}
+	export interface QueryLocationRespData extends Struct<QueryLocationRespData>{
+
+			items:Ref<LocationDto>[]
+			hasMore:Ref<bool>
+			pageToken:Ref<string>
 	}
 	//"ignore_empty_error"
 	export const QueryOptionIgnoreEmptyError:string
@@ -7992,6 +10226,17 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			updateTime(updateTime:string):Ref<QuestionnaireBuilder>
 			build():Ref<Questionnaire>
 	}
+	export interface RangeFilter extends Struct<RangeFilter>{
+
+			from:Ref<string>
+			to:Ref<string>
+	}
+	export interface RangeFilterBuilder extends Struct<RangeFilterBuilder>{
+
+			from(from:string):Ref<RangeFilterBuilder>
+			to(to:string):Ref<RangeFilterBuilder>
+			build():Ref<RangeFilter>
+	}
 	export interface ReconciliationReferralAccountPathReqBodyBuilder extends Struct<ReconciliationReferralAccountPathReqBodyBuilder>{
 
 			startTransTime(startTransTime:string):Ref<ReconciliationReferralAccountPathReqBodyBuilder>
@@ -8031,6 +10276,20 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 	export interface ReconciliationReferralAccountRespData extends Struct<ReconciliationReferralAccountRespData>{
 
 			checkFailedList:Ref<CheckFailedAccountInfo>[]
+	}
+	export interface RecoverApplicationReq extends Struct<RecoverApplicationReq>{
+
+	}
+	export interface RecoverApplicationReqBuilder extends Struct<RecoverApplicationReqBuilder>{
+
+			applicationId(applicationId:string):Ref<RecoverApplicationReqBuilder>
+			build():Ref<RecoverApplicationReq>
+	}
+	export interface RecoverApplicationResp extends Struct<RecoverApplicationResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			success():bool
 	}
 	export interface RecruiterJobReq extends Struct<RecruiterJobReq>{
 
@@ -8227,7 +10486,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			zhName:Ref<string>
 			enName:Ref<string>
 			activeStatus:Ref<int>
-			resumeSourceType:Ref<int>
+			resumeSourceType:Ref<string>
 	}
 	export interface ResumeSourceBuilder extends Struct<ResumeSourceBuilder>{
 
@@ -8235,7 +10494,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			zhName(zhName:string):Ref<ResumeSourceBuilder>
 			enName(enName:string):Ref<ResumeSourceBuilder>
 			activeStatus(activeStatus:int):Ref<ResumeSourceBuilder>
-			resumeSourceType(resumeSourceType:int):Ref<ResumeSourceBuilder>
+			resumeSourceType(resumeSourceType:string):Ref<ResumeSourceBuilder>
 			build():Ref<ResumeSource>
 	}
 	export interface Role extends Struct<Role>{
@@ -8244,6 +10503,9 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			name:Ref<I18n>
 			description:Ref<I18n>
 			scopeOfApplication:Ref<int>
+			modifyTime:Ref<string>
+			roleStatus:Ref<int>
+			roleType:Ref<int>
 	}
 	export interface RoleBuilder extends Struct<RoleBuilder>{
 
@@ -8251,6 +10513,9 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			name(name:Ref<I18n>):Ref<RoleBuilder>
 			description(description:Ref<I18n>):Ref<RoleBuilder>
 			scopeOfApplication(scopeOfApplication:int):Ref<RoleBuilder>
+			modifyTime(modifyTime:string):Ref<RoleBuilder>
+			roleStatus(roleStatus:int):Ref<RoleBuilder>
+			roleType(roleType:int):Ref<RoleBuilder>
 			build():Ref<Role>
 	}
 	export interface RoleDetail extends Struct<RoleDetail>{
@@ -8258,6 +10523,9 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			id:Ref<string>
 			name:Ref<I18n>
 			description:Ref<I18n>
+			modifyTime:Ref<string>
+			roleStatus:Ref<int>
+			roleType:Ref<int>
 			scopeOfApplication:Ref<int>
 			hasBusinessManagementScope:Ref<bool>
 			socailPermissionCollection:Ref<PermissionCollection>
@@ -8268,12 +10536,25 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			id(id:string):Ref<RoleDetailBuilder>
 			name(name:Ref<I18n>):Ref<RoleDetailBuilder>
 			description(description:Ref<I18n>):Ref<RoleDetailBuilder>
+			modifyTime(modifyTime:string):Ref<RoleDetailBuilder>
+			roleStatus(roleStatus:int):Ref<RoleDetailBuilder>
+			roleType(roleType:int):Ref<RoleDetailBuilder>
 			scopeOfApplication(scopeOfApplication:int):Ref<RoleDetailBuilder>
 			hasBusinessManagementScope(hasBusinessManagementScope:bool):Ref<RoleDetailBuilder>
 			socailPermissionCollection(socailPermissionCollection:Ref<PermissionCollection>):Ref<RoleDetailBuilder>
 			campusPermissionCollection(campusPermissionCollection:Ref<PermissionCollection>):Ref<RoleDetailBuilder>
 			build():Ref<RoleDetail>
 	}
+	//3
+	export const RuleTypeActive:int
+	//1
+	export const RuleTypeOnboard:int
+	//4
+	export const RuleTypeOpenSource:int
+	//5
+	export const RuleTypeOther:int
+	//2
+	export const RuleTypeProcesse:int
 	export interface Salary extends Struct<Salary>{
 
 			operateTime:Ref<string>
@@ -8292,11 +10573,15 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			build():Ref<Salary>
 	}
 	//14
-	export const ScenarioInfoUpdateRegistration:int
+	export const ScenarioListRegistrationSchemaInfoUpdateRegistration:int
 	//5
-	export const ScenarioInterviewRegistration:int
+	export const ScenarioListRegistrationSchemaInterviewRegistration:int
 	//6
-	export const ScenarioOnboardRegistration:int
+	export const ScenarioListRegistrationSchemaOnboardRegistration:int
+	//2
+	export const Scenario校招:int
+	//1
+	export const Scenario社招:int
 	//2
 	export const ScopeBatchUpdateEcoAccountCustomField笔试:int
 	//1
@@ -8333,6 +10618,326 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			upperLimitScore(upperLimitScore:int):Ref<ScoreDimensionConfigBuilder>
 			build():Ref<ScoreDimensionConfig>
 	}
+	export interface SearchDiversityInclusionPathReqBodyBuilder extends Struct<SearchDiversityInclusionPathReqBodyBuilder>{
+
+			talentIds(talentIds:string[]):Ref<SearchDiversityInclusionPathReqBodyBuilder>
+			applicationIds(applicationIds:string[]):Ref<SearchDiversityInclusionPathReqBodyBuilder>
+			build():Ref<SearchDiversityInclusionReqBody>
+	}
+	export interface SearchDiversityInclusionReq extends Struct<SearchDiversityInclusionReq>{
+
+			body:Ref<SearchDiversityInclusionReqBody>
+	}
+	export interface SearchDiversityInclusionReqBody extends Struct<SearchDiversityInclusionReqBody>{
+
+			talentIds:string[]
+			applicationIds:string[]
+	}
+	export interface SearchDiversityInclusionReqBodyBuilder extends Struct<SearchDiversityInclusionReqBodyBuilder>{
+
+			talentIds(talentIds:string[]):Ref<SearchDiversityInclusionReqBodyBuilder>
+			applicationIds(applicationIds:string[]):Ref<SearchDiversityInclusionReqBodyBuilder>
+			build():Ref<SearchDiversityInclusionReqBody>
+	}
+	export interface SearchDiversityInclusionReqBuilder extends Struct<SearchDiversityInclusionReqBuilder>{
+
+			body(body:Ref<SearchDiversityInclusionReqBody>):Ref<SearchDiversityInclusionReqBuilder>
+			build():Ref<SearchDiversityInclusionReq>
+	}
+	export interface SearchDiversityInclusionResp extends Struct<SearchDiversityInclusionResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<SearchDiversityInclusionRespData>
+			success():bool
+	}
+	export interface SearchDiversityInclusionRespData extends Struct<SearchDiversityInclusionRespData>{
+
+			items:Ref<DiInfo>[]
+	}
+	export interface SearchJobPublishRecordPathReqBodyBuilder extends Struct<SearchJobPublishRecordPathReqBodyBuilder>{
+
+			jobChannelId(jobChannelId:string):Ref<SearchJobPublishRecordPathReqBodyBuilder>
+			build():Ref<SearchJobPublishRecordReqBody>
+	}
+	export interface SearchJobPublishRecordReq extends Struct<SearchJobPublishRecordReq>{
+
+			body:Ref<SearchJobPublishRecordReqBody>
+	}
+	export interface SearchJobPublishRecordReqBody extends Struct<SearchJobPublishRecordReqBody>{
+
+			jobChannelId:Ref<string>
+	}
+	export interface SearchJobPublishRecordReqBodyBuilder extends Struct<SearchJobPublishRecordReqBodyBuilder>{
+
+			jobChannelId(jobChannelId:string):Ref<SearchJobPublishRecordReqBodyBuilder>
+			build():Ref<SearchJobPublishRecordReqBody>
+	}
+	export interface SearchJobPublishRecordReqBuilder extends Struct<SearchJobPublishRecordReqBuilder>{
+
+			pageToken(pageToken:string):Ref<SearchJobPublishRecordReqBuilder>
+			pageSize(pageSize:int):Ref<SearchJobPublishRecordReqBuilder>
+			userIdType(userIdType:string):Ref<SearchJobPublishRecordReqBuilder>
+			departmentIdType(departmentIdType:string):Ref<SearchJobPublishRecordReqBuilder>
+			jobLevelIdType(jobLevelIdType:string):Ref<SearchJobPublishRecordReqBuilder>
+			jobFamilyIdType(jobFamilyIdType:string):Ref<SearchJobPublishRecordReqBuilder>
+			body(body:Ref<SearchJobPublishRecordReqBody>):Ref<SearchJobPublishRecordReqBuilder>
+			build():Ref<SearchJobPublishRecordReq>
+	}
+	export interface SearchJobPublishRecordResp extends Struct<SearchJobPublishRecordResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<SearchJobPublishRecordRespData>
+			success():bool
+	}
+	export interface SearchJobPublishRecordRespData extends Struct<SearchJobPublishRecordRespData>{
+
+			items:Ref<WebsiteJobPost>[]
+			hasMore:Ref<bool>
+			pageToken:Ref<string>
+	}
+	export interface SearchReferralPathReqBodyBuilder extends Struct<SearchReferralPathReqBodyBuilder>{
+
+			talentId(talentId:string):Ref<SearchReferralPathReqBodyBuilder>
+			startTime(startTime:string):Ref<SearchReferralPathReqBodyBuilder>
+			endTime(endTime:string):Ref<SearchReferralPathReqBodyBuilder>
+			build():Ref<SearchReferralReqBody>
+	}
+	export interface SearchReferralReq extends Struct<SearchReferralReq>{
+
+			body:Ref<SearchReferralReqBody>
+	}
+	export interface SearchReferralReqBody extends Struct<SearchReferralReqBody>{
+
+			talentId:Ref<string>
+			startTime:Ref<string>
+			endTime:Ref<string>
+	}
+	export interface SearchReferralReqBodyBuilder extends Struct<SearchReferralReqBodyBuilder>{
+
+			talentId(talentId:string):Ref<SearchReferralReqBodyBuilder>
+			startTime(startTime:string):Ref<SearchReferralReqBodyBuilder>
+			endTime(endTime:string):Ref<SearchReferralReqBodyBuilder>
+			build():Ref<SearchReferralReqBody>
+	}
+	export interface SearchReferralReqBuilder extends Struct<SearchReferralReqBuilder>{
+
+			userIdType(userIdType:string):Ref<SearchReferralReqBuilder>
+			body(body:Ref<SearchReferralReqBody>):Ref<SearchReferralReqBuilder>
+			build():Ref<SearchReferralReq>
+	}
+	export interface SearchReferralResp extends Struct<SearchReferralResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<SearchReferralRespData>
+			success():bool
+	}
+	export interface SearchReferralRespData extends Struct<SearchReferralRespData>{
+
+			items:Ref<ReferralInfo>[]
+	}
+	export interface SearchTalentOperationLogPathReqBodyBuilder extends Struct<SearchTalentOperationLogPathReqBodyBuilder>{
+
+			jobIdList(jobIdList:string[]):Ref<SearchTalentOperationLogPathReqBodyBuilder>
+			operatorIdList(operatorIdList:string[]):Ref<SearchTalentOperationLogPathReqBodyBuilder>
+			operationList(operationList:int[]):Ref<SearchTalentOperationLogPathReqBodyBuilder>
+			build():Ref<SearchTalentOperationLogReqBody>
+	}
+	export interface SearchTalentOperationLogReq extends Struct<SearchTalentOperationLogReq>{
+
+			body:Ref<SearchTalentOperationLogReqBody>
+	}
+	export interface SearchTalentOperationLogReqBody extends Struct<SearchTalentOperationLogReqBody>{
+
+			jobIdList:string[]
+			operatorIdList:string[]
+			operationList:int[]
+	}
+	export interface SearchTalentOperationLogReqBodyBuilder extends Struct<SearchTalentOperationLogReqBodyBuilder>{
+
+			jobIdList(jobIdList:string[]):Ref<SearchTalentOperationLogReqBodyBuilder>
+			operatorIdList(operatorIdList:string[]):Ref<SearchTalentOperationLogReqBodyBuilder>
+			operationList(operationList:int[]):Ref<SearchTalentOperationLogReqBodyBuilder>
+			build():Ref<SearchTalentOperationLogReqBody>
+	}
+	export interface SearchTalentOperationLogReqBuilder extends Struct<SearchTalentOperationLogReqBuilder>{
+
+			pageToken(pageToken:string):Ref<SearchTalentOperationLogReqBuilder>
+			pageSize(pageSize:int):Ref<SearchTalentOperationLogReqBuilder>
+			userIdType(userIdType:string):Ref<SearchTalentOperationLogReqBuilder>
+			body(body:Ref<SearchTalentOperationLogReqBody>):Ref<SearchTalentOperationLogReqBuilder>
+			build():Ref<SearchTalentOperationLogReq>
+	}
+	export interface SearchTalentOperationLogResp extends Struct<SearchTalentOperationLogResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<SearchTalentOperationLogRespData>
+			success():bool
+	}
+	export interface SearchTalentOperationLogRespData extends Struct<SearchTalentOperationLogRespData>{
+
+			items:Ref<TalentOperationLog>[]
+			hasMore:Ref<bool>
+			pageToken:Ref<string>
+	}
+	export interface SearchTalentPoolIterator extends Struct<SearchTalentPoolIterator>{
+
+			next():[bool,Ref<TalentPool>]
+			nextPageToken():Ref<string>
+	}
+	export interface SearchTalentPoolReq extends Struct<SearchTalentPoolReq>{
+
+			limit:int
+	}
+	export interface SearchTalentPoolReqBuilder extends Struct<SearchTalentPoolReqBuilder>{
+
+			limit(limit:int):Ref<SearchTalentPoolReqBuilder>
+			pageSize(pageSize:int):Ref<SearchTalentPoolReqBuilder>
+			pageToken(pageToken:string):Ref<SearchTalentPoolReqBuilder>
+			idList(idList:string[]):Ref<SearchTalentPoolReqBuilder>
+			build():Ref<SearchTalentPoolReq>
+	}
+	export interface SearchTalentPoolResp extends Struct<SearchTalentPoolResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<SearchTalentPoolRespData>
+			success():bool
+	}
+	export interface SearchTalentPoolRespData extends Struct<SearchTalentPoolRespData>{
+
+			items:Ref<TalentPool>[]
+			pageToken:Ref<string>
+			hasMore:Ref<bool>
+	}
+	export interface SearchTestIterator extends Struct<SearchTestIterator>{
+
+			next():[bool,Ref<Test>]
+			nextPageToken():Ref<string>
+	}
+	export interface SearchTestPathReqBodyBuilder extends Struct<SearchTestPathReqBodyBuilder>{
+
+			applicationIdList(applicationIdList:string[]):Ref<SearchTestPathReqBodyBuilder>
+			testStartTimeMin(testStartTimeMin:string):Ref<SearchTestPathReqBodyBuilder>
+			testStartTimeMax(testStartTimeMax:string):Ref<SearchTestPathReqBodyBuilder>
+			build():Ref<SearchTestReqBody>
+	}
+	export interface SearchTestReq extends Struct<SearchTestReq>{
+
+			body:Ref<SearchTestReqBody>
+			limit:int
+	}
+	export interface SearchTestReqBody extends Struct<SearchTestReqBody>{
+
+			applicationIdList:string[]
+			testStartTimeMin:Ref<string>
+			testStartTimeMax:Ref<string>
+	}
+	export interface SearchTestReqBodyBuilder extends Struct<SearchTestReqBodyBuilder>{
+
+			applicationIdList(applicationIdList:string[]):Ref<SearchTestReqBodyBuilder>
+			testStartTimeMin(testStartTimeMin:string):Ref<SearchTestReqBodyBuilder>
+			testStartTimeMax(testStartTimeMax:string):Ref<SearchTestReqBodyBuilder>
+			build():Ref<SearchTestReqBody>
+	}
+	export interface SearchTestReqBuilder extends Struct<SearchTestReqBuilder>{
+
+			limit(limit:int):Ref<SearchTestReqBuilder>
+			pageToken(pageToken:string):Ref<SearchTestReqBuilder>
+			pageSize(pageSize:int):Ref<SearchTestReqBuilder>
+			userIdType(userIdType:string):Ref<SearchTestReqBuilder>
+			body(body:Ref<SearchTestReqBody>):Ref<SearchTestReqBuilder>
+			build():Ref<SearchTestReq>
+	}
+	export interface SearchTestResp extends Struct<SearchTestResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<SearchTestRespData>
+			success():bool
+	}
+	export interface SearchTestRespData extends Struct<SearchTestRespData>{
+
+			items:Ref<Test>[]
+			hasMore:Ref<bool>
+			pageToken:Ref<string>
+	}
+	export interface SearchWebsiteJobPostIterator extends Struct<SearchWebsiteJobPostIterator>{
+
+			next():[bool,Ref<WebsiteJobPost>]
+			nextPageToken():Ref<string>
+	}
+	export interface SearchWebsiteJobPostPathReqBodyBuilder extends Struct<SearchWebsiteJobPostPathReqBodyBuilder>{
+
+			jobTypeIdList(jobTypeIdList:string[]):Ref<SearchWebsiteJobPostPathReqBodyBuilder>
+			cityCodeList(cityCodeList:string[]):Ref<SearchWebsiteJobPostPathReqBodyBuilder>
+			jobFunctionIdList(jobFunctionIdList:string[]):Ref<SearchWebsiteJobPostPathReqBodyBuilder>
+			subjectIdList(subjectIdList:string[]):Ref<SearchWebsiteJobPostPathReqBodyBuilder>
+			keyword(keyword:string):Ref<SearchWebsiteJobPostPathReqBodyBuilder>
+			updateStartTime(updateStartTime:string):Ref<SearchWebsiteJobPostPathReqBodyBuilder>
+			updateEndTime(updateEndTime:string):Ref<SearchWebsiteJobPostPathReqBodyBuilder>
+			createStartTime(createStartTime:string):Ref<SearchWebsiteJobPostPathReqBodyBuilder>
+			createEndTime(createEndTime:string):Ref<SearchWebsiteJobPostPathReqBodyBuilder>
+			build():Ref<SearchWebsiteJobPostReqBody>
+	}
+	export interface SearchWebsiteJobPostReq extends Struct<SearchWebsiteJobPostReq>{
+
+			body:Ref<SearchWebsiteJobPostReqBody>
+			limit:int
+	}
+	export interface SearchWebsiteJobPostReqBody extends Struct<SearchWebsiteJobPostReqBody>{
+
+			jobTypeIdList:string[]
+			cityCodeList:string[]
+			jobFunctionIdList:string[]
+			subjectIdList:string[]
+			keyword:Ref<string>
+			updateStartTime:Ref<string>
+			updateEndTime:Ref<string>
+			createStartTime:Ref<string>
+			createEndTime:Ref<string>
+	}
+	export interface SearchWebsiteJobPostReqBodyBuilder extends Struct<SearchWebsiteJobPostReqBodyBuilder>{
+
+			jobTypeIdList(jobTypeIdList:string[]):Ref<SearchWebsiteJobPostReqBodyBuilder>
+			cityCodeList(cityCodeList:string[]):Ref<SearchWebsiteJobPostReqBodyBuilder>
+			jobFunctionIdList(jobFunctionIdList:string[]):Ref<SearchWebsiteJobPostReqBodyBuilder>
+			subjectIdList(subjectIdList:string[]):Ref<SearchWebsiteJobPostReqBodyBuilder>
+			keyword(keyword:string):Ref<SearchWebsiteJobPostReqBodyBuilder>
+			updateStartTime(updateStartTime:string):Ref<SearchWebsiteJobPostReqBodyBuilder>
+			updateEndTime(updateEndTime:string):Ref<SearchWebsiteJobPostReqBodyBuilder>
+			createStartTime(createStartTime:string):Ref<SearchWebsiteJobPostReqBodyBuilder>
+			createEndTime(createEndTime:string):Ref<SearchWebsiteJobPostReqBodyBuilder>
+			build():Ref<SearchWebsiteJobPostReqBody>
+	}
+	export interface SearchWebsiteJobPostReqBuilder extends Struct<SearchWebsiteJobPostReqBuilder>{
+
+			limit(limit:int):Ref<SearchWebsiteJobPostReqBuilder>
+			websiteId(websiteId:string):Ref<SearchWebsiteJobPostReqBuilder>
+			pageToken(pageToken:string):Ref<SearchWebsiteJobPostReqBuilder>
+			pageSize(pageSize:int):Ref<SearchWebsiteJobPostReqBuilder>
+			userIdType(userIdType:string):Ref<SearchWebsiteJobPostReqBuilder>
+			departmentIdType(departmentIdType:string):Ref<SearchWebsiteJobPostReqBuilder>
+			jobLevelIdType(jobLevelIdType:string):Ref<SearchWebsiteJobPostReqBuilder>
+			body(body:Ref<SearchWebsiteJobPostReqBody>):Ref<SearchWebsiteJobPostReqBuilder>
+			build():Ref<SearchWebsiteJobPostReq>
+	}
+	export interface SearchWebsiteJobPostResp extends Struct<SearchWebsiteJobPostResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<SearchWebsiteJobPostRespData>
+			success():bool
+	}
+	export interface SearchWebsiteJobPostRespData extends Struct<SearchWebsiteJobPostRespData>{
+
+			items:Ref<WebsiteJobPost>[]
+			hasMore:Ref<bool>
+			pageToken:Ref<string>
+	}
 	export interface SelectOptionResult extends Struct<SelectOptionResult>{
 
 			optionId:Ref<string>
@@ -8364,6 +10969,25 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			name(name:string):Ref<SequenceBuilder>
 			enName(enName:string):Ref<SequenceBuilder>
 			build():Ref<Sequence>
+	}
+	export interface SignatureAttachment extends Struct<SignatureAttachment>{
+
+			id:Ref<string>
+			fileName:Ref<string>
+			fileTemplateId:Ref<string>
+			fileTemplateName:Ref<string>
+			fileTemplateTypeId:Ref<string>
+			fileTemplateTypeName:Ref<string>
+	}
+	export interface SignatureAttachmentBuilder extends Struct<SignatureAttachmentBuilder>{
+
+			id(id:string):Ref<SignatureAttachmentBuilder>
+			fileName(fileName:string):Ref<SignatureAttachmentBuilder>
+			fileTemplateId(fileTemplateId:string):Ref<SignatureAttachmentBuilder>
+			fileTemplateName(fileTemplateName:string):Ref<SignatureAttachmentBuilder>
+			fileTemplateTypeId(fileTemplateTypeId:string):Ref<SignatureAttachmentBuilder>
+			fileTemplateTypeName(fileTemplateTypeName:string):Ref<SignatureAttachmentBuilder>
+			build():Ref<SignatureAttachment>
 	}
 	export interface Site extends Struct<Site>{
 
@@ -8699,6 +11323,48 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			snsType(snsType:int):Ref<SnsInfoBuilder>
 			build():Ref<SnsInfo>
 	}
+	//2
+	export const StageConfirmed:int
+	//3
+	export const StagePaid:int
+	//1
+	export const StageToBeConfirmed:int
+	//2
+	export const StateCreateTripartiteAgreementApplied:int
+	//4
+	export const StateCreateTripartiteAgreementCompanyProcessing:int
+	//7
+	export const StateCreateTripartiteAgreementCompleted:int
+	//6
+	export const StateCreateTripartiteAgreementEnded:int
+	//1
+	export const StateCreateTripartiteAgreementNotStarted:int
+	//5
+	export const StateCreateTripartiteAgreementSchoolProcessing:int
+	//3
+	export const StateCreateTripartiteAgreementStudentProcessing:int
+	//9
+	export const StateCreateTripartiteAgreementTerminated:int
+	//8
+	export const StateCreateTripartiteAgreementTerminationProcessing:int
+	//2
+	export const StateUpdateTripartiteAgreementApplied:int
+	//4
+	export const StateUpdateTripartiteAgreementCompanyProcessing:int
+	//7
+	export const StateUpdateTripartiteAgreementCompleted:int
+	//6
+	export const StateUpdateTripartiteAgreementEnded:int
+	//1
+	export const StateUpdateTripartiteAgreementNotStarted:int
+	//5
+	export const StateUpdateTripartiteAgreementSchoolProcessing:int
+	//3
+	export const StateUpdateTripartiteAgreementStudentProcessing:int
+	//9
+	export const StateUpdateTripartiteAgreementTerminated:int
+	//8
+	export const StateUpdateTripartiteAgreementTerminationProcessing:int
 	//2
 	export const State导入失败:int
 	//1
@@ -9800,6 +12466,36 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 
 			employee:Ref<Employee>
 	}
+	export interface TransferStageApplicationPathReqBodyBuilder extends Struct<TransferStageApplicationPathReqBodyBuilder>{
+
+			stageId(stageId:string):Ref<TransferStageApplicationPathReqBodyBuilder>
+			build():Ref<TransferStageApplicationReqBody>
+	}
+	export interface TransferStageApplicationReq extends Struct<TransferStageApplicationReq>{
+
+			body:Ref<TransferStageApplicationReqBody>
+	}
+	export interface TransferStageApplicationReqBody extends Struct<TransferStageApplicationReqBody>{
+
+			stageId:Ref<string>
+	}
+	export interface TransferStageApplicationReqBodyBuilder extends Struct<TransferStageApplicationReqBodyBuilder>{
+
+			stageId(stageId:string):Ref<TransferStageApplicationReqBodyBuilder>
+			build():Ref<TransferStageApplicationReqBody>
+	}
+	export interface TransferStageApplicationReqBuilder extends Struct<TransferStageApplicationReqBuilder>{
+
+			applicationId(applicationId:string):Ref<TransferStageApplicationReqBuilder>
+			body(body:Ref<TransferStageApplicationReqBody>):Ref<TransferStageApplicationReqBuilder>
+			build():Ref<TransferStageApplicationReq>
+	}
+	export interface TransferStageApplicationResp extends Struct<TransferStageApplicationResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			success():bool
+	}
 	export interface TripartiteAgreementInfo extends Struct<TripartiteAgreementInfo>{
 
 			id:Ref<string>
@@ -9817,6 +12513,14 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			modifyTime(modifyTime:string):Ref<TripartiteAgreementInfoBuilder>
 			build():Ref<TripartiteAgreementInfo>
 	}
+	//"evaluation"
+	export const TypeListTodoEvaluation:string
+	//"exam"
+	export const TypeListTodoExam:string
+	//"interview"
+	export const TypeListTodoInterview:string
+	//"offer"
+	export const TypeListTodoOffer:string
 	//2
 	export const Type候选人作品:int
 	//3
@@ -9882,6 +12586,22 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			build():Ref<UpdateJobRequirementReq>
 	}
 	export interface UpdateJobRequirementResp extends Struct<UpdateJobRequirementResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			success():bool
+	}
+	export interface UpdateOfferCustomFieldReq extends Struct<UpdateOfferCustomFieldReq>{
+
+			offerCustomField:Ref<OfferCustomField>
+	}
+	export interface UpdateOfferCustomFieldReqBuilder extends Struct<UpdateOfferCustomFieldReqBuilder>{
+
+			offerCustomFieldId(offerCustomFieldId:string):Ref<UpdateOfferCustomFieldReqBuilder>
+			offerCustomField(offerCustomField:Ref<OfferCustomField>):Ref<UpdateOfferCustomFieldReqBuilder>
+			build():Ref<UpdateOfferCustomFieldReq>
+	}
+	export interface UpdateOfferCustomFieldResp extends Struct<UpdateOfferCustomFieldResp>{
 
 			apiResp:Ref<larkcore.ApiResp>
 			codeError:larkcore.CodeError
@@ -10018,6 +12738,107 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			codeError:larkcore.CodeError
 			success():bool
 	}
+	export interface UpdateTalentExternalInfoPathReqBodyBuilder extends Struct<UpdateTalentExternalInfoPathReqBodyBuilder>{
+
+			externalCreateTime(externalCreateTime:string):Ref<UpdateTalentExternalInfoPathReqBodyBuilder>
+			build():Ref<UpdateTalentExternalInfoReqBody>
+	}
+	export interface UpdateTalentExternalInfoReq extends Struct<UpdateTalentExternalInfoReq>{
+
+			body:Ref<UpdateTalentExternalInfoReqBody>
+	}
+	export interface UpdateTalentExternalInfoReqBody extends Struct<UpdateTalentExternalInfoReqBody>{
+
+			externalCreateTime:Ref<string>
+	}
+	export interface UpdateTalentExternalInfoReqBodyBuilder extends Struct<UpdateTalentExternalInfoReqBodyBuilder>{
+
+			externalCreateTime(externalCreateTime:string):Ref<UpdateTalentExternalInfoReqBodyBuilder>
+			build():Ref<UpdateTalentExternalInfoReqBody>
+	}
+	export interface UpdateTalentExternalInfoReqBuilder extends Struct<UpdateTalentExternalInfoReqBuilder>{
+
+			talentId(talentId:string):Ref<UpdateTalentExternalInfoReqBuilder>
+			body(body:Ref<UpdateTalentExternalInfoReqBody>):Ref<UpdateTalentExternalInfoReqBuilder>
+			build():Ref<UpdateTalentExternalInfoReq>
+	}
+	export interface UpdateTalentExternalInfoResp extends Struct<UpdateTalentExternalInfoResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<UpdateTalentExternalInfoRespData>
+			success():bool
+	}
+	export interface UpdateTalentExternalInfoRespData extends Struct<UpdateTalentExternalInfoRespData>{
+
+			externalInfo:Ref<TalentExternalInfo>
+	}
+	export interface UpdateTripartiteAgreementReq extends Struct<UpdateTripartiteAgreementReq>{
+
+			tripartiteAgreementInfo:Ref<TripartiteAgreementInfo>
+	}
+	export interface UpdateTripartiteAgreementReqBuilder extends Struct<UpdateTripartiteAgreementReqBuilder>{
+
+			tripartiteAgreementId(tripartiteAgreementId:string):Ref<UpdateTripartiteAgreementReqBuilder>
+			tripartiteAgreementInfo(tripartiteAgreementInfo:Ref<TripartiteAgreementInfo>):Ref<UpdateTripartiteAgreementReqBuilder>
+			build():Ref<UpdateTripartiteAgreementReq>
+	}
+	export interface UpdateTripartiteAgreementResp extends Struct<UpdateTripartiteAgreementResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<UpdateTripartiteAgreementRespData>
+			success():bool
+	}
+	export interface UpdateTripartiteAgreementRespData extends Struct<UpdateTripartiteAgreementRespData>{
+
+			tripartiteAgreement:Ref<TripartiteAgreementInfo>
+	}
+	export interface UpdateWebsiteChannelPathReqBodyBuilder extends Struct<UpdateWebsiteChannelPathReqBodyBuilder>{
+
+			channelName(channelName:string):Ref<UpdateWebsiteChannelPathReqBodyBuilder>
+			build():Ref<UpdateWebsiteChannelReqBody>
+	}
+	export interface UpdateWebsiteChannelReq extends Struct<UpdateWebsiteChannelReq>{
+
+			body:Ref<UpdateWebsiteChannelReqBody>
+	}
+	export interface UpdateWebsiteChannelReqBody extends Struct<UpdateWebsiteChannelReqBody>{
+
+			channelName:Ref<string>
+	}
+	export interface UpdateWebsiteChannelReqBodyBuilder extends Struct<UpdateWebsiteChannelReqBodyBuilder>{
+
+			channelName(channelName:string):Ref<UpdateWebsiteChannelReqBodyBuilder>
+			build():Ref<UpdateWebsiteChannelReqBody>
+	}
+	export interface UpdateWebsiteChannelReqBuilder extends Struct<UpdateWebsiteChannelReqBuilder>{
+
+			websiteId(websiteId:string):Ref<UpdateWebsiteChannelReqBuilder>
+			channelId(channelId:string):Ref<UpdateWebsiteChannelReqBuilder>
+			body(body:Ref<UpdateWebsiteChannelReqBody>):Ref<UpdateWebsiteChannelReqBuilder>
+			build():Ref<UpdateWebsiteChannelReq>
+	}
+	export interface UpdateWebsiteChannelResp extends Struct<UpdateWebsiteChannelResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<UpdateWebsiteChannelRespData>
+			success():bool
+	}
+	export interface UpdateWebsiteChannelRespData extends Struct<UpdateWebsiteChannelRespData>{
+
+			id:Ref<string>
+			name:Ref<string>
+			link:Ref<string>
+			code:Ref<string>
+	}
+	//"interview_location"
+	export const UsageInterviewLocation:string
+	//"position_location"
+	export const UsagePositionLocation:string
+	//"store_location"
+	export const UsageStoreLocation:string
 	export interface UserBusinessManagementScope extends Struct<UserBusinessManagementScope>{
 
 			entity:Ref<EntityInfo>
@@ -10060,17 +12881,39 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			build():Ref<UserId>
 	}
 	//"open_id"
+	export const UserIdTypeBatchUpdateJobManagerOpenId:string
+	//"union_id"
+	export const UserIdTypeBatchUpdateJobManagerUnionId:string
+	//"user_id"
+	export const UserIdTypeBatchUpdateJobManagerUserId:string
+	//"open_id"
 	export const UserIdTypeCombinedCreateJobOpenId:string
 	//"union_id"
 	export const UserIdTypeCombinedCreateJobUnionId:string
 	//"user_id"
 	export const UserIdTypeCombinedCreateJobUserId:string
 	//"open_id"
+	export const UserIdTypeCombinedCreateTalentOpenId:string
+	//"people_admin_id"
+	export const UserIdTypeCombinedCreateTalentPeopleAdminId:string
+	//"union_id"
+	export const UserIdTypeCombinedCreateTalentUnionId:string
+	//"user_id"
+	export const UserIdTypeCombinedCreateTalentUserId:string
+	//"open_id"
 	export const UserIdTypeCombinedUpdateJobOpenId:string
 	//"union_id"
 	export const UserIdTypeCombinedUpdateJobUnionId:string
 	//"user_id"
 	export const UserIdTypeCombinedUpdateJobUserId:string
+	//"open_id"
+	export const UserIdTypeCombinedUpdateTalentOpenId:string
+	//"people_admin_id"
+	export const UserIdTypeCombinedUpdateTalentPeopleAdminId:string
+	//"union_id"
+	export const UserIdTypeCombinedUpdateTalentUnionId:string
+	//"user_id"
+	export const UserIdTypeCombinedUpdateTalentUserId:string
 	//"open_id"
 	export const UserIdTypeConfigJobOpenId:string
 	//"people_admin_id"
@@ -10079,6 +12922,32 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 	export const UserIdTypeConfigJobUnionId:string
 	//"user_id"
 	export const UserIdTypeConfigJobUserId:string
+	//"open_id"
+	export const UserIdTypeCreateApplicationOpenId:string
+	//"union_id"
+	export const UserIdTypeCreateApplicationUnionId:string
+	//"user_id"
+	export const UserIdTypeCreateApplicationUserId:string
+	//"open_id"
+	export const UserIdTypeCreateByResumeWebsiteDeliveryOpenId:string
+	//"union_id"
+	export const UserIdTypeCreateByResumeWebsiteDeliveryUnionId:string
+	//"user_id"
+	export const UserIdTypeCreateByResumeWebsiteDeliveryUserId:string
+	//"open_id"
+	export const UserIdTypeCreateExamOpenId:string
+	//"people_admin_id"
+	export const UserIdTypeCreateExamPeopleAdminId:string
+	//"union_id"
+	export const UserIdTypeCreateExamUnionId:string
+	//"user_id"
+	export const UserIdTypeCreateExamUserId:string
+	//"open_id"
+	export const UserIdTypeCreateExternalReferralRewardOpenId:string
+	//"union_id"
+	export const UserIdTypeCreateExternalReferralRewardUnionId:string
+	//"user_id"
+	export const UserIdTypeCreateExternalReferralRewardUserId:string
 	//"open_id"
 	export const UserIdTypeCreateJobRequirementOpenId:string
 	//"union_id"
@@ -10122,11 +12991,25 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 	//"user_id"
 	export const UserIdTypeGetByApplicationReferralUserId:string
 	//"open_id"
+	export const UserIdTypeGetByTalentInterviewOpenId:string
+	//"people_admin_id"
+	export const UserIdTypeGetByTalentInterviewPeopleAdminId:string
+	//"union_id"
+	export const UserIdTypeGetByTalentInterviewUnionId:string
+	//"user_id"
+	export const UserIdTypeGetByTalentInterviewUserId:string
+	//"open_id"
 	export const UserIdTypeGetEmployeeOpenId:string
 	//"union_id"
 	export const UserIdTypeGetEmployeeUnionId:string
 	//"user_id"
 	export const UserIdTypeGetEmployeeUserId:string
+	//"open_id"
+	export const UserIdTypeGetInterviewRecordOpenId:string
+	//"union_id"
+	export const UserIdTypeGetInterviewRecordUnionId:string
+	//"user_id"
+	export const UserIdTypeGetInterviewRecordUserId:string
 	//"open_id"
 	export const UserIdTypeGetJobManagerOpenId:string
 	//"people_admin_id"
@@ -10174,6 +13057,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 	//"user_id"
 	export const UserIdTypeGetTalentUserId:string
 	//"open_id"
+	export const UserIdTypeGetWebsiteJobPostOpenId:string
+	//"union_id"
+	export const UserIdTypeGetWebsiteJobPostUnionId:string
+	//"user_id"
+	export const UserIdTypeGetWebsiteJobPostUserId:string
+	//"open_id"
 	export const UserIdTypeListApplicationInterviewOpenId:string
 	//"people_admin_id"
 	export const UserIdTypeListApplicationInterviewPeopleAdminId:string
@@ -10181,6 +13070,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 	export const UserIdTypeListApplicationInterviewUnionId:string
 	//"user_id"
 	export const UserIdTypeListApplicationInterviewUserId:string
+	//"open_id"
+	export const UserIdTypeListBackgroundCheckOrderOpenId:string
+	//"union_id"
+	export const UserIdTypeListBackgroundCheckOrderUnionId:string
+	//"user_id"
+	export const UserIdTypeListBackgroundCheckOrderUserId:string
 	//"open_id"
 	export const UserIdTypeListByIdJobRequirementOpenId:string
 	//"union_id"
@@ -10191,12 +13086,42 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 	export const UserIdTypeListEvaluationOpenId:string
 	//"people_admin_id"
 	export const UserIdTypeListEvaluationPeopleAdminId:string
+	//"open_id"
+	export const UserIdTypeListEvaluationTaskOpenId:string
+	//"people_admin_id"
+	export const UserIdTypeListEvaluationTaskPeopleAdminId:string
+	//"union_id"
+	export const UserIdTypeListEvaluationTaskUnionId:string
+	//"user_id"
+	export const UserIdTypeListEvaluationTaskUserId:string
 	//"union_id"
 	export const UserIdTypeListEvaluationUnionId:string
 	//"user_id"
 	export const UserIdTypeListEvaluationUserId:string
 	//"open_id"
+	export const UserIdTypeListExamMarkingTaskOpenId:string
+	//"people_admin_id"
+	export const UserIdTypeListExamMarkingTaskPeopleAdminId:string
+	//"union_id"
+	export const UserIdTypeListExamMarkingTaskUnionId:string
+	//"user_id"
+	export const UserIdTypeListExamMarkingTaskUserId:string
+	//"open_id"
 	export const UserIdTypeListInterviewOpenId:string
+	//"open_id"
+	export const UserIdTypeListInterviewRecordOpenId:string
+	//"union_id"
+	export const UserIdTypeListInterviewRecordUnionId:string
+	//"user_id"
+	export const UserIdTypeListInterviewRecordUserId:string
+	//"open_id"
+	export const UserIdTypeListInterviewTaskOpenId:string
+	//"people_admin_id"
+	export const UserIdTypeListInterviewTaskPeopleAdminId:string
+	//"union_id"
+	export const UserIdTypeListInterviewTaskUnionId:string
+	//"user_id"
+	export const UserIdTypeListInterviewTaskUserId:string
 	//"union_id"
 	export const UserIdTypeListInterviewUnionId:string
 	//"user_id"
@@ -10236,6 +13161,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 	//"user_id"
 	export const UserIdTypeListReferralWebsiteJobPostUserId:string
 	//"open_id"
+	export const UserIdTypeListSubjectOpenId:string
+	//"union_id"
+	export const UserIdTypeListSubjectUnionId:string
+	//"user_id"
+	export const UserIdTypeListSubjectUserId:string
+	//"open_id"
 	export const UserIdTypeListTalentFolderOpenId:string
 	//"people_admin_id"
 	export const UserIdTypeListTalentFolderPeopleAdminId:string
@@ -10251,6 +13182,20 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 	export const UserIdTypeListTalentUnionId:string
 	//"user_id"
 	export const UserIdTypeListTalentUserId:string
+	//"open_id"
+	export const UserIdTypeListTodoOpenId:string
+	//"people_admin_id"
+	export const UserIdTypeListTodoPeopleAdminId:string
+	//"union_id"
+	export const UserIdTypeListTodoUnionId:string
+	//"user_id"
+	export const UserIdTypeListTodoUserId:string
+	//"open_id"
+	export const UserIdTypeListWebsiteJobPostOpenId:string
+	//"union_id"
+	export const UserIdTypeListWebsiteJobPostUnionId:string
+	//"user_id"
+	export const UserIdTypeListWebsiteJobPostUserId:string
 	//"open_id"
 	export const UserIdTypeOfferApplicationOpenId:string
 	//"union_id"
@@ -10273,12 +13218,58 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 	export const UserIdTypePatchNoteUnionId:string
 	//"user_id"
 	export const UserIdTypePatchNoteUserId:string
+	//"people_admin_id"
+	export const UserIdTypePeopleAdminId:string
+	//"open_id"
+	export const UserIdTypeProtectAgencyOpenId:string
+	//"people_admin_id"
+	export const UserIdTypeProtectAgencyPeopleAdminId:string
+	//"union_id"
+	export const UserIdTypeProtectAgencyUnionId:string
+	//"user_id"
+	export const UserIdTypeProtectAgencyUserId:string
+	//"open_id"
+	export const UserIdTypeQueryAgencyOpenId:string
+	//"union_id"
+	export const UserIdTypeQueryAgencyUnionId:string
+	//"user_id"
+	export const UserIdTypeQueryAgencyUserId:string
 	//"open_id"
 	export const UserIdTypeRecruiterJobOpenId:string
 	//"union_id"
 	export const UserIdTypeRecruiterJobUnionId:string
 	//"user_id"
 	export const UserIdTypeRecruiterJobUserId:string
+	//"open_id"
+	export const UserIdTypeSearchJobPublishRecordOpenId:string
+	//"union_id"
+	export const UserIdTypeSearchJobPublishRecordUnionId:string
+	//"user_id"
+	export const UserIdTypeSearchJobPublishRecordUserId:string
+	//"open_id"
+	export const UserIdTypeSearchReferralOpenId:string
+	//"union_id"
+	export const UserIdTypeSearchReferralUnionId:string
+	//"user_id"
+	export const UserIdTypeSearchReferralUserId:string
+	//"open_id"
+	export const UserIdTypeSearchTalentOperationLogOpenId:string
+	//"union_id"
+	export const UserIdTypeSearchTalentOperationLogUnionId:string
+	//"user_id"
+	export const UserIdTypeSearchTalentOperationLogUserId:string
+	//"open_id"
+	export const UserIdTypeSearchTestOpenId:string
+	//"union_id"
+	export const UserIdTypeSearchTestUnionId:string
+	//"user_id"
+	export const UserIdTypeSearchTestUserId:string
+	//"open_id"
+	export const UserIdTypeSearchWebsiteJobPostOpenId:string
+	//"union_id"
+	export const UserIdTypeSearchWebsiteJobPostUnionId:string
+	//"user_id"
+	export const UserIdTypeSearchWebsiteJobPostUserId:string
 	//"open_id"
 	export const UserIdTypeTransferOnboardApplicationOpenId:string
 	//"union_id"
@@ -10316,7 +13307,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			modifyTime:Ref<string>
 			roleName:Ref<I18n>
 			roleDescription:Ref<I18n>
-			businessManagementScopes:Ref<UserBusinessManagementScope>
+			businessManagementScopes:Ref<UserBusinessManagementScope>[]
 	}
 	export interface UserRoleBuilder extends Struct<UserRoleBuilder>{
 
@@ -10325,19 +13316,32 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			modifyTime(modifyTime:string):Ref<UserRoleBuilder>
 			roleName(roleName:Ref<I18n>):Ref<UserRoleBuilder>
 			roleDescription(roleDescription:Ref<I18n>):Ref<UserRoleBuilder>
-			businessManagementScopes(businessManagementScopes:Ref<UserBusinessManagementScope>):Ref<UserRoleBuilder>
+			businessManagementScopes(businessManagementScopes:Ref<UserBusinessManagementScope>[]):Ref<UserRoleBuilder>
 			build():Ref<UserRole>
 	}
 	export interface V1 extends Struct<V1>{
 
+			advertisement:Ref<{
+			
+				publish(ctx:context.Context,req:Ref<PublishAdvertisementReq>,...options:larkcore.RequestOptionFunc[]):Ref<PublishAdvertisementResp>
+			}>
+			agency:Ref<{
+			
+				get(ctx:context.Context,req:Ref<GetAgencyReq>,...options:larkcore.RequestOptionFunc[]):Ref<GetAgencyResp>
+				protect(ctx:context.Context,req:Ref<ProtectAgencyReq>,...options:larkcore.RequestOptionFunc[]):Ref<ProtectAgencyResp>
+				protectSearch(ctx:context.Context,req:Ref<ProtectSearchAgencyReq>,...options:larkcore.RequestOptionFunc[]):Ref<ProtectSearchAgencyResp>
+				query(ctx:context.Context,req:Ref<QueryAgencyReq>,...options:larkcore.RequestOptionFunc[]):Ref<QueryAgencyResp>
+			}>
 			application:Ref<{
 			
 				create(ctx:context.Context,req:Ref<CreateApplicationReq>,...options:larkcore.RequestOptionFunc[]):Ref<CreateApplicationResp>
 				get(ctx:context.Context,req:Ref<GetApplicationReq>,...options:larkcore.RequestOptionFunc[]):Ref<GetApplicationResp>
 				list(ctx:context.Context,req:Ref<ListApplicationReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListApplicationResp>
 				offer(ctx:context.Context,req:Ref<OfferApplicationReq>,...options:larkcore.RequestOptionFunc[]):Ref<OfferApplicationResp>
+				recover(ctx:context.Context,req:Ref<RecoverApplicationReq>,...options:larkcore.RequestOptionFunc[]):Ref<RecoverApplicationResp>
 				terminate(ctx:context.Context,req:Ref<TerminateApplicationReq>,...options:larkcore.RequestOptionFunc[]):Ref<TerminateApplicationResp>
 				transferOnboard(ctx:context.Context,req:Ref<TransferOnboardApplicationReq>,...options:larkcore.RequestOptionFunc[]):Ref<TransferOnboardApplicationResp>
+				transferStage(ctx:context.Context,req:Ref<TransferStageApplicationReq>,...options:larkcore.RequestOptionFunc[]):Ref<TransferStageApplicationResp>
 			}>
 			applicationInterview:Ref<{
 			
@@ -10345,8 +13349,17 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			}>
 			attachment:Ref<{
 			
+				create(ctx:context.Context,...options:larkcore.RequestOptionFunc[]):Ref<CreateAttachmentResp>
 				get(ctx:context.Context,req:Ref<GetAttachmentReq>,...options:larkcore.RequestOptionFunc[]):Ref<GetAttachmentResp>
 				preview(ctx:context.Context,req:Ref<PreviewAttachmentReq>,...options:larkcore.RequestOptionFunc[]):Ref<PreviewAttachmentResp>
+			}>
+			backgroundCheckOrder:Ref<{
+			
+				list(ctx:context.Context,req:Ref<ListBackgroundCheckOrderReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListBackgroundCheckOrderResp>
+			}>
+			diversityInclusion:Ref<{
+			
+				search(ctx:context.Context,req:Ref<SearchDiversityInclusionReq>,...options:larkcore.RequestOptionFunc[]):Ref<SearchDiversityInclusionResp>
 			}>
 			ecoAccountCustomField:Ref<{
 			
@@ -10398,10 +13411,26 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 				list(ctx:context.Context,req:Ref<ListEvaluationReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListEvaluationResp>
 				listByIterator(ctx:context.Context,req:Ref<ListEvaluationReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListEvaluationIterator>
 			}>
+			evaluationTask:Ref<{
+			
+				list(ctx:context.Context,req:Ref<ListEvaluationTaskReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListEvaluationTaskResp>
+				listByIterator(ctx:context.Context,req:Ref<ListEvaluationTaskReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListEvaluationTaskIterator>
+			}>
+			exam:Ref<{
+			
+				create(ctx:context.Context,req:Ref<CreateExamReq>,...options:larkcore.RequestOptionFunc[]):Ref<CreateExamResp>
+			}>
+			examMarkingTask:Ref<{
+			
+				list(ctx:context.Context,req:Ref<ListExamMarkingTaskReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListExamMarkingTaskResp>
+				listByIterator(ctx:context.Context,req:Ref<ListExamMarkingTaskReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListExamMarkingTaskIterator>
+			}>
 			externalApplication:Ref<{
 			
 				create(ctx:context.Context,req:Ref<CreateExternalApplicationReq>,...options:larkcore.RequestOptionFunc[]):Ref<CreateExternalApplicationResp>
 				delete(ctx:context.Context,req:Ref<DeleteExternalApplicationReq>,...options:larkcore.RequestOptionFunc[]):Ref<DeleteExternalApplicationResp>
+				list(ctx:context.Context,req:Ref<ListExternalApplicationReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListExternalApplicationResp>
+				listByIterator(ctx:context.Context,req:Ref<ListExternalApplicationReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListExternalApplicationIterator>
 				update(ctx:context.Context,req:Ref<UpdateExternalApplicationReq>,...options:larkcore.RequestOptionFunc[]):Ref<UpdateExternalApplicationResp>
 			}>
 			externalBackgroundCheck:Ref<{
@@ -10415,28 +13444,76 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			externalInterviewAssessment:Ref<{
 			
 				create(ctx:context.Context,req:Ref<CreateExternalInterviewAssessmentReq>,...options:larkcore.RequestOptionFunc[]):Ref<CreateExternalInterviewAssessmentResp>
+				patch(ctx:context.Context,req:Ref<PatchExternalInterviewAssessmentReq>,...options:larkcore.RequestOptionFunc[]):Ref<PatchExternalInterviewAssessmentResp>
+			}>
+			externalReferralReward:Ref<{
+			
+				create(ctx:context.Context,req:Ref<CreateExternalReferralRewardReq>,...options:larkcore.RequestOptionFunc[]):Ref<CreateExternalReferralRewardResp>
+				delete(ctx:context.Context,req:Ref<DeleteExternalReferralRewardReq>,...options:larkcore.RequestOptionFunc[]):Ref<DeleteExternalReferralRewardResp>
 			}>
 			interview:Ref<{
 			
+				getByTalent(ctx:context.Context,req:Ref<GetByTalentInterviewReq>,...options:larkcore.RequestOptionFunc[]):Ref<GetByTalentInterviewResp>
 				list(ctx:context.Context,req:Ref<ListInterviewReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListInterviewResp>
+			}>
+			interviewFeedbackForm:Ref<{
+			
+				list(ctx:context.Context,req:Ref<ListInterviewFeedbackFormReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListInterviewFeedbackFormResp>
+				listByIterator(ctx:context.Context,req:Ref<ListInterviewFeedbackFormReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListInterviewFeedbackFormIterator>
+			}>
+			interviewRecord:Ref<{
+			
+				get(ctx:context.Context,req:Ref<GetInterviewRecordReq>,...options:larkcore.RequestOptionFunc[]):Ref<GetInterviewRecordResp>
+				list(ctx:context.Context,req:Ref<ListInterviewRecordReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListInterviewRecordResp>
+				listByIterator(ctx:context.Context,req:Ref<ListInterviewRecordReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListInterviewRecordIterator>
+			}>
+			interviewRecordAttachment:Ref<{
+			
+				get(ctx:context.Context,req:Ref<GetInterviewRecordAttachmentReq>,...options:larkcore.RequestOptionFunc[]):Ref<GetInterviewRecordAttachmentResp>
+			}>
+			interviewRegistrationSchema:Ref<{
+			
+				list(ctx:context.Context,req:Ref<ListInterviewRegistrationSchemaReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListInterviewRegistrationSchemaResp>
+				listByIterator(ctx:context.Context,req:Ref<ListInterviewRegistrationSchemaReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListInterviewRegistrationSchemaIterator>
+			}>
+			interviewRoundType:Ref<{
+			
+				list(ctx:context.Context,req:Ref<ListInterviewRoundTypeReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListInterviewRoundTypeResp>
+			}>
+			interviewTask:Ref<{
+			
+				list(ctx:context.Context,req:Ref<ListInterviewTaskReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListInterviewTaskResp>
+				listByIterator(ctx:context.Context,req:Ref<ListInterviewTaskReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListInterviewTaskIterator>
 			}>
 			job:Ref<{
 			
+				close(ctx:context.Context,req:Ref<CloseJobReq>,...options:larkcore.RequestOptionFunc[]):[Ref<CloseJobResp>,error]
 				combinedCreate(ctx:context.Context,req:Ref<CombinedCreateJobReq>,...options:larkcore.RequestOptionFunc[]):Ref<CombinedCreateJobResp>
 				combinedUpdate(ctx:context.Context,req:Ref<CombinedUpdateJobReq>,...options:larkcore.RequestOptionFunc[]):Ref<CombinedUpdateJobResp>
 				config(ctx:context.Context,req:Ref<ConfigJobReq>,...options:larkcore.RequestOptionFunc[]):Ref<ConfigJobResp>
 				get(ctx:context.Context,req:Ref<GetJobReq>,...options:larkcore.RequestOptionFunc[]):Ref<GetJobResp>
 				list(ctx:context.Context,req:Ref<ListJobReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListJobResp>
+				open(ctx:context.Context,req:Ref<OpenJobReq>,...options:larkcore.RequestOptionFunc[]):Ref<OpenJobResp>
 				recruiter(ctx:context.Context,req:Ref<RecruiterJobReq>,...options:larkcore.RequestOptionFunc[]):Ref<RecruiterJobResp>
 				updateConfig(ctx:context.Context,req:Ref<UpdateConfigJobReq>,...options:larkcore.RequestOptionFunc[]):Ref<UpdateConfigJobResp>
 			}>
 			jobManager:Ref<{
 			
+				batchUpdate(ctx:context.Context,req:Ref<BatchUpdateJobManagerReq>,...options:larkcore.RequestOptionFunc[]):Ref<BatchUpdateJobManagerResp>
 				get(ctx:context.Context,req:Ref<GetJobManagerReq>,...options:larkcore.RequestOptionFunc[]):Ref<GetJobManagerResp>
+			}>
+			jobFunction:Ref<{
+			
+				list(ctx:context.Context,req:Ref<ListJobFunctionReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListJobFunctionResp>
+				listByIterator(ctx:context.Context,req:Ref<ListJobFunctionReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListJobFunctionIterator>
 			}>
 			jobProcess:Ref<{
 			
 				list(ctx:context.Context,req:Ref<ListJobProcessReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListJobProcessResp>
+			}>
+			jobPublishRecord:Ref<{
+			
+				search(ctx:context.Context,req:Ref<SearchJobPublishRecordReq>,...options:larkcore.RequestOptionFunc[]):Ref<SearchJobPublishRecordResp>
 			}>
 			jobRequirement:Ref<{
 			
@@ -10450,14 +13527,25 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			
 				list(ctx:context.Context,req:Ref<ListJobRequirementSchemaReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListJobRequirementSchemaResp>
 			}>
+			jobSchema:Ref<{
+			
+				list(ctx:context.Context,req:Ref<ListJobSchemaReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListJobSchemaResp>
+			}>
 			jobType:Ref<{
 			
 				list(ctx:context.Context,req:Ref<ListJobTypeReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListJobTypeResp>
 				listByIterator(ctx:context.Context,req:Ref<ListJobTypeReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListJobTypeIterator>
 			}>
+			location:Ref<{
+			
+				list(ctx:context.Context,req:Ref<ListLocationReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListLocationResp>
+				listByIterator(ctx:context.Context,req:Ref<ListLocationReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListLocationIterator>
+				query(ctx:context.Context,req:Ref<QueryLocationReq>,...options:larkcore.RequestOptionFunc[]):Ref<QueryLocationResp>
+			}>
 			note:Ref<{
 			
 				create(ctx:context.Context,req:Ref<CreateNoteReq>,...options:larkcore.RequestOptionFunc[]):Ref<CreateNoteResp>
+				delete(ctx:context.Context,req:Ref<DeleteNoteReq>,...options:larkcore.RequestOptionFunc[]):Ref<DeleteNoteResp>
 				get(ctx:context.Context,req:Ref<GetNoteReq>,...options:larkcore.RequestOptionFunc[]):Ref<GetNoteResp>
 				list(ctx:context.Context,req:Ref<ListNoteReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListNoteResp>
 				patch(ctx:context.Context,req:Ref<PatchNoteReq>,...options:larkcore.RequestOptionFunc[]):Ref<PatchNoteResp>
@@ -10471,6 +13559,15 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 				offerStatus(ctx:context.Context,req:Ref<OfferStatusOfferReq>,...options:larkcore.RequestOptionFunc[]):Ref<OfferStatusOfferResp>
 				update(ctx:context.Context,req:Ref<UpdateOfferReq>,...options:larkcore.RequestOptionFunc[]):Ref<UpdateOfferResp>
 			}>
+			offerApplicationForm:Ref<{
+			
+				get(ctx:context.Context,req:Ref<GetOfferApplicationFormReq>,...options:larkcore.RequestOptionFunc[]):Ref<GetOfferApplicationFormResp>
+				list(ctx:context.Context,req:Ref<ListOfferApplicationFormReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListOfferApplicationFormResp>
+			}>
+			offerCustomField:Ref<{
+			
+				update(ctx:context.Context,req:Ref<UpdateOfferCustomFieldReq>,...options:larkcore.RequestOptionFunc[]):Ref<UpdateOfferCustomFieldResp>
+			}>
 			offerSchema:Ref<{
 			
 				get(ctx:context.Context,req:Ref<GetOfferSchemaReq>,...options:larkcore.RequestOptionFunc[]):Ref<GetOfferSchemaResp>
@@ -10482,6 +13579,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			referral:Ref<{
 			
 				getByApplication(ctx:context.Context,req:Ref<GetByApplicationReferralReq>,...options:larkcore.RequestOptionFunc[]):Ref<GetByApplicationReferralResp>
+				search(ctx:context.Context,req:Ref<SearchReferralReq>,...options:larkcore.RequestOptionFunc[]):Ref<SearchReferralResp>
 			}>
 			referralAccount:Ref<{
 			
@@ -10506,12 +13604,30 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 				list(ctx:context.Context,req:Ref<ListResumeSourceReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListResumeSourceResp>
 				listByIterator(ctx:context.Context,req:Ref<ListResumeSourceReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListResumeSourceIterator>
 			}>
+			role:Ref<{
+			
+				get(ctx:context.Context,req:Ref<GetRoleReq>,...options:larkcore.RequestOptionFunc[]):Ref<GetRoleResp>
+				list(ctx:context.Context,req:Ref<ListRoleReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListRoleResp>
+				listByIterator(ctx:context.Context,req:Ref<ListRoleReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListRoleIterator>
+			}>
+			subject:Ref<{
+			
+				list(ctx:context.Context,req:Ref<ListSubjectReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListSubjectResp>
+			}>
 			talent:Ref<{
 			
 				addToFolder(ctx:context.Context,req:Ref<AddToFolderTalentReq>,...options:larkcore.RequestOptionFunc[]):Ref<AddToFolderTalentResp>
 				batchGetId(ctx:context.Context,req:Ref<BatchGetIdTalentReq>,...options:larkcore.RequestOptionFunc[]):Ref<BatchGetIdTalentResp>
+				combinedCreate(ctx:context.Context,req:Ref<CombinedCreateTalentReq>,...options:larkcore.RequestOptionFunc[]):Ref<CombinedCreateTalentResp>
+				combinedUpdate(ctx:context.Context,req:Ref<CombinedUpdateTalentReq>,...options:larkcore.RequestOptionFunc[]):Ref<CombinedUpdateTalentResp>
 				get(ctx:context.Context,req:Ref<GetTalentReq>,...options:larkcore.RequestOptionFunc[]):Ref<GetTalentResp>
 				list(ctx:context.Context,req:Ref<ListTalentReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListTalentResp>
+				onboardStatus(ctx:context.Context,req:Ref<OnboardStatusTalentReq>,...options:larkcore.RequestOptionFunc[]):Ref<OnboardStatusTalentResp>
+			}>
+			talentExternalInfo:Ref<{
+			
+				create(ctx:context.Context,req:Ref<CreateTalentExternalInfoReq>,...options:larkcore.RequestOptionFunc[]):Ref<CreateTalentExternalInfoResp>
+				update(ctx:context.Context,req:Ref<UpdateTalentExternalInfoReq>,...options:larkcore.RequestOptionFunc[]):Ref<UpdateTalentExternalInfoResp>
 			}>
 			talentFolder:Ref<{
 			
@@ -10521,6 +13637,72 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			talentObject:Ref<{
 			
 				query(ctx:context.Context,...options:larkcore.RequestOptionFunc[]):Ref<QueryTalentObjectResp>
+			}>
+			talentOperationLog:Ref<{
+			
+				search(ctx:context.Context,req:Ref<SearchTalentOperationLogReq>,...options:larkcore.RequestOptionFunc[]):Ref<SearchTalentOperationLogResp>
+			}>
+			talentPool:Ref<{
+			
+				moveTalent(ctx:context.Context,req:Ref<MoveTalentTalentPoolReq>,...options:larkcore.RequestOptionFunc[]):Ref<MoveTalentTalentPoolResp>
+				search(ctx:context.Context,req:Ref<SearchTalentPoolReq>,...options:larkcore.RequestOptionFunc[]):Ref<SearchTalentPoolResp>
+				searchByIterator(ctx:context.Context,req:Ref<SearchTalentPoolReq>,...options:larkcore.RequestOptionFunc[]):Ref<SearchTalentPoolIterator>
+			}>
+			terminationReason:Ref<{
+			
+				list(ctx:context.Context,req:Ref<ListTerminationReasonReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListTerminationReasonResp>
+				listByIterator(ctx:context.Context,req:Ref<ListTerminationReasonReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListTerminationReasonIterator>
+			}>
+			test:Ref<{
+			
+				search(ctx:context.Context,req:Ref<SearchTestReq>,...options:larkcore.RequestOptionFunc[]):Ref<SearchTestResp>
+				searchByIterator(ctx:context.Context,req:Ref<SearchTestReq>,...options:larkcore.RequestOptionFunc[]):Ref<SearchTestIterator>
+			}>
+			todo:Ref<{
+			
+				list(ctx:context.Context,req:Ref<ListTodoReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListTodoResp>
+				listByIterator(ctx:context.Context,req:Ref<ListTodoReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListTodoIterator>
+			}>
+			tripartiteAgreement:Ref<{
+			
+				create(ctx:context.Context,req:Ref<CreateTripartiteAgreementReq>,...options:larkcore.RequestOptionFunc[]):Ref<CreateTripartiteAgreementResp>
+				delete(ctx:context.Context,req:Ref<DeleteTripartiteAgreementReq>,...options:larkcore.RequestOptionFunc[]):Ref<DeleteTripartiteAgreementResp>
+				list(ctx:context.Context,req:Ref<ListTripartiteAgreementReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListTripartiteAgreementResp>
+				listByIterator(ctx:context.Context,req:Ref<ListTripartiteAgreementReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListTripartiteAgreementIterator>
+				update(ctx:context.Context,req:Ref<UpdateTripartiteAgreementReq>,...options:larkcore.RequestOptionFunc[]):Ref<UpdateTripartiteAgreementResp>
+			}>
+			website:Ref<{
+			
+				list(ctx:context.Context,req:Ref<ListWebsiteReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListWebsiteResp>
+				listByIterator(ctx:context.Context,req:Ref<ListWebsiteReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListWebsiteIterator>
+			}>
+			websiteChannel:Ref<{
+			
+				create(ctx:context.Context,req:Ref<CreateWebsiteChannelReq>,...options:larkcore.RequestOptionFunc[]):Ref<CreateWebsiteChannelResp>
+				delete(ctx:context.Context,req:Ref<DeleteWebsiteChannelReq>,...options:larkcore.RequestOptionFunc[]):Ref<DeleteWebsiteChannelResp>
+				list(ctx:context.Context,req:Ref<ListWebsiteChannelReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListWebsiteChannelResp>
+				update(ctx:context.Context,req:Ref<UpdateWebsiteChannelReq>,...options:larkcore.RequestOptionFunc[]):Ref<UpdateWebsiteChannelResp>
+			}>
+			websiteDelivery:Ref<{
+			
+				createByAttachment(ctx:context.Context,req:Ref<CreateByAttachmentWebsiteDeliveryReq>,...options:larkcore.RequestOptionFunc[]):Ref<CreateByAttachmentWebsiteDeliveryResp>
+				createByResume(ctx:context.Context,req:Ref<CreateByResumeWebsiteDeliveryReq>,...options:larkcore.RequestOptionFunc[]):Ref<CreateByResumeWebsiteDeliveryResp>
+			}>
+			websiteDeliveryTask:Ref<{
+			
+				get(ctx:context.Context,req:Ref<GetWebsiteDeliveryTaskReq>,...options:larkcore.RequestOptionFunc[]):Ref<GetWebsiteDeliveryTaskResp>
+			}>
+			websiteJobPost:Ref<{
+			
+				get(ctx:context.Context,req:Ref<GetWebsiteJobPostReq>,...options:larkcore.RequestOptionFunc[]):Ref<GetWebsiteJobPostResp>
+				list(ctx:context.Context,req:Ref<ListWebsiteJobPostReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListWebsiteJobPostResp>
+				listByIterator(ctx:context.Context,req:Ref<ListWebsiteJobPostReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListWebsiteJobPostIterator>
+				search(ctx:context.Context,req:Ref<SearchWebsiteJobPostReq>,...options:larkcore.RequestOptionFunc[]):Ref<SearchWebsiteJobPostResp>
+				searchByIterator(ctx:context.Context,req:Ref<SearchWebsiteJobPostReq>,...options:larkcore.RequestOptionFunc[]):Ref<SearchWebsiteJobPostIterator>
+			}>
+			websiteSiteUser:Ref<{
+			
+				create(ctx:context.Context,req:Ref<CreateWebsiteSiteUserReq>,...options:larkcore.RequestOptionFunc[]):Ref<CreateWebsiteSiteUserResp>
 			}>
 	}
 	export interface Website extends Struct<Website>{
@@ -11113,1786 +14295,3234 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 			link(link:string):Ref<WorksInfoBuilder>
 			build():Ref<WorksInfo>
 	}
-	export function emptyJobSchema():JobSchema
-	export function emptyRefJobSchema():Ref<JobSchema>
-	export function refOfJobSchema(x:JobSchema,v:Ref<JobSchema>)
-	export function unRefJobSchema(v:Ref<JobSchema>):JobSchema
-	export function emptyJobCustomizedValue():JobCustomizedValue
-	export function emptyRefJobCustomizedValue():Ref<JobCustomizedValue>
-	export function refOfJobCustomizedValue(x:JobCustomizedValue,v:Ref<JobCustomizedValue>)
-	export function unRefJobCustomizedValue(v:Ref<JobCustomizedValue>):JobCustomizedValue
-	export function emptyJobRequirementCustomizedOption():JobRequirementCustomizedOption
-	export function emptyRefJobRequirementCustomizedOption():Ref<JobRequirementCustomizedOption>
-	export function refOfJobRequirementCustomizedOption(x:JobRequirementCustomizedOption,v:Ref<JobRequirementCustomizedOption>)
-	export function unRefJobRequirementCustomizedOption(v:Ref<JobRequirementCustomizedOption>):JobRequirementCustomizedOption
-	export function emptyEcoAccountCustomFieldEventData():EcoAccountCustomFieldEventData
-	export function emptyRefEcoAccountCustomFieldEventData():Ref<EcoAccountCustomFieldEventData>
-	export function refOfEcoAccountCustomFieldEventData(x:EcoAccountCustomFieldEventData,v:Ref<EcoAccountCustomFieldEventData>)
-	export function unRefEcoAccountCustomFieldEventData(v:Ref<EcoAccountCustomFieldEventData>):EcoAccountCustomFieldEventData
-	export function emptyListReferralWebsiteJobPostRespData():ListReferralWebsiteJobPostRespData
-	export function emptyRefListReferralWebsiteJobPostRespData():Ref<ListReferralWebsiteJobPostRespData>
-	export function refOfListReferralWebsiteJobPostRespData(x:ListReferralWebsiteJobPostRespData,v:Ref<ListReferralWebsiteJobPostRespData>)
-	export function unRefListReferralWebsiteJobPostRespData(v:Ref<ListReferralWebsiteJobPostRespData>):ListReferralWebsiteJobPostRespData
-	export function emptyListResumeSourceResp():ListResumeSourceResp
-	export function emptyRefListResumeSourceResp():Ref<ListResumeSourceResp>
-	export function refOfListResumeSourceResp(x:ListResumeSourceResp,v:Ref<ListResumeSourceResp>)
-	export function unRefListResumeSourceResp(v:Ref<ListResumeSourceResp>):ListResumeSourceResp
-	export function emptyCommonSchema():CommonSchema
-	export function emptyRefCommonSchema():Ref<CommonSchema>
-	export function refOfCommonSchema(x:CommonSchema,v:Ref<CommonSchema>)
-	export function unRefCommonSchema(v:Ref<CommonSchema>):CommonSchema
-	export function emptyCreateExternalInterviewAssessmentReq():CreateExternalInterviewAssessmentReq
-	export function emptyRefCreateExternalInterviewAssessmentReq():Ref<CreateExternalInterviewAssessmentReq>
-	export function refOfCreateExternalInterviewAssessmentReq(x:CreateExternalInterviewAssessmentReq,v:Ref<CreateExternalInterviewAssessmentReq>)
-	export function unRefCreateExternalInterviewAssessmentReq(v:Ref<CreateExternalInterviewAssessmentReq>):CreateExternalInterviewAssessmentReq
-	export function emptyJobFunction():JobFunction
-	export function emptyRefJobFunction():Ref<JobFunction>
-	export function refOfJobFunction(x:JobFunction,v:Ref<JobFunction>)
-	export function unRefJobFunction(v:Ref<JobFunction>):JobFunction
-	export function emptyApplication():Application
-	export function emptyRefApplication():Ref<Application>
-	export function refOfApplication(x:Application,v:Ref<Application>)
-	export function unRefApplication(v:Ref<Application>):Application
-	export function emptyGetEmployeeReq():GetEmployeeReq
-	export function emptyRefGetEmployeeReq():Ref<GetEmployeeReq>
-	export function refOfGetEmployeeReq(x:GetEmployeeReq,v:Ref<GetEmployeeReq>)
-	export function unRefGetEmployeeReq(v:Ref<GetEmployeeReq>):GetEmployeeReq
-	export function emptyLocationBaseInfo():LocationBaseInfo
-	export function emptyRefLocationBaseInfo():Ref<LocationBaseInfo>
-	export function refOfLocationBaseInfo(x:LocationBaseInfo,v:Ref<LocationBaseInfo>)
-	export function unRefLocationBaseInfo(v:Ref<LocationBaseInfo>):LocationBaseInfo
-	export function emptyScoreDimensionConfig():ScoreDimensionConfig
-	export function emptyRefScoreDimensionConfig():Ref<ScoreDimensionConfig>
-	export function refOfScoreDimensionConfig(x:ScoreDimensionConfig,v:Ref<ScoreDimensionConfig>)
-	export function unRefScoreDimensionConfig(v:Ref<ScoreDimensionConfig>):ScoreDimensionConfig
-	export function emptyBatchUpdateEcoBackgroundCheckCustomFieldResp():BatchUpdateEcoBackgroundCheckCustomFieldResp
-	export function emptyRefBatchUpdateEcoBackgroundCheckCustomFieldResp():Ref<BatchUpdateEcoBackgroundCheckCustomFieldResp>
-	export function refOfBatchUpdateEcoBackgroundCheckCustomFieldResp(x:BatchUpdateEcoBackgroundCheckCustomFieldResp,v:Ref<BatchUpdateEcoBackgroundCheckCustomFieldResp>)
-	export function unRefBatchUpdateEcoBackgroundCheckCustomFieldResp(v:Ref<BatchUpdateEcoBackgroundCheckCustomFieldResp>):BatchUpdateEcoBackgroundCheckCustomFieldResp
-	export function emptyExternalBackgroundCheckAttachment():ExternalBackgroundCheckAttachment
-	export function emptyRefExternalBackgroundCheckAttachment():Ref<ExternalBackgroundCheckAttachment>
-	export function refOfExternalBackgroundCheckAttachment(x:ExternalBackgroundCheckAttachment,v:Ref<ExternalBackgroundCheckAttachment>)
-	export function unRefExternalBackgroundCheckAttachment(v:Ref<ExternalBackgroundCheckAttachment>):ExternalBackgroundCheckAttachment
-	export function emptyInterviewFeedbackForm():InterviewFeedbackForm
-	export function emptyRefInterviewFeedbackForm():Ref<InterviewFeedbackForm>
-	export function refOfInterviewFeedbackForm(x:InterviewFeedbackForm,v:Ref<InterviewFeedbackForm>)
-	export function unRefInterviewFeedbackForm(v:Ref<InterviewFeedbackForm>):InterviewFeedbackForm
-	export function emptyQueryTalentObjectRespData():QueryTalentObjectRespData
-	export function emptyRefQueryTalentObjectRespData():Ref<QueryTalentObjectRespData>
-	export function refOfQueryTalentObjectRespData(x:QueryTalentObjectRespData,v:Ref<QueryTalentObjectRespData>)
-	export function unRefQueryTalentObjectRespData(v:Ref<QueryTalentObjectRespData>):QueryTalentObjectRespData
-	export function emptyTalentOperationLog():TalentOperationLog
-	export function emptyRefTalentOperationLog():Ref<TalentOperationLog>
-	export function refOfTalentOperationLog(x:TalentOperationLog,v:Ref<TalentOperationLog>)
-	export function unRefTalentOperationLog(v:Ref<TalentOperationLog>):TalentOperationLog
-	export function emptyCountry():Country
-	export function emptyRefCountry():Ref<Country>
-	export function refOfCountry(x:Country,v:Ref<Country>)
-	export function unRefCountry(v:Ref<Country>):Country
-	export function emptyBatchGetIdTalentReqBody():BatchGetIdTalentReqBody
-	export function emptyRefBatchGetIdTalentReqBody():Ref<BatchGetIdTalentReqBody>
-	export function refOfBatchGetIdTalentReqBody(x:BatchGetIdTalentReqBody,v:Ref<BatchGetIdTalentReqBody>)
-	export function unRefBatchGetIdTalentReqBody(v:Ref<BatchGetIdTalentReqBody>):BatchGetIdTalentReqBody
-	export function emptyOfferApplyFormConfigOptionInfo():OfferApplyFormConfigOptionInfo
-	export function emptyRefOfferApplyFormConfigOptionInfo():Ref<OfferApplyFormConfigOptionInfo>
-	export function refOfOfferApplyFormConfigOptionInfo(x:OfferApplyFormConfigOptionInfo,v:Ref<OfferApplyFormConfigOptionInfo>)
-	export function unRefOfferApplyFormConfigOptionInfo(v:Ref<OfferApplyFormConfigOptionInfo>):OfferApplyFormConfigOptionInfo
-	export function emptyAttachmentV2():AttachmentV2
-	export function emptyRefAttachmentV2():Ref<AttachmentV2>
-	export function refOfAttachmentV2(x:AttachmentV2,v:Ref<AttachmentV2>)
-	export function unRefAttachmentV2(v:Ref<AttachmentV2>):AttachmentV2
-	export function emptyBatchDeleteEcoAccountCustomFieldResp():BatchDeleteEcoAccountCustomFieldResp
-	export function emptyRefBatchDeleteEcoAccountCustomFieldResp():Ref<BatchDeleteEcoAccountCustomFieldResp>
-	export function refOfBatchDeleteEcoAccountCustomFieldResp(x:BatchDeleteEcoAccountCustomFieldResp,v:Ref<BatchDeleteEcoAccountCustomFieldResp>)
-	export function unRefBatchDeleteEcoAccountCustomFieldResp(v:Ref<BatchDeleteEcoAccountCustomFieldResp>):BatchDeleteEcoAccountCustomFieldResp
-	export function emptyCreateApplicationRespData():CreateApplicationRespData
-	export function emptyRefCreateApplicationRespData():Ref<CreateApplicationRespData>
-	export function refOfCreateApplicationRespData(x:CreateApplicationRespData,v:Ref<CreateApplicationRespData>)
-	export function unRefCreateApplicationRespData(v:Ref<CreateApplicationRespData>):CreateApplicationRespData
-	export function emptyGetAttachmentRespData():GetAttachmentRespData
-	export function emptyRefGetAttachmentRespData():Ref<GetAttachmentRespData>
-	export function refOfGetAttachmentRespData(x:GetAttachmentRespData,v:Ref<GetAttachmentRespData>)
-	export function unRefGetAttachmentRespData(v:Ref<GetAttachmentRespData>):GetAttachmentRespData
-	export function emptyTalentSchemaObject():TalentSchemaObject
-	export function emptyRefTalentSchemaObject():Ref<TalentSchemaObject>
-	export function refOfTalentSchemaObject(x:TalentSchemaObject,v:Ref<TalentSchemaObject>)
-	export function unRefTalentSchemaObject(v:Ref<TalentSchemaObject>):TalentSchemaObject
-	export function emptyReconciliationReferralAccountReq():ReconciliationReferralAccountReq
-	export function emptyRefReconciliationReferralAccountReq():Ref<ReconciliationReferralAccountReq>
-	export function refOfReconciliationReferralAccountReq(x:ReconciliationReferralAccountReq,v:Ref<ReconciliationReferralAccountReq>)
-	export function unRefReconciliationReferralAccountReq(v:Ref<ReconciliationReferralAccountReq>):ReconciliationReferralAccountReq
-	export function emptySiteJobPostSearchRequest():SiteJobPostSearchRequest
-	export function emptyRefSiteJobPostSearchRequest():Ref<SiteJobPostSearchRequest>
-	export function refOfSiteJobPostSearchRequest(x:SiteJobPostSearchRequest,v:Ref<SiteJobPostSearchRequest>)
-	export function unRefSiteJobPostSearchRequest(v:Ref<SiteJobPostSearchRequest>):SiteJobPostSearchRequest
-	export function emptyCareerInfo():CareerInfo
-	export function emptyRefCareerInfo():Ref<CareerInfo>
-	export function refOfCareerInfo(x:CareerInfo,v:Ref<CareerInfo>)
-	export function unRefCareerInfo(v:Ref<CareerInfo>):CareerInfo
-	export function emptyCreateOfferRespData():CreateOfferRespData
-	export function emptyRefCreateOfferRespData():Ref<CreateOfferRespData>
-	export function refOfCreateOfferRespData(x:CreateOfferRespData,v:Ref<CreateOfferRespData>)
-	export function unRefCreateOfferRespData(v:Ref<CreateOfferRespData>):CreateOfferRespData
-	export function emptyGetReferralWebsiteJobPostReq():GetReferralWebsiteJobPostReq
-	export function emptyRefGetReferralWebsiteJobPostReq():Ref<GetReferralWebsiteJobPostReq>
-	export function refOfGetReferralWebsiteJobPostReq(x:GetReferralWebsiteJobPostReq,v:Ref<GetReferralWebsiteJobPostReq>)
-	export function unRefGetReferralWebsiteJobPostReq(v:Ref<GetReferralWebsiteJobPostReq>):GetReferralWebsiteJobPostReq
-	export function emptyTalentInternshipInfo():TalentInternshipInfo
-	export function emptyRefTalentInternshipInfo():Ref<TalentInternshipInfo>
-	export function refOfTalentInternshipInfo(x:TalentInternshipInfo,v:Ref<TalentInternshipInfo>)
-	export function unRefTalentInternshipInfo(v:Ref<TalentInternshipInfo>):TalentInternshipInfo
-	export function emptyTalentResumeSource():TalentResumeSource
-	export function emptyRefTalentResumeSource():Ref<TalentResumeSource>
-	export function refOfTalentResumeSource(x:TalentResumeSource,v:Ref<TalentResumeSource>)
-	export function unRefTalentResumeSource(v:Ref<TalentResumeSource>):TalentResumeSource
-	export function emptyGetTalentResp():GetTalentResp
-	export function emptyRefGetTalentResp():Ref<GetTalentResp>
-	export function refOfGetTalentResp(x:GetTalentResp,v:Ref<GetTalentResp>)
-	export function unRefGetTalentResp(v:Ref<GetTalentResp>):GetTalentResp
-	export function emptyBackgroundCheckCustomFieldDataValue():BackgroundCheckCustomFieldDataValue
-	export function emptyRefBackgroundCheckCustomFieldDataValue():Ref<BackgroundCheckCustomFieldDataValue>
-	export function refOfBackgroundCheckCustomFieldDataValue(x:BackgroundCheckCustomFieldDataValue,v:Ref<BackgroundCheckCustomFieldDataValue>)
-	export function unRefBackgroundCheckCustomFieldDataValue(v:Ref<BackgroundCheckCustomFieldDataValue>):BackgroundCheckCustomFieldDataValue
-	export function emptyCommonAddress():CommonAddress
-	export function emptyRefCommonAddress():Ref<CommonAddress>
-	export function refOfCommonAddress(x:CommonAddress,v:Ref<CommonAddress>)
-	export function unRefCommonAddress(v:Ref<CommonAddress>):CommonAddress
-	export function emptyUpdateExternalApplicationReq():UpdateExternalApplicationReq
-	export function emptyRefUpdateExternalApplicationReq():Ref<UpdateExternalApplicationReq>
-	export function refOfUpdateExternalApplicationReq(x:UpdateExternalApplicationReq,v:Ref<UpdateExternalApplicationReq>)
-	export function unRefUpdateExternalApplicationReq(v:Ref<UpdateExternalApplicationReq>):UpdateExternalApplicationReq
-	export function emptyUpdateJobRequirementResp():UpdateJobRequirementResp
-	export function emptyRefUpdateJobRequirementResp():Ref<UpdateJobRequirementResp>
-	export function refOfUpdateJobRequirementResp(x:UpdateJobRequirementResp,v:Ref<UpdateJobRequirementResp>)
-	export function unRefUpdateJobRequirementResp(v:Ref<UpdateJobRequirementResp>):UpdateJobRequirementResp
-	export function emptyWebsiteDeliveryCustomizedDataParent():WebsiteDeliveryCustomizedDataParent
-	export function emptyRefWebsiteDeliveryCustomizedDataParent():Ref<WebsiteDeliveryCustomizedDataParent>
-	export function refOfWebsiteDeliveryCustomizedDataParent(x:WebsiteDeliveryCustomizedDataParent,v:Ref<WebsiteDeliveryCustomizedDataParent>)
-	export function unRefWebsiteDeliveryCustomizedDataParent(v:Ref<WebsiteDeliveryCustomizedDataParent>):WebsiteDeliveryCustomizedDataParent
-	export function emptyCreateEcoBackgroundCheckCustomFieldReq():CreateEcoBackgroundCheckCustomFieldReq
-	export function emptyRefCreateEcoBackgroundCheckCustomFieldReq():Ref<CreateEcoBackgroundCheckCustomFieldReq>
-	export function refOfCreateEcoBackgroundCheckCustomFieldReq(x:CreateEcoBackgroundCheckCustomFieldReq,v:Ref<CreateEcoBackgroundCheckCustomFieldReq>)
-	export function unRefCreateEcoBackgroundCheckCustomFieldReq(v:Ref<CreateEcoBackgroundCheckCustomFieldReq>):CreateEcoBackgroundCheckCustomFieldReq
-	export function emptyReconciliationReferralAccountRespData():ReconciliationReferralAccountRespData
-	export function emptyRefReconciliationReferralAccountRespData():Ref<ReconciliationReferralAccountRespData>
-	export function refOfReconciliationReferralAccountRespData(x:ReconciliationReferralAccountRespData,v:Ref<ReconciliationReferralAccountRespData>)
-	export function unRefReconciliationReferralAccountRespData(v:Ref<ReconciliationReferralAccountRespData>):ReconciliationReferralAccountRespData
-	export function emptyTalentCustomizedDataObjectValueChild():TalentCustomizedDataObjectValueChild
-	export function emptyRefTalentCustomizedDataObjectValueChild():Ref<TalentCustomizedDataObjectValueChild>
-	export function refOfTalentCustomizedDataObjectValueChild(x:TalentCustomizedDataObjectValueChild,v:Ref<TalentCustomizedDataObjectValueChild>)
-	export function unRefTalentCustomizedDataObjectValueChild(v:Ref<TalentCustomizedDataObjectValueChild>):TalentCustomizedDataObjectValueChild
-	export function emptyGetTalentReq():GetTalentReq
-	export function emptyRefGetTalentReq():Ref<GetTalentReq>
-	export function refOfGetTalentReq(x:GetTalentReq,v:Ref<GetTalentReq>)
-	export function unRefGetTalentReq(v:Ref<GetTalentReq>):GetTalentReq
-	export function emptyJobConfigRoundTypeResult():JobConfigRoundTypeResult
-	export function emptyRefJobConfigRoundTypeResult():Ref<JobConfigRoundTypeResult>
-	export function refOfJobConfigRoundTypeResult(x:JobConfigRoundTypeResult,v:Ref<JobConfigRoundTypeResult>)
-	export function unRefJobConfigRoundTypeResult(v:Ref<JobConfigRoundTypeResult>):JobConfigRoundTypeResult
-	export function emptyAttachment():Attachment
-	export function emptyRefAttachment():Ref<Attachment>
-	export function refOfAttachment(x:Attachment,v:Ref<Attachment>)
-	export function unRefAttachment(v:Ref<Attachment>):Attachment
-	export function emptyJobConfigRoundType():JobConfigRoundType
-	export function emptyRefJobConfigRoundType():Ref<JobConfigRoundType>
-	export function refOfJobConfigRoundType(x:JobConfigRoundType,v:Ref<JobConfigRoundType>)
-	export function unRefJobConfigRoundType(v:Ref<JobConfigRoundType>):JobConfigRoundType
-	export function emptyWebsiteDeliveryWorks():WebsiteDeliveryWorks
-	export function emptyRefWebsiteDeliveryWorks():Ref<WebsiteDeliveryWorks>
-	export function refOfWebsiteDeliveryWorks(x:WebsiteDeliveryWorks,v:Ref<WebsiteDeliveryWorks>)
-	export function unRefWebsiteDeliveryWorks(v:Ref<WebsiteDeliveryWorks>):WebsiteDeliveryWorks
-	export function emptyGetEmployeeRespData():GetEmployeeRespData
-	export function emptyRefGetEmployeeRespData():Ref<GetEmployeeRespData>
-	export function refOfGetEmployeeRespData(x:GetEmployeeRespData,v:Ref<GetEmployeeRespData>)
-	export function unRefGetEmployeeRespData(v:Ref<GetEmployeeRespData>):GetEmployeeRespData
-	export function emptyJobManager():JobManager
-	export function emptyRefJobManager():Ref<JobManager>
-	export function refOfJobManager(x:JobManager,v:Ref<JobManager>)
-	export function unRefJobManager(v:Ref<JobManager>):JobManager
-	export function emptyInternOfferStatus():InternOfferStatus
-	export function emptyRefInternOfferStatus():Ref<InternOfferStatus>
-	export function refOfInternOfferStatus(x:InternOfferStatus,v:Ref<InternOfferStatus>)
-	export function unRefInternOfferStatus(v:Ref<InternOfferStatus>):InternOfferStatus
-	export function emptyTalentSelfEvaluation():TalentSelfEvaluation
-	export function emptyRefTalentSelfEvaluation():Ref<TalentSelfEvaluation>
-	export function refOfTalentSelfEvaluation(x:TalentSelfEvaluation,v:Ref<TalentSelfEvaluation>)
-	export function unRefTalentSelfEvaluation(v:Ref<TalentSelfEvaluation>):TalentSelfEvaluation
-	export function emptyEcoExamPaper():EcoExamPaper
-	export function emptyRefEcoExamPaper():Ref<EcoExamPaper>
-	export function refOfEcoExamPaper(x:EcoExamPaper,v:Ref<EcoExamPaper>)
-	export function unRefEcoExamPaper(v:Ref<EcoExamPaper>):EcoExamPaper
-	export function emptyP2OfferStatusChangedV1Data():P2OfferStatusChangedV1Data
-	export function emptyRefP2OfferStatusChangedV1Data():Ref<P2OfferStatusChangedV1Data>
-	export function refOfP2OfferStatusChangedV1Data(x:P2OfferStatusChangedV1Data,v:Ref<P2OfferStatusChangedV1Data>)
-	export function unRefP2OfferStatusChangedV1Data(v:Ref<P2OfferStatusChangedV1Data>):P2OfferStatusChangedV1Data
-	export function emptyListEvaluationResp():ListEvaluationResp
-	export function emptyRefListEvaluationResp():Ref<ListEvaluationResp>
-	export function refOfListEvaluationResp(x:ListEvaluationResp,v:Ref<ListEvaluationResp>)
-	export function unRefListEvaluationResp(v:Ref<ListEvaluationResp>):ListEvaluationResp
-	export function emptyInterviewAssessmentTemplate():InterviewAssessmentTemplate
-	export function emptyRefInterviewAssessmentTemplate():Ref<InterviewAssessmentTemplate>
-	export function refOfInterviewAssessmentTemplate(x:InterviewAssessmentTemplate,v:Ref<InterviewAssessmentTemplate>)
-	export function unRefInterviewAssessmentTemplate(v:Ref<InterviewAssessmentTemplate>):InterviewAssessmentTemplate
-	export function emptyObjectAttribute():ObjectAttribute
-	export function emptyRefObjectAttribute():Ref<ObjectAttribute>
-	export function refOfObjectAttribute(x:ObjectAttribute,v:Ref<ObjectAttribute>)
-	export function unRefObjectAttribute(v:Ref<ObjectAttribute>):ObjectAttribute
-	export function emptyInternOfferStatusOfferRespData():InternOfferStatusOfferRespData
-	export function emptyRefInternOfferStatusOfferRespData():Ref<InternOfferStatusOfferRespData>
-	export function refOfInternOfferStatusOfferRespData(x:InternOfferStatusOfferRespData,v:Ref<InternOfferStatusOfferRespData>)
-	export function unRefInternOfferStatusOfferRespData(v:Ref<InternOfferStatusOfferRespData>):InternOfferStatusOfferRespData
-	export function emptyListInterviewReq():ListInterviewReq
-	export function emptyRefListInterviewReq():Ref<ListInterviewReq>
-	export function refOfListInterviewReq(x:ListInterviewReq,v:Ref<ListInterviewReq>)
-	export function unRefListInterviewReq(v:Ref<ListInterviewReq>):ListInterviewReq
-	export function emptyWebsiteDeliveryWorksAttachment():WebsiteDeliveryWorksAttachment
-	export function emptyRefWebsiteDeliveryWorksAttachment():Ref<WebsiteDeliveryWorksAttachment>
-	export function refOfWebsiteDeliveryWorksAttachment(x:WebsiteDeliveryWorksAttachment,v:Ref<WebsiteDeliveryWorksAttachment>)
-	export function unRefWebsiteDeliveryWorksAttachment(v:Ref<WebsiteDeliveryWorksAttachment>):WebsiteDeliveryWorksAttachment
-	export function emptyCreateExternalBackgroundCheckReq():CreateExternalBackgroundCheckReq
-	export function emptyRefCreateExternalBackgroundCheckReq():Ref<CreateExternalBackgroundCheckReq>
-	export function refOfCreateExternalBackgroundCheckReq(x:CreateExternalBackgroundCheckReq,v:Ref<CreateExternalBackgroundCheckReq>)
-	export function unRefCreateExternalBackgroundCheckReq(v:Ref<CreateExternalBackgroundCheckReq>):CreateExternalBackgroundCheckReq
-	export function emptyAppliOfferOnboardProfile():AppliOfferOnboardProfile
-	export function emptyRefAppliOfferOnboardProfile():Ref<AppliOfferOnboardProfile>
-	export function refOfAppliOfferOnboardProfile(x:AppliOfferOnboardProfile,v:Ref<AppliOfferOnboardProfile>)
-	export function unRefAppliOfferOnboardProfile(v:Ref<AppliOfferOnboardProfile>):AppliOfferOnboardProfile
-	export function emptyCombinedUpdateJobReq():CombinedUpdateJobReq
-	export function emptyRefCombinedUpdateJobReq():Ref<CombinedUpdateJobReq>
-	export function refOfCombinedUpdateJobReq(x:CombinedUpdateJobReq,v:Ref<CombinedUpdateJobReq>)
-	export function unRefCombinedUpdateJobReq(v:Ref<CombinedUpdateJobReq>):CombinedUpdateJobReq
-	export function emptyGetByApplicationReferralReq():GetByApplicationReferralReq
-	export function emptyRefGetByApplicationReferralReq():Ref<GetByApplicationReferralReq>
-	export function refOfGetByApplicationReferralReq(x:GetByApplicationReferralReq,v:Ref<GetByApplicationReferralReq>)
-	export function unRefGetByApplicationReferralReq(v:Ref<GetByApplicationReferralReq>):GetByApplicationReferralReq
-	export function emptyLoginInfoEcoExamResp():LoginInfoEcoExamResp
-	export function emptyRefLoginInfoEcoExamResp():Ref<LoginInfoEcoExamResp>
-	export function refOfLoginInfoEcoExamResp(x:LoginInfoEcoExamResp,v:Ref<LoginInfoEcoExamResp>)
-	export function unRefLoginInfoEcoExamResp(v:Ref<LoginInfoEcoExamResp>):LoginInfoEcoExamResp
-	export function emptyApplicationOffer():ApplicationOffer
-	export function emptyRefApplicationOffer():Ref<ApplicationOffer>
-	export function refOfApplicationOffer(x:ApplicationOffer,v:Ref<ApplicationOffer>)
-	export function unRefApplicationOffer(v:Ref<ApplicationOffer>):ApplicationOffer
-	export function emptyWebsiteDeliveryResume():WebsiteDeliveryResume
-	export function emptyRefWebsiteDeliveryResume():Ref<WebsiteDeliveryResume>
-	export function refOfWebsiteDeliveryResume(x:WebsiteDeliveryResume,v:Ref<WebsiteDeliveryResume>)
-	export function unRefWebsiteDeliveryResume(v:Ref<WebsiteDeliveryResume>):WebsiteDeliveryResume
-	export function emptyExternalInterviewAssessmentDimension():ExternalInterviewAssessmentDimension
-	export function emptyRefExternalInterviewAssessmentDimension():Ref<ExternalInterviewAssessmentDimension>
-	export function refOfExternalInterviewAssessmentDimension(x:ExternalInterviewAssessmentDimension,v:Ref<ExternalInterviewAssessmentDimension>)
-	export function unRefExternalInterviewAssessmentDimension(v:Ref<ExternalInterviewAssessmentDimension>):ExternalInterviewAssessmentDimension
-	export function emptyJobConfigResult():JobConfigResult
-	export function emptyRefJobConfigResult():Ref<JobConfigResult>
-	export function refOfJobConfigResult(x:JobConfigResult,v:Ref<JobConfigResult>)
-	export function unRefJobConfigResult(v:Ref<JobConfigResult>):JobConfigResult
-	export function emptyStore():Store
-	export function emptyRefStore():Ref<Store>
-	export function refOfStore(x:Store,v:Ref<Store>)
-	export function unRefStore(v:Ref<Store>):Store
-	export function emptyBackgroundCheckOrder():BackgroundCheckOrder
-	export function emptyRefBackgroundCheckOrder():Ref<BackgroundCheckOrder>
-	export function refOfBackgroundCheckOrder(x:BackgroundCheckOrder,v:Ref<BackgroundCheckOrder>)
-	export function unRefBackgroundCheckOrder(v:Ref<BackgroundCheckOrder>):BackgroundCheckOrder
-	export function emptyBatchDeleteEcoBackgroundCheckCustomFieldResp():BatchDeleteEcoBackgroundCheckCustomFieldResp
-	export function emptyRefBatchDeleteEcoBackgroundCheckCustomFieldResp():Ref<BatchDeleteEcoBackgroundCheckCustomFieldResp>
-	export function refOfBatchDeleteEcoBackgroundCheckCustomFieldResp(x:BatchDeleteEcoBackgroundCheckCustomFieldResp,v:Ref<BatchDeleteEcoBackgroundCheckCustomFieldResp>)
-	export function unRefBatchDeleteEcoBackgroundCheckCustomFieldResp(v:Ref<BatchDeleteEcoBackgroundCheckCustomFieldResp>):BatchDeleteEcoBackgroundCheckCustomFieldResp
-	export function emptyTalentWorksInfo():TalentWorksInfo
-	export function emptyRefTalentWorksInfo():Ref<TalentWorksInfo>
-	export function refOfTalentWorksInfo(x:TalentWorksInfo,v:Ref<TalentWorksInfo>)
-	export function unRefTalentWorksInfo(v:Ref<TalentWorksInfo>):TalentWorksInfo
-	export function emptyCombinedUpdateJobRespData():CombinedUpdateJobRespData
-	export function emptyRefCombinedUpdateJobRespData():Ref<CombinedUpdateJobRespData>
-	export function refOfCombinedUpdateJobRespData(x:CombinedUpdateJobRespData,v:Ref<CombinedUpdateJobRespData>)
-	export function unRefCombinedUpdateJobRespData(v:Ref<CombinedUpdateJobRespData>):CombinedUpdateJobRespData
-	export function emptyQuestion():Question
-	export function emptyRefQuestion():Ref<Question>
-	export function refOfQuestion(x:Question,v:Ref<Question>)
-	export function unRefQuestion(v:Ref<Question>):Question
-	export function emptyCreateOfferReq():CreateOfferReq
-	export function emptyRefCreateOfferReq():Ref<CreateOfferReq>
-	export function refOfCreateOfferReq(x:CreateOfferReq,v:Ref<CreateOfferReq>)
-	export function unRefCreateOfferReq(v:Ref<CreateOfferReq>):CreateOfferReq
-	export function emptyCreateReferralAccountRespData():CreateReferralAccountRespData
-	export function emptyRefCreateReferralAccountRespData():Ref<CreateReferralAccountRespData>
-	export function refOfCreateReferralAccountRespData(x:CreateReferralAccountRespData,v:Ref<CreateReferralAccountRespData>)
-	export function unRefCreateReferralAccountRespData(v:Ref<CreateReferralAccountRespData>):CreateReferralAccountRespData
-	export function emptyInternOfferStatusOfferReq():InternOfferStatusOfferReq
-	export function emptyRefInternOfferStatusOfferReq():Ref<InternOfferStatusOfferReq>
-	export function refOfInternOfferStatusOfferReq(x:InternOfferStatusOfferReq,v:Ref<InternOfferStatusOfferReq>)
-	export function unRefInternOfferStatusOfferReq(v:Ref<InternOfferStatusOfferReq>):InternOfferStatusOfferReq
-	export function emptyP2ApplicationStageChangedV1():P2ApplicationStageChangedV1
-	export function emptyRefP2ApplicationStageChangedV1():Ref<P2ApplicationStageChangedV1>
-	export function refOfP2ApplicationStageChangedV1(x:P2ApplicationStageChangedV1,v:Ref<P2ApplicationStageChangedV1>)
-	export function unRefP2ApplicationStageChangedV1(v:Ref<P2ApplicationStageChangedV1>):P2ApplicationStageChangedV1
-	export function emptyApplicationTalent():ApplicationTalent
-	export function emptyRefApplicationTalent():Ref<ApplicationTalent>
-	export function refOfApplicationTalent(x:ApplicationTalent,v:Ref<ApplicationTalent>)
-	export function unRefApplicationTalent(v:Ref<ApplicationTalent>):ApplicationTalent
-	export function emptyListTalentFolderReq():ListTalentFolderReq
-	export function emptyRefListTalentFolderReq():Ref<ListTalentFolderReq>
-	export function refOfListTalentFolderReq(x:ListTalentFolderReq,v:Ref<ListTalentFolderReq>)
-	export function unRefListTalentFolderReq(v:Ref<ListTalentFolderReq>):ListTalentFolderReq
-	export function emptyP2ApplicationDeletedV1Data():P2ApplicationDeletedV1Data
-	export function emptyRefP2ApplicationDeletedV1Data():Ref<P2ApplicationDeletedV1Data>
-	export function refOfP2ApplicationDeletedV1Data(x:P2ApplicationDeletedV1Data,v:Ref<P2ApplicationDeletedV1Data>)
-	export function unRefP2ApplicationDeletedV1Data(v:Ref<P2ApplicationDeletedV1Data>):P2ApplicationDeletedV1Data
-	export function emptyBatchDeleteEcoBackgroundCheckPackageResp():BatchDeleteEcoBackgroundCheckPackageResp
-	export function emptyRefBatchDeleteEcoBackgroundCheckPackageResp():Ref<BatchDeleteEcoBackgroundCheckPackageResp>
-	export function refOfBatchDeleteEcoBackgroundCheckPackageResp(x:BatchDeleteEcoBackgroundCheckPackageResp,v:Ref<BatchDeleteEcoBackgroundCheckPackageResp>)
-	export function unRefBatchDeleteEcoBackgroundCheckPackageResp(v:Ref<BatchDeleteEcoBackgroundCheckPackageResp>):BatchDeleteEcoBackgroundCheckPackageResp
-	export function emptyInterviewDimensionScore():InterviewDimensionScore
-	export function emptyRefInterviewDimensionScore():Ref<InterviewDimensionScore>
-	export function refOfInterviewDimensionScore(x:InterviewDimensionScore,v:Ref<InterviewDimensionScore>)
-	export function unRefInterviewDimensionScore(v:Ref<InterviewDimensionScore>):InterviewDimensionScore
-	export function emptyP2ApplicationDeletedV1():P2ApplicationDeletedV1
-	export function emptyRefP2ApplicationDeletedV1():Ref<P2ApplicationDeletedV1>
-	export function refOfP2ApplicationDeletedV1(x:P2ApplicationDeletedV1,v:Ref<P2ApplicationDeletedV1>)
-	export function unRefP2ApplicationDeletedV1(v:Ref<P2ApplicationDeletedV1>):P2ApplicationDeletedV1
-	export function emptyApplicationOfferBasicInfoCustomizedObjectOptionValue():ApplicationOfferBasicInfoCustomizedObjectOptionValue
-	export function emptyRefApplicationOfferBasicInfoCustomizedObjectOptionValue():Ref<ApplicationOfferBasicInfoCustomizedObjectOptionValue>
-	export function refOfApplicationOfferBasicInfoCustomizedObjectOptionValue(x:ApplicationOfferBasicInfoCustomizedObjectOptionValue,v:Ref<ApplicationOfferBasicInfoCustomizedObjectOptionValue>)
-	export function unRefApplicationOfferBasicInfoCustomizedObjectOptionValue(v:Ref<ApplicationOfferBasicInfoCustomizedObjectOptionValue>):ApplicationOfferBasicInfoCustomizedObjectOptionValue
-	export function emptyWebsiteDeliveryInternship():WebsiteDeliveryInternship
-	export function emptyRefWebsiteDeliveryInternship():Ref<WebsiteDeliveryInternship>
-	export function refOfWebsiteDeliveryInternship(x:WebsiteDeliveryInternship,v:Ref<WebsiteDeliveryInternship>)
-	export function unRefWebsiteDeliveryInternship(v:Ref<WebsiteDeliveryInternship>):WebsiteDeliveryInternship
-	export function emptyWebsiteDeliveryBasicInfo():WebsiteDeliveryBasicInfo
-	export function emptyRefWebsiteDeliveryBasicInfo():Ref<WebsiteDeliveryBasicInfo>
-	export function refOfWebsiteDeliveryBasicInfo(x:WebsiteDeliveryBasicInfo,v:Ref<WebsiteDeliveryBasicInfo>)
-	export function unRefWebsiteDeliveryBasicInfo(v:Ref<WebsiteDeliveryBasicInfo>):WebsiteDeliveryBasicInfo
-	export function emptyInterviewRecord():InterviewRecord
-	export function emptyRefInterviewRecord():Ref<InterviewRecord>
-	export function refOfInterviewRecord(x:InterviewRecord,v:Ref<InterviewRecord>)
-	export function unRefInterviewRecord(v:Ref<InterviewRecord>):InterviewRecord
-	export function emptyTestSchedule():TestSchedule
-	export function emptyRefTestSchedule():Ref<TestSchedule>
-	export function refOfTestSchedule(x:TestSchedule,v:Ref<TestSchedule>)
-	export function unRefTestSchedule(v:Ref<TestSchedule>):TestSchedule
-	export function emptyWebsiteDeliveryAttachmentIndentification():WebsiteDeliveryAttachmentIndentification
-	export function emptyRefWebsiteDeliveryAttachmentIndentification():Ref<WebsiteDeliveryAttachmentIndentification>
-	export function refOfWebsiteDeliveryAttachmentIndentification(x:WebsiteDeliveryAttachmentIndentification,v:Ref<WebsiteDeliveryAttachmentIndentification>)
-	export function unRefWebsiteDeliveryAttachmentIndentification(v:Ref<WebsiteDeliveryAttachmentIndentification>):WebsiteDeliveryAttachmentIndentification
-	export function emptyEcoExamLoginInfo():EcoExamLoginInfo
-	export function emptyRefEcoExamLoginInfo():Ref<EcoExamLoginInfo>
-	export function refOfEcoExamLoginInfo(x:EcoExamLoginInfo,v:Ref<EcoExamLoginInfo>)
-	export function unRefEcoExamLoginInfo(v:Ref<EcoExamLoginInfo>):EcoExamLoginInfo
-	export function emptyGetReferralWebsiteJobPostRespData():GetReferralWebsiteJobPostRespData
-	export function emptyRefGetReferralWebsiteJobPostRespData():Ref<GetReferralWebsiteJobPostRespData>
-	export function refOfGetReferralWebsiteJobPostRespData(x:GetReferralWebsiteJobPostRespData,v:Ref<GetReferralWebsiteJobPostRespData>)
-	export function unRefGetReferralWebsiteJobPostRespData(v:Ref<GetReferralWebsiteJobPostRespData>):GetReferralWebsiteJobPostRespData
-	export function emptyWebsiteDeliveryLanguage():WebsiteDeliveryLanguage
-	export function emptyRefWebsiteDeliveryLanguage():Ref<WebsiteDeliveryLanguage>
-	export function refOfWebsiteDeliveryLanguage(x:WebsiteDeliveryLanguage,v:Ref<WebsiteDeliveryLanguage>)
-	export function unRefWebsiteDeliveryLanguage(v:Ref<WebsiteDeliveryLanguage>):WebsiteDeliveryLanguage
-	export function emptyWebsiteJobPostCustomizedOption():WebsiteJobPostCustomizedOption
-	export function emptyRefWebsiteJobPostCustomizedOption():Ref<WebsiteJobPostCustomizedOption>
-	export function refOfWebsiteJobPostCustomizedOption(x:WebsiteJobPostCustomizedOption,v:Ref<WebsiteJobPostCustomizedOption>)
-	export function unRefWebsiteJobPostCustomizedOption(v:Ref<WebsiteJobPostCustomizedOption>):WebsiteJobPostCustomizedOption
-	export function emptyListByIdJobRequirementReqBody():ListByIdJobRequirementReqBody
-	export function emptyRefListByIdJobRequirementReqBody():Ref<ListByIdJobRequirementReqBody>
-	export function refOfListByIdJobRequirementReqBody(x:ListByIdJobRequirementReqBody,v:Ref<ListByIdJobRequirementReqBody>)
-	export function unRefListByIdJobRequirementReqBody(v:Ref<ListByIdJobRequirementReqBody>):ListByIdJobRequirementReqBody
-	export function emptyCompetitionInfo():CompetitionInfo
-	export function emptyRefCompetitionInfo():Ref<CompetitionInfo>
-	export function refOfCompetitionInfo(x:CompetitionInfo,v:Ref<CompetitionInfo>)
-	export function unRefCompetitionInfo(v:Ref<CompetitionInfo>):CompetitionInfo
-	export function emptyGetAttachmentResp():GetAttachmentResp
-	export function emptyRefGetAttachmentResp():Ref<GetAttachmentResp>
-	export function refOfGetAttachmentResp(x:GetAttachmentResp,v:Ref<GetAttachmentResp>)
-	export function unRefGetAttachmentResp(v:Ref<GetAttachmentResp>):GetAttachmentResp
-	export function emptyTalentCustomizedTimeRange():TalentCustomizedTimeRange
-	export function emptyRefTalentCustomizedTimeRange():Ref<TalentCustomizedTimeRange>
-	export function refOfTalentCustomizedTimeRange(x:TalentCustomizedTimeRange,v:Ref<TalentCustomizedTimeRange>)
-	export function unRefTalentCustomizedTimeRange(v:Ref<TalentCustomizedTimeRange>):TalentCustomizedTimeRange
-	export function emptyRegistrationSchemaInfo():RegistrationSchemaInfo
-	export function emptyRefRegistrationSchemaInfo():Ref<RegistrationSchemaInfo>
-	export function refOfRegistrationSchemaInfo(x:RegistrationSchemaInfo,v:Ref<RegistrationSchemaInfo>)
-	export function unRefRegistrationSchemaInfo(v:Ref<RegistrationSchemaInfo>):RegistrationSchemaInfo
-	export function emptyDepartmentId():DepartmentId
-	export function emptyRefDepartmentId():Ref<DepartmentId>
-	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
-	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptyListTalentResp():ListTalentResp
-	export function emptyRefListTalentResp():Ref<ListTalentResp>
-	export function refOfListTalentResp(x:ListTalentResp,v:Ref<ListTalentResp>)
-	export function unRefListTalentResp(v:Ref<ListTalentResp>):ListTalentResp
-	export function emptyDepartment():Department
-	export function emptyRefDepartment():Ref<Department>
-	export function refOfDepartment(x:Department,v:Ref<Department>)
-	export function unRefDepartment(v:Ref<Department>):Department
-	export function emptyApplicationOfferCustomValue():ApplicationOfferCustomValue
-	export function emptyRefApplicationOfferCustomValue():Ref<ApplicationOfferCustomValue>
-	export function refOfApplicationOfferCustomValue(x:ApplicationOfferCustomValue,v:Ref<ApplicationOfferCustomValue>)
-	export function unRefApplicationOfferCustomValue(v:Ref<ApplicationOfferCustomValue>):ApplicationOfferCustomValue
-	export function emptyInterviewTask():InterviewTask
-	export function emptyRefInterviewTask():Ref<InterviewTask>
-	export function refOfInterviewTask(x:InterviewTask,v:Ref<InterviewTask>)
-	export function unRefInterviewTask(v:Ref<InterviewTask>):InterviewTask
-	export function emptyP2EhrImportTaskForInternshipOfferImportedV1():P2EhrImportTaskForInternshipOfferImportedV1
-	export function emptyRefP2EhrImportTaskForInternshipOfferImportedV1():Ref<P2EhrImportTaskForInternshipOfferImportedV1>
-	export function refOfP2EhrImportTaskForInternshipOfferImportedV1(x:P2EhrImportTaskForInternshipOfferImportedV1,v:Ref<P2EhrImportTaskForInternshipOfferImportedV1>)
-	export function unRefP2EhrImportTaskForInternshipOfferImportedV1(v:Ref<P2EhrImportTaskForInternshipOfferImportedV1>):P2EhrImportTaskForInternshipOfferImportedV1
-	export function emptyUpdateResultEcoBackgroundCheckReqBody():UpdateResultEcoBackgroundCheckReqBody
-	export function emptyRefUpdateResultEcoBackgroundCheckReqBody():Ref<UpdateResultEcoBackgroundCheckReqBody>
-	export function refOfUpdateResultEcoBackgroundCheckReqBody(x:UpdateResultEcoBackgroundCheckReqBody,v:Ref<UpdateResultEcoBackgroundCheckReqBody>)
-	export function unRefUpdateResultEcoBackgroundCheckReqBody(v:Ref<UpdateResultEcoBackgroundCheckReqBody>):UpdateResultEcoBackgroundCheckReqBody
-	export function emptyJobRequirementCustomizedTimeRange():JobRequirementCustomizedTimeRange
-	export function emptyRefJobRequirementCustomizedTimeRange():Ref<JobRequirementCustomizedTimeRange>
-	export function refOfJobRequirementCustomizedTimeRange(x:JobRequirementCustomizedTimeRange,v:Ref<JobRequirementCustomizedTimeRange>)
-	export function unRefJobRequirementCustomizedTimeRange(v:Ref<JobRequirementCustomizedTimeRange>):JobRequirementCustomizedTimeRange
-	export function emptyP2ReferralAccountAssetsUpdateV1():P2ReferralAccountAssetsUpdateV1
-	export function emptyRefP2ReferralAccountAssetsUpdateV1():Ref<P2ReferralAccountAssetsUpdateV1>
-	export function refOfP2ReferralAccountAssetsUpdateV1(x:P2ReferralAccountAssetsUpdateV1,v:Ref<P2ReferralAccountAssetsUpdateV1>)
-	export function unRefP2ReferralAccountAssetsUpdateV1(v:Ref<P2ReferralAccountAssetsUpdateV1>):P2ReferralAccountAssetsUpdateV1
-	export function emptyTalentFolderForList():TalentFolderForList
-	export function emptyRefTalentFolderForList():Ref<TalentFolderForList>
-	export function refOfTalentFolderForList(x:TalentFolderForList,v:Ref<TalentFolderForList>)
-	export function unRefTalentFolderForList(v:Ref<TalentFolderForList>):TalentFolderForList
-	export function emptyInterviewAppointmentConfig():InterviewAppointmentConfig
-	export function emptyRefInterviewAppointmentConfig():Ref<InterviewAppointmentConfig>
-	export function refOfInterviewAppointmentConfig(x:InterviewAppointmentConfig,v:Ref<InterviewAppointmentConfig>)
-	export function unRefInterviewAppointmentConfig(v:Ref<InterviewAppointmentConfig>):InterviewAppointmentConfig
-	export function emptyEvaluationTask():EvaluationTask
-	export function emptyRefEvaluationTask():Ref<EvaluationTask>
-	export function refOfEvaluationTask(x:EvaluationTask,v:Ref<EvaluationTask>)
-	export function unRefEvaluationTask(v:Ref<EvaluationTask>):EvaluationTask
-	export function emptyInterviewDimensionOption():InterviewDimensionOption
-	export function emptyRefInterviewDimensionOption():Ref<InterviewDimensionOption>
-	export function refOfInterviewDimensionOption(x:InterviewDimensionOption,v:Ref<InterviewDimensionOption>)
-	export function unRefInterviewDimensionOption(v:Ref<InterviewDimensionOption>):InterviewDimensionOption
-	export function emptyTalentLanguageInfo():TalentLanguageInfo
-	export function emptyRefTalentLanguageInfo():Ref<TalentLanguageInfo>
-	export function refOfTalentLanguageInfo(x:TalentLanguageInfo,v:Ref<TalentLanguageInfo>)
-	export function unRefTalentLanguageInfo(v:Ref<TalentLanguageInfo>):TalentLanguageInfo
-	export function emptyWebsiteDeliveryAttachment():WebsiteDeliveryAttachment
-	export function emptyRefWebsiteDeliveryAttachment():Ref<WebsiteDeliveryAttachment>
-	export function refOfWebsiteDeliveryAttachment(x:WebsiteDeliveryAttachment,v:Ref<WebsiteDeliveryAttachment>)
-	export function unRefWebsiteDeliveryAttachment(v:Ref<WebsiteDeliveryAttachment>):WebsiteDeliveryAttachment
-	export function emptyCash():Cash
-	export function emptyRefCash():Ref<Cash>
-	export function refOfCash(x:Cash,v:Ref<Cash>)
-	export function unRefCash(v:Ref<Cash>):Cash
-	export function emptyBatchUpdateEcoBackgroundCheckPackageResp():BatchUpdateEcoBackgroundCheckPackageResp
-	export function emptyRefBatchUpdateEcoBackgroundCheckPackageResp():Ref<BatchUpdateEcoBackgroundCheckPackageResp>
-	export function refOfBatchUpdateEcoBackgroundCheckPackageResp(x:BatchUpdateEcoBackgroundCheckPackageResp,v:Ref<BatchUpdateEcoBackgroundCheckPackageResp>)
-	export function unRefBatchUpdateEcoBackgroundCheckPackageResp(v:Ref<BatchUpdateEcoBackgroundCheckPackageResp>):BatchUpdateEcoBackgroundCheckPackageResp
-	export function emptyListResumeSourceIterator():ListResumeSourceIterator
-	export function emptyRefListResumeSourceIterator():Ref<ListResumeSourceIterator>
-	export function refOfListResumeSourceIterator(x:ListResumeSourceIterator,v:Ref<ListResumeSourceIterator>)
-	export function unRefListResumeSourceIterator(v:Ref<ListResumeSourceIterator>):ListResumeSourceIterator
-	export function emptyListByIdJobRequirementReq():ListByIdJobRequirementReq
-	export function emptyRefListByIdJobRequirementReq():Ref<ListByIdJobRequirementReq>
-	export function refOfListByIdJobRequirementReq(x:ListByIdJobRequirementReq,v:Ref<ListByIdJobRequirementReq>)
-	export function unRefListByIdJobRequirementReq(v:Ref<ListByIdJobRequirementReq>):ListByIdJobRequirementReq
-	export function emptyOfferApplyFormObjectConfigInfo():OfferApplyFormObjectConfigInfo
-	export function emptyRefOfferApplyFormObjectConfigInfo():Ref<OfferApplyFormObjectConfigInfo>
-	export function refOfOfferApplyFormObjectConfigInfo(x:OfferApplyFormObjectConfigInfo,v:Ref<OfferApplyFormObjectConfigInfo>)
-	export function unRefOfferApplyFormObjectConfigInfo(v:Ref<OfferApplyFormObjectConfigInfo>):OfferApplyFormObjectConfigInfo
-	export function emptyEmployeeConversionInfo():EmployeeConversionInfo
-	export function emptyRefEmployeeConversionInfo():Ref<EmployeeConversionInfo>
-	export function refOfEmployeeConversionInfo(x:EmployeeConversionInfo,v:Ref<EmployeeConversionInfo>)
-	export function unRefEmployeeConversionInfo(v:Ref<EmployeeConversionInfo>):EmployeeConversionInfo
-	export function emptyListTalentRespData():ListTalentRespData
-	export function emptyRefListTalentRespData():Ref<ListTalentRespData>
-	export function refOfListTalentRespData(x:ListTalentRespData,v:Ref<ListTalentRespData>)
-	export function unRefListTalentRespData(v:Ref<ListTalentRespData>):ListTalentRespData
-	export function emptyUpdateJobRequirementReq():UpdateJobRequirementReq
-	export function emptyRefUpdateJobRequirementReq():Ref<UpdateJobRequirementReq>
-	export function refOfUpdateJobRequirementReq(x:UpdateJobRequirementReq,v:Ref<UpdateJobRequirementReq>)
-	export function unRefUpdateJobRequirementReq(v:Ref<UpdateJobRequirementReq>):UpdateJobRequirementReq
-	export function emptyListEvaluationIterator():ListEvaluationIterator
-	export function emptyRefListEvaluationIterator():Ref<ListEvaluationIterator>
-	export function refOfListEvaluationIterator(x:ListEvaluationIterator,v:Ref<ListEvaluationIterator>)
-	export function unRefListEvaluationIterator(v:Ref<ListEvaluationIterator>):ListEvaluationIterator
-	export function emptyTalentCityInfo():TalentCityInfo
-	export function emptyRefTalentCityInfo():Ref<TalentCityInfo>
-	export function refOfTalentCityInfo(x:TalentCityInfo,v:Ref<TalentCityInfo>)
-	export function unRefTalentCityInfo(v:Ref<TalentCityInfo>):TalentCityInfo
-	export function emptyListJobResp():ListJobResp
-	export function emptyRefListJobResp():Ref<ListJobResp>
-	export function refOfListJobResp(x:ListJobResp,v:Ref<ListJobResp>)
-	export function unRefListJobResp(v:Ref<ListJobResp>):ListJobResp
-	export function emptyOfferApplicationReq():OfferApplicationReq
-	export function emptyRefOfferApplicationReq():Ref<OfferApplicationReq>
-	export function refOfOfferApplicationReq(x:OfferApplicationReq,v:Ref<OfferApplicationReq>)
-	export function unRefOfferApplicationReq(v:Ref<OfferApplicationReq>):OfferApplicationReq
-	export function emptyPatchNoteReqBody():PatchNoteReqBody
-	export function emptyRefPatchNoteReqBody():Ref<PatchNoteReqBody>
-	export function refOfPatchNoteReqBody(x:PatchNoteReqBody,v:Ref<PatchNoteReqBody>)
-	export function unRefPatchNoteReqBody(v:Ref<PatchNoteReqBody>):PatchNoteReqBody
-	export function emptyCommonSchemaChild():CommonSchemaChild
-	export function emptyRefCommonSchemaChild():Ref<CommonSchemaChild>
-	export function refOfCommonSchemaChild(x:CommonSchemaChild,v:Ref<CommonSchemaChild>)
-	export function unRefCommonSchemaChild(v:Ref<CommonSchemaChild>):CommonSchemaChild
-	export function emptyPatchEmployeeReq():PatchEmployeeReq
-	export function emptyRefPatchEmployeeReq():Ref<PatchEmployeeReq>
-	export function refOfPatchEmployeeReq(x:PatchEmployeeReq,v:Ref<PatchEmployeeReq>)
-	export function unRefPatchEmployeeReq(v:Ref<PatchEmployeeReq>):PatchEmployeeReq
-	export function emptyApplicationOfferOnboardProfile():ApplicationOfferOnboardProfile
-	export function emptyRefApplicationOfferOnboardProfile():Ref<ApplicationOfferOnboardProfile>
-	export function refOfApplicationOfferOnboardProfile(x:ApplicationOfferOnboardProfile,v:Ref<ApplicationOfferOnboardProfile>)
-	export function unRefApplicationOfferOnboardProfile(v:Ref<ApplicationOfferOnboardProfile>):ApplicationOfferOnboardProfile
-	export function emptyAttachmentInfo():AttachmentInfo
-	export function emptyRefAttachmentInfo():Ref<AttachmentInfo>
-	export function refOfAttachmentInfo(x:AttachmentInfo,v:Ref<AttachmentInfo>)
-	export function unRefAttachmentInfo(v:Ref<AttachmentInfo>):AttachmentInfo
-	export function emptyOfferApplyFormPreObjectConfigInfo():OfferApplyFormPreObjectConfigInfo
-	export function emptyRefOfferApplyFormPreObjectConfigInfo():Ref<OfferApplyFormPreObjectConfigInfo>
-	export function refOfOfferApplyFormPreObjectConfigInfo(x:OfferApplyFormPreObjectConfigInfo,v:Ref<OfferApplyFormPreObjectConfigInfo>)
-	export function unRefOfferApplyFormPreObjectConfigInfo(v:Ref<OfferApplyFormPreObjectConfigInfo>):OfferApplyFormPreObjectConfigInfo
-	export function emptySiteResumeSns():SiteResumeSns
-	export function emptyRefSiteResumeSns():Ref<SiteResumeSns>
-	export function refOfSiteResumeSns(x:SiteResumeSns,v:Ref<SiteResumeSns>)
-	export function unRefSiteResumeSns(v:Ref<SiteResumeSns>):SiteResumeSns
-	export function emptyWebsiteDeliveryProject():WebsiteDeliveryProject
-	export function emptyRefWebsiteDeliveryProject():Ref<WebsiteDeliveryProject>
-	export function refOfWebsiteDeliveryProject(x:WebsiteDeliveryProject,v:Ref<WebsiteDeliveryProject>)
-	export function unRefWebsiteDeliveryProject(v:Ref<WebsiteDeliveryProject>):WebsiteDeliveryProject
-	export function emptyApplicationWebsiteResumeSource():ApplicationWebsiteResumeSource
-	export function emptyRefApplicationWebsiteResumeSource():Ref<ApplicationWebsiteResumeSource>
-	export function refOfApplicationWebsiteResumeSource(x:ApplicationWebsiteResumeSource,v:Ref<ApplicationWebsiteResumeSource>)
-	export function unRefApplicationWebsiteResumeSource(v:Ref<ApplicationWebsiteResumeSource>):ApplicationWebsiteResumeSource
-	export function emptyEcoBackgroundCheckPackageAdditionalItem():EcoBackgroundCheckPackageAdditionalItem
-	export function emptyRefEcoBackgroundCheckPackageAdditionalItem():Ref<EcoBackgroundCheckPackageAdditionalItem>
-	export function refOfEcoBackgroundCheckPackageAdditionalItem(x:EcoBackgroundCheckPackageAdditionalItem,v:Ref<EcoBackgroundCheckPackageAdditionalItem>)
-	export function unRefEcoBackgroundCheckPackageAdditionalItem(v:Ref<EcoBackgroundCheckPackageAdditionalItem>):EcoBackgroundCheckPackageAdditionalItem
-	export function emptyGetJobRespData():GetJobRespData
-	export function emptyRefGetJobRespData():Ref<GetJobRespData>
-	export function refOfGetJobRespData(x:GetJobRespData,v:Ref<GetJobRespData>)
-	export function unRefGetJobRespData(v:Ref<GetJobRespData>):GetJobRespData
-	export function emptyTalentAwardInfo():TalentAwardInfo
-	export function emptyRefTalentAwardInfo():Ref<TalentAwardInfo>
-	export function refOfTalentAwardInfo(x:TalentAwardInfo,v:Ref<TalentAwardInfo>)
-	export function unRefTalentAwardInfo(v:Ref<TalentAwardInfo>):TalentAwardInfo
-	export function emptyEmployee():Employee
-	export function emptyRefEmployee():Ref<Employee>
-	export function refOfEmployee(x:Employee,v:Ref<Employee>)
-	export function unRefEmployee(v:Ref<Employee>):Employee
-	export function emptyConfigJobRespData():ConfigJobRespData
-	export function emptyRefConfigJobRespData():Ref<ConfigJobRespData>
-	export function refOfConfigJobRespData(x:ConfigJobRespData,v:Ref<ConfigJobRespData>)
-	export function unRefConfigJobRespData(v:Ref<ConfigJobRespData>):ConfigJobRespData
-	export function emptyAppliOfferBasicCustObj():AppliOfferBasicCustObj
-	export function emptyRefAppliOfferBasicCustObj():Ref<AppliOfferBasicCustObj>
-	export function refOfAppliOfferBasicCustObj(x:AppliOfferBasicCustObj,v:Ref<AppliOfferBasicCustObj>)
-	export function unRefAppliOfferBasicCustObj(v:Ref<AppliOfferBasicCustObj>):AppliOfferBasicCustObj
-	export function emptyCombinedCreateJobRespData():CombinedCreateJobRespData
-	export function emptyRefCombinedCreateJobRespData():Ref<CombinedCreateJobRespData>
-	export function refOfCombinedCreateJobRespData(x:CombinedCreateJobRespData,v:Ref<CombinedCreateJobRespData>)
-	export function unRefCombinedCreateJobRespData(v:Ref<CombinedCreateJobRespData>):CombinedCreateJobRespData
-	export function emptyJobProcesses():JobProcesses
-	export function emptyRefJobProcesses():Ref<JobProcesses>
-	export function refOfJobProcesses(x:JobProcesses,v:Ref<JobProcesses>)
-	export function unRefJobProcesses(v:Ref<JobProcesses>):JobProcesses
-	export function emptyOfferCustomFieldConfigOption():OfferCustomFieldConfigOption
-	export function emptyRefOfferCustomFieldConfigOption():Ref<OfferCustomFieldConfigOption>
-	export function refOfOfferCustomFieldConfigOption(x:OfferCustomFieldConfigOption,v:Ref<OfferCustomFieldConfigOption>)
-	export function unRefOfferCustomFieldConfigOption(v:Ref<OfferCustomFieldConfigOption>):OfferCustomFieldConfigOption
-	export function emptyTalentCustomizedDataChild():TalentCustomizedDataChild
-	export function emptyRefTalentCustomizedDataChild():Ref<TalentCustomizedDataChild>
-	export function refOfTalentCustomizedDataChild(x:TalentCustomizedDataChild,v:Ref<TalentCustomizedDataChild>)
-	export function unRefTalentCustomizedDataChild(v:Ref<TalentCustomizedDataChild>):TalentCustomizedDataChild
-	export function emptyExternalInterview():ExternalInterview
-	export function emptyRefExternalInterview():Ref<ExternalInterview>
-	export function refOfExternalInterview(x:ExternalInterview,v:Ref<ExternalInterview>)
-	export function unRefExternalInterview(v:Ref<ExternalInterview>):ExternalInterview
-	export function emptyP2EcoAccountCreatedV1():P2EcoAccountCreatedV1
-	export function emptyRefP2EcoAccountCreatedV1():Ref<P2EcoAccountCreatedV1>
-	export function refOfP2EcoAccountCreatedV1(x:P2EcoAccountCreatedV1,v:Ref<P2EcoAccountCreatedV1>)
-	export function unRefP2EcoAccountCreatedV1(v:Ref<P2EcoAccountCreatedV1>):P2EcoAccountCreatedV1
-	export function emptyTodo():Todo
-	export function emptyRefTodo():Ref<Todo>
-	export function refOfTodo(x:Todo,v:Ref<Todo>)
-	export function unRefTodo(v:Ref<Todo>):Todo
-	export function emptyExamMarkingTask():ExamMarkingTask
-	export function emptyRefExamMarkingTask():Ref<ExamMarkingTask>
-	export function refOfExamMarkingTask(x:ExamMarkingTask,v:Ref<ExamMarkingTask>)
-	export function unRefExamMarkingTask(v:Ref<ExamMarkingTask>):ExamMarkingTask
-	export function emptyListOfferRespData():ListOfferRespData
-	export function emptyRefListOfferRespData():Ref<ListOfferRespData>
-	export function refOfListOfferRespData(x:ListOfferRespData,v:Ref<ListOfferRespData>)
-	export function unRefListOfferRespData(v:Ref<ListOfferRespData>):ListOfferRespData
-	export function emptyPatchEmployeeRespData():PatchEmployeeRespData
-	export function emptyRefPatchEmployeeRespData():Ref<PatchEmployeeRespData>
-	export function refOfPatchEmployeeRespData(x:PatchEmployeeRespData,v:Ref<PatchEmployeeRespData>)
-	export function unRefPatchEmployeeRespData(v:Ref<PatchEmployeeRespData>):PatchEmployeeRespData
-	export function emptyAbility():Ability
-	export function emptyRefAbility():Ref<Ability>
-	export function refOfAbility(x:Ability,v:Ref<Ability>)
-	export function unRefAbility(v:Ref<Ability>):Ability
-	export function emptyOfferApplyFormSchema():OfferApplyFormSchema
-	export function emptyRefOfferApplyFormSchema():Ref<OfferApplyFormSchema>
-	export function refOfOfferApplyFormSchema(x:OfferApplyFormSchema,v:Ref<OfferApplyFormSchema>)
-	export function unRefOfferApplyFormSchema(v:Ref<OfferApplyFormSchema>):OfferApplyFormSchema
-	export function emptyAddToFolderTalentResp():AddToFolderTalentResp
-	export function emptyRefAddToFolderTalentResp():Ref<AddToFolderTalentResp>
-	export function refOfAddToFolderTalentResp(x:AddToFolderTalentResp,v:Ref<AddToFolderTalentResp>)
-	export function unRefAddToFolderTalentResp(v:Ref<AddToFolderTalentResp>):AddToFolderTalentResp
-	export function emptySiteResumeLanguageSkill():SiteResumeLanguageSkill
-	export function emptyRefSiteResumeLanguageSkill():Ref<SiteResumeLanguageSkill>
-	export function refOfSiteResumeLanguageSkill(x:SiteResumeLanguageSkill,v:Ref<SiteResumeLanguageSkill>)
-	export function unRefSiteResumeLanguageSkill(v:Ref<SiteResumeLanguageSkill>):SiteResumeLanguageSkill
-	export function emptyTalentCombinedBasicInfo():TalentCombinedBasicInfo
-	export function emptyRefTalentCombinedBasicInfo():Ref<TalentCombinedBasicInfo>
-	export function refOfTalentCombinedBasicInfo(x:TalentCombinedBasicInfo,v:Ref<TalentCombinedBasicInfo>)
-	export function unRefTalentCombinedBasicInfo(v:Ref<TalentCombinedBasicInfo>):TalentCombinedBasicInfo
-	export function emptyBasicInfo():BasicInfo
-	export function emptyRefBasicInfo():Ref<BasicInfo>
-	export function refOfBasicInfo(x:BasicInfo,v:Ref<BasicInfo>)
-	export function unRefBasicInfo(v:Ref<BasicInfo>):BasicInfo
-	export function emptyTransferOnboardApplicationRespData():TransferOnboardApplicationRespData
-	export function emptyRefTransferOnboardApplicationRespData():Ref<TransferOnboardApplicationRespData>
-	export function refOfTransferOnboardApplicationRespData(x:TransferOnboardApplicationRespData,v:Ref<TransferOnboardApplicationRespData>)
-	export function unRefTransferOnboardApplicationRespData(v:Ref<TransferOnboardApplicationRespData>):TransferOnboardApplicationRespData
-	export function emptyBaseBilingualWithId():BaseBilingualWithId
-	export function emptyRefBaseBilingualWithId():Ref<BaseBilingualWithId>
-	export function refOfBaseBilingualWithId(x:BaseBilingualWithId,v:Ref<BaseBilingualWithId>)
-	export function unRefBaseBilingualWithId(v:Ref<BaseBilingualWithId>):BaseBilingualWithId
-	export function emptyContractPeriodInfo():ContractPeriodInfo
-	export function emptyRefContractPeriodInfo():Ref<ContractPeriodInfo>
-	export function refOfContractPeriodInfo(x:ContractPeriodInfo,v:Ref<ContractPeriodInfo>)
-	export function unRefContractPeriodInfo(v:Ref<ContractPeriodInfo>):ContractPeriodInfo
-	export function emptyReferralInfo():ReferralInfo
-	export function emptyRefReferralInfo():Ref<ReferralInfo>
-	export function refOfReferralInfo(x:ReferralInfo,v:Ref<ReferralInfo>)
-	export function unRefReferralInfo(v:Ref<ReferralInfo>):ReferralInfo
-	export function emptyAppliTalentCertificateInfo():AppliTalentCertificateInfo
-	export function emptyRefAppliTalentCertificateInfo():Ref<AppliTalentCertificateInfo>
-	export function refOfAppliTalentCertificateInfo(x:AppliTalentCertificateInfo,v:Ref<AppliTalentCertificateInfo>)
-	export function unRefAppliTalentCertificateInfo(v:Ref<AppliTalentCertificateInfo>):AppliTalentCertificateInfo
-	export function emptyCreateEcoBackgroundCheckPackageReq():CreateEcoBackgroundCheckPackageReq
-	export function emptyRefCreateEcoBackgroundCheckPackageReq():Ref<CreateEcoBackgroundCheckPackageReq>
-	export function refOfCreateEcoBackgroundCheckPackageReq(x:CreateEcoBackgroundCheckPackageReq,v:Ref<CreateEcoBackgroundCheckPackageReq>)
-	export function unRefCreateEcoBackgroundCheckPackageReq(v:Ref<CreateEcoBackgroundCheckPackageReq>):CreateEcoBackgroundCheckPackageReq
-	export function emptyApplicationTalentCareerInfo():ApplicationTalentCareerInfo
-	export function emptyRefApplicationTalentCareerInfo():Ref<ApplicationTalentCareerInfo>
-	export function refOfApplicationTalentCareerInfo(x:ApplicationTalentCareerInfo,v:Ref<ApplicationTalentCareerInfo>)
-	export function unRefApplicationTalentCareerInfo(v:Ref<ApplicationTalentCareerInfo>):ApplicationTalentCareerInfo
-	export function emptyLevel():Level
-	export function emptyRefLevel():Ref<Level>
-	export function refOfLevel(x:Level,v:Ref<Level>)
-	export function unRefLevel(v:Ref<Level>):Level
-	export function emptyListTalentFolderResp():ListTalentFolderResp
-	export function emptyRefListTalentFolderResp():Ref<ListTalentFolderResp>
-	export function refOfListTalentFolderResp(x:ListTalentFolderResp,v:Ref<ListTalentFolderResp>)
-	export function unRefListTalentFolderResp(v:Ref<ListTalentFolderResp>):ListTalentFolderResp
-	export function emptyAppliTalentAttachResumeInfo():AppliTalentAttachResumeInfo
-	export function emptyRefAppliTalentAttachResumeInfo():Ref<AppliTalentAttachResumeInfo>
-	export function refOfAppliTalentAttachResumeInfo(x:AppliTalentAttachResumeInfo,v:Ref<AppliTalentAttachResumeInfo>)
-	export function unRefAppliTalentAttachResumeInfo(v:Ref<AppliTalentAttachResumeInfo>):AppliTalentAttachResumeInfo
-	export function emptyApplicationStage():ApplicationStage
-	export function emptyRefApplicationStage():Ref<ApplicationStage>
-	export function refOfApplicationStage(x:ApplicationStage,v:Ref<ApplicationStage>)
-	export function unRefApplicationStage(v:Ref<ApplicationStage>):ApplicationStage
-	export function emptyJobHighlight():JobHighlight
-	export function emptyRefJobHighlight():Ref<JobHighlight>
-	export function refOfJobHighlight(x:JobHighlight,v:Ref<JobHighlight>)
-	export function unRefJobHighlight(v:Ref<JobHighlight>):JobHighlight
-	export function emptyJobRequirementCustomizedValue():JobRequirementCustomizedValue
-	export function emptyRefJobRequirementCustomizedValue():Ref<JobRequirementCustomizedValue>
-	export function refOfJobRequirementCustomizedValue(x:JobRequirementCustomizedValue,v:Ref<JobRequirementCustomizedValue>)
-	export function unRefJobRequirementCustomizedValue(v:Ref<JobRequirementCustomizedValue>):JobRequirementCustomizedValue
-	export function emptyOfferBasicInfo():OfferBasicInfo
-	export function emptyRefOfferBasicInfo():Ref<OfferBasicInfo>
-	export function refOfOfferBasicInfo(x:OfferBasicInfo,v:Ref<OfferBasicInfo>)
-	export function unRefOfferBasicInfo(v:Ref<OfferBasicInfo>):OfferBasicInfo
-	export function emptyAppliTalentEducationInfo():AppliTalentEducationInfo
-	export function emptyRefAppliTalentEducationInfo():Ref<AppliTalentEducationInfo>
-	export function refOfAppliTalentEducationInfo(x:AppliTalentEducationInfo,v:Ref<AppliTalentEducationInfo>)
-	export function unRefAppliTalentEducationInfo(v:Ref<AppliTalentEducationInfo>):AppliTalentEducationInfo
-	export function emptyDiInfo():DiInfo
-	export function emptyRefDiInfo():Ref<DiInfo>
-	export function refOfDiInfo(x:DiInfo,v:Ref<DiInfo>)
-	export function unRefDiInfo(v:Ref<DiInfo>):DiInfo
-	export function emptyMasterLocationAddressInfo():MasterLocationAddressInfo
-	export function emptyRefMasterLocationAddressInfo():Ref<MasterLocationAddressInfo>
-	export function refOfMasterLocationAddressInfo(x:MasterLocationAddressInfo,v:Ref<MasterLocationAddressInfo>)
-	export function unRefMasterLocationAddressInfo(v:Ref<MasterLocationAddressInfo>):MasterLocationAddressInfo
-	export function emptyCreateExternalInterviewRespData():CreateExternalInterviewRespData
-	export function emptyRefCreateExternalInterviewRespData():Ref<CreateExternalInterviewRespData>
-	export function refOfCreateExternalInterviewRespData(x:CreateExternalInterviewRespData,v:Ref<CreateExternalInterviewRespData>)
-	export function unRefCreateExternalInterviewRespData(v:Ref<CreateExternalInterviewRespData>):CreateExternalInterviewRespData
-	export function emptyListTalentFolderIterator():ListTalentFolderIterator
-	export function emptyRefListTalentFolderIterator():Ref<ListTalentFolderIterator>
-	export function refOfListTalentFolderIterator(x:ListTalentFolderIterator,v:Ref<ListTalentFolderIterator>)
-	export function unRefListTalentFolderIterator(v:Ref<ListTalentFolderIterator>):ListTalentFolderIterator
-	export function emptyGetEmployeeResp():GetEmployeeResp
-	export function emptyRefGetEmployeeResp():Ref<GetEmployeeResp>
-	export function refOfGetEmployeeResp(x:GetEmployeeResp,v:Ref<GetEmployeeResp>)
-	export function unRefGetEmployeeResp(v:Ref<GetEmployeeResp>):GetEmployeeResp
-	export function emptyListJobRequirementReq():ListJobRequirementReq
-	export function emptyRefListJobRequirementReq():Ref<ListJobRequirementReq>
-	export function refOfListJobRequirementReq(x:ListJobRequirementReq,v:Ref<ListJobRequirementReq>)
-	export function unRefListJobRequirementReq(v:Ref<ListJobRequirementReq>):ListJobRequirementReq
-	export function emptyTalentCombinedProjectInfo():TalentCombinedProjectInfo
-	export function emptyRefTalentCombinedProjectInfo():Ref<TalentCombinedProjectInfo>
-	export function refOfTalentCombinedProjectInfo(x:TalentCombinedProjectInfo,v:Ref<TalentCombinedProjectInfo>)
-	export function unRefTalentCombinedProjectInfo(v:Ref<TalentCombinedProjectInfo>):TalentCombinedProjectInfo
-	export function emptyDimensionAbility():DimensionAbility
-	export function emptyRefDimensionAbility():Ref<DimensionAbility>
-	export function refOfDimensionAbility(x:DimensionAbility,v:Ref<DimensionAbility>)
-	export function unRefDimensionAbility(v:Ref<DimensionAbility>):DimensionAbility
-	export function emptyCreateNoteResp():CreateNoteResp
-	export function emptyRefCreateNoteResp():Ref<CreateNoteResp>
-	export function refOfCreateNoteResp(x:CreateNoteResp,v:Ref<CreateNoteResp>)
-	export function unRefCreateNoteResp(v:Ref<CreateNoteResp>):CreateNoteResp
-	export function emptyJob():Job
-	export function emptyRefJob():Ref<Job>
-	export function refOfJob(x:Job,v:Ref<Job>)
-	export function unRefJob(v:Ref<Job>):Job
-	export function emptyApplicationOfferAttachment():ApplicationOfferAttachment
-	export function emptyRefApplicationOfferAttachment():Ref<ApplicationOfferAttachment>
-	export function refOfApplicationOfferAttachment(x:ApplicationOfferAttachment,v:Ref<ApplicationOfferAttachment>)
-	export function unRefApplicationOfferAttachment(v:Ref<ApplicationOfferAttachment>):ApplicationOfferAttachment
-	export function emptyCreateJobRequirementReq():CreateJobRequirementReq
-	export function emptyRefCreateJobRequirementReq():Ref<CreateJobRequirementReq>
-	export function refOfCreateJobRequirementReq(x:CreateJobRequirementReq,v:Ref<CreateJobRequirementReq>)
-	export function unRefCreateJobRequirementReq(v:Ref<CreateJobRequirementReq>):CreateJobRequirementReq
-	export function emptyInterviewDimensionAssessment():InterviewDimensionAssessment
-	export function emptyRefInterviewDimensionAssessment():Ref<InterviewDimensionAssessment>
-	export function refOfInterviewDimensionAssessment(x:InterviewDimensionAssessment,v:Ref<InterviewDimensionAssessment>)
-	export function unRefInterviewDimensionAssessment(v:Ref<InterviewDimensionAssessment>):InterviewDimensionAssessment
-	export function emptyOffer():Offer
-	export function emptyRefOffer():Ref<Offer>
-	export function refOfOffer(x:Offer,v:Ref<Offer>)
-	export function unRefOffer(v:Ref<Offer>):Offer
-	export function emptyUserContactInfo():UserContactInfo
-	export function emptyRefUserContactInfo():Ref<UserContactInfo>
-	export function refOfUserContactInfo(x:UserContactInfo,v:Ref<UserContactInfo>)
-	export function unRefUserContactInfo(v:Ref<UserContactInfo>):UserContactInfo
-	export function emptyWebsiteDeliveryCustomizedData():WebsiteDeliveryCustomizedData
-	export function emptyRefWebsiteDeliveryCustomizedData():Ref<WebsiteDeliveryCustomizedData>
-	export function refOfWebsiteDeliveryCustomizedData(x:WebsiteDeliveryCustomizedData,v:Ref<WebsiteDeliveryCustomizedData>)
-	export function unRefWebsiteDeliveryCustomizedData(v:Ref<WebsiteDeliveryCustomizedData>):WebsiteDeliveryCustomizedData
-	export function emptyDummy():Dummy
-	export function emptyRefDummy():Ref<Dummy>
-	export function refOfDummy(x:Dummy,v:Ref<Dummy>)
-	export function unRefDummy(v:Ref<Dummy>):Dummy
-	export function emptyBatchDeleteEcoAccountCustomFieldReqBody():BatchDeleteEcoAccountCustomFieldReqBody
-	export function emptyRefBatchDeleteEcoAccountCustomFieldReqBody():Ref<BatchDeleteEcoAccountCustomFieldReqBody>
-	export function refOfBatchDeleteEcoAccountCustomFieldReqBody(x:BatchDeleteEcoAccountCustomFieldReqBody,v:Ref<BatchDeleteEcoAccountCustomFieldReqBody>)
-	export function unRefBatchDeleteEcoAccountCustomFieldReqBody(v:Ref<BatchDeleteEcoAccountCustomFieldReqBody>):BatchDeleteEcoAccountCustomFieldReqBody
-	export function emptyGetByApplicationEmployeeReq():GetByApplicationEmployeeReq
-	export function emptyRefGetByApplicationEmployeeReq():Ref<GetByApplicationEmployeeReq>
-	export function refOfGetByApplicationEmployeeReq(x:GetByApplicationEmployeeReq,v:Ref<GetByApplicationEmployeeReq>)
-	export function unRefGetByApplicationEmployeeReq(v:Ref<GetByApplicationEmployeeReq>):GetByApplicationEmployeeReq
-	export function emptyListJobTypeRespData():ListJobTypeRespData
-	export function emptyRefListJobTypeRespData():Ref<ListJobTypeRespData>
-	export function refOfListJobTypeRespData(x:ListJobTypeRespData,v:Ref<ListJobTypeRespData>)
-	export function unRefListJobTypeRespData(v:Ref<ListJobTypeRespData>):ListJobTypeRespData
-	export function emptySiteResumeInternship():SiteResumeInternship
-	export function emptyRefSiteResumeInternship():Ref<SiteResumeInternship>
-	export function refOfSiteResumeInternship(x:SiteResumeInternship,v:Ref<SiteResumeInternship>)
-	export function unRefSiteResumeInternship(v:Ref<SiteResumeInternship>):SiteResumeInternship
-	export function emptyApplicationOfferBasicInfoUser():ApplicationOfferBasicInfoUser
-	export function emptyRefApplicationOfferBasicInfoUser():Ref<ApplicationOfferBasicInfoUser>
-	export function refOfApplicationOfferBasicInfoUser(x:ApplicationOfferBasicInfoUser,v:Ref<ApplicationOfferBasicInfoUser>)
-	export function unRefApplicationOfferBasicInfoUser(v:Ref<ApplicationOfferBasicInfoUser>):ApplicationOfferBasicInfoUser
-	export function emptyAuth():Auth
-	export function emptyRefAuth():Ref<Auth>
-	export function refOfAuth(x:Auth,v:Ref<Auth>)
-	export function unRefAuth(v:Ref<Auth>):Auth
-	export function emptyOfferSalaryInfo():OfferSalaryInfo
-	export function emptyRefOfferSalaryInfo():Ref<OfferSalaryInfo>
-	export function refOfOfferSalaryInfo(x:OfferSalaryInfo,v:Ref<OfferSalaryInfo>)
-	export function unRefOfferSalaryInfo(v:Ref<OfferSalaryInfo>):OfferSalaryInfo
-	export function emptyDeleteExternalApplicationReq():DeleteExternalApplicationReq
-	export function emptyRefDeleteExternalApplicationReq():Ref<DeleteExternalApplicationReq>
-	export function refOfDeleteExternalApplicationReq(x:DeleteExternalApplicationReq,v:Ref<DeleteExternalApplicationReq>)
-	export function unRefDeleteExternalApplicationReq(v:Ref<DeleteExternalApplicationReq>):DeleteExternalApplicationReq
-	export function emptyTalentInterview():TalentInterview
-	export function emptyRefTalentInterview():Ref<TalentInterview>
-	export function refOfTalentInterview(x:TalentInterview,v:Ref<TalentInterview>)
-	export function unRefTalentInterview(v:Ref<TalentInterview>):TalentInterview
-	export function emptyApplicationTalentLanguageInfo():ApplicationTalentLanguageInfo
-	export function emptyRefApplicationTalentLanguageInfo():Ref<ApplicationTalentLanguageInfo>
-	export function refOfApplicationTalentLanguageInfo(x:ApplicationTalentLanguageInfo,v:Ref<ApplicationTalentLanguageInfo>)
-	export function unRefApplicationTalentLanguageInfo(v:Ref<ApplicationTalentLanguageInfo>):ApplicationTalentLanguageInfo
-	export function emptyBatchDeleteEcoBackgroundCheckPackageReq():BatchDeleteEcoBackgroundCheckPackageReq
-	export function emptyRefBatchDeleteEcoBackgroundCheckPackageReq():Ref<BatchDeleteEcoBackgroundCheckPackageReq>
-	export function refOfBatchDeleteEcoBackgroundCheckPackageReq(x:BatchDeleteEcoBackgroundCheckPackageReq,v:Ref<BatchDeleteEcoBackgroundCheckPackageReq>)
-	export function unRefBatchDeleteEcoBackgroundCheckPackageReq(v:Ref<BatchDeleteEcoBackgroundCheckPackageReq>):BatchDeleteEcoBackgroundCheckPackageReq
-	export function emptyInterviewRoundType():InterviewRoundType
-	export function emptyRefInterviewRoundType():Ref<InterviewRoundType>
-	export function refOfInterviewRoundType(x:InterviewRoundType,v:Ref<InterviewRoundType>)
-	export function unRefInterviewRoundType(v:Ref<InterviewRoundType>):InterviewRoundType
-	export function emptyOfferSchemaName():OfferSchemaName
-	export function emptyRefOfferSchemaName():Ref<OfferSchemaName>
-	export function refOfOfferSchemaName(x:OfferSchemaName,v:Ref<OfferSchemaName>)
-	export function unRefOfferSchemaName(v:Ref<OfferSchemaName>):OfferSchemaName
-	export function emptyP2EhrImportTaskImportedV1():P2EhrImportTaskImportedV1
-	export function emptyRefP2EhrImportTaskImportedV1():Ref<P2EhrImportTaskImportedV1>
-	export function refOfP2EhrImportTaskImportedV1(x:P2EhrImportTaskImportedV1,v:Ref<P2EhrImportTaskImportedV1>)
-	export function unRefP2EhrImportTaskImportedV1(v:Ref<P2EhrImportTaskImportedV1>):P2EhrImportTaskImportedV1
-	export function emptyCreateReferralAccountReq():CreateReferralAccountReq
-	export function emptyRefCreateReferralAccountReq():Ref<CreateReferralAccountReq>
-	export function refOfCreateReferralAccountReq(x:CreateReferralAccountReq,v:Ref<CreateReferralAccountReq>)
-	export function unRefCreateReferralAccountReq(v:Ref<CreateReferralAccountReq>):CreateReferralAccountReq
-	export function emptyEcoBackgroundCheckCustomFieldDataOption():EcoBackgroundCheckCustomFieldDataOption
-	export function emptyRefEcoBackgroundCheckCustomFieldDataOption():Ref<EcoBackgroundCheckCustomFieldDataOption>
-	export function refOfEcoBackgroundCheckCustomFieldDataOption(x:EcoBackgroundCheckCustomFieldDataOption,v:Ref<EcoBackgroundCheckCustomFieldDataOption>)
-	export function unRefEcoBackgroundCheckCustomFieldDataOption(v:Ref<EcoBackgroundCheckCustomFieldDataOption>):EcoBackgroundCheckCustomFieldDataOption
-	export function emptyOfferListInfo():OfferListInfo
-	export function emptyRefOfferListInfo():Ref<OfferListInfo>
-	export function refOfOfferListInfo(x:OfferListInfo,v:Ref<OfferListInfo>)
-	export function unRefOfferListInfo(v:Ref<OfferListInfo>):OfferListInfo
-	export function emptyGetJobReq():GetJobReq
-	export function emptyRefGetJobReq():Ref<GetJobReq>
-	export function refOfGetJobReq(x:GetJobReq,v:Ref<GetJobReq>)
-	export function unRefGetJobReq(v:Ref<GetJobReq>):GetJobReq
-	export function emptyInterviewAddress():InterviewAddress
-	export function emptyRefInterviewAddress():Ref<InterviewAddress>
-	export function refOfInterviewAddress(x:InterviewAddress,v:Ref<InterviewAddress>)
-	export function unRefInterviewAddress(v:Ref<InterviewAddress>):InterviewAddress
-	export function emptyOfferApplyFormConfigFormulaInfo():OfferApplyFormConfigFormulaInfo
-	export function emptyRefOfferApplyFormConfigFormulaInfo():Ref<OfferApplyFormConfigFormulaInfo>
-	export function refOfOfferApplyFormConfigFormulaInfo(x:OfferApplyFormConfigFormulaInfo,v:Ref<OfferApplyFormConfigFormulaInfo>)
-	export function unRefOfferApplyFormConfigFormulaInfo(v:Ref<OfferApplyFormConfigFormulaInfo>):OfferApplyFormConfigFormulaInfo
-	export function emptyTalentCareerInfo():TalentCareerInfo
-	export function emptyRefTalentCareerInfo():Ref<TalentCareerInfo>
-	export function refOfTalentCareerInfo(x:TalentCareerInfo,v:Ref<TalentCareerInfo>)
-	export function unRefTalentCareerInfo(v:Ref<TalentCareerInfo>):TalentCareerInfo
-	export function emptyApplicationOfferOnboardProfileAddress():ApplicationOfferOnboardProfileAddress
-	export function emptyRefApplicationOfferOnboardProfileAddress():Ref<ApplicationOfferOnboardProfileAddress>
-	export function refOfApplicationOfferOnboardProfileAddress(x:ApplicationOfferOnboardProfileAddress,v:Ref<ApplicationOfferOnboardProfileAddress>)
-	export function unRefApplicationOfferOnboardProfileAddress(v:Ref<ApplicationOfferOnboardProfileAddress>):ApplicationOfferOnboardProfileAddress
-	export function emptyBaseResp():BaseResp
-	export function emptyRefBaseResp():Ref<BaseResp>
-	export function refOfBaseResp(x:BaseResp,v:Ref<BaseResp>)
-	export function unRefBaseResp(v:Ref<BaseResp>):BaseResp
-	export function emptyPermissionGroupInfo():PermissionGroupInfo
-	export function emptyRefPermissionGroupInfo():Ref<PermissionGroupInfo>
-	export function refOfPermissionGroupInfo(x:PermissionGroupInfo,v:Ref<PermissionGroupInfo>)
-	export function unRefPermissionGroupInfo(v:Ref<PermissionGroupInfo>):PermissionGroupInfo
-	export function emptyApplicationPrehireOffer():ApplicationPrehireOffer
-	export function emptyRefApplicationPrehireOffer():Ref<ApplicationPrehireOffer>
-	export function refOfApplicationPrehireOffer(x:ApplicationPrehireOffer,v:Ref<ApplicationPrehireOffer>)
-	export function unRefApplicationPrehireOffer(v:Ref<ApplicationPrehireOffer>):ApplicationPrehireOffer
-	export function emptyEntityInfo():EntityInfo
-	export function emptyRefEntityInfo():Ref<EntityInfo>
-	export function refOfEntityInfo(x:EntityInfo,v:Ref<EntityInfo>)
-	export function unRefEntityInfo(v:Ref<EntityInfo>):EntityInfo
-	export function emptyAddToFolderTalentRespData():AddToFolderTalentRespData
-	export function emptyRefAddToFolderTalentRespData():Ref<AddToFolderTalentRespData>
-	export function refOfAddToFolderTalentRespData(x:AddToFolderTalentRespData,v:Ref<AddToFolderTalentRespData>)
-	export function unRefAddToFolderTalentRespData(v:Ref<AddToFolderTalentRespData>):AddToFolderTalentRespData
-	export function emptyBackgroundCheckOrderFeedbackInfo():BackgroundCheckOrderFeedbackInfo
-	export function emptyRefBackgroundCheckOrderFeedbackInfo():Ref<BackgroundCheckOrderFeedbackInfo>
-	export function refOfBackgroundCheckOrderFeedbackInfo(x:BackgroundCheckOrderFeedbackInfo,v:Ref<BackgroundCheckOrderFeedbackInfo>)
-	export function unRefBackgroundCheckOrderFeedbackInfo(v:Ref<BackgroundCheckOrderFeedbackInfo>):BackgroundCheckOrderFeedbackInfo
-	export function emptyEcoBackgroundCheckCreateEventCustomKv():EcoBackgroundCheckCreateEventCustomKv
-	export function emptyRefEcoBackgroundCheckCreateEventCustomKv():Ref<EcoBackgroundCheckCreateEventCustomKv>
-	export function refOfEcoBackgroundCheckCreateEventCustomKv(x:EcoBackgroundCheckCreateEventCustomKv,v:Ref<EcoBackgroundCheckCreateEventCustomKv>)
-	export function unRefEcoBackgroundCheckCreateEventCustomKv(v:Ref<EcoBackgroundCheckCreateEventCustomKv>):EcoBackgroundCheckCreateEventCustomKv
-	export function emptyEcoBackgroundCheckReportFile():EcoBackgroundCheckReportFile
-	export function emptyRefEcoBackgroundCheckReportFile():Ref<EcoBackgroundCheckReportFile>
-	export function refOfEcoBackgroundCheckReportFile(x:EcoBackgroundCheckReportFile,v:Ref<EcoBackgroundCheckReportFile>)
-	export function unRefEcoBackgroundCheckReportFile(v:Ref<EcoBackgroundCheckReportFile>):EcoBackgroundCheckReportFile
-	export function emptyAppliOfferBasicCustObjOpV():AppliOfferBasicCustObjOpV
-	export function emptyRefAppliOfferBasicCustObjOpV():Ref<AppliOfferBasicCustObjOpV>
-	export function refOfAppliOfferBasicCustObjOpV(x:AppliOfferBasicCustObjOpV,v:Ref<AppliOfferBasicCustObjOpV>)
-	export function unRefAppliOfferBasicCustObjOpV(v:Ref<AppliOfferBasicCustObjOpV>):AppliOfferBasicCustObjOpV
-	export function emptyTerminationReason():TerminationReason
-	export function emptyRefTerminationReason():Ref<TerminationReason>
-	export function refOfTerminationReason(x:TerminationReason,v:Ref<TerminationReason>)
-	export function unRefTerminationReason(v:Ref<TerminationReason>):TerminationReason
-	export function emptyTalentCombinedSnsInfo():TalentCombinedSnsInfo
-	export function emptyRefTalentCombinedSnsInfo():Ref<TalentCombinedSnsInfo>
-	export function refOfTalentCombinedSnsInfo(x:TalentCombinedSnsInfo,v:Ref<TalentCombinedSnsInfo>)
-	export function unRefTalentCombinedSnsInfo(v:Ref<TalentCombinedSnsInfo>):TalentCombinedSnsInfo
-	export function emptyWithdrawReferralAccountResp():WithdrawReferralAccountResp
-	export function emptyRefWithdrawReferralAccountResp():Ref<WithdrawReferralAccountResp>
-	export function refOfWithdrawReferralAccountResp(x:WithdrawReferralAccountResp,v:Ref<WithdrawReferralAccountResp>)
-	export function unRefWithdrawReferralAccountResp(v:Ref<WithdrawReferralAccountResp>):WithdrawReferralAccountResp
-	export function emptyGetOfferRespData():GetOfferRespData
-	export function emptyRefGetOfferRespData():Ref<GetOfferRespData>
-	export function refOfGetOfferRespData(x:GetOfferRespData,v:Ref<GetOfferRespData>)
-	export function unRefGetOfferRespData(v:Ref<GetOfferRespData>):GetOfferRespData
-	export function emptyInterviewAppointmentConfigContent():InterviewAppointmentConfigContent
-	export function emptyRefInterviewAppointmentConfigContent():Ref<InterviewAppointmentConfigContent>
-	export function refOfInterviewAppointmentConfigContent(x:InterviewAppointmentConfigContent,v:Ref<InterviewAppointmentConfigContent>)
-	export function unRefInterviewAppointmentConfigContent(v:Ref<InterviewAppointmentConfigContent>):InterviewAppointmentConfigContent
-	export function emptyDeleteJobRequirementReq():DeleteJobRequirementReq
-	export function emptyRefDeleteJobRequirementReq():Ref<DeleteJobRequirementReq>
-	export function refOfDeleteJobRequirementReq(x:DeleteJobRequirementReq,v:Ref<DeleteJobRequirementReq>)
-	export function unRefDeleteJobRequirementReq(v:Ref<DeleteJobRequirementReq>):DeleteJobRequirementReq
-	export function emptyReferral():Referral
-	export function emptyRefReferral():Ref<Referral>
-	export function refOfReferral(x:Referral,v:Ref<Referral>)
-	export function unRefReferral(v:Ref<Referral>):Referral
-	export function emptyCreateApplicationResp():CreateApplicationResp
-	export function emptyRefCreateApplicationResp():Ref<CreateApplicationResp>
-	export function refOfCreateApplicationResp(x:CreateApplicationResp,v:Ref<CreateApplicationResp>)
-	export function unRefCreateApplicationResp(v:Ref<CreateApplicationResp>):CreateApplicationResp
-	export function emptyEmployeeOverboardInfo():EmployeeOverboardInfo
-	export function emptyRefEmployeeOverboardInfo():Ref<EmployeeOverboardInfo>
-	export function refOfEmployeeOverboardInfo(x:EmployeeOverboardInfo,v:Ref<EmployeeOverboardInfo>)
-	export function unRefEmployeeOverboardInfo(v:Ref<EmployeeOverboardInfo>):EmployeeOverboardInfo
-	export function emptyInterviewScore():InterviewScore
-	export function emptyRefInterviewScore():Ref<InterviewScore>
-	export function refOfInterviewScore(x:InterviewScore,v:Ref<InterviewScore>)
-	export function unRefInterviewScore(v:Ref<InterviewScore>):InterviewScore
-	export function emptyListOfferReq():ListOfferReq
-	export function emptyRefListOfferReq():Ref<ListOfferReq>
-	export function refOfListOfferReq(x:ListOfferReq,v:Ref<ListOfferReq>)
-	export function unRefListOfferReq(v:Ref<ListOfferReq>):ListOfferReq
-	export function emptyBatchGetIdTalentReq():BatchGetIdTalentReq
-	export function emptyRefBatchGetIdTalentReq():Ref<BatchGetIdTalentReq>
-	export function refOfBatchGetIdTalentReq(x:BatchGetIdTalentReq,v:Ref<BatchGetIdTalentReq>)
-	export function unRefBatchGetIdTalentReq(v:Ref<BatchGetIdTalentReq>):BatchGetIdTalentReq
-	export function emptyChangeEmployeeStage():ChangeEmployeeStage
-	export function emptyRefChangeEmployeeStage():Ref<ChangeEmployeeStage>
-	export function refOfChangeEmployeeStage(x:ChangeEmployeeStage,v:Ref<ChangeEmployeeStage>)
-	export function unRefChangeEmployeeStage(v:Ref<ChangeEmployeeStage>):ChangeEmployeeStage
-	export function emptyCombinedJobResultDefaultJobPost():CombinedJobResultDefaultJobPost
-	export function emptyRefCombinedJobResultDefaultJobPost():Ref<CombinedJobResultDefaultJobPost>
-	export function refOfCombinedJobResultDefaultJobPost(x:CombinedJobResultDefaultJobPost,v:Ref<CombinedJobResultDefaultJobPost>)
-	export function unRefCombinedJobResultDefaultJobPost(v:Ref<CombinedJobResultDefaultJobPost>):CombinedJobResultDefaultJobPost
-	export function emptyReconciliationReferralAccountResp():ReconciliationReferralAccountResp
-	export function emptyRefReconciliationReferralAccountResp():Ref<ReconciliationReferralAccountResp>
-	export function refOfReconciliationReferralAccountResp(x:ReconciliationReferralAccountResp,v:Ref<ReconciliationReferralAccountResp>)
-	export function unRefReconciliationReferralAccountResp(v:Ref<ReconciliationReferralAccountResp>):ReconciliationReferralAccountResp
-	export function emptyApplicationJobAddress():ApplicationJobAddress
-	export function emptyRefApplicationJobAddress():Ref<ApplicationJobAddress>
-	export function refOfApplicationJobAddress(x:ApplicationJobAddress,v:Ref<ApplicationJobAddress>)
-	export function unRefApplicationJobAddress(v:Ref<ApplicationJobAddress>):ApplicationJobAddress
-	export function emptyApplicationTalentWorksInfo():ApplicationTalentWorksInfo
-	export function emptyRefApplicationTalentWorksInfo():Ref<ApplicationTalentWorksInfo>
-	export function refOfApplicationTalentWorksInfo(x:ApplicationTalentWorksInfo,v:Ref<ApplicationTalentWorksInfo>)
-	export function unRefApplicationTalentWorksInfo(v:Ref<ApplicationTalentWorksInfo>):ApplicationTalentWorksInfo
-	export function emptyJobProcess():JobProcess
-	export function emptyRefJobProcess():Ref<JobProcess>
-	export function refOfJobProcess(x:JobProcess,v:Ref<JobProcess>)
-	export function unRefJobProcess(v:Ref<JobProcess>):JobProcess
-	export function emptyPoint():Point
-	export function emptyRefPoint():Ref<Point>
-	export function refOfPoint(x:Point,v:Ref<Point>)
-	export function unRefPoint(v:Ref<Point>):Point
-	export function emptyP2OfferStatusChangedV1():P2OfferStatusChangedV1
-	export function emptyRefP2OfferStatusChangedV1():Ref<P2OfferStatusChangedV1>
-	export function refOfP2OfferStatusChangedV1(x:P2OfferStatusChangedV1,v:Ref<P2OfferStatusChangedV1>)
-	export function unRefP2OfferStatusChangedV1(v:Ref<P2OfferStatusChangedV1>):P2OfferStatusChangedV1
-	export function emptySnsInfo():SnsInfo
-	export function emptyRefSnsInfo():Ref<SnsInfo>
-	export function refOfSnsInfo(x:SnsInfo,v:Ref<SnsInfo>)
-	export function unRefSnsInfo(v:Ref<SnsInfo>):SnsInfo
-	export function emptyApplicationTalentAwardInfo():ApplicationTalentAwardInfo
-	export function emptyRefApplicationTalentAwardInfo():Ref<ApplicationTalentAwardInfo>
-	export function refOfApplicationTalentAwardInfo(x:ApplicationTalentAwardInfo,v:Ref<ApplicationTalentAwardInfo>)
-	export function unRefApplicationTalentAwardInfo(v:Ref<ApplicationTalentAwardInfo>):ApplicationTalentAwardInfo
-	export function emptyListRegistrationSchemaIterator():ListRegistrationSchemaIterator
-	export function emptyRefListRegistrationSchemaIterator():Ref<ListRegistrationSchemaIterator>
-	export function refOfListRegistrationSchemaIterator(x:ListRegistrationSchemaIterator,v:Ref<ListRegistrationSchemaIterator>)
-	export function unRefListRegistrationSchemaIterator(v:Ref<ListRegistrationSchemaIterator>):ListRegistrationSchemaIterator
-	export function emptyPermissionCollection():PermissionCollection
-	export function emptyRefPermissionCollection():Ref<PermissionCollection>
-	export function refOfPermissionCollection(x:PermissionCollection,v:Ref<PermissionCollection>)
-	export function unRefPermissionCollection(v:Ref<PermissionCollection>):PermissionCollection
-	export function emptySiteResumeAward():SiteResumeAward
-	export function emptyRefSiteResumeAward():Ref<SiteResumeAward>
-	export function refOfSiteResumeAward(x:SiteResumeAward,v:Ref<SiteResumeAward>)
-	export function unRefSiteResumeAward(v:Ref<SiteResumeAward>):SiteResumeAward
-	export function emptyWebsiteChannelInfo():WebsiteChannelInfo
-	export function emptyRefWebsiteChannelInfo():Ref<WebsiteChannelInfo>
-	export function refOfWebsiteChannelInfo(x:WebsiteChannelInfo,v:Ref<WebsiteChannelInfo>)
-	export function unRefWebsiteChannelInfo(v:Ref<WebsiteChannelInfo>):WebsiteChannelInfo
-	export function emptyAssessmentScoreInfo():AssessmentScoreInfo
-	export function emptyRefAssessmentScoreInfo():Ref<AssessmentScoreInfo>
-	export function refOfAssessmentScoreInfo(x:AssessmentScoreInfo,v:Ref<AssessmentScoreInfo>)
-	export function unRefAssessmentScoreInfo(v:Ref<AssessmentScoreInfo>):AssessmentScoreInfo
-	export function emptyBusinessManagementScope():BusinessManagementScope
-	export function emptyRefBusinessManagementScope():Ref<BusinessManagementScope>
-	export function refOfBusinessManagementScope(x:BusinessManagementScope,v:Ref<BusinessManagementScope>)
-	export function unRefBusinessManagementScope(v:Ref<BusinessManagementScope>):BusinessManagementScope
-	export function emptyOfferApprovalTemplate():OfferApprovalTemplate
-	export function emptyRefOfferApprovalTemplate():Ref<OfferApprovalTemplate>
-	export function refOfOfferApprovalTemplate(x:OfferApprovalTemplate,v:Ref<OfferApprovalTemplate>)
-	export function unRefOfferApprovalTemplate(v:Ref<OfferApprovalTemplate>):OfferApprovalTemplate
-	export function emptyUpdateOfferRespData():UpdateOfferRespData
-	export function emptyRefUpdateOfferRespData():Ref<UpdateOfferRespData>
-	export function refOfUpdateOfferRespData(x:UpdateOfferRespData,v:Ref<UpdateOfferRespData>)
-	export function unRefUpdateOfferRespData(v:Ref<UpdateOfferRespData>):UpdateOfferRespData
-	export function emptyListRegistrationSchemaRespData():ListRegistrationSchemaRespData
-	export function emptyRefListRegistrationSchemaRespData():Ref<ListRegistrationSchemaRespData>
-	export function refOfListRegistrationSchemaRespData(x:ListRegistrationSchemaRespData,v:Ref<ListRegistrationSchemaRespData>)
-	export function unRefListRegistrationSchemaRespData(v:Ref<ListRegistrationSchemaRespData>):ListRegistrationSchemaRespData
-	export function emptyListJobTypeIterator():ListJobTypeIterator
-	export function emptyRefListJobTypeIterator():Ref<ListJobTypeIterator>
-	export function refOfListJobTypeIterator(x:ListJobTypeIterator,v:Ref<ListJobTypeIterator>)
-	export function unRefListJobTypeIterator(v:Ref<ListJobTypeIterator>):ListJobTypeIterator
-	export function emptyEcoBackgroundCheckCustomFieldData():EcoBackgroundCheckCustomFieldData
-	export function emptyRefEcoBackgroundCheckCustomFieldData():Ref<EcoBackgroundCheckCustomFieldData>
-	export function refOfEcoBackgroundCheckCustomFieldData(x:EcoBackgroundCheckCustomFieldData,v:Ref<EcoBackgroundCheckCustomFieldData>)
-	export function unRefEcoBackgroundCheckCustomFieldData(v:Ref<EcoBackgroundCheckCustomFieldData>):EcoBackgroundCheckCustomFieldData
-	export function emptyOfferApplyForm():OfferApplyForm
-	export function emptyRefOfferApplyForm():Ref<OfferApplyForm>
-	export function refOfOfferApplyForm(x:OfferApplyForm,v:Ref<OfferApplyForm>)
-	export function unRefOfferApplyForm(v:Ref<OfferApplyForm>):OfferApplyForm
-	export function emptySiteJobPost():SiteJobPost
-	export function emptyRefSiteJobPost():Ref<SiteJobPost>
-	export function refOfSiteJobPost(x:SiteJobPost,v:Ref<SiteJobPost>)
-	export function unRefSiteJobPost(v:Ref<SiteJobPost>):SiteJobPost
-	export function emptyApplicationOfferCustomModule():ApplicationOfferCustomModule
-	export function emptyRefApplicationOfferCustomModule():Ref<ApplicationOfferCustomModule>
-	export function refOfApplicationOfferCustomModule(x:ApplicationOfferCustomModule,v:Ref<ApplicationOfferCustomModule>)
-	export function unRefApplicationOfferCustomModule(v:Ref<ApplicationOfferCustomModule>):ApplicationOfferCustomModule
-	export function emptyCreateOfferResp():CreateOfferResp
-	export function emptyRefCreateOfferResp():Ref<CreateOfferResp>
-	export function refOfCreateOfferResp(x:CreateOfferResp,v:Ref<CreateOfferResp>)
-	export function unRefCreateOfferResp(v:Ref<CreateOfferResp>):CreateOfferResp
-	export function emptySiteJobPostSearchInfo():SiteJobPostSearchInfo
-	export function emptyRefSiteJobPostSearchInfo():Ref<SiteJobPostSearchInfo>
-	export function refOfSiteJobPostSearchInfo(x:SiteJobPostSearchInfo,v:Ref<SiteJobPostSearchInfo>)
-	export function unRefSiteJobPostSearchInfo(v:Ref<SiteJobPostSearchInfo>):SiteJobPostSearchInfo
-	export function emptyTransferOnboardApplicationReqBody():TransferOnboardApplicationReqBody
-	export function emptyRefTransferOnboardApplicationReqBody():Ref<TransferOnboardApplicationReqBody>
-	export function refOfTransferOnboardApplicationReqBody(x:TransferOnboardApplicationReqBody,v:Ref<TransferOnboardApplicationReqBody>)
-	export function unRefTransferOnboardApplicationReqBody(v:Ref<TransferOnboardApplicationReqBody>):TransferOnboardApplicationReqBody
-	export function emptyCancelEcoBackgroundCheckReq():CancelEcoBackgroundCheckReq
-	export function emptyRefCancelEcoBackgroundCheckReq():Ref<CancelEcoBackgroundCheckReq>
-	export function refOfCancelEcoBackgroundCheckReq(x:CancelEcoBackgroundCheckReq,v:Ref<CancelEcoBackgroundCheckReq>)
-	export function unRefCancelEcoBackgroundCheckReq(v:Ref<CancelEcoBackgroundCheckReq>):CancelEcoBackgroundCheckReq
-	export function emptyDeactivateReferralAccountResp():DeactivateReferralAccountResp
-	export function emptyRefDeactivateReferralAccountResp():Ref<DeactivateReferralAccountResp>
-	export function refOfDeactivateReferralAccountResp(x:DeactivateReferralAccountResp,v:Ref<DeactivateReferralAccountResp>)
-	export function unRefDeactivateReferralAccountResp(v:Ref<DeactivateReferralAccountResp>):DeactivateReferralAccountResp
-	export function emptyOfferInfo():OfferInfo
-	export function emptyRefOfferInfo():Ref<OfferInfo>
-	export function refOfOfferInfo(x:OfferInfo,v:Ref<OfferInfo>)
-	export function unRefOfferInfo(v:Ref<OfferInfo>):OfferInfo
-	export function emptyTerminateApplicationReqBody():TerminateApplicationReqBody
-	export function emptyRefTerminateApplicationReqBody():Ref<TerminateApplicationReqBody>
-	export function refOfTerminateApplicationReqBody(x:TerminateApplicationReqBody,v:Ref<TerminateApplicationReqBody>)
-	export function unRefTerminateApplicationReqBody(v:Ref<TerminateApplicationReqBody>):TerminateApplicationReqBody
-	export function emptyUpdateResultEcoExamResp():UpdateResultEcoExamResp
-	export function emptyRefUpdateResultEcoExamResp():Ref<UpdateResultEcoExamResp>
-	export function refOfUpdateResultEcoExamResp(x:UpdateResultEcoExamResp,v:Ref<UpdateResultEcoExamResp>)
-	export function unRefUpdateResultEcoExamResp(v:Ref<UpdateResultEcoExamResp>):UpdateResultEcoExamResp
-	export function emptyEcoBackgroundCheckCreateEventContactInfo():EcoBackgroundCheckCreateEventContactInfo
-	export function emptyRefEcoBackgroundCheckCreateEventContactInfo():Ref<EcoBackgroundCheckCreateEventContactInfo>
-	export function refOfEcoBackgroundCheckCreateEventContactInfo(x:EcoBackgroundCheckCreateEventContactInfo,v:Ref<EcoBackgroundCheckCreateEventContactInfo>)
-	export function unRefEcoBackgroundCheckCreateEventContactInfo(v:Ref<EcoBackgroundCheckCreateEventContactInfo>):EcoBackgroundCheckCreateEventContactInfo
-	export function emptyWebsiteDelivery():WebsiteDelivery
-	export function emptyRefWebsiteDelivery():Ref<WebsiteDelivery>
-	export function refOfWebsiteDelivery(x:WebsiteDelivery,v:Ref<WebsiteDelivery>)
-	export function unRefWebsiteDelivery(v:Ref<WebsiteDelivery>):WebsiteDelivery
-	export function emptySequence():Sequence
-	export function emptyRefSequence():Ref<Sequence>
-	export function refOfSequence(x:Sequence,v:Ref<Sequence>)
-	export function unRefSequence(v:Ref<Sequence>):Sequence
-	export function emptyGetByApplicationReferralRespData():GetByApplicationReferralRespData
-	export function emptyRefGetByApplicationReferralRespData():Ref<GetByApplicationReferralRespData>
-	export function refOfGetByApplicationReferralRespData(x:GetByApplicationReferralRespData,v:Ref<GetByApplicationReferralRespData>)
-	export function unRefGetByApplicationReferralRespData(v:Ref<GetByApplicationReferralRespData>):GetByApplicationReferralRespData
-	export function emptyInterview():Interview
-	export function emptyRefInterview():Ref<Interview>
-	export function refOfInterview(x:Interview,v:Ref<Interview>)
-	export function unRefInterview(v:Ref<Interview>):Interview
-	export function emptySite():Site
-	export function emptyRefSite():Ref<Site>
-	export function refOfSite(x:Site,v:Ref<Site>)
-	export function unRefSite(v:Ref<Site>):Site
-	export function emptyBackgroundCheckOrderProcessInfo():BackgroundCheckOrderProcessInfo
-	export function emptyRefBackgroundCheckOrderProcessInfo():Ref<BackgroundCheckOrderProcessInfo>
-	export function refOfBackgroundCheckOrderProcessInfo(x:BackgroundCheckOrderProcessInfo,v:Ref<BackgroundCheckOrderProcessInfo>)
-	export function unRefBackgroundCheckOrderProcessInfo(v:Ref<BackgroundCheckOrderProcessInfo>):BackgroundCheckOrderProcessInfo
-	export function emptyDataPermission():DataPermission
-	export function emptyRefDataPermission():Ref<DataPermission>
-	export function refOfDataPermission(x:DataPermission,v:Ref<DataPermission>)
-	export function unRefDataPermission(v:Ref<DataPermission>):DataPermission
-	export function emptyLocation():Location
-	export function emptyRefLocation():Ref<Location>
-	export function refOfLocation(x:Location,v:Ref<Location>)
-	export function unRefLocation(v:Ref<Location>):Location
-	export function emptyWithdrawReferralAccountReqBody():WithdrawReferralAccountReqBody
-	export function emptyRefWithdrawReferralAccountReqBody():Ref<WithdrawReferralAccountReqBody>
-	export function refOfWithdrawReferralAccountReqBody(x:WithdrawReferralAccountReqBody,v:Ref<WithdrawReferralAccountReqBody>)
-	export function unRefWithdrawReferralAccountReqBody(v:Ref<WithdrawReferralAccountReqBody>):WithdrawReferralAccountReqBody
-	export function emptyCombinedCreateJobReq():CombinedCreateJobReq
-	export function emptyRefCombinedCreateJobReq():Ref<CombinedCreateJobReq>
-	export function refOfCombinedCreateJobReq(x:CombinedCreateJobReq,v:Ref<CombinedCreateJobReq>)
-	export function unRefCombinedCreateJobReq(v:Ref<CombinedCreateJobReq>):CombinedCreateJobReq
-	export function emptyCreateReferralAccountReqBody():CreateReferralAccountReqBody
-	export function emptyRefCreateReferralAccountReqBody():Ref<CreateReferralAccountReqBody>
-	export function refOfCreateReferralAccountReqBody(x:CreateReferralAccountReqBody,v:Ref<CreateReferralAccountReqBody>)
-	export function unRefCreateReferralAccountReqBody(v:Ref<CreateReferralAccountReqBody>):CreateReferralAccountReqBody
-	export function emptyPatchEhrImportTaskReq():PatchEhrImportTaskReq
-	export function emptyRefPatchEhrImportTaskReq():Ref<PatchEhrImportTaskReq>
-	export function refOfPatchEhrImportTaskReq(x:PatchEhrImportTaskReq,v:Ref<PatchEhrImportTaskReq>)
-	export function unRefPatchEhrImportTaskReq(v:Ref<PatchEhrImportTaskReq>):PatchEhrImportTaskReq
-	export function emptyTalentPool():TalentPool
-	export function emptyRefTalentPool():Ref<TalentPool>
-	export function refOfTalentPool(x:TalentPool,v:Ref<TalentPool>)
-	export function unRefTalentPool(v:Ref<TalentPool>):TalentPool
-	export function emptyRoleDetail():RoleDetail
-	export function emptyRefRoleDetail():Ref<RoleDetail>
-	export function refOfRoleDetail(x:RoleDetail,v:Ref<RoleDetail>)
-	export function unRefRoleDetail(v:Ref<RoleDetail>):RoleDetail
-	export function emptyTalentCustomizedAttachment():TalentCustomizedAttachment
-	export function emptyRefTalentCustomizedAttachment():Ref<TalentCustomizedAttachment>
-	export function refOfTalentCustomizedAttachment(x:TalentCustomizedAttachment,v:Ref<TalentCustomizedAttachment>)
-	export function unRefTalentCustomizedAttachment(v:Ref<TalentCustomizedAttachment>):TalentCustomizedAttachment
-	export function emptyCancelEcoBackgroundCheckReqBody():CancelEcoBackgroundCheckReqBody
-	export function emptyRefCancelEcoBackgroundCheckReqBody():Ref<CancelEcoBackgroundCheckReqBody>
-	export function refOfCancelEcoBackgroundCheckReqBody(x:CancelEcoBackgroundCheckReqBody,v:Ref<CancelEcoBackgroundCheckReqBody>)
-	export function unRefCancelEcoBackgroundCheckReqBody(v:Ref<CancelEcoBackgroundCheckReqBody>):CancelEcoBackgroundCheckReqBody
-	export function emptyCombinedUpdateJobResp():CombinedUpdateJobResp
-	export function emptyRefCombinedUpdateJobResp():Ref<CombinedUpdateJobResp>
-	export function refOfCombinedUpdateJobResp(x:CombinedUpdateJobResp,v:Ref<CombinedUpdateJobResp>)
-	export function unRefCombinedUpdateJobResp(v:Ref<CombinedUpdateJobResp>):CombinedUpdateJobResp
-	export function emptyBatchUpdateEcoAccountCustomFieldReq():BatchUpdateEcoAccountCustomFieldReq
-	export function emptyRefBatchUpdateEcoAccountCustomFieldReq():Ref<BatchUpdateEcoAccountCustomFieldReq>
-	export function refOfBatchUpdateEcoAccountCustomFieldReq(x:BatchUpdateEcoAccountCustomFieldReq,v:Ref<BatchUpdateEcoAccountCustomFieldReq>)
-	export function unRefBatchUpdateEcoAccountCustomFieldReq(v:Ref<BatchUpdateEcoAccountCustomFieldReq>):BatchUpdateEcoAccountCustomFieldReq
-	export function emptyWebsiteUser():WebsiteUser
-	export function emptyRefWebsiteUser():Ref<WebsiteUser>
-	export function refOfWebsiteUser(x:WebsiteUser,v:Ref<WebsiteUser>)
-	export function unRefWebsiteUser(v:Ref<WebsiteUser>):WebsiteUser
-	export function emptyApplicationReferral():ApplicationReferral
-	export function emptyRefApplicationReferral():Ref<ApplicationReferral>
-	export function refOfApplicationReferral(x:ApplicationReferral,v:Ref<ApplicationReferral>)
-	export function unRefApplicationReferral(v:Ref<ApplicationReferral>):ApplicationReferral
-	export function emptyWebsiteJobPost():WebsiteJobPost
-	export function emptyRefWebsiteJobPost():Ref<WebsiteJobPost>
-	export function refOfWebsiteJobPost(x:WebsiteJobPost,v:Ref<WebsiteJobPost>)
-	export function unRefWebsiteJobPost(v:Ref<WebsiteJobPost>):WebsiteJobPost
-	export function emptyBonusAmount():BonusAmount
-	export function emptyRefBonusAmount():Ref<BonusAmount>
-	export function refOfBonusAmount(x:BonusAmount,v:Ref<BonusAmount>)
-	export function unRefBonusAmount(v:Ref<BonusAmount>):BonusAmount
-	export function emptyListInterviewRespData():ListInterviewRespData
-	export function emptyRefListInterviewRespData():Ref<ListInterviewRespData>
-	export function refOfListInterviewRespData(x:ListInterviewRespData,v:Ref<ListInterviewRespData>)
-	export function unRefListInterviewRespData(v:Ref<ListInterviewRespData>):ListInterviewRespData
-	export function emptyPreviewAttachmentResp():PreviewAttachmentResp
-	export function emptyRefPreviewAttachmentResp():Ref<PreviewAttachmentResp>
-	export function refOfPreviewAttachmentResp(x:PreviewAttachmentResp,v:Ref<PreviewAttachmentResp>)
-	export function unRefPreviewAttachmentResp(v:Ref<PreviewAttachmentResp>):PreviewAttachmentResp
-	export function emptyWebsiteDeliveryDto():WebsiteDeliveryDto
-	export function emptyRefWebsiteDeliveryDto():Ref<WebsiteDeliveryDto>
-	export function refOfWebsiteDeliveryDto(x:WebsiteDeliveryDto,v:Ref<WebsiteDeliveryDto>)
-	export function unRefWebsiteDeliveryDto(v:Ref<WebsiteDeliveryDto>):WebsiteDeliveryDto
-	export function emptyOfferApplyFormModuleInfo():OfferApplyFormModuleInfo
-	export function emptyRefOfferApplyFormModuleInfo():Ref<OfferApplyFormModuleInfo>
-	export function refOfOfferApplyFormModuleInfo(x:OfferApplyFormModuleInfo,v:Ref<OfferApplyFormModuleInfo>)
-	export function unRefOfferApplyFormModuleInfo(v:Ref<OfferApplyFormModuleInfo>):OfferApplyFormModuleInfo
-	export function emptyOfferSchemaDetailOption():OfferSchemaDetailOption
-	export function emptyRefOfferSchemaDetailOption():Ref<OfferSchemaDetailOption>
-	export function refOfOfferSchemaDetailOption(x:OfferSchemaDetailOption,v:Ref<OfferSchemaDetailOption>)
-	export function unRefOfferSchemaDetailOption(v:Ref<OfferSchemaDetailOption>):OfferSchemaDetailOption
-	export function emptyBatchDeleteEcoBackgroundCheckCustomFieldReq():BatchDeleteEcoBackgroundCheckCustomFieldReq
-	export function emptyRefBatchDeleteEcoBackgroundCheckCustomFieldReq():Ref<BatchDeleteEcoBackgroundCheckCustomFieldReq>
-	export function refOfBatchDeleteEcoBackgroundCheckCustomFieldReq(x:BatchDeleteEcoBackgroundCheckCustomFieldReq,v:Ref<BatchDeleteEcoBackgroundCheckCustomFieldReq>)
-	export function unRefBatchDeleteEcoBackgroundCheckCustomFieldReq(v:Ref<BatchDeleteEcoBackgroundCheckCustomFieldReq>):BatchDeleteEcoBackgroundCheckCustomFieldReq
-	export function emptyPatchEhrImportTaskResp():PatchEhrImportTaskResp
-	export function emptyRefPatchEhrImportTaskResp():Ref<PatchEhrImportTaskResp>
-	export function refOfPatchEhrImportTaskResp(x:PatchEhrImportTaskResp,v:Ref<PatchEhrImportTaskResp>)
-	export function unRefPatchEhrImportTaskResp(v:Ref<PatchEhrImportTaskResp>):PatchEhrImportTaskResp
-	export function emptyTestResultDetail():TestResultDetail
-	export function emptyRefTestResultDetail():Ref<TestResultDetail>
-	export function refOfTestResultDetail(x:TestResultDetail,v:Ref<TestResultDetail>)
-	export function unRefTestResultDetail(v:Ref<TestResultDetail>):TestResultDetail
-	export function emptyProviderIdNameObject():ProviderIdNameObject
-	export function emptyRefProviderIdNameObject():Ref<ProviderIdNameObject>
-	export function refOfProviderIdNameObject(x:ProviderIdNameObject,v:Ref<ProviderIdNameObject>)
-	export function unRefProviderIdNameObject(v:Ref<ProviderIdNameObject>):ProviderIdNameObject
-	export function emptySiteResumeEducation():SiteResumeEducation
-	export function emptyRefSiteResumeEducation():Ref<SiteResumeEducation>
-	export function refOfSiteResumeEducation(x:SiteResumeEducation,v:Ref<SiteResumeEducation>)
-	export function unRefSiteResumeEducation(v:Ref<SiteResumeEducation>):SiteResumeEducation
-	export function emptyCancelEcoBackgroundCheckResp():CancelEcoBackgroundCheckResp
-	export function emptyRefCancelEcoBackgroundCheckResp():Ref<CancelEcoBackgroundCheckResp>
-	export function refOfCancelEcoBackgroundCheckResp(x:CancelEcoBackgroundCheckResp,v:Ref<CancelEcoBackgroundCheckResp>)
-	export function unRefCancelEcoBackgroundCheckResp(v:Ref<CancelEcoBackgroundCheckResp>):CancelEcoBackgroundCheckResp
-	export function emptyGetOfferReq():GetOfferReq
-	export function emptyRefGetOfferReq():Ref<GetOfferReq>
-	export function refOfGetOfferReq(x:GetOfferReq,v:Ref<GetOfferReq>)
-	export function unRefGetOfferReq(v:Ref<GetOfferReq>):GetOfferReq
-	export function emptyOfferSelectionObject():OfferSelectionObject
-	export function emptyRefOfferSelectionObject():Ref<OfferSelectionObject>
-	export function refOfOfferSelectionObject(x:OfferSelectionObject,v:Ref<OfferSelectionObject>)
-	export function unRefOfferSelectionObject(v:Ref<OfferSelectionObject>):OfferSelectionObject
-	export function emptyApplicationOfferOnboardProfileCity():ApplicationOfferOnboardProfileCity
-	export function emptyRefApplicationOfferOnboardProfileCity():Ref<ApplicationOfferOnboardProfileCity>
-	export function refOfApplicationOfferOnboardProfileCity(x:ApplicationOfferOnboardProfileCity,v:Ref<ApplicationOfferOnboardProfileCity>)
-	export function unRefApplicationOfferOnboardProfileCity(v:Ref<ApplicationOfferOnboardProfileCity>):ApplicationOfferOnboardProfileCity
-	export function emptyBatchUpdateEcoExamPaperReq():BatchUpdateEcoExamPaperReq
-	export function emptyRefBatchUpdateEcoExamPaperReq():Ref<BatchUpdateEcoExamPaperReq>
-	export function refOfBatchUpdateEcoExamPaperReq(x:BatchUpdateEcoExamPaperReq,v:Ref<BatchUpdateEcoExamPaperReq>)
-	export function unRefBatchUpdateEcoExamPaperReq(v:Ref<BatchUpdateEcoExamPaperReq>):BatchUpdateEcoExamPaperReq
-	export function emptyTalentCustomizedDataObjectValue():TalentCustomizedDataObjectValue
-	export function emptyRefTalentCustomizedDataObjectValue():Ref<TalentCustomizedDataObjectValue>
-	export function refOfTalentCustomizedDataObjectValue(x:TalentCustomizedDataObjectValue,v:Ref<TalentCustomizedDataObjectValue>)
-	export function unRefTalentCustomizedDataObjectValue(v:Ref<TalentCustomizedDataObjectValue>):TalentCustomizedDataObjectValue
-	export function emptyJobRequirement():JobRequirement
-	export function emptyRefJobRequirement():Ref<JobRequirement>
-	export function refOfJobRequirement(x:JobRequirement,v:Ref<JobRequirement>)
-	export function unRefJobRequirement(v:Ref<JobRequirement>):JobRequirement
-	export function emptyPreviewAttachmentReq():PreviewAttachmentReq
-	export function emptyRefPreviewAttachmentReq():Ref<PreviewAttachmentReq>
-	export function refOfPreviewAttachmentReq(x:PreviewAttachmentReq,v:Ref<PreviewAttachmentReq>)
-	export function unRefPreviewAttachmentReq(v:Ref<PreviewAttachmentReq>):PreviewAttachmentReq
-	export function emptyTalentCombinedWorkInfo():TalentCombinedWorkInfo
-	export function emptyRefTalentCombinedWorkInfo():Ref<TalentCombinedWorkInfo>
-	export function refOfTalentCombinedWorkInfo(x:TalentCombinedWorkInfo,v:Ref<TalentCombinedWorkInfo>)
-	export function unRefTalentCombinedWorkInfo(v:Ref<TalentCombinedWorkInfo>):TalentCombinedWorkInfo
-	export function emptyCombinedJobObjectValueMap():CombinedJobObjectValueMap
-	export function emptyRefCombinedJobObjectValueMap():Ref<CombinedJobObjectValueMap>
-	export function refOfCombinedJobObjectValueMap(x:CombinedJobObjectValueMap,v:Ref<CombinedJobObjectValueMap>)
-	export function unRefCombinedJobObjectValueMap(v:Ref<CombinedJobObjectValueMap>):CombinedJobObjectValueMap
-	export function emptyEcoAccountCustomField():EcoAccountCustomField
-	export function emptyRefEcoAccountCustomField():Ref<EcoAccountCustomField>
-	export function refOfEcoAccountCustomField(x:EcoAccountCustomField,v:Ref<EcoAccountCustomField>)
-	export function unRefEcoAccountCustomField(v:Ref<EcoAccountCustomField>):EcoAccountCustomField
-	export function emptyEcoExamCreateEventMobile():EcoExamCreateEventMobile
-	export function emptyRefEcoExamCreateEventMobile():Ref<EcoExamCreateEventMobile>
-	export function refOfEcoExamCreateEventMobile(x:EcoExamCreateEventMobile,v:Ref<EcoExamCreateEventMobile>)
-	export function unRefEcoExamCreateEventMobile(v:Ref<EcoExamCreateEventMobile>):EcoExamCreateEventMobile
-	export function emptyEcoExamResultDetail():EcoExamResultDetail
-	export function emptyRefEcoExamResultDetail():Ref<EcoExamResultDetail>
-	export function refOfEcoExamResultDetail(x:EcoExamResultDetail,v:Ref<EcoExamResultDetail>)
-	export function unRefEcoExamResultDetail(v:Ref<EcoExamResultDetail>):EcoExamResultDetail
-	export function emptyApplicationTalentCertificateInfo():ApplicationTalentCertificateInfo
-	export function emptyRefApplicationTalentCertificateInfo():Ref<ApplicationTalentCertificateInfo>
-	export function refOfApplicationTalentCertificateInfo(x:ApplicationTalentCertificateInfo,v:Ref<ApplicationTalentCertificateInfo>)
-	export function unRefApplicationTalentCertificateInfo(v:Ref<ApplicationTalentCertificateInfo>):ApplicationTalentCertificateInfo
-	export function emptyGetByApplicationEmployeeRespData():GetByApplicationEmployeeRespData
-	export function emptyRefGetByApplicationEmployeeRespData():Ref<GetByApplicationEmployeeRespData>
-	export function refOfGetByApplicationEmployeeRespData(x:GetByApplicationEmployeeRespData,v:Ref<GetByApplicationEmployeeRespData>)
-	export function unRefGetByApplicationEmployeeRespData(v:Ref<GetByApplicationEmployeeRespData>):GetByApplicationEmployeeRespData
-	export function emptyJobLevel():JobLevel
-	export function emptyRefJobLevel():Ref<JobLevel>
-	export function refOfJobLevel(x:JobLevel,v:Ref<JobLevel>)
-	export function unRefJobLevel(v:Ref<JobLevel>):JobLevel
-	export function emptyLanguageInfo():LanguageInfo
-	export function emptyRefLanguageInfo():Ref<LanguageInfo>
-	export function refOfLanguageInfo(x:LanguageInfo,v:Ref<LanguageInfo>)
-	export function unRefLanguageInfo(v:Ref<LanguageInfo>):LanguageInfo
-	export function emptyListNoteRespData():ListNoteRespData
-	export function emptyRefListNoteRespData():Ref<ListNoteRespData>
-	export function refOfListNoteRespData(x:ListNoteRespData,v:Ref<ListNoteRespData>)
-	export function unRefListNoteRespData(v:Ref<ListNoteRespData>):ListNoteRespData
-	export function emptyTalentBatchInfo():TalentBatchInfo
-	export function emptyRefTalentBatchInfo():Ref<TalentBatchInfo>
-	export function refOfTalentBatchInfo(x:TalentBatchInfo,v:Ref<TalentBatchInfo>)
-	export function unRefTalentBatchInfo(v:Ref<TalentBatchInfo>):TalentBatchInfo
-	export function emptyWebsite():Website
-	export function emptyRefWebsite():Ref<Website>
-	export function refOfWebsite(x:Website,v:Ref<Website>)
-	export function unRefWebsite(v:Ref<Website>):Website
-	export function emptyWebsiteDeliveryCertificate():WebsiteDeliveryCertificate
-	export function emptyRefWebsiteDeliveryCertificate():Ref<WebsiteDeliveryCertificate>
-	export function refOfWebsiteDeliveryCertificate(x:WebsiteDeliveryCertificate,v:Ref<WebsiteDeliveryCertificate>)
-	export function unRefWebsiteDeliveryCertificate(v:Ref<WebsiteDeliveryCertificate>):WebsiteDeliveryCertificate
-	export function emptyCreateExternalInterviewAssessmentRespData():CreateExternalInterviewAssessmentRespData
-	export function emptyRefCreateExternalInterviewAssessmentRespData():Ref<CreateExternalInterviewAssessmentRespData>
-	export function refOfCreateExternalInterviewAssessmentRespData(x:CreateExternalInterviewAssessmentRespData,v:Ref<CreateExternalInterviewAssessmentRespData>)
-	export function unRefCreateExternalInterviewAssessmentRespData(v:Ref<CreateExternalInterviewAssessmentRespData>):CreateExternalInterviewAssessmentRespData
-	export function emptyInterviewExtend():InterviewExtend
-	export function emptyRefInterviewExtend():Ref<InterviewExtend>
-	export function refOfInterviewExtend(x:InterviewExtend,v:Ref<InterviewExtend>)
-	export function unRefInterviewExtend(v:Ref<InterviewExtend>):InterviewExtend
-	export function emptyListJobReq():ListJobReq
-	export function emptyRefListJobReq():Ref<ListJobReq>
-	export function refOfListJobReq(x:ListJobReq,v:Ref<ListJobReq>)
-	export function unRefListJobReq(v:Ref<ListJobReq>):ListJobReq
-	export function emptyListApplicationResp():ListApplicationResp
-	export function emptyRefListApplicationResp():Ref<ListApplicationResp>
-	export function refOfListApplicationResp(x:ListApplicationResp,v:Ref<ListApplicationResp>)
-	export function unRefListApplicationResp(v:Ref<ListApplicationResp>):ListApplicationResp
-	export function emptyRegistrationInfo():RegistrationInfo
-	export function emptyRefRegistrationInfo():Ref<RegistrationInfo>
-	export function refOfRegistrationInfo(x:RegistrationInfo,v:Ref<RegistrationInfo>)
-	export function unRefRegistrationInfo(v:Ref<RegistrationInfo>):RegistrationInfo
-	export function emptyApplicationTalentBasicInfo():ApplicationTalentBasicInfo
-	export function emptyRefApplicationTalentBasicInfo():Ref<ApplicationTalentBasicInfo>
-	export function refOfApplicationTalentBasicInfo(x:ApplicationTalentBasicInfo,v:Ref<ApplicationTalentBasicInfo>)
-	export function unRefApplicationTalentBasicInfo(v:Ref<ApplicationTalentBasicInfo>):ApplicationTalentBasicInfo
-	export function emptyEcoBackgroundCheckPackageData():EcoBackgroundCheckPackageData
-	export function emptyRefEcoBackgroundCheckPackageData():Ref<EcoBackgroundCheckPackageData>
-	export function refOfEcoBackgroundCheckPackageData(x:EcoBackgroundCheckPackageData,v:Ref<EcoBackgroundCheckPackageData>)
-	export function unRefEcoBackgroundCheckPackageData(v:Ref<EcoBackgroundCheckPackageData>):EcoBackgroundCheckPackageData
-	export function emptyTalentSchemaOption():TalentSchemaOption
-	export function emptyRefTalentSchemaOption():Ref<TalentSchemaOption>
-	export function refOfTalentSchemaOption(x:TalentSchemaOption,v:Ref<TalentSchemaOption>)
-	export function unRefTalentSchemaOption(v:Ref<TalentSchemaOption>):TalentSchemaOption
-	export function emptyUpdateResultEcoBackgroundCheckResp():UpdateResultEcoBackgroundCheckResp
-	export function emptyRefUpdateResultEcoBackgroundCheckResp():Ref<UpdateResultEcoBackgroundCheckResp>
-	export function refOfUpdateResultEcoBackgroundCheckResp(x:UpdateResultEcoBackgroundCheckResp,v:Ref<UpdateResultEcoBackgroundCheckResp>)
-	export function unRefUpdateResultEcoBackgroundCheckResp(v:Ref<UpdateResultEcoBackgroundCheckResp>):UpdateResultEcoBackgroundCheckResp
-	export function emptyOfferSchema():OfferSchema
-	export function emptyRefOfferSchema():Ref<OfferSchema>
-	export function refOfOfferSchema(x:OfferSchema,v:Ref<OfferSchema>)
-	export function unRefOfferSchema(v:Ref<OfferSchema>):OfferSchema
-	export function emptyOfferApplyFormObjectDisplayConfigInfo():OfferApplyFormObjectDisplayConfigInfo
-	export function emptyRefOfferApplyFormObjectDisplayConfigInfo():Ref<OfferApplyFormObjectDisplayConfigInfo>
-	export function refOfOfferApplyFormObjectDisplayConfigInfo(x:OfferApplyFormObjectDisplayConfigInfo,v:Ref<OfferApplyFormObjectDisplayConfigInfo>)
-	export function unRefOfferApplyFormObjectDisplayConfigInfo(v:Ref<OfferApplyFormObjectDisplayConfigInfo>):OfferApplyFormObjectDisplayConfigInfo
-	export function emptyApplicationOfferSalaryPlan():ApplicationOfferSalaryPlan
-	export function emptyRefApplicationOfferSalaryPlan():Ref<ApplicationOfferSalaryPlan>
-	export function refOfApplicationOfferSalaryPlan(x:ApplicationOfferSalaryPlan,v:Ref<ApplicationOfferSalaryPlan>)
-	export function unRefApplicationOfferSalaryPlan(v:Ref<ApplicationOfferSalaryPlan>):ApplicationOfferSalaryPlan
-	export function emptyExternalReward():ExternalReward
-	export function emptyRefExternalReward():Ref<ExternalReward>
-	export function refOfExternalReward(x:ExternalReward,v:Ref<ExternalReward>)
-	export function unRefExternalReward(v:Ref<ExternalReward>):ExternalReward
-	export function emptySiteJobCity():SiteJobCity
-	export function emptyRefSiteJobCity():Ref<SiteJobCity>
-	export function refOfSiteJobCity(x:SiteJobCity,v:Ref<SiteJobCity>)
-	export function unRefSiteJobCity(v:Ref<SiteJobCity>):SiteJobCity
-	export function emptyUpdateOfferResp():UpdateOfferResp
-	export function emptyRefUpdateOfferResp():Ref<UpdateOfferResp>
-	export function refOfUpdateOfferResp(x:UpdateOfferResp,v:Ref<UpdateOfferResp>)
-	export function unRefUpdateOfferResp(v:Ref<UpdateOfferResp>):UpdateOfferResp
-	export function emptyInterviewFeedbackFormModule():InterviewFeedbackFormModule
-	export function emptyRefInterviewFeedbackFormModule():Ref<InterviewFeedbackFormModule>
-	export function refOfInterviewFeedbackFormModule(x:InterviewFeedbackFormModule,v:Ref<InterviewFeedbackFormModule>)
-	export function unRefInterviewFeedbackFormModule(v:Ref<InterviewFeedbackFormModule>):InterviewFeedbackFormModule
-	export function emptyPatchNoteResp():PatchNoteResp
-	export function emptyRefPatchNoteResp():Ref<PatchNoteResp>
-	export function refOfPatchNoteResp(x:PatchNoteResp,v:Ref<PatchNoteResp>)
-	export function unRefPatchNoteResp(v:Ref<PatchNoteResp>):PatchNoteResp
-	export function emptyEducationInfo():EducationInfo
-	export function emptyRefEducationInfo():Ref<EducationInfo>
-	export function refOfEducationInfo(x:EducationInfo,v:Ref<EducationInfo>)
-	export function unRefEducationInfo(v:Ref<EducationInfo>):EducationInfo
-	export function emptyTalentSnsInfo():TalentSnsInfo
-	export function emptyRefTalentSnsInfo():Ref<TalentSnsInfo>
-	export function refOfTalentSnsInfo(x:TalentSnsInfo,v:Ref<TalentSnsInfo>)
-	export function unRefTalentSnsInfo(v:Ref<TalentSnsInfo>):TalentSnsInfo
-	export function emptyUpdateExternalApplicationRespData():UpdateExternalApplicationRespData
-	export function emptyRefUpdateExternalApplicationRespData():Ref<UpdateExternalApplicationRespData>
-	export function refOfUpdateExternalApplicationRespData(x:UpdateExternalApplicationRespData,v:Ref<UpdateExternalApplicationRespData>)
-	export function unRefUpdateExternalApplicationRespData(v:Ref<UpdateExternalApplicationRespData>):UpdateExternalApplicationRespData
-	export function emptyTripartiteAgreementInfo():TripartiteAgreementInfo
-	export function emptyRefTripartiteAgreementInfo():Ref<TripartiteAgreementInfo>
-	export function refOfTripartiteAgreementInfo(x:TripartiteAgreementInfo,v:Ref<TripartiteAgreementInfo>)
-	export function unRefTripartiteAgreementInfo(v:Ref<TripartiteAgreementInfo>):TripartiteAgreementInfo
-	export function emptyV1():V1
-	export function emptyRefV1():Ref<V1>
-	export function refOfV1(x:V1,v:Ref<V1>)
-	export function unRefV1(v:Ref<V1>):V1
-	export function emptyListResumeSourceRespData():ListResumeSourceRespData
-	export function emptyRefListResumeSourceRespData():Ref<ListResumeSourceRespData>
-	export function refOfListResumeSourceRespData(x:ListResumeSourceRespData,v:Ref<ListResumeSourceRespData>)
-	export function unRefListResumeSourceRespData(v:Ref<ListResumeSourceRespData>):ListResumeSourceRespData
-	export function emptyAppliOfferOnboardProfileAdd():AppliOfferOnboardProfileAdd
-	export function emptyRefAppliOfferOnboardProfileAdd():Ref<AppliOfferOnboardProfileAdd>
-	export function refOfAppliOfferOnboardProfileAdd(x:AppliOfferOnboardProfileAdd,v:Ref<AppliOfferOnboardProfileAdd>)
-	export function unRefAppliOfferOnboardProfileAdd(v:Ref<AppliOfferOnboardProfileAdd>):AppliOfferOnboardProfileAdd
-	export function emptyGetReferralWebsiteJobPostResp():GetReferralWebsiteJobPostResp
-	export function emptyRefGetReferralWebsiteJobPostResp():Ref<GetReferralWebsiteJobPostResp>
-	export function refOfGetReferralWebsiteJobPostResp(x:GetReferralWebsiteJobPostResp,v:Ref<GetReferralWebsiteJobPostResp>)
-	export function unRefGetReferralWebsiteJobPostResp(v:Ref<GetReferralWebsiteJobPostResp>):GetReferralWebsiteJobPostResp
-	export function emptyListNoteReq():ListNoteReq
-	export function emptyRefListNoteReq():Ref<ListNoteReq>
-	export function refOfListNoteReq(x:ListNoteReq,v:Ref<ListNoteReq>)
-	export function unRefListNoteReq(v:Ref<ListNoteReq>):ListNoteReq
-	export function emptyP2ReferralAccountAssetsUpdateV1Data():P2ReferralAccountAssetsUpdateV1Data
-	export function emptyRefP2ReferralAccountAssetsUpdateV1Data():Ref<P2ReferralAccountAssetsUpdateV1Data>
-	export function refOfP2ReferralAccountAssetsUpdateV1Data(x:P2ReferralAccountAssetsUpdateV1Data,v:Ref<P2ReferralAccountAssetsUpdateV1Data>)
-	export function unRefP2ReferralAccountAssetsUpdateV1Data(v:Ref<P2ReferralAccountAssetsUpdateV1Data>):P2ReferralAccountAssetsUpdateV1Data
-	export function emptyTalentCombinedEducationInfo():TalentCombinedEducationInfo
-	export function emptyRefTalentCombinedEducationInfo():Ref<TalentCombinedEducationInfo>
-	export function refOfTalentCombinedEducationInfo(x:TalentCombinedEducationInfo,v:Ref<TalentCombinedEducationInfo>)
-	export function unRefTalentCombinedEducationInfo(v:Ref<TalentCombinedEducationInfo>):TalentCombinedEducationInfo
-	export function emptyCommonSchemaOption():CommonSchemaOption
-	export function emptyRefCommonSchemaOption():Ref<CommonSchemaOption>
-	export function refOfCommonSchemaOption(x:CommonSchemaOption,v:Ref<CommonSchemaOption>)
-	export function unRefCommonSchemaOption(v:Ref<CommonSchemaOption>):CommonSchemaOption
-	export function emptyIdentification():Identification
-	export function emptyRefIdentification():Ref<Identification>
-	export function refOfIdentification(x:Identification,v:Ref<Identification>)
-	export function unRefIdentification(v:Ref<Identification>):Identification
-	export function emptyListJobTypeResp():ListJobTypeResp
-	export function emptyRefListJobTypeResp():Ref<ListJobTypeResp>
-	export function refOfListJobTypeResp(x:ListJobTypeResp,v:Ref<ListJobTypeResp>)
-	export function unRefListJobTypeResp(v:Ref<ListJobTypeResp>):ListJobTypeResp
-	export function emptyIdNameObject():IdNameObject
-	export function emptyRefIdNameObject():Ref<IdNameObject>
-	export function refOfIdNameObject(x:IdNameObject,v:Ref<IdNameObject>)
-	export function unRefIdNameObject(v:Ref<IdNameObject>):IdNameObject
-	export function emptyJobRequirementSchema():JobRequirementSchema
-	export function emptyRefJobRequirementSchema():Ref<JobRequirementSchema>
-	export function refOfJobRequirementSchema(x:JobRequirementSchema,v:Ref<JobRequirementSchema>)
-	export function unRefJobRequirementSchema(v:Ref<JobRequirementSchema>):JobRequirementSchema
-	export function emptyOfferSchemaChild():OfferSchemaChild
-	export function emptyRefOfferSchemaChild():Ref<OfferSchemaChild>
-	export function refOfOfferSchemaChild(x:OfferSchemaChild,v:Ref<OfferSchemaChild>)
-	export function unRefOfferSchemaChild(v:Ref<OfferSchemaChild>):OfferSchemaChild
-	export function emptyPatchNoteRespData():PatchNoteRespData
-	export function emptyRefPatchNoteRespData():Ref<PatchNoteRespData>
-	export function refOfPatchNoteRespData(x:PatchNoteRespData,v:Ref<PatchNoteRespData>)
-	export function unRefPatchNoteRespData(v:Ref<PatchNoteRespData>):PatchNoteRespData
-	export function emptyTalentExternalInfo():TalentExternalInfo
-	export function emptyRefTalentExternalInfo():Ref<TalentExternalInfo>
-	export function refOfTalentExternalInfo(x:TalentExternalInfo,v:Ref<TalentExternalInfo>)
-	export function unRefTalentExternalInfo(v:Ref<TalentExternalInfo>):TalentExternalInfo
-	export function emptyApplicationPrehireOfferBasic():ApplicationPrehireOfferBasic
-	export function emptyRefApplicationPrehireOfferBasic():Ref<ApplicationPrehireOfferBasic>
-	export function refOfApplicationPrehireOfferBasic(x:ApplicationPrehireOfferBasic,v:Ref<ApplicationPrehireOfferBasic>)
-	export function unRefApplicationPrehireOfferBasic(v:Ref<ApplicationPrehireOfferBasic>):ApplicationPrehireOfferBasic
-	export function emptyCreateReferralAccountResp():CreateReferralAccountResp
-	export function emptyRefCreateReferralAccountResp():Ref<CreateReferralAccountResp>
-	export function refOfCreateReferralAccountResp(x:CreateReferralAccountResp,v:Ref<CreateReferralAccountResp>)
-	export function unRefCreateReferralAccountResp(v:Ref<CreateReferralAccountResp>):CreateReferralAccountResp
-	export function emptyTalentFolder():TalentFolder
-	export function emptyRefTalentFolder():Ref<TalentFolder>
-	export function refOfTalentFolder(x:TalentFolder,v:Ref<TalentFolder>)
-	export function unRefTalentFolder(v:Ref<TalentFolder>):TalentFolder
-	export function emptyTalentNationality():TalentNationality
-	export function emptyRefTalentNationality():Ref<TalentNationality>
-	export function refOfTalentNationality(x:TalentNationality,v:Ref<TalentNationality>)
-	export function unRefTalentNationality(v:Ref<TalentNationality>):TalentNationality
-	export function emptyBatchDeleteEcoExamPaperReq():BatchDeleteEcoExamPaperReq
-	export function emptyRefBatchDeleteEcoExamPaperReq():Ref<BatchDeleteEcoExamPaperReq>
-	export function refOfBatchDeleteEcoExamPaperReq(x:BatchDeleteEcoExamPaperReq,v:Ref<BatchDeleteEcoExamPaperReq>)
-	export function unRefBatchDeleteEcoExamPaperReq(v:Ref<BatchDeleteEcoExamPaperReq>):BatchDeleteEcoExamPaperReq
-	export function emptySiteJobType():SiteJobType
-	export function emptyRefSiteJobType():Ref<SiteJobType>
-	export function refOfSiteJobType(x:SiteJobType,v:Ref<SiteJobType>)
-	export function unRefSiteJobType(v:Ref<SiteJobType>):SiteJobType
-	export function emptyTalentCustomizedValue():TalentCustomizedValue
-	export function emptyRefTalentCustomizedValue():Ref<TalentCustomizedValue>
-	export function refOfTalentCustomizedValue(x:TalentCustomizedValue,v:Ref<TalentCustomizedValue>)
-	export function unRefTalentCustomizedValue(v:Ref<TalentCustomizedValue>):TalentCustomizedValue
-	export function emptyUpdateResultEcoExamReq():UpdateResultEcoExamReq
-	export function emptyRefUpdateResultEcoExamReq():Ref<UpdateResultEcoExamReq>
-	export function refOfUpdateResultEcoExamReq(x:UpdateResultEcoExamReq,v:Ref<UpdateResultEcoExamReq>)
-	export function unRefUpdateResultEcoExamReq(v:Ref<UpdateResultEcoExamReq>):UpdateResultEcoExamReq
-	export function emptyI18n():I18n
-	export function emptyRefI18n():Ref<I18n>
-	export function refOfI18n(x:I18n,v:Ref<I18n>)
-	export function unRefI18n(v:Ref<I18n>):I18n
-	export function emptyJobRequirementCustomizedData():JobRequirementCustomizedData
-	export function emptyRefJobRequirementCustomizedData():Ref<JobRequirementCustomizedData>
-	export function refOfJobRequirementCustomizedData(x:JobRequirementCustomizedData,v:Ref<JobRequirementCustomizedData>)
-	export function unRefJobRequirementCustomizedData(v:Ref<JobRequirementCustomizedData>):JobRequirementCustomizedData
-	export function emptyInterviewAssessmentDimensionArgs():InterviewAssessmentDimensionArgs
-	export function emptyRefInterviewAssessmentDimensionArgs():Ref<InterviewAssessmentDimensionArgs>
-	export function refOfInterviewAssessmentDimensionArgs(x:InterviewAssessmentDimensionArgs,v:Ref<InterviewAssessmentDimensionArgs>)
-	export function unRefInterviewAssessmentDimensionArgs(v:Ref<InterviewAssessmentDimensionArgs>):InterviewAssessmentDimensionArgs
-	export function emptyOfferApplyFormFormulaExtraMapInfo():OfferApplyFormFormulaExtraMapInfo
-	export function emptyRefOfferApplyFormFormulaExtraMapInfo():Ref<OfferApplyFormFormulaExtraMapInfo>
-	export function refOfOfferApplyFormFormulaExtraMapInfo(x:OfferApplyFormFormulaExtraMapInfo,v:Ref<OfferApplyFormFormulaExtraMapInfo>)
-	export function unRefOfferApplyFormFormulaExtraMapInfo(v:Ref<OfferApplyFormFormulaExtraMapInfo>):OfferApplyFormFormulaExtraMapInfo
-	export function emptyOfferSchemaListInfo():OfferSchemaListInfo
-	export function emptyRefOfferSchemaListInfo():Ref<OfferSchemaListInfo>
-	export function refOfOfferSchemaListInfo(x:OfferSchemaListInfo,v:Ref<OfferSchemaListInfo>)
-	export function unRefOfferSchemaListInfo(v:Ref<OfferSchemaListInfo>):OfferSchemaListInfo
-	export function emptyCreateJobRequirementRespData():CreateJobRequirementRespData
-	export function emptyRefCreateJobRequirementRespData():Ref<CreateJobRequirementRespData>
-	export function refOfCreateJobRequirementRespData(x:CreateJobRequirementRespData,v:Ref<CreateJobRequirementRespData>)
-	export function unRefCreateJobRequirementRespData(v:Ref<CreateJobRequirementRespData>):CreateJobRequirementRespData
-	export function emptyP2EcoBackgroundCheckCreatedV1():P2EcoBackgroundCheckCreatedV1
-	export function emptyRefP2EcoBackgroundCheckCreatedV1():Ref<P2EcoBackgroundCheckCreatedV1>
-	export function refOfP2EcoBackgroundCheckCreatedV1(x:P2EcoBackgroundCheckCreatedV1,v:Ref<P2EcoBackgroundCheckCreatedV1>)
-	export function unRefP2EcoBackgroundCheckCreatedV1(v:Ref<P2EcoBackgroundCheckCreatedV1>):P2EcoBackgroundCheckCreatedV1
-	export function emptySalary():Salary
-	export function emptyRefSalary():Ref<Salary>
-	export function refOfSalary(x:Salary,v:Ref<Salary>)
-	export function unRefSalary(v:Ref<Salary>):Salary
-	export function emptySiteApplication():SiteApplication
-	export function emptyRefSiteApplication():Ref<SiteApplication>
-	export function refOfSiteApplication(x:SiteApplication,v:Ref<SiteApplication>)
-	export function unRefSiteApplication(v:Ref<SiteApplication>):SiteApplication
-	export function emptyBatchDeleteEcoBackgroundCheckCustomFieldReqBody():BatchDeleteEcoBackgroundCheckCustomFieldReqBody
-	export function emptyRefBatchDeleteEcoBackgroundCheckCustomFieldReqBody():Ref<BatchDeleteEcoBackgroundCheckCustomFieldReqBody>
-	export function refOfBatchDeleteEcoBackgroundCheckCustomFieldReqBody(x:BatchDeleteEcoBackgroundCheckCustomFieldReqBody,v:Ref<BatchDeleteEcoBackgroundCheckCustomFieldReqBody>)
-	export function unRefBatchDeleteEcoBackgroundCheckCustomFieldReqBody(v:Ref<BatchDeleteEcoBackgroundCheckCustomFieldReqBody>):BatchDeleteEcoBackgroundCheckCustomFieldReqBody
-	export function emptyCommonSchemaSetting():CommonSchemaSetting
-	export function emptyRefCommonSchemaSetting():Ref<CommonSchemaSetting>
-	export function refOfCommonSchemaSetting(x:CommonSchemaSetting,v:Ref<CommonSchemaSetting>)
-	export function unRefCommonSchemaSetting(v:Ref<CommonSchemaSetting>):CommonSchemaSetting
-	export function emptyJobCategory():JobCategory
-	export function emptyRefJobCategory():Ref<JobCategory>
-	export function refOfJobCategory(x:JobCategory,v:Ref<JobCategory>)
-	export function unRefJobCategory(v:Ref<JobCategory>):JobCategory
-	export function emptyListEvaluationRespData():ListEvaluationRespData
-	export function emptyRefListEvaluationRespData():Ref<ListEvaluationRespData>
-	export function refOfListEvaluationRespData(x:ListEvaluationRespData,v:Ref<ListEvaluationRespData>)
-	export function unRefListEvaluationRespData(v:Ref<ListEvaluationRespData>):ListEvaluationRespData
-	export function emptyListJobRequirementResp():ListJobRequirementResp
-	export function emptyRefListJobRequirementResp():Ref<ListJobRequirementResp>
-	export function refOfListJobRequirementResp(x:ListJobRequirementResp,v:Ref<ListJobRequirementResp>)
-	export function unRefListJobRequirementResp(v:Ref<ListJobRequirementResp>):ListJobRequirementResp
-	export function emptyRegistrationBasicInfo():RegistrationBasicInfo
-	export function emptyRefRegistrationBasicInfo():Ref<RegistrationBasicInfo>
-	export function refOfRegistrationBasicInfo(x:RegistrationBasicInfo,v:Ref<RegistrationBasicInfo>)
-	export function unRefRegistrationBasicInfo(v:Ref<RegistrationBasicInfo>):RegistrationBasicInfo
-	export function emptyAccount():Account
-	export function emptyRefAccount():Ref<Account>
-	export function refOfAccount(x:Account,v:Ref<Account>)
-	export function unRefAccount(v:Ref<Account>):Account
-	export function emptyListJobRespData():ListJobRespData
-	export function emptyRefListJobRespData():Ref<ListJobRespData>
-	export function refOfListJobRespData(x:ListJobRespData,v:Ref<ListJobRespData>)
-	export function unRefListJobRespData(v:Ref<ListJobRespData>):ListJobRespData
-	export function emptyPatchEmployeeResp():PatchEmployeeResp
-	export function emptyRefPatchEmployeeResp():Ref<PatchEmployeeResp>
-	export function refOfPatchEmployeeResp(x:PatchEmployeeResp,v:Ref<PatchEmployeeResp>)
-	export function unRefPatchEmployeeResp(v:Ref<PatchEmployeeResp>):PatchEmployeeResp
-	export function emptyRecruiterJobResp():RecruiterJobResp
-	export function emptyRefRecruiterJobResp():Ref<RecruiterJobResp>
-	export function refOfRecruiterJobResp(x:RecruiterJobResp,v:Ref<RecruiterJobResp>)
-	export function unRefRecruiterJobResp(v:Ref<RecruiterJobResp>):RecruiterJobResp
-	export function emptySiteResumeCareer():SiteResumeCareer
-	export function emptyRefSiteResumeCareer():Ref<SiteResumeCareer>
-	export function refOfSiteResumeCareer(x:SiteResumeCareer,v:Ref<SiteResumeCareer>)
-	export function unRefSiteResumeCareer(v:Ref<SiteResumeCareer>):SiteResumeCareer
-	export function emptyTest():Test
-	export function emptyRefTest():Ref<Test>
-	export function refOfTest(x:Test,v:Ref<Test>)
-	export function unRefTest(v:Ref<Test>):Test
-	export function emptyJobCustomizedOption():JobCustomizedOption
-	export function emptyRefJobCustomizedOption():Ref<JobCustomizedOption>
-	export function refOfJobCustomizedOption(x:JobCustomizedOption,v:Ref<JobCustomizedOption>)
-	export function unRefJobCustomizedOption(v:Ref<JobCustomizedOption>):JobCustomizedOption
-	export function emptyInterviewRoundTypeAssessmentTemplate():InterviewRoundTypeAssessmentTemplate
-	export function emptyRefInterviewRoundTypeAssessmentTemplate():Ref<InterviewRoundTypeAssessmentTemplate>
-	export function refOfInterviewRoundTypeAssessmentTemplate(x:InterviewRoundTypeAssessmentTemplate,v:Ref<InterviewRoundTypeAssessmentTemplate>)
-	export function unRefInterviewRoundTypeAssessmentTemplate(v:Ref<InterviewRoundTypeAssessmentTemplate>):InterviewRoundTypeAssessmentTemplate
-	export function emptyListJobTypeReq():ListJobTypeReq
-	export function emptyRefListJobTypeReq():Ref<ListJobTypeReq>
-	export function refOfListJobTypeReq(x:ListJobTypeReq,v:Ref<ListJobTypeReq>)
-	export function unRefListJobTypeReq(v:Ref<ListJobTypeReq>):ListJobTypeReq
-	export function emptyBatchUpdateEcoAccountCustomFieldResp():BatchUpdateEcoAccountCustomFieldResp
-	export function emptyRefBatchUpdateEcoAccountCustomFieldResp():Ref<BatchUpdateEcoAccountCustomFieldResp>
-	export function refOfBatchUpdateEcoAccountCustomFieldResp(x:BatchUpdateEcoAccountCustomFieldResp,v:Ref<BatchUpdateEcoAccountCustomFieldResp>)
-	export function unRefBatchUpdateEcoAccountCustomFieldResp(v:Ref<BatchUpdateEcoAccountCustomFieldResp>):BatchUpdateEcoAccountCustomFieldResp
-	export function emptyConfigJobResp():ConfigJobResp
-	export function emptyRefConfigJobResp():Ref<ConfigJobResp>
-	export function refOfConfigJobResp(x:ConfigJobResp,v:Ref<ConfigJobResp>)
-	export function unRefConfigJobResp(v:Ref<ConfigJobResp>):ConfigJobResp
-	export function emptyCreateJobRequirementResp():CreateJobRequirementResp
-	export function emptyRefCreateJobRequirementResp():Ref<CreateJobRequirementResp>
-	export function refOfCreateJobRequirementResp(x:CreateJobRequirementResp,v:Ref<CreateJobRequirementResp>)
-	export function unRefCreateJobRequirementResp(v:Ref<CreateJobRequirementResp>):CreateJobRequirementResp
-	export function emptyPatchNoteReq():PatchNoteReq
-	export function emptyRefPatchNoteReq():Ref<PatchNoteReq>
-	export function refOfPatchNoteReq(x:PatchNoteReq,v:Ref<PatchNoteReq>)
-	export function unRefPatchNoteReq(v:Ref<PatchNoteReq>):PatchNoteReq
-	export function emptyTalentCombinedLanguageInfo():TalentCombinedLanguageInfo
-	export function emptyRefTalentCombinedLanguageInfo():Ref<TalentCombinedLanguageInfo>
-	export function refOfTalentCombinedLanguageInfo(x:TalentCombinedLanguageInfo,v:Ref<TalentCombinedLanguageInfo>)
-	export function unRefTalentCombinedLanguageInfo(v:Ref<TalentCombinedLanguageInfo>):TalentCombinedLanguageInfo
-	export function emptyCodeNameObject():CodeNameObject
-	export function emptyRefCodeNameObject():Ref<CodeNameObject>
-	export function refOfCodeNameObject(x:CodeNameObject,v:Ref<CodeNameObject>)
-	export function unRefCodeNameObject(v:Ref<CodeNameObject>):CodeNameObject
-	export function emptyBatchDeleteEcoAccountCustomFieldReq():BatchDeleteEcoAccountCustomFieldReq
-	export function emptyRefBatchDeleteEcoAccountCustomFieldReq():Ref<BatchDeleteEcoAccountCustomFieldReq>
-	export function refOfBatchDeleteEcoAccountCustomFieldReq(x:BatchDeleteEcoAccountCustomFieldReq,v:Ref<BatchDeleteEcoAccountCustomFieldReq>)
-	export function unRefBatchDeleteEcoAccountCustomFieldReq(v:Ref<BatchDeleteEcoAccountCustomFieldReq>):BatchDeleteEcoAccountCustomFieldReq
-	export function emptyBatchUpdateEcoExamPaperResp():BatchUpdateEcoExamPaperResp
-	export function emptyRefBatchUpdateEcoExamPaperResp():Ref<BatchUpdateEcoExamPaperResp>
-	export function refOfBatchUpdateEcoExamPaperResp(x:BatchUpdateEcoExamPaperResp,v:Ref<BatchUpdateEcoExamPaperResp>)
-	export function unRefBatchUpdateEcoExamPaperResp(v:Ref<BatchUpdateEcoExamPaperResp>):BatchUpdateEcoExamPaperResp
-	export function emptyCombinedJobResult():CombinedJobResult
-	export function emptyRefCombinedJobResult():Ref<CombinedJobResult>
-	export function refOfCombinedJobResult(x:CombinedJobResult,v:Ref<CombinedJobResult>)
-	export function unRefCombinedJobResult(v:Ref<CombinedJobResult>):CombinedJobResult
-	export function emptyGetJobResp():GetJobResp
-	export function emptyRefGetJobResp():Ref<GetJobResp>
-	export function refOfGetJobResp(x:GetJobResp,v:Ref<GetJobResp>)
-	export function unRefGetJobResp(v:Ref<GetJobResp>):GetJobResp
-	export function emptyUpdateOfferReq():UpdateOfferReq
-	export function emptyRefUpdateOfferReq():Ref<UpdateOfferReq>
-	export function refOfUpdateOfferReq(x:UpdateOfferReq,v:Ref<UpdateOfferReq>)
-	export function unRefUpdateOfferReq(v:Ref<UpdateOfferReq>):UpdateOfferReq
-	export function emptySiteResumeCertificate():SiteResumeCertificate
-	export function emptyRefSiteResumeCertificate():Ref<SiteResumeCertificate>
-	export function refOfSiteResumeCertificate(x:SiteResumeCertificate,v:Ref<SiteResumeCertificate>)
-	export function unRefSiteResumeCertificate(v:Ref<SiteResumeCertificate>):SiteResumeCertificate
-	export function emptyWithdrawReferralAccountReq():WithdrawReferralAccountReq
-	export function emptyRefWithdrawReferralAccountReq():Ref<WithdrawReferralAccountReq>
-	export function refOfWithdrawReferralAccountReq(x:WithdrawReferralAccountReq,v:Ref<WithdrawReferralAccountReq>)
-	export function unRefWithdrawReferralAccountReq(v:Ref<WithdrawReferralAccountReq>):WithdrawReferralAccountReq
-	export function emptyAssets():Assets
-	export function emptyRefAssets():Ref<Assets>
-	export function refOfAssets(x:Assets,v:Ref<Assets>)
-	export function unRefAssets(v:Ref<Assets>):Assets
-	export function emptyListReferralWebsiteJobPostReq():ListReferralWebsiteJobPostReq
-	export function emptyRefListReferralWebsiteJobPostReq():Ref<ListReferralWebsiteJobPostReq>
-	export function refOfListReferralWebsiteJobPostReq(x:ListReferralWebsiteJobPostReq,v:Ref<ListReferralWebsiteJobPostReq>)
-	export function unRefListReferralWebsiteJobPostReq(v:Ref<ListReferralWebsiteJobPostReq>):ListReferralWebsiteJobPostReq
-	export function emptyJobDepartment():JobDepartment
-	export function emptyRefJobDepartment():Ref<JobDepartment>
-	export function refOfJobDepartment(x:JobDepartment,v:Ref<JobDepartment>)
-	export function unRefJobDepartment(v:Ref<JobDepartment>):JobDepartment
-	export function emptyNationality():Nationality
-	export function emptyRefNationality():Ref<Nationality>
-	export function refOfNationality(x:Nationality,v:Ref<Nationality>)
-	export function unRefNationality(v:Ref<Nationality>):Nationality
-	export function emptyApplicationTalentSnsInfo():ApplicationTalentSnsInfo
-	export function emptyRefApplicationTalentSnsInfo():Ref<ApplicationTalentSnsInfo>
-	export function refOfApplicationTalentSnsInfo(x:ApplicationTalentSnsInfo,v:Ref<ApplicationTalentSnsInfo>)
-	export function unRefApplicationTalentSnsInfo(v:Ref<ApplicationTalentSnsInfo>):ApplicationTalentSnsInfo
-	export function emptyEvaluation():Evaluation
-	export function emptyRefEvaluation():Ref<Evaluation>
-	export function refOfEvaluation(x:Evaluation,v:Ref<Evaluation>)
-	export function unRefEvaluation(v:Ref<Evaluation>):Evaluation
-	export function emptyJobRequirementDto():JobRequirementDto
-	export function emptyRefJobRequirementDto():Ref<JobRequirementDto>
-	export function refOfJobRequirementDto(x:JobRequirementDto,v:Ref<JobRequirementDto>)
-	export function unRefJobRequirementDto(v:Ref<JobRequirementDto>):JobRequirementDto
-	export function emptyListByIdJobRequirementResp():ListByIdJobRequirementResp
-	export function emptyRefListByIdJobRequirementResp():Ref<ListByIdJobRequirementResp>
-	export function refOfListByIdJobRequirementResp(x:ListByIdJobRequirementResp,v:Ref<ListByIdJobRequirementResp>)
-	export function unRefListByIdJobRequirementResp(v:Ref<ListByIdJobRequirementResp>):ListByIdJobRequirementResp
-	export function emptyWebsiteJobPostCustomizedTimeRange():WebsiteJobPostCustomizedTimeRange
-	export function emptyRefWebsiteJobPostCustomizedTimeRange():Ref<WebsiteJobPostCustomizedTimeRange>
-	export function refOfWebsiteJobPostCustomizedTimeRange(x:WebsiteJobPostCustomizedTimeRange,v:Ref<WebsiteJobPostCustomizedTimeRange>)
-	export function unRefWebsiteJobPostCustomizedTimeRange(v:Ref<WebsiteJobPostCustomizedTimeRange>):WebsiteJobPostCustomizedTimeRange
-	export function emptyBackgroundCheckItemInfo():BackgroundCheckItemInfo
-	export function emptyRefBackgroundCheckItemInfo():Ref<BackgroundCheckItemInfo>
-	export function refOfBackgroundCheckItemInfo(x:BackgroundCheckItemInfo,v:Ref<BackgroundCheckItemInfo>)
-	export function unRefBackgroundCheckItemInfo(v:Ref<BackgroundCheckItemInfo>):BackgroundCheckItemInfo
-	export function emptyTalentBasicInfo():TalentBasicInfo
-	export function emptyRefTalentBasicInfo():Ref<TalentBasicInfo>
-	export function refOfTalentBasicInfo(x:TalentBasicInfo,v:Ref<TalentBasicInfo>)
-	export function unRefTalentBasicInfo(v:Ref<TalentBasicInfo>):TalentBasicInfo
-	export function emptyGetTalentRespData():GetTalentRespData
-	export function emptyRefGetTalentRespData():Ref<GetTalentRespData>
-	export function refOfGetTalentRespData(x:GetTalentRespData,v:Ref<GetTalentRespData>)
-	export function unRefGetTalentRespData(v:Ref<GetTalentRespData>):GetTalentRespData
-	export function emptyEhrImportTask():EhrImportTask
-	export function emptyRefEhrImportTask():Ref<EhrImportTask>
-	export function refOfEhrImportTask(x:EhrImportTask,v:Ref<EhrImportTask>)
-	export function unRefEhrImportTask(v:Ref<EhrImportTask>):EhrImportTask
-	export function emptyApplicationTalentEducationInfo():ApplicationTalentEducationInfo
-	export function emptyRefApplicationTalentEducationInfo():Ref<ApplicationTalentEducationInfo>
-	export function refOfApplicationTalentEducationInfo(x:ApplicationTalentEducationInfo,v:Ref<ApplicationTalentEducationInfo>)
-	export function unRefApplicationTalentEducationInfo(v:Ref<ApplicationTalentEducationInfo>):ApplicationTalentEducationInfo
-	export function emptyWebsiteJobPostCustomizedValue():WebsiteJobPostCustomizedValue
-	export function emptyRefWebsiteJobPostCustomizedValue():Ref<WebsiteJobPostCustomizedValue>
-	export function refOfWebsiteJobPostCustomizedValue(x:WebsiteJobPostCustomizedValue,v:Ref<WebsiteJobPostCustomizedValue>)
-	export function unRefWebsiteJobPostCustomizedValue(v:Ref<WebsiteJobPostCustomizedValue>):WebsiteJobPostCustomizedValue
-	export function emptyCreateEcoBackgroundCheckPackageResp():CreateEcoBackgroundCheckPackageResp
-	export function emptyRefCreateEcoBackgroundCheckPackageResp():Ref<CreateEcoBackgroundCheckPackageResp>
-	export function refOfCreateEcoBackgroundCheckPackageResp(x:CreateEcoBackgroundCheckPackageResp,v:Ref<CreateEcoBackgroundCheckPackageResp>)
-	export function unRefCreateEcoBackgroundCheckPackageResp(v:Ref<CreateEcoBackgroundCheckPackageResp>):CreateEcoBackgroundCheckPackageResp
-	export function emptyOfferCustomField():OfferCustomField
-	export function emptyRefOfferCustomField():Ref<OfferCustomField>
-	export function refOfOfferCustomField(x:OfferCustomField,v:Ref<OfferCustomField>)
-	export function unRefOfferCustomField(v:Ref<OfferCustomField>):OfferCustomField
-	export function emptyTodoCommon():TodoCommon
-	export function emptyRefTodoCommon():Ref<TodoCommon>
-	export function refOfTodoCommon(x:TodoCommon,v:Ref<TodoCommon>)
-	export function unRefTodoCommon(v:Ref<TodoCommon>):TodoCommon
-	export function emptyWebsiteDeliveryIdentification():WebsiteDeliveryIdentification
-	export function emptyRefWebsiteDeliveryIdentification():Ref<WebsiteDeliveryIdentification>
-	export function refOfWebsiteDeliveryIdentification(x:WebsiteDeliveryIdentification,v:Ref<WebsiteDeliveryIdentification>)
-	export function unRefWebsiteDeliveryIdentification(v:Ref<WebsiteDeliveryIdentification>):WebsiteDeliveryIdentification
-	export function emptyWebsiteDeliverySelfEvaluation():WebsiteDeliverySelfEvaluation
-	export function emptyRefWebsiteDeliverySelfEvaluation():Ref<WebsiteDeliverySelfEvaluation>
-	export function refOfWebsiteDeliverySelfEvaluation(x:WebsiteDeliverySelfEvaluation,v:Ref<WebsiteDeliverySelfEvaluation>)
-	export function unRefWebsiteDeliverySelfEvaluation(v:Ref<WebsiteDeliverySelfEvaluation>):WebsiteDeliverySelfEvaluation
-	export function emptyListQuestionnaireResp():ListQuestionnaireResp
-	export function emptyRefListQuestionnaireResp():Ref<ListQuestionnaireResp>
-	export function refOfListQuestionnaireResp(x:ListQuestionnaireResp,v:Ref<ListQuestionnaireResp>)
-	export function unRefListQuestionnaireResp(v:Ref<ListQuestionnaireResp>):ListQuestionnaireResp
-	export function emptyFiveStartScoringResult():FiveStartScoringResult
-	export function emptyRefFiveStartScoringResult():Ref<FiveStartScoringResult>
-	export function refOfFiveStartScoringResult(x:FiveStartScoringResult,v:Ref<FiveStartScoringResult>)
-	export function unRefFiveStartScoringResult(v:Ref<FiveStartScoringResult>):FiveStartScoringResult
-	export function emptyUpdateProgressEcoBackgroundCheckReq():UpdateProgressEcoBackgroundCheckReq
-	export function emptyRefUpdateProgressEcoBackgroundCheckReq():Ref<UpdateProgressEcoBackgroundCheckReq>
-	export function refOfUpdateProgressEcoBackgroundCheckReq(x:UpdateProgressEcoBackgroundCheckReq,v:Ref<UpdateProgressEcoBackgroundCheckReq>)
-	export function unRefUpdateProgressEcoBackgroundCheckReq(v:Ref<UpdateProgressEcoBackgroundCheckReq>):UpdateProgressEcoBackgroundCheckReq
-	export function emptyListInterviewResp():ListInterviewResp
-	export function emptyRefListInterviewResp():Ref<ListInterviewResp>
-	export function refOfListInterviewResp(x:ListInterviewResp,v:Ref<ListInterviewResp>)
-	export function unRefListInterviewResp(v:Ref<ListInterviewResp>):ListInterviewResp
-	export function emptyBackgroundCheckOrderCreator():BackgroundCheckOrderCreator
-	export function emptyRefBackgroundCheckOrderCreator():Ref<BackgroundCheckOrderCreator>
-	export function refOfBackgroundCheckOrderCreator(x:BackgroundCheckOrderCreator,v:Ref<BackgroundCheckOrderCreator>)
-	export function unRefBackgroundCheckOrderCreator(v:Ref<BackgroundCheckOrderCreator>):BackgroundCheckOrderCreator
-	export function emptyJobRequirementCustomizedDataDto():JobRequirementCustomizedDataDto
-	export function emptyRefJobRequirementCustomizedDataDto():Ref<JobRequirementCustomizedDataDto>
-	export function refOfJobRequirementCustomizedDataDto(x:JobRequirementCustomizedDataDto,v:Ref<JobRequirementCustomizedDataDto>)
-	export function unRefJobRequirementCustomizedDataDto(v:Ref<JobRequirementCustomizedDataDto>):JobRequirementCustomizedDataDto
-	export function emptyListApplicationReq():ListApplicationReq
-	export function emptyRefListApplicationReq():Ref<ListApplicationReq>
-	export function refOfListApplicationReq(x:ListApplicationReq,v:Ref<ListApplicationReq>)
-	export function unRefListApplicationReq(v:Ref<ListApplicationReq>):ListApplicationReq
-	export function emptyListOfferResp():ListOfferResp
-	export function emptyRefListOfferResp():Ref<ListOfferResp>
-	export function refOfListOfferResp(x:ListOfferResp,v:Ref<ListOfferResp>)
-	export function unRefListOfferResp(v:Ref<ListOfferResp>):ListOfferResp
-	export function emptyDeleteExternalApplicationRespData():DeleteExternalApplicationRespData
-	export function emptyRefDeleteExternalApplicationRespData():Ref<DeleteExternalApplicationRespData>
-	export function refOfDeleteExternalApplicationRespData(x:DeleteExternalApplicationRespData,v:Ref<DeleteExternalApplicationRespData>)
-	export function unRefDeleteExternalApplicationRespData(v:Ref<DeleteExternalApplicationRespData>):DeleteExternalApplicationRespData
-	export function emptyEcoBackgroundCheckCreateEventMobile():EcoBackgroundCheckCreateEventMobile
-	export function emptyRefEcoBackgroundCheckCreateEventMobile():Ref<EcoBackgroundCheckCreateEventMobile>
-	export function refOfEcoBackgroundCheckCreateEventMobile(x:EcoBackgroundCheckCreateEventMobile,v:Ref<EcoBackgroundCheckCreateEventMobile>)
-	export function unRefEcoBackgroundCheckCreateEventMobile(v:Ref<EcoBackgroundCheckCreateEventMobile>):EcoBackgroundCheckCreateEventMobile
-	export function emptyWebsiteDeliveryCompetition():WebsiteDeliveryCompetition
-	export function emptyRefWebsiteDeliveryCompetition():Ref<WebsiteDeliveryCompetition>
-	export function refOfWebsiteDeliveryCompetition(x:WebsiteDeliveryCompetition,v:Ref<WebsiteDeliveryCompetition>)
-	export function unRefWebsiteDeliveryCompetition(v:Ref<WebsiteDeliveryCompetition>):WebsiteDeliveryCompetition
-	export function emptyWebsiteDeliverySns():WebsiteDeliverySns
-	export function emptyRefWebsiteDeliverySns():Ref<WebsiteDeliverySns>
-	export function refOfWebsiteDeliverySns(x:WebsiteDeliverySns,v:Ref<WebsiteDeliverySns>)
-	export function unRefWebsiteDeliverySns(v:Ref<WebsiteDeliverySns>):WebsiteDeliverySns
-	export function emptySiteResumeCompetition():SiteResumeCompetition
-	export function emptyRefSiteResumeCompetition():Ref<SiteResumeCompetition>
-	export function refOfSiteResumeCompetition(x:SiteResumeCompetition,v:Ref<SiteResumeCompetition>)
-	export function unRefSiteResumeCompetition(v:Ref<SiteResumeCompetition>):SiteResumeCompetition
-	export function emptyP2EcoBackgroundCheckCanceledV1Data():P2EcoBackgroundCheckCanceledV1Data
-	export function emptyRefP2EcoBackgroundCheckCanceledV1Data():Ref<P2EcoBackgroundCheckCanceledV1Data>
-	export function refOfP2EcoBackgroundCheckCanceledV1Data(x:P2EcoBackgroundCheckCanceledV1Data,v:Ref<P2EcoBackgroundCheckCanceledV1Data>)
-	export function unRefP2EcoBackgroundCheckCanceledV1Data(v:Ref<P2EcoBackgroundCheckCanceledV1Data>):P2EcoBackgroundCheckCanceledV1Data
-	export function emptyCreateExternalApplicationResp():CreateExternalApplicationResp
-	export function emptyRefCreateExternalApplicationResp():Ref<CreateExternalApplicationResp>
-	export function refOfCreateExternalApplicationResp(x:CreateExternalApplicationResp,v:Ref<CreateExternalApplicationResp>)
-	export function unRefCreateExternalApplicationResp(v:Ref<CreateExternalApplicationResp>):CreateExternalApplicationResp
-	export function emptyGetAttachmentReq():GetAttachmentReq
-	export function emptyRefGetAttachmentReq():Ref<GetAttachmentReq>
-	export function refOfGetAttachmentReq(x:GetAttachmentReq,v:Ref<GetAttachmentReq>)
-	export function unRefGetAttachmentReq(v:Ref<GetAttachmentReq>):GetAttachmentReq
-	export function emptyJobRecruitmentType():JobRecruitmentType
-	export function emptyRefJobRecruitmentType():Ref<JobRecruitmentType>
-	export function refOfJobRecruitmentType(x:JobRecruitmentType,v:Ref<JobRecruitmentType>)
-	export function unRefJobRecruitmentType(v:Ref<JobRecruitmentType>):JobRecruitmentType
 	export function emptyTalentCombinedAwardInfo():TalentCombinedAwardInfo
 	export function emptyRefTalentCombinedAwardInfo():Ref<TalentCombinedAwardInfo>
 	export function refOfTalentCombinedAwardInfo(x:TalentCombinedAwardInfo,v:Ref<TalentCombinedAwardInfo>)
 	export function unRefTalentCombinedAwardInfo(v:Ref<TalentCombinedAwardInfo>):TalentCombinedAwardInfo
-	export function emptyListQuestionnaireReq():ListQuestionnaireReq
-	export function emptyRefListQuestionnaireReq():Ref<ListQuestionnaireReq>
-	export function refOfListQuestionnaireReq(x:ListQuestionnaireReq,v:Ref<ListQuestionnaireReq>)
-	export function unRefListQuestionnaireReq(v:Ref<ListQuestionnaireReq>):ListQuestionnaireReq
-	export function emptyRecruiterJobReq():RecruiterJobReq
-	export function emptyRefRecruiterJobReq():Ref<RecruiterJobReq>
-	export function refOfRecruiterJobReq(x:RecruiterJobReq,v:Ref<RecruiterJobReq>)
-	export function unRefRecruiterJobReq(v:Ref<RecruiterJobReq>):RecruiterJobReq
-	export function emptyEcoAccountCustomFieldData():EcoAccountCustomFieldData
-	export function emptyRefEcoAccountCustomFieldData():Ref<EcoAccountCustomFieldData>
-	export function refOfEcoAccountCustomFieldData(x:EcoAccountCustomFieldData,v:Ref<EcoAccountCustomFieldData>)
-	export function unRefEcoAccountCustomFieldData(v:Ref<EcoAccountCustomFieldData>):EcoAccountCustomFieldData
+	export function emptyOfferSchemaDetail():OfferSchemaDetail
+	export function emptyRefOfferSchemaDetail():Ref<OfferSchemaDetail>
+	export function refOfOfferSchemaDetail(x:OfferSchemaDetail,v:Ref<OfferSchemaDetail>)
+	export function unRefOfferSchemaDetail(v:Ref<OfferSchemaDetail>):OfferSchemaDetail
+	export function emptyDeleteTripartiteAgreementResp():DeleteTripartiteAgreementResp
+	export function emptyRefDeleteTripartiteAgreementResp():Ref<DeleteTripartiteAgreementResp>
+	export function refOfDeleteTripartiteAgreementResp(x:DeleteTripartiteAgreementResp,v:Ref<DeleteTripartiteAgreementResp>)
+	export function unRefDeleteTripartiteAgreementResp(v:Ref<DeleteTripartiteAgreementResp>):DeleteTripartiteAgreementResp
+	export function emptyInterviewAppointmentConfig():InterviewAppointmentConfig
+	export function emptyRefInterviewAppointmentConfig():Ref<InterviewAppointmentConfig>
+	export function refOfInterviewAppointmentConfig(x:InterviewAppointmentConfig,v:Ref<InterviewAppointmentConfig>)
+	export function unRefInterviewAppointmentConfig(v:Ref<InterviewAppointmentConfig>):InterviewAppointmentConfig
+	export function emptyListJobRespData():ListJobRespData
+	export function emptyRefListJobRespData():Ref<ListJobRespData>
+	export function refOfListJobRespData(x:ListJobRespData,v:Ref<ListJobRespData>)
+	export function unRefListJobRespData(v:Ref<ListJobRespData>):ListJobRespData
+	export function emptyListJobFunctionResp():ListJobFunctionResp
+	export function emptyRefListJobFunctionResp():Ref<ListJobFunctionResp>
+	export function refOfListJobFunctionResp(x:ListJobFunctionResp,v:Ref<ListJobFunctionResp>)
+	export function unRefListJobFunctionResp(v:Ref<ListJobFunctionResp>):ListJobFunctionResp
+	export function emptyJobConfigResult():JobConfigResult
+	export function emptyRefJobConfigResult():Ref<JobConfigResult>
+	export function refOfJobConfigResult(x:JobConfigResult,v:Ref<JobConfigResult>)
+	export function unRefJobConfigResult(v:Ref<JobConfigResult>):JobConfigResult
+	export function emptyDeleteWebsiteChannelReq():DeleteWebsiteChannelReq
+	export function emptyRefDeleteWebsiteChannelReq():Ref<DeleteWebsiteChannelReq>
+	export function refOfDeleteWebsiteChannelReq(x:DeleteWebsiteChannelReq,v:Ref<DeleteWebsiteChannelReq>)
+	export function unRefDeleteWebsiteChannelReq(v:Ref<DeleteWebsiteChannelReq>):DeleteWebsiteChannelReq
+	export function emptyOfferApplyFormConfigFormulaInfo():OfferApplyFormConfigFormulaInfo
+	export function emptyRefOfferApplyFormConfigFormulaInfo():Ref<OfferApplyFormConfigFormulaInfo>
+	export function refOfOfferApplyFormConfigFormulaInfo(x:OfferApplyFormConfigFormulaInfo,v:Ref<OfferApplyFormConfigFormulaInfo>)
+	export function unRefOfferApplyFormConfigFormulaInfo(v:Ref<OfferApplyFormConfigFormulaInfo>):OfferApplyFormConfigFormulaInfo
+	export function emptyListInterviewRegistrationSchemaReq():ListInterviewRegistrationSchemaReq
+	export function emptyRefListInterviewRegistrationSchemaReq():Ref<ListInterviewRegistrationSchemaReq>
+	export function refOfListInterviewRegistrationSchemaReq(x:ListInterviewRegistrationSchemaReq,v:Ref<ListInterviewRegistrationSchemaReq>)
+	export function unRefListInterviewRegistrationSchemaReq(v:Ref<ListInterviewRegistrationSchemaReq>):ListInterviewRegistrationSchemaReq
+	export function emptyJobLevel():JobLevel
+	export function emptyRefJobLevel():Ref<JobLevel>
+	export function refOfJobLevel(x:JobLevel,v:Ref<JobLevel>)
+	export function unRefJobLevel(v:Ref<JobLevel>):JobLevel
+	export function emptyOfferApplyFormModuleInfo():OfferApplyFormModuleInfo
+	export function emptyRefOfferApplyFormModuleInfo():Ref<OfferApplyFormModuleInfo>
+	export function refOfOfferApplyFormModuleInfo(x:OfferApplyFormModuleInfo,v:Ref<OfferApplyFormModuleInfo>)
+	export function unRefOfferApplyFormModuleInfo(v:Ref<OfferApplyFormModuleInfo>):OfferApplyFormModuleInfo
+	export function emptyPreviewAttachmentRespData():PreviewAttachmentRespData
+	export function emptyRefPreviewAttachmentRespData():Ref<PreviewAttachmentRespData>
+	export function refOfPreviewAttachmentRespData(x:PreviewAttachmentRespData,v:Ref<PreviewAttachmentRespData>)
+	export function unRefPreviewAttachmentRespData(v:Ref<PreviewAttachmentRespData>):PreviewAttachmentRespData
+	export function emptyOfferCustomField():OfferCustomField
+	export function emptyRefOfferCustomField():Ref<OfferCustomField>
+	export function refOfOfferCustomField(x:OfferCustomField,v:Ref<OfferCustomField>)
+	export function unRefOfferCustomField(v:Ref<OfferCustomField>):OfferCustomField
+	export function emptyApplicationWebsiteResumeSource():ApplicationWebsiteResumeSource
+	export function emptyRefApplicationWebsiteResumeSource():Ref<ApplicationWebsiteResumeSource>
+	export function refOfApplicationWebsiteResumeSource(x:ApplicationWebsiteResumeSource,v:Ref<ApplicationWebsiteResumeSource>)
+	export function unRefApplicationWebsiteResumeSource(v:Ref<ApplicationWebsiteResumeSource>):ApplicationWebsiteResumeSource
+	export function emptyGetJobManagerRespData():GetJobManagerRespData
+	export function emptyRefGetJobManagerRespData():Ref<GetJobManagerRespData>
+	export function refOfGetJobManagerRespData(x:GetJobManagerRespData,v:Ref<GetJobManagerRespData>)
+	export function unRefGetJobManagerRespData(v:Ref<GetJobManagerRespData>):GetJobManagerRespData
+	export function emptyInterviewAssessmentTemplateArgs():InterviewAssessmentTemplateArgs
+	export function emptyRefInterviewAssessmentTemplateArgs():Ref<InterviewAssessmentTemplateArgs>
+	export function refOfInterviewAssessmentTemplateArgs(x:InterviewAssessmentTemplateArgs,v:Ref<InterviewAssessmentTemplateArgs>)
+	export function unRefInterviewAssessmentTemplateArgs(v:Ref<InterviewAssessmentTemplateArgs>):InterviewAssessmentTemplateArgs
+	export function emptyInterviewFeedbackFormModule():InterviewFeedbackFormModule
+	export function emptyRefInterviewFeedbackFormModule():Ref<InterviewFeedbackFormModule>
+	export function refOfInterviewFeedbackFormModule(x:InterviewFeedbackFormModule,v:Ref<InterviewFeedbackFormModule>)
+	export function unRefInterviewFeedbackFormModule(v:Ref<InterviewFeedbackFormModule>):InterviewFeedbackFormModule
+	export function emptyCancelEcoBackgroundCheckReq():CancelEcoBackgroundCheckReq
+	export function emptyRefCancelEcoBackgroundCheckReq():Ref<CancelEcoBackgroundCheckReq>
+	export function refOfCancelEcoBackgroundCheckReq(x:CancelEcoBackgroundCheckReq,v:Ref<CancelEcoBackgroundCheckReq>)
+	export function unRefCancelEcoBackgroundCheckReq(v:Ref<CancelEcoBackgroundCheckReq>):CancelEcoBackgroundCheckReq
+	export function emptyPatchExternalInterviewAssessmentResp():PatchExternalInterviewAssessmentResp
+	export function emptyRefPatchExternalInterviewAssessmentResp():Ref<PatchExternalInterviewAssessmentResp>
+	export function refOfPatchExternalInterviewAssessmentResp(x:PatchExternalInterviewAssessmentResp,v:Ref<PatchExternalInterviewAssessmentResp>)
+	export function unRefPatchExternalInterviewAssessmentResp(v:Ref<PatchExternalInterviewAssessmentResp>):PatchExternalInterviewAssessmentResp
+	export function emptyApplicationPrehireOfferBasic():ApplicationPrehireOfferBasic
+	export function emptyRefApplicationPrehireOfferBasic():Ref<ApplicationPrehireOfferBasic>
+	export function refOfApplicationPrehireOfferBasic(x:ApplicationPrehireOfferBasic,v:Ref<ApplicationPrehireOfferBasic>)
+	export function unRefApplicationPrehireOfferBasic(v:Ref<ApplicationPrehireOfferBasic>):ApplicationPrehireOfferBasic
+	export function emptyListExamMarkingTaskResp():ListExamMarkingTaskResp
+	export function emptyRefListExamMarkingTaskResp():Ref<ListExamMarkingTaskResp>
+	export function refOfListExamMarkingTaskResp(x:ListExamMarkingTaskResp,v:Ref<ListExamMarkingTaskResp>)
+	export function unRefListExamMarkingTaskResp(v:Ref<ListExamMarkingTaskResp>):ListExamMarkingTaskResp
+	export function emptyListInterviewRecordIterator():ListInterviewRecordIterator
+	export function emptyRefListInterviewRecordIterator():Ref<ListInterviewRecordIterator>
+	export function refOfListInterviewRecordIterator(x:ListInterviewRecordIterator,v:Ref<ListInterviewRecordIterator>)
+	export function unRefListInterviewRecordIterator(v:Ref<ListInterviewRecordIterator>):ListInterviewRecordIterator
+	export function emptyListJobSchemaReq():ListJobSchemaReq
+	export function emptyRefListJobSchemaReq():Ref<ListJobSchemaReq>
+	export function refOfListJobSchemaReq(x:ListJobSchemaReq,v:Ref<ListJobSchemaReq>)
+	export function unRefListJobSchemaReq(v:Ref<ListJobSchemaReq>):ListJobSchemaReq
+	export function emptyJobFunction():JobFunction
+	export function emptyRefJobFunction():Ref<JobFunction>
+	export function refOfJobFunction(x:JobFunction,v:Ref<JobFunction>)
+	export function unRefJobFunction(v:Ref<JobFunction>):JobFunction
+	export function emptyQuestionnaire():Questionnaire
+	export function emptyRefQuestionnaire():Ref<Questionnaire>
+	export function refOfQuestionnaire(x:Questionnaire,v:Ref<Questionnaire>)
+	export function unRefQuestionnaire(v:Ref<Questionnaire>):Questionnaire
+	export function emptyApplicationOfferBasicInfoUser():ApplicationOfferBasicInfoUser
+	export function emptyRefApplicationOfferBasicInfoUser():Ref<ApplicationOfferBasicInfoUser>
+	export function refOfApplicationOfferBasicInfoUser(x:ApplicationOfferBasicInfoUser,v:Ref<ApplicationOfferBasicInfoUser>)
+	export function unRefApplicationOfferBasicInfoUser(v:Ref<ApplicationOfferBasicInfoUser>):ApplicationOfferBasicInfoUser
+	export function emptyJobProcessesStage():JobProcessesStage
+	export function emptyRefJobProcessesStage():Ref<JobProcessesStage>
+	export function refOfJobProcessesStage(x:JobProcessesStage,v:Ref<JobProcessesStage>)
+	export function unRefJobProcessesStage(v:Ref<JobProcessesStage>):JobProcessesStage
+	export function emptyTalentInterview():TalentInterview
+	export function emptyRefTalentInterview():Ref<TalentInterview>
+	export function refOfTalentInterview(x:TalentInterview,v:Ref<TalentInterview>)
+	export function unRefTalentInterview(v:Ref<TalentInterview>):TalentInterview
+	export function emptyInterviewTask():InterviewTask
+	export function emptyRefInterviewTask():Ref<InterviewTask>
+	export function refOfInterviewTask(x:InterviewTask,v:Ref<InterviewTask>)
+	export function unRefInterviewTask(v:Ref<InterviewTask>):InterviewTask
+	export function emptyRecruiterJobResp():RecruiterJobResp
+	export function emptyRefRecruiterJobResp():Ref<RecruiterJobResp>
+	export function refOfRecruiterJobResp(x:RecruiterJobResp,v:Ref<RecruiterJobResp>)
+	export function unRefRecruiterJobResp(v:Ref<RecruiterJobResp>):RecruiterJobResp
+	export function emptyScoreCalculationConfig():ScoreCalculationConfig
+	export function emptyRefScoreCalculationConfig():Ref<ScoreCalculationConfig>
+	export function refOfScoreCalculationConfig(x:ScoreCalculationConfig,v:Ref<ScoreCalculationConfig>)
+	export function unRefScoreCalculationConfig(v:Ref<ScoreCalculationConfig>):ScoreCalculationConfig
+	export function emptyListResumeSourceResp():ListResumeSourceResp
+	export function emptyRefListResumeSourceResp():Ref<ListResumeSourceResp>
+	export function refOfListResumeSourceResp(x:ListResumeSourceResp,v:Ref<ListResumeSourceResp>)
+	export function unRefListResumeSourceResp(v:Ref<ListResumeSourceResp>):ListResumeSourceResp
+	export function emptyMasterLocationAddressInfo():MasterLocationAddressInfo
+	export function emptyRefMasterLocationAddressInfo():Ref<MasterLocationAddressInfo>
+	export function refOfMasterLocationAddressInfo(x:MasterLocationAddressInfo,v:Ref<MasterLocationAddressInfo>)
+	export function unRefMasterLocationAddressInfo(v:Ref<MasterLocationAddressInfo>):MasterLocationAddressInfo
+	export function emptyProtectAgencyResp():ProtectAgencyResp
+	export function emptyRefProtectAgencyResp():Ref<ProtectAgencyResp>
+	export function refOfProtectAgencyResp(x:ProtectAgencyResp,v:Ref<ProtectAgencyResp>)
+	export function unRefProtectAgencyResp(v:Ref<ProtectAgencyResp>):ProtectAgencyResp
+	export function emptyListExternalApplicationReq():ListExternalApplicationReq
+	export function emptyRefListExternalApplicationReq():Ref<ListExternalApplicationReq>
+	export function refOfListExternalApplicationReq(x:ListExternalApplicationReq,v:Ref<ListExternalApplicationReq>)
+	export function unRefListExternalApplicationReq(v:Ref<ListExternalApplicationReq>):ListExternalApplicationReq
+	export function emptyGetJobResp():GetJobResp
+	export function emptyRefGetJobResp():Ref<GetJobResp>
+	export function refOfGetJobResp(x:GetJobResp,v:Ref<GetJobResp>)
+	export function unRefGetJobResp(v:Ref<GetJobResp>):GetJobResp
+	export function emptyTerminationReason():TerminationReason
+	export function emptyRefTerminationReason():Ref<TerminationReason>
+	export function refOfTerminationReason(x:TerminationReason,v:Ref<TerminationReason>)
+	export function unRefTerminationReason(v:Ref<TerminationReason>):TerminationReason
+	export function emptyUserId():UserId
+	export function emptyRefUserId():Ref<UserId>
+	export function refOfUserId(x:UserId,v:Ref<UserId>)
+	export function unRefUserId(v:Ref<UserId>):UserId
+	export function emptyCreateApplicationReqBody():CreateApplicationReqBody
+	export function emptyRefCreateApplicationReqBody():Ref<CreateApplicationReqBody>
+	export function refOfCreateApplicationReqBody(x:CreateApplicationReqBody,v:Ref<CreateApplicationReqBody>)
+	export function unRefCreateApplicationReqBody(v:Ref<CreateApplicationReqBody>):CreateApplicationReqBody
+	export function emptyListTalentRespData():ListTalentRespData
+	export function emptyRefListTalentRespData():Ref<ListTalentRespData>
+	export function refOfListTalentRespData(x:ListTalentRespData,v:Ref<ListTalentRespData>)
+	export function unRefListTalentRespData(v:Ref<ListTalentRespData>):ListTalentRespData
+	export function emptyWebsiteDeliveryProject():WebsiteDeliveryProject
+	export function emptyRefWebsiteDeliveryProject():Ref<WebsiteDeliveryProject>
+	export function refOfWebsiteDeliveryProject(x:WebsiteDeliveryProject,v:Ref<WebsiteDeliveryProject>)
+	export function unRefWebsiteDeliveryProject(v:Ref<WebsiteDeliveryProject>):WebsiteDeliveryProject
+	export function emptyContractPeriodInfo():ContractPeriodInfo
+	export function emptyRefContractPeriodInfo():Ref<ContractPeriodInfo>
+	export function refOfContractPeriodInfo(x:ContractPeriodInfo,v:Ref<ContractPeriodInfo>)
+	export function unRefContractPeriodInfo(v:Ref<ContractPeriodInfo>):ContractPeriodInfo
+	export function emptyListInterviewFeedbackFormIterator():ListInterviewFeedbackFormIterator
+	export function emptyRefListInterviewFeedbackFormIterator():Ref<ListInterviewFeedbackFormIterator>
+	export function refOfListInterviewFeedbackFormIterator(x:ListInterviewFeedbackFormIterator,v:Ref<ListInterviewFeedbackFormIterator>)
+	export function unRefListInterviewFeedbackFormIterator(v:Ref<ListInterviewFeedbackFormIterator>):ListInterviewFeedbackFormIterator
+	export function emptyOfferSchema():OfferSchema
+	export function emptyRefOfferSchema():Ref<OfferSchema>
+	export function refOfOfferSchema(x:OfferSchema,v:Ref<OfferSchema>)
+	export function unRefOfferSchema(v:Ref<OfferSchema>):OfferSchema
+	export function emptyCombinedCreateTalentReq():CombinedCreateTalentReq
+	export function emptyRefCombinedCreateTalentReq():Ref<CombinedCreateTalentReq>
+	export function refOfCombinedCreateTalentReq(x:CombinedCreateTalentReq,v:Ref<CombinedCreateTalentReq>)
+	export function unRefCombinedCreateTalentReq(v:Ref<CombinedCreateTalentReq>):CombinedCreateTalentReq
+	export function emptyListJobRequirementSchemaResp():ListJobRequirementSchemaResp
+	export function emptyRefListJobRequirementSchemaResp():Ref<ListJobRequirementSchemaResp>
+	export function refOfListJobRequirementSchemaResp(x:ListJobRequirementSchemaResp,v:Ref<ListJobRequirementSchemaResp>)
+	export function unRefListJobRequirementSchemaResp(v:Ref<ListJobRequirementSchemaResp>):ListJobRequirementSchemaResp
+	export function emptySiteResumeCompetition():SiteResumeCompetition
+	export function emptyRefSiteResumeCompetition():Ref<SiteResumeCompetition>
+	export function refOfSiteResumeCompetition(x:SiteResumeCompetition,v:Ref<SiteResumeCompetition>)
+	export function unRefSiteResumeCompetition(v:Ref<SiteResumeCompetition>):SiteResumeCompetition
+	export function emptyTalentLanguageInfo():TalentLanguageInfo
+	export function emptyRefTalentLanguageInfo():Ref<TalentLanguageInfo>
+	export function refOfTalentLanguageInfo(x:TalentLanguageInfo,v:Ref<TalentLanguageInfo>)
+	export function unRefTalentLanguageInfo(v:Ref<TalentLanguageInfo>):TalentLanguageInfo
+	export function emptyTalentWorksInfo():TalentWorksInfo
+	export function emptyRefTalentWorksInfo():Ref<TalentWorksInfo>
+	export function refOfTalentWorksInfo(x:TalentWorksInfo,v:Ref<TalentWorksInfo>)
+	export function unRefTalentWorksInfo(v:Ref<TalentWorksInfo>):TalentWorksInfo
+	export function emptyGetInterviewRecordAttachmentRespData():GetInterviewRecordAttachmentRespData
+	export function emptyRefGetInterviewRecordAttachmentRespData():Ref<GetInterviewRecordAttachmentRespData>
+	export function refOfGetInterviewRecordAttachmentRespData(x:GetInterviewRecordAttachmentRespData,v:Ref<GetInterviewRecordAttachmentRespData>)
+	export function unRefGetInterviewRecordAttachmentRespData(v:Ref<GetInterviewRecordAttachmentRespData>):GetInterviewRecordAttachmentRespData
+	export function emptyOfferApplicationReq():OfferApplicationReq
+	export function emptyRefOfferApplicationReq():Ref<OfferApplicationReq>
+	export function refOfOfferApplicationReq(x:OfferApplicationReq,v:Ref<OfferApplicationReq>)
+	export function unRefOfferApplicationReq(v:Ref<OfferApplicationReq>):OfferApplicationReq
+	export function emptyApplicationOfferBasicInfoCustomizedObject():ApplicationOfferBasicInfoCustomizedObject
+	export function emptyRefApplicationOfferBasicInfoCustomizedObject():Ref<ApplicationOfferBasicInfoCustomizedObject>
+	export function refOfApplicationOfferBasicInfoCustomizedObject(x:ApplicationOfferBasicInfoCustomizedObject,v:Ref<ApplicationOfferBasicInfoCustomizedObject>)
+	export function unRefApplicationOfferBasicInfoCustomizedObject(v:Ref<ApplicationOfferBasicInfoCustomizedObject>):ApplicationOfferBasicInfoCustomizedObject
+	export function emptyJobRequirementSchema():JobRequirementSchema
+	export function emptyRefJobRequirementSchema():Ref<JobRequirementSchema>
+	export function refOfJobRequirementSchema(x:JobRequirementSchema,v:Ref<JobRequirementSchema>)
+	export function unRefJobRequirementSchema(v:Ref<JobRequirementSchema>):JobRequirementSchema
+	export function emptyJobSchema():JobSchema
+	export function emptyRefJobSchema():Ref<JobSchema>
+	export function refOfJobSchema(x:JobSchema,v:Ref<JobSchema>)
+	export function unRefJobSchema(v:Ref<JobSchema>):JobSchema
+	export function emptyListInterviewTaskResp():ListInterviewTaskResp
+	export function emptyRefListInterviewTaskResp():Ref<ListInterviewTaskResp>
+	export function refOfListInterviewTaskResp(x:ListInterviewTaskResp,v:Ref<ListInterviewTaskResp>)
+	export function unRefListInterviewTaskResp(v:Ref<ListInterviewTaskResp>):ListInterviewTaskResp
+	export function emptyResumeSource():ResumeSource
+	export function emptyRefResumeSource():Ref<ResumeSource>
+	export function refOfResumeSource(x:ResumeSource,v:Ref<ResumeSource>)
+	export function unRefResumeSource(v:Ref<ResumeSource>):ResumeSource
+	export function emptyDepartmentId():DepartmentId
+	export function emptyRefDepartmentId():Ref<DepartmentId>
+	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
+	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
+	export function emptyApplicationPrehire():ApplicationPrehire
+	export function emptyRefApplicationPrehire():Ref<ApplicationPrehire>
+	export function refOfApplicationPrehire(x:ApplicationPrehire,v:Ref<ApplicationPrehire>)
+	export function unRefApplicationPrehire(v:Ref<ApplicationPrehire>):ApplicationPrehire
+	export function emptyWebsiteDeliveryWorks():WebsiteDeliveryWorks
+	export function emptyRefWebsiteDeliveryWorks():Ref<WebsiteDeliveryWorks>
+	export function refOfWebsiteDeliveryWorks(x:WebsiteDeliveryWorks,v:Ref<WebsiteDeliveryWorks>)
+	export function unRefWebsiteDeliveryWorks(v:Ref<WebsiteDeliveryWorks>):WebsiteDeliveryWorks
+	export function emptyListTerminationReasonResp():ListTerminationReasonResp
+	export function emptyRefListTerminationReasonResp():Ref<ListTerminationReasonResp>
+	export function refOfListTerminationReasonResp(x:ListTerminationReasonResp,v:Ref<ListTerminationReasonResp>)
+	export function unRefListTerminationReasonResp(v:Ref<ListTerminationReasonResp>):ListTerminationReasonResp
+	export function emptyLocationCountry():LocationCountry
+	export function emptyRefLocationCountry():Ref<LocationCountry>
+	export function refOfLocationCountry(x:LocationCountry,v:Ref<LocationCountry>)
+	export function unRefLocationCountry(v:Ref<LocationCountry>):LocationCountry
+	export function emptyApplicationBasicInfo():ApplicationBasicInfo
+	export function emptyRefApplicationBasicInfo():Ref<ApplicationBasicInfo>
+	export function refOfApplicationBasicInfo(x:ApplicationBasicInfo,v:Ref<ApplicationBasicInfo>)
+	export function unRefApplicationBasicInfo(v:Ref<ApplicationBasicInfo>):ApplicationBasicInfo
+	export function emptyCertificateInfo():CertificateInfo
+	export function emptyRefCertificateInfo():Ref<CertificateInfo>
+	export function refOfCertificateInfo(x:CertificateInfo,v:Ref<CertificateInfo>)
+	export function unRefCertificateInfo(v:Ref<CertificateInfo>):CertificateInfo
+	export function emptyCombinedUpdateJobReq():CombinedUpdateJobReq
+	export function emptyRefCombinedUpdateJobReq():Ref<CombinedUpdateJobReq>
+	export function refOfCombinedUpdateJobReq(x:CombinedUpdateJobReq,v:Ref<CombinedUpdateJobReq>)
+	export function unRefCombinedUpdateJobReq(v:Ref<CombinedUpdateJobReq>):CombinedUpdateJobReq
+	export function emptyExternalInterviewAssessmentDimension():ExternalInterviewAssessmentDimension
+	export function emptyRefExternalInterviewAssessmentDimension():Ref<ExternalInterviewAssessmentDimension>
+	export function refOfExternalInterviewAssessmentDimension(x:ExternalInterviewAssessmentDimension,v:Ref<ExternalInterviewAssessmentDimension>)
+	export function unRefExternalInterviewAssessmentDimension(v:Ref<ExternalInterviewAssessmentDimension>):ExternalInterviewAssessmentDimension
+	export function emptyListJobRequirementSchemaRespData():ListJobRequirementSchemaRespData
+	export function emptyRefListJobRequirementSchemaRespData():Ref<ListJobRequirementSchemaRespData>
+	export function refOfListJobRequirementSchemaRespData(x:ListJobRequirementSchemaRespData,v:Ref<ListJobRequirementSchemaRespData>)
+	export function unRefListJobRequirementSchemaRespData(v:Ref<ListJobRequirementSchemaRespData>):ListJobRequirementSchemaRespData
+	export function emptyInterviewer():Interviewer
+	export function emptyRefInterviewer():Ref<Interviewer>
+	export function refOfInterviewer(x:Interviewer,v:Ref<Interviewer>)
+	export function unRefInterviewer(v:Ref<Interviewer>):Interviewer
+	export function emptyAppliTalentEducationInfo():AppliTalentEducationInfo
+	export function emptyRefAppliTalentEducationInfo():Ref<AppliTalentEducationInfo>
+	export function refOfAppliTalentEducationInfo(x:AppliTalentEducationInfo,v:Ref<AppliTalentEducationInfo>)
+	export function unRefAppliTalentEducationInfo(v:Ref<AppliTalentEducationInfo>):AppliTalentEducationInfo
+	export function emptyGetReferralWebsiteJobPostReq():GetReferralWebsiteJobPostReq
+	export function emptyRefGetReferralWebsiteJobPostReq():Ref<GetReferralWebsiteJobPostReq>
+	export function refOfGetReferralWebsiteJobPostReq(x:GetReferralWebsiteJobPostReq,v:Ref<GetReferralWebsiteJobPostReq>)
+	export function unRefGetReferralWebsiteJobPostReq(v:Ref<GetReferralWebsiteJobPostReq>):GetReferralWebsiteJobPostReq
+	export function emptyGetWebsiteDeliveryTaskRespData():GetWebsiteDeliveryTaskRespData
+	export function emptyRefGetWebsiteDeliveryTaskRespData():Ref<GetWebsiteDeliveryTaskRespData>
+	export function refOfGetWebsiteDeliveryTaskRespData(x:GetWebsiteDeliveryTaskRespData,v:Ref<GetWebsiteDeliveryTaskRespData>)
+	export function unRefGetWebsiteDeliveryTaskRespData(v:Ref<GetWebsiteDeliveryTaskRespData>):GetWebsiteDeliveryTaskRespData
+	export function emptyInterviewDimensionOption():InterviewDimensionOption
+	export function emptyRefInterviewDimensionOption():Ref<InterviewDimensionOption>
+	export function refOfInterviewDimensionOption(x:InterviewDimensionOption,v:Ref<InterviewDimensionOption>)
+	export function unRefInterviewDimensionOption(v:Ref<InterviewDimensionOption>):InterviewDimensionOption
+	export function emptyCreateByResumeWebsiteDeliveryReq():CreateByResumeWebsiteDeliveryReq
+	export function emptyRefCreateByResumeWebsiteDeliveryReq():Ref<CreateByResumeWebsiteDeliveryReq>
+	export function refOfCreateByResumeWebsiteDeliveryReq(x:CreateByResumeWebsiteDeliveryReq,v:Ref<CreateByResumeWebsiteDeliveryReq>)
+	export function unRefCreateByResumeWebsiteDeliveryReq(v:Ref<CreateByResumeWebsiteDeliveryReq>):CreateByResumeWebsiteDeliveryReq
+	export function emptyGetEmployeeReq():GetEmployeeReq
+	export function emptyRefGetEmployeeReq():Ref<GetEmployeeReq>
+	export function refOfGetEmployeeReq(x:GetEmployeeReq,v:Ref<GetEmployeeReq>)
+	export function unRefGetEmployeeReq(v:Ref<GetEmployeeReq>):GetEmployeeReq
+	export function emptyTalentResumeSource():TalentResumeSource
+	export function emptyRefTalentResumeSource():Ref<TalentResumeSource>
+	export function refOfTalentResumeSource(x:TalentResumeSource,v:Ref<TalentResumeSource>)
+	export function unRefTalentResumeSource(v:Ref<TalentResumeSource>):TalentResumeSource
+	export function emptyTalentSchemaOption():TalentSchemaOption
+	export function emptyRefTalentSchemaOption():Ref<TalentSchemaOption>
+	export function refOfTalentSchemaOption(x:TalentSchemaOption,v:Ref<TalentSchemaOption>)
+	export function unRefTalentSchemaOption(v:Ref<TalentSchemaOption>):TalentSchemaOption
+	export function emptyCreateExternalBackgroundCheckRespData():CreateExternalBackgroundCheckRespData
+	export function emptyRefCreateExternalBackgroundCheckRespData():Ref<CreateExternalBackgroundCheckRespData>
+	export function refOfCreateExternalBackgroundCheckRespData(x:CreateExternalBackgroundCheckRespData,v:Ref<CreateExternalBackgroundCheckRespData>)
+	export function unRefCreateExternalBackgroundCheckRespData(v:Ref<CreateExternalBackgroundCheckRespData>):CreateExternalBackgroundCheckRespData
+	export function emptyQueryTalentObjectRespData():QueryTalentObjectRespData
+	export function emptyRefQueryTalentObjectRespData():Ref<QueryTalentObjectRespData>
+	export function refOfQueryTalentObjectRespData(x:QueryTalentObjectRespData,v:Ref<QueryTalentObjectRespData>)
+	export function unRefQueryTalentObjectRespData(v:Ref<QueryTalentObjectRespData>):QueryTalentObjectRespData
+	export function emptyUpdateOfferCustomFieldReq():UpdateOfferCustomFieldReq
+	export function emptyRefUpdateOfferCustomFieldReq():Ref<UpdateOfferCustomFieldReq>
+	export function refOfUpdateOfferCustomFieldReq(x:UpdateOfferCustomFieldReq,v:Ref<UpdateOfferCustomFieldReq>)
+	export function unRefUpdateOfferCustomFieldReq(v:Ref<UpdateOfferCustomFieldReq>):UpdateOfferCustomFieldReq
+	export function emptySiteJobPostSearchInfo():SiteJobPostSearchInfo
+	export function emptyRefSiteJobPostSearchInfo():Ref<SiteJobPostSearchInfo>
+	export function refOfSiteJobPostSearchInfo(x:SiteJobPostSearchInfo,v:Ref<SiteJobPostSearchInfo>)
+	export function unRefSiteJobPostSearchInfo(v:Ref<SiteJobPostSearchInfo>):SiteJobPostSearchInfo
+	export function emptyCreateOfferRespData():CreateOfferRespData
+	export function emptyRefCreateOfferRespData():Ref<CreateOfferRespData>
+	export function refOfCreateOfferRespData(x:CreateOfferRespData,v:Ref<CreateOfferRespData>)
+	export function unRefCreateOfferRespData(v:Ref<CreateOfferRespData>):CreateOfferRespData
+	export function emptyTalentBatchInfo():TalentBatchInfo
+	export function emptyRefTalentBatchInfo():Ref<TalentBatchInfo>
+	export function refOfTalentBatchInfo(x:TalentBatchInfo,v:Ref<TalentBatchInfo>)
+	export function unRefTalentBatchInfo(v:Ref<TalentBatchInfo>):TalentBatchInfo
+	export function emptyNationality():Nationality
+	export function emptyRefNationality():Ref<Nationality>
+	export function refOfNationality(x:Nationality,v:Ref<Nationality>)
+	export function unRefNationality(v:Ref<Nationality>):Nationality
+	export function emptyListJobResp():ListJobResp
+	export function emptyRefListJobResp():Ref<ListJobResp>
+	export function refOfListJobResp(x:ListJobResp,v:Ref<ListJobResp>)
+	export function unRefListJobResp(v:Ref<ListJobResp>):ListJobResp
+	export function emptyListOfferApplicationFormResp():ListOfferApplicationFormResp
+	export function emptyRefListOfferApplicationFormResp():Ref<ListOfferApplicationFormResp>
+	export function refOfListOfferApplicationFormResp(x:ListOfferApplicationFormResp,v:Ref<ListOfferApplicationFormResp>)
+	export function unRefListOfferApplicationFormResp(v:Ref<ListOfferApplicationFormResp>):ListOfferApplicationFormResp
+	export function emptyBatchUpdateEcoExamPaperResp():BatchUpdateEcoExamPaperResp
+	export function emptyRefBatchUpdateEcoExamPaperResp():Ref<BatchUpdateEcoExamPaperResp>
+	export function refOfBatchUpdateEcoExamPaperResp(x:BatchUpdateEcoExamPaperResp,v:Ref<BatchUpdateEcoExamPaperResp>)
+	export function unRefBatchUpdateEcoExamPaperResp(v:Ref<BatchUpdateEcoExamPaperResp>):BatchUpdateEcoExamPaperResp
+	export function emptyCash():Cash
+	export function emptyRefCash():Ref<Cash>
+	export function refOfCash(x:Cash,v:Ref<Cash>)
+	export function unRefCash(v:Ref<Cash>):Cash
+	export function emptyUserContactInfo():UserContactInfo
+	export function emptyRefUserContactInfo():Ref<UserContactInfo>
+	export function refOfUserContactInfo(x:UserContactInfo,v:Ref<UserContactInfo>)
+	export function unRefUserContactInfo(v:Ref<UserContactInfo>):UserContactInfo
+	export function emptyListJobRequirementResp():ListJobRequirementResp
+	export function emptyRefListJobRequirementResp():Ref<ListJobRequirementResp>
+	export function refOfListJobRequirementResp(x:ListJobRequirementResp,v:Ref<ListJobRequirementResp>)
+	export function unRefListJobRequirementResp(v:Ref<ListJobRequirementResp>):ListJobRequirementResp
+	export function emptyListTalentResp():ListTalentResp
+	export function emptyRefListTalentResp():Ref<ListTalentResp>
+	export function refOfListTalentResp(x:ListTalentResp,v:Ref<ListTalentResp>)
+	export function unRefListTalentResp(v:Ref<ListTalentResp>):ListTalentResp
+	export function emptySearchTestIterator():SearchTestIterator
+	export function emptyRefSearchTestIterator():Ref<SearchTestIterator>
+	export function refOfSearchTestIterator(x:SearchTestIterator,v:Ref<SearchTestIterator>)
+	export function unRefSearchTestIterator(v:Ref<SearchTestIterator>):SearchTestIterator
+	export function emptyCity():City
+	export function emptyRefCity():Ref<City>
+	export function refOfCity(x:City,v:Ref<City>)
+	export function unRefCity(v:Ref<City>):City
+	export function emptyGetInterviewRecordReq():GetInterviewRecordReq
+	export function emptyRefGetInterviewRecordReq():Ref<GetInterviewRecordReq>
+	export function refOfGetInterviewRecordReq(x:GetInterviewRecordReq,v:Ref<GetInterviewRecordReq>)
+	export function unRefGetInterviewRecordReq(v:Ref<GetInterviewRecordReq>):GetInterviewRecordReq
+	export function emptyTalentSchemaChildObject():TalentSchemaChildObject
+	export function emptyRefTalentSchemaChildObject():Ref<TalentSchemaChildObject>
+	export function refOfTalentSchemaChildObject(x:TalentSchemaChildObject,v:Ref<TalentSchemaChildObject>)
+	export function unRefTalentSchemaChildObject(v:Ref<TalentSchemaChildObject>):TalentSchemaChildObject
+	export function emptyUpdateJobRequirementReq():UpdateJobRequirementReq
+	export function emptyRefUpdateJobRequirementReq():Ref<UpdateJobRequirementReq>
+	export function refOfUpdateJobRequirementReq(x:UpdateJobRequirementReq,v:Ref<UpdateJobRequirementReq>)
+	export function unRefUpdateJobRequirementReq(v:Ref<UpdateJobRequirementReq>):UpdateJobRequirementReq
+	export function emptyOpenJobReq():OpenJobReq
+	export function emptyRefOpenJobReq():Ref<OpenJobReq>
+	export function refOfOpenJobReq(x:OpenJobReq,v:Ref<OpenJobReq>)
+	export function unRefOpenJobReq(v:Ref<OpenJobReq>):OpenJobReq
+	export function emptyTalentProjectInfo():TalentProjectInfo
+	export function emptyRefTalentProjectInfo():Ref<TalentProjectInfo>
+	export function refOfTalentProjectInfo(x:TalentProjectInfo,v:Ref<TalentProjectInfo>)
+	export function unRefTalentProjectInfo(v:Ref<TalentProjectInfo>):TalentProjectInfo
+	export function emptyListTalentFolderIterator():ListTalentFolderIterator
+	export function emptyRefListTalentFolderIterator():Ref<ListTalentFolderIterator>
+	export function refOfListTalentFolderIterator(x:ListTalentFolderIterator,v:Ref<ListTalentFolderIterator>)
+	export function unRefListTalentFolderIterator(v:Ref<ListTalentFolderIterator>):ListTalentFolderIterator
+	export function emptyOpenJobReqBody():OpenJobReqBody
+	export function emptyRefOpenJobReqBody():Ref<OpenJobReqBody>
+	export function refOfOpenJobReqBody(x:OpenJobReqBody,v:Ref<OpenJobReqBody>)
+	export function unRefOpenJobReqBody(v:Ref<OpenJobReqBody>):OpenJobReqBody
+	export function emptyGetNoteReq():GetNoteReq
+	export function emptyRefGetNoteReq():Ref<GetNoteReq>
+	export function refOfGetNoteReq(x:GetNoteReq,v:Ref<GetNoteReq>)
+	export function unRefGetNoteReq(v:Ref<GetNoteReq>):GetNoteReq
+	export function emptyBatchDeleteEcoBackgroundCheckCustomFieldReq():BatchDeleteEcoBackgroundCheckCustomFieldReq
+	export function emptyRefBatchDeleteEcoBackgroundCheckCustomFieldReq():Ref<BatchDeleteEcoBackgroundCheckCustomFieldReq>
+	export function refOfBatchDeleteEcoBackgroundCheckCustomFieldReq(x:BatchDeleteEcoBackgroundCheckCustomFieldReq,v:Ref<BatchDeleteEcoBackgroundCheckCustomFieldReq>)
+	export function unRefBatchDeleteEcoBackgroundCheckCustomFieldReq(v:Ref<BatchDeleteEcoBackgroundCheckCustomFieldReq>):BatchDeleteEcoBackgroundCheckCustomFieldReq
+	export function emptyListInterviewTaskReq():ListInterviewTaskReq
+	export function emptyRefListInterviewTaskReq():Ref<ListInterviewTaskReq>
+	export function refOfListInterviewTaskReq(x:ListInterviewTaskReq,v:Ref<ListInterviewTaskReq>)
+	export function unRefListInterviewTaskReq(v:Ref<ListInterviewTaskReq>):ListInterviewTaskReq
+	export function emptyPatchEhrImportTaskResp():PatchEhrImportTaskResp
+	export function emptyRefPatchEhrImportTaskResp():Ref<PatchEhrImportTaskResp>
+	export function refOfPatchEhrImportTaskResp(x:PatchEhrImportTaskResp,v:Ref<PatchEhrImportTaskResp>)
+	export function unRefPatchEhrImportTaskResp(v:Ref<PatchEhrImportTaskResp>):PatchEhrImportTaskResp
+	export function emptyAppliOfferOnboardProfileCity():AppliOfferOnboardProfileCity
+	export function emptyRefAppliOfferOnboardProfileCity():Ref<AppliOfferOnboardProfileCity>
+	export function refOfAppliOfferOnboardProfileCity(x:AppliOfferOnboardProfileCity,v:Ref<AppliOfferOnboardProfileCity>)
+	export function unRefAppliOfferOnboardProfileCity(v:Ref<AppliOfferOnboardProfileCity>):AppliOfferOnboardProfileCity
+	export function emptyCreateExternalApplicationReq():CreateExternalApplicationReq
+	export function emptyRefCreateExternalApplicationReq():Ref<CreateExternalApplicationReq>
+	export function refOfCreateExternalApplicationReq(x:CreateExternalApplicationReq,v:Ref<CreateExternalApplicationReq>)
+	export function unRefCreateExternalApplicationReq(v:Ref<CreateExternalApplicationReq>):CreateExternalApplicationReq
+	export function emptyBaseResp():BaseResp
+	export function emptyRefBaseResp():Ref<BaseResp>
+	export function refOfBaseResp(x:BaseResp,v:Ref<BaseResp>)
+	export function unRefBaseResp(v:Ref<BaseResp>):BaseResp
+	export function emptyBatchUpdateEcoBackgroundCheckPackageResp():BatchUpdateEcoBackgroundCheckPackageResp
+	export function emptyRefBatchUpdateEcoBackgroundCheckPackageResp():Ref<BatchUpdateEcoBackgroundCheckPackageResp>
+	export function refOfBatchUpdateEcoBackgroundCheckPackageResp(x:BatchUpdateEcoBackgroundCheckPackageResp,v:Ref<BatchUpdateEcoBackgroundCheckPackageResp>)
+	export function unRefBatchUpdateEcoBackgroundCheckPackageResp(v:Ref<BatchUpdateEcoBackgroundCheckPackageResp>):BatchUpdateEcoBackgroundCheckPackageResp
+	export function emptyTalentFolderForList():TalentFolderForList
+	export function emptyRefTalentFolderForList():Ref<TalentFolderForList>
+	export function refOfTalentFolderForList(x:TalentFolderForList,v:Ref<TalentFolderForList>)
+	export function unRefTalentFolderForList(v:Ref<TalentFolderForList>):TalentFolderForList
+	export function emptyP2EcoExamCreatedV1Data():P2EcoExamCreatedV1Data
+	export function emptyRefP2EcoExamCreatedV1Data():Ref<P2EcoExamCreatedV1Data>
+	export function refOfP2EcoExamCreatedV1Data(x:P2EcoExamCreatedV1Data,v:Ref<P2EcoExamCreatedV1Data>)
+	export function unRefP2EcoExamCreatedV1Data(v:Ref<P2EcoExamCreatedV1Data>):P2EcoExamCreatedV1Data
+	export function emptyScoreDimensionConfig():ScoreDimensionConfig
+	export function emptyRefScoreDimensionConfig():Ref<ScoreDimensionConfig>
+	export function refOfScoreDimensionConfig(x:ScoreDimensionConfig,v:Ref<ScoreDimensionConfig>)
+	export function unRefScoreDimensionConfig(v:Ref<ScoreDimensionConfig>):ScoreDimensionConfig
+	export function emptyQuestion():Question
+	export function emptyRefQuestion():Ref<Question>
+	export function refOfQuestion(x:Question,v:Ref<Question>)
+	export function unRefQuestion(v:Ref<Question>):Question
+	export function emptySiteResumeSns():SiteResumeSns
+	export function emptyRefSiteResumeSns():Ref<SiteResumeSns>
+	export function refOfSiteResumeSns(x:SiteResumeSns,v:Ref<SiteResumeSns>)
+	export function unRefSiteResumeSns(v:Ref<SiteResumeSns>):SiteResumeSns
+	export function emptyTalentBasicInfo():TalentBasicInfo
+	export function emptyRefTalentBasicInfo():Ref<TalentBasicInfo>
+	export function refOfTalentBasicInfo(x:TalentBasicInfo,v:Ref<TalentBasicInfo>)
+	export function unRefTalentBasicInfo(v:Ref<TalentBasicInfo>):TalentBasicInfo
+	export function emptyGetWebsiteJobPostReq():GetWebsiteJobPostReq
+	export function emptyRefGetWebsiteJobPostReq():Ref<GetWebsiteJobPostReq>
+	export function refOfGetWebsiteJobPostReq(x:GetWebsiteJobPostReq,v:Ref<GetWebsiteJobPostReq>)
+	export function unRefGetWebsiteJobPostReq(v:Ref<GetWebsiteJobPostReq>):GetWebsiteJobPostReq
+	export function emptyListNoteReq():ListNoteReq
+	export function emptyRefListNoteReq():Ref<ListNoteReq>
+	export function refOfListNoteReq(x:ListNoteReq,v:Ref<ListNoteReq>)
+	export function unRefListNoteReq(v:Ref<ListNoteReq>):ListNoteReq
+	export function emptyDeleteExternalApplicationReq():DeleteExternalApplicationReq
+	export function emptyRefDeleteExternalApplicationReq():Ref<DeleteExternalApplicationReq>
+	export function refOfDeleteExternalApplicationReq(x:DeleteExternalApplicationReq,v:Ref<DeleteExternalApplicationReq>)
+	export function unRefDeleteExternalApplicationReq(v:Ref<DeleteExternalApplicationReq>):DeleteExternalApplicationReq
+	export function emptyP2ReferralAccountAssetsUpdateV1Data():P2ReferralAccountAssetsUpdateV1Data
+	export function emptyRefP2ReferralAccountAssetsUpdateV1Data():Ref<P2ReferralAccountAssetsUpdateV1Data>
+	export function refOfP2ReferralAccountAssetsUpdateV1Data(x:P2ReferralAccountAssetsUpdateV1Data,v:Ref<P2ReferralAccountAssetsUpdateV1Data>)
+	export function unRefP2ReferralAccountAssetsUpdateV1Data(v:Ref<P2ReferralAccountAssetsUpdateV1Data>):P2ReferralAccountAssetsUpdateV1Data
+	export function emptyAppliOfferBasicCustObjOpV():AppliOfferBasicCustObjOpV
+	export function emptyRefAppliOfferBasicCustObjOpV():Ref<AppliOfferBasicCustObjOpV>
+	export function refOfAppliOfferBasicCustObjOpV(x:AppliOfferBasicCustObjOpV,v:Ref<AppliOfferBasicCustObjOpV>)
+	export function unRefAppliOfferBasicCustObjOpV(v:Ref<AppliOfferBasicCustObjOpV>):AppliOfferBasicCustObjOpV
+	export function emptyEhrImportTask():EhrImportTask
+	export function emptyRefEhrImportTask():Ref<EhrImportTask>
+	export function refOfEhrImportTask(x:EhrImportTask,v:Ref<EhrImportTask>)
+	export function unRefEhrImportTask(v:Ref<EhrImportTask>):EhrImportTask
+	export function emptyListLocationRespData():ListLocationRespData
+	export function emptyRefListLocationRespData():Ref<ListLocationRespData>
+	export function refOfListLocationRespData(x:ListLocationRespData,v:Ref<ListLocationRespData>)
+	export function unRefListLocationRespData(v:Ref<ListLocationRespData>):ListLocationRespData
+	export function emptyWebsiteUser():WebsiteUser
+	export function emptyRefWebsiteUser():Ref<WebsiteUser>
+	export function refOfWebsiteUser(x:WebsiteUser,v:Ref<WebsiteUser>)
+	export function unRefWebsiteUser(v:Ref<WebsiteUser>):WebsiteUser
+	export function emptyInternOfferOnboardingInfo():InternOfferOnboardingInfo
+	export function emptyRefInternOfferOnboardingInfo():Ref<InternOfferOnboardingInfo>
+	export function refOfInternOfferOnboardingInfo(x:InternOfferOnboardingInfo,v:Ref<InternOfferOnboardingInfo>)
+	export function unRefInternOfferOnboardingInfo(v:Ref<InternOfferOnboardingInfo>):InternOfferOnboardingInfo
+	export function emptyReconciliationReferralAccountReq():ReconciliationReferralAccountReq
+	export function emptyRefReconciliationReferralAccountReq():Ref<ReconciliationReferralAccountReq>
+	export function refOfReconciliationReferralAccountReq(x:ReconciliationReferralAccountReq,v:Ref<ReconciliationReferralAccountReq>)
+	export function unRefReconciliationReferralAccountReq(v:Ref<ReconciliationReferralAccountReq>):ReconciliationReferralAccountReq
+	export function emptyWebsiteDeliveryDto():WebsiteDeliveryDto
+	export function emptyRefWebsiteDeliveryDto():Ref<WebsiteDeliveryDto>
+	export function refOfWebsiteDeliveryDto(x:WebsiteDeliveryDto,v:Ref<WebsiteDeliveryDto>)
+	export function unRefWebsiteDeliveryDto(v:Ref<WebsiteDeliveryDto>):WebsiteDeliveryDto
+	export function emptyCreateTripartiteAgreementResp():CreateTripartiteAgreementResp
+	export function emptyRefCreateTripartiteAgreementResp():Ref<CreateTripartiteAgreementResp>
+	export function refOfCreateTripartiteAgreementResp(x:CreateTripartiteAgreementResp,v:Ref<CreateTripartiteAgreementResp>)
+	export function unRefCreateTripartiteAgreementResp(v:Ref<CreateTripartiteAgreementResp>):CreateTripartiteAgreementResp
+	export function emptyListQuestionnaireRespData():ListQuestionnaireRespData
+	export function emptyRefListQuestionnaireRespData():Ref<ListQuestionnaireRespData>
+	export function refOfListQuestionnaireRespData(x:ListQuestionnaireRespData,v:Ref<ListQuestionnaireRespData>)
+	export function unRefListQuestionnaireRespData(v:Ref<ListQuestionnaireRespData>):ListQuestionnaireRespData
+	export function emptyTalentCustomizedValue():TalentCustomizedValue
+	export function emptyRefTalentCustomizedValue():Ref<TalentCustomizedValue>
+	export function refOfTalentCustomizedValue(x:TalentCustomizedValue,v:Ref<TalentCustomizedValue>)
+	export function unRefTalentCustomizedValue(v:Ref<TalentCustomizedValue>):TalentCustomizedValue
+	export function emptyListQuestionnaireResp():ListQuestionnaireResp
+	export function emptyRefListQuestionnaireResp():Ref<ListQuestionnaireResp>
+	export function refOfListQuestionnaireResp(x:ListQuestionnaireResp,v:Ref<ListQuestionnaireResp>)
+	export function unRefListQuestionnaireResp(v:Ref<ListQuestionnaireResp>):ListQuestionnaireResp
+	export function emptyGetNoteRespData():GetNoteRespData
+	export function emptyRefGetNoteRespData():Ref<GetNoteRespData>
+	export function refOfGetNoteRespData(x:GetNoteRespData,v:Ref<GetNoteRespData>)
+	export function unRefGetNoteRespData(v:Ref<GetNoteRespData>):GetNoteRespData
+	export function emptyAssessmentScoreInfo():AssessmentScoreInfo
+	export function emptyRefAssessmentScoreInfo():Ref<AssessmentScoreInfo>
+	export function refOfAssessmentScoreInfo(x:AssessmentScoreInfo,v:Ref<AssessmentScoreInfo>)
+	export function unRefAssessmentScoreInfo(v:Ref<AssessmentScoreInfo>):AssessmentScoreInfo
+	export function emptyBatchDeleteEcoAccountCustomFieldReqBody():BatchDeleteEcoAccountCustomFieldReqBody
+	export function emptyRefBatchDeleteEcoAccountCustomFieldReqBody():Ref<BatchDeleteEcoAccountCustomFieldReqBody>
+	export function refOfBatchDeleteEcoAccountCustomFieldReqBody(x:BatchDeleteEcoAccountCustomFieldReqBody,v:Ref<BatchDeleteEcoAccountCustomFieldReqBody>)
+	export function unRefBatchDeleteEcoAccountCustomFieldReqBody(v:Ref<BatchDeleteEcoAccountCustomFieldReqBody>):BatchDeleteEcoAccountCustomFieldReqBody
+	export function emptyCombinedCreateJobResp():CombinedCreateJobResp
+	export function emptyRefCombinedCreateJobResp():Ref<CombinedCreateJobResp>
+	export function refOfCombinedCreateJobResp(x:CombinedCreateJobResp,v:Ref<CombinedCreateJobResp>)
+	export function unRefCombinedCreateJobResp(v:Ref<CombinedCreateJobResp>):CombinedCreateJobResp
+	export function emptyCreateExternalApplicationRespData():CreateExternalApplicationRespData
+	export function emptyRefCreateExternalApplicationRespData():Ref<CreateExternalApplicationRespData>
+	export function refOfCreateExternalApplicationRespData(x:CreateExternalApplicationRespData,v:Ref<CreateExternalApplicationRespData>)
+	export function unRefCreateExternalApplicationRespData(v:Ref<CreateExternalApplicationRespData>):CreateExternalApplicationRespData
+	export function emptyProtectSearchAgencyRespData():ProtectSearchAgencyRespData
+	export function emptyRefProtectSearchAgencyRespData():Ref<ProtectSearchAgencyRespData>
+	export function refOfProtectSearchAgencyRespData(x:ProtectSearchAgencyRespData,v:Ref<ProtectSearchAgencyRespData>)
+	export function unRefProtectSearchAgencyRespData(v:Ref<ProtectSearchAgencyRespData>):ProtectSearchAgencyRespData
+	export function emptyEvaluationTask():EvaluationTask
+	export function emptyRefEvaluationTask():Ref<EvaluationTask>
+	export function refOfEvaluationTask(x:EvaluationTask,v:Ref<EvaluationTask>)
+	export function unRefEvaluationTask(v:Ref<EvaluationTask>):EvaluationTask
+	export function emptyListExamMarkingTaskIterator():ListExamMarkingTaskIterator
+	export function emptyRefListExamMarkingTaskIterator():Ref<ListExamMarkingTaskIterator>
+	export function refOfListExamMarkingTaskIterator(x:ListExamMarkingTaskIterator,v:Ref<ListExamMarkingTaskIterator>)
+	export function unRefListExamMarkingTaskIterator(v:Ref<ListExamMarkingTaskIterator>):ListExamMarkingTaskIterator
+	export function emptyCreateExternalInterviewResp():CreateExternalInterviewResp
+	export function emptyRefCreateExternalInterviewResp():Ref<CreateExternalInterviewResp>
+	export function refOfCreateExternalInterviewResp(x:CreateExternalInterviewResp,v:Ref<CreateExternalInterviewResp>)
+	export function unRefCreateExternalInterviewResp(v:Ref<CreateExternalInterviewResp>):CreateExternalInterviewResp
+	export function emptyExternalBackgroundCheck():ExternalBackgroundCheck
+	export function emptyRefExternalBackgroundCheck():Ref<ExternalBackgroundCheck>
+	export function refOfExternalBackgroundCheck(x:ExternalBackgroundCheck,v:Ref<ExternalBackgroundCheck>)
+	export function unRefExternalBackgroundCheck(v:Ref<ExternalBackgroundCheck>):ExternalBackgroundCheck
+	export function emptyJobConfigRoundType():JobConfigRoundType
+	export function emptyRefJobConfigRoundType():Ref<JobConfigRoundType>
+	export function refOfJobConfigRoundType(x:JobConfigRoundType,v:Ref<JobConfigRoundType>)
+	export function unRefJobConfigRoundType(v:Ref<JobConfigRoundType>):JobConfigRoundType
+	export function emptyGetJobManagerReq():GetJobManagerReq
+	export function emptyRefGetJobManagerReq():Ref<GetJobManagerReq>
+	export function refOfGetJobManagerReq(x:GetJobManagerReq,v:Ref<GetJobManagerReq>)
+	export function unRefGetJobManagerReq(v:Ref<GetJobManagerReq>):GetJobManagerReq
+	export function emptyBaseCity():BaseCity
+	export function emptyRefBaseCity():Ref<BaseCity>
+	export function refOfBaseCity(x:BaseCity,v:Ref<BaseCity>)
+	export function unRefBaseCity(v:Ref<BaseCity>):BaseCity
+	export function emptyCreateExamResp():CreateExamResp
+	export function emptyRefCreateExamResp():Ref<CreateExamResp>
+	export function refOfCreateExamResp(x:CreateExamResp,v:Ref<CreateExamResp>)
+	export function unRefCreateExamResp(v:Ref<CreateExamResp>):CreateExamResp
+	export function emptyListTripartiteAgreementIterator():ListTripartiteAgreementIterator
+	export function emptyRefListTripartiteAgreementIterator():Ref<ListTripartiteAgreementIterator>
+	export function refOfListTripartiteAgreementIterator(x:ListTripartiteAgreementIterator,v:Ref<ListTripartiteAgreementIterator>)
+	export function unRefListTripartiteAgreementIterator(v:Ref<ListTripartiteAgreementIterator>):ListTripartiteAgreementIterator
+	export function emptyWebsiteDeliveryAward():WebsiteDeliveryAward
+	export function emptyRefWebsiteDeliveryAward():Ref<WebsiteDeliveryAward>
+	export function refOfWebsiteDeliveryAward(x:WebsiteDeliveryAward,v:Ref<WebsiteDeliveryAward>)
+	export function unRefWebsiteDeliveryAward(v:Ref<WebsiteDeliveryAward>):WebsiteDeliveryAward
+	export function emptyCreateApplicationRespData():CreateApplicationRespData
+	export function emptyRefCreateApplicationRespData():Ref<CreateApplicationRespData>
+	export function refOfCreateApplicationRespData(x:CreateApplicationRespData,v:Ref<CreateApplicationRespData>)
+	export function unRefCreateApplicationRespData(v:Ref<CreateApplicationRespData>):CreateApplicationRespData
+	export function emptyUpdateOfferReq():UpdateOfferReq
+	export function emptyRefUpdateOfferReq():Ref<UpdateOfferReq>
+	export function refOfUpdateOfferReq(x:UpdateOfferReq,v:Ref<UpdateOfferReq>)
+	export function unRefUpdateOfferReq(v:Ref<UpdateOfferReq>):UpdateOfferReq
+	export function emptyListApplicationRespData():ListApplicationRespData
+	export function emptyRefListApplicationRespData():Ref<ListApplicationRespData>
+	export function refOfListApplicationRespData(x:ListApplicationRespData,v:Ref<ListApplicationRespData>)
+	export function unRefListApplicationRespData(v:Ref<ListApplicationRespData>):ListApplicationRespData
+	export function emptyPatchEhrImportTaskReq():PatchEhrImportTaskReq
+	export function emptyRefPatchEhrImportTaskReq():Ref<PatchEhrImportTaskReq>
+	export function refOfPatchEhrImportTaskReq(x:PatchEhrImportTaskReq,v:Ref<PatchEhrImportTaskReq>)
+	export function unRefPatchEhrImportTaskReq(v:Ref<PatchEhrImportTaskReq>):PatchEhrImportTaskReq
+	export function emptyConfigJobReq():ConfigJobReq
+	export function emptyRefConfigJobReq():Ref<ConfigJobReq>
+	export function refOfConfigJobReq(x:ConfigJobReq,v:Ref<ConfigJobReq>)
+	export function unRefConfigJobReq(v:Ref<ConfigJobReq>):ConfigJobReq
+	export function emptyGetByApplicationEmployeeRespData():GetByApplicationEmployeeRespData
+	export function emptyRefGetByApplicationEmployeeRespData():Ref<GetByApplicationEmployeeRespData>
+	export function refOfGetByApplicationEmployeeRespData(x:GetByApplicationEmployeeRespData,v:Ref<GetByApplicationEmployeeRespData>)
+	export function unRefGetByApplicationEmployeeRespData(v:Ref<GetByApplicationEmployeeRespData>):GetByApplicationEmployeeRespData
+	export function emptyListInterviewRegistrationSchemaRespData():ListInterviewRegistrationSchemaRespData
+	export function emptyRefListInterviewRegistrationSchemaRespData():Ref<ListInterviewRegistrationSchemaRespData>
+	export function refOfListInterviewRegistrationSchemaRespData(x:ListInterviewRegistrationSchemaRespData,v:Ref<ListInterviewRegistrationSchemaRespData>)
+	export function unRefListInterviewRegistrationSchemaRespData(v:Ref<ListInterviewRegistrationSchemaRespData>):ListInterviewRegistrationSchemaRespData
+	export function emptyPatchEmployeeRespData():PatchEmployeeRespData
+	export function emptyRefPatchEmployeeRespData():Ref<PatchEmployeeRespData>
+	export function refOfPatchEmployeeRespData(x:PatchEmployeeRespData,v:Ref<PatchEmployeeRespData>)
+	export function unRefPatchEmployeeRespData(v:Ref<PatchEmployeeRespData>):PatchEmployeeRespData
+	export function emptyAppliTalentCompetitionInfo():AppliTalentCompetitionInfo
+	export function emptyRefAppliTalentCompetitionInfo():Ref<AppliTalentCompetitionInfo>
+	export function refOfAppliTalentCompetitionInfo(x:AppliTalentCompetitionInfo,v:Ref<AppliTalentCompetitionInfo>)
+	export function unRefAppliTalentCompetitionInfo(v:Ref<AppliTalentCompetitionInfo>):AppliTalentCompetitionInfo
+	export function emptySearchTalentPoolResp():SearchTalentPoolResp
+	export function emptyRefSearchTalentPoolResp():Ref<SearchTalentPoolResp>
+	export function refOfSearchTalentPoolResp(x:SearchTalentPoolResp,v:Ref<SearchTalentPoolResp>)
+	export function unRefSearchTalentPoolResp(v:Ref<SearchTalentPoolResp>):SearchTalentPoolResp
+	export function emptyUpdateResultEcoBackgroundCheckResp():UpdateResultEcoBackgroundCheckResp
+	export function emptyRefUpdateResultEcoBackgroundCheckResp():Ref<UpdateResultEcoBackgroundCheckResp>
+	export function refOfUpdateResultEcoBackgroundCheckResp(x:UpdateResultEcoBackgroundCheckResp,v:Ref<UpdateResultEcoBackgroundCheckResp>)
+	export function unRefUpdateResultEcoBackgroundCheckResp(v:Ref<UpdateResultEcoBackgroundCheckResp>):UpdateResultEcoBackgroundCheckResp
+	export function emptyPublishAdvertisementResp():PublishAdvertisementResp
+	export function emptyRefPublishAdvertisementResp():Ref<PublishAdvertisementResp>
+	export function refOfPublishAdvertisementResp(x:PublishAdvertisementResp,v:Ref<PublishAdvertisementResp>)
+	export function unRefPublishAdvertisementResp(v:Ref<PublishAdvertisementResp>):PublishAdvertisementResp
+	export function emptyCreateJobRequirementRespData():CreateJobRequirementRespData
+	export function emptyRefCreateJobRequirementRespData():Ref<CreateJobRequirementRespData>
+	export function refOfCreateJobRequirementRespData(x:CreateJobRequirementRespData,v:Ref<CreateJobRequirementRespData>)
+	export function unRefCreateJobRequirementRespData(v:Ref<CreateJobRequirementRespData>):CreateJobRequirementRespData
+	export function emptyPatchNoteReq():PatchNoteReq
+	export function emptyRefPatchNoteReq():Ref<PatchNoteReq>
+	export function refOfPatchNoteReq(x:PatchNoteReq,v:Ref<PatchNoteReq>)
+	export function unRefPatchNoteReq(v:Ref<PatchNoteReq>):PatchNoteReq
+	export function emptyListTodoReq():ListTodoReq
+	export function emptyRefListTodoReq():Ref<ListTodoReq>
+	export function refOfListTodoReq(x:ListTodoReq,v:Ref<ListTodoReq>)
+	export function unRefListTodoReq(v:Ref<ListTodoReq>):ListTodoReq
+	export function emptySearchJobPublishRecordRespData():SearchJobPublishRecordRespData
+	export function emptyRefSearchJobPublishRecordRespData():Ref<SearchJobPublishRecordRespData>
+	export function refOfSearchJobPublishRecordRespData(x:SearchJobPublishRecordRespData,v:Ref<SearchJobPublishRecordRespData>)
+	export function unRefSearchJobPublishRecordRespData(v:Ref<SearchJobPublishRecordRespData>):SearchJobPublishRecordRespData
+	export function emptyGetJobManagerResp():GetJobManagerResp
+	export function emptyRefGetJobManagerResp():Ref<GetJobManagerResp>
+	export function refOfGetJobManagerResp(x:GetJobManagerResp,v:Ref<GetJobManagerResp>)
+	export function unRefGetJobManagerResp(v:Ref<GetJobManagerResp>):GetJobManagerResp
+	export function emptyTalentCustomizedTimeRange():TalentCustomizedTimeRange
+	export function emptyRefTalentCustomizedTimeRange():Ref<TalentCustomizedTimeRange>
+	export function refOfTalentCustomizedTimeRange(x:TalentCustomizedTimeRange,v:Ref<TalentCustomizedTimeRange>)
+	export function unRefTalentCustomizedTimeRange(v:Ref<TalentCustomizedTimeRange>):TalentCustomizedTimeRange
+	export function emptyGetOfferRespData():GetOfferRespData
+	export function emptyRefGetOfferRespData():Ref<GetOfferRespData>
+	export function refOfGetOfferRespData(x:GetOfferRespData,v:Ref<GetOfferRespData>)
+	export function unRefGetOfferRespData(v:Ref<GetOfferRespData>):GetOfferRespData
+	export function emptySiteJobPost():SiteJobPost
+	export function emptyRefSiteJobPost():Ref<SiteJobPost>
+	export function refOfSiteJobPost(x:SiteJobPost,v:Ref<SiteJobPost>)
+	export function unRefSiteJobPost(v:Ref<SiteJobPost>):SiteJobPost
+	export function emptyUpdateJobRequirementResp():UpdateJobRequirementResp
+	export function emptyRefUpdateJobRequirementResp():Ref<UpdateJobRequirementResp>
+	export function refOfUpdateJobRequirementResp(x:UpdateJobRequirementResp,v:Ref<UpdateJobRequirementResp>)
+	export function unRefUpdateJobRequirementResp(v:Ref<UpdateJobRequirementResp>):UpdateJobRequirementResp
+	export function emptyApplicationTalentAttachmentResumeInfo():ApplicationTalentAttachmentResumeInfo
+	export function emptyRefApplicationTalentAttachmentResumeInfo():Ref<ApplicationTalentAttachmentResumeInfo>
+	export function refOfApplicationTalentAttachmentResumeInfo(x:ApplicationTalentAttachmentResumeInfo,v:Ref<ApplicationTalentAttachmentResumeInfo>)
+	export function unRefApplicationTalentAttachmentResumeInfo(v:Ref<ApplicationTalentAttachmentResumeInfo>):ApplicationTalentAttachmentResumeInfo
+	export function emptyObjectAttribute():ObjectAttribute
+	export function emptyRefObjectAttribute():Ref<ObjectAttribute>
+	export function refOfObjectAttribute(x:ObjectAttribute,v:Ref<ObjectAttribute>)
+	export function unRefObjectAttribute(v:Ref<ObjectAttribute>):ObjectAttribute
+	export function emptyTransferOnboardApplicationRespData():TransferOnboardApplicationRespData
+	export function emptyRefTransferOnboardApplicationRespData():Ref<TransferOnboardApplicationRespData>
+	export function refOfTransferOnboardApplicationRespData(x:TransferOnboardApplicationRespData,v:Ref<TransferOnboardApplicationRespData>)
+	export function unRefTransferOnboardApplicationRespData(v:Ref<TransferOnboardApplicationRespData>):TransferOnboardApplicationRespData
+	export function emptyEcoBackgroundCheckPackageData():EcoBackgroundCheckPackageData
+	export function emptyRefEcoBackgroundCheckPackageData():Ref<EcoBackgroundCheckPackageData>
+	export function refOfEcoBackgroundCheckPackageData(x:EcoBackgroundCheckPackageData,v:Ref<EcoBackgroundCheckPackageData>)
+	export function unRefEcoBackgroundCheckPackageData(v:Ref<EcoBackgroundCheckPackageData>):EcoBackgroundCheckPackageData
+	export function emptyGetRoleRespData():GetRoleRespData
+	export function emptyRefGetRoleRespData():Ref<GetRoleRespData>
+	export function refOfGetRoleRespData(x:GetRoleRespData,v:Ref<GetRoleRespData>)
+	export function unRefGetRoleRespData(v:Ref<GetRoleRespData>):GetRoleRespData
+	export function emptyJobProcess():JobProcess
+	export function emptyRefJobProcess():Ref<JobProcess>
+	export function refOfJobProcess(x:JobProcess,v:Ref<JobProcess>)
+	export function unRefJobProcess(v:Ref<JobProcess>):JobProcess
+	export function emptyApplicationWebsiteChannel():ApplicationWebsiteChannel
+	export function emptyRefApplicationWebsiteChannel():Ref<ApplicationWebsiteChannel>
+	export function refOfApplicationWebsiteChannel(x:ApplicationWebsiteChannel,v:Ref<ApplicationWebsiteChannel>)
+	export function unRefApplicationWebsiteChannel(v:Ref<ApplicationWebsiteChannel>):ApplicationWebsiteChannel
+	export function emptyEducationInfo():EducationInfo
+	export function emptyRefEducationInfo():Ref<EducationInfo>
+	export function refOfEducationInfo(x:EducationInfo,v:Ref<EducationInfo>)
+	export function unRefEducationInfo(v:Ref<EducationInfo>):EducationInfo
+	export function emptyAuth():Auth
+	export function emptyRefAuth():Ref<Auth>
+	export function refOfAuth(x:Auth,v:Ref<Auth>)
+	export function unRefAuth(v:Ref<Auth>):Auth
+	export function emptyCreateJobRequirementResp():CreateJobRequirementResp
+	export function emptyRefCreateJobRequirementResp():Ref<CreateJobRequirementResp>
+	export function refOfCreateJobRequirementResp(x:CreateJobRequirementResp,v:Ref<CreateJobRequirementResp>)
+	export function unRefCreateJobRequirementResp(v:Ref<CreateJobRequirementResp>):CreateJobRequirementResp
+	export function emptyListWebsiteJobPostResp():ListWebsiteJobPostResp
+	export function emptyRefListWebsiteJobPostResp():Ref<ListWebsiteJobPostResp>
+	export function refOfListWebsiteJobPostResp(x:ListWebsiteJobPostResp,v:Ref<ListWebsiteJobPostResp>)
+	export function unRefListWebsiteJobPostResp(v:Ref<ListWebsiteJobPostResp>):ListWebsiteJobPostResp
+	export function emptyAwardInfo():AwardInfo
+	export function emptyRefAwardInfo():Ref<AwardInfo>
+	export function refOfAwardInfo(x:AwardInfo,v:Ref<AwardInfo>)
+	export function unRefAwardInfo(v:Ref<AwardInfo>):AwardInfo
+	export function emptyBatchUpdateJobManagerReqBody():BatchUpdateJobManagerReqBody
+	export function emptyRefBatchUpdateJobManagerReqBody():Ref<BatchUpdateJobManagerReqBody>
+	export function refOfBatchUpdateJobManagerReqBody(x:BatchUpdateJobManagerReqBody,v:Ref<BatchUpdateJobManagerReqBody>)
+	export function unRefBatchUpdateJobManagerReqBody(v:Ref<BatchUpdateJobManagerReqBody>):BatchUpdateJobManagerReqBody
+	export function emptyCommonSchemaChild():CommonSchemaChild
+	export function emptyRefCommonSchemaChild():Ref<CommonSchemaChild>
+	export function refOfCommonSchemaChild(x:CommonSchemaChild,v:Ref<CommonSchemaChild>)
+	export function unRefCommonSchemaChild(v:Ref<CommonSchemaChild>):CommonSchemaChild
+	export function emptyCreateTalentExternalInfoRespData():CreateTalentExternalInfoRespData
+	export function emptyRefCreateTalentExternalInfoRespData():Ref<CreateTalentExternalInfoRespData>
+	export function refOfCreateTalentExternalInfoRespData(x:CreateTalentExternalInfoRespData,v:Ref<CreateTalentExternalInfoRespData>)
+	export function unRefCreateTalentExternalInfoRespData(v:Ref<CreateTalentExternalInfoRespData>):CreateTalentExternalInfoRespData
+	export function emptyPreviewAttachmentResp():PreviewAttachmentResp
+	export function emptyRefPreviewAttachmentResp():Ref<PreviewAttachmentResp>
+	export function refOfPreviewAttachmentResp(x:PreviewAttachmentResp,v:Ref<PreviewAttachmentResp>)
+	export function unRefPreviewAttachmentResp(v:Ref<PreviewAttachmentResp>):PreviewAttachmentResp
+	export function emptyPublishAdvertisementReq():PublishAdvertisementReq
+	export function emptyRefPublishAdvertisementReq():Ref<PublishAdvertisementReq>
+	export function refOfPublishAdvertisementReq(x:PublishAdvertisementReq,v:Ref<PublishAdvertisementReq>)
+	export function unRefPublishAdvertisementReq(v:Ref<PublishAdvertisementReq>):PublishAdvertisementReq
+	export function emptyTalentNationality():TalentNationality
+	export function emptyRefTalentNationality():Ref<TalentNationality>
+	export function refOfTalentNationality(x:TalentNationality,v:Ref<TalentNationality>)
+	export function unRefTalentNationality(v:Ref<TalentNationality>):TalentNationality
+	export function emptyEcoBackgroundCheckCreateEventMobile():EcoBackgroundCheckCreateEventMobile
+	export function emptyRefEcoBackgroundCheckCreateEventMobile():Ref<EcoBackgroundCheckCreateEventMobile>
+	export function refOfEcoBackgroundCheckCreateEventMobile(x:EcoBackgroundCheckCreateEventMobile,v:Ref<EcoBackgroundCheckCreateEventMobile>)
+	export function unRefEcoBackgroundCheckCreateEventMobile(v:Ref<EcoBackgroundCheckCreateEventMobile>):EcoBackgroundCheckCreateEventMobile
+	export function emptySite():Site
+	export function emptyRefSite():Ref<Site>
+	export function refOfSite(x:Site,v:Ref<Site>)
+	export function unRefSite(v:Ref<Site>):Site
+	export function emptySiteResumeAward():SiteResumeAward
+	export function emptyRefSiteResumeAward():Ref<SiteResumeAward>
+	export function refOfSiteResumeAward(x:SiteResumeAward,v:Ref<SiteResumeAward>)
+	export function unRefSiteResumeAward(v:Ref<SiteResumeAward>):SiteResumeAward
+	export function emptyBackgroundCheckOrderFeedbackInfo():BackgroundCheckOrderFeedbackInfo
+	export function emptyRefBackgroundCheckOrderFeedbackInfo():Ref<BackgroundCheckOrderFeedbackInfo>
+	export function refOfBackgroundCheckOrderFeedbackInfo(x:BackgroundCheckOrderFeedbackInfo,v:Ref<BackgroundCheckOrderFeedbackInfo>)
+	export function unRefBackgroundCheckOrderFeedbackInfo(v:Ref<BackgroundCheckOrderFeedbackInfo>):BackgroundCheckOrderFeedbackInfo
+	export function emptyCreateExternalInterviewReq():CreateExternalInterviewReq
+	export function emptyRefCreateExternalInterviewReq():Ref<CreateExternalInterviewReq>
+	export function refOfCreateExternalInterviewReq(x:CreateExternalInterviewReq,v:Ref<CreateExternalInterviewReq>)
+	export function unRefCreateExternalInterviewReq(v:Ref<CreateExternalInterviewReq>):CreateExternalInterviewReq
+	export function emptyOpenJobResp():OpenJobResp
+	export function emptyRefOpenJobResp():Ref<OpenJobResp>
+	export function refOfOpenJobResp(x:OpenJobResp,v:Ref<OpenJobResp>)
+	export function unRefOpenJobResp(v:Ref<OpenJobResp>):OpenJobResp
+	export function emptyBatchGetIdTalentResp():BatchGetIdTalentResp
+	export function emptyRefBatchGetIdTalentResp():Ref<BatchGetIdTalentResp>
+	export function refOfBatchGetIdTalentResp(x:BatchGetIdTalentResp,v:Ref<BatchGetIdTalentResp>)
+	export function unRefBatchGetIdTalentResp(v:Ref<BatchGetIdTalentResp>):BatchGetIdTalentResp
+	export function emptyLocationDto():LocationDto
+	export function emptyRefLocationDto():Ref<LocationDto>
+	export function refOfLocationDto(x:LocationDto,v:Ref<LocationDto>)
+	export function unRefLocationDto(v:Ref<LocationDto>):LocationDto
+	export function emptyPermissionGroupInfo():PermissionGroupInfo
+	export function emptyRefPermissionGroupInfo():Ref<PermissionGroupInfo>
+	export function refOfPermissionGroupInfo(x:PermissionGroupInfo,v:Ref<PermissionGroupInfo>)
+	export function unRefPermissionGroupInfo(v:Ref<PermissionGroupInfo>):PermissionGroupInfo
+	export function emptySearchTestReq():SearchTestReq
+	export function emptyRefSearchTestReq():Ref<SearchTestReq>
+	export function refOfSearchTestReq(x:SearchTestReq,v:Ref<SearchTestReq>)
+	export function unRefSearchTestReq(v:Ref<SearchTestReq>):SearchTestReq
+	export function emptyTalentCombinedBasicInfo():TalentCombinedBasicInfo
+	export function emptyRefTalentCombinedBasicInfo():Ref<TalentCombinedBasicInfo>
+	export function refOfTalentCombinedBasicInfo(x:TalentCombinedBasicInfo,v:Ref<TalentCombinedBasicInfo>)
+	export function unRefTalentCombinedBasicInfo(v:Ref<TalentCombinedBasicInfo>):TalentCombinedBasicInfo
+	export function emptyMoveTalentTalentPoolReq():MoveTalentTalentPoolReq
+	export function emptyRefMoveTalentTalentPoolReq():Ref<MoveTalentTalentPoolReq>
+	export function refOfMoveTalentTalentPoolReq(x:MoveTalentTalentPoolReq,v:Ref<MoveTalentTalentPoolReq>)
+	export function unRefMoveTalentTalentPoolReq(v:Ref<MoveTalentTalentPoolReq>):MoveTalentTalentPoolReq
+	export function emptyJobRecruiter():JobRecruiter
+	export function emptyRefJobRecruiter():Ref<JobRecruiter>
+	export function refOfJobRecruiter(x:JobRecruiter,v:Ref<JobRecruiter>)
+	export function unRefJobRecruiter(v:Ref<JobRecruiter>):JobRecruiter
+	export function emptyListByIdJobRequirementResp():ListByIdJobRequirementResp
+	export function emptyRefListByIdJobRequirementResp():Ref<ListByIdJobRequirementResp>
+	export function refOfListByIdJobRequirementResp(x:ListByIdJobRequirementResp,v:Ref<ListByIdJobRequirementResp>)
+	export function unRefListByIdJobRequirementResp(v:Ref<ListByIdJobRequirementResp>):ListByIdJobRequirementResp
+	export function emptyOfferCustomFieldConfig():OfferCustomFieldConfig
+	export function emptyRefOfferCustomFieldConfig():Ref<OfferCustomFieldConfig>
+	export function refOfOfferCustomFieldConfig(x:OfferCustomFieldConfig,v:Ref<OfferCustomFieldConfig>)
+	export function unRefOfferCustomFieldConfig(v:Ref<OfferCustomFieldConfig>):OfferCustomFieldConfig
+	export function emptyPublishAdvertisementReqBody():PublishAdvertisementReqBody
+	export function emptyRefPublishAdvertisementReqBody():Ref<PublishAdvertisementReqBody>
+	export function refOfPublishAdvertisementReqBody(x:PublishAdvertisementReqBody,v:Ref<PublishAdvertisementReqBody>)
+	export function unRefPublishAdvertisementReqBody(v:Ref<PublishAdvertisementReqBody>):PublishAdvertisementReqBody
+	export function emptyBatchDeleteEcoBackgroundCheckCustomFieldResp():BatchDeleteEcoBackgroundCheckCustomFieldResp
+	export function emptyRefBatchDeleteEcoBackgroundCheckCustomFieldResp():Ref<BatchDeleteEcoBackgroundCheckCustomFieldResp>
+	export function refOfBatchDeleteEcoBackgroundCheckCustomFieldResp(x:BatchDeleteEcoBackgroundCheckCustomFieldResp,v:Ref<BatchDeleteEcoBackgroundCheckCustomFieldResp>)
+	export function unRefBatchDeleteEcoBackgroundCheckCustomFieldResp(v:Ref<BatchDeleteEcoBackgroundCheckCustomFieldResp>):BatchDeleteEcoBackgroundCheckCustomFieldResp
+	export function emptyListJobSchemaResp():ListJobSchemaResp
+	export function emptyRefListJobSchemaResp():Ref<ListJobSchemaResp>
+	export function refOfListJobSchemaResp(x:ListJobSchemaResp,v:Ref<ListJobSchemaResp>)
+	export function unRefListJobSchemaResp(v:Ref<ListJobSchemaResp>):ListJobSchemaResp
+	export function emptyRecoverApplicationReq():RecoverApplicationReq
+	export function emptyRefRecoverApplicationReq():Ref<RecoverApplicationReq>
+	export function refOfRecoverApplicationReq(x:RecoverApplicationReq,v:Ref<RecoverApplicationReq>)
+	export function unRefRecoverApplicationReq(v:Ref<RecoverApplicationReq>):RecoverApplicationReq
+	export function emptySearchWebsiteJobPostRespData():SearchWebsiteJobPostRespData
+	export function emptyRefSearchWebsiteJobPostRespData():Ref<SearchWebsiteJobPostRespData>
+	export function refOfSearchWebsiteJobPostRespData(x:SearchWebsiteJobPostRespData,v:Ref<SearchWebsiteJobPostRespData>)
+	export function unRefSearchWebsiteJobPostRespData(v:Ref<SearchWebsiteJobPostRespData>):SearchWebsiteJobPostRespData
+	export function emptyApplicationJob():ApplicationJob
+	export function emptyRefApplicationJob():Ref<ApplicationJob>
+	export function refOfApplicationJob(x:ApplicationJob,v:Ref<ApplicationJob>)
+	export function unRefApplicationJob(v:Ref<ApplicationJob>):ApplicationJob
+	export function emptyJob():Job
+	export function emptyRefJob():Ref<Job>
+	export function refOfJob(x:Job,v:Ref<Job>)
+	export function unRefJob(v:Ref<Job>):Job
+	export function emptyListEvaluationTaskIterator():ListEvaluationTaskIterator
+	export function emptyRefListEvaluationTaskIterator():Ref<ListEvaluationTaskIterator>
+	export function refOfListEvaluationTaskIterator(x:ListEvaluationTaskIterator,v:Ref<ListEvaluationTaskIterator>)
+	export function unRefListEvaluationTaskIterator(v:Ref<ListEvaluationTaskIterator>):ListEvaluationTaskIterator
+	export function emptyOfferApplicationResp():OfferApplicationResp
+	export function emptyRefOfferApplicationResp():Ref<OfferApplicationResp>
+	export function refOfOfferApplicationResp(x:OfferApplicationResp,v:Ref<OfferApplicationResp>)
+	export function unRefOfferApplicationResp(v:Ref<OfferApplicationResp>):OfferApplicationResp
+	export function emptyCloseJobReq():CloseJobReq
+	export function emptyRefCloseJobReq():Ref<CloseJobReq>
+	export function refOfCloseJobReq(x:CloseJobReq,v:Ref<CloseJobReq>)
+	export function unRefCloseJobReq(v:Ref<CloseJobReq>):CloseJobReq
+	export function emptyWebsiteDeliveryCompetition():WebsiteDeliveryCompetition
+	export function emptyRefWebsiteDeliveryCompetition():Ref<WebsiteDeliveryCompetition>
+	export function refOfWebsiteDeliveryCompetition(x:WebsiteDeliveryCompetition,v:Ref<WebsiteDeliveryCompetition>)
+	export function unRefWebsiteDeliveryCompetition(v:Ref<WebsiteDeliveryCompetition>):WebsiteDeliveryCompetition
+	export function emptyInterviewAssessmentDimensionArgsScore():InterviewAssessmentDimensionArgsScore
+	export function emptyRefInterviewAssessmentDimensionArgsScore():Ref<InterviewAssessmentDimensionArgsScore>
+	export function refOfInterviewAssessmentDimensionArgsScore(x:InterviewAssessmentDimensionArgsScore,v:Ref<InterviewAssessmentDimensionArgsScore>)
+	export function unRefInterviewAssessmentDimensionArgsScore(v:Ref<InterviewAssessmentDimensionArgsScore>):InterviewAssessmentDimensionArgsScore
+	export function emptyListInterviewRegistrationSchemaIterator():ListInterviewRegistrationSchemaIterator
+	export function emptyRefListInterviewRegistrationSchemaIterator():Ref<ListInterviewRegistrationSchemaIterator>
+	export function refOfListInterviewRegistrationSchemaIterator(x:ListInterviewRegistrationSchemaIterator,v:Ref<ListInterviewRegistrationSchemaIterator>)
+	export function unRefListInterviewRegistrationSchemaIterator(v:Ref<ListInterviewRegistrationSchemaIterator>):ListInterviewRegistrationSchemaIterator
+	export function emptyP2EcoExamCreatedV1():P2EcoExamCreatedV1
+	export function emptyRefP2EcoExamCreatedV1():Ref<P2EcoExamCreatedV1>
+	export function refOfP2EcoExamCreatedV1(x:P2EcoExamCreatedV1,v:Ref<P2EcoExamCreatedV1>)
+	export function unRefP2EcoExamCreatedV1(v:Ref<P2EcoExamCreatedV1>):P2EcoExamCreatedV1
+	export function emptySiteName():SiteName
+	export function emptyRefSiteName():Ref<SiteName>
+	export function refOfSiteName(x:SiteName,v:Ref<SiteName>)
+	export function unRefSiteName(v:Ref<SiteName>):SiteName
+	export function emptyBatchGetIdTalentRespData():BatchGetIdTalentRespData
+	export function emptyRefBatchGetIdTalentRespData():Ref<BatchGetIdTalentRespData>
+	export function refOfBatchGetIdTalentRespData(x:BatchGetIdTalentRespData,v:Ref<BatchGetIdTalentRespData>)
+	export function unRefBatchGetIdTalentRespData(v:Ref<BatchGetIdTalentRespData>):BatchGetIdTalentRespData
+	export function emptySubject():Subject
+	export function emptyRefSubject():Ref<Subject>
+	export function refOfSubject(x:Subject,v:Ref<Subject>)
+	export function unRefSubject(v:Ref<Subject>):Subject
+	export function emptyWebsiteJobPostCustomizedOption():WebsiteJobPostCustomizedOption
+	export function emptyRefWebsiteJobPostCustomizedOption():Ref<WebsiteJobPostCustomizedOption>
+	export function refOfWebsiteJobPostCustomizedOption(x:WebsiteJobPostCustomizedOption,v:Ref<WebsiteJobPostCustomizedOption>)
+	export function unRefWebsiteJobPostCustomizedOption(v:Ref<WebsiteJobPostCustomizedOption>):WebsiteJobPostCustomizedOption
+	export function emptyGetWebsiteDeliveryTaskResp():GetWebsiteDeliveryTaskResp
+	export function emptyRefGetWebsiteDeliveryTaskResp():Ref<GetWebsiteDeliveryTaskResp>
+	export function refOfGetWebsiteDeliveryTaskResp(x:GetWebsiteDeliveryTaskResp,v:Ref<GetWebsiteDeliveryTaskResp>)
+	export function unRefGetWebsiteDeliveryTaskResp(v:Ref<GetWebsiteDeliveryTaskResp>):GetWebsiteDeliveryTaskResp
+	export function emptyListJobProcessReq():ListJobProcessReq
+	export function emptyRefListJobProcessReq():Ref<ListJobProcessReq>
+	export function refOfListJobProcessReq(x:ListJobProcessReq,v:Ref<ListJobProcessReq>)
+	export function unRefListJobProcessReq(v:Ref<ListJobProcessReq>):ListJobProcessReq
+	export function emptyTradeDetail():TradeDetail
+	export function emptyRefTradeDetail():Ref<TradeDetail>
+	export function refOfTradeDetail(x:TradeDetail,v:Ref<TradeDetail>)
+	export function unRefTradeDetail(v:Ref<TradeDetail>):TradeDetail
+	export function emptyInterviewMeetingRoom():InterviewMeetingRoom
+	export function emptyRefInterviewMeetingRoom():Ref<InterviewMeetingRoom>
+	export function refOfInterviewMeetingRoom(x:InterviewMeetingRoom,v:Ref<InterviewMeetingRoom>)
+	export function unRefInterviewMeetingRoom(v:Ref<InterviewMeetingRoom>):InterviewMeetingRoom
+	export function emptyUpdateProgressEcoBackgroundCheckReq():UpdateProgressEcoBackgroundCheckReq
+	export function emptyRefUpdateProgressEcoBackgroundCheckReq():Ref<UpdateProgressEcoBackgroundCheckReq>
+	export function refOfUpdateProgressEcoBackgroundCheckReq(x:UpdateProgressEcoBackgroundCheckReq,v:Ref<UpdateProgressEcoBackgroundCheckReq>)
+	export function unRefUpdateProgressEcoBackgroundCheckReq(v:Ref<UpdateProgressEcoBackgroundCheckReq>):UpdateProgressEcoBackgroundCheckReq
+	export function emptyApplicationOfferAttachment():ApplicationOfferAttachment
+	export function emptyRefApplicationOfferAttachment():Ref<ApplicationOfferAttachment>
+	export function refOfApplicationOfferAttachment(x:ApplicationOfferAttachment,v:Ref<ApplicationOfferAttachment>)
+	export function unRefApplicationOfferAttachment(v:Ref<ApplicationOfferAttachment>):ApplicationOfferAttachment
+	export function emptyBatchDeleteEcoExamPaperReq():BatchDeleteEcoExamPaperReq
+	export function emptyRefBatchDeleteEcoExamPaperReq():Ref<BatchDeleteEcoExamPaperReq>
+	export function refOfBatchDeleteEcoExamPaperReq(x:BatchDeleteEcoExamPaperReq,v:Ref<BatchDeleteEcoExamPaperReq>)
+	export function unRefBatchDeleteEcoExamPaperReq(v:Ref<BatchDeleteEcoExamPaperReq>):BatchDeleteEcoExamPaperReq
+	export function emptyJobDepartment():JobDepartment
+	export function emptyRefJobDepartment():Ref<JobDepartment>
+	export function refOfJobDepartment(x:JobDepartment,v:Ref<JobDepartment>)
+	export function unRefJobDepartment(v:Ref<JobDepartment>):JobDepartment
+	export function emptyAttachment():Attachment
+	export function emptyRefAttachment():Ref<Attachment>
+	export function refOfAttachment(x:Attachment,v:Ref<Attachment>)
+	export function unRefAttachment(v:Ref<Attachment>):Attachment
+	export function emptyOnboardStatusTalentReqBody():OnboardStatusTalentReqBody
+	export function emptyRefOnboardStatusTalentReqBody():Ref<OnboardStatusTalentReqBody>
+	export function refOfOnboardStatusTalentReqBody(x:OnboardStatusTalentReqBody,v:Ref<OnboardStatusTalentReqBody>)
+	export function unRefOnboardStatusTalentReqBody(v:Ref<OnboardStatusTalentReqBody>):OnboardStatusTalentReqBody
+	export function emptyAcceptance():Acceptance
+	export function emptyRefAcceptance():Ref<Acceptance>
+	export function refOfAcceptance(x:Acceptance,v:Ref<Acceptance>)
+	export function unRefAcceptance(v:Ref<Acceptance>):Acceptance
+	export function emptyEmployeeConversionInfo():EmployeeConversionInfo
+	export function emptyRefEmployeeConversionInfo():Ref<EmployeeConversionInfo>
+	export function refOfEmployeeConversionInfo(x:EmployeeConversionInfo,v:Ref<EmployeeConversionInfo>)
+	export function unRefEmployeeConversionInfo(v:Ref<EmployeeConversionInfo>):EmployeeConversionInfo
+	export function emptyNote():Note
+	export function emptyRefNote():Ref<Note>
+	export function refOfNote(x:Note,v:Ref<Note>)
+	export function unRefNote(v:Ref<Note>):Note
+	export function emptyOfferApplyForm():OfferApplyForm
+	export function emptyRefOfferApplyForm():Ref<OfferApplyForm>
+	export function refOfOfferApplyForm(x:OfferApplyForm,v:Ref<OfferApplyForm>)
+	export function unRefOfferApplyForm(v:Ref<OfferApplyForm>):OfferApplyForm
+	export function emptyApplicationTalentAwardInfo():ApplicationTalentAwardInfo
+	export function emptyRefApplicationTalentAwardInfo():Ref<ApplicationTalentAwardInfo>
+	export function refOfApplicationTalentAwardInfo(x:ApplicationTalentAwardInfo,v:Ref<ApplicationTalentAwardInfo>)
+	export function unRefApplicationTalentAwardInfo(v:Ref<ApplicationTalentAwardInfo>):ApplicationTalentAwardInfo
+	export function emptyTerminateApplicationResp():TerminateApplicationResp
+	export function emptyRefTerminateApplicationResp():Ref<TerminateApplicationResp>
+	export function refOfTerminateApplicationResp(x:TerminateApplicationResp,v:Ref<TerminateApplicationResp>)
+	export function unRefTerminateApplicationResp(v:Ref<TerminateApplicationResp>):TerminateApplicationResp
+	export function emptyUpdateOfferRespData():UpdateOfferRespData
+	export function emptyRefUpdateOfferRespData():Ref<UpdateOfferRespData>
+	export function refOfUpdateOfferRespData(x:UpdateOfferRespData,v:Ref<UpdateOfferRespData>)
+	export function unRefUpdateOfferRespData(v:Ref<UpdateOfferRespData>):UpdateOfferRespData
+	export function emptyBatchUpdateJobManagerResp():BatchUpdateJobManagerResp
+	export function emptyRefBatchUpdateJobManagerResp():Ref<BatchUpdateJobManagerResp>
+	export function refOfBatchUpdateJobManagerResp(x:BatchUpdateJobManagerResp,v:Ref<BatchUpdateJobManagerResp>)
+	export function unRefBatchUpdateJobManagerResp(v:Ref<BatchUpdateJobManagerResp>):BatchUpdateJobManagerResp
+	export function emptyJobRequirementCustomizedData():JobRequirementCustomizedData
+	export function emptyRefJobRequirementCustomizedData():Ref<JobRequirementCustomizedData>
+	export function refOfJobRequirementCustomizedData(x:JobRequirementCustomizedData,v:Ref<JobRequirementCustomizedData>)
+	export function unRefJobRequirementCustomizedData(v:Ref<JobRequirementCustomizedData>):JobRequirementCustomizedData
+	export function emptyListTodoIterator():ListTodoIterator
+	export function emptyRefListTodoIterator():Ref<ListTodoIterator>
+	export function refOfListTodoIterator(x:ListTodoIterator,v:Ref<ListTodoIterator>)
+	export function unRefListTodoIterator(v:Ref<ListTodoIterator>):ListTodoIterator
+	export function emptyApplicationPrehireDepartment():ApplicationPrehireDepartment
+	export function emptyRefApplicationPrehireDepartment():Ref<ApplicationPrehireDepartment>
+	export function refOfApplicationPrehireDepartment(x:ApplicationPrehireDepartment,v:Ref<ApplicationPrehireDepartment>)
+	export function unRefApplicationPrehireDepartment(v:Ref<ApplicationPrehireDepartment>):ApplicationPrehireDepartment
+	export function emptyOfferCustomizedInfo():OfferCustomizedInfo
+	export function emptyRefOfferCustomizedInfo():Ref<OfferCustomizedInfo>
+	export function refOfOfferCustomizedInfo(x:OfferCustomizedInfo,v:Ref<OfferCustomizedInfo>)
+	export function unRefOfferCustomizedInfo(v:Ref<OfferCustomizedInfo>):OfferCustomizedInfo
+	export function emptyQueryLocationReq():QueryLocationReq
+	export function emptyRefQueryLocationReq():Ref<QueryLocationReq>
+	export function refOfQueryLocationReq(x:QueryLocationReq,v:Ref<QueryLocationReq>)
+	export function unRefQueryLocationReq(v:Ref<QueryLocationReq>):QueryLocationReq
+	export function emptyDeleteTripartiteAgreementReq():DeleteTripartiteAgreementReq
+	export function emptyRefDeleteTripartiteAgreementReq():Ref<DeleteTripartiteAgreementReq>
+	export function refOfDeleteTripartiteAgreementReq(x:DeleteTripartiteAgreementReq,v:Ref<DeleteTripartiteAgreementReq>)
+	export function unRefDeleteTripartiteAgreementReq(v:Ref<DeleteTripartiteAgreementReq>):DeleteTripartiteAgreementReq
+	export function emptyQueryTalentObjectResp():QueryTalentObjectResp
+	export function emptyRefQueryTalentObjectResp():Ref<QueryTalentObjectResp>
+	export function refOfQueryTalentObjectResp(x:QueryTalentObjectResp,v:Ref<QueryTalentObjectResp>)
+	export function unRefQueryTalentObjectResp(v:Ref<QueryTalentObjectResp>):QueryTalentObjectResp
+	export function emptyOfferApplyFormConfigOptionInfo():OfferApplyFormConfigOptionInfo
+	export function emptyRefOfferApplyFormConfigOptionInfo():Ref<OfferApplyFormConfigOptionInfo>
+	export function refOfOfferApplyFormConfigOptionInfo(x:OfferApplyFormConfigOptionInfo,v:Ref<OfferApplyFormConfigOptionInfo>)
+	export function unRefOfferApplyFormConfigOptionInfo(v:Ref<OfferApplyFormConfigOptionInfo>):OfferApplyFormConfigOptionInfo
+	export function emptyOfferSendRecord():OfferSendRecord
+	export function emptyRefOfferSendRecord():Ref<OfferSendRecord>
+	export function refOfOfferSendRecord(x:OfferSendRecord,v:Ref<OfferSendRecord>)
+	export function unRefOfferSendRecord(v:Ref<OfferSendRecord>):OfferSendRecord
+	export function emptyTalentCombinedWorkInfo():TalentCombinedWorkInfo
+	export function emptyRefTalentCombinedWorkInfo():Ref<TalentCombinedWorkInfo>
+	export function refOfTalentCombinedWorkInfo(x:TalentCombinedWorkInfo,v:Ref<TalentCombinedWorkInfo>)
+	export function unRefTalentCombinedWorkInfo(v:Ref<TalentCombinedWorkInfo>):TalentCombinedWorkInfo
+	export function emptyApplicationOfferOnboardProfile():ApplicationOfferOnboardProfile
+	export function emptyRefApplicationOfferOnboardProfile():Ref<ApplicationOfferOnboardProfile>
+	export function refOfApplicationOfferOnboardProfile(x:ApplicationOfferOnboardProfile,v:Ref<ApplicationOfferOnboardProfile>)
+	export function unRefApplicationOfferOnboardProfile(v:Ref<ApplicationOfferOnboardProfile>):ApplicationOfferOnboardProfile
+	export function emptyProjectInfo():ProjectInfo
+	export function emptyRefProjectInfo():Ref<ProjectInfo>
+	export function refOfProjectInfo(x:ProjectInfo,v:Ref<ProjectInfo>)
+	export function unRefProjectInfo(v:Ref<ProjectInfo>):ProjectInfo
+	export function emptyUpdateTalentExternalInfoReqBody():UpdateTalentExternalInfoReqBody
+	export function emptyRefUpdateTalentExternalInfoReqBody():Ref<UpdateTalentExternalInfoReqBody>
+	export function refOfUpdateTalentExternalInfoReqBody(x:UpdateTalentExternalInfoReqBody,v:Ref<UpdateTalentExternalInfoReqBody>)
+	export function unRefUpdateTalentExternalInfoReqBody(v:Ref<UpdateTalentExternalInfoReqBody>):UpdateTalentExternalInfoReqBody
+	export function emptyInterviewRoundType():InterviewRoundType
+	export function emptyRefInterviewRoundType():Ref<InterviewRoundType>
+	export function refOfInterviewRoundType(x:InterviewRoundType,v:Ref<InterviewRoundType>)
+	export function unRefInterviewRoundType(v:Ref<InterviewRoundType>):InterviewRoundType
+	export function emptyOfferStatusOfferResp():OfferStatusOfferResp
+	export function emptyRefOfferStatusOfferResp():Ref<OfferStatusOfferResp>
+	export function refOfOfferStatusOfferResp(x:OfferStatusOfferResp,v:Ref<OfferStatusOfferResp>)
+	export function unRefOfferStatusOfferResp(v:Ref<OfferStatusOfferResp>):OfferStatusOfferResp
+	export function emptyP2TalentDeletedV1Data():P2TalentDeletedV1Data
+	export function emptyRefP2TalentDeletedV1Data():Ref<P2TalentDeletedV1Data>
+	export function refOfP2TalentDeletedV1Data(x:P2TalentDeletedV1Data,v:Ref<P2TalentDeletedV1Data>)
+	export function unRefP2TalentDeletedV1Data(v:Ref<P2TalentDeletedV1Data>):P2TalentDeletedV1Data
+	export function emptyListApplicationInterviewReq():ListApplicationInterviewReq
+	export function emptyRefListApplicationInterviewReq():Ref<ListApplicationInterviewReq>
+	export function refOfListApplicationInterviewReq(x:ListApplicationInterviewReq,v:Ref<ListApplicationInterviewReq>)
+	export function unRefListApplicationInterviewReq(v:Ref<ListApplicationInterviewReq>):ListApplicationInterviewReq
+	export function emptyChangeEmployeeStage():ChangeEmployeeStage
+	export function emptyRefChangeEmployeeStage():Ref<ChangeEmployeeStage>
+	export function refOfChangeEmployeeStage(x:ChangeEmployeeStage,v:Ref<ChangeEmployeeStage>)
+	export function unRefChangeEmployeeStage(v:Ref<ChangeEmployeeStage>):ChangeEmployeeStage
+	export function emptyOfferApplyFormObjectConfigInfo():OfferApplyFormObjectConfigInfo
+	export function emptyRefOfferApplyFormObjectConfigInfo():Ref<OfferApplyFormObjectConfigInfo>
+	export function refOfOfferApplyFormObjectConfigInfo(x:OfferApplyFormObjectConfigInfo,v:Ref<OfferApplyFormObjectConfigInfo>)
+	export function unRefOfferApplyFormObjectConfigInfo(v:Ref<OfferApplyFormObjectConfigInfo>):OfferApplyFormObjectConfigInfo
+	export function emptyGetOfferApplicationFormReq():GetOfferApplicationFormReq
+	export function emptyRefGetOfferApplicationFormReq():Ref<GetOfferApplicationFormReq>
+	export function refOfGetOfferApplicationFormReq(x:GetOfferApplicationFormReq,v:Ref<GetOfferApplicationFormReq>)
+	export function unRefGetOfferApplicationFormReq(v:Ref<GetOfferApplicationFormReq>):GetOfferApplicationFormReq
+	export function emptyP2EcoBackgroundCheckCreatedV1():P2EcoBackgroundCheckCreatedV1
+	export function emptyRefP2EcoBackgroundCheckCreatedV1():Ref<P2EcoBackgroundCheckCreatedV1>
+	export function refOfP2EcoBackgroundCheckCreatedV1(x:P2EcoBackgroundCheckCreatedV1,v:Ref<P2EcoBackgroundCheckCreatedV1>)
+	export function unRefP2EcoBackgroundCheckCreatedV1(v:Ref<P2EcoBackgroundCheckCreatedV1>):P2EcoBackgroundCheckCreatedV1
+	export function emptyUpdateResultEcoExamResp():UpdateResultEcoExamResp
+	export function emptyRefUpdateResultEcoExamResp():Ref<UpdateResultEcoExamResp>
+	export function refOfUpdateResultEcoExamResp(x:UpdateResultEcoExamResp,v:Ref<UpdateResultEcoExamResp>)
+	export function unRefUpdateResultEcoExamResp(v:Ref<UpdateResultEcoExamResp>):UpdateResultEcoExamResp
+	export function emptyExternalReward():ExternalReward
+	export function emptyRefExternalReward():Ref<ExternalReward>
+	export function refOfExternalReward(x:ExternalReward,v:Ref<ExternalReward>)
+	export function unRefExternalReward(v:Ref<ExternalReward>):ExternalReward
+	export function emptyListTerminationReasonIterator():ListTerminationReasonIterator
+	export function emptyRefListTerminationReasonIterator():Ref<ListTerminationReasonIterator>
+	export function refOfListTerminationReasonIterator(x:ListTerminationReasonIterator,v:Ref<ListTerminationReasonIterator>)
+	export function unRefListTerminationReasonIterator(v:Ref<ListTerminationReasonIterator>):ListTerminationReasonIterator
+	export function emptyListWebsiteChannelRespData():ListWebsiteChannelRespData
+	export function emptyRefListWebsiteChannelRespData():Ref<ListWebsiteChannelRespData>
+	export function refOfListWebsiteChannelRespData(x:ListWebsiteChannelRespData,v:Ref<ListWebsiteChannelRespData>)
+	export function unRefListWebsiteChannelRespData(v:Ref<ListWebsiteChannelRespData>):ListWebsiteChannelRespData
+	export function emptyWebsiteJobPostCustomizedValue():WebsiteJobPostCustomizedValue
+	export function emptyRefWebsiteJobPostCustomizedValue():Ref<WebsiteJobPostCustomizedValue>
+	export function refOfWebsiteJobPostCustomizedValue(x:WebsiteJobPostCustomizedValue,v:Ref<WebsiteJobPostCustomizedValue>)
+	export function unRefWebsiteJobPostCustomizedValue(v:Ref<WebsiteJobPostCustomizedValue>):WebsiteJobPostCustomizedValue
+	export function emptyApplicationPrehireOptional():ApplicationPrehireOptional
+	export function emptyRefApplicationPrehireOptional():Ref<ApplicationPrehireOptional>
+	export function refOfApplicationPrehireOptional(x:ApplicationPrehireOptional,v:Ref<ApplicationPrehireOptional>)
+	export function unRefApplicationPrehireOptional(v:Ref<ApplicationPrehireOptional>):ApplicationPrehireOptional
+	export function emptyListByIdJobRequirementRespData():ListByIdJobRequirementRespData
+	export function emptyRefListByIdJobRequirementRespData():Ref<ListByIdJobRequirementRespData>
+	export function refOfListByIdJobRequirementRespData(x:ListByIdJobRequirementRespData,v:Ref<ListByIdJobRequirementRespData>)
+	export function unRefListByIdJobRequirementRespData(v:Ref<ListByIdJobRequirementRespData>):ListByIdJobRequirementRespData
+	export function emptyListResumeSourceRespData():ListResumeSourceRespData
+	export function emptyRefListResumeSourceRespData():Ref<ListResumeSourceRespData>
+	export function refOfListResumeSourceRespData(x:ListResumeSourceRespData,v:Ref<ListResumeSourceRespData>)
+	export function unRefListResumeSourceRespData(v:Ref<ListResumeSourceRespData>):ListResumeSourceRespData
+	export function emptyOfferCustomFieldConfigOption():OfferCustomFieldConfigOption
+	export function emptyRefOfferCustomFieldConfigOption():Ref<OfferCustomFieldConfigOption>
+	export function refOfOfferCustomFieldConfigOption(x:OfferCustomFieldConfigOption,v:Ref<OfferCustomFieldConfigOption>)
+	export function unRefOfferCustomFieldConfigOption(v:Ref<OfferCustomFieldConfigOption>):OfferCustomFieldConfigOption
+	export function emptyQueryLocationRespData():QueryLocationRespData
+	export function emptyRefQueryLocationRespData():Ref<QueryLocationRespData>
+	export function refOfQueryLocationRespData(x:QueryLocationRespData,v:Ref<QueryLocationRespData>)
+	export function unRefQueryLocationRespData(v:Ref<QueryLocationRespData>):QueryLocationRespData
+	export function emptyBatchUpdateEcoBackgroundCheckPackageReq():BatchUpdateEcoBackgroundCheckPackageReq
+	export function emptyRefBatchUpdateEcoBackgroundCheckPackageReq():Ref<BatchUpdateEcoBackgroundCheckPackageReq>
+	export function refOfBatchUpdateEcoBackgroundCheckPackageReq(x:BatchUpdateEcoBackgroundCheckPackageReq,v:Ref<BatchUpdateEcoBackgroundCheckPackageReq>)
+	export function unRefBatchUpdateEcoBackgroundCheckPackageReq(v:Ref<BatchUpdateEcoBackgroundCheckPackageReq>):BatchUpdateEcoBackgroundCheckPackageReq
+	export function emptyCombinedJobObjectValueMap():CombinedJobObjectValueMap
+	export function emptyRefCombinedJobObjectValueMap():Ref<CombinedJobObjectValueMap>
+	export function refOfCombinedJobObjectValueMap(x:CombinedJobObjectValueMap,v:Ref<CombinedJobObjectValueMap>)
+	export function unRefCombinedJobObjectValueMap(v:Ref<CombinedJobObjectValueMap>):CombinedJobObjectValueMap
+	export function emptySiteResumeEducation():SiteResumeEducation
+	export function emptyRefSiteResumeEducation():Ref<SiteResumeEducation>
+	export function refOfSiteResumeEducation(x:SiteResumeEducation,v:Ref<SiteResumeEducation>)
+	export function unRefSiteResumeEducation(v:Ref<SiteResumeEducation>):SiteResumeEducation
+	export function emptyGetOfferReq():GetOfferReq
+	export function emptyRefGetOfferReq():Ref<GetOfferReq>
+	export function refOfGetOfferReq(x:GetOfferReq,v:Ref<GetOfferReq>)
+	export function unRefGetOfferReq(v:Ref<GetOfferReq>):GetOfferReq
+	export function emptyJobCity():JobCity
+	export function emptyRefJobCity():Ref<JobCity>
+	export function refOfJobCity(x:JobCity,v:Ref<JobCity>)
+	export function unRefJobCity(v:Ref<JobCity>):JobCity
+	export function emptyWebsiteDeliveryCertificate():WebsiteDeliveryCertificate
+	export function emptyRefWebsiteDeliveryCertificate():Ref<WebsiteDeliveryCertificate>
+	export function refOfWebsiteDeliveryCertificate(x:WebsiteDeliveryCertificate,v:Ref<WebsiteDeliveryCertificate>)
+	export function unRefWebsiteDeliveryCertificate(v:Ref<WebsiteDeliveryCertificate>):WebsiteDeliveryCertificate
+	export function emptyAppliTalentCertificateInfo():AppliTalentCertificateInfo
+	export function emptyRefAppliTalentCertificateInfo():Ref<AppliTalentCertificateInfo>
+	export function refOfAppliTalentCertificateInfo(x:AppliTalentCertificateInfo,v:Ref<AppliTalentCertificateInfo>)
+	export function unRefAppliTalentCertificateInfo(v:Ref<AppliTalentCertificateInfo>):AppliTalentCertificateInfo
+	export function emptySearchTalentPoolRespData():SearchTalentPoolRespData
+	export function emptyRefSearchTalentPoolRespData():Ref<SearchTalentPoolRespData>
+	export function refOfSearchTalentPoolRespData(x:SearchTalentPoolRespData,v:Ref<SearchTalentPoolRespData>)
+	export function unRefSearchTalentPoolRespData(v:Ref<SearchTalentPoolRespData>):SearchTalentPoolRespData
+	export function emptyUpdateWebsiteChannelReqBody():UpdateWebsiteChannelReqBody
+	export function emptyRefUpdateWebsiteChannelReqBody():Ref<UpdateWebsiteChannelReqBody>
+	export function refOfUpdateWebsiteChannelReqBody(x:UpdateWebsiteChannelReqBody,v:Ref<UpdateWebsiteChannelReqBody>)
+	export function unRefUpdateWebsiteChannelReqBody(v:Ref<UpdateWebsiteChannelReqBody>):UpdateWebsiteChannelReqBody
+	export function emptyP2ApplicationStageChangedV1():P2ApplicationStageChangedV1
+	export function emptyRefP2ApplicationStageChangedV1():Ref<P2ApplicationStageChangedV1>
+	export function refOfP2ApplicationStageChangedV1(x:P2ApplicationStageChangedV1,v:Ref<P2ApplicationStageChangedV1>)
+	export function unRefP2ApplicationStageChangedV1(v:Ref<P2ApplicationStageChangedV1>):P2ApplicationStageChangedV1
+	export function emptyP2TalentDeletedV1():P2TalentDeletedV1
+	export function emptyRefP2TalentDeletedV1():Ref<P2TalentDeletedV1>
+	export function refOfP2TalentDeletedV1(x:P2TalentDeletedV1,v:Ref<P2TalentDeletedV1>)
+	export function unRefP2TalentDeletedV1(v:Ref<P2TalentDeletedV1>):P2TalentDeletedV1
+	export function emptyOfferApprovalTemplate():OfferApprovalTemplate
+	export function emptyRefOfferApprovalTemplate():Ref<OfferApprovalTemplate>
+	export function refOfOfferApprovalTemplate(x:OfferApprovalTemplate,v:Ref<OfferApprovalTemplate>)
+	export function unRefOfferApprovalTemplate(v:Ref<OfferApprovalTemplate>):OfferApprovalTemplate
+	export function emptyCreateEcoExamPaperReq():CreateEcoExamPaperReq
+	export function emptyRefCreateEcoExamPaperReq():Ref<CreateEcoExamPaperReq>
+	export function refOfCreateEcoExamPaperReq(x:CreateEcoExamPaperReq,v:Ref<CreateEcoExamPaperReq>)
+	export function unRefCreateEcoExamPaperReq(v:Ref<CreateEcoExamPaperReq>):CreateEcoExamPaperReq
+	export function emptyDeleteExternalReferralRewardReq():DeleteExternalReferralRewardReq
+	export function emptyRefDeleteExternalReferralRewardReq():Ref<DeleteExternalReferralRewardReq>
+	export function refOfDeleteExternalReferralRewardReq(x:DeleteExternalReferralRewardReq,v:Ref<DeleteExternalReferralRewardReq>)
+	export function unRefDeleteExternalReferralRewardReq(v:Ref<DeleteExternalReferralRewardReq>):DeleteExternalReferralRewardReq
+	export function emptyJobConfigInterviewRound():JobConfigInterviewRound
+	export function emptyRefJobConfigInterviewRound():Ref<JobConfigInterviewRound>
+	export function refOfJobConfigInterviewRound(x:JobConfigInterviewRound,v:Ref<JobConfigInterviewRound>)
+	export function unRefJobConfigInterviewRound(v:Ref<JobConfigInterviewRound>):JobConfigInterviewRound
+	export function emptyQueryAgencyReq():QueryAgencyReq
+	export function emptyRefQueryAgencyReq():Ref<QueryAgencyReq>
+	export function refOfQueryAgencyReq(x:QueryAgencyReq,v:Ref<QueryAgencyReq>)
+	export function unRefQueryAgencyReq(v:Ref<QueryAgencyReq>):QueryAgencyReq
+	export function emptyCreateByAttachmentWebsiteDeliveryReq():CreateByAttachmentWebsiteDeliveryReq
+	export function emptyRefCreateByAttachmentWebsiteDeliveryReq():Ref<CreateByAttachmentWebsiteDeliveryReq>
+	export function refOfCreateByAttachmentWebsiteDeliveryReq(x:CreateByAttachmentWebsiteDeliveryReq,v:Ref<CreateByAttachmentWebsiteDeliveryReq>)
+	export function unRefCreateByAttachmentWebsiteDeliveryReq(v:Ref<CreateByAttachmentWebsiteDeliveryReq>):CreateByAttachmentWebsiteDeliveryReq
+	export function emptyInternOfferStatusOfferReq():InternOfferStatusOfferReq
+	export function emptyRefInternOfferStatusOfferReq():Ref<InternOfferStatusOfferReq>
+	export function refOfInternOfferStatusOfferReq(x:InternOfferStatusOfferReq,v:Ref<InternOfferStatusOfferReq>)
+	export function unRefInternOfferStatusOfferReq(v:Ref<InternOfferStatusOfferReq>):InternOfferStatusOfferReq
+	export function emptyListEvaluationTaskRespData():ListEvaluationTaskRespData
+	export function emptyRefListEvaluationTaskRespData():Ref<ListEvaluationTaskRespData>
+	export function refOfListEvaluationTaskRespData(x:ListEvaluationTaskRespData,v:Ref<ListEvaluationTaskRespData>)
+	export function unRefListEvaluationTaskRespData(v:Ref<ListEvaluationTaskRespData>):ListEvaluationTaskRespData
+	export function emptyApplicationOfferSalaryPlan():ApplicationOfferSalaryPlan
+	export function emptyRefApplicationOfferSalaryPlan():Ref<ApplicationOfferSalaryPlan>
+	export function refOfApplicationOfferSalaryPlan(x:ApplicationOfferSalaryPlan,v:Ref<ApplicationOfferSalaryPlan>)
+	export function unRefApplicationOfferSalaryPlan(v:Ref<ApplicationOfferSalaryPlan>):ApplicationOfferSalaryPlan
+	export function emptyBackgroundCheckOrder():BackgroundCheckOrder
+	export function emptyRefBackgroundCheckOrder():Ref<BackgroundCheckOrder>
+	export function refOfBackgroundCheckOrder(x:BackgroundCheckOrder,v:Ref<BackgroundCheckOrder>)
+	export function unRefBackgroundCheckOrder(v:Ref<BackgroundCheckOrder>):BackgroundCheckOrder
+	export function emptyGetByApplicationEmployeeResp():GetByApplicationEmployeeResp
+	export function emptyRefGetByApplicationEmployeeResp():Ref<GetByApplicationEmployeeResp>
+	export function refOfGetByApplicationEmployeeResp(x:GetByApplicationEmployeeResp,v:Ref<GetByApplicationEmployeeResp>)
+	export function unRefGetByApplicationEmployeeResp(v:Ref<GetByApplicationEmployeeResp>):GetByApplicationEmployeeResp
+	export function emptyOfferApplyFormObjectDisplayConfigInfo():OfferApplyFormObjectDisplayConfigInfo
+	export function emptyRefOfferApplyFormObjectDisplayConfigInfo():Ref<OfferApplyFormObjectDisplayConfigInfo>
+	export function refOfOfferApplyFormObjectDisplayConfigInfo(x:OfferApplyFormObjectDisplayConfigInfo,v:Ref<OfferApplyFormObjectDisplayConfigInfo>)
+	export function unRefOfferApplyFormObjectDisplayConfigInfo(v:Ref<OfferApplyFormObjectDisplayConfigInfo>):OfferApplyFormObjectDisplayConfigInfo
+	export function emptyCreateWebsiteSiteUserResp():CreateWebsiteSiteUserResp
+	export function emptyRefCreateWebsiteSiteUserResp():Ref<CreateWebsiteSiteUserResp>
+	export function refOfCreateWebsiteSiteUserResp(x:CreateWebsiteSiteUserResp,v:Ref<CreateWebsiteSiteUserResp>)
+	export function unRefCreateWebsiteSiteUserResp(v:Ref<CreateWebsiteSiteUserResp>):CreateWebsiteSiteUserResp
+	export function emptyReferral():Referral
+	export function emptyRefReferral():Ref<Referral>
+	export function refOfReferral(x:Referral,v:Ref<Referral>)
+	export function unRefReferral(v:Ref<Referral>):Referral
+	export function emptyLocationNameInfo():LocationNameInfo
+	export function emptyRefLocationNameInfo():Ref<LocationNameInfo>
+	export function refOfLocationNameInfo(x:LocationNameInfo,v:Ref<LocationNameInfo>)
+	export function unRefLocationNameInfo(v:Ref<LocationNameInfo>):LocationNameInfo
+	export function emptyP2ReferralAccountAssetsUpdateV1():P2ReferralAccountAssetsUpdateV1
+	export function emptyRefP2ReferralAccountAssetsUpdateV1():Ref<P2ReferralAccountAssetsUpdateV1>
+	export function refOfP2ReferralAccountAssetsUpdateV1(x:P2ReferralAccountAssetsUpdateV1,v:Ref<P2ReferralAccountAssetsUpdateV1>)
+	export function unRefP2ReferralAccountAssetsUpdateV1(v:Ref<P2ReferralAccountAssetsUpdateV1>):P2ReferralAccountAssetsUpdateV1
+	export function emptyUpdateResultEcoBackgroundCheckReq():UpdateResultEcoBackgroundCheckReq
+	export function emptyRefUpdateResultEcoBackgroundCheckReq():Ref<UpdateResultEcoBackgroundCheckReq>
+	export function refOfUpdateResultEcoBackgroundCheckReq(x:UpdateResultEcoBackgroundCheckReq,v:Ref<UpdateResultEcoBackgroundCheckReq>)
+	export function unRefUpdateResultEcoBackgroundCheckReq(v:Ref<UpdateResultEcoBackgroundCheckReq>):UpdateResultEcoBackgroundCheckReq
+	export function emptyListRoleResp():ListRoleResp
+	export function emptyRefListRoleResp():Ref<ListRoleResp>
+	export function refOfListRoleResp(x:ListRoleResp,v:Ref<ListRoleResp>)
+	export function unRefListRoleResp(v:Ref<ListRoleResp>):ListRoleResp
+	export function emptySiteJobCity():SiteJobCity
+	export function emptyRefSiteJobCity():Ref<SiteJobCity>
+	export function refOfSiteJobCity(x:SiteJobCity,v:Ref<SiteJobCity>)
+	export function unRefSiteJobCity(v:Ref<SiteJobCity>):SiteJobCity
+	export function emptyLevel():Level
+	export function emptyRefLevel():Ref<Level>
+	export function refOfLevel(x:Level,v:Ref<Level>)
+	export function unRefLevel(v:Ref<Level>):Level
+	export function emptyListWebsiteIterator():ListWebsiteIterator
+	export function emptyRefListWebsiteIterator():Ref<ListWebsiteIterator>
+	export function refOfListWebsiteIterator(x:ListWebsiteIterator,v:Ref<ListWebsiteIterator>)
+	export function unRefListWebsiteIterator(v:Ref<ListWebsiteIterator>):ListWebsiteIterator
+	export function emptyCreateNoteRespData():CreateNoteRespData
+	export function emptyRefCreateNoteRespData():Ref<CreateNoteRespData>
+	export function refOfCreateNoteRespData(x:CreateNoteRespData,v:Ref<CreateNoteRespData>)
+	export function unRefCreateNoteRespData(v:Ref<CreateNoteRespData>):CreateNoteRespData
+	export function emptyOfferSignatureInfo():OfferSignatureInfo
+	export function emptyRefOfferSignatureInfo():Ref<OfferSignatureInfo>
+	export function refOfOfferSignatureInfo(x:OfferSignatureInfo,v:Ref<OfferSignatureInfo>)
+	export function unRefOfferSignatureInfo(v:Ref<OfferSignatureInfo>):OfferSignatureInfo
+	export function emptyExamMarkingTask():ExamMarkingTask
+	export function emptyRefExamMarkingTask():Ref<ExamMarkingTask>
+	export function refOfExamMarkingTask(x:ExamMarkingTask,v:Ref<ExamMarkingTask>)
+	export function unRefExamMarkingTask(v:Ref<ExamMarkingTask>):ExamMarkingTask
+	export function emptyListTripartiteAgreementReq():ListTripartiteAgreementReq
+	export function emptyRefListTripartiteAgreementReq():Ref<ListTripartiteAgreementReq>
+	export function refOfListTripartiteAgreementReq(x:ListTripartiteAgreementReq,v:Ref<ListTripartiteAgreementReq>)
+	export function unRefListTripartiteAgreementReq(v:Ref<ListTripartiteAgreementReq>):ListTripartiteAgreementReq
+	export function emptyApplicationPrehireOffer():ApplicationPrehireOffer
+	export function emptyRefApplicationPrehireOffer():Ref<ApplicationPrehireOffer>
+	export function refOfApplicationPrehireOffer(x:ApplicationPrehireOffer,v:Ref<ApplicationPrehireOffer>)
+	export function unRefApplicationPrehireOffer(v:Ref<ApplicationPrehireOffer>):ApplicationPrehireOffer
+	export function emptyCombinedUpdateTalentReq():CombinedUpdateTalentReq
+	export function emptyRefCombinedUpdateTalentReq():Ref<CombinedUpdateTalentReq>
+	export function refOfCombinedUpdateTalentReq(x:CombinedUpdateTalentReq,v:Ref<CombinedUpdateTalentReq>)
+	export function unRefCombinedUpdateTalentReq(v:Ref<CombinedUpdateTalentReq>):CombinedUpdateTalentReq
+	export function emptyGetWebsiteJobPostResp():GetWebsiteJobPostResp
+	export function emptyRefGetWebsiteJobPostResp():Ref<GetWebsiteJobPostResp>
+	export function refOfGetWebsiteJobPostResp(x:GetWebsiteJobPostResp,v:Ref<GetWebsiteJobPostResp>)
+	export function unRefGetWebsiteJobPostResp(v:Ref<GetWebsiteJobPostResp>):GetWebsiteJobPostResp
+	export function emptyPatchEmployeeResp():PatchEmployeeResp
+	export function emptyRefPatchEmployeeResp():Ref<PatchEmployeeResp>
+	export function refOfPatchEmployeeResp(x:PatchEmployeeResp,v:Ref<PatchEmployeeResp>)
+	export function unRefPatchEmployeeResp(v:Ref<PatchEmployeeResp>):PatchEmployeeResp
+	export function emptySiteApplicationResume():SiteApplicationResume
+	export function emptyRefSiteApplicationResume():Ref<SiteApplicationResume>
+	export function refOfSiteApplicationResume(x:SiteApplicationResume,v:Ref<SiteApplicationResume>)
+	export function unRefSiteApplicationResume(v:Ref<SiteApplicationResume>):SiteApplicationResume
+	export function emptyTalent():Talent
+	export function emptyRefTalent():Ref<Talent>
+	export function refOfTalent(x:Talent,v:Ref<Talent>)
+	export function unRefTalent(v:Ref<Talent>):Talent
+	export function emptyTargetMajorInfo():TargetMajorInfo
+	export function emptyRefTargetMajorInfo():Ref<TargetMajorInfo>
+	export function refOfTargetMajorInfo(x:TargetMajorInfo,v:Ref<TargetMajorInfo>)
+	export function unRefTargetMajorInfo(v:Ref<TargetMajorInfo>):TargetMajorInfo
+	export function emptyBackgroundCheckOrderProcessInfo():BackgroundCheckOrderProcessInfo
+	export function emptyRefBackgroundCheckOrderProcessInfo():Ref<BackgroundCheckOrderProcessInfo>
+	export function refOfBackgroundCheckOrderProcessInfo(x:BackgroundCheckOrderProcessInfo,v:Ref<BackgroundCheckOrderProcessInfo>)
+	export function unRefBackgroundCheckOrderProcessInfo(v:Ref<BackgroundCheckOrderProcessInfo>):BackgroundCheckOrderProcessInfo
+	export function emptyWebsiteDeliverySns():WebsiteDeliverySns
+	export function emptyRefWebsiteDeliverySns():Ref<WebsiteDeliverySns>
+	export function refOfWebsiteDeliverySns(x:WebsiteDeliverySns,v:Ref<WebsiteDeliverySns>)
+	export function unRefWebsiteDeliverySns(v:Ref<WebsiteDeliverySns>):WebsiteDeliverySns
+	export function emptyListTalentFolderRespData():ListTalentFolderRespData
+	export function emptyRefListTalentFolderRespData():Ref<ListTalentFolderRespData>
+	export function refOfListTalentFolderRespData(x:ListTalentFolderRespData,v:Ref<ListTalentFolderRespData>)
+	export function unRefListTalentFolderRespData(v:Ref<ListTalentFolderRespData>):ListTalentFolderRespData
+	export function emptyIdentification():Identification
+	export function emptyRefIdentification():Ref<Identification>
+	export function refOfIdentification(x:Identification,v:Ref<Identification>)
+	export function unRefIdentification(v:Ref<Identification>):Identification
+	export function emptyGetEmployeeRespData():GetEmployeeRespData
+	export function emptyRefGetEmployeeRespData():Ref<GetEmployeeRespData>
+	export function refOfGetEmployeeRespData(x:GetEmployeeRespData,v:Ref<GetEmployeeRespData>)
+	export function unRefGetEmployeeRespData(v:Ref<GetEmployeeRespData>):GetEmployeeRespData
+	export function emptyGetJobRespData():GetJobRespData
+	export function emptyRefGetJobRespData():Ref<GetJobRespData>
+	export function refOfGetJobRespData(x:GetJobRespData,v:Ref<GetJobRespData>)
+	export function unRefGetJobRespData(v:Ref<GetJobRespData>):GetJobRespData
+	export function emptyCombinedCreateTalentRespData():CombinedCreateTalentRespData
+	export function emptyRefCombinedCreateTalentRespData():Ref<CombinedCreateTalentRespData>
+	export function refOfCombinedCreateTalentRespData(x:CombinedCreateTalentRespData,v:Ref<CombinedCreateTalentRespData>)
+	export function unRefCombinedCreateTalentRespData(v:Ref<CombinedCreateTalentRespData>):CombinedCreateTalentRespData
+	export function emptyReferralInfo():ReferralInfo
+	export function emptyRefReferralInfo():Ref<ReferralInfo>
+	export function refOfReferralInfo(x:ReferralInfo,v:Ref<ReferralInfo>)
+	export function unRefReferralInfo(v:Ref<ReferralInfo>):ReferralInfo
+	export function emptyApplicationTalentCompetitionInfo():ApplicationTalentCompetitionInfo
+	export function emptyRefApplicationTalentCompetitionInfo():Ref<ApplicationTalentCompetitionInfo>
+	export function refOfApplicationTalentCompetitionInfo(x:ApplicationTalentCompetitionInfo,v:Ref<ApplicationTalentCompetitionInfo>)
+	export function unRefApplicationTalentCompetitionInfo(v:Ref<ApplicationTalentCompetitionInfo>):ApplicationTalentCompetitionInfo
+	export function emptyListOfferResp():ListOfferResp
+	export function emptyRefListOfferResp():Ref<ListOfferResp>
+	export function refOfListOfferResp(x:ListOfferResp,v:Ref<ListOfferResp>)
+	export function unRefListOfferResp(v:Ref<ListOfferResp>):ListOfferResp
+	export function emptyP2OfferStatusChangedV1Data():P2OfferStatusChangedV1Data
+	export function emptyRefP2OfferStatusChangedV1Data():Ref<P2OfferStatusChangedV1Data>
+	export function refOfP2OfferStatusChangedV1Data(x:P2OfferStatusChangedV1Data,v:Ref<P2OfferStatusChangedV1Data>)
+	export function unRefP2OfferStatusChangedV1Data(v:Ref<P2OfferStatusChangedV1Data>):P2OfferStatusChangedV1Data
+	export function emptyProviderIdNameObject():ProviderIdNameObject
+	export function emptyRefProviderIdNameObject():Ref<ProviderIdNameObject>
+	export function refOfProviderIdNameObject(x:ProviderIdNameObject,v:Ref<ProviderIdNameObject>)
+	export function unRefProviderIdNameObject(v:Ref<ProviderIdNameObject>):ProviderIdNameObject
+	export function emptyUpdateTripartiteAgreementRespData():UpdateTripartiteAgreementRespData
+	export function emptyRefUpdateTripartiteAgreementRespData():Ref<UpdateTripartiteAgreementRespData>
+	export function refOfUpdateTripartiteAgreementRespData(x:UpdateTripartiteAgreementRespData,v:Ref<UpdateTripartiteAgreementRespData>)
+	export function unRefUpdateTripartiteAgreementRespData(v:Ref<UpdateTripartiteAgreementRespData>):UpdateTripartiteAgreementRespData
+	export function emptyDeleteExternalApplicationResp():DeleteExternalApplicationResp
+	export function emptyRefDeleteExternalApplicationResp():Ref<DeleteExternalApplicationResp>
+	export function refOfDeleteExternalApplicationResp(x:DeleteExternalApplicationResp,v:Ref<DeleteExternalApplicationResp>)
+	export function unRefDeleteExternalApplicationResp(v:Ref<DeleteExternalApplicationResp>):DeleteExternalApplicationResp
+	export function emptyEcoBackgroundCheckCreateEventCandidateInfo():EcoBackgroundCheckCreateEventCandidateInfo
+	export function emptyRefEcoBackgroundCheckCreateEventCandidateInfo():Ref<EcoBackgroundCheckCreateEventCandidateInfo>
+	export function refOfEcoBackgroundCheckCreateEventCandidateInfo(x:EcoBackgroundCheckCreateEventCandidateInfo,v:Ref<EcoBackgroundCheckCreateEventCandidateInfo>)
+	export function unRefEcoBackgroundCheckCreateEventCandidateInfo(v:Ref<EcoBackgroundCheckCreateEventCandidateInfo>):EcoBackgroundCheckCreateEventCandidateInfo
+	export function emptyDiInfo():DiInfo
+	export function emptyRefDiInfo():Ref<DiInfo>
+	export function refOfDiInfo(x:DiInfo,v:Ref<DiInfo>)
+	export function unRefDiInfo(v:Ref<DiInfo>):DiInfo
+	export function emptyCompetitionInfo():CompetitionInfo
+	export function emptyRefCompetitionInfo():Ref<CompetitionInfo>
+	export function refOfCompetitionInfo(x:CompetitionInfo,v:Ref<CompetitionInfo>)
+	export function unRefCompetitionInfo(v:Ref<CompetitionInfo>):CompetitionInfo
+	export function emptyDeleteWebsiteChannelResp():DeleteWebsiteChannelResp
+	export function emptyRefDeleteWebsiteChannelResp():Ref<DeleteWebsiteChannelResp>
+	export function refOfDeleteWebsiteChannelResp(x:DeleteWebsiteChannelResp,v:Ref<DeleteWebsiteChannelResp>)
+	export function unRefDeleteWebsiteChannelResp(v:Ref<DeleteWebsiteChannelResp>):DeleteWebsiteChannelResp
+	export function emptyJobTypeInfo():JobTypeInfo
+	export function emptyRefJobTypeInfo():Ref<JobTypeInfo>
+	export function refOfJobTypeInfo(x:JobTypeInfo,v:Ref<JobTypeInfo>)
+	export function unRefJobTypeInfo(v:Ref<JobTypeInfo>):JobTypeInfo
+	export function emptyListByIdJobRequirementReq():ListByIdJobRequirementReq
+	export function emptyRefListByIdJobRequirementReq():Ref<ListByIdJobRequirementReq>
+	export function refOfListByIdJobRequirementReq(x:ListByIdJobRequirementReq,v:Ref<ListByIdJobRequirementReq>)
+	export function unRefListByIdJobRequirementReq(v:Ref<ListByIdJobRequirementReq>):ListByIdJobRequirementReq
+	export function emptyListInterviewRecordResp():ListInterviewRecordResp
+	export function emptyRefListInterviewRecordResp():Ref<ListInterviewRecordResp>
+	export function refOfListInterviewRecordResp(x:ListInterviewRecordResp,v:Ref<ListInterviewRecordResp>)
+	export function unRefListInterviewRecordResp(v:Ref<ListInterviewRecordResp>):ListInterviewRecordResp
+	export function emptyReconciliationReferralAccountRespData():ReconciliationReferralAccountRespData
+	export function emptyRefReconciliationReferralAccountRespData():Ref<ReconciliationReferralAccountRespData>
+	export function refOfReconciliationReferralAccountRespData(x:ReconciliationReferralAccountRespData,v:Ref<ReconciliationReferralAccountRespData>)
+	export function unRefReconciliationReferralAccountRespData(v:Ref<ReconciliationReferralAccountRespData>):ReconciliationReferralAccountRespData
+	export function emptyOfferSchemaListInfo():OfferSchemaListInfo
+	export function emptyRefOfferSchemaListInfo():Ref<OfferSchemaListInfo>
+	export function refOfOfferSchemaListInfo(x:OfferSchemaListInfo,v:Ref<OfferSchemaListInfo>)
+	export function unRefOfferSchemaListInfo(v:Ref<OfferSchemaListInfo>):OfferSchemaListInfo
+	export function emptyApplicationOfferCustomValue():ApplicationOfferCustomValue
+	export function emptyRefApplicationOfferCustomValue():Ref<ApplicationOfferCustomValue>
+	export function refOfApplicationOfferCustomValue(x:ApplicationOfferCustomValue,v:Ref<ApplicationOfferCustomValue>)
+	export function unRefApplicationOfferCustomValue(v:Ref<ApplicationOfferCustomValue>):ApplicationOfferCustomValue
+	export function emptyListJobReq():ListJobReq
+	export function emptyRefListJobReq():Ref<ListJobReq>
+	export function refOfListJobReq(x:ListJobReq,v:Ref<ListJobReq>)
+	export function unRefListJobReq(v:Ref<ListJobReq>):ListJobReq
+	export function emptyCreateWebsiteChannelRespData():CreateWebsiteChannelRespData
+	export function emptyRefCreateWebsiteChannelRespData():Ref<CreateWebsiteChannelRespData>
+	export function refOfCreateWebsiteChannelRespData(x:CreateWebsiteChannelRespData,v:Ref<CreateWebsiteChannelRespData>)
+	export function unRefCreateWebsiteChannelRespData(v:Ref<CreateWebsiteChannelRespData>):CreateWebsiteChannelRespData
+	export function emptyJobConfig():JobConfig
+	export function emptyRefJobConfig():Ref<JobConfig>
+	export function refOfJobConfig(x:JobConfig,v:Ref<JobConfig>)
+	export function unRefJobConfig(v:Ref<JobConfig>):JobConfig
+	export function emptyTalentCustomizedData():TalentCustomizedData
+	export function emptyRefTalentCustomizedData():Ref<TalentCustomizedData>
+	export function refOfTalentCustomizedData(x:TalentCustomizedData,v:Ref<TalentCustomizedData>)
+	export function unRefTalentCustomizedData(v:Ref<TalentCustomizedData>):TalentCustomizedData
+	export function emptyApplicationOffer():ApplicationOffer
+	export function emptyRefApplicationOffer():Ref<ApplicationOffer>
+	export function refOfApplicationOffer(x:ApplicationOffer,v:Ref<ApplicationOffer>)
+	export function unRefApplicationOffer(v:Ref<ApplicationOffer>):ApplicationOffer
+	export function emptyInterviewRegistrationSchema():InterviewRegistrationSchema
+	export function emptyRefInterviewRegistrationSchema():Ref<InterviewRegistrationSchema>
+	export function refOfInterviewRegistrationSchema(x:InterviewRegistrationSchema,v:Ref<InterviewRegistrationSchema>)
+	export function unRefInterviewRegistrationSchema(v:Ref<InterviewRegistrationSchema>):InterviewRegistrationSchema
+	export function emptyP2EcoAccountCreatedV1():P2EcoAccountCreatedV1
+	export function emptyRefP2EcoAccountCreatedV1():Ref<P2EcoAccountCreatedV1>
+	export function refOfP2EcoAccountCreatedV1(x:P2EcoAccountCreatedV1,v:Ref<P2EcoAccountCreatedV1>)
+	export function unRefP2EcoAccountCreatedV1(v:Ref<P2EcoAccountCreatedV1>):P2EcoAccountCreatedV1
+	export function emptyTalentIdentificationInfo():TalentIdentificationInfo
+	export function emptyRefTalentIdentificationInfo():Ref<TalentIdentificationInfo>
+	export function refOfTalentIdentificationInfo(x:TalentIdentificationInfo,v:Ref<TalentIdentificationInfo>)
+	export function unRefTalentIdentificationInfo(v:Ref<TalentIdentificationInfo>):TalentIdentificationInfo
+	export function emptyAppliOfferSalaryPlanTemplate():AppliOfferSalaryPlanTemplate
+	export function emptyRefAppliOfferSalaryPlanTemplate():Ref<AppliOfferSalaryPlanTemplate>
+	export function refOfAppliOfferSalaryPlanTemplate(x:AppliOfferSalaryPlanTemplate,v:Ref<AppliOfferSalaryPlanTemplate>)
+	export function unRefAppliOfferSalaryPlanTemplate(v:Ref<AppliOfferSalaryPlanTemplate>):AppliOfferSalaryPlanTemplate
+	export function emptyListWebsiteChannelResp():ListWebsiteChannelResp
+	export function emptyRefListWebsiteChannelResp():Ref<ListWebsiteChannelResp>
+	export function refOfListWebsiteChannelResp(x:ListWebsiteChannelResp,v:Ref<ListWebsiteChannelResp>)
+	export function unRefListWebsiteChannelResp(v:Ref<ListWebsiteChannelResp>):ListWebsiteChannelResp
+	export function emptyListJobFunctionReq():ListJobFunctionReq
+	export function emptyRefListJobFunctionReq():Ref<ListJobFunctionReq>
+	export function refOfListJobFunctionReq(x:ListJobFunctionReq,v:Ref<ListJobFunctionReq>)
+	export function unRefListJobFunctionReq(v:Ref<ListJobFunctionReq>):ListJobFunctionReq
+	export function emptySiteResumeLanguageSkill():SiteResumeLanguageSkill
+	export function emptyRefSiteResumeLanguageSkill():Ref<SiteResumeLanguageSkill>
+	export function refOfSiteResumeLanguageSkill(x:SiteResumeLanguageSkill,v:Ref<SiteResumeLanguageSkill>)
+	export function unRefSiteResumeLanguageSkill(v:Ref<SiteResumeLanguageSkill>):SiteResumeLanguageSkill
+	export function emptyGetReferralWebsiteJobPostResp():GetReferralWebsiteJobPostResp
+	export function emptyRefGetReferralWebsiteJobPostResp():Ref<GetReferralWebsiteJobPostResp>
+	export function refOfGetReferralWebsiteJobPostResp(x:GetReferralWebsiteJobPostResp,v:Ref<GetReferralWebsiteJobPostResp>)
+	export function unRefGetReferralWebsiteJobPostResp(v:Ref<GetReferralWebsiteJobPostResp>):GetReferralWebsiteJobPostResp
+	export function emptyLoginInfoEcoExamReq():LoginInfoEcoExamReq
+	export function emptyRefLoginInfoEcoExamReq():Ref<LoginInfoEcoExamReq>
+	export function refOfLoginInfoEcoExamReq(x:LoginInfoEcoExamReq,v:Ref<LoginInfoEcoExamReq>)
+	export function unRefLoginInfoEcoExamReq(v:Ref<LoginInfoEcoExamReq>):LoginInfoEcoExamReq
+	export function emptyOfferStatusOfferReq():OfferStatusOfferReq
+	export function emptyRefOfferStatusOfferReq():Ref<OfferStatusOfferReq>
+	export function refOfOfferStatusOfferReq(x:OfferStatusOfferReq,v:Ref<OfferStatusOfferReq>)
+	export function unRefOfferStatusOfferReq(v:Ref<OfferStatusOfferReq>):OfferStatusOfferReq
+	export function emptyBatchDeleteEcoExamPaperResp():BatchDeleteEcoExamPaperResp
+	export function emptyRefBatchDeleteEcoExamPaperResp():Ref<BatchDeleteEcoExamPaperResp>
+	export function refOfBatchDeleteEcoExamPaperResp(x:BatchDeleteEcoExamPaperResp,v:Ref<BatchDeleteEcoExamPaperResp>)
+	export function unRefBatchDeleteEcoExamPaperResp(v:Ref<BatchDeleteEcoExamPaperResp>):BatchDeleteEcoExamPaperResp
+	export function emptyDimensionAbility():DimensionAbility
+	export function emptyRefDimensionAbility():Ref<DimensionAbility>
+	export function refOfDimensionAbility(x:DimensionAbility,v:Ref<DimensionAbility>)
+	export function unRefDimensionAbility(v:Ref<DimensionAbility>):DimensionAbility
+	export function emptyJobRequirementCustomizedOption():JobRequirementCustomizedOption
+	export function emptyRefJobRequirementCustomizedOption():Ref<JobRequirementCustomizedOption>
+	export function refOfJobRequirementCustomizedOption(x:JobRequirementCustomizedOption,v:Ref<JobRequirementCustomizedOption>)
+	export function unRefJobRequirementCustomizedOption(v:Ref<JobRequirementCustomizedOption>):JobRequirementCustomizedOption
+	export function emptyFiveStartScoringResult():FiveStartScoringResult
+	export function emptyRefFiveStartScoringResult():Ref<FiveStartScoringResult>
+	export function refOfFiveStartScoringResult(x:FiveStartScoringResult,v:Ref<FiveStartScoringResult>)
+	export function unRefFiveStartScoringResult(v:Ref<FiveStartScoringResult>):FiveStartScoringResult
+	export function emptyGetAttachmentRespData():GetAttachmentRespData
+	export function emptyRefGetAttachmentRespData():Ref<GetAttachmentRespData>
+	export function refOfGetAttachmentRespData(x:GetAttachmentRespData,v:Ref<GetAttachmentRespData>)
+	export function unRefGetAttachmentRespData(v:Ref<GetAttachmentRespData>):GetAttachmentRespData
+	export function emptySearchTestRespData():SearchTestRespData
+	export function emptyRefSearchTestRespData():Ref<SearchTestRespData>
+	export function refOfSearchTestRespData(x:SearchTestRespData,v:Ref<SearchTestRespData>)
+	export function unRefSearchTestRespData(v:Ref<SearchTestRespData>):SearchTestRespData
+	export function emptyTest():Test
+	export function emptyRefTest():Ref<Test>
+	export function refOfTest(x:Test,v:Ref<Test>)
+	export function unRefTest(v:Ref<Test>):Test
+	export function emptyEcoExamResultDetail():EcoExamResultDetail
+	export function emptyRefEcoExamResultDetail():Ref<EcoExamResultDetail>
+	export function refOfEcoExamResultDetail(x:EcoExamResultDetail,v:Ref<EcoExamResultDetail>)
+	export function unRefEcoExamResultDetail(v:Ref<EcoExamResultDetail>):EcoExamResultDetail
+	export function emptyTodo():Todo
+	export function emptyRefTodo():Ref<Todo>
+	export function refOfTodo(x:Todo,v:Ref<Todo>)
+	export function unRefTodo(v:Ref<Todo>):Todo
+	export function emptyCreateReferralAccountResp():CreateReferralAccountResp
+	export function emptyRefCreateReferralAccountResp():Ref<CreateReferralAccountResp>
+	export function refOfCreateReferralAccountResp(x:CreateReferralAccountResp,v:Ref<CreateReferralAccountResp>)
+	export function unRefCreateReferralAccountResp(v:Ref<CreateReferralAccountResp>):CreateReferralAccountResp
+	export function emptyStore():Store
+	export function emptyRefStore():Ref<Store>
+	export function refOfStore(x:Store,v:Ref<Store>)
+	export function unRefStore(v:Ref<Store>):Store
+	export function emptyJobCustomizedValue():JobCustomizedValue
+	export function emptyRefJobCustomizedValue():Ref<JobCustomizedValue>
+	export function refOfJobCustomizedValue(x:JobCustomizedValue,v:Ref<JobCustomizedValue>)
+	export function unRefJobCustomizedValue(v:Ref<JobCustomizedValue>):JobCustomizedValue
+	export function emptyGetOfferSchemaReq():GetOfferSchemaReq
+	export function emptyRefGetOfferSchemaReq():Ref<GetOfferSchemaReq>
+	export function refOfGetOfferSchemaReq(x:GetOfferSchemaReq,v:Ref<GetOfferSchemaReq>)
+	export function unRefGetOfferSchemaReq(v:Ref<GetOfferSchemaReq>):GetOfferSchemaReq
+	export function emptyMoveTalentTalentPoolRespData():MoveTalentTalentPoolRespData
+	export function emptyRefMoveTalentTalentPoolRespData():Ref<MoveTalentTalentPoolRespData>
+	export function refOfMoveTalentTalentPoolRespData(x:MoveTalentTalentPoolRespData,v:Ref<MoveTalentTalentPoolRespData>)
+	export function unRefMoveTalentTalentPoolRespData(v:Ref<MoveTalentTalentPoolRespData>):MoveTalentTalentPoolRespData
+	export function emptyBackgroundCheckProcessInfo():BackgroundCheckProcessInfo
+	export function emptyRefBackgroundCheckProcessInfo():Ref<BackgroundCheckProcessInfo>
+	export function refOfBackgroundCheckProcessInfo(x:BackgroundCheckProcessInfo,v:Ref<BackgroundCheckProcessInfo>)
+	export function unRefBackgroundCheckProcessInfo(v:Ref<BackgroundCheckProcessInfo>):BackgroundCheckProcessInfo
+	export function emptyExternalApplication():ExternalApplication
+	export function emptyRefExternalApplication():Ref<ExternalApplication>
+	export function refOfExternalApplication(x:ExternalApplication,v:Ref<ExternalApplication>)
+	export function unRefExternalApplication(v:Ref<ExternalApplication>):ExternalApplication
+	export function emptyListInterviewRoundTypeReq():ListInterviewRoundTypeReq
+	export function emptyRefListInterviewRoundTypeReq():Ref<ListInterviewRoundTypeReq>
+	export function refOfListInterviewRoundTypeReq(x:ListInterviewRoundTypeReq,v:Ref<ListInterviewRoundTypeReq>)
+	export function unRefListInterviewRoundTypeReq(v:Ref<ListInterviewRoundTypeReq>):ListInterviewRoundTypeReq
+	export function emptyUpdateExternalApplicationResp():UpdateExternalApplicationResp
+	export function emptyRefUpdateExternalApplicationResp():Ref<UpdateExternalApplicationResp>
+	export function refOfUpdateExternalApplicationResp(x:UpdateExternalApplicationResp,v:Ref<UpdateExternalApplicationResp>)
+	export function unRefUpdateExternalApplicationResp(v:Ref<UpdateExternalApplicationResp>):UpdateExternalApplicationResp
+	export function emptyGetInterviewRecordResp():GetInterviewRecordResp
+	export function emptyRefGetInterviewRecordResp():Ref<GetInterviewRecordResp>
+	export function refOfGetInterviewRecordResp(x:GetInterviewRecordResp,v:Ref<GetInterviewRecordResp>)
+	export function unRefGetInterviewRecordResp(v:Ref<GetInterviewRecordResp>):GetInterviewRecordResp
+	export function emptyInterviewAppointmentConfigContent():InterviewAppointmentConfigContent
+	export function emptyRefInterviewAppointmentConfigContent():Ref<InterviewAppointmentConfigContent>
+	export function refOfInterviewAppointmentConfigContent(x:InterviewAppointmentConfigContent,v:Ref<InterviewAppointmentConfigContent>)
+	export function unRefInterviewAppointmentConfigContent(v:Ref<InterviewAppointmentConfigContent>):InterviewAppointmentConfigContent
+	export function emptyOfferInfo():OfferInfo
+	export function emptyRefOfferInfo():Ref<OfferInfo>
+	export function refOfOfferInfo(x:OfferInfo,v:Ref<OfferInfo>)
+	export function unRefOfferInfo(v:Ref<OfferInfo>):OfferInfo
+	export function emptyOfferApplicationRespData():OfferApplicationRespData
+	export function emptyRefOfferApplicationRespData():Ref<OfferApplicationRespData>
+	export function refOfOfferApplicationRespData(x:OfferApplicationRespData,v:Ref<OfferApplicationRespData>)
+	export function unRefOfferApplicationRespData(v:Ref<OfferApplicationRespData>):OfferApplicationRespData
+	export function emptyWorksInfo():WorksInfo
+	export function emptyRefWorksInfo():Ref<WorksInfo>
+	export function refOfWorksInfo(x:WorksInfo,v:Ref<WorksInfo>)
+	export function unRefWorksInfo(v:Ref<WorksInfo>):WorksInfo
+	export function emptyGetByApplicationEmployeeReq():GetByApplicationEmployeeReq
+	export function emptyRefGetByApplicationEmployeeReq():Ref<GetByApplicationEmployeeReq>
+	export function refOfGetByApplicationEmployeeReq(x:GetByApplicationEmployeeReq,v:Ref<GetByApplicationEmployeeReq>)
+	export function unRefGetByApplicationEmployeeReq(v:Ref<GetByApplicationEmployeeReq>):GetByApplicationEmployeeReq
+	export function emptyListInterviewFeedbackFormReq():ListInterviewFeedbackFormReq
+	export function emptyRefListInterviewFeedbackFormReq():Ref<ListInterviewFeedbackFormReq>
+	export function refOfListInterviewFeedbackFormReq(x:ListInterviewFeedbackFormReq,v:Ref<ListInterviewFeedbackFormReq>)
+	export function unRefListInterviewFeedbackFormReq(v:Ref<ListInterviewFeedbackFormReq>):ListInterviewFeedbackFormReq
+	export function emptySearchJobPublishRecordReq():SearchJobPublishRecordReq
+	export function emptyRefSearchJobPublishRecordReq():Ref<SearchJobPublishRecordReq>
+	export function refOfSearchJobPublishRecordReq(x:SearchJobPublishRecordReq,v:Ref<SearchJobPublishRecordReq>)
+	export function unRefSearchJobPublishRecordReq(v:Ref<SearchJobPublishRecordReq>):SearchJobPublishRecordReq
+	export function emptyUserRole():UserRole
+	export function emptyRefUserRole():Ref<UserRole>
+	export function refOfUserRole(x:UserRole,v:Ref<UserRole>)
+	export function unRefUserRole(v:Ref<UserRole>):UserRole
+	export function emptyListRegistrationSchemaRespData():ListRegistrationSchemaRespData
+	export function emptyRefListRegistrationSchemaRespData():Ref<ListRegistrationSchemaRespData>
+	export function refOfListRegistrationSchemaRespData(x:ListRegistrationSchemaRespData,v:Ref<ListRegistrationSchemaRespData>)
+	export function unRefListRegistrationSchemaRespData(v:Ref<ListRegistrationSchemaRespData>):ListRegistrationSchemaRespData
+	export function emptyP2EhrImportTaskForInternshipOfferImportedV1():P2EhrImportTaskForInternshipOfferImportedV1
+	export function emptyRefP2EhrImportTaskForInternshipOfferImportedV1():Ref<P2EhrImportTaskForInternshipOfferImportedV1>
+	export function refOfP2EhrImportTaskForInternshipOfferImportedV1(x:P2EhrImportTaskForInternshipOfferImportedV1,v:Ref<P2EhrImportTaskForInternshipOfferImportedV1>)
+	export function unRefP2EhrImportTaskForInternshipOfferImportedV1(v:Ref<P2EhrImportTaskForInternshipOfferImportedV1>):P2EhrImportTaskForInternshipOfferImportedV1
+	export function emptySiteJobType():SiteJobType
+	export function emptyRefSiteJobType():Ref<SiteJobType>
+	export function refOfSiteJobType(x:SiteJobType,v:Ref<SiteJobType>)
+	export function unRefSiteJobType(v:Ref<SiteJobType>):SiteJobType
+	export function emptyCombinedUpdateJobRespData():CombinedUpdateJobRespData
+	export function emptyRefCombinedUpdateJobRespData():Ref<CombinedUpdateJobRespData>
+	export function refOfCombinedUpdateJobRespData(x:CombinedUpdateJobRespData,v:Ref<CombinedUpdateJobRespData>)
+	export function unRefCombinedUpdateJobRespData(v:Ref<CombinedUpdateJobRespData>):CombinedUpdateJobRespData
+	export function emptyOfferJobInfo():OfferJobInfo
+	export function emptyRefOfferJobInfo():Ref<OfferJobInfo>
+	export function refOfOfferJobInfo(x:OfferJobInfo,v:Ref<OfferJobInfo>)
+	export function unRefOfferJobInfo(v:Ref<OfferJobInfo>):OfferJobInfo
+	export function emptyListExternalApplicationRespData():ListExternalApplicationRespData
+	export function emptyRefListExternalApplicationRespData():Ref<ListExternalApplicationRespData>
+	export function refOfListExternalApplicationRespData(x:ListExternalApplicationRespData,v:Ref<ListExternalApplicationRespData>)
+	export function unRefListExternalApplicationRespData(v:Ref<ListExternalApplicationRespData>):ListExternalApplicationRespData
+	export function emptyTalentPool():TalentPool
+	export function emptyRefTalentPool():Ref<TalentPool>
+	export function refOfTalentPool(x:TalentPool,v:Ref<TalentPool>)
+	export function unRefTalentPool(v:Ref<TalentPool>):TalentPool
+	export function emptyGetApplicationRespData():GetApplicationRespData
+	export function emptyRefGetApplicationRespData():Ref<GetApplicationRespData>
+	export function refOfGetApplicationRespData(x:GetApplicationRespData,v:Ref<GetApplicationRespData>)
+	export function unRefGetApplicationRespData(v:Ref<GetApplicationRespData>):GetApplicationRespData
+	export function emptyUpdateExternalApplicationReq():UpdateExternalApplicationReq
+	export function emptyRefUpdateExternalApplicationReq():Ref<UpdateExternalApplicationReq>
+	export function refOfUpdateExternalApplicationReq(x:UpdateExternalApplicationReq,v:Ref<UpdateExternalApplicationReq>)
+	export function unRefUpdateExternalApplicationReq(v:Ref<UpdateExternalApplicationReq>):UpdateExternalApplicationReq
+	export function emptyOnboardStatusTalentReq():OnboardStatusTalentReq
+	export function emptyRefOnboardStatusTalentReq():Ref<OnboardStatusTalentReq>
+	export function refOfOnboardStatusTalentReq(x:OnboardStatusTalentReq,v:Ref<OnboardStatusTalentReq>)
+	export function unRefOnboardStatusTalentReq(v:Ref<OnboardStatusTalentReq>):OnboardStatusTalentReq
+	export function emptyCommonAddress():CommonAddress
+	export function emptyRefCommonAddress():Ref<CommonAddress>
+	export function refOfCommonAddress(x:CommonAddress,v:Ref<CommonAddress>)
+	export function unRefCommonAddress(v:Ref<CommonAddress>):CommonAddress
+	export function emptyCreateExamReq():CreateExamReq
+	export function emptyRefCreateExamReq():Ref<CreateExamReq>
+	export function refOfCreateExamReq(x:CreateExamReq,v:Ref<CreateExamReq>)
+	export function unRefCreateExamReq(v:Ref<CreateExamReq>):CreateExamReq
+	export function emptySiteResumeCertificate():SiteResumeCertificate
+	export function emptyRefSiteResumeCertificate():Ref<SiteResumeCertificate>
+	export function refOfSiteResumeCertificate(x:SiteResumeCertificate,v:Ref<SiteResumeCertificate>)
+	export function unRefSiteResumeCertificate(v:Ref<SiteResumeCertificate>):SiteResumeCertificate
+	export function emptyCreateAttachmentRespData():CreateAttachmentRespData
+	export function emptyRefCreateAttachmentRespData():Ref<CreateAttachmentRespData>
+	export function refOfCreateAttachmentRespData(x:CreateAttachmentRespData,v:Ref<CreateAttachmentRespData>)
+	export function unRefCreateAttachmentRespData(v:Ref<CreateAttachmentRespData>):CreateAttachmentRespData
+	export function emptyPatchExternalInterviewAssessmentReq():PatchExternalInterviewAssessmentReq
+	export function emptyRefPatchExternalInterviewAssessmentReq():Ref<PatchExternalInterviewAssessmentReq>
+	export function refOfPatchExternalInterviewAssessmentReq(x:PatchExternalInterviewAssessmentReq,v:Ref<PatchExternalInterviewAssessmentReq>)
+	export function unRefPatchExternalInterviewAssessmentReq(v:Ref<PatchExternalInterviewAssessmentReq>):PatchExternalInterviewAssessmentReq
+	export function emptyPatchNoteRespData():PatchNoteRespData
+	export function emptyRefPatchNoteRespData():Ref<PatchNoteRespData>
+	export function refOfPatchNoteRespData(x:PatchNoteRespData,v:Ref<PatchNoteRespData>)
+	export function unRefPatchNoteRespData(v:Ref<PatchNoteRespData>):PatchNoteRespData
+	export function emptyListJobTypeRespData():ListJobTypeRespData
+	export function emptyRefListJobTypeRespData():Ref<ListJobTypeRespData>
+	export function refOfListJobTypeRespData(x:ListJobTypeRespData,v:Ref<ListJobTypeRespData>)
+	export function unRefListJobTypeRespData(v:Ref<ListJobTypeRespData>):ListJobTypeRespData
+	export function emptyTalentCertificateInfo():TalentCertificateInfo
+	export function emptyRefTalentCertificateInfo():Ref<TalentCertificateInfo>
+	export function refOfTalentCertificateInfo(x:TalentCertificateInfo,v:Ref<TalentCertificateInfo>)
+	export function unRefTalentCertificateInfo(v:Ref<TalentCertificateInfo>):TalentCertificateInfo
+	export function emptyTransferStageApplicationReqBody():TransferStageApplicationReqBody
+	export function emptyRefTransferStageApplicationReqBody():Ref<TransferStageApplicationReqBody>
+	export function refOfTransferStageApplicationReqBody(x:TransferStageApplicationReqBody,v:Ref<TransferStageApplicationReqBody>)
+	export function unRefTransferStageApplicationReqBody(v:Ref<TransferStageApplicationReqBody>):TransferStageApplicationReqBody
+	export function emptyGetOfferApplicationFormRespData():GetOfferApplicationFormRespData
+	export function emptyRefGetOfferApplicationFormRespData():Ref<GetOfferApplicationFormRespData>
+	export function refOfGetOfferApplicationFormRespData(x:GetOfferApplicationFormRespData,v:Ref<GetOfferApplicationFormRespData>)
+	export function unRefGetOfferApplicationFormRespData(v:Ref<GetOfferApplicationFormRespData>):GetOfferApplicationFormRespData
+	export function emptyInternOfferStatusOfferResp():InternOfferStatusOfferResp
+	export function emptyRefInternOfferStatusOfferResp():Ref<InternOfferStatusOfferResp>
+	export function refOfInternOfferStatusOfferResp(x:InternOfferStatusOfferResp,v:Ref<InternOfferStatusOfferResp>)
+	export function unRefInternOfferStatusOfferResp(v:Ref<InternOfferStatusOfferResp>):InternOfferStatusOfferResp
+	export function emptyTalentCareerInfo():TalentCareerInfo
+	export function emptyRefTalentCareerInfo():Ref<TalentCareerInfo>
+	export function refOfTalentCareerInfo(x:TalentCareerInfo,v:Ref<TalentCareerInfo>)
+	export function unRefTalentCareerInfo(v:Ref<TalentCareerInfo>):TalentCareerInfo
+	export function emptyBaseBilingualWithId():BaseBilingualWithId
+	export function emptyRefBaseBilingualWithId():Ref<BaseBilingualWithId>
+	export function refOfBaseBilingualWithId(x:BaseBilingualWithId,v:Ref<BaseBilingualWithId>)
+	export function unRefBaseBilingualWithId(v:Ref<BaseBilingualWithId>):BaseBilingualWithId
+	export function emptyWebsiteDeliveryWorksAttachment():WebsiteDeliveryWorksAttachment
+	export function emptyRefWebsiteDeliveryWorksAttachment():Ref<WebsiteDeliveryWorksAttachment>
+	export function refOfWebsiteDeliveryWorksAttachment(x:WebsiteDeliveryWorksAttachment,v:Ref<WebsiteDeliveryWorksAttachment>)
+	export function unRefWebsiteDeliveryWorksAttachment(v:Ref<WebsiteDeliveryWorksAttachment>):WebsiteDeliveryWorksAttachment
+	export function emptyOffer():Offer
+	export function emptyRefOffer():Ref<Offer>
+	export function refOfOffer(x:Offer,v:Ref<Offer>)
+	export function unRefOffer(v:Ref<Offer>):Offer
+	export function emptyCombinedUpdateTalentReqBody():CombinedUpdateTalentReqBody
+	export function emptyRefCombinedUpdateTalentReqBody():Ref<CombinedUpdateTalentReqBody>
+	export function refOfCombinedUpdateTalentReqBody(x:CombinedUpdateTalentReqBody,v:Ref<CombinedUpdateTalentReqBody>)
+	export function unRefCombinedUpdateTalentReqBody(v:Ref<CombinedUpdateTalentReqBody>):CombinedUpdateTalentReqBody
+	export function emptyListJobTypeReq():ListJobTypeReq
+	export function emptyRefListJobTypeReq():Ref<ListJobTypeReq>
+	export function refOfListJobTypeReq(x:ListJobTypeReq,v:Ref<ListJobTypeReq>)
+	export function unRefListJobTypeReq(v:Ref<ListJobTypeReq>):ListJobTypeReq
+	export function emptyApplicationStageInfo():ApplicationStageInfo
+	export function emptyRefApplicationStageInfo():Ref<ApplicationStageInfo>
+	export function refOfApplicationStageInfo(x:ApplicationStageInfo,v:Ref<ApplicationStageInfo>)
+	export function unRefApplicationStageInfo(v:Ref<ApplicationStageInfo>):ApplicationStageInfo
+	export function emptyCreateExternalInterviewAssessmentRespData():CreateExternalInterviewAssessmentRespData
+	export function emptyRefCreateExternalInterviewAssessmentRespData():Ref<CreateExternalInterviewAssessmentRespData>
+	export function refOfCreateExternalInterviewAssessmentRespData(x:CreateExternalInterviewAssessmentRespData,v:Ref<CreateExternalInterviewAssessmentRespData>)
+	export function unRefCreateExternalInterviewAssessmentRespData(v:Ref<CreateExternalInterviewAssessmentRespData>):CreateExternalInterviewAssessmentRespData
+	export function emptyEcoBackgroundCheckPackage():EcoBackgroundCheckPackage
+	export function emptyRefEcoBackgroundCheckPackage():Ref<EcoBackgroundCheckPackage>
+	export function refOfEcoBackgroundCheckPackage(x:EcoBackgroundCheckPackage,v:Ref<EcoBackgroundCheckPackage>)
+	export function unRefEcoBackgroundCheckPackage(v:Ref<EcoBackgroundCheckPackage>):EcoBackgroundCheckPackage
+	export function emptyApplicationReferral():ApplicationReferral
+	export function emptyRefApplicationReferral():Ref<ApplicationReferral>
+	export function refOfApplicationReferral(x:ApplicationReferral,v:Ref<ApplicationReferral>)
+	export function unRefApplicationReferral(v:Ref<ApplicationReferral>):ApplicationReferral
+	export function emptyTerminateApplicationReqBody():TerminateApplicationReqBody
+	export function emptyRefTerminateApplicationReqBody():Ref<TerminateApplicationReqBody>
+	export function refOfTerminateApplicationReqBody(x:TerminateApplicationReqBody,v:Ref<TerminateApplicationReqBody>)
+	export function unRefTerminateApplicationReqBody(v:Ref<TerminateApplicationReqBody>):TerminateApplicationReqBody
+	export function emptySelectOptionResult():SelectOptionResult
+	export function emptyRefSelectOptionResult():Ref<SelectOptionResult>
+	export function refOfSelectOptionResult(x:SelectOptionResult,v:Ref<SelectOptionResult>)
+	export function unRefSelectOptionResult(v:Ref<SelectOptionResult>):SelectOptionResult
+	export function emptyOfferBasicInfo():OfferBasicInfo
+	export function emptyRefOfferBasicInfo():Ref<OfferBasicInfo>
+	export function refOfOfferBasicInfo(x:OfferBasicInfo,v:Ref<OfferBasicInfo>)
+	export function unRefOfferBasicInfo(v:Ref<OfferBasicInfo>):OfferBasicInfo
+	export function emptyPatchEmployeeReq():PatchEmployeeReq
+	export function emptyRefPatchEmployeeReq():Ref<PatchEmployeeReq>
+	export function refOfPatchEmployeeReq(x:PatchEmployeeReq,v:Ref<PatchEmployeeReq>)
+	export function unRefPatchEmployeeReq(v:Ref<PatchEmployeeReq>):PatchEmployeeReq
+	export function emptyBatchDeleteEcoBackgroundCheckCustomFieldReqBody():BatchDeleteEcoBackgroundCheckCustomFieldReqBody
+	export function emptyRefBatchDeleteEcoBackgroundCheckCustomFieldReqBody():Ref<BatchDeleteEcoBackgroundCheckCustomFieldReqBody>
+	export function refOfBatchDeleteEcoBackgroundCheckCustomFieldReqBody(x:BatchDeleteEcoBackgroundCheckCustomFieldReqBody,v:Ref<BatchDeleteEcoBackgroundCheckCustomFieldReqBody>)
+	export function unRefBatchDeleteEcoBackgroundCheckCustomFieldReqBody(v:Ref<BatchDeleteEcoBackgroundCheckCustomFieldReqBody>):BatchDeleteEcoBackgroundCheckCustomFieldReqBody
+	export function emptyBatchUpdateEcoBackgroundCheckCustomFieldReq():BatchUpdateEcoBackgroundCheckCustomFieldReq
+	export function emptyRefBatchUpdateEcoBackgroundCheckCustomFieldReq():Ref<BatchUpdateEcoBackgroundCheckCustomFieldReq>
+	export function refOfBatchUpdateEcoBackgroundCheckCustomFieldReq(x:BatchUpdateEcoBackgroundCheckCustomFieldReq,v:Ref<BatchUpdateEcoBackgroundCheckCustomFieldReq>)
+	export function unRefBatchUpdateEcoBackgroundCheckCustomFieldReq(v:Ref<BatchUpdateEcoBackgroundCheckCustomFieldReq>):BatchUpdateEcoBackgroundCheckCustomFieldReq
+	export function emptyCommonSchemaOption():CommonSchemaOption
+	export function emptyRefCommonSchemaOption():Ref<CommonSchemaOption>
+	export function refOfCommonSchemaOption(x:CommonSchemaOption,v:Ref<CommonSchemaOption>)
+	export function unRefCommonSchemaOption(v:Ref<CommonSchemaOption>):CommonSchemaOption
+	export function emptyListJobTypeResp():ListJobTypeResp
+	export function emptyRefListJobTypeResp():Ref<ListJobTypeResp>
+	export function refOfListJobTypeResp(x:ListJobTypeResp,v:Ref<ListJobTypeResp>)
+	export function unRefListJobTypeResp(v:Ref<ListJobTypeResp>):ListJobTypeResp
+	export function emptyListTodoRespData():ListTodoRespData
+	export function emptyRefListTodoRespData():Ref<ListTodoRespData>
+	export function refOfListTodoRespData(x:ListTodoRespData,v:Ref<ListTodoRespData>)
+	export function unRefListTodoRespData(v:Ref<ListTodoRespData>):ListTodoRespData
+	export function emptyListExamMarkingTaskRespData():ListExamMarkingTaskRespData
+	export function emptyRefListExamMarkingTaskRespData():Ref<ListExamMarkingTaskRespData>
+	export function refOfListExamMarkingTaskRespData(x:ListExamMarkingTaskRespData,v:Ref<ListExamMarkingTaskRespData>)
+	export function unRefListExamMarkingTaskRespData(v:Ref<ListExamMarkingTaskRespData>):ListExamMarkingTaskRespData
+	export function emptyListInterviewRecordReq():ListInterviewRecordReq
+	export function emptyRefListInterviewRecordReq():Ref<ListInterviewRecordReq>
+	export function refOfListInterviewRecordReq(x:ListInterviewRecordReq,v:Ref<ListInterviewRecordReq>)
+	export function unRefListInterviewRecordReq(v:Ref<ListInterviewRecordReq>):ListInterviewRecordReq
+	export function emptyListJobSchemaRespData():ListJobSchemaRespData
+	export function emptyRefListJobSchemaRespData():Ref<ListJobSchemaRespData>
+	export function refOfListJobSchemaRespData(x:ListJobSchemaRespData,v:Ref<ListJobSchemaRespData>)
+	export function unRefListJobSchemaRespData(v:Ref<ListJobSchemaRespData>):ListJobSchemaRespData
+	export function emptyTransferOnboardApplicationReq():TransferOnboardApplicationReq
+	export function emptyRefTransferOnboardApplicationReq():Ref<TransferOnboardApplicationReq>
+	export function refOfTransferOnboardApplicationReq(x:TransferOnboardApplicationReq,v:Ref<TransferOnboardApplicationReq>)
+	export function unRefTransferOnboardApplicationReq(v:Ref<TransferOnboardApplicationReq>):TransferOnboardApplicationReq
+	export function emptyGetWebsiteDeliveryTaskReq():GetWebsiteDeliveryTaskReq
+	export function emptyRefGetWebsiteDeliveryTaskReq():Ref<GetWebsiteDeliveryTaskReq>
+	export function refOfGetWebsiteDeliveryTaskReq(x:GetWebsiteDeliveryTaskReq,v:Ref<GetWebsiteDeliveryTaskReq>)
+	export function unRefGetWebsiteDeliveryTaskReq(v:Ref<GetWebsiteDeliveryTaskReq>):GetWebsiteDeliveryTaskReq
+	export function emptyReconciliationReferralAccountReqBody():ReconciliationReferralAccountReqBody
+	export function emptyRefReconciliationReferralAccountReqBody():Ref<ReconciliationReferralAccountReqBody>
+	export function refOfReconciliationReferralAccountReqBody(x:ReconciliationReferralAccountReqBody,v:Ref<ReconciliationReferralAccountReqBody>)
+	export function unRefReconciliationReferralAccountReqBody(v:Ref<ReconciliationReferralAccountReqBody>):ReconciliationReferralAccountReqBody
+	export function emptyAccount():Account
+	export function emptyRefAccount():Ref<Account>
+	export function refOfAccount(x:Account,v:Ref<Account>)
+	export function unRefAccount(v:Ref<Account>):Account
+	export function emptyAddToFolderTalentResp():AddToFolderTalentResp
+	export function emptyRefAddToFolderTalentResp():Ref<AddToFolderTalentResp>
+	export function refOfAddToFolderTalentResp(x:AddToFolderTalentResp,v:Ref<AddToFolderTalentResp>)
+	export function unRefAddToFolderTalentResp(v:Ref<AddToFolderTalentResp>):AddToFolderTalentResp
+	export function emptyTerminateApplicationReq():TerminateApplicationReq
+	export function emptyRefTerminateApplicationReq():Ref<TerminateApplicationReq>
+	export function refOfTerminateApplicationReq(x:TerminateApplicationReq,v:Ref<TerminateApplicationReq>)
+	export function unRefTerminateApplicationReq(v:Ref<TerminateApplicationReq>):TerminateApplicationReq
+	export function emptyIdNameObject():IdNameObject
+	export function emptyRefIdNameObject():Ref<IdNameObject>
+	export function refOfIdNameObject(x:IdNameObject,v:Ref<IdNameObject>)
+	export function unRefIdNameObject(v:Ref<IdNameObject>):IdNameObject
+	export function emptyBatchDeleteEcoExamPaperReqBody():BatchDeleteEcoExamPaperReqBody
+	export function emptyRefBatchDeleteEcoExamPaperReqBody():Ref<BatchDeleteEcoExamPaperReqBody>
+	export function refOfBatchDeleteEcoExamPaperReqBody(x:BatchDeleteEcoExamPaperReqBody,v:Ref<BatchDeleteEcoExamPaperReqBody>)
+	export function unRefBatchDeleteEcoExamPaperReqBody(v:Ref<BatchDeleteEcoExamPaperReqBody>):BatchDeleteEcoExamPaperReqBody
+	export function emptySearchWebsiteJobPostIterator():SearchWebsiteJobPostIterator
+	export function emptyRefSearchWebsiteJobPostIterator():Ref<SearchWebsiteJobPostIterator>
+	export function refOfSearchWebsiteJobPostIterator(x:SearchWebsiteJobPostIterator,v:Ref<SearchWebsiteJobPostIterator>)
+	export function unRefSearchWebsiteJobPostIterator(v:Ref<SearchWebsiteJobPostIterator>):SearchWebsiteJobPostIterator
+	export function emptyInterviewRoundTypeAssessmentTemplate():InterviewRoundTypeAssessmentTemplate
+	export function emptyRefInterviewRoundTypeAssessmentTemplate():Ref<InterviewRoundTypeAssessmentTemplate>
+	export function refOfInterviewRoundTypeAssessmentTemplate(x:InterviewRoundTypeAssessmentTemplate,v:Ref<InterviewRoundTypeAssessmentTemplate>)
+	export function unRefInterviewRoundTypeAssessmentTemplate(v:Ref<InterviewRoundTypeAssessmentTemplate>):InterviewRoundTypeAssessmentTemplate
+	export function emptyListWebsiteJobPostIterator():ListWebsiteJobPostIterator
+	export function emptyRefListWebsiteJobPostIterator():Ref<ListWebsiteJobPostIterator>
+	export function refOfListWebsiteJobPostIterator(x:ListWebsiteJobPostIterator,v:Ref<ListWebsiteJobPostIterator>)
+	export function unRefListWebsiteJobPostIterator(v:Ref<ListWebsiteJobPostIterator>):ListWebsiteJobPostIterator
+	export function emptyApplicationTalent():ApplicationTalent
+	export function emptyRefApplicationTalent():Ref<ApplicationTalent>
+	export function refOfApplicationTalent(x:ApplicationTalent,v:Ref<ApplicationTalent>)
+	export function unRefApplicationTalent(v:Ref<ApplicationTalent>):ApplicationTalent
+	export function emptyUpdateExternalApplicationRespData():UpdateExternalApplicationRespData
+	export function emptyRefUpdateExternalApplicationRespData():Ref<UpdateExternalApplicationRespData>
+	export function refOfUpdateExternalApplicationRespData(x:UpdateExternalApplicationRespData,v:Ref<UpdateExternalApplicationRespData>)
+	export function unRefUpdateExternalApplicationRespData(v:Ref<UpdateExternalApplicationRespData>):UpdateExternalApplicationRespData
+	export function emptySearchReferralResp():SearchReferralResp
+	export function emptyRefSearchReferralResp():Ref<SearchReferralResp>
+	export function refOfSearchReferralResp(x:SearchReferralResp,v:Ref<SearchReferralResp>)
+	export function unRefSearchReferralResp(v:Ref<SearchReferralResp>):SearchReferralResp
+	export function emptyUpdateTalentExternalInfoResp():UpdateTalentExternalInfoResp
+	export function emptyRefUpdateTalentExternalInfoResp():Ref<UpdateTalentExternalInfoResp>
+	export function refOfUpdateTalentExternalInfoResp(x:UpdateTalentExternalInfoResp,v:Ref<UpdateTalentExternalInfoResp>)
+	export function unRefUpdateTalentExternalInfoResp(v:Ref<UpdateTalentExternalInfoResp>):UpdateTalentExternalInfoResp
+	export function emptyBatchDeleteEcoAccountCustomFieldReq():BatchDeleteEcoAccountCustomFieldReq
+	export function emptyRefBatchDeleteEcoAccountCustomFieldReq():Ref<BatchDeleteEcoAccountCustomFieldReq>
+	export function refOfBatchDeleteEcoAccountCustomFieldReq(x:BatchDeleteEcoAccountCustomFieldReq,v:Ref<BatchDeleteEcoAccountCustomFieldReq>)
+	export function unRefBatchDeleteEcoAccountCustomFieldReq(v:Ref<BatchDeleteEcoAccountCustomFieldReq>):BatchDeleteEcoAccountCustomFieldReq
+	export function emptyFilter():Filter
+	export function emptyRefFilter():Ref<Filter>
+	export function refOfFilter(x:Filter,v:Ref<Filter>)
+	export function unRefFilter(v:Ref<Filter>):Filter
+	export function emptyListEvaluationIterator():ListEvaluationIterator
+	export function emptyRefListEvaluationIterator():Ref<ListEvaluationIterator>
+	export function refOfListEvaluationIterator(x:ListEvaluationIterator,v:Ref<ListEvaluationIterator>)
+	export function unRefListEvaluationIterator(v:Ref<ListEvaluationIterator>):ListEvaluationIterator
+	export function emptyAddToFolderTalentReqBody():AddToFolderTalentReqBody
+	export function emptyRefAddToFolderTalentReqBody():Ref<AddToFolderTalentReqBody>
+	export function refOfAddToFolderTalentReqBody(x:AddToFolderTalentReqBody,v:Ref<AddToFolderTalentReqBody>)
+	export function unRefAddToFolderTalentReqBody(v:Ref<AddToFolderTalentReqBody>):AddToFolderTalentReqBody
+	export function emptyCloseJobResp():CloseJobResp
+	export function emptyRefCloseJobResp():Ref<CloseJobResp>
+	export function refOfCloseJobResp(x:CloseJobResp,v:Ref<CloseJobResp>)
+	export function unRefCloseJobResp(v:Ref<CloseJobResp>):CloseJobResp
+	export function emptyOfferApplyFormFormulaExtraMapInfo():OfferApplyFormFormulaExtraMapInfo
+	export function emptyRefOfferApplyFormFormulaExtraMapInfo():Ref<OfferApplyFormFormulaExtraMapInfo>
+	export function refOfOfferApplyFormFormulaExtraMapInfo(x:OfferApplyFormFormulaExtraMapInfo,v:Ref<OfferApplyFormFormulaExtraMapInfo>)
+	export function unRefOfferApplyFormFormulaExtraMapInfo(v:Ref<OfferApplyFormFormulaExtraMapInfo>):OfferApplyFormFormulaExtraMapInfo
+	export function emptyListBackgroundCheckOrderRespData():ListBackgroundCheckOrderRespData
+	export function emptyRefListBackgroundCheckOrderRespData():Ref<ListBackgroundCheckOrderRespData>
+	export function refOfListBackgroundCheckOrderRespData(x:ListBackgroundCheckOrderRespData,v:Ref<ListBackgroundCheckOrderRespData>)
+	export function unRefListBackgroundCheckOrderRespData(v:Ref<ListBackgroundCheckOrderRespData>):ListBackgroundCheckOrderRespData
+	export function emptyLanguageInfo():LanguageInfo
+	export function emptyRefLanguageInfo():Ref<LanguageInfo>
+	export function refOfLanguageInfo(x:LanguageInfo,v:Ref<LanguageInfo>)
+	export function unRefLanguageInfo(v:Ref<LanguageInfo>):LanguageInfo
+	export function emptyJobConfigRoundTypeResult():JobConfigRoundTypeResult
+	export function emptyRefJobConfigRoundTypeResult():Ref<JobConfigRoundTypeResult>
+	export function refOfJobConfigRoundTypeResult(x:JobConfigRoundTypeResult,v:Ref<JobConfigRoundTypeResult>)
+	export function unRefJobConfigRoundTypeResult(v:Ref<JobConfigRoundTypeResult>):JobConfigRoundTypeResult
+	export function emptyListJobRequirementReq():ListJobRequirementReq
+	export function emptyRefListJobRequirementReq():Ref<ListJobRequirementReq>
+	export function refOfListJobRequirementReq(x:ListJobRequirementReq,v:Ref<ListJobRequirementReq>)
+	export function unRefListJobRequirementReq(v:Ref<ListJobRequirementReq>):ListJobRequirementReq
 	export function emptyP2EcoBackgroundCheckCreatedV1Data():P2EcoBackgroundCheckCreatedV1Data
 	export function emptyRefP2EcoBackgroundCheckCreatedV1Data():Ref<P2EcoBackgroundCheckCreatedV1Data>
 	export function refOfP2EcoBackgroundCheckCreatedV1Data(x:P2EcoBackgroundCheckCreatedV1Data,v:Ref<P2EcoBackgroundCheckCreatedV1Data>)
 	export function unRefP2EcoBackgroundCheckCreatedV1Data(v:Ref<P2EcoBackgroundCheckCreatedV1Data>):P2EcoBackgroundCheckCreatedV1Data
-	export function emptyAddToFolderTalentReq():AddToFolderTalentReq
-	export function emptyRefAddToFolderTalentReq():Ref<AddToFolderTalentReq>
-	export function refOfAddToFolderTalentReq(x:AddToFolderTalentReq,v:Ref<AddToFolderTalentReq>)
-	export function unRefAddToFolderTalentReq(v:Ref<AddToFolderTalentReq>):AddToFolderTalentReq
-	export function emptyApplicationResumeSource():ApplicationResumeSource
-	export function emptyRefApplicationResumeSource():Ref<ApplicationResumeSource>
-	export function refOfApplicationResumeSource(x:ApplicationResumeSource,v:Ref<ApplicationResumeSource>)
-	export function unRefApplicationResumeSource(v:Ref<ApplicationResumeSource>):ApplicationResumeSource
-	export function emptyInternshipInfo():InternshipInfo
-	export function emptyRefInternshipInfo():Ref<InternshipInfo>
-	export function refOfInternshipInfo(x:InternshipInfo,v:Ref<InternshipInfo>)
-	export function unRefInternshipInfo(v:Ref<InternshipInfo>):InternshipInfo
+	export function emptyCreateTalentExternalInfoResp():CreateTalentExternalInfoResp
+	export function emptyRefCreateTalentExternalInfoResp():Ref<CreateTalentExternalInfoResp>
+	export function refOfCreateTalentExternalInfoResp(x:CreateTalentExternalInfoResp,v:Ref<CreateTalentExternalInfoResp>)
+	export function unRefCreateTalentExternalInfoResp(v:Ref<CreateTalentExternalInfoResp>):CreateTalentExternalInfoResp
+	export function emptyWebsiteDeliveryCustomizedDataParent():WebsiteDeliveryCustomizedDataParent
+	export function emptyRefWebsiteDeliveryCustomizedDataParent():Ref<WebsiteDeliveryCustomizedDataParent>
+	export function refOfWebsiteDeliveryCustomizedDataParent(x:WebsiteDeliveryCustomizedDataParent,v:Ref<WebsiteDeliveryCustomizedDataParent>)
+	export function unRefWebsiteDeliveryCustomizedDataParent(v:Ref<WebsiteDeliveryCustomizedDataParent>):WebsiteDeliveryCustomizedDataParent
+	export function emptyTalentSchemaObject():TalentSchemaObject
+	export function emptyRefTalentSchemaObject():Ref<TalentSchemaObject>
+	export function refOfTalentSchemaObject(x:TalentSchemaObject,v:Ref<TalentSchemaObject>)
+	export function unRefTalentSchemaObject(v:Ref<TalentSchemaObject>):TalentSchemaObject
+	export function emptyListJobProcessRespData():ListJobProcessRespData
+	export function emptyRefListJobProcessRespData():Ref<ListJobProcessRespData>
+	export function refOfListJobProcessRespData(x:ListJobProcessRespData,v:Ref<ListJobProcessRespData>)
+	export function unRefListJobProcessRespData(v:Ref<ListJobProcessRespData>):ListJobProcessRespData
+	export function emptyTalentCustomizedDataObjectValue():TalentCustomizedDataObjectValue
+	export function emptyRefTalentCustomizedDataObjectValue():Ref<TalentCustomizedDataObjectValue>
+	export function refOfTalentCustomizedDataObjectValue(x:TalentCustomizedDataObjectValue,v:Ref<TalentCustomizedDataObjectValue>)
+	export function unRefTalentCustomizedDataObjectValue(v:Ref<TalentCustomizedDataObjectValue>):TalentCustomizedDataObjectValue
+	export function emptyLocation():Location
+	export function emptyRefLocation():Ref<Location>
+	export function refOfLocation(x:Location,v:Ref<Location>)
+	export function unRefLocation(v:Ref<Location>):Location
+	export function emptyDepartment():Department
+	export function emptyRefDepartment():Ref<Department>
+	export function refOfDepartment(x:Department,v:Ref<Department>)
+	export function unRefDepartment(v:Ref<Department>):Department
+	export function emptyCreateEcoBackgroundCheckCustomFieldResp():CreateEcoBackgroundCheckCustomFieldResp
+	export function emptyRefCreateEcoBackgroundCheckCustomFieldResp():Ref<CreateEcoBackgroundCheckCustomFieldResp>
+	export function refOfCreateEcoBackgroundCheckCustomFieldResp(x:CreateEcoBackgroundCheckCustomFieldResp,v:Ref<CreateEcoBackgroundCheckCustomFieldResp>)
+	export function unRefCreateEcoBackgroundCheckCustomFieldResp(v:Ref<CreateEcoBackgroundCheckCustomFieldResp>):CreateEcoBackgroundCheckCustomFieldResp
+	export function emptyEcoBackgroundCheckCustomField():EcoBackgroundCheckCustomField
+	export function emptyRefEcoBackgroundCheckCustomField():Ref<EcoBackgroundCheckCustomField>
+	export function refOfEcoBackgroundCheckCustomField(x:EcoBackgroundCheckCustomField,v:Ref<EcoBackgroundCheckCustomField>)
+	export function unRefEcoBackgroundCheckCustomField(v:Ref<EcoBackgroundCheckCustomField>):EcoBackgroundCheckCustomField
+	export function emptyCreateApplicationReq():CreateApplicationReq
+	export function emptyRefCreateApplicationReq():Ref<CreateApplicationReq>
+	export function refOfCreateApplicationReq(x:CreateApplicationReq,v:Ref<CreateApplicationReq>)
+	export function unRefCreateApplicationReq(v:Ref<CreateApplicationReq>):CreateApplicationReq
+	export function emptyInterviewFeedbackFormDimension():InterviewFeedbackFormDimension
+	export function emptyRefInterviewFeedbackFormDimension():Ref<InterviewFeedbackFormDimension>
+	export function refOfInterviewFeedbackFormDimension(x:InterviewFeedbackFormDimension,v:Ref<InterviewFeedbackFormDimension>)
+	export function unRefInterviewFeedbackFormDimension(v:Ref<InterviewFeedbackFormDimension>):InterviewFeedbackFormDimension
+	export function emptyDeleteExternalApplicationRespData():DeleteExternalApplicationRespData
+	export function emptyRefDeleteExternalApplicationRespData():Ref<DeleteExternalApplicationRespData>
+	export function refOfDeleteExternalApplicationRespData(x:DeleteExternalApplicationRespData,v:Ref<DeleteExternalApplicationRespData>)
+	export function unRefDeleteExternalApplicationRespData(v:Ref<DeleteExternalApplicationRespData>):DeleteExternalApplicationRespData
+	export function emptyInterviewAddress():InterviewAddress
+	export function emptyRefInterviewAddress():Ref<InterviewAddress>
+	export function refOfInterviewAddress(x:InterviewAddress,v:Ref<InterviewAddress>)
+	export function unRefInterviewAddress(v:Ref<InterviewAddress>):InterviewAddress
+	export function emptyListInterviewRoundTypeResp():ListInterviewRoundTypeResp
+	export function emptyRefListInterviewRoundTypeResp():Ref<ListInterviewRoundTypeResp>
+	export function refOfListInterviewRoundTypeResp(x:ListInterviewRoundTypeResp,v:Ref<ListInterviewRoundTypeResp>)
+	export function unRefListInterviewRoundTypeResp(v:Ref<ListInterviewRoundTypeResp>):ListInterviewRoundTypeResp
+	export function emptyRecoverApplicationResp():RecoverApplicationResp
+	export function emptyRefRecoverApplicationResp():Ref<RecoverApplicationResp>
+	export function refOfRecoverApplicationResp(x:RecoverApplicationResp,v:Ref<RecoverApplicationResp>)
+	export function unRefRecoverApplicationResp(v:Ref<RecoverApplicationResp>):RecoverApplicationResp
+	export function emptyTalentInternshipInfo():TalentInternshipInfo
+	export function emptyRefTalentInternshipInfo():Ref<TalentInternshipInfo>
+	export function refOfTalentInternshipInfo(x:TalentInternshipInfo,v:Ref<TalentInternshipInfo>)
+	export function unRefTalentInternshipInfo(v:Ref<TalentInternshipInfo>):TalentInternshipInfo
+	export function emptyWebsiteDeliveryInternship():WebsiteDeliveryInternship
+	export function emptyRefWebsiteDeliveryInternship():Ref<WebsiteDeliveryInternship>
+	export function refOfWebsiteDeliveryInternship(x:WebsiteDeliveryInternship,v:Ref<WebsiteDeliveryInternship>)
+	export function unRefWebsiteDeliveryInternship(v:Ref<WebsiteDeliveryInternship>):WebsiteDeliveryInternship
+	export function emptyListInterviewFeedbackFormResp():ListInterviewFeedbackFormResp
+	export function emptyRefListInterviewFeedbackFormResp():Ref<ListInterviewFeedbackFormResp>
+	export function refOfListInterviewFeedbackFormResp(x:ListInterviewFeedbackFormResp,v:Ref<ListInterviewFeedbackFormResp>)
+	export function unRefListInterviewFeedbackFormResp(v:Ref<ListInterviewFeedbackFormResp>):ListInterviewFeedbackFormResp
+	export function emptyListWebsiteResp():ListWebsiteResp
+	export function emptyRefListWebsiteResp():Ref<ListWebsiteResp>
+	export function refOfListWebsiteResp(x:ListWebsiteResp,v:Ref<ListWebsiteResp>)
+	export function unRefListWebsiteResp(v:Ref<ListWebsiteResp>):ListWebsiteResp
+	export function emptyTalentOperationLog():TalentOperationLog
+	export function emptyRefTalentOperationLog():Ref<TalentOperationLog>
+	export function refOfTalentOperationLog(x:TalentOperationLog,v:Ref<TalentOperationLog>)
+	export function unRefTalentOperationLog(v:Ref<TalentOperationLog>):TalentOperationLog
+	export function emptyApplicationJobAddress():ApplicationJobAddress
+	export function emptyRefApplicationJobAddress():Ref<ApplicationJobAddress>
+	export function refOfApplicationJobAddress(x:ApplicationJobAddress,v:Ref<ApplicationJobAddress>)
+	export function unRefApplicationJobAddress(v:Ref<ApplicationJobAddress>):ApplicationJobAddress
+	export function emptyBatchUpdateEcoBackgroundCheckCustomFieldResp():BatchUpdateEcoBackgroundCheckCustomFieldResp
+	export function emptyRefBatchUpdateEcoBackgroundCheckCustomFieldResp():Ref<BatchUpdateEcoBackgroundCheckCustomFieldResp>
+	export function refOfBatchUpdateEcoBackgroundCheckCustomFieldResp(x:BatchUpdateEcoBackgroundCheckCustomFieldResp,v:Ref<BatchUpdateEcoBackgroundCheckCustomFieldResp>)
+	export function unRefBatchUpdateEcoBackgroundCheckCustomFieldResp(v:Ref<BatchUpdateEcoBackgroundCheckCustomFieldResp>):BatchUpdateEcoBackgroundCheckCustomFieldResp
+	export function emptyGetAgencyResp():GetAgencyResp
+	export function emptyRefGetAgencyResp():Ref<GetAgencyResp>
+	export function refOfGetAgencyResp(x:GetAgencyResp,v:Ref<GetAgencyResp>)
+	export function unRefGetAgencyResp(v:Ref<GetAgencyResp>):GetAgencyResp
+	export function emptyListOfferApplicationFormRespData():ListOfferApplicationFormRespData
+	export function emptyRefListOfferApplicationFormRespData():Ref<ListOfferApplicationFormRespData>
+	export function refOfListOfferApplicationFormRespData(x:ListOfferApplicationFormRespData,v:Ref<ListOfferApplicationFormRespData>)
+	export function unRefListOfferApplicationFormRespData(v:Ref<ListOfferApplicationFormRespData>):ListOfferApplicationFormRespData
+	export function emptyCreateJobRequirementReq():CreateJobRequirementReq
+	export function emptyRefCreateJobRequirementReq():Ref<CreateJobRequirementReq>
+	export function refOfCreateJobRequirementReq(x:CreateJobRequirementReq,v:Ref<CreateJobRequirementReq>)
+	export function unRefCreateJobRequirementReq(v:Ref<CreateJobRequirementReq>):CreateJobRequirementReq
+	export function emptyWebsiteJobPostCustomizedTimeRange():WebsiteJobPostCustomizedTimeRange
+	export function emptyRefWebsiteJobPostCustomizedTimeRange():Ref<WebsiteJobPostCustomizedTimeRange>
+	export function refOfWebsiteJobPostCustomizedTimeRange(x:WebsiteJobPostCustomizedTimeRange,v:Ref<WebsiteJobPostCustomizedTimeRange>)
+	export function unRefWebsiteJobPostCustomizedTimeRange(v:Ref<WebsiteJobPostCustomizedTimeRange>):WebsiteJobPostCustomizedTimeRange
+	export function emptyTalentEducationInfo():TalentEducationInfo
+	export function emptyRefTalentEducationInfo():Ref<TalentEducationInfo>
+	export function refOfTalentEducationInfo(x:TalentEducationInfo,v:Ref<TalentEducationInfo>)
+	export function unRefTalentEducationInfo(v:Ref<TalentEducationInfo>):TalentEducationInfo
+	export function emptyListInterviewTaskRespData():ListInterviewTaskRespData
+	export function emptyRefListInterviewTaskRespData():Ref<ListInterviewTaskRespData>
+	export function refOfListInterviewTaskRespData(x:ListInterviewTaskRespData,v:Ref<ListInterviewTaskRespData>)
+	export function unRefListInterviewTaskRespData(v:Ref<ListInterviewTaskRespData>):ListInterviewTaskRespData
+	export function emptyListJobFunctionIterator():ListJobFunctionIterator
+	export function emptyRefListJobFunctionIterator():Ref<ListJobFunctionIterator>
+	export function refOfListJobFunctionIterator(x:ListJobFunctionIterator,v:Ref<ListJobFunctionIterator>)
+	export function unRefListJobFunctionIterator(v:Ref<ListJobFunctionIterator>):ListJobFunctionIterator
+	export function emptyProtectSearchAgencyReq():ProtectSearchAgencyReq
+	export function emptyRefProtectSearchAgencyReq():Ref<ProtectSearchAgencyReq>
+	export function refOfProtectSearchAgencyReq(x:ProtectSearchAgencyReq,v:Ref<ProtectSearchAgencyReq>)
+	export function unRefProtectSearchAgencyReq(v:Ref<ProtectSearchAgencyReq>):ProtectSearchAgencyReq
+	export function emptyApplicationTalentWorksInfo():ApplicationTalentWorksInfo
+	export function emptyRefApplicationTalentWorksInfo():Ref<ApplicationTalentWorksInfo>
+	export function refOfApplicationTalentWorksInfo(x:ApplicationTalentWorksInfo,v:Ref<ApplicationTalentWorksInfo>)
+	export function unRefApplicationTalentWorksInfo(v:Ref<ApplicationTalentWorksInfo>):ApplicationTalentWorksInfo
+	export function emptySearchDiversityInclusionResp():SearchDiversityInclusionResp
+	export function emptyRefSearchDiversityInclusionResp():Ref<SearchDiversityInclusionResp>
+	export function refOfSearchDiversityInclusionResp(x:SearchDiversityInclusionResp,v:Ref<SearchDiversityInclusionResp>)
+	export function unRefSearchDiversityInclusionResp(v:Ref<SearchDiversityInclusionResp>):SearchDiversityInclusionResp
+	export function emptyListInterviewRecordRespData():ListInterviewRecordRespData
+	export function emptyRefListInterviewRecordRespData():Ref<ListInterviewRecordRespData>
+	export function refOfListInterviewRecordRespData(x:ListInterviewRecordRespData,v:Ref<ListInterviewRecordRespData>)
+	export function unRefListInterviewRecordRespData(v:Ref<ListInterviewRecordRespData>):ListInterviewRecordRespData
+	export function emptyListApplicationResp():ListApplicationResp
+	export function emptyRefListApplicationResp():Ref<ListApplicationResp>
+	export function refOfListApplicationResp(x:ListApplicationResp,v:Ref<ListApplicationResp>)
+	export function unRefListApplicationResp(v:Ref<ListApplicationResp>):ListApplicationResp
+	export function emptyAttachmentInfo():AttachmentInfo
+	export function emptyRefAttachmentInfo():Ref<AttachmentInfo>
+	export function refOfAttachmentInfo(x:AttachmentInfo,v:Ref<AttachmentInfo>)
+	export function unRefAttachmentInfo(v:Ref<AttachmentInfo>):AttachmentInfo
+	export function emptyBatchDeleteEcoBackgroundCheckPackageResp():BatchDeleteEcoBackgroundCheckPackageResp
+	export function emptyRefBatchDeleteEcoBackgroundCheckPackageResp():Ref<BatchDeleteEcoBackgroundCheckPackageResp>
+	export function refOfBatchDeleteEcoBackgroundCheckPackageResp(x:BatchDeleteEcoBackgroundCheckPackageResp,v:Ref<BatchDeleteEcoBackgroundCheckPackageResp>)
+	export function unRefBatchDeleteEcoBackgroundCheckPackageResp(v:Ref<BatchDeleteEcoBackgroundCheckPackageResp>):BatchDeleteEcoBackgroundCheckPackageResp
+	export function emptyCommonSchema():CommonSchema
+	export function emptyRefCommonSchema():Ref<CommonSchema>
+	export function refOfCommonSchema(x:CommonSchema,v:Ref<CommonSchema>)
+	export function unRefCommonSchema(v:Ref<CommonSchema>):CommonSchema
+	export function emptyGetOfferSchemaRespData():GetOfferSchemaRespData
+	export function emptyRefGetOfferSchemaRespData():Ref<GetOfferSchemaRespData>
+	export function refOfGetOfferSchemaRespData(x:GetOfferSchemaRespData,v:Ref<GetOfferSchemaRespData>)
+	export function unRefGetOfferSchemaRespData(v:Ref<GetOfferSchemaRespData>):GetOfferSchemaRespData
+	export function emptyBatchGetIdTalentReqBody():BatchGetIdTalentReqBody
+	export function emptyRefBatchGetIdTalentReqBody():Ref<BatchGetIdTalentReqBody>
+	export function refOfBatchGetIdTalentReqBody(x:BatchGetIdTalentReqBody,v:Ref<BatchGetIdTalentReqBody>)
+	export function unRefBatchGetIdTalentReqBody(v:Ref<BatchGetIdTalentReqBody>):BatchGetIdTalentReqBody
+	export function emptyCreateTripartiteAgreementReq():CreateTripartiteAgreementReq
+	export function emptyRefCreateTripartiteAgreementReq():Ref<CreateTripartiteAgreementReq>
+	export function refOfCreateTripartiteAgreementReq(x:CreateTripartiteAgreementReq,v:Ref<CreateTripartiteAgreementReq>)
+	export function unRefCreateTripartiteAgreementReq(v:Ref<CreateTripartiteAgreementReq>):CreateTripartiteAgreementReq
+	export function emptyWithdrawReferralAccountResp():WithdrawReferralAccountResp
+	export function emptyRefWithdrawReferralAccountResp():Ref<WithdrawReferralAccountResp>
+	export function refOfWithdrawReferralAccountResp(x:WithdrawReferralAccountResp,v:Ref<WithdrawReferralAccountResp>)
+	export function unRefWithdrawReferralAccountResp(v:Ref<WithdrawReferralAccountResp>):WithdrawReferralAccountResp
+	export function emptyAbility():Ability
+	export function emptyRefAbility():Ref<Ability>
+	export function refOfAbility(x:Ability,v:Ref<Ability>)
+	export function unRefAbility(v:Ref<Ability>):Ability
+	export function emptyWithdrawReferralAccountReqBody():WithdrawReferralAccountReqBody
+	export function emptyRefWithdrawReferralAccountReqBody():Ref<WithdrawReferralAccountReqBody>
+	export function refOfWithdrawReferralAccountReqBody(x:WithdrawReferralAccountReqBody,v:Ref<WithdrawReferralAccountReqBody>)
+	export function unRefWithdrawReferralAccountReqBody(v:Ref<WithdrawReferralAccountReqBody>):WithdrawReferralAccountReqBody
+	export function emptyDummy():Dummy
+	export function emptyRefDummy():Ref<Dummy>
+	export function refOfDummy(x:Dummy,v:Ref<Dummy>)
+	export function unRefDummy(v:Ref<Dummy>):Dummy
+	export function emptyGetByApplicationReferralRespData():GetByApplicationReferralRespData
+	export function emptyRefGetByApplicationReferralRespData():Ref<GetByApplicationReferralRespData>
+	export function refOfGetByApplicationReferralRespData(x:GetByApplicationReferralRespData,v:Ref<GetByApplicationReferralRespData>)
+	export function unRefGetByApplicationReferralRespData(v:Ref<GetByApplicationReferralRespData>):GetByApplicationReferralRespData
+	export function emptyGetTalentRespData():GetTalentRespData
+	export function emptyRefGetTalentRespData():Ref<GetTalentRespData>
+	export function refOfGetTalentRespData(x:GetTalentRespData,v:Ref<GetTalentRespData>)
+	export function unRefGetTalentRespData(v:Ref<GetTalentRespData>):GetTalentRespData
+	export function emptyInterviewRecordTemplate():InterviewRecordTemplate
+	export function emptyRefInterviewRecordTemplate():Ref<InterviewRecordTemplate>
+	export function refOfInterviewRecordTemplate(x:InterviewRecordTemplate,v:Ref<InterviewRecordTemplate>)
+	export function unRefInterviewRecordTemplate(v:Ref<InterviewRecordTemplate>):InterviewRecordTemplate
+	export function emptyLocationState():LocationState
+	export function emptyRefLocationState():Ref<LocationState>
+	export function refOfLocationState(x:LocationState,v:Ref<LocationState>)
+	export function unRefLocationState(v:Ref<LocationState>):LocationState
+	export function emptyP2ApplicationDeletedV1Data():P2ApplicationDeletedV1Data
+	export function emptyRefP2ApplicationDeletedV1Data():Ref<P2ApplicationDeletedV1Data>
+	export function refOfP2ApplicationDeletedV1Data(x:P2ApplicationDeletedV1Data,v:Ref<P2ApplicationDeletedV1Data>)
+	export function unRefP2ApplicationDeletedV1Data(v:Ref<P2ApplicationDeletedV1Data>):P2ApplicationDeletedV1Data
+	export function emptyProtectAgencyReq():ProtectAgencyReq
+	export function emptyRefProtectAgencyReq():Ref<ProtectAgencyReq>
+	export function refOfProtectAgencyReq(x:ProtectAgencyReq,v:Ref<ProtectAgencyReq>)
+	export function unRefProtectAgencyReq(v:Ref<ProtectAgencyReq>):ProtectAgencyReq
+	export function emptyWithdrawReferralAccountReq():WithdrawReferralAccountReq
+	export function emptyRefWithdrawReferralAccountReq():Ref<WithdrawReferralAccountReq>
+	export function refOfWithdrawReferralAccountReq(x:WithdrawReferralAccountReq,v:Ref<WithdrawReferralAccountReq>)
+	export function unRefWithdrawReferralAccountReq(v:Ref<WithdrawReferralAccountReq>):WithdrawReferralAccountReq
+	export function emptyDeleteExternalReferralRewardResp():DeleteExternalReferralRewardResp
+	export function emptyRefDeleteExternalReferralRewardResp():Ref<DeleteExternalReferralRewardResp>
+	export function refOfDeleteExternalReferralRewardResp(x:DeleteExternalReferralRewardResp,v:Ref<DeleteExternalReferralRewardResp>)
+	export function unRefDeleteExternalReferralRewardResp(v:Ref<DeleteExternalReferralRewardResp>):DeleteExternalReferralRewardResp
+	export function emptyJobCustomizedData():JobCustomizedData
+	export function emptyRefJobCustomizedData():Ref<JobCustomizedData>
+	export function refOfJobCustomizedData(x:JobCustomizedData,v:Ref<JobCustomizedData>)
+	export function unRefJobCustomizedData(v:Ref<JobCustomizedData>):JobCustomizedData
+	export function emptyTalentCustomizedOption():TalentCustomizedOption
+	export function emptyRefTalentCustomizedOption():Ref<TalentCustomizedOption>
+	export function refOfTalentCustomizedOption(x:TalentCustomizedOption,v:Ref<TalentCustomizedOption>)
+	export function unRefTalentCustomizedOption(v:Ref<TalentCustomizedOption>):TalentCustomizedOption
+	export function emptyConfigJobRespData():ConfigJobRespData
+	export function emptyRefConfigJobRespData():Ref<ConfigJobRespData>
+	export function refOfConfigJobRespData(x:ConfigJobRespData,v:Ref<ConfigJobRespData>)
+	export function unRefConfigJobRespData(v:Ref<ConfigJobRespData>):ConfigJobRespData
+	export function emptyListInterviewTaskIterator():ListInterviewTaskIterator
+	export function emptyRefListInterviewTaskIterator():Ref<ListInterviewTaskIterator>
+	export function refOfListInterviewTaskIterator(x:ListInterviewTaskIterator,v:Ref<ListInterviewTaskIterator>)
+	export function unRefListInterviewTaskIterator(v:Ref<ListInterviewTaskIterator>):ListInterviewTaskIterator
+	export function emptyUpdateOfferCustomFieldResp():UpdateOfferCustomFieldResp
+	export function emptyRefUpdateOfferCustomFieldResp():Ref<UpdateOfferCustomFieldResp>
+	export function refOfUpdateOfferCustomFieldResp(x:UpdateOfferCustomFieldResp,v:Ref<UpdateOfferCustomFieldResp>)
+	export function unRefUpdateOfferCustomFieldResp(v:Ref<UpdateOfferCustomFieldResp>):UpdateOfferCustomFieldResp
+	export function emptyApplicationTalentProjectInfo():ApplicationTalentProjectInfo
+	export function emptyRefApplicationTalentProjectInfo():Ref<ApplicationTalentProjectInfo>
+	export function refOfApplicationTalentProjectInfo(x:ApplicationTalentProjectInfo,v:Ref<ApplicationTalentProjectInfo>)
+	export function unRefApplicationTalentProjectInfo(v:Ref<ApplicationTalentProjectInfo>):ApplicationTalentProjectInfo
+	export function emptyCodeNameObject():CodeNameObject
+	export function emptyRefCodeNameObject():Ref<CodeNameObject>
+	export function refOfCodeNameObject(x:CodeNameObject,v:Ref<CodeNameObject>)
+	export function unRefCodeNameObject(v:Ref<CodeNameObject>):CodeNameObject
+	export function emptyGetApplicationReq():GetApplicationReq
+	export function emptyRefGetApplicationReq():Ref<GetApplicationReq>
+	export function refOfGetApplicationReq(x:GetApplicationReq,v:Ref<GetApplicationReq>)
+	export function unRefGetApplicationReq(v:Ref<GetApplicationReq>):GetApplicationReq
+	export function emptyJobRequirementDto():JobRequirementDto
+	export function emptyRefJobRequirementDto():Ref<JobRequirementDto>
+	export function refOfJobRequirementDto(x:JobRequirementDto,v:Ref<JobRequirementDto>)
+	export function unRefJobRequirementDto(v:Ref<JobRequirementDto>):JobRequirementDto
+	export function emptyApplicationOfferBasicInfoCustomizedObjectOptionValue():ApplicationOfferBasicInfoCustomizedObjectOptionValue
+	export function emptyRefApplicationOfferBasicInfoCustomizedObjectOptionValue():Ref<ApplicationOfferBasicInfoCustomizedObjectOptionValue>
+	export function refOfApplicationOfferBasicInfoCustomizedObjectOptionValue(x:ApplicationOfferBasicInfoCustomizedObjectOptionValue,v:Ref<ApplicationOfferBasicInfoCustomizedObjectOptionValue>)
+	export function unRefApplicationOfferBasicInfoCustomizedObjectOptionValue(v:Ref<ApplicationOfferBasicInfoCustomizedObjectOptionValue>):ApplicationOfferBasicInfoCustomizedObjectOptionValue
+	export function emptyListBackgroundCheckOrderReq():ListBackgroundCheckOrderReq
+	export function emptyRefListBackgroundCheckOrderReq():Ref<ListBackgroundCheckOrderReq>
+	export function refOfListBackgroundCheckOrderReq(x:ListBackgroundCheckOrderReq,v:Ref<ListBackgroundCheckOrderReq>)
+	export function unRefListBackgroundCheckOrderReq(v:Ref<ListBackgroundCheckOrderReq>):ListBackgroundCheckOrderReq
+	export function emptyListWebsiteReq():ListWebsiteReq
+	export function emptyRefListWebsiteReq():Ref<ListWebsiteReq>
+	export function refOfListWebsiteReq(x:ListWebsiteReq,v:Ref<ListWebsiteReq>)
+	export function unRefListWebsiteReq(v:Ref<ListWebsiteReq>):ListWebsiteReq
+	export function emptyListReferralWebsiteJobPostReq():ListReferralWebsiteJobPostReq
+	export function emptyRefListReferralWebsiteJobPostReq():Ref<ListReferralWebsiteJobPostReq>
+	export function refOfListReferralWebsiteJobPostReq(x:ListReferralWebsiteJobPostReq,v:Ref<ListReferralWebsiteJobPostReq>)
+	export function unRefListReferralWebsiteJobPostReq(v:Ref<ListReferralWebsiteJobPostReq>):ListReferralWebsiteJobPostReq
+	export function emptySearchDiversityInclusionReqBody():SearchDiversityInclusionReqBody
+	export function emptyRefSearchDiversityInclusionReqBody():Ref<SearchDiversityInclusionReqBody>
+	export function refOfSearchDiversityInclusionReqBody(x:SearchDiversityInclusionReqBody,v:Ref<SearchDiversityInclusionReqBody>)
+	export function unRefSearchDiversityInclusionReqBody(v:Ref<SearchDiversityInclusionReqBody>):SearchDiversityInclusionReqBody
+	export function emptyTalentCustomizedAttachment():TalentCustomizedAttachment
+	export function emptyRefTalentCustomizedAttachment():Ref<TalentCustomizedAttachment>
+	export function refOfTalentCustomizedAttachment(x:TalentCustomizedAttachment,v:Ref<TalentCustomizedAttachment>)
+	export function unRefTalentCustomizedAttachment(v:Ref<TalentCustomizedAttachment>):TalentCustomizedAttachment
+	export function emptyApplication():Application
+	export function emptyRefApplication():Ref<Application>
+	export function refOfApplication(x:Application,v:Ref<Application>)
+	export function unRefApplication(v:Ref<Application>):Application
+	export function emptyEcoBackgroundCheckCustomFieldDataOption():EcoBackgroundCheckCustomFieldDataOption
+	export function emptyRefEcoBackgroundCheckCustomFieldDataOption():Ref<EcoBackgroundCheckCustomFieldDataOption>
+	export function refOfEcoBackgroundCheckCustomFieldDataOption(x:EcoBackgroundCheckCustomFieldDataOption,v:Ref<EcoBackgroundCheckCustomFieldDataOption>)
+	export function unRefEcoBackgroundCheckCustomFieldDataOption(v:Ref<EcoBackgroundCheckCustomFieldDataOption>):EcoBackgroundCheckCustomFieldDataOption
+	export function emptyUpdateTripartiteAgreementReq():UpdateTripartiteAgreementReq
+	export function emptyRefUpdateTripartiteAgreementReq():Ref<UpdateTripartiteAgreementReq>
+	export function refOfUpdateTripartiteAgreementReq(x:UpdateTripartiteAgreementReq,v:Ref<UpdateTripartiteAgreementReq>)
+	export function unRefUpdateTripartiteAgreementReq(v:Ref<UpdateTripartiteAgreementReq>):UpdateTripartiteAgreementReq
+	export function emptyDeleteNoteReq():DeleteNoteReq
+	export function emptyRefDeleteNoteReq():Ref<DeleteNoteReq>
+	export function refOfDeleteNoteReq(x:DeleteNoteReq,v:Ref<DeleteNoteReq>)
+	export function unRefDeleteNoteReq(v:Ref<DeleteNoteReq>):DeleteNoteReq
+	export function emptyOnboardStatusTalentResp():OnboardStatusTalentResp
+	export function emptyRefOnboardStatusTalentResp():Ref<OnboardStatusTalentResp>
+	export function refOfOnboardStatusTalentResp(x:OnboardStatusTalentResp,v:Ref<OnboardStatusTalentResp>)
+	export function unRefOnboardStatusTalentResp(v:Ref<OnboardStatusTalentResp>):OnboardStatusTalentResp
+	export function emptyGetAttachmentReq():GetAttachmentReq
+	export function emptyRefGetAttachmentReq():Ref<GetAttachmentReq>
+	export function refOfGetAttachmentReq(x:GetAttachmentReq,v:Ref<GetAttachmentReq>)
+	export function unRefGetAttachmentReq(v:Ref<GetAttachmentReq>):GetAttachmentReq
+	export function emptyCombinedCreateTalentReqBody():CombinedCreateTalentReqBody
+	export function emptyRefCombinedCreateTalentReqBody():Ref<CombinedCreateTalentReqBody>
+	export function refOfCombinedCreateTalentReqBody(x:CombinedCreateTalentReqBody,v:Ref<CombinedCreateTalentReqBody>)
+	export function unRefCombinedCreateTalentReqBody(v:Ref<CombinedCreateTalentReqBody>):CombinedCreateTalentReqBody
+	export function emptyGetAgencyReq():GetAgencyReq
+	export function emptyRefGetAgencyReq():Ref<GetAgencyReq>
+	export function refOfGetAgencyReq(x:GetAgencyReq,v:Ref<GetAgencyReq>)
+	export function unRefGetAgencyReq(v:Ref<GetAgencyReq>):GetAgencyReq
+	export function emptyP2ApplicationStageChangedV1Data():P2ApplicationStageChangedV1Data
+	export function emptyRefP2ApplicationStageChangedV1Data():Ref<P2ApplicationStageChangedV1Data>
+	export function refOfP2ApplicationStageChangedV1Data(x:P2ApplicationStageChangedV1Data,v:Ref<P2ApplicationStageChangedV1Data>)
+	export function unRefP2ApplicationStageChangedV1Data(v:Ref<P2ApplicationStageChangedV1Data>):P2ApplicationStageChangedV1Data
+	export function emptyListJobTypeIterator():ListJobTypeIterator
+	export function emptyRefListJobTypeIterator():Ref<ListJobTypeIterator>
+	export function refOfListJobTypeIterator(x:ListJobTypeIterator,v:Ref<ListJobTypeIterator>)
+	export function unRefListJobTypeIterator(v:Ref<ListJobTypeIterator>):ListJobTypeIterator
+	export function emptyTestResultDetail():TestResultDetail
+	export function emptyRefTestResultDetail():Ref<TestResultDetail>
+	export function refOfTestResultDetail(x:TestResultDetail,v:Ref<TestResultDetail>)
+	export function unRefTestResultDetail(v:Ref<TestResultDetail>):TestResultDetail
+	export function emptyJobCustomizedTimeRange():JobCustomizedTimeRange
+	export function emptyRefJobCustomizedTimeRange():Ref<JobCustomizedTimeRange>
+	export function refOfJobCustomizedTimeRange(x:JobCustomizedTimeRange,v:Ref<JobCustomizedTimeRange>)
+	export function unRefJobCustomizedTimeRange(v:Ref<JobCustomizedTimeRange>):JobCustomizedTimeRange
+	export function emptyPoint():Point
+	export function emptyRefPoint():Ref<Point>
+	export function refOfPoint(x:Point,v:Ref<Point>)
+	export function unRefPoint(v:Ref<Point>):Point
+	export function emptyRegistrationBasicInfo():RegistrationBasicInfo
+	export function emptyRefRegistrationBasicInfo():Ref<RegistrationBasicInfo>
+	export function refOfRegistrationBasicInfo(x:RegistrationBasicInfo,v:Ref<RegistrationBasicInfo>)
+	export function unRefRegistrationBasicInfo(v:Ref<RegistrationBasicInfo>):RegistrationBasicInfo
+	export function emptyCreateOfferResp():CreateOfferResp
+	export function emptyRefCreateOfferResp():Ref<CreateOfferResp>
+	export function refOfCreateOfferResp(x:CreateOfferResp,v:Ref<CreateOfferResp>)
+	export function unRefCreateOfferResp(v:Ref<CreateOfferResp>):CreateOfferResp
+	export function emptyGetEmployeeResp():GetEmployeeResp
+	export function emptyRefGetEmployeeResp():Ref<GetEmployeeResp>
+	export function refOfGetEmployeeResp(x:GetEmployeeResp,v:Ref<GetEmployeeResp>)
+	export function unRefGetEmployeeResp(v:Ref<GetEmployeeResp>):GetEmployeeResp
+	export function emptyListLocationReq():ListLocationReq
+	export function emptyRefListLocationReq():Ref<ListLocationReq>
+	export function refOfListLocationReq(x:ListLocationReq,v:Ref<ListLocationReq>)
+	export function unRefListLocationReq(v:Ref<ListLocationReq>):ListLocationReq
+	export function emptyPatchExternalInterviewAssessmentRespData():PatchExternalInterviewAssessmentRespData
+	export function emptyRefPatchExternalInterviewAssessmentRespData():Ref<PatchExternalInterviewAssessmentRespData>
+	export function refOfPatchExternalInterviewAssessmentRespData(x:PatchExternalInterviewAssessmentRespData,v:Ref<PatchExternalInterviewAssessmentRespData>)
+	export function unRefPatchExternalInterviewAssessmentRespData(v:Ref<PatchExternalInterviewAssessmentRespData>):PatchExternalInterviewAssessmentRespData
+	export function emptyCombinedJob():CombinedJob
+	export function emptyRefCombinedJob():Ref<CombinedJob>
+	export function refOfCombinedJob(x:CombinedJob,v:Ref<CombinedJob>)
+	export function unRefCombinedJob(v:Ref<CombinedJob>):CombinedJob
+	export function emptyEcoExamLoginInfo():EcoExamLoginInfo
+	export function emptyRefEcoExamLoginInfo():Ref<EcoExamLoginInfo>
+	export function refOfEcoExamLoginInfo(x:EcoExamLoginInfo,v:Ref<EcoExamLoginInfo>)
+	export function unRefEcoExamLoginInfo(v:Ref<EcoExamLoginInfo>):EcoExamLoginInfo
+	export function emptyBatchUpdateEcoAccountCustomFieldReq():BatchUpdateEcoAccountCustomFieldReq
+	export function emptyRefBatchUpdateEcoAccountCustomFieldReq():Ref<BatchUpdateEcoAccountCustomFieldReq>
+	export function refOfBatchUpdateEcoAccountCustomFieldReq(x:BatchUpdateEcoAccountCustomFieldReq,v:Ref<BatchUpdateEcoAccountCustomFieldReq>)
+	export function unRefBatchUpdateEcoAccountCustomFieldReq(v:Ref<BatchUpdateEcoAccountCustomFieldReq>):BatchUpdateEcoAccountCustomFieldReq
+	export function emptyV1():V1
+	export function emptyRefV1():Ref<V1>
+	export function refOfV1(x:V1,v:Ref<V1>)
+	export function unRefV1(v:Ref<V1>):V1
+	export function emptyWebsiteDeliveryAttachment():WebsiteDeliveryAttachment
+	export function emptyRefWebsiteDeliveryAttachment():Ref<WebsiteDeliveryAttachment>
+	export function refOfWebsiteDeliveryAttachment(x:WebsiteDeliveryAttachment,v:Ref<WebsiteDeliveryAttachment>)
+	export function unRefWebsiteDeliveryAttachment(v:Ref<WebsiteDeliveryAttachment>):WebsiteDeliveryAttachment
+	export function emptyListEvaluationResp():ListEvaluationResp
+	export function emptyRefListEvaluationResp():Ref<ListEvaluationResp>
+	export function refOfListEvaluationResp(x:ListEvaluationResp,v:Ref<ListEvaluationResp>)
+	export function unRefListEvaluationResp(v:Ref<ListEvaluationResp>):ListEvaluationResp
+	export function emptySnsInfo():SnsInfo
+	export function emptyRefSnsInfo():Ref<SnsInfo>
+	export function refOfSnsInfo(x:SnsInfo,v:Ref<SnsInfo>)
+	export function unRefSnsInfo(v:Ref<SnsInfo>):SnsInfo
+	export function emptyEntityInfo():EntityInfo
+	export function emptyRefEntityInfo():Ref<EntityInfo>
+	export function refOfEntityInfo(x:EntityInfo,v:Ref<EntityInfo>)
+	export function unRefEntityInfo(v:Ref<EntityInfo>):EntityInfo
+	export function emptySiteJobPostSearchRequest():SiteJobPostSearchRequest
+	export function emptyRefSiteJobPostSearchRequest():Ref<SiteJobPostSearchRequest>
+	export function refOfSiteJobPostSearchRequest(x:SiteJobPostSearchRequest,v:Ref<SiteJobPostSearchRequest>)
+	export function unRefSiteJobPostSearchRequest(v:Ref<SiteJobPostSearchRequest>):SiteJobPostSearchRequest
+	export function emptyEcoAccountCustomField():EcoAccountCustomField
+	export function emptyRefEcoAccountCustomField():Ref<EcoAccountCustomField>
+	export function refOfEcoAccountCustomField(x:EcoAccountCustomField,v:Ref<EcoAccountCustomField>)
+	export function unRefEcoAccountCustomField(v:Ref<EcoAccountCustomField>):EcoAccountCustomField
+	export function emptyBatchDeleteEcoBackgroundCheckPackageReqBody():BatchDeleteEcoBackgroundCheckPackageReqBody
+	export function emptyRefBatchDeleteEcoBackgroundCheckPackageReqBody():Ref<BatchDeleteEcoBackgroundCheckPackageReqBody>
+	export function refOfBatchDeleteEcoBackgroundCheckPackageReqBody(x:BatchDeleteEcoBackgroundCheckPackageReqBody,v:Ref<BatchDeleteEcoBackgroundCheckPackageReqBody>)
+	export function unRefBatchDeleteEcoBackgroundCheckPackageReqBody(v:Ref<BatchDeleteEcoBackgroundCheckPackageReqBody>):BatchDeleteEcoBackgroundCheckPackageReqBody
+	export function emptyCreateTalentExternalInfoReqBody():CreateTalentExternalInfoReqBody
+	export function emptyRefCreateTalentExternalInfoReqBody():Ref<CreateTalentExternalInfoReqBody>
+	export function refOfCreateTalentExternalInfoReqBody(x:CreateTalentExternalInfoReqBody,v:Ref<CreateTalentExternalInfoReqBody>)
+	export function unRefCreateTalentExternalInfoReqBody(v:Ref<CreateTalentExternalInfoReqBody>):CreateTalentExternalInfoReqBody
+	export function emptyDeleteJobRequirementResp():DeleteJobRequirementResp
+	export function emptyRefDeleteJobRequirementResp():Ref<DeleteJobRequirementResp>
+	export function refOfDeleteJobRequirementResp(x:DeleteJobRequirementResp,v:Ref<DeleteJobRequirementResp>)
+	export function unRefDeleteJobRequirementResp(v:Ref<DeleteJobRequirementResp>):DeleteJobRequirementResp
+	export function emptySiteResumeCareer():SiteResumeCareer
+	export function emptyRefSiteResumeCareer():Ref<SiteResumeCareer>
+	export function refOfSiteResumeCareer(x:SiteResumeCareer,v:Ref<SiteResumeCareer>)
+	export function unRefSiteResumeCareer(v:Ref<SiteResumeCareer>):SiteResumeCareer
+	export function emptySearchReferralRespData():SearchReferralRespData
+	export function emptyRefSearchReferralRespData():Ref<SearchReferralRespData>
+	export function refOfSearchReferralRespData(x:SearchReferralRespData,v:Ref<SearchReferralRespData>)
+	export function unRefSearchReferralRespData(v:Ref<SearchReferralRespData>):SearchReferralRespData
+	export function emptyApplicationStage():ApplicationStage
+	export function emptyRefApplicationStage():Ref<ApplicationStage>
+	export function refOfApplicationStage(x:ApplicationStage,v:Ref<ApplicationStage>)
+	export function unRefApplicationStage(v:Ref<ApplicationStage>):ApplicationStage
+	export function emptyBatchDeleteEcoBackgroundCheckPackageReq():BatchDeleteEcoBackgroundCheckPackageReq
+	export function emptyRefBatchDeleteEcoBackgroundCheckPackageReq():Ref<BatchDeleteEcoBackgroundCheckPackageReq>
+	export function refOfBatchDeleteEcoBackgroundCheckPackageReq(x:BatchDeleteEcoBackgroundCheckPackageReq,v:Ref<BatchDeleteEcoBackgroundCheckPackageReq>)
+	export function unRefBatchDeleteEcoBackgroundCheckPackageReq(v:Ref<BatchDeleteEcoBackgroundCheckPackageReq>):BatchDeleteEcoBackgroundCheckPackageReq
+	export function emptyDeleteNoteResp():DeleteNoteResp
+	export function emptyRefDeleteNoteResp():Ref<DeleteNoteResp>
+	export function refOfDeleteNoteResp(x:DeleteNoteResp,v:Ref<DeleteNoteResp>)
+	export function unRefDeleteNoteResp(v:Ref<DeleteNoteResp>):DeleteNoteResp
+	export function emptyGetInterviewRecordAttachmentReq():GetInterviewRecordAttachmentReq
+	export function emptyRefGetInterviewRecordAttachmentReq():Ref<GetInterviewRecordAttachmentReq>
+	export function refOfGetInterviewRecordAttachmentReq(x:GetInterviewRecordAttachmentReq,v:Ref<GetInterviewRecordAttachmentReq>)
+	export function unRefGetInterviewRecordAttachmentReq(v:Ref<GetInterviewRecordAttachmentReq>):GetInterviewRecordAttachmentReq
+	export function emptyOfferListInfo():OfferListInfo
+	export function emptyRefOfferListInfo():Ref<OfferListInfo>
+	export function refOfOfferListInfo(x:OfferListInfo,v:Ref<OfferListInfo>)
+	export function unRefOfferListInfo(v:Ref<OfferListInfo>):OfferListInfo
+	export function emptyP2EhrImportTaskForInternshipOfferImportedV1Data():P2EhrImportTaskForInternshipOfferImportedV1Data
+	export function emptyRefP2EhrImportTaskForInternshipOfferImportedV1Data():Ref<P2EhrImportTaskForInternshipOfferImportedV1Data>
+	export function refOfP2EhrImportTaskForInternshipOfferImportedV1Data(x:P2EhrImportTaskForInternshipOfferImportedV1Data,v:Ref<P2EhrImportTaskForInternshipOfferImportedV1Data>)
+	export function unRefP2EhrImportTaskForInternshipOfferImportedV1Data(v:Ref<P2EhrImportTaskForInternshipOfferImportedV1Data>):P2EhrImportTaskForInternshipOfferImportedV1Data
+	export function emptyMentionEntity():MentionEntity
+	export function emptyRefMentionEntity():Ref<MentionEntity>
+	export function refOfMentionEntity(x:MentionEntity,v:Ref<MentionEntity>)
+	export function unRefMentionEntity(v:Ref<MentionEntity>):MentionEntity
+	export function emptyTalentInterviewRegistrationSimple():TalentInterviewRegistrationSimple
+	export function emptyRefTalentInterviewRegistrationSimple():Ref<TalentInterviewRegistrationSimple>
+	export function refOfTalentInterviewRegistrationSimple(x:TalentInterviewRegistrationSimple,v:Ref<TalentInterviewRegistrationSimple>)
+	export function unRefTalentInterviewRegistrationSimple(v:Ref<TalentInterviewRegistrationSimple>):TalentInterviewRegistrationSimple
+	export function emptyBackgroundCheckOrderCreator():BackgroundCheckOrderCreator
+	export function emptyRefBackgroundCheckOrderCreator():Ref<BackgroundCheckOrderCreator>
+	export function refOfBackgroundCheckOrderCreator(x:BackgroundCheckOrderCreator,v:Ref<BackgroundCheckOrderCreator>)
+	export function unRefBackgroundCheckOrderCreator(v:Ref<BackgroundCheckOrderCreator>):BackgroundCheckOrderCreator
+	export function emptyLocationBaseInfo():LocationBaseInfo
+	export function emptyRefLocationBaseInfo():Ref<LocationBaseInfo>
+	export function refOfLocationBaseInfo(x:LocationBaseInfo,v:Ref<LocationBaseInfo>)
+	export function unRefLocationBaseInfo(v:Ref<LocationBaseInfo>):LocationBaseInfo
+	export function emptyCommonSchemaConfig():CommonSchemaConfig
+	export function emptyRefCommonSchemaConfig():Ref<CommonSchemaConfig>
+	export function refOfCommonSchemaConfig(x:CommonSchemaConfig,v:Ref<CommonSchemaConfig>)
+	export function unRefCommonSchemaConfig(v:Ref<CommonSchemaConfig>):CommonSchemaConfig
+	export function emptyJobManager():JobManager
+	export function emptyRefJobManager():Ref<JobManager>
+	export function refOfJobManager(x:JobManager,v:Ref<JobManager>)
+	export function unRefJobManager(v:Ref<JobManager>):JobManager
+	export function emptyTalentCustomizedDataChild():TalentCustomizedDataChild
+	export function emptyRefTalentCustomizedDataChild():Ref<TalentCustomizedDataChild>
+	export function refOfTalentCustomizedDataChild(x:TalentCustomizedDataChild,v:Ref<TalentCustomizedDataChild>)
+	export function unRefTalentCustomizedDataChild(v:Ref<TalentCustomizedDataChild>):TalentCustomizedDataChild
+	export function emptyOfferSalaryInfo():OfferSalaryInfo
+	export function emptyRefOfferSalaryInfo():Ref<OfferSalaryInfo>
+	export function refOfOfferSalaryInfo(x:OfferSalaryInfo,v:Ref<OfferSalaryInfo>)
+	export function unRefOfferSalaryInfo(v:Ref<OfferSalaryInfo>):OfferSalaryInfo
+	export function emptyInterviewScore():InterviewScore
+	export function emptyRefInterviewScore():Ref<InterviewScore>
+	export function refOfInterviewScore(x:InterviewScore,v:Ref<InterviewScore>)
+	export function unRefInterviewScore(v:Ref<InterviewScore>):InterviewScore
+	export function emptyOfferApplyFormPreObjectConfigInfo():OfferApplyFormPreObjectConfigInfo
+	export function emptyRefOfferApplyFormPreObjectConfigInfo():Ref<OfferApplyFormPreObjectConfigInfo>
+	export function refOfOfferApplyFormPreObjectConfigInfo(x:OfferApplyFormPreObjectConfigInfo,v:Ref<OfferApplyFormPreObjectConfigInfo>)
+	export function unRefOfferApplyFormPreObjectConfigInfo(v:Ref<OfferApplyFormPreObjectConfigInfo>):OfferApplyFormPreObjectConfigInfo
+	export function emptyCreateReferralAccountReqBody():CreateReferralAccountReqBody
+	export function emptyRefCreateReferralAccountReqBody():Ref<CreateReferralAccountReqBody>
+	export function refOfCreateReferralAccountReqBody(x:CreateReferralAccountReqBody,v:Ref<CreateReferralAccountReqBody>)
+	export function unRefCreateReferralAccountReqBody(v:Ref<CreateReferralAccountReqBody>):CreateReferralAccountReqBody
+	export function emptyListReferralWebsiteJobPostRespData():ListReferralWebsiteJobPostRespData
+	export function emptyRefListReferralWebsiteJobPostRespData():Ref<ListReferralWebsiteJobPostRespData>
+	export function refOfListReferralWebsiteJobPostRespData(x:ListReferralWebsiteJobPostRespData,v:Ref<ListReferralWebsiteJobPostRespData>)
+	export function unRefListReferralWebsiteJobPostRespData(v:Ref<ListReferralWebsiteJobPostRespData>):ListReferralWebsiteJobPostRespData
+	export function emptyApplicationTalentCertificateInfo():ApplicationTalentCertificateInfo
+	export function emptyRefApplicationTalentCertificateInfo():Ref<ApplicationTalentCertificateInfo>
+	export function refOfApplicationTalentCertificateInfo(x:ApplicationTalentCertificateInfo,v:Ref<ApplicationTalentCertificateInfo>)
+	export function unRefApplicationTalentCertificateInfo(v:Ref<ApplicationTalentCertificateInfo>):ApplicationTalentCertificateInfo
+	export function emptyWebsiteDelivery():WebsiteDelivery
+	export function emptyRefWebsiteDelivery():Ref<WebsiteDelivery>
+	export function refOfWebsiteDelivery(x:WebsiteDelivery,v:Ref<WebsiteDelivery>)
+	export function unRefWebsiteDelivery(v:Ref<WebsiteDelivery>):WebsiteDelivery
+	export function emptyInterviewAssessmentDimension():InterviewAssessmentDimension
+	export function emptyRefInterviewAssessmentDimension():Ref<InterviewAssessmentDimension>
+	export function refOfInterviewAssessmentDimension(x:InterviewAssessmentDimension,v:Ref<InterviewAssessmentDimension>)
+	export function unRefInterviewAssessmentDimension(v:Ref<InterviewAssessmentDimension>):InterviewAssessmentDimension
+	export function emptyListResumeSourceIterator():ListResumeSourceIterator
+	export function emptyRefListResumeSourceIterator():Ref<ListResumeSourceIterator>
+	export function refOfListResumeSourceIterator(x:ListResumeSourceIterator,v:Ref<ListResumeSourceIterator>)
+	export function unRefListResumeSourceIterator(v:Ref<ListResumeSourceIterator>):ListResumeSourceIterator
+	export function emptyListTripartiteAgreementResp():ListTripartiteAgreementResp
+	export function emptyRefListTripartiteAgreementResp():Ref<ListTripartiteAgreementResp>
+	export function refOfListTripartiteAgreementResp(x:ListTripartiteAgreementResp,v:Ref<ListTripartiteAgreementResp>)
+	export function unRefListTripartiteAgreementResp(v:Ref<ListTripartiteAgreementResp>):ListTripartiteAgreementResp
+	export function emptyEcoAccountCustomFieldEventData():EcoAccountCustomFieldEventData
+	export function emptyRefEcoAccountCustomFieldEventData():Ref<EcoAccountCustomFieldEventData>
+	export function refOfEcoAccountCustomFieldEventData(x:EcoAccountCustomFieldEventData,v:Ref<EcoAccountCustomFieldEventData>)
+	export function unRefEcoAccountCustomFieldEventData(v:Ref<EcoAccountCustomFieldEventData>):EcoAccountCustomFieldEventData
+	export function emptyPortalJobPost():PortalJobPost
+	export function emptyRefPortalJobPost():Ref<PortalJobPost>
+	export function refOfPortalJobPost(x:PortalJobPost,v:Ref<PortalJobPost>)
+	export function unRefPortalJobPost(v:Ref<PortalJobPost>):PortalJobPost
+	export function emptyBatchGetIdTalentReq():BatchGetIdTalentReq
+	export function emptyRefBatchGetIdTalentReq():Ref<BatchGetIdTalentReq>
+	export function refOfBatchGetIdTalentReq(x:BatchGetIdTalentReq,v:Ref<BatchGetIdTalentReq>)
+	export function unRefBatchGetIdTalentReq(v:Ref<BatchGetIdTalentReq>):BatchGetIdTalentReq
+	export function emptyAppliOfferOnboardProfile():AppliOfferOnboardProfile
+	export function emptyRefAppliOfferOnboardProfile():Ref<AppliOfferOnboardProfile>
+	export function refOfAppliOfferOnboardProfile(x:AppliOfferOnboardProfile,v:Ref<AppliOfferOnboardProfile>)
+	export function unRefAppliOfferOnboardProfile(v:Ref<AppliOfferOnboardProfile>):AppliOfferOnboardProfile
+	export function emptyCreateExternalInterviewAssessmentResp():CreateExternalInterviewAssessmentResp
+	export function emptyRefCreateExternalInterviewAssessmentResp():Ref<CreateExternalInterviewAssessmentResp>
+	export function refOfCreateExternalInterviewAssessmentResp(x:CreateExternalInterviewAssessmentResp,v:Ref<CreateExternalInterviewAssessmentResp>)
+	export function unRefCreateExternalInterviewAssessmentResp(v:Ref<CreateExternalInterviewAssessmentResp>):CreateExternalInterviewAssessmentResp
+	export function emptyCreateNoteReq():CreateNoteReq
+	export function emptyRefCreateNoteReq():Ref<CreateNoteReq>
+	export function refOfCreateNoteReq(x:CreateNoteReq,v:Ref<CreateNoteReq>)
+	export function unRefCreateNoteReq(v:Ref<CreateNoteReq>):CreateNoteReq
+	export function emptyListBackgroundCheckOrderResp():ListBackgroundCheckOrderResp
+	export function emptyRefListBackgroundCheckOrderResp():Ref<ListBackgroundCheckOrderResp>
+	export function refOfListBackgroundCheckOrderResp(x:ListBackgroundCheckOrderResp,v:Ref<ListBackgroundCheckOrderResp>)
+	export function unRefListBackgroundCheckOrderResp(v:Ref<ListBackgroundCheckOrderResp>):ListBackgroundCheckOrderResp
+	export function emptyListEvaluationTaskResp():ListEvaluationTaskResp
+	export function emptyRefListEvaluationTaskResp():Ref<ListEvaluationTaskResp>
+	export function refOfListEvaluationTaskResp(x:ListEvaluationTaskResp,v:Ref<ListEvaluationTaskResp>)
+	export function unRefListEvaluationTaskResp(v:Ref<ListEvaluationTaskResp>):ListEvaluationTaskResp
+	export function emptySearchTalentPoolReq():SearchTalentPoolReq
+	export function emptyRefSearchTalentPoolReq():Ref<SearchTalentPoolReq>
+	export function refOfSearchTalentPoolReq(x:SearchTalentPoolReq,v:Ref<SearchTalentPoolReq>)
+	export function unRefSearchTalentPoolReq(v:Ref<SearchTalentPoolReq>):SearchTalentPoolReq
+	export function emptyCreateEcoBackgroundCheckPackageResp():CreateEcoBackgroundCheckPackageResp
+	export function emptyRefCreateEcoBackgroundCheckPackageResp():Ref<CreateEcoBackgroundCheckPackageResp>
+	export function refOfCreateEcoBackgroundCheckPackageResp(x:CreateEcoBackgroundCheckPackageResp,v:Ref<CreateEcoBackgroundCheckPackageResp>)
+	export function unRefCreateEcoBackgroundCheckPackageResp(v:Ref<CreateEcoBackgroundCheckPackageResp>):CreateEcoBackgroundCheckPackageResp
+	export function emptyInternOfferOffboardingInfo():InternOfferOffboardingInfo
+	export function emptyRefInternOfferOffboardingInfo():Ref<InternOfferOffboardingInfo>
+	export function refOfInternOfferOffboardingInfo(x:InternOfferOffboardingInfo,v:Ref<InternOfferOffboardingInfo>)
+	export function unRefInternOfferOffboardingInfo(v:Ref<InternOfferOffboardingInfo>):InternOfferOffboardingInfo
+	export function emptyOfferStatusOfferReqBody():OfferStatusOfferReqBody
+	export function emptyRefOfferStatusOfferReqBody():Ref<OfferStatusOfferReqBody>
+	export function refOfOfferStatusOfferReqBody(x:OfferStatusOfferReqBody,v:Ref<OfferStatusOfferReqBody>)
+	export function unRefOfferStatusOfferReqBody(v:Ref<OfferStatusOfferReqBody>):OfferStatusOfferReqBody
+	export function emptySearchReferralReq():SearchReferralReq
+	export function emptyRefSearchReferralReq():Ref<SearchReferralReq>
+	export function refOfSearchReferralReq(x:SearchReferralReq,v:Ref<SearchReferralReq>)
+	export function unRefSearchReferralReq(v:Ref<SearchReferralReq>):SearchReferralReq
+	export function emptyBackgroundCheckItemInfo():BackgroundCheckItemInfo
+	export function emptyRefBackgroundCheckItemInfo():Ref<BackgroundCheckItemInfo>
+	export function refOfBackgroundCheckItemInfo(x:BackgroundCheckItemInfo,v:Ref<BackgroundCheckItemInfo>)
+	export function unRefBackgroundCheckItemInfo(v:Ref<BackgroundCheckItemInfo>):BackgroundCheckItemInfo
+	export function emptyListEvaluationRespData():ListEvaluationRespData
+	export function emptyRefListEvaluationRespData():Ref<ListEvaluationRespData>
+	export function refOfListEvaluationRespData(x:ListEvaluationRespData,v:Ref<ListEvaluationRespData>)
+	export function unRefListEvaluationRespData(v:Ref<ListEvaluationRespData>):ListEvaluationRespData
+	export function emptyGetOfferApplicationFormResp():GetOfferApplicationFormResp
+	export function emptyRefGetOfferApplicationFormResp():Ref<GetOfferApplicationFormResp>
+	export function refOfGetOfferApplicationFormResp(x:GetOfferApplicationFormResp,v:Ref<GetOfferApplicationFormResp>)
+	export function unRefGetOfferApplicationFormResp(v:Ref<GetOfferApplicationFormResp>):GetOfferApplicationFormResp
+	export function emptyListInterviewRegistrationSchemaResp():ListInterviewRegistrationSchemaResp
+	export function emptyRefListInterviewRegistrationSchemaResp():Ref<ListInterviewRegistrationSchemaResp>
+	export function refOfListInterviewRegistrationSchemaResp(x:ListInterviewRegistrationSchemaResp,v:Ref<ListInterviewRegistrationSchemaResp>)
+	export function unRefListInterviewRegistrationSchemaResp(v:Ref<ListInterviewRegistrationSchemaResp>):ListInterviewRegistrationSchemaResp
+	export function emptyCombinedCreateTalentResp():CombinedCreateTalentResp
+	export function emptyRefCombinedCreateTalentResp():Ref<CombinedCreateTalentResp>
+	export function refOfCombinedCreateTalentResp(x:CombinedCreateTalentResp,v:Ref<CombinedCreateTalentResp>)
+	export function unRefCombinedCreateTalentResp(v:Ref<CombinedCreateTalentResp>):CombinedCreateTalentResp
+	export function emptySearchTalentPoolIterator():SearchTalentPoolIterator
+	export function emptyRefSearchTalentPoolIterator():Ref<SearchTalentPoolIterator>
+	export function refOfSearchTalentPoolIterator(x:SearchTalentPoolIterator,v:Ref<SearchTalentPoolIterator>)
+	export function unRefSearchTalentPoolIterator(v:Ref<SearchTalentPoolIterator>):SearchTalentPoolIterator
+	export function emptyCreateAttachmentResp():CreateAttachmentResp
+	export function emptyRefCreateAttachmentResp():Ref<CreateAttachmentResp>
+	export function refOfCreateAttachmentResp(x:CreateAttachmentResp,v:Ref<CreateAttachmentResp>)
+	export function unRefCreateAttachmentResp(v:Ref<CreateAttachmentResp>):CreateAttachmentResp
+	export function emptySiteResumeInternship():SiteResumeInternship
+	export function emptyRefSiteResumeInternship():Ref<SiteResumeInternship>
+	export function refOfSiteResumeInternship(x:SiteResumeInternship,v:Ref<SiteResumeInternship>)
+	export function unRefSiteResumeInternship(v:Ref<SiteResumeInternship>):SiteResumeInternship
+	export function emptyListTalentReq():ListTalentReq
+	export function emptyRefListTalentReq():Ref<ListTalentReq>
+	export function refOfListTalentReq(x:ListTalentReq,v:Ref<ListTalentReq>)
+	export function unRefListTalentReq(v:Ref<ListTalentReq>):ListTalentReq
+	export function emptyLoginInfoEcoExamResp():LoginInfoEcoExamResp
+	export function emptyRefLoginInfoEcoExamResp():Ref<LoginInfoEcoExamResp>
+	export function refOfLoginInfoEcoExamResp(x:LoginInfoEcoExamResp,v:Ref<LoginInfoEcoExamResp>)
+	export function unRefLoginInfoEcoExamResp(v:Ref<LoginInfoEcoExamResp>):LoginInfoEcoExamResp
+	export function emptyListJobFunctionRespData():ListJobFunctionRespData
+	export function emptyRefListJobFunctionRespData():Ref<ListJobFunctionRespData>
+	export function refOfListJobFunctionRespData(x:ListJobFunctionRespData,v:Ref<ListJobFunctionRespData>)
+	export function unRefListJobFunctionRespData(v:Ref<ListJobFunctionRespData>):ListJobFunctionRespData
+	export function emptyListReferralWebsiteJobPostIterator():ListReferralWebsiteJobPostIterator
+	export function emptyRefListReferralWebsiteJobPostIterator():Ref<ListReferralWebsiteJobPostIterator>
+	export function refOfListReferralWebsiteJobPostIterator(x:ListReferralWebsiteJobPostIterator,v:Ref<ListReferralWebsiteJobPostIterator>)
+	export function unRefListReferralWebsiteJobPostIterator(v:Ref<ListReferralWebsiteJobPostIterator>):ListReferralWebsiteJobPostIterator
+	export function emptyCommonSchemaSetting():CommonSchemaSetting
+	export function emptyRefCommonSchemaSetting():Ref<CommonSchemaSetting>
+	export function refOfCommonSchemaSetting(x:CommonSchemaSetting,v:Ref<CommonSchemaSetting>)
+	export function unRefCommonSchemaSetting(v:Ref<CommonSchemaSetting>):CommonSchemaSetting
+	export function emptyCreateExternalReferralRewardResp():CreateExternalReferralRewardResp
+	export function emptyRefCreateExternalReferralRewardResp():Ref<CreateExternalReferralRewardResp>
+	export function refOfCreateExternalReferralRewardResp(x:CreateExternalReferralRewardResp,v:Ref<CreateExternalReferralRewardResp>)
+	export function unRefCreateExternalReferralRewardResp(v:Ref<CreateExternalReferralRewardResp>):CreateExternalReferralRewardResp
+	export function emptyInterviewDimensionScore():InterviewDimensionScore
+	export function emptyRefInterviewDimensionScore():Ref<InterviewDimensionScore>
+	export function refOfInterviewDimensionScore(x:InterviewDimensionScore,v:Ref<InterviewDimensionScore>)
+	export function unRefInterviewDimensionScore(v:Ref<InterviewDimensionScore>):InterviewDimensionScore
+	export function emptyLocationCity():LocationCity
+	export function emptyRefLocationCity():Ref<LocationCity>
+	export function refOfLocationCity(x:LocationCity,v:Ref<LocationCity>)
+	export function unRefLocationCity(v:Ref<LocationCity>):LocationCity
+	export function emptyPreviewAttachmentReq():PreviewAttachmentReq
+	export function emptyRefPreviewAttachmentReq():Ref<PreviewAttachmentReq>
+	export function refOfPreviewAttachmentReq(x:PreviewAttachmentReq,v:Ref<PreviewAttachmentReq>)
+	export function unRefPreviewAttachmentReq(v:Ref<PreviewAttachmentReq>):PreviewAttachmentReq
+	export function emptyUpdateResultEcoExamReq():UpdateResultEcoExamReq
+	export function emptyRefUpdateResultEcoExamReq():Ref<UpdateResultEcoExamReq>
+	export function refOfUpdateResultEcoExamReq(x:UpdateResultEcoExamReq,v:Ref<UpdateResultEcoExamReq>)
+	export function unRefUpdateResultEcoExamReq(v:Ref<UpdateResultEcoExamReq>):UpdateResultEcoExamReq
+	export function emptyCreateExternalInterviewAssessmentReq():CreateExternalInterviewAssessmentReq
+	export function emptyRefCreateExternalInterviewAssessmentReq():Ref<CreateExternalInterviewAssessmentReq>
+	export function refOfCreateExternalInterviewAssessmentReq(x:CreateExternalInterviewAssessmentReq,v:Ref<CreateExternalInterviewAssessmentReq>)
+	export function unRefCreateExternalInterviewAssessmentReq(v:Ref<CreateExternalInterviewAssessmentReq>):CreateExternalInterviewAssessmentReq
+	export function emptyDeactivateReferralAccountRespData():DeactivateReferralAccountRespData
+	export function emptyRefDeactivateReferralAccountRespData():Ref<DeactivateReferralAccountRespData>
+	export function refOfDeactivateReferralAccountRespData(x:DeactivateReferralAccountRespData,v:Ref<DeactivateReferralAccountRespData>)
+	export function unRefDeactivateReferralAccountRespData(v:Ref<DeactivateReferralAccountRespData>):DeactivateReferralAccountRespData
+	export function emptyEcoExamPaperData():EcoExamPaperData
+	export function emptyRefEcoExamPaperData():Ref<EcoExamPaperData>
+	export function refOfEcoExamPaperData(x:EcoExamPaperData,v:Ref<EcoExamPaperData>)
+	export function unRefEcoExamPaperData(v:Ref<EcoExamPaperData>):EcoExamPaperData
+	export function emptyGetByTalentInterviewResp():GetByTalentInterviewResp
+	export function emptyRefGetByTalentInterviewResp():Ref<GetByTalentInterviewResp>
+	export function refOfGetByTalentInterviewResp(x:GetByTalentInterviewResp,v:Ref<GetByTalentInterviewResp>)
+	export function unRefGetByTalentInterviewResp(v:Ref<GetByTalentInterviewResp>):GetByTalentInterviewResp
+	export function emptyListInterviewRespData():ListInterviewRespData
+	export function emptyRefListInterviewRespData():Ref<ListInterviewRespData>
+	export function refOfListInterviewRespData(x:ListInterviewRespData,v:Ref<ListInterviewRespData>)
+	export function unRefListInterviewRespData(v:Ref<ListInterviewRespData>):ListInterviewRespData
+	export function emptyListTalentFolderReq():ListTalentFolderReq
+	export function emptyRefListTalentFolderReq():Ref<ListTalentFolderReq>
+	export function refOfListTalentFolderReq(x:ListTalentFolderReq,v:Ref<ListTalentFolderReq>)
+	export function unRefListTalentFolderReq(v:Ref<ListTalentFolderReq>):ListTalentFolderReq
+	export function emptyBatchUpdateJobManagerReq():BatchUpdateJobManagerReq
+	export function emptyRefBatchUpdateJobManagerReq():Ref<BatchUpdateJobManagerReq>
+	export function refOfBatchUpdateJobManagerReq(x:BatchUpdateJobManagerReq,v:Ref<BatchUpdateJobManagerReq>)
+	export function unRefBatchUpdateJobManagerReq(v:Ref<BatchUpdateJobManagerReq>):BatchUpdateJobManagerReq
+	export function emptyEcoExamPaper():EcoExamPaper
+	export function emptyRefEcoExamPaper():Ref<EcoExamPaper>
+	export function refOfEcoExamPaper(x:EcoExamPaper,v:Ref<EcoExamPaper>)
+	export function unRefEcoExamPaper(v:Ref<EcoExamPaper>):EcoExamPaper
+	export function emptyListJobProcessResp():ListJobProcessResp
+	export function emptyRefListJobProcessResp():Ref<ListJobProcessResp>
+	export function refOfListJobProcessResp(x:ListJobProcessResp,v:Ref<ListJobProcessResp>)
+	export function unRefListJobProcessResp(v:Ref<ListJobProcessResp>):ListJobProcessResp
+	export function emptyCreateExternalReferralRewardRespData():CreateExternalReferralRewardRespData
+	export function emptyRefCreateExternalReferralRewardRespData():Ref<CreateExternalReferralRewardRespData>
+	export function refOfCreateExternalReferralRewardRespData(x:CreateExternalReferralRewardRespData,v:Ref<CreateExternalReferralRewardRespData>)
+	export function unRefCreateExternalReferralRewardRespData(v:Ref<CreateExternalReferralRewardRespData>):CreateExternalReferralRewardRespData
+	export function emptyInterviewRecord():InterviewRecord
+	export function emptyRefInterviewRecord():Ref<InterviewRecord>
+	export function refOfInterviewRecord(x:InterviewRecord,v:Ref<InterviewRecord>)
+	export function unRefInterviewRecord(v:Ref<InterviewRecord>):InterviewRecord
+	export function emptyRegistrationSchema():RegistrationSchema
+	export function emptyRefRegistrationSchema():Ref<RegistrationSchema>
+	export function refOfRegistrationSchema(x:RegistrationSchema,v:Ref<RegistrationSchema>)
+	export function unRefRegistrationSchema(v:Ref<RegistrationSchema>):RegistrationSchema
+	export function emptyCareerInfo():CareerInfo
+	export function emptyRefCareerInfo():Ref<CareerInfo>
+	export function refOfCareerInfo(x:CareerInfo,v:Ref<CareerInfo>)
+	export function unRefCareerInfo(v:Ref<CareerInfo>):CareerInfo
+	export function emptyCombinedUpdateJobResp():CombinedUpdateJobResp
+	export function emptyRefCombinedUpdateJobResp():Ref<CombinedUpdateJobResp>
+	export function refOfCombinedUpdateJobResp(x:CombinedUpdateJobResp,v:Ref<CombinedUpdateJobResp>)
+	export function unRefCombinedUpdateJobResp(v:Ref<CombinedUpdateJobResp>):CombinedUpdateJobResp
+	export function emptyListWebsiteJobPostReq():ListWebsiteJobPostReq
+	export function emptyRefListWebsiteJobPostReq():Ref<ListWebsiteJobPostReq>
+	export function refOfListWebsiteJobPostReq(x:ListWebsiteJobPostReq,v:Ref<ListWebsiteJobPostReq>)
+	export function unRefListWebsiteJobPostReq(v:Ref<ListWebsiteJobPostReq>):ListWebsiteJobPostReq
+	export function emptyP2EcoBackgroundCheckCanceledV1Data():P2EcoBackgroundCheckCanceledV1Data
+	export function emptyRefP2EcoBackgroundCheckCanceledV1Data():Ref<P2EcoBackgroundCheckCanceledV1Data>
+	export function refOfP2EcoBackgroundCheckCanceledV1Data(x:P2EcoBackgroundCheckCanceledV1Data,v:Ref<P2EcoBackgroundCheckCanceledV1Data>)
+	export function unRefP2EcoBackgroundCheckCanceledV1Data(v:Ref<P2EcoBackgroundCheckCanceledV1Data>):P2EcoBackgroundCheckCanceledV1Data
+	export function emptyBatchUpdateJobManagerRespData():BatchUpdateJobManagerRespData
+	export function emptyRefBatchUpdateJobManagerRespData():Ref<BatchUpdateJobManagerRespData>
+	export function refOfBatchUpdateJobManagerRespData(x:BatchUpdateJobManagerRespData,v:Ref<BatchUpdateJobManagerRespData>)
+	export function unRefBatchUpdateJobManagerRespData(v:Ref<BatchUpdateJobManagerRespData>):BatchUpdateJobManagerRespData
+	export function emptyCombinedCreateJobReq():CombinedCreateJobReq
+	export function emptyRefCombinedCreateJobReq():Ref<CombinedCreateJobReq>
+	export function refOfCombinedCreateJobReq(x:CombinedCreateJobReq,v:Ref<CombinedCreateJobReq>)
+	export function unRefCombinedCreateJobReq(v:Ref<CombinedCreateJobReq>):CombinedCreateJobReq
+	export function emptyP2EcoBackgroundCheckCanceledV1():P2EcoBackgroundCheckCanceledV1
+	export function emptyRefP2EcoBackgroundCheckCanceledV1():Ref<P2EcoBackgroundCheckCanceledV1>
+	export function refOfP2EcoBackgroundCheckCanceledV1(x:P2EcoBackgroundCheckCanceledV1,v:Ref<P2EcoBackgroundCheckCanceledV1>)
+	export function unRefP2EcoBackgroundCheckCanceledV1(v:Ref<P2EcoBackgroundCheckCanceledV1>):P2EcoBackgroundCheckCanceledV1
+	export function emptySiteResumeProject():SiteResumeProject
+	export function emptyRefSiteResumeProject():Ref<SiteResumeProject>
+	export function refOfSiteResumeProject(x:SiteResumeProject,v:Ref<SiteResumeProject>)
+	export function unRefSiteResumeProject(v:Ref<SiteResumeProject>):SiteResumeProject
+	export function emptyBatchDeleteEcoAccountCustomFieldResp():BatchDeleteEcoAccountCustomFieldResp
+	export function emptyRefBatchDeleteEcoAccountCustomFieldResp():Ref<BatchDeleteEcoAccountCustomFieldResp>
+	export function refOfBatchDeleteEcoAccountCustomFieldResp(x:BatchDeleteEcoAccountCustomFieldResp,v:Ref<BatchDeleteEcoAccountCustomFieldResp>)
+	export function unRefBatchDeleteEcoAccountCustomFieldResp(v:Ref<BatchDeleteEcoAccountCustomFieldResp>):BatchDeleteEcoAccountCustomFieldResp
+	export function emptyListRegistrationSchemaReq():ListRegistrationSchemaReq
+	export function emptyRefListRegistrationSchemaReq():Ref<ListRegistrationSchemaReq>
+	export function refOfListRegistrationSchemaReq(x:ListRegistrationSchemaReq,v:Ref<ListRegistrationSchemaReq>)
+	export function unRefListRegistrationSchemaReq(v:Ref<ListRegistrationSchemaReq>):ListRegistrationSchemaReq
+	export function emptyListTodoResp():ListTodoResp
+	export function emptyRefListTodoResp():Ref<ListTodoResp>
+	export function refOfListTodoResp(x:ListTodoResp,v:Ref<ListTodoResp>)
+	export function unRefListTodoResp(v:Ref<ListTodoResp>):ListTodoResp
+	export function emptyEcoExamResult():EcoExamResult
+	export function emptyRefEcoExamResult():Ref<EcoExamResult>
+	export function refOfEcoExamResult(x:EcoExamResult,v:Ref<EcoExamResult>)
+	export function unRefEcoExamResult(v:Ref<EcoExamResult>):EcoExamResult
+	export function emptyListTalentFolderResp():ListTalentFolderResp
+	export function emptyRefListTalentFolderResp():Ref<ListTalentFolderResp>
+	export function refOfListTalentFolderResp(x:ListTalentFolderResp,v:Ref<ListTalentFolderResp>)
+	export function unRefListTalentFolderResp(v:Ref<ListTalentFolderResp>):ListTalentFolderResp
+	export function emptyP2EhrImportTaskImportedV1Data():P2EhrImportTaskImportedV1Data
+	export function emptyRefP2EhrImportTaskImportedV1Data():Ref<P2EhrImportTaskImportedV1Data>
+	export function refOfP2EhrImportTaskImportedV1Data(x:P2EhrImportTaskImportedV1Data,v:Ref<P2EhrImportTaskImportedV1Data>)
+	export function unRefP2EhrImportTaskImportedV1Data(v:Ref<P2EhrImportTaskImportedV1Data>):P2EhrImportTaskImportedV1Data
+	export function emptyTalentCustomizedDataObjectValueChild():TalentCustomizedDataObjectValueChild
+	export function emptyRefTalentCustomizedDataObjectValueChild():Ref<TalentCustomizedDataObjectValueChild>
+	export function refOfTalentCustomizedDataObjectValueChild(x:TalentCustomizedDataObjectValueChild,v:Ref<TalentCustomizedDataObjectValueChild>)
+	export function unRefTalentCustomizedDataObjectValueChild(v:Ref<TalentCustomizedDataObjectValueChild>):TalentCustomizedDataObjectValueChild
+	export function emptyOfferSchemaName():OfferSchemaName
+	export function emptyRefOfferSchemaName():Ref<OfferSchemaName>
+	export function refOfOfferSchemaName(x:OfferSchemaName,v:Ref<OfferSchemaName>)
+	export function unRefOfferSchemaName(v:Ref<OfferSchemaName>):OfferSchemaName
+	export function emptyListQuestionnaireReq():ListQuestionnaireReq
+	export function emptyRefListQuestionnaireReq():Ref<ListQuestionnaireReq>
+	export function refOfListQuestionnaireReq(x:ListQuestionnaireReq,v:Ref<ListQuestionnaireReq>)
+	export function unRefListQuestionnaireReq(v:Ref<ListQuestionnaireReq>):ListQuestionnaireReq
+	export function emptyPatchNoteResp():PatchNoteResp
+	export function emptyRefPatchNoteResp():Ref<PatchNoteResp>
+	export function refOfPatchNoteResp(x:PatchNoteResp,v:Ref<PatchNoteResp>)
+	export function unRefPatchNoteResp(v:Ref<PatchNoteResp>):PatchNoteResp
+	export function emptyUpdateProgressEcoBackgroundCheckResp():UpdateProgressEcoBackgroundCheckResp
+	export function emptyRefUpdateProgressEcoBackgroundCheckResp():Ref<UpdateProgressEcoBackgroundCheckResp>
+	export function refOfUpdateProgressEcoBackgroundCheckResp(x:UpdateProgressEcoBackgroundCheckResp,v:Ref<UpdateProgressEcoBackgroundCheckResp>)
+	export function unRefUpdateProgressEcoBackgroundCheckResp(v:Ref<UpdateProgressEcoBackgroundCheckResp>):UpdateProgressEcoBackgroundCheckResp
+	export function emptyInterviewAssessmentTemplate():InterviewAssessmentTemplate
+	export function emptyRefInterviewAssessmentTemplate():Ref<InterviewAssessmentTemplate>
+	export function refOfInterviewAssessmentTemplate(x:InterviewAssessmentTemplate,v:Ref<InterviewAssessmentTemplate>)
+	export function unRefInterviewAssessmentTemplate(v:Ref<InterviewAssessmentTemplate>):InterviewAssessmentTemplate
+	export function emptyListExamMarkingTaskReq():ListExamMarkingTaskReq
+	export function emptyRefListExamMarkingTaskReq():Ref<ListExamMarkingTaskReq>
+	export function refOfListExamMarkingTaskReq(x:ListExamMarkingTaskReq,v:Ref<ListExamMarkingTaskReq>)
+	export function unRefListExamMarkingTaskReq(v:Ref<ListExamMarkingTaskReq>):ListExamMarkingTaskReq
+	export function emptyInterviewAssessmentDimensionArgs():InterviewAssessmentDimensionArgs
+	export function emptyRefInterviewAssessmentDimensionArgs():Ref<InterviewAssessmentDimensionArgs>
+	export function refOfInterviewAssessmentDimensionArgs(x:InterviewAssessmentDimensionArgs,v:Ref<InterviewAssessmentDimensionArgs>)
+	export function unRefInterviewAssessmentDimensionArgs(v:Ref<InterviewAssessmentDimensionArgs>):InterviewAssessmentDimensionArgs
+	export function emptyInterviewExtend():InterviewExtend
+	export function emptyRefInterviewExtend():Ref<InterviewExtend>
+	export function refOfInterviewExtend(x:InterviewExtend,v:Ref<InterviewExtend>)
+	export function unRefInterviewExtend(v:Ref<InterviewExtend>):InterviewExtend
+	export function emptyI18n():I18n
+	export function emptyRefI18n():Ref<I18n>
+	export function refOfI18n(x:I18n,v:Ref<I18n>)
+	export function unRefI18n(v:Ref<I18n>):I18n
+	export function emptyP2OfferStatusChangedV1():P2OfferStatusChangedV1
+	export function emptyRefP2OfferStatusChangedV1():Ref<P2OfferStatusChangedV1>
+	export function refOfP2OfferStatusChangedV1(x:P2OfferStatusChangedV1,v:Ref<P2OfferStatusChangedV1>)
+	export function unRefP2OfferStatusChangedV1(v:Ref<P2OfferStatusChangedV1>):P2OfferStatusChangedV1
+	export function emptyBaseDistrict():BaseDistrict
+	export function emptyRefBaseDistrict():Ref<BaseDistrict>
+	export function refOfBaseDistrict(x:BaseDistrict,v:Ref<BaseDistrict>)
+	export function unRefBaseDistrict(v:Ref<BaseDistrict>):BaseDistrict
+	export function emptyUpdateTalentExternalInfoReq():UpdateTalentExternalInfoReq
+	export function emptyRefUpdateTalentExternalInfoReq():Ref<UpdateTalentExternalInfoReq>
+	export function refOfUpdateTalentExternalInfoReq(x:UpdateTalentExternalInfoReq,v:Ref<UpdateTalentExternalInfoReq>)
+	export function unRefUpdateTalentExternalInfoReq(v:Ref<UpdateTalentExternalInfoReq>):UpdateTalentExternalInfoReq
+	export function emptyUpdateResultEcoBackgroundCheckReqBody():UpdateResultEcoBackgroundCheckReqBody
+	export function emptyRefUpdateResultEcoBackgroundCheckReqBody():Ref<UpdateResultEcoBackgroundCheckReqBody>
+	export function refOfUpdateResultEcoBackgroundCheckReqBody(x:UpdateResultEcoBackgroundCheckReqBody,v:Ref<UpdateResultEcoBackgroundCheckReqBody>)
+	export function unRefUpdateResultEcoBackgroundCheckReqBody(v:Ref<UpdateResultEcoBackgroundCheckReqBody>):UpdateResultEcoBackgroundCheckReqBody
+	export function emptyListNoteResp():ListNoteResp
+	export function emptyRefListNoteResp():Ref<ListNoteResp>
+	export function refOfListNoteResp(x:ListNoteResp,v:Ref<ListNoteResp>)
+	export function unRefListNoteResp(v:Ref<ListNoteResp>):ListNoteResp
+	export function emptyJobRequirementCustomizedValue():JobRequirementCustomizedValue
+	export function emptyRefJobRequirementCustomizedValue():Ref<JobRequirementCustomizedValue>
+	export function refOfJobRequirementCustomizedValue(x:JobRequirementCustomizedValue,v:Ref<JobRequirementCustomizedValue>)
+	export function unRefJobRequirementCustomizedValue(v:Ref<JobRequirementCustomizedValue>):JobRequirementCustomizedValue
+	export function emptyWebsiteDeliveryIdentification():WebsiteDeliveryIdentification
+	export function emptyRefWebsiteDeliveryIdentification():Ref<WebsiteDeliveryIdentification>
+	export function refOfWebsiteDeliveryIdentification(x:WebsiteDeliveryIdentification,v:Ref<WebsiteDeliveryIdentification>)
+	export function unRefWebsiteDeliveryIdentification(v:Ref<WebsiteDeliveryIdentification>):WebsiteDeliveryIdentification
+	export function emptyUpdateConfigJobResp():UpdateConfigJobResp
+	export function emptyRefUpdateConfigJobResp():Ref<UpdateConfigJobResp>
+	export function refOfUpdateConfigJobResp(x:UpdateConfigJobResp,v:Ref<UpdateConfigJobResp>)
+	export function unRefUpdateConfigJobResp(v:Ref<UpdateConfigJobResp>):UpdateConfigJobResp
+	export function emptyCreateTripartiteAgreementRespData():CreateTripartiteAgreementRespData
+	export function emptyRefCreateTripartiteAgreementRespData():Ref<CreateTripartiteAgreementRespData>
+	export function refOfCreateTripartiteAgreementRespData(x:CreateTripartiteAgreementRespData,v:Ref<CreateTripartiteAgreementRespData>)
+	export function unRefCreateTripartiteAgreementRespData(v:Ref<CreateTripartiteAgreementRespData>):CreateTripartiteAgreementRespData
+	export function emptyListOfferApplicationFormReq():ListOfferApplicationFormReq
+	export function emptyRefListOfferApplicationFormReq():Ref<ListOfferApplicationFormReq>
+	export function refOfListOfferApplicationFormReq(x:ListOfferApplicationFormReq,v:Ref<ListOfferApplicationFormReq>)
+	export function unRefListOfferApplicationFormReq(v:Ref<ListOfferApplicationFormReq>):ListOfferApplicationFormReq
+	export function emptySearchTalentOperationLogReq():SearchTalentOperationLogReq
+	export function emptyRefSearchTalentOperationLogReq():Ref<SearchTalentOperationLogReq>
+	export function refOfSearchTalentOperationLogReq(x:SearchTalentOperationLogReq,v:Ref<SearchTalentOperationLogReq>)
+	export function unRefSearchTalentOperationLogReq(v:Ref<SearchTalentOperationLogReq>):SearchTalentOperationLogReq
+	export function emptyAgencyProtection():AgencyProtection
+	export function emptyRefAgencyProtection():Ref<AgencyProtection>
+	export function refOfAgencyProtection(x:AgencyProtection,v:Ref<AgencyProtection>)
+	export function unRefAgencyProtection(v:Ref<AgencyProtection>):AgencyProtection
+	export function emptyCreateByResumeWebsiteDeliveryResp():CreateByResumeWebsiteDeliveryResp
+	export function emptyRefCreateByResumeWebsiteDeliveryResp():Ref<CreateByResumeWebsiteDeliveryResp>
+	export function refOfCreateByResumeWebsiteDeliveryResp(x:CreateByResumeWebsiteDeliveryResp,v:Ref<CreateByResumeWebsiteDeliveryResp>)
+	export function unRefCreateByResumeWebsiteDeliveryResp(v:Ref<CreateByResumeWebsiteDeliveryResp>):CreateByResumeWebsiteDeliveryResp
+	export function emptyRoleDetail():RoleDetail
+	export function emptyRefRoleDetail():Ref<RoleDetail>
+	export function refOfRoleDetail(x:RoleDetail,v:Ref<RoleDetail>)
+	export function unRefRoleDetail(v:Ref<RoleDetail>):RoleDetail
+	export function emptyInterviewFeedbackForm():InterviewFeedbackForm
+	export function emptyRefInterviewFeedbackForm():Ref<InterviewFeedbackForm>
+	export function refOfInterviewFeedbackForm(x:InterviewFeedbackForm,v:Ref<InterviewFeedbackForm>)
+	export function unRefInterviewFeedbackForm(v:Ref<InterviewFeedbackForm>):InterviewFeedbackForm
+	export function emptyBaseAddress():BaseAddress
+	export function emptyRefBaseAddress():Ref<BaseAddress>
+	export function refOfBaseAddress(x:BaseAddress,v:Ref<BaseAddress>)
+	export function unRefBaseAddress(v:Ref<BaseAddress>):BaseAddress
+	export function emptyCreateExamRespData():CreateExamRespData
+	export function emptyRefCreateExamRespData():Ref<CreateExamRespData>
+	export function refOfCreateExamRespData(x:CreateExamRespData,v:Ref<CreateExamRespData>)
+	export function unRefCreateExamRespData(v:Ref<CreateExamRespData>):CreateExamRespData
+	export function emptyDeactivateReferralAccountReq():DeactivateReferralAccountReq
+	export function emptyRefDeactivateReferralAccountReq():Ref<DeactivateReferralAccountReq>
+	export function refOfDeactivateReferralAccountReq(x:DeactivateReferralAccountReq,v:Ref<DeactivateReferralAccountReq>)
+	export function unRefDeactivateReferralAccountReq(v:Ref<DeactivateReferralAccountReq>):DeactivateReferralAccountReq
+	export function emptyTodoCommon():TodoCommon
+	export function emptyRefTodoCommon():Ref<TodoCommon>
+	export function refOfTodoCommon(x:TodoCommon,v:Ref<TodoCommon>)
+	export function unRefTodoCommon(v:Ref<TodoCommon>):TodoCommon
+	export function emptySalary():Salary
+	export function emptyRefSalary():Ref<Salary>
+	export function refOfSalary(x:Salary,v:Ref<Salary>)
+	export function unRefSalary(v:Ref<Salary>):Salary
+	export function emptyApplicationOfferCustomModule():ApplicationOfferCustomModule
+	export function emptyRefApplicationOfferCustomModule():Ref<ApplicationOfferCustomModule>
+	export function refOfApplicationOfferCustomModule(x:ApplicationOfferCustomModule,v:Ref<ApplicationOfferCustomModule>)
+	export function unRefApplicationOfferCustomModule(v:Ref<ApplicationOfferCustomModule>):ApplicationOfferCustomModule
+	export function emptyProtectAgencyReqBody():ProtectAgencyReqBody
+	export function emptyRefProtectAgencyReqBody():Ref<ProtectAgencyReqBody>
+	export function refOfProtectAgencyReqBody(x:ProtectAgencyReqBody,v:Ref<ProtectAgencyReqBody>)
+	export function unRefProtectAgencyReqBody(v:Ref<ProtectAgencyReqBody>):ProtectAgencyReqBody
+	export function emptySearchTestReqBody():SearchTestReqBody
+	export function emptyRefSearchTestReqBody():Ref<SearchTestReqBody>
+	export function refOfSearchTestReqBody(x:SearchTestReqBody,v:Ref<SearchTestReqBody>)
+	export function unRefSearchTestReqBody(v:Ref<SearchTestReqBody>):SearchTestReqBody
+	export function emptyBasicInfo():BasicInfo
+	export function emptyRefBasicInfo():Ref<BasicInfo>
+	export function refOfBasicInfo(x:BasicInfo,v:Ref<BasicInfo>)
+	export function unRefBasicInfo(v:Ref<BasicInfo>):BasicInfo
+	export function emptyListLocationIterator():ListLocationIterator
+	export function emptyRefListLocationIterator():Ref<ListLocationIterator>
+	export function refOfListLocationIterator(x:ListLocationIterator,v:Ref<ListLocationIterator>)
+	export function unRefListLocationIterator(v:Ref<ListLocationIterator>):ListLocationIterator
+	export function emptyTransferStageApplicationReq():TransferStageApplicationReq
+	export function emptyRefTransferStageApplicationReq():Ref<TransferStageApplicationReq>
+	export function refOfTransferStageApplicationReq(x:TransferStageApplicationReq,v:Ref<TransferStageApplicationReq>)
+	export function unRefTransferStageApplicationReq(v:Ref<TransferStageApplicationReq>):TransferStageApplicationReq
+	export function emptyTalentCombinedEducationInfo():TalentCombinedEducationInfo
+	export function emptyRefTalentCombinedEducationInfo():Ref<TalentCombinedEducationInfo>
+	export function refOfTalentCombinedEducationInfo(x:TalentCombinedEducationInfo,v:Ref<TalentCombinedEducationInfo>)
+	export function unRefTalentCombinedEducationInfo(v:Ref<TalentCombinedEducationInfo>):TalentCombinedEducationInfo
+	export function emptyEcoBackgroundCheckReportFile():EcoBackgroundCheckReportFile
+	export function emptyRefEcoBackgroundCheckReportFile():Ref<EcoBackgroundCheckReportFile>
+	export function refOfEcoBackgroundCheckReportFile(x:EcoBackgroundCheckReportFile,v:Ref<EcoBackgroundCheckReportFile>)
+	export function unRefEcoBackgroundCheckReportFile(v:Ref<EcoBackgroundCheckReportFile>):EcoBackgroundCheckReportFile
+	export function emptyAssets():Assets
+	export function emptyRefAssets():Ref<Assets>
+	export function refOfAssets(x:Assets,v:Ref<Assets>)
+	export function unRefAssets(v:Ref<Assets>):Assets
+	export function emptyCombinedUpdateTalentResp():CombinedUpdateTalentResp
+	export function emptyRefCombinedUpdateTalentResp():Ref<CombinedUpdateTalentResp>
+	export function refOfCombinedUpdateTalentResp(x:CombinedUpdateTalentResp,v:Ref<CombinedUpdateTalentResp>)
+	export function unRefCombinedUpdateTalentResp(v:Ref<CombinedUpdateTalentResp>):CombinedUpdateTalentResp
+	export function emptyListApplicationInterviewResp():ListApplicationInterviewResp
+	export function emptyRefListApplicationInterviewResp():Ref<ListApplicationInterviewResp>
+	export function refOfListApplicationInterviewResp(x:ListApplicationInterviewResp,v:Ref<ListApplicationInterviewResp>)
+	export function unRefListApplicationInterviewResp(v:Ref<ListApplicationInterviewResp>):ListApplicationInterviewResp
+	export function emptyTransferOnboardApplicationResp():TransferOnboardApplicationResp
+	export function emptyRefTransferOnboardApplicationResp():Ref<TransferOnboardApplicationResp>
+	export function refOfTransferOnboardApplicationResp(x:TransferOnboardApplicationResp,v:Ref<TransferOnboardApplicationResp>)
+	export function unRefTransferOnboardApplicationResp(v:Ref<TransferOnboardApplicationResp>):TransferOnboardApplicationResp
+	export function emptyListEvaluationTaskReq():ListEvaluationTaskReq
+	export function emptyRefListEvaluationTaskReq():Ref<ListEvaluationTaskReq>
+	export function refOfListEvaluationTaskReq(x:ListEvaluationTaskReq,v:Ref<ListEvaluationTaskReq>)
+	export function unRefListEvaluationTaskReq(v:Ref<ListEvaluationTaskReq>):ListEvaluationTaskReq
+	export function emptyCombinedJobResultDefaultJobPost():CombinedJobResultDefaultJobPost
+	export function emptyRefCombinedJobResultDefaultJobPost():Ref<CombinedJobResultDefaultJobPost>
+	export function refOfCombinedJobResultDefaultJobPost(x:CombinedJobResultDefaultJobPost,v:Ref<CombinedJobResultDefaultJobPost>)
+	export function unRefCombinedJobResultDefaultJobPost(v:Ref<CombinedJobResultDefaultJobPost>):CombinedJobResultDefaultJobPost
+	export function emptyJobCustomizedOption():JobCustomizedOption
+	export function emptyRefJobCustomizedOption():Ref<JobCustomizedOption>
+	export function refOfJobCustomizedOption(x:JobCustomizedOption,v:Ref<JobCustomizedOption>)
+	export function unRefJobCustomizedOption(v:Ref<JobCustomizedOption>):JobCustomizedOption
+	export function emptyOfferFile():OfferFile
+	export function emptyRefOfferFile():Ref<OfferFile>
+	export function refOfOfferFile(x:OfferFile,v:Ref<OfferFile>)
+	export function unRefOfferFile(v:Ref<OfferFile>):OfferFile
+	export function emptySearchTalentOperationLogReqBody():SearchTalentOperationLogReqBody
+	export function emptyRefSearchTalentOperationLogReqBody():Ref<SearchTalentOperationLogReqBody>
+	export function refOfSearchTalentOperationLogReqBody(x:SearchTalentOperationLogReqBody,v:Ref<SearchTalentOperationLogReqBody>)
+	export function unRefSearchTalentOperationLogReqBody(v:Ref<SearchTalentOperationLogReqBody>):SearchTalentOperationLogReqBody
+	export function emptyListApplicationInterviewRespData():ListApplicationInterviewRespData
+	export function emptyRefListApplicationInterviewRespData():Ref<ListApplicationInterviewRespData>
+	export function refOfListApplicationInterviewRespData(x:ListApplicationInterviewRespData,v:Ref<ListApplicationInterviewRespData>)
+	export function unRefListApplicationInterviewRespData(v:Ref<ListApplicationInterviewRespData>):ListApplicationInterviewRespData
+	export function emptyBackgroundCheckFeedbackInfo():BackgroundCheckFeedbackInfo
+	export function emptyRefBackgroundCheckFeedbackInfo():Ref<BackgroundCheckFeedbackInfo>
+	export function refOfBackgroundCheckFeedbackInfo(x:BackgroundCheckFeedbackInfo,v:Ref<BackgroundCheckFeedbackInfo>)
+	export function unRefBackgroundCheckFeedbackInfo(v:Ref<BackgroundCheckFeedbackInfo>):BackgroundCheckFeedbackInfo
+	export function emptyDataPermission():DataPermission
+	export function emptyRefDataPermission():Ref<DataPermission>
+	export function refOfDataPermission(x:DataPermission,v:Ref<DataPermission>)
+	export function unRefDataPermission(v:Ref<DataPermission>):DataPermission
+	export function emptyExternalInterviewAssessment():ExternalInterviewAssessment
+	export function emptyRefExternalInterviewAssessment():Ref<ExternalInterviewAssessment>
+	export function refOfExternalInterviewAssessment(x:ExternalInterviewAssessment,v:Ref<ExternalInterviewAssessment>)
+	export function unRefExternalInterviewAssessment(v:Ref<ExternalInterviewAssessment>):ExternalInterviewAssessment
+	export function emptyCreateExternalApplicationResp():CreateExternalApplicationResp
+	export function emptyRefCreateExternalApplicationResp():Ref<CreateExternalApplicationResp>
+	export function refOfCreateExternalApplicationResp(x:CreateExternalApplicationResp,v:Ref<CreateExternalApplicationResp>)
+	export function unRefCreateExternalApplicationResp(v:Ref<CreateExternalApplicationResp>):CreateExternalApplicationResp
+	export function emptyCreateExternalBackgroundCheckResp():CreateExternalBackgroundCheckResp
+	export function emptyRefCreateExternalBackgroundCheckResp():Ref<CreateExternalBackgroundCheckResp>
+	export function refOfCreateExternalBackgroundCheckResp(x:CreateExternalBackgroundCheckResp,v:Ref<CreateExternalBackgroundCheckResp>)
+	export function unRefCreateExternalBackgroundCheckResp(v:Ref<CreateExternalBackgroundCheckResp>):CreateExternalBackgroundCheckResp
+	export function emptyEmployeeOverboardInfo():EmployeeOverboardInfo
+	export function emptyRefEmployeeOverboardInfo():Ref<EmployeeOverboardInfo>
+	export function refOfEmployeeOverboardInfo(x:EmployeeOverboardInfo,v:Ref<EmployeeOverboardInfo>)
+	export function unRefEmployeeOverboardInfo(v:Ref<EmployeeOverboardInfo>):EmployeeOverboardInfo
+	export function emptyGetByTalentInterviewRespData():GetByTalentInterviewRespData
+	export function emptyRefGetByTalentInterviewRespData():Ref<GetByTalentInterviewRespData>
+	export function refOfGetByTalentInterviewRespData(x:GetByTalentInterviewRespData,v:Ref<GetByTalentInterviewRespData>)
+	export function unRefGetByTalentInterviewRespData(v:Ref<GetByTalentInterviewRespData>):GetByTalentInterviewRespData
+	export function emptyAgency():Agency
+	export function emptyRefAgency():Ref<Agency>
+	export function refOfAgency(x:Agency,v:Ref<Agency>)
+	export function unRefAgency(v:Ref<Agency>):Agency
+	export function emptyGetTalentReq():GetTalentReq
+	export function emptyRefGetTalentReq():Ref<GetTalentReq>
+	export function refOfGetTalentReq(x:GetTalentReq,v:Ref<GetTalentReq>)
+	export function unRefGetTalentReq(v:Ref<GetTalentReq>):GetTalentReq
+	export function emptyListRoleRespData():ListRoleRespData
+	export function emptyRefListRoleRespData():Ref<ListRoleRespData>
+	export function refOfListRoleRespData(x:ListRoleRespData,v:Ref<ListRoleRespData>)
+	export function unRefListRoleRespData(v:Ref<ListRoleRespData>):ListRoleRespData
+	export function emptySiteResumeWork():SiteResumeWork
+	export function emptyRefSiteResumeWork():Ref<SiteResumeWork>
+	export function refOfSiteResumeWork(x:SiteResumeWork,v:Ref<SiteResumeWork>)
+	export function unRefSiteResumeWork(v:Ref<SiteResumeWork>):SiteResumeWork
+	export function emptyApplicationStageTime():ApplicationStageTime
+	export function emptyRefApplicationStageTime():Ref<ApplicationStageTime>
+	export function refOfApplicationStageTime(x:ApplicationStageTime,v:Ref<ApplicationStageTime>)
+	export function unRefApplicationStageTime(v:Ref<ApplicationStageTime>):ApplicationStageTime
+	export function emptyGetInterviewRecordAttachmentResp():GetInterviewRecordAttachmentResp
+	export function emptyRefGetInterviewRecordAttachmentResp():Ref<GetInterviewRecordAttachmentResp>
+	export function refOfGetInterviewRecordAttachmentResp(x:GetInterviewRecordAttachmentResp,v:Ref<GetInterviewRecordAttachmentResp>)
+	export function unRefGetInterviewRecordAttachmentResp(v:Ref<GetInterviewRecordAttachmentResp>):GetInterviewRecordAttachmentResp
+	export function emptyDegreeFilter():DegreeFilter
+	export function emptyRefDegreeFilter():Ref<DegreeFilter>
+	export function refOfDegreeFilter(x:DegreeFilter,v:Ref<DegreeFilter>)
+	export function unRefDegreeFilter(v:Ref<DegreeFilter>):DegreeFilter
+	export function emptyEvaluation():Evaluation
+	export function emptyRefEvaluation():Ref<Evaluation>
+	export function refOfEvaluation(x:Evaluation,v:Ref<Evaluation>)
+	export function unRefEvaluation(v:Ref<Evaluation>):Evaluation
+	export function emptyUpdateTripartiteAgreementResp():UpdateTripartiteAgreementResp
+	export function emptyRefUpdateTripartiteAgreementResp():Ref<UpdateTripartiteAgreementResp>
+	export function refOfUpdateTripartiteAgreementResp(x:UpdateTripartiteAgreementResp,v:Ref<UpdateTripartiteAgreementResp>)
+	export function unRefUpdateTripartiteAgreementResp(v:Ref<UpdateTripartiteAgreementResp>):UpdateTripartiteAgreementResp
+	export function emptyCreateExternalInterviewRespData():CreateExternalInterviewRespData
+	export function emptyRefCreateExternalInterviewRespData():Ref<CreateExternalInterviewRespData>
+	export function refOfCreateExternalInterviewRespData(x:CreateExternalInterviewRespData,v:Ref<CreateExternalInterviewRespData>)
+	export function unRefCreateExternalInterviewRespData(v:Ref<CreateExternalInterviewRespData>):CreateExternalInterviewRespData
+	export function emptyInterviewDimensionAssessment():InterviewDimensionAssessment
+	export function emptyRefInterviewDimensionAssessment():Ref<InterviewDimensionAssessment>
+	export function refOfInterviewDimensionAssessment(x:InterviewDimensionAssessment,v:Ref<InterviewDimensionAssessment>)
+	export function unRefInterviewDimensionAssessment(v:Ref<InterviewDimensionAssessment>):InterviewDimensionAssessment
+	export function emptyTalentAwardInfo():TalentAwardInfo
+	export function emptyRefTalentAwardInfo():Ref<TalentAwardInfo>
+	export function refOfTalentAwardInfo(x:TalentAwardInfo,v:Ref<TalentAwardInfo>)
+	export function unRefTalentAwardInfo(v:Ref<TalentAwardInfo>):TalentAwardInfo
+	export function emptyTalentSelfEvaluation():TalentSelfEvaluation
+	export function emptyRefTalentSelfEvaluation():Ref<TalentSelfEvaluation>
+	export function refOfTalentSelfEvaluation(x:TalentSelfEvaluation,v:Ref<TalentSelfEvaluation>)
+	export function unRefTalentSelfEvaluation(v:Ref<TalentSelfEvaluation>):TalentSelfEvaluation
+	export function emptyConfigJobResp():ConfigJobResp
+	export function emptyRefConfigJobResp():Ref<ConfigJobResp>
+	export function refOfConfigJobResp(x:ConfigJobResp,v:Ref<ConfigJobResp>)
+	export function unRefConfigJobResp(v:Ref<ConfigJobResp>):ConfigJobResp
+	export function emptyDeleteJobRequirementReq():DeleteJobRequirementReq
+	export function emptyRefDeleteJobRequirementReq():Ref<DeleteJobRequirementReq>
+	export function refOfDeleteJobRequirementReq(x:DeleteJobRequirementReq,v:Ref<DeleteJobRequirementReq>)
+	export function unRefDeleteJobRequirementReq(v:Ref<DeleteJobRequirementReq>):DeleteJobRequirementReq
+	export function emptyGetByApplicationReferralResp():GetByApplicationReferralResp
+	export function emptyRefGetByApplicationReferralResp():Ref<GetByApplicationReferralResp>
+	export function refOfGetByApplicationReferralResp(x:GetByApplicationReferralResp,v:Ref<GetByApplicationReferralResp>)
+	export function unRefGetByApplicationReferralResp(v:Ref<GetByApplicationReferralResp>):GetByApplicationReferralResp
+	export function emptyAppliTalentAttachResumeInfo():AppliTalentAttachResumeInfo
+	export function emptyRefAppliTalentAttachResumeInfo():Ref<AppliTalentAttachResumeInfo>
+	export function refOfAppliTalentAttachResumeInfo(x:AppliTalentAttachResumeInfo,v:Ref<AppliTalentAttachResumeInfo>)
+	export function unRefAppliTalentAttachResumeInfo(v:Ref<AppliTalentAttachResumeInfo>):AppliTalentAttachResumeInfo
+	export function emptyApplicationTalentBasicInfo():ApplicationTalentBasicInfo
+	export function emptyRefApplicationTalentBasicInfo():Ref<ApplicationTalentBasicInfo>
+	export function refOfApplicationTalentBasicInfo(x:ApplicationTalentBasicInfo,v:Ref<ApplicationTalentBasicInfo>)
+	export function unRefApplicationTalentBasicInfo(v:Ref<ApplicationTalentBasicInfo>):ApplicationTalentBasicInfo
+	export function emptyProtectSearchAgencyReqBody():ProtectSearchAgencyReqBody
+	export function emptyRefProtectSearchAgencyReqBody():Ref<ProtectSearchAgencyReqBody>
+	export function refOfProtectSearchAgencyReqBody(x:ProtectSearchAgencyReqBody,v:Ref<ProtectSearchAgencyReqBody>)
+	export function unRefProtectSearchAgencyReqBody(v:Ref<ProtectSearchAgencyReqBody>):ProtectSearchAgencyReqBody
+	export function emptyCountry():Country
+	export function emptyRefCountry():Ref<Country>
+	export function refOfCountry(x:Country,v:Ref<Country>)
+	export function unRefCountry(v:Ref<Country>):Country
+	export function emptyCreateEcoAccountCustomFieldReq():CreateEcoAccountCustomFieldReq
+	export function emptyRefCreateEcoAccountCustomFieldReq():Ref<CreateEcoAccountCustomFieldReq>
+	export function refOfCreateEcoAccountCustomFieldReq(x:CreateEcoAccountCustomFieldReq,v:Ref<CreateEcoAccountCustomFieldReq>)
+	export function unRefCreateEcoAccountCustomFieldReq(v:Ref<CreateEcoAccountCustomFieldReq>):CreateEcoAccountCustomFieldReq
+	export function emptyWebsiteDeliverySelfEvaluation():WebsiteDeliverySelfEvaluation
+	export function emptyRefWebsiteDeliverySelfEvaluation():Ref<WebsiteDeliverySelfEvaluation>
+	export function refOfWebsiteDeliverySelfEvaluation(x:WebsiteDeliverySelfEvaluation,v:Ref<WebsiteDeliverySelfEvaluation>)
+	export function unRefWebsiteDeliverySelfEvaluation(v:Ref<WebsiteDeliverySelfEvaluation>):WebsiteDeliverySelfEvaluation
+	export function emptyJobRecruiter2():JobRecruiter2
+	export function emptyRefJobRecruiter2():Ref<JobRecruiter2>
+	export function refOfJobRecruiter2(x:JobRecruiter2,v:Ref<JobRecruiter2>)
+	export function unRefJobRecruiter2(v:Ref<JobRecruiter2>):JobRecruiter2
+	export function emptyAppliOfferBasicCustObj():AppliOfferBasicCustObj
+	export function emptyRefAppliOfferBasicCustObj():Ref<AppliOfferBasicCustObj>
+	export function refOfAppliOfferBasicCustObj(x:AppliOfferBasicCustObj,v:Ref<AppliOfferBasicCustObj>)
+	export function unRefAppliOfferBasicCustObj(v:Ref<AppliOfferBasicCustObj>):AppliOfferBasicCustObj
+	export function emptyEmployee():Employee
+	export function emptyRefEmployee():Ref<Employee>
+	export function refOfEmployee(x:Employee,v:Ref<Employee>)
+	export function unRefEmployee(v:Ref<Employee>):Employee
+	export function emptyExternalInterview():ExternalInterview
+	export function emptyRefExternalInterview():Ref<ExternalInterview>
+	export function refOfExternalInterview(x:ExternalInterview,v:Ref<ExternalInterview>)
+	export function unRefExternalInterview(v:Ref<ExternalInterview>):ExternalInterview
+	export function emptyQueryAgencyRespData():QueryAgencyRespData
+	export function emptyRefQueryAgencyRespData():Ref<QueryAgencyRespData>
+	export function refOfQueryAgencyRespData(x:QueryAgencyRespData,v:Ref<QueryAgencyRespData>)
+	export function unRefQueryAgencyRespData(v:Ref<QueryAgencyRespData>):QueryAgencyRespData
+	export function emptyListJobRequirementRespData():ListJobRequirementRespData
+	export function emptyRefListJobRequirementRespData():Ref<ListJobRequirementRespData>
+	export function refOfListJobRequirementRespData(x:ListJobRequirementRespData,v:Ref<ListJobRequirementRespData>)
+	export function unRefListJobRequirementRespData(v:Ref<ListJobRequirementRespData>):ListJobRequirementRespData
+	export function emptySearchDiversityInclusionRespData():SearchDiversityInclusionRespData
+	export function emptyRefSearchDiversityInclusionRespData():Ref<SearchDiversityInclusionRespData>
+	export function refOfSearchDiversityInclusionRespData(x:SearchDiversityInclusionRespData,v:Ref<SearchDiversityInclusionRespData>)
+	export function unRefSearchDiversityInclusionRespData(v:Ref<SearchDiversityInclusionRespData>):SearchDiversityInclusionRespData
+	export function emptyJobHighlight():JobHighlight
+	export function emptyRefJobHighlight():Ref<JobHighlight>
+	export function refOfJobHighlight(x:JobHighlight,v:Ref<JobHighlight>)
+	export function unRefJobHighlight(v:Ref<JobHighlight>):JobHighlight
+	export function emptyListRegistrationSchemaResp():ListRegistrationSchemaResp
+	export function emptyRefListRegistrationSchemaResp():Ref<ListRegistrationSchemaResp>
+	export function refOfListRegistrationSchemaResp(x:ListRegistrationSchemaResp,v:Ref<ListRegistrationSchemaResp>)
+	export function unRefListRegistrationSchemaResp(v:Ref<ListRegistrationSchemaResp>):ListRegistrationSchemaResp
+	export function emptyBatchUpdateEcoExamPaperReq():BatchUpdateEcoExamPaperReq
+	export function emptyRefBatchUpdateEcoExamPaperReq():Ref<BatchUpdateEcoExamPaperReq>
+	export function refOfBatchUpdateEcoExamPaperReq(x:BatchUpdateEcoExamPaperReq,v:Ref<BatchUpdateEcoExamPaperReq>)
+	export function unRefBatchUpdateEcoExamPaperReq(v:Ref<BatchUpdateEcoExamPaperReq>):BatchUpdateEcoExamPaperReq
+	export function emptyLocationDistrict():LocationDistrict
+	export function emptyRefLocationDistrict():Ref<LocationDistrict>
+	export function refOfLocationDistrict(x:LocationDistrict,v:Ref<LocationDistrict>)
+	export function unRefLocationDistrict(v:Ref<LocationDistrict>):LocationDistrict
+	export function emptyCancelEcoBackgroundCheckResp():CancelEcoBackgroundCheckResp
+	export function emptyRefCancelEcoBackgroundCheckResp():Ref<CancelEcoBackgroundCheckResp>
+	export function refOfCancelEcoBackgroundCheckResp(x:CancelEcoBackgroundCheckResp,v:Ref<CancelEcoBackgroundCheckResp>)
+	export function unRefCancelEcoBackgroundCheckResp(v:Ref<CancelEcoBackgroundCheckResp>):CancelEcoBackgroundCheckResp
+	export function emptySearchTalentOperationLogRespData():SearchTalentOperationLogRespData
+	export function emptyRefSearchTalentOperationLogRespData():Ref<SearchTalentOperationLogRespData>
+	export function refOfSearchTalentOperationLogRespData(x:SearchTalentOperationLogRespData,v:Ref<SearchTalentOperationLogRespData>)
+	export function unRefSearchTalentOperationLogRespData(v:Ref<SearchTalentOperationLogRespData>):SearchTalentOperationLogRespData
+	export function emptyListInterviewReq():ListInterviewReq
+	export function emptyRefListInterviewReq():Ref<ListInterviewReq>
+	export function refOfListInterviewReq(x:ListInterviewReq,v:Ref<ListInterviewReq>)
+	export function unRefListInterviewReq(v:Ref<ListInterviewReq>):ListInterviewReq
+	export function emptyAppliOfferBasicInfoUser():AppliOfferBasicInfoUser
+	export function emptyRefAppliOfferBasicInfoUser():Ref<AppliOfferBasicInfoUser>
+	export function refOfAppliOfferBasicInfoUser(x:AppliOfferBasicInfoUser,v:Ref<AppliOfferBasicInfoUser>)
+	export function unRefAppliOfferBasicInfoUser(v:Ref<AppliOfferBasicInfoUser>):AppliOfferBasicInfoUser
+	export function emptyGetAttachmentResp():GetAttachmentResp
+	export function emptyRefGetAttachmentResp():Ref<GetAttachmentResp>
+	export function refOfGetAttachmentResp(x:GetAttachmentResp,v:Ref<GetAttachmentResp>)
+	export function unRefGetAttachmentResp(v:Ref<GetAttachmentResp>):GetAttachmentResp
+	export function emptySiteJobRecruitmentType():SiteJobRecruitmentType
+	export function emptyRefSiteJobRecruitmentType():Ref<SiteJobRecruitmentType>
+	export function refOfSiteJobRecruitmentType(x:SiteJobRecruitmentType,v:Ref<SiteJobRecruitmentType>)
+	export function unRefSiteJobRecruitmentType(v:Ref<SiteJobRecruitmentType>):SiteJobRecruitmentType
+	export function emptyQueryAgencyResp():QueryAgencyResp
+	export function emptyRefQueryAgencyResp():Ref<QueryAgencyResp>
+	export function refOfQueryAgencyResp(x:QueryAgencyResp,v:Ref<QueryAgencyResp>)
+	export function unRefQueryAgencyResp(v:Ref<QueryAgencyResp>):QueryAgencyResp
+	export function emptySearchWebsiteJobPostReq():SearchWebsiteJobPostReq
+	export function emptyRefSearchWebsiteJobPostReq():Ref<SearchWebsiteJobPostReq>
+	export function refOfSearchWebsiteJobPostReq(x:SearchWebsiteJobPostReq,v:Ref<SearchWebsiteJobPostReq>)
+	export function unRefSearchWebsiteJobPostReq(v:Ref<SearchWebsiteJobPostReq>):SearchWebsiteJobPostReq
+	export function emptySearchWebsiteJobPostResp():SearchWebsiteJobPostResp
+	export function emptyRefSearchWebsiteJobPostResp():Ref<SearchWebsiteJobPostResp>
+	export function refOfSearchWebsiteJobPostResp(x:SearchWebsiteJobPostResp,v:Ref<SearchWebsiteJobPostResp>)
+	export function unRefSearchWebsiteJobPostResp(v:Ref<SearchWebsiteJobPostResp>):SearchWebsiteJobPostResp
+	export function emptyCandidateTagFilter():CandidateTagFilter
+	export function emptyRefCandidateTagFilter():Ref<CandidateTagFilter>
+	export function refOfCandidateTagFilter(x:CandidateTagFilter,v:Ref<CandidateTagFilter>)
+	export function unRefCandidateTagFilter(v:Ref<CandidateTagFilter>):CandidateTagFilter
+	export function emptyInterviewQuestion():InterviewQuestion
+	export function emptyRefInterviewQuestion():Ref<InterviewQuestion>
+	export function refOfInterviewQuestion(x:InterviewQuestion,v:Ref<InterviewQuestion>)
+	export function unRefInterviewQuestion(v:Ref<InterviewQuestion>):InterviewQuestion
+	export function emptySearchTalentOperationLogResp():SearchTalentOperationLogResp
+	export function emptyRefSearchTalentOperationLogResp():Ref<SearchTalentOperationLogResp>
+	export function refOfSearchTalentOperationLogResp(x:SearchTalentOperationLogResp,v:Ref<SearchTalentOperationLogResp>)
+	export function unRefSearchTalentOperationLogResp(v:Ref<SearchTalentOperationLogResp>):SearchTalentOperationLogResp
+	export function emptyGetWebsiteJobPostRespData():GetWebsiteJobPostRespData
+	export function emptyRefGetWebsiteJobPostRespData():Ref<GetWebsiteJobPostRespData>
+	export function refOfGetWebsiteJobPostRespData(x:GetWebsiteJobPostRespData,v:Ref<GetWebsiteJobPostRespData>)
+	export function unRefGetWebsiteJobPostRespData(v:Ref<GetWebsiteJobPostRespData>):GetWebsiteJobPostRespData
+	export function emptyTalentCompetitionInfo():TalentCompetitionInfo
+	export function emptyRefTalentCompetitionInfo():Ref<TalentCompetitionInfo>
+	export function refOfTalentCompetitionInfo(x:TalentCompetitionInfo,v:Ref<TalentCompetitionInfo>)
+	export function unRefTalentCompetitionInfo(v:Ref<TalentCompetitionInfo>):TalentCompetitionInfo
+	export function emptyTalentExternalInfo():TalentExternalInfo
+	export function emptyRefTalentExternalInfo():Ref<TalentExternalInfo>
+	export function refOfTalentExternalInfo(x:TalentExternalInfo,v:Ref<TalentExternalInfo>)
+	export function unRefTalentExternalInfo(v:Ref<TalentExternalInfo>):TalentExternalInfo
+	export function emptyListWebsiteJobPostRespData():ListWebsiteJobPostRespData
+	export function emptyRefListWebsiteJobPostRespData():Ref<ListWebsiteJobPostRespData>
+	export function refOfListWebsiteJobPostRespData(x:ListWebsiteJobPostRespData,v:Ref<ListWebsiteJobPostRespData>)
+	export function unRefListWebsiteJobPostRespData(v:Ref<ListWebsiteJobPostRespData>):ListWebsiteJobPostRespData
+	export function emptySiteApplication():SiteApplication
+	export function emptyRefSiteApplication():Ref<SiteApplication>
+	export function refOfSiteApplication(x:SiteApplication,v:Ref<SiteApplication>)
+	export function unRefSiteApplication(v:Ref<SiteApplication>):SiteApplication
+	export function emptyGetRoleReq():GetRoleReq
+	export function emptyRefGetRoleReq():Ref<GetRoleReq>
+	export function refOfGetRoleReq(x:GetRoleReq,v:Ref<GetRoleReq>)
+	export function unRefGetRoleReq(v:Ref<GetRoleReq>):GetRoleReq
+	export function emptyListRoleReq():ListRoleReq
+	export function emptyRefListRoleReq():Ref<ListRoleReq>
+	export function refOfListRoleReq(x:ListRoleReq,v:Ref<ListRoleReq>)
+	export function unRefListRoleReq(v:Ref<ListRoleReq>):ListRoleReq
+	export function emptyMasterLocationInfo():MasterLocationInfo
+	export function emptyRefMasterLocationInfo():Ref<MasterLocationInfo>
+	export function refOfMasterLocationInfo(x:MasterLocationInfo,v:Ref<MasterLocationInfo>)
+	export function unRefMasterLocationInfo(v:Ref<MasterLocationInfo>):MasterLocationInfo
+	export function emptyPermissionCollection():PermissionCollection
+	export function emptyRefPermissionCollection():Ref<PermissionCollection>
+	export function refOfPermissionCollection(x:PermissionCollection,v:Ref<PermissionCollection>)
+	export function unRefPermissionCollection(v:Ref<PermissionCollection>):PermissionCollection
+	export function emptySearchReferralReqBody():SearchReferralReqBody
+	export function emptyRefSearchReferralReqBody():Ref<SearchReferralReqBody>
+	export function refOfSearchReferralReqBody(x:SearchReferralReqBody,v:Ref<SearchReferralReqBody>)
+	export function unRefSearchReferralReqBody(v:Ref<SearchReferralReqBody>):SearchReferralReqBody
+	export function emptyGetOfferResp():GetOfferResp
+	export function emptyRefGetOfferResp():Ref<GetOfferResp>
+	export function refOfGetOfferResp(x:GetOfferResp,v:Ref<GetOfferResp>)
+	export function unRefGetOfferResp(v:Ref<GetOfferResp>):GetOfferResp
+	export function emptyExternalGrantRoleInfo():ExternalGrantRoleInfo
+	export function emptyRefExternalGrantRoleInfo():Ref<ExternalGrantRoleInfo>
+	export function refOfExternalGrantRoleInfo(x:ExternalGrantRoleInfo,v:Ref<ExternalGrantRoleInfo>)
+	export function unRefExternalGrantRoleInfo(v:Ref<ExternalGrantRoleInfo>):ExternalGrantRoleInfo
+	export function emptyApplicationTalentCareerInfo():ApplicationTalentCareerInfo
+	export function emptyRefApplicationTalentCareerInfo():Ref<ApplicationTalentCareerInfo>
+	export function refOfApplicationTalentCareerInfo(x:ApplicationTalentCareerInfo,v:Ref<ApplicationTalentCareerInfo>)
+	export function unRefApplicationTalentCareerInfo(v:Ref<ApplicationTalentCareerInfo>):ApplicationTalentCareerInfo
+	export function emptyExternalBackgroundCheckAttachment():ExternalBackgroundCheckAttachment
+	export function emptyRefExternalBackgroundCheckAttachment():Ref<ExternalBackgroundCheckAttachment>
+	export function refOfExternalBackgroundCheckAttachment(x:ExternalBackgroundCheckAttachment,v:Ref<ExternalBackgroundCheckAttachment>)
+	export function unRefExternalBackgroundCheckAttachment(v:Ref<ExternalBackgroundCheckAttachment>):ExternalBackgroundCheckAttachment
+	export function emptyP2ApplicationDeletedV1():P2ApplicationDeletedV1
+	export function emptyRefP2ApplicationDeletedV1():Ref<P2ApplicationDeletedV1>
+	export function refOfP2ApplicationDeletedV1(x:P2ApplicationDeletedV1,v:Ref<P2ApplicationDeletedV1>)
+	export function unRefP2ApplicationDeletedV1(v:Ref<P2ApplicationDeletedV1>):P2ApplicationDeletedV1
+	export function emptyTransferOnboardApplicationReqBody():TransferOnboardApplicationReqBody
+	export function emptyRefTransferOnboardApplicationReqBody():Ref<TransferOnboardApplicationReqBody>
+	export function refOfTransferOnboardApplicationReqBody(x:TransferOnboardApplicationReqBody,v:Ref<TransferOnboardApplicationReqBody>)
+	export function unRefTransferOnboardApplicationReqBody(v:Ref<TransferOnboardApplicationReqBody>):TransferOnboardApplicationReqBody
+	export function emptyUpdateConfigJobRespData():UpdateConfigJobRespData
+	export function emptyRefUpdateConfigJobRespData():Ref<UpdateConfigJobRespData>
+	export function refOfUpdateConfigJobRespData(x:UpdateConfigJobRespData,v:Ref<UpdateConfigJobRespData>)
+	export function unRefUpdateConfigJobRespData(v:Ref<UpdateConfigJobRespData>):UpdateConfigJobRespData
+	export function emptyCreateExternalBackgroundCheckReq():CreateExternalBackgroundCheckReq
+	export function emptyRefCreateExternalBackgroundCheckReq():Ref<CreateExternalBackgroundCheckReq>
+	export function refOfCreateExternalBackgroundCheckReq(x:CreateExternalBackgroundCheckReq,v:Ref<CreateExternalBackgroundCheckReq>)
+	export function unRefCreateExternalBackgroundCheckReq(v:Ref<CreateExternalBackgroundCheckReq>):CreateExternalBackgroundCheckReq
+	export function emptyJobType():JobType
+	export function emptyRefJobType():Ref<JobType>
+	export function refOfJobType(x:JobType,v:Ref<JobType>)
+	export function unRefJobType(v:Ref<JobType>):JobType
+	export function emptyListRoleIterator():ListRoleIterator
+	export function emptyRefListRoleIterator():Ref<ListRoleIterator>
+	export function refOfListRoleIterator(x:ListRoleIterator,v:Ref<ListRoleIterator>)
+	export function unRefListRoleIterator(v:Ref<ListRoleIterator>):ListRoleIterator
+	export function emptyAddToFolderTalentRespData():AddToFolderTalentRespData
+	export function emptyRefAddToFolderTalentRespData():Ref<AddToFolderTalentRespData>
+	export function refOfAddToFolderTalentRespData(x:AddToFolderTalentRespData,v:Ref<AddToFolderTalentRespData>)
+	export function unRefAddToFolderTalentRespData(v:Ref<AddToFolderTalentRespData>):AddToFolderTalentRespData
+	export function emptyApplicationOfferOnboardProfileAddress():ApplicationOfferOnboardProfileAddress
+	export function emptyRefApplicationOfferOnboardProfileAddress():Ref<ApplicationOfferOnboardProfileAddress>
+	export function refOfApplicationOfferOnboardProfileAddress(x:ApplicationOfferOnboardProfileAddress,v:Ref<ApplicationOfferOnboardProfileAddress>)
+	export function unRefApplicationOfferOnboardProfileAddress(v:Ref<ApplicationOfferOnboardProfileAddress>):ApplicationOfferOnboardProfileAddress
+	export function emptyBusinessManagementScope():BusinessManagementScope
+	export function emptyRefBusinessManagementScope():Ref<BusinessManagementScope>
+	export function refOfBusinessManagementScope(x:BusinessManagementScope,v:Ref<BusinessManagementScope>)
+	export function unRefBusinessManagementScope(v:Ref<BusinessManagementScope>):BusinessManagementScope
+	export function emptyP2EhrImportTaskImportedV1():P2EhrImportTaskImportedV1
+	export function emptyRefP2EhrImportTaskImportedV1():Ref<P2EhrImportTaskImportedV1>
+	export function refOfP2EhrImportTaskImportedV1(x:P2EhrImportTaskImportedV1,v:Ref<P2EhrImportTaskImportedV1>)
+	export function unRefP2EhrImportTaskImportedV1(v:Ref<P2EhrImportTaskImportedV1>):P2EhrImportTaskImportedV1
+	export function emptyUpdateConfigJobReq():UpdateConfigJobReq
+	export function emptyRefUpdateConfigJobReq():Ref<UpdateConfigJobReq>
+	export function refOfUpdateConfigJobReq(x:UpdateConfigJobReq,v:Ref<UpdateConfigJobReq>)
+	export function unRefUpdateConfigJobReq(v:Ref<UpdateConfigJobReq>):UpdateConfigJobReq
+	export function emptyBatchUpdateEcoAccountCustomFieldResp():BatchUpdateEcoAccountCustomFieldResp
+	export function emptyRefBatchUpdateEcoAccountCustomFieldResp():Ref<BatchUpdateEcoAccountCustomFieldResp>
+	export function refOfBatchUpdateEcoAccountCustomFieldResp(x:BatchUpdateEcoAccountCustomFieldResp,v:Ref<BatchUpdateEcoAccountCustomFieldResp>)
+	export function unRefBatchUpdateEcoAccountCustomFieldResp(v:Ref<BatchUpdateEcoAccountCustomFieldResp>):BatchUpdateEcoAccountCustomFieldResp
+	export function emptyDiData():DiData
+	export function emptyRefDiData():Ref<DiData>
+	export function refOfDiData(x:DiData,v:Ref<DiData>)
+	export function unRefDiData(v:Ref<DiData>):DiData
+	export function emptyGetNoteResp():GetNoteResp
+	export function emptyRefGetNoteResp():Ref<GetNoteResp>
+	export function refOfGetNoteResp(x:GetNoteResp,v:Ref<GetNoteResp>)
+	export function unRefGetNoteResp(v:Ref<GetNoteResp>):GetNoteResp
+	export function emptyUpdateWebsiteChannelReq():UpdateWebsiteChannelReq
+	export function emptyRefUpdateWebsiteChannelReq():Ref<UpdateWebsiteChannelReq>
+	export function refOfUpdateWebsiteChannelReq(x:UpdateWebsiteChannelReq,v:Ref<UpdateWebsiteChannelReq>)
+	export function unRefUpdateWebsiteChannelReq(v:Ref<UpdateWebsiteChannelReq>):UpdateWebsiteChannelReq
+	export function emptyApplicationOfferBasicInfo():ApplicationOfferBasicInfo
+	export function emptyRefApplicationOfferBasicInfo():Ref<ApplicationOfferBasicInfo>
+	export function refOfApplicationOfferBasicInfo(x:ApplicationOfferBasicInfo,v:Ref<ApplicationOfferBasicInfo>)
+	export function unRefApplicationOfferBasicInfo(v:Ref<ApplicationOfferBasicInfo>):ApplicationOfferBasicInfo
+	export function emptyMobile():Mobile
+	export function emptyRefMobile():Ref<Mobile>
+	export function refOfMobile(x:Mobile,v:Ref<Mobile>)
+	export function unRefMobile(v:Ref<Mobile>):Mobile
+	export function emptyReconciliationReferralAccountResp():ReconciliationReferralAccountResp
+	export function emptyRefReconciliationReferralAccountResp():Ref<ReconciliationReferralAccountResp>
+	export function refOfReconciliationReferralAccountResp(x:ReconciliationReferralAccountResp,v:Ref<ReconciliationReferralAccountResp>)
+	export function unRefReconciliationReferralAccountResp(v:Ref<ReconciliationReferralAccountResp>):ReconciliationReferralAccountResp
+	export function emptyListWebsiteChannelReq():ListWebsiteChannelReq
+	export function emptyRefListWebsiteChannelReq():Ref<ListWebsiteChannelReq>
+	export function refOfListWebsiteChannelReq(x:ListWebsiteChannelReq,v:Ref<ListWebsiteChannelReq>)
+	export function unRefListWebsiteChannelReq(v:Ref<ListWebsiteChannelReq>):ListWebsiteChannelReq
+	export function emptyMoveTalentTalentPoolResp():MoveTalentTalentPoolResp
+	export function emptyRefMoveTalentTalentPoolResp():Ref<MoveTalentTalentPoolResp>
+	export function refOfMoveTalentTalentPoolResp(x:MoveTalentTalentPoolResp,v:Ref<MoveTalentTalentPoolResp>)
+	export function unRefMoveTalentTalentPoolResp(v:Ref<MoveTalentTalentPoolResp>):MoveTalentTalentPoolResp
+	export function emptyCreateWebsiteChannelReqBody():CreateWebsiteChannelReqBody
+	export function emptyRefCreateWebsiteChannelReqBody():Ref<CreateWebsiteChannelReqBody>
+	export function refOfCreateWebsiteChannelReqBody(x:CreateWebsiteChannelReqBody,v:Ref<CreateWebsiteChannelReqBody>)
+	export function unRefCreateWebsiteChannelReqBody(v:Ref<CreateWebsiteChannelReqBody>):CreateWebsiteChannelReqBody
+	export function emptyListTerminationReasonReq():ListTerminationReasonReq
+	export function emptyRefListTerminationReasonReq():Ref<ListTerminationReasonReq>
+	export function refOfListTerminationReasonReq(x:ListTerminationReasonReq,v:Ref<ListTerminationReasonReq>)
+	export function unRefListTerminationReasonReq(v:Ref<ListTerminationReasonReq>):ListTerminationReasonReq
+	export function emptyCreateEcoExamPaperResp():CreateEcoExamPaperResp
+	export function emptyRefCreateEcoExamPaperResp():Ref<CreateEcoExamPaperResp>
+	export function refOfCreateEcoExamPaperResp(x:CreateEcoExamPaperResp,v:Ref<CreateEcoExamPaperResp>)
+	export function unRefCreateEcoExamPaperResp(v:Ref<CreateEcoExamPaperResp>):CreateEcoExamPaperResp
+	export function emptyCreateReferralAccountRespData():CreateReferralAccountRespData
+	export function emptyRefCreateReferralAccountRespData():Ref<CreateReferralAccountRespData>
+	export function refOfCreateReferralAccountRespData(x:CreateReferralAccountRespData,v:Ref<CreateReferralAccountRespData>)
+	export function unRefCreateReferralAccountRespData(v:Ref<CreateReferralAccountRespData>):CreateReferralAccountRespData
+	export function emptyPermissionScopeRule():PermissionScopeRule
+	export function emptyRefPermissionScopeRule():Ref<PermissionScopeRule>
+	export function refOfPermissionScopeRule(x:PermissionScopeRule,v:Ref<PermissionScopeRule>)
+	export function unRefPermissionScopeRule(v:Ref<PermissionScopeRule>):PermissionScopeRule
 	export function emptyRecruiterJobRespData():RecruiterJobRespData
 	export function emptyRefRecruiterJobRespData():Ref<RecruiterJobRespData>
 	export function refOfRecruiterJobRespData(x:RecruiterJobRespData,v:Ref<RecruiterJobRespData>)
 	export function unRefRecruiterJobRespData(v:Ref<RecruiterJobRespData>):RecruiterJobRespData
+	export function emptyListOfferReq():ListOfferReq
+	export function emptyRefListOfferReq():Ref<ListOfferReq>
+	export function refOfListOfferReq(x:ListOfferReq,v:Ref<ListOfferReq>)
+	export function unRefListOfferReq(v:Ref<ListOfferReq>):ListOfferReq
+	export function emptyEcoExamCreateEventCandidateInfo():EcoExamCreateEventCandidateInfo
+	export function emptyRefEcoExamCreateEventCandidateInfo():Ref<EcoExamCreateEventCandidateInfo>
+	export function refOfEcoExamCreateEventCandidateInfo(x:EcoExamCreateEventCandidateInfo,v:Ref<EcoExamCreateEventCandidateInfo>)
+	export function unRefEcoExamCreateEventCandidateInfo(v:Ref<EcoExamCreateEventCandidateInfo>):EcoExamCreateEventCandidateInfo
+	export function emptyCombinedCreateJobRespData():CombinedCreateJobRespData
+	export function emptyRefCombinedCreateJobRespData():Ref<CombinedCreateJobRespData>
+	export function refOfCombinedCreateJobRespData(x:CombinedCreateJobRespData,v:Ref<CombinedCreateJobRespData>)
+	export function unRefCombinedCreateJobRespData(v:Ref<CombinedCreateJobRespData>):CombinedCreateJobRespData
+	export function emptyListNoteRespData():ListNoteRespData
+	export function emptyRefListNoteRespData():Ref<ListNoteRespData>
+	export function refOfListNoteRespData(x:ListNoteRespData,v:Ref<ListNoteRespData>)
+	export function unRefListNoteRespData(v:Ref<ListNoteRespData>):ListNoteRespData
+	export function emptyCreateApplicationResp():CreateApplicationResp
+	export function emptyRefCreateApplicationResp():Ref<CreateApplicationResp>
+	export function refOfCreateApplicationResp(x:CreateApplicationResp,v:Ref<CreateApplicationResp>)
+	export function unRefCreateApplicationResp(v:Ref<CreateApplicationResp>):CreateApplicationResp
+	export function emptyWebsiteJobPostCustomizedData():WebsiteJobPostCustomizedData
+	export function emptyRefWebsiteJobPostCustomizedData():Ref<WebsiteJobPostCustomizedData>
+	export function refOfWebsiteJobPostCustomizedData(x:WebsiteJobPostCustomizedData,v:Ref<WebsiteJobPostCustomizedData>)
+	export function unRefWebsiteJobPostCustomizedData(v:Ref<WebsiteJobPostCustomizedData>):WebsiteJobPostCustomizedData
+	export function emptySiteResumeIdentification():SiteResumeIdentification
+	export function emptyRefSiteResumeIdentification():Ref<SiteResumeIdentification>
+	export function refOfSiteResumeIdentification(x:SiteResumeIdentification,v:Ref<SiteResumeIdentification>)
+	export function unRefSiteResumeIdentification(v:Ref<SiteResumeIdentification>):SiteResumeIdentification
+	export function emptyTripartiteAgreementInfo():TripartiteAgreementInfo
+	export function emptyRefTripartiteAgreementInfo():Ref<TripartiteAgreementInfo>
+	export function refOfTripartiteAgreementInfo(x:TripartiteAgreementInfo,v:Ref<TripartiteAgreementInfo>)
+	export function unRefTripartiteAgreementInfo(v:Ref<TripartiteAgreementInfo>):TripartiteAgreementInfo
+	export function emptyUpdateWebsiteChannelRespData():UpdateWebsiteChannelRespData
+	export function emptyRefUpdateWebsiteChannelRespData():Ref<UpdateWebsiteChannelRespData>
+	export function refOfUpdateWebsiteChannelRespData(x:UpdateWebsiteChannelRespData,v:Ref<UpdateWebsiteChannelRespData>)
+	export function unRefUpdateWebsiteChannelRespData(v:Ref<UpdateWebsiteChannelRespData>):UpdateWebsiteChannelRespData
+	export function emptySignatureAttachment():SignatureAttachment
+	export function emptyRefSignatureAttachment():Ref<SignatureAttachment>
+	export function refOfSignatureAttachment(x:SignatureAttachment,v:Ref<SignatureAttachment>)
+	export function unRefSignatureAttachment(v:Ref<SignatureAttachment>):SignatureAttachment
+	export function emptyWebsiteDeliveryBasicInfo():WebsiteDeliveryBasicInfo
+	export function emptyRefWebsiteDeliveryBasicInfo():Ref<WebsiteDeliveryBasicInfo>
+	export function refOfWebsiteDeliveryBasicInfo(x:WebsiteDeliveryBasicInfo,v:Ref<WebsiteDeliveryBasicInfo>)
+	export function unRefWebsiteDeliveryBasicInfo(v:Ref<WebsiteDeliveryBasicInfo>):WebsiteDeliveryBasicInfo
+	export function emptyBackgroundCheckCustomFieldDataValue():BackgroundCheckCustomFieldDataValue
+	export function emptyRefBackgroundCheckCustomFieldDataValue():Ref<BackgroundCheckCustomFieldDataValue>
+	export function refOfBackgroundCheckCustomFieldDataValue(x:BackgroundCheckCustomFieldDataValue,v:Ref<BackgroundCheckCustomFieldDataValue>)
+	export function unRefBackgroundCheckCustomFieldDataValue(v:Ref<BackgroundCheckCustomFieldDataValue>):BackgroundCheckCustomFieldDataValue
+	export function emptyCreateWebsiteSiteUserReq():CreateWebsiteSiteUserReq
+	export function emptyRefCreateWebsiteSiteUserReq():Ref<CreateWebsiteSiteUserReq>
+	export function refOfCreateWebsiteSiteUserReq(x:CreateWebsiteSiteUserReq,v:Ref<CreateWebsiteSiteUserReq>)
+	export function unRefCreateWebsiteSiteUserReq(v:Ref<CreateWebsiteSiteUserReq>):CreateWebsiteSiteUserReq
+	export function emptyUpdateWebsiteChannelResp():UpdateWebsiteChannelResp
+	export function emptyRefUpdateWebsiteChannelResp():Ref<UpdateWebsiteChannelResp>
+	export function refOfUpdateWebsiteChannelResp(x:UpdateWebsiteChannelResp,v:Ref<UpdateWebsiteChannelResp>)
+	export function unRefUpdateWebsiteChannelResp(v:Ref<UpdateWebsiteChannelResp>):UpdateWebsiteChannelResp
+	export function emptyListWebsiteRespData():ListWebsiteRespData
+	export function emptyRefListWebsiteRespData():Ref<ListWebsiteRespData>
+	export function refOfListWebsiteRespData(x:ListWebsiteRespData,v:Ref<ListWebsiteRespData>)
+	export function unRefListWebsiteRespData(v:Ref<ListWebsiteRespData>):ListWebsiteRespData
+	export function emptyTalentCombinedCareerInfo():TalentCombinedCareerInfo
+	export function emptyRefTalentCombinedCareerInfo():Ref<TalentCombinedCareerInfo>
+	export function refOfTalentCombinedCareerInfo(x:TalentCombinedCareerInfo,v:Ref<TalentCombinedCareerInfo>)
+	export function unRefTalentCombinedCareerInfo(v:Ref<TalentCombinedCareerInfo>):TalentCombinedCareerInfo
+	export function emptySearchDiversityInclusionReq():SearchDiversityInclusionReq
+	export function emptyRefSearchDiversityInclusionReq():Ref<SearchDiversityInclusionReq>
+	export function refOfSearchDiversityInclusionReq(x:SearchDiversityInclusionReq,v:Ref<SearchDiversityInclusionReq>)
+	export function unRefSearchDiversityInclusionReq(v:Ref<SearchDiversityInclusionReq>):SearchDiversityInclusionReq
+	export function emptyBaseCountry():BaseCountry
+	export function emptyRefBaseCountry():Ref<BaseCountry>
+	export function refOfBaseCountry(x:BaseCountry,v:Ref<BaseCountry>)
+	export function unRefBaseCountry(v:Ref<BaseCountry>):BaseCountry
+	export function emptyCreateWebsiteChannelResp():CreateWebsiteChannelResp
+	export function emptyRefCreateWebsiteChannelResp():Ref<CreateWebsiteChannelResp>
+	export function refOfCreateWebsiteChannelResp(x:CreateWebsiteChannelResp,v:Ref<CreateWebsiteChannelResp>)
+	export function unRefCreateWebsiteChannelResp(v:Ref<CreateWebsiteChannelResp>):CreateWebsiteChannelResp
+	export function emptyRangeFilter():RangeFilter
+	export function emptyRefRangeFilter():Ref<RangeFilter>
+	export function refOfRangeFilter(x:RangeFilter,v:Ref<RangeFilter>)
+	export function unRefRangeFilter(v:Ref<RangeFilter>):RangeFilter
+	export function emptyInternshipInfo():InternshipInfo
+	export function emptyRefInternshipInfo():Ref<InternshipInfo>
+	export function refOfInternshipInfo(x:InternshipInfo,v:Ref<InternshipInfo>)
+	export function unRefInternshipInfo(v:Ref<InternshipInfo>):InternshipInfo
+	export function emptyListEvaluationReq():ListEvaluationReq
+	export function emptyRefListEvaluationReq():Ref<ListEvaluationReq>
+	export function refOfListEvaluationReq(x:ListEvaluationReq,v:Ref<ListEvaluationReq>)
+	export function unRefListEvaluationReq(v:Ref<ListEvaluationReq>):ListEvaluationReq
+	export function emptyPatchNoteReqBody():PatchNoteReqBody
+	export function emptyRefPatchNoteReqBody():Ref<PatchNoteReqBody>
+	export function refOfPatchNoteReqBody(x:PatchNoteReqBody,v:Ref<PatchNoteReqBody>)
+	export function unRefPatchNoteReqBody(v:Ref<PatchNoteReqBody>):PatchNoteReqBody
+	export function emptyQueryLocationReqBody():QueryLocationReqBody
+	export function emptyRefQueryLocationReqBody():Ref<QueryLocationReqBody>
+	export function refOfQueryLocationReqBody(x:QueryLocationReqBody,v:Ref<QueryLocationReqBody>)
+	export function unRefQueryLocationReqBody(v:Ref<QueryLocationReqBody>):QueryLocationReqBody
+	export function emptyCreateReferralAccountReq():CreateReferralAccountReq
+	export function emptyRefCreateReferralAccountReq():Ref<CreateReferralAccountReq>
+	export function refOfCreateReferralAccountReq(x:CreateReferralAccountReq,v:Ref<CreateReferralAccountReq>)
+	export function unRefCreateReferralAccountReq(v:Ref<CreateReferralAccountReq>):CreateReferralAccountReq
+	export function emptyApplicationResumeSource():ApplicationResumeSource
+	export function emptyRefApplicationResumeSource():Ref<ApplicationResumeSource>
+	export function refOfApplicationResumeSource(x:ApplicationResumeSource,v:Ref<ApplicationResumeSource>)
+	export function unRefApplicationResumeSource(v:Ref<ApplicationResumeSource>):ApplicationResumeSource
+	export function emptyWebsiteDeliveryResume():WebsiteDeliveryResume
+	export function emptyRefWebsiteDeliveryResume():Ref<WebsiteDeliveryResume>
+	export function refOfWebsiteDeliveryResume(x:WebsiteDeliveryResume,v:Ref<WebsiteDeliveryResume>)
+	export function unRefWebsiteDeliveryResume(v:Ref<WebsiteDeliveryResume>):WebsiteDeliveryResume
+	export function emptyGetReferralWebsiteJobPostRespData():GetReferralWebsiteJobPostRespData
+	export function emptyRefGetReferralWebsiteJobPostRespData():Ref<GetReferralWebsiteJobPostRespData>
+	export function refOfGetReferralWebsiteJobPostRespData(x:GetReferralWebsiteJobPostRespData,v:Ref<GetReferralWebsiteJobPostRespData>)
+	export function unRefGetReferralWebsiteJobPostRespData(v:Ref<GetReferralWebsiteJobPostRespData>):GetReferralWebsiteJobPostRespData
+	export function emptyOfferSchemaChild():OfferSchemaChild
+	export function emptyRefOfferSchemaChild():Ref<OfferSchemaChild>
+	export function refOfOfferSchemaChild(x:OfferSchemaChild,v:Ref<OfferSchemaChild>)
+	export function unRefOfferSchemaChild(v:Ref<OfferSchemaChild>):OfferSchemaChild
+	export function emptyDeactivateReferralAccountResp():DeactivateReferralAccountResp
+	export function emptyRefDeactivateReferralAccountResp():Ref<DeactivateReferralAccountResp>
+	export function refOfDeactivateReferralAccountResp(x:DeactivateReferralAccountResp,v:Ref<DeactivateReferralAccountResp>)
+	export function unRefDeactivateReferralAccountResp(v:Ref<DeactivateReferralAccountResp>):DeactivateReferralAccountResp
+	export function emptyAddToFolderTalentReq():AddToFolderTalentReq
+	export function emptyRefAddToFolderTalentReq():Ref<AddToFolderTalentReq>
+	export function refOfAddToFolderTalentReq(x:AddToFolderTalentReq,v:Ref<AddToFolderTalentReq>)
+	export function unRefAddToFolderTalentReq(v:Ref<AddToFolderTalentReq>):AddToFolderTalentReq
+	export function emptySearchJobPublishRecordResp():SearchJobPublishRecordResp
+	export function emptyRefSearchJobPublishRecordResp():Ref<SearchJobPublishRecordResp>
+	export function refOfSearchJobPublishRecordResp(x:SearchJobPublishRecordResp,v:Ref<SearchJobPublishRecordResp>)
+	export function unRefSearchJobPublishRecordResp(v:Ref<SearchJobPublishRecordResp>):SearchJobPublishRecordResp
+	export function emptyEcoAccountCustomFieldData():EcoAccountCustomFieldData
+	export function emptyRefEcoAccountCustomFieldData():Ref<EcoAccountCustomFieldData>
+	export function refOfEcoAccountCustomFieldData(x:EcoAccountCustomFieldData,v:Ref<EcoAccountCustomFieldData>)
+	export function unRefEcoAccountCustomFieldData(v:Ref<EcoAccountCustomFieldData>):EcoAccountCustomFieldData
+	export function emptyListByIdJobRequirementReqBody():ListByIdJobRequirementReqBody
+	export function emptyRefListByIdJobRequirementReqBody():Ref<ListByIdJobRequirementReqBody>
+	export function refOfListByIdJobRequirementReqBody(x:ListByIdJobRequirementReqBody,v:Ref<ListByIdJobRequirementReqBody>)
+	export function unRefListByIdJobRequirementReqBody(v:Ref<ListByIdJobRequirementReqBody>):ListByIdJobRequirementReqBody
+	export function emptyAppliOfferOnboardProfileAdd():AppliOfferOnboardProfileAdd
+	export function emptyRefAppliOfferOnboardProfileAdd():Ref<AppliOfferOnboardProfileAdd>
+	export function refOfAppliOfferOnboardProfileAdd(x:AppliOfferOnboardProfileAdd,v:Ref<AppliOfferOnboardProfileAdd>)
+	export function unRefAppliOfferOnboardProfileAdd(v:Ref<AppliOfferOnboardProfileAdd>):AppliOfferOnboardProfileAdd
+	export function emptyCancelEcoBackgroundCheckReqBody():CancelEcoBackgroundCheckReqBody
+	export function emptyRefCancelEcoBackgroundCheckReqBody():Ref<CancelEcoBackgroundCheckReqBody>
+	export function refOfCancelEcoBackgroundCheckReqBody(x:CancelEcoBackgroundCheckReqBody,v:Ref<CancelEcoBackgroundCheckReqBody>)
+	export function unRefCancelEcoBackgroundCheckReqBody(v:Ref<CancelEcoBackgroundCheckReqBody>):CancelEcoBackgroundCheckReqBody
+	export function emptyCreateNoteResp():CreateNoteResp
+	export function emptyRefCreateNoteResp():Ref<CreateNoteResp>
+	export function refOfCreateNoteResp(x:CreateNoteResp,v:Ref<CreateNoteResp>)
+	export function unRefCreateNoteResp(v:Ref<CreateNoteResp>):CreateNoteResp
+	export function emptyEcoExamResultReport():EcoExamResultReport
+	export function emptyRefEcoExamResultReport():Ref<EcoExamResultReport>
+	export function refOfEcoExamResultReport(x:EcoExamResultReport,v:Ref<EcoExamResultReport>)
+	export function unRefEcoExamResultReport(v:Ref<EcoExamResultReport>):EcoExamResultReport
+	export function emptyWebsiteDeliveryEducation():WebsiteDeliveryEducation
+	export function emptyRefWebsiteDeliveryEducation():Ref<WebsiteDeliveryEducation>
+	export function refOfWebsiteDeliveryEducation(x:WebsiteDeliveryEducation,v:Ref<WebsiteDeliveryEducation>)
+	export function unRefWebsiteDeliveryEducation(v:Ref<WebsiteDeliveryEducation>):WebsiteDeliveryEducation
+	export function emptyGetInterviewRecordRespData():GetInterviewRecordRespData
+	export function emptyRefGetInterviewRecordRespData():Ref<GetInterviewRecordRespData>
+	export function refOfGetInterviewRecordRespData(x:GetInterviewRecordRespData,v:Ref<GetInterviewRecordRespData>)
+	export function unRefGetInterviewRecordRespData(v:Ref<GetInterviewRecordRespData>):GetInterviewRecordRespData
+	export function emptyListRegistrationSchemaIterator():ListRegistrationSchemaIterator
+	export function emptyRefListRegistrationSchemaIterator():Ref<ListRegistrationSchemaIterator>
+	export function refOfListRegistrationSchemaIterator(x:ListRegistrationSchemaIterator,v:Ref<ListRegistrationSchemaIterator>)
+	export function unRefListRegistrationSchemaIterator(v:Ref<ListRegistrationSchemaIterator>):ListRegistrationSchemaIterator
+	export function emptyListResumeSourceReq():ListResumeSourceReq
+	export function emptyRefListResumeSourceReq():Ref<ListResumeSourceReq>
+	export function refOfListResumeSourceReq(x:ListResumeSourceReq,v:Ref<ListResumeSourceReq>)
+	export function unRefListResumeSourceReq(v:Ref<ListResumeSourceReq>):ListResumeSourceReq
+	export function emptyGetAgencyRespData():GetAgencyRespData
+	export function emptyRefGetAgencyRespData():Ref<GetAgencyRespData>
+	export function refOfGetAgencyRespData(x:GetAgencyRespData,v:Ref<GetAgencyRespData>)
+	export function unRefGetAgencyRespData(v:Ref<GetAgencyRespData>):GetAgencyRespData
+	export function emptyOfferApplyFormInfo():OfferApplyFormInfo
+	export function emptyRefOfferApplyFormInfo():Ref<OfferApplyFormInfo>
+	export function refOfOfferApplyFormInfo(x:OfferApplyFormInfo,v:Ref<OfferApplyFormInfo>)
+	export function unRefOfferApplyFormInfo(v:Ref<OfferApplyFormInfo>):OfferApplyFormInfo
 	export function emptyListJobRequirementSchemaReq():ListJobRequirementSchemaReq
 	export function emptyRefListJobRequirementSchemaReq():Ref<ListJobRequirementSchemaReq>
 	export function refOfListJobRequirementSchemaReq(x:ListJobRequirementSchemaReq,v:Ref<ListJobRequirementSchemaReq>)
@@ -12901,832 +17531,388 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'{
 	export function emptyRefCreateEcoAccountCustomFieldResp():Ref<CreateEcoAccountCustomFieldResp>
 	export function refOfCreateEcoAccountCustomFieldResp(x:CreateEcoAccountCustomFieldResp,v:Ref<CreateEcoAccountCustomFieldResp>)
 	export function unRefCreateEcoAccountCustomFieldResp(v:Ref<CreateEcoAccountCustomFieldResp>):CreateEcoAccountCustomFieldResp
-	export function emptyInterviewMeetingRoom():InterviewMeetingRoom
-	export function emptyRefInterviewMeetingRoom():Ref<InterviewMeetingRoom>
-	export function refOfInterviewMeetingRoom(x:InterviewMeetingRoom,v:Ref<InterviewMeetingRoom>)
-	export function unRefInterviewMeetingRoom(v:Ref<InterviewMeetingRoom>):InterviewMeetingRoom
-	export function emptyCombinedJob():CombinedJob
-	export function emptyRefCombinedJob():Ref<CombinedJob>
-	export function refOfCombinedJob(x:CombinedJob,v:Ref<CombinedJob>)
-	export function unRefCombinedJob(v:Ref<CombinedJob>):CombinedJob
-	export function emptyApplicationTalentProjectInfo():ApplicationTalentProjectInfo
-	export function emptyRefApplicationTalentProjectInfo():Ref<ApplicationTalentProjectInfo>
-	export function refOfApplicationTalentProjectInfo(x:ApplicationTalentProjectInfo,v:Ref<ApplicationTalentProjectInfo>)
-	export function unRefApplicationTalentProjectInfo(v:Ref<ApplicationTalentProjectInfo>):ApplicationTalentProjectInfo
-	export function emptyPortalJobPost():PortalJobPost
-	export function emptyRefPortalJobPost():Ref<PortalJobPost>
-	export function refOfPortalJobPost(x:PortalJobPost,v:Ref<PortalJobPost>)
-	export function unRefPortalJobPost(v:Ref<PortalJobPost>):PortalJobPost
-	export function emptyApplicationBasicInfo():ApplicationBasicInfo
-	export function emptyRefApplicationBasicInfo():Ref<ApplicationBasicInfo>
-	export function refOfApplicationBasicInfo(x:ApplicationBasicInfo,v:Ref<ApplicationBasicInfo>)
-	export function unRefApplicationBasicInfo(v:Ref<ApplicationBasicInfo>):ApplicationBasicInfo
-	export function emptyCreateNoteReq():CreateNoteReq
-	export function emptyRefCreateNoteReq():Ref<CreateNoteReq>
-	export function refOfCreateNoteReq(x:CreateNoteReq,v:Ref<CreateNoteReq>)
-	export function unRefCreateNoteReq(v:Ref<CreateNoteReq>):CreateNoteReq
-	export function emptyListNoteResp():ListNoteResp
-	export function emptyRefListNoteResp():Ref<ListNoteResp>
-	export function refOfListNoteResp(x:ListNoteResp,v:Ref<ListNoteResp>)
-	export function unRefListNoteResp(v:Ref<ListNoteResp>):ListNoteResp
-	export function emptyTerminateApplicationReq():TerminateApplicationReq
-	export function emptyRefTerminateApplicationReq():Ref<TerminateApplicationReq>
-	export function refOfTerminateApplicationReq(x:TerminateApplicationReq,v:Ref<TerminateApplicationReq>)
-	export function unRefTerminateApplicationReq(v:Ref<TerminateApplicationReq>):TerminateApplicationReq
-	export function emptyWebsiteDeliveryAward():WebsiteDeliveryAward
-	export function emptyRefWebsiteDeliveryAward():Ref<WebsiteDeliveryAward>
-	export function refOfWebsiteDeliveryAward(x:WebsiteDeliveryAward,v:Ref<WebsiteDeliveryAward>)
-	export function unRefWebsiteDeliveryAward(v:Ref<WebsiteDeliveryAward>):WebsiteDeliveryAward
-	export function emptyGetJobManagerResp():GetJobManagerResp
-	export function emptyRefGetJobManagerResp():Ref<GetJobManagerResp>
-	export function refOfGetJobManagerResp(x:GetJobManagerResp,v:Ref<GetJobManagerResp>)
-	export function unRefGetJobManagerResp(v:Ref<GetJobManagerResp>):GetJobManagerResp
-	export function emptyBaseCity():BaseCity
-	export function emptyRefBaseCity():Ref<BaseCity>
-	export function refOfBaseCity(x:BaseCity,v:Ref<BaseCity>)
-	export function unRefBaseCity(v:Ref<BaseCity>):BaseCity
-	export function emptyWebsiteJobPostCustomizedData():WebsiteJobPostCustomizedData
-	export function emptyRefWebsiteJobPostCustomizedData():Ref<WebsiteJobPostCustomizedData>
-	export function refOfWebsiteJobPostCustomizedData(x:WebsiteJobPostCustomizedData,v:Ref<WebsiteJobPostCustomizedData>)
-	export function unRefWebsiteJobPostCustomizedData(v:Ref<WebsiteJobPostCustomizedData>):WebsiteJobPostCustomizedData
-	export function emptyGetNoteRespData():GetNoteRespData
-	export function emptyRefGetNoteRespData():Ref<GetNoteRespData>
-	export function refOfGetNoteRespData(x:GetNoteRespData,v:Ref<GetNoteRespData>)
-	export function unRefGetNoteRespData(v:Ref<GetNoteRespData>):GetNoteRespData
-	export function emptyAwardInfo():AwardInfo
-	export function emptyRefAwardInfo():Ref<AwardInfo>
-	export function refOfAwardInfo(x:AwardInfo,v:Ref<AwardInfo>)
-	export function unRefAwardInfo(v:Ref<AwardInfo>):AwardInfo
-	export function emptyCity():City
-	export function emptyRefCity():Ref<City>
-	export function refOfCity(x:City,v:Ref<City>)
-	export function unRefCity(v:Ref<City>):City
-	export function emptyOfferApplicationRespData():OfferApplicationRespData
-	export function emptyRefOfferApplicationRespData():Ref<OfferApplicationRespData>
-	export function refOfOfferApplicationRespData(x:OfferApplicationRespData,v:Ref<OfferApplicationRespData>)
-	export function unRefOfferApplicationRespData(v:Ref<OfferApplicationRespData>):OfferApplicationRespData
-	export function emptyP2ApplicationStageChangedV1Data():P2ApplicationStageChangedV1Data
-	export function emptyRefP2ApplicationStageChangedV1Data():Ref<P2ApplicationStageChangedV1Data>
-	export function refOfP2ApplicationStageChangedV1Data(x:P2ApplicationStageChangedV1Data,v:Ref<P2ApplicationStageChangedV1Data>)
-	export function unRefP2ApplicationStageChangedV1Data(v:Ref<P2ApplicationStageChangedV1Data>):P2ApplicationStageChangedV1Data
-	export function emptyTalentEducationInfo():TalentEducationInfo
-	export function emptyRefTalentEducationInfo():Ref<TalentEducationInfo>
-	export function refOfTalentEducationInfo(x:TalentEducationInfo,v:Ref<TalentEducationInfo>)
-	export function unRefTalentEducationInfo(v:Ref<TalentEducationInfo>):TalentEducationInfo
-	export function emptyTargetMajorInfo():TargetMajorInfo
-	export function emptyRefTargetMajorInfo():Ref<TargetMajorInfo>
-	export function refOfTargetMajorInfo(x:TargetMajorInfo,v:Ref<TargetMajorInfo>)
-	export function unRefTargetMajorInfo(v:Ref<TargetMajorInfo>):TargetMajorInfo
-	export function emptySiteApplicationResume():SiteApplicationResume
-	export function emptyRefSiteApplicationResume():Ref<SiteApplicationResume>
-	export function refOfSiteApplicationResume(x:SiteApplicationResume,v:Ref<SiteApplicationResume>)
-	export function unRefSiteApplicationResume(v:Ref<SiteApplicationResume>):SiteApplicationResume
-	export function emptyInternOfferOffboardingInfo():InternOfferOffboardingInfo
-	export function emptyRefInternOfferOffboardingInfo():Ref<InternOfferOffboardingInfo>
-	export function refOfInternOfferOffboardingInfo(x:InternOfferOffboardingInfo,v:Ref<InternOfferOffboardingInfo>)
-	export function unRefInternOfferOffboardingInfo(v:Ref<InternOfferOffboardingInfo>):InternOfferOffboardingInfo
-	export function emptyBatchGetIdTalentRespData():BatchGetIdTalentRespData
-	export function emptyRefBatchGetIdTalentRespData():Ref<BatchGetIdTalentRespData>
-	export function refOfBatchGetIdTalentRespData(x:BatchGetIdTalentRespData,v:Ref<BatchGetIdTalentRespData>)
-	export function unRefBatchGetIdTalentRespData(v:Ref<BatchGetIdTalentRespData>):BatchGetIdTalentRespData
-	export function emptyCreateNoteRespData():CreateNoteRespData
-	export function emptyRefCreateNoteRespData():Ref<CreateNoteRespData>
-	export function refOfCreateNoteRespData(x:CreateNoteRespData,v:Ref<CreateNoteRespData>)
-	export function unRefCreateNoteRespData(v:Ref<CreateNoteRespData>):CreateNoteRespData
-	export function emptyListResumeSourceReq():ListResumeSourceReq
-	export function emptyRefListResumeSourceReq():Ref<ListResumeSourceReq>
-	export function refOfListResumeSourceReq(x:ListResumeSourceReq,v:Ref<ListResumeSourceReq>)
-	export function unRefListResumeSourceReq(v:Ref<ListResumeSourceReq>):ListResumeSourceReq
-	export function emptyTradeDetail():TradeDetail
-	export function emptyRefTradeDetail():Ref<TradeDetail>
-	export function refOfTradeDetail(x:TradeDetail,v:Ref<TradeDetail>)
-	export function unRefTradeDetail(v:Ref<TradeDetail>):TradeDetail
-	export function emptyCheckFailedAccountInfo():CheckFailedAccountInfo
-	export function emptyRefCheckFailedAccountInfo():Ref<CheckFailedAccountInfo>
-	export function refOfCheckFailedAccountInfo(x:CheckFailedAccountInfo,v:Ref<CheckFailedAccountInfo>)
-	export function unRefCheckFailedAccountInfo(v:Ref<CheckFailedAccountInfo>):CheckFailedAccountInfo
-	export function emptyGetApplicationResp():GetApplicationResp
-	export function emptyRefGetApplicationResp():Ref<GetApplicationResp>
-	export function refOfGetApplicationResp(x:GetApplicationResp,v:Ref<GetApplicationResp>)
-	export function unRefGetApplicationResp(v:Ref<GetApplicationResp>):GetApplicationResp
-	export function emptyInterviewQuestion():InterviewQuestion
-	export function emptyRefInterviewQuestion():Ref<InterviewQuestion>
-	export function refOfInterviewQuestion(x:InterviewQuestion,v:Ref<InterviewQuestion>)
-	export function unRefInterviewQuestion(v:Ref<InterviewQuestion>):InterviewQuestion
-	export function emptyCreateApplicationReq():CreateApplicationReq
-	export function emptyRefCreateApplicationReq():Ref<CreateApplicationReq>
-	export function refOfCreateApplicationReq(x:CreateApplicationReq,v:Ref<CreateApplicationReq>)
-	export function unRefCreateApplicationReq(v:Ref<CreateApplicationReq>):CreateApplicationReq
-	export function emptyEcoExamResultReport():EcoExamResultReport
-	export function emptyRefEcoExamResultReport():Ref<EcoExamResultReport>
-	export function refOfEcoExamResultReport(x:EcoExamResultReport,v:Ref<EcoExamResultReport>)
-	export function unRefEcoExamResultReport(v:Ref<EcoExamResultReport>):EcoExamResultReport
-	export function emptyListReferralWebsiteJobPostIterator():ListReferralWebsiteJobPostIterator
-	export function emptyRefListReferralWebsiteJobPostIterator():Ref<ListReferralWebsiteJobPostIterator>
-	export function refOfListReferralWebsiteJobPostIterator(x:ListReferralWebsiteJobPostIterator,v:Ref<ListReferralWebsiteJobPostIterator>)
-	export function unRefListReferralWebsiteJobPostIterator(v:Ref<ListReferralWebsiteJobPostIterator>):ListReferralWebsiteJobPostIterator
-	export function emptySubject():Subject
-	export function emptyRefSubject():Ref<Subject>
-	export function refOfSubject(x:Subject,v:Ref<Subject>)
-	export function unRefSubject(v:Ref<Subject>):Subject
-	export function emptyTalentCustomizedOption():TalentCustomizedOption
-	export function emptyRefTalentCustomizedOption():Ref<TalentCustomizedOption>
-	export function refOfTalentCustomizedOption(x:TalentCustomizedOption,v:Ref<TalentCustomizedOption>)
-	export function unRefTalentCustomizedOption(v:Ref<TalentCustomizedOption>):TalentCustomizedOption
-	export function emptyDiData():DiData
-	export function emptyRefDiData():Ref<DiData>
-	export function refOfDiData(x:DiData,v:Ref<DiData>)
-	export function unRefDiData(v:Ref<DiData>):DiData
-	export function emptyEcoExamCreateEventCandidateInfo():EcoExamCreateEventCandidateInfo
-	export function emptyRefEcoExamCreateEventCandidateInfo():Ref<EcoExamCreateEventCandidateInfo>
-	export function refOfEcoExamCreateEventCandidateInfo(x:EcoExamCreateEventCandidateInfo,v:Ref<EcoExamCreateEventCandidateInfo>)
-	export function unRefEcoExamCreateEventCandidateInfo(v:Ref<EcoExamCreateEventCandidateInfo>):EcoExamCreateEventCandidateInfo
-	export function emptyCreateExternalInterviewReq():CreateExternalInterviewReq
-	export function emptyRefCreateExternalInterviewReq():Ref<CreateExternalInterviewReq>
-	export function refOfCreateExternalInterviewReq(x:CreateExternalInterviewReq,v:Ref<CreateExternalInterviewReq>)
-	export function unRefCreateExternalInterviewReq(v:Ref<CreateExternalInterviewReq>):CreateExternalInterviewReq
-	export function emptyJobCity():JobCity
-	export function emptyRefJobCity():Ref<JobCity>
-	export function refOfJobCity(x:JobCity,v:Ref<JobCity>)
-	export function unRefJobCity(v:Ref<JobCity>):JobCity
-	export function emptyJobTypeInfo():JobTypeInfo
-	export function emptyRefJobTypeInfo():Ref<JobTypeInfo>
-	export function refOfJobTypeInfo(x:JobTypeInfo,v:Ref<JobTypeInfo>)
-	export function unRefJobTypeInfo(v:Ref<JobTypeInfo>):JobTypeInfo
-	export function emptyTalentSchemaChildObject():TalentSchemaChildObject
-	export function emptyRefTalentSchemaChildObject():Ref<TalentSchemaChildObject>
-	export function refOfTalentSchemaChildObject(x:TalentSchemaChildObject,v:Ref<TalentSchemaChildObject>)
-	export function unRefTalentSchemaChildObject(v:Ref<TalentSchemaChildObject>):TalentSchemaChildObject
-	export function emptyGetNoteReq():GetNoteReq
-	export function emptyRefGetNoteReq():Ref<GetNoteReq>
-	export function refOfGetNoteReq(x:GetNoteReq,v:Ref<GetNoteReq>)
-	export function unRefGetNoteReq(v:Ref<GetNoteReq>):GetNoteReq
-	export function emptyMobile():Mobile
-	export function emptyRefMobile():Ref<Mobile>
-	export function refOfMobile(x:Mobile,v:Ref<Mobile>)
-	export function unRefMobile(v:Ref<Mobile>):Mobile
-	export function emptyTalentCombinedCareerInfo():TalentCombinedCareerInfo
-	export function emptyRefTalentCombinedCareerInfo():Ref<TalentCombinedCareerInfo>
-	export function refOfTalentCombinedCareerInfo(x:TalentCombinedCareerInfo,v:Ref<TalentCombinedCareerInfo>)
-	export function unRefTalentCombinedCareerInfo(v:Ref<TalentCombinedCareerInfo>):TalentCombinedCareerInfo
-	export function emptyApplicationPrehireOptional():ApplicationPrehireOptional
-	export function emptyRefApplicationPrehireOptional():Ref<ApplicationPrehireOptional>
-	export function refOfApplicationPrehireOptional(x:ApplicationPrehireOptional,v:Ref<ApplicationPrehireOptional>)
-	export function unRefApplicationPrehireOptional(v:Ref<ApplicationPrehireOptional>):ApplicationPrehireOptional
-	export function emptyProjectInfo():ProjectInfo
-	export function emptyRefProjectInfo():Ref<ProjectInfo>
-	export function refOfProjectInfo(x:ProjectInfo,v:Ref<ProjectInfo>)
-	export function unRefProjectInfo(v:Ref<ProjectInfo>):ProjectInfo
-	export function emptyTransferOnboardApplicationResp():TransferOnboardApplicationResp
-	export function emptyRefTransferOnboardApplicationResp():Ref<TransferOnboardApplicationResp>
-	export function refOfTransferOnboardApplicationResp(x:TransferOnboardApplicationResp,v:Ref<TransferOnboardApplicationResp>)
-	export function unRefTransferOnboardApplicationResp(v:Ref<TransferOnboardApplicationResp>):TransferOnboardApplicationResp
-	export function emptyGetNoteResp():GetNoteResp
-	export function emptyRefGetNoteResp():Ref<GetNoteResp>
-	export function refOfGetNoteResp(x:GetNoteResp,v:Ref<GetNoteResp>)
-	export function unRefGetNoteResp(v:Ref<GetNoteResp>):GetNoteResp
-	export function emptyJobRecruiter2():JobRecruiter2
-	export function emptyRefJobRecruiter2():Ref<JobRecruiter2>
-	export function refOfJobRecruiter2(x:JobRecruiter2,v:Ref<JobRecruiter2>)
-	export function unRefJobRecruiter2(v:Ref<JobRecruiter2>):JobRecruiter2
-	export function emptyDeactivateReferralAccountReq():DeactivateReferralAccountReq
-	export function emptyRefDeactivateReferralAccountReq():Ref<DeactivateReferralAccountReq>
-	export function refOfDeactivateReferralAccountReq(x:DeactivateReferralAccountReq,v:Ref<DeactivateReferralAccountReq>)
-	export function unRefDeactivateReferralAccountReq(v:Ref<DeactivateReferralAccountReq>):DeactivateReferralAccountReq
-	export function emptyP2EcoAccountCreatedV1Data():P2EcoAccountCreatedV1Data
-	export function emptyRefP2EcoAccountCreatedV1Data():Ref<P2EcoAccountCreatedV1Data>
-	export function refOfP2EcoAccountCreatedV1Data(x:P2EcoAccountCreatedV1Data,v:Ref<P2EcoAccountCreatedV1Data>)
-	export function unRefP2EcoAccountCreatedV1Data(v:Ref<P2EcoAccountCreatedV1Data>):P2EcoAccountCreatedV1Data
-	export function emptyApplicationStageInfo():ApplicationStageInfo
-	export function emptyRefApplicationStageInfo():Ref<ApplicationStageInfo>
-	export function refOfApplicationStageInfo(x:ApplicationStageInfo,v:Ref<ApplicationStageInfo>)
-	export function unRefApplicationStageInfo(v:Ref<ApplicationStageInfo>):ApplicationStageInfo
-	export function emptyP2EcoBackgroundCheckCanceledV1():P2EcoBackgroundCheckCanceledV1
-	export function emptyRefP2EcoBackgroundCheckCanceledV1():Ref<P2EcoBackgroundCheckCanceledV1>
-	export function refOfP2EcoBackgroundCheckCanceledV1(x:P2EcoBackgroundCheckCanceledV1,v:Ref<P2EcoBackgroundCheckCanceledV1>)
-	export function unRefP2EcoBackgroundCheckCanceledV1(v:Ref<P2EcoBackgroundCheckCanceledV1>):P2EcoBackgroundCheckCanceledV1
-	export function emptyListEvaluationReq():ListEvaluationReq
-	export function emptyRefListEvaluationReq():Ref<ListEvaluationReq>
-	export function refOfListEvaluationReq(x:ListEvaluationReq,v:Ref<ListEvaluationReq>)
-	export function unRefListEvaluationReq(v:Ref<ListEvaluationReq>):ListEvaluationReq
-	export function emptyRole():Role
-	export function emptyRefRole():Ref<Role>
-	export function refOfRole(x:Role,v:Ref<Role>)
-	export function unRefRole(v:Ref<Role>):Role
-	export function emptyOfferJobInfo():OfferJobInfo
-	export function emptyRefOfferJobInfo():Ref<OfferJobInfo>
-	export function refOfOfferJobInfo(x:OfferJobInfo,v:Ref<OfferJobInfo>)
-	export function unRefOfferJobInfo(v:Ref<OfferJobInfo>):OfferJobInfo
-	export function emptyJobProcessesStage():JobProcessesStage
-	export function emptyRefJobProcessesStage():Ref<JobProcessesStage>
-	export function refOfJobProcessesStage(x:JobProcessesStage,v:Ref<JobProcessesStage>)
-	export function unRefJobProcessesStage(v:Ref<JobProcessesStage>):JobProcessesStage
-	export function emptyOfferApplyFormInfo():OfferApplyFormInfo
-	export function emptyRefOfferApplyFormInfo():Ref<OfferApplyFormInfo>
-	export function refOfOfferApplyFormInfo(x:OfferApplyFormInfo,v:Ref<OfferApplyFormInfo>)
-	export function unRefOfferApplyFormInfo(v:Ref<OfferApplyFormInfo>):OfferApplyFormInfo
-	export function emptyP2EcoExamCreatedV1():P2EcoExamCreatedV1
-	export function emptyRefP2EcoExamCreatedV1():Ref<P2EcoExamCreatedV1>
-	export function refOfP2EcoExamCreatedV1(x:P2EcoExamCreatedV1,v:Ref<P2EcoExamCreatedV1>)
-	export function unRefP2EcoExamCreatedV1(v:Ref<P2EcoExamCreatedV1>):P2EcoExamCreatedV1
-	export function emptyTalentIdentificationInfo():TalentIdentificationInfo
-	export function emptyRefTalentIdentificationInfo():Ref<TalentIdentificationInfo>
-	export function refOfTalentIdentificationInfo(x:TalentIdentificationInfo,v:Ref<TalentIdentificationInfo>)
-	export function unRefTalentIdentificationInfo(v:Ref<TalentIdentificationInfo>):TalentIdentificationInfo
-	export function emptyGetOfferSchemaRespData():GetOfferSchemaRespData
-	export function emptyRefGetOfferSchemaRespData():Ref<GetOfferSchemaRespData>
-	export function refOfGetOfferSchemaRespData(x:GetOfferSchemaRespData,v:Ref<GetOfferSchemaRespData>)
-	export function unRefGetOfferSchemaRespData(v:Ref<GetOfferSchemaRespData>):GetOfferSchemaRespData
-	export function emptyBatchDeleteEcoExamPaperResp():BatchDeleteEcoExamPaperResp
-	export function emptyRefBatchDeleteEcoExamPaperResp():Ref<BatchDeleteEcoExamPaperResp>
-	export function refOfBatchDeleteEcoExamPaperResp(x:BatchDeleteEcoExamPaperResp,v:Ref<BatchDeleteEcoExamPaperResp>)
-	export function unRefBatchDeleteEcoExamPaperResp(v:Ref<BatchDeleteEcoExamPaperResp>):BatchDeleteEcoExamPaperResp
-	export function emptyInternOfferOnboardingInfo():InternOfferOnboardingInfo
-	export function emptyRefInternOfferOnboardingInfo():Ref<InternOfferOnboardingInfo>
-	export function refOfInternOfferOnboardingInfo(x:InternOfferOnboardingInfo,v:Ref<InternOfferOnboardingInfo>)
-	export function unRefInternOfferOnboardingInfo(v:Ref<InternOfferOnboardingInfo>):InternOfferOnboardingInfo
-	export function emptyUpdateConfigJobResp():UpdateConfigJobResp
-	export function emptyRefUpdateConfigJobResp():Ref<UpdateConfigJobResp>
-	export function refOfUpdateConfigJobResp(x:UpdateConfigJobResp,v:Ref<UpdateConfigJobResp>)
-	export function unRefUpdateConfigJobResp(v:Ref<UpdateConfigJobResp>):UpdateConfigJobResp
-	export function emptyApplicationOfferBasicInfoCustomizedObject():ApplicationOfferBasicInfoCustomizedObject
-	export function emptyRefApplicationOfferBasicInfoCustomizedObject():Ref<ApplicationOfferBasicInfoCustomizedObject>
-	export function refOfApplicationOfferBasicInfoCustomizedObject(x:ApplicationOfferBasicInfoCustomizedObject,v:Ref<ApplicationOfferBasicInfoCustomizedObject>)
-	export function unRefApplicationOfferBasicInfoCustomizedObject(v:Ref<ApplicationOfferBasicInfoCustomizedObject>):ApplicationOfferBasicInfoCustomizedObject
-	export function emptyBackgroundCheckProcessInfo():BackgroundCheckProcessInfo
-	export function emptyRefBackgroundCheckProcessInfo():Ref<BackgroundCheckProcessInfo>
-	export function refOfBackgroundCheckProcessInfo(x:BackgroundCheckProcessInfo,v:Ref<BackgroundCheckProcessInfo>)
-	export function unRefBackgroundCheckProcessInfo(v:Ref<BackgroundCheckProcessInfo>):BackgroundCheckProcessInfo
-	export function emptyListJobRequirementSchemaResp():ListJobRequirementSchemaResp
-	export function emptyRefListJobRequirementSchemaResp():Ref<ListJobRequirementSchemaResp>
-	export function refOfListJobRequirementSchemaResp(x:ListJobRequirementSchemaResp,v:Ref<ListJobRequirementSchemaResp>)
-	export function unRefListJobRequirementSchemaResp(v:Ref<ListJobRequirementSchemaResp>):ListJobRequirementSchemaResp
-	export function emptyListReferralWebsiteJobPostResp():ListReferralWebsiteJobPostResp
-	export function emptyRefListReferralWebsiteJobPostResp():Ref<ListReferralWebsiteJobPostResp>
-	export function refOfListReferralWebsiteJobPostResp(x:ListReferralWebsiteJobPostResp,v:Ref<ListReferralWebsiteJobPostResp>)
-	export function unRefListReferralWebsiteJobPostResp(v:Ref<ListReferralWebsiteJobPostResp>):ListReferralWebsiteJobPostResp
-	export function emptyUpdateProgressEcoBackgroundCheckReqBody():UpdateProgressEcoBackgroundCheckReqBody
-	export function emptyRefUpdateProgressEcoBackgroundCheckReqBody():Ref<UpdateProgressEcoBackgroundCheckReqBody>
-	export function refOfUpdateProgressEcoBackgroundCheckReqBody(x:UpdateProgressEcoBackgroundCheckReqBody,v:Ref<UpdateProgressEcoBackgroundCheckReqBody>)
-	export function unRefUpdateProgressEcoBackgroundCheckReqBody(v:Ref<UpdateProgressEcoBackgroundCheckReqBody>):UpdateProgressEcoBackgroundCheckReqBody
-	export function emptyApplicationTalentAttachmentResumeInfo():ApplicationTalentAttachmentResumeInfo
-	export function emptyRefApplicationTalentAttachmentResumeInfo():Ref<ApplicationTalentAttachmentResumeInfo>
-	export function refOfApplicationTalentAttachmentResumeInfo(x:ApplicationTalentAttachmentResumeInfo,v:Ref<ApplicationTalentAttachmentResumeInfo>)
-	export function unRefApplicationTalentAttachmentResumeInfo(v:Ref<ApplicationTalentAttachmentResumeInfo>):ApplicationTalentAttachmentResumeInfo
-	export function emptyJobCustomizedData():JobCustomizedData
-	export function emptyRefJobCustomizedData():Ref<JobCustomizedData>
-	export function refOfJobCustomizedData(x:JobCustomizedData,v:Ref<JobCustomizedData>)
-	export function unRefJobCustomizedData(v:Ref<JobCustomizedData>):JobCustomizedData
-	export function emptyListByIdJobRequirementRespData():ListByIdJobRequirementRespData
-	export function emptyRefListByIdJobRequirementRespData():Ref<ListByIdJobRequirementRespData>
-	export function refOfListByIdJobRequirementRespData(x:ListByIdJobRequirementRespData,v:Ref<ListByIdJobRequirementRespData>)
-	export function unRefListByIdJobRequirementRespData(v:Ref<ListByIdJobRequirementRespData>):ListByIdJobRequirementRespData
-	export function emptyCreateExternalApplicationRespData():CreateExternalApplicationRespData
-	export function emptyRefCreateExternalApplicationRespData():Ref<CreateExternalApplicationRespData>
-	export function refOfCreateExternalApplicationRespData(x:CreateExternalApplicationRespData,v:Ref<CreateExternalApplicationRespData>)
-	export function unRefCreateExternalApplicationRespData(v:Ref<CreateExternalApplicationRespData>):CreateExternalApplicationRespData
-	export function emptyP2EhrImportTaskForInternshipOfferImportedV1Data():P2EhrImportTaskForInternshipOfferImportedV1Data
-	export function emptyRefP2EhrImportTaskForInternshipOfferImportedV1Data():Ref<P2EhrImportTaskForInternshipOfferImportedV1Data>
-	export function refOfP2EhrImportTaskForInternshipOfferImportedV1Data(x:P2EhrImportTaskForInternshipOfferImportedV1Data,v:Ref<P2EhrImportTaskForInternshipOfferImportedV1Data>)
-	export function unRefP2EhrImportTaskForInternshipOfferImportedV1Data(v:Ref<P2EhrImportTaskForInternshipOfferImportedV1Data>):P2EhrImportTaskForInternshipOfferImportedV1Data
-	export function emptyCreateApplicationReqBody():CreateApplicationReqBody
-	export function emptyRefCreateApplicationReqBody():Ref<CreateApplicationReqBody>
-	export function refOfCreateApplicationReqBody(x:CreateApplicationReqBody,v:Ref<CreateApplicationReqBody>)
-	export function unRefCreateApplicationReqBody(v:Ref<CreateApplicationReqBody>):CreateApplicationReqBody
-	export function emptyTalentInterviewRegistrationSimple():TalentInterviewRegistrationSimple
-	export function emptyRefTalentInterviewRegistrationSimple():Ref<TalentInterviewRegistrationSimple>
-	export function refOfTalentInterviewRegistrationSimple(x:TalentInterviewRegistrationSimple,v:Ref<TalentInterviewRegistrationSimple>)
-	export function unRefTalentInterviewRegistrationSimple(v:Ref<TalentInterviewRegistrationSimple>):TalentInterviewRegistrationSimple
-	export function emptyAppliOfferBasicInfoUser():AppliOfferBasicInfoUser
-	export function emptyRefAppliOfferBasicInfoUser():Ref<AppliOfferBasicInfoUser>
-	export function refOfAppliOfferBasicInfoUser(x:AppliOfferBasicInfoUser,v:Ref<AppliOfferBasicInfoUser>)
-	export function unRefAppliOfferBasicInfoUser(v:Ref<AppliOfferBasicInfoUser>):AppliOfferBasicInfoUser
-	export function emptyBatchGetIdTalentResp():BatchGetIdTalentResp
-	export function emptyRefBatchGetIdTalentResp():Ref<BatchGetIdTalentResp>
-	export function refOfBatchGetIdTalentResp(x:BatchGetIdTalentResp,v:Ref<BatchGetIdTalentResp>)
-	export function unRefBatchGetIdTalentResp(v:Ref<BatchGetIdTalentResp>):BatchGetIdTalentResp
-	export function emptyNote():Note
-	export function emptyRefNote():Ref<Note>
-	export function refOfNote(x:Note,v:Ref<Note>)
-	export function unRefNote(v:Ref<Note>):Note
-	export function emptyEcoBackgroundCheckPackage():EcoBackgroundCheckPackage
-	export function emptyRefEcoBackgroundCheckPackage():Ref<EcoBackgroundCheckPackage>
-	export function refOfEcoBackgroundCheckPackage(x:EcoBackgroundCheckPackage,v:Ref<EcoBackgroundCheckPackage>)
-	export function unRefEcoBackgroundCheckPackage(v:Ref<EcoBackgroundCheckPackage>):EcoBackgroundCheckPackage
-	export function emptyJobType():JobType
-	export function emptyRefJobType():Ref<JobType>
-	export function refOfJobType(x:JobType,v:Ref<JobType>)
-	export function unRefJobType(v:Ref<JobType>):JobType
-	export function emptyListApplicationInterviewResp():ListApplicationInterviewResp
-	export function emptyRefListApplicationInterviewResp():Ref<ListApplicationInterviewResp>
-	export function refOfListApplicationInterviewResp(x:ListApplicationInterviewResp,v:Ref<ListApplicationInterviewResp>)
-	export function unRefListApplicationInterviewResp(v:Ref<ListApplicationInterviewResp>):ListApplicationInterviewResp
-	export function emptyApplicationPrehire():ApplicationPrehire
-	export function emptyRefApplicationPrehire():Ref<ApplicationPrehire>
-	export function refOfApplicationPrehire(x:ApplicationPrehire,v:Ref<ApplicationPrehire>)
-	export function unRefApplicationPrehire(v:Ref<ApplicationPrehire>):ApplicationPrehire
-	export function emptyBatchDeleteEcoExamPaperReqBody():BatchDeleteEcoExamPaperReqBody
-	export function emptyRefBatchDeleteEcoExamPaperReqBody():Ref<BatchDeleteEcoExamPaperReqBody>
-	export function refOfBatchDeleteEcoExamPaperReqBody(x:BatchDeleteEcoExamPaperReqBody,v:Ref<BatchDeleteEcoExamPaperReqBody>)
-	export function unRefBatchDeleteEcoExamPaperReqBody(v:Ref<BatchDeleteEcoExamPaperReqBody>):BatchDeleteEcoExamPaperReqBody
-	export function emptyOfferStatusOfferReqBody():OfferStatusOfferReqBody
-	export function emptyRefOfferStatusOfferReqBody():Ref<OfferStatusOfferReqBody>
-	export function refOfOfferStatusOfferReqBody(x:OfferStatusOfferReqBody,v:Ref<OfferStatusOfferReqBody>)
-	export function unRefOfferStatusOfferReqBody(v:Ref<OfferStatusOfferReqBody>):OfferStatusOfferReqBody
-	export function emptyBackgroundCheckFeedbackInfo():BackgroundCheckFeedbackInfo
-	export function emptyRefBackgroundCheckFeedbackInfo():Ref<BackgroundCheckFeedbackInfo>
-	export function refOfBackgroundCheckFeedbackInfo(x:BackgroundCheckFeedbackInfo,v:Ref<BackgroundCheckFeedbackInfo>)
-	export function unRefBackgroundCheckFeedbackInfo(v:Ref<BackgroundCheckFeedbackInfo>):BackgroundCheckFeedbackInfo
-	export function emptyGetOfferResp():GetOfferResp
-	export function emptyRefGetOfferResp():Ref<GetOfferResp>
-	export function refOfGetOfferResp(x:GetOfferResp,v:Ref<GetOfferResp>)
-	export function unRefGetOfferResp(v:Ref<GetOfferResp>):GetOfferResp
-	export function emptyCreateEcoExamPaperResp():CreateEcoExamPaperResp
-	export function emptyRefCreateEcoExamPaperResp():Ref<CreateEcoExamPaperResp>
-	export function refOfCreateEcoExamPaperResp(x:CreateEcoExamPaperResp,v:Ref<CreateEcoExamPaperResp>)
-	export function unRefCreateEcoExamPaperResp(v:Ref<CreateEcoExamPaperResp>):CreateEcoExamPaperResp
-	export function emptyBatchUpdateEcoBackgroundCheckCustomFieldReq():BatchUpdateEcoBackgroundCheckCustomFieldReq
-	export function emptyRefBatchUpdateEcoBackgroundCheckCustomFieldReq():Ref<BatchUpdateEcoBackgroundCheckCustomFieldReq>
-	export function refOfBatchUpdateEcoBackgroundCheckCustomFieldReq(x:BatchUpdateEcoBackgroundCheckCustomFieldReq,v:Ref<BatchUpdateEcoBackgroundCheckCustomFieldReq>)
-	export function unRefBatchUpdateEcoBackgroundCheckCustomFieldReq(v:Ref<BatchUpdateEcoBackgroundCheckCustomFieldReq>):BatchUpdateEcoBackgroundCheckCustomFieldReq
-	export function emptyWebsiteDeliveryCareer():WebsiteDeliveryCareer
-	export function emptyRefWebsiteDeliveryCareer():Ref<WebsiteDeliveryCareer>
-	export function refOfWebsiteDeliveryCareer(x:WebsiteDeliveryCareer,v:Ref<WebsiteDeliveryCareer>)
-	export function unRefWebsiteDeliveryCareer(v:Ref<WebsiteDeliveryCareer>):WebsiteDeliveryCareer
-	export function emptyAgencyProtection():AgencyProtection
-	export function emptyRefAgencyProtection():Ref<AgencyProtection>
-	export function refOfAgencyProtection(x:AgencyProtection,v:Ref<AgencyProtection>)
-	export function unRefAgencyProtection(v:Ref<AgencyProtection>):AgencyProtection
-	export function emptyTalentCompetitionInfo():TalentCompetitionInfo
-	export function emptyRefTalentCompetitionInfo():Ref<TalentCompetitionInfo>
-	export function refOfTalentCompetitionInfo(x:TalentCompetitionInfo,v:Ref<TalentCompetitionInfo>)
-	export function unRefTalentCompetitionInfo(v:Ref<TalentCompetitionInfo>):TalentCompetitionInfo
-	export function emptyCombinedCreateJobResp():CombinedCreateJobResp
-	export function emptyRefCombinedCreateJobResp():Ref<CombinedCreateJobResp>
-	export function refOfCombinedCreateJobResp(x:CombinedCreateJobResp,v:Ref<CombinedCreateJobResp>)
-	export function unRefCombinedCreateJobResp(v:Ref<CombinedCreateJobResp>):CombinedCreateJobResp
-	export function emptyExternalApplication():ExternalApplication
-	export function emptyRefExternalApplication():Ref<ExternalApplication>
-	export function refOfExternalApplication(x:ExternalApplication,v:Ref<ExternalApplication>)
-	export function unRefExternalApplication(v:Ref<ExternalApplication>):ExternalApplication
-	export function emptyGetByApplicationReferralResp():GetByApplicationReferralResp
-	export function emptyRefGetByApplicationReferralResp():Ref<GetByApplicationReferralResp>
-	export function refOfGetByApplicationReferralResp(x:GetByApplicationReferralResp,v:Ref<GetByApplicationReferralResp>)
-	export function unRefGetByApplicationReferralResp(v:Ref<GetByApplicationReferralResp>):GetByApplicationReferralResp
-	export function emptyTalentCustomizedData():TalentCustomizedData
-	export function emptyRefTalentCustomizedData():Ref<TalentCustomizedData>
-	export function refOfTalentCustomizedData(x:TalentCustomizedData,v:Ref<TalentCustomizedData>)
-	export function unRefTalentCustomizedData(v:Ref<TalentCustomizedData>):TalentCustomizedData
-	export function emptyApplicationTalentCompetitionInfo():ApplicationTalentCompetitionInfo
-	export function emptyRefApplicationTalentCompetitionInfo():Ref<ApplicationTalentCompetitionInfo>
-	export function refOfApplicationTalentCompetitionInfo(x:ApplicationTalentCompetitionInfo,v:Ref<ApplicationTalentCompetitionInfo>)
-	export function unRefApplicationTalentCompetitionInfo(v:Ref<ApplicationTalentCompetitionInfo>):ApplicationTalentCompetitionInfo
-	export function emptyDeleteJobRequirementResp():DeleteJobRequirementResp
-	export function emptyRefDeleteJobRequirementResp():Ref<DeleteJobRequirementResp>
-	export function refOfDeleteJobRequirementResp(x:DeleteJobRequirementResp,v:Ref<DeleteJobRequirementResp>)
-	export function unRefDeleteJobRequirementResp(v:Ref<DeleteJobRequirementResp>):DeleteJobRequirementResp
-	export function emptyUpdateProgressEcoBackgroundCheckResp():UpdateProgressEcoBackgroundCheckResp
-	export function emptyRefUpdateProgressEcoBackgroundCheckResp():Ref<UpdateProgressEcoBackgroundCheckResp>
-	export function refOfUpdateProgressEcoBackgroundCheckResp(x:UpdateProgressEcoBackgroundCheckResp,v:Ref<UpdateProgressEcoBackgroundCheckResp>)
-	export function unRefUpdateProgressEcoBackgroundCheckResp(v:Ref<UpdateProgressEcoBackgroundCheckResp>):UpdateProgressEcoBackgroundCheckResp
-	export function emptyCreateEcoAccountCustomFieldReq():CreateEcoAccountCustomFieldReq
-	export function emptyRefCreateEcoAccountCustomFieldReq():Ref<CreateEcoAccountCustomFieldReq>
-	export function refOfCreateEcoAccountCustomFieldReq(x:CreateEcoAccountCustomFieldReq,v:Ref<CreateEcoAccountCustomFieldReq>)
-	export function unRefCreateEcoAccountCustomFieldReq(v:Ref<CreateEcoAccountCustomFieldReq>):CreateEcoAccountCustomFieldReq
-	export function emptyUpdateConfigJobRespData():UpdateConfigJobRespData
-	export function emptyRefUpdateConfigJobRespData():Ref<UpdateConfigJobRespData>
-	export function refOfUpdateConfigJobRespData(x:UpdateConfigJobRespData,v:Ref<UpdateConfigJobRespData>)
-	export function unRefUpdateConfigJobRespData(v:Ref<UpdateConfigJobRespData>):UpdateConfigJobRespData
-	export function emptyInterviewFeedbackFormDimension():InterviewFeedbackFormDimension
-	export function emptyRefInterviewFeedbackFormDimension():Ref<InterviewFeedbackFormDimension>
-	export function refOfInterviewFeedbackFormDimension(x:InterviewFeedbackFormDimension,v:Ref<InterviewFeedbackFormDimension>)
-	export function unRefInterviewFeedbackFormDimension(v:Ref<InterviewFeedbackFormDimension>):InterviewFeedbackFormDimension
-	export function emptyLoginInfoEcoExamReq():LoginInfoEcoExamReq
-	export function emptyRefLoginInfoEcoExamReq():Ref<LoginInfoEcoExamReq>
-	export function refOfLoginInfoEcoExamReq(x:LoginInfoEcoExamReq,v:Ref<LoginInfoEcoExamReq>)
-	export function unRefLoginInfoEcoExamReq(v:Ref<LoginInfoEcoExamReq>):LoginInfoEcoExamReq
-	export function emptyCreateExternalInterviewAssessmentResp():CreateExternalInterviewAssessmentResp
-	export function emptyRefCreateExternalInterviewAssessmentResp():Ref<CreateExternalInterviewAssessmentResp>
-	export function refOfCreateExternalInterviewAssessmentResp(x:CreateExternalInterviewAssessmentResp,v:Ref<CreateExternalInterviewAssessmentResp>)
-	export function unRefCreateExternalInterviewAssessmentResp(v:Ref<CreateExternalInterviewAssessmentResp>):CreateExternalInterviewAssessmentResp
-	export function emptyGetApplicationReq():GetApplicationReq
-	export function emptyRefGetApplicationReq():Ref<GetApplicationReq>
-	export function refOfGetApplicationReq(x:GetApplicationReq,v:Ref<GetApplicationReq>)
-	export function unRefGetApplicationReq(v:Ref<GetApplicationReq>):GetApplicationReq
-	export function emptySiteResumeProject():SiteResumeProject
-	export function emptyRefSiteResumeProject():Ref<SiteResumeProject>
-	export function refOfSiteResumeProject(x:SiteResumeProject,v:Ref<SiteResumeProject>)
-	export function unRefSiteResumeProject(v:Ref<SiteResumeProject>):SiteResumeProject
-	export function emptyWithdrawReferralAccountRespData():WithdrawReferralAccountRespData
-	export function emptyRefWithdrawReferralAccountRespData():Ref<WithdrawReferralAccountRespData>
-	export function refOfWithdrawReferralAccountRespData(x:WithdrawReferralAccountRespData,v:Ref<WithdrawReferralAccountRespData>)
-	export function unRefWithdrawReferralAccountRespData(v:Ref<WithdrawReferralAccountRespData>):WithdrawReferralAccountRespData
-	export function emptyWebsiteDeliveryEducation():WebsiteDeliveryEducation
-	export function emptyRefWebsiteDeliveryEducation():Ref<WebsiteDeliveryEducation>
-	export function refOfWebsiteDeliveryEducation(x:WebsiteDeliveryEducation,v:Ref<WebsiteDeliveryEducation>)
-	export function unRefWebsiteDeliveryEducation(v:Ref<WebsiteDeliveryEducation>):WebsiteDeliveryEducation
-	export function emptyWorksInfo():WorksInfo
-	export function emptyRefWorksInfo():Ref<WorksInfo>
-	export function refOfWorksInfo(x:WorksInfo,v:Ref<WorksInfo>)
-	export function unRefWorksInfo(v:Ref<WorksInfo>):WorksInfo
-	export function emptyApplicationPrehireDepartment():ApplicationPrehireDepartment
-	export function emptyRefApplicationPrehireDepartment():Ref<ApplicationPrehireDepartment>
-	export function refOfApplicationPrehireDepartment(x:ApplicationPrehireDepartment,v:Ref<ApplicationPrehireDepartment>)
-	export function unRefApplicationPrehireDepartment(v:Ref<ApplicationPrehireDepartment>):ApplicationPrehireDepartment
-	export function emptyJobConfigInterviewRound():JobConfigInterviewRound
-	export function emptyRefJobConfigInterviewRound():Ref<JobConfigInterviewRound>
-	export function refOfJobConfigInterviewRound(x:JobConfigInterviewRound,v:Ref<JobConfigInterviewRound>)
-	export function unRefJobConfigInterviewRound(v:Ref<JobConfigInterviewRound>):JobConfigInterviewRound
-	export function emptyPermissionScopeRule():PermissionScopeRule
-	export function emptyRefPermissionScopeRule():Ref<PermissionScopeRule>
-	export function refOfPermissionScopeRule(x:PermissionScopeRule,v:Ref<PermissionScopeRule>)
-	export function unRefPermissionScopeRule(v:Ref<PermissionScopeRule>):PermissionScopeRule
-	export function emptyResumeSource():ResumeSource
-	export function emptyRefResumeSource():Ref<ResumeSource>
-	export function refOfResumeSource(x:ResumeSource,v:Ref<ResumeSource>)
-	export function unRefResumeSource(v:Ref<ResumeSource>):ResumeSource
-	export function emptyUserRole():UserRole
-	export function emptyRefUserRole():Ref<UserRole>
-	export function refOfUserRole(x:UserRole,v:Ref<UserRole>)
-	export function unRefUserRole(v:Ref<UserRole>):UserRole
-	export function emptyBatchUpdateEcoBackgroundCheckPackageReq():BatchUpdateEcoBackgroundCheckPackageReq
-	export function emptyRefBatchUpdateEcoBackgroundCheckPackageReq():Ref<BatchUpdateEcoBackgroundCheckPackageReq>
-	export function refOfBatchUpdateEcoBackgroundCheckPackageReq(x:BatchUpdateEcoBackgroundCheckPackageReq,v:Ref<BatchUpdateEcoBackgroundCheckPackageReq>)
-	export function unRefBatchUpdateEcoBackgroundCheckPackageReq(v:Ref<BatchUpdateEcoBackgroundCheckPackageReq>):BatchUpdateEcoBackgroundCheckPackageReq
-	export function emptySiteResumeIdentification():SiteResumeIdentification
-	export function emptyRefSiteResumeIdentification():Ref<SiteResumeIdentification>
-	export function refOfSiteResumeIdentification(x:SiteResumeIdentification,v:Ref<SiteResumeIdentification>)
-	export function unRefSiteResumeIdentification(v:Ref<SiteResumeIdentification>):SiteResumeIdentification
-	export function emptyBatchDeleteEcoBackgroundCheckPackageReqBody():BatchDeleteEcoBackgroundCheckPackageReqBody
-	export function emptyRefBatchDeleteEcoBackgroundCheckPackageReqBody():Ref<BatchDeleteEcoBackgroundCheckPackageReqBody>
-	export function refOfBatchDeleteEcoBackgroundCheckPackageReqBody(x:BatchDeleteEcoBackgroundCheckPackageReqBody,v:Ref<BatchDeleteEcoBackgroundCheckPackageReqBody>)
-	export function unRefBatchDeleteEcoBackgroundCheckPackageReqBody(v:Ref<BatchDeleteEcoBackgroundCheckPackageReqBody>):BatchDeleteEcoBackgroundCheckPackageReqBody
+	export function emptyCreateWebsiteSiteUserRespData():CreateWebsiteSiteUserRespData
+	export function emptyRefCreateWebsiteSiteUserRespData():Ref<CreateWebsiteSiteUserRespData>
+	export function refOfCreateWebsiteSiteUserRespData(x:CreateWebsiteSiteUserRespData,v:Ref<CreateWebsiteSiteUserRespData>)
+	export function unRefCreateWebsiteSiteUserRespData(v:Ref<CreateWebsiteSiteUserRespData>):CreateWebsiteSiteUserRespData
+	export function emptyJobRecruitmentType():JobRecruitmentType
+	export function emptyRefJobRecruitmentType():Ref<JobRecruitmentType>
+	export function refOfJobRecruitmentType(x:JobRecruitmentType,v:Ref<JobRecruitmentType>)
+	export function unRefJobRecruitmentType(v:Ref<JobRecruitmentType>):JobRecruitmentType
 	export function emptyOfferApplyFormObjectInfo():OfferApplyFormObjectInfo
 	export function emptyRefOfferApplyFormObjectInfo():Ref<OfferApplyFormObjectInfo>
 	export function refOfOfferApplyFormObjectInfo(x:OfferApplyFormObjectInfo,v:Ref<OfferApplyFormObjectInfo>)
 	export function unRefOfferApplyFormObjectInfo(v:Ref<OfferApplyFormObjectInfo>):OfferApplyFormObjectInfo
-	export function emptyOfferCustomFieldConfig():OfferCustomFieldConfig
-	export function emptyRefOfferCustomFieldConfig():Ref<OfferCustomFieldConfig>
-	export function refOfOfferCustomFieldConfig(x:OfferCustomFieldConfig,v:Ref<OfferCustomFieldConfig>)
-	export function unRefOfferCustomFieldConfig(v:Ref<OfferCustomFieldConfig>):OfferCustomFieldConfig
-	export function emptyInterviewAssessmentDimensionArgsScore():InterviewAssessmentDimensionArgsScore
-	export function emptyRefInterviewAssessmentDimensionArgsScore():Ref<InterviewAssessmentDimensionArgsScore>
-	export function refOfInterviewAssessmentDimensionArgsScore(x:InterviewAssessmentDimensionArgsScore,v:Ref<InterviewAssessmentDimensionArgsScore>)
-	export function unRefInterviewAssessmentDimensionArgsScore(v:Ref<InterviewAssessmentDimensionArgsScore>):InterviewAssessmentDimensionArgsScore
-	export function emptyEcoBackgroundCheckCustomField():EcoBackgroundCheckCustomField
-	export function emptyRefEcoBackgroundCheckCustomField():Ref<EcoBackgroundCheckCustomField>
-	export function refOfEcoBackgroundCheckCustomField(x:EcoBackgroundCheckCustomField,v:Ref<EcoBackgroundCheckCustomField>)
-	export function unRefEcoBackgroundCheckCustomField(v:Ref<EcoBackgroundCheckCustomField>):EcoBackgroundCheckCustomField
-	export function emptyJobConfigInterviewRoundConf():JobConfigInterviewRoundConf
-	export function emptyRefJobConfigInterviewRoundConf():Ref<JobConfigInterviewRoundConf>
-	export function refOfJobConfigInterviewRoundConf(x:JobConfigInterviewRoundConf,v:Ref<JobConfigInterviewRoundConf>)
-	export function unRefJobConfigInterviewRoundConf(v:Ref<JobConfigInterviewRoundConf>):JobConfigInterviewRoundConf
-	export function emptyInterviewRecordTemplate():InterviewRecordTemplate
-	export function emptyRefInterviewRecordTemplate():Ref<InterviewRecordTemplate>
-	export function refOfInterviewRecordTemplate(x:InterviewRecordTemplate,v:Ref<InterviewRecordTemplate>)
-	export function unRefInterviewRecordTemplate(v:Ref<InterviewRecordTemplate>):InterviewRecordTemplate
-	export function emptyCertificateInfo():CertificateInfo
-	export function emptyRefCertificateInfo():Ref<CertificateInfo>
-	export function refOfCertificateInfo(x:CertificateInfo,v:Ref<CertificateInfo>)
-	export function unRefCertificateInfo(v:Ref<CertificateInfo>):CertificateInfo
-	export function emptyListJobProcessRespData():ListJobProcessRespData
-	export function emptyRefListJobProcessRespData():Ref<ListJobProcessRespData>
-	export function refOfListJobProcessRespData(x:ListJobProcessRespData,v:Ref<ListJobProcessRespData>)
-	export function unRefListJobProcessRespData(v:Ref<ListJobProcessRespData>):ListJobProcessRespData
-	export function emptyListTalentFolderRespData():ListTalentFolderRespData
-	export function emptyRefListTalentFolderRespData():Ref<ListTalentFolderRespData>
-	export function refOfListTalentFolderRespData(x:ListTalentFolderRespData,v:Ref<ListTalentFolderRespData>)
-	export function unRefListTalentFolderRespData(v:Ref<ListTalentFolderRespData>):ListTalentFolderRespData
-	export function emptyListTalentReq():ListTalentReq
-	export function emptyRefListTalentReq():Ref<ListTalentReq>
-	export function refOfListTalentReq(x:ListTalentReq,v:Ref<ListTalentReq>)
-	export function unRefListTalentReq(v:Ref<ListTalentReq>):ListTalentReq
-	export function emptyUpdateResultEcoBackgroundCheckReq():UpdateResultEcoBackgroundCheckReq
-	export function emptyRefUpdateResultEcoBackgroundCheckReq():Ref<UpdateResultEcoBackgroundCheckReq>
-	export function refOfUpdateResultEcoBackgroundCheckReq(x:UpdateResultEcoBackgroundCheckReq,v:Ref<UpdateResultEcoBackgroundCheckReq>)
-	export function unRefUpdateResultEcoBackgroundCheckReq(v:Ref<UpdateResultEcoBackgroundCheckReq>):UpdateResultEcoBackgroundCheckReq
-	export function emptyApplicationStageTime():ApplicationStageTime
-	export function emptyRefApplicationStageTime():Ref<ApplicationStageTime>
-	export function refOfApplicationStageTime(x:ApplicationStageTime,v:Ref<ApplicationStageTime>)
-	export function unRefApplicationStageTime(v:Ref<ApplicationStageTime>):ApplicationStageTime
-	export function emptyUpdateConfigJobReq():UpdateConfigJobReq
-	export function emptyRefUpdateConfigJobReq():Ref<UpdateConfigJobReq>
-	export function refOfUpdateConfigJobReq(x:UpdateConfigJobReq,v:Ref<UpdateConfigJobReq>)
-	export function unRefUpdateConfigJobReq(v:Ref<UpdateConfigJobReq>):UpdateConfigJobReq
-	export function emptyBaseAddress():BaseAddress
-	export function emptyRefBaseAddress():Ref<BaseAddress>
-	export function refOfBaseAddress(x:BaseAddress,v:Ref<BaseAddress>)
-	export function unRefBaseAddress(v:Ref<BaseAddress>):BaseAddress
-	export function emptyCreateExternalInterviewResp():CreateExternalInterviewResp
-	export function emptyRefCreateExternalInterviewResp():Ref<CreateExternalInterviewResp>
-	export function refOfCreateExternalInterviewResp(x:CreateExternalInterviewResp,v:Ref<CreateExternalInterviewResp>)
-	export function unRefCreateExternalInterviewResp(v:Ref<CreateExternalInterviewResp>):CreateExternalInterviewResp
-	export function emptyExternalGrantRoleInfo():ExternalGrantRoleInfo
-	export function emptyRefExternalGrantRoleInfo():Ref<ExternalGrantRoleInfo>
-	export function refOfExternalGrantRoleInfo(x:ExternalGrantRoleInfo,v:Ref<ExternalGrantRoleInfo>)
-	export function unRefExternalGrantRoleInfo(v:Ref<ExternalGrantRoleInfo>):ExternalGrantRoleInfo
-	export function emptyGetByApplicationEmployeeResp():GetByApplicationEmployeeResp
-	export function emptyRefGetByApplicationEmployeeResp():Ref<GetByApplicationEmployeeResp>
-	export function refOfGetByApplicationEmployeeResp(x:GetByApplicationEmployeeResp,v:Ref<GetByApplicationEmployeeResp>)
-	export function unRefGetByApplicationEmployeeResp(v:Ref<GetByApplicationEmployeeResp>):GetByApplicationEmployeeResp
-	export function emptyInternOfferStatusOfferResp():InternOfferStatusOfferResp
-	export function emptyRefInternOfferStatusOfferResp():Ref<InternOfferStatusOfferResp>
-	export function refOfInternOfferStatusOfferResp(x:InternOfferStatusOfferResp,v:Ref<InternOfferStatusOfferResp>)
-	export function unRefInternOfferStatusOfferResp(v:Ref<InternOfferStatusOfferResp>):InternOfferStatusOfferResp
-	export function emptyUserBusinessManagementScope():UserBusinessManagementScope
-	export function emptyRefUserBusinessManagementScope():Ref<UserBusinessManagementScope>
-	export function refOfUserBusinessManagementScope(x:UserBusinessManagementScope,v:Ref<UserBusinessManagementScope>)
-	export function unRefUserBusinessManagementScope(v:Ref<UserBusinessManagementScope>):UserBusinessManagementScope
-	export function emptyDeactivateReferralAccountRespData():DeactivateReferralAccountRespData
-	export function emptyRefDeactivateReferralAccountRespData():Ref<DeactivateReferralAccountRespData>
-	export function refOfDeactivateReferralAccountRespData(x:DeactivateReferralAccountRespData,v:Ref<DeactivateReferralAccountRespData>)
-	export function unRefDeactivateReferralAccountRespData(v:Ref<DeactivateReferralAccountRespData>):DeactivateReferralAccountRespData
-	export function emptyRegistrationSchema():RegistrationSchema
-	export function emptyRefRegistrationSchema():Ref<RegistrationSchema>
-	export function refOfRegistrationSchema(x:RegistrationSchema,v:Ref<RegistrationSchema>)
-	export function unRefRegistrationSchema(v:Ref<RegistrationSchema>):RegistrationSchema
-	export function emptyAppliOfferOnboardProfileCity():AppliOfferOnboardProfileCity
-	export function emptyRefAppliOfferOnboardProfileCity():Ref<AppliOfferOnboardProfileCity>
-	export function refOfAppliOfferOnboardProfileCity(x:AppliOfferOnboardProfileCity,v:Ref<AppliOfferOnboardProfileCity>)
-	export function unRefAppliOfferOnboardProfileCity(v:Ref<AppliOfferOnboardProfileCity>):AppliOfferOnboardProfileCity
-	export function emptyListApplicationInterviewReq():ListApplicationInterviewReq
-	export function emptyRefListApplicationInterviewReq():Ref<ListApplicationInterviewReq>
-	export function refOfListApplicationInterviewReq(x:ListApplicationInterviewReq,v:Ref<ListApplicationInterviewReq>)
-	export function unRefListApplicationInterviewReq(v:Ref<ListApplicationInterviewReq>):ListApplicationInterviewReq
-	export function emptyAppliTalentCompetitionInfo():AppliTalentCompetitionInfo
-	export function emptyRefAppliTalentCompetitionInfo():Ref<AppliTalentCompetitionInfo>
-	export function refOfAppliTalentCompetitionInfo(x:AppliTalentCompetitionInfo,v:Ref<AppliTalentCompetitionInfo>)
-	export function unRefAppliTalentCompetitionInfo(v:Ref<AppliTalentCompetitionInfo>):AppliTalentCompetitionInfo
-	export function emptyConfigJobReq():ConfigJobReq
-	export function emptyRefConfigJobReq():Ref<ConfigJobReq>
-	export function refOfConfigJobReq(x:ConfigJobReq,v:Ref<ConfigJobReq>)
-	export function unRefConfigJobReq(v:Ref<ConfigJobReq>):ConfigJobReq
-	export function emptyInterviewAssessmentDimension():InterviewAssessmentDimension
-	export function emptyRefInterviewAssessmentDimension():Ref<InterviewAssessmentDimension>
-	export function refOfInterviewAssessmentDimension(x:InterviewAssessmentDimension,v:Ref<InterviewAssessmentDimension>)
-	export function unRefInterviewAssessmentDimension(v:Ref<InterviewAssessmentDimension>):InterviewAssessmentDimension
-	export function emptyJobRecruiter():JobRecruiter
-	export function emptyRefJobRecruiter():Ref<JobRecruiter>
-	export function refOfJobRecruiter(x:JobRecruiter,v:Ref<JobRecruiter>)
-	export function unRefJobRecruiter(v:Ref<JobRecruiter>):JobRecruiter
-	export function emptyMasterLocationInfo():MasterLocationInfo
-	export function emptyRefMasterLocationInfo():Ref<MasterLocationInfo>
-	export function refOfMasterLocationInfo(x:MasterLocationInfo,v:Ref<MasterLocationInfo>)
-	export function unRefMasterLocationInfo(v:Ref<MasterLocationInfo>):MasterLocationInfo
-	export function emptySelectOptionResult():SelectOptionResult
-	export function emptyRefSelectOptionResult():Ref<SelectOptionResult>
-	export function refOfSelectOptionResult(x:SelectOptionResult,v:Ref<SelectOptionResult>)
-	export function unRefSelectOptionResult(v:Ref<SelectOptionResult>):SelectOptionResult
-	export function emptyCreateEcoExamPaperReq():CreateEcoExamPaperReq
-	export function emptyRefCreateEcoExamPaperReq():Ref<CreateEcoExamPaperReq>
-	export function refOfCreateEcoExamPaperReq(x:CreateEcoExamPaperReq,v:Ref<CreateEcoExamPaperReq>)
-	export function unRefCreateEcoExamPaperReq(v:Ref<CreateEcoExamPaperReq>):CreateEcoExamPaperReq
-	export function emptyJobConfig():JobConfig
-	export function emptyRefJobConfig():Ref<JobConfig>
-	export function refOfJobConfig(x:JobConfig,v:Ref<JobConfig>)
-	export function unRefJobConfig(v:Ref<JobConfig>):JobConfig
-	export function emptyTransferOnboardApplicationReq():TransferOnboardApplicationReq
-	export function emptyRefTransferOnboardApplicationReq():Ref<TransferOnboardApplicationReq>
-	export function refOfTransferOnboardApplicationReq(x:TransferOnboardApplicationReq,v:Ref<TransferOnboardApplicationReq>)
-	export function unRefTransferOnboardApplicationReq(v:Ref<TransferOnboardApplicationReq>):TransferOnboardApplicationReq
-	export function emptyUserId():UserId
-	export function emptyRefUserId():Ref<UserId>
-	export function refOfUserId(x:UserId,v:Ref<UserId>)
-	export function unRefUserId(v:Ref<UserId>):UserId
-	export function emptyTerminateApplicationResp():TerminateApplicationResp
-	export function emptyRefTerminateApplicationResp():Ref<TerminateApplicationResp>
-	export function refOfTerminateApplicationResp(x:TerminateApplicationResp,v:Ref<TerminateApplicationResp>)
-	export function unRefTerminateApplicationResp(v:Ref<TerminateApplicationResp>):TerminateApplicationResp
-	export function emptyListQuestionnaireRespData():ListQuestionnaireRespData
-	export function emptyRefListQuestionnaireRespData():Ref<ListQuestionnaireRespData>
-	export function refOfListQuestionnaireRespData(x:ListQuestionnaireRespData,v:Ref<ListQuestionnaireRespData>)
-	export function unRefListQuestionnaireRespData(v:Ref<ListQuestionnaireRespData>):ListQuestionnaireRespData
-	export function emptyTalent():Talent
-	export function emptyRefTalent():Ref<Talent>
-	export function refOfTalent(x:Talent,v:Ref<Talent>)
-	export function unRefTalent(v:Ref<Talent>):Talent
-	export function emptyEcoExamPaperData():EcoExamPaperData
-	export function emptyRefEcoExamPaperData():Ref<EcoExamPaperData>
-	export function refOfEcoExamPaperData(x:EcoExamPaperData,v:Ref<EcoExamPaperData>)
-	export function unRefEcoExamPaperData(v:Ref<EcoExamPaperData>):EcoExamPaperData
-	export function emptyListJobProcessReq():ListJobProcessReq
-	export function emptyRefListJobProcessReq():Ref<ListJobProcessReq>
-	export function refOfListJobProcessReq(x:ListJobProcessReq,v:Ref<ListJobProcessReq>)
-	export function unRefListJobProcessReq(v:Ref<ListJobProcessReq>):ListJobProcessReq
-	export function emptyListJobProcessResp():ListJobProcessResp
-	export function emptyRefListJobProcessResp():Ref<ListJobProcessResp>
-	export function refOfListJobProcessResp(x:ListJobProcessResp,v:Ref<ListJobProcessResp>)
-	export function unRefListJobProcessResp(v:Ref<ListJobProcessResp>):ListJobProcessResp
-	export function emptyAgency():Agency
-	export function emptyRefAgency():Ref<Agency>
-	export function refOfAgency(x:Agency,v:Ref<Agency>)
-	export function unRefAgency(v:Ref<Agency>):Agency
-	export function emptyListRegistrationSchemaResp():ListRegistrationSchemaResp
-	export function emptyRefListRegistrationSchemaResp():Ref<ListRegistrationSchemaResp>
-	export function refOfListRegistrationSchemaResp(x:ListRegistrationSchemaResp,v:Ref<ListRegistrationSchemaResp>)
-	export function unRefListRegistrationSchemaResp(v:Ref<ListRegistrationSchemaResp>):ListRegistrationSchemaResp
-	export function emptyOfferSchemaDetail():OfferSchemaDetail
-	export function emptyRefOfferSchemaDetail():Ref<OfferSchemaDetail>
-	export function refOfOfferSchemaDetail(x:OfferSchemaDetail,v:Ref<OfferSchemaDetail>)
-	export function unRefOfferSchemaDetail(v:Ref<OfferSchemaDetail>):OfferSchemaDetail
-	export function emptyBaseDistrict():BaseDistrict
-	export function emptyRefBaseDistrict():Ref<BaseDistrict>
-	export function refOfBaseDistrict(x:BaseDistrict,v:Ref<BaseDistrict>)
-	export function unRefBaseDistrict(v:Ref<BaseDistrict>):BaseDistrict
-	export function emptyOfferApplicationResp():OfferApplicationResp
-	export function emptyRefOfferApplicationResp():Ref<OfferApplicationResp>
-	export function refOfOfferApplicationResp(x:OfferApplicationResp,v:Ref<OfferApplicationResp>)
-	export function unRefOfferApplicationResp(v:Ref<OfferApplicationResp>):OfferApplicationResp
-	export function emptyListApplicationInterviewRespData():ListApplicationInterviewRespData
-	export function emptyRefListApplicationInterviewRespData():Ref<ListApplicationInterviewRespData>
-	export function refOfListApplicationInterviewRespData(x:ListApplicationInterviewRespData,v:Ref<ListApplicationInterviewRespData>)
-	export function unRefListApplicationInterviewRespData(v:Ref<ListApplicationInterviewRespData>):ListApplicationInterviewRespData
-	export function emptyCreateExternalBackgroundCheckRespData():CreateExternalBackgroundCheckRespData
-	export function emptyRefCreateExternalBackgroundCheckRespData():Ref<CreateExternalBackgroundCheckRespData>
-	export function refOfCreateExternalBackgroundCheckRespData(x:CreateExternalBackgroundCheckRespData,v:Ref<CreateExternalBackgroundCheckRespData>)
-	export function unRefCreateExternalBackgroundCheckRespData(v:Ref<CreateExternalBackgroundCheckRespData>):CreateExternalBackgroundCheckRespData
-	export function emptyInterviewRegistrationSchema():InterviewRegistrationSchema
-	export function emptyRefInterviewRegistrationSchema():Ref<InterviewRegistrationSchema>
-	export function refOfInterviewRegistrationSchema(x:InterviewRegistrationSchema,v:Ref<InterviewRegistrationSchema>)
-	export function unRefInterviewRegistrationSchema(v:Ref<InterviewRegistrationSchema>):InterviewRegistrationSchema
-	export function emptyOfferCustomizedInfo():OfferCustomizedInfo
-	export function emptyRefOfferCustomizedInfo():Ref<OfferCustomizedInfo>
-	export function refOfOfferCustomizedInfo(x:OfferCustomizedInfo,v:Ref<OfferCustomizedInfo>)
-	export function unRefOfferCustomizedInfo(v:Ref<OfferCustomizedInfo>):OfferCustomizedInfo
-	export function emptySiteJobRecruitmentType():SiteJobRecruitmentType
-	export function emptyRefSiteJobRecruitmentType():Ref<SiteJobRecruitmentType>
-	export function refOfSiteJobRecruitmentType(x:SiteJobRecruitmentType,v:Ref<SiteJobRecruitmentType>)
-	export function unRefSiteJobRecruitmentType(v:Ref<SiteJobRecruitmentType>):SiteJobRecruitmentType
-	export function emptyAppliOfferSalaryPlanTemplate():AppliOfferSalaryPlanTemplate
-	export function emptyRefAppliOfferSalaryPlanTemplate():Ref<AppliOfferSalaryPlanTemplate>
-	export function refOfAppliOfferSalaryPlanTemplate(x:AppliOfferSalaryPlanTemplate,v:Ref<AppliOfferSalaryPlanTemplate>)
-	export function unRefAppliOfferSalaryPlanTemplate(v:Ref<AppliOfferSalaryPlanTemplate>):AppliOfferSalaryPlanTemplate
-	export function emptyCreateExternalBackgroundCheckResp():CreateExternalBackgroundCheckResp
-	export function emptyRefCreateExternalBackgroundCheckResp():Ref<CreateExternalBackgroundCheckResp>
-	export function refOfCreateExternalBackgroundCheckResp(x:CreateExternalBackgroundCheckResp,v:Ref<CreateExternalBackgroundCheckResp>)
-	export function unRefCreateExternalBackgroundCheckResp(v:Ref<CreateExternalBackgroundCheckResp>):CreateExternalBackgroundCheckResp
-	export function emptyListRegistrationSchemaReq():ListRegistrationSchemaReq
-	export function emptyRefListRegistrationSchemaReq():Ref<ListRegistrationSchemaReq>
-	export function refOfListRegistrationSchemaReq(x:ListRegistrationSchemaReq,v:Ref<ListRegistrationSchemaReq>)
-	export function unRefListRegistrationSchemaReq(v:Ref<ListRegistrationSchemaReq>):ListRegistrationSchemaReq
-	export function emptyJobCustomizedTimeRange():JobCustomizedTimeRange
-	export function emptyRefJobCustomizedTimeRange():Ref<JobCustomizedTimeRange>
-	export function refOfJobCustomizedTimeRange(x:JobCustomizedTimeRange,v:Ref<JobCustomizedTimeRange>)
-	export function unRefJobCustomizedTimeRange(v:Ref<JobCustomizedTimeRange>):JobCustomizedTimeRange
-	export function emptyPreviewAttachmentRespData():PreviewAttachmentRespData
-	export function emptyRefPreviewAttachmentRespData():Ref<PreviewAttachmentRespData>
-	export function refOfPreviewAttachmentRespData(x:PreviewAttachmentRespData,v:Ref<PreviewAttachmentRespData>)
-	export function unRefPreviewAttachmentRespData(v:Ref<PreviewAttachmentRespData>):PreviewAttachmentRespData
-	export function emptyTalentCertificateInfo():TalentCertificateInfo
-	export function emptyRefTalentCertificateInfo():Ref<TalentCertificateInfo>
-	export function refOfTalentCertificateInfo(x:TalentCertificateInfo,v:Ref<TalentCertificateInfo>)
-	export function unRefTalentCertificateInfo(v:Ref<TalentCertificateInfo>):TalentCertificateInfo
-	export function emptyInterviewAssessmentTemplateArgs():InterviewAssessmentTemplateArgs
-	export function emptyRefInterviewAssessmentTemplateArgs():Ref<InterviewAssessmentTemplateArgs>
-	export function refOfInterviewAssessmentTemplateArgs(x:InterviewAssessmentTemplateArgs,v:Ref<InterviewAssessmentTemplateArgs>)
-	export function unRefInterviewAssessmentTemplateArgs(v:Ref<InterviewAssessmentTemplateArgs>):InterviewAssessmentTemplateArgs
-	export function emptyApplicationWebsiteChannel():ApplicationWebsiteChannel
-	export function emptyRefApplicationWebsiteChannel():Ref<ApplicationWebsiteChannel>
-	export function refOfApplicationWebsiteChannel(x:ApplicationWebsiteChannel,v:Ref<ApplicationWebsiteChannel>)
-	export function unRefApplicationWebsiteChannel(v:Ref<ApplicationWebsiteChannel>):ApplicationWebsiteChannel
-	export function emptyGetApplicationRespData():GetApplicationRespData
-	export function emptyRefGetApplicationRespData():Ref<GetApplicationRespData>
-	export function refOfGetApplicationRespData(x:GetApplicationRespData,v:Ref<GetApplicationRespData>)
-	export function unRefGetApplicationRespData(v:Ref<GetApplicationRespData>):GetApplicationRespData
-	export function emptyCreateExternalApplicationReq():CreateExternalApplicationReq
-	export function emptyRefCreateExternalApplicationReq():Ref<CreateExternalApplicationReq>
-	export function refOfCreateExternalApplicationReq(x:CreateExternalApplicationReq,v:Ref<CreateExternalApplicationReq>)
-	export function unRefCreateExternalApplicationReq(v:Ref<CreateExternalApplicationReq>):CreateExternalApplicationReq
-	export function emptyEcoExamResult():EcoExamResult
-	export function emptyRefEcoExamResult():Ref<EcoExamResult>
-	export function refOfEcoExamResult(x:EcoExamResult,v:Ref<EcoExamResult>)
-	export function unRefEcoExamResult(v:Ref<EcoExamResult>):EcoExamResult
-	export function emptyQueryTalentObjectResp():QueryTalentObjectResp
-	export function emptyRefQueryTalentObjectResp():Ref<QueryTalentObjectResp>
-	export function refOfQueryTalentObjectResp(x:QueryTalentObjectResp,v:Ref<QueryTalentObjectResp>)
-	export function unRefQueryTalentObjectResp(v:Ref<QueryTalentObjectResp>):QueryTalentObjectResp
-	export function emptyApplicationOfferBasicInfo():ApplicationOfferBasicInfo
-	export function emptyRefApplicationOfferBasicInfo():Ref<ApplicationOfferBasicInfo>
-	export function refOfApplicationOfferBasicInfo(x:ApplicationOfferBasicInfo,v:Ref<ApplicationOfferBasicInfo>)
-	export function unRefApplicationOfferBasicInfo(v:Ref<ApplicationOfferBasicInfo>):ApplicationOfferBasicInfo
-	export function emptyP2EcoExamCreatedV1Data():P2EcoExamCreatedV1Data
-	export function emptyRefP2EcoExamCreatedV1Data():Ref<P2EcoExamCreatedV1Data>
-	export function refOfP2EcoExamCreatedV1Data(x:P2EcoExamCreatedV1Data,v:Ref<P2EcoExamCreatedV1Data>)
-	export function unRefP2EcoExamCreatedV1Data(v:Ref<P2EcoExamCreatedV1Data>):P2EcoExamCreatedV1Data
-	export function emptySiteName():SiteName
-	export function emptyRefSiteName():Ref<SiteName>
-	export function refOfSiteName(x:SiteName,v:Ref<SiteName>)
-	export function unRefSiteName(v:Ref<SiteName>):SiteName
-	export function emptyExternalInterviewAssessment():ExternalInterviewAssessment
-	export function emptyRefExternalInterviewAssessment():Ref<ExternalInterviewAssessment>
-	export function refOfExternalInterviewAssessment(x:ExternalInterviewAssessment,v:Ref<ExternalInterviewAssessment>)
-	export function unRefExternalInterviewAssessment(v:Ref<ExternalInterviewAssessment>):ExternalInterviewAssessment
-	export function emptyEcoBackgroundCheckCreateEventCandidateInfo():EcoBackgroundCheckCreateEventCandidateInfo
-	export function emptyRefEcoBackgroundCheckCreateEventCandidateInfo():Ref<EcoBackgroundCheckCreateEventCandidateInfo>
-	export function refOfEcoBackgroundCheckCreateEventCandidateInfo(x:EcoBackgroundCheckCreateEventCandidateInfo,v:Ref<EcoBackgroundCheckCreateEventCandidateInfo>)
-	export function unRefEcoBackgroundCheckCreateEventCandidateInfo(v:Ref<EcoBackgroundCheckCreateEventCandidateInfo>):EcoBackgroundCheckCreateEventCandidateInfo
-	export function emptyListApplicationRespData():ListApplicationRespData
-	export function emptyRefListApplicationRespData():Ref<ListApplicationRespData>
-	export function refOfListApplicationRespData(x:ListApplicationRespData,v:Ref<ListApplicationRespData>)
-	export function unRefListApplicationRespData(v:Ref<ListApplicationRespData>):ListApplicationRespData
-	export function emptySiteResumeWork():SiteResumeWork
-	export function emptyRefSiteResumeWork():Ref<SiteResumeWork>
-	export function refOfSiteResumeWork(x:SiteResumeWork,v:Ref<SiteResumeWork>)
-	export function unRefSiteResumeWork(v:Ref<SiteResumeWork>):SiteResumeWork
-	export function emptyDeleteExternalApplicationResp():DeleteExternalApplicationResp
-	export function emptyRefDeleteExternalApplicationResp():Ref<DeleteExternalApplicationResp>
-	export function refOfDeleteExternalApplicationResp(x:DeleteExternalApplicationResp,v:Ref<DeleteExternalApplicationResp>)
-	export function unRefDeleteExternalApplicationResp(v:Ref<DeleteExternalApplicationResp>):DeleteExternalApplicationResp
-	export function emptyGetJobManagerReq():GetJobManagerReq
-	export function emptyRefGetJobManagerReq():Ref<GetJobManagerReq>
-	export function refOfGetJobManagerReq(x:GetJobManagerReq,v:Ref<GetJobManagerReq>)
-	export function unRefGetJobManagerReq(v:Ref<GetJobManagerReq>):GetJobManagerReq
-	export function emptyQuestionnaire():Questionnaire
-	export function emptyRefQuestionnaire():Ref<Questionnaire>
-	export function refOfQuestionnaire(x:Questionnaire,v:Ref<Questionnaire>)
-	export function unRefQuestionnaire(v:Ref<Questionnaire>):Questionnaire
-	export function emptyScoreCalculationConfig():ScoreCalculationConfig
-	export function emptyRefScoreCalculationConfig():Ref<ScoreCalculationConfig>
-	export function refOfScoreCalculationConfig(x:ScoreCalculationConfig,v:Ref<ScoreCalculationConfig>)
-	export function unRefScoreCalculationConfig(v:Ref<ScoreCalculationConfig>):ScoreCalculationConfig
-	export function emptyBaseCountry():BaseCountry
-	export function emptyRefBaseCountry():Ref<BaseCountry>
-	export function refOfBaseCountry(x:BaseCountry,v:Ref<BaseCountry>)
-	export function unRefBaseCountry(v:Ref<BaseCountry>):BaseCountry
-	export function emptyCommonSchemaConfig():CommonSchemaConfig
-	export function emptyRefCommonSchemaConfig():Ref<CommonSchemaConfig>
-	export function refOfCommonSchemaConfig(x:CommonSchemaConfig,v:Ref<CommonSchemaConfig>)
-	export function unRefCommonSchemaConfig(v:Ref<CommonSchemaConfig>):CommonSchemaConfig
-	export function emptyRecruitmentType():RecruitmentType
-	export function emptyRefRecruitmentType():Ref<RecruitmentType>
-	export function refOfRecruitmentType(x:RecruitmentType,v:Ref<RecruitmentType>)
-	export function unRefRecruitmentType(v:Ref<RecruitmentType>):RecruitmentType
-	export function emptyTalentProjectInfo():TalentProjectInfo
-	export function emptyRefTalentProjectInfo():Ref<TalentProjectInfo>
-	export function refOfTalentProjectInfo(x:TalentProjectInfo,v:Ref<TalentProjectInfo>)
-	export function unRefTalentProjectInfo(v:Ref<TalentProjectInfo>):TalentProjectInfo
-	export function emptyUpdateExternalApplicationResp():UpdateExternalApplicationResp
-	export function emptyRefUpdateExternalApplicationResp():Ref<UpdateExternalApplicationResp>
-	export function refOfUpdateExternalApplicationResp(x:UpdateExternalApplicationResp,v:Ref<UpdateExternalApplicationResp>)
-	export function unRefUpdateExternalApplicationResp(v:Ref<UpdateExternalApplicationResp>):UpdateExternalApplicationResp
-	export function emptyGetOfferSchemaReq():GetOfferSchemaReq
-	export function emptyRefGetOfferSchemaReq():Ref<GetOfferSchemaReq>
-	export function refOfGetOfferSchemaReq(x:GetOfferSchemaReq,v:Ref<GetOfferSchemaReq>)
-	export function unRefGetOfferSchemaReq(v:Ref<GetOfferSchemaReq>):GetOfferSchemaReq
-	export function emptyListJobRequirementRespData():ListJobRequirementRespData
-	export function emptyRefListJobRequirementRespData():Ref<ListJobRequirementRespData>
-	export function refOfListJobRequirementRespData(x:ListJobRequirementRespData,v:Ref<ListJobRequirementRespData>)
-	export function unRefListJobRequirementRespData(v:Ref<ListJobRequirementRespData>):ListJobRequirementRespData
-	export function emptyApplicationOfferSalaryPlanSalaryTemplate():ApplicationOfferSalaryPlanSalaryTemplate
-	export function emptyRefApplicationOfferSalaryPlanSalaryTemplate():Ref<ApplicationOfferSalaryPlanSalaryTemplate>
-	export function refOfApplicationOfferSalaryPlanSalaryTemplate(x:ApplicationOfferSalaryPlanSalaryTemplate,v:Ref<ApplicationOfferSalaryPlanSalaryTemplate>)
-	export function unRefApplicationOfferSalaryPlanSalaryTemplate(v:Ref<ApplicationOfferSalaryPlanSalaryTemplate>):ApplicationOfferSalaryPlanSalaryTemplate
-	export function emptyCreateEcoBackgroundCheckCustomFieldResp():CreateEcoBackgroundCheckCustomFieldResp
-	export function emptyRefCreateEcoBackgroundCheckCustomFieldResp():Ref<CreateEcoBackgroundCheckCustomFieldResp>
-	export function refOfCreateEcoBackgroundCheckCustomFieldResp(x:CreateEcoBackgroundCheckCustomFieldResp,v:Ref<CreateEcoBackgroundCheckCustomFieldResp>)
-	export function unRefCreateEcoBackgroundCheckCustomFieldResp(v:Ref<CreateEcoBackgroundCheckCustomFieldResp>):CreateEcoBackgroundCheckCustomFieldResp
+	export function emptyListSubjectReq():ListSubjectReq
+	export function emptyRefListSubjectReq():Ref<ListSubjectReq>
+	export function refOfListSubjectReq(x:ListSubjectReq,v:Ref<ListSubjectReq>)
+	export function unRefListSubjectReq(v:Ref<ListSubjectReq>):ListSubjectReq
+	export function emptyRole():Role
+	export function emptyRefRole():Ref<Role>
+	export function refOfRole(x:Role,v:Ref<Role>)
+	export function unRefRole(v:Ref<Role>):Role
+	export function emptyTalentSnsInfo():TalentSnsInfo
+	export function emptyRefTalentSnsInfo():Ref<TalentSnsInfo>
+	export function refOfTalentSnsInfo(x:TalentSnsInfo,v:Ref<TalentSnsInfo>)
+	export function unRefTalentSnsInfo(v:Ref<TalentSnsInfo>):TalentSnsInfo
 	export function emptyGetOfferSchemaResp():GetOfferSchemaResp
 	export function emptyRefGetOfferSchemaResp():Ref<GetOfferSchemaResp>
 	export function refOfGetOfferSchemaResp(x:GetOfferSchemaResp,v:Ref<GetOfferSchemaResp>)
 	export function unRefGetOfferSchemaResp(v:Ref<GetOfferSchemaResp>):GetOfferSchemaResp
-	export function emptyP2EhrImportTaskImportedV1Data():P2EhrImportTaskImportedV1Data
-	export function emptyRefP2EhrImportTaskImportedV1Data():Ref<P2EhrImportTaskImportedV1Data>
-	export function refOfP2EhrImportTaskImportedV1Data(x:P2EhrImportTaskImportedV1Data,v:Ref<P2EhrImportTaskImportedV1Data>)
-	export function unRefP2EhrImportTaskImportedV1Data(v:Ref<P2EhrImportTaskImportedV1Data>):P2EhrImportTaskImportedV1Data
-	export function emptyOfferStatusOfferResp():OfferStatusOfferResp
-	export function emptyRefOfferStatusOfferResp():Ref<OfferStatusOfferResp>
-	export function refOfOfferStatusOfferResp(x:OfferStatusOfferResp,v:Ref<OfferStatusOfferResp>)
-	export function unRefOfferStatusOfferResp(v:Ref<OfferStatusOfferResp>):OfferStatusOfferResp
-	export function emptyGetJobManagerRespData():GetJobManagerRespData
-	export function emptyRefGetJobManagerRespData():Ref<GetJobManagerRespData>
-	export function refOfGetJobManagerRespData(x:GetJobManagerRespData,v:Ref<GetJobManagerRespData>)
-	export function unRefGetJobManagerRespData(v:Ref<GetJobManagerRespData>):GetJobManagerRespData
-	export function emptyApplicationJob():ApplicationJob
-	export function emptyRefApplicationJob():Ref<ApplicationJob>
-	export function refOfApplicationJob(x:ApplicationJob,v:Ref<ApplicationJob>)
-	export function unRefApplicationJob(v:Ref<ApplicationJob>):ApplicationJob
-	export function emptyExternalBackgroundCheck():ExternalBackgroundCheck
-	export function emptyRefExternalBackgroundCheck():Ref<ExternalBackgroundCheck>
-	export function refOfExternalBackgroundCheck(x:ExternalBackgroundCheck,v:Ref<ExternalBackgroundCheck>)
-	export function unRefExternalBackgroundCheck(v:Ref<ExternalBackgroundCheck>):ExternalBackgroundCheck
-	export function emptyListJobRequirementSchemaRespData():ListJobRequirementSchemaRespData
-	export function emptyRefListJobRequirementSchemaRespData():Ref<ListJobRequirementSchemaRespData>
-	export function refOfListJobRequirementSchemaRespData(x:ListJobRequirementSchemaRespData,v:Ref<ListJobRequirementSchemaRespData>)
-	export function unRefListJobRequirementSchemaRespData(v:Ref<ListJobRequirementSchemaRespData>):ListJobRequirementSchemaRespData
-	export function emptyOfferStatusOfferReq():OfferStatusOfferReq
-	export function emptyRefOfferStatusOfferReq():Ref<OfferStatusOfferReq>
-	export function refOfOfferStatusOfferReq(x:OfferStatusOfferReq,v:Ref<OfferStatusOfferReq>)
-	export function unRefOfferStatusOfferReq(v:Ref<OfferStatusOfferReq>):OfferStatusOfferReq
-	export function emptyReconciliationReferralAccountReqBody():ReconciliationReferralAccountReqBody
-	export function emptyRefReconciliationReferralAccountReqBody():Ref<ReconciliationReferralAccountReqBody>
-	export function refOfReconciliationReferralAccountReqBody(x:ReconciliationReferralAccountReqBody,v:Ref<ReconciliationReferralAccountReqBody>)
-	export function unRefReconciliationReferralAccountReqBody(v:Ref<ReconciliationReferralAccountReqBody>):ReconciliationReferralAccountReqBody
-	export function emptyAddToFolderTalentReqBody():AddToFolderTalentReqBody
-	export function emptyRefAddToFolderTalentReqBody():Ref<AddToFolderTalentReqBody>
-	export function refOfAddToFolderTalentReqBody(x:AddToFolderTalentReqBody,v:Ref<AddToFolderTalentReqBody>)
-	export function unRefAddToFolderTalentReqBody(v:Ref<AddToFolderTalentReqBody>):AddToFolderTalentReqBody
+	export function emptyListReferralWebsiteJobPostResp():ListReferralWebsiteJobPostResp
+	export function emptyRefListReferralWebsiteJobPostResp():Ref<ListReferralWebsiteJobPostResp>
+	export function refOfListReferralWebsiteJobPostResp(x:ListReferralWebsiteJobPostResp,v:Ref<ListReferralWebsiteJobPostResp>)
+	export function unRefListReferralWebsiteJobPostResp(v:Ref<ListReferralWebsiteJobPostResp>):ListReferralWebsiteJobPostResp
+	export function emptyListTripartiteAgreementRespData():ListTripartiteAgreementRespData
+	export function emptyRefListTripartiteAgreementRespData():Ref<ListTripartiteAgreementRespData>
+	export function refOfListTripartiteAgreementRespData(x:ListTripartiteAgreementRespData,v:Ref<ListTripartiteAgreementRespData>)
+	export function unRefListTripartiteAgreementRespData(v:Ref<ListTripartiteAgreementRespData>):ListTripartiteAgreementRespData
+	export function emptyListInterviewFeedbackFormRespData():ListInterviewFeedbackFormRespData
+	export function emptyRefListInterviewFeedbackFormRespData():Ref<ListInterviewFeedbackFormRespData>
+	export function refOfListInterviewFeedbackFormRespData(x:ListInterviewFeedbackFormRespData,v:Ref<ListInterviewFeedbackFormRespData>)
+	export function unRefListInterviewFeedbackFormRespData(v:Ref<ListInterviewFeedbackFormRespData>):ListInterviewFeedbackFormRespData
+	export function emptyCreateByAttachmentWebsiteDeliveryRespData():CreateByAttachmentWebsiteDeliveryRespData
+	export function emptyRefCreateByAttachmentWebsiteDeliveryRespData():Ref<CreateByAttachmentWebsiteDeliveryRespData>
+	export function refOfCreateByAttachmentWebsiteDeliveryRespData(x:CreateByAttachmentWebsiteDeliveryRespData,v:Ref<CreateByAttachmentWebsiteDeliveryRespData>)
+	export function unRefCreateByAttachmentWebsiteDeliveryRespData(v:Ref<CreateByAttachmentWebsiteDeliveryRespData>):CreateByAttachmentWebsiteDeliveryRespData
+	export function emptyListExternalApplicationResp():ListExternalApplicationResp
+	export function emptyRefListExternalApplicationResp():Ref<ListExternalApplicationResp>
+	export function refOfListExternalApplicationResp(x:ListExternalApplicationResp,v:Ref<ListExternalApplicationResp>)
+	export function unRefListExternalApplicationResp(v:Ref<ListExternalApplicationResp>):ListExternalApplicationResp
+	export function emptyGetApplicationResp():GetApplicationResp
+	export function emptyRefGetApplicationResp():Ref<GetApplicationResp>
+	export function refOfGetApplicationResp(x:GetApplicationResp,v:Ref<GetApplicationResp>)
+	export function unRefGetApplicationResp(v:Ref<GetApplicationResp>):GetApplicationResp
+	export function emptySearchTestResp():SearchTestResp
+	export function emptyRefSearchTestResp():Ref<SearchTestResp>
+	export function refOfSearchTestResp(x:SearchTestResp,v:Ref<SearchTestResp>)
+	export function unRefSearchTestResp(v:Ref<SearchTestResp>):SearchTestResp
+	export function emptyWithdrawReferralAccountRespData():WithdrawReferralAccountRespData
+	export function emptyRefWithdrawReferralAccountRespData():Ref<WithdrawReferralAccountRespData>
+	export function refOfWithdrawReferralAccountRespData(x:WithdrawReferralAccountRespData,v:Ref<WithdrawReferralAccountRespData>)
+	export function unRefWithdrawReferralAccountRespData(v:Ref<WithdrawReferralAccountRespData>):WithdrawReferralAccountRespData
+	export function emptyGetJobReq():GetJobReq
+	export function emptyRefGetJobReq():Ref<GetJobReq>
+	export function refOfGetJobReq(x:GetJobReq,v:Ref<GetJobReq>)
+	export function unRefGetJobReq(v:Ref<GetJobReq>):GetJobReq
+	export function emptyJobCategory():JobCategory
+	export function emptyRefJobCategory():Ref<JobCategory>
+	export function refOfJobCategory(x:JobCategory,v:Ref<JobCategory>)
+	export function unRefJobCategory(v:Ref<JobCategory>):JobCategory
+	export function emptyRecruitmentType():RecruitmentType
+	export function emptyRefRecruitmentType():Ref<RecruitmentType>
+	export function refOfRecruitmentType(x:RecruitmentType,v:Ref<RecruitmentType>)
+	export function unRefRecruitmentType(v:Ref<RecruitmentType>):RecruitmentType
+	export function emptyAttachmentV2():AttachmentV2
+	export function emptyRefAttachmentV2():Ref<AttachmentV2>
+	export function refOfAttachmentV2(x:AttachmentV2,v:Ref<AttachmentV2>)
+	export function unRefAttachmentV2(v:Ref<AttachmentV2>):AttachmentV2
+	export function emptyCreateTalentExternalInfoReq():CreateTalentExternalInfoReq
+	export function emptyRefCreateTalentExternalInfoReq():Ref<CreateTalentExternalInfoReq>
+	export function refOfCreateTalentExternalInfoReq(x:CreateTalentExternalInfoReq,v:Ref<CreateTalentExternalInfoReq>)
+	export function unRefCreateTalentExternalInfoReq(v:Ref<CreateTalentExternalInfoReq>):CreateTalentExternalInfoReq
+	export function emptyCreateByResumeWebsiteDeliveryRespData():CreateByResumeWebsiteDeliveryRespData
+	export function emptyRefCreateByResumeWebsiteDeliveryRespData():Ref<CreateByResumeWebsiteDeliveryRespData>
+	export function refOfCreateByResumeWebsiteDeliveryRespData(x:CreateByResumeWebsiteDeliveryRespData,v:Ref<CreateByResumeWebsiteDeliveryRespData>)
+	export function unRefCreateByResumeWebsiteDeliveryRespData(v:Ref<CreateByResumeWebsiteDeliveryRespData>):CreateByResumeWebsiteDeliveryRespData
+	export function emptyEcoBackgroundCheckPackageAdditionalItem():EcoBackgroundCheckPackageAdditionalItem
+	export function emptyRefEcoBackgroundCheckPackageAdditionalItem():Ref<EcoBackgroundCheckPackageAdditionalItem>
+	export function refOfEcoBackgroundCheckPackageAdditionalItem(x:EcoBackgroundCheckPackageAdditionalItem,v:Ref<EcoBackgroundCheckPackageAdditionalItem>)
+	export function unRefEcoBackgroundCheckPackageAdditionalItem(v:Ref<EcoBackgroundCheckPackageAdditionalItem>):EcoBackgroundCheckPackageAdditionalItem
+	export function emptyCreateWebsiteChannelReq():CreateWebsiteChannelReq
+	export function emptyRefCreateWebsiteChannelReq():Ref<CreateWebsiteChannelReq>
+	export function refOfCreateWebsiteChannelReq(x:CreateWebsiteChannelReq,v:Ref<CreateWebsiteChannelReq>)
+	export function unRefCreateWebsiteChannelReq(v:Ref<CreateWebsiteChannelReq>):CreateWebsiteChannelReq
+	export function emptyGetByApplicationReferralReq():GetByApplicationReferralReq
+	export function emptyRefGetByApplicationReferralReq():Ref<GetByApplicationReferralReq>
+	export function refOfGetByApplicationReferralReq(x:GetByApplicationReferralReq,v:Ref<GetByApplicationReferralReq>)
+	export function unRefGetByApplicationReferralReq(v:Ref<GetByApplicationReferralReq>):GetByApplicationReferralReq
+	export function emptyListExternalApplicationIterator():ListExternalApplicationIterator
+	export function emptyRefListExternalApplicationIterator():Ref<ListExternalApplicationIterator>
+	export function refOfListExternalApplicationIterator(x:ListExternalApplicationIterator,v:Ref<ListExternalApplicationIterator>)
+	export function unRefListExternalApplicationIterator(v:Ref<ListExternalApplicationIterator>):ListExternalApplicationIterator
+	export function emptySearchWebsiteJobPostReqBody():SearchWebsiteJobPostReqBody
+	export function emptyRefSearchWebsiteJobPostReqBody():Ref<SearchWebsiteJobPostReqBody>
+	export function refOfSearchWebsiteJobPostReqBody(x:SearchWebsiteJobPostReqBody,v:Ref<SearchWebsiteJobPostReqBody>)
+	export function unRefSearchWebsiteJobPostReqBody(v:Ref<SearchWebsiteJobPostReqBody>):SearchWebsiteJobPostReqBody
+	export function emptyProtectSearchAgencyResp():ProtectSearchAgencyResp
+	export function emptyRefProtectSearchAgencyResp():Ref<ProtectSearchAgencyResp>
+	export function refOfProtectSearchAgencyResp(x:ProtectSearchAgencyResp,v:Ref<ProtectSearchAgencyResp>)
+	export function unRefProtectSearchAgencyResp(v:Ref<ProtectSearchAgencyResp>):ProtectSearchAgencyResp
+	export function emptySearchJobPublishRecordReqBody():SearchJobPublishRecordReqBody
+	export function emptyRefSearchJobPublishRecordReqBody():Ref<SearchJobPublishRecordReqBody>
+	export function refOfSearchJobPublishRecordReqBody(x:SearchJobPublishRecordReqBody,v:Ref<SearchJobPublishRecordReqBody>)
+	export function unRefSearchJobPublishRecordReqBody(v:Ref<SearchJobPublishRecordReqBody>):SearchJobPublishRecordReqBody
+	export function emptyCreateExamReqBody():CreateExamReqBody
+	export function emptyRefCreateExamReqBody():Ref<CreateExamReqBody>
+	export function refOfCreateExamReqBody(x:CreateExamReqBody,v:Ref<CreateExamReqBody>)
+	export function unRefCreateExamReqBody(v:Ref<CreateExamReqBody>):CreateExamReqBody
+	export function emptyMoveTalentTalentPoolReqBody():MoveTalentTalentPoolReqBody
+	export function emptyRefMoveTalentTalentPoolReqBody():Ref<MoveTalentTalentPoolReqBody>
+	export function refOfMoveTalentTalentPoolReqBody(x:MoveTalentTalentPoolReqBody,v:Ref<MoveTalentTalentPoolReqBody>)
+	export function unRefMoveTalentTalentPoolReqBody(v:Ref<MoveTalentTalentPoolReqBody>):MoveTalentTalentPoolReqBody
+	export function emptyTalentCombinedSnsInfo():TalentCombinedSnsInfo
+	export function emptyRefTalentCombinedSnsInfo():Ref<TalentCombinedSnsInfo>
+	export function refOfTalentCombinedSnsInfo(x:TalentCombinedSnsInfo,v:Ref<TalentCombinedSnsInfo>)
+	export function unRefTalentCombinedSnsInfo(v:Ref<TalentCombinedSnsInfo>):TalentCombinedSnsInfo
+	export function emptyCreateEcoBackgroundCheckPackageReq():CreateEcoBackgroundCheckPackageReq
+	export function emptyRefCreateEcoBackgroundCheckPackageReq():Ref<CreateEcoBackgroundCheckPackageReq>
+	export function refOfCreateEcoBackgroundCheckPackageReq(x:CreateEcoBackgroundCheckPackageReq,v:Ref<CreateEcoBackgroundCheckPackageReq>)
+	export function unRefCreateEcoBackgroundCheckPackageReq(v:Ref<CreateEcoBackgroundCheckPackageReq>):CreateEcoBackgroundCheckPackageReq
+	export function emptyP2EcoAccountCreatedV1Data():P2EcoAccountCreatedV1Data
+	export function emptyRefP2EcoAccountCreatedV1Data():Ref<P2EcoAccountCreatedV1Data>
+	export function refOfP2EcoAccountCreatedV1Data(x:P2EcoAccountCreatedV1Data,v:Ref<P2EcoAccountCreatedV1Data>)
+	export function unRefP2EcoAccountCreatedV1Data(v:Ref<P2EcoAccountCreatedV1Data>):P2EcoAccountCreatedV1Data
+	export function emptyInterview():Interview
+	export function emptyRefInterview():Ref<Interview>
+	export function refOfInterview(x:Interview,v:Ref<Interview>)
+	export function unRefInterview(v:Ref<Interview>):Interview
+	export function emptyTestSchedule():TestSchedule
+	export function emptyRefTestSchedule():Ref<TestSchedule>
+	export function refOfTestSchedule(x:TestSchedule,v:Ref<TestSchedule>)
+	export function unRefTestSchedule(v:Ref<TestSchedule>):TestSchedule
+	export function emptyUpdateOfferResp():UpdateOfferResp
+	export function emptyRefUpdateOfferResp():Ref<UpdateOfferResp>
+	export function refOfUpdateOfferResp(x:UpdateOfferResp,v:Ref<UpdateOfferResp>)
+	export function unRefUpdateOfferResp(v:Ref<UpdateOfferResp>):UpdateOfferResp
+	export function emptyCombinedUpdateTalentRespData():CombinedUpdateTalentRespData
+	export function emptyRefCombinedUpdateTalentRespData():Ref<CombinedUpdateTalentRespData>
+	export function refOfCombinedUpdateTalentRespData(x:CombinedUpdateTalentRespData,v:Ref<CombinedUpdateTalentRespData>)
+	export function unRefCombinedUpdateTalentRespData(v:Ref<CombinedUpdateTalentRespData>):CombinedUpdateTalentRespData
+	export function emptyTalentCombinedProjectInfo():TalentCombinedProjectInfo
+	export function emptyRefTalentCombinedProjectInfo():Ref<TalentCombinedProjectInfo>
+	export function refOfTalentCombinedProjectInfo(x:TalentCombinedProjectInfo,v:Ref<TalentCombinedProjectInfo>)
+	export function unRefTalentCombinedProjectInfo(v:Ref<TalentCombinedProjectInfo>):TalentCombinedProjectInfo
+	export function emptyGetTalentResp():GetTalentResp
+	export function emptyRefGetTalentResp():Ref<GetTalentResp>
+	export function refOfGetTalentResp(x:GetTalentResp,v:Ref<GetTalentResp>)
+	export function unRefGetTalentResp(v:Ref<GetTalentResp>):GetTalentResp
+	export function emptyTalentCombinedLanguageInfo():TalentCombinedLanguageInfo
+	export function emptyRefTalentCombinedLanguageInfo():Ref<TalentCombinedLanguageInfo>
+	export function refOfTalentCombinedLanguageInfo(x:TalentCombinedLanguageInfo,v:Ref<TalentCombinedLanguageInfo>)
+	export function unRefTalentCombinedLanguageInfo(v:Ref<TalentCombinedLanguageInfo>):TalentCombinedLanguageInfo
+	export function emptyOfferSchemaDetailOption():OfferSchemaDetailOption
+	export function emptyRefOfferSchemaDetailOption():Ref<OfferSchemaDetailOption>
+	export function refOfOfferSchemaDetailOption(x:OfferSchemaDetailOption,v:Ref<OfferSchemaDetailOption>)
+	export function unRefOfferSchemaDetailOption(v:Ref<OfferSchemaDetailOption>):OfferSchemaDetailOption
+	export function emptyTransferStageApplicationResp():TransferStageApplicationResp
+	export function emptyRefTransferStageApplicationResp():Ref<TransferStageApplicationResp>
+	export function refOfTransferStageApplicationResp(x:TransferStageApplicationResp,v:Ref<TransferStageApplicationResp>)
+	export function unRefTransferStageApplicationResp(v:Ref<TransferStageApplicationResp>):TransferStageApplicationResp
+	export function emptyQueryLocationResp():QueryLocationResp
+	export function emptyRefQueryLocationResp():Ref<QueryLocationResp>
+	export function refOfQueryLocationResp(x:QueryLocationResp,v:Ref<QueryLocationResp>)
+	export function unRefQueryLocationResp(v:Ref<QueryLocationResp>):QueryLocationResp
+	export function emptyRegistrationInfo():RegistrationInfo
+	export function emptyRefRegistrationInfo():Ref<RegistrationInfo>
+	export function refOfRegistrationInfo(x:RegistrationInfo,v:Ref<RegistrationInfo>)
+	export function unRefRegistrationInfo(v:Ref<RegistrationInfo>):RegistrationInfo
+	export function emptyUserBusinessManagementScope():UserBusinessManagementScope
+	export function emptyRefUserBusinessManagementScope():Ref<UserBusinessManagementScope>
+	export function refOfUserBusinessManagementScope(x:UserBusinessManagementScope,v:Ref<UserBusinessManagementScope>)
+	export function unRefUserBusinessManagementScope(v:Ref<UserBusinessManagementScope>):UserBusinessManagementScope
+	export function emptyCreateExternalReferralRewardReq():CreateExternalReferralRewardReq
+	export function emptyRefCreateExternalReferralRewardReq():Ref<CreateExternalReferralRewardReq>
+	export function refOfCreateExternalReferralRewardReq(x:CreateExternalReferralRewardReq,v:Ref<CreateExternalReferralRewardReq>)
+	export function unRefCreateExternalReferralRewardReq(v:Ref<CreateExternalReferralRewardReq>):CreateExternalReferralRewardReq
+	export function emptyListSubjectRespData():ListSubjectRespData
+	export function emptyRefListSubjectRespData():Ref<ListSubjectRespData>
+	export function refOfListSubjectRespData(x:ListSubjectRespData,v:Ref<ListSubjectRespData>)
+	export function unRefListSubjectRespData(v:Ref<ListSubjectRespData>):ListSubjectRespData
+	export function emptyRegistrationSchemaInfo():RegistrationSchemaInfo
+	export function emptyRefRegistrationSchemaInfo():Ref<RegistrationSchemaInfo>
+	export function refOfRegistrationSchemaInfo(x:RegistrationSchemaInfo,v:Ref<RegistrationSchemaInfo>)
+	export function unRefRegistrationSchemaInfo(v:Ref<RegistrationSchemaInfo>):RegistrationSchemaInfo
+	export function emptyCreateEcoBackgroundCheckCustomFieldReq():CreateEcoBackgroundCheckCustomFieldReq
+	export function emptyRefCreateEcoBackgroundCheckCustomFieldReq():Ref<CreateEcoBackgroundCheckCustomFieldReq>
+	export function refOfCreateEcoBackgroundCheckCustomFieldReq(x:CreateEcoBackgroundCheckCustomFieldReq,v:Ref<CreateEcoBackgroundCheckCustomFieldReq>)
+	export function unRefCreateEcoBackgroundCheckCustomFieldReq(v:Ref<CreateEcoBackgroundCheckCustomFieldReq>):CreateEcoBackgroundCheckCustomFieldReq
+	export function emptyCreateByAttachmentWebsiteDeliveryResp():CreateByAttachmentWebsiteDeliveryResp
+	export function emptyRefCreateByAttachmentWebsiteDeliveryResp():Ref<CreateByAttachmentWebsiteDeliveryResp>
+	export function refOfCreateByAttachmentWebsiteDeliveryResp(x:CreateByAttachmentWebsiteDeliveryResp,v:Ref<CreateByAttachmentWebsiteDeliveryResp>)
+	export function unRefCreateByAttachmentWebsiteDeliveryResp(v:Ref<CreateByAttachmentWebsiteDeliveryResp>):CreateByAttachmentWebsiteDeliveryResp
+	export function emptyEcoExamCreateEventMobile():EcoExamCreateEventMobile
+	export function emptyRefEcoExamCreateEventMobile():Ref<EcoExamCreateEventMobile>
+	export function refOfEcoExamCreateEventMobile(x:EcoExamCreateEventMobile,v:Ref<EcoExamCreateEventMobile>)
+	export function unRefEcoExamCreateEventMobile(v:Ref<EcoExamCreateEventMobile>):EcoExamCreateEventMobile
+	export function emptyApplicationTalentLanguageInfo():ApplicationTalentLanguageInfo
+	export function emptyRefApplicationTalentLanguageInfo():Ref<ApplicationTalentLanguageInfo>
+	export function refOfApplicationTalentLanguageInfo(x:ApplicationTalentLanguageInfo,v:Ref<ApplicationTalentLanguageInfo>)
+	export function unRefApplicationTalentLanguageInfo(v:Ref<ApplicationTalentLanguageInfo>):ApplicationTalentLanguageInfo
+	export function emptyCombinedJobResult():CombinedJobResult
+	export function emptyRefCombinedJobResult():Ref<CombinedJobResult>
+	export function refOfCombinedJobResult(x:CombinedJobResult,v:Ref<CombinedJobResult>)
+	export function unRefCombinedJobResult(v:Ref<CombinedJobResult>):CombinedJobResult
+	export function emptyWebsiteDeliveryCareer():WebsiteDeliveryCareer
+	export function emptyRefWebsiteDeliveryCareer():Ref<WebsiteDeliveryCareer>
+	export function refOfWebsiteDeliveryCareer(x:WebsiteDeliveryCareer,v:Ref<WebsiteDeliveryCareer>)
+	export function unRefWebsiteDeliveryCareer(v:Ref<WebsiteDeliveryCareer>):WebsiteDeliveryCareer
+	export function emptyWebsiteJobPost():WebsiteJobPost
+	export function emptyRefWebsiteJobPost():Ref<WebsiteJobPost>
+	export function refOfWebsiteJobPost(x:WebsiteJobPost,v:Ref<WebsiteJobPost>)
+	export function unRefWebsiteJobPost(v:Ref<WebsiteJobPost>):WebsiteJobPost
+	export function emptyApplicationOfferSalaryPlanSalaryTemplate():ApplicationOfferSalaryPlanSalaryTemplate
+	export function emptyRefApplicationOfferSalaryPlanSalaryTemplate():Ref<ApplicationOfferSalaryPlanSalaryTemplate>
+	export function refOfApplicationOfferSalaryPlanSalaryTemplate(x:ApplicationOfferSalaryPlanSalaryTemplate,v:Ref<ApplicationOfferSalaryPlanSalaryTemplate>)
+	export function unRefApplicationOfferSalaryPlanSalaryTemplate(v:Ref<ApplicationOfferSalaryPlanSalaryTemplate>):ApplicationOfferSalaryPlanSalaryTemplate
+	export function emptyJobRequirementCustomizedTimeRange():JobRequirementCustomizedTimeRange
+	export function emptyRefJobRequirementCustomizedTimeRange():Ref<JobRequirementCustomizedTimeRange>
+	export function refOfJobRequirementCustomizedTimeRange(x:JobRequirementCustomizedTimeRange,v:Ref<JobRequirementCustomizedTimeRange>)
+	export function unRefJobRequirementCustomizedTimeRange(v:Ref<JobRequirementCustomizedTimeRange>):JobRequirementCustomizedTimeRange
+	export function emptyWebsiteChannelInfo():WebsiteChannelInfo
+	export function emptyRefWebsiteChannelInfo():Ref<WebsiteChannelInfo>
+	export function refOfWebsiteChannelInfo(x:WebsiteChannelInfo,v:Ref<WebsiteChannelInfo>)
+	export function unRefWebsiteChannelInfo(v:Ref<WebsiteChannelInfo>):WebsiteChannelInfo
+	export function emptyTalentFolder():TalentFolder
+	export function emptyRefTalentFolder():Ref<TalentFolder>
+	export function refOfTalentFolder(x:TalentFolder,v:Ref<TalentFolder>)
+	export function unRefTalentFolder(v:Ref<TalentFolder>):TalentFolder
 	export function emptyLoginInfoEcoExamReqBody():LoginInfoEcoExamReqBody
 	export function emptyRefLoginInfoEcoExamReqBody():Ref<LoginInfoEcoExamReqBody>
 	export function refOfLoginInfoEcoExamReqBody(x:LoginInfoEcoExamReqBody,v:Ref<LoginInfoEcoExamReqBody>)
 	export function unRefLoginInfoEcoExamReqBody(v:Ref<LoginInfoEcoExamReqBody>):LoginInfoEcoExamReqBody
+	export function emptyApplicationOfferOnboardProfileCity():ApplicationOfferOnboardProfileCity
+	export function emptyRefApplicationOfferOnboardProfileCity():Ref<ApplicationOfferOnboardProfileCity>
+	export function refOfApplicationOfferOnboardProfileCity(x:ApplicationOfferOnboardProfileCity,v:Ref<ApplicationOfferOnboardProfileCity>)
+	export function unRefApplicationOfferOnboardProfileCity(v:Ref<ApplicationOfferOnboardProfileCity>):ApplicationOfferOnboardProfileCity
+	export function emptyBonusAmount():BonusAmount
+	export function emptyRefBonusAmount():Ref<BonusAmount>
+	export function refOfBonusAmount(x:BonusAmount,v:Ref<BonusAmount>)
+	export function unRefBonusAmount(v:Ref<BonusAmount>):BonusAmount
+	export function emptyWebsiteDeliveryLanguage():WebsiteDeliveryLanguage
+	export function emptyRefWebsiteDeliveryLanguage():Ref<WebsiteDeliveryLanguage>
+	export function refOfWebsiteDeliveryLanguage(x:WebsiteDeliveryLanguage,v:Ref<WebsiteDeliveryLanguage>)
+	export function unRefWebsiteDeliveryLanguage(v:Ref<WebsiteDeliveryLanguage>):WebsiteDeliveryLanguage
+	export function emptyGetByTalentInterviewReq():GetByTalentInterviewReq
+	export function emptyRefGetByTalentInterviewReq():Ref<GetByTalentInterviewReq>
+	export function refOfGetByTalentInterviewReq(x:GetByTalentInterviewReq,v:Ref<GetByTalentInterviewReq>)
+	export function unRefGetByTalentInterviewReq(v:Ref<GetByTalentInterviewReq>):GetByTalentInterviewReq
+	export function emptyJobConfigInterviewRoundConf():JobConfigInterviewRoundConf
+	export function emptyRefJobConfigInterviewRoundConf():Ref<JobConfigInterviewRoundConf>
+	export function refOfJobConfigInterviewRoundConf(x:JobConfigInterviewRoundConf,v:Ref<JobConfigInterviewRoundConf>)
+	export function unRefJobConfigInterviewRoundConf(v:Ref<JobConfigInterviewRoundConf>):JobConfigInterviewRoundConf
+	export function emptyRecruiterJobReq():RecruiterJobReq
+	export function emptyRefRecruiterJobReq():Ref<RecruiterJobReq>
+	export function refOfRecruiterJobReq(x:RecruiterJobReq,v:Ref<RecruiterJobReq>)
+	export function unRefRecruiterJobReq(v:Ref<RecruiterJobReq>):RecruiterJobReq
+	export function emptyUpdateProgressEcoBackgroundCheckReqBody():UpdateProgressEcoBackgroundCheckReqBody
+	export function emptyRefUpdateProgressEcoBackgroundCheckReqBody():Ref<UpdateProgressEcoBackgroundCheckReqBody>
+	export function refOfUpdateProgressEcoBackgroundCheckReqBody(x:UpdateProgressEcoBackgroundCheckReqBody,v:Ref<UpdateProgressEcoBackgroundCheckReqBody>)
+	export function unRefUpdateProgressEcoBackgroundCheckReqBody(v:Ref<UpdateProgressEcoBackgroundCheckReqBody>):UpdateProgressEcoBackgroundCheckReqBody
+	export function emptyListInterviewResp():ListInterviewResp
+	export function emptyRefListInterviewResp():Ref<ListInterviewResp>
+	export function refOfListInterviewResp(x:ListInterviewResp,v:Ref<ListInterviewResp>)
+	export function unRefListInterviewResp(v:Ref<ListInterviewResp>):ListInterviewResp
+	export function emptyEcoBackgroundCheckCustomFieldData():EcoBackgroundCheckCustomFieldData
+	export function emptyRefEcoBackgroundCheckCustomFieldData():Ref<EcoBackgroundCheckCustomFieldData>
+	export function refOfEcoBackgroundCheckCustomFieldData(x:EcoBackgroundCheckCustomFieldData,v:Ref<EcoBackgroundCheckCustomFieldData>)
+	export function unRefEcoBackgroundCheckCustomFieldData(v:Ref<EcoBackgroundCheckCustomFieldData>):EcoBackgroundCheckCustomFieldData
+	export function emptyListOfferRespData():ListOfferRespData
+	export function emptyRefListOfferRespData():Ref<ListOfferRespData>
+	export function refOfListOfferRespData(x:ListOfferRespData,v:Ref<ListOfferRespData>)
+	export function unRefListOfferRespData(v:Ref<ListOfferRespData>):ListOfferRespData
+	export function emptyListSubjectResp():ListSubjectResp
+	export function emptyRefListSubjectResp():Ref<ListSubjectResp>
+	export function refOfListSubjectResp(x:ListSubjectResp,v:Ref<ListSubjectResp>)
+	export function unRefListSubjectResp(v:Ref<ListSubjectResp>):ListSubjectResp
+	export function emptyWebsiteDeliveryAttachmentIndentification():WebsiteDeliveryAttachmentIndentification
+	export function emptyRefWebsiteDeliveryAttachmentIndentification():Ref<WebsiteDeliveryAttachmentIndentification>
+	export function refOfWebsiteDeliveryAttachmentIndentification(x:WebsiteDeliveryAttachmentIndentification,v:Ref<WebsiteDeliveryAttachmentIndentification>)
+	export function unRefWebsiteDeliveryAttachmentIndentification(v:Ref<WebsiteDeliveryAttachmentIndentification>):WebsiteDeliveryAttachmentIndentification
+	export function emptyGetRoleResp():GetRoleResp
+	export function emptyRefGetRoleResp():Ref<GetRoleResp>
+	export function refOfGetRoleResp(x:GetRoleResp,v:Ref<GetRoleResp>)
+	export function unRefGetRoleResp(v:Ref<GetRoleResp>):GetRoleResp
+	export function emptyJobProcesses():JobProcesses
+	export function emptyRefJobProcesses():Ref<JobProcesses>
+	export function refOfJobProcesses(x:JobProcesses,v:Ref<JobProcesses>)
+	export function unRefJobProcesses(v:Ref<JobProcesses>):JobProcesses
+	export function emptyJobRequirementCustomizedDataDto():JobRequirementCustomizedDataDto
+	export function emptyRefJobRequirementCustomizedDataDto():Ref<JobRequirementCustomizedDataDto>
+	export function refOfJobRequirementCustomizedDataDto(x:JobRequirementCustomizedDataDto,v:Ref<JobRequirementCustomizedDataDto>)
+	export function unRefJobRequirementCustomizedDataDto(v:Ref<JobRequirementCustomizedDataDto>):JobRequirementCustomizedDataDto
+	export function emptyOfferApplyFormSchema():OfferApplyFormSchema
+	export function emptyRefOfferApplyFormSchema():Ref<OfferApplyFormSchema>
+	export function refOfOfferApplyFormSchema(x:OfferApplyFormSchema,v:Ref<OfferApplyFormSchema>)
+	export function unRefOfferApplyFormSchema(v:Ref<OfferApplyFormSchema>):OfferApplyFormSchema
+	export function emptyCreateOfferReq():CreateOfferReq
+	export function emptyRefCreateOfferReq():Ref<CreateOfferReq>
+	export function refOfCreateOfferReq(x:CreateOfferReq,v:Ref<CreateOfferReq>)
+	export function unRefCreateOfferReq(v:Ref<CreateOfferReq>):CreateOfferReq
+	export function emptyListApplicationReq():ListApplicationReq
+	export function emptyRefListApplicationReq():Ref<ListApplicationReq>
+	export function refOfListApplicationReq(x:ListApplicationReq,v:Ref<ListApplicationReq>)
+	export function unRefListApplicationReq(v:Ref<ListApplicationReq>):ListApplicationReq
+	export function emptyListInterviewRoundTypeRespData():ListInterviewRoundTypeRespData
+	export function emptyRefListInterviewRoundTypeRespData():Ref<ListInterviewRoundTypeRespData>
+	export function refOfListInterviewRoundTypeRespData(x:ListInterviewRoundTypeRespData,v:Ref<ListInterviewRoundTypeRespData>)
+	export function unRefListInterviewRoundTypeRespData(v:Ref<ListInterviewRoundTypeRespData>):ListInterviewRoundTypeRespData
+	export function emptyApplicationTalentEducationInfo():ApplicationTalentEducationInfo
+	export function emptyRefApplicationTalentEducationInfo():Ref<ApplicationTalentEducationInfo>
+	export function refOfApplicationTalentEducationInfo(x:ApplicationTalentEducationInfo,v:Ref<ApplicationTalentEducationInfo>)
+	export function unRefApplicationTalentEducationInfo(v:Ref<ApplicationTalentEducationInfo>):ApplicationTalentEducationInfo
+	export function emptyUpdateTalentExternalInfoRespData():UpdateTalentExternalInfoRespData
+	export function emptyRefUpdateTalentExternalInfoRespData():Ref<UpdateTalentExternalInfoRespData>
+	export function refOfUpdateTalentExternalInfoRespData(x:UpdateTalentExternalInfoRespData,v:Ref<UpdateTalentExternalInfoRespData>)
+	export function unRefUpdateTalentExternalInfoRespData(v:Ref<UpdateTalentExternalInfoRespData>):UpdateTalentExternalInfoRespData
+	export function emptyOfferSelectionObject():OfferSelectionObject
+	export function emptyRefOfferSelectionObject():Ref<OfferSelectionObject>
+	export function refOfOfferSelectionObject(x:OfferSelectionObject,v:Ref<OfferSelectionObject>)
+	export function unRefOfferSelectionObject(v:Ref<OfferSelectionObject>):OfferSelectionObject
+	export function emptyWebsite():Website
+	export function emptyRefWebsite():Ref<Website>
+	export function refOfWebsite(x:Website,v:Ref<Website>)
+	export function unRefWebsite(v:Ref<Website>):Website
+	export function emptyTalentCityInfo():TalentCityInfo
+	export function emptyRefTalentCityInfo():Ref<TalentCityInfo>
+	export function refOfTalentCityInfo(x:TalentCityInfo,v:Ref<TalentCityInfo>)
+	export function unRefTalentCityInfo(v:Ref<TalentCityInfo>):TalentCityInfo
+	export function emptyInternOfferStatus():InternOfferStatus
+	export function emptyRefInternOfferStatus():Ref<InternOfferStatus>
+	export function refOfInternOfferStatus(x:InternOfferStatus,v:Ref<InternOfferStatus>)
+	export function unRefInternOfferStatus(v:Ref<InternOfferStatus>):InternOfferStatus
+	export function emptyWebsiteDeliveryCustomizedData():WebsiteDeliveryCustomizedData
+	export function emptyRefWebsiteDeliveryCustomizedData():Ref<WebsiteDeliveryCustomizedData>
+	export function refOfWebsiteDeliveryCustomizedData(x:WebsiteDeliveryCustomizedData,v:Ref<WebsiteDeliveryCustomizedData>)
+	export function unRefWebsiteDeliveryCustomizedData(v:Ref<WebsiteDeliveryCustomizedData>):WebsiteDeliveryCustomizedData
+	export function emptyApplicationTalentSnsInfo():ApplicationTalentSnsInfo
+	export function emptyRefApplicationTalentSnsInfo():Ref<ApplicationTalentSnsInfo>
+	export function refOfApplicationTalentSnsInfo(x:ApplicationTalentSnsInfo,v:Ref<ApplicationTalentSnsInfo>)
+	export function unRefApplicationTalentSnsInfo(v:Ref<ApplicationTalentSnsInfo>):ApplicationTalentSnsInfo
+	export function emptySequence():Sequence
+	export function emptyRefSequence():Ref<Sequence>
+	export function refOfSequence(x:Sequence,v:Ref<Sequence>)
+	export function unRefSequence(v:Ref<Sequence>):Sequence
+	export function emptyJobRequirement():JobRequirement
+	export function emptyRefJobRequirement():Ref<JobRequirement>
+	export function refOfJobRequirement(x:JobRequirement,v:Ref<JobRequirement>)
+	export function unRefJobRequirement(v:Ref<JobRequirement>):JobRequirement
+	export function emptyListLocationResp():ListLocationResp
+	export function emptyRefListLocationResp():Ref<ListLocationResp>
+	export function refOfListLocationResp(x:ListLocationResp,v:Ref<ListLocationResp>)
+	export function unRefListLocationResp(v:Ref<ListLocationResp>):ListLocationResp
+	export function emptyListTerminationReasonRespData():ListTerminationReasonRespData
+	export function emptyRefListTerminationReasonRespData():Ref<ListTerminationReasonRespData>
+	export function refOfListTerminationReasonRespData(x:ListTerminationReasonRespData,v:Ref<ListTerminationReasonRespData>)
+	export function unRefListTerminationReasonRespData(v:Ref<ListTerminationReasonRespData>):ListTerminationReasonRespData
+	export function emptyEcoBackgroundCheckCreateEventCustomKv():EcoBackgroundCheckCreateEventCustomKv
+	export function emptyRefEcoBackgroundCheckCreateEventCustomKv():Ref<EcoBackgroundCheckCreateEventCustomKv>
+	export function refOfEcoBackgroundCheckCreateEventCustomKv(x:EcoBackgroundCheckCreateEventCustomKv,v:Ref<EcoBackgroundCheckCreateEventCustomKv>)
+	export function unRefEcoBackgroundCheckCreateEventCustomKv(v:Ref<EcoBackgroundCheckCreateEventCustomKv>):EcoBackgroundCheckCreateEventCustomKv
+	export function emptyInternOfferStatusOfferRespData():InternOfferStatusOfferRespData
+	export function emptyRefInternOfferStatusOfferRespData():Ref<InternOfferStatusOfferRespData>
+	export function refOfInternOfferStatusOfferRespData(x:InternOfferStatusOfferRespData,v:Ref<InternOfferStatusOfferRespData>)
+	export function unRefInternOfferStatusOfferRespData(v:Ref<InternOfferStatusOfferRespData>):InternOfferStatusOfferRespData
+	export function emptyCheckFailedAccountInfo():CheckFailedAccountInfo
+	export function emptyRefCheckFailedAccountInfo():Ref<CheckFailedAccountInfo>
+	export function refOfCheckFailedAccountInfo(x:CheckFailedAccountInfo,v:Ref<CheckFailedAccountInfo>)
+	export function unRefCheckFailedAccountInfo(v:Ref<CheckFailedAccountInfo>):CheckFailedAccountInfo
+	export function emptyEcoBackgroundCheckCreateEventContactInfo():EcoBackgroundCheckCreateEventContactInfo
+	export function emptyRefEcoBackgroundCheckCreateEventContactInfo():Ref<EcoBackgroundCheckCreateEventContactInfo>
+	export function refOfEcoBackgroundCheckCreateEventContactInfo(x:EcoBackgroundCheckCreateEventContactInfo,v:Ref<EcoBackgroundCheckCreateEventContactInfo>)
+	export function unRefEcoBackgroundCheckCreateEventContactInfo(v:Ref<EcoBackgroundCheckCreateEventContactInfo>):EcoBackgroundCheckCreateEventContactInfo
+	export function emptyOfferEmailInfo():OfferEmailInfo
+	export function emptyRefOfferEmailInfo():Ref<OfferEmailInfo>
+	export function refOfOfferEmailInfo(x:OfferEmailInfo,v:Ref<OfferEmailInfo>)
+	export function unRefOfferEmailInfo(v:Ref<OfferEmailInfo>):OfferEmailInfo
 }

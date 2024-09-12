@@ -7,7 +7,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/meeting_room'{
 	// @ts-ignore
 	import * as larkmeeting_room from 'github.com/larksuite/oapi-sdk-go/v3/service/meeting_room/v1'
 	// @ts-ignore
-	import type {Struct,Ref} from 'go'
+	import type {Ref,Struct} from 'go'
 	export function newService(config:Ref<larkcore.Config>):Ref<Service>
 
 	export interface Service extends Struct<Service>{

@@ -275,80 +275,80 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/board/v1'{
 			mindMap(mindMap:Ref<MindMap>):Ref<WhiteboardNodeBuilder>
 			build():Ref<WhiteboardNode>
 	}
-	export function emptyTable():Table
-	export function emptyRefTable():Ref<Table>
-	export function refOfTable(x:Table,v:Ref<Table>)
-	export function unRefTable(v:Ref<Table>):Table
-	export function emptyConnector():Connector
-	export function emptyRefConnector():Ref<Connector>
-	export function refOfConnector(x:Connector,v:Ref<Connector>)
-	export function unRefConnector(v:Ref<Connector>):Connector
-	export function emptyListWhiteboardNodeRespData():ListWhiteboardNodeRespData
-	export function emptyRefListWhiteboardNodeRespData():Ref<ListWhiteboardNodeRespData>
-	export function refOfListWhiteboardNodeRespData(x:ListWhiteboardNodeRespData,v:Ref<ListWhiteboardNodeRespData>)
-	export function unRefListWhiteboardNodeRespData(v:Ref<ListWhiteboardNodeRespData>):ListWhiteboardNodeRespData
-	export function emptySection():Section
-	export function emptyRefSection():Ref<Section>
-	export function refOfSection(x:Section,v:Ref<Section>)
-	export function unRefSection(v:Ref<Section>):Section
-	export function emptyTableCell():TableCell
-	export function emptyRefTableCell():Ref<TableCell>
-	export function refOfTableCell(x:TableCell,v:Ref<TableCell>)
-	export function unRefTableCell(v:Ref<TableCell>):TableCell
-	export function emptyCompositeShape():CompositeShape
-	export function emptyRefCompositeShape():Ref<CompositeShape>
-	export function refOfCompositeShape(x:CompositeShape,v:Ref<CompositeShape>)
-	export function unRefCompositeShape(v:Ref<CompositeShape>):CompositeShape
-	export function emptyListWhiteboardNodeReq():ListWhiteboardNodeReq
-	export function emptyRefListWhiteboardNodeReq():Ref<ListWhiteboardNodeReq>
-	export function refOfListWhiteboardNodeReq(x:ListWhiteboardNodeReq,v:Ref<ListWhiteboardNodeReq>)
-	export function unRefListWhiteboardNodeReq(v:Ref<ListWhiteboardNodeReq>):ListWhiteboardNodeReq
-	export function emptyDepartmentId():DepartmentId
-	export function emptyRefDepartmentId():Ref<DepartmentId>
-	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
-	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptyTableMeta():TableMeta
-	export function emptyRefTableMeta():Ref<TableMeta>
-	export function refOfTableMeta(x:TableMeta,v:Ref<TableMeta>)
-	export function unRefTableMeta(v:Ref<TableMeta>):TableMeta
-	export function emptyStyle():Style
-	export function emptyRefStyle():Ref<Style>
-	export function refOfStyle(x:Style,v:Ref<Style>)
-	export function unRefStyle(v:Ref<Style>):Style
-	export function emptyV1():V1
-	export function emptyRefV1():Ref<V1>
-	export function refOfV1(x:V1,v:Ref<V1>)
-	export function unRefV1(v:Ref<V1>):V1
-	export function emptyWhiteboardNode():WhiteboardNode
-	export function emptyRefWhiteboardNode():Ref<WhiteboardNode>
-	export function refOfWhiteboardNode(x:WhiteboardNode,v:Ref<WhiteboardNode>)
-	export function unRefWhiteboardNode(v:Ref<WhiteboardNode>):WhiteboardNode
-	export function emptyConnectorCaption():ConnectorCaption
-	export function emptyRefConnectorCaption():Ref<ConnectorCaption>
-	export function refOfConnectorCaption(x:ConnectorCaption,v:Ref<ConnectorCaption>)
-	export function unRefConnectorCaption(v:Ref<ConnectorCaption>):ConnectorCaption
 	export function emptyImage():Image
 	export function emptyRefImage():Ref<Image>
 	export function refOfImage(x:Image,v:Ref<Image>)
 	export function unRefImage(v:Ref<Image>):Image
-	export function emptyMindMap():MindMap
-	export function emptyRefMindMap():Ref<MindMap>
-	export function refOfMindMap(x:MindMap,v:Ref<MindMap>)
-	export function unRefMindMap(v:Ref<MindMap>):MindMap
+	export function emptyStyle():Style
+	export function emptyRefStyle():Ref<Style>
+	export function refOfStyle(x:Style,v:Ref<Style>)
+	export function unRefStyle(v:Ref<Style>):Style
 	export function emptyTableCellMergeInfo():TableCellMergeInfo
 	export function emptyRefTableCellMergeInfo():Ref<TableCellMergeInfo>
 	export function refOfTableCellMergeInfo(x:TableCellMergeInfo,v:Ref<TableCellMergeInfo>)
 	export function unRefTableCellMergeInfo(v:Ref<TableCellMergeInfo>):TableCellMergeInfo
-	export function emptyConnectorAttachedObject():ConnectorAttachedObject
-	export function emptyRefConnectorAttachedObject():Ref<ConnectorAttachedObject>
-	export function refOfConnectorAttachedObject(x:ConnectorAttachedObject,v:Ref<ConnectorAttachedObject>)
-	export function unRefConnectorAttachedObject(v:Ref<ConnectorAttachedObject>):ConnectorAttachedObject
 	export function emptyListWhiteboardNodeResp():ListWhiteboardNodeResp
 	export function emptyRefListWhiteboardNodeResp():Ref<ListWhiteboardNodeResp>
 	export function refOfListWhiteboardNodeResp(x:ListWhiteboardNodeResp,v:Ref<ListWhiteboardNodeResp>)
 	export function unRefListWhiteboardNodeResp(v:Ref<ListWhiteboardNodeResp>):ListWhiteboardNodeResp
+	export function emptyTableCell():TableCell
+	export function emptyRefTableCell():Ref<TableCell>
+	export function refOfTableCell(x:TableCell,v:Ref<TableCell>)
+	export function unRefTableCell(v:Ref<TableCell>):TableCell
+	export function emptyConnector():Connector
+	export function emptyRefConnector():Ref<Connector>
+	export function refOfConnector(x:Connector,v:Ref<Connector>)
+	export function unRefConnector(v:Ref<Connector>):Connector
+	export function emptyWhiteboardNode():WhiteboardNode
+	export function emptyRefWhiteboardNode():Ref<WhiteboardNode>
+	export function refOfWhiteboardNode(x:WhiteboardNode,v:Ref<WhiteboardNode>)
+	export function unRefWhiteboardNode(v:Ref<WhiteboardNode>):WhiteboardNode
+	export function emptyConnectorAttachedObject():ConnectorAttachedObject
+	export function emptyRefConnectorAttachedObject():Ref<ConnectorAttachedObject>
+	export function refOfConnectorAttachedObject(x:ConnectorAttachedObject,v:Ref<ConnectorAttachedObject>)
+	export function unRefConnectorAttachedObject(v:Ref<ConnectorAttachedObject>):ConnectorAttachedObject
+	export function emptyMindMap():MindMap
+	export function emptyRefMindMap():Ref<MindMap>
+	export function refOfMindMap(x:MindMap,v:Ref<MindMap>)
+	export function unRefMindMap(v:Ref<MindMap>):MindMap
+	export function emptySection():Section
+	export function emptyRefSection():Ref<Section>
+	export function refOfSection(x:Section,v:Ref<Section>)
+	export function unRefSection(v:Ref<Section>):Section
+	export function emptyTable():Table
+	export function emptyRefTable():Ref<Table>
+	export function refOfTable(x:Table,v:Ref<Table>)
+	export function unRefTable(v:Ref<Table>):Table
+	export function emptyConnectorCaption():ConnectorCaption
+	export function emptyRefConnectorCaption():Ref<ConnectorCaption>
+	export function refOfConnectorCaption(x:ConnectorCaption,v:Ref<ConnectorCaption>)
+	export function unRefConnectorCaption(v:Ref<ConnectorCaption>):ConnectorCaption
+	export function emptyListWhiteboardNodeRespData():ListWhiteboardNodeRespData
+	export function emptyRefListWhiteboardNodeRespData():Ref<ListWhiteboardNodeRespData>
+	export function refOfListWhiteboardNodeRespData(x:ListWhiteboardNodeRespData,v:Ref<ListWhiteboardNodeRespData>)
+	export function unRefListWhiteboardNodeRespData(v:Ref<ListWhiteboardNodeRespData>):ListWhiteboardNodeRespData
+	export function emptyTableMeta():TableMeta
+	export function emptyRefTableMeta():Ref<TableMeta>
+	export function refOfTableMeta(x:TableMeta,v:Ref<TableMeta>)
+	export function unRefTableMeta(v:Ref<TableMeta>):TableMeta
+	export function emptyCompositeShape():CompositeShape
+	export function emptyRefCompositeShape():Ref<CompositeShape>
+	export function refOfCompositeShape(x:CompositeShape,v:Ref<CompositeShape>)
+	export function unRefCompositeShape(v:Ref<CompositeShape>):CompositeShape
+	export function emptyDepartmentId():DepartmentId
+	export function emptyRefDepartmentId():Ref<DepartmentId>
+	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
+	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
+	export function emptyListWhiteboardNodeReq():ListWhiteboardNodeReq
+	export function emptyRefListWhiteboardNodeReq():Ref<ListWhiteboardNodeReq>
+	export function refOfListWhiteboardNodeReq(x:ListWhiteboardNodeReq,v:Ref<ListWhiteboardNodeReq>)
+	export function unRefListWhiteboardNodeReq(v:Ref<ListWhiteboardNodeReq>):ListWhiteboardNodeReq
 	export function emptyText():Text
 	export function emptyRefText():Ref<Text>
 	export function refOfText(x:Text,v:Ref<Text>)
 	export function unRefText(v:Ref<Text>):Text
+	export function emptyV1():V1
+	export function emptyRefV1():Ref<V1>
+	export function refOfV1(x:V1,v:Ref<V1>)
+	export function unRefV1(v:Ref<V1>):V1
 }

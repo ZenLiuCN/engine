@@ -3,41 +3,41 @@
 declare module 'github.com/larksuite/oapi-sdk-go/v3/event/dispatcher'{
 
 	// @ts-ignore
-	import * as larkcore from 'github.com/larksuite/oapi-sdk-go/v3/core'
+	import * as larkapproval from 'github.com/larksuite/oapi-sdk-go/v3/service/approval/v4'
 	// @ts-ignore
 	import * as larkcontact from 'github.com/larksuite/oapi-sdk-go/v3/service/contact/v3'
 	// @ts-ignore
+	import * as larkcorehr from 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'
+	// @ts-ignore
+	import * as larkcorehr from 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'
+	// @ts-ignore
 	import * as larkdrive from 'github.com/larksuite/oapi-sdk-go/v3/service/drive/v1'
+	// @ts-ignore
+	import * as larktask from 'github.com/larksuite/oapi-sdk-go/v3/service/task/v1'
+	// @ts-ignore
+	import * as json from 'golang/encoding/json'
+	// @ts-ignore
+	import * as larkcore from 'github.com/larksuite/oapi-sdk-go/v3/core'
+	// @ts-ignore
+	import * as larkacs from 'github.com/larksuite/oapi-sdk-go/v3/service/acs/v1'
+	// @ts-ignore
+	import * as larkapplication from 'github.com/larksuite/oapi-sdk-go/v3/service/application/v6'
+	// @ts-ignore
+	import * as larkim from 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'
+	// @ts-ignore
+	import * as context from 'golang/context'
+	// @ts-ignore
+	import * as larkmeeting_room from 'github.com/larksuite/oapi-sdk-go/v3/service/meeting_room/v1'
 	// @ts-ignore
 	import * as larkvc from 'github.com/larksuite/oapi-sdk-go/v3/service/vc/v1'
 	// @ts-ignore
 	import * as larkevent from 'github.com/larksuite/oapi-sdk-go/v3/event'
 	// @ts-ignore
-	import * as context from 'golang/context'
+	import * as larkcalendar from 'github.com/larksuite/oapi-sdk-go/v3/service/calendar/v4'
 	// @ts-ignore
 	import * as larkhelpdesk from 'github.com/larksuite/oapi-sdk-go/v3/service/helpdesk/v1'
 	// @ts-ignore
 	import * as larkhire from 'github.com/larksuite/oapi-sdk-go/v3/service/hire/v1'
-	// @ts-ignore
-	import * as larktask from 'github.com/larksuite/oapi-sdk-go/v3/service/task/v1'
-	// @ts-ignore
-	import * as larkapplication from 'github.com/larksuite/oapi-sdk-go/v3/service/application/v6'
-	// @ts-ignore
-	import * as larkapproval from 'github.com/larksuite/oapi-sdk-go/v3/service/approval/v4'
-	// @ts-ignore
-	import * as larkcorehr from 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v2'
-	// @ts-ignore
-	import * as larkmeeting_room from 'github.com/larksuite/oapi-sdk-go/v3/service/meeting_room/v1'
-	// @ts-ignore
-	import * as json from 'golang/encoding/json'
-	// @ts-ignore
-	import * as larkacs from 'github.com/larksuite/oapi-sdk-go/v3/service/acs/v1'
-	// @ts-ignore
-	import * as larkcalendar from 'github.com/larksuite/oapi-sdk-go/v3/service/calendar/v4'
-	// @ts-ignore
-	import * as larkcorehr from 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'
-	// @ts-ignore
-	import * as larkim from 'github.com/larksuite/oapi-sdk-go/v3/service/im/v1'
 	// @ts-ignore
 	import type {Ref,Struct,error,GoError} from 'go'
 	export interface AppTicketEvent extends Struct<AppTicketEvent>,json.Token{
@@ -103,6 +103,11 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/event/dispatcher'{
 			onP2PersonDeletedV1(v1:(ctx:context.Context,event:Ref<larkcorehr.P2PersonDeletedV1>)=>void/*error*/):Ref<EventDispatcher>
 			onP2PersonUpdatedV1(v1:(ctx:context.Context,event:Ref<larkcorehr.P2PersonUpdatedV1>)=>void/*error*/):Ref<EventDispatcher>
 			onP2PreHireUpdatedV1(v1:(ctx:context.Context,event:Ref<larkcorehr.P2PreHireUpdatedV1>)=>void/*error*/):Ref<EventDispatcher>
+			onP2EmployeeDomainEventV2(v1:(ctx:context.Context,event:Ref<larkcorehr.P2EmployeeDomainEventV2>)=>void/*error*/):Ref<EventDispatcher>
+			onP2JobChangeUpdatedV2(v1:(ctx:context.Context,event:Ref<larkcorehr.P2JobChangeUpdatedV2>)=>void/*error*/):Ref<EventDispatcher>
+			onP2OffboardingChecklistUpdatedV2(v1:(ctx:context.Context,event:Ref<larkcorehr.P2OffboardingChecklistUpdatedV2>)=>void/*error*/):Ref<EventDispatcher>
+			onP2OffboardingStatusUpdatedV2(v1:(ctx:context.Context,event:Ref<larkcorehr.P2OffboardingStatusUpdatedV2>)=>void/*error*/):Ref<EventDispatcher>
+			onP2OffboardingUpdatedV2(v1:(ctx:context.Context,event:Ref<larkcorehr.P2OffboardingUpdatedV2>)=>void/*error*/):Ref<EventDispatcher>
 			onP2ProbationUpdatedV2(v1:(ctx:context.Context,event:Ref<larkcorehr.P2ProbationUpdatedV2>)=>void/*error*/):Ref<EventDispatcher>
 			onP2ProcessUpdatedV2(v1:(ctx:context.Context,event:Ref<larkcorehr.P2ProcessUpdatedV2>)=>void/*error*/):Ref<EventDispatcher>
 			onP2ProcessApproverUpdatedV2(v1:(ctx:context.Context,event:Ref<larkcorehr.P2ProcessApproverUpdatedV2>)=>void/*error*/):Ref<EventDispatcher>
@@ -118,6 +123,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/event/dispatcher'{
 			Do(ctx:context.Context,payload:Uint8Array)/*error*/
 			doHandle(ctx:context.Context,reqType:larkevent.ReqType,eventType:string,challenge:string,token:string,plainEventJsonStr:string,path:string,req:Ref<larkevent.EventReq>):Ref<larkevent.EventResp>
 			onP2FileBitableFieldChangedV1(v1:(ctx:context.Context,event:Ref<larkdrive.P2FileBitableFieldChangedV1>)=>void/*error*/):Ref<EventDispatcher>
+			onP2FileBitableRecordChangedV1(v1:(ctx:context.Context,event:Ref<larkdrive.P2FileBitableRecordChangedV1>)=>void/*error*/):Ref<EventDispatcher>
 			onP2FileDeletedV1(v1:(ctx:context.Context,event:Ref<larkdrive.P2FileDeletedV1>)=>void/*error*/):Ref<EventDispatcher>
 			onP2FileEditV1(v1:(ctx:context.Context,event:Ref<larkdrive.P2FileEditV1>)=>void/*error*/):Ref<EventDispatcher>
 			onP2FilePermissionMemberAddedV1(v1:(ctx:context.Context,event:Ref<larkdrive.P2FilePermissionMemberAddedV1>)=>void/*error*/):Ref<EventDispatcher>
@@ -164,8 +170,10 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/event/dispatcher'{
 			onP2EhrImportTaskForInternshipOfferImportedV1(v1:(ctx:context.Context,event:Ref<larkhire.P2EhrImportTaskForInternshipOfferImportedV1>)=>void/*error*/):Ref<EventDispatcher>
 			onP2OfferStatusChangedV1(v1:(ctx:context.Context,event:Ref<larkhire.P2OfferStatusChangedV1>)=>void/*error*/):Ref<EventDispatcher>
 			onP2ReferralAccountAssetsUpdateV1(v1:(ctx:context.Context,event:Ref<larkhire.P2ReferralAccountAssetsUpdateV1>)=>void/*error*/):Ref<EventDispatcher>
+			onP2TalentDeletedV1(v1:(ctx:context.Context,event:Ref<larkhire.P2TalentDeletedV1>)=>void/*error*/):Ref<EventDispatcher>
 			onP2ChatDisbandedV1(v1:(ctx:context.Context,event:Ref<larkim.P2ChatDisbandedV1>)=>void/*error*/):Ref<EventDispatcher>
 			onP2ChatUpdatedV1(v1:(ctx:context.Context,event:Ref<larkim.P2ChatUpdatedV1>)=>void/*error*/):Ref<EventDispatcher>
+			onP2ChatAccessEventBotP2pChatEnteredV1(v1:(ctx:context.Context,event:Ref<larkim.P2ChatAccessEventBotP2pChatEnteredV1>)=>void/*error*/):Ref<EventDispatcher>
 			onP2ChatMemberBotAddedV1(v1:(ctx:context.Context,event:Ref<larkim.P2ChatMemberBotAddedV1>)=>void/*error*/):Ref<EventDispatcher>
 			onP2ChatMemberBotDeletedV1(v1:(ctx:context.Context,event:Ref<larkim.P2ChatMemberBotDeletedV1>)=>void/*error*/):Ref<EventDispatcher>
 			onP2ChatMemberUserAddedV1(v1:(ctx:context.Context,event:Ref<larkim.P2ChatMemberUserAddedV1>)=>void/*error*/):Ref<EventDispatcher>
@@ -204,16 +212,16 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/event/dispatcher'{
 	}
 	export function newEventDispatcher(verificationToken:string,eventEncryptKey:string):Ref<EventDispatcher>
 
-	export interface NotFoundEventHandlerErr extends GoError,Struct<NotFoundEventHandlerErr>,Error{
+	export interface NotFoundEventHandlerErr extends Struct<NotFoundEventHandlerErr>,Error,GoError{
 
 			error():string
 	}
-	export function emptyAppTicketEvent():AppTicketEvent
-	export function emptyRefAppTicketEvent():Ref<AppTicketEvent>
-	export function refOfAppTicketEvent(x:AppTicketEvent,v:Ref<AppTicketEvent>)
-	export function unRefAppTicketEvent(v:Ref<AppTicketEvent>):AppTicketEvent
 	export function emptyCustomAppTicketEventHandler():CustomAppTicketEventHandler
 	export function emptyRefCustomAppTicketEventHandler():Ref<CustomAppTicketEventHandler>
 	export function refOfCustomAppTicketEventHandler(x:CustomAppTicketEventHandler,v:Ref<CustomAppTicketEventHandler>)
 	export function unRefCustomAppTicketEventHandler(v:Ref<CustomAppTicketEventHandler>):CustomAppTicketEventHandler
+	export function emptyAppTicketEvent():AppTicketEvent
+	export function emptyRefAppTicketEvent():Ref<AppTicketEvent>
+	export function refOfAppTicketEvent(x:AppTicketEvent,v:Ref<AppTicketEvent>)
+	export function unRefAppTicketEvent(v:Ref<AppTicketEvent>):AppTicketEvent
 }

@@ -285,26 +285,6 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/report/v1'{
 	export interface View extends Alias<Nothing>{
 
 	}
-	export function emptyFormContent():FormContent
-	export function emptyRefFormContent():Ref<FormContent>
-	export function refOfFormContent(x:FormContent,v:Ref<FormContent>)
-	export function unRefFormContent(v:Ref<FormContent>):FormContent
-	export function emptyRemoveRuleViewReq():RemoveRuleViewReq
-	export function emptyRefRemoveRuleViewReq():Ref<RemoveRuleViewReq>
-	export function refOfRemoveRuleViewReq(x:RemoveRuleViewReq,v:Ref<RemoveRuleViewReq>)
-	export function unRefRemoveRuleViewReq(v:Ref<RemoveRuleViewReq>):RemoveRuleViewReq
-	export function emptyTask():Task
-	export function emptyRefTask():Ref<Task>
-	export function refOfTask(x:Task,v:Ref<Task>)
-	export function unRefTask(v:Ref<Task>):Task
-	export function emptyRemoveRuleViewResp():RemoveRuleViewResp
-	export function emptyRefRemoveRuleViewResp():Ref<RemoveRuleViewResp>
-	export function refOfRemoveRuleViewResp(x:RemoveRuleViewResp,v:Ref<RemoveRuleViewResp>)
-	export function unRefRemoveRuleViewResp(v:Ref<RemoveRuleViewResp>):RemoveRuleViewResp
-	export function emptyV1():V1
-	export function emptyRefV1():Ref<V1>
-	export function refOfV1(x:V1,v:Ref<V1>)
-	export function unRefV1(v:Ref<V1>):V1
 	export function emptyDepartmentId():DepartmentId
 	export function emptyRefDepartmentId():Ref<DepartmentId>
 	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
@@ -313,40 +293,60 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/report/v1'{
 	export function emptyRefQueryRuleResp():Ref<QueryRuleResp>
 	export function refOfQueryRuleResp(x:QueryRuleResp,v:Ref<QueryRuleResp>)
 	export function unRefQueryRuleResp(v:Ref<QueryRuleResp>):QueryRuleResp
-	export function emptyQueryRuleRespData():QueryRuleRespData
-	export function emptyRefQueryRuleRespData():Ref<QueryRuleRespData>
-	export function refOfQueryRuleRespData(x:QueryRuleRespData,v:Ref<QueryRuleRespData>)
-	export function unRefQueryRuleRespData(v:Ref<QueryRuleRespData>):QueryRuleRespData
 	export function emptyQueryTaskReq():QueryTaskReq
 	export function emptyRefQueryTaskReq():Ref<QueryTaskReq>
 	export function refOfQueryTaskReq(x:QueryTaskReq,v:Ref<QueryTaskReq>)
 	export function unRefQueryTaskReq(v:Ref<QueryTaskReq>):QueryTaskReq
-	export function emptyQueryTaskResp():QueryTaskResp
-	export function emptyRefQueryTaskResp():Ref<QueryTaskResp>
-	export function refOfQueryTaskResp(x:QueryTaskResp,v:Ref<QueryTaskResp>)
-	export function unRefQueryTaskResp(v:Ref<QueryTaskResp>):QueryTaskResp
-	export function emptyQueryTaskRespData():QueryTaskRespData
-	export function emptyRefQueryTaskRespData():Ref<QueryTaskRespData>
-	export function refOfQueryTaskRespData(x:QueryTaskRespData,v:Ref<QueryTaskRespData>)
-	export function unRefQueryTaskRespData(v:Ref<QueryTaskRespData>):QueryTaskRespData
-	export function emptyRule():Rule
-	export function emptyRefRule():Ref<Rule>
-	export function refOfRule(x:Rule,v:Ref<Rule>)
-	export function unRefRule(v:Ref<Rule>):Rule
-	export function emptyQueryRuleReq():QueryRuleReq
-	export function emptyRefQueryRuleReq():Ref<QueryRuleReq>
-	export function refOfQueryRuleReq(x:QueryRuleReq,v:Ref<QueryRuleReq>)
-	export function unRefQueryRuleReq(v:Ref<QueryRuleReq>):QueryRuleReq
 	export function emptyRemoveRuleViewReqBody():RemoveRuleViewReqBody
 	export function emptyRefRemoveRuleViewReqBody():Ref<RemoveRuleViewReqBody>
 	export function refOfRemoveRuleViewReqBody(x:RemoveRuleViewReqBody,v:Ref<RemoveRuleViewReqBody>)
 	export function unRefRemoveRuleViewReqBody(v:Ref<RemoveRuleViewReqBody>):RemoveRuleViewReqBody
-	export function emptyFormField():FormField
-	export function emptyRefFormField():Ref<FormField>
-	export function refOfFormField(x:FormField,v:Ref<FormField>)
-	export function unRefFormField(v:Ref<FormField>):FormField
+	export function emptyQueryRuleRespData():QueryRuleRespData
+	export function emptyRefQueryRuleRespData():Ref<QueryRuleRespData>
+	export function refOfQueryRuleRespData(x:QueryRuleRespData,v:Ref<QueryRuleRespData>)
+	export function unRefQueryRuleRespData(v:Ref<QueryRuleRespData>):QueryRuleRespData
+	export function emptyTask():Task
+	export function emptyRefTask():Ref<Task>
+	export function refOfTask(x:Task,v:Ref<Task>)
+	export function unRefTask(v:Ref<Task>):Task
+	export function emptyV1():V1
+	export function emptyRefV1():Ref<V1>
+	export function refOfV1(x:V1,v:Ref<V1>)
+	export function unRefV1(v:Ref<V1>):V1
+	export function emptyQueryRuleReq():QueryRuleReq
+	export function emptyRefQueryRuleReq():Ref<QueryRuleReq>
+	export function refOfQueryRuleReq(x:QueryRuleReq,v:Ref<QueryRuleReq>)
+	export function unRefQueryRuleReq(v:Ref<QueryRuleReq>):QueryRuleReq
+	export function emptyRemoveRuleViewResp():RemoveRuleViewResp
+	export function emptyRefRemoveRuleViewResp():Ref<RemoveRuleViewResp>
+	export function refOfRemoveRuleViewResp(x:RemoveRuleViewResp,v:Ref<RemoveRuleViewResp>)
+	export function unRefRemoveRuleViewResp(v:Ref<RemoveRuleViewResp>):RemoveRuleViewResp
+	export function emptyRule():Rule
+	export function emptyRefRule():Ref<Rule>
+	export function refOfRule(x:Rule,v:Ref<Rule>)
+	export function unRefRule(v:Ref<Rule>):Rule
 	export function emptyQueryTaskReqBody():QueryTaskReqBody
 	export function emptyRefQueryTaskReqBody():Ref<QueryTaskReqBody>
 	export function refOfQueryTaskReqBody(x:QueryTaskReqBody,v:Ref<QueryTaskReqBody>)
 	export function unRefQueryTaskReqBody(v:Ref<QueryTaskReqBody>):QueryTaskReqBody
+	export function emptyQueryTaskResp():QueryTaskResp
+	export function emptyRefQueryTaskResp():Ref<QueryTaskResp>
+	export function refOfQueryTaskResp(x:QueryTaskResp,v:Ref<QueryTaskResp>)
+	export function unRefQueryTaskResp(v:Ref<QueryTaskResp>):QueryTaskResp
+	export function emptyRemoveRuleViewReq():RemoveRuleViewReq
+	export function emptyRefRemoveRuleViewReq():Ref<RemoveRuleViewReq>
+	export function refOfRemoveRuleViewReq(x:RemoveRuleViewReq,v:Ref<RemoveRuleViewReq>)
+	export function unRefRemoveRuleViewReq(v:Ref<RemoveRuleViewReq>):RemoveRuleViewReq
+	export function emptyFormContent():FormContent
+	export function emptyRefFormContent():Ref<FormContent>
+	export function refOfFormContent(x:FormContent,v:Ref<FormContent>)
+	export function unRefFormContent(v:Ref<FormContent>):FormContent
+	export function emptyFormField():FormField
+	export function emptyRefFormField():Ref<FormField>
+	export function refOfFormField(x:FormField,v:Ref<FormField>)
+	export function unRefFormField(v:Ref<FormField>):FormField
+	export function emptyQueryTaskRespData():QueryTaskRespData
+	export function emptyRefQueryTaskRespData():Ref<QueryTaskRespData>
+	export function refOfQueryTaskRespData(x:QueryTaskRespData,v:Ref<QueryTaskRespData>)
+	export function unRefQueryTaskRespData(v:Ref<QueryTaskRespData>):QueryTaskRespData
 }

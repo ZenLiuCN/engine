@@ -19,7 +19,7 @@ require (
 	github.com/jackc/pgx/v5 v5.5.5
 	github.com/jmoiron/sqlx v1.4.0
 	github.com/larksuite/base-sdk-go/v3 v3.0.2
-	github.com/larksuite/oapi-sdk-go/v3 v3.2.5
+	github.com/larksuite/oapi-sdk-go/v3 v3.3.0
 	github.com/marcboeker/go-duckdb v1.8.0
 	github.com/mattn/go-colorable v0.1.13
 	github.com/tdewolff/minify/v2 v2.20.20

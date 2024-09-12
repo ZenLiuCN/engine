@@ -7,7 +7,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/security_and_complia
 	// @ts-ignore
 	import * as context from 'golang/context'
 	// @ts-ignore
-	import type {Ref,int,Struct,bool,Alias,Nothing,error} from 'go'
+	import type {int,Struct,bool,Alias,Nothing,error,Ref} from 'go'
 	export interface AdminLog extends Struct<AdminLog>{
 
 			uniqueId:Ref<string>
@@ -346,6 +346,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/security_and_complia
 			evidenceDetail:Ref<DlpEvidenceDetail>
 			hitPolicies:Ref<DlpHitPolicy>[]
 			fileToken:Ref<string>
+			triggerEventType:Ref<string>
 	}
 	export interface DlpExecuteLogBuilder extends Struct<DlpExecuteLogBuilder>{
 
@@ -376,6 +377,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/security_and_complia
 			evidenceDetail(evidenceDetail:Ref<DlpEvidenceDetail>):Ref<DlpExecuteLogBuilder>
 			hitPolicies(hitPolicies:Ref<DlpHitPolicy>[]):Ref<DlpExecuteLogBuilder>
 			fileToken(fileToken:string):Ref<DlpExecuteLogBuilder>
+			triggerEventType(triggerEventType:string):Ref<DlpExecuteLogBuilder>
 			build():Ref<DlpExecuteLog>
 	}
 	export interface DlpHitPolicy extends Struct<DlpHitPolicy>{
@@ -481,6 +483,34 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/security_and_complia
 	}
 	export interface File extends Alias<Nothing>{
 
+	}
+	export interface FileRiskDetectionRecord extends Struct<FileRiskDetectionRecord>{
+
+			recordId:Ref<string>
+			fileUrl:Ref<string>
+			fileUrlExpireTime:Ref<string>
+			fileSize:Ref<string>
+			triggerReason:Ref<int>
+	}
+	export interface FileRiskDetectionRecordBuilder extends Struct<FileRiskDetectionRecordBuilder>{
+
+			recordId(recordId:string):Ref<FileRiskDetectionRecordBuilder>
+			fileUrl(fileUrl:string):Ref<FileRiskDetectionRecordBuilder>
+			fileUrlExpireTime(fileUrlExpireTime:string):Ref<FileRiskDetectionRecordBuilder>
+			fileSize(fileSize:string):Ref<FileRiskDetectionRecordBuilder>
+			triggerReason(triggerReason:int):Ref<FileRiskDetectionRecordBuilder>
+			build():Ref<FileRiskDetectionRecord>
+	}
+	export interface FileRiskDetectionRecordResult extends Struct<FileRiskDetectionRecordResult>{
+
+			status:Ref<string>
+			riskTag:Ref<string>
+	}
+	export interface FileRiskDetectionRecordResultBuilder extends Struct<FileRiskDetectionRecordResultBuilder>{
+
+			status(status:string):Ref<FileRiskDetectionRecordResultBuilder>
+			riskTag(riskTag:string):Ref<FileRiskDetectionRecordResultBuilder>
+			build():Ref<FileRiskDetectionRecordResult>
 	}
 	export interface GwCommon extends Struct<GwCommon>{
 
@@ -703,6 +733,10 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/security_and_complia
 	export function newEmailBuilder():Ref<EmailBuilder>
 
 	export function newEmailFilterBuilder():Ref<EmailFilterBuilder>
+
+	export function newFileRiskDetectionRecordBuilder():Ref<FileRiskDetectionRecordBuilder>
+
+	export function newFileRiskDetectionRecordResultBuilder():Ref<FileRiskDetectionRecordResultBuilder>
 
 	export function newGwCommonBuilder():Ref<GwCommonBuilder>
 
@@ -976,174 +1010,118 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/security_and_complia
 			status(status:Ref<TaskStatus>):Ref<VaultTaskBuilder>
 			build():Ref<VaultTask>
 	}
-	export function emptyUserMigration():UserMigration
-	export function emptyRefUserMigration():Ref<UserMigration>
-	export function refOfUserMigration(x:UserMigration,v:Ref<UserMigration>)
-	export function unRefUserMigration(v:Ref<UserMigration>):UserMigration
-	export function emptyTaskStatus():TaskStatus
-	export function emptyRefTaskStatus():Ref<TaskStatus>
-	export function refOfTaskStatus(x:TaskStatus,v:Ref<TaskStatus>)
-	export function unRefTaskStatus(v:Ref<TaskStatus>):TaskStatus
-	export function emptyMessage():Message
-	export function emptyRefMessage():Ref<Message>
-	export function refOfMessage(x:Message,v:Ref<Message>)
-	export function unRefMessage(v:Ref<Message>):Message
-	export function emptyListDataOpenapiLogResp():ListDataOpenapiLogResp
-	export function emptyRefListDataOpenapiLogResp():Ref<ListDataOpenapiLogResp>
-	export function refOfListDataOpenapiLogResp(x:ListDataOpenapiLogResp,v:Ref<ListDataOpenapiLogResp>)
-	export function unRefListDataOpenapiLogResp(v:Ref<ListDataOpenapiLogResp>):ListDataOpenapiLogResp
-	export function emptyNotification():Notification
-	export function emptyRefNotification():Ref<Notification>
-	export function refOfNotification(x:Notification,v:Ref<Notification>)
-	export function unRefNotification(v:Ref<Notification>):Notification
-	export function emptyTimeRange():TimeRange
-	export function emptyRefTimeRange():Ref<TimeRange>
-	export function refOfTimeRange(x:TimeRange,v:Ref<TimeRange>)
-	export function unRefTimeRange(v:Ref<TimeRange>):TimeRange
-	export function emptyGwCommon():GwCommon
-	export function emptyRefGwCommon():Ref<GwCommon>
-	export function refOfGwCommon(x:GwCommon,v:Ref<GwCommon>)
-	export function unRefGwCommon(v:Ref<GwCommon>):GwCommon
-	export function emptyTenantThirdPartyEncryptionApp():TenantThirdPartyEncryptionApp
-	export function emptyRefTenantThirdPartyEncryptionApp():Ref<TenantThirdPartyEncryptionApp>
-	export function refOfTenantThirdPartyEncryptionApp(x:TenantThirdPartyEncryptionApp,v:Ref<TenantThirdPartyEncryptionApp>)
-	export function unRefTenantThirdPartyEncryptionApp(v:Ref<TenantThirdPartyEncryptionApp>):TenantThirdPartyEncryptionApp
-	export function emptyDataArchivingUserStruct():DataArchivingUserStruct
-	export function emptyRefDataArchivingUserStruct():Ref<DataArchivingUserStruct>
-	export function refOfDataArchivingUserStruct(x:DataArchivingUserStruct,v:Ref<DataArchivingUserStruct>)
-	export function unRefDataArchivingUserStruct(v:Ref<DataArchivingUserStruct>):DataArchivingUserStruct
-	export function emptyOpenapiLogDetail():OpenapiLogDetail
-	export function emptyRefOpenapiLogDetail():Ref<OpenapiLogDetail>
-	export function refOfOpenapiLogDetail(x:OpenapiLogDetail,v:Ref<OpenapiLogDetail>)
-	export function unRefOpenapiLogDetail(v:Ref<OpenapiLogDetail>):OpenapiLogDetail
-	export function emptyDlpHitPolicy():DlpHitPolicy
-	export function emptyRefDlpHitPolicy():Ref<DlpHitPolicy>
-	export function refOfDlpHitPolicy(x:DlpHitPolicy,v:Ref<DlpHitPolicy>)
-	export function unRefDlpHitPolicy(v:Ref<DlpHitPolicy>):DlpHitPolicy
-	export function emptyCreateMigrationItems():CreateMigrationItems
-	export function emptyRefCreateMigrationItems():Ref<CreateMigrationItems>
-	export function refOfCreateMigrationItems(x:CreateMigrationItems,v:Ref<CreateMigrationItems>)
-	export function unRefCreateMigrationItems(v:Ref<CreateMigrationItems>):CreateMigrationItems
-	export function emptyListOpenapiLogRequest():ListOpenapiLogRequest
-	export function emptyRefListOpenapiLogRequest():Ref<ListOpenapiLogRequest>
-	export function refOfListOpenapiLogRequest(x:ListOpenapiLogRequest,v:Ref<ListOpenapiLogRequest>)
-	export function unRefListOpenapiLogRequest(v:Ref<ListOpenapiLogRequest>):ListOpenapiLogRequest
-	export function emptyEmailFilter():EmailFilter
-	export function emptyRefEmailFilter():Ref<EmailFilter>
-	export function refOfEmailFilter(x:EmailFilter,v:Ref<EmailFilter>)
-	export function unRefEmailFilter(v:Ref<EmailFilter>):EmailFilter
-	export function emptyParam():Param
-	export function emptyRefParam():Ref<Param>
-	export function refOfParam(x:Param,v:Ref<Param>)
-	export function unRefParam(v:Ref<Param>):Param
-	export function emptyCreateMigrationEntity():CreateMigrationEntity
-	export function emptyRefCreateMigrationEntity():Ref<CreateMigrationEntity>
-	export function refOfCreateMigrationEntity(x:CreateMigrationEntity,v:Ref<CreateMigrationEntity>)
-	export function unRefCreateMigrationEntity(v:Ref<CreateMigrationEntity>):CreateMigrationEntity
-	export function emptyDirectoryItems():DirectoryItems
-	export function emptyRefDirectoryItems():Ref<DirectoryItems>
-	export function refOfDirectoryItems(x:DirectoryItems,v:Ref<DirectoryItems>)
-	export function unRefDirectoryItems(v:Ref<DirectoryItems>):DirectoryItems
-	export function emptyDocument():Document
-	export function emptyRefDocument():Ref<Document>
-	export function refOfDocument(x:Document,v:Ref<Document>)
-	export function unRefDocument(v:Ref<Document>):Document
-	export function emptyVaultExportFile():VaultExportFile
-	export function emptyRefVaultExportFile():Ref<VaultExportFile>
-	export function refOfVaultExportFile(x:VaultExportFile,v:Ref<VaultExportFile>)
-	export function unRefVaultExportFile(v:Ref<VaultExportFile>):VaultExportFile
-	export function emptyDataArchivingMessageStruct():DataArchivingMessageStruct
-	export function emptyRefDataArchivingMessageStruct():Ref<DataArchivingMessageStruct>
-	export function refOfDataArchivingMessageStruct(x:DataArchivingMessageStruct,v:Ref<DataArchivingMessageStruct>)
-	export function unRefDataArchivingMessageStruct(v:Ref<DataArchivingMessageStruct>):DataArchivingMessageStruct
-	export function emptyDlpPolicyHitProof():DlpPolicyHitProof
-	export function emptyRefDlpPolicyHitProof():Ref<DlpPolicyHitProof>
-	export function refOfDlpPolicyHitProof(x:DlpPolicyHitProof,v:Ref<DlpPolicyHitProof>)
-	export function unRefDlpPolicyHitProof(v:Ref<DlpPolicyHitProof>):DlpPolicyHitProof
-	export function emptyDownloadToken():DownloadToken
-	export function emptyRefDownloadToken():Ref<DownloadToken>
-	export function refOfDownloadToken(x:DownloadToken,v:Ref<DownloadToken>)
-	export function unRefDownloadToken(v:Ref<DownloadToken>):DownloadToken
-	export function emptyDeviceApplyRecord():DeviceApplyRecord
-	export function emptyRefDeviceApplyRecord():Ref<DeviceApplyRecord>
-	export function refOfDeviceApplyRecord(x:DeviceApplyRecord,v:Ref<DeviceApplyRecord>)
-	export function unRefDeviceApplyRecord(v:Ref<DeviceApplyRecord>):DeviceApplyRecord
-	export function emptyUserId():UserId
-	export function emptyRefUserId():Ref<UserId>
-	export function refOfUserId(x:UserId,v:Ref<UserId>)
-	export function unRefUserId(v:Ref<UserId>):UserId
-	export function emptyListDataOpenapiLogReq():ListDataOpenapiLogReq
-	export function emptyRefListDataOpenapiLogReq():Ref<ListDataOpenapiLogReq>
-	export function refOfListDataOpenapiLogReq(x:ListDataOpenapiLogReq,v:Ref<ListDataOpenapiLogReq>)
-	export function unRefListDataOpenapiLogReq(v:Ref<ListDataOpenapiLogReq>):ListDataOpenapiLogReq
-	export function emptySimpleUser():SimpleUser
-	export function emptyRefSimpleUser():Ref<SimpleUser>
-	export function refOfSimpleUser(x:SimpleUser,v:Ref<SimpleUser>)
-	export function unRefSimpleUser(v:Ref<SimpleUser>):SimpleUser
-	export function emptyTenant():Tenant
-	export function emptyRefTenant():Ref<Tenant>
-	export function refOfTenant(x:Tenant,v:Ref<Tenant>)
-	export function unRefTenant(v:Ref<Tenant>):Tenant
 	export function emptyAdminLog():AdminLog
 	export function emptyRefAdminLog():Ref<AdminLog>
 	export function refOfAdminLog(x:AdminLog,v:Ref<AdminLog>)
 	export function unRefAdminLog(v:Ref<AdminLog>):AdminLog
-	export function emptyDeviceRecord():DeviceRecord
-	export function emptyRefDeviceRecord():Ref<DeviceRecord>
-	export function refOfDeviceRecord(x:DeviceRecord,v:Ref<DeviceRecord>)
-	export function unRefDeviceRecord(v:Ref<DeviceRecord>):DeviceRecord
+	export function emptyGwCommon():GwCommon
+	export function emptyRefGwCommon():Ref<GwCommon>
+	export function refOfGwCommon(x:GwCommon,v:Ref<GwCommon>)
+	export function unRefGwCommon(v:Ref<GwCommon>):GwCommon
+	export function emptyOpenapiLogDetail():OpenapiLogDetail
+	export function emptyRefOpenapiLogDetail():Ref<OpenapiLogDetail>
+	export function refOfOpenapiLogDetail(x:OpenapiLogDetail,v:Ref<OpenapiLogDetail>)
+	export function unRefOpenapiLogDetail(v:Ref<OpenapiLogDetail>):OpenapiLogDetail
+	export function emptyEmail():Email
+	export function emptyRefEmail():Ref<Email>
+	export function refOfEmail(x:Email,v:Ref<Email>)
+	export function unRefEmail(v:Ref<Email>):Email
+	export function emptyUser():User
+	export function emptyRefUser():Ref<User>
+	export function refOfUser(x:User,v:Ref<User>)
+	export function unRefUser(v:Ref<User>):User
 	export function emptyDlpExecuteEvidence():DlpExecuteEvidence
 	export function emptyRefDlpExecuteEvidence():Ref<DlpExecuteEvidence>
 	export function refOfDlpExecuteEvidence(x:DlpExecuteEvidence,v:Ref<DlpExecuteEvidence>)
 	export function unRefDlpExecuteEvidence(v:Ref<DlpExecuteEvidence>):DlpExecuteEvidence
-	export function emptyDataArchivingMessage():DataArchivingMessage
-	export function emptyRefDataArchivingMessage():Ref<DataArchivingMessage>
-	export function refOfDataArchivingMessage(x:DataArchivingMessage,v:Ref<DataArchivingMessage>)
-	export function unRefDataArchivingMessage(v:Ref<DataArchivingMessage>):DataArchivingMessage
-	export function emptyDataArchivingUser():DataArchivingUser
-	export function emptyRefDataArchivingUser():Ref<DataArchivingUser>
-	export function refOfDataArchivingUser(x:DataArchivingUser,v:Ref<DataArchivingUser>)
-	export function unRefDataArchivingUser(v:Ref<DataArchivingUser>):DataArchivingUser
-	export function emptyV1():V1
-	export function emptyRefV1():Ref<V1>
-	export function refOfV1(x:V1,v:Ref<V1>)
-	export function unRefV1(v:Ref<V1>):V1
-	export function emptyDlpProofContext():DlpProofContext
-	export function emptyRefDlpProofContext():Ref<DlpProofContext>
-	export function refOfDlpProofContext(x:DlpProofContext,v:Ref<DlpProofContext>)
-	export function unRefDlpProofContext(v:Ref<DlpProofContext>):DlpProofContext
-	export function emptyListDataOpenapiLogRespData():ListDataOpenapiLogRespData
-	export function emptyRefListDataOpenapiLogRespData():Ref<ListDataOpenapiLogRespData>
-	export function refOfListDataOpenapiLogRespData(x:ListDataOpenapiLogRespData,v:Ref<ListDataOpenapiLogRespData>)
-	export function unRefListDataOpenapiLogRespData(v:Ref<ListDataOpenapiLogRespData>):ListDataOpenapiLogRespData
-	export function emptyDepartmentId():DepartmentId
-	export function emptyRefDepartmentId():Ref<DepartmentId>
-	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
-	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptyVaultTask():VaultTask
-	export function emptyRefVaultTask():Ref<VaultTask>
-	export function refOfVaultTask(x:VaultTask,v:Ref<VaultTask>)
-	export function unRefVaultTask(v:Ref<VaultTask>):VaultTask
-	export function emptyMigrationItems():MigrationItems
-	export function emptyRefMigrationItems():Ref<MigrationItems>
-	export function refOfMigrationItems(x:MigrationItems,v:Ref<MigrationItems>)
-	export function unRefMigrationItems(v:Ref<MigrationItems>):MigrationItems
-	export function emptyDlpDetectModeProofContext():DlpDetectModeProofContext
-	export function emptyRefDlpDetectModeProofContext():Ref<DlpDetectModeProofContext>
-	export function refOfDlpDetectModeProofContext(x:DlpDetectModeProofContext,v:Ref<DlpDetectModeProofContext>)
-	export function unRefDlpDetectModeProofContext(v:Ref<DlpDetectModeProofContext>):DlpDetectModeProofContext
+	export function emptyListDataOpenapiLogReq():ListDataOpenapiLogReq
+	export function emptyRefListDataOpenapiLogReq():Ref<ListDataOpenapiLogReq>
+	export function refOfListDataOpenapiLogReq(x:ListDataOpenapiLogReq,v:Ref<ListDataOpenapiLogReq>)
+	export function unRefListDataOpenapiLogReq(v:Ref<ListDataOpenapiLogReq>):ListDataOpenapiLogReq
 	export function emptyOpenapiLog():OpenapiLog
 	export function emptyRefOpenapiLog():Ref<OpenapiLog>
 	export function refOfOpenapiLog(x:OpenapiLog,v:Ref<OpenapiLog>)
 	export function unRefOpenapiLog(v:Ref<OpenapiLog>):OpenapiLog
+	export function emptySimpleUser():SimpleUser
+	export function emptyRefSimpleUser():Ref<SimpleUser>
+	export function refOfSimpleUser(x:SimpleUser,v:Ref<SimpleUser>)
+	export function unRefSimpleUser(v:Ref<SimpleUser>):SimpleUser
+	export function emptyVaultExportFile():VaultExportFile
+	export function emptyRefVaultExportFile():Ref<VaultExportFile>
+	export function refOfVaultExportFile(x:VaultExportFile,v:Ref<VaultExportFile>)
+	export function unRefVaultExportFile(v:Ref<VaultExportFile>):VaultExportFile
+	export function emptyNotification():Notification
+	export function emptyRefNotification():Ref<Notification>
+	export function refOfNotification(x:Notification,v:Ref<Notification>)
+	export function unRefNotification(v:Ref<Notification>):Notification
+	export function emptyTenant():Tenant
+	export function emptyRefTenant():Ref<Tenant>
+	export function refOfTenant(x:Tenant,v:Ref<Tenant>)
+	export function unRefTenant(v:Ref<Tenant>):Tenant
+	export function emptyDocument():Document
+	export function emptyRefDocument():Ref<Document>
+	export function refOfDocument(x:Document,v:Ref<Document>)
+	export function unRefDocument(v:Ref<Document>):Document
+	export function emptyDlpDetectModeProofContext():DlpDetectModeProofContext
+	export function emptyRefDlpDetectModeProofContext():Ref<DlpDetectModeProofContext>
+	export function refOfDlpDetectModeProofContext(x:DlpDetectModeProofContext,v:Ref<DlpDetectModeProofContext>)
+	export function unRefDlpDetectModeProofContext(v:Ref<DlpDetectModeProofContext>):DlpDetectModeProofContext
+	export function emptyListOpenapiLogRequest():ListOpenapiLogRequest
+	export function emptyRefListOpenapiLogRequest():Ref<ListOpenapiLogRequest>
+	export function refOfListOpenapiLogRequest(x:ListOpenapiLogRequest,v:Ref<ListOpenapiLogRequest>)
+	export function unRefListOpenapiLogRequest(v:Ref<ListOpenapiLogRequest>):ListOpenapiLogRequest
+	export function emptyDataArchivingMessageStruct():DataArchivingMessageStruct
+	export function emptyRefDataArchivingMessageStruct():Ref<DataArchivingMessageStruct>
+	export function refOfDataArchivingMessageStruct(x:DataArchivingMessageStruct,v:Ref<DataArchivingMessageStruct>)
+	export function unRefDataArchivingMessageStruct(v:Ref<DataArchivingMessageStruct>):DataArchivingMessageStruct
+	export function emptyDeviceRecord():DeviceRecord
+	export function emptyRefDeviceRecord():Ref<DeviceRecord>
+	export function refOfDeviceRecord(x:DeviceRecord,v:Ref<DeviceRecord>)
+	export function unRefDeviceRecord(v:Ref<DeviceRecord>):DeviceRecord
+	export function emptyVaultTask():VaultTask
+	export function emptyRefVaultTask():Ref<VaultTask>
+	export function refOfVaultTask(x:VaultTask,v:Ref<VaultTask>)
+	export function unRefVaultTask(v:Ref<VaultTask>):VaultTask
+	export function emptyDirectoryItems():DirectoryItems
+	export function emptyRefDirectoryItems():Ref<DirectoryItems>
+	export function refOfDirectoryItems(x:DirectoryItems,v:Ref<DirectoryItems>)
+	export function unRefDirectoryItems(v:Ref<DirectoryItems>):DirectoryItems
+	export function emptyEmailFilter():EmailFilter
+	export function emptyRefEmailFilter():Ref<EmailFilter>
+	export function refOfEmailFilter(x:EmailFilter,v:Ref<EmailFilter>)
+	export function unRefEmailFilter(v:Ref<EmailFilter>):EmailFilter
+	export function emptyUserId():UserId
+	export function emptyRefUserId():Ref<UserId>
+	export function refOfUserId(x:UserId,v:Ref<UserId>)
+	export function unRefUserId(v:Ref<UserId>):UserId
+	export function emptyFileRiskDetectionRecordResult():FileRiskDetectionRecordResult
+	export function emptyRefFileRiskDetectionRecordResult():Ref<FileRiskDetectionRecordResult>
+	export function refOfFileRiskDetectionRecordResult(x:FileRiskDetectionRecordResult,v:Ref<FileRiskDetectionRecordResult>)
+	export function unRefFileRiskDetectionRecordResult(v:Ref<FileRiskDetectionRecordResult>):FileRiskDetectionRecordResult
+	export function emptyDlpProofContext():DlpProofContext
+	export function emptyRefDlpProofContext():Ref<DlpProofContext>
+	export function refOfDlpProofContext(x:DlpProofContext,v:Ref<DlpProofContext>)
+	export function unRefDlpProofContext(v:Ref<DlpProofContext>):DlpProofContext
 	export function emptyDlpExecuteLog():DlpExecuteLog
 	export function emptyRefDlpExecuteLog():Ref<DlpExecuteLog>
 	export function refOfDlpExecuteLog(x:DlpExecuteLog,v:Ref<DlpExecuteLog>)
 	export function unRefDlpExecuteLog(v:Ref<DlpExecuteLog>):DlpExecuteLog
+	export function emptyCreateMigrationEntity():CreateMigrationEntity
+	export function emptyRefCreateMigrationEntity():Ref<CreateMigrationEntity>
+	export function refOfCreateMigrationEntity(x:CreateMigrationEntity,v:Ref<CreateMigrationEntity>)
+	export function unRefCreateMigrationEntity(v:Ref<CreateMigrationEntity>):CreateMigrationEntity
+	export function emptyCreateMigrationItems():CreateMigrationItems
+	export function emptyRefCreateMigrationItems():Ref<CreateMigrationItems>
+	export function refOfCreateMigrationItems(x:CreateMigrationItems,v:Ref<CreateMigrationItems>)
+	export function unRefCreateMigrationItems(v:Ref<CreateMigrationItems>):CreateMigrationItems
 	export function emptyGwResponse():GwResponse
 	export function emptyRefGwResponse():Ref<GwResponse>
 	export function refOfGwResponse(x:GwResponse,v:Ref<GwResponse>)
 	export function unRefGwResponse(v:Ref<GwResponse>):GwResponse
+	export function emptyTaskStatus():TaskStatus
+	export function emptyRefTaskStatus():Ref<TaskStatus>
+	export function refOfTaskStatus(x:TaskStatus,v:Ref<TaskStatus>)
+	export function unRefTaskStatus(v:Ref<TaskStatus>):TaskStatus
 	export function emptyDlpEvidenceDetail():DlpEvidenceDetail
 	export function emptyRefDlpEvidenceDetail():Ref<DlpEvidenceDetail>
 	export function refOfDlpEvidenceDetail(x:DlpEvidenceDetail,v:Ref<DlpEvidenceDetail>)
@@ -1152,24 +1130,88 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/security_and_complia
 	export function emptyRefMigrationEntity():Ref<MigrationEntity>
 	export function refOfMigrationEntity(x:MigrationEntity,v:Ref<MigrationEntity>)
 	export function unRefMigrationEntity(v:Ref<MigrationEntity>):MigrationEntity
-	export function emptyUser():User
-	export function emptyRefUser():Ref<User>
-	export function refOfUser(x:User,v:Ref<User>)
-	export function unRefUser(v:Ref<User>):User
-	export function emptyAppDlpExecuteLog():AppDlpExecuteLog
-	export function emptyRefAppDlpExecuteLog():Ref<AppDlpExecuteLog>
-	export function refOfAppDlpExecuteLog(x:AppDlpExecuteLog,v:Ref<AppDlpExecuteLog>)
-	export function unRefAppDlpExecuteLog(v:Ref<AppDlpExecuteLog>):AppDlpExecuteLog
-	export function emptyEmail():Email
-	export function emptyRefEmail():Ref<Email>
-	export function refOfEmail(x:Email,v:Ref<Email>)
-	export function unRefEmail(v:Ref<Email>):Email
+	export function emptyUserMigration():UserMigration
+	export function emptyRefUserMigration():Ref<UserMigration>
+	export function refOfUserMigration(x:UserMigration,v:Ref<UserMigration>)
+	export function unRefUserMigration(v:Ref<UserMigration>):UserMigration
+	export function emptyDlpPolicyHitProof():DlpPolicyHitProof
+	export function emptyRefDlpPolicyHitProof():Ref<DlpPolicyHitProof>
+	export function refOfDlpPolicyHitProof(x:DlpPolicyHitProof,v:Ref<DlpPolicyHitProof>)
+	export function unRefDlpPolicyHitProof(v:Ref<DlpPolicyHitProof>):DlpPolicyHitProof
+	export function emptyDownloadToken():DownloadToken
+	export function emptyRefDownloadToken():Ref<DownloadToken>
+	export function refOfDownloadToken(x:DownloadToken,v:Ref<DownloadToken>)
+	export function unRefDownloadToken(v:Ref<DownloadToken>):DownloadToken
+	export function emptyDataArchivingUser():DataArchivingUser
+	export function emptyRefDataArchivingUser():Ref<DataArchivingUser>
+	export function refOfDataArchivingUser(x:DataArchivingUser,v:Ref<DataArchivingUser>)
+	export function unRefDataArchivingUser(v:Ref<DataArchivingUser>):DataArchivingUser
+	export function emptyDeviceApplyRecord():DeviceApplyRecord
+	export function emptyRefDeviceApplyRecord():Ref<DeviceApplyRecord>
+	export function refOfDeviceApplyRecord(x:DeviceApplyRecord,v:Ref<DeviceApplyRecord>)
+	export function unRefDeviceApplyRecord(v:Ref<DeviceApplyRecord>):DeviceApplyRecord
+	export function emptyTimeRange():TimeRange
+	export function emptyRefTimeRange():Ref<TimeRange>
+	export function refOfTimeRange(x:TimeRange,v:Ref<TimeRange>)
+	export function unRefTimeRange(v:Ref<TimeRange>):TimeRange
+	export function emptyFileRiskDetectionRecord():FileRiskDetectionRecord
+	export function emptyRefFileRiskDetectionRecord():Ref<FileRiskDetectionRecord>
+	export function refOfFileRiskDetectionRecord(x:FileRiskDetectionRecord,v:Ref<FileRiskDetectionRecord>)
+	export function unRefFileRiskDetectionRecord(v:Ref<FileRiskDetectionRecord>):FileRiskDetectionRecord
 	export function emptyGwRequest():GwRequest
 	export function emptyRefGwRequest():Ref<GwRequest>
 	export function refOfGwRequest(x:GwRequest,v:Ref<GwRequest>)
 	export function unRefGwRequest(v:Ref<GwRequest>):GwRequest
+	export function emptyDataArchivingUserStruct():DataArchivingUserStruct
+	export function emptyRefDataArchivingUserStruct():Ref<DataArchivingUserStruct>
+	export function refOfDataArchivingUserStruct(x:DataArchivingUserStruct,v:Ref<DataArchivingUserStruct>)
+	export function unRefDataArchivingUserStruct(v:Ref<DataArchivingUserStruct>):DataArchivingUserStruct
+	export function emptyDlpHitPolicy():DlpHitPolicy
+	export function emptyRefDlpHitPolicy():Ref<DlpHitPolicy>
+	export function refOfDlpHitPolicy(x:DlpHitPolicy,v:Ref<DlpHitPolicy>)
+	export function unRefDlpHitPolicy(v:Ref<DlpHitPolicy>):DlpHitPolicy
+	export function emptyAppDlpExecuteLog():AppDlpExecuteLog
+	export function emptyRefAppDlpExecuteLog():Ref<AppDlpExecuteLog>
+	export function refOfAppDlpExecuteLog(x:AppDlpExecuteLog,v:Ref<AppDlpExecuteLog>)
+	export function unRefAppDlpExecuteLog(v:Ref<AppDlpExecuteLog>):AppDlpExecuteLog
+	export function emptyDepartmentId():DepartmentId
+	export function emptyRefDepartmentId():Ref<DepartmentId>
+	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
+	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
+	export function emptyTenantThirdPartyEncryptionApp():TenantThirdPartyEncryptionApp
+	export function emptyRefTenantThirdPartyEncryptionApp():Ref<TenantThirdPartyEncryptionApp>
+	export function refOfTenantThirdPartyEncryptionApp(x:TenantThirdPartyEncryptionApp,v:Ref<TenantThirdPartyEncryptionApp>)
+	export function unRefTenantThirdPartyEncryptionApp(v:Ref<TenantThirdPartyEncryptionApp>):TenantThirdPartyEncryptionApp
+	export function emptyV1():V1
+	export function emptyRefV1():Ref<V1>
+	export function refOfV1(x:V1,v:Ref<V1>)
+	export function unRefV1(v:Ref<V1>):V1
+	export function emptyDataArchivingMessage():DataArchivingMessage
+	export function emptyRefDataArchivingMessage():Ref<DataArchivingMessage>
+	export function refOfDataArchivingMessage(x:DataArchivingMessage,v:Ref<DataArchivingMessage>)
+	export function unRefDataArchivingMessage(v:Ref<DataArchivingMessage>):DataArchivingMessage
 	export function emptyKeyPerson():KeyPerson
 	export function emptyRefKeyPerson():Ref<KeyPerson>
 	export function refOfKeyPerson(x:KeyPerson,v:Ref<KeyPerson>)
 	export function unRefKeyPerson(v:Ref<KeyPerson>):KeyPerson
+	export function emptyMigrationItems():MigrationItems
+	export function emptyRefMigrationItems():Ref<MigrationItems>
+	export function refOfMigrationItems(x:MigrationItems,v:Ref<MigrationItems>)
+	export function unRefMigrationItems(v:Ref<MigrationItems>):MigrationItems
+	export function emptyListDataOpenapiLogResp():ListDataOpenapiLogResp
+	export function emptyRefListDataOpenapiLogResp():Ref<ListDataOpenapiLogResp>
+	export function refOfListDataOpenapiLogResp(x:ListDataOpenapiLogResp,v:Ref<ListDataOpenapiLogResp>)
+	export function unRefListDataOpenapiLogResp(v:Ref<ListDataOpenapiLogResp>):ListDataOpenapiLogResp
+	export function emptyParam():Param
+	export function emptyRefParam():Ref<Param>
+	export function refOfParam(x:Param,v:Ref<Param>)
+	export function unRefParam(v:Ref<Param>):Param
+	export function emptyListDataOpenapiLogRespData():ListDataOpenapiLogRespData
+	export function emptyRefListDataOpenapiLogRespData():Ref<ListDataOpenapiLogRespData>
+	export function refOfListDataOpenapiLogRespData(x:ListDataOpenapiLogRespData,v:Ref<ListDataOpenapiLogRespData>)
+	export function unRefListDataOpenapiLogRespData(v:Ref<ListDataOpenapiLogRespData>):ListDataOpenapiLogRespData
+	export function emptyMessage():Message
+	export function emptyRefMessage():Ref<Message>
+	export function refOfMessage(x:Message,v:Ref<Message>)
+	export function unRefMessage(v:Ref<Message>):Message
 }

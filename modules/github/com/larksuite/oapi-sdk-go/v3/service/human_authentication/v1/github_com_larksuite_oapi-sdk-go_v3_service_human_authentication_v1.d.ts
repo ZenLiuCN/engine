@@ -99,14 +99,6 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/human_authentication
 				create(ctx:context.Context,req:Ref<CreateIdentityReq>,...options:larkcore.RequestOptionFunc[]):Ref<CreateIdentityResp>
 			}>
 	}
-	export function emptyCreateIdentityReqBody():CreateIdentityReqBody
-	export function emptyRefCreateIdentityReqBody():Ref<CreateIdentityReqBody>
-	export function refOfCreateIdentityReqBody(x:CreateIdentityReqBody,v:Ref<CreateIdentityReqBody>)
-	export function unRefCreateIdentityReqBody(v:Ref<CreateIdentityReqBody>):CreateIdentityReqBody
-	export function emptyDepartmentId():DepartmentId
-	export function emptyRefDepartmentId():Ref<DepartmentId>
-	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
-	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
 	export function emptyCreateIdentityReq():CreateIdentityReq
 	export function emptyRefCreateIdentityReq():Ref<CreateIdentityReq>
 	export function refOfCreateIdentityReq(x:CreateIdentityReq,v:Ref<CreateIdentityReq>)
@@ -115,6 +107,18 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/human_authentication
 	export function emptyRefCreateIdentityResp():Ref<CreateIdentityResp>
 	export function refOfCreateIdentityResp(x:CreateIdentityResp,v:Ref<CreateIdentityResp>)
 	export function unRefCreateIdentityResp(v:Ref<CreateIdentityResp>):CreateIdentityResp
+	export function emptyDepartmentId():DepartmentId
+	export function emptyRefDepartmentId():Ref<DepartmentId>
+	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
+	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
+	export function emptyV1():V1
+	export function emptyRefV1():Ref<V1>
+	export function refOfV1(x:V1,v:Ref<V1>)
+	export function unRefV1(v:Ref<V1>):V1
+	export function emptyCreateIdentityReqBody():CreateIdentityReqBody
+	export function emptyRefCreateIdentityReqBody():Ref<CreateIdentityReqBody>
+	export function refOfCreateIdentityReqBody(x:CreateIdentityReqBody,v:Ref<CreateIdentityReqBody>)
+	export function unRefCreateIdentityReqBody(v:Ref<CreateIdentityReqBody>):CreateIdentityReqBody
 	export function emptyCreateIdentityRespData():CreateIdentityRespData
 	export function emptyRefCreateIdentityRespData():Ref<CreateIdentityRespData>
 	export function refOfCreateIdentityRespData(x:CreateIdentityRespData,v:Ref<CreateIdentityRespData>)
@@ -123,8 +127,4 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/human_authentication
 	export function emptyRefIdentity():Ref<Identity>
 	export function refOfIdentity(x:Identity,v:Ref<Identity>)
 	export function unRefIdentity(v:Ref<Identity>):Identity
-	export function emptyV1():V1
-	export function emptyRefV1():Ref<V1>
-	export function refOfV1(x:V1,v:Ref<V1>)
-	export function unRefV1(v:Ref<V1>):V1
 }

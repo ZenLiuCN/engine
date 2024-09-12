@@ -7,7 +7,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/wiki'{
 	// @ts-ignore
 	import * as larkwiki from 'github.com/larksuite/oapi-sdk-go/v3/service/wiki/v2'
 	// @ts-ignore
-	import type {Ref,Struct} from 'go'
+	import type {Struct,Ref} from 'go'
 	export function newService(config:Ref<larkcore.Config>):Ref<Service>
 
 	export interface Service extends Struct<Service>{

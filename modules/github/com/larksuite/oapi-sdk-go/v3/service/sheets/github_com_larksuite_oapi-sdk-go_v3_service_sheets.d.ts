@@ -3,9 +3,9 @@
 declare module 'github.com/larksuite/oapi-sdk-go/v3/service/sheets'{
 
 	// @ts-ignore
-	import * as larkcore from 'github.com/larksuite/oapi-sdk-go/v3/core'
-	// @ts-ignore
 	import * as larksheets from 'github.com/larksuite/oapi-sdk-go/v3/service/sheets/v3'
+	// @ts-ignore
+	import * as larkcore from 'github.com/larksuite/oapi-sdk-go/v3/core'
 	// @ts-ignore
 	import type {Ref,Struct} from 'go'
 	export function newService(config:Ref<larkcore.Config>):Ref<Service>

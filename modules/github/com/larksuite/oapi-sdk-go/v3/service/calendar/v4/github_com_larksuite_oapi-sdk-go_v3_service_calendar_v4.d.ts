@@ -9,7 +9,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/calendar/v4'{
 	// @ts-ignore
 	import * as larkevent from 'github.com/larksuite/oapi-sdk-go/v3/event'
 	// @ts-ignore
-	import type {error,int,float64,Alias,Nothing,Ref,Struct,bool} from 'go'
+	import type {bool,error,int,float64,Alias,Nothing,Ref,Struct} from 'go'
 	export interface AclScope extends Struct<AclScope>{
 
 			type:Ref<string>
@@ -600,6 +600,26 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/calendar/v4'{
 			meetingChatId:Ref<string>
 			applink:Ref<string>
 	}
+	export interface CreateCalendarEventMeetingMinuteReq extends Struct<CreateCalendarEventMeetingMinuteReq>{
+
+	}
+	export interface CreateCalendarEventMeetingMinuteReqBuilder extends Struct<CreateCalendarEventMeetingMinuteReqBuilder>{
+
+			calendarId(calendarId:string):Ref<CreateCalendarEventMeetingMinuteReqBuilder>
+			eventId(eventId:string):Ref<CreateCalendarEventMeetingMinuteReqBuilder>
+			build():Ref<CreateCalendarEventMeetingMinuteReq>
+	}
+	export interface CreateCalendarEventMeetingMinuteResp extends Struct<CreateCalendarEventMeetingMinuteResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<CreateCalendarEventMeetingMinuteRespData>
+			success():bool
+	}
+	export interface CreateCalendarEventMeetingMinuteRespData extends Struct<CreateCalendarEventMeetingMinuteRespData>{
+
+			docUrl:Ref<string>
+	}
 	export interface CreateCalendarEventReq extends Struct<CreateCalendarEventReq>{
 
 			calendarEvent:Ref<CalendarEvent>
@@ -744,7 +764,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/calendar/v4'{
 
 			calendarId(calendarId:string):Ref<DeleteCalendarEventReqBuilder>
 			eventId(eventId:string):Ref<DeleteCalendarEventReqBuilder>
-			needNotification(needNotification:bool):Ref<DeleteCalendarEventReqBuilder>
+			needNotification(needNotification:string):Ref<DeleteCalendarEventReqBuilder>
 			build():Ref<DeleteCalendarEventReq>
 	}
 	export interface DeleteCalendarEventResp extends Struct<DeleteCalendarEventResp>{
@@ -972,6 +992,19 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/calendar/v4'{
 			status(status:string):Ref<ExchangeBindingBuilder>
 			exchangeBindingId(exchangeBindingId:string):Ref<ExchangeBindingBuilder>
 			build():Ref<ExchangeBinding>
+	}
+	export interface File extends Struct<File>{
+
+			fileToken:Ref<string>
+			fileSize:Ref<string>
+			name:Ref<string>
+	}
+	export interface FileBuilder extends Struct<FileBuilder>{
+
+			fileToken(fileToken:string):Ref<FileBuilder>
+			fileSize(fileSize:string):Ref<FileBuilder>
+			name(name:string):Ref<FileBuilder>
+			build():Ref<File>
 	}
 	export interface FreeTime extends Struct<FreeTime>{
 
@@ -1576,10 +1609,10 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/calendar/v4'{
 			message(message:string):Ref<MyaiSearchDocResultBuilder>
 			build():Ref<MyaiSearchDocResult>
 	}
-	//false
-	export const NeedNotificationFalse:bool
-	//true
-	export const NeedNotificationTrue:bool
+	//"false"
+	export const NeedNotificationFalse:string
+	//"true"
+	export const NeedNotificationTrue:string
 	export function New(config:Ref<larkcore.Config>):Ref<V4>
 
 	export function newAclScopeBuilder():Ref<AclScopeBuilder>
@@ -1642,6 +1675,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/calendar/v4'{
 
 	export function newCreateCalendarEventMeetingChatReqBuilder():Ref<CreateCalendarEventMeetingChatReqBuilder>
 
+	export function newCreateCalendarEventMeetingMinuteReqBuilder():Ref<CreateCalendarEventMeetingMinuteReqBuilder>
+
 	export function newCreateCalendarEventReqBuilder():Ref<CreateCalendarEventReqBuilder>
 
 	export function newCreateCalendarReqBuilder():Ref<CreateCalendarReqBuilder>
@@ -1679,6 +1714,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/calendar/v4'{
 	export function newEventTimeBuilder():Ref<EventTimeBuilder>
 
 	export function newExchangeBindingBuilder():Ref<ExchangeBindingBuilder>
+
+	export function newFileBuilder():Ref<FileBuilder>
 
 	export function newFreeTimeAiBuilder():Ref<FreeTimeAiBuilder>
 
@@ -1846,7 +1883,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/calendar/v4'{
 			meetingNo(meetingNo:string):Ref<OperateCardDataBuilder>
 			build():Ref<OperateCardData>
 	}
-	export interface P2CalendarAclCreatedV4 extends Struct<P2CalendarAclCreatedV4>,larkevent.EventHandlerModel{
+	export interface P2CalendarAclCreatedV4 extends larkevent.EventHandlerModel,Struct<P2CalendarAclCreatedV4>{
 
 			eventV2Base:Ref<larkevent.EventV2Base>
 			eventReq:Ref<larkevent.EventReq>
@@ -1900,7 +1937,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/calendar/v4'{
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
 	}
-	export interface P2CalendarEventChangedV4 extends Struct<P2CalendarEventChangedV4>,larkevent.EventHandlerModel{
+	export interface P2CalendarEventChangedV4 extends larkevent.EventHandlerModel,Struct<P2CalendarEventChangedV4>{
 
 			eventV2Base:Ref<larkevent.EventV2Base>
 			eventReq:Ref<larkevent.EventReq>
@@ -2545,6 +2582,10 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/calendar/v4'{
 				create(ctx:context.Context,req:Ref<CreateCalendarEventMeetingChatReq>,...options:larkcore.RequestOptionFunc[]):Ref<CreateCalendarEventMeetingChatResp>
 				delete(ctx:context.Context,req:Ref<DeleteCalendarEventMeetingChatReq>,...options:larkcore.RequestOptionFunc[]):Ref<DeleteCalendarEventMeetingChatResp>
 			}>
+			calendarEventMeetingMinute:Ref<{
+			
+				create(ctx:context.Context,req:Ref<CreateCalendarEventMeetingMinuteReq>,...options:larkcore.RequestOptionFunc[]):Ref<CreateCalendarEventMeetingMinuteResp>
+			}>
 			exchangeBinding:Ref<{
 			
 				create(ctx:context.Context,req:Ref<CreateExchangeBindingReq>,...options:larkcore.RequestOptionFunc[]):Ref<CreateExchangeBindingResp>
@@ -2621,206 +2662,74 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/calendar/v4'{
 			userId(userId:string):Ref<WorkhourSettingBuilder>
 			build():Ref<WorkhourSetting>
 	}
-	export function emptyWorkhourSetting():WorkhourSetting
-	export function emptyRefWorkhourSetting():Ref<WorkhourSetting>
-	export function refOfWorkhourSetting(x:WorkhourSetting,v:Ref<WorkhourSetting>)
-	export function unRefWorkhourSetting(v:Ref<WorkhourSetting>):WorkhourSetting
-	export function emptyBatchDeleteCalendarEventAttendeeReq():BatchDeleteCalendarEventAttendeeReq
-	export function emptyRefBatchDeleteCalendarEventAttendeeReq():Ref<BatchDeleteCalendarEventAttendeeReq>
-	export function refOfBatchDeleteCalendarEventAttendeeReq(x:BatchDeleteCalendarEventAttendeeReq,v:Ref<BatchDeleteCalendarEventAttendeeReq>)
-	export function unRefBatchDeleteCalendarEventAttendeeReq(v:Ref<BatchDeleteCalendarEventAttendeeReq>):BatchDeleteCalendarEventAttendeeReq
-	export function emptyGenerateCaldavConfSettingReqBody():GenerateCaldavConfSettingReqBody
-	export function emptyRefGenerateCaldavConfSettingReqBody():Ref<GenerateCaldavConfSettingReqBody>
-	export function refOfGenerateCaldavConfSettingReqBody(x:GenerateCaldavConfSettingReqBody,v:Ref<GenerateCaldavConfSettingReqBody>)
-	export function unRefGenerateCaldavConfSettingReqBody(v:Ref<GenerateCaldavConfSettingReqBody>):GenerateCaldavConfSettingReqBody
-	export function emptySchema():Schema
-	export function emptyRefSchema():Ref<Schema>
-	export function refOfSchema(x:Schema,v:Ref<Schema>)
-	export function unRefSchema(v:Ref<Schema>):Schema
-	export function emptyListCalendarEventAttendeeReq():ListCalendarEventAttendeeReq
-	export function emptyRefListCalendarEventAttendeeReq():Ref<ListCalendarEventAttendeeReq>
-	export function refOfListCalendarEventAttendeeReq(x:ListCalendarEventAttendeeReq,v:Ref<ListCalendarEventAttendeeReq>)
-	export function unRefListCalendarEventAttendeeReq(v:Ref<ListCalendarEventAttendeeReq>):ListCalendarEventAttendeeReq
-	export function emptyListCalendarEventReq():ListCalendarEventReq
-	export function emptyRefListCalendarEventReq():Ref<ListCalendarEventReq>
-	export function refOfListCalendarEventReq(x:ListCalendarEventReq,v:Ref<ListCalendarEventReq>)
-	export function unRefListCalendarEventReq(v:Ref<ListCalendarEventReq>):ListCalendarEventReq
-	export function emptyCalendarAcl():CalendarAcl
-	export function emptyRefCalendarAcl():Ref<CalendarAcl>
-	export function refOfCalendarAcl(x:CalendarAcl,v:Ref<CalendarAcl>)
-	export function unRefCalendarAcl(v:Ref<CalendarAcl>):CalendarAcl
-	export function emptyCalendarUnderstandScenarioContext():CalendarUnderstandScenarioContext
-	export function emptyRefCalendarUnderstandScenarioContext():Ref<CalendarUnderstandScenarioContext>
-	export function refOfCalendarUnderstandScenarioContext(x:CalendarUnderstandScenarioContext,v:Ref<CalendarUnderstandScenarioContext>)
-	export function unRefCalendarUnderstandScenarioContext(v:Ref<CalendarUnderstandScenarioContext>):CalendarUnderstandScenarioContext
-	export function emptyListCalendarAclIterator():ListCalendarAclIterator
-	export function emptyRefListCalendarAclIterator():Ref<ListCalendarAclIterator>
-	export function refOfListCalendarAclIterator(x:ListCalendarAclIterator,v:Ref<ListCalendarAclIterator>)
-	export function unRefListCalendarAclIterator(v:Ref<ListCalendarAclIterator>):ListCalendarAclIterator
-	export function emptyListCalendarEventAttendeeChatMemberRespData():ListCalendarEventAttendeeChatMemberRespData
-	export function emptyRefListCalendarEventAttendeeChatMemberRespData():Ref<ListCalendarEventAttendeeChatMemberRespData>
-	export function refOfListCalendarEventAttendeeChatMemberRespData(x:ListCalendarEventAttendeeChatMemberRespData,v:Ref<ListCalendarEventAttendeeChatMemberRespData>)
-	export function unRefListCalendarEventAttendeeChatMemberRespData(v:Ref<ListCalendarEventAttendeeChatMemberRespData>):ListCalendarEventAttendeeChatMemberRespData
-	export function emptyCalendarUnderstandExtra():CalendarUnderstandExtra
-	export function emptyRefCalendarUnderstandExtra():Ref<CalendarUnderstandExtra>
-	export function refOfCalendarUnderstandExtra(x:CalendarUnderstandExtra,v:Ref<CalendarUnderstandExtra>)
-	export function unRefCalendarUnderstandExtra(v:Ref<CalendarUnderstandExtra>):CalendarUnderstandExtra
-	export function emptyDepartmentId():DepartmentId
-	export function emptyRefDepartmentId():Ref<DepartmentId>
-	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
-	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptyListCalendarAclResp():ListCalendarAclResp
-	export function emptyRefListCalendarAclResp():Ref<ListCalendarAclResp>
-	export function refOfListCalendarAclResp(x:ListCalendarAclResp,v:Ref<ListCalendarAclResp>)
-	export function unRefListCalendarAclResp(v:Ref<ListCalendarAclResp>):ListCalendarAclResp
-	export function emptyPatchCalendarEventRespData():PatchCalendarEventRespData
-	export function emptyRefPatchCalendarEventRespData():Ref<PatchCalendarEventRespData>
-	export function refOfPatchCalendarEventRespData(x:PatchCalendarEventRespData,v:Ref<PatchCalendarEventRespData>)
-	export function unRefPatchCalendarEventRespData(v:Ref<PatchCalendarEventRespData>):PatchCalendarEventRespData
-	export function emptyFreeTimeSlot():FreeTimeSlot
-	export function emptyRefFreeTimeSlot():Ref<FreeTimeSlot>
-	export function refOfFreeTimeSlot(x:FreeTimeSlot,v:Ref<FreeTimeSlot>)
-	export function unRefFreeTimeSlot(v:Ref<FreeTimeSlot>):FreeTimeSlot
-	export function emptyListCalendarAclReq():ListCalendarAclReq
-	export function emptyRefListCalendarAclReq():Ref<ListCalendarAclReq>
-	export function refOfListCalendarAclReq(x:ListCalendarAclReq,v:Ref<ListCalendarAclReq>)
-	export function unRefListCalendarAclReq(v:Ref<ListCalendarAclReq>):ListCalendarAclReq
-	export function emptyGenerateCaldavConfSettingResp():GenerateCaldavConfSettingResp
-	export function emptyRefGenerateCaldavConfSettingResp():Ref<GenerateCaldavConfSettingResp>
-	export function refOfGenerateCaldavConfSettingResp(x:GenerateCaldavConfSettingResp,v:Ref<GenerateCaldavConfSettingResp>)
-	export function unRefGenerateCaldavConfSettingResp(v:Ref<GenerateCaldavConfSettingResp>):GenerateCaldavConfSettingResp
-	export function emptyMyAiEventDetail():MyAiEventDetail
-	export function emptyRefMyAiEventDetail():Ref<MyAiEventDetail>
-	export function refOfMyAiEventDetail(x:MyAiEventDetail,v:Ref<MyAiEventDetail>)
-	export function unRefMyAiEventDetail(v:Ref<MyAiEventDetail>):MyAiEventDetail
-	export function emptySearchCalendarRespData():SearchCalendarRespData
-	export function emptyRefSearchCalendarRespData():Ref<SearchCalendarRespData>
-	export function refOfSearchCalendarRespData(x:SearchCalendarRespData,v:Ref<SearchCalendarRespData>)
-	export function unRefSearchCalendarRespData(v:Ref<SearchCalendarRespData>):SearchCalendarRespData
-	export function emptyInstanceViewCalendarEventRespData():InstanceViewCalendarEventRespData
-	export function emptyRefInstanceViewCalendarEventRespData():Ref<InstanceViewCalendarEventRespData>
-	export function refOfInstanceViewCalendarEventRespData(x:InstanceViewCalendarEventRespData,v:Ref<InstanceViewCalendarEventRespData>)
-	export function unRefInstanceViewCalendarEventRespData(v:Ref<InstanceViewCalendarEventRespData>):InstanceViewCalendarEventRespData
-	export function emptyListCalendarEventAttendeeRespData():ListCalendarEventAttendeeRespData
-	export function emptyRefListCalendarEventAttendeeRespData():Ref<ListCalendarEventAttendeeRespData>
-	export function refOfListCalendarEventAttendeeRespData(x:ListCalendarEventAttendeeRespData,v:Ref<ListCalendarEventAttendeeRespData>)
-	export function unRefListCalendarEventAttendeeRespData(v:Ref<ListCalendarEventAttendeeRespData>):ListCalendarEventAttendeeRespData
-	export function emptyMyaiDocDetail():MyaiDocDetail
-	export function emptyRefMyaiDocDetail():Ref<MyaiDocDetail>
-	export function refOfMyaiDocDetail(x:MyaiDocDetail,v:Ref<MyaiDocDetail>)
-	export function unRefMyaiDocDetail(v:Ref<MyaiDocDetail>):MyaiDocDetail
-	export function emptyDeleteCalendarEventResp():DeleteCalendarEventResp
-	export function emptyRefDeleteCalendarEventResp():Ref<DeleteCalendarEventResp>
-	export function refOfDeleteCalendarEventResp(x:DeleteCalendarEventResp,v:Ref<DeleteCalendarEventResp>)
-	export function unRefDeleteCalendarEventResp(v:Ref<DeleteCalendarEventResp>):DeleteCalendarEventResp
-	export function emptyP2CalendarChangedV4Data():P2CalendarChangedV4Data
-	export function emptyRefP2CalendarChangedV4Data():Ref<P2CalendarChangedV4Data>
-	export function refOfP2CalendarChangedV4Data(x:P2CalendarChangedV4Data,v:Ref<P2CalendarChangedV4Data>)
-	export function unRefP2CalendarChangedV4Data(v:Ref<P2CalendarChangedV4Data>):P2CalendarChangedV4Data
-	export function emptyAttendeeChatMember():AttendeeChatMember
-	export function emptyRefAttendeeChatMember():Ref<AttendeeChatMember>
-	export function refOfAttendeeChatMember(x:AttendeeChatMember,v:Ref<AttendeeChatMember>)
-	export function unRefAttendeeChatMember(v:Ref<AttendeeChatMember>):AttendeeChatMember
-	export function emptyCreateCalendarResp():CreateCalendarResp
-	export function emptyRefCreateCalendarResp():Ref<CreateCalendarResp>
-	export function refOfCreateCalendarResp(x:CreateCalendarResp,v:Ref<CreateCalendarResp>)
-	export function unRefCreateCalendarResp(v:Ref<CreateCalendarResp>):CreateCalendarResp
-	export function emptyCreateExchangeBindingReq():CreateExchangeBindingReq
-	export function emptyRefCreateExchangeBindingReq():Ref<CreateExchangeBindingReq>
-	export function refOfCreateExchangeBindingReq(x:CreateExchangeBindingReq,v:Ref<CreateExchangeBindingReq>)
-	export function unRefCreateExchangeBindingReq(v:Ref<CreateExchangeBindingReq>):CreateExchangeBindingReq
-	export function emptySearchCalendarEventReqBody():SearchCalendarEventReqBody
-	export function emptyRefSearchCalendarEventReqBody():Ref<SearchCalendarEventReqBody>
-	export function refOfSearchCalendarEventReqBody(x:SearchCalendarEventReqBody,v:Ref<SearchCalendarEventReqBody>)
-	export function unRefSearchCalendarEventReqBody(v:Ref<SearchCalendarEventReqBody>):SearchCalendarEventReqBody
-	export function emptyListFreebusyReqBody():ListFreebusyReqBody
-	export function emptyRefListFreebusyReqBody():Ref<ListFreebusyReqBody>
-	export function refOfListFreebusyReqBody(x:ListFreebusyReqBody,v:Ref<ListFreebusyReqBody>)
-	export function unRefListFreebusyReqBody(v:Ref<ListFreebusyReqBody>):ListFreebusyReqBody
-	export function emptyCreateTimeoffEventRespData():CreateTimeoffEventRespData
-	export function emptyRefCreateTimeoffEventRespData():Ref<CreateTimeoffEventRespData>
-	export function refOfCreateTimeoffEventRespData(x:CreateTimeoffEventRespData,v:Ref<CreateTimeoffEventRespData>)
-	export function unRefCreateTimeoffEventRespData(v:Ref<CreateTimeoffEventRespData>):CreateTimeoffEventRespData
-	export function emptyInstancesCalendarEventReq():InstancesCalendarEventReq
-	export function emptyRefInstancesCalendarEventReq():Ref<InstancesCalendarEventReq>
-	export function refOfInstancesCalendarEventReq(x:InstancesCalendarEventReq,v:Ref<InstancesCalendarEventReq>)
-	export function unRefInstancesCalendarEventReq(v:Ref<InstancesCalendarEventReq>):InstancesCalendarEventReq
-	export function emptySystemInfo():SystemInfo
-	export function emptyRefSystemInfo():Ref<SystemInfo>
-	export function refOfSystemInfo(x:SystemInfo,v:Ref<SystemInfo>)
-	export function unRefSystemInfo(v:Ref<SystemInfo>):SystemInfo
-	export function emptyCreateCalendarEventResp():CreateCalendarEventResp
-	export function emptyRefCreateCalendarEventResp():Ref<CreateCalendarEventResp>
-	export function refOfCreateCalendarEventResp(x:CreateCalendarEventResp,v:Ref<CreateCalendarEventResp>)
-	export function unRefCreateCalendarEventResp(v:Ref<CreateCalendarEventResp>):CreateCalendarEventResp
-	export function emptyCreateTimeoffEventResp():CreateTimeoffEventResp
-	export function emptyRefCreateTimeoffEventResp():Ref<CreateTimeoffEventResp>
-	export function refOfCreateTimeoffEventResp(x:CreateTimeoffEventResp,v:Ref<CreateTimeoffEventResp>)
-	export function unRefCreateTimeoffEventResp(v:Ref<CreateTimeoffEventResp>):CreateTimeoffEventResp
-	export function emptyMyaiCardStatus():MyaiCardStatus
-	export function emptyRefMyaiCardStatus():Ref<MyaiCardStatus>
-	export function refOfMyaiCardStatus(x:MyaiCardStatus,v:Ref<MyaiCardStatus>)
-	export function unRefMyaiCardStatus(v:Ref<MyaiCardStatus>):MyaiCardStatus
-	export function emptyAclScope():AclScope
-	export function emptyRefAclScope():Ref<AclScope>
-	export function refOfAclScope(x:AclScope,v:Ref<AclScope>)
-	export function unRefAclScope(v:Ref<AclScope>):AclScope
-	export function emptyCalendarEventResp():CalendarEventResp
-	export function emptyRefCalendarEventResp():Ref<CalendarEventResp>
-	export function refOfCalendarEventResp(x:CalendarEventResp,v:Ref<CalendarEventResp>)
-	export function unRefCalendarEventResp(v:Ref<CalendarEventResp>):CalendarEventResp
+	export function emptyBatchDeleteCalendarEventAttendeeReqBody():BatchDeleteCalendarEventAttendeeReqBody
+	export function emptyRefBatchDeleteCalendarEventAttendeeReqBody():Ref<BatchDeleteCalendarEventAttendeeReqBody>
+	export function refOfBatchDeleteCalendarEventAttendeeReqBody(x:BatchDeleteCalendarEventAttendeeReqBody,v:Ref<BatchDeleteCalendarEventAttendeeReqBody>)
+	export function unRefBatchDeleteCalendarEventAttendeeReqBody(v:Ref<BatchDeleteCalendarEventAttendeeReqBody>):BatchDeleteCalendarEventAttendeeReqBody
+	export function emptyPrimaryCalendarReq():PrimaryCalendarReq
+	export function emptyRefPrimaryCalendarReq():Ref<PrimaryCalendarReq>
+	export function refOfPrimaryCalendarReq(x:PrimaryCalendarReq,v:Ref<PrimaryCalendarReq>)
+	export function unRefPrimaryCalendarReq(v:Ref<PrimaryCalendarReq>):PrimaryCalendarReq
+	export function emptyV4():V4
+	export function emptyRefV4():Ref<V4>
+	export function refOfV4(x:V4,v:Ref<V4>)
+	export function unRefV4(v:Ref<V4>):V4
+	export function emptyCalendarEvent():CalendarEvent
+	export function emptyRefCalendarEvent():Ref<CalendarEvent>
+	export function refOfCalendarEvent(x:CalendarEvent,v:Ref<CalendarEvent>)
+	export function unRefCalendarEvent(v:Ref<CalendarEvent>):CalendarEvent
+	export function emptyCreateCalendarEventAttendeeReq():CreateCalendarEventAttendeeReq
+	export function emptyRefCreateCalendarEventAttendeeReq():Ref<CreateCalendarEventAttendeeReq>
+	export function refOfCreateCalendarEventAttendeeReq(x:CreateCalendarEventAttendeeReq,v:Ref<CreateCalendarEventAttendeeReq>)
+	export function unRefCreateCalendarEventAttendeeReq(v:Ref<CreateCalendarEventAttendeeReq>):CreateCalendarEventAttendeeReq
+	export function emptyCreateCalendarEventMeetingChatReq():CreateCalendarEventMeetingChatReq
+	export function emptyRefCreateCalendarEventMeetingChatReq():Ref<CreateCalendarEventMeetingChatReq>
+	export function refOfCreateCalendarEventMeetingChatReq(x:CreateCalendarEventMeetingChatReq,v:Ref<CreateCalendarEventMeetingChatReq>)
+	export function unRefCreateCalendarEventMeetingChatReq(v:Ref<CreateCalendarEventMeetingChatReq>):CreateCalendarEventMeetingChatReq
+	export function emptyDeleteCalendarReq():DeleteCalendarReq
+	export function emptyRefDeleteCalendarReq():Ref<DeleteCalendarReq>
+	export function refOfDeleteCalendarReq(x:DeleteCalendarReq,v:Ref<DeleteCalendarReq>)
+	export function unRefDeleteCalendarReq(v:Ref<DeleteCalendarReq>):DeleteCalendarReq
+	export function emptyDeleteExchangeBindingResp():DeleteExchangeBindingResp
+	export function emptyRefDeleteExchangeBindingResp():Ref<DeleteExchangeBindingResp>
+	export function refOfDeleteExchangeBindingResp(x:DeleteExchangeBindingResp,v:Ref<DeleteExchangeBindingResp>)
+	export function unRefDeleteExchangeBindingResp(v:Ref<DeleteExchangeBindingResp>):DeleteExchangeBindingResp
+	export function emptyGetCalendarEventReq():GetCalendarEventReq
+	export function emptyRefGetCalendarEventReq():Ref<GetCalendarEventReq>
+	export function refOfGetCalendarEventReq(x:GetCalendarEventReq,v:Ref<GetCalendarEventReq>)
+	export function unRefGetCalendarEventReq(v:Ref<GetCalendarEventReq>):GetCalendarEventReq
 	export function emptyInstance():Instance
 	export function emptyRefInstance():Ref<Instance>
 	export function refOfInstance(x:Instance,v:Ref<Instance>)
 	export function unRefInstance(v:Ref<Instance>):Instance
-	export function emptyGetCalendarEventResp():GetCalendarEventResp
-	export function emptyRefGetCalendarEventResp():Ref<GetCalendarEventResp>
-	export function refOfGetCalendarEventResp(x:GetCalendarEventResp,v:Ref<GetCalendarEventResp>)
-	export function unRefGetCalendarEventResp(v:Ref<GetCalendarEventResp>):GetCalendarEventResp
-	export function emptyMeetingChat():MeetingChat
-	export function emptyRefMeetingChat():Ref<MeetingChat>
-	export function refOfMeetingChat(x:MeetingChat,v:Ref<MeetingChat>)
-	export function unRefMeetingChat(v:Ref<MeetingChat>):MeetingChat
-	export function emptyCardPresent():CardPresent
-	export function emptyRefCardPresent():Ref<CardPresent>
-	export function refOfCardPresent(x:CardPresent,v:Ref<CardPresent>)
-	export function unRefCardPresent(v:Ref<CardPresent>):CardPresent
-	export function emptyListCalendarAclRespData():ListCalendarAclRespData
-	export function emptyRefListCalendarAclRespData():Ref<ListCalendarAclRespData>
-	export function refOfListCalendarAclRespData(x:ListCalendarAclRespData,v:Ref<ListCalendarAclRespData>)
-	export function unRefListCalendarAclRespData(v:Ref<ListCalendarAclRespData>):ListCalendarAclRespData
-	export function emptyInstancesCalendarEventResp():InstancesCalendarEventResp
-	export function emptyRefInstancesCalendarEventResp():Ref<InstancesCalendarEventResp>
-	export function refOfInstancesCalendarEventResp(x:InstancesCalendarEventResp,v:Ref<InstancesCalendarEventResp>)
-	export function unRefInstancesCalendarEventResp(v:Ref<InstancesCalendarEventResp>):InstancesCalendarEventResp
-	export function emptyP2CalendarAclCreatedV4Data():P2CalendarAclCreatedV4Data
-	export function emptyRefP2CalendarAclCreatedV4Data():Ref<P2CalendarAclCreatedV4Data>
-	export function refOfP2CalendarAclCreatedV4Data(x:P2CalendarAclCreatedV4Data,v:Ref<P2CalendarAclCreatedV4Data>)
-	export function unRefP2CalendarAclCreatedV4Data(v:Ref<P2CalendarAclCreatedV4Data>):P2CalendarAclCreatedV4Data
-	export function emptySubscriptionCalendarAclResp():SubscriptionCalendarAclResp
-	export function emptyRefSubscriptionCalendarAclResp():Ref<SubscriptionCalendarAclResp>
-	export function refOfSubscriptionCalendarAclResp(x:SubscriptionCalendarAclResp,v:Ref<SubscriptionCalendarAclResp>)
-	export function unRefSubscriptionCalendarAclResp(v:Ref<SubscriptionCalendarAclResp>):SubscriptionCalendarAclResp
-	export function emptyUnsubscriptionCalendarAclResp():UnsubscriptionCalendarAclResp
-	export function emptyRefUnsubscriptionCalendarAclResp():Ref<UnsubscriptionCalendarAclResp>
-	export function refOfUnsubscriptionCalendarAclResp(x:UnsubscriptionCalendarAclResp,v:Ref<UnsubscriptionCalendarAclResp>)
-	export function unRefUnsubscriptionCalendarAclResp(v:Ref<UnsubscriptionCalendarAclResp>):UnsubscriptionCalendarAclResp
-	export function emptyListCalendarEventRespData():ListCalendarEventRespData
-	export function emptyRefListCalendarEventRespData():Ref<ListCalendarEventRespData>
-	export function refOfListCalendarEventRespData(x:ListCalendarEventRespData,v:Ref<ListCalendarEventRespData>)
-	export function unRefListCalendarEventRespData(v:Ref<ListCalendarEventRespData>):ListCalendarEventRespData
-	export function emptyOpenEventRsvpInfo():OpenEventRsvpInfo
-	export function emptyRefOpenEventRsvpInfo():Ref<OpenEventRsvpInfo>
-	export function refOfOpenEventRsvpInfo(x:OpenEventRsvpInfo,v:Ref<OpenEventRsvpInfo>)
-	export function unRefOpenEventRsvpInfo(v:Ref<OpenEventRsvpInfo>):OpenEventRsvpInfo
-	export function emptyP2CalendarAclDeletedV4():P2CalendarAclDeletedV4
-	export function emptyRefP2CalendarAclDeletedV4():Ref<P2CalendarAclDeletedV4>
-	export function refOfP2CalendarAclDeletedV4(x:P2CalendarAclDeletedV4,v:Ref<P2CalendarAclDeletedV4>)
-	export function unRefP2CalendarAclDeletedV4(v:Ref<P2CalendarAclDeletedV4>):P2CalendarAclDeletedV4
-	export function emptyCreateCalendarEventMeetingChatRespData():CreateCalendarEventMeetingChatRespData
-	export function emptyRefCreateCalendarEventMeetingChatRespData():Ref<CreateCalendarEventMeetingChatRespData>
-	export function refOfCreateCalendarEventMeetingChatRespData(x:CreateCalendarEventMeetingChatRespData,v:Ref<CreateCalendarEventMeetingChatRespData>)
-	export function unRefCreateCalendarEventMeetingChatRespData(v:Ref<CreateCalendarEventMeetingChatRespData>):CreateCalendarEventMeetingChatRespData
+	export function emptyListCalendarEventAttendeeResp():ListCalendarEventAttendeeResp
+	export function emptyRefListCalendarEventAttendeeResp():Ref<ListCalendarEventAttendeeResp>
+	export function refOfListCalendarEventAttendeeResp(x:ListCalendarEventAttendeeResp,v:Ref<ListCalendarEventAttendeeResp>)
+	export function unRefListCalendarEventAttendeeResp(v:Ref<ListCalendarEventAttendeeResp>):ListCalendarEventAttendeeResp
+	export function emptyPatchCalendarEventRespData():PatchCalendarEventRespData
+	export function emptyRefPatchCalendarEventRespData():Ref<PatchCalendarEventRespData>
+	export function refOfPatchCalendarEventRespData(x:PatchCalendarEventRespData,v:Ref<PatchCalendarEventRespData>)
+	export function unRefPatchCalendarEventRespData(v:Ref<PatchCalendarEventRespData>):PatchCalendarEventRespData
+	export function emptyListFreebusyResp():ListFreebusyResp
+	export function emptyRefListFreebusyResp():Ref<ListFreebusyResp>
+	export function refOfListFreebusyResp(x:ListFreebusyResp,v:Ref<ListFreebusyResp>)
+	export function unRefListFreebusyResp(v:Ref<ListFreebusyResp>):ListFreebusyResp
+	export function emptyWorkhour():Workhour
+	export function emptyRefWorkhour():Ref<Workhour>
+	export function refOfWorkhour(x:Workhour,v:Ref<Workhour>)
+	export function unRefWorkhour(v:Ref<Workhour>):Workhour
+	export function emptyFreeTime():FreeTime
+	export function emptyRefFreeTime():Ref<FreeTime>
+	export function refOfFreeTime(x:FreeTime,v:Ref<FreeTime>)
+	export function unRefFreeTime(v:Ref<FreeTime>):FreeTime
+	export function emptyMyaiDocDetail():MyaiDocDetail
+	export function emptyRefMyaiDocDetail():Ref<MyaiDocDetail>
+	export function refOfMyaiDocDetail(x:MyaiDocDetail,v:Ref<MyaiDocDetail>)
+	export function unRefMyaiDocDetail(v:Ref<MyaiDocDetail>):MyaiDocDetail
+	export function emptyWorkhourSetting():WorkhourSetting
+	export function emptyRefWorkhourSetting():Ref<WorkhourSetting>
+	export function refOfWorkhourSetting(x:WorkhourSetting,v:Ref<WorkhourSetting>)
+	export function unRefWorkhourSetting(v:Ref<WorkhourSetting>):WorkhourSetting
 	export function emptyCreateExchangeBindingRespData():CreateExchangeBindingRespData
 	export function emptyRefCreateExchangeBindingRespData():Ref<CreateExchangeBindingRespData>
 	export function refOfCreateExchangeBindingRespData(x:CreateExchangeBindingRespData,v:Ref<CreateExchangeBindingRespData>)
@@ -2833,506 +2742,198 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/calendar/v4'{
 	export function emptyRefPatchCalendarEventResp():Ref<PatchCalendarEventResp>
 	export function refOfPatchCalendarEventResp(x:PatchCalendarEventResp,v:Ref<PatchCalendarEventResp>)
 	export function unRefPatchCalendarEventResp(v:Ref<PatchCalendarEventResp>):PatchCalendarEventResp
-	export function emptyRoomMeta():RoomMeta
-	export function emptyRefRoomMeta():Ref<RoomMeta>
-	export function refOfRoomMeta(x:RoomMeta,v:Ref<RoomMeta>)
-	export function unRefRoomMeta(v:Ref<RoomMeta>):RoomMeta
-	export function emptyUserFreebusy():UserFreebusy
-	export function emptyRefUserFreebusy():Ref<UserFreebusy>
-	export function refOfUserFreebusy(x:UserFreebusy,v:Ref<UserFreebusy>)
-	export function unRefUserFreebusy(v:Ref<UserFreebusy>):UserFreebusy
-	export function emptyV4():V4
-	export function emptyRefV4():Ref<V4>
-	export function refOfV4(x:V4,v:Ref<V4>)
-	export function unRefV4(v:Ref<V4>):V4
-	export function emptyP2CalendarEventChangedV4Data():P2CalendarEventChangedV4Data
-	export function emptyRefP2CalendarEventChangedV4Data():Ref<P2CalendarEventChangedV4Data>
-	export function refOfP2CalendarEventChangedV4Data(x:P2CalendarEventChangedV4Data,v:Ref<P2CalendarEventChangedV4Data>)
-	export function unRefP2CalendarEventChangedV4Data(v:Ref<P2CalendarEventChangedV4Data>):P2CalendarEventChangedV4Data
-	export function emptyCalendarEventAttendeeId():CalendarEventAttendeeId
-	export function emptyRefCalendarEventAttendeeId():Ref<CalendarEventAttendeeId>
-	export function refOfCalendarEventAttendeeId(x:CalendarEventAttendeeId,v:Ref<CalendarEventAttendeeId>)
-	export function unRefCalendarEventAttendeeId(v:Ref<CalendarEventAttendeeId>):CalendarEventAttendeeId
-	export function emptyCreateCalendarEventReq():CreateCalendarEventReq
-	export function emptyRefCreateCalendarEventReq():Ref<CreateCalendarEventReq>
-	export function refOfCreateCalendarEventReq(x:CreateCalendarEventReq,v:Ref<CreateCalendarEventReq>)
-	export function unRefCreateCalendarEventReq(v:Ref<CreateCalendarEventReq>):CreateCalendarEventReq
-	export function emptyCreateCalendarReq():CreateCalendarReq
-	export function emptyRefCreateCalendarReq():Ref<CreateCalendarReq>
-	export function refOfCreateCalendarReq(x:CreateCalendarReq,v:Ref<CreateCalendarReq>)
-	export function unRefCreateCalendarReq(v:Ref<CreateCalendarReq>):CreateCalendarReq
-	export function emptyInstancesCalendarEventRespData():InstancesCalendarEventRespData
-	export function emptyRefInstancesCalendarEventRespData():Ref<InstancesCalendarEventRespData>
-	export function refOfInstancesCalendarEventRespData(x:InstancesCalendarEventRespData,v:Ref<InstancesCalendarEventRespData>)
-	export function unRefInstancesCalendarEventRespData(v:Ref<InstancesCalendarEventRespData>):InstancesCalendarEventRespData
-	export function emptyListCalendarEventAttendeeIterator():ListCalendarEventAttendeeIterator
-	export function emptyRefListCalendarEventAttendeeIterator():Ref<ListCalendarEventAttendeeIterator>
-	export function refOfListCalendarEventAttendeeIterator(x:ListCalendarEventAttendeeIterator,v:Ref<ListCalendarEventAttendeeIterator>)
-	export function unRefListCalendarEventAttendeeIterator(v:Ref<ListCalendarEventAttendeeIterator>):ListCalendarEventAttendeeIterator
-	export function emptyCreateCalendarEventMeetingChatResp():CreateCalendarEventMeetingChatResp
-	export function emptyRefCreateCalendarEventMeetingChatResp():Ref<CreateCalendarEventMeetingChatResp>
-	export function refOfCreateCalendarEventMeetingChatResp(x:CreateCalendarEventMeetingChatResp,v:Ref<CreateCalendarEventMeetingChatResp>)
-	export function unRefCreateCalendarEventMeetingChatResp(v:Ref<CreateCalendarEventMeetingChatResp>):CreateCalendarEventMeetingChatResp
-	export function emptyMyAiEventInfo():MyAiEventInfo
-	export function emptyRefMyAiEventInfo():Ref<MyAiEventInfo>
-	export function refOfMyAiEventInfo(x:MyAiEventInfo,v:Ref<MyAiEventInfo>)
-	export function unRefMyAiEventInfo(v:Ref<MyAiEventInfo>):MyAiEventInfo
-	export function emptySearchCalendarIterator():SearchCalendarIterator
-	export function emptyRefSearchCalendarIterator():Ref<SearchCalendarIterator>
-	export function refOfSearchCalendarIterator(x:SearchCalendarIterator,v:Ref<SearchCalendarIterator>)
-	export function unRefSearchCalendarIterator(v:Ref<SearchCalendarIterator>):SearchCalendarIterator
-	export function emptyEventTime():EventTime
-	export function emptyRefEventTime():Ref<EventTime>
-	export function refOfEventTime(x:EventTime,v:Ref<EventTime>)
-	export function unRefEventTime(v:Ref<EventTime>):EventTime
-	export function emptySearchEventData():SearchEventData
-	export function emptyRefSearchEventData():Ref<SearchEventData>
-	export function refOfSearchEventData(x:SearchEventData,v:Ref<SearchEventData>)
-	export function unRefSearchEventData(v:Ref<SearchEventData>):SearchEventData
-	export function emptyGetExchangeBindingRespData():GetExchangeBindingRespData
-	export function emptyRefGetExchangeBindingRespData():Ref<GetExchangeBindingRespData>
-	export function refOfGetExchangeBindingRespData(x:GetExchangeBindingRespData,v:Ref<GetExchangeBindingRespData>)
-	export function unRefGetExchangeBindingRespData(v:Ref<GetExchangeBindingRespData>):GetExchangeBindingRespData
-	export function emptyListFreebusyRespData():ListFreebusyRespData
-	export function emptyRefListFreebusyRespData():Ref<ListFreebusyRespData>
-	export function refOfListFreebusyRespData(x:ListFreebusyRespData,v:Ref<ListFreebusyRespData>)
-	export function unRefListFreebusyRespData(v:Ref<ListFreebusyRespData>):ListFreebusyRespData
-	export function emptyMeetingMinute():MeetingMinute
-	export function emptyRefMeetingMinute():Ref<MeetingMinute>
-	export function refOfMeetingMinute(x:MeetingMinute,v:Ref<MeetingMinute>)
-	export function unRefMeetingMinute(v:Ref<MeetingMinute>):MeetingMinute
-	export function emptyReplyCalendarEventResp():ReplyCalendarEventResp
-	export function emptyRefReplyCalendarEventResp():Ref<ReplyCalendarEventResp>
-	export function refOfReplyCalendarEventResp(x:ReplyCalendarEventResp,v:Ref<ReplyCalendarEventResp>)
-	export function unRefReplyCalendarEventResp(v:Ref<ReplyCalendarEventResp>):ReplyCalendarEventResp
-	export function emptyInstanceViewCalendarEventReq():InstanceViewCalendarEventReq
-	export function emptyRefInstanceViewCalendarEventReq():Ref<InstanceViewCalendarEventReq>
-	export function refOfInstanceViewCalendarEventReq(x:InstanceViewCalendarEventReq,v:Ref<InstanceViewCalendarEventReq>)
-	export function unRefInstanceViewCalendarEventReq(v:Ref<InstanceViewCalendarEventReq>):InstanceViewCalendarEventReq
-	export function emptyCreateTimeoffEventReq():CreateTimeoffEventReq
-	export function emptyRefCreateTimeoffEventReq():Ref<CreateTimeoffEventReq>
-	export function refOfCreateTimeoffEventReq(x:CreateTimeoffEventReq,v:Ref<CreateTimeoffEventReq>)
-	export function unRefCreateTimeoffEventReq(v:Ref<CreateTimeoffEventReq>):CreateTimeoffEventReq
-	export function emptyCustomizationOption():CustomizationOption
-	export function emptyRefCustomizationOption():Ref<CustomizationOption>
-	export function refOfCustomizationOption(x:CustomizationOption,v:Ref<CustomizationOption>)
-	export function unRefCustomizationOption(v:Ref<CustomizationOption>):CustomizationOption
-	export function emptyDeleteCalendarEventReq():DeleteCalendarEventReq
-	export function emptyRefDeleteCalendarEventReq():Ref<DeleteCalendarEventReq>
-	export function refOfDeleteCalendarEventReq(x:DeleteCalendarEventReq,v:Ref<DeleteCalendarEventReq>)
-	export function unRefDeleteCalendarEventReq(v:Ref<DeleteCalendarEventReq>):DeleteCalendarEventReq
-	export function emptyAclScopeEvent():AclScopeEvent
-	export function emptyRefAclScopeEvent():Ref<AclScopeEvent>
-	export function refOfAclScopeEvent(x:AclScopeEvent,v:Ref<AclScopeEvent>)
-	export function unRefAclScopeEvent(v:Ref<AclScopeEvent>):AclScopeEvent
-	export function emptySubscriptionCalendarEventResp():SubscriptionCalendarEventResp
-	export function emptyRefSubscriptionCalendarEventResp():Ref<SubscriptionCalendarEventResp>
-	export function refOfSubscriptionCalendarEventResp(x:SubscriptionCalendarEventResp,v:Ref<SubscriptionCalendarEventResp>)
-	export function unRefSubscriptionCalendarEventResp(v:Ref<SubscriptionCalendarEventResp>):SubscriptionCalendarEventResp
-	export function emptyP2CalendarChangedV4():P2CalendarChangedV4
-	export function emptyRefP2CalendarChangedV4():Ref<P2CalendarChangedV4>
-	export function refOfP2CalendarChangedV4(x:P2CalendarChangedV4,v:Ref<P2CalendarChangedV4>)
-	export function unRefP2CalendarChangedV4(v:Ref<P2CalendarChangedV4>):P2CalendarChangedV4
-	export function emptyPrimaryCalendarRespData():PrimaryCalendarRespData
-	export function emptyRefPrimaryCalendarRespData():Ref<PrimaryCalendarRespData>
-	export function refOfPrimaryCalendarRespData(x:PrimaryCalendarRespData,v:Ref<PrimaryCalendarRespData>)
-	export function unRefPrimaryCalendarRespData(v:Ref<PrimaryCalendarRespData>):PrimaryCalendarRespData
-	export function emptyUnsubscriptionCalendarAclReq():UnsubscriptionCalendarAclReq
-	export function emptyRefUnsubscriptionCalendarAclReq():Ref<UnsubscriptionCalendarAclReq>
-	export function refOfUnsubscriptionCalendarAclReq(x:UnsubscriptionCalendarAclReq,v:Ref<UnsubscriptionCalendarAclReq>)
-	export function unRefUnsubscriptionCalendarAclReq(v:Ref<UnsubscriptionCalendarAclReq>):UnsubscriptionCalendarAclReq
-	export function emptyCalendarFreebusy():CalendarFreebusy
-	export function emptyRefCalendarFreebusy():Ref<CalendarFreebusy>
-	export function refOfCalendarFreebusy(x:CalendarFreebusy,v:Ref<CalendarFreebusy>)
-	export function unRefCalendarFreebusy(v:Ref<CalendarFreebusy>):CalendarFreebusy
-	export function emptyFreebusy():Freebusy
-	export function emptyRefFreebusy():Ref<Freebusy>
-	export function refOfFreebusy(x:Freebusy,v:Ref<Freebusy>)
-	export function unRefFreebusy(v:Ref<Freebusy>):Freebusy
-	export function emptyUnsubscriptionCalendarEventReq():UnsubscriptionCalendarEventReq
-	export function emptyRefUnsubscriptionCalendarEventReq():Ref<UnsubscriptionCalendarEventReq>
-	export function refOfUnsubscriptionCalendarEventReq(x:UnsubscriptionCalendarEventReq,v:Ref<UnsubscriptionCalendarEventReq>)
-	export function unRefUnsubscriptionCalendarEventReq(v:Ref<UnsubscriptionCalendarEventReq>):UnsubscriptionCalendarEventReq
-	export function emptyCreateCalendarAclReq():CreateCalendarAclReq
-	export function emptyRefCreateCalendarAclReq():Ref<CreateCalendarAclReq>
-	export function refOfCreateCalendarAclReq(x:CreateCalendarAclReq,v:Ref<CreateCalendarAclReq>)
-	export function unRefCreateCalendarAclReq(v:Ref<CreateCalendarAclReq>):CreateCalendarAclReq
-	export function emptyVchat():Vchat
-	export function emptyRefVchat():Ref<Vchat>
-	export function refOfVchat(x:Vchat,v:Ref<Vchat>)
-	export function unRefVchat(v:Ref<Vchat>):Vchat
-	export function emptyCalendarEvent():CalendarEvent
-	export function emptyRefCalendarEvent():Ref<CalendarEvent>
-	export function refOfCalendarEvent(x:CalendarEvent,v:Ref<CalendarEvent>)
-	export function unRefCalendarEvent(v:Ref<CalendarEvent>):CalendarEvent
-	export function emptyEventLocation():EventLocation
-	export function emptyRefEventLocation():Ref<EventLocation>
-	export function refOfEventLocation(x:EventLocation,v:Ref<EventLocation>)
-	export function unRefEventLocation(v:Ref<EventLocation>):EventLocation
-	export function emptyUserId():UserId
-	export function emptyRefUserId():Ref<UserId>
-	export function refOfUserId(x:UserId,v:Ref<UserId>)
-	export function unRefUserId(v:Ref<UserId>):UserId
-	export function emptyUnsubscribeCalendarReq():UnsubscribeCalendarReq
-	export function emptyRefUnsubscribeCalendarReq():Ref<UnsubscribeCalendarReq>
-	export function refOfUnsubscribeCalendarReq(x:UnsubscribeCalendarReq,v:Ref<UnsubscribeCalendarReq>)
-	export function unRefUnsubscribeCalendarReq(v:Ref<UnsubscribeCalendarReq>):UnsubscribeCalendarReq
-	export function emptyBatchDeleteCalendarEventAttendeeResp():BatchDeleteCalendarEventAttendeeResp
-	export function emptyRefBatchDeleteCalendarEventAttendeeResp():Ref<BatchDeleteCalendarEventAttendeeResp>
-	export function refOfBatchDeleteCalendarEventAttendeeResp(x:BatchDeleteCalendarEventAttendeeResp,v:Ref<BatchDeleteCalendarEventAttendeeResp>)
-	export function unRefBatchDeleteCalendarEventAttendeeResp(v:Ref<BatchDeleteCalendarEventAttendeeResp>):BatchDeleteCalendarEventAttendeeResp
-	export function emptyListCalendarRespData():ListCalendarRespData
-	export function emptyRefListCalendarRespData():Ref<ListCalendarRespData>
-	export function refOfListCalendarRespData(x:ListCalendarRespData,v:Ref<ListCalendarRespData>)
-	export function unRefListCalendarRespData(v:Ref<ListCalendarRespData>):ListCalendarRespData
-	export function emptyTimeSpan():TimeSpan
-	export function emptyRefTimeSpan():Ref<TimeSpan>
-	export function refOfTimeSpan(x:TimeSpan,v:Ref<TimeSpan>)
-	export function unRefTimeSpan(v:Ref<TimeSpan>):TimeSpan
-	export function emptyGetExchangeBindingReq():GetExchangeBindingReq
-	export function emptyRefGetExchangeBindingReq():Ref<GetExchangeBindingReq>
-	export function refOfGetExchangeBindingReq(x:GetExchangeBindingReq,v:Ref<GetExchangeBindingReq>)
-	export function unRefGetExchangeBindingReq(v:Ref<GetExchangeBindingReq>):GetExchangeBindingReq
-	export function emptyP2CalendarEventChangedV4():P2CalendarEventChangedV4
-	export function emptyRefP2CalendarEventChangedV4():Ref<P2CalendarEventChangedV4>
-	export function refOfP2CalendarEventChangedV4(x:P2CalendarEventChangedV4,v:Ref<P2CalendarEventChangedV4>)
-	export function unRefP2CalendarEventChangedV4(v:Ref<P2CalendarEventChangedV4>):P2CalendarEventChangedV4
-	export function emptyReminder():Reminder
-	export function emptyRefReminder():Ref<Reminder>
-	export function refOfReminder(x:Reminder,v:Ref<Reminder>)
-	export function unRefReminder(v:Ref<Reminder>):Reminder
-	export function emptyEventCard():EventCard
-	export function emptyRefEventCard():Ref<EventCard>
-	export function refOfEventCard(x:EventCard,v:Ref<EventCard>)
-	export function unRefEventCard(v:Ref<EventCard>):EventCard
-	export function emptyPatchCalendarEventReq():PatchCalendarEventReq
-	export function emptyRefPatchCalendarEventReq():Ref<PatchCalendarEventReq>
-	export function refOfPatchCalendarEventReq(x:PatchCalendarEventReq,v:Ref<PatchCalendarEventReq>)
-	export function unRefPatchCalendarEventReq(v:Ref<PatchCalendarEventReq>):PatchCalendarEventReq
-	export function emptySearchCalendarReqBody():SearchCalendarReqBody
-	export function emptyRefSearchCalendarReqBody():Ref<SearchCalendarReqBody>
-	export function refOfSearchCalendarReqBody(x:SearchCalendarReqBody,v:Ref<SearchCalendarReqBody>)
-	export function unRefSearchCalendarReqBody(v:Ref<SearchCalendarReqBody>):SearchCalendarReqBody
-	export function emptyUnsubscribeCalendarResp():UnsubscribeCalendarResp
-	export function emptyRefUnsubscribeCalendarResp():Ref<UnsubscribeCalendarResp>
-	export function refOfUnsubscribeCalendarResp(x:UnsubscribeCalendarResp,v:Ref<UnsubscribeCalendarResp>)
-	export function unRefUnsubscribeCalendarResp(v:Ref<UnsubscribeCalendarResp>):UnsubscribeCalendarResp
-	export function emptyCalendarPrimaryBatchReq():CalendarPrimaryBatchReq
-	export function emptyRefCalendarPrimaryBatchReq():Ref<CalendarPrimaryBatchReq>
-	export function refOfCalendarPrimaryBatchReq(x:CalendarPrimaryBatchReq,v:Ref<CalendarPrimaryBatchReq>)
-	export function unRefCalendarPrimaryBatchReq(v:Ref<CalendarPrimaryBatchReq>):CalendarPrimaryBatchReq
-	export function emptyCreateCalendarEventAttendeeRespData():CreateCalendarEventAttendeeRespData
-	export function emptyRefCreateCalendarEventAttendeeRespData():Ref<CreateCalendarEventAttendeeRespData>
-	export function refOfCreateCalendarEventAttendeeRespData(x:CreateCalendarEventAttendeeRespData,v:Ref<CreateCalendarEventAttendeeRespData>)
-	export function unRefCreateCalendarEventAttendeeRespData(v:Ref<CreateCalendarEventAttendeeRespData>):CreateCalendarEventAttendeeRespData
-	export function emptyListCalendarEventAttendeeResp():ListCalendarEventAttendeeResp
-	export function emptyRefListCalendarEventAttendeeResp():Ref<ListCalendarEventAttendeeResp>
-	export function refOfListCalendarEventAttendeeResp(x:ListCalendarEventAttendeeResp,v:Ref<ListCalendarEventAttendeeResp>)
-	export function unRefListCalendarEventAttendeeResp(v:Ref<ListCalendarEventAttendeeResp>):ListCalendarEventAttendeeResp
-	export function emptyP2CalendarAclDeletedV4Data():P2CalendarAclDeletedV4Data
-	export function emptyRefP2CalendarAclDeletedV4Data():Ref<P2CalendarAclDeletedV4Data>
-	export function refOfP2CalendarAclDeletedV4Data(x:P2CalendarAclDeletedV4Data,v:Ref<P2CalendarAclDeletedV4Data>)
-	export function unRefP2CalendarAclDeletedV4Data(v:Ref<P2CalendarAclDeletedV4Data>):P2CalendarAclDeletedV4Data
-	export function emptyTimeInfo():TimeInfo
-	export function emptyRefTimeInfo():Ref<TimeInfo>
-	export function refOfTimeInfo(x:TimeInfo,v:Ref<TimeInfo>)
-	export function unRefTimeInfo(v:Ref<TimeInfo>):TimeInfo
-	export function emptyCreateCalendarEventMeetingChatReq():CreateCalendarEventMeetingChatReq
-	export function emptyRefCreateCalendarEventMeetingChatReq():Ref<CreateCalendarEventMeetingChatReq>
-	export function refOfCreateCalendarEventMeetingChatReq(x:CreateCalendarEventMeetingChatReq,v:Ref<CreateCalendarEventMeetingChatReq>)
-	export function unRefCreateCalendarEventMeetingChatReq(v:Ref<CreateCalendarEventMeetingChatReq>):CreateCalendarEventMeetingChatReq
-	export function emptyDeleteCalendarResp():DeleteCalendarResp
-	export function emptyRefDeleteCalendarResp():Ref<DeleteCalendarResp>
-	export function refOfDeleteCalendarResp(x:DeleteCalendarResp,v:Ref<DeleteCalendarResp>)
-	export function unRefDeleteCalendarResp(v:Ref<DeleteCalendarResp>):DeleteCalendarResp
-	export function emptyOperateCardData():OperateCardData
-	export function emptyRefOperateCardData():Ref<OperateCardData>
-	export function refOfOperateCardData(x:OperateCardData,v:Ref<OperateCardData>)
-	export function unRefOperateCardData(v:Ref<OperateCardData>):OperateCardData
-	export function emptyExchangeBinding():ExchangeBinding
-	export function emptyRefExchangeBinding():Ref<ExchangeBinding>
-	export function refOfExchangeBinding(x:ExchangeBinding,v:Ref<ExchangeBinding>)
-	export function unRefExchangeBinding(v:Ref<ExchangeBinding>):ExchangeBinding
-	export function emptySearchCalendarEventIterator():SearchCalendarEventIterator
-	export function emptyRefSearchCalendarEventIterator():Ref<SearchCalendarEventIterator>
-	export function refOfSearchCalendarEventIterator(x:SearchCalendarEventIterator,v:Ref<SearchCalendarEventIterator>)
-	export function unRefSearchCalendarEventIterator(v:Ref<SearchCalendarEventIterator>):SearchCalendarEventIterator
-	export function emptyCalendarEventAttendeeResp():CalendarEventAttendeeResp
-	export function emptyRefCalendarEventAttendeeResp():Ref<CalendarEventAttendeeResp>
-	export function refOfCalendarEventAttendeeResp(x:CalendarEventAttendeeResp,v:Ref<CalendarEventAttendeeResp>)
-	export function unRefCalendarEventAttendeeResp(v:Ref<CalendarEventAttendeeResp>):CalendarEventAttendeeResp
-	export function emptyCardCallback():CardCallback
-	export function emptyRefCardCallback():Ref<CardCallback>
-	export function refOfCardCallback(x:CardCallback,v:Ref<CardCallback>)
-	export function unRefCardCallback(v:Ref<CardCallback>):CardCallback
-	export function emptyCreateExchangeBindingResp():CreateExchangeBindingResp
-	export function emptyRefCreateExchangeBindingResp():Ref<CreateExchangeBindingResp>
-	export function refOfCreateExchangeBindingResp(x:CreateExchangeBindingResp,v:Ref<CreateExchangeBindingResp>)
-	export function unRefCreateExchangeBindingResp(v:Ref<CreateExchangeBindingResp>):CreateExchangeBindingResp
-	export function emptyEventOrganizer():EventOrganizer
-	export function emptyRefEventOrganizer():Ref<EventOrganizer>
-	export function refOfEventOrganizer(x:EventOrganizer,v:Ref<EventOrganizer>)
-	export function unRefEventOrganizer(v:Ref<EventOrganizer>):EventOrganizer
-	export function emptyMyaiReply():MyaiReply
-	export function emptyRefMyaiReply():Ref<MyaiReply>
-	export function refOfMyaiReply(x:MyaiReply,v:Ref<MyaiReply>)
-	export function unRefMyaiReply(v:Ref<MyaiReply>):MyaiReply
-	export function emptySubscriptionCalendarEventReq():SubscriptionCalendarEventReq
-	export function emptyRefSubscriptionCalendarEventReq():Ref<SubscriptionCalendarEventReq>
-	export function refOfSubscriptionCalendarEventReq(x:SubscriptionCalendarEventReq,v:Ref<SubscriptionCalendarEventReq>)
-	export function unRefSubscriptionCalendarEventReq(v:Ref<SubscriptionCalendarEventReq>):SubscriptionCalendarEventReq
-	export function emptyCreateCalendarEventAttendeeReqBody():CreateCalendarEventAttendeeReqBody
-	export function emptyRefCreateCalendarEventAttendeeReqBody():Ref<CreateCalendarEventAttendeeReqBody>
-	export function refOfCreateCalendarEventAttendeeReqBody(x:CreateCalendarEventAttendeeReqBody,v:Ref<CreateCalendarEventAttendeeReqBody>)
-	export function unRefCreateCalendarEventAttendeeReqBody(v:Ref<CreateCalendarEventAttendeeReqBody>):CreateCalendarEventAttendeeReqBody
-	export function emptyEventSearchFilter():EventSearchFilter
-	export function emptyRefEventSearchFilter():Ref<EventSearchFilter>
-	export function refOfEventSearchFilter(x:EventSearchFilter,v:Ref<EventSearchFilter>)
-	export function unRefEventSearchFilter(v:Ref<EventSearchFilter>):EventSearchFilter
-	export function emptyFreeTimeAi():FreeTimeAi
-	export function emptyRefFreeTimeAi():Ref<FreeTimeAi>
-	export function refOfFreeTimeAi(x:FreeTimeAi,v:Ref<FreeTimeAi>)
-	export function unRefFreeTimeAi(v:Ref<FreeTimeAi>):FreeTimeAi
-	export function emptyReplyCalendarEventReqBody():ReplyCalendarEventReqBody
-	export function emptyRefReplyCalendarEventReqBody():Ref<ReplyCalendarEventReqBody>
-	export function refOfReplyCalendarEventReqBody(x:ReplyCalendarEventReqBody,v:Ref<ReplyCalendarEventReqBody>)
-	export function unRefReplyCalendarEventReqBody(v:Ref<ReplyCalendarEventReqBody>):ReplyCalendarEventReqBody
-	export function emptyPatchCalendarRespData():PatchCalendarRespData
-	export function emptyRefPatchCalendarRespData():Ref<PatchCalendarRespData>
-	export function refOfPatchCalendarRespData(x:PatchCalendarRespData,v:Ref<PatchCalendarRespData>)
-	export function unRefPatchCalendarRespData(v:Ref<PatchCalendarRespData>):PatchCalendarRespData
-	export function emptySubscribeCalendarRespData():SubscribeCalendarRespData
-	export function emptyRefSubscribeCalendarRespData():Ref<SubscribeCalendarRespData>
-	export function refOfSubscribeCalendarRespData(x:SubscribeCalendarRespData,v:Ref<SubscribeCalendarRespData>)
-	export function unRefSubscribeCalendarRespData(v:Ref<SubscribeCalendarRespData>):SubscribeCalendarRespData
-	export function emptyMyaiSearchDocResult():MyaiSearchDocResult
-	export function emptyRefMyaiSearchDocResult():Ref<MyaiSearchDocResult>
-	export function refOfMyaiSearchDocResult(x:MyaiSearchDocResult,v:Ref<MyaiSearchDocResult>)
-	export function unRefMyaiSearchDocResult(v:Ref<MyaiSearchDocResult>):MyaiSearchDocResult
-	export function emptyPatchCalendarResp():PatchCalendarResp
-	export function emptyRefPatchCalendarResp():Ref<PatchCalendarResp>
-	export function refOfPatchCalendarResp(x:PatchCalendarResp,v:Ref<PatchCalendarResp>)
-	export function unRefPatchCalendarResp(v:Ref<PatchCalendarResp>):PatchCalendarResp
-	export function emptyP2CalendarAclCreatedV4():P2CalendarAclCreatedV4
-	export function emptyRefP2CalendarAclCreatedV4():Ref<P2CalendarAclCreatedV4>
-	export function refOfP2CalendarAclCreatedV4(x:P2CalendarAclCreatedV4,v:Ref<P2CalendarAclCreatedV4>)
-	export function unRefP2CalendarAclCreatedV4(v:Ref<P2CalendarAclCreatedV4>):P2CalendarAclCreatedV4
-	export function emptyUnsubscriptionCalendarResp():UnsubscriptionCalendarResp
-	export function emptyRefUnsubscriptionCalendarResp():Ref<UnsubscriptionCalendarResp>
-	export function refOfUnsubscriptionCalendarResp(x:UnsubscriptionCalendarResp,v:Ref<UnsubscriptionCalendarResp>)
-	export function unRefUnsubscriptionCalendarResp(v:Ref<UnsubscriptionCalendarResp>):UnsubscriptionCalendarResp
-	export function emptyBatchDeleteCalendarEventAttendeeReqBody():BatchDeleteCalendarEventAttendeeReqBody
-	export function emptyRefBatchDeleteCalendarEventAttendeeReqBody():Ref<BatchDeleteCalendarEventAttendeeReqBody>
-	export function refOfBatchDeleteCalendarEventAttendeeReqBody(x:BatchDeleteCalendarEventAttendeeReqBody,v:Ref<BatchDeleteCalendarEventAttendeeReqBody>)
-	export function unRefBatchDeleteCalendarEventAttendeeReqBody(v:Ref<BatchDeleteCalendarEventAttendeeReqBody>):BatchDeleteCalendarEventAttendeeReqBody
-	export function emptyDeleteExchangeBindingReq():DeleteExchangeBindingReq
-	export function emptyRefDeleteExchangeBindingReq():Ref<DeleteExchangeBindingReq>
-	export function refOfDeleteExchangeBindingReq(x:DeleteExchangeBindingReq,v:Ref<DeleteExchangeBindingReq>)
-	export function unRefDeleteExchangeBindingReq(v:Ref<DeleteExchangeBindingReq>):DeleteExchangeBindingReq
-	export function emptyDeleteTimeoffEventReq():DeleteTimeoffEventReq
-	export function emptyRefDeleteTimeoffEventReq():Ref<DeleteTimeoffEventReq>
-	export function refOfDeleteTimeoffEventReq(x:DeleteTimeoffEventReq,v:Ref<DeleteTimeoffEventReq>)
-	export function unRefDeleteTimeoffEventReq(v:Ref<DeleteTimeoffEventReq>):DeleteTimeoffEventReq
-	export function emptyListCalendarResp():ListCalendarResp
-	export function emptyRefListCalendarResp():Ref<ListCalendarResp>
-	export function refOfListCalendarResp(x:ListCalendarResp,v:Ref<ListCalendarResp>)
-	export function unRefListCalendarResp(v:Ref<ListCalendarResp>):ListCalendarResp
-	export function emptySubscriptionCalendarAclReq():SubscriptionCalendarAclReq
-	export function emptyRefSubscriptionCalendarAclReq():Ref<SubscriptionCalendarAclReq>
-	export function refOfSubscriptionCalendarAclReq(x:SubscriptionCalendarAclReq,v:Ref<SubscriptionCalendarAclReq>)
-	export function unRefSubscriptionCalendarAclReq(v:Ref<SubscriptionCalendarAclReq>):SubscriptionCalendarAclReq
-	export function emptyWorkhour():Workhour
-	export function emptyRefWorkhour():Ref<Workhour>
-	export function refOfWorkhour(x:Workhour,v:Ref<Workhour>)
-	export function unRefWorkhour(v:Ref<Workhour>):Workhour
-	export function emptyGenerateCaldavConfSettingReq():GenerateCaldavConfSettingReq
-	export function emptyRefGenerateCaldavConfSettingReq():Ref<GenerateCaldavConfSettingReq>
-	export function refOfGenerateCaldavConfSettingReq(x:GenerateCaldavConfSettingReq,v:Ref<GenerateCaldavConfSettingReq>)
-	export function unRefGenerateCaldavConfSettingReq(v:Ref<GenerateCaldavConfSettingReq>):GenerateCaldavConfSettingReq
-	export function emptySearchUserDataAi():SearchUserDataAi
-	export function emptyRefSearchUserDataAi():Ref<SearchUserDataAi>
-	export function refOfSearchUserDataAi(x:SearchUserDataAi,v:Ref<SearchUserDataAi>)
-	export function unRefSearchUserDataAi(v:Ref<SearchUserDataAi>):SearchUserDataAi
-	export function emptyListFreebusyReq():ListFreebusyReq
-	export function emptyRefListFreebusyReq():Ref<ListFreebusyReq>
-	export function refOfListFreebusyReq(x:ListFreebusyReq,v:Ref<ListFreebusyReq>)
-	export function unRefListFreebusyReq(v:Ref<ListFreebusyReq>):ListFreebusyReq
-	export function emptyCreateCalendarEventAttendeeReq():CreateCalendarEventAttendeeReq
-	export function emptyRefCreateCalendarEventAttendeeReq():Ref<CreateCalendarEventAttendeeReq>
-	export function refOfCreateCalendarEventAttendeeReq(x:CreateCalendarEventAttendeeReq,v:Ref<CreateCalendarEventAttendeeReq>)
-	export function unRefCreateCalendarEventAttendeeReq(v:Ref<CreateCalendarEventAttendeeReq>):CreateCalendarEventAttendeeReq
-	export function emptyDeleteTimeoffEventResp():DeleteTimeoffEventResp
-	export function emptyRefDeleteTimeoffEventResp():Ref<DeleteTimeoffEventResp>
-	export function refOfDeleteTimeoffEventResp(x:DeleteTimeoffEventResp,v:Ref<DeleteTimeoffEventResp>)
-	export function unRefDeleteTimeoffEventResp(v:Ref<DeleteTimeoffEventResp>):DeleteTimeoffEventResp
-	export function emptyInstanceViewCalendarEventResp():InstanceViewCalendarEventResp
-	export function emptyRefInstanceViewCalendarEventResp():Ref<InstanceViewCalendarEventResp>
-	export function refOfInstanceViewCalendarEventResp(x:InstanceViewCalendarEventResp,v:Ref<InstanceViewCalendarEventResp>)
-	export function unRefInstanceViewCalendarEventResp(v:Ref<InstanceViewCalendarEventResp>):InstanceViewCalendarEventResp
-	export function emptyUserMeta():UserMeta
-	export function emptyRefUserMeta():Ref<UserMeta>
-	export function refOfUserMeta(x:UserMeta,v:Ref<UserMeta>)
-	export function unRefUserMeta(v:Ref<UserMeta>):UserMeta
-	export function emptyCalendar():Calendar
-	export function emptyRefCalendar():Ref<Calendar>
-	export function refOfCalendar(x:Calendar,v:Ref<Calendar>)
-	export function unRefCalendar(v:Ref<Calendar>):Calendar
-	export function emptyDeleteCalendarReq():DeleteCalendarReq
-	export function emptyRefDeleteCalendarReq():Ref<DeleteCalendarReq>
-	export function refOfDeleteCalendarReq(x:DeleteCalendarReq,v:Ref<DeleteCalendarReq>)
-	export function unRefDeleteCalendarReq(v:Ref<DeleteCalendarReq>):DeleteCalendarReq
-	export function emptyGetCalendarReq():GetCalendarReq
-	export function emptyRefGetCalendarReq():Ref<GetCalendarReq>
-	export function refOfGetCalendarReq(x:GetCalendarReq,v:Ref<GetCalendarReq>)
-	export function unRefGetCalendarReq(v:Ref<GetCalendarReq>):GetCalendarReq
-	export function emptyListCalendarEventAttendeeChatMemberIterator():ListCalendarEventAttendeeChatMemberIterator
-	export function emptyRefListCalendarEventAttendeeChatMemberIterator():Ref<ListCalendarEventAttendeeChatMemberIterator>
-	export function refOfListCalendarEventAttendeeChatMemberIterator(x:ListCalendarEventAttendeeChatMemberIterator,v:Ref<ListCalendarEventAttendeeChatMemberIterator>)
-	export function unRefListCalendarEventAttendeeChatMemberIterator(v:Ref<ListCalendarEventAttendeeChatMemberIterator>):ListCalendarEventAttendeeChatMemberIterator
-	export function emptySearchCalendarEventReq():SearchCalendarEventReq
-	export function emptyRefSearchCalendarEventReq():Ref<SearchCalendarEventReq>
-	export function refOfSearchCalendarEventReq(x:SearchCalendarEventReq,v:Ref<SearchCalendarEventReq>)
-	export function unRefSearchCalendarEventReq(v:Ref<SearchCalendarEventReq>):SearchCalendarEventReq
-	export function emptySubscriptionCalendarResp():SubscriptionCalendarResp
-	export function emptyRefSubscriptionCalendarResp():Ref<SubscriptionCalendarResp>
-	export function refOfSubscriptionCalendarResp(x:SubscriptionCalendarResp,v:Ref<SubscriptionCalendarResp>)
-	export function unRefSubscriptionCalendarResp(v:Ref<SubscriptionCalendarResp>):SubscriptionCalendarResp
-	export function emptyCreateCalendarAclResp():CreateCalendarAclResp
-	export function emptyRefCreateCalendarAclResp():Ref<CreateCalendarAclResp>
-	export function refOfCreateCalendarAclResp(x:CreateCalendarAclResp,v:Ref<CreateCalendarAclResp>)
-	export function unRefCreateCalendarAclResp(v:Ref<CreateCalendarAclResp>):CreateCalendarAclResp
-	export function emptyEventBriefInfoAi():EventBriefInfoAi
-	export function emptyRefEventBriefInfoAi():Ref<EventBriefInfoAi>
-	export function refOfEventBriefInfoAi(x:EventBriefInfoAi,v:Ref<EventBriefInfoAi>)
-	export function unRefEventBriefInfoAi(v:Ref<EventBriefInfoAi>):EventBriefInfoAi
-	export function emptyGetExchangeBindingResp():GetExchangeBindingResp
-	export function emptyRefGetExchangeBindingResp():Ref<GetExchangeBindingResp>
-	export function refOfGetExchangeBindingResp(x:GetExchangeBindingResp,v:Ref<GetExchangeBindingResp>)
-	export function unRefGetExchangeBindingResp(v:Ref<GetExchangeBindingResp>):GetExchangeBindingResp
-	export function emptyCreateCalendarRespData():CreateCalendarRespData
-	export function emptyRefCreateCalendarRespData():Ref<CreateCalendarRespData>
-	export function refOfCreateCalendarRespData(x:CreateCalendarRespData,v:Ref<CreateCalendarRespData>)
-	export function unRefCreateCalendarRespData(v:Ref<CreateCalendarRespData>):CreateCalendarRespData
-	export function emptyDeleteCalendarAclReq():DeleteCalendarAclReq
-	export function emptyRefDeleteCalendarAclReq():Ref<DeleteCalendarAclReq>
-	export function refOfDeleteCalendarAclReq(x:DeleteCalendarAclReq,v:Ref<DeleteCalendarAclReq>)
-	export function unRefDeleteCalendarAclReq(v:Ref<DeleteCalendarAclReq>):DeleteCalendarAclReq
-	export function emptySearchCalendarResp():SearchCalendarResp
-	export function emptyRefSearchCalendarResp():Ref<SearchCalendarResp>
-	export function refOfSearchCalendarResp(x:SearchCalendarResp,v:Ref<SearchCalendarResp>)
-	export function unRefSearchCalendarResp(v:Ref<SearchCalendarResp>):SearchCalendarResp
-	export function emptyGetCalendarRespData():GetCalendarRespData
-	export function emptyRefGetCalendarRespData():Ref<GetCalendarRespData>
-	export function refOfGetCalendarRespData(x:GetCalendarRespData,v:Ref<GetCalendarRespData>)
-	export function unRefGetCalendarRespData(v:Ref<GetCalendarRespData>):GetCalendarRespData
-	export function emptyListCalendarEventAttendeeChatMemberReq():ListCalendarEventAttendeeChatMemberReq
-	export function emptyRefListCalendarEventAttendeeChatMemberReq():Ref<ListCalendarEventAttendeeChatMemberReq>
-	export function refOfListCalendarEventAttendeeChatMemberReq(x:ListCalendarEventAttendeeChatMemberReq,v:Ref<ListCalendarEventAttendeeChatMemberReq>)
-	export function unRefListCalendarEventAttendeeChatMemberReq(v:Ref<ListCalendarEventAttendeeChatMemberReq>):ListCalendarEventAttendeeChatMemberReq
-	export function emptyListCalendarEventAttendeeChatMemberResp():ListCalendarEventAttendeeChatMemberResp
-	export function emptyRefListCalendarEventAttendeeChatMemberResp():Ref<ListCalendarEventAttendeeChatMemberResp>
-	export function refOfListCalendarEventAttendeeChatMemberResp(x:ListCalendarEventAttendeeChatMemberResp,v:Ref<ListCalendarEventAttendeeChatMemberResp>)
-	export function unRefListCalendarEventAttendeeChatMemberResp(v:Ref<ListCalendarEventAttendeeChatMemberResp>):ListCalendarEventAttendeeChatMemberResp
-	export function emptyReplyCalendarEventReq():ReplyCalendarEventReq
-	export function emptyRefReplyCalendarEventReq():Ref<ReplyCalendarEventReq>
-	export function refOfReplyCalendarEventReq(x:ReplyCalendarEventReq,v:Ref<ReplyCalendarEventReq>)
-	export function unRefReplyCalendarEventReq(v:Ref<ReplyCalendarEventReq>):ReplyCalendarEventReq
-	export function emptyCalendarAclEvent():CalendarAclEvent
-	export function emptyRefCalendarAclEvent():Ref<CalendarAclEvent>
-	export function refOfCalendarAclEvent(x:CalendarAclEvent,v:Ref<CalendarAclEvent>)
-	export function unRefCalendarAclEvent(v:Ref<CalendarAclEvent>):CalendarAclEvent
-	export function emptyCreateCalendarAclRespData():CreateCalendarAclRespData
-	export function emptyRefCreateCalendarAclRespData():Ref<CreateCalendarAclRespData>
-	export function refOfCreateCalendarAclRespData(x:CreateCalendarAclRespData,v:Ref<CreateCalendarAclRespData>)
-	export function unRefCreateCalendarAclRespData(v:Ref<CreateCalendarAclRespData>):CreateCalendarAclRespData
-	export function emptyListFreebusyResp():ListFreebusyResp
-	export function emptyRefListFreebusyResp():Ref<ListFreebusyResp>
-	export function refOfListFreebusyResp(x:ListFreebusyResp,v:Ref<ListFreebusyResp>)
-	export function unRefListFreebusyResp(v:Ref<ListFreebusyResp>):ListFreebusyResp
-	export function emptyMeetingSettings():MeetingSettings
-	export function emptyRefMeetingSettings():Ref<MeetingSettings>
-	export function refOfMeetingSettings(x:MeetingSettings,v:Ref<MeetingSettings>)
-	export function unRefMeetingSettings(v:Ref<MeetingSettings>):MeetingSettings
-	export function emptyUserCalendar():UserCalendar
-	export function emptyRefUserCalendar():Ref<UserCalendar>
-	export function refOfUserCalendar(x:UserCalendar,v:Ref<UserCalendar>)
-	export function unRefUserCalendar(v:Ref<UserCalendar>):UserCalendar
-	export function emptyCalendarAttendeeResourceCustomization():CalendarAttendeeResourceCustomization
-	export function emptyRefCalendarAttendeeResourceCustomization():Ref<CalendarAttendeeResourceCustomization>
-	export function refOfCalendarAttendeeResourceCustomization(x:CalendarAttendeeResourceCustomization,v:Ref<CalendarAttendeeResourceCustomization>)
-	export function unRefCalendarAttendeeResourceCustomization(v:Ref<CalendarAttendeeResourceCustomization>):CalendarAttendeeResourceCustomization
-	export function emptyDeleteCalendarEventMeetingChatResp():DeleteCalendarEventMeetingChatResp
-	export function emptyRefDeleteCalendarEventMeetingChatResp():Ref<DeleteCalendarEventMeetingChatResp>
-	export function refOfDeleteCalendarEventMeetingChatResp(x:DeleteCalendarEventMeetingChatResp,v:Ref<DeleteCalendarEventMeetingChatResp>)
-	export function unRefDeleteCalendarEventMeetingChatResp(v:Ref<DeleteCalendarEventMeetingChatResp>):DeleteCalendarEventMeetingChatResp
-	export function emptyBookMeetingRoomData():BookMeetingRoomData
-	export function emptyRefBookMeetingRoomData():Ref<BookMeetingRoomData>
-	export function refOfBookMeetingRoomData(x:BookMeetingRoomData,v:Ref<BookMeetingRoomData>)
-	export function unRefBookMeetingRoomData(v:Ref<BookMeetingRoomData>):BookMeetingRoomData
-	export function emptyDeleteCalendarEventMeetingChatReq():DeleteCalendarEventMeetingChatReq
-	export function emptyRefDeleteCalendarEventMeetingChatReq():Ref<DeleteCalendarEventMeetingChatReq>
-	export function refOfDeleteCalendarEventMeetingChatReq(x:DeleteCalendarEventMeetingChatReq,v:Ref<DeleteCalendarEventMeetingChatReq>)
-	export function unRefDeleteCalendarEventMeetingChatReq(v:Ref<DeleteCalendarEventMeetingChatReq>):DeleteCalendarEventMeetingChatReq
-	export function emptySearchCalendarReq():SearchCalendarReq
-	export function emptyRefSearchCalendarReq():Ref<SearchCalendarReq>
-	export function refOfSearchCalendarReq(x:SearchCalendarReq,v:Ref<SearchCalendarReq>)
-	export function unRefSearchCalendarReq(v:Ref<SearchCalendarReq>):SearchCalendarReq
-	export function emptyGetCalendarResp():GetCalendarResp
-	export function emptyRefGetCalendarResp():Ref<GetCalendarResp>
-	export function refOfGetCalendarResp(x:GetCalendarResp,v:Ref<GetCalendarResp>)
-	export function unRefGetCalendarResp(v:Ref<GetCalendarResp>):GetCalendarResp
-	export function emptySubscribeCalendarReq():SubscribeCalendarReq
-	export function emptyRefSubscribeCalendarReq():Ref<SubscribeCalendarReq>
-	export function refOfSubscribeCalendarReq(x:SubscribeCalendarReq,v:Ref<SubscribeCalendarReq>)
-	export function unRefSubscribeCalendarReq(v:Ref<SubscribeCalendarReq>):SubscribeCalendarReq
-	export function emptyListCalendarReq():ListCalendarReq
-	export function emptyRefListCalendarReq():Ref<ListCalendarReq>
-	export function refOfListCalendarReq(x:ListCalendarReq,v:Ref<ListCalendarReq>)
-	export function unRefListCalendarReq(v:Ref<ListCalendarReq>):ListCalendarReq
-	export function emptyTimeoffEvent():TimeoffEvent
-	export function emptyRefTimeoffEvent():Ref<TimeoffEvent>
-	export function refOfTimeoffEvent(x:TimeoffEvent,v:Ref<TimeoffEvent>)
-	export function unRefTimeoffEvent(v:Ref<TimeoffEvent>):TimeoffEvent
-	export function emptyDeleteExchangeBindingResp():DeleteExchangeBindingResp
-	export function emptyRefDeleteExchangeBindingResp():Ref<DeleteExchangeBindingResp>
-	export function refOfDeleteExchangeBindingResp(x:DeleteExchangeBindingResp,v:Ref<DeleteExchangeBindingResp>)
-	export function unRefDeleteExchangeBindingResp(v:Ref<DeleteExchangeBindingResp>):DeleteExchangeBindingResp
-	export function emptyListCalendarEventResp():ListCalendarEventResp
-	export function emptyRefListCalendarEventResp():Ref<ListCalendarEventResp>
-	export function refOfListCalendarEventResp(x:ListCalendarEventResp,v:Ref<ListCalendarEventResp>)
-	export function unRefListCalendarEventResp(v:Ref<ListCalendarEventResp>):ListCalendarEventResp
 	export function emptyDeleteCalendarAclResp():DeleteCalendarAclResp
 	export function emptyRefDeleteCalendarAclResp():Ref<DeleteCalendarAclResp>
 	export function refOfDeleteCalendarAclResp(x:DeleteCalendarAclResp,v:Ref<DeleteCalendarAclResp>)
 	export function unRefDeleteCalendarAclResp(v:Ref<DeleteCalendarAclResp>):DeleteCalendarAclResp
-	export function emptyGetCalendarEventReq():GetCalendarEventReq
-	export function emptyRefGetCalendarEventReq():Ref<GetCalendarEventReq>
-	export function refOfGetCalendarEventReq(x:GetCalendarEventReq,v:Ref<GetCalendarEventReq>)
-	export function unRefGetCalendarEventReq(v:Ref<GetCalendarEventReq>):GetCalendarEventReq
-	export function emptyAttachment():Attachment
-	export function emptyRefAttachment():Ref<Attachment>
-	export function refOfAttachment(x:Attachment,v:Ref<Attachment>)
-	export function unRefAttachment(v:Ref<Attachment>):Attachment
-	export function emptyPrimaryCalendarReq():PrimaryCalendarReq
-	export function emptyRefPrimaryCalendarReq():Ref<PrimaryCalendarReq>
-	export function refOfPrimaryCalendarReq(x:PrimaryCalendarReq,v:Ref<PrimaryCalendarReq>)
-	export function unRefPrimaryCalendarReq(v:Ref<PrimaryCalendarReq>):PrimaryCalendarReq
-	export function emptySubscribeCalendarResp():SubscribeCalendarResp
-	export function emptyRefSubscribeCalendarResp():Ref<SubscribeCalendarResp>
-	export function refOfSubscribeCalendarResp(x:SubscribeCalendarResp,v:Ref<SubscribeCalendarResp>)
-	export function unRefSubscribeCalendarResp(v:Ref<SubscribeCalendarResp>):SubscribeCalendarResp
+	export function emptyP2CalendarAclCreatedV4():P2CalendarAclCreatedV4
+	export function emptyRefP2CalendarAclCreatedV4():Ref<P2CalendarAclCreatedV4>
+	export function refOfP2CalendarAclCreatedV4(x:P2CalendarAclCreatedV4,v:Ref<P2CalendarAclCreatedV4>)
+	export function unRefP2CalendarAclCreatedV4(v:Ref<P2CalendarAclCreatedV4>):P2CalendarAclCreatedV4
+	export function emptyP2CalendarEventChangedV4Data():P2CalendarEventChangedV4Data
+	export function emptyRefP2CalendarEventChangedV4Data():Ref<P2CalendarEventChangedV4Data>
+	export function refOfP2CalendarEventChangedV4Data(x:P2CalendarEventChangedV4Data,v:Ref<P2CalendarEventChangedV4Data>)
+	export function unRefP2CalendarEventChangedV4Data(v:Ref<P2CalendarEventChangedV4Data>):P2CalendarEventChangedV4Data
+	export function emptySubscriptionCalendarResp():SubscriptionCalendarResp
+	export function emptyRefSubscriptionCalendarResp():Ref<SubscriptionCalendarResp>
+	export function refOfSubscriptionCalendarResp(x:SubscriptionCalendarResp,v:Ref<SubscriptionCalendarResp>)
+	export function unRefSubscriptionCalendarResp(v:Ref<SubscriptionCalendarResp>):SubscriptionCalendarResp
+	export function emptyCalendarEventAttendeeResp():CalendarEventAttendeeResp
+	export function emptyRefCalendarEventAttendeeResp():Ref<CalendarEventAttendeeResp>
+	export function refOfCalendarEventAttendeeResp(x:CalendarEventAttendeeResp,v:Ref<CalendarEventAttendeeResp>)
+	export function unRefCalendarEventAttendeeResp(v:Ref<CalendarEventAttendeeResp>):CalendarEventAttendeeResp
+	export function emptyEventSearchFilter():EventSearchFilter
+	export function emptyRefEventSearchFilter():Ref<EventSearchFilter>
+	export function refOfEventSearchFilter(x:EventSearchFilter,v:Ref<EventSearchFilter>)
+	export function unRefEventSearchFilter(v:Ref<EventSearchFilter>):EventSearchFilter
 	export function emptySearchCalendarEventRespData():SearchCalendarEventRespData
 	export function emptyRefSearchCalendarEventRespData():Ref<SearchCalendarEventRespData>
 	export function refOfSearchCalendarEventRespData(x:SearchCalendarEventRespData,v:Ref<SearchCalendarEventRespData>)
 	export function unRefSearchCalendarEventRespData(v:Ref<SearchCalendarEventRespData>):SearchCalendarEventRespData
-	export function emptyCalendarEventAttendee():CalendarEventAttendee
-	export function emptyRefCalendarEventAttendee():Ref<CalendarEventAttendee>
-	export function refOfCalendarEventAttendee(x:CalendarEventAttendee,v:Ref<CalendarEventAttendee>)
-	export function unRefCalendarEventAttendee(v:Ref<CalendarEventAttendee>):CalendarEventAttendee
+	export function emptyListCalendarEventAttendeeChatMemberReq():ListCalendarEventAttendeeChatMemberReq
+	export function emptyRefListCalendarEventAttendeeChatMemberReq():Ref<ListCalendarEventAttendeeChatMemberReq>
+	export function refOfListCalendarEventAttendeeChatMemberReq(x:ListCalendarEventAttendeeChatMemberReq,v:Ref<ListCalendarEventAttendeeChatMemberReq>)
+	export function unRefListCalendarEventAttendeeChatMemberReq(v:Ref<ListCalendarEventAttendeeChatMemberReq>):ListCalendarEventAttendeeChatMemberReq
+	export function emptySearchEventData():SearchEventData
+	export function emptyRefSearchEventData():Ref<SearchEventData>
+	export function refOfSearchEventData(x:SearchEventData,v:Ref<SearchEventData>)
+	export function unRefSearchEventData(v:Ref<SearchEventData>):SearchEventData
+	export function emptyUnsubscriptionCalendarAclReq():UnsubscriptionCalendarAclReq
+	export function emptyRefUnsubscriptionCalendarAclReq():Ref<UnsubscriptionCalendarAclReq>
+	export function refOfUnsubscriptionCalendarAclReq(x:UnsubscriptionCalendarAclReq,v:Ref<UnsubscriptionCalendarAclReq>)
+	export function unRefUnsubscriptionCalendarAclReq(v:Ref<UnsubscriptionCalendarAclReq>):UnsubscriptionCalendarAclReq
+	export function emptyCalendarUnderstandScenarioContext():CalendarUnderstandScenarioContext
+	export function emptyRefCalendarUnderstandScenarioContext():Ref<CalendarUnderstandScenarioContext>
+	export function refOfCalendarUnderstandScenarioContext(x:CalendarUnderstandScenarioContext,v:Ref<CalendarUnderstandScenarioContext>)
+	export function unRefCalendarUnderstandScenarioContext(v:Ref<CalendarUnderstandScenarioContext>):CalendarUnderstandScenarioContext
+	export function emptyCreateCalendarEventReq():CreateCalendarEventReq
+	export function emptyRefCreateCalendarEventReq():Ref<CreateCalendarEventReq>
+	export function refOfCreateCalendarEventReq(x:CreateCalendarEventReq,v:Ref<CreateCalendarEventReq>)
+	export function unRefCreateCalendarEventReq(v:Ref<CreateCalendarEventReq>):CreateCalendarEventReq
+	export function emptyDeleteCalendarResp():DeleteCalendarResp
+	export function emptyRefDeleteCalendarResp():Ref<DeleteCalendarResp>
+	export function refOfDeleteCalendarResp(x:DeleteCalendarResp,v:Ref<DeleteCalendarResp>)
+	export function unRefDeleteCalendarResp(v:Ref<DeleteCalendarResp>):DeleteCalendarResp
+	export function emptyInstanceViewCalendarEventReq():InstanceViewCalendarEventReq
+	export function emptyRefInstanceViewCalendarEventReq():Ref<InstanceViewCalendarEventReq>
+	export function refOfInstanceViewCalendarEventReq(x:InstanceViewCalendarEventReq,v:Ref<InstanceViewCalendarEventReq>)
+	export function unRefInstanceViewCalendarEventReq(v:Ref<InstanceViewCalendarEventReq>):InstanceViewCalendarEventReq
+	export function emptyInstanceViewCalendarEventRespData():InstanceViewCalendarEventRespData
+	export function emptyRefInstanceViewCalendarEventRespData():Ref<InstanceViewCalendarEventRespData>
+	export function refOfInstanceViewCalendarEventRespData(x:InstanceViewCalendarEventRespData,v:Ref<InstanceViewCalendarEventRespData>)
+	export function unRefInstanceViewCalendarEventRespData(v:Ref<InstanceViewCalendarEventRespData>):InstanceViewCalendarEventRespData
+	export function emptySearchCalendarRespData():SearchCalendarRespData
+	export function emptyRefSearchCalendarRespData():Ref<SearchCalendarRespData>
+	export function refOfSearchCalendarRespData(x:SearchCalendarRespData,v:Ref<SearchCalendarRespData>)
+	export function unRefSearchCalendarRespData(v:Ref<SearchCalendarRespData>):SearchCalendarRespData
+	export function emptyListCalendarAclReq():ListCalendarAclReq
+	export function emptyRefListCalendarAclReq():Ref<ListCalendarAclReq>
+	export function refOfListCalendarAclReq(x:ListCalendarAclReq,v:Ref<ListCalendarAclReq>)
+	export function unRefListCalendarAclReq(v:Ref<ListCalendarAclReq>):ListCalendarAclReq
+	export function emptyReminder():Reminder
+	export function emptyRefReminder():Ref<Reminder>
+	export function refOfReminder(x:Reminder,v:Ref<Reminder>)
+	export function unRefReminder(v:Ref<Reminder>):Reminder
+	export function emptyCreateTimeoffEventRespData():CreateTimeoffEventRespData
+	export function emptyRefCreateTimeoffEventRespData():Ref<CreateTimeoffEventRespData>
+	export function refOfCreateTimeoffEventRespData(x:CreateTimeoffEventRespData,v:Ref<CreateTimeoffEventRespData>)
+	export function unRefCreateTimeoffEventRespData(v:Ref<CreateTimeoffEventRespData>):CreateTimeoffEventRespData
+	export function emptyP2CalendarChangedV4():P2CalendarChangedV4
+	export function emptyRefP2CalendarChangedV4():Ref<P2CalendarChangedV4>
+	export function refOfP2CalendarChangedV4(x:P2CalendarChangedV4,v:Ref<P2CalendarChangedV4>)
+	export function unRefP2CalendarChangedV4(v:Ref<P2CalendarChangedV4>):P2CalendarChangedV4
+	export function emptyUnsubscribeCalendarReq():UnsubscribeCalendarReq
+	export function emptyRefUnsubscribeCalendarReq():Ref<UnsubscribeCalendarReq>
+	export function refOfUnsubscribeCalendarReq(x:UnsubscribeCalendarReq,v:Ref<UnsubscribeCalendarReq>)
+	export function unRefUnsubscribeCalendarReq(v:Ref<UnsubscribeCalendarReq>):UnsubscribeCalendarReq
 	export function emptyCreateCalendarEventAttendeeResp():CreateCalendarEventAttendeeResp
 	export function emptyRefCreateCalendarEventAttendeeResp():Ref<CreateCalendarEventAttendeeResp>
 	export function refOfCreateCalendarEventAttendeeResp(x:CreateCalendarEventAttendeeResp,v:Ref<CreateCalendarEventAttendeeResp>)
 	export function unRefCreateCalendarEventAttendeeResp(v:Ref<CreateCalendarEventAttendeeResp>):CreateCalendarEventAttendeeResp
+	export function emptyPatchCalendarResp():PatchCalendarResp
+	export function emptyRefPatchCalendarResp():Ref<PatchCalendarResp>
+	export function refOfPatchCalendarResp(x:PatchCalendarResp,v:Ref<PatchCalendarResp>)
+	export function unRefPatchCalendarResp(v:Ref<PatchCalendarResp>):PatchCalendarResp
+	export function emptyListCalendarEventAttendeeIterator():ListCalendarEventAttendeeIterator
+	export function emptyRefListCalendarEventAttendeeIterator():Ref<ListCalendarEventAttendeeIterator>
+	export function refOfListCalendarEventAttendeeIterator(x:ListCalendarEventAttendeeIterator,v:Ref<ListCalendarEventAttendeeIterator>)
+	export function unRefListCalendarEventAttendeeIterator(v:Ref<ListCalendarEventAttendeeIterator>):ListCalendarEventAttendeeIterator
+	export function emptyUnsubscribeCalendarResp():UnsubscribeCalendarResp
+	export function emptyRefUnsubscribeCalendarResp():Ref<UnsubscribeCalendarResp>
+	export function refOfUnsubscribeCalendarResp(x:UnsubscribeCalendarResp,v:Ref<UnsubscribeCalendarResp>)
+	export function unRefUnsubscribeCalendarResp(v:Ref<UnsubscribeCalendarResp>):UnsubscribeCalendarResp
+	export function emptyUserId():UserId
+	export function emptyRefUserId():Ref<UserId>
+	export function refOfUserId(x:UserId,v:Ref<UserId>)
+	export function unRefUserId(v:Ref<UserId>):UserId
+	export function emptyCalendarUnderstandExtra():CalendarUnderstandExtra
+	export function emptyRefCalendarUnderstandExtra():Ref<CalendarUnderstandExtra>
+	export function refOfCalendarUnderstandExtra(x:CalendarUnderstandExtra,v:Ref<CalendarUnderstandExtra>)
+	export function unRefCalendarUnderstandExtra(v:Ref<CalendarUnderstandExtra>):CalendarUnderstandExtra
+	export function emptyGetCalendarReq():GetCalendarReq
+	export function emptyRefGetCalendarReq():Ref<GetCalendarReq>
+	export function refOfGetCalendarReq(x:GetCalendarReq,v:Ref<GetCalendarReq>)
+	export function unRefGetCalendarReq(v:Ref<GetCalendarReq>):GetCalendarReq
+	export function emptyInstancesCalendarEventRespData():InstancesCalendarEventRespData
+	export function emptyRefInstancesCalendarEventRespData():Ref<InstancesCalendarEventRespData>
+	export function refOfInstancesCalendarEventRespData(x:InstancesCalendarEventRespData,v:Ref<InstancesCalendarEventRespData>)
+	export function unRefInstancesCalendarEventRespData(v:Ref<InstancesCalendarEventRespData>):InstancesCalendarEventRespData
+	export function emptyMeetingMinute():MeetingMinute
+	export function emptyRefMeetingMinute():Ref<MeetingMinute>
+	export function refOfMeetingMinute(x:MeetingMinute,v:Ref<MeetingMinute>)
+	export function unRefMeetingMinute(v:Ref<MeetingMinute>):MeetingMinute
+	export function emptyDeleteCalendarEventMeetingChatResp():DeleteCalendarEventMeetingChatResp
+	export function emptyRefDeleteCalendarEventMeetingChatResp():Ref<DeleteCalendarEventMeetingChatResp>
+	export function refOfDeleteCalendarEventMeetingChatResp(x:DeleteCalendarEventMeetingChatResp,v:Ref<DeleteCalendarEventMeetingChatResp>)
+	export function unRefDeleteCalendarEventMeetingChatResp(v:Ref<DeleteCalendarEventMeetingChatResp>):DeleteCalendarEventMeetingChatResp
+	export function emptyInstancesCalendarEventResp():InstancesCalendarEventResp
+	export function emptyRefInstancesCalendarEventResp():Ref<InstancesCalendarEventResp>
+	export function refOfInstancesCalendarEventResp(x:InstancesCalendarEventResp,v:Ref<InstancesCalendarEventResp>)
+	export function unRefInstancesCalendarEventResp(v:Ref<InstancesCalendarEventResp>):InstancesCalendarEventResp
+	export function emptyRoomMeta():RoomMeta
+	export function emptyRefRoomMeta():Ref<RoomMeta>
+	export function refOfRoomMeta(x:RoomMeta,v:Ref<RoomMeta>)
+	export function unRefRoomMeta(v:Ref<RoomMeta>):RoomMeta
+	export function emptyGetExchangeBindingReq():GetExchangeBindingReq
+	export function emptyRefGetExchangeBindingReq():Ref<GetExchangeBindingReq>
+	export function refOfGetExchangeBindingReq(x:GetExchangeBindingReq,v:Ref<GetExchangeBindingReq>)
+	export function unRefGetExchangeBindingReq(v:Ref<GetExchangeBindingReq>):GetExchangeBindingReq
+	export function emptySearchCalendarEventReqBody():SearchCalendarEventReqBody
+	export function emptyRefSearchCalendarEventReqBody():Ref<SearchCalendarEventReqBody>
+	export function refOfSearchCalendarEventReqBody(x:SearchCalendarEventReqBody,v:Ref<SearchCalendarEventReqBody>)
+	export function unRefSearchCalendarEventReqBody(v:Ref<SearchCalendarEventReqBody>):SearchCalendarEventReqBody
+	export function emptySearchUserResultAi():SearchUserResultAi
+	export function emptyRefSearchUserResultAi():Ref<SearchUserResultAi>
+	export function refOfSearchUserResultAi(x:SearchUserResultAi,v:Ref<SearchUserResultAi>)
+	export function unRefSearchUserResultAi(v:Ref<SearchUserResultAi>):SearchUserResultAi
+	export function emptyAclScope():AclScope
+	export function emptyRefAclScope():Ref<AclScope>
+	export function refOfAclScope(x:AclScope,v:Ref<AclScope>)
+	export function unRefAclScope(v:Ref<AclScope>):AclScope
+	export function emptyCalendarAcl():CalendarAcl
+	export function emptyRefCalendarAcl():Ref<CalendarAcl>
+	export function refOfCalendarAcl(x:CalendarAcl,v:Ref<CalendarAcl>)
+	export function unRefCalendarAcl(v:Ref<CalendarAcl>):CalendarAcl
+	export function emptyCreateCalendarRespData():CreateCalendarRespData
+	export function emptyRefCreateCalendarRespData():Ref<CreateCalendarRespData>
+	export function refOfCreateCalendarRespData(x:CreateCalendarRespData,v:Ref<CreateCalendarRespData>)
+	export function unRefCreateCalendarRespData(v:Ref<CreateCalendarRespData>):CreateCalendarRespData
+	export function emptyFile():File
+	export function emptyRefFile():Ref<File>
+	export function refOfFile(x:File,v:Ref<File>)
+	export function unRefFile(v:Ref<File>):File
+	export function emptyUnsubscriptionCalendarAclResp():UnsubscriptionCalendarAclResp
+	export function emptyRefUnsubscriptionCalendarAclResp():Ref<UnsubscriptionCalendarAclResp>
+	export function refOfUnsubscriptionCalendarAclResp(x:UnsubscriptionCalendarAclResp,v:Ref<UnsubscriptionCalendarAclResp>)
+	export function unRefUnsubscriptionCalendarAclResp(v:Ref<UnsubscriptionCalendarAclResp>):UnsubscriptionCalendarAclResp
+	export function emptyAclScopeEvent():AclScopeEvent
+	export function emptyRefAclScopeEvent():Ref<AclScopeEvent>
+	export function refOfAclScopeEvent(x:AclScopeEvent,v:Ref<AclScopeEvent>)
+	export function unRefAclScopeEvent(v:Ref<AclScopeEvent>):AclScopeEvent
+	export function emptyListCalendarEventReq():ListCalendarEventReq
+	export function emptyRefListCalendarEventReq():Ref<ListCalendarEventReq>
+	export function refOfListCalendarEventReq(x:ListCalendarEventReq,v:Ref<ListCalendarEventReq>)
+	export function unRefListCalendarEventReq(v:Ref<ListCalendarEventReq>):ListCalendarEventReq
+	export function emptyListCalendarEventResp():ListCalendarEventResp
+	export function emptyRefListCalendarEventResp():Ref<ListCalendarEventResp>
+	export function refOfListCalendarEventResp(x:ListCalendarEventResp,v:Ref<ListCalendarEventResp>)
+	export function unRefListCalendarEventResp(v:Ref<ListCalendarEventResp>):ListCalendarEventResp
+	export function emptyUserFreebusy():UserFreebusy
+	export function emptyRefUserFreebusy():Ref<UserFreebusy>
+	export function refOfUserFreebusy(x:UserFreebusy,v:Ref<UserFreebusy>)
+	export function unRefUserFreebusy(v:Ref<UserFreebusy>):UserFreebusy
+	export function emptyCreateCalendarEventRespData():CreateCalendarEventRespData
+	export function emptyRefCreateCalendarEventRespData():Ref<CreateCalendarEventRespData>
+	export function refOfCreateCalendarEventRespData(x:CreateCalendarEventRespData,v:Ref<CreateCalendarEventRespData>)
+	export function unRefCreateCalendarEventRespData(v:Ref<CreateCalendarEventRespData>):CreateCalendarEventRespData
+	export function emptyEventBriefInfoAi():EventBriefInfoAi
+	export function emptyRefEventBriefInfoAi():Ref<EventBriefInfoAi>
+	export function refOfEventBriefInfoAi(x:EventBriefInfoAi,v:Ref<EventBriefInfoAi>)
+	export function unRefEventBriefInfoAi(v:Ref<EventBriefInfoAi>):EventBriefInfoAi
+	export function emptyMyAiEventInfo():MyAiEventInfo
+	export function emptyRefMyAiEventInfo():Ref<MyAiEventInfo>
+	export function refOfMyAiEventInfo(x:MyAiEventInfo,v:Ref<MyAiEventInfo>)
+	export function unRefMyAiEventInfo(v:Ref<MyAiEventInfo>):MyAiEventInfo
 	export function emptyPatchCalendarReq():PatchCalendarReq
 	export function emptyRefPatchCalendarReq():Ref<PatchCalendarReq>
 	export function refOfPatchCalendarReq(x:PatchCalendarReq,v:Ref<PatchCalendarReq>)
@@ -3341,36 +2942,492 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/calendar/v4'{
 	export function emptyRefCalendarEventAttendeeChatMember():Ref<CalendarEventAttendeeChatMember>
 	export function refOfCalendarEventAttendeeChatMember(x:CalendarEventAttendeeChatMember,v:Ref<CalendarEventAttendeeChatMember>)
 	export function unRefCalendarEventAttendeeChatMember(v:Ref<CalendarEventAttendeeChatMember>):CalendarEventAttendeeChatMember
+	export function emptyCalendarFreebusy():CalendarFreebusy
+	export function emptyRefCalendarFreebusy():Ref<CalendarFreebusy>
+	export function refOfCalendarFreebusy(x:CalendarFreebusy,v:Ref<CalendarFreebusy>)
+	export function unRefCalendarFreebusy(v:Ref<CalendarFreebusy>):CalendarFreebusy
+	export function emptyDepartmentId():DepartmentId
+	export function emptyRefDepartmentId():Ref<DepartmentId>
+	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
+	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
+	export function emptyGetCalendarEventResp():GetCalendarEventResp
+	export function emptyRefGetCalendarEventResp():Ref<GetCalendarEventResp>
+	export function refOfGetCalendarEventResp(x:GetCalendarEventResp,v:Ref<GetCalendarEventResp>)
+	export function unRefGetCalendarEventResp(v:Ref<GetCalendarEventResp>):GetCalendarEventResp
+	export function emptyOperateCardData():OperateCardData
+	export function emptyRefOperateCardData():Ref<OperateCardData>
+	export function refOfOperateCardData(x:OperateCardData,v:Ref<OperateCardData>)
+	export function unRefOperateCardData(v:Ref<OperateCardData>):OperateCardData
+	export function emptySubscribeCalendarRespData():SubscribeCalendarRespData
+	export function emptyRefSubscribeCalendarRespData():Ref<SubscribeCalendarRespData>
+	export function refOfSubscribeCalendarRespData(x:SubscribeCalendarRespData,v:Ref<SubscribeCalendarRespData>)
+	export function unRefSubscribeCalendarRespData(v:Ref<SubscribeCalendarRespData>):SubscribeCalendarRespData
+	export function emptyAttendeeChatMember():AttendeeChatMember
+	export function emptyRefAttendeeChatMember():Ref<AttendeeChatMember>
+	export function refOfAttendeeChatMember(x:AttendeeChatMember,v:Ref<AttendeeChatMember>)
+	export function unRefAttendeeChatMember(v:Ref<AttendeeChatMember>):AttendeeChatMember
+	export function emptyEventTime():EventTime
+	export function emptyRefEventTime():Ref<EventTime>
+	export function refOfEventTime(x:EventTime,v:Ref<EventTime>)
+	export function unRefEventTime(v:Ref<EventTime>):EventTime
+	export function emptyBatchDeleteCalendarEventAttendeeReq():BatchDeleteCalendarEventAttendeeReq
+	export function emptyRefBatchDeleteCalendarEventAttendeeReq():Ref<BatchDeleteCalendarEventAttendeeReq>
+	export function refOfBatchDeleteCalendarEventAttendeeReq(x:BatchDeleteCalendarEventAttendeeReq,v:Ref<BatchDeleteCalendarEventAttendeeReq>)
+	export function unRefBatchDeleteCalendarEventAttendeeReq(v:Ref<BatchDeleteCalendarEventAttendeeReq>):BatchDeleteCalendarEventAttendeeReq
+	export function emptyCreateCalendarEventAttendeeReqBody():CreateCalendarEventAttendeeReqBody
+	export function emptyRefCreateCalendarEventAttendeeReqBody():Ref<CreateCalendarEventAttendeeReqBody>
+	export function refOfCreateCalendarEventAttendeeReqBody(x:CreateCalendarEventAttendeeReqBody,v:Ref<CreateCalendarEventAttendeeReqBody>)
+	export function unRefCreateCalendarEventAttendeeReqBody(v:Ref<CreateCalendarEventAttendeeReqBody>):CreateCalendarEventAttendeeReqBody
+	export function emptyCreateCalendarResp():CreateCalendarResp
+	export function emptyRefCreateCalendarResp():Ref<CreateCalendarResp>
+	export function refOfCreateCalendarResp(x:CreateCalendarResp,v:Ref<CreateCalendarResp>)
+	export function unRefCreateCalendarResp(v:Ref<CreateCalendarResp>):CreateCalendarResp
+	export function emptyListCalendarEventAttendeeReq():ListCalendarEventAttendeeReq
+	export function emptyRefListCalendarEventAttendeeReq():Ref<ListCalendarEventAttendeeReq>
+	export function refOfListCalendarEventAttendeeReq(x:ListCalendarEventAttendeeReq,v:Ref<ListCalendarEventAttendeeReq>)
+	export function unRefListCalendarEventAttendeeReq(v:Ref<ListCalendarEventAttendeeReq>):ListCalendarEventAttendeeReq
+	export function emptySubscriptionCalendarAclResp():SubscriptionCalendarAclResp
+	export function emptyRefSubscriptionCalendarAclResp():Ref<SubscriptionCalendarAclResp>
+	export function refOfSubscriptionCalendarAclResp(x:SubscriptionCalendarAclResp,v:Ref<SubscriptionCalendarAclResp>)
+	export function unRefSubscriptionCalendarAclResp(v:Ref<SubscriptionCalendarAclResp>):SubscriptionCalendarAclResp
+	export function emptyUserMeta():UserMeta
+	export function emptyRefUserMeta():Ref<UserMeta>
+	export function refOfUserMeta(x:UserMeta,v:Ref<UserMeta>)
+	export function unRefUserMeta(v:Ref<UserMeta>):UserMeta
+	export function emptyDeleteTimeoffEventResp():DeleteTimeoffEventResp
+	export function emptyRefDeleteTimeoffEventResp():Ref<DeleteTimeoffEventResp>
+	export function refOfDeleteTimeoffEventResp(x:DeleteTimeoffEventResp,v:Ref<DeleteTimeoffEventResp>)
+	export function unRefDeleteTimeoffEventResp(v:Ref<DeleteTimeoffEventResp>):DeleteTimeoffEventResp
+	export function emptyFreebusy():Freebusy
+	export function emptyRefFreebusy():Ref<Freebusy>
+	export function refOfFreebusy(x:Freebusy,v:Ref<Freebusy>)
+	export function unRefFreebusy(v:Ref<Freebusy>):Freebusy
+	export function emptyInstanceViewCalendarEventResp():InstanceViewCalendarEventResp
+	export function emptyRefInstanceViewCalendarEventResp():Ref<InstanceViewCalendarEventResp>
+	export function refOfInstanceViewCalendarEventResp(x:InstanceViewCalendarEventResp,v:Ref<InstanceViewCalendarEventResp>)
+	export function unRefInstanceViewCalendarEventResp(v:Ref<InstanceViewCalendarEventResp>):InstanceViewCalendarEventResp
 	export function emptyVcInfo():VcInfo
 	export function emptyRefVcInfo():Ref<VcInfo>
 	export function refOfVcInfo(x:VcInfo,v:Ref<VcInfo>)
 	export function unRefVcInfo(v:Ref<VcInfo>):VcInfo
-	export function emptyFreeTime():FreeTime
-	export function emptyRefFreeTime():Ref<FreeTime>
-	export function refOfFreeTime(x:FreeTime,v:Ref<FreeTime>)
-	export function unRefFreeTime(v:Ref<FreeTime>):FreeTime
-	export function emptySearchUserResultAi():SearchUserResultAi
-	export function emptyRefSearchUserResultAi():Ref<SearchUserResultAi>
-	export function refOfSearchUserResultAi(x:SearchUserResultAi,v:Ref<SearchUserResultAi>)
-	export function unRefSearchUserResultAi(v:Ref<SearchUserResultAi>):SearchUserResultAi
-	export function emptySearchCalendarEventResp():SearchCalendarEventResp
-	export function emptyRefSearchCalendarEventResp():Ref<SearchCalendarEventResp>
-	export function refOfSearchCalendarEventResp(x:SearchCalendarEventResp,v:Ref<SearchCalendarEventResp>)
-	export function unRefSearchCalendarEventResp(v:Ref<SearchCalendarEventResp>):SearchCalendarEventResp
-	export function emptyPrimaryCalendarResp():PrimaryCalendarResp
-	export function emptyRefPrimaryCalendarResp():Ref<PrimaryCalendarResp>
-	export function refOfPrimaryCalendarResp(x:PrimaryCalendarResp,v:Ref<PrimaryCalendarResp>)
-	export function unRefPrimaryCalendarResp(v:Ref<PrimaryCalendarResp>):PrimaryCalendarResp
-	export function emptyCreateCalendarEventRespData():CreateCalendarEventRespData
-	export function emptyRefCreateCalendarEventRespData():Ref<CreateCalendarEventRespData>
-	export function refOfCreateCalendarEventRespData(x:CreateCalendarEventRespData,v:Ref<CreateCalendarEventRespData>)
-	export function unRefCreateCalendarEventRespData(v:Ref<CreateCalendarEventRespData>):CreateCalendarEventRespData
+	export function emptyTimeoffEvent():TimeoffEvent
+	export function emptyRefTimeoffEvent():Ref<TimeoffEvent>
+	export function refOfTimeoffEvent(x:TimeoffEvent,v:Ref<TimeoffEvent>)
+	export function unRefTimeoffEvent(v:Ref<TimeoffEvent>):TimeoffEvent
+	export function emptyAttachment():Attachment
+	export function emptyRefAttachment():Ref<Attachment>
+	export function refOfAttachment(x:Attachment,v:Ref<Attachment>)
+	export function unRefAttachment(v:Ref<Attachment>):Attachment
+	export function emptyDeleteCalendarAclReq():DeleteCalendarAclReq
+	export function emptyRefDeleteCalendarAclReq():Ref<DeleteCalendarAclReq>
+	export function refOfDeleteCalendarAclReq(x:DeleteCalendarAclReq,v:Ref<DeleteCalendarAclReq>)
+	export function unRefDeleteCalendarAclReq(v:Ref<DeleteCalendarAclReq>):DeleteCalendarAclReq
+	export function emptySearchCalendarEventReq():SearchCalendarEventReq
+	export function emptyRefSearchCalendarEventReq():Ref<SearchCalendarEventReq>
+	export function refOfSearchCalendarEventReq(x:SearchCalendarEventReq,v:Ref<SearchCalendarEventReq>)
+	export function unRefSearchCalendarEventReq(v:Ref<SearchCalendarEventReq>):SearchCalendarEventReq
+	export function emptySearchCalendarResp():SearchCalendarResp
+	export function emptyRefSearchCalendarResp():Ref<SearchCalendarResp>
+	export function refOfSearchCalendarResp(x:SearchCalendarResp,v:Ref<SearchCalendarResp>)
+	export function unRefSearchCalendarResp(v:Ref<SearchCalendarResp>):SearchCalendarResp
+	export function emptyEventLocation():EventLocation
+	export function emptyRefEventLocation():Ref<EventLocation>
+	export function refOfEventLocation(x:EventLocation,v:Ref<EventLocation>)
+	export function unRefEventLocation(v:Ref<EventLocation>):EventLocation
+	export function emptySubscribeCalendarResp():SubscribeCalendarResp
+	export function emptyRefSubscribeCalendarResp():Ref<SubscribeCalendarResp>
+	export function refOfSubscribeCalendarResp(x:SubscribeCalendarResp,v:Ref<SubscribeCalendarResp>)
+	export function unRefSubscribeCalendarResp(v:Ref<SubscribeCalendarResp>):SubscribeCalendarResp
+	export function emptyP2CalendarAclCreatedV4Data():P2CalendarAclCreatedV4Data
+	export function emptyRefP2CalendarAclCreatedV4Data():Ref<P2CalendarAclCreatedV4Data>
+	export function refOfP2CalendarAclCreatedV4Data(x:P2CalendarAclCreatedV4Data,v:Ref<P2CalendarAclCreatedV4Data>)
+	export function unRefP2CalendarAclCreatedV4Data(v:Ref<P2CalendarAclCreatedV4Data>):P2CalendarAclCreatedV4Data
+	export function emptyReplyCalendarEventResp():ReplyCalendarEventResp
+	export function emptyRefReplyCalendarEventResp():Ref<ReplyCalendarEventResp>
+	export function refOfReplyCalendarEventResp(x:ReplyCalendarEventResp,v:Ref<ReplyCalendarEventResp>)
+	export function unRefReplyCalendarEventResp(v:Ref<ReplyCalendarEventResp>):ReplyCalendarEventResp
+	export function emptyListCalendarAclResp():ListCalendarAclResp
+	export function emptyRefListCalendarAclResp():Ref<ListCalendarAclResp>
+	export function refOfListCalendarAclResp(x:ListCalendarAclResp,v:Ref<ListCalendarAclResp>)
+	export function unRefListCalendarAclResp(v:Ref<ListCalendarAclResp>):ListCalendarAclResp
+	export function emptyListCalendarEventAttendeeChatMemberIterator():ListCalendarEventAttendeeChatMemberIterator
+	export function emptyRefListCalendarEventAttendeeChatMemberIterator():Ref<ListCalendarEventAttendeeChatMemberIterator>
+	export function refOfListCalendarEventAttendeeChatMemberIterator(x:ListCalendarEventAttendeeChatMemberIterator,v:Ref<ListCalendarEventAttendeeChatMemberIterator>)
+	export function unRefListCalendarEventAttendeeChatMemberIterator(v:Ref<ListCalendarEventAttendeeChatMemberIterator>):ListCalendarEventAttendeeChatMemberIterator
+	export function emptySchema():Schema
+	export function emptyRefSchema():Ref<Schema>
+	export function refOfSchema(x:Schema,v:Ref<Schema>)
+	export function unRefSchema(v:Ref<Schema>):Schema
+	export function emptySearchUserDataAi():SearchUserDataAi
+	export function emptyRefSearchUserDataAi():Ref<SearchUserDataAi>
+	export function refOfSearchUserDataAi(x:SearchUserDataAi,v:Ref<SearchUserDataAi>)
+	export function unRefSearchUserDataAi(v:Ref<SearchUserDataAi>):SearchUserDataAi
+	export function emptyGenerateCaldavConfSettingReqBody():GenerateCaldavConfSettingReqBody
+	export function emptyRefGenerateCaldavConfSettingReqBody():Ref<GenerateCaldavConfSettingReqBody>
+	export function refOfGenerateCaldavConfSettingReqBody(x:GenerateCaldavConfSettingReqBody,v:Ref<GenerateCaldavConfSettingReqBody>)
+	export function unRefGenerateCaldavConfSettingReqBody(v:Ref<GenerateCaldavConfSettingReqBody>):GenerateCaldavConfSettingReqBody
+	export function emptyOpenEventRsvpInfo():OpenEventRsvpInfo
+	export function emptyRefOpenEventRsvpInfo():Ref<OpenEventRsvpInfo>
+	export function refOfOpenEventRsvpInfo(x:OpenEventRsvpInfo,v:Ref<OpenEventRsvpInfo>)
+	export function unRefOpenEventRsvpInfo(v:Ref<OpenEventRsvpInfo>):OpenEventRsvpInfo
+	export function emptyUserCalendar():UserCalendar
+	export function emptyRefUserCalendar():Ref<UserCalendar>
+	export function refOfUserCalendar(x:UserCalendar,v:Ref<UserCalendar>)
+	export function unRefUserCalendar(v:Ref<UserCalendar>):UserCalendar
+	export function emptyCreateCalendarEventMeetingChatRespData():CreateCalendarEventMeetingChatRespData
+	export function emptyRefCreateCalendarEventMeetingChatRespData():Ref<CreateCalendarEventMeetingChatRespData>
+	export function refOfCreateCalendarEventMeetingChatRespData(x:CreateCalendarEventMeetingChatRespData,v:Ref<CreateCalendarEventMeetingChatRespData>)
+	export function unRefCreateCalendarEventMeetingChatRespData(v:Ref<CreateCalendarEventMeetingChatRespData>):CreateCalendarEventMeetingChatRespData
 	export function emptyGenerateCaldavConfSettingRespData():GenerateCaldavConfSettingRespData
 	export function emptyRefGenerateCaldavConfSettingRespData():Ref<GenerateCaldavConfSettingRespData>
 	export function refOfGenerateCaldavConfSettingRespData(x:GenerateCaldavConfSettingRespData,v:Ref<GenerateCaldavConfSettingRespData>)
 	export function unRefGenerateCaldavConfSettingRespData(v:Ref<GenerateCaldavConfSettingRespData>):GenerateCaldavConfSettingRespData
+	export function emptyListCalendarReq():ListCalendarReq
+	export function emptyRefListCalendarReq():Ref<ListCalendarReq>
+	export function refOfListCalendarReq(x:ListCalendarReq,v:Ref<ListCalendarReq>)
+	export function unRefListCalendarReq(v:Ref<ListCalendarReq>):ListCalendarReq
+	export function emptyCreateCalendarEventResp():CreateCalendarEventResp
+	export function emptyRefCreateCalendarEventResp():Ref<CreateCalendarEventResp>
+	export function refOfCreateCalendarEventResp(x:CreateCalendarEventResp,v:Ref<CreateCalendarEventResp>)
+	export function unRefCreateCalendarEventResp(v:Ref<CreateCalendarEventResp>):CreateCalendarEventResp
+	export function emptyP2CalendarChangedV4Data():P2CalendarChangedV4Data
+	export function emptyRefP2CalendarChangedV4Data():Ref<P2CalendarChangedV4Data>
+	export function refOfP2CalendarChangedV4Data(x:P2CalendarChangedV4Data,v:Ref<P2CalendarChangedV4Data>)
+	export function unRefP2CalendarChangedV4Data(v:Ref<P2CalendarChangedV4Data>):P2CalendarChangedV4Data
+	export function emptySystemInfo():SystemInfo
+	export function emptyRefSystemInfo():Ref<SystemInfo>
+	export function refOfSystemInfo(x:SystemInfo,v:Ref<SystemInfo>)
+	export function unRefSystemInfo(v:Ref<SystemInfo>):SystemInfo
 	export function emptyUnsubscriptionCalendarEventResp():UnsubscriptionCalendarEventResp
 	export function emptyRefUnsubscriptionCalendarEventResp():Ref<UnsubscriptionCalendarEventResp>
 	export function refOfUnsubscriptionCalendarEventResp(x:UnsubscriptionCalendarEventResp,v:Ref<UnsubscriptionCalendarEventResp>)
 	export function unRefUnsubscriptionCalendarEventResp(v:Ref<UnsubscriptionCalendarEventResp>):UnsubscriptionCalendarEventResp
+	export function emptyCreateExchangeBindingResp():CreateExchangeBindingResp
+	export function emptyRefCreateExchangeBindingResp():Ref<CreateExchangeBindingResp>
+	export function refOfCreateExchangeBindingResp(x:CreateExchangeBindingResp,v:Ref<CreateExchangeBindingResp>)
+	export function unRefCreateExchangeBindingResp(v:Ref<CreateExchangeBindingResp>):CreateExchangeBindingResp
+	export function emptyEventOrganizer():EventOrganizer
+	export function emptyRefEventOrganizer():Ref<EventOrganizer>
+	export function refOfEventOrganizer(x:EventOrganizer,v:Ref<EventOrganizer>)
+	export function unRefEventOrganizer(v:Ref<EventOrganizer>):EventOrganizer
+	export function emptyListCalendarAclRespData():ListCalendarAclRespData
+	export function emptyRefListCalendarAclRespData():Ref<ListCalendarAclRespData>
+	export function refOfListCalendarAclRespData(x:ListCalendarAclRespData,v:Ref<ListCalendarAclRespData>)
+	export function unRefListCalendarAclRespData(v:Ref<ListCalendarAclRespData>):ListCalendarAclRespData
+	export function emptyTimeInfo():TimeInfo
+	export function emptyRefTimeInfo():Ref<TimeInfo>
+	export function refOfTimeInfo(x:TimeInfo,v:Ref<TimeInfo>)
+	export function unRefTimeInfo(v:Ref<TimeInfo>):TimeInfo
+	export function emptyGenerateCaldavConfSettingResp():GenerateCaldavConfSettingResp
+	export function emptyRefGenerateCaldavConfSettingResp():Ref<GenerateCaldavConfSettingResp>
+	export function refOfGenerateCaldavConfSettingResp(x:GenerateCaldavConfSettingResp,v:Ref<GenerateCaldavConfSettingResp>)
+	export function unRefGenerateCaldavConfSettingResp(v:Ref<GenerateCaldavConfSettingResp>):GenerateCaldavConfSettingResp
+	export function emptyListCalendarRespData():ListCalendarRespData
+	export function emptyRefListCalendarRespData():Ref<ListCalendarRespData>
+	export function refOfListCalendarRespData(x:ListCalendarRespData,v:Ref<ListCalendarRespData>)
+	export function unRefListCalendarRespData(v:Ref<ListCalendarRespData>):ListCalendarRespData
+	export function emptyP2CalendarAclDeletedV4():P2CalendarAclDeletedV4
+	export function emptyRefP2CalendarAclDeletedV4():Ref<P2CalendarAclDeletedV4>
+	export function refOfP2CalendarAclDeletedV4(x:P2CalendarAclDeletedV4,v:Ref<P2CalendarAclDeletedV4>)
+	export function unRefP2CalendarAclDeletedV4(v:Ref<P2CalendarAclDeletedV4>):P2CalendarAclDeletedV4
+	export function emptySearchCalendarEventIterator():SearchCalendarEventIterator
+	export function emptyRefSearchCalendarEventIterator():Ref<SearchCalendarEventIterator>
+	export function refOfSearchCalendarEventIterator(x:SearchCalendarEventIterator,v:Ref<SearchCalendarEventIterator>)
+	export function unRefSearchCalendarEventIterator(v:Ref<SearchCalendarEventIterator>):SearchCalendarEventIterator
+	export function emptyGenerateCaldavConfSettingReq():GenerateCaldavConfSettingReq
+	export function emptyRefGenerateCaldavConfSettingReq():Ref<GenerateCaldavConfSettingReq>
+	export function refOfGenerateCaldavConfSettingReq(x:GenerateCaldavConfSettingReq,v:Ref<GenerateCaldavConfSettingReq>)
+	export function unRefGenerateCaldavConfSettingReq(v:Ref<GenerateCaldavConfSettingReq>):GenerateCaldavConfSettingReq
+	export function emptyGetCalendarRespData():GetCalendarRespData
+	export function emptyRefGetCalendarRespData():Ref<GetCalendarRespData>
+	export function refOfGetCalendarRespData(x:GetCalendarRespData,v:Ref<GetCalendarRespData>)
+	export function unRefGetCalendarRespData(v:Ref<GetCalendarRespData>):GetCalendarRespData
+	export function emptyReplyCalendarEventReqBody():ReplyCalendarEventReqBody
+	export function emptyRefReplyCalendarEventReqBody():Ref<ReplyCalendarEventReqBody>
+	export function refOfReplyCalendarEventReqBody(x:ReplyCalendarEventReqBody,v:Ref<ReplyCalendarEventReqBody>)
+	export function unRefReplyCalendarEventReqBody(v:Ref<ReplyCalendarEventReqBody>):ReplyCalendarEventReqBody
+	export function emptyUnsubscriptionCalendarEventReq():UnsubscriptionCalendarEventReq
+	export function emptyRefUnsubscriptionCalendarEventReq():Ref<UnsubscriptionCalendarEventReq>
+	export function refOfUnsubscriptionCalendarEventReq(x:UnsubscriptionCalendarEventReq,v:Ref<UnsubscriptionCalendarEventReq>)
+	export function unRefUnsubscriptionCalendarEventReq(v:Ref<UnsubscriptionCalendarEventReq>):UnsubscriptionCalendarEventReq
+	export function emptyCreateCalendarEventMeetingMinuteReq():CreateCalendarEventMeetingMinuteReq
+	export function emptyRefCreateCalendarEventMeetingMinuteReq():Ref<CreateCalendarEventMeetingMinuteReq>
+	export function refOfCreateCalendarEventMeetingMinuteReq(x:CreateCalendarEventMeetingMinuteReq,v:Ref<CreateCalendarEventMeetingMinuteReq>)
+	export function unRefCreateCalendarEventMeetingMinuteReq(v:Ref<CreateCalendarEventMeetingMinuteReq>):CreateCalendarEventMeetingMinuteReq
+	export function emptyCalendarAclEvent():CalendarAclEvent
+	export function emptyRefCalendarAclEvent():Ref<CalendarAclEvent>
+	export function refOfCalendarAclEvent(x:CalendarAclEvent,v:Ref<CalendarAclEvent>)
+	export function unRefCalendarAclEvent(v:Ref<CalendarAclEvent>):CalendarAclEvent
+	export function emptyListCalendarAclIterator():ListCalendarAclIterator
+	export function emptyRefListCalendarAclIterator():Ref<ListCalendarAclIterator>
+	export function refOfListCalendarAclIterator(x:ListCalendarAclIterator,v:Ref<ListCalendarAclIterator>)
+	export function unRefListCalendarAclIterator(v:Ref<ListCalendarAclIterator>):ListCalendarAclIterator
+	export function emptyBookMeetingRoomData():BookMeetingRoomData
+	export function emptyRefBookMeetingRoomData():Ref<BookMeetingRoomData>
+	export function refOfBookMeetingRoomData(x:BookMeetingRoomData,v:Ref<BookMeetingRoomData>)
+	export function unRefBookMeetingRoomData(v:Ref<BookMeetingRoomData>):BookMeetingRoomData
+	export function emptyCreateExchangeBindingReq():CreateExchangeBindingReq
+	export function emptyRefCreateExchangeBindingReq():Ref<CreateExchangeBindingReq>
+	export function refOfCreateExchangeBindingReq(x:CreateExchangeBindingReq,v:Ref<CreateExchangeBindingReq>)
+	export function unRefCreateExchangeBindingReq(v:Ref<CreateExchangeBindingReq>):CreateExchangeBindingReq
+	export function emptyCustomizationOption():CustomizationOption
+	export function emptyRefCustomizationOption():Ref<CustomizationOption>
+	export function refOfCustomizationOption(x:CustomizationOption,v:Ref<CustomizationOption>)
+	export function unRefCustomizationOption(v:Ref<CustomizationOption>):CustomizationOption
+	export function emptyCalendarPrimaryBatchReq():CalendarPrimaryBatchReq
+	export function emptyRefCalendarPrimaryBatchReq():Ref<CalendarPrimaryBatchReq>
+	export function refOfCalendarPrimaryBatchReq(x:CalendarPrimaryBatchReq,v:Ref<CalendarPrimaryBatchReq>)
+	export function unRefCalendarPrimaryBatchReq(v:Ref<CalendarPrimaryBatchReq>):CalendarPrimaryBatchReq
+	export function emptyCreateCalendarAclResp():CreateCalendarAclResp
+	export function emptyRefCreateCalendarAclResp():Ref<CreateCalendarAclResp>
+	export function refOfCreateCalendarAclResp(x:CreateCalendarAclResp,v:Ref<CreateCalendarAclResp>)
+	export function unRefCreateCalendarAclResp(v:Ref<CreateCalendarAclResp>):CreateCalendarAclResp
+	export function emptyGetExchangeBindingRespData():GetExchangeBindingRespData
+	export function emptyRefGetExchangeBindingRespData():Ref<GetExchangeBindingRespData>
+	export function refOfGetExchangeBindingRespData(x:GetExchangeBindingRespData,v:Ref<GetExchangeBindingRespData>)
+	export function unRefGetExchangeBindingRespData(v:Ref<GetExchangeBindingRespData>):GetExchangeBindingRespData
+	export function emptySubscriptionCalendarEventReq():SubscriptionCalendarEventReq
+	export function emptyRefSubscriptionCalendarEventReq():Ref<SubscriptionCalendarEventReq>
+	export function refOfSubscriptionCalendarEventReq(x:SubscriptionCalendarEventReq,v:Ref<SubscriptionCalendarEventReq>)
+	export function unRefSubscriptionCalendarEventReq(v:Ref<SubscriptionCalendarEventReq>):SubscriptionCalendarEventReq
+	export function emptyVchat():Vchat
+	export function emptyRefVchat():Ref<Vchat>
+	export function refOfVchat(x:Vchat,v:Ref<Vchat>)
+	export function unRefVchat(v:Ref<Vchat>):Vchat
+	export function emptyDeleteExchangeBindingReq():DeleteExchangeBindingReq
+	export function emptyRefDeleteExchangeBindingReq():Ref<DeleteExchangeBindingReq>
+	export function refOfDeleteExchangeBindingReq(x:DeleteExchangeBindingReq,v:Ref<DeleteExchangeBindingReq>)
+	export function unRefDeleteExchangeBindingReq(v:Ref<DeleteExchangeBindingReq>):DeleteExchangeBindingReq
+	export function emptyCardCallback():CardCallback
+	export function emptyRefCardCallback():Ref<CardCallback>
+	export function refOfCardCallback(x:CardCallback,v:Ref<CardCallback>)
+	export function unRefCardCallback(v:Ref<CardCallback>):CardCallback
+	export function emptyListCalendarEventAttendeeRespData():ListCalendarEventAttendeeRespData
+	export function emptyRefListCalendarEventAttendeeRespData():Ref<ListCalendarEventAttendeeRespData>
+	export function refOfListCalendarEventAttendeeRespData(x:ListCalendarEventAttendeeRespData,v:Ref<ListCalendarEventAttendeeRespData>)
+	export function unRefListCalendarEventAttendeeRespData(v:Ref<ListCalendarEventAttendeeRespData>):ListCalendarEventAttendeeRespData
+	export function emptyListFreebusyRespData():ListFreebusyRespData
+	export function emptyRefListFreebusyRespData():Ref<ListFreebusyRespData>
+	export function refOfListFreebusyRespData(x:ListFreebusyRespData,v:Ref<ListFreebusyRespData>)
+	export function unRefListFreebusyRespData(v:Ref<ListFreebusyRespData>):ListFreebusyRespData
+	export function emptyCreateCalendarEventMeetingMinuteRespData():CreateCalendarEventMeetingMinuteRespData
+	export function emptyRefCreateCalendarEventMeetingMinuteRespData():Ref<CreateCalendarEventMeetingMinuteRespData>
+	export function refOfCreateCalendarEventMeetingMinuteRespData(x:CreateCalendarEventMeetingMinuteRespData,v:Ref<CreateCalendarEventMeetingMinuteRespData>)
+	export function unRefCreateCalendarEventMeetingMinuteRespData(v:Ref<CreateCalendarEventMeetingMinuteRespData>):CreateCalendarEventMeetingMinuteRespData
+	export function emptyListCalendarEventAttendeeChatMemberRespData():ListCalendarEventAttendeeChatMemberRespData
+	export function emptyRefListCalendarEventAttendeeChatMemberRespData():Ref<ListCalendarEventAttendeeChatMemberRespData>
+	export function refOfListCalendarEventAttendeeChatMemberRespData(x:ListCalendarEventAttendeeChatMemberRespData,v:Ref<ListCalendarEventAttendeeChatMemberRespData>)
+	export function unRefListCalendarEventAttendeeChatMemberRespData(v:Ref<ListCalendarEventAttendeeChatMemberRespData>):ListCalendarEventAttendeeChatMemberRespData
+	export function emptyMyaiCardStatus():MyaiCardStatus
+	export function emptyRefMyaiCardStatus():Ref<MyaiCardStatus>
+	export function refOfMyaiCardStatus(x:MyaiCardStatus,v:Ref<MyaiCardStatus>)
+	export function unRefMyaiCardStatus(v:Ref<MyaiCardStatus>):MyaiCardStatus
+	export function emptyReplyCalendarEventReq():ReplyCalendarEventReq
+	export function emptyRefReplyCalendarEventReq():Ref<ReplyCalendarEventReq>
+	export function refOfReplyCalendarEventReq(x:ReplyCalendarEventReq,v:Ref<ReplyCalendarEventReq>)
+	export function unRefReplyCalendarEventReq(v:Ref<ReplyCalendarEventReq>):ReplyCalendarEventReq
+	export function emptyCreateCalendarAclRespData():CreateCalendarAclRespData
+	export function emptyRefCreateCalendarAclRespData():Ref<CreateCalendarAclRespData>
+	export function refOfCreateCalendarAclRespData(x:CreateCalendarAclRespData,v:Ref<CreateCalendarAclRespData>)
+	export function unRefCreateCalendarAclRespData(v:Ref<CreateCalendarAclRespData>):CreateCalendarAclRespData
+	export function emptyMyaiReply():MyaiReply
+	export function emptyRefMyaiReply():Ref<MyaiReply>
+	export function refOfMyaiReply(x:MyaiReply,v:Ref<MyaiReply>)
+	export function unRefMyaiReply(v:Ref<MyaiReply>):MyaiReply
+	export function emptyP2CalendarEventChangedV4():P2CalendarEventChangedV4
+	export function emptyRefP2CalendarEventChangedV4():Ref<P2CalendarEventChangedV4>
+	export function refOfP2CalendarEventChangedV4(x:P2CalendarEventChangedV4,v:Ref<P2CalendarEventChangedV4>)
+	export function unRefP2CalendarEventChangedV4(v:Ref<P2CalendarEventChangedV4>):P2CalendarEventChangedV4
+	export function emptyTimeSpan():TimeSpan
+	export function emptyRefTimeSpan():Ref<TimeSpan>
+	export function refOfTimeSpan(x:TimeSpan,v:Ref<TimeSpan>)
+	export function unRefTimeSpan(v:Ref<TimeSpan>):TimeSpan
+	export function emptyCreateCalendarEventAttendeeRespData():CreateCalendarEventAttendeeRespData
+	export function emptyRefCreateCalendarEventAttendeeRespData():Ref<CreateCalendarEventAttendeeRespData>
+	export function refOfCreateCalendarEventAttendeeRespData(x:CreateCalendarEventAttendeeRespData,v:Ref<CreateCalendarEventAttendeeRespData>)
+	export function unRefCreateCalendarEventAttendeeRespData(v:Ref<CreateCalendarEventAttendeeRespData>):CreateCalendarEventAttendeeRespData
+	export function emptyGetCalendarResp():GetCalendarResp
+	export function emptyRefGetCalendarResp():Ref<GetCalendarResp>
+	export function refOfGetCalendarResp(x:GetCalendarResp,v:Ref<GetCalendarResp>)
+	export function unRefGetCalendarResp(v:Ref<GetCalendarResp>):GetCalendarResp
+	export function emptyGetExchangeBindingResp():GetExchangeBindingResp
+	export function emptyRefGetExchangeBindingResp():Ref<GetExchangeBindingResp>
+	export function refOfGetExchangeBindingResp(x:GetExchangeBindingResp,v:Ref<GetExchangeBindingResp>)
+	export function unRefGetExchangeBindingResp(v:Ref<GetExchangeBindingResp>):GetExchangeBindingResp
+	export function emptyMyAiEventDetail():MyAiEventDetail
+	export function emptyRefMyAiEventDetail():Ref<MyAiEventDetail>
+	export function refOfMyAiEventDetail(x:MyAiEventDetail,v:Ref<MyAiEventDetail>)
+	export function unRefMyAiEventDetail(v:Ref<MyAiEventDetail>):MyAiEventDetail
+	export function emptyPrimaryCalendarResp():PrimaryCalendarResp
+	export function emptyRefPrimaryCalendarResp():Ref<PrimaryCalendarResp>
+	export function refOfPrimaryCalendarResp(x:PrimaryCalendarResp,v:Ref<PrimaryCalendarResp>)
+	export function unRefPrimaryCalendarResp(v:Ref<PrimaryCalendarResp>):PrimaryCalendarResp
+	export function emptySubscribeCalendarReq():SubscribeCalendarReq
+	export function emptyRefSubscribeCalendarReq():Ref<SubscribeCalendarReq>
+	export function refOfSubscribeCalendarReq(x:SubscribeCalendarReq,v:Ref<SubscribeCalendarReq>)
+	export function unRefSubscribeCalendarReq(v:Ref<SubscribeCalendarReq>):SubscribeCalendarReq
+	export function emptySubscriptionCalendarEventResp():SubscriptionCalendarEventResp
+	export function emptyRefSubscriptionCalendarEventResp():Ref<SubscriptionCalendarEventResp>
+	export function refOfSubscriptionCalendarEventResp(x:SubscriptionCalendarEventResp,v:Ref<SubscriptionCalendarEventResp>)
+	export function unRefSubscriptionCalendarEventResp(v:Ref<SubscriptionCalendarEventResp>):SubscriptionCalendarEventResp
+	export function emptyUnsubscriptionCalendarResp():UnsubscriptionCalendarResp
+	export function emptyRefUnsubscriptionCalendarResp():Ref<UnsubscriptionCalendarResp>
+	export function refOfUnsubscriptionCalendarResp(x:UnsubscriptionCalendarResp,v:Ref<UnsubscriptionCalendarResp>)
+	export function unRefUnsubscriptionCalendarResp(v:Ref<UnsubscriptionCalendarResp>):UnsubscriptionCalendarResp
+	export function emptyCreateCalendarReq():CreateCalendarReq
+	export function emptyRefCreateCalendarReq():Ref<CreateCalendarReq>
+	export function refOfCreateCalendarReq(x:CreateCalendarReq,v:Ref<CreateCalendarReq>)
+	export function unRefCreateCalendarReq(v:Ref<CreateCalendarReq>):CreateCalendarReq
+	export function emptyDeleteCalendarEventReq():DeleteCalendarEventReq
+	export function emptyRefDeleteCalendarEventReq():Ref<DeleteCalendarEventReq>
+	export function refOfDeleteCalendarEventReq(x:DeleteCalendarEventReq,v:Ref<DeleteCalendarEventReq>)
+	export function unRefDeleteCalendarEventReq(v:Ref<DeleteCalendarEventReq>):DeleteCalendarEventReq
+	export function emptyCalendar():Calendar
+	export function emptyRefCalendar():Ref<Calendar>
+	export function refOfCalendar(x:Calendar,v:Ref<Calendar>)
+	export function unRefCalendar(v:Ref<Calendar>):Calendar
+	export function emptyCalendarEventAttendeeId():CalendarEventAttendeeId
+	export function emptyRefCalendarEventAttendeeId():Ref<CalendarEventAttendeeId>
+	export function refOfCalendarEventAttendeeId(x:CalendarEventAttendeeId,v:Ref<CalendarEventAttendeeId>)
+	export function unRefCalendarEventAttendeeId(v:Ref<CalendarEventAttendeeId>):CalendarEventAttendeeId
+	export function emptyCreateTimeoffEventResp():CreateTimeoffEventResp
+	export function emptyRefCreateTimeoffEventResp():Ref<CreateTimeoffEventResp>
+	export function refOfCreateTimeoffEventResp(x:CreateTimeoffEventResp,v:Ref<CreateTimeoffEventResp>)
+	export function unRefCreateTimeoffEventResp(v:Ref<CreateTimeoffEventResp>):CreateTimeoffEventResp
+	export function emptyFreeTimeAi():FreeTimeAi
+	export function emptyRefFreeTimeAi():Ref<FreeTimeAi>
+	export function refOfFreeTimeAi(x:FreeTimeAi,v:Ref<FreeTimeAi>)
+	export function unRefFreeTimeAi(v:Ref<FreeTimeAi>):FreeTimeAi
+	export function emptyMeetingSettings():MeetingSettings
+	export function emptyRefMeetingSettings():Ref<MeetingSettings>
+	export function refOfMeetingSettings(x:MeetingSettings,v:Ref<MeetingSettings>)
+	export function unRefMeetingSettings(v:Ref<MeetingSettings>):MeetingSettings
+	export function emptyCalendarAttendeeResourceCustomization():CalendarAttendeeResourceCustomization
+	export function emptyRefCalendarAttendeeResourceCustomization():Ref<CalendarAttendeeResourceCustomization>
+	export function refOfCalendarAttendeeResourceCustomization(x:CalendarAttendeeResourceCustomization,v:Ref<CalendarAttendeeResourceCustomization>)
+	export function unRefCalendarAttendeeResourceCustomization(v:Ref<CalendarAttendeeResourceCustomization>):CalendarAttendeeResourceCustomization
+	export function emptyPatchCalendarRespData():PatchCalendarRespData
+	export function emptyRefPatchCalendarRespData():Ref<PatchCalendarRespData>
+	export function refOfPatchCalendarRespData(x:PatchCalendarRespData,v:Ref<PatchCalendarRespData>)
+	export function unRefPatchCalendarRespData(v:Ref<PatchCalendarRespData>):PatchCalendarRespData
+	export function emptySearchCalendarEventResp():SearchCalendarEventResp
+	export function emptyRefSearchCalendarEventResp():Ref<SearchCalendarEventResp>
+	export function refOfSearchCalendarEventResp(x:SearchCalendarEventResp,v:Ref<SearchCalendarEventResp>)
+	export function unRefSearchCalendarEventResp(v:Ref<SearchCalendarEventResp>):SearchCalendarEventResp
+	export function emptyCreateCalendarAclReq():CreateCalendarAclReq
+	export function emptyRefCreateCalendarAclReq():Ref<CreateCalendarAclReq>
+	export function refOfCreateCalendarAclReq(x:CreateCalendarAclReq,v:Ref<CreateCalendarAclReq>)
+	export function unRefCreateCalendarAclReq(v:Ref<CreateCalendarAclReq>):CreateCalendarAclReq
+	export function emptyListFreebusyReqBody():ListFreebusyReqBody
+	export function emptyRefListFreebusyReqBody():Ref<ListFreebusyReqBody>
+	export function refOfListFreebusyReqBody(x:ListFreebusyReqBody,v:Ref<ListFreebusyReqBody>)
+	export function unRefListFreebusyReqBody(v:Ref<ListFreebusyReqBody>):ListFreebusyReqBody
+	export function emptySearchCalendarReq():SearchCalendarReq
+	export function emptyRefSearchCalendarReq():Ref<SearchCalendarReq>
+	export function refOfSearchCalendarReq(x:SearchCalendarReq,v:Ref<SearchCalendarReq>)
+	export function unRefSearchCalendarReq(v:Ref<SearchCalendarReq>):SearchCalendarReq
+	export function emptyCreateCalendarEventMeetingMinuteResp():CreateCalendarEventMeetingMinuteResp
+	export function emptyRefCreateCalendarEventMeetingMinuteResp():Ref<CreateCalendarEventMeetingMinuteResp>
+	export function refOfCreateCalendarEventMeetingMinuteResp(x:CreateCalendarEventMeetingMinuteResp,v:Ref<CreateCalendarEventMeetingMinuteResp>)
+	export function unRefCreateCalendarEventMeetingMinuteResp(v:Ref<CreateCalendarEventMeetingMinuteResp>):CreateCalendarEventMeetingMinuteResp
+	export function emptyDeleteCalendarEventResp():DeleteCalendarEventResp
+	export function emptyRefDeleteCalendarEventResp():Ref<DeleteCalendarEventResp>
+	export function refOfDeleteCalendarEventResp(x:DeleteCalendarEventResp,v:Ref<DeleteCalendarEventResp>)
+	export function unRefDeleteCalendarEventResp(v:Ref<DeleteCalendarEventResp>):DeleteCalendarEventResp
+	export function emptyListCalendarEventAttendeeChatMemberResp():ListCalendarEventAttendeeChatMemberResp
+	export function emptyRefListCalendarEventAttendeeChatMemberResp():Ref<ListCalendarEventAttendeeChatMemberResp>
+	export function refOfListCalendarEventAttendeeChatMemberResp(x:ListCalendarEventAttendeeChatMemberResp,v:Ref<ListCalendarEventAttendeeChatMemberResp>)
+	export function unRefListCalendarEventAttendeeChatMemberResp(v:Ref<ListCalendarEventAttendeeChatMemberResp>):ListCalendarEventAttendeeChatMemberResp
+	export function emptyListCalendarResp():ListCalendarResp
+	export function emptyRefListCalendarResp():Ref<ListCalendarResp>
+	export function refOfListCalendarResp(x:ListCalendarResp,v:Ref<ListCalendarResp>)
+	export function unRefListCalendarResp(v:Ref<ListCalendarResp>):ListCalendarResp
+	export function emptyP2CalendarAclDeletedV4Data():P2CalendarAclDeletedV4Data
+	export function emptyRefP2CalendarAclDeletedV4Data():Ref<P2CalendarAclDeletedV4Data>
+	export function refOfP2CalendarAclDeletedV4Data(x:P2CalendarAclDeletedV4Data,v:Ref<P2CalendarAclDeletedV4Data>)
+	export function unRefP2CalendarAclDeletedV4Data(v:Ref<P2CalendarAclDeletedV4Data>):P2CalendarAclDeletedV4Data
+	export function emptyCalendarEventResp():CalendarEventResp
+	export function emptyRefCalendarEventResp():Ref<CalendarEventResp>
+	export function refOfCalendarEventResp(x:CalendarEventResp,v:Ref<CalendarEventResp>)
+	export function unRefCalendarEventResp(v:Ref<CalendarEventResp>):CalendarEventResp
+	export function emptyDeleteTimeoffEventReq():DeleteTimeoffEventReq
+	export function emptyRefDeleteTimeoffEventReq():Ref<DeleteTimeoffEventReq>
+	export function refOfDeleteTimeoffEventReq(x:DeleteTimeoffEventReq,v:Ref<DeleteTimeoffEventReq>)
+	export function unRefDeleteTimeoffEventReq(v:Ref<DeleteTimeoffEventReq>):DeleteTimeoffEventReq
+	export function emptyInstancesCalendarEventReq():InstancesCalendarEventReq
+	export function emptyRefInstancesCalendarEventReq():Ref<InstancesCalendarEventReq>
+	export function refOfInstancesCalendarEventReq(x:InstancesCalendarEventReq,v:Ref<InstancesCalendarEventReq>)
+	export function unRefInstancesCalendarEventReq(v:Ref<InstancesCalendarEventReq>):InstancesCalendarEventReq
+	export function emptyPrimaryCalendarRespData():PrimaryCalendarRespData
+	export function emptyRefPrimaryCalendarRespData():Ref<PrimaryCalendarRespData>
+	export function refOfPrimaryCalendarRespData(x:PrimaryCalendarRespData,v:Ref<PrimaryCalendarRespData>)
+	export function unRefPrimaryCalendarRespData(v:Ref<PrimaryCalendarRespData>):PrimaryCalendarRespData
+	export function emptySearchCalendarReqBody():SearchCalendarReqBody
+	export function emptyRefSearchCalendarReqBody():Ref<SearchCalendarReqBody>
+	export function refOfSearchCalendarReqBody(x:SearchCalendarReqBody,v:Ref<SearchCalendarReqBody>)
+	export function unRefSearchCalendarReqBody(v:Ref<SearchCalendarReqBody>):SearchCalendarReqBody
+	export function emptyBatchDeleteCalendarEventAttendeeResp():BatchDeleteCalendarEventAttendeeResp
+	export function emptyRefBatchDeleteCalendarEventAttendeeResp():Ref<BatchDeleteCalendarEventAttendeeResp>
+	export function refOfBatchDeleteCalendarEventAttendeeResp(x:BatchDeleteCalendarEventAttendeeResp,v:Ref<BatchDeleteCalendarEventAttendeeResp>)
+	export function unRefBatchDeleteCalendarEventAttendeeResp(v:Ref<BatchDeleteCalendarEventAttendeeResp>):BatchDeleteCalendarEventAttendeeResp
+	export function emptyCreateTimeoffEventReq():CreateTimeoffEventReq
+	export function emptyRefCreateTimeoffEventReq():Ref<CreateTimeoffEventReq>
+	export function refOfCreateTimeoffEventReq(x:CreateTimeoffEventReq,v:Ref<CreateTimeoffEventReq>)
+	export function unRefCreateTimeoffEventReq(v:Ref<CreateTimeoffEventReq>):CreateTimeoffEventReq
+	export function emptyExchangeBinding():ExchangeBinding
+	export function emptyRefExchangeBinding():Ref<ExchangeBinding>
+	export function refOfExchangeBinding(x:ExchangeBinding,v:Ref<ExchangeBinding>)
+	export function unRefExchangeBinding(v:Ref<ExchangeBinding>):ExchangeBinding
+	export function emptyListFreebusyReq():ListFreebusyReq
+	export function emptyRefListFreebusyReq():Ref<ListFreebusyReq>
+	export function refOfListFreebusyReq(x:ListFreebusyReq,v:Ref<ListFreebusyReq>)
+	export function unRefListFreebusyReq(v:Ref<ListFreebusyReq>):ListFreebusyReq
+	export function emptySubscriptionCalendarAclReq():SubscriptionCalendarAclReq
+	export function emptyRefSubscriptionCalendarAclReq():Ref<SubscriptionCalendarAclReq>
+	export function refOfSubscriptionCalendarAclReq(x:SubscriptionCalendarAclReq,v:Ref<SubscriptionCalendarAclReq>)
+	export function unRefSubscriptionCalendarAclReq(v:Ref<SubscriptionCalendarAclReq>):SubscriptionCalendarAclReq
+	export function emptyCardPresent():CardPresent
+	export function emptyRefCardPresent():Ref<CardPresent>
+	export function refOfCardPresent(x:CardPresent,v:Ref<CardPresent>)
+	export function unRefCardPresent(v:Ref<CardPresent>):CardPresent
+	export function emptyDeleteCalendarEventMeetingChatReq():DeleteCalendarEventMeetingChatReq
+	export function emptyRefDeleteCalendarEventMeetingChatReq():Ref<DeleteCalendarEventMeetingChatReq>
+	export function refOfDeleteCalendarEventMeetingChatReq(x:DeleteCalendarEventMeetingChatReq,v:Ref<DeleteCalendarEventMeetingChatReq>)
+	export function unRefDeleteCalendarEventMeetingChatReq(v:Ref<DeleteCalendarEventMeetingChatReq>):DeleteCalendarEventMeetingChatReq
+	export function emptyMyaiSearchDocResult():MyaiSearchDocResult
+	export function emptyRefMyaiSearchDocResult():Ref<MyaiSearchDocResult>
+	export function refOfMyaiSearchDocResult(x:MyaiSearchDocResult,v:Ref<MyaiSearchDocResult>)
+	export function unRefMyaiSearchDocResult(v:Ref<MyaiSearchDocResult>):MyaiSearchDocResult
+	export function emptyCalendarEventAttendee():CalendarEventAttendee
+	export function emptyRefCalendarEventAttendee():Ref<CalendarEventAttendee>
+	export function refOfCalendarEventAttendee(x:CalendarEventAttendee,v:Ref<CalendarEventAttendee>)
+	export function unRefCalendarEventAttendee(v:Ref<CalendarEventAttendee>):CalendarEventAttendee
+	export function emptyEventCard():EventCard
+	export function emptyRefEventCard():Ref<EventCard>
+	export function refOfEventCard(x:EventCard,v:Ref<EventCard>)
+	export function unRefEventCard(v:Ref<EventCard>):EventCard
+	export function emptyFreeTimeSlot():FreeTimeSlot
+	export function emptyRefFreeTimeSlot():Ref<FreeTimeSlot>
+	export function refOfFreeTimeSlot(x:FreeTimeSlot,v:Ref<FreeTimeSlot>)
+	export function unRefFreeTimeSlot(v:Ref<FreeTimeSlot>):FreeTimeSlot
+	export function emptyCreateCalendarEventMeetingChatResp():CreateCalendarEventMeetingChatResp
+	export function emptyRefCreateCalendarEventMeetingChatResp():Ref<CreateCalendarEventMeetingChatResp>
+	export function refOfCreateCalendarEventMeetingChatResp(x:CreateCalendarEventMeetingChatResp,v:Ref<CreateCalendarEventMeetingChatResp>)
+	export function unRefCreateCalendarEventMeetingChatResp(v:Ref<CreateCalendarEventMeetingChatResp>):CreateCalendarEventMeetingChatResp
+	export function emptyListCalendarEventRespData():ListCalendarEventRespData
+	export function emptyRefListCalendarEventRespData():Ref<ListCalendarEventRespData>
+	export function refOfListCalendarEventRespData(x:ListCalendarEventRespData,v:Ref<ListCalendarEventRespData>)
+	export function unRefListCalendarEventRespData(v:Ref<ListCalendarEventRespData>):ListCalendarEventRespData
+	export function emptyMeetingChat():MeetingChat
+	export function emptyRefMeetingChat():Ref<MeetingChat>
+	export function refOfMeetingChat(x:MeetingChat,v:Ref<MeetingChat>)
+	export function unRefMeetingChat(v:Ref<MeetingChat>):MeetingChat
+	export function emptyPatchCalendarEventReq():PatchCalendarEventReq
+	export function emptyRefPatchCalendarEventReq():Ref<PatchCalendarEventReq>
+	export function refOfPatchCalendarEventReq(x:PatchCalendarEventReq,v:Ref<PatchCalendarEventReq>)
+	export function unRefPatchCalendarEventReq(v:Ref<PatchCalendarEventReq>):PatchCalendarEventReq
+	export function emptySearchCalendarIterator():SearchCalendarIterator
+	export function emptyRefSearchCalendarIterator():Ref<SearchCalendarIterator>
+	export function refOfSearchCalendarIterator(x:SearchCalendarIterator,v:Ref<SearchCalendarIterator>)
+	export function unRefSearchCalendarIterator(v:Ref<SearchCalendarIterator>):SearchCalendarIterator
 }

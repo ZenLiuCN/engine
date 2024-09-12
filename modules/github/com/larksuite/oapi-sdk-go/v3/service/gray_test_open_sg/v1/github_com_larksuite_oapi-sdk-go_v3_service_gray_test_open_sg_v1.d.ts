@@ -7,7 +7,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/gray_test_open_sg/v1
 	// @ts-ignore
 	import * as context from 'golang/context'
 	// @ts-ignore
-	import type {Ref,Struct,bool,error,int} from 'go'
+	import type {bool,error,int,Ref,Struct} from 'go'
 	export interface CreateMotoReq extends Struct<CreateMotoReq>{
 
 			level:Ref<Level>
@@ -143,30 +143,46 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/gray_test_open_sg/v1
 				listByIterator(ctx:context.Context,req:Ref<ListMotoReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListMotoIterator>
 			}>
 	}
+	export function emptyListMotoResp():ListMotoResp
+	export function emptyRefListMotoResp():Ref<ListMotoResp>
+	export function refOfListMotoResp(x:ListMotoResp,v:Ref<ListMotoResp>)
+	export function unRefListMotoResp(v:Ref<ListMotoResp>):ListMotoResp
+	export function emptyListMotoRespData():ListMotoRespData
+	export function emptyRefListMotoRespData():Ref<ListMotoRespData>
+	export function refOfListMotoRespData(x:ListMotoRespData,v:Ref<ListMotoRespData>)
+	export function unRefListMotoRespData(v:Ref<ListMotoRespData>):ListMotoRespData
 	export function emptyCreateMotoReq():CreateMotoReq
 	export function emptyRefCreateMotoReq():Ref<CreateMotoReq>
 	export function refOfCreateMotoReq(x:CreateMotoReq,v:Ref<CreateMotoReq>)
 	export function unRefCreateMotoReq(v:Ref<CreateMotoReq>):CreateMotoReq
-	export function emptyV1():V1
-	export function emptyRefV1():Ref<V1>
-	export function refOfV1(x:V1,v:Ref<V1>)
-	export function unRefV1(v:Ref<V1>):V1
 	export function emptyCreateMotoRespData():CreateMotoRespData
 	export function emptyRefCreateMotoRespData():Ref<CreateMotoRespData>
 	export function refOfCreateMotoRespData(x:CreateMotoRespData,v:Ref<CreateMotoRespData>)
 	export function unRefCreateMotoRespData(v:Ref<CreateMotoRespData>):CreateMotoRespData
-	export function emptyDepartmentId():DepartmentId
-	export function emptyRefDepartmentId():Ref<DepartmentId>
-	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
-	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptyGetMotoRespData():GetMotoRespData
-	export function emptyRefGetMotoRespData():Ref<GetMotoRespData>
-	export function refOfGetMotoRespData(x:GetMotoRespData,v:Ref<GetMotoRespData>)
-	export function unRefGetMotoRespData(v:Ref<GetMotoRespData>):GetMotoRespData
+	export function emptyListMotoIterator():ListMotoIterator
+	export function emptyRefListMotoIterator():Ref<ListMotoIterator>
+	export function refOfListMotoIterator(x:ListMotoIterator,v:Ref<ListMotoIterator>)
+	export function unRefListMotoIterator(v:Ref<ListMotoIterator>):ListMotoIterator
+	export function emptyListMotoReq():ListMotoReq
+	export function emptyRefListMotoReq():Ref<ListMotoReq>
+	export function refOfListMotoReq(x:ListMotoReq,v:Ref<ListMotoReq>)
+	export function unRefListMotoReq(v:Ref<ListMotoReq>):ListMotoReq
+	export function emptyLevel():Level
+	export function emptyRefLevel():Ref<Level>
+	export function refOfLevel(x:Level,v:Ref<Level>)
+	export function unRefLevel(v:Ref<Level>):Level
 	export function emptyMoto():Moto
 	export function emptyRefMoto():Ref<Moto>
 	export function refOfMoto(x:Moto,v:Ref<Moto>)
 	export function unRefMoto(v:Ref<Moto>):Moto
+	export function emptyV1():V1
+	export function emptyRefV1():Ref<V1>
+	export function refOfV1(x:V1,v:Ref<V1>)
+	export function unRefV1(v:Ref<V1>):V1
+	export function emptyDepartmentId():DepartmentId
+	export function emptyRefDepartmentId():Ref<DepartmentId>
+	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
+	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
 	export function emptyGetMotoReq():GetMotoReq
 	export function emptyRefGetMotoReq():Ref<GetMotoReq>
 	export function refOfGetMotoReq(x:GetMotoReq,v:Ref<GetMotoReq>)
@@ -175,28 +191,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/gray_test_open_sg/v1
 	export function emptyRefGetMotoResp():Ref<GetMotoResp>
 	export function refOfGetMotoResp(x:GetMotoResp,v:Ref<GetMotoResp>)
 	export function unRefGetMotoResp(v:Ref<GetMotoResp>):GetMotoResp
-	export function emptyLevel():Level
-	export function emptyRefLevel():Ref<Level>
-	export function refOfLevel(x:Level,v:Ref<Level>)
-	export function unRefLevel(v:Ref<Level>):Level
-	export function emptyListMotoIterator():ListMotoIterator
-	export function emptyRefListMotoIterator():Ref<ListMotoIterator>
-	export function refOfListMotoIterator(x:ListMotoIterator,v:Ref<ListMotoIterator>)
-	export function unRefListMotoIterator(v:Ref<ListMotoIterator>):ListMotoIterator
-	export function emptyListMotoResp():ListMotoResp
-	export function emptyRefListMotoResp():Ref<ListMotoResp>
-	export function refOfListMotoResp(x:ListMotoResp,v:Ref<ListMotoResp>)
-	export function unRefListMotoResp(v:Ref<ListMotoResp>):ListMotoResp
 	export function emptyCreateMotoResp():CreateMotoResp
 	export function emptyRefCreateMotoResp():Ref<CreateMotoResp>
 	export function refOfCreateMotoResp(x:CreateMotoResp,v:Ref<CreateMotoResp>)
 	export function unRefCreateMotoResp(v:Ref<CreateMotoResp>):CreateMotoResp
-	export function emptyListMotoReq():ListMotoReq
-	export function emptyRefListMotoReq():Ref<ListMotoReq>
-	export function refOfListMotoReq(x:ListMotoReq,v:Ref<ListMotoReq>)
-	export function unRefListMotoReq(v:Ref<ListMotoReq>):ListMotoReq
-	export function emptyListMotoRespData():ListMotoRespData
-	export function emptyRefListMotoRespData():Ref<ListMotoRespData>
-	export function refOfListMotoRespData(x:ListMotoRespData,v:Ref<ListMotoRespData>)
-	export function unRefListMotoRespData(v:Ref<ListMotoRespData>):ListMotoRespData
+	export function emptyGetMotoRespData():GetMotoRespData
+	export function emptyRefGetMotoRespData():Ref<GetMotoRespData>
+	export function refOfGetMotoRespData(x:GetMotoRespData,v:Ref<GetMotoRespData>)
+	export function unRefGetMotoRespData(v:Ref<GetMotoRespData>):GetMotoRespData
 }

@@ -14,10 +14,18 @@ var (
 	//go:embed github_com_larksuite_oapi-sdk-go_v3_service_event_v1.d.ts
 	GithubComLarksuiteOapiSdkGo3ServiceEvent1Define   []byte
 	GithubComLarksuiteOapiSdkGo3ServiceEvent1Declared = map[string]any{
-		"newDepartmentIdBuilder":      larkevent.NewDepartmentIdBuilder,
 		"newListOutboundIpReqBuilder": larkevent.NewListOutboundIpReqBuilder,
 		"New":                         larkevent.New,
+		"newDepartmentIdBuilder":      larkevent.NewDepartmentIdBuilder,
 
+		"emptyListOutboundIpIterator":    engine.Empty[larkevent.ListOutboundIpIterator],
+		"emptyRefListOutboundIpIterator": engine.EmptyRefer[larkevent.ListOutboundIpIterator],
+		"refOfListOutboundIpIterator":    engine.ReferOf[larkevent.ListOutboundIpIterator],
+		"unRefListOutboundIpIterator":    engine.UnRefer[larkevent.ListOutboundIpIterator],
+		"emptyListOutboundIpReq":         engine.Empty[larkevent.ListOutboundIpReq],
+		"emptyRefListOutboundIpReq":      engine.EmptyRefer[larkevent.ListOutboundIpReq],
+		"refOfListOutboundIpReq":         engine.ReferOf[larkevent.ListOutboundIpReq],
+		"unRefListOutboundIpReq":         engine.UnRefer[larkevent.ListOutboundIpReq],
 		"emptyListOutboundIpResp":        engine.Empty[larkevent.ListOutboundIpResp],
 		"emptyRefListOutboundIpResp":     engine.EmptyRefer[larkevent.ListOutboundIpResp],
 		"refOfListOutboundIpResp":        engine.ReferOf[larkevent.ListOutboundIpResp],
@@ -33,15 +41,7 @@ var (
 		"emptyDepartmentId":              engine.Empty[larkevent.DepartmentId],
 		"emptyRefDepartmentId":           engine.EmptyRefer[larkevent.DepartmentId],
 		"refOfDepartmentId":              engine.ReferOf[larkevent.DepartmentId],
-		"unRefDepartmentId":              engine.UnRefer[larkevent.DepartmentId],
-		"emptyListOutboundIpIterator":    engine.Empty[larkevent.ListOutboundIpIterator],
-		"emptyRefListOutboundIpIterator": engine.EmptyRefer[larkevent.ListOutboundIpIterator],
-		"refOfListOutboundIpIterator":    engine.ReferOf[larkevent.ListOutboundIpIterator],
-		"unRefListOutboundIpIterator":    engine.UnRefer[larkevent.ListOutboundIpIterator],
-		"emptyListOutboundIpReq":         engine.Empty[larkevent.ListOutboundIpReq],
-		"emptyRefListOutboundIpReq":      engine.EmptyRefer[larkevent.ListOutboundIpReq],
-		"refOfListOutboundIpReq":         engine.ReferOf[larkevent.ListOutboundIpReq],
-		"unRefListOutboundIpReq":         engine.UnRefer[larkevent.ListOutboundIpReq]}
+		"unRefDepartmentId":              engine.UnRefer[larkevent.DepartmentId]}
 )
 
 func init() {

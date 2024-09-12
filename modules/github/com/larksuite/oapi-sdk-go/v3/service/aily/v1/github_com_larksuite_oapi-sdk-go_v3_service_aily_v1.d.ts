@@ -7,7 +7,107 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/aily/v1'{
 	// @ts-ignore
 	import * as context from 'golang/context'
 	// @ts-ignore
-	import type {Ref,Struct,bool,error,map,int} from 'go'
+	import type {map,int,Ref,Struct,bool,error} from 'go'
+	export interface AilyKnowledgeDataset extends Struct<AilyKnowledgeDataset>{
+
+			apiName:Ref<string>
+			title:Ref<string>
+	}
+	export interface AilyKnowledgeDatasetBuilder extends Struct<AilyKnowledgeDatasetBuilder>{
+
+			apiName(apiName:string):Ref<AilyKnowledgeDatasetBuilder>
+			title(title:string):Ref<AilyKnowledgeDatasetBuilder>
+			build():Ref<AilyKnowledgeDataset>
+	}
+	export interface AilyKnowledgeDatatable extends Struct<AilyKnowledgeDatatable>{
+
+			apiName:Ref<string>
+			title:Ref<string>
+	}
+	export interface AilyKnowledgeDatatableBuilder extends Struct<AilyKnowledgeDatatableBuilder>{
+
+			apiName(apiName:string):Ref<AilyKnowledgeDatatableBuilder>
+			title(title:string):Ref<AilyKnowledgeDatatableBuilder>
+			build():Ref<AilyKnowledgeDatatable>
+	}
+	export interface AilyKnowledgeDocs extends Struct<AilyKnowledgeDocs>{
+
+			title:Ref<string>
+			type:Ref<string>
+			token:Ref<string>
+			url:Ref<string>
+	}
+	export interface AilyKnowledgeDocsBuilder extends Struct<AilyKnowledgeDocsBuilder>{
+
+			title(title:string):Ref<AilyKnowledgeDocsBuilder>
+			type(type_:string):Ref<AilyKnowledgeDocsBuilder>
+			token(token:string):Ref<AilyKnowledgeDocsBuilder>
+			url(url:string):Ref<AilyKnowledgeDocsBuilder>
+			build():Ref<AilyKnowledgeDocs>
+	}
+	export interface AilyKnowledgeFile extends Struct<AilyKnowledgeFile>{
+
+			title:Ref<string>
+			mimeType:Ref<string>
+			content:Ref<string>
+			sourceUrl:Ref<string>
+	}
+	export interface AilyKnowledgeFileBuilder extends Struct<AilyKnowledgeFileBuilder>{
+
+			title(title:string):Ref<AilyKnowledgeFileBuilder>
+			mimeType(mimeType:string):Ref<AilyKnowledgeFileBuilder>
+			content(content:string):Ref<AilyKnowledgeFileBuilder>
+			sourceUrl(sourceUrl:string):Ref<AilyKnowledgeFileBuilder>
+			build():Ref<AilyKnowledgeFile>
+	}
+	export interface AilyKnowledgeFolder extends Struct<AilyKnowledgeFolder>{
+
+			title:Ref<string>
+			token:Ref<string>
+			url:Ref<string>
+	}
+	export interface AilyKnowledgeFolderBuilder extends Struct<AilyKnowledgeFolderBuilder>{
+
+			title(title:string):Ref<AilyKnowledgeFolderBuilder>
+			token(token:string):Ref<AilyKnowledgeFolderBuilder>
+			url(url:string):Ref<AilyKnowledgeFolderBuilder>
+			build():Ref<AilyKnowledgeFolder>
+	}
+	export interface AilyKnowledgeHelpdesk extends Struct<AilyKnowledgeHelpdesk>{
+
+			helpdeskId:Ref<string>
+			title:Ref<string>
+	}
+	export interface AilyKnowledgeHelpdeskBuilder extends Struct<AilyKnowledgeHelpdeskBuilder>{
+
+			helpdeskId(helpdeskId:string):Ref<AilyKnowledgeHelpdeskBuilder>
+			title(title:string):Ref<AilyKnowledgeHelpdeskBuilder>
+			build():Ref<AilyKnowledgeHelpdesk>
+	}
+	export interface AilyKnowledgeWeb extends Struct<AilyKnowledgeWeb>{
+
+			url:Ref<string>
+			title:Ref<string>
+	}
+	export interface AilyKnowledgeWebBuilder extends Struct<AilyKnowledgeWebBuilder>{
+
+			url(url:string):Ref<AilyKnowledgeWebBuilder>
+			title(title:string):Ref<AilyKnowledgeWebBuilder>
+			build():Ref<AilyKnowledgeWeb>
+	}
+	export interface AilyKnowledgeWikiSpace extends Struct<AilyKnowledgeWikiSpace>{
+
+			title:Ref<string>
+			spaceId:Ref<string>
+			subDocs:Ref<AilyKnowledgeDocs>[]
+	}
+	export interface AilyKnowledgeWikiSpaceBuilder extends Struct<AilyKnowledgeWikiSpaceBuilder>{
+
+			title(title:string):Ref<AilyKnowledgeWikiSpaceBuilder>
+			spaceId(spaceId:string):Ref<AilyKnowledgeWikiSpaceBuilder>
+			subDocs(subDocs:Ref<AilyKnowledgeDocs>[]):Ref<AilyKnowledgeWikiSpaceBuilder>
+			build():Ref<AilyKnowledgeWikiSpace>
+	}
 	export interface AilyMention extends Struct<AilyMention>{
 
 			entityId:Ref<string>
@@ -63,6 +163,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/aily/v1'{
 			fileName:Ref<string>
 			metadata:Ref<string>
 			createdAt:Ref<string>
+			previewUrl:Ref<AilyMessageFilePreview>
 	}
 	export interface AilyMessageFileBuilder extends Struct<AilyMessageFileBuilder>{
 
@@ -71,7 +172,28 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/aily/v1'{
 			fileName(fileName:string):Ref<AilyMessageFileBuilder>
 			metadata(metadata:string):Ref<AilyMessageFileBuilder>
 			createdAt(createdAt:string):Ref<AilyMessageFileBuilder>
+			previewUrl(previewUrl:Ref<AilyMessageFilePreview>):Ref<AilyMessageFileBuilder>
 			build():Ref<AilyMessageFile>
+	}
+	export interface AilyMessageFileFilter extends Struct<AilyMessageFileFilter>{
+
+			withPreviewUrl:Ref<bool>
+	}
+	export interface AilyMessageFileFilterBuilder extends Struct<AilyMessageFileFilterBuilder>{
+
+			withPreviewUrl(withPreviewUrl:bool):Ref<AilyMessageFileFilterBuilder>
+			build():Ref<AilyMessageFileFilter>
+	}
+	export interface AilyMessageFilePreview extends Struct<AilyMessageFilePreview>{
+
+			url:Ref<string>
+			expiredAt:Ref<string>
+	}
+	export interface AilyMessageFilePreviewBuilder extends Struct<AilyMessageFilePreviewBuilder>{
+
+			url(url:string):Ref<AilyMessageFilePreviewBuilder>
+			expiredAt(expiredAt:string):Ref<AilyMessageFilePreviewBuilder>
+			build():Ref<AilyMessageFilePreview>
 	}
 	export interface AilyMessageFilter extends Struct<AilyMessageFilter>{
 
@@ -492,6 +614,47 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/aily/v1'{
 			authenticationType(authenticationType:string):Ref<KctxBuilder>
 			build():Ref<Kctx>
 	}
+	export interface Knowledge extends Struct<Knowledge>{
+
+			id:Ref<string>
+			knowledgeBaseId:Ref<string>
+			status:Ref<string>
+			title:Ref<string>
+			type:Ref<string>
+			file:Ref<AilyKnowledgeFile>
+			docs:Ref<AilyKnowledgeDocs>
+			wikiSpace:Ref<AilyKnowledgeWikiSpace>
+			folder:Ref<AilyKnowledgeFolder>
+			helpdesk:Ref<AilyKnowledgeHelpdesk>
+			datatable:Ref<AilyKnowledgeDatatable>
+			dataset:Ref<AilyKnowledgeDataset>
+			web:Ref<AilyKnowledgeWeb>
+			chunkCount:Ref<int>
+			createTime:Ref<int>
+			updateTime:Ref<int>
+			failMessage:Ref<string>
+	}
+	export interface KnowledgeBuilder extends Struct<KnowledgeBuilder>{
+
+			id(id:string):Ref<KnowledgeBuilder>
+			knowledgeBaseId(knowledgeBaseId:string):Ref<KnowledgeBuilder>
+			status(status:string):Ref<KnowledgeBuilder>
+			title(title:string):Ref<KnowledgeBuilder>
+			type(type_:string):Ref<KnowledgeBuilder>
+			file(file:Ref<AilyKnowledgeFile>):Ref<KnowledgeBuilder>
+			docs(docs:Ref<AilyKnowledgeDocs>):Ref<KnowledgeBuilder>
+			wikiSpace(wikiSpace:Ref<AilyKnowledgeWikiSpace>):Ref<KnowledgeBuilder>
+			folder(folder:Ref<AilyKnowledgeFolder>):Ref<KnowledgeBuilder>
+			helpdesk(helpdesk:Ref<AilyKnowledgeHelpdesk>):Ref<KnowledgeBuilder>
+			datatable(datatable:Ref<AilyKnowledgeDatatable>):Ref<KnowledgeBuilder>
+			dataset(dataset:Ref<AilyKnowledgeDataset>):Ref<KnowledgeBuilder>
+			web(web:Ref<AilyKnowledgeWeb>):Ref<KnowledgeBuilder>
+			chunkCount(chunkCount:int):Ref<KnowledgeBuilder>
+			createTime(createTime:int):Ref<KnowledgeBuilder>
+			updateTime(updateTime:int):Ref<KnowledgeBuilder>
+			failMessage(failMessage:string):Ref<KnowledgeBuilder>
+			build():Ref<Knowledge>
+	}
 	export interface ListAilySessionAilyMessageIterator extends Struct<ListAilySessionAilyMessageIterator>{
 
 			next():[bool,Ref<AilyMessage>]
@@ -628,11 +791,31 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/aily/v1'{
 	}
 	export function New(config:Ref<larkcore.Config>):Ref<V1>
 
+	export function newAilyKnowledgeDatasetBuilder():Ref<AilyKnowledgeDatasetBuilder>
+
+	export function newAilyKnowledgeDatatableBuilder():Ref<AilyKnowledgeDatatableBuilder>
+
+	export function newAilyKnowledgeDocsBuilder():Ref<AilyKnowledgeDocsBuilder>
+
+	export function newAilyKnowledgeFileBuilder():Ref<AilyKnowledgeFileBuilder>
+
+	export function newAilyKnowledgeFolderBuilder():Ref<AilyKnowledgeFolderBuilder>
+
+	export function newAilyKnowledgeHelpdeskBuilder():Ref<AilyKnowledgeHelpdeskBuilder>
+
+	export function newAilyKnowledgeWebBuilder():Ref<AilyKnowledgeWebBuilder>
+
+	export function newAilyKnowledgeWikiSpaceBuilder():Ref<AilyKnowledgeWikiSpaceBuilder>
+
 	export function newAilyMentionBuilder():Ref<AilyMentionBuilder>
 
 	export function newAilyMessageBuilder():Ref<AilyMessageBuilder>
 
 	export function newAilyMessageFileBuilder():Ref<AilyMessageFileBuilder>
+
+	export function newAilyMessageFileFilterBuilder():Ref<AilyMessageFileFilterBuilder>
+
+	export function newAilyMessageFilePreviewBuilder():Ref<AilyMessageFilePreviewBuilder>
 
 	export function newAilyMessageFilterBuilder():Ref<AilyMessageFilterBuilder>
 
@@ -684,6 +867,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/aily/v1'{
 
 	export function newKctxBuilder():Ref<KctxBuilder>
 
+	export function newKnowledgeBuilder():Ref<KnowledgeBuilder>
+
 	export function newListAilySessionAilyMessageReqBuilder():Ref<ListAilySessionAilyMessageReqBuilder>
 
 	export function newListAilySessionRunReqBuilder():Ref<ListAilySessionRunReqBuilder>
@@ -723,6 +908,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/aily/v1'{
 	export function newSkillInstanceBuilder():Ref<SkillInstanceBuilder>
 
 	export function newSourceSettingBuilder():Ref<SourceSettingBuilder>
+
+	export function newSuggestionBuilder():Ref<SuggestionBuilder>
 
 	export function newTableBuilder():Ref<TableBuilder>
 
@@ -784,7 +971,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/aily/v1'{
 			code:Ref<string>
 			message:Ref<string>
 	}
-	export interface RecordErrorBuilder extends Error,Struct<RecordErrorBuilder>{
+	export interface RecordErrorBuilder extends Struct<RecordErrorBuilder>,Error{
 
 			code(code:string):Ref<RecordErrorBuilder>
 			message(message:string):Ref<RecordErrorBuilder>
@@ -846,7 +1033,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/aily/v1'{
 			code:Ref<string>
 			message:Ref<string>
 	}
-	export interface RunErrorBuilder extends Error,Struct<RunErrorBuilder>{
+	export interface RunErrorBuilder extends Struct<RunErrorBuilder>,Error{
 
 			code(code:string):Ref<RunErrorBuilder>
 			message(message:string):Ref<RunErrorBuilder>
@@ -960,6 +1147,17 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/aily/v1'{
 			dataSourceIntegrationType(dataSourceIntegrationType:string):Ref<SourceSettingBuilder>
 			build():Ref<SourceSetting>
 	}
+	export interface Suggestion extends Struct<Suggestion>{
+
+			content:Ref<string>
+			skillId:Ref<string>
+	}
+	export interface SuggestionBuilder extends Struct<SuggestionBuilder>{
+
+			content(content:string):Ref<SuggestionBuilder>
+			skillId(skillId:string):Ref<SuggestionBuilder>
+			build():Ref<Suggestion>
+	}
 	export interface Table extends Struct<Table>{
 
 			tableType:Ref<string>
@@ -1042,202 +1240,302 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/aily/v1'{
 				listByIterator(ctx:context.Context,req:Ref<ListAilySessionRunReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListAilySessionRunIterator>
 			}>
 	}
-	export function emptyListAilySessionAilyMessageReq():ListAilySessionAilyMessageReq
-	export function emptyRefListAilySessionAilyMessageReq():Ref<ListAilySessionAilyMessageReq>
-	export function refOfListAilySessionAilyMessageReq(x:ListAilySessionAilyMessageReq,v:Ref<ListAilySessionAilyMessageReq>)
-	export function unRefListAilySessionAilyMessageReq(v:Ref<ListAilySessionAilyMessageReq>):ListAilySessionAilyMessageReq
-	export function emptyDeleteAilySessionResp():DeleteAilySessionResp
-	export function emptyRefDeleteAilySessionResp():Ref<DeleteAilySessionResp>
-	export function refOfDeleteAilySessionResp(x:DeleteAilySessionResp,v:Ref<DeleteAilySessionResp>)
-	export function unRefDeleteAilySessionResp(v:Ref<DeleteAilySessionResp>):DeleteAilySessionResp
 	export function emptyCreateAilySessionRunResp():CreateAilySessionRunResp
 	export function emptyRefCreateAilySessionRunResp():Ref<CreateAilySessionRunResp>
 	export function refOfCreateAilySessionRunResp(x:CreateAilySessionRunResp,v:Ref<CreateAilySessionRunResp>)
 	export function unRefCreateAilySessionRunResp(v:Ref<CreateAilySessionRunResp>):CreateAilySessionRunResp
-	export function emptyCreateAilySessionAilyMessageResp():CreateAilySessionAilyMessageResp
-	export function emptyRefCreateAilySessionAilyMessageResp():Ref<CreateAilySessionAilyMessageResp>
-	export function refOfCreateAilySessionAilyMessageResp(x:CreateAilySessionAilyMessageResp,v:Ref<CreateAilySessionAilyMessageResp>)
-	export function unRefCreateAilySessionAilyMessageResp(v:Ref<CreateAilySessionAilyMessageResp>):CreateAilySessionAilyMessageResp
-	export function emptyDatasetSource():DatasetSource
-	export function emptyRefDatasetSource():Ref<DatasetSource>
-	export function refOfDatasetSource(x:DatasetSource,v:Ref<DatasetSource>)
-	export function unRefDatasetSource(v:Ref<DatasetSource>):DatasetSource
-	export function emptyDeleteAilySessionReq():DeleteAilySessionReq
-	export function emptyRefDeleteAilySessionReq():Ref<DeleteAilySessionReq>
-	export function refOfDeleteAilySessionReq(x:DeleteAilySessionReq,v:Ref<DeleteAilySessionReq>)
-	export function unRefDeleteAilySessionReq(v:Ref<DeleteAilySessionReq>):DeleteAilySessionReq
-	export function emptyListAilySessionRunIterator():ListAilySessionRunIterator
-	export function emptyRefListAilySessionRunIterator():Ref<ListAilySessionRunIterator>
-	export function refOfListAilySessionRunIterator(x:ListAilySessionRunIterator,v:Ref<ListAilySessionRunIterator>)
-	export function unRefListAilySessionRunIterator(v:Ref<ListAilySessionRunIterator>):ListAilySessionRunIterator
-	export function emptyListAilySessionRunReq():ListAilySessionRunReq
-	export function emptyRefListAilySessionRunReq():Ref<ListAilySessionRunReq>
-	export function refOfListAilySessionRunReq(x:ListAilySessionRunReq,v:Ref<ListAilySessionRunReq>)
-	export function unRefListAilySessionRunReq(v:Ref<ListAilySessionRunReq>):ListAilySessionRunReq
-	export function emptyCreateAilySessionAilyMessageRespData():CreateAilySessionAilyMessageRespData
-	export function emptyRefCreateAilySessionAilyMessageRespData():Ref<CreateAilySessionAilyMessageRespData>
-	export function refOfCreateAilySessionAilyMessageRespData(x:CreateAilySessionAilyMessageRespData,v:Ref<CreateAilySessionAilyMessageRespData>)
-	export function unRefCreateAilySessionAilyMessageRespData(v:Ref<CreateAilySessionAilyMessageRespData>):CreateAilySessionAilyMessageRespData
-	export function emptyCreateAilySessionRunReqBody():CreateAilySessionRunReqBody
-	export function emptyRefCreateAilySessionRunReqBody():Ref<CreateAilySessionRunReqBody>
-	export function refOfCreateAilySessionRunReqBody(x:CreateAilySessionRunReqBody,v:Ref<CreateAilySessionRunReqBody>)
-	export function unRefCreateAilySessionRunReqBody(v:Ref<CreateAilySessionRunReqBody>):CreateAilySessionRunReqBody
-	export function emptyUpdateAilySessionReqBody():UpdateAilySessionReqBody
-	export function emptyRefUpdateAilySessionReqBody():Ref<UpdateAilySessionReqBody>
-	export function refOfUpdateAilySessionReqBody(x:UpdateAilySessionReqBody,v:Ref<UpdateAilySessionReqBody>)
-	export function unRefUpdateAilySessionReqBody(v:Ref<UpdateAilySessionReqBody>):UpdateAilySessionReqBody
-	export function emptyDepartmentId():DepartmentId
-	export function emptyRefDepartmentId():Ref<DepartmentId>
-	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
-	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptyFieldSetting():FieldSetting
-	export function emptyRefFieldSetting():Ref<FieldSetting>
-	export function refOfFieldSetting(x:FieldSetting,v:Ref<FieldSetting>)
-	export function unRefFieldSetting(v:Ref<FieldSetting>):FieldSetting
-	export function emptyGetAilySessionRespData():GetAilySessionRespData
-	export function emptyRefGetAilySessionRespData():Ref<GetAilySessionRespData>
-	export function refOfGetAilySessionRespData(x:GetAilySessionRespData,v:Ref<GetAilySessionRespData>)
-	export function unRefGetAilySessionRespData(v:Ref<GetAilySessionRespData>):GetAilySessionRespData
-	export function emptyUpdateAilySessionResp():UpdateAilySessionResp
-	export function emptyRefUpdateAilySessionResp():Ref<UpdateAilySessionResp>
-	export function refOfUpdateAilySessionResp(x:UpdateAilySessionResp,v:Ref<UpdateAilySessionResp>)
-	export function unRefUpdateAilySessionResp(v:Ref<UpdateAilySessionResp>):UpdateAilySessionResp
-	export function emptySkillCall():SkillCall
-	export function emptyRefSkillCall():Ref<SkillCall>
-	export function refOfSkillCall(x:SkillCall,v:Ref<SkillCall>)
-	export function unRefSkillCall(v:Ref<SkillCall>):SkillCall
-	export function emptySkillInstance():SkillInstance
-	export function emptyRefSkillInstance():Ref<SkillInstance>
-	export function refOfSkillInstance(x:SkillInstance,v:Ref<SkillInstance>)
-	export function unRefSkillInstance(v:Ref<SkillInstance>):SkillInstance
+	export function emptyGetAilySessionRunReq():GetAilySessionRunReq
+	export function emptyRefGetAilySessionRunReq():Ref<GetAilySessionRunReq>
+	export function refOfGetAilySessionRunReq(x:GetAilySessionRunReq,v:Ref<GetAilySessionRunReq>)
+	export function unRefGetAilySessionRunReq(v:Ref<GetAilySessionRunReq>):GetAilySessionRunReq
+	export function emptyV1():V1
+	export function emptyRefV1():Ref<V1>
+	export function refOfV1(x:V1,v:Ref<V1>)
+	export function unRefV1(v:Ref<V1>):V1
+	export function emptyDeleteAilySessionResp():DeleteAilySessionResp
+	export function emptyRefDeleteAilySessionResp():Ref<DeleteAilySessionResp>
+	export function refOfDeleteAilySessionResp(x:DeleteAilySessionResp,v:Ref<DeleteAilySessionResp>)
+	export function unRefDeleteAilySessionResp(v:Ref<DeleteAilySessionResp>):DeleteAilySessionResp
 	export function emptyGetAilySessionRunResp():GetAilySessionRunResp
 	export function emptyRefGetAilySessionRunResp():Ref<GetAilySessionRunResp>
 	export function refOfGetAilySessionRunResp(x:GetAilySessionRunResp,v:Ref<GetAilySessionRunResp>)
 	export function unRefGetAilySessionRunResp(v:Ref<GetAilySessionRunResp>):GetAilySessionRunResp
-	export function emptyRun():Run
-	export function emptyRefRun():Ref<Run>
-	export function refOfRun(x:Run,v:Ref<Run>)
-	export function unRefRun(v:Ref<Run>):Run
-	export function emptyMessageProgress():MessageProgress
-	export function emptyRefMessageProgress():Ref<MessageProgress>
-	export function refOfMessageProgress(x:MessageProgress,v:Ref<MessageProgress>)
-	export function unRefMessageProgress(v:Ref<MessageProgress>):MessageProgress
-	export function emptySkillBaseInfo():SkillBaseInfo
-	export function emptyRefSkillBaseInfo():Ref<SkillBaseInfo>
-	export function refOfSkillBaseInfo(x:SkillBaseInfo,v:Ref<SkillBaseInfo>)
-	export function unRefSkillBaseInfo(v:Ref<SkillBaseInfo>):SkillBaseInfo
-	export function emptyAilyMention():AilyMention
-	export function emptyRefAilyMention():Ref<AilyMention>
-	export function refOfAilyMention(x:AilyMention,v:Ref<AilyMention>)
-	export function unRefAilyMention(v:Ref<AilyMention>):AilyMention
-	export function emptyField():Field
-	export function emptyRefField():Ref<Field>
-	export function refOfField(x:Field,v:Ref<Field>)
-	export function unRefField(v:Ref<Field>):Field
-	export function emptyGetAilySessionAilyMessageRespData():GetAilySessionAilyMessageRespData
-	export function emptyRefGetAilySessionAilyMessageRespData():Ref<GetAilySessionAilyMessageRespData>
-	export function refOfGetAilySessionAilyMessageRespData(x:GetAilySessionAilyMessageRespData,v:Ref<GetAilySessionAilyMessageRespData>)
-	export function unRefGetAilySessionAilyMessageRespData(v:Ref<GetAilySessionAilyMessageRespData>):GetAilySessionAilyMessageRespData
-	export function emptyCreateAilySessionAilyMessageReq():CreateAilySessionAilyMessageReq
-	export function emptyRefCreateAilySessionAilyMessageReq():Ref<CreateAilySessionAilyMessageReq>
-	export function refOfCreateAilySessionAilyMessageReq(x:CreateAilySessionAilyMessageReq,v:Ref<CreateAilySessionAilyMessageReq>)
-	export function unRefCreateAilySessionAilyMessageReq(v:Ref<CreateAilySessionAilyMessageReq>):CreateAilySessionAilyMessageReq
-	export function emptyCreateAilySessionRunReq():CreateAilySessionRunReq
-	export function emptyRefCreateAilySessionRunReq():Ref<CreateAilySessionRunReq>
-	export function refOfCreateAilySessionRunReq(x:CreateAilySessionRunReq,v:Ref<CreateAilySessionRunReq>)
-	export function unRefCreateAilySessionRunReq(v:Ref<CreateAilySessionRunReq>):CreateAilySessionRunReq
-	export function emptyListAilySessionAilyMessageIterator():ListAilySessionAilyMessageIterator
-	export function emptyRefListAilySessionAilyMessageIterator():Ref<ListAilySessionAilyMessageIterator>
-	export function refOfListAilySessionAilyMessageIterator(x:ListAilySessionAilyMessageIterator,v:Ref<ListAilySessionAilyMessageIterator>)
-	export function unRefListAilySessionAilyMessageIterator(v:Ref<ListAilySessionAilyMessageIterator>):ListAilySessionAilyMessageIterator
-	export function emptyTable():Table
-	export function emptyRefTable():Ref<Table>
-	export function refOfTable(x:Table,v:Ref<Table>)
-	export function unRefTable(v:Ref<Table>):Table
-	export function emptyAilyMessageFile():AilyMessageFile
-	export function emptyRefAilyMessageFile():Ref<AilyMessageFile>
-	export function refOfAilyMessageFile(x:AilyMessageFile,v:Ref<AilyMessageFile>)
-	export function unRefAilyMessageFile(v:Ref<AilyMessageFile>):AilyMessageFile
-	export function emptyCancelAilySessionRunRespData():CancelAilySessionRunRespData
-	export function emptyRefCancelAilySessionRunRespData():Ref<CancelAilySessionRunRespData>
-	export function refOfCancelAilySessionRunRespData(x:CancelAilySessionRunRespData,v:Ref<CancelAilySessionRunRespData>)
-	export function unRefCancelAilySessionRunRespData(v:Ref<CancelAilySessionRunRespData>):CancelAilySessionRunRespData
-	export function emptyCreateAilySessionResp():CreateAilySessionResp
-	export function emptyRefCreateAilySessionResp():Ref<CreateAilySessionResp>
-	export function refOfCreateAilySessionResp(x:CreateAilySessionResp,v:Ref<CreateAilySessionResp>)
-	export function unRefCreateAilySessionResp(v:Ref<CreateAilySessionResp>):CreateAilySessionResp
-	export function emptyApp():App
-	export function emptyRefApp():Ref<App>
-	export function refOfApp(x:App,v:Ref<App>)
-	export function unRefApp(v:Ref<App>):App
-	export function emptyListAilySessionRunResp():ListAilySessionRunResp
-	export function emptyRefListAilySessionRunResp():Ref<ListAilySessionRunResp>
-	export function refOfListAilySessionRunResp(x:ListAilySessionRunResp,v:Ref<ListAilySessionRunResp>)
-	export function unRefListAilySessionRunResp(v:Ref<ListAilySessionRunResp>):ListAilySessionRunResp
-	export function emptySession():Session
-	export function emptyRefSession():Ref<Session>
-	export function refOfSession(x:Session,v:Ref<Session>)
-	export function unRefSession(v:Ref<Session>):Session
-	export function emptyRecordResult():RecordResult
-	export function emptyRefRecordResult():Ref<RecordResult>
-	export function refOfRecordResult(x:RecordResult,v:Ref<RecordResult>)
-	export function unRefRecordResult(v:Ref<RecordResult>):RecordResult
-	export function emptyIntent():Intent
-	export function emptyRefIntent():Ref<Intent>
-	export function refOfIntent(x:Intent,v:Ref<Intent>)
-	export function unRefIntent(v:Ref<Intent>):Intent
-	export function emptyMessageWithOperation():MessageWithOperation
-	export function emptyRefMessageWithOperation():Ref<MessageWithOperation>
-	export function refOfMessageWithOperation(x:MessageWithOperation,v:Ref<MessageWithOperation>)
-	export function unRefMessageWithOperation(v:Ref<MessageWithOperation>):MessageWithOperation
-	export function emptyListAilySessionAilyMessageResp():ListAilySessionAilyMessageResp
-	export function emptyRefListAilySessionAilyMessageResp():Ref<ListAilySessionAilyMessageResp>
-	export function refOfListAilySessionAilyMessageResp(x:ListAilySessionAilyMessageResp,v:Ref<ListAilySessionAilyMessageResp>)
-	export function unRefListAilySessionAilyMessageResp(v:Ref<ListAilySessionAilyMessageResp>):ListAilySessionAilyMessageResp
-	export function emptyAilyMessage():AilyMessage
-	export function emptyRefAilyMessage():Ref<AilyMessage>
-	export function refOfAilyMessage(x:AilyMessage,v:Ref<AilyMessage>)
-	export function unRefAilyMessage(v:Ref<AilyMessage>):AilyMessage
-	export function emptyBuiltinAction():BuiltinAction
-	export function emptyRefBuiltinAction():Ref<BuiltinAction>
-	export function refOfBuiltinAction(x:BuiltinAction,v:Ref<BuiltinAction>)
-	export function unRefBuiltinAction(v:Ref<BuiltinAction>):BuiltinAction
-	export function emptyUpdateAilySessionReq():UpdateAilySessionReq
-	export function emptyRefUpdateAilySessionReq():Ref<UpdateAilySessionReq>
-	export function refOfUpdateAilySessionReq(x:UpdateAilySessionReq,v:Ref<UpdateAilySessionReq>)
-	export function unRefUpdateAilySessionReq(v:Ref<UpdateAilySessionReq>):UpdateAilySessionReq
+	export function emptyCancelAilySessionRunReq():CancelAilySessionRunReq
+	export function emptyRefCancelAilySessionRunReq():Ref<CancelAilySessionRunReq>
+	export function refOfCancelAilySessionRunReq(x:CancelAilySessionRunReq,v:Ref<CancelAilySessionRunReq>)
+	export function unRefCancelAilySessionRunReq(v:Ref<CancelAilySessionRunReq>):CancelAilySessionRunReq
 	export function emptyCreateAilySessionRunRespData():CreateAilySessionRunRespData
 	export function emptyRefCreateAilySessionRunRespData():Ref<CreateAilySessionRunRespData>
 	export function refOfCreateAilySessionRunRespData(x:CreateAilySessionRunRespData,v:Ref<CreateAilySessionRunRespData>)
 	export function unRefCreateAilySessionRunRespData(v:Ref<CreateAilySessionRunRespData>):CreateAilySessionRunRespData
-	export function emptyGetAilySessionReq():GetAilySessionReq
-	export function emptyRefGetAilySessionReq():Ref<GetAilySessionReq>
-	export function refOfGetAilySessionReq(x:GetAilySessionReq,v:Ref<GetAilySessionReq>)
-	export function unRefGetAilySessionReq(v:Ref<GetAilySessionReq>):GetAilySessionReq
-	export function emptyRecordQueryOption():RecordQueryOption
-	export function emptyRefRecordQueryOption():Ref<RecordQueryOption>
-	export function refOfRecordQueryOption(x:RecordQueryOption,v:Ref<RecordQueryOption>)
-	export function unRefRecordQueryOption(v:Ref<RecordQueryOption>):RecordQueryOption
-	export function emptyCreateAilySessionRespData():CreateAilySessionRespData
-	export function emptyRefCreateAilySessionRespData():Ref<CreateAilySessionRespData>
-	export function refOfCreateAilySessionRespData(x:CreateAilySessionRespData,v:Ref<CreateAilySessionRespData>)
-	export function unRefCreateAilySessionRespData(v:Ref<CreateAilySessionRespData>):CreateAilySessionRespData
-	export function emptyListAilySessionAilyMessageRespData():ListAilySessionAilyMessageRespData
-	export function emptyRefListAilySessionAilyMessageRespData():Ref<ListAilySessionAilyMessageRespData>
-	export function refOfListAilySessionAilyMessageRespData(x:ListAilySessionAilyMessageRespData,v:Ref<ListAilySessionAilyMessageRespData>)
-	export function unRefListAilySessionAilyMessageRespData(v:Ref<ListAilySessionAilyMessageRespData>):ListAilySessionAilyMessageRespData
-	export function emptyOrderCondition():OrderCondition
-	export function emptyRefOrderCondition():Ref<OrderCondition>
-	export function refOfOrderCondition(x:OrderCondition,v:Ref<OrderCondition>)
-	export function unRefOrderCondition(v:Ref<OrderCondition>):OrderCondition
-	export function emptyGetAilySessionAilyMessageReq():GetAilySessionAilyMessageReq
-	export function emptyRefGetAilySessionAilyMessageReq():Ref<GetAilySessionAilyMessageReq>
-	export function refOfGetAilySessionAilyMessageReq(x:GetAilySessionAilyMessageReq,v:Ref<GetAilySessionAilyMessageReq>)
-	export function unRefGetAilySessionAilyMessageReq(v:Ref<GetAilySessionAilyMessageReq>):GetAilySessionAilyMessageReq
+	export function emptyField():Field
+	export function emptyRefField():Ref<Field>
+	export function refOfField(x:Field,v:Ref<Field>)
+	export function unRefField(v:Ref<Field>):Field
+	export function emptyObjectSetting():ObjectSetting
+	export function emptyRefObjectSetting():Ref<ObjectSetting>
+	export function refOfObjectSetting(x:ObjectSetting,v:Ref<ObjectSetting>)
+	export function unRefObjectSetting(v:Ref<ObjectSetting>):ObjectSetting
+	export function emptyAilyMessageFilePreview():AilyMessageFilePreview
+	export function emptyRefAilyMessageFilePreview():Ref<AilyMessageFilePreview>
+	export function refOfAilyMessageFilePreview(x:AilyMessageFilePreview,v:Ref<AilyMessageFilePreview>)
+	export function unRefAilyMessageFilePreview(v:Ref<AilyMessageFilePreview>):AilyMessageFilePreview
+	export function emptyListAilySessionAilyMessageReq():ListAilySessionAilyMessageReq
+	export function emptyRefListAilySessionAilyMessageReq():Ref<ListAilySessionAilyMessageReq>
+	export function refOfListAilySessionAilyMessageReq(x:ListAilySessionAilyMessageReq,v:Ref<ListAilySessionAilyMessageReq>)
+	export function unRefListAilySessionAilyMessageReq(v:Ref<ListAilySessionAilyMessageReq>):ListAilySessionAilyMessageReq
+	export function emptyAilyMessageFilter():AilyMessageFilter
+	export function emptyRefAilyMessageFilter():Ref<AilyMessageFilter>
+	export function refOfAilyMessageFilter(x:AilyMessageFilter,v:Ref<AilyMessageFilter>)
+	export function unRefAilyMessageFilter(v:Ref<AilyMessageFilter>):AilyMessageFilter
+	export function emptyKnowledge():Knowledge
+	export function emptyRefKnowledge():Ref<Knowledge>
+	export function refOfKnowledge(x:Knowledge,v:Ref<Knowledge>)
+	export function unRefKnowledge(v:Ref<Knowledge>):Knowledge
+	export function emptyAilyKnowledgeWeb():AilyKnowledgeWeb
+	export function emptyRefAilyKnowledgeWeb():Ref<AilyKnowledgeWeb>
+	export function refOfAilyKnowledgeWeb(x:AilyKnowledgeWeb,v:Ref<AilyKnowledgeWeb>)
+	export function unRefAilyKnowledgeWeb(v:Ref<AilyKnowledgeWeb>):AilyKnowledgeWeb
+	export function emptyApp():App
+	export function emptyRefApp():Ref<App>
+	export function refOfApp(x:App,v:Ref<App>)
+	export function unRefApp(v:Ref<App>):App
+	export function emptyMessageProgress():MessageProgress
+	export function emptyRefMessageProgress():Ref<MessageProgress>
+	export function refOfMessageProgress(x:MessageProgress,v:Ref<MessageProgress>)
+	export function unRefMessageProgress(v:Ref<MessageProgress>):MessageProgress
+	export function emptyUpdateAilySessionReqBody():UpdateAilySessionReqBody
+	export function emptyRefUpdateAilySessionReqBody():Ref<UpdateAilySessionReqBody>
+	export function refOfUpdateAilySessionReqBody(x:UpdateAilySessionReqBody,v:Ref<UpdateAilySessionReqBody>)
+	export function unRefUpdateAilySessionReqBody(v:Ref<UpdateAilySessionReqBody>):UpdateAilySessionReqBody
+	export function emptyAilyKnowledgeWikiSpace():AilyKnowledgeWikiSpace
+	export function emptyRefAilyKnowledgeWikiSpace():Ref<AilyKnowledgeWikiSpace>
+	export function refOfAilyKnowledgeWikiSpace(x:AilyKnowledgeWikiSpace,v:Ref<AilyKnowledgeWikiSpace>)
+	export function unRefAilyKnowledgeWikiSpace(v:Ref<AilyKnowledgeWikiSpace>):AilyKnowledgeWikiSpace
+	export function emptyListAilySessionAilyMessageResp():ListAilySessionAilyMessageResp
+	export function emptyRefListAilySessionAilyMessageResp():Ref<ListAilySessionAilyMessageResp>
+	export function refOfListAilySessionAilyMessageResp(x:ListAilySessionAilyMessageResp,v:Ref<ListAilySessionAilyMessageResp>)
+	export function unRefListAilySessionAilyMessageResp(v:Ref<ListAilySessionAilyMessageResp>):ListAilySessionAilyMessageResp
+	export function emptyRun():Run
+	export function emptyRefRun():Ref<Run>
+	export function refOfRun(x:Run,v:Ref<Run>)
+	export function unRefRun(v:Ref<Run>):Run
+	export function emptyAilyMention():AilyMention
+	export function emptyRefAilyMention():Ref<AilyMention>
+	export function refOfAilyMention(x:AilyMention,v:Ref<AilyMention>)
+	export function unRefAilyMention(v:Ref<AilyMention>):AilyMention
+	export function emptyListAilySessionRunResp():ListAilySessionRunResp
+	export function emptyRefListAilySessionRunResp():Ref<ListAilySessionRunResp>
+	export function refOfListAilySessionRunResp(x:ListAilySessionRunResp,v:Ref<ListAilySessionRunResp>)
+	export function unRefListAilySessionRunResp(v:Ref<ListAilySessionRunResp>):ListAilySessionRunResp
+	export function emptyRecordResult():RecordResult
+	export function emptyRefRecordResult():Ref<RecordResult>
+	export function refOfRecordResult(x:RecordResult,v:Ref<RecordResult>)
+	export function unRefRecordResult(v:Ref<RecordResult>):RecordResult
+	export function emptyAilyKnowledgeFile():AilyKnowledgeFile
+	export function emptyRefAilyKnowledgeFile():Ref<AilyKnowledgeFile>
+	export function refOfAilyKnowledgeFile(x:AilyKnowledgeFile,v:Ref<AilyKnowledgeFile>)
+	export function unRefAilyKnowledgeFile(v:Ref<AilyKnowledgeFile>):AilyKnowledgeFile
+	export function emptyUpdateAilySessionReq():UpdateAilySessionReq
+	export function emptyRefUpdateAilySessionReq():Ref<UpdateAilySessionReq>
+	export function refOfUpdateAilySessionReq(x:UpdateAilySessionReq,v:Ref<UpdateAilySessionReq>)
+	export function unRefUpdateAilySessionReq(v:Ref<UpdateAilySessionReq>):UpdateAilySessionReq
+	export function emptyListAilySessionRunIterator():ListAilySessionRunIterator
+	export function emptyRefListAilySessionRunIterator():Ref<ListAilySessionRunIterator>
+	export function refOfListAilySessionRunIterator(x:ListAilySessionRunIterator,v:Ref<ListAilySessionRunIterator>)
+	export function unRefListAilySessionRunIterator(v:Ref<ListAilySessionRunIterator>):ListAilySessionRunIterator
+	export function emptyListAilySessionAilyMessageIterator():ListAilySessionAilyMessageIterator
+	export function emptyRefListAilySessionAilyMessageIterator():Ref<ListAilySessionAilyMessageIterator>
+	export function refOfListAilySessionAilyMessageIterator(x:ListAilySessionAilyMessageIterator,v:Ref<ListAilySessionAilyMessageIterator>)
+	export function unRefListAilySessionAilyMessageIterator(v:Ref<ListAilySessionAilyMessageIterator>):ListAilySessionAilyMessageIterator
+	export function emptyAilySession():AilySession
+	export function emptyRefAilySession():Ref<AilySession>
+	export function refOfAilySession(x:AilySession,v:Ref<AilySession>)
+	export function unRefAilySession(v:Ref<AilySession>):AilySession
+	export function emptyCreateAilySessionAilyMessageResp():CreateAilySessionAilyMessageResp
+	export function emptyRefCreateAilySessionAilyMessageResp():Ref<CreateAilySessionAilyMessageResp>
+	export function refOfCreateAilySessionAilyMessageResp(x:CreateAilySessionAilyMessageResp,v:Ref<CreateAilySessionAilyMessageResp>)
+	export function unRefCreateAilySessionAilyMessageResp(v:Ref<CreateAilySessionAilyMessageResp>):CreateAilySessionAilyMessageResp
+	export function emptyGetAilySessionRespData():GetAilySessionRespData
+	export function emptyRefGetAilySessionRespData():Ref<GetAilySessionRespData>
+	export function refOfGetAilySessionRespData(x:GetAilySessionRespData,v:Ref<GetAilySessionRespData>)
+	export function unRefGetAilySessionRespData(v:Ref<GetAilySessionRespData>):GetAilySessionRespData
+	export function emptyUpdateAilySessionRespData():UpdateAilySessionRespData
+	export function emptyRefUpdateAilySessionRespData():Ref<UpdateAilySessionRespData>
+	export function refOfUpdateAilySessionRespData(x:UpdateAilySessionRespData,v:Ref<UpdateAilySessionRespData>)
+	export function unRefUpdateAilySessionRespData(v:Ref<UpdateAilySessionRespData>):UpdateAilySessionRespData
+	export function emptyBuiltinAction():BuiltinAction
+	export function emptyRefBuiltinAction():Ref<BuiltinAction>
+	export function refOfBuiltinAction(x:BuiltinAction,v:Ref<BuiltinAction>)
+	export function unRefBuiltinAction(v:Ref<BuiltinAction>):BuiltinAction
+	export function emptyCreateAilySessionRunReqBody():CreateAilySessionRunReqBody
+	export function emptyRefCreateAilySessionRunReqBody():Ref<CreateAilySessionRunReqBody>
+	export function refOfCreateAilySessionRunReqBody(x:CreateAilySessionRunReqBody,v:Ref<CreateAilySessionRunReqBody>)
+	export function unRefCreateAilySessionRunReqBody(v:Ref<CreateAilySessionRunReqBody>):CreateAilySessionRunReqBody
+	export function emptyDepartmentId():DepartmentId
+	export function emptyRefDepartmentId():Ref<DepartmentId>
+	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
+	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
+	export function emptyListAilySessionRunRespData():ListAilySessionRunRespData
+	export function emptyRefListAilySessionRunRespData():Ref<ListAilySessionRunRespData>
+	export function refOfListAilySessionRunRespData(x:ListAilySessionRunRespData,v:Ref<ListAilySessionRunRespData>)
+	export function unRefListAilySessionRunRespData(v:Ref<ListAilySessionRunRespData>):ListAilySessionRunRespData
+	export function emptyProgressItem():ProgressItem
+	export function emptyRefProgressItem():Ref<ProgressItem>
+	export function refOfProgressItem(x:ProgressItem,v:Ref<ProgressItem>)
+	export function unRefProgressItem(v:Ref<ProgressItem>):ProgressItem
+	export function emptyUpdateAilySessionResp():UpdateAilySessionResp
+	export function emptyRefUpdateAilySessionResp():Ref<UpdateAilySessionResp>
+	export function refOfUpdateAilySessionResp(x:UpdateAilySessionResp,v:Ref<UpdateAilySessionResp>)
+	export function unRefUpdateAilySessionResp(v:Ref<UpdateAilySessionResp>):UpdateAilySessionResp
+	export function emptyCreateAilySessionRunReq():CreateAilySessionRunReq
+	export function emptyRefCreateAilySessionRunReq():Ref<CreateAilySessionRunReq>
+	export function refOfCreateAilySessionRunReq(x:CreateAilySessionRunReq,v:Ref<CreateAilySessionRunReq>)
+	export function unRefCreateAilySessionRunReq(v:Ref<CreateAilySessionRunReq>):CreateAilySessionRunReq
+	export function emptyDeleteAilySessionReq():DeleteAilySessionReq
+	export function emptyRefDeleteAilySessionReq():Ref<DeleteAilySessionReq>
+	export function refOfDeleteAilySessionReq(x:DeleteAilySessionReq,v:Ref<DeleteAilySessionReq>)
+	export function unRefDeleteAilySessionReq(v:Ref<DeleteAilySessionReq>):DeleteAilySessionReq
+	export function emptyFieldSetting():FieldSetting
+	export function emptyRefFieldSetting():Ref<FieldSetting>
+	export function refOfFieldSetting(x:FieldSetting,v:Ref<FieldSetting>)
+	export function unRefFieldSetting(v:Ref<FieldSetting>):FieldSetting
 	export function emptyGetAilySessionRunRespData():GetAilySessionRunRespData
 	export function emptyRefGetAilySessionRunRespData():Ref<GetAilySessionRunRespData>
 	export function refOfGetAilySessionRunRespData(x:GetAilySessionRunRespData,v:Ref<GetAilySessionRunRespData>)
 	export function unRefGetAilySessionRunRespData(v:Ref<GetAilySessionRunRespData>):GetAilySessionRunRespData
+	export function emptyAilyKnowledgeDocs():AilyKnowledgeDocs
+	export function emptyRefAilyKnowledgeDocs():Ref<AilyKnowledgeDocs>
+	export function refOfAilyKnowledgeDocs(x:AilyKnowledgeDocs,v:Ref<AilyKnowledgeDocs>)
+	export function unRefAilyKnowledgeDocs(v:Ref<AilyKnowledgeDocs>):AilyKnowledgeDocs
+	export function emptyCreateAilySessionAilyMessageRespData():CreateAilySessionAilyMessageRespData
+	export function emptyRefCreateAilySessionAilyMessageRespData():Ref<CreateAilySessionAilyMessageRespData>
+	export function refOfCreateAilySessionAilyMessageRespData(x:CreateAilySessionAilyMessageRespData,v:Ref<CreateAilySessionAilyMessageRespData>)
+	export function unRefCreateAilySessionAilyMessageRespData(v:Ref<CreateAilySessionAilyMessageRespData>):CreateAilySessionAilyMessageRespData
+	export function emptySkillInstance():SkillInstance
+	export function emptyRefSkillInstance():Ref<SkillInstance>
+	export function refOfSkillInstance(x:SkillInstance,v:Ref<SkillInstance>)
+	export function unRefSkillInstance(v:Ref<SkillInstance>):SkillInstance
+	export function emptyAilyKnowledgeHelpdesk():AilyKnowledgeHelpdesk
+	export function emptyRefAilyKnowledgeHelpdesk():Ref<AilyKnowledgeHelpdesk>
+	export function refOfAilyKnowledgeHelpdesk(x:AilyKnowledgeHelpdesk,v:Ref<AilyKnowledgeHelpdesk>)
+	export function unRefAilyKnowledgeHelpdesk(v:Ref<AilyKnowledgeHelpdesk>):AilyKnowledgeHelpdesk
+	export function emptyOrderCondition():OrderCondition
+	export function emptyRefOrderCondition():Ref<OrderCondition>
+	export function refOfOrderCondition(x:OrderCondition,v:Ref<OrderCondition>)
+	export function unRefOrderCondition(v:Ref<OrderCondition>):OrderCondition
+	export function emptySender():Sender
+	export function emptyRefSender():Ref<Sender>
+	export function refOfSender(x:Sender,v:Ref<Sender>)
+	export function unRefSender(v:Ref<Sender>):Sender
+	export function emptyIntent():Intent
+	export function emptyRefIntent():Ref<Intent>
+	export function refOfIntent(x:Intent,v:Ref<Intent>)
+	export function unRefIntent(v:Ref<Intent>):Intent
+	export function emptySkillBaseInfo():SkillBaseInfo
+	export function emptyRefSkillBaseInfo():Ref<SkillBaseInfo>
+	export function refOfSkillBaseInfo(x:SkillBaseInfo,v:Ref<SkillBaseInfo>)
+	export function unRefSkillBaseInfo(v:Ref<SkillBaseInfo>):SkillBaseInfo
+	export function emptyAilyMessage():AilyMessage
+	export function emptyRefAilyMessage():Ref<AilyMessage>
+	export function refOfAilyMessage(x:AilyMessage,v:Ref<AilyMessage>)
+	export function unRefAilyMessage(v:Ref<AilyMessage>):AilyMessage
+	export function emptySkillCall():SkillCall
+	export function emptyRefSkillCall():Ref<SkillCall>
+	export function refOfSkillCall(x:SkillCall,v:Ref<SkillCall>)
+	export function unRefSkillCall(v:Ref<SkillCall>):SkillCall
+	export function emptyCreateAilySessionReq():CreateAilySessionReq
+	export function emptyRefCreateAilySessionReq():Ref<CreateAilySessionReq>
+	export function refOfCreateAilySessionReq(x:CreateAilySessionReq,v:Ref<CreateAilySessionReq>)
+	export function unRefCreateAilySessionReq(v:Ref<CreateAilySessionReq>):CreateAilySessionReq
+	export function emptyGetAilySessionReq():GetAilySessionReq
+	export function emptyRefGetAilySessionReq():Ref<GetAilySessionReq>
+	export function refOfGetAilySessionReq(x:GetAilySessionReq,v:Ref<GetAilySessionReq>)
+	export function unRefGetAilySessionReq(v:Ref<GetAilySessionReq>):GetAilySessionReq
+	export function emptyDatasetSource():DatasetSource
+	export function emptyRefDatasetSource():Ref<DatasetSource>
+	export function refOfDatasetSource(x:DatasetSource,v:Ref<DatasetSource>)
+	export function unRefDatasetSource(v:Ref<DatasetSource>):DatasetSource
+	export function emptyGetAilySessionResp():GetAilySessionResp
+	export function emptyRefGetAilySessionResp():Ref<GetAilySessionResp>
+	export function refOfGetAilySessionResp(x:GetAilySessionResp,v:Ref<GetAilySessionResp>)
+	export function unRefGetAilySessionResp(v:Ref<GetAilySessionResp>):GetAilySessionResp
+	export function emptySourceSetting():SourceSetting
+	export function emptyRefSourceSetting():Ref<SourceSetting>
+	export function refOfSourceSetting(x:SourceSetting,v:Ref<SourceSetting>)
+	export function unRefSourceSetting(v:Ref<SourceSetting>):SourceSetting
+	export function emptyAilyMessageFileFilter():AilyMessageFileFilter
+	export function emptyRefAilyMessageFileFilter():Ref<AilyMessageFileFilter>
+	export function refOfAilyMessageFileFilter(x:AilyMessageFileFilter,v:Ref<AilyMessageFileFilter>)
+	export function unRefAilyMessageFileFilter(v:Ref<AilyMessageFileFilter>):AilyMessageFileFilter
+	export function emptySuggestion():Suggestion
+	export function emptyRefSuggestion():Ref<Suggestion>
+	export function refOfSuggestion(x:Suggestion,v:Ref<Suggestion>)
+	export function unRefSuggestion(v:Ref<Suggestion>):Suggestion
+	export function emptyAilyMessageFile():AilyMessageFile
+	export function emptyRefAilyMessageFile():Ref<AilyMessageFile>
+	export function refOfAilyMessageFile(x:AilyMessageFile,v:Ref<AilyMessageFile>)
+	export function unRefAilyMessageFile(v:Ref<AilyMessageFile>):AilyMessageFile
+	export function emptyCreateAilySessionResp():CreateAilySessionResp
+	export function emptyRefCreateAilySessionResp():Ref<CreateAilySessionResp>
+	export function refOfCreateAilySessionResp(x:CreateAilySessionResp,v:Ref<CreateAilySessionResp>)
+	export function unRefCreateAilySessionResp(v:Ref<CreateAilySessionResp>):CreateAilySessionResp
+	export function emptyGetAilySessionAilyMessageReq():GetAilySessionAilyMessageReq
+	export function emptyRefGetAilySessionAilyMessageReq():Ref<GetAilySessionAilyMessageReq>
+	export function refOfGetAilySessionAilyMessageReq(x:GetAilySessionAilyMessageReq,v:Ref<GetAilySessionAilyMessageReq>)
+	export function unRefGetAilySessionAilyMessageReq(v:Ref<GetAilySessionAilyMessageReq>):GetAilySessionAilyMessageReq
+	export function emptyMessage():Message
+	export function emptyRefMessage():Ref<Message>
+	export function refOfMessage(x:Message,v:Ref<Message>)
+	export function unRefMessage(v:Ref<Message>):Message
+	export function emptyMessageWithOperation():MessageWithOperation
+	export function emptyRefMessageWithOperation():Ref<MessageWithOperation>
+	export function refOfMessageWithOperation(x:MessageWithOperation,v:Ref<MessageWithOperation>)
+	export function unRefMessageWithOperation(v:Ref<MessageWithOperation>):MessageWithOperation
+	export function emptyListAilySessionRunReq():ListAilySessionRunReq
+	export function emptyRefListAilySessionRunReq():Ref<ListAilySessionRunReq>
+	export function refOfListAilySessionRunReq(x:ListAilySessionRunReq,v:Ref<ListAilySessionRunReq>)
+	export function unRefListAilySessionRunReq(v:Ref<ListAilySessionRunReq>):ListAilySessionRunReq
+	export function emptyRecordQueryOption():RecordQueryOption
+	export function emptyRefRecordQueryOption():Ref<RecordQueryOption>
+	export function refOfRecordQueryOption(x:RecordQueryOption,v:Ref<RecordQueryOption>)
+	export function unRefRecordQueryOption(v:Ref<RecordQueryOption>):RecordQueryOption
+	export function emptyAilySender():AilySender
+	export function emptyRefAilySender():Ref<AilySender>
+	export function refOfAilySender(x:AilySender,v:Ref<AilySender>)
+	export function unRefAilySender(v:Ref<AilySender>):AilySender
+	export function emptyGetAilySessionAilyMessageRespData():GetAilySessionAilyMessageRespData
+	export function emptyRefGetAilySessionAilyMessageRespData():Ref<GetAilySessionAilyMessageRespData>
+	export function refOfGetAilySessionAilyMessageRespData(x:GetAilySessionAilyMessageRespData,v:Ref<GetAilySessionAilyMessageRespData>)
+	export function unRefGetAilySessionAilyMessageRespData(v:Ref<GetAilySessionAilyMessageRespData>):GetAilySessionAilyMessageRespData
+	export function emptyListAilySessionAilyMessageRespData():ListAilySessionAilyMessageRespData
+	export function emptyRefListAilySessionAilyMessageRespData():Ref<ListAilySessionAilyMessageRespData>
+	export function refOfListAilySessionAilyMessageRespData(x:ListAilySessionAilyMessageRespData,v:Ref<ListAilySessionAilyMessageRespData>)
+	export function unRefListAilySessionAilyMessageRespData(v:Ref<ListAilySessionAilyMessageRespData>):ListAilySessionAilyMessageRespData
+	export function emptyAilyKnowledgeFolder():AilyKnowledgeFolder
+	export function emptyRefAilyKnowledgeFolder():Ref<AilyKnowledgeFolder>
+	export function refOfAilyKnowledgeFolder(x:AilyKnowledgeFolder,v:Ref<AilyKnowledgeFolder>)
+	export function unRefAilyKnowledgeFolder(v:Ref<AilyKnowledgeFolder>):AilyKnowledgeFolder
+	export function emptyCreateAilySessionRespData():CreateAilySessionRespData
+	export function emptyRefCreateAilySessionRespData():Ref<CreateAilySessionRespData>
+	export function refOfCreateAilySessionRespData(x:CreateAilySessionRespData,v:Ref<CreateAilySessionRespData>)
+	export function unRefCreateAilySessionRespData(v:Ref<CreateAilySessionRespData>):CreateAilySessionRespData
+	export function emptyCancelAilySessionRunRespData():CancelAilySessionRunRespData
+	export function emptyRefCancelAilySessionRunRespData():Ref<CancelAilySessionRunRespData>
+	export function refOfCancelAilySessionRunRespData(x:CancelAilySessionRunRespData,v:Ref<CancelAilySessionRunRespData>)
+	export function unRefCancelAilySessionRunRespData(v:Ref<CancelAilySessionRunRespData>):CancelAilySessionRunRespData
+	export function emptyCreateAilySessionAilyMessageReq():CreateAilySessionAilyMessageReq
+	export function emptyRefCreateAilySessionAilyMessageReq():Ref<CreateAilySessionAilyMessageReq>
+	export function refOfCreateAilySessionAilyMessageReq(x:CreateAilySessionAilyMessageReq,v:Ref<CreateAilySessionAilyMessageReq>)
+	export function unRefCreateAilySessionAilyMessageReq(v:Ref<CreateAilySessionAilyMessageReq>):CreateAilySessionAilyMessageReq
+	export function emptyCreateAilySessionReqBody():CreateAilySessionReqBody
+	export function emptyRefCreateAilySessionReqBody():Ref<CreateAilySessionReqBody>
+	export function refOfCreateAilySessionReqBody(x:CreateAilySessionReqBody,v:Ref<CreateAilySessionReqBody>)
+	export function unRefCreateAilySessionReqBody(v:Ref<CreateAilySessionReqBody>):CreateAilySessionReqBody
+	export function emptySession():Session
+	export function emptyRefSession():Ref<Session>
+	export function refOfSession(x:Session,v:Ref<Session>)
+	export function unRefSession(v:Ref<Session>):Session
 	export function emptyCancelAilySessionRunResp():CancelAilySessionRunResp
 	export function emptyRefCancelAilySessionRunResp():Ref<CancelAilySessionRunResp>
 	export function refOfCancelAilySessionRunResp(x:CancelAilySessionRunResp,v:Ref<CancelAilySessionRunResp>)
@@ -1246,74 +1544,22 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/aily/v1'{
 	export function emptyRefCreateAilySessionAilyMessageReqBody():Ref<CreateAilySessionAilyMessageReqBody>
 	export function refOfCreateAilySessionAilyMessageReqBody(x:CreateAilySessionAilyMessageReqBody,v:Ref<CreateAilySessionAilyMessageReqBody>)
 	export function unRefCreateAilySessionAilyMessageReqBody(v:Ref<CreateAilySessionAilyMessageReqBody>):CreateAilySessionAilyMessageReqBody
-	export function emptyUpdateAilySessionRespData():UpdateAilySessionRespData
-	export function emptyRefUpdateAilySessionRespData():Ref<UpdateAilySessionRespData>
-	export function refOfUpdateAilySessionRespData(x:UpdateAilySessionRespData,v:Ref<UpdateAilySessionRespData>)
-	export function unRefUpdateAilySessionRespData(v:Ref<UpdateAilySessionRespData>):UpdateAilySessionRespData
-	export function emptyAilySender():AilySender
-	export function emptyRefAilySender():Ref<AilySender>
-	export function refOfAilySender(x:AilySender,v:Ref<AilySender>)
-	export function unRefAilySender(v:Ref<AilySender>):AilySender
-	export function emptyMessage():Message
-	export function emptyRefMessage():Ref<Message>
-	export function refOfMessage(x:Message,v:Ref<Message>)
-	export function unRefMessage(v:Ref<Message>):Message
-	export function emptyProgressItem():ProgressItem
-	export function emptyRefProgressItem():Ref<ProgressItem>
-	export function refOfProgressItem(x:ProgressItem,v:Ref<ProgressItem>)
-	export function unRefProgressItem(v:Ref<ProgressItem>):ProgressItem
-	export function emptyListAilySessionRunRespData():ListAilySessionRunRespData
-	export function emptyRefListAilySessionRunRespData():Ref<ListAilySessionRunRespData>
-	export function refOfListAilySessionRunRespData(x:ListAilySessionRunRespData,v:Ref<ListAilySessionRunRespData>)
-	export function unRefListAilySessionRunRespData(v:Ref<ListAilySessionRunRespData>):ListAilySessionRunRespData
-	export function emptySourceSetting():SourceSetting
-	export function emptyRefSourceSetting():Ref<SourceSetting>
-	export function refOfSourceSetting(x:SourceSetting,v:Ref<SourceSetting>)
-	export function unRefSourceSetting(v:Ref<SourceSetting>):SourceSetting
-	export function emptyObjectSetting():ObjectSetting
-	export function emptyRefObjectSetting():Ref<ObjectSetting>
-	export function refOfObjectSetting(x:ObjectSetting,v:Ref<ObjectSetting>)
-	export function unRefObjectSetting(v:Ref<ObjectSetting>):ObjectSetting
-	export function emptyCancelAilySessionRunReq():CancelAilySessionRunReq
-	export function emptyRefCancelAilySessionRunReq():Ref<CancelAilySessionRunReq>
-	export function refOfCancelAilySessionRunReq(x:CancelAilySessionRunReq,v:Ref<CancelAilySessionRunReq>)
-	export function unRefCancelAilySessionRunReq(v:Ref<CancelAilySessionRunReq>):CancelAilySessionRunReq
-	export function emptyGetAilySessionResp():GetAilySessionResp
-	export function emptyRefGetAilySessionResp():Ref<GetAilySessionResp>
-	export function refOfGetAilySessionResp(x:GetAilySessionResp,v:Ref<GetAilySessionResp>)
-	export function unRefGetAilySessionResp(v:Ref<GetAilySessionResp>):GetAilySessionResp
-	export function emptySender():Sender
-	export function emptyRefSender():Ref<Sender>
-	export function refOfSender(x:Sender,v:Ref<Sender>)
-	export function unRefSender(v:Ref<Sender>):Sender
-	export function emptyAilyMessageFilter():AilyMessageFilter
-	export function emptyRefAilyMessageFilter():Ref<AilyMessageFilter>
-	export function refOfAilyMessageFilter(x:AilyMessageFilter,v:Ref<AilyMessageFilter>)
-	export function unRefAilyMessageFilter(v:Ref<AilyMessageFilter>):AilyMessageFilter
-	export function emptyV1():V1
-	export function emptyRefV1():Ref<V1>
-	export function refOfV1(x:V1,v:Ref<V1>)
-	export function unRefV1(v:Ref<V1>):V1
-	export function emptyAilySession():AilySession
-	export function emptyRefAilySession():Ref<AilySession>
-	export function refOfAilySession(x:AilySession,v:Ref<AilySession>)
-	export function unRefAilySession(v:Ref<AilySession>):AilySession
-	export function emptyCreateAilySessionReq():CreateAilySessionReq
-	export function emptyRefCreateAilySessionReq():Ref<CreateAilySessionReq>
-	export function refOfCreateAilySessionReq(x:CreateAilySessionReq,v:Ref<CreateAilySessionReq>)
-	export function unRefCreateAilySessionReq(v:Ref<CreateAilySessionReq>):CreateAilySessionReq
-	export function emptyCreateAilySessionReqBody():CreateAilySessionReqBody
-	export function emptyRefCreateAilySessionReqBody():Ref<CreateAilySessionReqBody>
-	export function refOfCreateAilySessionReqBody(x:CreateAilySessionReqBody,v:Ref<CreateAilySessionReqBody>)
-	export function unRefCreateAilySessionReqBody(v:Ref<CreateAilySessionReqBody>):CreateAilySessionReqBody
-	export function emptyGetAilySessionRunReq():GetAilySessionRunReq
-	export function emptyRefGetAilySessionRunReq():Ref<GetAilySessionRunReq>
-	export function refOfGetAilySessionRunReq(x:GetAilySessionRunReq,v:Ref<GetAilySessionRunReq>)
-	export function unRefGetAilySessionRunReq(v:Ref<GetAilySessionRunReq>):GetAilySessionRunReq
 	export function emptyKctx():Kctx
 	export function emptyRefKctx():Ref<Kctx>
 	export function refOfKctx(x:Kctx,v:Ref<Kctx>)
 	export function unRefKctx(v:Ref<Kctx>):Kctx
+	export function emptyTable():Table
+	export function emptyRefTable():Ref<Table>
+	export function refOfTable(x:Table,v:Ref<Table>)
+	export function unRefTable(v:Ref<Table>):Table
+	export function emptyAilyKnowledgeDataset():AilyKnowledgeDataset
+	export function emptyRefAilyKnowledgeDataset():Ref<AilyKnowledgeDataset>
+	export function refOfAilyKnowledgeDataset(x:AilyKnowledgeDataset,v:Ref<AilyKnowledgeDataset>)
+	export function unRefAilyKnowledgeDataset(v:Ref<AilyKnowledgeDataset>):AilyKnowledgeDataset
+	export function emptyAilyKnowledgeDatatable():AilyKnowledgeDatatable
+	export function emptyRefAilyKnowledgeDatatable():Ref<AilyKnowledgeDatatable>
+	export function refOfAilyKnowledgeDatatable(x:AilyKnowledgeDatatable,v:Ref<AilyKnowledgeDatatable>)
+	export function unRefAilyKnowledgeDatatable(v:Ref<AilyKnowledgeDatatable>):AilyKnowledgeDatatable
 	export function emptyGetAilySessionAilyMessageResp():GetAilySessionAilyMessageResp
 	export function emptyRefGetAilySessionAilyMessageResp():Ref<GetAilySessionAilyMessageResp>
 	export function refOfGetAilySessionAilyMessageResp(x:GetAilySessionAilyMessageResp,v:Ref<GetAilySessionAilyMessageResp>)

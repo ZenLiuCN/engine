@@ -19,6 +19,7 @@ import (
 	_ "github.com/ZenLiuCN/engine/modules/github/com/larksuite/oapi-sdk-go/v3/service/block"
 	_ "github.com/ZenLiuCN/engine/modules/github/com/larksuite/oapi-sdk-go/v3/service/board"
 	_ "github.com/ZenLiuCN/engine/modules/github/com/larksuite/oapi-sdk-go/v3/service/calendar"
+	_ "github.com/ZenLiuCN/engine/modules/github/com/larksuite/oapi-sdk-go/v3/service/compensation"
 	_ "github.com/ZenLiuCN/engine/modules/github/com/larksuite/oapi-sdk-go/v3/service/contact"
 	_ "github.com/ZenLiuCN/engine/modules/github/com/larksuite/oapi-sdk-go/v3/service/corehr"
 	_ "github.com/ZenLiuCN/engine/modules/github/com/larksuite/oapi-sdk-go/v3/service/document_ai"
@@ -63,22 +64,22 @@ var (
 	//go:embed github_com_larksuite_oapi-sdk-go_v3.d.ts
 	GithubComLarksuiteOapiSdkGo3Define   []byte
 	GithubComLarksuiteOapiSdkGo3Declared = map[string]any{
-		"withOpenBaseUrl":        lark.WithOpenBaseUrl,
-		"withTokenCache":         lark.WithTokenCache,
-		"newClient":              lark.NewClient,
-		"withLogLevel":           lark.WithLogLevel,
-		"withReqTimeout":         lark.WithReqTimeout,
 		"withAppType":            lark.WithAppType,
-		"withHelpdeskCredential": lark.WithHelpdeskCredential,
-		"LarkBaseUrl":            lark.LarkBaseUrl,
 		"withEnableTokenCache":   lark.WithEnableTokenCache,
-		"withHeaders":            lark.WithHeaders,
-		"withHttpClient":         lark.WithHttpClient,
-		"withLogReqAtDebug":      lark.WithLogReqAtDebug,
+		"withLogLevel":           lark.WithLogLevel,
 		"withLogger":             lark.WithLogger,
+		"withHeaders":            lark.WithHeaders,
 		"withMarketplaceApp":     lark.WithMarketplaceApp,
+		"withReqTimeout":         lark.WithReqTimeout,
+		"withHelpdeskCredential": lark.WithHelpdeskCredential,
+		"withLogReqAtDebug":      lark.WithLogReqAtDebug,
+		"withOpenBaseUrl":        lark.WithOpenBaseUrl,
 		"FeishuBaseUrl":          lark.FeishuBaseUrl,
+		"LarkBaseUrl":            lark.LarkBaseUrl,
+		"newClient":              lark.NewClient,
+		"withHttpClient":         lark.WithHttpClient,
 		"withSerialization":      lark.WithSerialization,
+		"withTokenCache":         lark.WithTokenCache,
 	}
 )
 

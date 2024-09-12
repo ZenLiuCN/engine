@@ -3,11 +3,11 @@
 declare module 'github.com/larksuite/oapi-sdk-go/v3/service/tenant/v2'{
 
 	// @ts-ignore
-	import * as context from 'golang/context'
-	// @ts-ignore
 	import * as larkcore from 'github.com/larksuite/oapi-sdk-go/v3/core'
 	// @ts-ignore
-	import type {bool,int,error,Ref,Struct} from 'go'
+	import * as context from 'golang/context'
+	// @ts-ignore
+	import type {Ref,Struct,bool,int,error} from 'go'
 	export interface Avatar extends Struct<Avatar>{
 
 			avatarOrigin:Ref<string>
@@ -134,26 +134,14 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/tenant/v2'{
 				query(ctx:context.Context,...options:larkcore.RequestOptionFunc[]):Ref<QueryTenantProductAssignInfoResp>
 			}>
 	}
-	export function emptyProductI18nName():ProductI18nName
-	export function emptyRefProductI18nName():Ref<ProductI18nName>
-	export function refOfProductI18nName(x:ProductI18nName,v:Ref<ProductI18nName>)
-	export function unRefProductI18nName(v:Ref<ProductI18nName>):ProductI18nName
-	export function emptyAvatar():Avatar
-	export function emptyRefAvatar():Ref<Avatar>
-	export function refOfAvatar(x:Avatar,v:Ref<Avatar>)
-	export function unRefAvatar(v:Ref<Avatar>):Avatar
-	export function emptyQueryTenantRespData():QueryTenantRespData
-	export function emptyRefQueryTenantRespData():Ref<QueryTenantRespData>
-	export function refOfQueryTenantRespData(x:QueryTenantRespData,v:Ref<QueryTenantRespData>)
-	export function unRefQueryTenantRespData(v:Ref<QueryTenantRespData>):QueryTenantRespData
-	export function emptyTenant():Tenant
-	export function emptyRefTenant():Ref<Tenant>
-	export function refOfTenant(x:Tenant,v:Ref<Tenant>)
-	export function unRefTenant(v:Ref<Tenant>):Tenant
 	export function emptyDepartmentId():DepartmentId
 	export function emptyRefDepartmentId():Ref<DepartmentId>
 	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
 	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
+	export function emptyQueryTenantProductAssignInfoResp():QueryTenantProductAssignInfoResp
+	export function emptyRefQueryTenantProductAssignInfoResp():Ref<QueryTenantProductAssignInfoResp>
+	export function refOfQueryTenantProductAssignInfoResp(x:QueryTenantProductAssignInfoResp,v:Ref<QueryTenantProductAssignInfoResp>)
+	export function unRefQueryTenantProductAssignInfoResp(v:Ref<QueryTenantProductAssignInfoResp>):QueryTenantProductAssignInfoResp
 	export function emptyQueryTenantProductAssignInfoRespData():QueryTenantProductAssignInfoRespData
 	export function emptyRefQueryTenantProductAssignInfoRespData():Ref<QueryTenantProductAssignInfoRespData>
 	export function refOfQueryTenantProductAssignInfoRespData(x:QueryTenantProductAssignInfoRespData,v:Ref<QueryTenantProductAssignInfoRespData>)
@@ -162,6 +150,14 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/tenant/v2'{
 	export function emptyRefQueryTenantResp():Ref<QueryTenantResp>
 	export function refOfQueryTenantResp(x:QueryTenantResp,v:Ref<QueryTenantResp>)
 	export function unRefQueryTenantResp(v:Ref<QueryTenantResp>):QueryTenantResp
+	export function emptyQueryTenantRespData():QueryTenantRespData
+	export function emptyRefQueryTenantRespData():Ref<QueryTenantRespData>
+	export function refOfQueryTenantRespData(x:QueryTenantRespData,v:Ref<QueryTenantRespData>)
+	export function unRefQueryTenantRespData(v:Ref<QueryTenantRespData>):QueryTenantRespData
+	export function emptyTenant():Tenant
+	export function emptyRefTenant():Ref<Tenant>
+	export function refOfTenant(x:Tenant,v:Ref<Tenant>)
+	export function unRefTenant(v:Ref<Tenant>):Tenant
 	export function emptyTenantAssignInfo():TenantAssignInfo
 	export function emptyRefTenantAssignInfo():Ref<TenantAssignInfo>
 	export function refOfTenantAssignInfo(x:TenantAssignInfo,v:Ref<TenantAssignInfo>)
@@ -170,8 +166,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/tenant/v2'{
 	export function emptyRefV2():Ref<V2>
 	export function refOfV2(x:V2,v:Ref<V2>)
 	export function unRefV2(v:Ref<V2>):V2
-	export function emptyQueryTenantProductAssignInfoResp():QueryTenantProductAssignInfoResp
-	export function emptyRefQueryTenantProductAssignInfoResp():Ref<QueryTenantProductAssignInfoResp>
-	export function refOfQueryTenantProductAssignInfoResp(x:QueryTenantProductAssignInfoResp,v:Ref<QueryTenantProductAssignInfoResp>)
-	export function unRefQueryTenantProductAssignInfoResp(v:Ref<QueryTenantProductAssignInfoResp>):QueryTenantProductAssignInfoResp
+	export function emptyProductI18nName():ProductI18nName
+	export function emptyRefProductI18nName():Ref<ProductI18nName>
+	export function refOfProductI18nName(x:ProductI18nName,v:Ref<ProductI18nName>)
+	export function unRefProductI18nName(v:Ref<ProductI18nName>):ProductI18nName
+	export function emptyAvatar():Avatar
+	export function emptyRefAvatar():Ref<Avatar>
+	export function refOfAvatar(x:Avatar,v:Ref<Avatar>)
+	export function unRefAvatar(v:Ref<Avatar>):Avatar
 }

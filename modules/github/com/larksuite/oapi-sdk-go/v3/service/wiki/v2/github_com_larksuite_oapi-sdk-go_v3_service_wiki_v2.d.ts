@@ -7,7 +7,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/wiki/v2'{
 	// @ts-ignore
 	import * as context from 'golang/context'
 	// @ts-ignore
-	import type {float64,Struct,Ref,error,bool,int} from 'go'
+	import type {Struct,Ref,error,bool,int,float64} from 'go'
 	export interface CopySpaceNodePathReqBodyBuilder extends Struct<CopySpaceNodePathReqBodyBuilder>{
 
 			targetParentToken(targetParentToken:string):Ref<CopySpaceNodePathReqBodyBuilder>
@@ -272,12 +272,14 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/wiki/v2'{
 			memberType:Ref<string>
 			memberId:Ref<string>
 			memberRole:Ref<string>
+			type:Ref<string>
 	}
 	export interface MemberBuilder extends Struct<MemberBuilder>{
 
 			memberType(memberType:string):Ref<MemberBuilder>
 			memberId(memberId:string):Ref<MemberBuilder>
 			memberRole(memberRole:string):Ref<MemberBuilder>
+			type(type_:string):Ref<MemberBuilder>
 			build():Ref<Member>
 	}
 	//"bitable"
@@ -471,6 +473,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/wiki/v2'{
 			nodeCreateTime:Ref<string>
 			creator:Ref<string>
 			owner:Ref<string>
+			nodeCreator:Ref<string>
 	}
 	export interface NodeBuilder extends Struct<NodeBuilder>{
 
@@ -489,6 +492,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/wiki/v2'{
 			nodeCreateTime(nodeCreateTime:string):Ref<NodeBuilder>
 			creator(creator:string):Ref<NodeBuilder>
 			owner(owner:string):Ref<NodeBuilder>
+			nodeCreator(nodeCreator:string):Ref<NodeBuilder>
 			build():Ref<Node>
 	}
 	export interface NodeSearch extends Struct<NodeSearch>{
@@ -554,6 +558,10 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/wiki/v2'{
 	export const ObjTypeObjTypeSheet:string
 	//"slides"
 	export const ObjTypeObjTypeSlides:string
+	//"closed"
+	export const OpenSharingClosed:string
+	//"open"
+	export const OpenSharingOpen:string
 	export interface Setting extends Struct<Setting>{
 
 			createSetting:Ref<string>
@@ -638,6 +646,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/wiki/v2'{
 			spaceId:Ref<string>
 			spaceType:Ref<string>
 			visibility:Ref<string>
+			openSharing:Ref<string>
 	}
 	export interface SpaceBuilder extends Struct<SpaceBuilder>{
 
@@ -646,6 +655,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/wiki/v2'{
 			spaceId(spaceId:string):Ref<SpaceBuilder>
 			spaceType(spaceType:string):Ref<SpaceBuilder>
 			visibility(visibility:string):Ref<SpaceBuilder>
+			openSharing(openSharing:string):Ref<SpaceBuilder>
 			build():Ref<Space>
 	}
 	export interface TaskResult extends Struct<TaskResult>{
@@ -661,6 +671,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/wiki/v2'{
 	}
 	//"move"
 	export const TaskTypeMove:string
+	//"chat"
+	export const TypeChat:string
+	//"department"
+	export const TypeDepartment:string
+	//"user"
+	export const TypeUser:string
 	export interface UpdateSpaceSettingReq extends Struct<UpdateSpaceSettingReq>{
 
 			setting:Ref<Setting>
@@ -747,228 +763,228 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/wiki/v2'{
 				get(ctx:context.Context,req:Ref<GetTaskReq>,...options:larkcore.RequestOptionFunc[]):Ref<GetTaskResp>
 			}>
 	}
-	export function emptyGetTaskRespData():GetTaskRespData
-	export function emptyRefGetTaskRespData():Ref<GetTaskRespData>
-	export function refOfGetTaskRespData(x:GetTaskRespData,v:Ref<GetTaskRespData>)
-	export function unRefGetTaskRespData(v:Ref<GetTaskRespData>):GetTaskRespData
-	export function emptyMoveDocsToWikiSpaceNodeReq():MoveDocsToWikiSpaceNodeReq
-	export function emptyRefMoveDocsToWikiSpaceNodeReq():Ref<MoveDocsToWikiSpaceNodeReq>
-	export function refOfMoveDocsToWikiSpaceNodeReq(x:MoveDocsToWikiSpaceNodeReq,v:Ref<MoveDocsToWikiSpaceNodeReq>)
-	export function unRefMoveDocsToWikiSpaceNodeReq(v:Ref<MoveDocsToWikiSpaceNodeReq>):MoveDocsToWikiSpaceNodeReq
-	export function emptyMoveDocsToWikiSpaceNodeResp():MoveDocsToWikiSpaceNodeResp
-	export function emptyRefMoveDocsToWikiSpaceNodeResp():Ref<MoveDocsToWikiSpaceNodeResp>
-	export function refOfMoveDocsToWikiSpaceNodeResp(x:MoveDocsToWikiSpaceNodeResp,v:Ref<MoveDocsToWikiSpaceNodeResp>)
-	export function unRefMoveDocsToWikiSpaceNodeResp(v:Ref<MoveDocsToWikiSpaceNodeResp>):MoveDocsToWikiSpaceNodeResp
-	export function emptyUpdateSpaceSettingResp():UpdateSpaceSettingResp
-	export function emptyRefUpdateSpaceSettingResp():Ref<UpdateSpaceSettingResp>
-	export function refOfUpdateSpaceSettingResp(x:UpdateSpaceSettingResp,v:Ref<UpdateSpaceSettingResp>)
-	export function unRefUpdateSpaceSettingResp(v:Ref<UpdateSpaceSettingResp>):UpdateSpaceSettingResp
-	export function emptyCreateSpaceNodeRespData():CreateSpaceNodeRespData
-	export function emptyRefCreateSpaceNodeRespData():Ref<CreateSpaceNodeRespData>
-	export function refOfCreateSpaceNodeRespData(x:CreateSpaceNodeRespData,v:Ref<CreateSpaceNodeRespData>)
-	export function unRefCreateSpaceNodeRespData(v:Ref<CreateSpaceNodeRespData>):CreateSpaceNodeRespData
-	export function emptyGetNodeSpaceReq():GetNodeSpaceReq
-	export function emptyRefGetNodeSpaceReq():Ref<GetNodeSpaceReq>
-	export function refOfGetNodeSpaceReq(x:GetNodeSpaceReq,v:Ref<GetNodeSpaceReq>)
-	export function unRefGetNodeSpaceReq(v:Ref<GetNodeSpaceReq>):GetNodeSpaceReq
-	export function emptyMoveSpaceNodeRespData():MoveSpaceNodeRespData
-	export function emptyRefMoveSpaceNodeRespData():Ref<MoveSpaceNodeRespData>
-	export function refOfMoveSpaceNodeRespData(x:MoveSpaceNodeRespData,v:Ref<MoveSpaceNodeRespData>)
-	export function unRefMoveSpaceNodeRespData(v:Ref<MoveSpaceNodeRespData>):MoveSpaceNodeRespData
-	export function emptyCreateSpaceResp():CreateSpaceResp
-	export function emptyRefCreateSpaceResp():Ref<CreateSpaceResp>
-	export function refOfCreateSpaceResp(x:CreateSpaceResp,v:Ref<CreateSpaceResp>)
-	export function unRefCreateSpaceResp(v:Ref<CreateSpaceResp>):CreateSpaceResp
-	export function emptyCreateSpaceNodeResp():CreateSpaceNodeResp
-	export function emptyRefCreateSpaceNodeResp():Ref<CreateSpaceNodeResp>
-	export function refOfCreateSpaceNodeResp(x:CreateSpaceNodeResp,v:Ref<CreateSpaceNodeResp>)
-	export function unRefCreateSpaceNodeResp(v:Ref<CreateSpaceNodeResp>):CreateSpaceNodeResp
-	export function emptyDeleteSpaceMemberResp():DeleteSpaceMemberResp
-	export function emptyRefDeleteSpaceMemberResp():Ref<DeleteSpaceMemberResp>
-	export function refOfDeleteSpaceMemberResp(x:DeleteSpaceMemberResp,v:Ref<DeleteSpaceMemberResp>)
-	export function unRefDeleteSpaceMemberResp(v:Ref<DeleteSpaceMemberResp>):DeleteSpaceMemberResp
-	export function emptyGetNodeSpaceResp():GetNodeSpaceResp
-	export function emptyRefGetNodeSpaceResp():Ref<GetNodeSpaceResp>
-	export function refOfGetNodeSpaceResp(x:GetNodeSpaceResp,v:Ref<GetNodeSpaceResp>)
-	export function unRefGetNodeSpaceResp(v:Ref<GetNodeSpaceResp>):GetNodeSpaceResp
-	export function emptyCreateSpaceMemberRespData():CreateSpaceMemberRespData
-	export function emptyRefCreateSpaceMemberRespData():Ref<CreateSpaceMemberRespData>
-	export function refOfCreateSpaceMemberRespData(x:CreateSpaceMemberRespData,v:Ref<CreateSpaceMemberRespData>)
-	export function unRefCreateSpaceMemberRespData(v:Ref<CreateSpaceMemberRespData>):CreateSpaceMemberRespData
-	export function emptyGetTaskResp():GetTaskResp
-	export function emptyRefGetTaskResp():Ref<GetTaskResp>
-	export function refOfGetTaskResp(x:GetTaskResp,v:Ref<GetTaskResp>)
-	export function unRefGetTaskResp(v:Ref<GetTaskResp>):GetTaskResp
-	export function emptyTaskResult():TaskResult
-	export function emptyRefTaskResult():Ref<TaskResult>
-	export function refOfTaskResult(x:TaskResult,v:Ref<TaskResult>)
-	export function unRefTaskResult(v:Ref<TaskResult>):TaskResult
-	export function emptyGetNodeSpaceRespData():GetNodeSpaceRespData
-	export function emptyRefGetNodeSpaceRespData():Ref<GetNodeSpaceRespData>
-	export function refOfGetNodeSpaceRespData(x:GetNodeSpaceRespData,v:Ref<GetNodeSpaceRespData>)
-	export function unRefGetNodeSpaceRespData(v:Ref<GetNodeSpaceRespData>):GetNodeSpaceRespData
-	export function emptyListSpaceRespData():ListSpaceRespData
-	export function emptyRefListSpaceRespData():Ref<ListSpaceRespData>
-	export function refOfListSpaceRespData(x:ListSpaceRespData,v:Ref<ListSpaceRespData>)
-	export function unRefListSpaceRespData(v:Ref<ListSpaceRespData>):ListSpaceRespData
-	export function emptyMoveDocsToWikiSpaceNodeRespData():MoveDocsToWikiSpaceNodeRespData
-	export function emptyRefMoveDocsToWikiSpaceNodeRespData():Ref<MoveDocsToWikiSpaceNodeRespData>
-	export function refOfMoveDocsToWikiSpaceNodeRespData(x:MoveDocsToWikiSpaceNodeRespData,v:Ref<MoveDocsToWikiSpaceNodeRespData>)
-	export function unRefMoveDocsToWikiSpaceNodeRespData(v:Ref<MoveDocsToWikiSpaceNodeRespData>):MoveDocsToWikiSpaceNodeRespData
-	export function emptyMoveSpaceNodeReqBody():MoveSpaceNodeReqBody
-	export function emptyRefMoveSpaceNodeReqBody():Ref<MoveSpaceNodeReqBody>
-	export function refOfMoveSpaceNodeReqBody(x:MoveSpaceNodeReqBody,v:Ref<MoveSpaceNodeReqBody>)
-	export function unRefMoveSpaceNodeReqBody(v:Ref<MoveSpaceNodeReqBody>):MoveSpaceNodeReqBody
-	export function emptyNode():Node
-	export function emptyRefNode():Ref<Node>
-	export function refOfNode(x:Node,v:Ref<Node>)
-	export function unRefNode(v:Ref<Node>):Node
-	export function emptyUpdateSpaceSettingReq():UpdateSpaceSettingReq
-	export function emptyRefUpdateSpaceSettingReq():Ref<UpdateSpaceSettingReq>
-	export function refOfUpdateSpaceSettingReq(x:UpdateSpaceSettingReq,v:Ref<UpdateSpaceSettingReq>)
-	export function unRefUpdateSpaceSettingReq(v:Ref<UpdateSpaceSettingReq>):UpdateSpaceSettingReq
-	export function emptyDeleteSpaceMemberRespData():DeleteSpaceMemberRespData
-	export function emptyRefDeleteSpaceMemberRespData():Ref<DeleteSpaceMemberRespData>
-	export function refOfDeleteSpaceMemberRespData(x:DeleteSpaceMemberRespData,v:Ref<DeleteSpaceMemberRespData>)
-	export function unRefDeleteSpaceMemberRespData(v:Ref<DeleteSpaceMemberRespData>):DeleteSpaceMemberRespData
-	export function emptyCreateSpaceNodeReq():CreateSpaceNodeReq
-	export function emptyRefCreateSpaceNodeReq():Ref<CreateSpaceNodeReq>
-	export function refOfCreateSpaceNodeReq(x:CreateSpaceNodeReq,v:Ref<CreateSpaceNodeReq>)
-	export function unRefCreateSpaceNodeReq(v:Ref<CreateSpaceNodeReq>):CreateSpaceNodeReq
-	export function emptyCreateSpaceReq():CreateSpaceReq
-	export function emptyRefCreateSpaceReq():Ref<CreateSpaceReq>
-	export function refOfCreateSpaceReq(x:CreateSpaceReq,v:Ref<CreateSpaceReq>)
-	export function unRefCreateSpaceReq(v:Ref<CreateSpaceReq>):CreateSpaceReq
-	export function emptyCreateSpaceMemberReq():CreateSpaceMemberReq
-	export function emptyRefCreateSpaceMemberReq():Ref<CreateSpaceMemberReq>
-	export function refOfCreateSpaceMemberReq(x:CreateSpaceMemberReq,v:Ref<CreateSpaceMemberReq>)
-	export function unRefCreateSpaceMemberReq(v:Ref<CreateSpaceMemberReq>):CreateSpaceMemberReq
-	export function emptyMoveResult():MoveResult
-	export function emptyRefMoveResult():Ref<MoveResult>
-	export function refOfMoveResult(x:MoveResult,v:Ref<MoveResult>)
-	export function unRefMoveResult(v:Ref<MoveResult>):MoveResult
-	export function emptySpace():Space
-	export function emptyRefSpace():Ref<Space>
-	export function refOfSpace(x:Space,v:Ref<Space>)
-	export function unRefSpace(v:Ref<Space>):Space
-	export function emptyListSpaceNodeReq():ListSpaceNodeReq
-	export function emptyRefListSpaceNodeReq():Ref<ListSpaceNodeReq>
-	export function refOfListSpaceNodeReq(x:ListSpaceNodeReq,v:Ref<ListSpaceNodeReq>)
-	export function unRefListSpaceNodeReq(v:Ref<ListSpaceNodeReq>):ListSpaceNodeReq
-	export function emptyListSpaceNodeResp():ListSpaceNodeResp
-	export function emptyRefListSpaceNodeResp():Ref<ListSpaceNodeResp>
-	export function refOfListSpaceNodeResp(x:ListSpaceNodeResp,v:Ref<ListSpaceNodeResp>)
-	export function unRefListSpaceNodeResp(v:Ref<ListSpaceNodeResp>):ListSpaceNodeResp
-	export function emptyMoveSpaceNodeResp():MoveSpaceNodeResp
-	export function emptyRefMoveSpaceNodeResp():Ref<MoveSpaceNodeResp>
-	export function refOfMoveSpaceNodeResp(x:MoveSpaceNodeResp,v:Ref<MoveSpaceNodeResp>)
-	export function unRefMoveSpaceNodeResp(v:Ref<MoveSpaceNodeResp>):MoveSpaceNodeResp
-	export function emptyNodeSearch():NodeSearch
-	export function emptyRefNodeSearch():Ref<NodeSearch>
-	export function refOfNodeSearch(x:NodeSearch,v:Ref<NodeSearch>)
-	export function unRefNodeSearch(v:Ref<NodeSearch>):NodeSearch
-	export function emptyGetTaskReq():GetTaskReq
-	export function emptyRefGetTaskReq():Ref<GetTaskReq>
-	export function refOfGetTaskReq(x:GetTaskReq,v:Ref<GetTaskReq>)
-	export function unRefGetTaskReq(v:Ref<GetTaskReq>):GetTaskReq
-	export function emptyCopySpaceNodeRespData():CopySpaceNodeRespData
-	export function emptyRefCopySpaceNodeRespData():Ref<CopySpaceNodeRespData>
-	export function refOfCopySpaceNodeRespData(x:CopySpaceNodeRespData,v:Ref<CopySpaceNodeRespData>)
-	export function unRefCopySpaceNodeRespData(v:Ref<CopySpaceNodeRespData>):CopySpaceNodeRespData
-	export function emptyMember():Member
-	export function emptyRefMember():Ref<Member>
-	export function refOfMember(x:Member,v:Ref<Member>)
-	export function unRefMember(v:Ref<Member>):Member
-	export function emptySetting():Setting
-	export function emptyRefSetting():Ref<Setting>
-	export function refOfSetting(x:Setting,v:Ref<Setting>)
-	export function unRefSetting(v:Ref<Setting>):Setting
-	export function emptyUpdateSpaceSettingRespData():UpdateSpaceSettingRespData
-	export function emptyRefUpdateSpaceSettingRespData():Ref<UpdateSpaceSettingRespData>
-	export function refOfUpdateSpaceSettingRespData(x:UpdateSpaceSettingRespData,v:Ref<UpdateSpaceSettingRespData>)
-	export function unRefUpdateSpaceSettingRespData(v:Ref<UpdateSpaceSettingRespData>):UpdateSpaceSettingRespData
-	export function emptyListSpaceReq():ListSpaceReq
-	export function emptyRefListSpaceReq():Ref<ListSpaceReq>
-	export function refOfListSpaceReq(x:ListSpaceReq,v:Ref<ListSpaceReq>)
-	export function unRefListSpaceReq(v:Ref<ListSpaceReq>):ListSpaceReq
 	export function emptyV2():V2
 	export function emptyRefV2():Ref<V2>
 	export function refOfV2(x:V2,v:Ref<V2>)
 	export function unRefV2(v:Ref<V2>):V2
-	export function emptyListSpaceNodeIterator():ListSpaceNodeIterator
-	export function emptyRefListSpaceNodeIterator():Ref<ListSpaceNodeIterator>
-	export function refOfListSpaceNodeIterator(x:ListSpaceNodeIterator,v:Ref<ListSpaceNodeIterator>)
-	export function unRefListSpaceNodeIterator(v:Ref<ListSpaceNodeIterator>):ListSpaceNodeIterator
+	export function emptyCreateSpaceNodeReq():CreateSpaceNodeReq
+	export function emptyRefCreateSpaceNodeReq():Ref<CreateSpaceNodeReq>
+	export function refOfCreateSpaceNodeReq(x:CreateSpaceNodeReq,v:Ref<CreateSpaceNodeReq>)
+	export function unRefCreateSpaceNodeReq(v:Ref<CreateSpaceNodeReq>):CreateSpaceNodeReq
+	export function emptyCreateSpaceResp():CreateSpaceResp
+	export function emptyRefCreateSpaceResp():Ref<CreateSpaceResp>
+	export function refOfCreateSpaceResp(x:CreateSpaceResp,v:Ref<CreateSpaceResp>)
+	export function unRefCreateSpaceResp(v:Ref<CreateSpaceResp>):CreateSpaceResp
 	export function emptyDepartmentId():DepartmentId
 	export function emptyRefDepartmentId():Ref<DepartmentId>
 	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
 	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptyGetSpaceReq():GetSpaceReq
-	export function emptyRefGetSpaceReq():Ref<GetSpaceReq>
-	export function refOfGetSpaceReq(x:GetSpaceReq,v:Ref<GetSpaceReq>)
-	export function unRefGetSpaceReq(v:Ref<GetSpaceReq>):GetSpaceReq
-	export function emptyGetSpaceRespData():GetSpaceRespData
-	export function emptyRefGetSpaceRespData():Ref<GetSpaceRespData>
-	export function refOfGetSpaceRespData(x:GetSpaceRespData,v:Ref<GetSpaceRespData>)
-	export function unRefGetSpaceRespData(v:Ref<GetSpaceRespData>):GetSpaceRespData
+	export function emptyGetTaskRespData():GetTaskRespData
+	export function emptyRefGetTaskRespData():Ref<GetTaskRespData>
+	export function refOfGetTaskRespData(x:GetTaskRespData,v:Ref<GetTaskRespData>)
+	export function unRefGetTaskRespData(v:Ref<GetTaskRespData>):GetTaskRespData
+	export function emptyMoveSpaceNodeResp():MoveSpaceNodeResp
+	export function emptyRefMoveSpaceNodeResp():Ref<MoveSpaceNodeResp>
+	export function refOfMoveSpaceNodeResp(x:MoveSpaceNodeResp,v:Ref<MoveSpaceNodeResp>)
+	export function unRefMoveSpaceNodeResp(v:Ref<MoveSpaceNodeResp>):MoveSpaceNodeResp
+	export function emptyGetNodeSpaceReq():GetNodeSpaceReq
+	export function emptyRefGetNodeSpaceReq():Ref<GetNodeSpaceReq>
+	export function refOfGetNodeSpaceReq(x:GetNodeSpaceReq,v:Ref<GetNodeSpaceReq>)
+	export function unRefGetNodeSpaceReq(v:Ref<GetNodeSpaceReq>):GetNodeSpaceReq
+	export function emptyListSpaceRespData():ListSpaceRespData
+	export function emptyRefListSpaceRespData():Ref<ListSpaceRespData>
+	export function refOfListSpaceRespData(x:ListSpaceRespData,v:Ref<ListSpaceRespData>)
+	export function unRefListSpaceRespData(v:Ref<ListSpaceRespData>):ListSpaceRespData
+	export function emptyMoveResult():MoveResult
+	export function emptyRefMoveResult():Ref<MoveResult>
+	export function refOfMoveResult(x:MoveResult,v:Ref<MoveResult>)
+	export function unRefMoveResult(v:Ref<MoveResult>):MoveResult
 	export function emptyListSpaceIterator():ListSpaceIterator
 	export function emptyRefListSpaceIterator():Ref<ListSpaceIterator>
 	export function refOfListSpaceIterator(x:ListSpaceIterator,v:Ref<ListSpaceIterator>)
 	export function unRefListSpaceIterator(v:Ref<ListSpaceIterator>):ListSpaceIterator
+	export function emptyListSpaceNodeIterator():ListSpaceNodeIterator
+	export function emptyRefListSpaceNodeIterator():Ref<ListSpaceNodeIterator>
+	export function refOfListSpaceNodeIterator(x:ListSpaceNodeIterator,v:Ref<ListSpaceNodeIterator>)
+	export function unRefListSpaceNodeIterator(v:Ref<ListSpaceNodeIterator>):ListSpaceNodeIterator
+	export function emptyMember():Member
+	export function emptyRefMember():Ref<Member>
+	export function refOfMember(x:Member,v:Ref<Member>)
+	export function unRefMember(v:Ref<Member>):Member
+	export function emptyCreateSpaceReq():CreateSpaceReq
+	export function emptyRefCreateSpaceReq():Ref<CreateSpaceReq>
+	export function refOfCreateSpaceReq(x:CreateSpaceReq,v:Ref<CreateSpaceReq>)
+	export function unRefCreateSpaceReq(v:Ref<CreateSpaceReq>):CreateSpaceReq
+	export function emptyDeleteSpaceMemberResp():DeleteSpaceMemberResp
+	export function emptyRefDeleteSpaceMemberResp():Ref<DeleteSpaceMemberResp>
+	export function refOfDeleteSpaceMemberResp(x:DeleteSpaceMemberResp,v:Ref<DeleteSpaceMemberResp>)
+	export function unRefDeleteSpaceMemberResp(v:Ref<DeleteSpaceMemberResp>):DeleteSpaceMemberResp
 	export function emptyUpdateTitleSpaceNodeReq():UpdateTitleSpaceNodeReq
 	export function emptyRefUpdateTitleSpaceNodeReq():Ref<UpdateTitleSpaceNodeReq>
 	export function refOfUpdateTitleSpaceNodeReq(x:UpdateTitleSpaceNodeReq,v:Ref<UpdateTitleSpaceNodeReq>)
 	export function unRefUpdateTitleSpaceNodeReq(v:Ref<UpdateTitleSpaceNodeReq>):UpdateTitleSpaceNodeReq
-	export function emptyCopySpaceNodeReqBody():CopySpaceNodeReqBody
-	export function emptyRefCopySpaceNodeReqBody():Ref<CopySpaceNodeReqBody>
-	export function refOfCopySpaceNodeReqBody(x:CopySpaceNodeReqBody,v:Ref<CopySpaceNodeReqBody>)
-	export function unRefCopySpaceNodeReqBody(v:Ref<CopySpaceNodeReqBody>):CopySpaceNodeReqBody
-	export function emptyMoveSpaceNodeReq():MoveSpaceNodeReq
-	export function emptyRefMoveSpaceNodeReq():Ref<MoveSpaceNodeReq>
-	export function refOfMoveSpaceNodeReq(x:MoveSpaceNodeReq,v:Ref<MoveSpaceNodeReq>)
-	export function unRefMoveSpaceNodeReq(v:Ref<MoveSpaceNodeReq>):MoveSpaceNodeReq
-	export function emptyMoveDocsToWikiSpaceNodeReqBody():MoveDocsToWikiSpaceNodeReqBody
-	export function emptyRefMoveDocsToWikiSpaceNodeReqBody():Ref<MoveDocsToWikiSpaceNodeReqBody>
-	export function refOfMoveDocsToWikiSpaceNodeReqBody(x:MoveDocsToWikiSpaceNodeReqBody,v:Ref<MoveDocsToWikiSpaceNodeReqBody>)
-	export function unRefMoveDocsToWikiSpaceNodeReqBody(v:Ref<MoveDocsToWikiSpaceNodeReqBody>):MoveDocsToWikiSpaceNodeReqBody
-	export function emptyCreateSpaceMemberResp():CreateSpaceMemberResp
-	export function emptyRefCreateSpaceMemberResp():Ref<CreateSpaceMemberResp>
-	export function refOfCreateSpaceMemberResp(x:CreateSpaceMemberResp,v:Ref<CreateSpaceMemberResp>)
-	export function unRefCreateSpaceMemberResp(v:Ref<CreateSpaceMemberResp>):CreateSpaceMemberResp
-	export function emptyCopySpaceNodeResp():CopySpaceNodeResp
-	export function emptyRefCopySpaceNodeResp():Ref<CopySpaceNodeResp>
-	export function refOfCopySpaceNodeResp(x:CopySpaceNodeResp,v:Ref<CopySpaceNodeResp>)
-	export function unRefCopySpaceNodeResp(v:Ref<CopySpaceNodeResp>):CopySpaceNodeResp
-	export function emptyCreateSpaceRespData():CreateSpaceRespData
-	export function emptyRefCreateSpaceRespData():Ref<CreateSpaceRespData>
-	export function refOfCreateSpaceRespData(x:CreateSpaceRespData,v:Ref<CreateSpaceRespData>)
-	export function unRefCreateSpaceRespData(v:Ref<CreateSpaceRespData>):CreateSpaceRespData
-	export function emptyListSpaceNodeRespData():ListSpaceNodeRespData
-	export function emptyRefListSpaceNodeRespData():Ref<ListSpaceNodeRespData>
-	export function refOfListSpaceNodeRespData(x:ListSpaceNodeRespData,v:Ref<ListSpaceNodeRespData>)
-	export function unRefListSpaceNodeRespData(v:Ref<ListSpaceNodeRespData>):ListSpaceNodeRespData
-	export function emptyListSpaceResp():ListSpaceResp
-	export function emptyRefListSpaceResp():Ref<ListSpaceResp>
-	export function refOfListSpaceResp(x:ListSpaceResp,v:Ref<ListSpaceResp>)
-	export function unRefListSpaceResp(v:Ref<ListSpaceResp>):ListSpaceResp
-	export function emptyUpdateTitleSpaceNodeReqBody():UpdateTitleSpaceNodeReqBody
-	export function emptyRefUpdateTitleSpaceNodeReqBody():Ref<UpdateTitleSpaceNodeReqBody>
-	export function refOfUpdateTitleSpaceNodeReqBody(x:UpdateTitleSpaceNodeReqBody,v:Ref<UpdateTitleSpaceNodeReqBody>)
-	export function unRefUpdateTitleSpaceNodeReqBody(v:Ref<UpdateTitleSpaceNodeReqBody>):UpdateTitleSpaceNodeReqBody
-	export function emptyCopySpaceNodeReq():CopySpaceNodeReq
-	export function emptyRefCopySpaceNodeReq():Ref<CopySpaceNodeReq>
-	export function refOfCopySpaceNodeReq(x:CopySpaceNodeReq,v:Ref<CopySpaceNodeReq>)
-	export function unRefCopySpaceNodeReq(v:Ref<CopySpaceNodeReq>):CopySpaceNodeReq
-	export function emptyGetSpaceResp():GetSpaceResp
-	export function emptyRefGetSpaceResp():Ref<GetSpaceResp>
-	export function refOfGetSpaceResp(x:GetSpaceResp,v:Ref<GetSpaceResp>)
-	export function unRefGetSpaceResp(v:Ref<GetSpaceResp>):GetSpaceResp
 	export function emptyUpdateTitleSpaceNodeResp():UpdateTitleSpaceNodeResp
 	export function emptyRefUpdateTitleSpaceNodeResp():Ref<UpdateTitleSpaceNodeResp>
 	export function refOfUpdateTitleSpaceNodeResp(x:UpdateTitleSpaceNodeResp,v:Ref<UpdateTitleSpaceNodeResp>)
 	export function unRefUpdateTitleSpaceNodeResp(v:Ref<UpdateTitleSpaceNodeResp>):UpdateTitleSpaceNodeResp
+	export function emptyNode():Node
+	export function emptyRefNode():Ref<Node>
+	export function refOfNode(x:Node,v:Ref<Node>)
+	export function unRefNode(v:Ref<Node>):Node
+	export function emptyUpdateSpaceSettingResp():UpdateSpaceSettingResp
+	export function emptyRefUpdateSpaceSettingResp():Ref<UpdateSpaceSettingResp>
+	export function refOfUpdateSpaceSettingResp(x:UpdateSpaceSettingResp,v:Ref<UpdateSpaceSettingResp>)
+	export function unRefUpdateSpaceSettingResp(v:Ref<UpdateSpaceSettingResp>):UpdateSpaceSettingResp
+	export function emptyCreateSpaceMemberRespData():CreateSpaceMemberRespData
+	export function emptyRefCreateSpaceMemberRespData():Ref<CreateSpaceMemberRespData>
+	export function refOfCreateSpaceMemberRespData(x:CreateSpaceMemberRespData,v:Ref<CreateSpaceMemberRespData>)
+	export function unRefCreateSpaceMemberRespData(v:Ref<CreateSpaceMemberRespData>):CreateSpaceMemberRespData
+	export function emptyGetNodeSpaceRespData():GetNodeSpaceRespData
+	export function emptyRefGetNodeSpaceRespData():Ref<GetNodeSpaceRespData>
+	export function refOfGetNodeSpaceRespData(x:GetNodeSpaceRespData,v:Ref<GetNodeSpaceRespData>)
+	export function unRefGetNodeSpaceRespData(v:Ref<GetNodeSpaceRespData>):GetNodeSpaceRespData
+	export function emptyUpdateSpaceSettingRespData():UpdateSpaceSettingRespData
+	export function emptyRefUpdateSpaceSettingRespData():Ref<UpdateSpaceSettingRespData>
+	export function refOfUpdateSpaceSettingRespData(x:UpdateSpaceSettingRespData,v:Ref<UpdateSpaceSettingRespData>)
+	export function unRefUpdateSpaceSettingRespData(v:Ref<UpdateSpaceSettingRespData>):UpdateSpaceSettingRespData
+	export function emptyMoveSpaceNodeRespData():MoveSpaceNodeRespData
+	export function emptyRefMoveSpaceNodeRespData():Ref<MoveSpaceNodeRespData>
+	export function refOfMoveSpaceNodeRespData(x:MoveSpaceNodeRespData,v:Ref<MoveSpaceNodeRespData>)
+	export function unRefMoveSpaceNodeRespData(v:Ref<MoveSpaceNodeRespData>):MoveSpaceNodeRespData
+	export function emptyCreateSpaceNodeResp():CreateSpaceNodeResp
+	export function emptyRefCreateSpaceNodeResp():Ref<CreateSpaceNodeResp>
+	export function refOfCreateSpaceNodeResp(x:CreateSpaceNodeResp,v:Ref<CreateSpaceNodeResp>)
+	export function unRefCreateSpaceNodeResp(v:Ref<CreateSpaceNodeResp>):CreateSpaceNodeResp
+	export function emptyMoveDocsToWikiSpaceNodeResp():MoveDocsToWikiSpaceNodeResp
+	export function emptyRefMoveDocsToWikiSpaceNodeResp():Ref<MoveDocsToWikiSpaceNodeResp>
+	export function refOfMoveDocsToWikiSpaceNodeResp(x:MoveDocsToWikiSpaceNodeResp,v:Ref<MoveDocsToWikiSpaceNodeResp>)
+	export function unRefMoveDocsToWikiSpaceNodeResp(v:Ref<MoveDocsToWikiSpaceNodeResp>):MoveDocsToWikiSpaceNodeResp
+	export function emptyMoveSpaceNodeReqBody():MoveSpaceNodeReqBody
+	export function emptyRefMoveSpaceNodeReqBody():Ref<MoveSpaceNodeReqBody>
+	export function refOfMoveSpaceNodeReqBody(x:MoveSpaceNodeReqBody,v:Ref<MoveSpaceNodeReqBody>)
+	export function unRefMoveSpaceNodeReqBody(v:Ref<MoveSpaceNodeReqBody>):MoveSpaceNodeReqBody
+	export function emptyMoveDocsToWikiSpaceNodeReqBody():MoveDocsToWikiSpaceNodeReqBody
+	export function emptyRefMoveDocsToWikiSpaceNodeReqBody():Ref<MoveDocsToWikiSpaceNodeReqBody>
+	export function refOfMoveDocsToWikiSpaceNodeReqBody(x:MoveDocsToWikiSpaceNodeReqBody,v:Ref<MoveDocsToWikiSpaceNodeReqBody>)
+	export function unRefMoveDocsToWikiSpaceNodeReqBody(v:Ref<MoveDocsToWikiSpaceNodeReqBody>):MoveDocsToWikiSpaceNodeReqBody
+	export function emptyDeleteSpaceMemberRespData():DeleteSpaceMemberRespData
+	export function emptyRefDeleteSpaceMemberRespData():Ref<DeleteSpaceMemberRespData>
+	export function refOfDeleteSpaceMemberRespData(x:DeleteSpaceMemberRespData,v:Ref<DeleteSpaceMemberRespData>)
+	export function unRefDeleteSpaceMemberRespData(v:Ref<DeleteSpaceMemberRespData>):DeleteSpaceMemberRespData
+	export function emptyGetSpaceResp():GetSpaceResp
+	export function emptyRefGetSpaceResp():Ref<GetSpaceResp>
+	export function refOfGetSpaceResp(x:GetSpaceResp,v:Ref<GetSpaceResp>)
+	export function unRefGetSpaceResp(v:Ref<GetSpaceResp>):GetSpaceResp
+	export function emptyListSpaceNodeResp():ListSpaceNodeResp
+	export function emptyRefListSpaceNodeResp():Ref<ListSpaceNodeResp>
+	export function refOfListSpaceNodeResp(x:ListSpaceNodeResp,v:Ref<ListSpaceNodeResp>)
+	export function unRefListSpaceNodeResp(v:Ref<ListSpaceNodeResp>):ListSpaceNodeResp
+	export function emptyGetTaskResp():GetTaskResp
+	export function emptyRefGetTaskResp():Ref<GetTaskResp>
+	export function refOfGetTaskResp(x:GetTaskResp,v:Ref<GetTaskResp>)
+	export function unRefGetTaskResp(v:Ref<GetTaskResp>):GetTaskResp
+	export function emptyCopySpaceNodeReq():CopySpaceNodeReq
+	export function emptyRefCopySpaceNodeReq():Ref<CopySpaceNodeReq>
+	export function refOfCopySpaceNodeReq(x:CopySpaceNodeReq,v:Ref<CopySpaceNodeReq>)
+	export function unRefCopySpaceNodeReq(v:Ref<CopySpaceNodeReq>):CopySpaceNodeReq
+	export function emptyMoveSpaceNodeReq():MoveSpaceNodeReq
+	export function emptyRefMoveSpaceNodeReq():Ref<MoveSpaceNodeReq>
+	export function refOfMoveSpaceNodeReq(x:MoveSpaceNodeReq,v:Ref<MoveSpaceNodeReq>)
+	export function unRefMoveSpaceNodeReq(v:Ref<MoveSpaceNodeReq>):MoveSpaceNodeReq
+	export function emptyCreateSpaceMemberReq():CreateSpaceMemberReq
+	export function emptyRefCreateSpaceMemberReq():Ref<CreateSpaceMemberReq>
+	export function refOfCreateSpaceMemberReq(x:CreateSpaceMemberReq,v:Ref<CreateSpaceMemberReq>)
+	export function unRefCreateSpaceMemberReq(v:Ref<CreateSpaceMemberReq>):CreateSpaceMemberReq
+	export function emptyCreateSpaceRespData():CreateSpaceRespData
+	export function emptyRefCreateSpaceRespData():Ref<CreateSpaceRespData>
+	export function refOfCreateSpaceRespData(x:CreateSpaceRespData,v:Ref<CreateSpaceRespData>)
+	export function unRefCreateSpaceRespData(v:Ref<CreateSpaceRespData>):CreateSpaceRespData
+	export function emptyListSpaceNodeReq():ListSpaceNodeReq
+	export function emptyRefListSpaceNodeReq():Ref<ListSpaceNodeReq>
+	export function refOfListSpaceNodeReq(x:ListSpaceNodeReq,v:Ref<ListSpaceNodeReq>)
+	export function unRefListSpaceNodeReq(v:Ref<ListSpaceNodeReq>):ListSpaceNodeReq
+	export function emptyGetNodeSpaceResp():GetNodeSpaceResp
+	export function emptyRefGetNodeSpaceResp():Ref<GetNodeSpaceResp>
+	export function refOfGetNodeSpaceResp(x:GetNodeSpaceResp,v:Ref<GetNodeSpaceResp>)
+	export function unRefGetNodeSpaceResp(v:Ref<GetNodeSpaceResp>):GetNodeSpaceResp
+	export function emptyGetSpaceRespData():GetSpaceRespData
+	export function emptyRefGetSpaceRespData():Ref<GetSpaceRespData>
+	export function refOfGetSpaceRespData(x:GetSpaceRespData,v:Ref<GetSpaceRespData>)
+	export function unRefGetSpaceRespData(v:Ref<GetSpaceRespData>):GetSpaceRespData
+	export function emptyListSpaceReq():ListSpaceReq
+	export function emptyRefListSpaceReq():Ref<ListSpaceReq>
+	export function refOfListSpaceReq(x:ListSpaceReq,v:Ref<ListSpaceReq>)
+	export function unRefListSpaceReq(v:Ref<ListSpaceReq>):ListSpaceReq
+	export function emptyMoveDocsToWikiSpaceNodeRespData():MoveDocsToWikiSpaceNodeRespData
+	export function emptyRefMoveDocsToWikiSpaceNodeRespData():Ref<MoveDocsToWikiSpaceNodeRespData>
+	export function refOfMoveDocsToWikiSpaceNodeRespData(x:MoveDocsToWikiSpaceNodeRespData,v:Ref<MoveDocsToWikiSpaceNodeRespData>)
+	export function unRefMoveDocsToWikiSpaceNodeRespData(v:Ref<MoveDocsToWikiSpaceNodeRespData>):MoveDocsToWikiSpaceNodeRespData
+	export function emptyTaskResult():TaskResult
+	export function emptyRefTaskResult():Ref<TaskResult>
+	export function refOfTaskResult(x:TaskResult,v:Ref<TaskResult>)
+	export function unRefTaskResult(v:Ref<TaskResult>):TaskResult
+	export function emptyCopySpaceNodeReqBody():CopySpaceNodeReqBody
+	export function emptyRefCopySpaceNodeReqBody():Ref<CopySpaceNodeReqBody>
+	export function refOfCopySpaceNodeReqBody(x:CopySpaceNodeReqBody,v:Ref<CopySpaceNodeReqBody>)
+	export function unRefCopySpaceNodeReqBody(v:Ref<CopySpaceNodeReqBody>):CopySpaceNodeReqBody
+	export function emptyCopySpaceNodeRespData():CopySpaceNodeRespData
+	export function emptyRefCopySpaceNodeRespData():Ref<CopySpaceNodeRespData>
+	export function refOfCopySpaceNodeRespData(x:CopySpaceNodeRespData,v:Ref<CopySpaceNodeRespData>)
+	export function unRefCopySpaceNodeRespData(v:Ref<CopySpaceNodeRespData>):CopySpaceNodeRespData
 	export function emptyDeleteSpaceMemberReq():DeleteSpaceMemberReq
 	export function emptyRefDeleteSpaceMemberReq():Ref<DeleteSpaceMemberReq>
 	export function refOfDeleteSpaceMemberReq(x:DeleteSpaceMemberReq,v:Ref<DeleteSpaceMemberReq>)
 	export function unRefDeleteSpaceMemberReq(v:Ref<DeleteSpaceMemberReq>):DeleteSpaceMemberReq
+	export function emptyUpdateTitleSpaceNodeReqBody():UpdateTitleSpaceNodeReqBody
+	export function emptyRefUpdateTitleSpaceNodeReqBody():Ref<UpdateTitleSpaceNodeReqBody>
+	export function refOfUpdateTitleSpaceNodeReqBody(x:UpdateTitleSpaceNodeReqBody,v:Ref<UpdateTitleSpaceNodeReqBody>)
+	export function unRefUpdateTitleSpaceNodeReqBody(v:Ref<UpdateTitleSpaceNodeReqBody>):UpdateTitleSpaceNodeReqBody
+	export function emptySetting():Setting
+	export function emptyRefSetting():Ref<Setting>
+	export function refOfSetting(x:Setting,v:Ref<Setting>)
+	export function unRefSetting(v:Ref<Setting>):Setting
+	export function emptySpace():Space
+	export function emptyRefSpace():Ref<Space>
+	export function refOfSpace(x:Space,v:Ref<Space>)
+	export function unRefSpace(v:Ref<Space>):Space
+	export function emptyMoveDocsToWikiSpaceNodeReq():MoveDocsToWikiSpaceNodeReq
+	export function emptyRefMoveDocsToWikiSpaceNodeReq():Ref<MoveDocsToWikiSpaceNodeReq>
+	export function refOfMoveDocsToWikiSpaceNodeReq(x:MoveDocsToWikiSpaceNodeReq,v:Ref<MoveDocsToWikiSpaceNodeReq>)
+	export function unRefMoveDocsToWikiSpaceNodeReq(v:Ref<MoveDocsToWikiSpaceNodeReq>):MoveDocsToWikiSpaceNodeReq
+	export function emptyUpdateSpaceSettingReq():UpdateSpaceSettingReq
+	export function emptyRefUpdateSpaceSettingReq():Ref<UpdateSpaceSettingReq>
+	export function refOfUpdateSpaceSettingReq(x:UpdateSpaceSettingReq,v:Ref<UpdateSpaceSettingReq>)
+	export function unRefUpdateSpaceSettingReq(v:Ref<UpdateSpaceSettingReq>):UpdateSpaceSettingReq
+	export function emptyCreateSpaceMemberResp():CreateSpaceMemberResp
+	export function emptyRefCreateSpaceMemberResp():Ref<CreateSpaceMemberResp>
+	export function refOfCreateSpaceMemberResp(x:CreateSpaceMemberResp,v:Ref<CreateSpaceMemberResp>)
+	export function unRefCreateSpaceMemberResp(v:Ref<CreateSpaceMemberResp>):CreateSpaceMemberResp
+	export function emptyGetSpaceReq():GetSpaceReq
+	export function emptyRefGetSpaceReq():Ref<GetSpaceReq>
+	export function refOfGetSpaceReq(x:GetSpaceReq,v:Ref<GetSpaceReq>)
+	export function unRefGetSpaceReq(v:Ref<GetSpaceReq>):GetSpaceReq
+	export function emptyListSpaceResp():ListSpaceResp
+	export function emptyRefListSpaceResp():Ref<ListSpaceResp>
+	export function refOfListSpaceResp(x:ListSpaceResp,v:Ref<ListSpaceResp>)
+	export function unRefListSpaceResp(v:Ref<ListSpaceResp>):ListSpaceResp
+	export function emptyListSpaceNodeRespData():ListSpaceNodeRespData
+	export function emptyRefListSpaceNodeRespData():Ref<ListSpaceNodeRespData>
+	export function refOfListSpaceNodeRespData(x:ListSpaceNodeRespData,v:Ref<ListSpaceNodeRespData>)
+	export function unRefListSpaceNodeRespData(v:Ref<ListSpaceNodeRespData>):ListSpaceNodeRespData
+	export function emptyNodeSearch():NodeSearch
+	export function emptyRefNodeSearch():Ref<NodeSearch>
+	export function refOfNodeSearch(x:NodeSearch,v:Ref<NodeSearch>)
+	export function unRefNodeSearch(v:Ref<NodeSearch>):NodeSearch
+	export function emptyCopySpaceNodeResp():CopySpaceNodeResp
+	export function emptyRefCopySpaceNodeResp():Ref<CopySpaceNodeResp>
+	export function refOfCopySpaceNodeResp(x:CopySpaceNodeResp,v:Ref<CopySpaceNodeResp>)
+	export function unRefCopySpaceNodeResp(v:Ref<CopySpaceNodeResp>):CopySpaceNodeResp
+	export function emptyCreateSpaceNodeRespData():CreateSpaceNodeRespData
+	export function emptyRefCreateSpaceNodeRespData():Ref<CreateSpaceNodeRespData>
+	export function refOfCreateSpaceNodeRespData(x:CreateSpaceNodeRespData,v:Ref<CreateSpaceNodeRespData>)
+	export function unRefCreateSpaceNodeRespData(v:Ref<CreateSpaceNodeRespData>):CreateSpaceNodeRespData
+	export function emptyGetTaskReq():GetTaskReq
+	export function emptyRefGetTaskReq():Ref<GetTaskReq>
+	export function refOfGetTaskReq(x:GetTaskReq,v:Ref<GetTaskReq>)
+	export function unRefGetTaskReq(v:Ref<GetTaskReq>):GetTaskReq
 }

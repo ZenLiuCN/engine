@@ -1,7 +1,7 @@
 #!/bin/sh
 #go run . -ro ../modules $1
 rootb="D:/Dev/tmp/go/pkg/mod/github.com/larksuite/base-sdk-go/v3@v3.0.2/"
-root="D:/Dev/tmp/go/pkg/mod/github.com/larksuite/oapi-sdk-go/v3@v3.2.5/"
+root="D:/Dev/tmp/go/pkg/mod/github.com/larksuite/oapi-sdk-go/v3@v3.3.0/"
 
 ./gene -ro ../modules $rootb/
 ./gene -ro ../modules $rootb/core
@@ -26,6 +26,8 @@ root="D:/Dev/tmp/go/pkg/mod/github.com/larksuite/oapi-sdk-go/v3@v3.2.5/"
 ./gene -ro ../modules $root/service/vc/v1
 ./gene -ro ../modules $root/service/translation
 ./gene -ro ../modules $root/service/translation/v1
+./gene -ro ../modules $root/service/compensation
+./gene -ro ../modules $root/service/compensation/v1
 ./gene -ro ../modules $root/service/tenant
 ./gene -ro ../modules $root/service/tenant/v2
 ./gene -ro ../modules $root/service/task

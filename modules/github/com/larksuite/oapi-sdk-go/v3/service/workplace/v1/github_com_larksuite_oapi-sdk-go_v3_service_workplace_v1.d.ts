@@ -7,7 +7,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/workplace/v1'{
 	// @ts-ignore
 	import * as context from 'golang/context'
 	// @ts-ignore
-	import type {int,Ref,Struct,bool,error} from 'go'
+	import type {bool,error,int,Ref,Struct} from 'go'
 	export interface AccessData extends Struct<AccessData>{
 
 			pv:Ref<int>
@@ -249,22 +249,6 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/workplace/v1'{
 			expireTime(expireTime:string):Ref<WorkplaceUserNotificationBuilder>
 			build():Ref<WorkplaceUserNotification>
 	}
-	export function emptyRule():Rule
-	export function emptyRefRule():Ref<Rule>
-	export function refOfRule(x:Rule,v:Ref<Rule>)
-	export function unRefRule(v:Ref<Rule>):Rule
-	export function emptySearchCustomWorkplaceAccessDataResp():SearchCustomWorkplaceAccessDataResp
-	export function emptyRefSearchCustomWorkplaceAccessDataResp():Ref<SearchCustomWorkplaceAccessDataResp>
-	export function refOfSearchCustomWorkplaceAccessDataResp(x:SearchCustomWorkplaceAccessDataResp,v:Ref<SearchCustomWorkplaceAccessDataResp>)
-	export function unRefSearchCustomWorkplaceAccessDataResp(v:Ref<SearchCustomWorkplaceAccessDataResp>):SearchCustomWorkplaceAccessDataResp
-	export function emptySearchWorkplaceAccessDataRespData():SearchWorkplaceAccessDataRespData
-	export function emptyRefSearchWorkplaceAccessDataRespData():Ref<SearchWorkplaceAccessDataRespData>
-	export function refOfSearchWorkplaceAccessDataRespData(x:SearchWorkplaceAccessDataRespData,v:Ref<SearchWorkplaceAccessDataRespData>)
-	export function unRefSearchWorkplaceAccessDataRespData(v:Ref<SearchWorkplaceAccessDataRespData>):SearchWorkplaceAccessDataRespData
-	export function emptyTemplateWorkplaceAccessData():TemplateWorkplaceAccessData
-	export function emptyRefTemplateWorkplaceAccessData():Ref<TemplateWorkplaceAccessData>
-	export function refOfTemplateWorkplaceAccessData(x:TemplateWorkplaceAccessData,v:Ref<TemplateWorkplaceAccessData>)
-	export function unRefTemplateWorkplaceAccessData(v:Ref<TemplateWorkplaceAccessData>):TemplateWorkplaceAccessData
 	export function emptyDepartmentId():DepartmentId
 	export function emptyRefDepartmentId():Ref<DepartmentId>
 	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
@@ -273,26 +257,6 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/workplace/v1'{
 	export function emptyRefSearchCustomWorkplaceAccessDataRespData():Ref<SearchCustomWorkplaceAccessDataRespData>
 	export function refOfSearchCustomWorkplaceAccessDataRespData(x:SearchCustomWorkplaceAccessDataRespData,v:Ref<SearchCustomWorkplaceAccessDataRespData>)
 	export function unRefSearchCustomWorkplaceAccessDataRespData(v:Ref<SearchCustomWorkplaceAccessDataRespData>):SearchCustomWorkplaceAccessDataRespData
-	export function emptyBlockAccessData():BlockAccessData
-	export function emptyRefBlockAccessData():Ref<BlockAccessData>
-	export function refOfBlockAccessData(x:BlockAccessData,v:Ref<BlockAccessData>)
-	export function unRefBlockAccessData(v:Ref<BlockAccessData>):BlockAccessData
-	export function emptyI18nName():I18nName
-	export function emptyRefI18nName():Ref<I18nName>
-	export function refOfI18nName(x:I18nName,v:Ref<I18nName>)
-	export function unRefI18nName(v:Ref<I18nName>):I18nName
-	export function emptyWorkplaceTenantNotification():WorkplaceTenantNotification
-	export function emptyRefWorkplaceTenantNotification():Ref<WorkplaceTenantNotification>
-	export function refOfWorkplaceTenantNotification(x:WorkplaceTenantNotification,v:Ref<WorkplaceTenantNotification>)
-	export function unRefWorkplaceTenantNotification(v:Ref<WorkplaceTenantNotification>):WorkplaceTenantNotification
-	export function emptySearchWorkplaceAccessDataResp():SearchWorkplaceAccessDataResp
-	export function emptyRefSearchWorkplaceAccessDataResp():Ref<SearchWorkplaceAccessDataResp>
-	export function refOfSearchWorkplaceAccessDataResp(x:SearchWorkplaceAccessDataResp,v:Ref<SearchWorkplaceAccessDataResp>)
-	export function unRefSearchWorkplaceAccessDataResp(v:Ref<SearchWorkplaceAccessDataResp>):SearchWorkplaceAccessDataResp
-	export function emptySearchWorkplaceBlockAccessDataResp():SearchWorkplaceBlockAccessDataResp
-	export function emptyRefSearchWorkplaceBlockAccessDataResp():Ref<SearchWorkplaceBlockAccessDataResp>
-	export function refOfSearchWorkplaceBlockAccessDataResp(x:SearchWorkplaceBlockAccessDataResp,v:Ref<SearchWorkplaceBlockAccessDataResp>)
-	export function unRefSearchWorkplaceBlockAccessDataResp(v:Ref<SearchWorkplaceBlockAccessDataResp>):SearchWorkplaceBlockAccessDataResp
 	export function emptyV1():V1
 	export function emptyRefV1():Ref<V1>
 	export function refOfV1(x:V1,v:Ref<V1>)
@@ -301,32 +265,68 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/workplace/v1'{
 	export function emptyRefAccessData():Ref<AccessData>
 	export function refOfAccessData(x:AccessData,v:Ref<AccessData>)
 	export function unRefAccessData(v:Ref<AccessData>):AccessData
-	export function emptySearchCustomWorkplaceAccessDataReq():SearchCustomWorkplaceAccessDataReq
-	export function emptyRefSearchCustomWorkplaceAccessDataReq():Ref<SearchCustomWorkplaceAccessDataReq>
-	export function refOfSearchCustomWorkplaceAccessDataReq(x:SearchCustomWorkplaceAccessDataReq,v:Ref<SearchCustomWorkplaceAccessDataReq>)
-	export function unRefSearchCustomWorkplaceAccessDataReq(v:Ref<SearchCustomWorkplaceAccessDataReq>):SearchCustomWorkplaceAccessDataReq
-	export function emptySearchWorkplaceBlockAccessDataRespData():SearchWorkplaceBlockAccessDataRespData
-	export function emptyRefSearchWorkplaceBlockAccessDataRespData():Ref<SearchWorkplaceBlockAccessDataRespData>
-	export function refOfSearchWorkplaceBlockAccessDataRespData(x:SearchWorkplaceBlockAccessDataRespData,v:Ref<SearchWorkplaceBlockAccessDataRespData>)
-	export function unRefSearchWorkplaceBlockAccessDataRespData(v:Ref<SearchWorkplaceBlockAccessDataRespData>):SearchWorkplaceBlockAccessDataRespData
+	export function emptyI18nName():I18nName
+	export function emptyRefI18nName():Ref<I18nName>
+	export function refOfI18nName(x:I18nName,v:Ref<I18nName>)
+	export function unRefI18nName(v:Ref<I18nName>):I18nName
 	export function emptyWorkplaceUserNotification():WorkplaceUserNotification
 	export function emptyRefWorkplaceUserNotification():Ref<WorkplaceUserNotification>
 	export function refOfWorkplaceUserNotification(x:WorkplaceUserNotification,v:Ref<WorkplaceUserNotification>)
 	export function unRefWorkplaceUserNotification(v:Ref<WorkplaceUserNotification>):WorkplaceUserNotification
-	export function emptySearchWorkplaceBlockAccessDataReq():SearchWorkplaceBlockAccessDataReq
-	export function emptyRefSearchWorkplaceBlockAccessDataReq():Ref<SearchWorkplaceBlockAccessDataReq>
-	export function refOfSearchWorkplaceBlockAccessDataReq(x:SearchWorkplaceBlockAccessDataReq,v:Ref<SearchWorkplaceBlockAccessDataReq>)
-	export function unRefSearchWorkplaceBlockAccessDataReq(v:Ref<SearchWorkplaceBlockAccessDataReq>):SearchWorkplaceBlockAccessDataReq
-	export function emptyWorkplaceAccessData():WorkplaceAccessData
-	export function emptyRefWorkplaceAccessData():Ref<WorkplaceAccessData>
-	export function refOfWorkplaceAccessData(x:WorkplaceAccessData,v:Ref<WorkplaceAccessData>)
-	export function unRefWorkplaceAccessData(v:Ref<WorkplaceAccessData>):WorkplaceAccessData
 	export function emptyCustomWorkplaceAccessData():CustomWorkplaceAccessData
 	export function emptyRefCustomWorkplaceAccessData():Ref<CustomWorkplaceAccessData>
 	export function refOfCustomWorkplaceAccessData(x:CustomWorkplaceAccessData,v:Ref<CustomWorkplaceAccessData>)
 	export function unRefCustomWorkplaceAccessData(v:Ref<CustomWorkplaceAccessData>):CustomWorkplaceAccessData
+	export function emptySearchWorkplaceBlockAccessDataRespData():SearchWorkplaceBlockAccessDataRespData
+	export function emptyRefSearchWorkplaceBlockAccessDataRespData():Ref<SearchWorkplaceBlockAccessDataRespData>
+	export function refOfSearchWorkplaceBlockAccessDataRespData(x:SearchWorkplaceBlockAccessDataRespData,v:Ref<SearchWorkplaceBlockAccessDataRespData>)
+	export function unRefSearchWorkplaceBlockAccessDataRespData(v:Ref<SearchWorkplaceBlockAccessDataRespData>):SearchWorkplaceBlockAccessDataRespData
+	export function emptySearchCustomWorkplaceAccessDataReq():SearchCustomWorkplaceAccessDataReq
+	export function emptyRefSearchCustomWorkplaceAccessDataReq():Ref<SearchCustomWorkplaceAccessDataReq>
+	export function refOfSearchCustomWorkplaceAccessDataReq(x:SearchCustomWorkplaceAccessDataReq,v:Ref<SearchCustomWorkplaceAccessDataReq>)
+	export function unRefSearchCustomWorkplaceAccessDataReq(v:Ref<SearchCustomWorkplaceAccessDataReq>):SearchCustomWorkplaceAccessDataReq
+	export function emptySearchWorkplaceAccessDataResp():SearchWorkplaceAccessDataResp
+	export function emptyRefSearchWorkplaceAccessDataResp():Ref<SearchWorkplaceAccessDataResp>
+	export function refOfSearchWorkplaceAccessDataResp(x:SearchWorkplaceAccessDataResp,v:Ref<SearchWorkplaceAccessDataResp>)
+	export function unRefSearchWorkplaceAccessDataResp(v:Ref<SearchWorkplaceAccessDataResp>):SearchWorkplaceAccessDataResp
+	export function emptyTemplateWorkplaceAccessData():TemplateWorkplaceAccessData
+	export function emptyRefTemplateWorkplaceAccessData():Ref<TemplateWorkplaceAccessData>
+	export function refOfTemplateWorkplaceAccessData(x:TemplateWorkplaceAccessData,v:Ref<TemplateWorkplaceAccessData>)
+	export function unRefTemplateWorkplaceAccessData(v:Ref<TemplateWorkplaceAccessData>):TemplateWorkplaceAccessData
+	export function emptySearchWorkplaceBlockAccessDataResp():SearchWorkplaceBlockAccessDataResp
+	export function emptyRefSearchWorkplaceBlockAccessDataResp():Ref<SearchWorkplaceBlockAccessDataResp>
+	export function refOfSearchWorkplaceBlockAccessDataResp(x:SearchWorkplaceBlockAccessDataResp,v:Ref<SearchWorkplaceBlockAccessDataResp>)
+	export function unRefSearchWorkplaceBlockAccessDataResp(v:Ref<SearchWorkplaceBlockAccessDataResp>):SearchWorkplaceBlockAccessDataResp
+	export function emptySearchCustomWorkplaceAccessDataResp():SearchCustomWorkplaceAccessDataResp
+	export function emptyRefSearchCustomWorkplaceAccessDataResp():Ref<SearchCustomWorkplaceAccessDataResp>
+	export function refOfSearchCustomWorkplaceAccessDataResp(x:SearchCustomWorkplaceAccessDataResp,v:Ref<SearchCustomWorkplaceAccessDataResp>)
+	export function unRefSearchCustomWorkplaceAccessDataResp(v:Ref<SearchCustomWorkplaceAccessDataResp>):SearchCustomWorkplaceAccessDataResp
+	export function emptySearchWorkplaceBlockAccessDataReq():SearchWorkplaceBlockAccessDataReq
+	export function emptyRefSearchWorkplaceBlockAccessDataReq():Ref<SearchWorkplaceBlockAccessDataReq>
+	export function refOfSearchWorkplaceBlockAccessDataReq(x:SearchWorkplaceBlockAccessDataReq,v:Ref<SearchWorkplaceBlockAccessDataReq>)
+	export function unRefSearchWorkplaceBlockAccessDataReq(v:Ref<SearchWorkplaceBlockAccessDataReq>):SearchWorkplaceBlockAccessDataReq
+	export function emptyRule():Rule
+	export function emptyRefRule():Ref<Rule>
+	export function refOfRule(x:Rule,v:Ref<Rule>)
+	export function unRefRule(v:Ref<Rule>):Rule
+	export function emptyWorkplaceAccessData():WorkplaceAccessData
+	export function emptyRefWorkplaceAccessData():Ref<WorkplaceAccessData>
+	export function refOfWorkplaceAccessData(x:WorkplaceAccessData,v:Ref<WorkplaceAccessData>)
+	export function unRefWorkplaceAccessData(v:Ref<WorkplaceAccessData>):WorkplaceAccessData
+	export function emptyBlockAccessData():BlockAccessData
+	export function emptyRefBlockAccessData():Ref<BlockAccessData>
+	export function refOfBlockAccessData(x:BlockAccessData,v:Ref<BlockAccessData>)
+	export function unRefBlockAccessData(v:Ref<BlockAccessData>):BlockAccessData
 	export function emptySearchWorkplaceAccessDataReq():SearchWorkplaceAccessDataReq
 	export function emptyRefSearchWorkplaceAccessDataReq():Ref<SearchWorkplaceAccessDataReq>
 	export function refOfSearchWorkplaceAccessDataReq(x:SearchWorkplaceAccessDataReq,v:Ref<SearchWorkplaceAccessDataReq>)
 	export function unRefSearchWorkplaceAccessDataReq(v:Ref<SearchWorkplaceAccessDataReq>):SearchWorkplaceAccessDataReq
+	export function emptySearchWorkplaceAccessDataRespData():SearchWorkplaceAccessDataRespData
+	export function emptyRefSearchWorkplaceAccessDataRespData():Ref<SearchWorkplaceAccessDataRespData>
+	export function refOfSearchWorkplaceAccessDataRespData(x:SearchWorkplaceAccessDataRespData,v:Ref<SearchWorkplaceAccessDataRespData>)
+	export function unRefSearchWorkplaceAccessDataRespData(v:Ref<SearchWorkplaceAccessDataRespData>):SearchWorkplaceAccessDataRespData
+	export function emptyWorkplaceTenantNotification():WorkplaceTenantNotification
+	export function emptyRefWorkplaceTenantNotification():Ref<WorkplaceTenantNotification>
+	export function refOfWorkplaceTenantNotification(x:WorkplaceTenantNotification,v:Ref<WorkplaceTenantNotification>)
+	export function unRefWorkplaceTenantNotification(v:Ref<WorkplaceTenantNotification>):WorkplaceTenantNotification
 }

@@ -3,13 +3,13 @@
 declare module 'github.com/larksuite/oapi-sdk-go/v3/service/baike/v1'{
 
 	// @ts-ignore
+	import * as larkcore from 'github.com/larksuite/oapi-sdk-go/v3/core'
+	// @ts-ignore
 	import * as io from 'golang/io'
 	// @ts-ignore
 	import * as context from 'golang/context'
 	// @ts-ignore
-	import * as larkcore from 'github.com/larksuite/oapi-sdk-go/v3/core'
-	// @ts-ignore
-	import type {Ref,Struct,int,bool,error,float64} from 'go'
+	import type {error,float64,Ref,Struct,int,bool} from 'go'
 	export interface Abbreviation extends Struct<Abbreviation>{
 
 			id:Ref<string>
@@ -52,7 +52,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/baike/v1'{
 			exclude(exclude:string[]):Ref<ClassificationFilterBuilder>
 			build():Ref<ClassificationFilter>
 	}
-	export interface CorrectError extends Error,Struct<CorrectError>{
+	export interface CorrectError extends Struct<CorrectError>,Error{
 
 			type:Ref<int>
 			total:Ref<int>
@@ -865,158 +865,34 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/baike/v1'{
 			sendEngWordsRingGrowth(sendEngWordsRingGrowth:int):Ref<WordInfoBuilder>
 			build():Ref<WordInfo>
 	}
-	export function emptyGetEntityResp():GetEntityResp
-	export function emptyRefGetEntityResp():Ref<GetEntityResp>
-	export function refOfGetEntityResp(x:GetEntityResp,v:Ref<GetEntityResp>)
-	export function unRefGetEntityResp(v:Ref<GetEntityResp>):GetEntityResp
-	export function emptySpan():Span
-	export function emptyRefSpan():Ref<Span>
-	export function refOfSpan(x:Span,v:Ref<Span>)
-	export function unRefSpan(v:Ref<Span>):Span
-	export function emptyWordInfo():WordInfo
-	export function emptyRefWordInfo():Ref<WordInfo>
-	export function refOfWordInfo(x:WordInfo,v:Ref<WordInfo>)
-	export function unRefWordInfo(v:Ref<WordInfo>):WordInfo
-	export function emptyHighlightEntityReqBody():HighlightEntityReqBody
-	export function emptyRefHighlightEntityReqBody():Ref<HighlightEntityReqBody>
-	export function refOfHighlightEntityReqBody(x:HighlightEntityReqBody,v:Ref<HighlightEntityReqBody>)
-	export function unRefHighlightEntityReqBody(v:Ref<HighlightEntityReqBody>):HighlightEntityReqBody
-	export function emptyStatisticalReport():StatisticalReport
-	export function emptyRefStatisticalReport():Ref<StatisticalReport>
-	export function refOfStatisticalReport(x:StatisticalReport,v:Ref<StatisticalReport>)
-	export function unRefStatisticalReport(v:Ref<StatisticalReport>):StatisticalReport
-	export function emptyUpdateEntityReq():UpdateEntityReq
-	export function emptyRefUpdateEntityReq():Ref<UpdateEntityReq>
-	export function refOfUpdateEntityReq(x:UpdateEntityReq,v:Ref<UpdateEntityReq>)
-	export function unRefUpdateEntityReq(v:Ref<UpdateEntityReq>):UpdateEntityReq
-	export function emptyExtractEntityReq():ExtractEntityReq
-	export function emptyRefExtractEntityReq():Ref<ExtractEntityReq>
-	export function refOfExtractEntityReq(x:ExtractEntityReq,v:Ref<ExtractEntityReq>)
-	export function unRefExtractEntityReq(v:Ref<ExtractEntityReq>):ExtractEntityReq
-	export function emptyListClassificationRespData():ListClassificationRespData
-	export function emptyRefListClassificationRespData():Ref<ListClassificationRespData>
-	export function refOfListClassificationRespData(x:ListClassificationRespData,v:Ref<ListClassificationRespData>)
-	export function unRefListClassificationRespData(v:Ref<ListClassificationRespData>):ListClassificationRespData
 	export function emptyListEntityRespData():ListEntityRespData
 	export function emptyRefListEntityRespData():Ref<ListEntityRespData>
 	export function refOfListEntityRespData(x:ListEntityRespData,v:Ref<ListEntityRespData>)
 	export function unRefListEntityRespData(v:Ref<ListEntityRespData>):ListEntityRespData
+	export function emptyHighlightEntityRespData():HighlightEntityRespData
+	export function emptyRefHighlightEntityRespData():Ref<HighlightEntityRespData>
+	export function refOfHighlightEntityRespData(x:HighlightEntityRespData,v:Ref<HighlightEntityRespData>)
+	export function unRefHighlightEntityRespData(v:Ref<HighlightEntityRespData>):HighlightEntityRespData
+	export function emptyListClassificationReq():ListClassificationReq
+	export function emptyRefListClassificationReq():Ref<ListClassificationReq>
+	export function refOfListClassificationReq(x:ListClassificationReq,v:Ref<ListClassificationReq>)
+	export function unRefListClassificationReq(v:Ref<ListClassificationReq>):ListClassificationReq
+	export function emptyRelatedMeta():RelatedMeta
+	export function emptyRefRelatedMeta():Ref<RelatedMeta>
+	export function refOfRelatedMeta(x:RelatedMeta,v:Ref<RelatedMeta>)
+	export function unRefRelatedMeta(v:Ref<RelatedMeta>):RelatedMeta
 	export function emptyUpdateDraftResp():UpdateDraftResp
 	export function emptyRefUpdateDraftResp():Ref<UpdateDraftResp>
 	export function refOfUpdateDraftResp(x:UpdateDraftResp,v:Ref<UpdateDraftResp>)
 	export function unRefUpdateDraftResp(v:Ref<UpdateDraftResp>):UpdateDraftResp
-	export function emptyDraft():Draft
-	export function emptyRefDraft():Ref<Draft>
-	export function refOfDraft(x:Draft,v:Ref<Draft>)
-	export function unRefDraft(v:Ref<Draft>):Draft
-	export function emptyV1():V1
-	export function emptyRefV1():Ref<V1>
-	export function refOfV1(x:V1,v:Ref<V1>)
-	export function unRefV1(v:Ref<V1>):V1
+	export function emptyDisplayStatus():DisplayStatus
+	export function emptyRefDisplayStatus():Ref<DisplayStatus>
+	export function refOfDisplayStatus(x:DisplayStatus,v:Ref<DisplayStatus>)
+	export function unRefDisplayStatus(v:Ref<DisplayStatus>):DisplayStatus
 	export function emptyExtractEntityResp():ExtractEntityResp
 	export function emptyRefExtractEntityResp():Ref<ExtractEntityResp>
 	export function refOfExtractEntityResp(x:ExtractEntityResp,v:Ref<ExtractEntityResp>)
 	export function unRefExtractEntityResp(v:Ref<ExtractEntityResp>):ExtractEntityResp
-	export function emptyGetEntityReq():GetEntityReq
-	export function emptyRefGetEntityReq():Ref<GetEntityReq>
-	export function refOfGetEntityReq(x:GetEntityReq,v:Ref<GetEntityReq>)
-	export function unRefGetEntityReq(v:Ref<GetEntityReq>):GetEntityReq
-	export function emptyHighlightEntityResp():HighlightEntityResp
-	export function emptyRefHighlightEntityResp():Ref<HighlightEntityResp>
-	export function refOfHighlightEntityResp(x:HighlightEntityResp,v:Ref<HighlightEntityResp>)
-	export function unRefHighlightEntityResp(v:Ref<HighlightEntityResp>):HighlightEntityResp
-	export function emptyMatchInfo():MatchInfo
-	export function emptyRefMatchInfo():Ref<MatchInfo>
-	export function refOfMatchInfo(x:MatchInfo,v:Ref<MatchInfo>)
-	export function unRefMatchInfo(v:Ref<MatchInfo>):MatchInfo
-	export function emptyStatistics():Statistics
-	export function emptyRefStatistics():Ref<Statistics>
-	export function refOfStatistics(x:Statistics,v:Ref<Statistics>)
-	export function unRefStatistics(v:Ref<Statistics>):Statistics
-	export function emptyUploadFileReq():UploadFileReq
-	export function emptyRefUploadFileReq():Ref<UploadFileReq>
-	export function refOfUploadFileReq(x:UploadFileReq,v:Ref<UploadFileReq>)
-	export function unRefUploadFileReq(v:Ref<UploadFileReq>):UploadFileReq
-	export function emptyBaikeImage():BaikeImage
-	export function emptyRefBaikeImage():Ref<BaikeImage>
-	export function refOfBaikeImage(x:BaikeImage,v:Ref<BaikeImage>)
-	export function unRefBaikeImage(v:Ref<BaikeImage>):BaikeImage
-	export function emptyCreateEntityReq():CreateEntityReq
-	export function emptyRefCreateEntityReq():Ref<CreateEntityReq>
-	export function refOfCreateEntityReq(x:CreateEntityReq,v:Ref<CreateEntityReq>)
-	export function unRefCreateEntityReq(v:Ref<CreateEntityReq>):CreateEntityReq
-	export function emptyClassification():Classification
-	export function emptyRefClassification():Ref<Classification>
-	export function refOfClassification(x:Classification,v:Ref<Classification>)
-	export function unRefClassification(v:Ref<Classification>):Classification
-	export function emptyCorrectInfo():CorrectInfo
-	export function emptyRefCorrectInfo():Ref<CorrectInfo>
-	export function refOfCorrectInfo(x:CorrectInfo,v:Ref<CorrectInfo>)
-	export function unRefCorrectInfo(v:Ref<CorrectInfo>):CorrectInfo
-	export function emptyUpdateDraftRespData():UpdateDraftRespData
-	export function emptyRefUpdateDraftRespData():Ref<UpdateDraftRespData>
-	export function refOfUpdateDraftRespData(x:UpdateDraftRespData,v:Ref<UpdateDraftRespData>)
-	export function unRefUpdateDraftRespData(v:Ref<UpdateDraftRespData>):UpdateDraftRespData
-	export function emptyUploadFileResp():UploadFileResp
-	export function emptyRefUploadFileResp():Ref<UploadFileResp>
-	export function refOfUploadFileResp(x:UploadFileResp,v:Ref<UploadFileResp>)
-	export function unRefUploadFileResp(v:Ref<UploadFileResp>):UploadFileResp
-	export function emptyAbbreviation():Abbreviation
-	export function emptyRefAbbreviation():Ref<Abbreviation>
-	export function refOfAbbreviation(x:Abbreviation,v:Ref<Abbreviation>)
-	export function unRefAbbreviation(v:Ref<Abbreviation>):Abbreviation
-	export function emptyCreateEntityResp():CreateEntityResp
-	export function emptyRefCreateEntityResp():Ref<CreateEntityResp>
-	export function refOfCreateEntityResp(x:CreateEntityResp,v:Ref<CreateEntityResp>)
-	export function unRefCreateEntityResp(v:Ref<CreateEntityResp>):CreateEntityResp
-	export function emptyTerm():Term
-	export function emptyRefTerm():Ref<Term>
-	export function refOfTerm(x:Term,v:Ref<Term>)
-	export function unRefTerm(v:Ref<Term>):Term
-	export function emptyFile():File
-	export function emptyRefFile():Ref<File>
-	export function refOfFile(x:File,v:Ref<File>)
-	export function unRefFile(v:Ref<File>):File
-	export function emptyGetEntityRespData():GetEntityRespData
-	export function emptyRefGetEntityRespData():Ref<GetEntityRespData>
-	export function refOfGetEntityRespData(x:GetEntityRespData,v:Ref<GetEntityRespData>)
-	export function unRefGetEntityRespData(v:Ref<GetEntityRespData>):GetEntityRespData
-	export function emptyMatchEntityReqBody():MatchEntityReqBody
-	export function emptyRefMatchEntityReqBody():Ref<MatchEntityReqBody>
-	export function refOfMatchEntityReqBody(x:MatchEntityReqBody,v:Ref<MatchEntityReqBody>)
-	export function unRefMatchEntityReqBody(v:Ref<MatchEntityReqBody>):MatchEntityReqBody
-	export function emptyMatchEntityRespData():MatchEntityRespData
-	export function emptyRefMatchEntityRespData():Ref<MatchEntityRespData>
-	export function refOfMatchEntityRespData(x:MatchEntityRespData,v:Ref<MatchEntityRespData>)
-	export function unRefMatchEntityRespData(v:Ref<MatchEntityRespData>):MatchEntityRespData
-	export function emptyUpdateDraftReq():UpdateDraftReq
-	export function emptyRefUpdateDraftReq():Ref<UpdateDraftReq>
-	export function refOfUpdateDraftReq(x:UpdateDraftReq,v:Ref<UpdateDraftReq>)
-	export function unRefUpdateDraftReq(v:Ref<UpdateDraftReq>):UpdateDraftReq
-	export function emptyClassificationFilter():ClassificationFilter
-	export function emptyRefClassificationFilter():Ref<ClassificationFilter>
-	export function refOfClassificationFilter(x:ClassificationFilter,v:Ref<ClassificationFilter>)
-	export function unRefClassificationFilter(v:Ref<ClassificationFilter>):ClassificationFilter
-	export function emptyHighlightEntityReq():HighlightEntityReq
-	export function emptyRefHighlightEntityReq():Ref<HighlightEntityReq>
-	export function refOfHighlightEntityReq(x:HighlightEntityReq,v:Ref<HighlightEntityReq>)
-	export function unRefHighlightEntityReq(v:Ref<HighlightEntityReq>):HighlightEntityReq
-	export function emptySearchEntityReq():SearchEntityReq
-	export function emptyRefSearchEntityReq():Ref<SearchEntityReq>
-	export function refOfSearchEntityReq(x:SearchEntityReq,v:Ref<SearchEntityReq>)
-	export function unRefSearchEntityReq(v:Ref<SearchEntityReq>):SearchEntityReq
-	export function emptyUpdateEntityRespData():UpdateEntityRespData
-	export function emptyRefUpdateEntityRespData():Ref<UpdateEntityRespData>
-	export function refOfUpdateEntityRespData(x:UpdateEntityRespData,v:Ref<UpdateEntityRespData>)
-	export function unRefUpdateEntityRespData(v:Ref<UpdateEntityRespData>):UpdateEntityRespData
-	export function emptyEntity():Entity
-	export function emptyRefEntity():Ref<Entity>
-	export function refOfEntity(x:Entity,v:Ref<Entity>)
-	export function unRefEntity(v:Ref<Entity>):Entity
-	export function emptyEntityWord():EntityWord
-	export function emptyRefEntityWord():Ref<EntityWord>
-	export function refOfEntityWord(x:EntityWord,v:Ref<EntityWord>)
-	export function unRefEntityWord(v:Ref<EntityWord>):EntityWord
 	export function emptyExtractEntityReqBody():ExtractEntityReqBody
 	export function emptyRefExtractEntityReqBody():Ref<ExtractEntityReqBody>
 	export function refOfExtractEntityReqBody(x:ExtractEntityReqBody,v:Ref<ExtractEntityReqBody>)
@@ -1025,116 +901,240 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/baike/v1'{
 	export function emptyRefExtractEntityRespData():Ref<ExtractEntityRespData>
 	export function refOfExtractEntityRespData(x:ExtractEntityRespData,v:Ref<ExtractEntityRespData>)
 	export function unRefExtractEntityRespData(v:Ref<ExtractEntityRespData>):ExtractEntityRespData
-	export function emptyDepartmentId():DepartmentId
-	export function emptyRefDepartmentId():Ref<DepartmentId>
-	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
-	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptyHighlightEntityRespData():HighlightEntityRespData
-	export function emptyRefHighlightEntityRespData():Ref<HighlightEntityRespData>
-	export function refOfHighlightEntityRespData(x:HighlightEntityRespData,v:Ref<HighlightEntityRespData>)
-	export function unRefHighlightEntityRespData(v:Ref<HighlightEntityRespData>):HighlightEntityRespData
-	export function emptyListEntityIterator():ListEntityIterator
-	export function emptyRefListEntityIterator():Ref<ListEntityIterator>
-	export function refOfListEntityIterator(x:ListEntityIterator,v:Ref<ListEntityIterator>)
-	export function unRefListEntityIterator(v:Ref<ListEntityIterator>):ListEntityIterator
-	export function emptyListClassificationResp():ListClassificationResp
-	export function emptyRefListClassificationResp():Ref<ListClassificationResp>
-	export function refOfListClassificationResp(x:ListClassificationResp,v:Ref<ListClassificationResp>)
-	export function unRefListClassificationResp(v:Ref<ListClassificationResp>):ListClassificationResp
-	export function emptyUploadFileRespData():UploadFileRespData
-	export function emptyRefUploadFileRespData():Ref<UploadFileRespData>
-	export function refOfUploadFileRespData(x:UploadFileRespData,v:Ref<UploadFileRespData>)
-	export function unRefUploadFileRespData(v:Ref<UploadFileRespData>):UploadFileRespData
-	export function emptyListEntityReq():ListEntityReq
-	export function emptyRefListEntityReq():Ref<ListEntityReq>
-	export function refOfListEntityReq(x:ListEntityReq,v:Ref<ListEntityReq>)
-	export function unRefListEntityReq(v:Ref<ListEntityReq>):ListEntityReq
-	export function emptyDownloadFileReq():DownloadFileReq
-	export function emptyRefDownloadFileReq():Ref<DownloadFileReq>
-	export function refOfDownloadFileReq(x:DownloadFileReq,v:Ref<DownloadFileReq>)
-	export function unRefDownloadFileReq(v:Ref<DownloadFileReq>):DownloadFileReq
-	export function emptyDisplayStatus():DisplayStatus
-	export function emptyRefDisplayStatus():Ref<DisplayStatus>
-	export function refOfDisplayStatus(x:DisplayStatus,v:Ref<DisplayStatus>)
-	export function unRefDisplayStatus(v:Ref<DisplayStatus>):DisplayStatus
-	export function emptyListClassificationIterator():ListClassificationIterator
-	export function emptyRefListClassificationIterator():Ref<ListClassificationIterator>
-	export function refOfListClassificationIterator(x:ListClassificationIterator,v:Ref<ListClassificationIterator>)
-	export function unRefListClassificationIterator(v:Ref<ListClassificationIterator>):ListClassificationIterator
-	export function emptySearchEntityIterator():SearchEntityIterator
-	export function emptyRefSearchEntityIterator():Ref<SearchEntityIterator>
-	export function refOfSearchEntityIterator(x:SearchEntityIterator,v:Ref<SearchEntityIterator>)
-	export function unRefSearchEntityIterator(v:Ref<SearchEntityIterator>):SearchEntityIterator
-	export function emptyPhrase():Phrase
-	export function emptyRefPhrase():Ref<Phrase>
-	export function refOfPhrase(x:Phrase,v:Ref<Phrase>)
-	export function unRefPhrase(v:Ref<Phrase>):Phrase
-	export function emptySearchEntityResp():SearchEntityResp
-	export function emptyRefSearchEntityResp():Ref<SearchEntityResp>
-	export function refOfSearchEntityResp(x:SearchEntityResp,v:Ref<SearchEntityResp>)
-	export function unRefSearchEntityResp(v:Ref<SearchEntityResp>):SearchEntityResp
-	export function emptyCreateDraftReq():CreateDraftReq
-	export function emptyRefCreateDraftReq():Ref<CreateDraftReq>
-	export function refOfCreateDraftReq(x:CreateDraftReq,v:Ref<CreateDraftReq>)
-	export function unRefCreateDraftReq(v:Ref<CreateDraftReq>):CreateDraftReq
-	export function emptyCreateDraftResp():CreateDraftResp
-	export function emptyRefCreateDraftResp():Ref<CreateDraftResp>
-	export function refOfCreateDraftResp(x:CreateDraftResp,v:Ref<CreateDraftResp>)
-	export function unRefCreateDraftResp(v:Ref<CreateDraftResp>):CreateDraftResp
-	export function emptyMatchEntityReq():MatchEntityReq
-	export function emptyRefMatchEntityReq():Ref<MatchEntityReq>
-	export function refOfMatchEntityReq(x:MatchEntityReq,v:Ref<MatchEntityReq>)
-	export function unRefMatchEntityReq(v:Ref<MatchEntityReq>):MatchEntityReq
-	export function emptyMatchEntityResp():MatchEntityResp
-	export function emptyRefMatchEntityResp():Ref<MatchEntityResp>
-	export function refOfMatchEntityResp(x:MatchEntityResp,v:Ref<MatchEntityResp>)
-	export function unRefMatchEntityResp(v:Ref<MatchEntityResp>):MatchEntityResp
-	export function emptyReferer():Referer
-	export function emptyRefReferer():Ref<Referer>
-	export function refOfReferer(x:Referer,v:Ref<Referer>)
-	export function unRefReferer(v:Ref<Referer>):Referer
-	export function emptyRelatedMeta():RelatedMeta
-	export function emptyRefRelatedMeta():Ref<RelatedMeta>
-	export function refOfRelatedMeta(x:RelatedMeta,v:Ref<RelatedMeta>)
-	export function unRefRelatedMeta(v:Ref<RelatedMeta>):RelatedMeta
-	export function emptyDownloadFileResp():DownloadFileResp
-	export function emptyRefDownloadFileResp():Ref<DownloadFileResp>
-	export function refOfDownloadFileResp(x:DownloadFileResp,v:Ref<DownloadFileResp>)
-	export function unRefDownloadFileResp(v:Ref<DownloadFileResp>):DownloadFileResp
-	export function emptySearchEntityReqBody():SearchEntityReqBody
-	export function emptyRefSearchEntityReqBody():Ref<SearchEntityReqBody>
-	export function refOfSearchEntityReqBody(x:SearchEntityReqBody,v:Ref<SearchEntityReqBody>)
-	export function unRefSearchEntityReqBody(v:Ref<SearchEntityReqBody>):SearchEntityReqBody
+	export function emptyUpdateDraftRespData():UpdateDraftRespData
+	export function emptyRefUpdateDraftRespData():Ref<UpdateDraftRespData>
+	export function refOfUpdateDraftRespData(x:UpdateDraftRespData,v:Ref<UpdateDraftRespData>)
+	export function unRefUpdateDraftRespData(v:Ref<UpdateDraftRespData>):UpdateDraftRespData
+	export function emptyEntity():Entity
+	export function emptyRefEntity():Ref<Entity>
+	export function refOfEntity(x:Entity,v:Ref<Entity>)
+	export function unRefEntity(v:Ref<Entity>):Entity
 	export function emptySearchEntityRespData():SearchEntityRespData
 	export function emptyRefSearchEntityRespData():Ref<SearchEntityRespData>
 	export function refOfSearchEntityRespData(x:SearchEntityRespData,v:Ref<SearchEntityRespData>)
 	export function unRefSearchEntityRespData(v:Ref<SearchEntityRespData>):SearchEntityRespData
-	export function emptyCorrectPair():CorrectPair
-	export function emptyRefCorrectPair():Ref<CorrectPair>
-	export function refOfCorrectPair(x:CorrectPair,v:Ref<CorrectPair>)
-	export function unRefCorrectPair(v:Ref<CorrectPair>):CorrectPair
-	export function emptyCreateDraftRespData():CreateDraftRespData
-	export function emptyRefCreateDraftRespData():Ref<CreateDraftRespData>
-	export function refOfCreateDraftRespData(x:CreateDraftRespData,v:Ref<CreateDraftRespData>)
-	export function unRefCreateDraftRespData(v:Ref<CreateDraftRespData>):CreateDraftRespData
-	export function emptyListClassificationReq():ListClassificationReq
-	export function emptyRefListClassificationReq():Ref<ListClassificationReq>
-	export function refOfListClassificationReq(x:ListClassificationReq,v:Ref<ListClassificationReq>)
-	export function unRefListClassificationReq(v:Ref<ListClassificationReq>):ListClassificationReq
-	export function emptyCreateEntityRespData():CreateEntityRespData
-	export function emptyRefCreateEntityRespData():Ref<CreateEntityRespData>
-	export function refOfCreateEntityRespData(x:CreateEntityRespData,v:Ref<CreateEntityRespData>)
-	export function unRefCreateEntityRespData(v:Ref<CreateEntityRespData>):CreateEntityRespData
-	export function emptyOuterInfo():OuterInfo
-	export function emptyRefOuterInfo():Ref<OuterInfo>
-	export function refOfOuterInfo(x:OuterInfo,v:Ref<OuterInfo>)
-	export function unRefOuterInfo(v:Ref<OuterInfo>):OuterInfo
-	export function emptyListEntityResp():ListEntityResp
-	export function emptyRefListEntityResp():Ref<ListEntityResp>
-	export function refOfListEntityResp(x:ListEntityResp,v:Ref<ListEntityResp>)
-	export function unRefListEntityResp(v:Ref<ListEntityResp>):ListEntityResp
+	export function emptyUpdateDraftReq():UpdateDraftReq
+	export function emptyRefUpdateDraftReq():Ref<UpdateDraftReq>
+	export function refOfUpdateDraftReq(x:UpdateDraftReq,v:Ref<UpdateDraftReq>)
+	export function unRefUpdateDraftReq(v:Ref<UpdateDraftReq>):UpdateDraftReq
+	export function emptyUploadFileReq():UploadFileReq
+	export function emptyRefUploadFileReq():Ref<UploadFileReq>
+	export function refOfUploadFileReq(x:UploadFileReq,v:Ref<UploadFileReq>)
+	export function unRefUploadFileReq(v:Ref<UploadFileReq>):UploadFileReq
+	export function emptyCorrectInfo():CorrectInfo
+	export function emptyRefCorrectInfo():Ref<CorrectInfo>
+	export function refOfCorrectInfo(x:CorrectInfo,v:Ref<CorrectInfo>)
+	export function unRefCorrectInfo(v:Ref<CorrectInfo>):CorrectInfo
+	export function emptyListClassificationResp():ListClassificationResp
+	export function emptyRefListClassificationResp():Ref<ListClassificationResp>
+	export function refOfListClassificationResp(x:ListClassificationResp,v:Ref<ListClassificationResp>)
+	export function unRefListClassificationResp(v:Ref<ListClassificationResp>):ListClassificationResp
+	export function emptyListClassificationRespData():ListClassificationRespData
+	export function emptyRefListClassificationRespData():Ref<ListClassificationRespData>
+	export function refOfListClassificationRespData(x:ListClassificationRespData,v:Ref<ListClassificationRespData>)
+	export function unRefListClassificationRespData(v:Ref<ListClassificationRespData>):ListClassificationRespData
+	export function emptyMatchEntityResp():MatchEntityResp
+	export function emptyRefMatchEntityResp():Ref<MatchEntityResp>
+	export function refOfMatchEntityResp(x:MatchEntityResp,v:Ref<MatchEntityResp>)
+	export function unRefMatchEntityResp(v:Ref<MatchEntityResp>):MatchEntityResp
+	export function emptyMatchInfo():MatchInfo
+	export function emptyRefMatchInfo():Ref<MatchInfo>
+	export function refOfMatchInfo(x:MatchInfo,v:Ref<MatchInfo>)
+	export function unRefMatchInfo(v:Ref<MatchInfo>):MatchInfo
+	export function emptyGetEntityResp():GetEntityResp
+	export function emptyRefGetEntityResp():Ref<GetEntityResp>
+	export function refOfGetEntityResp(x:GetEntityResp,v:Ref<GetEntityResp>)
+	export function unRefGetEntityResp(v:Ref<GetEntityResp>):GetEntityResp
 	export function emptyUpdateEntityResp():UpdateEntityResp
 	export function emptyRefUpdateEntityResp():Ref<UpdateEntityResp>
 	export function refOfUpdateEntityResp(x:UpdateEntityResp,v:Ref<UpdateEntityResp>)
 	export function unRefUpdateEntityResp(v:Ref<UpdateEntityResp>):UpdateEntityResp
+	export function emptyCreateDraftReq():CreateDraftReq
+	export function emptyRefCreateDraftReq():Ref<CreateDraftReq>
+	export function refOfCreateDraftReq(x:CreateDraftReq,v:Ref<CreateDraftReq>)
+	export function unRefCreateDraftReq(v:Ref<CreateDraftReq>):CreateDraftReq
+	export function emptyUpdateEntityRespData():UpdateEntityRespData
+	export function emptyRefUpdateEntityRespData():Ref<UpdateEntityRespData>
+	export function refOfUpdateEntityRespData(x:UpdateEntityRespData,v:Ref<UpdateEntityRespData>)
+	export function unRefUpdateEntityRespData(v:Ref<UpdateEntityRespData>):UpdateEntityRespData
+	export function emptyWordInfo():WordInfo
+	export function emptyRefWordInfo():Ref<WordInfo>
+	export function refOfWordInfo(x:WordInfo,v:Ref<WordInfo>)
+	export function unRefWordInfo(v:Ref<WordInfo>):WordInfo
+	export function emptyMatchEntityRespData():MatchEntityRespData
+	export function emptyRefMatchEntityRespData():Ref<MatchEntityRespData>
+	export function refOfMatchEntityRespData(x:MatchEntityRespData,v:Ref<MatchEntityRespData>)
+	export function unRefMatchEntityRespData(v:Ref<MatchEntityRespData>):MatchEntityRespData
+	export function emptyOuterInfo():OuterInfo
+	export function emptyRefOuterInfo():Ref<OuterInfo>
+	export function refOfOuterInfo(x:OuterInfo,v:Ref<OuterInfo>)
+	export function unRefOuterInfo(v:Ref<OuterInfo>):OuterInfo
+	export function emptyStatisticalReport():StatisticalReport
+	export function emptyRefStatisticalReport():Ref<StatisticalReport>
+	export function refOfStatisticalReport(x:StatisticalReport,v:Ref<StatisticalReport>)
+	export function unRefStatisticalReport(v:Ref<StatisticalReport>):StatisticalReport
+	export function emptyCreateDraftRespData():CreateDraftRespData
+	export function emptyRefCreateDraftRespData():Ref<CreateDraftRespData>
+	export function refOfCreateDraftRespData(x:CreateDraftRespData,v:Ref<CreateDraftRespData>)
+	export function unRefCreateDraftRespData(v:Ref<CreateDraftRespData>):CreateDraftRespData
+	export function emptyCreateEntityReq():CreateEntityReq
+	export function emptyRefCreateEntityReq():Ref<CreateEntityReq>
+	export function refOfCreateEntityReq(x:CreateEntityReq,v:Ref<CreateEntityReq>)
+	export function unRefCreateEntityReq(v:Ref<CreateEntityReq>):CreateEntityReq
+	export function emptySearchEntityReqBody():SearchEntityReqBody
+	export function emptyRefSearchEntityReqBody():Ref<SearchEntityReqBody>
+	export function refOfSearchEntityReqBody(x:SearchEntityReqBody,v:Ref<SearchEntityReqBody>)
+	export function unRefSearchEntityReqBody(v:Ref<SearchEntityReqBody>):SearchEntityReqBody
+	export function emptyMatchEntityReqBody():MatchEntityReqBody
+	export function emptyRefMatchEntityReqBody():Ref<MatchEntityReqBody>
+	export function refOfMatchEntityReqBody(x:MatchEntityReqBody,v:Ref<MatchEntityReqBody>)
+	export function unRefMatchEntityReqBody(v:Ref<MatchEntityReqBody>):MatchEntityReqBody
+	export function emptyClassification():Classification
+	export function emptyRefClassification():Ref<Classification>
+	export function refOfClassification(x:Classification,v:Ref<Classification>)
+	export function unRefClassification(v:Ref<Classification>):Classification
+	export function emptyCreateEntityResp():CreateEntityResp
+	export function emptyRefCreateEntityResp():Ref<CreateEntityResp>
+	export function refOfCreateEntityResp(x:CreateEntityResp,v:Ref<CreateEntityResp>)
+	export function unRefCreateEntityResp(v:Ref<CreateEntityResp>):CreateEntityResp
+	export function emptyDownloadFileReq():DownloadFileReq
+	export function emptyRefDownloadFileReq():Ref<DownloadFileReq>
+	export function refOfDownloadFileReq(x:DownloadFileReq,v:Ref<DownloadFileReq>)
+	export function unRefDownloadFileReq(v:Ref<DownloadFileReq>):DownloadFileReq
+	export function emptyUploadFileResp():UploadFileResp
+	export function emptyRefUploadFileResp():Ref<UploadFileResp>
+	export function refOfUploadFileResp(x:UploadFileResp,v:Ref<UploadFileResp>)
+	export function unRefUploadFileResp(v:Ref<UploadFileResp>):UploadFileResp
+	export function emptyDownloadFileResp():DownloadFileResp
+	export function emptyRefDownloadFileResp():Ref<DownloadFileResp>
+	export function refOfDownloadFileResp(x:DownloadFileResp,v:Ref<DownloadFileResp>)
+	export function unRefDownloadFileResp(v:Ref<DownloadFileResp>):DownloadFileResp
+	export function emptyV1():V1
+	export function emptyRefV1():Ref<V1>
+	export function refOfV1(x:V1,v:Ref<V1>)
+	export function unRefV1(v:Ref<V1>):V1
+	export function emptyClassificationFilter():ClassificationFilter
+	export function emptyRefClassificationFilter():Ref<ClassificationFilter>
+	export function refOfClassificationFilter(x:ClassificationFilter,v:Ref<ClassificationFilter>)
+	export function unRefClassificationFilter(v:Ref<ClassificationFilter>):ClassificationFilter
+	export function emptyDepartmentId():DepartmentId
+	export function emptyRefDepartmentId():Ref<DepartmentId>
+	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
+	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
+	export function emptyListEntityReq():ListEntityReq
+	export function emptyRefListEntityReq():Ref<ListEntityReq>
+	export function refOfListEntityReq(x:ListEntityReq,v:Ref<ListEntityReq>)
+	export function unRefListEntityReq(v:Ref<ListEntityReq>):ListEntityReq
+	export function emptySearchEntityReq():SearchEntityReq
+	export function emptyRefSearchEntityReq():Ref<SearchEntityReq>
+	export function refOfSearchEntityReq(x:SearchEntityReq,v:Ref<SearchEntityReq>)
+	export function unRefSearchEntityReq(v:Ref<SearchEntityReq>):SearchEntityReq
+	export function emptyEntityWord():EntityWord
+	export function emptyRefEntityWord():Ref<EntityWord>
+	export function refOfEntityWord(x:EntityWord,v:Ref<EntityWord>)
+	export function unRefEntityWord(v:Ref<EntityWord>):EntityWord
+	export function emptyMatchEntityReq():MatchEntityReq
+	export function emptyRefMatchEntityReq():Ref<MatchEntityReq>
+	export function refOfMatchEntityReq(x:MatchEntityReq,v:Ref<MatchEntityReq>)
+	export function unRefMatchEntityReq(v:Ref<MatchEntityReq>):MatchEntityReq
+	export function emptyBaikeImage():BaikeImage
+	export function emptyRefBaikeImage():Ref<BaikeImage>
+	export function refOfBaikeImage(x:BaikeImage,v:Ref<BaikeImage>)
+	export function unRefBaikeImage(v:Ref<BaikeImage>):BaikeImage
+	export function emptyTerm():Term
+	export function emptyRefTerm():Ref<Term>
+	export function refOfTerm(x:Term,v:Ref<Term>)
+	export function unRefTerm(v:Ref<Term>):Term
+	export function emptySearchEntityIterator():SearchEntityIterator
+	export function emptyRefSearchEntityIterator():Ref<SearchEntityIterator>
+	export function refOfSearchEntityIterator(x:SearchEntityIterator,v:Ref<SearchEntityIterator>)
+	export function unRefSearchEntityIterator(v:Ref<SearchEntityIterator>):SearchEntityIterator
+	export function emptyGetEntityReq():GetEntityReq
+	export function emptyRefGetEntityReq():Ref<GetEntityReq>
+	export function refOfGetEntityReq(x:GetEntityReq,v:Ref<GetEntityReq>)
+	export function unRefGetEntityReq(v:Ref<GetEntityReq>):GetEntityReq
+	export function emptyExtractEntityReq():ExtractEntityReq
+	export function emptyRefExtractEntityReq():Ref<ExtractEntityReq>
+	export function refOfExtractEntityReq(x:ExtractEntityReq,v:Ref<ExtractEntityReq>)
+	export function unRefExtractEntityReq(v:Ref<ExtractEntityReq>):ExtractEntityReq
+	export function emptyCreateDraftResp():CreateDraftResp
+	export function emptyRefCreateDraftResp():Ref<CreateDraftResp>
+	export function refOfCreateDraftResp(x:CreateDraftResp,v:Ref<CreateDraftResp>)
+	export function unRefCreateDraftResp(v:Ref<CreateDraftResp>):CreateDraftResp
+	export function emptyCreateEntityRespData():CreateEntityRespData
+	export function emptyRefCreateEntityRespData():Ref<CreateEntityRespData>
+	export function refOfCreateEntityRespData(x:CreateEntityRespData,v:Ref<CreateEntityRespData>)
+	export function unRefCreateEntityRespData(v:Ref<CreateEntityRespData>):CreateEntityRespData
+	export function emptyPhrase():Phrase
+	export function emptyRefPhrase():Ref<Phrase>
+	export function refOfPhrase(x:Phrase,v:Ref<Phrase>)
+	export function unRefPhrase(v:Ref<Phrase>):Phrase
+	export function emptyHighlightEntityReq():HighlightEntityReq
+	export function emptyRefHighlightEntityReq():Ref<HighlightEntityReq>
+	export function refOfHighlightEntityReq(x:HighlightEntityReq,v:Ref<HighlightEntityReq>)
+	export function unRefHighlightEntityReq(v:Ref<HighlightEntityReq>):HighlightEntityReq
+	export function emptyListClassificationIterator():ListClassificationIterator
+	export function emptyRefListClassificationIterator():Ref<ListClassificationIterator>
+	export function refOfListClassificationIterator(x:ListClassificationIterator,v:Ref<ListClassificationIterator>)
+	export function unRefListClassificationIterator(v:Ref<ListClassificationIterator>):ListClassificationIterator
+	export function emptyUploadFileRespData():UploadFileRespData
+	export function emptyRefUploadFileRespData():Ref<UploadFileRespData>
+	export function refOfUploadFileRespData(x:UploadFileRespData,v:Ref<UploadFileRespData>)
+	export function unRefUploadFileRespData(v:Ref<UploadFileRespData>):UploadFileRespData
+	export function emptySpan():Span
+	export function emptyRefSpan():Ref<Span>
+	export function refOfSpan(x:Span,v:Ref<Span>)
+	export function unRefSpan(v:Ref<Span>):Span
+	export function emptyCorrectPair():CorrectPair
+	export function emptyRefCorrectPair():Ref<CorrectPair>
+	export function refOfCorrectPair(x:CorrectPair,v:Ref<CorrectPair>)
+	export function unRefCorrectPair(v:Ref<CorrectPair>):CorrectPair
+	export function emptyListEntityResp():ListEntityResp
+	export function emptyRefListEntityResp():Ref<ListEntityResp>
+	export function refOfListEntityResp(x:ListEntityResp,v:Ref<ListEntityResp>)
+	export function unRefListEntityResp(v:Ref<ListEntityResp>):ListEntityResp
+	export function emptyListEntityIterator():ListEntityIterator
+	export function emptyRefListEntityIterator():Ref<ListEntityIterator>
+	export function refOfListEntityIterator(x:ListEntityIterator,v:Ref<ListEntityIterator>)
+	export function unRefListEntityIterator(v:Ref<ListEntityIterator>):ListEntityIterator
+	export function emptySearchEntityResp():SearchEntityResp
+	export function emptyRefSearchEntityResp():Ref<SearchEntityResp>
+	export function refOfSearchEntityResp(x:SearchEntityResp,v:Ref<SearchEntityResp>)
+	export function unRefSearchEntityResp(v:Ref<SearchEntityResp>):SearchEntityResp
+	export function emptyUpdateEntityReq():UpdateEntityReq
+	export function emptyRefUpdateEntityReq():Ref<UpdateEntityReq>
+	export function refOfUpdateEntityReq(x:UpdateEntityReq,v:Ref<UpdateEntityReq>)
+	export function unRefUpdateEntityReq(v:Ref<UpdateEntityReq>):UpdateEntityReq
+	export function emptyHighlightEntityResp():HighlightEntityResp
+	export function emptyRefHighlightEntityResp():Ref<HighlightEntityResp>
+	export function refOfHighlightEntityResp(x:HighlightEntityResp,v:Ref<HighlightEntityResp>)
+	export function unRefHighlightEntityResp(v:Ref<HighlightEntityResp>):HighlightEntityResp
+	export function emptyAbbreviation():Abbreviation
+	export function emptyRefAbbreviation():Ref<Abbreviation>
+	export function refOfAbbreviation(x:Abbreviation,v:Ref<Abbreviation>)
+	export function unRefAbbreviation(v:Ref<Abbreviation>):Abbreviation
+	export function emptyHighlightEntityReqBody():HighlightEntityReqBody
+	export function emptyRefHighlightEntityReqBody():Ref<HighlightEntityReqBody>
+	export function refOfHighlightEntityReqBody(x:HighlightEntityReqBody,v:Ref<HighlightEntityReqBody>)
+	export function unRefHighlightEntityReqBody(v:Ref<HighlightEntityReqBody>):HighlightEntityReqBody
+	export function emptyReferer():Referer
+	export function emptyRefReferer():Ref<Referer>
+	export function refOfReferer(x:Referer,v:Ref<Referer>)
+	export function unRefReferer(v:Ref<Referer>):Referer
+	export function emptyDraft():Draft
+	export function emptyRefDraft():Ref<Draft>
+	export function refOfDraft(x:Draft,v:Ref<Draft>)
+	export function unRefDraft(v:Ref<Draft>):Draft
+	export function emptyStatistics():Statistics
+	export function emptyRefStatistics():Ref<Statistics>
+	export function refOfStatistics(x:Statistics,v:Ref<Statistics>)
+	export function unRefStatistics(v:Ref<Statistics>):Statistics
+	export function emptyFile():File
+	export function emptyRefFile():Ref<File>
+	export function refOfFile(x:File,v:Ref<File>)
+	export function unRefFile(v:Ref<File>):File
+	export function emptyGetEntityRespData():GetEntityRespData
+	export function emptyRefGetEntityRespData():Ref<GetEntityRespData>
+	export function refOfGetEntityRespData(x:GetEntityRespData,v:Ref<GetEntityRespData>)
+	export function unRefGetEntityRespData(v:Ref<GetEntityRespData>):GetEntityRespData
 }

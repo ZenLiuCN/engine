@@ -7,7 +7,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/search/v2'{
 	// @ts-ignore
 	import * as context from 'golang/context'
 	// @ts-ignore
-	import type {float64,int,error,Alias,Nothing,Ref,Struct,bool} from 'go'
+	import type {float64,error,Alias,Nothing,Ref,Struct,bool,int} from 'go'
 	export interface Acl extends Struct<Acl>{
 
 			access:Ref<string>
@@ -33,6 +33,49 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/search/v2'{
 			isSuccess(isSuccess:bool):Ref<BatchItemResultBuilder>
 			err(err:string):Ref<BatchItemResultBuilder>
 			build():Ref<BatchItemResult>
+	}
+	export interface CallbackAction extends Struct<CallbackAction>{
+
+			tag:Ref<string>
+			value:Ref<CallbackActionValue>
+	}
+	export interface CallbackActionBuilder extends Struct<CallbackActionBuilder>{
+
+			tag(tag:string):Ref<CallbackActionBuilder>
+			value(value:Ref<CallbackActionValue>):Ref<CallbackActionBuilder>
+			build():Ref<CallbackAction>
+	}
+	export interface CallbackActionValue extends Struct<CallbackActionValue>{
+
+			strategyInfo:Ref<string>
+			agentId:Ref<string>
+			agentType:Ref<int>
+			responseType:Ref<int>
+			sessionId:Ref<string>
+	}
+	export interface CallbackActionValueBuilder extends Struct<CallbackActionValueBuilder>{
+
+			strategyInfo(strategyInfo:string):Ref<CallbackActionValueBuilder>
+			agentId(agentId:string):Ref<CallbackActionValueBuilder>
+			agentType(agentType:int):Ref<CallbackActionValueBuilder>
+			responseType(responseType:int):Ref<CallbackActionValueBuilder>
+			sessionId(sessionId:string):Ref<CallbackActionValueBuilder>
+			build():Ref<CallbackActionValue>
+	}
+	export interface CardCallbackRequest extends Struct<CardCallbackRequest>{
+
+			openChatId:Ref<string>
+			openMessageId:Ref<string>
+			token:Ref<string>
+			action:Ref<CallbackAction>
+	}
+	export interface CardCallbackRequestBuilder extends Struct<CardCallbackRequestBuilder>{
+
+			openChatId(openChatId:string):Ref<CardCallbackRequestBuilder>
+			openMessageId(openMessageId:string):Ref<CardCallbackRequestBuilder>
+			token(token:string):Ref<CardCallbackRequestBuilder>
+			action(action:Ref<CallbackAction>):Ref<CardCallbackRequestBuilder>
+			build():Ref<CardCallbackRequest>
 	}
 	//"group_chat"
 	export const ChatTypeGroupChat:string
@@ -714,6 +757,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/search/v2'{
 
 	export function newBatchItemResultBuilder():Ref<BatchItemResultBuilder>
 
+	export function newCallbackActionBuilder():Ref<CallbackActionBuilder>
+
+	export function newCallbackActionValueBuilder():Ref<CallbackActionValueBuilder>
+
+	export function newCardCallbackRequestBuilder():Ref<CardCallbackRequestBuilder>
+
 	export function newChunkBuilder():Ref<ChunkBuilder>
 
 	export function newConnectDataSourceBuilder():Ref<ConnectDataSourceBuilder>
@@ -814,6 +863,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/search/v2'{
 
 	export function newPresentBuilder():Ref<PresentBuilder>
 
+	export function newPresentDataCallbackDialogRequestBuilder():Ref<PresentDataCallbackDialogRequestBuilder>
+
 	export function newRagAnswerResponseBuilder():Ref<RagAnswerResponseBuilder>
 
 	export function newRagProbeBuilder():Ref<RagProbeBuilder>
@@ -849,6 +900,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/search/v2'{
 	export function newSchemaUserIdsOptionBuilder():Ref<SchemaUserIdsOptionBuilder>
 
 	export function newSeperatePassageBuilder():Ref<SeperatePassageBuilder>
+
+	export function newStatusBuilder():Ref<StatusBuilder>
 
 	export function newSystemInfoBuilder():Ref<SystemInfoBuilder>
 
@@ -1045,6 +1098,19 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/search/v2'{
 			cardTemplateId(cardTemplateId:string):Ref<PresentBuilder>
 			cardVariables(cardVariables:Ref<TemplateCardVariables>):Ref<PresentBuilder>
 			build():Ref<Present>
+	}
+	export interface PresentDataCallbackDialogRequest extends Struct<PresentDataCallbackDialogRequest>{
+
+			messageId:Ref<string>
+			status:Ref<Status>
+			callbackInfo:Ref<string>
+	}
+	export interface PresentDataCallbackDialogRequestBuilder extends Struct<PresentDataCallbackDialogRequestBuilder>{
+
+			messageId(messageId:string):Ref<PresentDataCallbackDialogRequestBuilder>
+			status(status:Ref<Status>):Ref<PresentDataCallbackDialogRequestBuilder>
+			callbackInfo(callbackInfo:string):Ref<PresentDataCallbackDialogRequestBuilder>
+			build():Ref<PresentDataCallbackDialogRequest>
 	}
 	export interface RagAnswerResponse extends Struct<RagAnswerResponse>{
 
@@ -1306,6 +1372,17 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/search/v2'{
 	export const StatePatchDataSourceOffline:int
 	//0
 	export const StatePatchDataSourceOnline:int
+	export interface Status extends Struct<Status>{
+
+			fromStatus:Ref<string>
+			toStatus:Ref<string>
+	}
+	export interface StatusBuilder extends Struct<StatusBuilder>{
+
+			fromStatus(fromStatus:string):Ref<StatusBuilder>
+			toStatus(toStatus:string):Ref<StatusBuilder>
+			build():Ref<Status>
+	}
 	export interface SystemInfo extends Struct<SystemInfo>{
 
 			time:Ref<string>
@@ -1317,6 +1394,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/search/v2'{
 			shadowName:Ref<string>
 			msgId:Ref<string>
 			agentId:Ref<string>
+			locale:Ref<string>
+			appVersion:Ref<string>
 	}
 	export interface SystemInfoBuilder extends Struct<SystemInfoBuilder>{
 
@@ -1329,6 +1408,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/search/v2'{
 			shadowName(shadowName:string):Ref<SystemInfoBuilder>
 			msgId(msgId:string):Ref<SystemInfoBuilder>
 			agentId(agentId:string):Ref<SystemInfoBuilder>
+			locale(locale:string):Ref<SystemInfoBuilder>
+			appVersion(appVersion:string):Ref<SystemInfoBuilder>
 			build():Ref<SystemInfo>
 	}
 	export interface TemplateCardVariables extends Alias<Nothing>{
@@ -1432,388 +1513,408 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/search/v2'{
 			disableSearchLink(disableSearchLink:bool):Ref<WikiPassageParamBuilder>
 			build():Ref<WikiPassageParam>
 	}
-	export function emptyListDataSourceResp():ListDataSourceResp
-	export function emptyRefListDataSourceResp():Ref<ListDataSourceResp>
-	export function refOfListDataSourceResp(x:ListDataSourceResp,v:Ref<ListDataSourceResp>)
-	export function unRefListDataSourceResp(v:Ref<ListDataSourceResp>):ListDataSourceResp
-	export function emptyModelConfig():ModelConfig
-	export function emptyRefModelConfig():Ref<ModelConfig>
-	export function refOfModelConfig(x:ModelConfig,v:Ref<ModelConfig>)
-	export function unRefModelConfig(v:Ref<ModelConfig>):ModelConfig
-	export function emptyPresent():Present
-	export function emptyRefPresent():Ref<Present>
-	export function refOfPresent(x:Present,v:Ref<Present>)
-	export function unRefPresent(v:Ref<Present>):Present
-	export function emptyCreateSchemaRespData():CreateSchemaRespData
-	export function emptyRefCreateSchemaRespData():Ref<CreateSchemaRespData>
-	export function refOfCreateSchemaRespData(x:CreateSchemaRespData,v:Ref<CreateSchemaRespData>)
-	export function unRefCreateSchemaRespData(v:Ref<CreateSchemaRespData>):CreateSchemaRespData
-	export function emptyFilterSchema():FilterSchema
-	export function emptyRefFilterSchema():Ref<FilterSchema>
-	export function refOfFilterSchema(x:FilterSchema,v:Ref<FilterSchema>)
-	export function unRefFilterSchema(v:Ref<FilterSchema>):FilterSchema
-	export function emptyGetDataSourceReq():GetDataSourceReq
-	export function emptyRefGetDataSourceReq():Ref<GetDataSourceReq>
-	export function refOfGetDataSourceReq(x:GetDataSourceReq,v:Ref<GetDataSourceReq>)
-	export function unRefGetDataSourceReq(v:Ref<GetDataSourceReq>):GetDataSourceReq
-	export function emptySchema():Schema
-	export function emptyRefSchema():Ref<Schema>
-	export function refOfSchema(x:Schema,v:Ref<Schema>)
-	export function unRefSchema(v:Ref<Schema>):Schema
-	export function emptySchemaEnumOptions():SchemaEnumOptions
-	export function emptyRefSchemaEnumOptions():Ref<SchemaEnumOptions>
-	export function refOfSchemaEnumOptions(x:SchemaEnumOptions,v:Ref<SchemaEnumOptions>)
-	export function unRefSchemaEnumOptions(v:Ref<SchemaEnumOptions>):SchemaEnumOptions
-	export function emptyItemRecord():ItemRecord
-	export function emptyRefItemRecord():Ref<ItemRecord>
-	export function refOfItemRecord(x:ItemRecord,v:Ref<ItemRecord>)
-	export function unRefItemRecord(v:Ref<ItemRecord>):ItemRecord
-	export function emptyNlsModelConfig():NlsModelConfig
-	export function emptyRefNlsModelConfig():Ref<NlsModelConfig>
-	export function refOfNlsModelConfig(x:NlsModelConfig,v:Ref<NlsModelConfig>)
-	export function unRefNlsModelConfig(v:Ref<NlsModelConfig>):NlsModelConfig
-	export function emptyPatchSchemaReq():PatchSchemaReq
-	export function emptyRefPatchSchemaReq():Ref<PatchSchemaReq>
-	export function refOfPatchSchemaReq(x:PatchSchemaReq,v:Ref<PatchSchemaReq>)
-	export function unRefPatchSchemaReq(v:Ref<PatchSchemaReq>):PatchSchemaReq
-	export function emptyDeleteSchemaResp():DeleteSchemaResp
-	export function emptyRefDeleteSchemaResp():Ref<DeleteSchemaResp>
-	export function refOfDeleteSchemaResp(x:DeleteSchemaResp,v:Ref<DeleteSchemaResp>)
-	export function unRefDeleteSchemaResp(v:Ref<DeleteSchemaResp>):DeleteSchemaResp
-	export function emptySchemaTagOptions():SchemaTagOptions
-	export function emptyRefSchemaTagOptions():Ref<SchemaTagOptions>
-	export function refOfSchemaTagOptions(x:SchemaTagOptions,v:Ref<SchemaTagOptions>)
-	export function unRefSchemaTagOptions(v:Ref<SchemaTagOptions>):SchemaTagOptions
-	export function emptyPassageParam():PassageParam
-	export function emptyRefPassageParam():Ref<PassageParam>
-	export function refOfPassageParam(x:PassageParam,v:Ref<PassageParam>)
-	export function unRefPassageParam(v:Ref<PassageParam>):PassageParam
-	export function emptyGetDataSourceItemReq():GetDataSourceItemReq
-	export function emptyRefGetDataSourceItemReq():Ref<GetDataSourceItemReq>
-	export function refOfGetDataSourceItemReq(x:GetDataSourceItemReq,v:Ref<GetDataSourceItemReq>)
-	export function unRefGetDataSourceItemReq(v:Ref<GetDataSourceItemReq>):GetDataSourceItemReq
-	export function emptyHelpdeskPassageParam():HelpdeskPassageParam
-	export function emptyRefHelpdeskPassageParam():Ref<HelpdeskPassageParam>
-	export function refOfHelpdeskPassageParam(x:HelpdeskPassageParam,v:Ref<HelpdeskPassageParam>)
-	export function unRefHelpdeskPassageParam(v:Ref<HelpdeskPassageParam>):HelpdeskPassageParam
-	export function emptyModelParam():ModelParam
-	export function emptyRefModelParam():Ref<ModelParam>
-	export function refOfModelParam(x:ModelParam,v:Ref<ModelParam>)
-	export function unRefModelParam(v:Ref<ModelParam>):ModelParam
-	export function emptySchemaSortOptions():SchemaSortOptions
-	export function emptyRefSchemaSortOptions():Ref<SchemaSortOptions>
-	export function refOfSchemaSortOptions(x:SchemaSortOptions,v:Ref<SchemaSortOptions>)
-	export function unRefSchemaSortOptions(v:Ref<SchemaSortOptions>):SchemaSortOptions
-	export function emptyBatchItemResult():BatchItemResult
-	export function emptyRefBatchItemResult():Ref<BatchItemResult>
-	export function refOfBatchItemResult(x:BatchItemResult,v:Ref<BatchItemResult>)
-	export function unRefBatchItemResult(v:Ref<BatchItemResult>):BatchItemResult
-	export function emptyDeleteDataSourceItemReq():DeleteDataSourceItemReq
-	export function emptyRefDeleteDataSourceItemReq():Ref<DeleteDataSourceItemReq>
-	export function refOfDeleteDataSourceItemReq(x:DeleteDataSourceItemReq,v:Ref<DeleteDataSourceItemReq>)
-	export function unRefDeleteDataSourceItemReq(v:Ref<DeleteDataSourceItemReq>):DeleteDataSourceItemReq
-	export function emptyPatchSchemaReqBody():PatchSchemaReqBody
-	export function emptyRefPatchSchemaReqBody():Ref<PatchSchemaReqBody>
-	export function refOfPatchSchemaReqBody(x:PatchSchemaReqBody,v:Ref<PatchSchemaReqBody>)
-	export function unRefPatchSchemaReqBody(v:Ref<PatchSchemaReqBody>):PatchSchemaReqBody
-	export function emptySchemaPredefineEnumStruct():SchemaPredefineEnumStruct
-	export function emptyRefSchemaPredefineEnumStruct():Ref<SchemaPredefineEnumStruct>
-	export function refOfSchemaPredefineEnumStruct(x:SchemaPredefineEnumStruct,v:Ref<SchemaPredefineEnumStruct>)
-	export function unRefSchemaPredefineEnumStruct(v:Ref<SchemaPredefineEnumStruct>):SchemaPredefineEnumStruct
-	export function emptyCreateAppReq():CreateAppReq
-	export function emptyRefCreateAppReq():Ref<CreateAppReq>
-	export function refOfCreateAppReq(x:CreateAppReq,v:Ref<CreateAppReq>)
-	export function unRefCreateAppReq(v:Ref<CreateAppReq>):CreateAppReq
-	export function emptyCreateDataSourceRespData():CreateDataSourceRespData
-	export function emptyRefCreateDataSourceRespData():Ref<CreateDataSourceRespData>
-	export function refOfCreateDataSourceRespData(x:CreateDataSourceRespData,v:Ref<CreateDataSourceRespData>)
-	export function unRefCreateDataSourceRespData(v:Ref<CreateDataSourceRespData>):CreateDataSourceRespData
-	export function emptyDialogSearchRequest():DialogSearchRequest
-	export function emptyRefDialogSearchRequest():Ref<DialogSearchRequest>
-	export function refOfDialogSearchRequest(x:DialogSearchRequest,v:Ref<DialogSearchRequest>)
-	export function unRefDialogSearchRequest(v:Ref<DialogSearchRequest>):DialogSearchRequest
-	export function emptyLlmModelConfig():LlmModelConfig
-	export function emptyRefLlmModelConfig():Ref<LlmModelConfig>
-	export function refOfLlmModelConfig(x:LlmModelConfig,v:Ref<LlmModelConfig>)
-	export function unRefLlmModelConfig(v:Ref<LlmModelConfig>):LlmModelConfig
-	export function emptySchemaTypeDefinitions():SchemaTypeDefinitions
-	export function emptyRefSchemaTypeDefinitions():Ref<SchemaTypeDefinitions>
-	export function refOfSchemaTypeDefinitions(x:SchemaTypeDefinitions,v:Ref<SchemaTypeDefinitions>)
-	export function unRefSchemaTypeDefinitions(v:Ref<SchemaTypeDefinitions>):SchemaTypeDefinitions
-	export function emptyCreateAppRespData():CreateAppRespData
-	export function emptyRefCreateAppRespData():Ref<CreateAppRespData>
-	export function refOfCreateAppRespData(x:CreateAppRespData,v:Ref<CreateAppRespData>)
-	export function unRefCreateAppRespData(v:Ref<CreateAppRespData>):CreateAppRespData
-	export function emptyCreateMessageRespData():CreateMessageRespData
-	export function emptyRefCreateMessageRespData():Ref<CreateMessageRespData>
-	export function refOfCreateMessageRespData(x:CreateMessageRespData,v:Ref<CreateMessageRespData>)
-	export function unRefCreateMessageRespData(v:Ref<CreateMessageRespData>):CreateMessageRespData
-	export function emptyParaphraseResult():ParaphraseResult
-	export function emptyRefParaphraseResult():Ref<ParaphraseResult>
-	export function refOfParaphraseResult(x:ParaphraseResult,v:Ref<ParaphraseResult>)
-	export function unRefParaphraseResult(v:Ref<ParaphraseResult>):ParaphraseResult
-	export function emptyWebPassageParam():WebPassageParam
-	export function emptyRefWebPassageParam():Ref<WebPassageParam>
-	export function refOfWebPassageParam(x:WebPassageParam,v:Ref<WebPassageParam>)
-	export function unRefWebPassageParam(v:Ref<WebPassageParam>):WebPassageParam
-	export function emptyRagAnswerResponse():RagAnswerResponse
-	export function emptyRefRagAnswerResponse():Ref<RagAnswerResponse>
-	export function refOfRagAnswerResponse(x:RagAnswerResponse,v:Ref<RagAnswerResponse>)
-	export function unRefRagAnswerResponse(v:Ref<RagAnswerResponse>):RagAnswerResponse
-	export function emptySchemaSearchOptions():SchemaSearchOptions
-	export function emptyRefSchemaSearchOptions():Ref<SchemaSearchOptions>
-	export function refOfSchemaSearchOptions(x:SchemaSearchOptions,v:Ref<SchemaSearchOptions>)
-	export function unRefSchemaSearchOptions(v:Ref<SchemaSearchOptions>):SchemaSearchOptions
-	export function emptyUserInfo():UserInfo
-	export function emptyRefUserInfo():Ref<UserInfo>
-	export function refOfUserInfo(x:UserInfo,v:Ref<UserInfo>)
-	export function unRefUserInfo(v:Ref<UserInfo>):UserInfo
-	export function emptyDocPassageParam():DocPassageParam
-	export function emptyRefDocPassageParam():Ref<DocPassageParam>
-	export function refOfDocPassageParam(x:DocPassageParam,v:Ref<DocPassageParam>)
-	export function unRefDocPassageParam(v:Ref<DocPassageParam>):DocPassageParam
-	export function emptyListDataSourceIterator():ListDataSourceIterator
-	export function emptyRefListDataSourceIterator():Ref<ListDataSourceIterator>
-	export function refOfListDataSourceIterator(x:ListDataSourceIterator,v:Ref<ListDataSourceIterator>)
-	export function unRefListDataSourceIterator(v:Ref<ListDataSourceIterator>):ListDataSourceIterator
-	export function emptyScenarioContext():ScenarioContext
-	export function emptyRefScenarioContext():Ref<ScenarioContext>
-	export function refOfScenarioContext(x:ScenarioContext,v:Ref<ScenarioContext>)
-	export function unRefScenarioContext(v:Ref<ScenarioContext>):ScenarioContext
-	export function emptyPassage():Passage
-	export function emptyRefPassage():Ref<Passage>
-	export function refOfPassage(x:Passage,v:Ref<Passage>)
-	export function unRefPassage(v:Ref<Passage>):Passage
-	export function emptyPatchSchemaProperty():PatchSchemaProperty
-	export function emptyRefPatchSchemaProperty():Ref<PatchSchemaProperty>
-	export function refOfPatchSchemaProperty(x:PatchSchemaProperty,v:Ref<PatchSchemaProperty>)
-	export function unRefPatchSchemaProperty(v:Ref<PatchSchemaProperty>):PatchSchemaProperty
-	export function emptyConnectorParam():ConnectorParam
-	export function emptyRefConnectorParam():Ref<ConnectorParam>
-	export function refOfConnectorParam(x:ConnectorParam,v:Ref<ConnectorParam>)
-	export function unRefConnectorParam(v:Ref<ConnectorParam>):ConnectorParam
-	export function emptyGetDataSourceResp():GetDataSourceResp
-	export function emptyRefGetDataSourceResp():Ref<GetDataSourceResp>
-	export function refOfGetDataSourceResp(x:GetDataSourceResp,v:Ref<GetDataSourceResp>)
-	export function unRefGetDataSourceResp(v:Ref<GetDataSourceResp>):GetDataSourceResp
-	export function emptyV2():V2
-	export function emptyRefV2():Ref<V2>
-	export function refOfV2(x:V2,v:Ref<V2>)
-	export function unRefV2(v:Ref<V2>):V2
-	export function emptyCreateMessageResp():CreateMessageResp
-	export function emptyRefCreateMessageResp():Ref<CreateMessageResp>
-	export function refOfCreateMessageResp(x:CreateMessageResp,v:Ref<CreateMessageResp>)
-	export function unRefCreateMessageResp(v:Ref<CreateMessageResp>):CreateMessageResp
-	export function emptyDoc():Doc
-	export function emptyRefDoc():Ref<Doc>
-	export function refOfDoc(x:Doc,v:Ref<Doc>)
-	export function unRefDoc(v:Ref<Doc>):Doc
-	export function emptyCreateDataSourceItemReq():CreateDataSourceItemReq
-	export function emptyRefCreateDataSourceItemReq():Ref<CreateDataSourceItemReq>
-	export function refOfCreateDataSourceItemReq(x:CreateDataSourceItemReq,v:Ref<CreateDataSourceItemReq>)
-	export function unRefCreateDataSourceItemReq(v:Ref<CreateDataSourceItemReq>):CreateDataSourceItemReq
-	export function emptyCreateSchemaReq():CreateSchemaReq
-	export function emptyRefCreateSchemaReq():Ref<CreateSchemaReq>
-	export function refOfCreateSchemaReq(x:CreateSchemaReq,v:Ref<CreateSchemaReq>)
-	export function unRefCreateSchemaReq(v:Ref<CreateSchemaReq>):CreateSchemaReq
-	export function emptyGetDataSourceRespData():GetDataSourceRespData
-	export function emptyRefGetDataSourceRespData():Ref<GetDataSourceRespData>
-	export function refOfGetDataSourceRespData(x:GetDataSourceRespData,v:Ref<GetDataSourceRespData>)
-	export function unRefGetDataSourceRespData(v:Ref<GetDataSourceRespData>):GetDataSourceRespData
-	export function emptyGetSchemaRespData():GetSchemaRespData
-	export function emptyRefGetSchemaRespData():Ref<GetSchemaRespData>
-	export function refOfGetSchemaRespData(x:GetSchemaRespData,v:Ref<GetSchemaRespData>)
-	export function unRefGetSchemaRespData(v:Ref<GetSchemaRespData>):GetSchemaRespData
-	export function emptyGetDataSourceItemRespData():GetDataSourceItemRespData
-	export function emptyRefGetDataSourceItemRespData():Ref<GetDataSourceItemRespData>
-	export function refOfGetDataSourceItemRespData(x:GetDataSourceItemRespData,v:Ref<GetDataSourceItemRespData>)
-	export function unRefGetDataSourceItemRespData(v:Ref<GetDataSourceItemRespData>):GetDataSourceItemRespData
-	export function emptyPatchSchemaRespData():PatchSchemaRespData
-	export function emptyRefPatchSchemaRespData():Ref<PatchSchemaRespData>
-	export function refOfPatchSchemaRespData(x:PatchSchemaRespData,v:Ref<PatchSchemaRespData>)
-	export function unRefPatchSchemaRespData(v:Ref<PatchSchemaRespData>):PatchSchemaRespData
-	export function emptyRagProbe():RagProbe
-	export function emptyRefRagProbe():Ref<RagProbe>
-	export function refOfRagProbe(x:RagProbe,v:Ref<RagProbe>)
-	export function unRefRagProbe(v:Ref<RagProbe>):RagProbe
-	export function emptyCreateAppReqBody():CreateAppReqBody
-	export function emptyRefCreateAppReqBody():Ref<CreateAppReqBody>
-	export function refOfCreateAppReqBody(x:CreateAppReqBody,v:Ref<CreateAppReqBody>)
-	export function unRefCreateAppReqBody(v:Ref<CreateAppReqBody>):CreateAppReqBody
-	export function emptyCreateMessageReq():CreateMessageReq
-	export function emptyRefCreateMessageReq():Ref<CreateMessageReq>
-	export function refOfCreateMessageReq(x:CreateMessageReq,v:Ref<CreateMessageReq>)
-	export function unRefCreateMessageReq(v:Ref<CreateMessageReq>):CreateMessageReq
-	export function emptyI18nMeta():I18nMeta
-	export function emptyRefI18nMeta():Ref<I18nMeta>
-	export function refOfI18nMeta(x:I18nMeta,v:Ref<I18nMeta>)
-	export function unRefI18nMeta(v:Ref<I18nMeta>):I18nMeta
-	export function emptyPatchDataSourceRespData():PatchDataSourceRespData
-	export function emptyRefPatchDataSourceRespData():Ref<PatchDataSourceRespData>
-	export function refOfPatchDataSourceRespData(x:PatchDataSourceRespData,v:Ref<PatchDataSourceRespData>)
-	export function unRefPatchDataSourceRespData(v:Ref<PatchDataSourceRespData>):PatchDataSourceRespData
-	export function emptySystemInfo():SystemInfo
-	export function emptyRefSystemInfo():Ref<SystemInfo>
-	export function refOfSystemInfo(x:SystemInfo,v:Ref<SystemInfo>)
-	export function unRefSystemInfo(v:Ref<SystemInfo>):SystemInfo
-	export function emptyAcl():Acl
-	export function emptyRefAcl():Ref<Acl>
-	export function refOfAcl(x:Acl,v:Ref<Acl>)
-	export function unRefAcl(v:Ref<Acl>):Acl
-	export function emptyDeleteSchemaReq():DeleteSchemaReq
-	export function emptyRefDeleteSchemaReq():Ref<DeleteSchemaReq>
-	export function refOfDeleteSchemaReq(x:DeleteSchemaReq,v:Ref<DeleteSchemaReq>)
-	export function unRefDeleteSchemaReq(v:Ref<DeleteSchemaReq>):DeleteSchemaReq
-	export function emptyCreateAppResp():CreateAppResp
-	export function emptyRefCreateAppResp():Ref<CreateAppResp>
-	export function refOfCreateAppResp(x:CreateAppResp,v:Ref<CreateAppResp>)
-	export function unRefCreateAppResp(v:Ref<CreateAppResp>):CreateAppResp
-	export function emptyCreateSchemaResp():CreateSchemaResp
-	export function emptyRefCreateSchemaResp():Ref<CreateSchemaResp>
-	export function refOfCreateSchemaResp(x:CreateSchemaResp,v:Ref<CreateSchemaResp>)
-	export function unRefCreateSchemaResp(v:Ref<CreateSchemaResp>):CreateSchemaResp
-	export function emptyPatchDataSourceReqBody():PatchDataSourceReqBody
-	export function emptyRefPatchDataSourceReqBody():Ref<PatchDataSourceReqBody>
-	export function refOfPatchDataSourceReqBody(x:PatchDataSourceReqBody,v:Ref<PatchDataSourceReqBody>)
-	export function unRefPatchDataSourceReqBody(v:Ref<PatchDataSourceReqBody>):PatchDataSourceReqBody
-	export function emptySchemaFieldAnswerOption():SchemaFieldAnswerOption
-	export function emptyRefSchemaFieldAnswerOption():Ref<SchemaFieldAnswerOption>
-	export function refOfSchemaFieldAnswerOption(x:SchemaFieldAnswerOption,v:Ref<SchemaFieldAnswerOption>)
-	export function unRefSchemaFieldAnswerOption(v:Ref<SchemaFieldAnswerOption>):SchemaFieldAnswerOption
-	export function emptyChunk():Chunk
-	export function emptyRefChunk():Ref<Chunk>
-	export function refOfChunk(x:Chunk,v:Ref<Chunk>)
-	export function unRefChunk(v:Ref<Chunk>):Chunk
-	export function emptyCreateMessageReqBody():CreateMessageReqBody
-	export function emptyRefCreateMessageReqBody():Ref<CreateMessageReqBody>
-	export function refOfCreateMessageReqBody(x:CreateMessageReqBody,v:Ref<CreateMessageReqBody>)
-	export function unRefCreateMessageReqBody(v:Ref<CreateMessageReqBody>):CreateMessageReqBody
-	export function emptyDepartmentId():DepartmentId
-	export function emptyRefDepartmentId():Ref<DepartmentId>
-	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
-	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptyGetDataSourceItemResp():GetDataSourceItemResp
-	export function emptyRefGetDataSourceItemResp():Ref<GetDataSourceItemResp>
-	export function refOfGetDataSourceItemResp(x:GetDataSourceItemResp,v:Ref<GetDataSourceItemResp>)
-	export function unRefGetDataSourceItemResp(v:Ref<GetDataSourceItemResp>):GetDataSourceItemResp
-	export function emptyScenarioContextExtra():ScenarioContextExtra
-	export function emptyRefScenarioContextExtra():Ref<ScenarioContextExtra>
-	export function refOfScenarioContextExtra(x:ScenarioContextExtra,v:Ref<ScenarioContextExtra>)
-	export function unRefScenarioContextExtra(v:Ref<ScenarioContextExtra>):ScenarioContextExtra
-	export function emptyPatchDataSourceResp():PatchDataSourceResp
-	export function emptyRefPatchDataSourceResp():Ref<PatchDataSourceResp>
-	export function refOfPatchDataSourceResp(x:PatchDataSourceResp,v:Ref<PatchDataSourceResp>)
-	export function unRefPatchDataSourceResp(v:Ref<PatchDataSourceResp>):PatchDataSourceResp
-	export function emptySchemaUserIdsOption():SchemaUserIdsOption
-	export function emptyRefSchemaUserIdsOption():Ref<SchemaUserIdsOption>
-	export function refOfSchemaUserIdsOption(x:SchemaUserIdsOption,v:Ref<SchemaUserIdsOption>)
-	export function unRefSchemaUserIdsOption(v:Ref<SchemaUserIdsOption>):SchemaUserIdsOption
-	export function emptyDeleteDataSourceReq():DeleteDataSourceReq
-	export function emptyRefDeleteDataSourceReq():Ref<DeleteDataSourceReq>
-	export function refOfDeleteDataSourceReq(x:DeleteDataSourceReq,v:Ref<DeleteDataSourceReq>)
-	export function unRefDeleteDataSourceReq(v:Ref<DeleteDataSourceReq>):DeleteDataSourceReq
-	export function emptyMemoryMessage():MemoryMessage
-	export function emptyRefMemoryMessage():Ref<MemoryMessage>
-	export function refOfMemoryMessage(x:MemoryMessage,v:Ref<MemoryMessage>)
-	export function unRefMemoryMessage(v:Ref<MemoryMessage>):MemoryMessage
-	export function emptySchemaDisplay():SchemaDisplay
-	export function emptyRefSchemaDisplay():Ref<SchemaDisplay>
-	export function refOfSchemaDisplay(x:SchemaDisplay,v:Ref<SchemaDisplay>)
-	export function unRefSchemaDisplay(v:Ref<SchemaDisplay>):SchemaDisplay
-	export function emptySchemaProperty():SchemaProperty
-	export function emptyRefSchemaProperty():Ref<SchemaProperty>
-	export function refOfSchemaProperty(x:SchemaProperty,v:Ref<SchemaProperty>)
-	export function unRefSchemaProperty(v:Ref<SchemaProperty>):SchemaProperty
-	export function emptySeperatePassage():SeperatePassage
-	export function emptyRefSeperatePassage():Ref<SeperatePassage>
-	export function refOfSeperatePassage(x:SeperatePassage,v:Ref<SeperatePassage>)
-	export function unRefSeperatePassage(v:Ref<SeperatePassage>):SeperatePassage
-	export function emptyCreateDataSourceResp():CreateDataSourceResp
-	export function emptyRefCreateDataSourceResp():Ref<CreateDataSourceResp>
-	export function refOfCreateDataSourceResp(x:CreateDataSourceResp,v:Ref<CreateDataSourceResp>)
-	export function unRefCreateDataSourceResp(v:Ref<CreateDataSourceResp>):CreateDataSourceResp
-	export function emptyGetSchemaReq():GetSchemaReq
-	export function emptyRefGetSchemaReq():Ref<GetSchemaReq>
-	export function refOfGetSchemaReq(x:GetSchemaReq,v:Ref<GetSchemaReq>)
-	export function unRefGetSchemaReq(v:Ref<GetSchemaReq>):GetSchemaReq
-	export function emptyDeleteDataSourceResp():DeleteDataSourceResp
-	export function emptyRefDeleteDataSourceResp():Ref<DeleteDataSourceResp>
-	export function refOfDeleteDataSourceResp(x:DeleteDataSourceResp,v:Ref<DeleteDataSourceResp>)
-	export function unRefDeleteDataSourceResp(v:Ref<DeleteDataSourceResp>):DeleteDataSourceResp
-	export function emptyItem():Item
-	export function emptyRefItem():Ref<Item>
-	export function refOfItem(x:Item,v:Ref<Item>)
-	export function unRefItem(v:Ref<Item>):Item
-	export function emptyPatchDataSourceReq():PatchDataSourceReq
-	export function emptyRefPatchDataSourceReq():Ref<PatchDataSourceReq>
-	export function refOfPatchDataSourceReq(x:PatchDataSourceReq,v:Ref<PatchDataSourceReq>)
-	export function unRefPatchDataSourceReq(v:Ref<PatchDataSourceReq>):PatchDataSourceReq
-	export function emptySchemaDisplayFieldMapping():SchemaDisplayFieldMapping
-	export function emptyRefSchemaDisplayFieldMapping():Ref<SchemaDisplayFieldMapping>
-	export function refOfSchemaDisplayFieldMapping(x:SchemaDisplayFieldMapping,v:Ref<SchemaDisplayFieldMapping>)
-	export function unRefSchemaDisplayFieldMapping(v:Ref<SchemaDisplayFieldMapping>):SchemaDisplayFieldMapping
-	export function emptyCreateDocParam():CreateDocParam
-	export function emptyRefCreateDocParam():Ref<CreateDocParam>
-	export function refOfCreateDocParam(x:CreateDocParam,v:Ref<CreateDocParam>)
-	export function unRefCreateDocParam(v:Ref<CreateDocParam>):CreateDocParam
-	export function emptyItemContent():ItemContent
-	export function emptyRefItemContent():Ref<ItemContent>
-	export function refOfItemContent(x:ItemContent,v:Ref<ItemContent>)
-	export function unRefItemContent(v:Ref<ItemContent>):ItemContent
-	export function emptyItemMetadata():ItemMetadata
-	export function emptyRefItemMetadata():Ref<ItemMetadata>
-	export function refOfItemMetadata(x:ItemMetadata,v:Ref<ItemMetadata>)
-	export function unRefItemMetadata(v:Ref<ItemMetadata>):ItemMetadata
-	export function emptyWikiPassageParam():WikiPassageParam
-	export function emptyRefWikiPassageParam():Ref<WikiPassageParam>
-	export function refOfWikiPassageParam(x:WikiPassageParam,v:Ref<WikiPassageParam>)
-	export function unRefWikiPassageParam(v:Ref<WikiPassageParam>):WikiPassageParam
-	export function emptyDeleteDataSourceItemResp():DeleteDataSourceItemResp
-	export function emptyRefDeleteDataSourceItemResp():Ref<DeleteDataSourceItemResp>
-	export function refOfDeleteDataSourceItemResp(x:DeleteDataSourceItemResp,v:Ref<DeleteDataSourceItemResp>)
-	export function unRefDeleteDataSourceItemResp(v:Ref<DeleteDataSourceItemResp>):DeleteDataSourceItemResp
-	export function emptyListDataSourceRespData():ListDataSourceRespData
-	export function emptyRefListDataSourceRespData():Ref<ListDataSourceRespData>
-	export function refOfListDataSourceRespData(x:ListDataSourceRespData,v:Ref<ListDataSourceRespData>)
-	export function unRefListDataSourceRespData(v:Ref<ListDataSourceRespData>):ListDataSourceRespData
-	export function emptySchemaFilterOptions():SchemaFilterOptions
-	export function emptyRefSchemaFilterOptions():Ref<SchemaFilterOptions>
-	export function refOfSchemaFilterOptions(x:SchemaFilterOptions,v:Ref<SchemaFilterOptions>)
-	export function unRefSchemaFilterOptions(v:Ref<SchemaFilterOptions>):SchemaFilterOptions
-	export function emptyGetSchemaResp():GetSchemaResp
-	export function emptyRefGetSchemaResp():Ref<GetSchemaResp>
-	export function refOfGetSchemaResp(x:GetSchemaResp,v:Ref<GetSchemaResp>)
-	export function unRefGetSchemaResp(v:Ref<GetSchemaResp>):GetSchemaResp
-	export function emptyLingoPassageParam():LingoPassageParam
-	export function emptyRefLingoPassageParam():Ref<LingoPassageParam>
-	export function refOfLingoPassageParam(x:LingoPassageParam,v:Ref<LingoPassageParam>)
-	export function unRefLingoPassageParam(v:Ref<LingoPassageParam>):LingoPassageParam
-	export function emptyCreateDataSourceReq():CreateDataSourceReq
-	export function emptyRefCreateDataSourceReq():Ref<CreateDataSourceReq>
-	export function refOfCreateDataSourceReq(x:CreateDataSourceReq,v:Ref<CreateDataSourceReq>)
-	export function unRefCreateDataSourceReq(v:Ref<CreateDataSourceReq>):CreateDataSourceReq
-	export function emptyDataset():Dataset
-	export function emptyRefDataset():Ref<Dataset>
-	export function refOfDataset(x:Dataset,v:Ref<Dataset>)
-	export function unRefDataset(v:Ref<Dataset>):Dataset
-	export function emptyCreateDataSourceItemResp():CreateDataSourceItemResp
-	export function emptyRefCreateDataSourceItemResp():Ref<CreateDataSourceItemResp>
-	export function refOfCreateDataSourceItemResp(x:CreateDataSourceItemResp,v:Ref<CreateDataSourceItemResp>)
-	export function unRefCreateDataSourceItemResp(v:Ref<CreateDataSourceItemResp>):CreateDataSourceItemResp
-	export function emptyDataSource():DataSource
-	export function emptyRefDataSource():Ref<DataSource>
-	export function refOfDataSource(x:DataSource,v:Ref<DataSource>)
-	export function unRefDataSource(v:Ref<DataSource>):DataSource
 	export function emptyListDataSourceReq():ListDataSourceReq
 	export function emptyRefListDataSourceReq():Ref<ListDataSourceReq>
 	export function refOfListDataSourceReq(x:ListDataSourceReq,v:Ref<ListDataSourceReq>)
 	export function unRefListDataSourceReq(v:Ref<ListDataSourceReq>):ListDataSourceReq
+	export function emptyModelConfig():ModelConfig
+	export function emptyRefModelConfig():Ref<ModelConfig>
+	export function refOfModelConfig(x:ModelConfig,v:Ref<ModelConfig>)
+	export function unRefModelConfig(v:Ref<ModelConfig>):ModelConfig
+	export function emptyCreateAppReq():CreateAppReq
+	export function emptyRefCreateAppReq():Ref<CreateAppReq>
+	export function refOfCreateAppReq(x:CreateAppReq,v:Ref<CreateAppReq>)
+	export function unRefCreateAppReq(v:Ref<CreateAppReq>):CreateAppReq
+	export function emptyDeleteDataSourceResp():DeleteDataSourceResp
+	export function emptyRefDeleteDataSourceResp():Ref<DeleteDataSourceResp>
+	export function refOfDeleteDataSourceResp(x:DeleteDataSourceResp,v:Ref<DeleteDataSourceResp>)
+	export function unRefDeleteDataSourceResp(v:Ref<DeleteDataSourceResp>):DeleteDataSourceResp
+	export function emptyCreateAppRespData():CreateAppRespData
+	export function emptyRefCreateAppRespData():Ref<CreateAppRespData>
+	export function refOfCreateAppRespData(x:CreateAppRespData,v:Ref<CreateAppRespData>)
+	export function unRefCreateAppRespData(v:Ref<CreateAppRespData>):CreateAppRespData
+	export function emptyCreateMessageReq():CreateMessageReq
+	export function emptyRefCreateMessageReq():Ref<CreateMessageReq>
+	export function refOfCreateMessageReq(x:CreateMessageReq,v:Ref<CreateMessageReq>)
+	export function unRefCreateMessageReq(v:Ref<CreateMessageReq>):CreateMessageReq
+	export function emptyGetDataSourceReq():GetDataSourceReq
+	export function emptyRefGetDataSourceReq():Ref<GetDataSourceReq>
+	export function refOfGetDataSourceReq(x:GetDataSourceReq,v:Ref<GetDataSourceReq>)
+	export function unRefGetDataSourceReq(v:Ref<GetDataSourceReq>):GetDataSourceReq
+	export function emptyItem():Item
+	export function emptyRefItem():Ref<Item>
+	export function refOfItem(x:Item,v:Ref<Item>)
+	export function unRefItem(v:Ref<Item>):Item
+	export function emptyCallbackActionValue():CallbackActionValue
+	export function emptyRefCallbackActionValue():Ref<CallbackActionValue>
+	export function refOfCallbackActionValue(x:CallbackActionValue,v:Ref<CallbackActionValue>)
+	export function unRefCallbackActionValue(v:Ref<CallbackActionValue>):CallbackActionValue
+	export function emptyCardCallbackRequest():CardCallbackRequest
+	export function emptyRefCardCallbackRequest():Ref<CardCallbackRequest>
+	export function refOfCardCallbackRequest(x:CardCallbackRequest,v:Ref<CardCallbackRequest>)
+	export function unRefCardCallbackRequest(v:Ref<CardCallbackRequest>):CardCallbackRequest
+	export function emptyWikiPassageParam():WikiPassageParam
+	export function emptyRefWikiPassageParam():Ref<WikiPassageParam>
+	export function refOfWikiPassageParam(x:WikiPassageParam,v:Ref<WikiPassageParam>)
+	export function unRefWikiPassageParam(v:Ref<WikiPassageParam>):WikiPassageParam
+	export function emptySchemaFilterOptions():SchemaFilterOptions
+	export function emptyRefSchemaFilterOptions():Ref<SchemaFilterOptions>
+	export function refOfSchemaFilterOptions(x:SchemaFilterOptions,v:Ref<SchemaFilterOptions>)
+	export function unRefSchemaFilterOptions(v:Ref<SchemaFilterOptions>):SchemaFilterOptions
+	export function emptySystemInfo():SystemInfo
+	export function emptyRefSystemInfo():Ref<SystemInfo>
+	export function refOfSystemInfo(x:SystemInfo,v:Ref<SystemInfo>)
+	export function unRefSystemInfo(v:Ref<SystemInfo>):SystemInfo
+	export function emptyPatchSchemaRespData():PatchSchemaRespData
+	export function emptyRefPatchSchemaRespData():Ref<PatchSchemaRespData>
+	export function refOfPatchSchemaRespData(x:PatchSchemaRespData,v:Ref<PatchSchemaRespData>)
+	export function unRefPatchSchemaRespData(v:Ref<PatchSchemaRespData>):PatchSchemaRespData
+	export function emptyGetDataSourceItemReq():GetDataSourceItemReq
+	export function emptyRefGetDataSourceItemReq():Ref<GetDataSourceItemReq>
+	export function refOfGetDataSourceItemReq(x:GetDataSourceItemReq,v:Ref<GetDataSourceItemReq>)
+	export function unRefGetDataSourceItemReq(v:Ref<GetDataSourceItemReq>):GetDataSourceItemReq
+	export function emptyItemContent():ItemContent
+	export function emptyRefItemContent():Ref<ItemContent>
+	export function refOfItemContent(x:ItemContent,v:Ref<ItemContent>)
+	export function unRefItemContent(v:Ref<ItemContent>):ItemContent
+	export function emptyModelParam():ModelParam
+	export function emptyRefModelParam():Ref<ModelParam>
+	export function refOfModelParam(x:ModelParam,v:Ref<ModelParam>)
+	export function unRefModelParam(v:Ref<ModelParam>):ModelParam
+	export function emptyPassage():Passage
+	export function emptyRefPassage():Ref<Passage>
+	export function refOfPassage(x:Passage,v:Ref<Passage>)
+	export function unRefPassage(v:Ref<Passage>):Passage
+	export function emptyAcl():Acl
+	export function emptyRefAcl():Ref<Acl>
+	export function refOfAcl(x:Acl,v:Ref<Acl>)
+	export function unRefAcl(v:Ref<Acl>):Acl
+	export function emptyCreateDataSourceRespData():CreateDataSourceRespData
+	export function emptyRefCreateDataSourceRespData():Ref<CreateDataSourceRespData>
+	export function refOfCreateDataSourceRespData(x:CreateDataSourceRespData,v:Ref<CreateDataSourceRespData>)
+	export function unRefCreateDataSourceRespData(v:Ref<CreateDataSourceRespData>):CreateDataSourceRespData
+	export function emptyGetSchemaRespData():GetSchemaRespData
+	export function emptyRefGetSchemaRespData():Ref<GetSchemaRespData>
+	export function refOfGetSchemaRespData(x:GetSchemaRespData,v:Ref<GetSchemaRespData>)
+	export function unRefGetSchemaRespData(v:Ref<GetSchemaRespData>):GetSchemaRespData
+	export function emptyHelpdeskPassageParam():HelpdeskPassageParam
+	export function emptyRefHelpdeskPassageParam():Ref<HelpdeskPassageParam>
+	export function refOfHelpdeskPassageParam(x:HelpdeskPassageParam,v:Ref<HelpdeskPassageParam>)
+	export function unRefHelpdeskPassageParam(v:Ref<HelpdeskPassageParam>):HelpdeskPassageParam
+	export function emptyCreateAppReqBody():CreateAppReqBody
+	export function emptyRefCreateAppReqBody():Ref<CreateAppReqBody>
+	export function refOfCreateAppReqBody(x:CreateAppReqBody,v:Ref<CreateAppReqBody>)
+	export function unRefCreateAppReqBody(v:Ref<CreateAppReqBody>):CreateAppReqBody
+	export function emptyCreateDataSourceResp():CreateDataSourceResp
+	export function emptyRefCreateDataSourceResp():Ref<CreateDataSourceResp>
+	export function refOfCreateDataSourceResp(x:CreateDataSourceResp,v:Ref<CreateDataSourceResp>)
+	export function unRefCreateDataSourceResp(v:Ref<CreateDataSourceResp>):CreateDataSourceResp
+	export function emptyPatchSchemaProperty():PatchSchemaProperty
+	export function emptyRefPatchSchemaProperty():Ref<PatchSchemaProperty>
+	export function refOfPatchSchemaProperty(x:PatchSchemaProperty,v:Ref<PatchSchemaProperty>)
+	export function unRefPatchSchemaProperty(v:Ref<PatchSchemaProperty>):PatchSchemaProperty
+	export function emptyGetDataSourceItemRespData():GetDataSourceItemRespData
+	export function emptyRefGetDataSourceItemRespData():Ref<GetDataSourceItemRespData>
+	export function refOfGetDataSourceItemRespData(x:GetDataSourceItemRespData,v:Ref<GetDataSourceItemRespData>)
+	export function unRefGetDataSourceItemRespData(v:Ref<GetDataSourceItemRespData>):GetDataSourceItemRespData
+	export function emptyScenarioContext():ScenarioContext
+	export function emptyRefScenarioContext():Ref<ScenarioContext>
+	export function refOfScenarioContext(x:ScenarioContext,v:Ref<ScenarioContext>)
+	export function unRefScenarioContext(v:Ref<ScenarioContext>):ScenarioContext
+	export function emptyPatchDataSourceReq():PatchDataSourceReq
+	export function emptyRefPatchDataSourceReq():Ref<PatchDataSourceReq>
+	export function refOfPatchDataSourceReq(x:PatchDataSourceReq,v:Ref<PatchDataSourceReq>)
+	export function unRefPatchDataSourceReq(v:Ref<PatchDataSourceReq>):PatchDataSourceReq
+	export function emptySchemaTypeDefinitions():SchemaTypeDefinitions
+	export function emptyRefSchemaTypeDefinitions():Ref<SchemaTypeDefinitions>
+	export function refOfSchemaTypeDefinitions(x:SchemaTypeDefinitions,v:Ref<SchemaTypeDefinitions>)
+	export function unRefSchemaTypeDefinitions(v:Ref<SchemaTypeDefinitions>):SchemaTypeDefinitions
+	export function emptyV2():V2
+	export function emptyRefV2():Ref<V2>
+	export function refOfV2(x:V2,v:Ref<V2>)
+	export function unRefV2(v:Ref<V2>):V2
+	export function emptyCreateDataSourceReq():CreateDataSourceReq
+	export function emptyRefCreateDataSourceReq():Ref<CreateDataSourceReq>
+	export function refOfCreateDataSourceReq(x:CreateDataSourceReq,v:Ref<CreateDataSourceReq>)
+	export function unRefCreateDataSourceReq(v:Ref<CreateDataSourceReq>):CreateDataSourceReq
+	export function emptySchema():Schema
+	export function emptyRefSchema():Ref<Schema>
+	export function refOfSchema(x:Schema,v:Ref<Schema>)
+	export function unRefSchema(v:Ref<Schema>):Schema
+	export function emptyCallbackAction():CallbackAction
+	export function emptyRefCallbackAction():Ref<CallbackAction>
+	export function refOfCallbackAction(x:CallbackAction,v:Ref<CallbackAction>)
+	export function unRefCallbackAction(v:Ref<CallbackAction>):CallbackAction
+	export function emptyCreateMessageReqBody():CreateMessageReqBody
+	export function emptyRefCreateMessageReqBody():Ref<CreateMessageReqBody>
+	export function refOfCreateMessageReqBody(x:CreateMessageReqBody,v:Ref<CreateMessageReqBody>)
+	export function unRefCreateMessageReqBody(v:Ref<CreateMessageReqBody>):CreateMessageReqBody
+	export function emptyDocPassageParam():DocPassageParam
+	export function emptyRefDocPassageParam():Ref<DocPassageParam>
+	export function refOfDocPassageParam(x:DocPassageParam,v:Ref<DocPassageParam>)
+	export function unRefDocPassageParam(v:Ref<DocPassageParam>):DocPassageParam
+	export function emptySchemaPredefineEnumStruct():SchemaPredefineEnumStruct
+	export function emptyRefSchemaPredefineEnumStruct():Ref<SchemaPredefineEnumStruct>
+	export function refOfSchemaPredefineEnumStruct(x:SchemaPredefineEnumStruct,v:Ref<SchemaPredefineEnumStruct>)
+	export function unRefSchemaPredefineEnumStruct(v:Ref<SchemaPredefineEnumStruct>):SchemaPredefineEnumStruct
+	export function emptySchemaUserIdsOption():SchemaUserIdsOption
+	export function emptyRefSchemaUserIdsOption():Ref<SchemaUserIdsOption>
+	export function refOfSchemaUserIdsOption(x:SchemaUserIdsOption,v:Ref<SchemaUserIdsOption>)
+	export function unRefSchemaUserIdsOption(v:Ref<SchemaUserIdsOption>):SchemaUserIdsOption
+	export function emptyDataset():Dataset
+	export function emptyRefDataset():Ref<Dataset>
+	export function refOfDataset(x:Dataset,v:Ref<Dataset>)
+	export function unRefDataset(v:Ref<Dataset>):Dataset
+	export function emptyScenarioContextExtra():ScenarioContextExtra
+	export function emptyRefScenarioContextExtra():Ref<ScenarioContextExtra>
+	export function refOfScenarioContextExtra(x:ScenarioContextExtra,v:Ref<ScenarioContextExtra>)
+	export function unRefScenarioContextExtra(v:Ref<ScenarioContextExtra>):ScenarioContextExtra
+	export function emptyMemoryMessage():MemoryMessage
+	export function emptyRefMemoryMessage():Ref<MemoryMessage>
+	export function refOfMemoryMessage(x:MemoryMessage,v:Ref<MemoryMessage>)
+	export function unRefMemoryMessage(v:Ref<MemoryMessage>):MemoryMessage
+	export function emptyGetDataSourceItemResp():GetDataSourceItemResp
+	export function emptyRefGetDataSourceItemResp():Ref<GetDataSourceItemResp>
+	export function refOfGetDataSourceItemResp(x:GetDataSourceItemResp,v:Ref<GetDataSourceItemResp>)
+	export function unRefGetDataSourceItemResp(v:Ref<GetDataSourceItemResp>):GetDataSourceItemResp
+	export function emptyBatchItemResult():BatchItemResult
+	export function emptyRefBatchItemResult():Ref<BatchItemResult>
+	export function refOfBatchItemResult(x:BatchItemResult,v:Ref<BatchItemResult>)
+	export function unRefBatchItemResult(v:Ref<BatchItemResult>):BatchItemResult
+	export function emptyCreateDataSourceItemReq():CreateDataSourceItemReq
+	export function emptyRefCreateDataSourceItemReq():Ref<CreateDataSourceItemReq>
+	export function refOfCreateDataSourceItemReq(x:CreateDataSourceItemReq,v:Ref<CreateDataSourceItemReq>)
+	export function unRefCreateDataSourceItemReq(v:Ref<CreateDataSourceItemReq>):CreateDataSourceItemReq
+	export function emptyDoc():Doc
+	export function emptyRefDoc():Ref<Doc>
+	export function refOfDoc(x:Doc,v:Ref<Doc>)
+	export function unRefDoc(v:Ref<Doc>):Doc
+	export function emptyLingoPassageParam():LingoPassageParam
+	export function emptyRefLingoPassageParam():Ref<LingoPassageParam>
+	export function refOfLingoPassageParam(x:LingoPassageParam,v:Ref<LingoPassageParam>)
+	export function unRefLingoPassageParam(v:Ref<LingoPassageParam>):LingoPassageParam
+	export function emptyLlmModelConfig():LlmModelConfig
+	export function emptyRefLlmModelConfig():Ref<LlmModelConfig>
+	export function refOfLlmModelConfig(x:LlmModelConfig,v:Ref<LlmModelConfig>)
+	export function unRefLlmModelConfig(v:Ref<LlmModelConfig>):LlmModelConfig
+	export function emptyNlsModelConfig():NlsModelConfig
+	export function emptyRefNlsModelConfig():Ref<NlsModelConfig>
+	export function refOfNlsModelConfig(x:NlsModelConfig,v:Ref<NlsModelConfig>)
+	export function unRefNlsModelConfig(v:Ref<NlsModelConfig>):NlsModelConfig
+	export function emptySchemaFieldAnswerOption():SchemaFieldAnswerOption
+	export function emptyRefSchemaFieldAnswerOption():Ref<SchemaFieldAnswerOption>
+	export function refOfSchemaFieldAnswerOption(x:SchemaFieldAnswerOption,v:Ref<SchemaFieldAnswerOption>)
+	export function unRefSchemaFieldAnswerOption(v:Ref<SchemaFieldAnswerOption>):SchemaFieldAnswerOption
+	export function emptySchemaSearchOptions():SchemaSearchOptions
+	export function emptyRefSchemaSearchOptions():Ref<SchemaSearchOptions>
+	export function refOfSchemaSearchOptions(x:SchemaSearchOptions,v:Ref<SchemaSearchOptions>)
+	export function unRefSchemaSearchOptions(v:Ref<SchemaSearchOptions>):SchemaSearchOptions
+	export function emptyPassageParam():PassageParam
+	export function emptyRefPassageParam():Ref<PassageParam>
+	export function refOfPassageParam(x:PassageParam,v:Ref<PassageParam>)
+	export function unRefPassageParam(v:Ref<PassageParam>):PassageParam
+	export function emptyCreateSchemaResp():CreateSchemaResp
+	export function emptyRefCreateSchemaResp():Ref<CreateSchemaResp>
+	export function refOfCreateSchemaResp(x:CreateSchemaResp,v:Ref<CreateSchemaResp>)
+	export function unRefCreateSchemaResp(v:Ref<CreateSchemaResp>):CreateSchemaResp
+	export function emptyGetSchemaReq():GetSchemaReq
+	export function emptyRefGetSchemaReq():Ref<GetSchemaReq>
+	export function refOfGetSchemaReq(x:GetSchemaReq,v:Ref<GetSchemaReq>)
+	export function unRefGetSchemaReq(v:Ref<GetSchemaReq>):GetSchemaReq
+	export function emptyUserInfo():UserInfo
+	export function emptyRefUserInfo():Ref<UserInfo>
+	export function refOfUserInfo(x:UserInfo,v:Ref<UserInfo>)
+	export function unRefUserInfo(v:Ref<UserInfo>):UserInfo
+	export function emptyCreateSchemaReq():CreateSchemaReq
+	export function emptyRefCreateSchemaReq():Ref<CreateSchemaReq>
+	export function refOfCreateSchemaReq(x:CreateSchemaReq,v:Ref<CreateSchemaReq>)
+	export function unRefCreateSchemaReq(v:Ref<CreateSchemaReq>):CreateSchemaReq
+	export function emptyRagAnswerResponse():RagAnswerResponse
+	export function emptyRefRagAnswerResponse():Ref<RagAnswerResponse>
+	export function refOfRagAnswerResponse(x:RagAnswerResponse,v:Ref<RagAnswerResponse>)
+	export function unRefRagAnswerResponse(v:Ref<RagAnswerResponse>):RagAnswerResponse
+	export function emptyListDataSourceResp():ListDataSourceResp
+	export function emptyRefListDataSourceResp():Ref<ListDataSourceResp>
+	export function refOfListDataSourceResp(x:ListDataSourceResp,v:Ref<ListDataSourceResp>)
+	export function unRefListDataSourceResp(v:Ref<ListDataSourceResp>):ListDataSourceResp
+	export function emptyPatchSchemaReq():PatchSchemaReq
+	export function emptyRefPatchSchemaReq():Ref<PatchSchemaReq>
+	export function refOfPatchSchemaReq(x:PatchSchemaReq,v:Ref<PatchSchemaReq>)
+	export function unRefPatchSchemaReq(v:Ref<PatchSchemaReq>):PatchSchemaReq
+	export function emptyDeleteDataSourceItemResp():DeleteDataSourceItemResp
+	export function emptyRefDeleteDataSourceItemResp():Ref<DeleteDataSourceItemResp>
+	export function refOfDeleteDataSourceItemResp(x:DeleteDataSourceItemResp,v:Ref<DeleteDataSourceItemResp>)
+	export function unRefDeleteDataSourceItemResp(v:Ref<DeleteDataSourceItemResp>):DeleteDataSourceItemResp
+	export function emptyStatus():Status
+	export function emptyRefStatus():Ref<Status>
+	export function refOfStatus(x:Status,v:Ref<Status>)
+	export function unRefStatus(v:Ref<Status>):Status
+	export function emptyItemMetadata():ItemMetadata
+	export function emptyRefItemMetadata():Ref<ItemMetadata>
+	export function refOfItemMetadata(x:ItemMetadata,v:Ref<ItemMetadata>)
+	export function unRefItemMetadata(v:Ref<ItemMetadata>):ItemMetadata
+	export function emptyListDataSourceRespData():ListDataSourceRespData
+	export function emptyRefListDataSourceRespData():Ref<ListDataSourceRespData>
+	export function refOfListDataSourceRespData(x:ListDataSourceRespData,v:Ref<ListDataSourceRespData>)
+	export function unRefListDataSourceRespData(v:Ref<ListDataSourceRespData>):ListDataSourceRespData
+	export function emptyPatchDataSourceReqBody():PatchDataSourceReqBody
+	export function emptyRefPatchDataSourceReqBody():Ref<PatchDataSourceReqBody>
+	export function refOfPatchDataSourceReqBody(x:PatchDataSourceReqBody,v:Ref<PatchDataSourceReqBody>)
+	export function unRefPatchDataSourceReqBody(v:Ref<PatchDataSourceReqBody>):PatchDataSourceReqBody
+	export function emptyCreateDataSourceItemResp():CreateDataSourceItemResp
+	export function emptyRefCreateDataSourceItemResp():Ref<CreateDataSourceItemResp>
+	export function refOfCreateDataSourceItemResp(x:CreateDataSourceItemResp,v:Ref<CreateDataSourceItemResp>)
+	export function unRefCreateDataSourceItemResp(v:Ref<CreateDataSourceItemResp>):CreateDataSourceItemResp
+	export function emptyCreateMessageRespData():CreateMessageRespData
+	export function emptyRefCreateMessageRespData():Ref<CreateMessageRespData>
+	export function refOfCreateMessageRespData(x:CreateMessageRespData,v:Ref<CreateMessageRespData>)
+	export function unRefCreateMessageRespData(v:Ref<CreateMessageRespData>):CreateMessageRespData
+	export function emptyDeleteDataSourceReq():DeleteDataSourceReq
+	export function emptyRefDeleteDataSourceReq():Ref<DeleteDataSourceReq>
+	export function refOfDeleteDataSourceReq(x:DeleteDataSourceReq,v:Ref<DeleteDataSourceReq>)
+	export function unRefDeleteDataSourceReq(v:Ref<DeleteDataSourceReq>):DeleteDataSourceReq
+	export function emptyItemRecord():ItemRecord
+	export function emptyRefItemRecord():Ref<ItemRecord>
+	export function refOfItemRecord(x:ItemRecord,v:Ref<ItemRecord>)
+	export function unRefItemRecord(v:Ref<ItemRecord>):ItemRecord
+	export function emptyListDataSourceIterator():ListDataSourceIterator
+	export function emptyRefListDataSourceIterator():Ref<ListDataSourceIterator>
+	export function refOfListDataSourceIterator(x:ListDataSourceIterator,v:Ref<ListDataSourceIterator>)
+	export function unRefListDataSourceIterator(v:Ref<ListDataSourceIterator>):ListDataSourceIterator
+	export function emptyParaphraseResult():ParaphraseResult
+	export function emptyRefParaphraseResult():Ref<ParaphraseResult>
+	export function refOfParaphraseResult(x:ParaphraseResult,v:Ref<ParaphraseResult>)
+	export function unRefParaphraseResult(v:Ref<ParaphraseResult>):ParaphraseResult
+	export function emptyCreateMessageResp():CreateMessageResp
+	export function emptyRefCreateMessageResp():Ref<CreateMessageResp>
+	export function refOfCreateMessageResp(x:CreateMessageResp,v:Ref<CreateMessageResp>)
+	export function unRefCreateMessageResp(v:Ref<CreateMessageResp>):CreateMessageResp
+	export function emptyPatchDataSourceRespData():PatchDataSourceRespData
+	export function emptyRefPatchDataSourceRespData():Ref<PatchDataSourceRespData>
+	export function refOfPatchDataSourceRespData(x:PatchDataSourceRespData,v:Ref<PatchDataSourceRespData>)
+	export function unRefPatchDataSourceRespData(v:Ref<PatchDataSourceRespData>):PatchDataSourceRespData
+	export function emptyPatchSchemaReqBody():PatchSchemaReqBody
+	export function emptyRefPatchSchemaReqBody():Ref<PatchSchemaReqBody>
+	export function refOfPatchSchemaReqBody(x:PatchSchemaReqBody,v:Ref<PatchSchemaReqBody>)
+	export function unRefPatchSchemaReqBody(v:Ref<PatchSchemaReqBody>):PatchSchemaReqBody
+	export function emptyDataSource():DataSource
+	export function emptyRefDataSource():Ref<DataSource>
+	export function refOfDataSource(x:DataSource,v:Ref<DataSource>)
+	export function unRefDataSource(v:Ref<DataSource>):DataSource
+	export function emptySchemaProperty():SchemaProperty
+	export function emptyRefSchemaProperty():Ref<SchemaProperty>
+	export function refOfSchemaProperty(x:SchemaProperty,v:Ref<SchemaProperty>)
+	export function unRefSchemaProperty(v:Ref<SchemaProperty>):SchemaProperty
+	export function emptySchemaSortOptions():SchemaSortOptions
+	export function emptyRefSchemaSortOptions():Ref<SchemaSortOptions>
+	export function refOfSchemaSortOptions(x:SchemaSortOptions,v:Ref<SchemaSortOptions>)
+	export function unRefSchemaSortOptions(v:Ref<SchemaSortOptions>):SchemaSortOptions
+	export function emptyChunk():Chunk
+	export function emptyRefChunk():Ref<Chunk>
+	export function refOfChunk(x:Chunk,v:Ref<Chunk>)
+	export function unRefChunk(v:Ref<Chunk>):Chunk
+	export function emptySchemaDisplayFieldMapping():SchemaDisplayFieldMapping
+	export function emptyRefSchemaDisplayFieldMapping():Ref<SchemaDisplayFieldMapping>
+	export function refOfSchemaDisplayFieldMapping(x:SchemaDisplayFieldMapping,v:Ref<SchemaDisplayFieldMapping>)
+	export function unRefSchemaDisplayFieldMapping(v:Ref<SchemaDisplayFieldMapping>):SchemaDisplayFieldMapping
+	export function emptyPatchDataSourceResp():PatchDataSourceResp
+	export function emptyRefPatchDataSourceResp():Ref<PatchDataSourceResp>
+	export function refOfPatchDataSourceResp(x:PatchDataSourceResp,v:Ref<PatchDataSourceResp>)
+	export function unRefPatchDataSourceResp(v:Ref<PatchDataSourceResp>):PatchDataSourceResp
+	export function emptyFilterSchema():FilterSchema
+	export function emptyRefFilterSchema():Ref<FilterSchema>
+	export function refOfFilterSchema(x:FilterSchema,v:Ref<FilterSchema>)
+	export function unRefFilterSchema(v:Ref<FilterSchema>):FilterSchema
+	export function emptyCreateDocParam():CreateDocParam
+	export function emptyRefCreateDocParam():Ref<CreateDocParam>
+	export function refOfCreateDocParam(x:CreateDocParam,v:Ref<CreateDocParam>)
+	export function unRefCreateDocParam(v:Ref<CreateDocParam>):CreateDocParam
+	export function emptyDeleteSchemaResp():DeleteSchemaResp
+	export function emptyRefDeleteSchemaResp():Ref<DeleteSchemaResp>
+	export function refOfDeleteSchemaResp(x:DeleteSchemaResp,v:Ref<DeleteSchemaResp>)
+	export function unRefDeleteSchemaResp(v:Ref<DeleteSchemaResp>):DeleteSchemaResp
+	export function emptyDepartmentId():DepartmentId
+	export function emptyRefDepartmentId():Ref<DepartmentId>
+	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
+	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
+	export function emptyPresent():Present
+	export function emptyRefPresent():Ref<Present>
+	export function refOfPresent(x:Present,v:Ref<Present>)
+	export function unRefPresent(v:Ref<Present>):Present
+	export function emptySeperatePassage():SeperatePassage
+	export function emptyRefSeperatePassage():Ref<SeperatePassage>
+	export function refOfSeperatePassage(x:SeperatePassage,v:Ref<SeperatePassage>)
+	export function unRefSeperatePassage(v:Ref<SeperatePassage>):SeperatePassage
+	export function emptyCreateAppResp():CreateAppResp
+	export function emptyRefCreateAppResp():Ref<CreateAppResp>
+	export function refOfCreateAppResp(x:CreateAppResp,v:Ref<CreateAppResp>)
+	export function unRefCreateAppResp(v:Ref<CreateAppResp>):CreateAppResp
 	export function emptyPatchSchemaResp():PatchSchemaResp
 	export function emptyRefPatchSchemaResp():Ref<PatchSchemaResp>
 	export function refOfPatchSchemaResp(x:PatchSchemaResp,v:Ref<PatchSchemaResp>)
 	export function unRefPatchSchemaResp(v:Ref<PatchSchemaResp>):PatchSchemaResp
+	export function emptyGetDataSourceResp():GetDataSourceResp
+	export function emptyRefGetDataSourceResp():Ref<GetDataSourceResp>
+	export function refOfGetDataSourceResp(x:GetDataSourceResp,v:Ref<GetDataSourceResp>)
+	export function unRefGetDataSourceResp(v:Ref<GetDataSourceResp>):GetDataSourceResp
+	export function emptyI18nMeta():I18nMeta
+	export function emptyRefI18nMeta():Ref<I18nMeta>
+	export function refOfI18nMeta(x:I18nMeta,v:Ref<I18nMeta>)
+	export function unRefI18nMeta(v:Ref<I18nMeta>):I18nMeta
+	export function emptyPresentDataCallbackDialogRequest():PresentDataCallbackDialogRequest
+	export function emptyRefPresentDataCallbackDialogRequest():Ref<PresentDataCallbackDialogRequest>
+	export function refOfPresentDataCallbackDialogRequest(x:PresentDataCallbackDialogRequest,v:Ref<PresentDataCallbackDialogRequest>)
+	export function unRefPresentDataCallbackDialogRequest(v:Ref<PresentDataCallbackDialogRequest>):PresentDataCallbackDialogRequest
+	export function emptyRagProbe():RagProbe
+	export function emptyRefRagProbe():Ref<RagProbe>
+	export function refOfRagProbe(x:RagProbe,v:Ref<RagProbe>)
+	export function unRefRagProbe(v:Ref<RagProbe>):RagProbe
+	export function emptySchemaTagOptions():SchemaTagOptions
+	export function emptyRefSchemaTagOptions():Ref<SchemaTagOptions>
+	export function refOfSchemaTagOptions(x:SchemaTagOptions,v:Ref<SchemaTagOptions>)
+	export function unRefSchemaTagOptions(v:Ref<SchemaTagOptions>):SchemaTagOptions
+	export function emptyDialogSearchRequest():DialogSearchRequest
+	export function emptyRefDialogSearchRequest():Ref<DialogSearchRequest>
+	export function refOfDialogSearchRequest(x:DialogSearchRequest,v:Ref<DialogSearchRequest>)
+	export function unRefDialogSearchRequest(v:Ref<DialogSearchRequest>):DialogSearchRequest
+	export function emptySchemaDisplay():SchemaDisplay
+	export function emptyRefSchemaDisplay():Ref<SchemaDisplay>
+	export function refOfSchemaDisplay(x:SchemaDisplay,v:Ref<SchemaDisplay>)
+	export function unRefSchemaDisplay(v:Ref<SchemaDisplay>):SchemaDisplay
+	export function emptyWebPassageParam():WebPassageParam
+	export function emptyRefWebPassageParam():Ref<WebPassageParam>
+	export function refOfWebPassageParam(x:WebPassageParam,v:Ref<WebPassageParam>)
+	export function unRefWebPassageParam(v:Ref<WebPassageParam>):WebPassageParam
+	export function emptyConnectorParam():ConnectorParam
+	export function emptyRefConnectorParam():Ref<ConnectorParam>
+	export function refOfConnectorParam(x:ConnectorParam,v:Ref<ConnectorParam>)
+	export function unRefConnectorParam(v:Ref<ConnectorParam>):ConnectorParam
+	export function emptyGetSchemaResp():GetSchemaResp
+	export function emptyRefGetSchemaResp():Ref<GetSchemaResp>
+	export function refOfGetSchemaResp(x:GetSchemaResp,v:Ref<GetSchemaResp>)
+	export function unRefGetSchemaResp(v:Ref<GetSchemaResp>):GetSchemaResp
+	export function emptyCreateSchemaRespData():CreateSchemaRespData
+	export function emptyRefCreateSchemaRespData():Ref<CreateSchemaRespData>
+	export function refOfCreateSchemaRespData(x:CreateSchemaRespData,v:Ref<CreateSchemaRespData>)
+	export function unRefCreateSchemaRespData(v:Ref<CreateSchemaRespData>):CreateSchemaRespData
+	export function emptyGetDataSourceRespData():GetDataSourceRespData
+	export function emptyRefGetDataSourceRespData():Ref<GetDataSourceRespData>
+	export function refOfGetDataSourceRespData(x:GetDataSourceRespData,v:Ref<GetDataSourceRespData>)
+	export function unRefGetDataSourceRespData(v:Ref<GetDataSourceRespData>):GetDataSourceRespData
+	export function emptyDeleteDataSourceItemReq():DeleteDataSourceItemReq
+	export function emptyRefDeleteDataSourceItemReq():Ref<DeleteDataSourceItemReq>
+	export function refOfDeleteDataSourceItemReq(x:DeleteDataSourceItemReq,v:Ref<DeleteDataSourceItemReq>)
+	export function unRefDeleteDataSourceItemReq(v:Ref<DeleteDataSourceItemReq>):DeleteDataSourceItemReq
 	export function emptyConnectDataSource():ConnectDataSource
 	export function emptyRefConnectDataSource():Ref<ConnectDataSource>
 	export function refOfConnectDataSource(x:ConnectDataSource,v:Ref<ConnectDataSource>)
 	export function unRefConnectDataSource(v:Ref<ConnectDataSource>):ConnectDataSource
+	export function emptySchemaEnumOptions():SchemaEnumOptions
+	export function emptyRefSchemaEnumOptions():Ref<SchemaEnumOptions>
+	export function refOfSchemaEnumOptions(x:SchemaEnumOptions,v:Ref<SchemaEnumOptions>)
+	export function unRefSchemaEnumOptions(v:Ref<SchemaEnumOptions>):SchemaEnumOptions
+	export function emptyDeleteSchemaReq():DeleteSchemaReq
+	export function emptyRefDeleteSchemaReq():Ref<DeleteSchemaReq>
+	export function refOfDeleteSchemaReq(x:DeleteSchemaReq,v:Ref<DeleteSchemaReq>)
+	export function unRefDeleteSchemaReq(v:Ref<DeleteSchemaReq>):DeleteSchemaReq
 }

@@ -9,7 +9,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/application/v6'{
 	// @ts-ignore
 	import * as larkevent from 'github.com/larksuite/oapi-sdk-go/v3/event'
 	// @ts-ignore
-	import type {Alias,Nothing,Ref,Struct,bool,int,error,int64} from 'go'
+	import type {int,error,int64,Alias,Nothing,Ref,Struct,bool} from 'go'
 	//"app"
 	export const AbilityApp:string
 	//"bot"
@@ -1390,6 +1390,58 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/application/v6'{
 			eventType(eventType:string):Ref<MessageOverviewItemBuilder>
 			build():Ref<MessageOverviewItem>
 	}
+	//1
+	export const MessagePushOverviewApplicationAppUsageCycleTypeDay:int
+	//3
+	export const MessagePushOverviewApplicationAppUsageCycleTypeMonth:int
+	//2
+	export const MessagePushOverviewApplicationAppUsageCycleTypeWeek:int
+	//"department_id"
+	export const MessagePushOverviewApplicationAppUsageDepartmentIdTypeDepartmentId:string
+	//"open_department_id"
+	export const MessagePushOverviewApplicationAppUsageDepartmentIdTypeOpenDepartmentId:string
+	export interface MessagePushOverviewApplicationAppUsagePathReqBodyBuilder extends Struct<MessagePushOverviewApplicationAppUsagePathReqBodyBuilder>{
+
+			date(date:string):Ref<MessagePushOverviewApplicationAppUsagePathReqBodyBuilder>
+			cycleType(cycleType:int):Ref<MessagePushOverviewApplicationAppUsagePathReqBodyBuilder>
+			departmentId(departmentId:string):Ref<MessagePushOverviewApplicationAppUsagePathReqBodyBuilder>
+			build():Ref<MessagePushOverviewApplicationAppUsageReqBody>
+	}
+	export interface MessagePushOverviewApplicationAppUsageReq extends Struct<MessagePushOverviewApplicationAppUsageReq>{
+
+			body:Ref<MessagePushOverviewApplicationAppUsageReqBody>
+	}
+	export interface MessagePushOverviewApplicationAppUsageReqBody extends Struct<MessagePushOverviewApplicationAppUsageReqBody>{
+
+			date:Ref<string>
+			cycleType:Ref<int>
+			departmentId:Ref<string>
+	}
+	export interface MessagePushOverviewApplicationAppUsageReqBodyBuilder extends Struct<MessagePushOverviewApplicationAppUsageReqBodyBuilder>{
+
+			date(date:string):Ref<MessagePushOverviewApplicationAppUsageReqBodyBuilder>
+			cycleType(cycleType:int):Ref<MessagePushOverviewApplicationAppUsageReqBodyBuilder>
+			departmentId(departmentId:string):Ref<MessagePushOverviewApplicationAppUsageReqBodyBuilder>
+			build():Ref<MessagePushOverviewApplicationAppUsageReqBody>
+	}
+	export interface MessagePushOverviewApplicationAppUsageReqBuilder extends Struct<MessagePushOverviewApplicationAppUsageReqBuilder>{
+
+			appId(appId:string):Ref<MessagePushOverviewApplicationAppUsageReqBuilder>
+			departmentIdType(departmentIdType:string):Ref<MessagePushOverviewApplicationAppUsageReqBuilder>
+			body(body:Ref<MessagePushOverviewApplicationAppUsageReqBody>):Ref<MessagePushOverviewApplicationAppUsageReqBuilder>
+			build():Ref<MessagePushOverviewApplicationAppUsageReq>
+	}
+	export interface MessagePushOverviewApplicationAppUsageResp extends Struct<MessagePushOverviewApplicationAppUsageResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<MessagePushOverviewApplicationAppUsageRespData>
+			success():bool
+	}
+	export interface MessagePushOverviewApplicationAppUsageRespData extends Struct<MessagePushOverviewApplicationAppUsageRespData>{
+
+			items:Ref<ApplicationAppUsage>[]
+	}
 	export interface Miniprogram extends Struct<Miniprogram>{
 
 			enablePcMode:Ref<int>
@@ -1616,6 +1668,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/application/v6'{
 	export function newMessageActionI18nInfoBuilder():Ref<MessageActionI18nInfoBuilder>
 
 	export function newMessageOverviewItemBuilder():Ref<MessageOverviewItemBuilder>
+
+	export function newMessagePushOverviewApplicationAppUsagePathReqBodyBuilder():Ref<MessagePushOverviewApplicationAppUsagePathReqBodyBuilder>
+
+	export function newMessagePushOverviewApplicationAppUsageReqBodyBuilder():Ref<MessagePushOverviewApplicationAppUsageReqBodyBuilder>
+
+	export function newMessagePushOverviewApplicationAppUsageReqBuilder():Ref<MessagePushOverviewApplicationAppUsageReqBuilder>
 
 	export function newMiniprogramBuilder():Ref<MiniprogramBuilder>
 
@@ -1850,7 +1908,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/application/v6'{
 			status:string
 			operator:Ref<P1AppStatusChangeOperatorV6>
 	}
-	export interface P1AppStatusChangedV6Handler extends Struct<P1AppStatusChangedV6Handler>,larkevent.EventHandler{
+	export interface P1AppStatusChangedV6Handler extends larkevent.EventHandler,Struct<P1AppStatusChangedV6Handler>{
 
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
@@ -1918,7 +1976,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/application/v6'{
 			remark:Ref<string>
 			auditSource:Ref<string>
 	}
-	export interface P2ApplicationAppVersionAuditV6Handler extends larkevent.EventHandler,Struct<P2ApplicationAppVersionAuditV6Handler>{
+	export interface P2ApplicationAppVersionAuditV6Handler extends Struct<P2ApplicationAppVersionAuditV6Handler>,larkevent.EventHandler{
 
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
@@ -1979,12 +2037,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/application/v6'{
 			primaryLanguage:Ref<string>
 			createSource:Ref<string>
 	}
-	export interface P2ApplicationCreatedV6Handler extends larkevent.EventHandler,Struct<P2ApplicationCreatedV6Handler>{
+	export interface P2ApplicationCreatedV6Handler extends Struct<P2ApplicationCreatedV6Handler>,larkevent.EventHandler{
 
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
 	}
-	export interface P2ApplicationFeedbackCreatedV6 extends Struct<P2ApplicationFeedbackCreatedV6>,larkevent.EventHandlerModel{
+	export interface P2ApplicationFeedbackCreatedV6 extends larkevent.EventHandlerModel,Struct<P2ApplicationFeedbackCreatedV6>{
 
 			eventV2Base:Ref<larkevent.EventV2Base>
 			eventReq:Ref<larkevent.EventReq>
@@ -2007,7 +2065,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/application/v6'{
 			feedbackId:Ref<string>
 			feedbackPath:Ref<string>
 	}
-	export interface P2ApplicationFeedbackCreatedV6Handler extends Struct<P2ApplicationFeedbackCreatedV6Handler>,larkevent.EventHandler{
+	export interface P2ApplicationFeedbackCreatedV6Handler extends larkevent.EventHandler,Struct<P2ApplicationFeedbackCreatedV6Handler>{
 
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
@@ -2032,7 +2090,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/application/v6'{
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
 	}
-	export interface P2ApplicationVisibilityAddedV6 extends larkevent.EventHandlerModel,Struct<P2ApplicationVisibilityAddedV6>{
+	export interface P2ApplicationVisibilityAddedV6 extends Struct<P2ApplicationVisibilityAddedV6>,larkevent.EventHandlerModel{
 
 			eventV2Base:Ref<larkevent.EventV2Base>
 			eventReq:Ref<larkevent.EventReq>
@@ -2466,6 +2524,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/application/v6'{
 			applicationAppUsage:Ref<{
 			
 				departmentOverview(ctx:context.Context,req:Ref<DepartmentOverviewApplicationAppUsageReq>,...options:larkcore.RequestOptionFunc[]):Ref<DepartmentOverviewApplicationAppUsageResp>
+				messagePushOverview(ctx:context.Context,req:Ref<MessagePushOverviewApplicationAppUsageReq>,...options:larkcore.RequestOptionFunc[]):Ref<MessagePushOverviewApplicationAppUsageResp>
 				overview(ctx:context.Context,req:Ref<OverviewApplicationAppUsageReq>,...options:larkcore.RequestOptionFunc[]):Ref<OverviewApplicationAppUsageResp>
 			}>
 			applicationAppVersion:Ref<{
@@ -2518,166 +2577,14 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/application/v6'{
 			minLarkVersion(minLarkVersion:string):Ref<WorkplaceWidgetBuilder>
 			build():Ref<WorkplaceWidget>
 	}
-	export function emptyMsgAction():MsgAction
-	export function emptyRefMsgAction():Ref<MsgAction>
-	export function refOfMsgAction(x:MsgAction,v:Ref<MsgAction>)
-	export function unRefMsgAction(v:Ref<MsgAction>):MsgAction
-	export function emptyP2ApplicationFeedbackUpdatedV6():P2ApplicationFeedbackUpdatedV6
-	export function emptyRefP2ApplicationFeedbackUpdatedV6():Ref<P2ApplicationFeedbackUpdatedV6>
-	export function refOfP2ApplicationFeedbackUpdatedV6(x:P2ApplicationFeedbackUpdatedV6,v:Ref<P2ApplicationFeedbackUpdatedV6>)
-	export function unRefP2ApplicationFeedbackUpdatedV6(v:Ref<P2ApplicationFeedbackUpdatedV6>):P2ApplicationFeedbackUpdatedV6
-	export function emptyAppVersionRemarkEvent():AppVersionRemarkEvent
-	export function emptyRefAppVersionRemarkEvent():Ref<AppVersionRemarkEvent>
-	export function refOfAppVersionRemarkEvent(x:AppVersionRemarkEvent,v:Ref<AppVersionRemarkEvent>)
-	export function unRefAppVersionRemarkEvent(v:Ref<AppVersionRemarkEvent>):AppVersionRemarkEvent
-	export function emptyContactsRangeConfigurationApplicationResp():ContactsRangeConfigurationApplicationResp
-	export function emptyRefContactsRangeConfigurationApplicationResp():Ref<ContactsRangeConfigurationApplicationResp>
-	export function refOfContactsRangeConfigurationApplicationResp(x:ContactsRangeConfigurationApplicationResp,v:Ref<ContactsRangeConfigurationApplicationResp>)
-	export function unRefContactsRangeConfigurationApplicationResp(v:Ref<ContactsRangeConfigurationApplicationResp>):ContactsRangeConfigurationApplicationResp
-	export function emptyListApplicationFeedbackReq():ListApplicationFeedbackReq
-	export function emptyRefListApplicationFeedbackReq():Ref<ListApplicationFeedbackReq>
-	export function refOfListApplicationFeedbackReq(x:ListApplicationFeedbackReq,v:Ref<ListApplicationFeedbackReq>)
-	export function unRefListApplicationFeedbackReq(v:Ref<ListApplicationFeedbackReq>):ListApplicationFeedbackReq
-	export function emptyP1AppStatusChangedV6():P1AppStatusChangedV6
-	export function emptyRefP1AppStatusChangedV6():Ref<P1AppStatusChangedV6>
-	export function refOfP1AppStatusChangedV6(x:P1AppStatusChangedV6,v:Ref<P1AppStatusChangedV6>)
-	export function unRefP1AppStatusChangedV6(v:Ref<P1AppStatusChangedV6>):P1AppStatusChangedV6
-	export function emptyAppConfigSecurity():AppConfigSecurity
-	export function emptyRefAppConfigSecurity():Ref<AppConfigSecurity>
-	export function refOfAppConfigSecurity(x:AppConfigSecurity,v:Ref<AppConfigSecurity>)
-	export function unRefAppConfigSecurity(v:Ref<AppConfigSecurity>):AppConfigSecurity
-	export function emptyCheckWhiteBlackListApplicationVisibilityReqBody():CheckWhiteBlackListApplicationVisibilityReqBody
-	export function emptyRefCheckWhiteBlackListApplicationVisibilityReqBody():Ref<CheckWhiteBlackListApplicationVisibilityReqBody>
-	export function refOfCheckWhiteBlackListApplicationVisibilityReqBody(x:CheckWhiteBlackListApplicationVisibilityReqBody,v:Ref<CheckWhiteBlackListApplicationVisibilityReqBody>)
-	export function unRefCheckWhiteBlackListApplicationVisibilityReqBody(v:Ref<CheckWhiteBlackListApplicationVisibilityReqBody>):CheckWhiteBlackListApplicationVisibilityReqBody
-	export function emptyP2ApplicationFeedbackCreatedV6():P2ApplicationFeedbackCreatedV6
-	export function emptyRefP2ApplicationFeedbackCreatedV6():Ref<P2ApplicationFeedbackCreatedV6>
-	export function refOfP2ApplicationFeedbackCreatedV6(x:P2ApplicationFeedbackCreatedV6,v:Ref<P2ApplicationFeedbackCreatedV6>)
-	export function unRefP2ApplicationFeedbackCreatedV6(v:Ref<P2ApplicationFeedbackCreatedV6>):P2ApplicationFeedbackCreatedV6
-	export function emptyAppScopeI18nInfo():AppScopeI18nInfo
-	export function emptyRefAppScopeI18nInfo():Ref<AppScopeI18nInfo>
-	export function refOfAppScopeI18nInfo(x:AppScopeI18nInfo,v:Ref<AppScopeI18nInfo>)
-	export function unRefAppScopeI18nInfo(v:Ref<AppScopeI18nInfo>):AppScopeI18nInfo
-	export function emptyListApplicationAppVersionIterator():ListApplicationAppVersionIterator
-	export function emptyRefListApplicationAppVersionIterator():Ref<ListApplicationAppVersionIterator>
-	export function refOfListApplicationAppVersionIterator(x:ListApplicationAppVersionIterator,v:Ref<ListApplicationAppVersionIterator>)
-	export function unRefListApplicationAppVersionIterator(v:Ref<ListApplicationAppVersionIterator>):ListApplicationAppVersionIterator
-	export function emptyPatchApplicationContactsRangeResp():PatchApplicationContactsRangeResp
-	export function emptyRefPatchApplicationContactsRangeResp():Ref<PatchApplicationContactsRangeResp>
-	export function refOfPatchApplicationContactsRangeResp(x:PatchApplicationContactsRangeResp,v:Ref<PatchApplicationContactsRangeResp>)
-	export function unRefPatchApplicationContactsRangeResp(v:Ref<PatchApplicationContactsRangeResp>):PatchApplicationContactsRangeResp
-	export function emptyAppConfigContactsRange():AppConfigContactsRange
-	export function emptyRefAppConfigContactsRange():Ref<AppConfigContactsRange>
-	export function refOfAppConfigContactsRange(x:AppConfigContactsRange,v:Ref<AppConfigContactsRange>)
-	export function unRefAppConfigContactsRange(v:Ref<AppConfigContactsRange>):AppConfigContactsRange
-	export function emptyAppAbilityWeb():AppAbilityWeb
-	export function emptyRefAppAbilityWeb():Ref<AppAbilityWeb>
-	export function refOfAppAbilityWeb(x:AppAbilityWeb,v:Ref<AppAbilityWeb>)
-	export function unRefAppAbilityWeb(v:Ref<AppAbilityWeb>):AppAbilityWeb
-	export function emptyListApplicationFeedbackRespData():ListApplicationFeedbackRespData
-	export function emptyRefListApplicationFeedbackRespData():Ref<ListApplicationFeedbackRespData>
-	export function refOfListApplicationFeedbackRespData(x:ListApplicationFeedbackRespData,v:Ref<ListApplicationFeedbackRespData>)
-	export function unRefListApplicationFeedbackRespData(v:Ref<ListApplicationFeedbackRespData>):ListApplicationFeedbackRespData
-	export function emptyAppRecommendRule():AppRecommendRule
-	export function emptyRefAppRecommendRule():Ref<AppRecommendRule>
-	export function refOfAppRecommendRule(x:AppRecommendRule,v:Ref<AppRecommendRule>)
-	export function unRefAppRecommendRule(v:Ref<AppRecommendRule>):AppRecommendRule
-	export function emptyDepartmentId():DepartmentId
-	export function emptyRefDepartmentId():Ref<DepartmentId>
-	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
-	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptyAppAbility():AppAbility
-	export function emptyRefAppAbility():Ref<AppAbility>
-	export function refOfAppAbility(x:AppAbility,v:Ref<AppAbility>)
-	export function unRefAppAbility(v:Ref<AppAbility>):AppAbility
-	export function emptyAppConfigEvent():AppConfigEvent
-	export function emptyRefAppConfigEvent():Ref<AppConfigEvent>
-	export function refOfAppConfigEvent(x:AppConfigEvent,v:Ref<AppConfigEvent>)
-	export function unRefAppConfigEvent(v:Ref<AppConfigEvent>):AppConfigEvent
-	export function emptyAppCustomCategoryI18nInfo():AppCustomCategoryI18nInfo
-	export function emptyRefAppCustomCategoryI18nInfo():Ref<AppCustomCategoryI18nInfo>
-	export function refOfAppCustomCategoryI18nInfo(x:AppCustomCategoryI18nInfo,v:Ref<AppCustomCategoryI18nInfo>)
-	export function unRefAppCustomCategoryI18nInfo(v:Ref<AppCustomCategoryI18nInfo>):AppCustomCategoryI18nInfo
 	export function emptyBlockI18nInfo():BlockI18nInfo
 	export function emptyRefBlockI18nInfo():Ref<BlockI18nInfo>
 	export function refOfBlockI18nInfo(x:BlockI18nInfo,v:Ref<BlockI18nInfo>)
 	export function unRefBlockI18nInfo(v:Ref<BlockI18nInfo>):BlockI18nInfo
-	export function emptyAppConfigScope():AppConfigScope
-	export function emptyRefAppConfigScope():Ref<AppConfigScope>
-	export function refOfAppConfigScope(x:AppConfigScope,v:Ref<AppConfigScope>)
-	export function unRefAppConfigScope(v:Ref<AppConfigScope>):AppConfigScope
-	export function emptyCloudDoc():CloudDoc
-	export function emptyRefCloudDoc():Ref<CloudDoc>
-	export function refOfCloudDoc(x:CloudDoc,v:Ref<CloudDoc>)
-	export function unRefCloudDoc(v:Ref<CloudDoc>):CloudDoc
-	export function emptyP2BotMenuV6():P2BotMenuV6
-	export function emptyRefP2BotMenuV6():Ref<P2BotMenuV6>
-	export function refOfP2BotMenuV6(x:P2BotMenuV6,v:Ref<P2BotMenuV6>)
-	export function unRefP2BotMenuV6(v:Ref<P2BotMenuV6>):P2BotMenuV6
-	export function emptyPatchApplicationVisibilityReq():PatchApplicationVisibilityReq
-	export function emptyRefPatchApplicationVisibilityReq():Ref<PatchApplicationVisibilityReq>
-	export function refOfPatchApplicationVisibilityReq(x:PatchApplicationVisibilityReq,v:Ref<PatchApplicationVisibilityReq>)
-	export function unRefPatchApplicationVisibilityReq(v:Ref<PatchApplicationVisibilityReq>):PatchApplicationVisibilityReq
-	export function emptyAppVisibleList():AppVisibleList
-	export function emptyRefAppVisibleList():Ref<AppVisibleList>
-	export function refOfAppVisibleList(x:AppVisibleList,v:Ref<AppVisibleList>)
-	export function unRefAppVisibleList(v:Ref<AppVisibleList>):AppVisibleList
-	export function emptyMiniprogram():Miniprogram
-	export function emptyRefMiniprogram():Ref<Miniprogram>
-	export function refOfMiniprogram(x:Miniprogram,v:Ref<Miniprogram>)
-	export function unRefMiniprogram(v:Ref<Miniprogram>):Miniprogram
-	export function emptyP1AppOpenV6():P1AppOpenV6
-	export function emptyRefP1AppOpenV6():Ref<P1AppOpenV6>
-	export function refOfP1AppOpenV6(x:P1AppOpenV6,v:Ref<P1AppOpenV6>)
-	export function unRefP1AppOpenV6(v:Ref<P1AppOpenV6>):P1AppOpenV6
-	export function emptySetAppBadgeResp():SetAppBadgeResp
-	export function emptyRefSetAppBadgeResp():Ref<SetAppBadgeResp>
-	export function refOfSetAppBadgeResp(x:SetAppBadgeResp,v:Ref<SetAppBadgeResp>)
-	export function unRefSetAppBadgeResp(v:Ref<SetAppBadgeResp>):SetAppBadgeResp
-	export function emptyAppCollaborator():AppCollaborator
-	export function emptyRefAppCollaborator():Ref<AppCollaborator>
-	export function refOfAppCollaborator(x:AppCollaborator,v:Ref<AppCollaborator>)
-	export function unRefAppCollaborator(v:Ref<AppCollaborator>):AppCollaborator
-	export function emptyP2ApplicationAppVersionPublishRevokeV6Data():P2ApplicationAppVersionPublishRevokeV6Data
-	export function emptyRefP2ApplicationAppVersionPublishRevokeV6Data():Ref<P2ApplicationAppVersionPublishRevokeV6Data>
-	export function refOfP2ApplicationAppVersionPublishRevokeV6Data(x:P2ApplicationAppVersionPublishRevokeV6Data,v:Ref<P2ApplicationAppVersionPublishRevokeV6Data>)
-	export function unRefP2ApplicationAppVersionPublishRevokeV6Data(v:Ref<P2ApplicationAppVersionPublishRevokeV6Data>):P2ApplicationAppVersionPublishRevokeV6Data
-	export function emptyPatchApplicationContactsRangeReq():PatchApplicationContactsRangeReq
-	export function emptyRefPatchApplicationContactsRangeReq():Ref<PatchApplicationContactsRangeReq>
-	export function refOfPatchApplicationContactsRangeReq(x:PatchApplicationContactsRangeReq,v:Ref<PatchApplicationContactsRangeReq>)
-	export function unRefPatchApplicationContactsRangeReq(v:Ref<PatchApplicationContactsRangeReq>):PatchApplicationContactsRangeReq
-	export function emptyAppVisibility():AppVisibility
-	export function emptyRefAppVisibility():Ref<AppVisibility>
-	export function refOfAppVisibility(x:AppVisibility,v:Ref<AppVisibility>)
-	export function unRefAppVisibility(v:Ref<AppVisibility>):AppVisibility
-	export function emptyGetApplicationRespData():GetApplicationRespData
-	export function emptyRefGetApplicationRespData():Ref<GetApplicationRespData>
-	export function refOfGetApplicationRespData(x:GetApplicationRespData,v:Ref<GetApplicationRespData>)
-	export function unRefGetApplicationRespData(v:Ref<GetApplicationRespData>):GetApplicationRespData
-	export function emptyPatchApplicationAppVersionResp():PatchApplicationAppVersionResp
-	export function emptyRefPatchApplicationAppVersionResp():Ref<PatchApplicationAppVersionResp>
-	export function refOfPatchApplicationAppVersionResp(x:PatchApplicationAppVersionResp,v:Ref<PatchApplicationAppVersionResp>)
-	export function unRefPatchApplicationAppVersionResp(v:Ref<PatchApplicationAppVersionResp>):PatchApplicationAppVersionResp
-	export function emptyAppConfigVisibility():AppConfigVisibility
-	export function emptyRefAppConfigVisibility():Ref<AppConfigVisibility>
-	export function refOfAppConfigVisibility(x:AppConfigVisibility,v:Ref<AppConfigVisibility>)
-	export function unRefAppConfigVisibility(v:Ref<AppConfigVisibility>):AppConfigVisibility
-	export function emptyContactsRangeSuggestApplicationAppVersionReq():ContactsRangeSuggestApplicationAppVersionReq
-	export function emptyRefContactsRangeSuggestApplicationAppVersionReq():Ref<ContactsRangeSuggestApplicationAppVersionReq>
-	export function refOfContactsRangeSuggestApplicationAppVersionReq(x:ContactsRangeSuggestApplicationAppVersionReq,v:Ref<ContactsRangeSuggestApplicationAppVersionReq>)
-	export function unRefContactsRangeSuggestApplicationAppVersionReq(v:Ref<ContactsRangeSuggestApplicationAppVersionReq>):ContactsRangeSuggestApplicationAppVersionReq
-	export function emptyApplicationAppVersion():ApplicationAppVersion
-	export function emptyRefApplicationAppVersion():Ref<ApplicationAppVersion>
-	export function refOfApplicationAppVersion(x:ApplicationAppVersion,v:Ref<ApplicationAppVersion>)
-	export function unRefApplicationAppVersion(v:Ref<ApplicationAppVersion>):ApplicationAppVersion
-	export function emptyUpdateApplicationManagementReqBody():UpdateApplicationManagementReqBody
-	export function emptyRefUpdateApplicationManagementReqBody():Ref<UpdateApplicationManagementReqBody>
-	export function refOfUpdateApplicationManagementReqBody(x:UpdateApplicationManagementReqBody,v:Ref<UpdateApplicationManagementReqBody>)
-	export function unRefUpdateApplicationManagementReqBody(v:Ref<UpdateApplicationManagementReqBody>):UpdateApplicationManagementReqBody
-	export function emptyAppVersionRemark():AppVersionRemark
-	export function emptyRefAppVersionRemark():Ref<AppVersionRemark>
-	export function refOfAppVersionRemark(x:AppVersionRemark,v:Ref<AppVersionRemark>)
-	export function unRefAppVersionRemark(v:Ref<AppVersionRemark>):AppVersionRemark
+	export function emptyP2ApplicationFeedbackUpdatedV6Data():P2ApplicationFeedbackUpdatedV6Data
+	export function emptyRefP2ApplicationFeedbackUpdatedV6Data():Ref<P2ApplicationFeedbackUpdatedV6Data>
+	export function refOfP2ApplicationFeedbackUpdatedV6Data(x:P2ApplicationFeedbackUpdatedV6Data,v:Ref<P2ApplicationFeedbackUpdatedV6Data>)
+	export function unRefP2ApplicationFeedbackUpdatedV6Data(v:Ref<P2ApplicationFeedbackUpdatedV6Data>):P2ApplicationFeedbackUpdatedV6Data
 	export function emptyAppVisibleListEvent():AppVisibleListEvent
 	export function emptyRefAppVisibleListEvent():Ref<AppVisibleListEvent>
 	export function refOfAppVisibleListEvent(x:AppVisibleListEvent,v:Ref<AppVisibleListEvent>)
@@ -2686,186 +2593,142 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/application/v6'{
 	export function emptyRefOverviewApplicationAppUsageReq():Ref<OverviewApplicationAppUsageReq>
 	export function refOfOverviewApplicationAppUsageReq(x:OverviewApplicationAppUsageReq,v:Ref<OverviewApplicationAppUsageReq>)
 	export function unRefOverviewApplicationAppUsageReq(v:Ref<OverviewApplicationAppUsageReq>):OverviewApplicationAppUsageReq
-	export function emptyP2ApplicationAppVersionAuditV6():P2ApplicationAppVersionAuditV6
-	export function emptyRefP2ApplicationAppVersionAuditV6():Ref<P2ApplicationAppVersionAuditV6>
-	export function refOfP2ApplicationAppVersionAuditV6(x:P2ApplicationAppVersionAuditV6,v:Ref<P2ApplicationAppVersionAuditV6>)
-	export function unRefP2ApplicationAppVersionAuditV6(v:Ref<P2ApplicationAppVersionAuditV6>):P2ApplicationAppVersionAuditV6
-	export function emptyAppVisibilityItem():AppVisibilityItem
-	export function emptyRefAppVisibilityItem():Ref<AppVisibilityItem>
-	export function refOfAppVisibilityItem(x:AppVisibilityItem,v:Ref<AppVisibilityItem>)
-	export function unRefAppVisibilityItem(v:Ref<AppVisibilityItem>):AppVisibilityItem
-	export function emptyBlock():Block
-	export function emptyRefBlock():Ref<Block>
-	export function refOfBlock(x:Block,v:Ref<Block>)
-	export function unRefBlock(v:Ref<Block>):Block
-	export function emptyP1AppOpenInstallerEmployeeV6():P1AppOpenInstallerEmployeeV6
-	export function emptyRefP1AppOpenInstallerEmployeeV6():Ref<P1AppOpenInstallerEmployeeV6>
-	export function refOfP1AppOpenInstallerEmployeeV6(x:P1AppOpenInstallerEmployeeV6,v:Ref<P1AppOpenInstallerEmployeeV6>)
-	export function unRefP1AppOpenInstallerEmployeeV6(v:Ref<P1AppOpenInstallerEmployeeV6>):P1AppOpenInstallerEmployeeV6
-	export function emptyP1AppUninstalledV6():P1AppUninstalledV6
-	export function emptyRefP1AppUninstalledV6():Ref<P1AppUninstalledV6>
-	export function refOfP1AppUninstalledV6(x:P1AppUninstalledV6,v:Ref<P1AppUninstalledV6>)
-	export function unRefP1AppUninstalledV6(v:Ref<P1AppUninstalledV6>):P1AppUninstalledV6
-	export function emptySetAppBadgeReq():SetAppBadgeReq
-	export function emptyRefSetAppBadgeReq():Ref<SetAppBadgeReq>
-	export function refOfSetAppBadgeReq(x:SetAppBadgeReq,v:Ref<SetAppBadgeReq>)
-	export function unRefSetAppBadgeReq(v:Ref<SetAppBadgeReq>):SetAppBadgeReq
-	export function emptyWebApp():WebApp
-	export function emptyRefWebApp():Ref<WebApp>
-	export function refOfWebApp(x:WebApp,v:Ref<WebApp>)
-	export function unRefWebApp(v:Ref<WebApp>):WebApp
-	export function emptyGetApplicationAppVersionRespData():GetApplicationAppVersionRespData
-	export function emptyRefGetApplicationAppVersionRespData():Ref<GetApplicationAppVersionRespData>
-	export function refOfGetApplicationAppVersionRespData(x:GetApplicationAppVersionRespData,v:Ref<GetApplicationAppVersionRespData>)
-	export function unRefGetApplicationAppVersionRespData(v:Ref<GetApplicationAppVersionRespData>):GetApplicationAppVersionRespData
-	export function emptyAppRecommendRuleItemInfoI18nName():AppRecommendRuleItemInfoI18nName
-	export function emptyRefAppRecommendRuleItemInfoI18nName():Ref<AppRecommendRuleItemInfoI18nName>
-	export function refOfAppRecommendRuleItemInfoI18nName(x:AppRecommendRuleItemInfoI18nName,v:Ref<AppRecommendRuleItemInfoI18nName>)
-	export function unRefAppRecommendRuleItemInfoI18nName(v:Ref<AppRecommendRuleItemInfoI18nName>):AppRecommendRuleItemInfoI18nName
-	export function emptyListAppRecommendRuleReq():ListAppRecommendRuleReq
-	export function emptyRefListAppRecommendRuleReq():Ref<ListAppRecommendRuleReq>
-	export function refOfListAppRecommendRuleReq(x:ListAppRecommendRuleReq,v:Ref<ListAppRecommendRuleReq>)
-	export function unRefListAppRecommendRuleReq(v:Ref<ListAppRecommendRuleReq>):ListAppRecommendRuleReq
-	export function emptyP2BotMenuV6Data():P2BotMenuV6Data
-	export function emptyRefP2BotMenuV6Data():Ref<P2BotMenuV6Data>
-	export function refOfP2BotMenuV6Data(x:P2BotMenuV6Data,v:Ref<P2BotMenuV6Data>)
-	export function unRefP2BotMenuV6Data(v:Ref<P2BotMenuV6Data>):P2BotMenuV6Data
-	export function emptyUnderauditlistApplicationReq():UnderauditlistApplicationReq
-	export function emptyRefUnderauditlistApplicationReq():Ref<UnderauditlistApplicationReq>
-	export function refOfUnderauditlistApplicationReq(x:UnderauditlistApplicationReq,v:Ref<UnderauditlistApplicationReq>)
-	export function unRefUnderauditlistApplicationReq(v:Ref<UnderauditlistApplicationReq>):UnderauditlistApplicationReq
-	export function emptyAppRecommendRuleVisibilityInfo():AppRecommendRuleVisibilityInfo
-	export function emptyRefAppRecommendRuleVisibilityInfo():Ref<AppRecommendRuleVisibilityInfo>
-	export function refOfAppRecommendRuleVisibilityInfo(x:AppRecommendRuleVisibilityInfo,v:Ref<AppRecommendRuleVisibilityInfo>)
-	export function unRefAppRecommendRuleVisibilityInfo(v:Ref<AppRecommendRuleVisibilityInfo>):AppRecommendRuleVisibilityInfo
-	export function emptyDepartmentOverviewApplicationAppUsageResp():DepartmentOverviewApplicationAppUsageResp
-	export function emptyRefDepartmentOverviewApplicationAppUsageResp():Ref<DepartmentOverviewApplicationAppUsageResp>
-	export function refOfDepartmentOverviewApplicationAppUsageResp(x:DepartmentOverviewApplicationAppUsageResp,v:Ref<DepartmentOverviewApplicationAppUsageResp>)
-	export function unRefDepartmentOverviewApplicationAppUsageResp(v:Ref<DepartmentOverviewApplicationAppUsageResp>):DepartmentOverviewApplicationAppUsageResp
-	export function emptyPatchApplicationFeedbackResp():PatchApplicationFeedbackResp
-	export function emptyRefPatchApplicationFeedbackResp():Ref<PatchApplicationFeedbackResp>
-	export function refOfPatchApplicationFeedbackResp(x:PatchApplicationFeedbackResp,v:Ref<PatchApplicationFeedbackResp>)
-	export function unRefPatchApplicationFeedbackResp(v:Ref<PatchApplicationFeedbackResp>):PatchApplicationFeedbackResp
-	export function emptyUnderauditlistApplicationResp():UnderauditlistApplicationResp
-	export function emptyRefUnderauditlistApplicationResp():Ref<UnderauditlistApplicationResp>
-	export function refOfUnderauditlistApplicationResp(x:UnderauditlistApplicationResp,v:Ref<UnderauditlistApplicationResp>)
-	export function unRefUnderauditlistApplicationResp(v:Ref<UnderauditlistApplicationResp>):UnderauditlistApplicationResp
+	export function emptyPatchApplicationVisibilityReqBody():PatchApplicationVisibilityReqBody
+	export function emptyRefPatchApplicationVisibilityReqBody():Ref<PatchApplicationVisibilityReqBody>
+	export function refOfPatchApplicationVisibilityReqBody(x:PatchApplicationVisibilityReqBody,v:Ref<PatchApplicationVisibilityReqBody>)
+	export function unRefPatchApplicationVisibilityReqBody(v:Ref<PatchApplicationVisibilityReqBody>):PatchApplicationVisibilityReqBody
+	export function emptyAppConfigVisibility():AppConfigVisibility
+	export function emptyRefAppConfigVisibility():Ref<AppConfigVisibility>
+	export function refOfAppConfigVisibility(x:AppConfigVisibility,v:Ref<AppConfigVisibility>)
+	export function unRefAppConfigVisibility(v:Ref<AppConfigVisibility>):AppConfigVisibility
+	export function emptyAppI18nInfo():AppI18nInfo
+	export function emptyRefAppI18nInfo():Ref<AppI18nInfo>
+	export function refOfAppI18nInfo(x:AppI18nInfo,v:Ref<AppI18nInfo>)
+	export function unRefAppI18nInfo(v:Ref<AppI18nInfo>):AppI18nInfo
 	export function emptyAppAbilityBotI18n():AppAbilityBotI18n
 	export function emptyRefAppAbilityBotI18n():Ref<AppAbilityBotI18n>
 	export function refOfAppAbilityBotI18n(x:AppAbilityBotI18n,v:Ref<AppAbilityBotI18n>)
 	export function unRefAppAbilityBotI18n(v:Ref<AppAbilityBotI18n>):AppAbilityBotI18n
-	export function emptyAppVersionId():AppVersionId
-	export function emptyRefAppVersionId():Ref<AppVersionId>
-	export function refOfAppVersionId(x:AppVersionId,v:Ref<AppVersionId>)
-	export function unRefAppVersionId(v:Ref<AppVersionId>):AppVersionId
-	export function emptyUser():User
-	export function emptyRefUser():Ref<User>
-	export function refOfUser(x:User,v:Ref<User>)
-	export function unRefUser(v:Ref<User>):User
-	export function emptyApplicationFeedback():ApplicationFeedback
-	export function emptyRefApplicationFeedback():Ref<ApplicationFeedback>
-	export function refOfApplicationFeedback(x:ApplicationFeedback,v:Ref<ApplicationFeedback>)
-	export function unRefApplicationFeedback(v:Ref<ApplicationFeedback>):ApplicationFeedback
+	export function emptyApplicationOwner():ApplicationOwner
+	export function emptyRefApplicationOwner():Ref<ApplicationOwner>
+	export function refOfApplicationOwner(x:ApplicationOwner,v:Ref<ApplicationOwner>)
+	export function unRefApplicationOwner(v:Ref<ApplicationOwner>):ApplicationOwner
 	export function emptyOverviewApplicationAppUsageReqBody():OverviewApplicationAppUsageReqBody
 	export function emptyRefOverviewApplicationAppUsageReqBody():Ref<OverviewApplicationAppUsageReqBody>
 	export function refOfOverviewApplicationAppUsageReqBody(x:OverviewApplicationAppUsageReqBody,v:Ref<OverviewApplicationAppUsageReqBody>)
 	export function unRefOverviewApplicationAppUsageReqBody(v:Ref<OverviewApplicationAppUsageReqBody>):OverviewApplicationAppUsageReqBody
-	export function emptyAppAbilityBot():AppAbilityBot
-	export function emptyRefAppAbilityBot():Ref<AppAbilityBot>
-	export function refOfAppAbilityBot(x:AppAbilityBot,v:Ref<AppAbilityBot>)
-	export function unRefAppAbilityBot(v:Ref<AppAbilityBot>):AppAbilityBot
-	export function emptyContactsRangeSuggestApplicationAppVersionRespData():ContactsRangeSuggestApplicationAppVersionRespData
-	export function emptyRefContactsRangeSuggestApplicationAppVersionRespData():Ref<ContactsRangeSuggestApplicationAppVersionRespData>
-	export function refOfContactsRangeSuggestApplicationAppVersionRespData(x:ContactsRangeSuggestApplicationAppVersionRespData,v:Ref<ContactsRangeSuggestApplicationAppVersionRespData>)
-	export function unRefContactsRangeSuggestApplicationAppVersionRespData(v:Ref<ContactsRangeSuggestApplicationAppVersionRespData>):ContactsRangeSuggestApplicationAppVersionRespData
+	export function emptyUsageUser():UsageUser
+	export function emptyRefUsageUser():Ref<UsageUser>
+	export function refOfUsageUser(x:UsageUser,v:Ref<UsageUser>)
+	export function unRefUsageUser(v:Ref<UsageUser>):UsageUser
+	export function emptyWorkplaceWidget():WorkplaceWidget
+	export function emptyRefWorkplaceWidget():Ref<WorkplaceWidget>
+	export function refOfWorkplaceWidget(x:WorkplaceWidget,v:Ref<WorkplaceWidget>)
+	export function unRefWorkplaceWidget(v:Ref<WorkplaceWidget>):WorkplaceWidget
+	export function emptyAppVisibilityIdList():AppVisibilityIdList
+	export function emptyRefAppVisibilityIdList():Ref<AppVisibilityIdList>
+	export function refOfAppVisibilityIdList(x:AppVisibilityIdList,v:Ref<AppVisibilityIdList>)
+	export function unRefAppVisibilityIdList(v:Ref<AppVisibilityIdList>):AppVisibilityIdList
+	export function emptyP2ApplicationAppVersionAuditV6():P2ApplicationAppVersionAuditV6
+	export function emptyRefP2ApplicationAppVersionAuditV6():Ref<P2ApplicationAppVersionAuditV6>
+	export function refOfP2ApplicationAppVersionAuditV6(x:P2ApplicationAppVersionAuditV6,v:Ref<P2ApplicationAppVersionAuditV6>)
+	export function unRefP2ApplicationAppVersionAuditV6(v:Ref<P2ApplicationAppVersionAuditV6>):P2ApplicationAppVersionAuditV6
 	export function emptyApplication():Application
 	export function emptyRefApplication():Ref<Application>
 	export function refOfApplication(x:Application,v:Ref<Application>)
 	export function unRefApplication(v:Ref<Application>):Application
-	export function emptyEvent():Event
-	export function emptyRefEvent():Ref<Event>
-	export function refOfEvent(x:Event,v:Ref<Event>)
-	export function unRefEvent(v:Ref<Event>):Event
-	export function emptyMessageAction():MessageAction
-	export function emptyRefMessageAction():Ref<MessageAction>
-	export function refOfMessageAction(x:MessageAction,v:Ref<MessageAction>)
-	export function unRefMessageAction(v:Ref<MessageAction>):MessageAction
-	export function emptyOperator():Operator
-	export function emptyRefOperator():Ref<Operator>
-	export function refOfOperator(x:Operator,v:Ref<Operator>)
-	export function unRefOperator(v:Ref<Operator>):Operator
-	export function emptyAppBadge():AppBadge
-	export function emptyRefAppBadge():Ref<AppBadge>
-	export function refOfAppBadge(x:AppBadge,v:Ref<AppBadge>)
-	export function unRefAppBadge(v:Ref<AppBadge>):AppBadge
-	export function emptyAppVisibilityEvent():AppVisibilityEvent
-	export function emptyRefAppVisibilityEvent():Ref<AppVisibilityEvent>
-	export function refOfAppVisibilityEvent(x:AppVisibilityEvent,v:Ref<AppVisibilityEvent>)
-	export function unRefAppVisibilityEvent(v:Ref<AppVisibilityEvent>):AppVisibilityEvent
-	export function emptyCheckWhiteBlackListApplicationVisibilityRespData():CheckWhiteBlackListApplicationVisibilityRespData
-	export function emptyRefCheckWhiteBlackListApplicationVisibilityRespData():Ref<CheckWhiteBlackListApplicationVisibilityRespData>
-	export function refOfCheckWhiteBlackListApplicationVisibilityRespData(x:CheckWhiteBlackListApplicationVisibilityRespData,v:Ref<CheckWhiteBlackListApplicationVisibilityRespData>)
-	export function unRefCheckWhiteBlackListApplicationVisibilityRespData(v:Ref<CheckWhiteBlackListApplicationVisibilityRespData>):CheckWhiteBlackListApplicationVisibilityRespData
-	export function emptyScope():Scope
-	export function emptyRefScope():Ref<Scope>
-	export function refOfScope(x:Scope,v:Ref<Scope>)
-	export function unRefScope(v:Ref<Scope>):Scope
-	export function emptyBot():Bot
-	export function emptyRefBot():Ref<Bot>
-	export function refOfBot(x:Bot,v:Ref<Bot>)
-	export function unRefBot(v:Ref<Bot>):Bot
-	export function emptyContactsRangeConfigurationApplicationRespData():ContactsRangeConfigurationApplicationRespData
-	export function emptyRefContactsRangeConfigurationApplicationRespData():Ref<ContactsRangeConfigurationApplicationRespData>
-	export function refOfContactsRangeConfigurationApplicationRespData(x:ContactsRangeConfigurationApplicationRespData,v:Ref<ContactsRangeConfigurationApplicationRespData>)
-	export function unRefContactsRangeConfigurationApplicationRespData(v:Ref<ContactsRangeConfigurationApplicationRespData>):ContactsRangeConfigurationApplicationRespData
-	export function emptyAppScope():AppScope
-	export function emptyRefAppScope():Ref<AppScope>
-	export function refOfAppScope(x:AppScope,v:Ref<AppScope>)
-	export function unRefAppScope(v:Ref<AppScope>):AppScope
-	export function emptyP2ApplicationAppVersionPublishApplyV6Data():P2ApplicationAppVersionPublishApplyV6Data
-	export function emptyRefP2ApplicationAppVersionPublishApplyV6Data():Ref<P2ApplicationAppVersionPublishApplyV6Data>
-	export function refOfP2ApplicationAppVersionPublishApplyV6Data(x:P2ApplicationAppVersionPublishApplyV6Data,v:Ref<P2ApplicationAppVersionPublishApplyV6Data>)
-	export function unRefP2ApplicationAppVersionPublishApplyV6Data(v:Ref<P2ApplicationAppVersionPublishApplyV6Data>):P2ApplicationAppVersionPublishApplyV6Data
+	export function emptyAccessibility():Accessibility
+	export function emptyRefAccessibility():Ref<Accessibility>
+	export function refOfAccessibility(x:Accessibility,v:Ref<Accessibility>)
+	export function unRefAccessibility(v:Ref<Accessibility>):Accessibility
 	export function emptyCloudDocI18nInfo():CloudDocI18nInfo
 	export function emptyRefCloudDocI18nInfo():Ref<CloudDocI18nInfo>
 	export function refOfCloudDocI18nInfo(x:CloudDocI18nInfo,v:Ref<CloudDocI18nInfo>)
 	export function unRefCloudDocI18nInfo(v:Ref<CloudDocI18nInfo>):CloudDocI18nInfo
-	export function emptyP2ApplicationFeedbackUpdatedV6Data():P2ApplicationFeedbackUpdatedV6Data
-	export function emptyRefP2ApplicationFeedbackUpdatedV6Data():Ref<P2ApplicationFeedbackUpdatedV6Data>
-	export function refOfP2ApplicationFeedbackUpdatedV6Data(x:P2ApplicationFeedbackUpdatedV6Data,v:Ref<P2ApplicationFeedbackUpdatedV6Data>)
-	export function unRefP2ApplicationFeedbackUpdatedV6Data(v:Ref<P2ApplicationFeedbackUpdatedV6Data>):P2ApplicationFeedbackUpdatedV6Data
-	export function emptyUnderauditlistApplicationRespData():UnderauditlistApplicationRespData
-	export function emptyRefUnderauditlistApplicationRespData():Ref<UnderauditlistApplicationRespData>
-	export function refOfUnderauditlistApplicationRespData(x:UnderauditlistApplicationRespData,v:Ref<UnderauditlistApplicationRespData>)
-	export function unRefUnderauditlistApplicationRespData(v:Ref<UnderauditlistApplicationRespData>):UnderauditlistApplicationRespData
-	export function emptyMessageActionI18nInfo():MessageActionI18nInfo
-	export function emptyRefMessageActionI18nInfo():Ref<MessageActionI18nInfo>
-	export function refOfMessageActionI18nInfo(x:MessageActionI18nInfo,v:Ref<MessageActionI18nInfo>)
-	export function unRefMessageActionI18nInfo(v:Ref<MessageActionI18nInfo>):MessageActionI18nInfo
-	export function emptyNavigate():Navigate
-	export function emptyRefNavigate():Ref<Navigate>
-	export function refOfNavigate(x:Navigate,v:Ref<Navigate>)
-	export function unRefNavigate(v:Ref<Navigate>):Navigate
-	export function emptyOverviewApplicationAppUsageResp():OverviewApplicationAppUsageResp
-	export function emptyRefOverviewApplicationAppUsageResp():Ref<OverviewApplicationAppUsageResp>
-	export function refOfOverviewApplicationAppUsageResp(x:OverviewApplicationAppUsageResp,v:Ref<OverviewApplicationAppUsageResp>)
-	export function unRefOverviewApplicationAppUsageResp(v:Ref<OverviewApplicationAppUsageResp>):OverviewApplicationAppUsageResp
-	export function emptyContactsRangeSuggestApplicationAppVersionResp():ContactsRangeSuggestApplicationAppVersionResp
-	export function emptyRefContactsRangeSuggestApplicationAppVersionResp():Ref<ContactsRangeSuggestApplicationAppVersionResp>
-	export function refOfContactsRangeSuggestApplicationAppVersionResp(x:ContactsRangeSuggestApplicationAppVersionResp,v:Ref<ContactsRangeSuggestApplicationAppVersionResp>)
-	export function unRefContactsRangeSuggestApplicationAppVersionResp(v:Ref<ContactsRangeSuggestApplicationAppVersionResp>):ContactsRangeSuggestApplicationAppVersionResp
-	export function emptyAppRecommendRuleItemInfo():AppRecommendRuleItemInfo
-	export function emptyRefAppRecommendRuleItemInfo():Ref<AppRecommendRuleItemInfo>
-	export function refOfAppRecommendRuleItemInfo(x:AppRecommendRuleItemInfo,v:Ref<AppRecommendRuleItemInfo>)
-	export function unRefAppRecommendRuleItemInfo(v:Ref<AppRecommendRuleItemInfo>):AppRecommendRuleItemInfo
-	export function emptyOverviewApplicationAppUsageRespData():OverviewApplicationAppUsageRespData
-	export function emptyRefOverviewApplicationAppUsageRespData():Ref<OverviewApplicationAppUsageRespData>
-	export function refOfOverviewApplicationAppUsageRespData(x:OverviewApplicationAppUsageRespData,v:Ref<OverviewApplicationAppUsageRespData>)
-	export function unRefOverviewApplicationAppUsageRespData(v:Ref<OverviewApplicationAppUsageRespData>):OverviewApplicationAppUsageRespData
-	export function emptyApplicationVisibilityGroupWhiteBlackInfo():ApplicationVisibilityGroupWhiteBlackInfo
-	export function emptyRefApplicationVisibilityGroupWhiteBlackInfo():Ref<ApplicationVisibilityGroupWhiteBlackInfo>
-	export function refOfApplicationVisibilityGroupWhiteBlackInfo(x:ApplicationVisibilityGroupWhiteBlackInfo,v:Ref<ApplicationVisibilityGroupWhiteBlackInfo>)
-	export function unRefApplicationVisibilityGroupWhiteBlackInfo(v:Ref<ApplicationVisibilityGroupWhiteBlackInfo>):ApplicationVisibilityGroupWhiteBlackInfo
+	export function emptyAppConfigScope():AppConfigScope
+	export function emptyRefAppConfigScope():Ref<AppConfigScope>
+	export function refOfAppConfigScope(x:AppConfigScope,v:Ref<AppConfigScope>)
+	export function unRefAppConfigScope(v:Ref<AppConfigScope>):AppConfigScope
+	export function emptyContactsRangeConfigurationApplicationReq():ContactsRangeConfigurationApplicationReq
+	export function emptyRefContactsRangeConfigurationApplicationReq():Ref<ContactsRangeConfigurationApplicationReq>
+	export function refOfContactsRangeConfigurationApplicationReq(x:ContactsRangeConfigurationApplicationReq,v:Ref<ContactsRangeConfigurationApplicationReq>)
+	export function unRefContactsRangeConfigurationApplicationReq(v:Ref<ContactsRangeConfigurationApplicationReq>):ContactsRangeConfigurationApplicationReq
+	export function emptyP2ApplicationAppVersionPublishRevokeV6Data():P2ApplicationAppVersionPublishRevokeV6Data
+	export function emptyRefP2ApplicationAppVersionPublishRevokeV6Data():Ref<P2ApplicationAppVersionPublishRevokeV6Data>
+	export function refOfP2ApplicationAppVersionPublishRevokeV6Data(x:P2ApplicationAppVersionPublishRevokeV6Data,v:Ref<P2ApplicationAppVersionPublishRevokeV6Data>)
+	export function unRefP2ApplicationAppVersionPublishRevokeV6Data(v:Ref<P2ApplicationAppVersionPublishRevokeV6Data>):P2ApplicationAppVersionPublishRevokeV6Data
+	export function emptyAppConfigScopeItem():AppConfigScopeItem
+	export function emptyRefAppConfigScopeItem():Ref<AppConfigScopeItem>
+	export function refOfAppConfigScopeItem(x:AppConfigScopeItem,v:Ref<AppConfigScopeItem>)
+	export function unRefAppConfigScopeItem(v:Ref<AppConfigScopeItem>):AppConfigScopeItem
+	export function emptyAppRecommendRule():AppRecommendRule
+	export function emptyRefAppRecommendRule():Ref<AppRecommendRule>
+	export function refOfAppRecommendRule(x:AppRecommendRule,v:Ref<AppRecommendRule>)
+	export function unRefAppRecommendRule(v:Ref<AppRecommendRule>):AppRecommendRule
+	export function emptyAppVersionRemark():AppVersionRemark
+	export function emptyRefAppVersionRemark():Ref<AppVersionRemark>
+	export function refOfAppVersionRemark(x:AppVersionRemark,v:Ref<AppVersionRemark>)
+	export function unRefAppVersionRemark(v:Ref<AppVersionRemark>):AppVersionRemark
+	export function emptyApplicationVisibilityDepartmentWhiteBlackInfo():ApplicationVisibilityDepartmentWhiteBlackInfo
+	export function emptyRefApplicationVisibilityDepartmentWhiteBlackInfo():Ref<ApplicationVisibilityDepartmentWhiteBlackInfo>
+	export function refOfApplicationVisibilityDepartmentWhiteBlackInfo(x:ApplicationVisibilityDepartmentWhiteBlackInfo,v:Ref<ApplicationVisibilityDepartmentWhiteBlackInfo>)
+	export function unRefApplicationVisibilityDepartmentWhiteBlackInfo(v:Ref<ApplicationVisibilityDepartmentWhiteBlackInfo>):ApplicationVisibilityDepartmentWhiteBlackInfo
+	export function emptyUser():User
+	export function emptyRefUser():Ref<User>
+	export function refOfUser(x:User,v:Ref<User>)
+	export function unRefUser(v:Ref<User>):User
+	export function emptyAppCustomCategory():AppCustomCategory
+	export function emptyRefAppCustomCategory():Ref<AppCustomCategory>
+	export function refOfAppCustomCategory(x:AppCustomCategory,v:Ref<AppCustomCategory>)
+	export function unRefAppCustomCategory(v:Ref<AppCustomCategory>):AppCustomCategory
+	export function emptyContactsRangeConfigurationApplicationResp():ContactsRangeConfigurationApplicationResp
+	export function emptyRefContactsRangeConfigurationApplicationResp():Ref<ContactsRangeConfigurationApplicationResp>
+	export function refOfContactsRangeConfigurationApplicationResp(x:ContactsRangeConfigurationApplicationResp,v:Ref<ContactsRangeConfigurationApplicationResp>)
+	export function unRefContactsRangeConfigurationApplicationResp(v:Ref<ContactsRangeConfigurationApplicationResp>):ContactsRangeConfigurationApplicationResp
+	export function emptyP1AppOpenInstallerV6():P1AppOpenInstallerV6
+	export function emptyRefP1AppOpenInstallerV6():Ref<P1AppOpenInstallerV6>
+	export function refOfP1AppOpenInstallerV6(x:P1AppOpenInstallerV6,v:Ref<P1AppOpenInstallerV6>)
+	export function unRefP1AppOpenInstallerV6(v:Ref<P1AppOpenInstallerV6>):P1AppOpenInstallerV6
+	export function emptyWebApp():WebApp
+	export function emptyRefWebApp():Ref<WebApp>
+	export function refOfWebApp(x:WebApp,v:Ref<WebApp>)
+	export function unRefWebApp(v:Ref<WebApp>):WebApp
+	export function emptyUsageTrendItem():UsageTrendItem
+	export function emptyRefUsageTrendItem():Ref<UsageTrendItem>
+	export function refOfUsageTrendItem(x:UsageTrendItem,v:Ref<UsageTrendItem>)
+	export function unRefUsageTrendItem(v:Ref<UsageTrendItem>):UsageTrendItem
+	export function emptyDepartmentOverviewApplicationAppUsageReq():DepartmentOverviewApplicationAppUsageReq
+	export function emptyRefDepartmentOverviewApplicationAppUsageReq():Ref<DepartmentOverviewApplicationAppUsageReq>
+	export function refOfDepartmentOverviewApplicationAppUsageReq(x:DepartmentOverviewApplicationAppUsageReq,v:Ref<DepartmentOverviewApplicationAppUsageReq>)
+	export function unRefDepartmentOverviewApplicationAppUsageReq(v:Ref<DepartmentOverviewApplicationAppUsageReq>):DepartmentOverviewApplicationAppUsageReq
+	export function emptyApplicationAppVersionEvent():ApplicationAppVersionEvent
+	export function emptyRefApplicationAppVersionEvent():Ref<ApplicationAppVersionEvent>
+	export function refOfApplicationAppVersionEvent(x:ApplicationAppVersionEvent,v:Ref<ApplicationAppVersionEvent>)
+	export function unRefApplicationAppVersionEvent(v:Ref<ApplicationAppVersionEvent>):ApplicationAppVersionEvent
+	export function emptyUserId():UserId
+	export function emptyRefUserId():Ref<UserId>
+	export function refOfUserId(x:UserId,v:Ref<UserId>)
+	export function unRefUserId(v:Ref<UserId>):UserId
+	export function emptyDepartmentOverviewApplicationAppUsageRespData():DepartmentOverviewApplicationAppUsageRespData
+	export function emptyRefDepartmentOverviewApplicationAppUsageRespData():Ref<DepartmentOverviewApplicationAppUsageRespData>
+	export function refOfDepartmentOverviewApplicationAppUsageRespData(x:DepartmentOverviewApplicationAppUsageRespData,v:Ref<DepartmentOverviewApplicationAppUsageRespData>)
+	export function unRefDepartmentOverviewApplicationAppUsageRespData(v:Ref<DepartmentOverviewApplicationAppUsageRespData>):DepartmentOverviewApplicationAppUsageRespData
+	export function emptyPatchApplicationContactsRangeReqBody():PatchApplicationContactsRangeReqBody
+	export function emptyRefPatchApplicationContactsRangeReqBody():Ref<PatchApplicationContactsRangeReqBody>
+	export function refOfPatchApplicationContactsRangeReqBody(x:PatchApplicationContactsRangeReqBody,v:Ref<PatchApplicationContactsRangeReqBody>)
+	export function unRefPatchApplicationContactsRangeReqBody(v:Ref<PatchApplicationContactsRangeReqBody>):PatchApplicationContactsRangeReqBody
+	export function emptyUnderauditlistApplicationResp():UnderauditlistApplicationResp
+	export function emptyRefUnderauditlistApplicationResp():Ref<UnderauditlistApplicationResp>
+	export function refOfUnderauditlistApplicationResp(x:UnderauditlistApplicationResp,v:Ref<UnderauditlistApplicationResp>)
+	export function unRefUnderauditlistApplicationResp(v:Ref<UnderauditlistApplicationResp>):UnderauditlistApplicationResp
+	export function emptyAppAbility():AppAbility
+	export function emptyRefAppAbility():Ref<AppAbility>
+	export function refOfAppAbility(x:AppAbility,v:Ref<AppAbility>)
+	export function unRefAppAbility(v:Ref<AppAbility>):AppAbility
+	export function emptyApplicationAppVersion():ApplicationAppVersion
+	export function emptyRefApplicationAppVersion():Ref<ApplicationAppVersion>
+	export function refOfApplicationAppVersion(x:ApplicationAppVersion,v:Ref<ApplicationAppVersion>)
+	export function unRefApplicationAppVersion(v:Ref<ApplicationAppVersion>):ApplicationAppVersion
 	export function emptyGetApplicationResp():GetApplicationResp
 	export function emptyRefGetApplicationResp():Ref<GetApplicationResp>
 	export function refOfGetApplicationResp(x:GetApplicationResp,v:Ref<GetApplicationResp>)
@@ -2874,86 +2737,122 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/application/v6'{
 	export function emptyRefP2ApplicationFeedbackCreatedV6Data():Ref<P2ApplicationFeedbackCreatedV6Data>
 	export function refOfP2ApplicationFeedbackCreatedV6Data(x:P2ApplicationFeedbackCreatedV6Data,v:Ref<P2ApplicationFeedbackCreatedV6Data>)
 	export function unRefP2ApplicationFeedbackCreatedV6Data(v:Ref<P2ApplicationFeedbackCreatedV6Data>):P2ApplicationFeedbackCreatedV6Data
-	export function emptyP2ApplicationVisibilityAddedV6():P2ApplicationVisibilityAddedV6
-	export function emptyRefP2ApplicationVisibilityAddedV6():Ref<P2ApplicationVisibilityAddedV6>
-	export function refOfP2ApplicationVisibilityAddedV6(x:P2ApplicationVisibilityAddedV6,v:Ref<P2ApplicationVisibilityAddedV6>)
-	export function unRefP2ApplicationVisibilityAddedV6(v:Ref<P2ApplicationVisibilityAddedV6>):P2ApplicationVisibilityAddedV6
-	export function emptyP1OrderPaidV6Data():P1OrderPaidV6Data
-	export function emptyRefP1OrderPaidV6Data():Ref<P1OrderPaidV6Data>
-	export function refOfP1OrderPaidV6Data(x:P1OrderPaidV6Data,v:Ref<P1OrderPaidV6Data>)
-	export function unRefP1OrderPaidV6Data(v:Ref<P1OrderPaidV6Data>):P1OrderPaidV6Data
-	export function emptyEventAndCallbackEncryptStrategy():EventAndCallbackEncryptStrategy
-	export function emptyRefEventAndCallbackEncryptStrategy():Ref<EventAndCallbackEncryptStrategy>
-	export function refOfEventAndCallbackEncryptStrategy(x:EventAndCallbackEncryptStrategy,v:Ref<EventAndCallbackEncryptStrategy>)
-	export function unRefEventAndCallbackEncryptStrategy(v:Ref<EventAndCallbackEncryptStrategy>):EventAndCallbackEncryptStrategy
-	export function emptyP1AppOpenInstallerV6():P1AppOpenInstallerV6
-	export function emptyRefP1AppOpenInstallerV6():Ref<P1AppOpenInstallerV6>
-	export function refOfP1AppOpenInstallerV6(x:P1AppOpenInstallerV6,v:Ref<P1AppOpenInstallerV6>)
-	export function unRefP1AppOpenInstallerV6(v:Ref<P1AppOpenInstallerV6>):P1AppOpenInstallerV6
-	export function emptyUserId():UserId
-	export function emptyRefUserId():Ref<UserId>
-	export function refOfUserId(x:UserId,v:Ref<UserId>)
-	export function unRefUserId(v:Ref<UserId>):UserId
-	export function emptyAppAdminUser():AppAdminUser
-	export function emptyRefAppAdminUser():Ref<AppAdminUser>
-	export function refOfAppAdminUser(x:AppAdminUser,v:Ref<AppAdminUser>)
-	export function unRefAppAdminUser(v:Ref<AppAdminUser>):AppAdminUser
-	export function emptyAppCommonCategory():AppCommonCategory
-	export function emptyRefAppCommonCategory():Ref<AppCommonCategory>
-	export function refOfAppCommonCategory(x:AppCommonCategory,v:Ref<AppCommonCategory>)
-	export function unRefAppCommonCategory(v:Ref<AppCommonCategory>):AppCommonCategory
-	export function emptyDepartmentOverviewApplicationAppUsageReqBody():DepartmentOverviewApplicationAppUsageReqBody
-	export function emptyRefDepartmentOverviewApplicationAppUsageReqBody():Ref<DepartmentOverviewApplicationAppUsageReqBody>
-	export function refOfDepartmentOverviewApplicationAppUsageReqBody(x:DepartmentOverviewApplicationAppUsageReqBody,v:Ref<DepartmentOverviewApplicationAppUsageReqBody>)
-	export function unRefDepartmentOverviewApplicationAppUsageReqBody(v:Ref<DepartmentOverviewApplicationAppUsageReqBody>):DepartmentOverviewApplicationAppUsageReqBody
 	export function emptyP2ApplicationVisibilityAddedV6Data():P2ApplicationVisibilityAddedV6Data
 	export function emptyRefP2ApplicationVisibilityAddedV6Data():Ref<P2ApplicationVisibilityAddedV6Data>
 	export function refOfP2ApplicationVisibilityAddedV6Data(x:P2ApplicationVisibilityAddedV6Data,v:Ref<P2ApplicationVisibilityAddedV6Data>)
 	export function unRefP2ApplicationVisibilityAddedV6Data(v:Ref<P2ApplicationVisibilityAddedV6Data>):P2ApplicationVisibilityAddedV6Data
-	export function emptyPatchApplicationReq():PatchApplicationReq
-	export function emptyRefPatchApplicationReq():Ref<PatchApplicationReq>
-	export function refOfPatchApplicationReq(x:PatchApplicationReq,v:Ref<PatchApplicationReq>)
-	export function unRefPatchApplicationReq(v:Ref<PatchApplicationReq>):PatchApplicationReq
-	export function emptyAppVisibilityIdList():AppVisibilityIdList
-	export function emptyRefAppVisibilityIdList():Ref<AppVisibilityIdList>
-	export function refOfAppVisibilityIdList(x:AppVisibilityIdList,v:Ref<AppVisibilityIdList>)
-	export function unRefAppVisibilityIdList(v:Ref<AppVisibilityIdList>):AppVisibilityIdList
-	export function emptyApplicationAppVersionEvent():ApplicationAppVersionEvent
-	export function emptyRefApplicationAppVersionEvent():Ref<ApplicationAppVersionEvent>
-	export function refOfApplicationAppVersionEvent(x:ApplicationAppVersionEvent,v:Ref<ApplicationAppVersionEvent>)
-	export function unRefApplicationAppVersionEvent(v:Ref<ApplicationAppVersionEvent>):ApplicationAppVersionEvent
-	export function emptyGetApplicationAppVersionReq():GetApplicationAppVersionReq
-	export function emptyRefGetApplicationAppVersionReq():Ref<GetApplicationAppVersionReq>
-	export function refOfGetApplicationAppVersionReq(x:GetApplicationAppVersionReq,v:Ref<GetApplicationAppVersionReq>)
-	export function unRefGetApplicationAppVersionReq(v:Ref<GetApplicationAppVersionReq>):GetApplicationAppVersionReq
+	export function emptyPatchApplicationAppVersionReq():PatchApplicationAppVersionReq
+	export function emptyRefPatchApplicationAppVersionReq():Ref<PatchApplicationAppVersionReq>
+	export function refOfPatchApplicationAppVersionReq(x:PatchApplicationAppVersionReq,v:Ref<PatchApplicationAppVersionReq>)
+	export function unRefPatchApplicationAppVersionReq(v:Ref<PatchApplicationAppVersionReq>):PatchApplicationAppVersionReq
+	export function emptyGetApplicationReq():GetApplicationReq
+	export function emptyRefGetApplicationReq():Ref<GetApplicationReq>
+	export function refOfGetApplicationReq(x:GetApplicationReq,v:Ref<GetApplicationReq>)
+	export function unRefGetApplicationReq(v:Ref<GetApplicationReq>):GetApplicationReq
+	export function emptyGetApplicationRespData():GetApplicationRespData
+	export function emptyRefGetApplicationRespData():Ref<GetApplicationRespData>
+	export function refOfGetApplicationRespData(x:GetApplicationRespData,v:Ref<GetApplicationRespData>)
+	export function unRefGetApplicationRespData(v:Ref<GetApplicationRespData>):GetApplicationRespData
+	export function emptyP1AppUninstalledV6Data():P1AppUninstalledV6Data
+	export function emptyRefP1AppUninstalledV6Data():Ref<P1AppUninstalledV6Data>
+	export function refOfP1AppUninstalledV6Data(x:P1AppUninstalledV6Data,v:Ref<P1AppUninstalledV6Data>)
+	export function unRefP1AppUninstalledV6Data(v:Ref<P1AppUninstalledV6Data>):P1AppUninstalledV6Data
 	export function emptyListAppRecommendRuleRespData():ListAppRecommendRuleRespData
 	export function emptyRefListAppRecommendRuleRespData():Ref<ListAppRecommendRuleRespData>
 	export function refOfListAppRecommendRuleRespData(x:ListAppRecommendRuleRespData,v:Ref<ListAppRecommendRuleRespData>)
 	export function unRefListAppRecommendRuleRespData(v:Ref<ListAppRecommendRuleRespData>):ListAppRecommendRuleRespData
-	export function emptyAppMessageTrendItem():AppMessageTrendItem
-	export function emptyRefAppMessageTrendItem():Ref<AppMessageTrendItem>
-	export function refOfAppMessageTrendItem(x:AppMessageTrendItem,v:Ref<AppMessageTrendItem>)
-	export function unRefAppMessageTrendItem(v:Ref<AppMessageTrendItem>):AppMessageTrendItem
-	export function emptyApplicationAppUsage():ApplicationAppUsage
-	export function emptyRefApplicationAppUsage():Ref<ApplicationAppUsage>
-	export function refOfApplicationAppUsage(x:ApplicationAppUsage,v:Ref<ApplicationAppUsage>)
-	export function unRefApplicationAppUsage(v:Ref<ApplicationAppUsage>):ApplicationAppUsage
-	export function emptyListApplicationAppVersionResp():ListApplicationAppVersionResp
-	export function emptyRefListApplicationAppVersionResp():Ref<ListApplicationAppVersionResp>
-	export function refOfListApplicationAppVersionResp(x:ListApplicationAppVersionResp,v:Ref<ListApplicationAppVersionResp>)
-	export function unRefListApplicationAppVersionResp(v:Ref<ListApplicationAppVersionResp>):ListApplicationAppVersionResp
-	export function emptyUsageTrendItem():UsageTrendItem
-	export function emptyRefUsageTrendItem():Ref<UsageTrendItem>
-	export function refOfUsageTrendItem(x:UsageTrendItem,v:Ref<UsageTrendItem>)
-	export function unRefUsageTrendItem(v:Ref<UsageTrendItem>):UsageTrendItem
-	export function emptyAppCustomCategory():AppCustomCategory
-	export function emptyRefAppCustomCategory():Ref<AppCustomCategory>
-	export function refOfAppCustomCategory(x:AppCustomCategory,v:Ref<AppCustomCategory>)
-	export function unRefAppCustomCategory(v:Ref<AppCustomCategory>):AppCustomCategory
+	export function emptyBot():Bot
+	export function emptyRefBot():Ref<Bot>
+	export function refOfBot(x:Bot,v:Ref<Bot>)
+	export function unRefBot(v:Ref<Bot>):Bot
+	export function emptyClientBadgeNum():ClientBadgeNum
+	export function emptyRefClientBadgeNum():Ref<ClientBadgeNum>
+	export function refOfClientBadgeNum(x:ClientBadgeNum,v:Ref<ClientBadgeNum>)
+	export function unRefClientBadgeNum(v:Ref<ClientBadgeNum>):ClientBadgeNum
+	export function emptyAppUsageTrendItems():AppUsageTrendItems
+	export function emptyRefAppUsageTrendItems():Ref<AppUsageTrendItems>
+	export function refOfAppUsageTrendItems(x:AppUsageTrendItems,v:Ref<AppUsageTrendItems>)
+	export function unRefAppUsageTrendItems(v:Ref<AppUsageTrendItems>):AppUsageTrendItems
 	export function emptyOpenapiOption():OpenapiOption
 	export function emptyRefOpenapiOption():Ref<OpenapiOption>
 	export function refOfOpenapiOption(x:OpenapiOption,v:Ref<OpenapiOption>)
 	export function unRefOpenapiOption(v:Ref<OpenapiOption>):OpenapiOption
+	export function emptyAppAdminUser():AppAdminUser
+	export function emptyRefAppAdminUser():Ref<AppAdminUser>
+	export function refOfAppAdminUser(x:AppAdminUser,v:Ref<AppAdminUser>)
+	export function unRefAppAdminUser(v:Ref<AppAdminUser>):AppAdminUser
+	export function emptyContactsRangeSuggestApplicationAppVersionReq():ContactsRangeSuggestApplicationAppVersionReq
+	export function emptyRefContactsRangeSuggestApplicationAppVersionReq():Ref<ContactsRangeSuggestApplicationAppVersionReq>
+	export function refOfContactsRangeSuggestApplicationAppVersionReq(x:ContactsRangeSuggestApplicationAppVersionReq,v:Ref<ContactsRangeSuggestApplicationAppVersionReq>)
+	export function unRefContactsRangeSuggestApplicationAppVersionReq(v:Ref<ContactsRangeSuggestApplicationAppVersionReq>):ContactsRangeSuggestApplicationAppVersionReq
+	export function emptyP2BotMenuV6Data():P2BotMenuV6Data
+	export function emptyRefP2BotMenuV6Data():Ref<P2BotMenuV6Data>
+	export function refOfP2BotMenuV6Data(x:P2BotMenuV6Data,v:Ref<P2BotMenuV6Data>)
+	export function unRefP2BotMenuV6Data(v:Ref<P2BotMenuV6Data>):P2BotMenuV6Data
+	export function emptyApplicationFeedback():ApplicationFeedback
+	export function emptyRefApplicationFeedback():Ref<ApplicationFeedback>
+	export function refOfApplicationFeedback(x:ApplicationFeedback,v:Ref<ApplicationFeedback>)
+	export function unRefApplicationFeedback(v:Ref<ApplicationFeedback>):ApplicationFeedback
+	export function emptyGetApplicationAppVersionRespData():GetApplicationAppVersionRespData
+	export function emptyRefGetApplicationAppVersionRespData():Ref<GetApplicationAppVersionRespData>
+	export function refOfGetApplicationAppVersionRespData(x:GetApplicationAppVersionRespData,v:Ref<GetApplicationAppVersionRespData>)
+	export function unRefGetApplicationAppVersionRespData(v:Ref<GetApplicationAppVersionRespData>):GetApplicationAppVersionRespData
+	export function emptyUsageOverviewItem():UsageOverviewItem
+	export function emptyRefUsageOverviewItem():Ref<UsageOverviewItem>
+	export function refOfUsageOverviewItem(x:UsageOverviewItem,v:Ref<UsageOverviewItem>)
+	export function unRefUsageOverviewItem(v:Ref<UsageOverviewItem>):UsageOverviewItem
+	export function emptyAppConfigEvent():AppConfigEvent
+	export function emptyRefAppConfigEvent():Ref<AppConfigEvent>
+	export function refOfAppConfigEvent(x:AppConfigEvent,v:Ref<AppConfigEvent>)
+	export function unRefAppConfigEvent(v:Ref<AppConfigEvent>):AppConfigEvent
+	export function emptyOverviewApplicationAppUsageRespData():OverviewApplicationAppUsageRespData
+	export function emptyRefOverviewApplicationAppUsageRespData():Ref<OverviewApplicationAppUsageRespData>
+	export function refOfOverviewApplicationAppUsageRespData(x:OverviewApplicationAppUsageRespData,v:Ref<OverviewApplicationAppUsageRespData>)
+	export function unRefOverviewApplicationAppUsageRespData(v:Ref<OverviewApplicationAppUsageRespData>):OverviewApplicationAppUsageRespData
+	export function emptyAppCustomCategoryI18nInfo():AppCustomCategoryI18nInfo
+	export function emptyRefAppCustomCategoryI18nInfo():Ref<AppCustomCategoryI18nInfo>
+	export function refOfAppCustomCategoryI18nInfo(x:AppCustomCategoryI18nInfo,v:Ref<AppCustomCategoryI18nInfo>)
+	export function unRefAppCustomCategoryI18nInfo(v:Ref<AppCustomCategoryI18nInfo>):AppCustomCategoryI18nInfo
+	export function emptyCheckWhiteBlackListApplicationVisibilityRespData():CheckWhiteBlackListApplicationVisibilityRespData
+	export function emptyRefCheckWhiteBlackListApplicationVisibilityRespData():Ref<CheckWhiteBlackListApplicationVisibilityRespData>
+	export function refOfCheckWhiteBlackListApplicationVisibilityRespData(x:CheckWhiteBlackListApplicationVisibilityRespData,v:Ref<CheckWhiteBlackListApplicationVisibilityRespData>)
+	export function unRefCheckWhiteBlackListApplicationVisibilityRespData(v:Ref<CheckWhiteBlackListApplicationVisibilityRespData>):CheckWhiteBlackListApplicationVisibilityRespData
+	export function emptyDepartmentOverviewApplicationAppUsageResp():DepartmentOverviewApplicationAppUsageResp
+	export function emptyRefDepartmentOverviewApplicationAppUsageResp():Ref<DepartmentOverviewApplicationAppUsageResp>
+	export function refOfDepartmentOverviewApplicationAppUsageResp(x:DepartmentOverviewApplicationAppUsageResp,v:Ref<DepartmentOverviewApplicationAppUsageResp>)
+	export function unRefDepartmentOverviewApplicationAppUsageResp(v:Ref<DepartmentOverviewApplicationAppUsageResp>):DepartmentOverviewApplicationAppUsageResp
+	export function emptyMsgAction():MsgAction
+	export function emptyRefMsgAction():Ref<MsgAction>
+	export function refOfMsgAction(x:MsgAction,v:Ref<MsgAction>)
+	export function unRefMsgAction(v:Ref<MsgAction>):MsgAction
+	export function emptyCheckWhiteBlackListApplicationVisibilityResp():CheckWhiteBlackListApplicationVisibilityResp
+	export function emptyRefCheckWhiteBlackListApplicationVisibilityResp():Ref<CheckWhiteBlackListApplicationVisibilityResp>
+	export function refOfCheckWhiteBlackListApplicationVisibilityResp(x:CheckWhiteBlackListApplicationVisibilityResp,v:Ref<CheckWhiteBlackListApplicationVisibilityResp>)
+	export function unRefCheckWhiteBlackListApplicationVisibilityResp(v:Ref<CheckWhiteBlackListApplicationVisibilityResp>):CheckWhiteBlackListApplicationVisibilityResp
+	export function emptyP2ApplicationCreatedV6():P2ApplicationCreatedV6
+	export function emptyRefP2ApplicationCreatedV6():Ref<P2ApplicationCreatedV6>
+	export function refOfP2ApplicationCreatedV6(x:P2ApplicationCreatedV6,v:Ref<P2ApplicationCreatedV6>)
+	export function unRefP2ApplicationCreatedV6(v:Ref<P2ApplicationCreatedV6>):P2ApplicationCreatedV6
+	export function emptyCheckWhiteBlackListApplicationVisibilityReq():CheckWhiteBlackListApplicationVisibilityReq
+	export function emptyRefCheckWhiteBlackListApplicationVisibilityReq():Ref<CheckWhiteBlackListApplicationVisibilityReq>
+	export function refOfCheckWhiteBlackListApplicationVisibilityReq(x:CheckWhiteBlackListApplicationVisibilityReq,v:Ref<CheckWhiteBlackListApplicationVisibilityReq>)
+	export function unRefCheckWhiteBlackListApplicationVisibilityReq(v:Ref<CheckWhiteBlackListApplicationVisibilityReq>):CheckWhiteBlackListApplicationVisibilityReq
+	export function emptyPatchApplicationContactsRangeReq():PatchApplicationContactsRangeReq
+	export function emptyRefPatchApplicationContactsRangeReq():Ref<PatchApplicationContactsRangeReq>
+	export function refOfPatchApplicationContactsRangeReq(x:PatchApplicationContactsRangeReq,v:Ref<PatchApplicationContactsRangeReq>)
+	export function unRefPatchApplicationContactsRangeReq(v:Ref<PatchApplicationContactsRangeReq>):PatchApplicationContactsRangeReq
+	export function emptyAppRecommendRuleItemInfo():AppRecommendRuleItemInfo
+	export function emptyRefAppRecommendRuleItemInfo():Ref<AppRecommendRuleItemInfo>
+	export function refOfAppRecommendRuleItemInfo(x:AppRecommendRuleItemInfo,v:Ref<AppRecommendRuleItemInfo>)
+	export function unRefAppRecommendRuleItemInfo(v:Ref<AppRecommendRuleItemInfo>):AppRecommendRuleItemInfo
+	export function emptyCloudDoc():CloudDoc
+	export function emptyRefCloudDoc():Ref<CloudDoc>
+	export function refOfCloudDoc(x:CloudDoc,v:Ref<CloudDoc>)
+	export function unRefCloudDoc(v:Ref<CloudDoc>):CloudDoc
+	export function emptyP1AppStatusChangeOperatorV6():P1AppStatusChangeOperatorV6
+	export function emptyRefP1AppStatusChangeOperatorV6():Ref<P1AppStatusChangeOperatorV6>
+	export function refOfP1AppStatusChangeOperatorV6(x:P1AppStatusChangeOperatorV6,v:Ref<P1AppStatusChangeOperatorV6>)
+	export function unRefP1AppStatusChangeOperatorV6(v:Ref<P1AppStatusChangeOperatorV6>):P1AppStatusChangeOperatorV6
 	export function emptyPatchApplicationResp():PatchApplicationResp
 	export function emptyRefPatchApplicationResp():Ref<PatchApplicationResp>
 	export function refOfPatchApplicationResp(x:PatchApplicationResp,v:Ref<PatchApplicationResp>)
@@ -2962,224 +2861,400 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/application/v6'{
 	export function emptyRefUpdateApplicationManagementReq():Ref<UpdateApplicationManagementReq>
 	export function refOfUpdateApplicationManagementReq(x:UpdateApplicationManagementReq,v:Ref<UpdateApplicationManagementReq>)
 	export function unRefUpdateApplicationManagementReq(v:Ref<UpdateApplicationManagementReq>):UpdateApplicationManagementReq
-	export function emptyApplicationAppContactsRange():ApplicationAppContactsRange
-	export function emptyRefApplicationAppContactsRange():Ref<ApplicationAppContactsRange>
-	export function refOfApplicationAppContactsRange(x:ApplicationAppContactsRange,v:Ref<ApplicationAppContactsRange>)
-	export function unRefApplicationAppContactsRange(v:Ref<ApplicationAppContactsRange>):ApplicationAppContactsRange
-	export function emptyListAppRecommendRuleIterator():ListAppRecommendRuleIterator
-	export function emptyRefListAppRecommendRuleIterator():Ref<ListAppRecommendRuleIterator>
-	export function refOfListAppRecommendRuleIterator(x:ListAppRecommendRuleIterator,v:Ref<ListAppRecommendRuleIterator>)
-	export function unRefListAppRecommendRuleIterator(v:Ref<ListAppRecommendRuleIterator>):ListAppRecommendRuleIterator
-	export function emptyAppConfigSecurityItem():AppConfigSecurityItem
-	export function emptyRefAppConfigSecurityItem():Ref<AppConfigSecurityItem>
-	export function refOfAppConfigSecurityItem(x:AppConfigSecurityItem,v:Ref<AppConfigSecurityItem>)
-	export function unRefAppConfigSecurityItem(v:Ref<AppConfigSecurityItem>):AppConfigSecurityItem
-	export function emptyPatchApplicationAppVersionReq():PatchApplicationAppVersionReq
-	export function emptyRefPatchApplicationAppVersionReq():Ref<PatchApplicationAppVersionReq>
-	export function refOfPatchApplicationAppVersionReq(x:PatchApplicationAppVersionReq,v:Ref<PatchApplicationAppVersionReq>)
-	export function unRefPatchApplicationAppVersionReq(v:Ref<PatchApplicationAppVersionReq>):PatchApplicationAppVersionReq
-	export function emptyAppUsageTrendItems():AppUsageTrendItems
-	export function emptyRefAppUsageTrendItems():Ref<AppUsageTrendItems>
-	export function refOfAppUsageTrendItems(x:AppUsageTrendItems,v:Ref<AppUsageTrendItems>)
-	export function unRefAppUsageTrendItems(v:Ref<AppUsageTrendItems>):AppUsageTrendItems
-	export function emptyCheckWhiteBlackListApplicationVisibilityReq():CheckWhiteBlackListApplicationVisibilityReq
-	export function emptyRefCheckWhiteBlackListApplicationVisibilityReq():Ref<CheckWhiteBlackListApplicationVisibilityReq>
-	export function refOfCheckWhiteBlackListApplicationVisibilityReq(x:CheckWhiteBlackListApplicationVisibilityReq,v:Ref<CheckWhiteBlackListApplicationVisibilityReq>)
-	export function unRefCheckWhiteBlackListApplicationVisibilityReq(v:Ref<CheckWhiteBlackListApplicationVisibilityReq>):CheckWhiteBlackListApplicationVisibilityReq
-	export function emptyDepartmentOverviewApplicationAppUsageReq():DepartmentOverviewApplicationAppUsageReq
-	export function emptyRefDepartmentOverviewApplicationAppUsageReq():Ref<DepartmentOverviewApplicationAppUsageReq>
-	export function refOfDepartmentOverviewApplicationAppUsageReq(x:DepartmentOverviewApplicationAppUsageReq,v:Ref<DepartmentOverviewApplicationAppUsageReq>)
-	export function unRefDepartmentOverviewApplicationAppUsageReq(v:Ref<DepartmentOverviewApplicationAppUsageReq>):DepartmentOverviewApplicationAppUsageReq
-	export function emptyP1AppStatusChangedV6Data():P1AppStatusChangedV6Data
-	export function emptyRefP1AppStatusChangedV6Data():Ref<P1AppStatusChangedV6Data>
-	export function refOfP1AppStatusChangedV6Data(x:P1AppStatusChangedV6Data,v:Ref<P1AppStatusChangedV6Data>)
-	export function unRefP1AppStatusChangedV6Data(v:Ref<P1AppStatusChangedV6Data>):P1AppStatusChangedV6Data
-	export function emptyUpdateApplicationManagementResp():UpdateApplicationManagementResp
-	export function emptyRefUpdateApplicationManagementResp():Ref<UpdateApplicationManagementResp>
-	export function refOfUpdateApplicationManagementResp(x:UpdateApplicationManagementResp,v:Ref<UpdateApplicationManagementResp>)
-	export function unRefUpdateApplicationManagementResp(v:Ref<UpdateApplicationManagementResp>):UpdateApplicationManagementResp
-	export function emptyApplicationVisibility():ApplicationVisibility
-	export function emptyRefApplicationVisibility():Ref<ApplicationVisibility>
-	export function refOfApplicationVisibility(x:ApplicationVisibility,v:Ref<ApplicationVisibility>)
-	export function unRefApplicationVisibility(v:Ref<ApplicationVisibility>):ApplicationVisibility
-	export function emptyGetApplicationAppVersionResp():GetApplicationAppVersionResp
-	export function emptyRefGetApplicationAppVersionResp():Ref<GetApplicationAppVersionResp>
-	export function refOfGetApplicationAppVersionResp(x:GetApplicationAppVersionResp,v:Ref<GetApplicationAppVersionResp>)
-	export function unRefGetApplicationAppVersionResp(v:Ref<GetApplicationAppVersionResp>):GetApplicationAppVersionResp
-	export function emptyPatchApplicationFeedbackReq():PatchApplicationFeedbackReq
-	export function emptyRefPatchApplicationFeedbackReq():Ref<PatchApplicationFeedbackReq>
-	export function refOfPatchApplicationFeedbackReq(x:PatchApplicationFeedbackReq,v:Ref<PatchApplicationFeedbackReq>)
-	export function unRefPatchApplicationFeedbackReq(v:Ref<PatchApplicationFeedbackReq>):PatchApplicationFeedbackReq
-	export function emptyApplicationEventOwner():ApplicationEventOwner
-	export function emptyRefApplicationEventOwner():Ref<ApplicationEventOwner>
-	export function refOfApplicationEventOwner(x:ApplicationEventOwner,v:Ref<ApplicationEventOwner>)
-	export function unRefApplicationEventOwner(v:Ref<ApplicationEventOwner>):ApplicationEventOwner
-	export function emptyP1AppOpenV6Data():P1AppOpenV6Data
-	export function emptyRefP1AppOpenV6Data():Ref<P1AppOpenV6Data>
-	export function refOfP1AppOpenV6Data(x:P1AppOpenV6Data,v:Ref<P1AppOpenV6Data>)
-	export function unRefP1AppOpenV6Data(v:Ref<P1AppOpenV6Data>):P1AppOpenV6Data
-	export function emptyPatchApplicationVisibilityResp():PatchApplicationVisibilityResp
-	export function emptyRefPatchApplicationVisibilityResp():Ref<PatchApplicationVisibilityResp>
-	export function refOfPatchApplicationVisibilityResp(x:PatchApplicationVisibilityResp,v:Ref<PatchApplicationVisibilityResp>)
-	export function unRefPatchApplicationVisibilityResp(v:Ref<PatchApplicationVisibilityResp>):PatchApplicationVisibilityResp
-	export function emptyUsageUser():UsageUser
-	export function emptyRefUsageUser():Ref<UsageUser>
-	export function refOfUsageUser(x:UsageUser,v:Ref<UsageUser>)
-	export function unRefUsageUser(v:Ref<UsageUser>):UsageUser
-	export function emptyAppI18nInfo():AppI18nInfo
-	export function emptyRefAppI18nInfo():Ref<AppI18nInfo>
-	export function refOfAppI18nInfo(x:AppI18nInfo,v:Ref<AppI18nInfo>)
-	export function unRefAppI18nInfo(v:Ref<AppI18nInfo>):AppI18nInfo
-	export function emptyAppScopes():AppScopes
-	export function emptyRefAppScopes():Ref<AppScopes>
-	export function refOfAppScopes(x:AppScopes,v:Ref<AppScopes>)
-	export function unRefAppScopes(v:Ref<AppScopes>):AppScopes
-	export function emptyContactsRangeConfigurationApplicationReq():ContactsRangeConfigurationApplicationReq
-	export function emptyRefContactsRangeConfigurationApplicationReq():Ref<ContactsRangeConfigurationApplicationReq>
-	export function refOfContactsRangeConfigurationApplicationReq(x:ContactsRangeConfigurationApplicationReq,v:Ref<ContactsRangeConfigurationApplicationReq>)
-	export function unRefContactsRangeConfigurationApplicationReq(v:Ref<ContactsRangeConfigurationApplicationReq>):ContactsRangeConfigurationApplicationReq
-	export function emptyListApplicationFeedbackResp():ListApplicationFeedbackResp
-	export function emptyRefListApplicationFeedbackResp():Ref<ListApplicationFeedbackResp>
-	export function refOfListApplicationFeedbackResp(x:ListApplicationFeedbackResp,v:Ref<ListApplicationFeedbackResp>)
-	export function unRefListApplicationFeedbackResp(v:Ref<ListApplicationFeedbackResp>):ListApplicationFeedbackResp
-	export function emptyP1AppUninstalledV6Data():P1AppUninstalledV6Data
-	export function emptyRefP1AppUninstalledV6Data():Ref<P1AppUninstalledV6Data>
-	export function refOfP1AppUninstalledV6Data(x:P1AppUninstalledV6Data,v:Ref<P1AppUninstalledV6Data>)
-	export function unRefP1AppUninstalledV6Data(v:Ref<P1AppUninstalledV6Data>):P1AppUninstalledV6Data
-	export function emptyAppContactsRangeIdList():AppContactsRangeIdList
-	export function emptyRefAppContactsRangeIdList():Ref<AppContactsRangeIdList>
-	export function refOfAppContactsRangeIdList(x:AppContactsRangeIdList,v:Ref<AppContactsRangeIdList>)
-	export function unRefAppContactsRangeIdList(v:Ref<AppContactsRangeIdList>):AppContactsRangeIdList
-	export function emptyMsgActionI18nInfo():MsgActionI18nInfo
-	export function emptyRefMsgActionI18nInfo():Ref<MsgActionI18nInfo>
-	export function refOfMsgActionI18nInfo(x:MsgActionI18nInfo,v:Ref<MsgActionI18nInfo>)
-	export function unRefMsgActionI18nInfo(v:Ref<MsgActionI18nInfo>):MsgActionI18nInfo
-	export function emptyUnderauditlistApplicationIterator():UnderauditlistApplicationIterator
-	export function emptyRefUnderauditlistApplicationIterator():Ref<UnderauditlistApplicationIterator>
-	export function refOfUnderauditlistApplicationIterator(x:UnderauditlistApplicationIterator,v:Ref<UnderauditlistApplicationIterator>)
-	export function unRefUnderauditlistApplicationIterator(v:Ref<UnderauditlistApplicationIterator>):UnderauditlistApplicationIterator
-	export function emptyWorkplaceWidget():WorkplaceWidget
-	export function emptyRefWorkplaceWidget():Ref<WorkplaceWidget>
-	export function refOfWorkplaceWidget(x:WorkplaceWidget,v:Ref<WorkplaceWidget>)
-	export function unRefWorkplaceWidget(v:Ref<WorkplaceWidget>):WorkplaceWidget
-	export function emptyDepartmentOverviewApplicationAppUsageRespData():DepartmentOverviewApplicationAppUsageRespData
-	export function emptyRefDepartmentOverviewApplicationAppUsageRespData():Ref<DepartmentOverviewApplicationAppUsageRespData>
-	export function refOfDepartmentOverviewApplicationAppUsageRespData(x:DepartmentOverviewApplicationAppUsageRespData,v:Ref<DepartmentOverviewApplicationAppUsageRespData>)
-	export function unRefDepartmentOverviewApplicationAppUsageRespData(v:Ref<DepartmentOverviewApplicationAppUsageRespData>):DepartmentOverviewApplicationAppUsageRespData
-	export function emptyP2ApplicationAppVersionPublishApplyV6():P2ApplicationAppVersionPublishApplyV6
-	export function emptyRefP2ApplicationAppVersionPublishApplyV6():Ref<P2ApplicationAppVersionPublishApplyV6>
-	export function refOfP2ApplicationAppVersionPublishApplyV6(x:P2ApplicationAppVersionPublishApplyV6,v:Ref<P2ApplicationAppVersionPublishApplyV6>)
-	export function unRefP2ApplicationAppVersionPublishApplyV6(v:Ref<P2ApplicationAppVersionPublishApplyV6>):P2ApplicationAppVersionPublishApplyV6
-	export function emptyP2ApplicationCreatedV6Data():P2ApplicationCreatedV6Data
-	export function emptyRefP2ApplicationCreatedV6Data():Ref<P2ApplicationCreatedV6Data>
-	export function refOfP2ApplicationCreatedV6Data(x:P2ApplicationCreatedV6Data,v:Ref<P2ApplicationCreatedV6Data>)
-	export function unRefP2ApplicationCreatedV6Data(v:Ref<P2ApplicationCreatedV6Data>):P2ApplicationCreatedV6Data
-	export function emptyCheckWhiteBlackListApplicationVisibilityResp():CheckWhiteBlackListApplicationVisibilityResp
-	export function emptyRefCheckWhiteBlackListApplicationVisibilityResp():Ref<CheckWhiteBlackListApplicationVisibilityResp>
-	export function refOfCheckWhiteBlackListApplicationVisibilityResp(x:CheckWhiteBlackListApplicationVisibilityResp,v:Ref<CheckWhiteBlackListApplicationVisibilityResp>)
-	export function unRefCheckWhiteBlackListApplicationVisibilityResp(v:Ref<CheckWhiteBlackListApplicationVisibilityResp>):CheckWhiteBlackListApplicationVisibilityResp
-	export function emptyDocsBlock():DocsBlock
-	export function emptyRefDocsBlock():Ref<DocsBlock>
-	export function refOfDocsBlock(x:DocsBlock,v:Ref<DocsBlock>)
-	export function unRefDocsBlock(v:Ref<DocsBlock>):DocsBlock
-	export function emptyNavigateMeta():NavigateMeta
-	export function emptyRefNavigateMeta():Ref<NavigateMeta>
-	export function refOfNavigateMeta(x:NavigateMeta,v:Ref<NavigateMeta>)
-	export function unRefNavigateMeta(v:Ref<NavigateMeta>):NavigateMeta
-	export function emptyClientBadgeNum():ClientBadgeNum
-	export function emptyRefClientBadgeNum():Ref<ClientBadgeNum>
-	export function refOfClientBadgeNum(x:ClientBadgeNum,v:Ref<ClientBadgeNum>)
-	export function unRefClientBadgeNum(v:Ref<ClientBadgeNum>):ClientBadgeNum
-	export function emptyApplicationOwner():ApplicationOwner
-	export function emptyRefApplicationOwner():Ref<ApplicationOwner>
-	export function refOfApplicationOwner(x:ApplicationOwner,v:Ref<ApplicationOwner>)
-	export function unRefApplicationOwner(v:Ref<ApplicationOwner>):ApplicationOwner
-	export function emptyListApplicationAppVersionRespData():ListApplicationAppVersionRespData
-	export function emptyRefListApplicationAppVersionRespData():Ref<ListApplicationAppVersionRespData>
-	export function refOfListApplicationAppVersionRespData(x:ListApplicationAppVersionRespData,v:Ref<ListApplicationAppVersionRespData>)
-	export function unRefListApplicationAppVersionRespData(v:Ref<ListApplicationAppVersionRespData>):ListApplicationAppVersionRespData
-	export function emptyP2ApplicationAppVersionAuditV6Data():P2ApplicationAppVersionAuditV6Data
-	export function emptyRefP2ApplicationAppVersionAuditV6Data():Ref<P2ApplicationAppVersionAuditV6Data>
-	export function refOfP2ApplicationAppVersionAuditV6Data(x:P2ApplicationAppVersionAuditV6Data,v:Ref<P2ApplicationAppVersionAuditV6Data>)
-	export function unRefP2ApplicationAppVersionAuditV6Data(v:Ref<P2ApplicationAppVersionAuditV6Data>):P2ApplicationAppVersionAuditV6Data
-	export function emptyPatchApplicationVisibilityReqBody():PatchApplicationVisibilityReqBody
-	export function emptyRefPatchApplicationVisibilityReqBody():Ref<PatchApplicationVisibilityReqBody>
-	export function refOfPatchApplicationVisibilityReqBody(x:PatchApplicationVisibilityReqBody,v:Ref<PatchApplicationVisibilityReqBody>)
-	export function unRefPatchApplicationVisibilityReqBody(v:Ref<PatchApplicationVisibilityReqBody>):PatchApplicationVisibilityReqBody
-	export function emptyV6():V6
-	export function emptyRefV6():Ref<V6>
-	export function refOfV6(x:V6,v:Ref<V6>)
-	export function unRefV6(v:Ref<V6>):V6
-	export function emptyApplicationVisibilityUserWhiteBlackInfo():ApplicationVisibilityUserWhiteBlackInfo
-	export function emptyRefApplicationVisibilityUserWhiteBlackInfo():Ref<ApplicationVisibilityUserWhiteBlackInfo>
-	export function refOfApplicationVisibilityUserWhiteBlackInfo(x:ApplicationVisibilityUserWhiteBlackInfo,v:Ref<ApplicationVisibilityUserWhiteBlackInfo>)
-	export function unRefApplicationVisibilityUserWhiteBlackInfo(v:Ref<ApplicationVisibilityUserWhiteBlackInfo>):ApplicationVisibilityUserWhiteBlackInfo
-	export function emptyGetApplicationReq():GetApplicationReq
-	export function emptyRefGetApplicationReq():Ref<GetApplicationReq>
-	export function refOfGetApplicationReq(x:GetApplicationReq,v:Ref<GetApplicationReq>)
-	export function unRefGetApplicationReq(v:Ref<GetApplicationReq>):GetApplicationReq
-	export function emptyListApplicationAppVersionReq():ListApplicationAppVersionReq
-	export function emptyRefListApplicationAppVersionReq():Ref<ListApplicationAppVersionReq>
-	export function refOfListApplicationAppVersionReq(x:ListApplicationAppVersionReq,v:Ref<ListApplicationAppVersionReq>)
-	export function unRefListApplicationAppVersionReq(v:Ref<ListApplicationAppVersionReq>):ListApplicationAppVersionReq
-	export function emptyP1AppOpenApplicantV6():P1AppOpenApplicantV6
-	export function emptyRefP1AppOpenApplicantV6():Ref<P1AppOpenApplicantV6>
-	export function refOfP1AppOpenApplicantV6(x:P1AppOpenApplicantV6,v:Ref<P1AppOpenApplicantV6>)
-	export function unRefP1AppOpenApplicantV6(v:Ref<P1AppOpenApplicantV6>):P1AppOpenApplicantV6
-	export function emptyP2ApplicationCreatedV6():P2ApplicationCreatedV6
-	export function emptyRefP2ApplicationCreatedV6():Ref<P2ApplicationCreatedV6>
-	export function refOfP2ApplicationCreatedV6(x:P2ApplicationCreatedV6,v:Ref<P2ApplicationCreatedV6>)
-	export function unRefP2ApplicationCreatedV6(v:Ref<P2ApplicationCreatedV6>):P2ApplicationCreatedV6
-	export function emptyApplicationVisibilityDepartmentWhiteBlackInfo():ApplicationVisibilityDepartmentWhiteBlackInfo
-	export function emptyRefApplicationVisibilityDepartmentWhiteBlackInfo():Ref<ApplicationVisibilityDepartmentWhiteBlackInfo>
-	export function refOfApplicationVisibilityDepartmentWhiteBlackInfo(x:ApplicationVisibilityDepartmentWhiteBlackInfo,v:Ref<ApplicationVisibilityDepartmentWhiteBlackInfo>)
-	export function unRefApplicationVisibilityDepartmentWhiteBlackInfo(v:Ref<ApplicationVisibilityDepartmentWhiteBlackInfo>):ApplicationVisibilityDepartmentWhiteBlackInfo
-	export function emptyListAppRecommendRuleResp():ListAppRecommendRuleResp
-	export function emptyRefListAppRecommendRuleResp():Ref<ListAppRecommendRuleResp>
-	export function refOfListAppRecommendRuleResp(x:ListAppRecommendRuleResp,v:Ref<ListAppRecommendRuleResp>)
-	export function unRefListAppRecommendRuleResp(v:Ref<ListAppRecommendRuleResp>):ListAppRecommendRuleResp
-	export function emptyP1OrderPaidV6():P1OrderPaidV6
-	export function emptyRefP1OrderPaidV6():Ref<P1OrderPaidV6>
-	export function refOfP1OrderPaidV6(x:P1OrderPaidV6,v:Ref<P1OrderPaidV6>)
-	export function unRefP1OrderPaidV6(v:Ref<P1OrderPaidV6>):P1OrderPaidV6
-	export function emptyPlusMenu():PlusMenu
-	export function emptyRefPlusMenu():Ref<PlusMenu>
-	export function refOfPlusMenu(x:PlusMenu,v:Ref<PlusMenu>)
-	export function unRefPlusMenu(v:Ref<PlusMenu>):PlusMenu
-	export function emptyUsageOverviewItem():UsageOverviewItem
-	export function emptyRefUsageOverviewItem():Ref<UsageOverviewItem>
-	export function refOfUsageOverviewItem(x:UsageOverviewItem,v:Ref<UsageOverviewItem>)
-	export function unRefUsageOverviewItem(v:Ref<UsageOverviewItem>):UsageOverviewItem
-	export function emptyMessageOverviewItem():MessageOverviewItem
-	export function emptyRefMessageOverviewItem():Ref<MessageOverviewItem>
-	export function refOfMessageOverviewItem(x:MessageOverviewItem,v:Ref<MessageOverviewItem>)
-	export function unRefMessageOverviewItem(v:Ref<MessageOverviewItem>):MessageOverviewItem
-	export function emptyP2ApplicationAppVersionPublishRevokeV6():P2ApplicationAppVersionPublishRevokeV6
-	export function emptyRefP2ApplicationAppVersionPublishRevokeV6():Ref<P2ApplicationAppVersionPublishRevokeV6>
-	export function refOfP2ApplicationAppVersionPublishRevokeV6(x:P2ApplicationAppVersionPublishRevokeV6,v:Ref<P2ApplicationAppVersionPublishRevokeV6>)
-	export function unRefP2ApplicationAppVersionPublishRevokeV6(v:Ref<P2ApplicationAppVersionPublishRevokeV6>):P2ApplicationAppVersionPublishRevokeV6
-	export function emptyAppConfigScopeItem():AppConfigScopeItem
-	export function emptyRefAppConfigScopeItem():Ref<AppConfigScopeItem>
-	export function refOfAppConfigScopeItem(x:AppConfigScopeItem,v:Ref<AppConfigScopeItem>)
-	export function unRefAppConfigScopeItem(v:Ref<AppConfigScopeItem>):AppConfigScopeItem
-	export function emptyApplicationDepartmentAppUsage():ApplicationDepartmentAppUsage
-	export function emptyRefApplicationDepartmentAppUsage():Ref<ApplicationDepartmentAppUsage>
-	export function refOfApplicationDepartmentAppUsage(x:ApplicationDepartmentAppUsage,v:Ref<ApplicationDepartmentAppUsage>)
-	export function unRefApplicationDepartmentAppUsage(v:Ref<ApplicationDepartmentAppUsage>):ApplicationDepartmentAppUsage
-	export function emptyP1AppStatusChangeOperatorV6():P1AppStatusChangeOperatorV6
-	export function emptyRefP1AppStatusChangeOperatorV6():Ref<P1AppStatusChangeOperatorV6>
-	export function refOfP1AppStatusChangeOperatorV6(x:P1AppStatusChangeOperatorV6,v:Ref<P1AppStatusChangeOperatorV6>)
-	export function unRefP1AppStatusChangeOperatorV6(v:Ref<P1AppStatusChangeOperatorV6>):P1AppStatusChangeOperatorV6
-	export function emptyPatchApplicationContactsRangeReqBody():PatchApplicationContactsRangeReqBody
-	export function emptyRefPatchApplicationContactsRangeReqBody():Ref<PatchApplicationContactsRangeReqBody>
-	export function refOfPatchApplicationContactsRangeReqBody(x:PatchApplicationContactsRangeReqBody,v:Ref<PatchApplicationContactsRangeReqBody>)
-	export function unRefPatchApplicationContactsRangeReqBody(v:Ref<PatchApplicationContactsRangeReqBody>):PatchApplicationContactsRangeReqBody
-	export function emptyAccessibility():Accessibility
-	export function emptyRefAccessibility():Ref<Accessibility>
-	export function refOfAccessibility(x:Accessibility,v:Ref<Accessibility>)
-	export function unRefAccessibility(v:Ref<Accessibility>):Accessibility
+	export function emptyAppAbilityWeb():AppAbilityWeb
+	export function emptyRefAppAbilityWeb():Ref<AppAbilityWeb>
+	export function refOfAppAbilityWeb(x:AppAbilityWeb,v:Ref<AppAbilityWeb>)
+	export function unRefAppAbilityWeb(v:Ref<AppAbilityWeb>):AppAbilityWeb
 	export function emptyGadget():Gadget
 	export function emptyRefGadget():Ref<Gadget>
 	export function refOfGadget(x:Gadget,v:Ref<Gadget>)
 	export function unRefGadget(v:Ref<Gadget>):Gadget
+	export function emptyListApplicationAppVersionReq():ListApplicationAppVersionReq
+	export function emptyRefListApplicationAppVersionReq():Ref<ListApplicationAppVersionReq>
+	export function refOfListApplicationAppVersionReq(x:ListApplicationAppVersionReq,v:Ref<ListApplicationAppVersionReq>)
+	export function unRefListApplicationAppVersionReq(v:Ref<ListApplicationAppVersionReq>):ListApplicationAppVersionReq
+	export function emptyPatchApplicationReq():PatchApplicationReq
+	export function emptyRefPatchApplicationReq():Ref<PatchApplicationReq>
+	export function refOfPatchApplicationReq(x:PatchApplicationReq,v:Ref<PatchApplicationReq>)
+	export function unRefPatchApplicationReq(v:Ref<PatchApplicationReq>):PatchApplicationReq
+	export function emptyP2ApplicationCreatedV6Data():P2ApplicationCreatedV6Data
+	export function emptyRefP2ApplicationCreatedV6Data():Ref<P2ApplicationCreatedV6Data>
+	export function refOfP2ApplicationCreatedV6Data(x:P2ApplicationCreatedV6Data,v:Ref<P2ApplicationCreatedV6Data>)
+	export function unRefP2ApplicationCreatedV6Data(v:Ref<P2ApplicationCreatedV6Data>):P2ApplicationCreatedV6Data
+	export function emptyAppRecommendRuleVisibilityInfo():AppRecommendRuleVisibilityInfo
+	export function emptyRefAppRecommendRuleVisibilityInfo():Ref<AppRecommendRuleVisibilityInfo>
+	export function refOfAppRecommendRuleVisibilityInfo(x:AppRecommendRuleVisibilityInfo,v:Ref<AppRecommendRuleVisibilityInfo>)
+	export function unRefAppRecommendRuleVisibilityInfo(v:Ref<AppRecommendRuleVisibilityInfo>):AppRecommendRuleVisibilityInfo
+	export function emptyListAppRecommendRuleReq():ListAppRecommendRuleReq
+	export function emptyRefListAppRecommendRuleReq():Ref<ListAppRecommendRuleReq>
+	export function refOfListAppRecommendRuleReq(x:ListAppRecommendRuleReq,v:Ref<ListAppRecommendRuleReq>)
+	export function unRefListAppRecommendRuleReq(v:Ref<ListAppRecommendRuleReq>):ListAppRecommendRuleReq
+	export function emptyMessagePushOverviewApplicationAppUsageReq():MessagePushOverviewApplicationAppUsageReq
+	export function emptyRefMessagePushOverviewApplicationAppUsageReq():Ref<MessagePushOverviewApplicationAppUsageReq>
+	export function refOfMessagePushOverviewApplicationAppUsageReq(x:MessagePushOverviewApplicationAppUsageReq,v:Ref<MessagePushOverviewApplicationAppUsageReq>)
+	export function unRefMessagePushOverviewApplicationAppUsageReq(v:Ref<MessagePushOverviewApplicationAppUsageReq>):MessagePushOverviewApplicationAppUsageReq
+	export function emptyAppVisibleList():AppVisibleList
+	export function emptyRefAppVisibleList():Ref<AppVisibleList>
+	export function refOfAppVisibleList(x:AppVisibleList,v:Ref<AppVisibleList>)
+	export function unRefAppVisibleList(v:Ref<AppVisibleList>):AppVisibleList
+	export function emptyMessageAction():MessageAction
+	export function emptyRefMessageAction():Ref<MessageAction>
+	export function refOfMessageAction(x:MessageAction,v:Ref<MessageAction>)
+	export function unRefMessageAction(v:Ref<MessageAction>):MessageAction
+	export function emptyGetApplicationAppVersionReq():GetApplicationAppVersionReq
+	export function emptyRefGetApplicationAppVersionReq():Ref<GetApplicationAppVersionReq>
+	export function refOfGetApplicationAppVersionReq(x:GetApplicationAppVersionReq,v:Ref<GetApplicationAppVersionReq>)
+	export function unRefGetApplicationAppVersionReq(v:Ref<GetApplicationAppVersionReq>):GetApplicationAppVersionReq
+	export function emptyListApplicationFeedbackResp():ListApplicationFeedbackResp
+	export function emptyRefListApplicationFeedbackResp():Ref<ListApplicationFeedbackResp>
+	export function refOfListApplicationFeedbackResp(x:ListApplicationFeedbackResp,v:Ref<ListApplicationFeedbackResp>)
+	export function unRefListApplicationFeedbackResp(v:Ref<ListApplicationFeedbackResp>):ListApplicationFeedbackResp
+	export function emptyMessagePushOverviewApplicationAppUsageReqBody():MessagePushOverviewApplicationAppUsageReqBody
+	export function emptyRefMessagePushOverviewApplicationAppUsageReqBody():Ref<MessagePushOverviewApplicationAppUsageReqBody>
+	export function refOfMessagePushOverviewApplicationAppUsageReqBody(x:MessagePushOverviewApplicationAppUsageReqBody,v:Ref<MessagePushOverviewApplicationAppUsageReqBody>)
+	export function unRefMessagePushOverviewApplicationAppUsageReqBody(v:Ref<MessagePushOverviewApplicationAppUsageReqBody>):MessagePushOverviewApplicationAppUsageReqBody
+	export function emptyAppVisibilityEvent():AppVisibilityEvent
+	export function emptyRefAppVisibilityEvent():Ref<AppVisibilityEvent>
+	export function refOfAppVisibilityEvent(x:AppVisibilityEvent,v:Ref<AppVisibilityEvent>)
+	export function unRefAppVisibilityEvent(v:Ref<AppVisibilityEvent>):AppVisibilityEvent
+	export function emptyDepartmentId():DepartmentId
+	export function emptyRefDepartmentId():Ref<DepartmentId>
+	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
+	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
+	export function emptyNavigate():Navigate
+	export function emptyRefNavigate():Ref<Navigate>
+	export function refOfNavigate(x:Navigate,v:Ref<Navigate>)
+	export function unRefNavigate(v:Ref<Navigate>):Navigate
+	export function emptyP2BotMenuV6():P2BotMenuV6
+	export function emptyRefP2BotMenuV6():Ref<P2BotMenuV6>
+	export function refOfP2BotMenuV6(x:P2BotMenuV6,v:Ref<P2BotMenuV6>)
+	export function unRefP2BotMenuV6(v:Ref<P2BotMenuV6>):P2BotMenuV6
+	export function emptyPlusMenu():PlusMenu
+	export function emptyRefPlusMenu():Ref<PlusMenu>
+	export function refOfPlusMenu(x:PlusMenu,v:Ref<PlusMenu>)
+	export function unRefPlusMenu(v:Ref<PlusMenu>):PlusMenu
+	export function emptyApplicationVisibilityGroupWhiteBlackInfo():ApplicationVisibilityGroupWhiteBlackInfo
+	export function emptyRefApplicationVisibilityGroupWhiteBlackInfo():Ref<ApplicationVisibilityGroupWhiteBlackInfo>
+	export function refOfApplicationVisibilityGroupWhiteBlackInfo(x:ApplicationVisibilityGroupWhiteBlackInfo,v:Ref<ApplicationVisibilityGroupWhiteBlackInfo>)
+	export function unRefApplicationVisibilityGroupWhiteBlackInfo(v:Ref<ApplicationVisibilityGroupWhiteBlackInfo>):ApplicationVisibilityGroupWhiteBlackInfo
+	export function emptyListAppRecommendRuleIterator():ListAppRecommendRuleIterator
+	export function emptyRefListAppRecommendRuleIterator():Ref<ListAppRecommendRuleIterator>
+	export function refOfListAppRecommendRuleIterator(x:ListAppRecommendRuleIterator,v:Ref<ListAppRecommendRuleIterator>)
+	export function unRefListAppRecommendRuleIterator(v:Ref<ListAppRecommendRuleIterator>):ListAppRecommendRuleIterator
+	export function emptyListAppRecommendRuleResp():ListAppRecommendRuleResp
+	export function emptyRefListAppRecommendRuleResp():Ref<ListAppRecommendRuleResp>
+	export function refOfListAppRecommendRuleResp(x:ListAppRecommendRuleResp,v:Ref<ListAppRecommendRuleResp>)
+	export function unRefListAppRecommendRuleResp(v:Ref<ListAppRecommendRuleResp>):ListAppRecommendRuleResp
+	export function emptyUnderauditlistApplicationReq():UnderauditlistApplicationReq
+	export function emptyRefUnderauditlistApplicationReq():Ref<UnderauditlistApplicationReq>
+	export function refOfUnderauditlistApplicationReq(x:UnderauditlistApplicationReq,v:Ref<UnderauditlistApplicationReq>)
+	export function unRefUnderauditlistApplicationReq(v:Ref<UnderauditlistApplicationReq>):UnderauditlistApplicationReq
+	export function emptyAppVersionRemarkEvent():AppVersionRemarkEvent
+	export function emptyRefAppVersionRemarkEvent():Ref<AppVersionRemarkEvent>
+	export function refOfAppVersionRemarkEvent(x:AppVersionRemarkEvent,v:Ref<AppVersionRemarkEvent>)
+	export function unRefAppVersionRemarkEvent(v:Ref<AppVersionRemarkEvent>):AppVersionRemarkEvent
+	export function emptyNavigateMeta():NavigateMeta
+	export function emptyRefNavigateMeta():Ref<NavigateMeta>
+	export function refOfNavigateMeta(x:NavigateMeta,v:Ref<NavigateMeta>)
+	export function unRefNavigateMeta(v:Ref<NavigateMeta>):NavigateMeta
+	export function emptyUnderauditlistApplicationRespData():UnderauditlistApplicationRespData
+	export function emptyRefUnderauditlistApplicationRespData():Ref<UnderauditlistApplicationRespData>
+	export function refOfUnderauditlistApplicationRespData(x:UnderauditlistApplicationRespData,v:Ref<UnderauditlistApplicationRespData>)
+	export function unRefUnderauditlistApplicationRespData(v:Ref<UnderauditlistApplicationRespData>):UnderauditlistApplicationRespData
+	export function emptyAppVisibility():AppVisibility
+	export function emptyRefAppVisibility():Ref<AppVisibility>
+	export function refOfAppVisibility(x:AppVisibility,v:Ref<AppVisibility>)
+	export function unRefAppVisibility(v:Ref<AppVisibility>):AppVisibility
+	export function emptyMessagePushOverviewApplicationAppUsageResp():MessagePushOverviewApplicationAppUsageResp
+	export function emptyRefMessagePushOverviewApplicationAppUsageResp():Ref<MessagePushOverviewApplicationAppUsageResp>
+	export function refOfMessagePushOverviewApplicationAppUsageResp(x:MessagePushOverviewApplicationAppUsageResp,v:Ref<MessagePushOverviewApplicationAppUsageResp>)
+	export function unRefMessagePushOverviewApplicationAppUsageResp(v:Ref<MessagePushOverviewApplicationAppUsageResp>):MessagePushOverviewApplicationAppUsageResp
+	export function emptyP2ApplicationVisibilityAddedV6():P2ApplicationVisibilityAddedV6
+	export function emptyRefP2ApplicationVisibilityAddedV6():Ref<P2ApplicationVisibilityAddedV6>
+	export function refOfP2ApplicationVisibilityAddedV6(x:P2ApplicationVisibilityAddedV6,v:Ref<P2ApplicationVisibilityAddedV6>)
+	export function unRefP2ApplicationVisibilityAddedV6(v:Ref<P2ApplicationVisibilityAddedV6>):P2ApplicationVisibilityAddedV6
+	export function emptyPatchApplicationFeedbackReq():PatchApplicationFeedbackReq
+	export function emptyRefPatchApplicationFeedbackReq():Ref<PatchApplicationFeedbackReq>
+	export function refOfPatchApplicationFeedbackReq(x:PatchApplicationFeedbackReq,v:Ref<PatchApplicationFeedbackReq>)
+	export function unRefPatchApplicationFeedbackReq(v:Ref<PatchApplicationFeedbackReq>):PatchApplicationFeedbackReq
+	export function emptyMessagePushOverviewApplicationAppUsageRespData():MessagePushOverviewApplicationAppUsageRespData
+	export function emptyRefMessagePushOverviewApplicationAppUsageRespData():Ref<MessagePushOverviewApplicationAppUsageRespData>
+	export function refOfMessagePushOverviewApplicationAppUsageRespData(x:MessagePushOverviewApplicationAppUsageRespData,v:Ref<MessagePushOverviewApplicationAppUsageRespData>)
+	export function unRefMessagePushOverviewApplicationAppUsageRespData(v:Ref<MessagePushOverviewApplicationAppUsageRespData>):MessagePushOverviewApplicationAppUsageRespData
+	export function emptyP1AppOpenV6Data():P1AppOpenV6Data
+	export function emptyRefP1AppOpenV6Data():Ref<P1AppOpenV6Data>
+	export function refOfP1AppOpenV6Data(x:P1AppOpenV6Data,v:Ref<P1AppOpenV6Data>)
+	export function unRefP1AppOpenV6Data(v:Ref<P1AppOpenV6Data>):P1AppOpenV6Data
+	export function emptyAppRecommendRuleItemInfoI18nName():AppRecommendRuleItemInfoI18nName
+	export function emptyRefAppRecommendRuleItemInfoI18nName():Ref<AppRecommendRuleItemInfoI18nName>
+	export function refOfAppRecommendRuleItemInfoI18nName(x:AppRecommendRuleItemInfoI18nName,v:Ref<AppRecommendRuleItemInfoI18nName>)
+	export function unRefAppRecommendRuleItemInfoI18nName(v:Ref<AppRecommendRuleItemInfoI18nName>):AppRecommendRuleItemInfoI18nName
+	export function emptyListApplicationAppVersionRespData():ListApplicationAppVersionRespData
+	export function emptyRefListApplicationAppVersionRespData():Ref<ListApplicationAppVersionRespData>
+	export function refOfListApplicationAppVersionRespData(x:ListApplicationAppVersionRespData,v:Ref<ListApplicationAppVersionRespData>)
+	export function unRefListApplicationAppVersionRespData(v:Ref<ListApplicationAppVersionRespData>):ListApplicationAppVersionRespData
+	export function emptyMessageOverviewItem():MessageOverviewItem
+	export function emptyRefMessageOverviewItem():Ref<MessageOverviewItem>
+	export function refOfMessageOverviewItem(x:MessageOverviewItem,v:Ref<MessageOverviewItem>)
+	export function unRefMessageOverviewItem(v:Ref<MessageOverviewItem>):MessageOverviewItem
+	export function emptyApplicationAppContactsRange():ApplicationAppContactsRange
+	export function emptyRefApplicationAppContactsRange():Ref<ApplicationAppContactsRange>
+	export function refOfApplicationAppContactsRange(x:ApplicationAppContactsRange,v:Ref<ApplicationAppContactsRange>)
+	export function unRefApplicationAppContactsRange(v:Ref<ApplicationAppContactsRange>):ApplicationAppContactsRange
+	export function emptyDocsBlock():DocsBlock
+	export function emptyRefDocsBlock():Ref<DocsBlock>
+	export function refOfDocsBlock(x:DocsBlock,v:Ref<DocsBlock>)
+	export function unRefDocsBlock(v:Ref<DocsBlock>):DocsBlock
+	export function emptyListApplicationAppVersionResp():ListApplicationAppVersionResp
+	export function emptyRefListApplicationAppVersionResp():Ref<ListApplicationAppVersionResp>
+	export function refOfListApplicationAppVersionResp(x:ListApplicationAppVersionResp,v:Ref<ListApplicationAppVersionResp>)
+	export function unRefListApplicationAppVersionResp(v:Ref<ListApplicationAppVersionResp>):ListApplicationAppVersionResp
+	export function emptyAppConfigContactsRange():AppConfigContactsRange
+	export function emptyRefAppConfigContactsRange():Ref<AppConfigContactsRange>
+	export function refOfAppConfigContactsRange(x:AppConfigContactsRange,v:Ref<AppConfigContactsRange>)
+	export function unRefAppConfigContactsRange(v:Ref<AppConfigContactsRange>):AppConfigContactsRange
+	export function emptyApplicationAppUsage():ApplicationAppUsage
+	export function emptyRefApplicationAppUsage():Ref<ApplicationAppUsage>
+	export function refOfApplicationAppUsage(x:ApplicationAppUsage,v:Ref<ApplicationAppUsage>)
+	export function unRefApplicationAppUsage(v:Ref<ApplicationAppUsage>):ApplicationAppUsage
+	export function emptyP1AppStatusChangedV6Data():P1AppStatusChangedV6Data
+	export function emptyRefP1AppStatusChangedV6Data():Ref<P1AppStatusChangedV6Data>
+	export function refOfP1AppStatusChangedV6Data(x:P1AppStatusChangedV6Data,v:Ref<P1AppStatusChangedV6Data>)
+	export function unRefP1AppStatusChangedV6Data(v:Ref<P1AppStatusChangedV6Data>):P1AppStatusChangedV6Data
+	export function emptyP1OrderPaidV6Data():P1OrderPaidV6Data
+	export function emptyRefP1OrderPaidV6Data():Ref<P1OrderPaidV6Data>
+	export function refOfP1OrderPaidV6Data(x:P1OrderPaidV6Data,v:Ref<P1OrderPaidV6Data>)
+	export function unRefP1OrderPaidV6Data(v:Ref<P1OrderPaidV6Data>):P1OrderPaidV6Data
+	export function emptyAppBadge():AppBadge
+	export function emptyRefAppBadge():Ref<AppBadge>
+	export function refOfAppBadge(x:AppBadge,v:Ref<AppBadge>)
+	export function unRefAppBadge(v:Ref<AppBadge>):AppBadge
+	export function emptyGetApplicationAppVersionResp():GetApplicationAppVersionResp
+	export function emptyRefGetApplicationAppVersionResp():Ref<GetApplicationAppVersionResp>
+	export function refOfGetApplicationAppVersionResp(x:GetApplicationAppVersionResp,v:Ref<GetApplicationAppVersionResp>)
+	export function unRefGetApplicationAppVersionResp(v:Ref<GetApplicationAppVersionResp>):GetApplicationAppVersionResp
+	export function emptyP2ApplicationAppVersionPublishApplyV6Data():P2ApplicationAppVersionPublishApplyV6Data
+	export function emptyRefP2ApplicationAppVersionPublishApplyV6Data():Ref<P2ApplicationAppVersionPublishApplyV6Data>
+	export function refOfP2ApplicationAppVersionPublishApplyV6Data(x:P2ApplicationAppVersionPublishApplyV6Data,v:Ref<P2ApplicationAppVersionPublishApplyV6Data>)
+	export function unRefP2ApplicationAppVersionPublishApplyV6Data(v:Ref<P2ApplicationAppVersionPublishApplyV6Data>):P2ApplicationAppVersionPublishApplyV6Data
+	export function emptyP1OrderPaidV6():P1OrderPaidV6
+	export function emptyRefP1OrderPaidV6():Ref<P1OrderPaidV6>
+	export function refOfP1OrderPaidV6(x:P1OrderPaidV6,v:Ref<P1OrderPaidV6>)
+	export function unRefP1OrderPaidV6(v:Ref<P1OrderPaidV6>):P1OrderPaidV6
+	export function emptyP1AppOpenV6():P1AppOpenV6
+	export function emptyRefP1AppOpenV6():Ref<P1AppOpenV6>
+	export function refOfP1AppOpenV6(x:P1AppOpenV6,v:Ref<P1AppOpenV6>)
+	export function unRefP1AppOpenV6(v:Ref<P1AppOpenV6>):P1AppOpenV6
+	export function emptyBlock():Block
+	export function emptyRefBlock():Ref<Block>
+	export function refOfBlock(x:Block,v:Ref<Block>)
+	export function unRefBlock(v:Ref<Block>):Block
+	export function emptyDepartmentOverviewApplicationAppUsageReqBody():DepartmentOverviewApplicationAppUsageReqBody
+	export function emptyRefDepartmentOverviewApplicationAppUsageReqBody():Ref<DepartmentOverviewApplicationAppUsageReqBody>
+	export function refOfDepartmentOverviewApplicationAppUsageReqBody(x:DepartmentOverviewApplicationAppUsageReqBody,v:Ref<DepartmentOverviewApplicationAppUsageReqBody>)
+	export function unRefDepartmentOverviewApplicationAppUsageReqBody(v:Ref<DepartmentOverviewApplicationAppUsageReqBody>):DepartmentOverviewApplicationAppUsageReqBody
+	export function emptyMessageActionI18nInfo():MessageActionI18nInfo
+	export function emptyRefMessageActionI18nInfo():Ref<MessageActionI18nInfo>
+	export function refOfMessageActionI18nInfo(x:MessageActionI18nInfo,v:Ref<MessageActionI18nInfo>)
+	export function unRefMessageActionI18nInfo(v:Ref<MessageActionI18nInfo>):MessageActionI18nInfo
+	export function emptyMiniprogram():Miniprogram
+	export function emptyRefMiniprogram():Ref<Miniprogram>
+	export function refOfMiniprogram(x:Miniprogram,v:Ref<Miniprogram>)
+	export function unRefMiniprogram(v:Ref<Miniprogram>):Miniprogram
+	export function emptyOverviewApplicationAppUsageResp():OverviewApplicationAppUsageResp
+	export function emptyRefOverviewApplicationAppUsageResp():Ref<OverviewApplicationAppUsageResp>
+	export function refOfOverviewApplicationAppUsageResp(x:OverviewApplicationAppUsageResp,v:Ref<OverviewApplicationAppUsageResp>)
+	export function unRefOverviewApplicationAppUsageResp(v:Ref<OverviewApplicationAppUsageResp>):OverviewApplicationAppUsageResp
+	export function emptySetAppBadgeResp():SetAppBadgeResp
+	export function emptyRefSetAppBadgeResp():Ref<SetAppBadgeResp>
+	export function refOfSetAppBadgeResp(x:SetAppBadgeResp,v:Ref<SetAppBadgeResp>)
+	export function unRefSetAppBadgeResp(v:Ref<SetAppBadgeResp>):SetAppBadgeResp
+	export function emptyPatchApplicationVisibilityResp():PatchApplicationVisibilityResp
+	export function emptyRefPatchApplicationVisibilityResp():Ref<PatchApplicationVisibilityResp>
+	export function refOfPatchApplicationVisibilityResp(x:PatchApplicationVisibilityResp,v:Ref<PatchApplicationVisibilityResp>)
+	export function unRefPatchApplicationVisibilityResp(v:Ref<PatchApplicationVisibilityResp>):PatchApplicationVisibilityResp
+	export function emptyP1AppOpenApplicantV6():P1AppOpenApplicantV6
+	export function emptyRefP1AppOpenApplicantV6():Ref<P1AppOpenApplicantV6>
+	export function refOfP1AppOpenApplicantV6(x:P1AppOpenApplicantV6,v:Ref<P1AppOpenApplicantV6>)
+	export function unRefP1AppOpenApplicantV6(v:Ref<P1AppOpenApplicantV6>):P1AppOpenApplicantV6
+	export function emptyP1AppOpenInstallerEmployeeV6():P1AppOpenInstallerEmployeeV6
+	export function emptyRefP1AppOpenInstallerEmployeeV6():Ref<P1AppOpenInstallerEmployeeV6>
+	export function refOfP1AppOpenInstallerEmployeeV6(x:P1AppOpenInstallerEmployeeV6,v:Ref<P1AppOpenInstallerEmployeeV6>)
+	export function unRefP1AppOpenInstallerEmployeeV6(v:Ref<P1AppOpenInstallerEmployeeV6>):P1AppOpenInstallerEmployeeV6
+	export function emptyAppCollaborator():AppCollaborator
+	export function emptyRefAppCollaborator():Ref<AppCollaborator>
+	export function refOfAppCollaborator(x:AppCollaborator,v:Ref<AppCollaborator>)
+	export function unRefAppCollaborator(v:Ref<AppCollaborator>):AppCollaborator
+	export function emptyMsgActionI18nInfo():MsgActionI18nInfo
+	export function emptyRefMsgActionI18nInfo():Ref<MsgActionI18nInfo>
+	export function refOfMsgActionI18nInfo(x:MsgActionI18nInfo,v:Ref<MsgActionI18nInfo>)
+	export function unRefMsgActionI18nInfo(v:Ref<MsgActionI18nInfo>):MsgActionI18nInfo
+	export function emptyP2ApplicationFeedbackCreatedV6():P2ApplicationFeedbackCreatedV6
+	export function emptyRefP2ApplicationFeedbackCreatedV6():Ref<P2ApplicationFeedbackCreatedV6>
+	export function refOfP2ApplicationFeedbackCreatedV6(x:P2ApplicationFeedbackCreatedV6,v:Ref<P2ApplicationFeedbackCreatedV6>)
+	export function unRefP2ApplicationFeedbackCreatedV6(v:Ref<P2ApplicationFeedbackCreatedV6>):P2ApplicationFeedbackCreatedV6
+	export function emptyContactsRangeSuggestApplicationAppVersionResp():ContactsRangeSuggestApplicationAppVersionResp
+	export function emptyRefContactsRangeSuggestApplicationAppVersionResp():Ref<ContactsRangeSuggestApplicationAppVersionResp>
+	export function refOfContactsRangeSuggestApplicationAppVersionResp(x:ContactsRangeSuggestApplicationAppVersionResp,v:Ref<ContactsRangeSuggestApplicationAppVersionResp>)
+	export function unRefContactsRangeSuggestApplicationAppVersionResp(v:Ref<ContactsRangeSuggestApplicationAppVersionResp>):ContactsRangeSuggestApplicationAppVersionResp
+	export function emptyEvent():Event
+	export function emptyRefEvent():Ref<Event>
+	export function refOfEvent(x:Event,v:Ref<Event>)
+	export function unRefEvent(v:Ref<Event>):Event
+	export function emptyP1AppUninstalledV6():P1AppUninstalledV6
+	export function emptyRefP1AppUninstalledV6():Ref<P1AppUninstalledV6>
+	export function refOfP1AppUninstalledV6(x:P1AppUninstalledV6,v:Ref<P1AppUninstalledV6>)
+	export function unRefP1AppUninstalledV6(v:Ref<P1AppUninstalledV6>):P1AppUninstalledV6
+	export function emptyApplicationVisibility():ApplicationVisibility
+	export function emptyRefApplicationVisibility():Ref<ApplicationVisibility>
+	export function refOfApplicationVisibility(x:ApplicationVisibility,v:Ref<ApplicationVisibility>)
+	export function unRefApplicationVisibility(v:Ref<ApplicationVisibility>):ApplicationVisibility
+	export function emptyP2ApplicationAppVersionPublishApplyV6():P2ApplicationAppVersionPublishApplyV6
+	export function emptyRefP2ApplicationAppVersionPublishApplyV6():Ref<P2ApplicationAppVersionPublishApplyV6>
+	export function refOfP2ApplicationAppVersionPublishApplyV6(x:P2ApplicationAppVersionPublishApplyV6,v:Ref<P2ApplicationAppVersionPublishApplyV6>)
+	export function unRefP2ApplicationAppVersionPublishApplyV6(v:Ref<P2ApplicationAppVersionPublishApplyV6>):P2ApplicationAppVersionPublishApplyV6
+	export function emptyCheckWhiteBlackListApplicationVisibilityReqBody():CheckWhiteBlackListApplicationVisibilityReqBody
+	export function emptyRefCheckWhiteBlackListApplicationVisibilityReqBody():Ref<CheckWhiteBlackListApplicationVisibilityReqBody>
+	export function refOfCheckWhiteBlackListApplicationVisibilityReqBody(x:CheckWhiteBlackListApplicationVisibilityReqBody,v:Ref<CheckWhiteBlackListApplicationVisibilityReqBody>)
+	export function unRefCheckWhiteBlackListApplicationVisibilityReqBody(v:Ref<CheckWhiteBlackListApplicationVisibilityReqBody>):CheckWhiteBlackListApplicationVisibilityReqBody
+	export function emptyP1AppStatusChangedV6():P1AppStatusChangedV6
+	export function emptyRefP1AppStatusChangedV6():Ref<P1AppStatusChangedV6>
+	export function refOfP1AppStatusChangedV6(x:P1AppStatusChangedV6,v:Ref<P1AppStatusChangedV6>)
+	export function unRefP1AppStatusChangedV6(v:Ref<P1AppStatusChangedV6>):P1AppStatusChangedV6
+	export function emptyAppContactsRangeIdList():AppContactsRangeIdList
+	export function emptyRefAppContactsRangeIdList():Ref<AppContactsRangeIdList>
+	export function refOfAppContactsRangeIdList(x:AppContactsRangeIdList,v:Ref<AppContactsRangeIdList>)
+	export function unRefAppContactsRangeIdList(v:Ref<AppContactsRangeIdList>):AppContactsRangeIdList
+	export function emptyApplicationVisibilityUserWhiteBlackInfo():ApplicationVisibilityUserWhiteBlackInfo
+	export function emptyRefApplicationVisibilityUserWhiteBlackInfo():Ref<ApplicationVisibilityUserWhiteBlackInfo>
+	export function refOfApplicationVisibilityUserWhiteBlackInfo(x:ApplicationVisibilityUserWhiteBlackInfo,v:Ref<ApplicationVisibilityUserWhiteBlackInfo>)
+	export function unRefApplicationVisibilityUserWhiteBlackInfo(v:Ref<ApplicationVisibilityUserWhiteBlackInfo>):ApplicationVisibilityUserWhiteBlackInfo
+	export function emptyListApplicationAppVersionIterator():ListApplicationAppVersionIterator
+	export function emptyRefListApplicationAppVersionIterator():Ref<ListApplicationAppVersionIterator>
+	export function refOfListApplicationAppVersionIterator(x:ListApplicationAppVersionIterator,v:Ref<ListApplicationAppVersionIterator>)
+	export function unRefListApplicationAppVersionIterator(v:Ref<ListApplicationAppVersionIterator>):ListApplicationAppVersionIterator
+	export function emptySetAppBadgeReq():SetAppBadgeReq
+	export function emptyRefSetAppBadgeReq():Ref<SetAppBadgeReq>
+	export function refOfSetAppBadgeReq(x:SetAppBadgeReq,v:Ref<SetAppBadgeReq>)
+	export function unRefSetAppBadgeReq(v:Ref<SetAppBadgeReq>):SetAppBadgeReq
+	export function emptyUnderauditlistApplicationIterator():UnderauditlistApplicationIterator
+	export function emptyRefUnderauditlistApplicationIterator():Ref<UnderauditlistApplicationIterator>
+	export function refOfUnderauditlistApplicationIterator(x:UnderauditlistApplicationIterator,v:Ref<UnderauditlistApplicationIterator>)
+	export function unRefUnderauditlistApplicationIterator(v:Ref<UnderauditlistApplicationIterator>):UnderauditlistApplicationIterator
+	export function emptyAppScopeI18nInfo():AppScopeI18nInfo
+	export function emptyRefAppScopeI18nInfo():Ref<AppScopeI18nInfo>
+	export function refOfAppScopeI18nInfo(x:AppScopeI18nInfo,v:Ref<AppScopeI18nInfo>)
+	export function unRefAppScopeI18nInfo(v:Ref<AppScopeI18nInfo>):AppScopeI18nInfo
+	export function emptyListApplicationFeedbackRespData():ListApplicationFeedbackRespData
+	export function emptyRefListApplicationFeedbackRespData():Ref<ListApplicationFeedbackRespData>
+	export function refOfListApplicationFeedbackRespData(x:ListApplicationFeedbackRespData,v:Ref<ListApplicationFeedbackRespData>)
+	export function unRefListApplicationFeedbackRespData(v:Ref<ListApplicationFeedbackRespData>):ListApplicationFeedbackRespData
+	export function emptyOperator():Operator
+	export function emptyRefOperator():Ref<Operator>
+	export function refOfOperator(x:Operator,v:Ref<Operator>)
+	export function unRefOperator(v:Ref<Operator>):Operator
+	export function emptyP2ApplicationFeedbackUpdatedV6():P2ApplicationFeedbackUpdatedV6
+	export function emptyRefP2ApplicationFeedbackUpdatedV6():Ref<P2ApplicationFeedbackUpdatedV6>
+	export function refOfP2ApplicationFeedbackUpdatedV6(x:P2ApplicationFeedbackUpdatedV6,v:Ref<P2ApplicationFeedbackUpdatedV6>)
+	export function unRefP2ApplicationFeedbackUpdatedV6(v:Ref<P2ApplicationFeedbackUpdatedV6>):P2ApplicationFeedbackUpdatedV6
+	export function emptyV6():V6
+	export function emptyRefV6():Ref<V6>
+	export function refOfV6(x:V6,v:Ref<V6>)
+	export function unRefV6(v:Ref<V6>):V6
+	export function emptyAppConfigSecurityItem():AppConfigSecurityItem
+	export function emptyRefAppConfigSecurityItem():Ref<AppConfigSecurityItem>
+	export function refOfAppConfigSecurityItem(x:AppConfigSecurityItem,v:Ref<AppConfigSecurityItem>)
+	export function unRefAppConfigSecurityItem(v:Ref<AppConfigSecurityItem>):AppConfigSecurityItem
+	export function emptyP2ApplicationAppVersionAuditV6Data():P2ApplicationAppVersionAuditV6Data
+	export function emptyRefP2ApplicationAppVersionAuditV6Data():Ref<P2ApplicationAppVersionAuditV6Data>
+	export function refOfP2ApplicationAppVersionAuditV6Data(x:P2ApplicationAppVersionAuditV6Data,v:Ref<P2ApplicationAppVersionAuditV6Data>)
+	export function unRefP2ApplicationAppVersionAuditV6Data(v:Ref<P2ApplicationAppVersionAuditV6Data>):P2ApplicationAppVersionAuditV6Data
+	export function emptyApplicationEventOwner():ApplicationEventOwner
+	export function emptyRefApplicationEventOwner():Ref<ApplicationEventOwner>
+	export function refOfApplicationEventOwner(x:ApplicationEventOwner,v:Ref<ApplicationEventOwner>)
+	export function unRefApplicationEventOwner(v:Ref<ApplicationEventOwner>):ApplicationEventOwner
+	export function emptyAppScopes():AppScopes
+	export function emptyRefAppScopes():Ref<AppScopes>
+	export function refOfAppScopes(x:AppScopes,v:Ref<AppScopes>)
+	export function unRefAppScopes(v:Ref<AppScopes>):AppScopes
+	export function emptyContactsRangeConfigurationApplicationRespData():ContactsRangeConfigurationApplicationRespData
+	export function emptyRefContactsRangeConfigurationApplicationRespData():Ref<ContactsRangeConfigurationApplicationRespData>
+	export function refOfContactsRangeConfigurationApplicationRespData(x:ContactsRangeConfigurationApplicationRespData,v:Ref<ContactsRangeConfigurationApplicationRespData>)
+	export function unRefContactsRangeConfigurationApplicationRespData(v:Ref<ContactsRangeConfigurationApplicationRespData>):ContactsRangeConfigurationApplicationRespData
+	export function emptyPatchApplicationAppVersionResp():PatchApplicationAppVersionResp
+	export function emptyRefPatchApplicationAppVersionResp():Ref<PatchApplicationAppVersionResp>
+	export function refOfPatchApplicationAppVersionResp(x:PatchApplicationAppVersionResp,v:Ref<PatchApplicationAppVersionResp>)
+	export function unRefPatchApplicationAppVersionResp(v:Ref<PatchApplicationAppVersionResp>):PatchApplicationAppVersionResp
+	export function emptyPatchApplicationVisibilityReq():PatchApplicationVisibilityReq
+	export function emptyRefPatchApplicationVisibilityReq():Ref<PatchApplicationVisibilityReq>
+	export function refOfPatchApplicationVisibilityReq(x:PatchApplicationVisibilityReq,v:Ref<PatchApplicationVisibilityReq>)
+	export function unRefPatchApplicationVisibilityReq(v:Ref<PatchApplicationVisibilityReq>):PatchApplicationVisibilityReq
+	export function emptyAppConfigSecurity():AppConfigSecurity
+	export function emptyRefAppConfigSecurity():Ref<AppConfigSecurity>
+	export function refOfAppConfigSecurity(x:AppConfigSecurity,v:Ref<AppConfigSecurity>)
+	export function unRefAppConfigSecurity(v:Ref<AppConfigSecurity>):AppConfigSecurity
+	export function emptyAppVisibilityItem():AppVisibilityItem
+	export function emptyRefAppVisibilityItem():Ref<AppVisibilityItem>
+	export function refOfAppVisibilityItem(x:AppVisibilityItem,v:Ref<AppVisibilityItem>)
+	export function unRefAppVisibilityItem(v:Ref<AppVisibilityItem>):AppVisibilityItem
+	export function emptyEventAndCallbackEncryptStrategy():EventAndCallbackEncryptStrategy
+	export function emptyRefEventAndCallbackEncryptStrategy():Ref<EventAndCallbackEncryptStrategy>
+	export function refOfEventAndCallbackEncryptStrategy(x:EventAndCallbackEncryptStrategy,v:Ref<EventAndCallbackEncryptStrategy>)
+	export function unRefEventAndCallbackEncryptStrategy(v:Ref<EventAndCallbackEncryptStrategy>):EventAndCallbackEncryptStrategy
+	export function emptyPatchApplicationContactsRangeResp():PatchApplicationContactsRangeResp
+	export function emptyRefPatchApplicationContactsRangeResp():Ref<PatchApplicationContactsRangeResp>
+	export function refOfPatchApplicationContactsRangeResp(x:PatchApplicationContactsRangeResp,v:Ref<PatchApplicationContactsRangeResp>)
+	export function unRefPatchApplicationContactsRangeResp(v:Ref<PatchApplicationContactsRangeResp>):PatchApplicationContactsRangeResp
+	export function emptyPatchApplicationFeedbackResp():PatchApplicationFeedbackResp
+	export function emptyRefPatchApplicationFeedbackResp():Ref<PatchApplicationFeedbackResp>
+	export function refOfPatchApplicationFeedbackResp(x:PatchApplicationFeedbackResp,v:Ref<PatchApplicationFeedbackResp>)
+	export function unRefPatchApplicationFeedbackResp(v:Ref<PatchApplicationFeedbackResp>):PatchApplicationFeedbackResp
+	export function emptyUpdateApplicationManagementReqBody():UpdateApplicationManagementReqBody
+	export function emptyRefUpdateApplicationManagementReqBody():Ref<UpdateApplicationManagementReqBody>
+	export function refOfUpdateApplicationManagementReqBody(x:UpdateApplicationManagementReqBody,v:Ref<UpdateApplicationManagementReqBody>)
+	export function unRefUpdateApplicationManagementReqBody(v:Ref<UpdateApplicationManagementReqBody>):UpdateApplicationManagementReqBody
+	export function emptyUpdateApplicationManagementResp():UpdateApplicationManagementResp
+	export function emptyRefUpdateApplicationManagementResp():Ref<UpdateApplicationManagementResp>
+	export function refOfUpdateApplicationManagementResp(x:UpdateApplicationManagementResp,v:Ref<UpdateApplicationManagementResp>)
+	export function unRefUpdateApplicationManagementResp(v:Ref<UpdateApplicationManagementResp>):UpdateApplicationManagementResp
+	export function emptyAppScope():AppScope
+	export function emptyRefAppScope():Ref<AppScope>
+	export function refOfAppScope(x:AppScope,v:Ref<AppScope>)
+	export function unRefAppScope(v:Ref<AppScope>):AppScope
+	export function emptyApplicationDepartmentAppUsage():ApplicationDepartmentAppUsage
+	export function emptyRefApplicationDepartmentAppUsage():Ref<ApplicationDepartmentAppUsage>
+	export function refOfApplicationDepartmentAppUsage(x:ApplicationDepartmentAppUsage,v:Ref<ApplicationDepartmentAppUsage>)
+	export function unRefApplicationDepartmentAppUsage(v:Ref<ApplicationDepartmentAppUsage>):ApplicationDepartmentAppUsage
+	export function emptyAppMessageTrendItem():AppMessageTrendItem
+	export function emptyRefAppMessageTrendItem():Ref<AppMessageTrendItem>
+	export function refOfAppMessageTrendItem(x:AppMessageTrendItem,v:Ref<AppMessageTrendItem>)
+	export function unRefAppMessageTrendItem(v:Ref<AppMessageTrendItem>):AppMessageTrendItem
+	export function emptyAppVersionId():AppVersionId
+	export function emptyRefAppVersionId():Ref<AppVersionId>
+	export function refOfAppVersionId(x:AppVersionId,v:Ref<AppVersionId>)
+	export function unRefAppVersionId(v:Ref<AppVersionId>):AppVersionId
+	export function emptyScope():Scope
+	export function emptyRefScope():Ref<Scope>
+	export function refOfScope(x:Scope,v:Ref<Scope>)
+	export function unRefScope(v:Ref<Scope>):Scope
+	export function emptyAppAbilityBot():AppAbilityBot
+	export function emptyRefAppAbilityBot():Ref<AppAbilityBot>
+	export function refOfAppAbilityBot(x:AppAbilityBot,v:Ref<AppAbilityBot>)
+	export function unRefAppAbilityBot(v:Ref<AppAbilityBot>):AppAbilityBot
+	export function emptyAppCommonCategory():AppCommonCategory
+	export function emptyRefAppCommonCategory():Ref<AppCommonCategory>
+	export function refOfAppCommonCategory(x:AppCommonCategory,v:Ref<AppCommonCategory>)
+	export function unRefAppCommonCategory(v:Ref<AppCommonCategory>):AppCommonCategory
+	export function emptyContactsRangeSuggestApplicationAppVersionRespData():ContactsRangeSuggestApplicationAppVersionRespData
+	export function emptyRefContactsRangeSuggestApplicationAppVersionRespData():Ref<ContactsRangeSuggestApplicationAppVersionRespData>
+	export function refOfContactsRangeSuggestApplicationAppVersionRespData(x:ContactsRangeSuggestApplicationAppVersionRespData,v:Ref<ContactsRangeSuggestApplicationAppVersionRespData>)
+	export function unRefContactsRangeSuggestApplicationAppVersionRespData(v:Ref<ContactsRangeSuggestApplicationAppVersionRespData>):ContactsRangeSuggestApplicationAppVersionRespData
+	export function emptyListApplicationFeedbackReq():ListApplicationFeedbackReq
+	export function emptyRefListApplicationFeedbackReq():Ref<ListApplicationFeedbackReq>
+	export function refOfListApplicationFeedbackReq(x:ListApplicationFeedbackReq,v:Ref<ListApplicationFeedbackReq>)
+	export function unRefListApplicationFeedbackReq(v:Ref<ListApplicationFeedbackReq>):ListApplicationFeedbackReq
+	export function emptyP2ApplicationAppVersionPublishRevokeV6():P2ApplicationAppVersionPublishRevokeV6
+	export function emptyRefP2ApplicationAppVersionPublishRevokeV6():Ref<P2ApplicationAppVersionPublishRevokeV6>
+	export function refOfP2ApplicationAppVersionPublishRevokeV6(x:P2ApplicationAppVersionPublishRevokeV6,v:Ref<P2ApplicationAppVersionPublishRevokeV6>)
+	export function unRefP2ApplicationAppVersionPublishRevokeV6(v:Ref<P2ApplicationAppVersionPublishRevokeV6>):P2ApplicationAppVersionPublishRevokeV6
 }

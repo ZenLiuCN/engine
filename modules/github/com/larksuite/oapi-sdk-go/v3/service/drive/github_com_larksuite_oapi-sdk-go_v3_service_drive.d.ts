@@ -3,11 +3,11 @@
 declare module 'github.com/larksuite/oapi-sdk-go/v3/service/drive'{
 
 	// @ts-ignore
-	import * as larkcore from 'github.com/larksuite/oapi-sdk-go/v3/core'
-	// @ts-ignore
 	import * as larkdrive from 'github.com/larksuite/oapi-sdk-go/v3/service/drive/v1'
 	// @ts-ignore
 	import * as larkdrive from 'github.com/larksuite/oapi-sdk-go/v3/service/drive/v2'
+	// @ts-ignore
+	import * as larkcore from 'github.com/larksuite/oapi-sdk-go/v3/core'
 	// @ts-ignore
 	import type {Ref,Struct} from 'go'
 	export function newService(config:Ref<larkcore.Config>):Ref<Service>

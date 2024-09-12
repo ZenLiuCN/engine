@@ -7,7 +7,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/optical_char_recogni
 	// @ts-ignore
 	import * as context from 'golang/context'
 	// @ts-ignore
-	import type {Alias,Nothing,Struct,Ref,error,bool} from 'go'
+	import type {error,bool,Alias,Nothing,Struct,Ref} from 'go'
 	export interface BasicRecognizeImagePathReqBodyBuilder extends Struct<BasicRecognizeImagePathReqBodyBuilder>{
 
 			image(image:string):Ref<BasicRecognizeImagePathReqBodyBuilder>
@@ -73,6 +73,14 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/optical_char_recogni
 				basicRecognize(ctx:context.Context,req:Ref<BasicRecognizeImageReq>,...options:larkcore.RequestOptionFunc[]):Ref<BasicRecognizeImageResp>
 			}>
 	}
+	export function emptyBasicRecognizeImageRespData():BasicRecognizeImageRespData
+	export function emptyRefBasicRecognizeImageRespData():Ref<BasicRecognizeImageRespData>
+	export function refOfBasicRecognizeImageRespData(x:BasicRecognizeImageRespData,v:Ref<BasicRecognizeImageRespData>)
+	export function unRefBasicRecognizeImageRespData(v:Ref<BasicRecognizeImageRespData>):BasicRecognizeImageRespData
+	export function emptyBasicRecognizeImageReq():BasicRecognizeImageReq
+	export function emptyRefBasicRecognizeImageReq():Ref<BasicRecognizeImageReq>
+	export function refOfBasicRecognizeImageReq(x:BasicRecognizeImageReq,v:Ref<BasicRecognizeImageReq>)
+	export function unRefBasicRecognizeImageReq(v:Ref<BasicRecognizeImageReq>):BasicRecognizeImageReq
 	export function emptyBasicRecognizeImageReqBody():BasicRecognizeImageReqBody
 	export function emptyRefBasicRecognizeImageReqBody():Ref<BasicRecognizeImageReqBody>
 	export function refOfBasicRecognizeImageReqBody(x:BasicRecognizeImageReqBody,v:Ref<BasicRecognizeImageReqBody>)
@@ -81,20 +89,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/optical_char_recogni
 	export function emptyRefBasicRecognizeImageResp():Ref<BasicRecognizeImageResp>
 	export function refOfBasicRecognizeImageResp(x:BasicRecognizeImageResp,v:Ref<BasicRecognizeImageResp>)
 	export function unRefBasicRecognizeImageResp(v:Ref<BasicRecognizeImageResp>):BasicRecognizeImageResp
-	export function emptyBasicRecognizeImageRespData():BasicRecognizeImageRespData
-	export function emptyRefBasicRecognizeImageRespData():Ref<BasicRecognizeImageRespData>
-	export function refOfBasicRecognizeImageRespData(x:BasicRecognizeImageRespData,v:Ref<BasicRecognizeImageRespData>)
-	export function unRefBasicRecognizeImageRespData(v:Ref<BasicRecognizeImageRespData>):BasicRecognizeImageRespData
-	export function emptyV1():V1
-	export function emptyRefV1():Ref<V1>
-	export function refOfV1(x:V1,v:Ref<V1>)
-	export function unRefV1(v:Ref<V1>):V1
-	export function emptyBasicRecognizeImageReq():BasicRecognizeImageReq
-	export function emptyRefBasicRecognizeImageReq():Ref<BasicRecognizeImageReq>
-	export function refOfBasicRecognizeImageReq(x:BasicRecognizeImageReq,v:Ref<BasicRecognizeImageReq>)
-	export function unRefBasicRecognizeImageReq(v:Ref<BasicRecognizeImageReq>):BasicRecognizeImageReq
 	export function emptyDepartmentId():DepartmentId
 	export function emptyRefDepartmentId():Ref<DepartmentId>
 	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
 	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
+	export function emptyV1():V1
+	export function emptyRefV1():Ref<V1>
+	export function refOfV1(x:V1,v:Ref<V1>)
+	export function unRefV1(v:Ref<V1>):V1
 }

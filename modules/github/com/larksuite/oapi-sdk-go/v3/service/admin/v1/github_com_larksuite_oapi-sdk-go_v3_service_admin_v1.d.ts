@@ -50,6 +50,10 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/admin/v1'{
 			emailReceiveExtCount:Ref<string>
 			emailSendInCount:Ref<string>
 			emailReceiveInCount:Ref<string>
+			searchActiveDau:Ref<string>
+			totalSearchCount:Ref<string>
+			quickSearchCount:Ref<string>
+			tabSearchCount:Ref<string>
 	}
 	export interface AdminDeptStatBuilder extends Struct<AdminDeptStatBuilder>{
 
@@ -91,6 +95,10 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/admin/v1'{
 			emailReceiveExtCount(emailReceiveExtCount:string):Ref<AdminDeptStatBuilder>
 			emailSendInCount(emailSendInCount:string):Ref<AdminDeptStatBuilder>
 			emailReceiveInCount(emailReceiveInCount:string):Ref<AdminDeptStatBuilder>
+			searchActiveDau(searchActiveDau:string):Ref<AdminDeptStatBuilder>
+			totalSearchCount(totalSearchCount:string):Ref<AdminDeptStatBuilder>
+			quickSearchCount(quickSearchCount:string):Ref<AdminDeptStatBuilder>
+			tabSearchCount(tabSearchCount:string):Ref<AdminDeptStatBuilder>
 			build():Ref<AdminDeptStat>
 	}
 	export interface AdminUserStat extends Struct<AdminUserStat>{
@@ -124,6 +132,10 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/admin/v1'{
 			emailReceiveExtCount:Ref<string>
 			emailSendInCount:Ref<string>
 			emailReceiveInCount:Ref<string>
+			searchActiveFlag:Ref<int>
+			totalSearchCount:Ref<string>
+			quickSearchCount:Ref<string>
+			tabSearchCount:Ref<string>
 	}
 	export interface AdminUserStatBuilder extends Struct<AdminUserStatBuilder>{
 
@@ -156,6 +168,10 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/admin/v1'{
 			emailReceiveExtCount(emailReceiveExtCount:string):Ref<AdminUserStatBuilder>
 			emailSendInCount(emailSendInCount:string):Ref<AdminUserStatBuilder>
 			emailReceiveInCount(emailReceiveInCount:string):Ref<AdminUserStatBuilder>
+			searchActiveFlag(searchActiveFlag:int):Ref<AdminUserStatBuilder>
+			totalSearchCount(totalSearchCount:string):Ref<AdminUserStatBuilder>
+			quickSearchCount(quickSearchCount:string):Ref<AdminUserStatBuilder>
+			tabSearchCount(tabSearchCount:string):Ref<AdminUserStatBuilder>
 			build():Ref<AdminUserStat>
 	}
 	export interface Administrator extends Struct<Administrator>{
@@ -866,6 +882,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/admin/v1'{
 			userType(userType:int):Ref<ListAuditInfoReqBuilder>
 			objectType(objectType:int):Ref<ListAuditInfoReqBuilder>
 			objectValue(objectValue:string):Ref<ListAuditInfoReqBuilder>
+			extFilterObjectByCcmToken(extFilterObjectByCcmToken:string):Ref<ListAuditInfoReqBuilder>
 			build():Ref<ListAuditInfoReq>
 	}
 	export interface ListAuditInfoResp extends Struct<ListAuditInfoResp>{
@@ -1552,18 +1569,34 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/admin/v1'{
 				reset(ctx:context.Context,req:Ref<ResetPasswordReq>,...options:larkcore.RequestOptionFunc[]):Ref<ResetPasswordResp>
 			}>
 	}
-	export function emptyUserReport2022():UserReport2022
-	export function emptyRefUserReport2022():Ref<UserReport2022>
-	export function refOfUserReport2022(x:UserReport2022,v:Ref<UserReport2022>)
-	export function unRefUserReport2022(v:Ref<UserReport2022>):UserReport2022
-	export function emptyUserAnnualReport():UserAnnualReport
-	export function emptyRefUserAnnualReport():Ref<UserAnnualReport>
-	export function refOfUserAnnualReport(x:UserAnnualReport,v:Ref<UserAnnualReport>)
-	export function unRefUserAnnualReport(v:Ref<UserAnnualReport>):UserAnnualReport
-	export function emptyAuditRecipientEntity():AuditRecipientEntity
-	export function emptyRefAuditRecipientEntity():Ref<AuditRecipientEntity>
-	export function refOfAuditRecipientEntity(x:AuditRecipientEntity,v:Ref<AuditRecipientEntity>)
-	export function unRefAuditRecipientEntity(v:Ref<AuditRecipientEntity>):AuditRecipientEntity
+	export function emptyAuditWebContext():AuditWebContext
+	export function emptyRefAuditWebContext():Ref<AuditWebContext>
+	export function refOfAuditWebContext(x:AuditWebContext,v:Ref<AuditWebContext>)
+	export function unRefAuditWebContext(v:Ref<AuditWebContext>):AuditWebContext
+	export function emptyCreateBadgeGrantReq():CreateBadgeGrantReq
+	export function emptyRefCreateBadgeGrantReq():Ref<CreateBadgeGrantReq>
+	export function refOfCreateBadgeGrantReq(x:CreateBadgeGrantReq,v:Ref<CreateBadgeGrantReq>)
+	export function unRefCreateBadgeGrantReq(v:Ref<CreateBadgeGrantReq>):CreateBadgeGrantReq
+	export function emptyFile():File
+	export function emptyRefFile():Ref<File>
+	export function refOfFile(x:File,v:Ref<File>)
+	export function unRefFile(v:Ref<File>):File
+	export function emptyListBadgeRespData():ListBadgeRespData
+	export function emptyRefListBadgeRespData():Ref<ListBadgeRespData>
+	export function refOfListBadgeRespData(x:ListBadgeRespData,v:Ref<ListBadgeRespData>)
+	export function unRefListBadgeRespData(v:Ref<ListBadgeRespData>):ListBadgeRespData
+	export function emptyCreateBadgeImageRespData():CreateBadgeImageRespData
+	export function emptyRefCreateBadgeImageRespData():Ref<CreateBadgeImageRespData>
+	export function refOfCreateBadgeImageRespData(x:CreateBadgeImageRespData,v:Ref<CreateBadgeImageRespData>)
+	export function unRefCreateBadgeImageRespData(v:Ref<CreateBadgeImageRespData>):CreateBadgeImageRespData
+	export function emptyUpdateBadgeGrantRespData():UpdateBadgeGrantRespData
+	export function emptyRefUpdateBadgeGrantRespData():Ref<UpdateBadgeGrantRespData>
+	export function refOfUpdateBadgeGrantRespData(x:UpdateBadgeGrantRespData,v:Ref<UpdateBadgeGrantRespData>)
+	export function unRefUpdateBadgeGrantRespData(v:Ref<UpdateBadgeGrantRespData>):UpdateBadgeGrantRespData
+	export function emptyAuditEventExtend():AuditEventExtend
+	export function emptyRefAuditEventExtend():Ref<AuditEventExtend>
+	export function refOfAuditEventExtend(x:AuditEventExtend,v:Ref<AuditEventExtend>)
+	export function unRefAuditEventExtend(v:Ref<AuditEventExtend>):AuditEventExtend
 	export function emptyPassword():Password
 	export function emptyRefPassword():Ref<Password>
 	export function refOfPassword(x:Password,v:Ref<Password>)
@@ -1572,304 +1605,288 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/admin/v1'{
 	export function emptyRefListAdminUserStatRespData():Ref<ListAdminUserStatRespData>
 	export function refOfListAdminUserStatRespData(x:ListAdminUserStatRespData,v:Ref<ListAdminUserStatRespData>)
 	export function unRefListAdminUserStatRespData(v:Ref<ListAdminUserStatRespData>):ListAdminUserStatRespData
-	export function emptyGetBadgeReq():GetBadgeReq
-	export function emptyRefGetBadgeReq():Ref<GetBadgeReq>
-	export function refOfGetBadgeReq(x:GetBadgeReq,v:Ref<GetBadgeReq>)
-	export function unRefGetBadgeReq(v:Ref<GetBadgeReq>):GetBadgeReq
-	export function emptyListBadgeGrantIterator():ListBadgeGrantIterator
-	export function emptyRefListBadgeGrantIterator():Ref<ListBadgeGrantIterator>
-	export function refOfListBadgeGrantIterator(x:ListBadgeGrantIterator,v:Ref<ListBadgeGrantIterator>)
-	export function unRefListBadgeGrantIterator(v:Ref<ListBadgeGrantIterator>):ListBadgeGrantIterator
-	export function emptyAnnualReportMapFloat():AnnualReportMapFloat
-	export function emptyRefAnnualReportMapFloat():Ref<AnnualReportMapFloat>
-	export function refOfAnnualReportMapFloat(x:AnnualReportMapFloat,v:Ref<AnnualReportMapFloat>)
-	export function unRefAnnualReportMapFloat(v:Ref<AnnualReportMapFloat>):AnnualReportMapFloat
-	export function emptyAuditInfo():AuditInfo
-	export function emptyRefAuditInfo():Ref<AuditInfo>
-	export function refOfAuditInfo(x:AuditInfo,v:Ref<AuditInfo>)
-	export function unRefAuditInfo(v:Ref<AuditInfo>):AuditInfo
-	export function emptyAuditEventExtend():AuditEventExtend
-	export function emptyRefAuditEventExtend():Ref<AuditEventExtend>
-	export function refOfAuditEventExtend(x:AuditEventExtend,v:Ref<AuditEventExtend>)
-	export function unRefAuditEventExtend(v:Ref<AuditEventExtend>):AuditEventExtend
-	export function emptyFile():File
-	export function emptyRefFile():Ref<File>
-	export function refOfFile(x:File,v:Ref<File>)
-	export function unRefFile(v:Ref<File>):File
-	export function emptyFileList():FileList
-	export function emptyRefFileList():Ref<FileList>
-	export function refOfFileList(x:FileList,v:Ref<FileList>)
-	export function unRefFileList(v:Ref<FileList>):FileList
-	export function emptyAuditRecipientDetail():AuditRecipientDetail
-	export function emptyRefAuditRecipientDetail():Ref<AuditRecipientDetail>
-	export function refOfAuditRecipientDetail(x:AuditRecipientDetail,v:Ref<AuditRecipientDetail>)
-	export function unRefAuditRecipientDetail(v:Ref<AuditRecipientDetail>):AuditRecipientDetail
-	export function emptyCreateBadgeResp():CreateBadgeResp
-	export function emptyRefCreateBadgeResp():Ref<CreateBadgeResp>
-	export function refOfCreateBadgeResp(x:CreateBadgeResp,v:Ref<CreateBadgeResp>)
-	export function unRefCreateBadgeResp(v:Ref<CreateBadgeResp>):CreateBadgeResp
-	export function emptyListAuditInfoReq():ListAuditInfoReq
-	export function emptyRefListAuditInfoReq():Ref<ListAuditInfoReq>
-	export function refOfListAuditInfoReq(x:ListAuditInfoReq,v:Ref<ListAuditInfoReq>)
-	export function unRefListAuditInfoReq(v:Ref<ListAuditInfoReq>):ListAuditInfoReq
-	export function emptyCreateBadgeImageRespData():CreateBadgeImageRespData
-	export function emptyRefCreateBadgeImageRespData():Ref<CreateBadgeImageRespData>
-	export function refOfCreateBadgeImageRespData(x:CreateBadgeImageRespData,v:Ref<CreateBadgeImageRespData>)
-	export function unRefCreateBadgeImageRespData(v:Ref<CreateBadgeImageRespData>):CreateBadgeImageRespData
-	export function emptyAnnualReportMapInt():AnnualReportMapInt
-	export function emptyRefAnnualReportMapInt():Ref<AnnualReportMapInt>
-	export function refOfAnnualReportMapInt(x:AnnualReportMapInt,v:Ref<AnnualReportMapInt>)
-	export function unRefAnnualReportMapInt(v:Ref<AnnualReportMapInt>):AnnualReportMapInt
-	export function emptyResetPasswordReqBody():ResetPasswordReqBody
-	export function emptyRefResetPasswordReqBody():Ref<ResetPasswordReqBody>
-	export function refOfResetPasswordReqBody(x:ResetPasswordReqBody,v:Ref<ResetPasswordReqBody>)
-	export function unRefResetPasswordReqBody(v:Ref<ResetPasswordReqBody>):ResetPasswordReqBody
-	export function emptyTask():Task
-	export function emptyRefTask():Ref<Task>
-	export function refOfTask(x:Task,v:Ref<Task>)
-	export function unRefTask(v:Ref<Task>):Task
 	export function emptyDepartmentId():DepartmentId
 	export function emptyRefDepartmentId():Ref<DepartmentId>
 	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
 	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptyI18n():I18n
-	export function emptyRefI18n():Ref<I18n>
-	export function refOfI18n(x:I18n,v:Ref<I18n>)
-	export function unRefI18n(v:Ref<I18n>):I18n
-	export function emptyListAdminDeptStatResp():ListAdminDeptStatResp
-	export function emptyRefListAdminDeptStatResp():Ref<ListAdminDeptStatResp>
-	export function refOfListAdminDeptStatResp(x:ListAdminDeptStatResp,v:Ref<ListAdminDeptStatResp>)
-	export function unRefListAdminDeptStatResp(v:Ref<ListAdminDeptStatResp>):ListAdminDeptStatResp
-	export function emptyListAdminUserStatReq():ListAdminUserStatReq
-	export function emptyRefListAdminUserStatReq():Ref<ListAdminUserStatReq>
-	export function refOfListAdminUserStatReq(x:ListAdminUserStatReq,v:Ref<ListAdminUserStatReq>)
-	export function unRefListAdminUserStatReq(v:Ref<ListAdminUserStatReq>):ListAdminUserStatReq
-	export function emptyRuleDetail():RuleDetail
-	export function emptyRefRuleDetail():Ref<RuleDetail>
-	export function refOfRuleDetail(x:RuleDetail,v:Ref<RuleDetail>)
-	export function unRefRuleDetail(v:Ref<RuleDetail>):RuleDetail
-	export function emptyAuditWebContext():AuditWebContext
-	export function emptyRefAuditWebContext():Ref<AuditWebContext>
-	export function refOfAuditWebContext(x:AuditWebContext,v:Ref<AuditWebContext>)
-	export function unRefAuditWebContext(v:Ref<AuditWebContext>):AuditWebContext
-	export function emptyGetBadgeGrantReq():GetBadgeGrantReq
-	export function emptyRefGetBadgeGrantReq():Ref<GetBadgeGrantReq>
-	export function refOfGetBadgeGrantReq(x:GetBadgeGrantReq,v:Ref<GetBadgeGrantReq>)
-	export function unRefGetBadgeGrantReq(v:Ref<GetBadgeGrantReq>):GetBadgeGrantReq
-	export function emptyGetBadgeResp():GetBadgeResp
-	export function emptyRefGetBadgeResp():Ref<GetBadgeResp>
-	export function refOfGetBadgeResp(x:GetBadgeResp,v:Ref<GetBadgeResp>)
-	export function unRefGetBadgeResp(v:Ref<GetBadgeResp>):GetBadgeResp
-	export function emptyUser():User
-	export function emptyRefUser():Ref<User>
-	export function refOfUser(x:User,v:Ref<User>)
-	export function unRefUser(v:Ref<User>):User
-	export function emptyUserReport2021():UserReport2021
-	export function emptyRefUserReport2021():Ref<UserReport2021>
-	export function refOfUserReport2021(x:UserReport2021,v:Ref<UserReport2021>)
-	export function unRefUserReport2021(v:Ref<UserReport2021>):UserReport2021
-	export function emptyAuditObjectEntity():AuditObjectEntity
-	export function emptyRefAuditObjectEntity():Ref<AuditObjectEntity>
-	export function refOfAuditObjectEntity(x:AuditObjectEntity,v:Ref<AuditObjectEntity>)
-	export function unRefAuditObjectEntity(v:Ref<AuditObjectEntity>):AuditObjectEntity
-	export function emptyCreateBadgeGrantRespData():CreateBadgeGrantRespData
-	export function emptyRefCreateBadgeGrantRespData():Ref<CreateBadgeGrantRespData>
-	export function refOfCreateBadgeGrantRespData(x:CreateBadgeGrantRespData,v:Ref<CreateBadgeGrantRespData>)
-	export function unRefCreateBadgeGrantRespData(v:Ref<CreateBadgeGrantRespData>):CreateBadgeGrantRespData
-	export function emptyUpdateBadgeGrantRespData():UpdateBadgeGrantRespData
-	export function emptyRefUpdateBadgeGrantRespData():Ref<UpdateBadgeGrantRespData>
-	export function refOfUpdateBadgeGrantRespData(x:UpdateBadgeGrantRespData,v:Ref<UpdateBadgeGrantRespData>)
-	export function unRefUpdateBadgeGrantRespData(v:Ref<UpdateBadgeGrantRespData>):UpdateBadgeGrantRespData
-	export function emptyAuditDetail():AuditDetail
-	export function emptyRefAuditDetail():Ref<AuditDetail>
-	export function refOfAuditDetail(x:AuditDetail,v:Ref<AuditDetail>)
-	export function unRefAuditDetail(v:Ref<AuditDetail>):AuditDetail
-	export function emptyDeleteBadgeGrantResp():DeleteBadgeGrantResp
-	export function emptyRefDeleteBadgeGrantResp():Ref<DeleteBadgeGrantResp>
-	export function refOfDeleteBadgeGrantResp(x:DeleteBadgeGrantResp,v:Ref<DeleteBadgeGrantResp>)
-	export function unRefDeleteBadgeGrantResp(v:Ref<DeleteBadgeGrantResp>):DeleteBadgeGrantResp
-	export function emptyResetPasswordReq():ResetPasswordReq
-	export function emptyRefResetPasswordReq():Ref<ResetPasswordReq>
-	export function refOfResetPasswordReq(x:ResetPasswordReq,v:Ref<ResetPasswordReq>)
-	export function unRefResetPasswordReq(v:Ref<ResetPasswordReq>):ResetPasswordReq
-	export function emptyAuditContext():AuditContext
-	export function emptyRefAuditContext():Ref<AuditContext>
-	export function refOfAuditContext(x:AuditContext,v:Ref<AuditContext>)
-	export function unRefAuditContext(v:Ref<AuditContext>):AuditContext
-	export function emptyGetBadgeRespData():GetBadgeRespData
-	export function emptyRefGetBadgeRespData():Ref<GetBadgeRespData>
-	export function refOfGetBadgeRespData(x:GetBadgeRespData,v:Ref<GetBadgeRespData>)
-	export function unRefGetBadgeRespData(v:Ref<GetBadgeRespData>):GetBadgeRespData
-	export function emptyApiAuditDrawerInfo():ApiAuditDrawerInfo
-	export function emptyRefApiAuditDrawerInfo():Ref<ApiAuditDrawerInfo>
-	export function refOfApiAuditDrawerInfo(x:ApiAuditDrawerInfo,v:Ref<ApiAuditDrawerInfo>)
-	export function unRefApiAuditDrawerInfo(v:Ref<ApiAuditDrawerInfo>):ApiAuditDrawerInfo
-	export function emptyAuditAndroidContext():AuditAndroidContext
-	export function emptyRefAuditAndroidContext():Ref<AuditAndroidContext>
-	export function refOfAuditAndroidContext(x:AuditAndroidContext,v:Ref<AuditAndroidContext>)
-	export function unRefAuditAndroidContext(v:Ref<AuditAndroidContext>):AuditAndroidContext
-	export function emptyCreateBadgeImageResp():CreateBadgeImageResp
-	export function emptyRefCreateBadgeImageResp():Ref<CreateBadgeImageResp>
-	export function refOfCreateBadgeImageResp(x:CreateBadgeImageResp,v:Ref<CreateBadgeImageResp>)
-	export function unRefCreateBadgeImageResp(v:Ref<CreateBadgeImageResp>):CreateBadgeImageResp
-	export function emptyUpdateBadgeReq():UpdateBadgeReq
-	export function emptyRefUpdateBadgeReq():Ref<UpdateBadgeReq>
-	export function refOfUpdateBadgeReq(x:UpdateBadgeReq,v:Ref<UpdateBadgeReq>)
-	export function unRefUpdateBadgeReq(v:Ref<UpdateBadgeReq>):UpdateBadgeReq
-	export function emptyListAdminDeptStatRespData():ListAdminDeptStatRespData
-	export function emptyRefListAdminDeptStatRespData():Ref<ListAdminDeptStatRespData>
-	export function refOfListAdminDeptStatRespData(x:ListAdminDeptStatRespData,v:Ref<ListAdminDeptStatRespData>)
-	export function unRefListAdminDeptStatRespData(v:Ref<ListAdminDeptStatRespData>):ListAdminDeptStatRespData
-	export function emptyCreateBadgeImageReqBody():CreateBadgeImageReqBody
-	export function emptyRefCreateBadgeImageReqBody():Ref<CreateBadgeImageReqBody>
-	export function refOfCreateBadgeImageReqBody(x:CreateBadgeImageReqBody,v:Ref<CreateBadgeImageReqBody>)
-	export function unRefCreateBadgeImageReqBody(v:Ref<CreateBadgeImageReqBody>):CreateBadgeImageReqBody
-	export function emptyListBadgeReq():ListBadgeReq
-	export function emptyRefListBadgeReq():Ref<ListBadgeReq>
-	export function refOfListBadgeReq(x:ListBadgeReq,v:Ref<ListBadgeReq>)
-	export function unRefListBadgeReq(v:Ref<ListBadgeReq>):ListBadgeReq
 	export function emptyListAuditInfoRespData():ListAuditInfoRespData
 	export function emptyRefListAuditInfoRespData():Ref<ListAuditInfoRespData>
 	export function refOfListAuditInfoRespData(x:ListAuditInfoRespData,v:Ref<ListAuditInfoRespData>)
 	export function unRefListAuditInfoRespData(v:Ref<ListAuditInfoRespData>):ListAuditInfoRespData
-	export function emptyAuditPcContext():AuditPcContext
-	export function emptyRefAuditPcContext():Ref<AuditPcContext>
-	export function refOfAuditPcContext(x:AuditPcContext,v:Ref<AuditPcContext>)
-	export function unRefAuditPcContext(v:Ref<AuditPcContext>):AuditPcContext
-	export function emptyCreateBadgeGrantResp():CreateBadgeGrantResp
-	export function emptyRefCreateBadgeGrantResp():Ref<CreateBadgeGrantResp>
-	export function refOfCreateBadgeGrantResp(x:CreateBadgeGrantResp,v:Ref<CreateBadgeGrantResp>)
-	export function unRefCreateBadgeGrantResp(v:Ref<CreateBadgeGrantResp>):CreateBadgeGrantResp
-	export function emptyCreateBadgeRespData():CreateBadgeRespData
-	export function emptyRefCreateBadgeRespData():Ref<CreateBadgeRespData>
-	export function refOfCreateBadgeRespData(x:CreateBadgeRespData,v:Ref<CreateBadgeRespData>)
-	export function unRefCreateBadgeRespData(v:Ref<CreateBadgeRespData>):CreateBadgeRespData
-	export function emptyGetBadgeGrantResp():GetBadgeGrantResp
-	export function emptyRefGetBadgeGrantResp():Ref<GetBadgeGrantResp>
-	export function refOfGetBadgeGrantResp(x:GetBadgeGrantResp,v:Ref<GetBadgeGrantResp>)
-	export function unRefGetBadgeGrantResp(v:Ref<GetBadgeGrantResp>):GetBadgeGrantResp
-	export function emptyGetBadgeGrantRespData():GetBadgeGrantRespData
-	export function emptyRefGetBadgeGrantRespData():Ref<GetBadgeGrantRespData>
-	export function refOfGetBadgeGrantRespData(x:GetBadgeGrantRespData,v:Ref<GetBadgeGrantRespData>)
-	export function unRefGetBadgeGrantRespData(v:Ref<GetBadgeGrantRespData>):GetBadgeGrantRespData
-	export function emptyListBadgeGrantResp():ListBadgeGrantResp
-	export function emptyRefListBadgeGrantResp():Ref<ListBadgeGrantResp>
-	export function refOfListBadgeGrantResp(x:ListBadgeGrantResp,v:Ref<ListBadgeGrantResp>)
-	export function unRefListBadgeGrantResp(v:Ref<ListBadgeGrantResp>):ListBadgeGrantResp
-	export function emptyListAuditInfoIterator():ListAuditInfoIterator
-	export function emptyRefListAuditInfoIterator():Ref<ListAuditInfoIterator>
-	export function refOfListAuditInfoIterator(x:ListAuditInfoIterator,v:Ref<ListAuditInfoIterator>)
-	export function unRefListAuditInfoIterator(v:Ref<ListAuditInfoIterator>):ListAuditInfoIterator
-	export function emptyListAuditInfoResp():ListAuditInfoResp
-	export function emptyRefListAuditInfoResp():Ref<ListAuditInfoResp>
-	export function refOfListAuditInfoResp(x:ListAuditInfoResp,v:Ref<ListAuditInfoResp>)
-	export function unRefListAuditInfoResp(v:Ref<ListAuditInfoResp>):ListAuditInfoResp
-	export function emptySplashPageStat():SplashPageStat
-	export function emptyRefSplashPageStat():Ref<SplashPageStat>
-	export function refOfSplashPageStat(x:SplashPageStat,v:Ref<SplashPageStat>)
-	export function unRefSplashPageStat(v:Ref<SplashPageStat>):SplashPageStat
-	export function emptyListBadgeGrantRespData():ListBadgeGrantRespData
-	export function emptyRefListBadgeGrantRespData():Ref<ListBadgeGrantRespData>
-	export function refOfListBadgeGrantRespData(x:ListBadgeGrantRespData,v:Ref<ListBadgeGrantRespData>)
-	export function unRefListBadgeGrantRespData(v:Ref<ListBadgeGrantRespData>):ListBadgeGrantRespData
-	export function emptyAuditIosContext():AuditIosContext
-	export function emptyRefAuditIosContext():Ref<AuditIosContext>
-	export function refOfAuditIosContext(x:AuditIosContext,v:Ref<AuditIosContext>)
-	export function unRefAuditIosContext(v:Ref<AuditIosContext>):AuditIosContext
-	export function emptyUpdateBadgeRespData():UpdateBadgeRespData
-	export function emptyRefUpdateBadgeRespData():Ref<UpdateBadgeRespData>
-	export function refOfUpdateBadgeRespData(x:UpdateBadgeRespData,v:Ref<UpdateBadgeRespData>)
-	export function unRefUpdateBadgeRespData(v:Ref<UpdateBadgeRespData>):UpdateBadgeRespData
-	export function emptyBadge():Badge
-	export function emptyRefBadge():Ref<Badge>
-	export function refOfBadge(x:Badge,v:Ref<Badge>)
-	export function unRefBadge(v:Ref<Badge>):Badge
-	export function emptyListAdminUserStatResp():ListAdminUserStatResp
-	export function emptyRefListAdminUserStatResp():Ref<ListAdminUserStatResp>
-	export function refOfListAdminUserStatResp(x:ListAdminUserStatResp,v:Ref<ListAdminUserStatResp>)
-	export function unRefListAdminUserStatResp(v:Ref<ListAdminUserStatResp>):ListAdminUserStatResp
-	export function emptyCreateBadgeGrantReq():CreateBadgeGrantReq
-	export function emptyRefCreateBadgeGrantReq():Ref<CreateBadgeGrantReq>
-	export function refOfCreateBadgeGrantReq(x:CreateBadgeGrantReq,v:Ref<CreateBadgeGrantReq>)
-	export function unRefCreateBadgeGrantReq(v:Ref<CreateBadgeGrantReq>):CreateBadgeGrantReq
-	export function emptyV1():V1
-	export function emptyRefV1():Ref<V1>
-	export function refOfV1(x:V1,v:Ref<V1>)
-	export function unRefV1(v:Ref<V1>):V1
-	export function emptyDeleteBadgeGrantReq():DeleteBadgeGrantReq
-	export function emptyRefDeleteBadgeGrantReq():Ref<DeleteBadgeGrantReq>
-	export function refOfDeleteBadgeGrantReq(x:DeleteBadgeGrantReq,v:Ref<DeleteBadgeGrantReq>)
-	export function unRefDeleteBadgeGrantReq(v:Ref<DeleteBadgeGrantReq>):DeleteBadgeGrantReq
+	export function emptyListBadgeGrantIterator():ListBadgeGrantIterator
+	export function emptyRefListBadgeGrantIterator():Ref<ListBadgeGrantIterator>
+	export function refOfListBadgeGrantIterator(x:ListBadgeGrantIterator,v:Ref<ListBadgeGrantIterator>)
+	export function unRefListBadgeGrantIterator(v:Ref<ListBadgeGrantIterator>):ListBadgeGrantIterator
 	export function emptyListBadgeGrantReq():ListBadgeGrantReq
 	export function emptyRefListBadgeGrantReq():Ref<ListBadgeGrantReq>
 	export function refOfListBadgeGrantReq(x:ListBadgeGrantReq,v:Ref<ListBadgeGrantReq>)
 	export function unRefListBadgeGrantReq(v:Ref<ListBadgeGrantReq>):ListBadgeGrantReq
-	export function emptyGrant():Grant
-	export function emptyRefGrant():Ref<Grant>
-	export function refOfGrant(x:Grant,v:Ref<Grant>)
-	export function unRefGrant(v:Ref<Grant>):Grant
-	export function emptyApiAuditCommonDrawers():ApiAuditCommonDrawers
-	export function emptyRefApiAuditCommonDrawers():Ref<ApiAuditCommonDrawers>
-	export function refOfApiAuditCommonDrawers(x:ApiAuditCommonDrawers,v:Ref<ApiAuditCommonDrawers>)
-	export function unRefApiAuditCommonDrawers(v:Ref<ApiAuditCommonDrawers>):ApiAuditCommonDrawers
-	export function emptyListBadgeRespData():ListBadgeRespData
-	export function emptyRefListBadgeRespData():Ref<ListBadgeRespData>
-	export function refOfListBadgeRespData(x:ListBadgeRespData,v:Ref<ListBadgeRespData>)
-	export function unRefListBadgeRespData(v:Ref<ListBadgeRespData>):ListBadgeRespData
-	export function emptyAuditObjectDetail():AuditObjectDetail
-	export function emptyRefAuditObjectDetail():Ref<AuditObjectDetail>
-	export function refOfAuditObjectDetail(x:AuditObjectDetail,v:Ref<AuditObjectDetail>)
-	export function unRefAuditObjectDetail(v:Ref<AuditObjectDetail>):AuditObjectDetail
-	export function emptyAdminDeptStat():AdminDeptStat
-	export function emptyRefAdminDeptStat():Ref<AdminDeptStat>
-	export function refOfAdminDeptStat(x:AdminDeptStat,v:Ref<AdminDeptStat>)
-	export function unRefAdminDeptStat(v:Ref<AdminDeptStat>):AdminDeptStat
-	export function emptyAdministrator():Administrator
-	export function emptyRefAdministrator():Ref<Administrator>
-	export function refOfAdministrator(x:Administrator,v:Ref<Administrator>)
-	export function unRefAdministrator(v:Ref<Administrator>):Administrator
-	export function emptyCreateBadgeImageReq():CreateBadgeImageReq
-	export function emptyRefCreateBadgeImageReq():Ref<CreateBadgeImageReq>
-	export function refOfCreateBadgeImageReq(x:CreateBadgeImageReq,v:Ref<CreateBadgeImageReq>)
-	export function unRefCreateBadgeImageReq(v:Ref<CreateBadgeImageReq>):CreateBadgeImageReq
-	export function emptyListBadgeIterator():ListBadgeIterator
-	export function emptyRefListBadgeIterator():Ref<ListBadgeIterator>
-	export function refOfListBadgeIterator(x:ListBadgeIterator,v:Ref<ListBadgeIterator>)
-	export function unRefListBadgeIterator(v:Ref<ListBadgeIterator>):ListBadgeIterator
+	export function emptyResetPasswordReq():ResetPasswordReq
+	export function emptyRefResetPasswordReq():Ref<ResetPasswordReq>
+	export function refOfResetPasswordReq(x:ResetPasswordReq,v:Ref<ResetPasswordReq>)
+	export function unRefResetPasswordReq(v:Ref<ResetPasswordReq>):ResetPasswordReq
+	export function emptyListAdminUserStatResp():ListAdminUserStatResp
+	export function emptyRefListAdminUserStatResp():Ref<ListAdminUserStatResp>
+	export function refOfListAdminUserStatResp(x:ListAdminUserStatResp,v:Ref<ListAdminUserStatResp>)
+	export function unRefListAdminUserStatResp(v:Ref<ListAdminUserStatResp>):ListAdminUserStatResp
+	export function emptyGetBadgeRespData():GetBadgeRespData
+	export function emptyRefGetBadgeRespData():Ref<GetBadgeRespData>
+	export function refOfGetBadgeRespData(x:GetBadgeRespData,v:Ref<GetBadgeRespData>)
+	export function unRefGetBadgeRespData(v:Ref<GetBadgeRespData>):GetBadgeRespData
+	export function emptyCreateBadgeResp():CreateBadgeResp
+	export function emptyRefCreateBadgeResp():Ref<CreateBadgeResp>
+	export function refOfCreateBadgeResp(x:CreateBadgeResp,v:Ref<CreateBadgeResp>)
+	export function unRefCreateBadgeResp(v:Ref<CreateBadgeResp>):CreateBadgeResp
 	export function emptyListBadgeResp():ListBadgeResp
 	export function emptyRefListBadgeResp():Ref<ListBadgeResp>
 	export function refOfListBadgeResp(x:ListBadgeResp,v:Ref<ListBadgeResp>)
 	export function unRefListBadgeResp(v:Ref<ListBadgeResp>):ListBadgeResp
-	export function emptyUpdateBadgeGrantResp():UpdateBadgeGrantResp
-	export function emptyRefUpdateBadgeGrantResp():Ref<UpdateBadgeGrantResp>
-	export function refOfUpdateBadgeGrantResp(x:UpdateBadgeGrantResp,v:Ref<UpdateBadgeGrantResp>)
-	export function unRefUpdateBadgeGrantResp(v:Ref<UpdateBadgeGrantResp>):UpdateBadgeGrantResp
-	export function emptyUpdateBadgeResp():UpdateBadgeResp
-	export function emptyRefUpdateBadgeResp():Ref<UpdateBadgeResp>
-	export function refOfUpdateBadgeResp(x:UpdateBadgeResp,v:Ref<UpdateBadgeResp>)
-	export function unRefUpdateBadgeResp(v:Ref<UpdateBadgeResp>):UpdateBadgeResp
-	export function emptyAdminUserStat():AdminUserStat
-	export function emptyRefAdminUserStat():Ref<AdminUserStat>
-	export function refOfAdminUserStat(x:AdminUserStat,v:Ref<AdminUserStat>)
-	export function unRefAdminUserStat(v:Ref<AdminUserStat>):AdminUserStat
+	export function emptyTask():Task
+	export function emptyRefTask():Ref<Task>
+	export function refOfTask(x:Task,v:Ref<Task>)
+	export function unRefTask(v:Ref<Task>):Task
 	export function emptyCreateBadgeReq():CreateBadgeReq
 	export function emptyRefCreateBadgeReq():Ref<CreateBadgeReq>
 	export function refOfCreateBadgeReq(x:CreateBadgeReq,v:Ref<CreateBadgeReq>)
 	export function unRefCreateBadgeReq(v:Ref<CreateBadgeReq>):CreateBadgeReq
-	export function emptyResetPasswordResp():ResetPasswordResp
-	export function emptyRefResetPasswordResp():Ref<ResetPasswordResp>
-	export function refOfResetPasswordResp(x:ResetPasswordResp,v:Ref<ResetPasswordResp>)
-	export function unRefResetPasswordResp(v:Ref<ResetPasswordResp>):ResetPasswordResp
+	export function emptyUserAnnualReport():UserAnnualReport
+	export function emptyRefUserAnnualReport():Ref<UserAnnualReport>
+	export function refOfUserAnnualReport(x:UserAnnualReport,v:Ref<UserAnnualReport>)
+	export function unRefUserAnnualReport(v:Ref<UserAnnualReport>):UserAnnualReport
+	export function emptyAuditIosContext():AuditIosContext
+	export function emptyRefAuditIosContext():Ref<AuditIosContext>
+	export function refOfAuditIosContext(x:AuditIosContext,v:Ref<AuditIosContext>)
+	export function unRefAuditIosContext(v:Ref<AuditIosContext>):AuditIosContext
+	export function emptyListAdminDeptStatRespData():ListAdminDeptStatRespData
+	export function emptyRefListAdminDeptStatRespData():Ref<ListAdminDeptStatRespData>
+	export function refOfListAdminDeptStatRespData(x:ListAdminDeptStatRespData,v:Ref<ListAdminDeptStatRespData>)
+	export function unRefListAdminDeptStatRespData(v:Ref<ListAdminDeptStatRespData>):ListAdminDeptStatRespData
+	export function emptyRuleDetail():RuleDetail
+	export function emptyRefRuleDetail():Ref<RuleDetail>
+	export function refOfRuleDetail(x:RuleDetail,v:Ref<RuleDetail>)
+	export function unRefRuleDetail(v:Ref<RuleDetail>):RuleDetail
+	export function emptyV1():V1
+	export function emptyRefV1():Ref<V1>
+	export function refOfV1(x:V1,v:Ref<V1>)
+	export function unRefV1(v:Ref<V1>):V1
+	export function emptyCreateBadgeGrantResp():CreateBadgeGrantResp
+	export function emptyRefCreateBadgeGrantResp():Ref<CreateBadgeGrantResp>
+	export function refOfCreateBadgeGrantResp(x:CreateBadgeGrantResp,v:Ref<CreateBadgeGrantResp>)
+	export function unRefCreateBadgeGrantResp(v:Ref<CreateBadgeGrantResp>):CreateBadgeGrantResp
+	export function emptyAuditContext():AuditContext
+	export function emptyRefAuditContext():Ref<AuditContext>
+	export function refOfAuditContext(x:AuditContext,v:Ref<AuditContext>)
+	export function unRefAuditContext(v:Ref<AuditContext>):AuditContext
+	export function emptyUpdateBadgeRespData():UpdateBadgeRespData
+	export function emptyRefUpdateBadgeRespData():Ref<UpdateBadgeRespData>
+	export function refOfUpdateBadgeRespData(x:UpdateBadgeRespData,v:Ref<UpdateBadgeRespData>)
+	export function unRefUpdateBadgeRespData(v:Ref<UpdateBadgeRespData>):UpdateBadgeRespData
+	export function emptyCreateBadgeImageResp():CreateBadgeImageResp
+	export function emptyRefCreateBadgeImageResp():Ref<CreateBadgeImageResp>
+	export function refOfCreateBadgeImageResp(x:CreateBadgeImageResp,v:Ref<CreateBadgeImageResp>)
+	export function unRefCreateBadgeImageResp(v:Ref<CreateBadgeImageResp>):CreateBadgeImageResp
+	export function emptyGetBadgeReq():GetBadgeReq
+	export function emptyRefGetBadgeReq():Ref<GetBadgeReq>
+	export function refOfGetBadgeReq(x:GetBadgeReq,v:Ref<GetBadgeReq>)
+	export function unRefGetBadgeReq(v:Ref<GetBadgeReq>):GetBadgeReq
+	export function emptyResetPasswordReqBody():ResetPasswordReqBody
+	export function emptyRefResetPasswordReqBody():Ref<ResetPasswordReqBody>
+	export function refOfResetPasswordReqBody(x:ResetPasswordReqBody,v:Ref<ResetPasswordReqBody>)
+	export function unRefResetPasswordReqBody(v:Ref<ResetPasswordReqBody>):ResetPasswordReqBody
 	export function emptyUpdateBadgeGrantReq():UpdateBadgeGrantReq
 	export function emptyRefUpdateBadgeGrantReq():Ref<UpdateBadgeGrantReq>
 	export function refOfUpdateBadgeGrantReq(x:UpdateBadgeGrantReq,v:Ref<UpdateBadgeGrantReq>)
 	export function unRefUpdateBadgeGrantReq(v:Ref<UpdateBadgeGrantReq>):UpdateBadgeGrantReq
+	export function emptyUpdateBadgeReq():UpdateBadgeReq
+	export function emptyRefUpdateBadgeReq():Ref<UpdateBadgeReq>
+	export function refOfUpdateBadgeReq(x:UpdateBadgeReq,v:Ref<UpdateBadgeReq>)
+	export function unRefUpdateBadgeReq(v:Ref<UpdateBadgeReq>):UpdateBadgeReq
+	export function emptyAuditObjectEntity():AuditObjectEntity
+	export function emptyRefAuditObjectEntity():Ref<AuditObjectEntity>
+	export function refOfAuditObjectEntity(x:AuditObjectEntity,v:Ref<AuditObjectEntity>)
+	export function unRefAuditObjectEntity(v:Ref<AuditObjectEntity>):AuditObjectEntity
+	export function emptyListAuditInfoResp():ListAuditInfoResp
+	export function emptyRefListAuditInfoResp():Ref<ListAuditInfoResp>
+	export function refOfListAuditInfoResp(x:ListAuditInfoResp,v:Ref<ListAuditInfoResp>)
+	export function unRefListAuditInfoResp(v:Ref<ListAuditInfoResp>):ListAuditInfoResp
+	export function emptyAdminDeptStat():AdminDeptStat
+	export function emptyRefAdminDeptStat():Ref<AdminDeptStat>
+	export function refOfAdminDeptStat(x:AdminDeptStat,v:Ref<AdminDeptStat>)
+	export function unRefAdminDeptStat(v:Ref<AdminDeptStat>):AdminDeptStat
+	export function emptyListAuditInfoIterator():ListAuditInfoIterator
+	export function emptyRefListAuditInfoIterator():Ref<ListAuditInfoIterator>
+	export function refOfListAuditInfoIterator(x:ListAuditInfoIterator,v:Ref<ListAuditInfoIterator>)
+	export function unRefListAuditInfoIterator(v:Ref<ListAuditInfoIterator>):ListAuditInfoIterator
+	export function emptyUpdateBadgeGrantResp():UpdateBadgeGrantResp
+	export function emptyRefUpdateBadgeGrantResp():Ref<UpdateBadgeGrantResp>
+	export function refOfUpdateBadgeGrantResp(x:UpdateBadgeGrantResp,v:Ref<UpdateBadgeGrantResp>)
+	export function unRefUpdateBadgeGrantResp(v:Ref<UpdateBadgeGrantResp>):UpdateBadgeGrantResp
+	export function emptyAuditPcContext():AuditPcContext
+	export function emptyRefAuditPcContext():Ref<AuditPcContext>
+	export function refOfAuditPcContext(x:AuditPcContext,v:Ref<AuditPcContext>)
+	export function unRefAuditPcContext(v:Ref<AuditPcContext>):AuditPcContext
+	export function emptyCreateBadgeRespData():CreateBadgeRespData
+	export function emptyRefCreateBadgeRespData():Ref<CreateBadgeRespData>
+	export function refOfCreateBadgeRespData(x:CreateBadgeRespData,v:Ref<CreateBadgeRespData>)
+	export function unRefCreateBadgeRespData(v:Ref<CreateBadgeRespData>):CreateBadgeRespData
+	export function emptyGetBadgeGrantReq():GetBadgeGrantReq
+	export function emptyRefGetBadgeGrantReq():Ref<GetBadgeGrantReq>
+	export function refOfGetBadgeGrantReq(x:GetBadgeGrantReq,v:Ref<GetBadgeGrantReq>)
+	export function unRefGetBadgeGrantReq(v:Ref<GetBadgeGrantReq>):GetBadgeGrantReq
+	export function emptyGetBadgeGrantRespData():GetBadgeGrantRespData
+	export function emptyRefGetBadgeGrantRespData():Ref<GetBadgeGrantRespData>
+	export function refOfGetBadgeGrantRespData(x:GetBadgeGrantRespData,v:Ref<GetBadgeGrantRespData>)
+	export function unRefGetBadgeGrantRespData(v:Ref<GetBadgeGrantRespData>):GetBadgeGrantRespData
+	export function emptyAnnualReportMapInt():AnnualReportMapInt
+	export function emptyRefAnnualReportMapInt():Ref<AnnualReportMapInt>
+	export function refOfAnnualReportMapInt(x:AnnualReportMapInt,v:Ref<AnnualReportMapInt>)
+	export function unRefAnnualReportMapInt(v:Ref<AnnualReportMapInt>):AnnualReportMapInt
+	export function emptyListBadgeGrantResp():ListBadgeGrantResp
+	export function emptyRefListBadgeGrantResp():Ref<ListBadgeGrantResp>
+	export function refOfListBadgeGrantResp(x:ListBadgeGrantResp,v:Ref<ListBadgeGrantResp>)
+	export function unRefListBadgeGrantResp(v:Ref<ListBadgeGrantResp>):ListBadgeGrantResp
+	export function emptyUserReport2022():UserReport2022
+	export function emptyRefUserReport2022():Ref<UserReport2022>
+	export function refOfUserReport2022(x:UserReport2022,v:Ref<UserReport2022>)
+	export function unRefUserReport2022(v:Ref<UserReport2022>):UserReport2022
+	export function emptyApiAuditDrawerInfo():ApiAuditDrawerInfo
+	export function emptyRefApiAuditDrawerInfo():Ref<ApiAuditDrawerInfo>
+	export function refOfApiAuditDrawerInfo(x:ApiAuditDrawerInfo,v:Ref<ApiAuditDrawerInfo>)
+	export function unRefApiAuditDrawerInfo(v:Ref<ApiAuditDrawerInfo>):ApiAuditDrawerInfo
+	export function emptyAdministrator():Administrator
+	export function emptyRefAdministrator():Ref<Administrator>
+	export function refOfAdministrator(x:Administrator,v:Ref<Administrator>)
+	export function unRefAdministrator(v:Ref<Administrator>):Administrator
+	export function emptyListBadgeIterator():ListBadgeIterator
+	export function emptyRefListBadgeIterator():Ref<ListBadgeIterator>
+	export function refOfListBadgeIterator(x:ListBadgeIterator,v:Ref<ListBadgeIterator>)
+	export function unRefListBadgeIterator(v:Ref<ListBadgeIterator>):ListBadgeIterator
 	export function emptyUserReport2023():UserReport2023
 	export function emptyRefUserReport2023():Ref<UserReport2023>
 	export function refOfUserReport2023(x:UserReport2023,v:Ref<UserReport2023>)
 	export function unRefUserReport2023(v:Ref<UserReport2023>):UserReport2023
+	export function emptyGetBadgeGrantResp():GetBadgeGrantResp
+	export function emptyRefGetBadgeGrantResp():Ref<GetBadgeGrantResp>
+	export function refOfGetBadgeGrantResp(x:GetBadgeGrantResp,v:Ref<GetBadgeGrantResp>)
+	export function unRefGetBadgeGrantResp(v:Ref<GetBadgeGrantResp>):GetBadgeGrantResp
+	export function emptyApiAuditCommonDrawers():ApiAuditCommonDrawers
+	export function emptyRefApiAuditCommonDrawers():Ref<ApiAuditCommonDrawers>
+	export function refOfApiAuditCommonDrawers(x:ApiAuditCommonDrawers,v:Ref<ApiAuditCommonDrawers>)
+	export function unRefApiAuditCommonDrawers(v:Ref<ApiAuditCommonDrawers>):ApiAuditCommonDrawers
+	export function emptyAuditDetail():AuditDetail
+	export function emptyRefAuditDetail():Ref<AuditDetail>
+	export function refOfAuditDetail(x:AuditDetail,v:Ref<AuditDetail>)
+	export function unRefAuditDetail(v:Ref<AuditDetail>):AuditDetail
+	export function emptyAuditRecipientDetail():AuditRecipientDetail
+	export function emptyRefAuditRecipientDetail():Ref<AuditRecipientDetail>
+	export function refOfAuditRecipientDetail(x:AuditRecipientDetail,v:Ref<AuditRecipientDetail>)
+	export function unRefAuditRecipientDetail(v:Ref<AuditRecipientDetail>):AuditRecipientDetail
+	export function emptyAdminUserStat():AdminUserStat
+	export function emptyRefAdminUserStat():Ref<AdminUserStat>
+	export function refOfAdminUserStat(x:AdminUserStat,v:Ref<AdminUserStat>)
+	export function unRefAdminUserStat(v:Ref<AdminUserStat>):AdminUserStat
+	export function emptyListAdminDeptStatResp():ListAdminDeptStatResp
+	export function emptyRefListAdminDeptStatResp():Ref<ListAdminDeptStatResp>
+	export function refOfListAdminDeptStatResp(x:ListAdminDeptStatResp,v:Ref<ListAdminDeptStatResp>)
+	export function unRefListAdminDeptStatResp(v:Ref<ListAdminDeptStatResp>):ListAdminDeptStatResp
+	export function emptyBadge():Badge
+	export function emptyRefBadge():Ref<Badge>
+	export function refOfBadge(x:Badge,v:Ref<Badge>)
+	export function unRefBadge(v:Ref<Badge>):Badge
+	export function emptyDeleteBadgeGrantReq():DeleteBadgeGrantReq
+	export function emptyRefDeleteBadgeGrantReq():Ref<DeleteBadgeGrantReq>
+	export function refOfDeleteBadgeGrantReq(x:DeleteBadgeGrantReq,v:Ref<DeleteBadgeGrantReq>)
+	export function unRefDeleteBadgeGrantReq(v:Ref<DeleteBadgeGrantReq>):DeleteBadgeGrantReq
+	export function emptyFileList():FileList
+	export function emptyRefFileList():Ref<FileList>
+	export function refOfFileList(x:FileList,v:Ref<FileList>)
+	export function unRefFileList(v:Ref<FileList>):FileList
 	export function emptyListAdminDeptStatReq():ListAdminDeptStatReq
 	export function emptyRefListAdminDeptStatReq():Ref<ListAdminDeptStatReq>
 	export function refOfListAdminDeptStatReq(x:ListAdminDeptStatReq,v:Ref<ListAdminDeptStatReq>)
 	export function unRefListAdminDeptStatReq(v:Ref<ListAdminDeptStatReq>):ListAdminDeptStatReq
+	export function emptyListAdminUserStatReq():ListAdminUserStatReq
+	export function emptyRefListAdminUserStatReq():Ref<ListAdminUserStatReq>
+	export function refOfListAdminUserStatReq(x:ListAdminUserStatReq,v:Ref<ListAdminUserStatReq>)
+	export function unRefListAdminUserStatReq(v:Ref<ListAdminUserStatReq>):ListAdminUserStatReq
+	export function emptyResetPasswordResp():ResetPasswordResp
+	export function emptyRefResetPasswordResp():Ref<ResetPasswordResp>
+	export function refOfResetPasswordResp(x:ResetPasswordResp,v:Ref<ResetPasswordResp>)
+	export function unRefResetPasswordResp(v:Ref<ResetPasswordResp>):ResetPasswordResp
+	export function emptyAuditInfo():AuditInfo
+	export function emptyRefAuditInfo():Ref<AuditInfo>
+	export function refOfAuditInfo(x:AuditInfo,v:Ref<AuditInfo>)
+	export function unRefAuditInfo(v:Ref<AuditInfo>):AuditInfo
+	export function emptyUser():User
+	export function emptyRefUser():Ref<User>
+	export function refOfUser(x:User,v:Ref<User>)
+	export function unRefUser(v:Ref<User>):User
+	export function emptySplashPageStat():SplashPageStat
+	export function emptyRefSplashPageStat():Ref<SplashPageStat>
+	export function refOfSplashPageStat(x:SplashPageStat,v:Ref<SplashPageStat>)
+	export function unRefSplashPageStat(v:Ref<SplashPageStat>):SplashPageStat
+	export function emptyCreateBadgeImageReq():CreateBadgeImageReq
+	export function emptyRefCreateBadgeImageReq():Ref<CreateBadgeImageReq>
+	export function refOfCreateBadgeImageReq(x:CreateBadgeImageReq,v:Ref<CreateBadgeImageReq>)
+	export function unRefCreateBadgeImageReq(v:Ref<CreateBadgeImageReq>):CreateBadgeImageReq
+	export function emptyGetBadgeResp():GetBadgeResp
+	export function emptyRefGetBadgeResp():Ref<GetBadgeResp>
+	export function refOfGetBadgeResp(x:GetBadgeResp,v:Ref<GetBadgeResp>)
+	export function unRefGetBadgeResp(v:Ref<GetBadgeResp>):GetBadgeResp
+	export function emptyListBadgeGrantRespData():ListBadgeGrantRespData
+	export function emptyRefListBadgeGrantRespData():Ref<ListBadgeGrantRespData>
+	export function refOfListBadgeGrantRespData(x:ListBadgeGrantRespData,v:Ref<ListBadgeGrantRespData>)
+	export function unRefListBadgeGrantRespData(v:Ref<ListBadgeGrantRespData>):ListBadgeGrantRespData
+	export function emptyAuditAndroidContext():AuditAndroidContext
+	export function emptyRefAuditAndroidContext():Ref<AuditAndroidContext>
+	export function refOfAuditAndroidContext(x:AuditAndroidContext,v:Ref<AuditAndroidContext>)
+	export function unRefAuditAndroidContext(v:Ref<AuditAndroidContext>):AuditAndroidContext
+	export function emptyCreateBadgeGrantRespData():CreateBadgeGrantRespData
+	export function emptyRefCreateBadgeGrantRespData():Ref<CreateBadgeGrantRespData>
+	export function refOfCreateBadgeGrantRespData(x:CreateBadgeGrantRespData,v:Ref<CreateBadgeGrantRespData>)
+	export function unRefCreateBadgeGrantRespData(v:Ref<CreateBadgeGrantRespData>):CreateBadgeGrantRespData
+	export function emptyI18n():I18n
+	export function emptyRefI18n():Ref<I18n>
+	export function refOfI18n(x:I18n,v:Ref<I18n>)
+	export function unRefI18n(v:Ref<I18n>):I18n
+	export function emptyAuditObjectDetail():AuditObjectDetail
+	export function emptyRefAuditObjectDetail():Ref<AuditObjectDetail>
+	export function refOfAuditObjectDetail(x:AuditObjectDetail,v:Ref<AuditObjectDetail>)
+	export function unRefAuditObjectDetail(v:Ref<AuditObjectDetail>):AuditObjectDetail
+	export function emptyAuditRecipientEntity():AuditRecipientEntity
+	export function emptyRefAuditRecipientEntity():Ref<AuditRecipientEntity>
+	export function refOfAuditRecipientEntity(x:AuditRecipientEntity,v:Ref<AuditRecipientEntity>)
+	export function unRefAuditRecipientEntity(v:Ref<AuditRecipientEntity>):AuditRecipientEntity
+	export function emptyCreateBadgeImageReqBody():CreateBadgeImageReqBody
+	export function emptyRefCreateBadgeImageReqBody():Ref<CreateBadgeImageReqBody>
+	export function refOfCreateBadgeImageReqBody(x:CreateBadgeImageReqBody,v:Ref<CreateBadgeImageReqBody>)
+	export function unRefCreateBadgeImageReqBody(v:Ref<CreateBadgeImageReqBody>):CreateBadgeImageReqBody
+	export function emptyGrant():Grant
+	export function emptyRefGrant():Ref<Grant>
+	export function refOfGrant(x:Grant,v:Ref<Grant>)
+	export function unRefGrant(v:Ref<Grant>):Grant
+	export function emptyDeleteBadgeGrantResp():DeleteBadgeGrantResp
+	export function emptyRefDeleteBadgeGrantResp():Ref<DeleteBadgeGrantResp>
+	export function refOfDeleteBadgeGrantResp(x:DeleteBadgeGrantResp,v:Ref<DeleteBadgeGrantResp>)
+	export function unRefDeleteBadgeGrantResp(v:Ref<DeleteBadgeGrantResp>):DeleteBadgeGrantResp
+	export function emptyListAuditInfoReq():ListAuditInfoReq
+	export function emptyRefListAuditInfoReq():Ref<ListAuditInfoReq>
+	export function refOfListAuditInfoReq(x:ListAuditInfoReq,v:Ref<ListAuditInfoReq>)
+	export function unRefListAuditInfoReq(v:Ref<ListAuditInfoReq>):ListAuditInfoReq
+	export function emptyListBadgeReq():ListBadgeReq
+	export function emptyRefListBadgeReq():Ref<ListBadgeReq>
+	export function refOfListBadgeReq(x:ListBadgeReq,v:Ref<ListBadgeReq>)
+	export function unRefListBadgeReq(v:Ref<ListBadgeReq>):ListBadgeReq
+	export function emptyUpdateBadgeResp():UpdateBadgeResp
+	export function emptyRefUpdateBadgeResp():Ref<UpdateBadgeResp>
+	export function refOfUpdateBadgeResp(x:UpdateBadgeResp,v:Ref<UpdateBadgeResp>)
+	export function unRefUpdateBadgeResp(v:Ref<UpdateBadgeResp>):UpdateBadgeResp
+	export function emptyUserReport2021():UserReport2021
+	export function emptyRefUserReport2021():Ref<UserReport2021>
+	export function refOfUserReport2021(x:UserReport2021,v:Ref<UserReport2021>)
+	export function unRefUserReport2021(v:Ref<UserReport2021>):UserReport2021
+	export function emptyAnnualReportMapFloat():AnnualReportMapFloat
+	export function emptyRefAnnualReportMapFloat():Ref<AnnualReportMapFloat>
+	export function refOfAnnualReportMapFloat(x:AnnualReportMapFloat,v:Ref<AnnualReportMapFloat>)
+	export function unRefAnnualReportMapFloat(v:Ref<AnnualReportMapFloat>):AnnualReportMapFloat
 }

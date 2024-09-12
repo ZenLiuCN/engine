@@ -7,7 +7,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/personal_settings/v1
 	// @ts-ignore
 	import * as context from 'golang/context'
 	// @ts-ignore
-	import type {Struct,Ref,error,bool,int} from 'go'
+	import type {Ref,error,bool,int,Struct} from 'go'
 	export interface BatchCloseSystemStatusPathReqBodyBuilder extends Struct<BatchCloseSystemStatusPathReqBodyBuilder>{
 
 			userList(userList:string[]):Ref<BatchCloseSystemStatusPathReqBodyBuilder>
@@ -435,128 +435,128 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/personal_settings/v1
 				patch(ctx:context.Context,req:Ref<PatchSystemStatusReq>,...options:larkcore.RequestOptionFunc[]):Ref<PatchSystemStatusResp>
 			}>
 	}
-	export function emptyListSystemStatusRespData():ListSystemStatusRespData
-	export function emptyRefListSystemStatusRespData():Ref<ListSystemStatusRespData>
-	export function refOfListSystemStatusRespData(x:ListSystemStatusRespData,v:Ref<ListSystemStatusRespData>)
-	export function unRefListSystemStatusRespData(v:Ref<ListSystemStatusRespData>):ListSystemStatusRespData
-	export function emptyPatchSystemStatusRespData():PatchSystemStatusRespData
-	export function emptyRefPatchSystemStatusRespData():Ref<PatchSystemStatusRespData>
-	export function refOfPatchSystemStatusRespData(x:PatchSystemStatusRespData,v:Ref<PatchSystemStatusRespData>)
-	export function unRefPatchSystemStatusRespData(v:Ref<PatchSystemStatusRespData>):PatchSystemStatusRespData
-	export function emptySystemStatusUserOpenResultEntity():SystemStatusUserOpenResultEntity
-	export function emptyRefSystemStatusUserOpenResultEntity():Ref<SystemStatusUserOpenResultEntity>
-	export function refOfSystemStatusUserOpenResultEntity(x:SystemStatusUserOpenResultEntity,v:Ref<SystemStatusUserOpenResultEntity>)
-	export function unRefSystemStatusUserOpenResultEntity(v:Ref<SystemStatusUserOpenResultEntity>):SystemStatusUserOpenResultEntity
-	export function emptyV1():V1
-	export function emptyRefV1():Ref<V1>
-	export function refOfV1(x:V1,v:Ref<V1>)
-	export function unRefV1(v:Ref<V1>):V1
-	export function emptyBatchCloseSystemStatusResp():BatchCloseSystemStatusResp
-	export function emptyRefBatchCloseSystemStatusResp():Ref<BatchCloseSystemStatusResp>
-	export function refOfBatchCloseSystemStatusResp(x:BatchCloseSystemStatusResp,v:Ref<BatchCloseSystemStatusResp>)
-	export function unRefBatchCloseSystemStatusResp(v:Ref<BatchCloseSystemStatusResp>):BatchCloseSystemStatusResp
-	export function emptyListSystemStatusReq():ListSystemStatusReq
-	export function emptyRefListSystemStatusReq():Ref<ListSystemStatusReq>
-	export function refOfListSystemStatusReq(x:ListSystemStatusReq,v:Ref<ListSystemStatusReq>)
-	export function unRefListSystemStatusReq(v:Ref<ListSystemStatusReq>):ListSystemStatusReq
-	export function emptyPatchSystemStatusReqBody():PatchSystemStatusReqBody
-	export function emptyRefPatchSystemStatusReqBody():Ref<PatchSystemStatusReqBody>
-	export function refOfPatchSystemStatusReqBody(x:PatchSystemStatusReqBody,v:Ref<PatchSystemStatusReqBody>)
-	export function unRefPatchSystemStatusReqBody(v:Ref<PatchSystemStatusReqBody>):PatchSystemStatusReqBody
-	export function emptyPatchSystemStatusResp():PatchSystemStatusResp
-	export function emptyRefPatchSystemStatusResp():Ref<PatchSystemStatusResp>
-	export function refOfPatchSystemStatusResp(x:PatchSystemStatusResp,v:Ref<PatchSystemStatusResp>)
-	export function unRefPatchSystemStatusResp(v:Ref<PatchSystemStatusResp>):PatchSystemStatusResp
-	export function emptyBatchCloseSystemStatusReq():BatchCloseSystemStatusReq
-	export function emptyRefBatchCloseSystemStatusReq():Ref<BatchCloseSystemStatusReq>
-	export function refOfBatchCloseSystemStatusReq(x:BatchCloseSystemStatusReq,v:Ref<BatchCloseSystemStatusReq>)
-	export function unRefBatchCloseSystemStatusReq(v:Ref<BatchCloseSystemStatusReq>):BatchCloseSystemStatusReq
-	export function emptyDepartmentId():DepartmentId
-	export function emptyRefDepartmentId():Ref<DepartmentId>
-	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
-	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptySystemStatusSyncI18nExplain():SystemStatusSyncI18nExplain
-	export function emptyRefSystemStatusSyncI18nExplain():Ref<SystemStatusSyncI18nExplain>
-	export function refOfSystemStatusSyncI18nExplain(x:SystemStatusSyncI18nExplain,v:Ref<SystemStatusSyncI18nExplain>)
-	export function unRefSystemStatusSyncI18nExplain(v:Ref<SystemStatusSyncI18nExplain>):SystemStatusSyncI18nExplain
-	export function emptySystemStatusSyncSetting():SystemStatusSyncSetting
-	export function emptyRefSystemStatusSyncSetting():Ref<SystemStatusSyncSetting>
-	export function refOfSystemStatusSyncSetting(x:SystemStatusSyncSetting,v:Ref<SystemStatusSyncSetting>)
-	export function unRefSystemStatusSyncSetting(v:Ref<SystemStatusSyncSetting>):SystemStatusSyncSetting
-	export function emptyBatchCloseSystemStatusReqBody():BatchCloseSystemStatusReqBody
-	export function emptyRefBatchCloseSystemStatusReqBody():Ref<BatchCloseSystemStatusReqBody>
-	export function refOfBatchCloseSystemStatusReqBody(x:BatchCloseSystemStatusReqBody,v:Ref<BatchCloseSystemStatusReqBody>)
-	export function unRefBatchCloseSystemStatusReqBody(v:Ref<BatchCloseSystemStatusReqBody>):BatchCloseSystemStatusReqBody
-	export function emptyBatchOpenSystemStatusRespData():BatchOpenSystemStatusRespData
-	export function emptyRefBatchOpenSystemStatusRespData():Ref<BatchOpenSystemStatusRespData>
-	export function refOfBatchOpenSystemStatusRespData(x:BatchOpenSystemStatusRespData,v:Ref<BatchOpenSystemStatusRespData>)
-	export function unRefBatchOpenSystemStatusRespData(v:Ref<BatchOpenSystemStatusRespData>):BatchOpenSystemStatusRespData
-	export function emptyBatchOpenSystemStatusResp():BatchOpenSystemStatusResp
-	export function emptyRefBatchOpenSystemStatusResp():Ref<BatchOpenSystemStatusResp>
-	export function refOfBatchOpenSystemStatusResp(x:BatchOpenSystemStatusResp,v:Ref<BatchOpenSystemStatusResp>)
-	export function unRefBatchOpenSystemStatusResp(v:Ref<BatchOpenSystemStatusResp>):BatchOpenSystemStatusResp
-	export function emptyPatchSystemStatusReq():PatchSystemStatusReq
-	export function emptyRefPatchSystemStatusReq():Ref<PatchSystemStatusReq>
-	export function refOfPatchSystemStatusReq(x:PatchSystemStatusReq,v:Ref<PatchSystemStatusReq>)
-	export function unRefPatchSystemStatusReq(v:Ref<PatchSystemStatusReq>):PatchSystemStatusReq
-	export function emptySystemStatusI18nName():SystemStatusI18nName
-	export function emptyRefSystemStatusI18nName():Ref<SystemStatusI18nName>
-	export function refOfSystemStatusI18nName(x:SystemStatusI18nName,v:Ref<SystemStatusI18nName>)
-	export function unRefSystemStatusI18nName(v:Ref<SystemStatusI18nName>):SystemStatusI18nName
-	export function emptyDeleteSystemStatusResp():DeleteSystemStatusResp
-	export function emptyRefDeleteSystemStatusResp():Ref<DeleteSystemStatusResp>
-	export function refOfDeleteSystemStatusResp(x:DeleteSystemStatusResp,v:Ref<DeleteSystemStatusResp>)
-	export function unRefDeleteSystemStatusResp(v:Ref<DeleteSystemStatusResp>):DeleteSystemStatusResp
-	export function emptyListSystemStatusResp():ListSystemStatusResp
-	export function emptyRefListSystemStatusResp():Ref<ListSystemStatusResp>
-	export function refOfListSystemStatusResp(x:ListSystemStatusResp,v:Ref<ListSystemStatusResp>)
-	export function unRefListSystemStatusResp(v:Ref<ListSystemStatusResp>):ListSystemStatusResp
-	export function emptyCreateSystemStatusResp():CreateSystemStatusResp
-	export function emptyRefCreateSystemStatusResp():Ref<CreateSystemStatusResp>
-	export function refOfCreateSystemStatusResp(x:CreateSystemStatusResp,v:Ref<CreateSystemStatusResp>)
-	export function unRefCreateSystemStatusResp(v:Ref<CreateSystemStatusResp>):CreateSystemStatusResp
-	export function emptyBatchOpenSystemStatusReqBody():BatchOpenSystemStatusReqBody
-	export function emptyRefBatchOpenSystemStatusReqBody():Ref<BatchOpenSystemStatusReqBody>
-	export function refOfBatchOpenSystemStatusReqBody(x:BatchOpenSystemStatusReqBody,v:Ref<BatchOpenSystemStatusReqBody>)
-	export function unRefBatchOpenSystemStatusReqBody(v:Ref<BatchOpenSystemStatusReqBody>):BatchOpenSystemStatusReqBody
-	export function emptySystemStatus():SystemStatus
-	export function emptyRefSystemStatus():Ref<SystemStatus>
-	export function refOfSystemStatus(x:SystemStatus,v:Ref<SystemStatus>)
-	export function unRefSystemStatus(v:Ref<SystemStatus>):SystemStatus
 	export function emptyBatchCloseSystemStatusRespData():BatchCloseSystemStatusRespData
 	export function emptyRefBatchCloseSystemStatusRespData():Ref<BatchCloseSystemStatusRespData>
 	export function refOfBatchCloseSystemStatusRespData(x:BatchCloseSystemStatusRespData,v:Ref<BatchCloseSystemStatusRespData>)
 	export function unRefBatchCloseSystemStatusRespData(v:Ref<BatchCloseSystemStatusRespData>):BatchCloseSystemStatusRespData
-	export function emptyCreateSystemStatusReq():CreateSystemStatusReq
-	export function emptyRefCreateSystemStatusReq():Ref<CreateSystemStatusReq>
-	export function refOfCreateSystemStatusReq(x:CreateSystemStatusReq,v:Ref<CreateSystemStatusReq>)
-	export function unRefCreateSystemStatusReq(v:Ref<CreateSystemStatusReq>):CreateSystemStatusReq
-	export function emptyDeleteSystemStatusReq():DeleteSystemStatusReq
-	export function emptyRefDeleteSystemStatusReq():Ref<DeleteSystemStatusReq>
-	export function refOfDeleteSystemStatusReq(x:DeleteSystemStatusReq,v:Ref<DeleteSystemStatusReq>)
-	export function unRefDeleteSystemStatusReq(v:Ref<DeleteSystemStatusReq>):DeleteSystemStatusReq
-	export function emptyListSystemStatusIterator():ListSystemStatusIterator
-	export function emptyRefListSystemStatusIterator():Ref<ListSystemStatusIterator>
-	export function refOfListSystemStatusIterator(x:ListSystemStatusIterator,v:Ref<ListSystemStatusIterator>)
-	export function unRefListSystemStatusIterator(v:Ref<ListSystemStatusIterator>):ListSystemStatusIterator
+	export function emptyListSystemStatusResp():ListSystemStatusResp
+	export function emptyRefListSystemStatusResp():Ref<ListSystemStatusResp>
+	export function refOfListSystemStatusResp(x:ListSystemStatusResp,v:Ref<ListSystemStatusResp>)
+	export function unRefListSystemStatusResp(v:Ref<ListSystemStatusResp>):ListSystemStatusResp
+	export function emptyPatchSystemStatusResp():PatchSystemStatusResp
+	export function emptyRefPatchSystemStatusResp():Ref<PatchSystemStatusResp>
+	export function refOfPatchSystemStatusResp(x:PatchSystemStatusResp,v:Ref<PatchSystemStatusResp>)
+	export function unRefPatchSystemStatusResp(v:Ref<PatchSystemStatusResp>):PatchSystemStatusResp
 	export function emptySystemStatusSyncI18nName():SystemStatusSyncI18nName
 	export function emptyRefSystemStatusSyncI18nName():Ref<SystemStatusSyncI18nName>
 	export function refOfSystemStatusSyncI18nName(x:SystemStatusSyncI18nName,v:Ref<SystemStatusSyncI18nName>)
 	export function unRefSystemStatusSyncI18nName(v:Ref<SystemStatusSyncI18nName>):SystemStatusSyncI18nName
-	export function emptySystemStatusUserOpenParam():SystemStatusUserOpenParam
-	export function emptyRefSystemStatusUserOpenParam():Ref<SystemStatusUserOpenParam>
-	export function refOfSystemStatusUserOpenParam(x:SystemStatusUserOpenParam,v:Ref<SystemStatusUserOpenParam>)
-	export function unRefSystemStatusUserOpenParam(v:Ref<SystemStatusUserOpenParam>):SystemStatusUserOpenParam
+	export function emptyBatchCloseSystemStatusReq():BatchCloseSystemStatusReq
+	export function emptyRefBatchCloseSystemStatusReq():Ref<BatchCloseSystemStatusReq>
+	export function refOfBatchCloseSystemStatusReq(x:BatchCloseSystemStatusReq,v:Ref<BatchCloseSystemStatusReq>)
+	export function unRefBatchCloseSystemStatusReq(v:Ref<BatchCloseSystemStatusReq>):BatchCloseSystemStatusReq
 	export function emptyBatchOpenSystemStatusReq():BatchOpenSystemStatusReq
 	export function emptyRefBatchOpenSystemStatusReq():Ref<BatchOpenSystemStatusReq>
 	export function refOfBatchOpenSystemStatusReq(x:BatchOpenSystemStatusReq,v:Ref<BatchOpenSystemStatusReq>)
 	export function unRefBatchOpenSystemStatusReq(v:Ref<BatchOpenSystemStatusReq>):BatchOpenSystemStatusReq
-	export function emptyCreateSystemStatusRespData():CreateSystemStatusRespData
-	export function emptyRefCreateSystemStatusRespData():Ref<CreateSystemStatusRespData>
-	export function refOfCreateSystemStatusRespData(x:CreateSystemStatusRespData,v:Ref<CreateSystemStatusRespData>)
-	export function unRefCreateSystemStatusRespData(v:Ref<CreateSystemStatusRespData>):CreateSystemStatusRespData
+	export function emptySystemStatusSyncI18nExplain():SystemStatusSyncI18nExplain
+	export function emptyRefSystemStatusSyncI18nExplain():Ref<SystemStatusSyncI18nExplain>
+	export function refOfSystemStatusSyncI18nExplain(x:SystemStatusSyncI18nExplain,v:Ref<SystemStatusSyncI18nExplain>)
+	export function unRefSystemStatusSyncI18nExplain(v:Ref<SystemStatusSyncI18nExplain>):SystemStatusSyncI18nExplain
+	export function emptySystemStatusI18nName():SystemStatusI18nName
+	export function emptyRefSystemStatusI18nName():Ref<SystemStatusI18nName>
+	export function refOfSystemStatusI18nName(x:SystemStatusI18nName,v:Ref<SystemStatusI18nName>)
+	export function unRefSystemStatusI18nName(v:Ref<SystemStatusI18nName>):SystemStatusI18nName
+	export function emptyBatchOpenSystemStatusReqBody():BatchOpenSystemStatusReqBody
+	export function emptyRefBatchOpenSystemStatusReqBody():Ref<BatchOpenSystemStatusReqBody>
+	export function refOfBatchOpenSystemStatusReqBody(x:BatchOpenSystemStatusReqBody,v:Ref<BatchOpenSystemStatusReqBody>)
+	export function unRefBatchOpenSystemStatusReqBody(v:Ref<BatchOpenSystemStatusReqBody>):BatchOpenSystemStatusReqBody
+	export function emptyBatchOpenSystemStatusResp():BatchOpenSystemStatusResp
+	export function emptyRefBatchOpenSystemStatusResp():Ref<BatchOpenSystemStatusResp>
+	export function refOfBatchOpenSystemStatusResp(x:BatchOpenSystemStatusResp,v:Ref<BatchOpenSystemStatusResp>)
+	export function unRefBatchOpenSystemStatusResp(v:Ref<BatchOpenSystemStatusResp>):BatchOpenSystemStatusResp
 	export function emptySystemStatusUserCloseResultEntity():SystemStatusUserCloseResultEntity
 	export function emptyRefSystemStatusUserCloseResultEntity():Ref<SystemStatusUserCloseResultEntity>
 	export function refOfSystemStatusUserCloseResultEntity(x:SystemStatusUserCloseResultEntity,v:Ref<SystemStatusUserCloseResultEntity>)
 	export function unRefSystemStatusUserCloseResultEntity(v:Ref<SystemStatusUserCloseResultEntity>):SystemStatusUserCloseResultEntity
+	export function emptyPatchSystemStatusRespData():PatchSystemStatusRespData
+	export function emptyRefPatchSystemStatusRespData():Ref<PatchSystemStatusRespData>
+	export function refOfPatchSystemStatusRespData(x:PatchSystemStatusRespData,v:Ref<PatchSystemStatusRespData>)
+	export function unRefPatchSystemStatusRespData(v:Ref<PatchSystemStatusRespData>):PatchSystemStatusRespData
+	export function emptyCreateSystemStatusRespData():CreateSystemStatusRespData
+	export function emptyRefCreateSystemStatusRespData():Ref<CreateSystemStatusRespData>
+	export function refOfCreateSystemStatusRespData(x:CreateSystemStatusRespData,v:Ref<CreateSystemStatusRespData>)
+	export function unRefCreateSystemStatusRespData(v:Ref<CreateSystemStatusRespData>):CreateSystemStatusRespData
+	export function emptyV1():V1
+	export function emptyRefV1():Ref<V1>
+	export function refOfV1(x:V1,v:Ref<V1>)
+	export function unRefV1(v:Ref<V1>):V1
+	export function emptyCreateSystemStatusResp():CreateSystemStatusResp
+	export function emptyRefCreateSystemStatusResp():Ref<CreateSystemStatusResp>
+	export function refOfCreateSystemStatusResp(x:CreateSystemStatusResp,v:Ref<CreateSystemStatusResp>)
+	export function unRefCreateSystemStatusResp(v:Ref<CreateSystemStatusResp>):CreateSystemStatusResp
+	export function emptyBatchCloseSystemStatusResp():BatchCloseSystemStatusResp
+	export function emptyRefBatchCloseSystemStatusResp():Ref<BatchCloseSystemStatusResp>
+	export function refOfBatchCloseSystemStatusResp(x:BatchCloseSystemStatusResp,v:Ref<BatchCloseSystemStatusResp>)
+	export function unRefBatchCloseSystemStatusResp(v:Ref<BatchCloseSystemStatusResp>):BatchCloseSystemStatusResp
+	export function emptySystemStatusSyncSetting():SystemStatusSyncSetting
+	export function emptyRefSystemStatusSyncSetting():Ref<SystemStatusSyncSetting>
+	export function refOfSystemStatusSyncSetting(x:SystemStatusSyncSetting,v:Ref<SystemStatusSyncSetting>)
+	export function unRefSystemStatusSyncSetting(v:Ref<SystemStatusSyncSetting>):SystemStatusSyncSetting
+	export function emptyBatchOpenSystemStatusRespData():BatchOpenSystemStatusRespData
+	export function emptyRefBatchOpenSystemStatusRespData():Ref<BatchOpenSystemStatusRespData>
+	export function refOfBatchOpenSystemStatusRespData(x:BatchOpenSystemStatusRespData,v:Ref<BatchOpenSystemStatusRespData>)
+	export function unRefBatchOpenSystemStatusRespData(v:Ref<BatchOpenSystemStatusRespData>):BatchOpenSystemStatusRespData
+	export function emptyDeleteSystemStatusResp():DeleteSystemStatusResp
+	export function emptyRefDeleteSystemStatusResp():Ref<DeleteSystemStatusResp>
+	export function refOfDeleteSystemStatusResp(x:DeleteSystemStatusResp,v:Ref<DeleteSystemStatusResp>)
+	export function unRefDeleteSystemStatusResp(v:Ref<DeleteSystemStatusResp>):DeleteSystemStatusResp
+	export function emptySystemStatusUserOpenParam():SystemStatusUserOpenParam
+	export function emptyRefSystemStatusUserOpenParam():Ref<SystemStatusUserOpenParam>
+	export function refOfSystemStatusUserOpenParam(x:SystemStatusUserOpenParam,v:Ref<SystemStatusUserOpenParam>)
+	export function unRefSystemStatusUserOpenParam(v:Ref<SystemStatusUserOpenParam>):SystemStatusUserOpenParam
+	export function emptySystemStatusUserOpenResultEntity():SystemStatusUserOpenResultEntity
+	export function emptyRefSystemStatusUserOpenResultEntity():Ref<SystemStatusUserOpenResultEntity>
+	export function refOfSystemStatusUserOpenResultEntity(x:SystemStatusUserOpenResultEntity,v:Ref<SystemStatusUserOpenResultEntity>)
+	export function unRefSystemStatusUserOpenResultEntity(v:Ref<SystemStatusUserOpenResultEntity>):SystemStatusUserOpenResultEntity
+	export function emptyDepartmentId():DepartmentId
+	export function emptyRefDepartmentId():Ref<DepartmentId>
+	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
+	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
+	export function emptyListSystemStatusRespData():ListSystemStatusRespData
+	export function emptyRefListSystemStatusRespData():Ref<ListSystemStatusRespData>
+	export function refOfListSystemStatusRespData(x:ListSystemStatusRespData,v:Ref<ListSystemStatusRespData>)
+	export function unRefListSystemStatusRespData(v:Ref<ListSystemStatusRespData>):ListSystemStatusRespData
+	export function emptyListSystemStatusReq():ListSystemStatusReq
+	export function emptyRefListSystemStatusReq():Ref<ListSystemStatusReq>
+	export function refOfListSystemStatusReq(x:ListSystemStatusReq,v:Ref<ListSystemStatusReq>)
+	export function unRefListSystemStatusReq(v:Ref<ListSystemStatusReq>):ListSystemStatusReq
+	export function emptySystemStatus():SystemStatus
+	export function emptyRefSystemStatus():Ref<SystemStatus>
+	export function refOfSystemStatus(x:SystemStatus,v:Ref<SystemStatus>)
+	export function unRefSystemStatus(v:Ref<SystemStatus>):SystemStatus
+	export function emptyListSystemStatusIterator():ListSystemStatusIterator
+	export function emptyRefListSystemStatusIterator():Ref<ListSystemStatusIterator>
+	export function refOfListSystemStatusIterator(x:ListSystemStatusIterator,v:Ref<ListSystemStatusIterator>)
+	export function unRefListSystemStatusIterator(v:Ref<ListSystemStatusIterator>):ListSystemStatusIterator
+	export function emptyBatchCloseSystemStatusReqBody():BatchCloseSystemStatusReqBody
+	export function emptyRefBatchCloseSystemStatusReqBody():Ref<BatchCloseSystemStatusReqBody>
+	export function refOfBatchCloseSystemStatusReqBody(x:BatchCloseSystemStatusReqBody,v:Ref<BatchCloseSystemStatusReqBody>)
+	export function unRefBatchCloseSystemStatusReqBody(v:Ref<BatchCloseSystemStatusReqBody>):BatchCloseSystemStatusReqBody
+	export function emptyCreateSystemStatusReq():CreateSystemStatusReq
+	export function emptyRefCreateSystemStatusReq():Ref<CreateSystemStatusReq>
+	export function refOfCreateSystemStatusReq(x:CreateSystemStatusReq,v:Ref<CreateSystemStatusReq>)
+	export function unRefCreateSystemStatusReq(v:Ref<CreateSystemStatusReq>):CreateSystemStatusReq
+	export function emptyPatchSystemStatusReqBody():PatchSystemStatusReqBody
+	export function emptyRefPatchSystemStatusReqBody():Ref<PatchSystemStatusReqBody>
+	export function refOfPatchSystemStatusReqBody(x:PatchSystemStatusReqBody,v:Ref<PatchSystemStatusReqBody>)
+	export function unRefPatchSystemStatusReqBody(v:Ref<PatchSystemStatusReqBody>):PatchSystemStatusReqBody
+	export function emptyDeleteSystemStatusReq():DeleteSystemStatusReq
+	export function emptyRefDeleteSystemStatusReq():Ref<DeleteSystemStatusReq>
+	export function refOfDeleteSystemStatusReq(x:DeleteSystemStatusReq,v:Ref<DeleteSystemStatusReq>)
+	export function unRefDeleteSystemStatusReq(v:Ref<DeleteSystemStatusReq>):DeleteSystemStatusReq
+	export function emptyPatchSystemStatusReq():PatchSystemStatusReq
+	export function emptyRefPatchSystemStatusReq():Ref<PatchSystemStatusReq>
+	export function refOfPatchSystemStatusReq(x:PatchSystemStatusReq,v:Ref<PatchSystemStatusReq>)
+	export function unRefPatchSystemStatusReq(v:Ref<PatchSystemStatusReq>):PatchSystemStatusReq
 }

@@ -3,13 +3,13 @@
 declare module 'github.com/larksuite/base-sdk-go/v3/service/drive/v1'{
 
 	// @ts-ignore
-	import * as context from 'golang/context'
-	// @ts-ignore
 	import * as larkcore from 'github.com/larksuite/base-sdk-go/v3/core'
 	// @ts-ignore
 	import * as io from 'golang/io'
 	// @ts-ignore
-	import type {bool,error,Alias,Nothing,Ref,Struct,int} from 'go'
+	import * as context from 'golang/context'
+	// @ts-ignore
+	import type {Alias,Nothing,Ref,Struct,int,bool,error} from 'go'
 	export interface ApplyMemberRequest extends Struct<ApplyMemberRequest>{
 
 			perm:Ref<string>
@@ -1627,232 +1627,232 @@ declare module 'github.com/larksuite/base-sdk-go/v3/service/drive/v1'{
 	export const ViewerIdTypeUnionId:string
 	//"user_id"
 	export const ViewerIdTypeUserId:string
-	export function emptyFileUploadInfo():FileUploadInfo
-	export function emptyRefFileUploadInfo():Ref<FileUploadInfo>
-	export function refOfFileUploadInfo(x:FileUploadInfo,v:Ref<FileUploadInfo>)
-	export function unRefFileUploadInfo(v:Ref<FileUploadInfo>):FileUploadInfo
-	export function emptyImportTaskMountPoint():ImportTaskMountPoint
-	export function emptyRefImportTaskMountPoint():Ref<ImportTaskMountPoint>
-	export function refOfImportTaskMountPoint(x:ImportTaskMountPoint,v:Ref<ImportTaskMountPoint>)
-	export function unRefImportTaskMountPoint(v:Ref<ImportTaskMountPoint>):ImportTaskMountPoint
-	export function emptyMeta():Meta
-	export function emptyRefMeta():Ref<Meta>
-	export function refOfMeta(x:Meta,v:Ref<Meta>)
-	export function unRefMeta(v:Ref<Meta>):Meta
-	export function emptyReferEntity():ReferEntity
-	export function emptyRefReferEntity():Ref<ReferEntity>
-	export function refOfReferEntity(x:ReferEntity,v:Ref<ReferEntity>)
-	export function unRefReferEntity(v:Ref<ReferEntity>):ReferEntity
-	export function emptyMember():Member
-	export function emptyRefMember():Ref<Member>
-	export function refOfMember(x:Member,v:Ref<Member>)
-	export function unRefMember(v:Ref<Member>):Member
-	export function emptyRequestDoc():RequestDoc
-	export function emptyRefRequestDoc():Ref<RequestDoc>
-	export function refOfRequestDoc(x:RequestDoc,v:Ref<RequestDoc>)
-	export function unRefRequestDoc(v:Ref<RequestDoc>):RequestDoc
-	export function emptyDepartmentId():DepartmentId
-	export function emptyRefDepartmentId():Ref<DepartmentId>
-	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
-	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptyReplyElement():ReplyElement
-	export function emptyRefReplyElement():Ref<ReplyElement>
-	export function refOfReplyElement(x:ReplyElement,v:Ref<ReplyElement>)
-	export function unRefReplyElement(v:Ref<ReplyElement>):ReplyElement
-	export function emptyApplyMemberRequest():ApplyMemberRequest
-	export function emptyRefApplyMemberRequest():Ref<ApplyMemberRequest>
-	export function refOfApplyMemberRequest(x:ApplyMemberRequest,v:Ref<ApplyMemberRequest>)
-	export function unRefApplyMemberRequest(v:Ref<ApplyMemberRequest>):ApplyMemberRequest
-	export function emptyFileComment():FileComment
-	export function emptyRefFileComment():Ref<FileComment>
-	export function refOfFileComment(x:FileComment,v:Ref<FileComment>)
-	export function unRefFileComment(v:Ref<FileComment>):FileComment
-	export function emptyFileSubscription():FileSubscription
-	export function emptyRefFileSubscription():Ref<FileSubscription>
-	export function refOfFileSubscription(x:FileSubscription,v:Ref<FileSubscription>)
-	export function unRefFileSubscription(v:Ref<FileSubscription>):FileSubscription
-	export function emptyBitableTableRecordActionFieldIdentityUser():BitableTableRecordActionFieldIdentityUser
-	export function emptyRefBitableTableRecordActionFieldIdentityUser():Ref<BitableTableRecordActionFieldIdentityUser>
-	export function refOfBitableTableRecordActionFieldIdentityUser(x:BitableTableRecordActionFieldIdentityUser,v:Ref<BitableTableRecordActionFieldIdentityUser>)
-	export function unRefBitableTableRecordActionFieldIdentityUser(v:Ref<BitableTableRecordActionFieldIdentityUser>):BitableTableRecordActionFieldIdentityUser
-	export function emptyBitableTableFieldActionValuePropertyAutoSerial():BitableTableFieldActionValuePropertyAutoSerial
-	export function emptyRefBitableTableFieldActionValuePropertyAutoSerial():Ref<BitableTableFieldActionValuePropertyAutoSerial>
-	export function refOfBitableTableFieldActionValuePropertyAutoSerial(x:BitableTableFieldActionValuePropertyAutoSerial,v:Ref<BitableTableFieldActionValuePropertyAutoSerial>)
-	export function unRefBitableTableFieldActionValuePropertyAutoSerial(v:Ref<BitableTableFieldActionValuePropertyAutoSerial>):BitableTableFieldActionValuePropertyAutoSerial
-	export function emptyMedia():Media
-	export function emptyRefMedia():Ref<Media>
-	export function refOfMedia(x:Media,v:Ref<Media>)
-	export function unRefMedia(v:Ref<Media>):Media
-	export function emptyUploadInfo():UploadInfo
-	export function emptyRefUploadInfo():Ref<UploadInfo>
-	export function refOfUploadInfo(x:UploadInfo,v:Ref<UploadInfo>)
-	export function unRefUploadInfo(v:Ref<UploadInfo>):UploadInfo
-	export function emptyUploadAllMediaReqBody():UploadAllMediaReqBody
-	export function emptyRefUploadAllMediaReqBody():Ref<UploadAllMediaReqBody>
-	export function refOfUploadAllMediaReqBody(x:UploadAllMediaReqBody,v:Ref<UploadAllMediaReqBody>)
-	export function unRefUploadAllMediaReqBody(v:Ref<UploadAllMediaReqBody>):UploadAllMediaReqBody
-	export function emptyDownloadMediaResp():DownloadMediaResp
-	export function emptyRefDownloadMediaResp():Ref<DownloadMediaResp>
-	export function refOfDownloadMediaResp(x:DownloadMediaResp,v:Ref<DownloadMediaResp>)
-	export function unRefDownloadMediaResp(v:Ref<DownloadMediaResp>):DownloadMediaResp
-	export function emptyFile():File
-	export function emptyRefFile():Ref<File>
-	export function refOfFile(x:File,v:Ref<File>)
-	export function unRefFile(v:Ref<File>):File
-	export function emptyBaseMember():BaseMember
-	export function emptyRefBaseMember():Ref<BaseMember>
-	export function refOfBaseMember(x:BaseMember,v:Ref<BaseMember>)
-	export function unRefBaseMember(v:Ref<BaseMember>):BaseMember
-	export function emptyBitableTableRecordActionField():BitableTableRecordActionField
-	export function emptyRefBitableTableRecordActionField():Ref<BitableTableRecordActionField>
-	export function refOfBitableTableRecordActionField(x:BitableTableRecordActionField,v:Ref<BitableTableRecordActionField>)
-	export function unRefBitableTableRecordActionField(v:Ref<BitableTableRecordActionField>):BitableTableRecordActionField
-	export function emptyUserId():UserId
-	export function emptyRefUserId():Ref<UserId>
-	export function refOfUserId(x:UserId,v:Ref<UserId>)
-	export function unRefUserId(v:Ref<UserId>):UserId
-	export function emptyDocsLink():DocsLink
-	export function emptyRefDocsLink():Ref<DocsLink>
-	export function refOfDocsLink(x:DocsLink,v:Ref<DocsLink>)
-	export function unRefDocsLink(v:Ref<DocsLink>):DocsLink
-	export function emptyUploadAllMediaResp():UploadAllMediaResp
-	export function emptyRefUploadAllMediaResp():Ref<UploadAllMediaResp>
-	export function refOfUploadAllMediaResp(x:UploadAllMediaResp,v:Ref<UploadAllMediaResp>)
-	export function unRefUploadAllMediaResp(v:Ref<UploadAllMediaResp>):UploadAllMediaResp
-	export function emptyFileCommentReply():FileCommentReply
-	export function emptyRefFileCommentReply():Ref<FileCommentReply>
-	export function refOfFileCommentReply(x:FileCommentReply,v:Ref<FileCommentReply>)
-	export function unRefFileCommentReply(v:Ref<FileCommentReply>):FileCommentReply
-	export function emptyTokenType():TokenType
-	export function emptyRefTokenType():Ref<TokenType>
-	export function refOfTokenType(x:TokenType,v:Ref<TokenType>)
-	export function unRefTokenType(v:Ref<TokenType>):TokenType
-	export function emptyVersion():Version
-	export function emptyRefVersion():Ref<Version>
-	export function refOfVersion(x:Version,v:Ref<Version>)
-	export function unRefVersion(v:Ref<Version>):Version
-	export function emptyUploadAllMediaRespData():UploadAllMediaRespData
-	export function emptyRefUploadAllMediaRespData():Ref<UploadAllMediaRespData>
-	export function refOfUploadAllMediaRespData(x:UploadAllMediaRespData,v:Ref<UploadAllMediaRespData>)
-	export function unRefUploadAllMediaRespData(v:Ref<UploadAllMediaRespData>):UploadAllMediaRespData
 	export function emptyBitableTableFieldActionValueProperty():BitableTableFieldActionValueProperty
 	export function emptyRefBitableTableFieldActionValueProperty():Ref<BitableTableFieldActionValueProperty>
 	export function refOfBitableTableFieldActionValueProperty(x:BitableTableFieldActionValueProperty,v:Ref<BitableTableFieldActionValueProperty>)
 	export function unRefBitableTableFieldActionValueProperty(v:Ref<BitableTableFieldActionValueProperty>):BitableTableFieldActionValueProperty
-	export function emptyImportTask():ImportTask
-	export function emptyRefImportTask():Ref<ImportTask>
-	export function refOfImportTask(x:ImportTask,v:Ref<ImportTask>)
-	export function unRefImportTask(v:Ref<ImportTask>):ImportTask
-	export function emptyOwner():Owner
-	export function emptyRefOwner():Ref<Owner>
-	export function refOfOwner(x:Owner,v:Ref<Owner>)
-	export function unRefOwner(v:Ref<Owner>):Owner
-	export function emptyTextRun():TextRun
-	export function emptyRefTextRun():Ref<TextRun>
-	export function refOfTextRun(x:TextRun,v:Ref<TextRun>)
-	export function unRefTextRun(v:Ref<TextRun>):TextRun
-	export function emptyMetaRequest():MetaRequest
-	export function emptyRefMetaRequest():Ref<MetaRequest>
-	export function refOfMetaRequest(x:MetaRequest,v:Ref<MetaRequest>)
-	export function unRefMetaRequest(v:Ref<MetaRequest>):MetaRequest
-	export function emptyUploadAllMediaReq():UploadAllMediaReq
-	export function emptyRefUploadAllMediaReq():Ref<UploadAllMediaReq>
-	export function refOfUploadAllMediaReq(x:UploadAllMediaReq,v:Ref<UploadAllMediaReq>)
-	export function unRefUploadAllMediaReq(v:Ref<UploadAllMediaReq>):UploadAllMediaReq
+	export function emptyReplyElement():ReplyElement
+	export function emptyRefReplyElement():Ref<ReplyElement>
+	export function refOfReplyElement(x:ReplyElement,v:Ref<ReplyElement>)
+	export function unRefReplyElement(v:Ref<ReplyElement>):ReplyElement
 	export function emptyBitableTableFieldAction():BitableTableFieldAction
 	export function emptyRefBitableTableFieldAction():Ref<BitableTableFieldAction>
 	export function refOfBitableTableFieldAction(x:BitableTableFieldAction,v:Ref<BitableTableFieldAction>)
 	export function unRefBitableTableFieldAction(v:Ref<BitableTableFieldAction>):BitableTableFieldAction
-	export function emptyBitableTableFieldActionValue():BitableTableFieldActionValue
-	export function emptyRefBitableTableFieldActionValue():Ref<BitableTableFieldActionValue>
-	export function refOfBitableTableFieldActionValue(x:BitableTableFieldActionValue,v:Ref<BitableTableFieldActionValue>)
-	export function unRefBitableTableFieldActionValue(v:Ref<BitableTableFieldActionValue>):BitableTableFieldActionValue
-	export function emptyDriveService():DriveService
-	export function emptyRefDriveService():Ref<DriveService>
-	export function refOfDriveService(x:DriveService,v:Ref<DriveService>)
-	export function unRefDriveService(v:Ref<DriveService>):DriveService
-	export function emptyFileStatistics():FileStatistics
-	export function emptyRefFileStatistics():Ref<FileStatistics>
-	export function refOfFileStatistics(x:FileStatistics,v:Ref<FileStatistics>)
-	export function unRefFileStatistics(v:Ref<FileStatistics>):FileStatistics
-	export function emptyFileViewRecord():FileViewRecord
-	export function emptyRefFileViewRecord():Ref<FileViewRecord>
-	export function refOfFileViewRecord(x:FileViewRecord,v:Ref<FileViewRecord>)
-	export function unRefFileViewRecord(v:Ref<FileViewRecord>):FileViewRecord
-	export function emptyFileSearch():FileSearch
-	export function emptyRefFileSearch():Ref<FileSearch>
-	export function refOfFileSearch(x:FileSearch,v:Ref<FileSearch>)
-	export function unRefFileSearch(v:Ref<FileSearch>):FileSearch
-	export function emptyBitableTableRecordAction():BitableTableRecordAction
-	export function emptyRefBitableTableRecordAction():Ref<BitableTableRecordAction>
-	export function refOfBitableTableRecordAction(x:BitableTableRecordAction,v:Ref<BitableTableRecordAction>)
-	export function unRefBitableTableRecordAction(v:Ref<BitableTableRecordAction>):BitableTableRecordAction
-	export function emptyDownloadMediaReq():DownloadMediaReq
-	export function emptyRefDownloadMediaReq():Ref<DownloadMediaReq>
-	export function refOfDownloadMediaReq(x:DownloadMediaReq,v:Ref<DownloadMediaReq>)
-	export function unRefDownloadMediaReq(v:Ref<DownloadMediaReq>):DownloadMediaReq
-	export function emptyProperty():Property
-	export function emptyRefProperty():Ref<Property>
-	export function refOfProperty(x:Property,v:Ref<Property>)
-	export function unRefProperty(v:Ref<Property>):Property
-	export function emptyPerson():Person
-	export function emptyRefPerson():Ref<Person>
-	export function refOfPerson(x:Person,v:Ref<Person>)
-	export function unRefPerson(v:Ref<Person>):Person
-	export function emptyBitableTableRecordActionFieldIdentity():BitableTableRecordActionFieldIdentity
-	export function emptyRefBitableTableRecordActionFieldIdentity():Ref<BitableTableRecordActionFieldIdentity>
-	export function refOfBitableTableRecordActionFieldIdentity(x:BitableTableRecordActionFieldIdentity,v:Ref<BitableTableRecordActionFieldIdentity>)
-	export function unRefBitableTableRecordActionFieldIdentity(v:Ref<BitableTableRecordActionFieldIdentity>):BitableTableRecordActionFieldIdentity
-	export function emptyExportTask():ExportTask
-	export function emptyRefExportTask():Ref<ExportTask>
-	export function refOfExportTask(x:ExportTask,v:Ref<ExportTask>)
-	export function unRefExportTask(v:Ref<ExportTask>):ExportTask
-	export function emptyMetaFailed():MetaFailed
-	export function emptyRefMetaFailed():Ref<MetaFailed>
-	export function refOfMetaFailed(x:MetaFailed,v:Ref<MetaFailed>)
-	export function unRefMetaFailed(v:Ref<MetaFailed>):MetaFailed
+	export function emptyBitableTableRecordActionFieldIdentityUser():BitableTableRecordActionFieldIdentityUser
+	export function emptyRefBitableTableRecordActionFieldIdentityUser():Ref<BitableTableRecordActionFieldIdentityUser>
+	export function refOfBitableTableRecordActionFieldIdentityUser(x:BitableTableRecordActionFieldIdentityUser,v:Ref<BitableTableRecordActionFieldIdentityUser>)
+	export function unRefBitableTableRecordActionFieldIdentityUser(v:Ref<BitableTableRecordActionFieldIdentityUser>):BitableTableRecordActionFieldIdentityUser
+	export function emptyUploadAllMediaReqBody():UploadAllMediaReqBody
+	export function emptyRefUploadAllMediaReqBody():Ref<UploadAllMediaReqBody>
+	export function refOfUploadAllMediaReqBody(x:UploadAllMediaReqBody,v:Ref<UploadAllMediaReqBody>)
+	export function unRefUploadAllMediaReqBody(v:Ref<UploadAllMediaReqBody>):UploadAllMediaReqBody
 	export function emptyPermissionPublicRequest():PermissionPublicRequest
 	export function emptyRefPermissionPublicRequest():Ref<PermissionPublicRequest>
 	export function refOfPermissionPublicRequest(x:PermissionPublicRequest,v:Ref<PermissionPublicRequest>)
 	export function unRefPermissionPublicRequest(v:Ref<PermissionPublicRequest>):PermissionPublicRequest
-	export function emptyBitableTableFieldActionValuePropertyOption():BitableTableFieldActionValuePropertyOption
-	export function emptyRefBitableTableFieldActionValuePropertyOption():Ref<BitableTableFieldActionValuePropertyOption>
-	export function refOfBitableTableFieldActionValuePropertyOption(x:BitableTableFieldActionValuePropertyOption,v:Ref<BitableTableFieldActionValuePropertyOption>)
-	export function unRefBitableTableFieldActionValuePropertyOption(v:Ref<BitableTableFieldActionValuePropertyOption>):BitableTableFieldActionValuePropertyOption
-	export function emptyMediaUploadInfo():MediaUploadInfo
-	export function emptyRefMediaUploadInfo():Ref<MediaUploadInfo>
-	export function refOfMediaUploadInfo(x:MediaUploadInfo,v:Ref<MediaUploadInfo>)
-	export function unRefMediaUploadInfo(v:Ref<MediaUploadInfo>):MediaUploadInfo
-	export function emptyPermissionPublic():PermissionPublic
-	export function emptyRefPermissionPublic():Ref<PermissionPublic>
-	export function refOfPermissionPublic(x:PermissionPublic,v:Ref<PermissionPublic>)
-	export function unRefPermissionPublic(v:Ref<PermissionPublic>):PermissionPublic
 	export function emptyReplyContent():ReplyContent
 	export function emptyRefReplyContent():Ref<ReplyContent>
 	export function refOfReplyContent(x:ReplyContent,v:Ref<ReplyContent>)
 	export function unRefReplyContent(v:Ref<ReplyContent>):ReplyContent
+	export function emptyUploadAllMediaReq():UploadAllMediaReq
+	export function emptyRefUploadAllMediaReq():Ref<UploadAllMediaReq>
+	export function refOfUploadAllMediaReq(x:UploadAllMediaReq,v:Ref<UploadAllMediaReq>)
+	export function unRefUploadAllMediaReq(v:Ref<UploadAllMediaReq>):UploadAllMediaReq
+	export function emptyMedia():Media
+	export function emptyRefMedia():Ref<Media>
+	export function refOfMedia(x:Media,v:Ref<Media>)
+	export function unRefMedia(v:Ref<Media>):Media
+	export function emptyMediaUploadInfo():MediaUploadInfo
+	export function emptyRefMediaUploadInfo():Ref<MediaUploadInfo>
+	export function refOfMediaUploadInfo(x:MediaUploadInfo,v:Ref<MediaUploadInfo>)
+	export function unRefMediaUploadInfo(v:Ref<MediaUploadInfo>):MediaUploadInfo
+	export function emptyMember():Member
+	export function emptyRefMember():Ref<Member>
+	export function refOfMember(x:Member,v:Ref<Member>)
+	export function unRefMember(v:Ref<Member>):Member
+	export function emptyBitableTableRecordActionFieldIdentity():BitableTableRecordActionFieldIdentity
+	export function emptyRefBitableTableRecordActionFieldIdentity():Ref<BitableTableRecordActionFieldIdentity>
+	export function refOfBitableTableRecordActionFieldIdentity(x:BitableTableRecordActionFieldIdentity,v:Ref<BitableTableRecordActionFieldIdentity>)
+	export function unRefBitableTableRecordActionFieldIdentity(v:Ref<BitableTableRecordActionFieldIdentity>):BitableTableRecordActionFieldIdentity
+	export function emptyImportTask():ImportTask
+	export function emptyRefImportTask():Ref<ImportTask>
+	export function refOfImportTask(x:ImportTask,v:Ref<ImportTask>)
+	export function unRefImportTask(v:Ref<ImportTask>):ImportTask
+	export function emptyMetaFailed():MetaFailed
+	export function emptyRefMetaFailed():Ref<MetaFailed>
+	export function refOfMetaFailed(x:MetaFailed,v:Ref<MetaFailed>)
+	export function unRefMetaFailed(v:Ref<MetaFailed>):MetaFailed
 	export function emptyReplyList():ReplyList
 	export function emptyRefReplyList():Ref<ReplyList>
 	export function refOfReplyList(x:ReplyList,v:Ref<ReplyList>)
 	export function unRefReplyList(v:Ref<ReplyList>):ReplyList
-	export function emptyTmpDownloadUrl():TmpDownloadUrl
-	export function emptyRefTmpDownloadUrl():Ref<TmpDownloadUrl>
-	export function refOfTmpDownloadUrl(x:TmpDownloadUrl,v:Ref<TmpDownloadUrl>)
-	export function unRefTmpDownloadUrl(v:Ref<TmpDownloadUrl>):TmpDownloadUrl
-	export function emptyShortcutInfo():ShortcutInfo
-	export function emptyRefShortcutInfo():Ref<ShortcutInfo>
-	export function refOfShortcutInfo(x:ShortcutInfo,v:Ref<ShortcutInfo>)
-	export function unRefShortcutInfo(v:Ref<ShortcutInfo>):ShortcutInfo
+	export function emptyVersion():Version
+	export function emptyRefVersion():Ref<Version>
+	export function refOfVersion(x:Version,v:Ref<Version>)
+	export function unRefVersion(v:Ref<Version>):Version
+	export function emptyTokenType():TokenType
+	export function emptyRefTokenType():Ref<TokenType>
+	export function refOfTokenType(x:TokenType,v:Ref<TokenType>)
+	export function unRefTokenType(v:Ref<TokenType>):TokenType
+	export function emptyExportTask():ExportTask
+	export function emptyRefExportTask():Ref<ExportTask>
+	export function refOfExportTask(x:ExportTask,v:Ref<ExportTask>)
+	export function unRefExportTask(v:Ref<ExportTask>):ExportTask
+	export function emptyDepartmentId():DepartmentId
+	export function emptyRefDepartmentId():Ref<DepartmentId>
+	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
+	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
+	export function emptyFileSearch():FileSearch
+	export function emptyRefFileSearch():Ref<FileSearch>
+	export function refOfFileSearch(x:FileSearch,v:Ref<FileSearch>)
+	export function unRefFileSearch(v:Ref<FileSearch>):FileSearch
+	export function emptyFileUploadInfo():FileUploadInfo
+	export function emptyRefFileUploadInfo():Ref<FileUploadInfo>
+	export function refOfFileUploadInfo(x:FileUploadInfo,v:Ref<FileUploadInfo>)
+	export function unRefFileUploadInfo(v:Ref<FileUploadInfo>):FileUploadInfo
+	export function emptyUploadInfo():UploadInfo
+	export function emptyRefUploadInfo():Ref<UploadInfo>
+	export function refOfUploadInfo(x:UploadInfo,v:Ref<UploadInfo>)
+	export function unRefUploadInfo(v:Ref<UploadInfo>):UploadInfo
+	export function emptyApplyMemberRequest():ApplyMemberRequest
+	export function emptyRefApplyMemberRequest():Ref<ApplyMemberRequest>
+	export function refOfApplyMemberRequest(x:ApplyMemberRequest,v:Ref<ApplyMemberRequest>)
+	export function unRefApplyMemberRequest(v:Ref<ApplyMemberRequest>):ApplyMemberRequest
+	export function emptyFileSubscription():FileSubscription
+	export function emptyRefFileSubscription():Ref<FileSubscription>
+	export function refOfFileSubscription(x:FileSubscription,v:Ref<FileSubscription>)
+	export function unRefFileSubscription(v:Ref<FileSubscription>):FileSubscription
+	export function emptyDriveService():DriveService
+	export function emptyRefDriveService():Ref<DriveService>
+	export function refOfDriveService(x:DriveService,v:Ref<DriveService>)
+	export function unRefDriveService(v:Ref<DriveService>):DriveService
+	export function emptyFileComment():FileComment
+	export function emptyRefFileComment():Ref<FileComment>
+	export function refOfFileComment(x:FileComment,v:Ref<FileComment>)
+	export function unRefFileComment(v:Ref<FileComment>):FileComment
+	export function emptyFileStatistics():FileStatistics
+	export function emptyRefFileStatistics():Ref<FileStatistics>
+	export function refOfFileStatistics(x:FileStatistics,v:Ref<FileStatistics>)
+	export function unRefFileStatistics(v:Ref<FileStatistics>):FileStatistics
+	export function emptyBitableTableFieldActionValuePropertyAutoSerial():BitableTableFieldActionValuePropertyAutoSerial
+	export function emptyRefBitableTableFieldActionValuePropertyAutoSerial():Ref<BitableTableFieldActionValuePropertyAutoSerial>
+	export function refOfBitableTableFieldActionValuePropertyAutoSerial(x:BitableTableFieldActionValuePropertyAutoSerial,v:Ref<BitableTableFieldActionValuePropertyAutoSerial>)
+	export function unRefBitableTableFieldActionValuePropertyAutoSerial(v:Ref<BitableTableFieldActionValuePropertyAutoSerial>):BitableTableFieldActionValuePropertyAutoSerial
 	export function emptyBitableTableFieldActionValuePropertyAutoSerialOptions():BitableTableFieldActionValuePropertyAutoSerialOptions
 	export function emptyRefBitableTableFieldActionValuePropertyAutoSerialOptions():Ref<BitableTableFieldActionValuePropertyAutoSerialOptions>
 	export function refOfBitableTableFieldActionValuePropertyAutoSerialOptions(x:BitableTableFieldActionValuePropertyAutoSerialOptions,v:Ref<BitableTableFieldActionValuePropertyAutoSerialOptions>)
 	export function unRefBitableTableFieldActionValuePropertyAutoSerialOptions(v:Ref<BitableTableFieldActionValuePropertyAutoSerialOptions>):BitableTableFieldActionValuePropertyAutoSerialOptions
+	export function emptyMeta():Meta
+	export function emptyRefMeta():Ref<Meta>
+	export function refOfMeta(x:Meta,v:Ref<Meta>)
+	export function unRefMeta(v:Ref<Meta>):Meta
+	export function emptyBaseMember():BaseMember
+	export function emptyRefBaseMember():Ref<BaseMember>
+	export function refOfBaseMember(x:BaseMember,v:Ref<BaseMember>)
+	export function unRefBaseMember(v:Ref<BaseMember>):BaseMember
+	export function emptyBitableTableFieldActionValuePropertyOption():BitableTableFieldActionValuePropertyOption
+	export function emptyRefBitableTableFieldActionValuePropertyOption():Ref<BitableTableFieldActionValuePropertyOption>
+	export function refOfBitableTableFieldActionValuePropertyOption(x:BitableTableFieldActionValuePropertyOption,v:Ref<BitableTableFieldActionValuePropertyOption>)
+	export function unRefBitableTableFieldActionValuePropertyOption(v:Ref<BitableTableFieldActionValuePropertyOption>):BitableTableFieldActionValuePropertyOption
+	export function emptyFileCommentReply():FileCommentReply
+	export function emptyRefFileCommentReply():Ref<FileCommentReply>
+	export function refOfFileCommentReply(x:FileCommentReply,v:Ref<FileCommentReply>)
+	export function unRefFileCommentReply(v:Ref<FileCommentReply>):FileCommentReply
 	export function emptyReplyExtra():ReplyExtra
 	export function emptyRefReplyExtra():Ref<ReplyExtra>
 	export function refOfReplyExtra(x:ReplyExtra,v:Ref<ReplyExtra>)
 	export function unRefReplyExtra(v:Ref<ReplyExtra>):ReplyExtra
+	export function emptyBitableTableRecordActionField():BitableTableRecordActionField
+	export function emptyRefBitableTableRecordActionField():Ref<BitableTableRecordActionField>
+	export function refOfBitableTableRecordActionField(x:BitableTableRecordActionField,v:Ref<BitableTableRecordActionField>)
+	export function unRefBitableTableRecordActionField(v:Ref<BitableTableRecordActionField>):BitableTableRecordActionField
+	export function emptyImportTaskMountPoint():ImportTaskMountPoint
+	export function emptyRefImportTaskMountPoint():Ref<ImportTaskMountPoint>
+	export function refOfImportTaskMountPoint(x:ImportTaskMountPoint,v:Ref<ImportTaskMountPoint>)
+	export function unRefImportTaskMountPoint(v:Ref<ImportTaskMountPoint>):ImportTaskMountPoint
+	export function emptyUploadAllMediaResp():UploadAllMediaResp
+	export function emptyRefUploadAllMediaResp():Ref<UploadAllMediaResp>
+	export function refOfUploadAllMediaResp(x:UploadAllMediaResp,v:Ref<UploadAllMediaResp>)
+	export function unRefUploadAllMediaResp(v:Ref<UploadAllMediaResp>):UploadAllMediaResp
+	export function emptyUserId():UserId
+	export function emptyRefUserId():Ref<UserId>
+	export function refOfUserId(x:UserId,v:Ref<UserId>)
+	export function unRefUserId(v:Ref<UserId>):UserId
+	export function emptyTextRun():TextRun
+	export function emptyRefTextRun():Ref<TextRun>
+	export function refOfTextRun(x:TextRun,v:Ref<TextRun>)
+	export function unRefTextRun(v:Ref<TextRun>):TextRun
+	export function emptyTmpDownloadUrl():TmpDownloadUrl
+	export function emptyRefTmpDownloadUrl():Ref<TmpDownloadUrl>
+	export function refOfTmpDownloadUrl(x:TmpDownloadUrl,v:Ref<TmpDownloadUrl>)
+	export function unRefTmpDownloadUrl(v:Ref<TmpDownloadUrl>):TmpDownloadUrl
+	export function emptyRequestDoc():RequestDoc
+	export function emptyRefRequestDoc():Ref<RequestDoc>
+	export function refOfRequestDoc(x:RequestDoc,v:Ref<RequestDoc>)
+	export function unRefRequestDoc(v:Ref<RequestDoc>):RequestDoc
 	export function emptyCollaborator():Collaborator
 	export function emptyRefCollaborator():Ref<Collaborator>
 	export function refOfCollaborator(x:Collaborator,v:Ref<Collaborator>)
 	export function unRefCollaborator(v:Ref<Collaborator>):Collaborator
+	export function emptyPermissionPublic():PermissionPublic
+	export function emptyRefPermissionPublic():Ref<PermissionPublic>
+	export function refOfPermissionPublic(x:PermissionPublic,v:Ref<PermissionPublic>)
+	export function unRefPermissionPublic(v:Ref<PermissionPublic>):PermissionPublic
+	export function emptyProperty():Property
+	export function emptyRefProperty():Ref<Property>
+	export function refOfProperty(x:Property,v:Ref<Property>)
+	export function unRefProperty(v:Ref<Property>):Property
+	export function emptyShortcutInfo():ShortcutInfo
+	export function emptyRefShortcutInfo():Ref<ShortcutInfo>
+	export function refOfShortcutInfo(x:ShortcutInfo,v:Ref<ShortcutInfo>)
+	export function unRefShortcutInfo(v:Ref<ShortcutInfo>):ShortcutInfo
+	export function emptyFileViewRecord():FileViewRecord
+	export function emptyRefFileViewRecord():Ref<FileViewRecord>
+	export function refOfFileViewRecord(x:FileViewRecord,v:Ref<FileViewRecord>)
+	export function unRefFileViewRecord(v:Ref<FileViewRecord>):FileViewRecord
+	export function emptyOwner():Owner
+	export function emptyRefOwner():Ref<Owner>
+	export function refOfOwner(x:Owner,v:Ref<Owner>)
+	export function unRefOwner(v:Ref<Owner>):Owner
+	export function emptyBitableTableRecordAction():BitableTableRecordAction
+	export function emptyRefBitableTableRecordAction():Ref<BitableTableRecordAction>
+	export function refOfBitableTableRecordAction(x:BitableTableRecordAction,v:Ref<BitableTableRecordAction>)
+	export function unRefBitableTableRecordAction(v:Ref<BitableTableRecordAction>):BitableTableRecordAction
+	export function emptyUploadAllMediaRespData():UploadAllMediaRespData
+	export function emptyRefUploadAllMediaRespData():Ref<UploadAllMediaRespData>
+	export function refOfUploadAllMediaRespData(x:UploadAllMediaRespData,v:Ref<UploadAllMediaRespData>)
+	export function unRefUploadAllMediaRespData(v:Ref<UploadAllMediaRespData>):UploadAllMediaRespData
+	export function emptyPerson():Person
+	export function emptyRefPerson():Ref<Person>
+	export function refOfPerson(x:Person,v:Ref<Person>)
+	export function unRefPerson(v:Ref<Person>):Person
+	export function emptyDownloadMediaReq():DownloadMediaReq
+	export function emptyRefDownloadMediaReq():Ref<DownloadMediaReq>
+	export function refOfDownloadMediaReq(x:DownloadMediaReq,v:Ref<DownloadMediaReq>)
+	export function unRefDownloadMediaReq(v:Ref<DownloadMediaReq>):DownloadMediaReq
+	export function emptyReferEntity():ReferEntity
+	export function emptyRefReferEntity():Ref<ReferEntity>
+	export function refOfReferEntity(x:ReferEntity,v:Ref<ReferEntity>)
+	export function unRefReferEntity(v:Ref<ReferEntity>):ReferEntity
+	export function emptyBitableTableFieldActionValue():BitableTableFieldActionValue
+	export function emptyRefBitableTableFieldActionValue():Ref<BitableTableFieldActionValue>
+	export function refOfBitableTableFieldActionValue(x:BitableTableFieldActionValue,v:Ref<BitableTableFieldActionValue>)
+	export function unRefBitableTableFieldActionValue(v:Ref<BitableTableFieldActionValue>):BitableTableFieldActionValue
+	export function emptyFile():File
+	export function emptyRefFile():Ref<File>
+	export function refOfFile(x:File,v:Ref<File>)
+	export function unRefFile(v:Ref<File>):File
+	export function emptyDocsLink():DocsLink
+	export function emptyRefDocsLink():Ref<DocsLink>
+	export function refOfDocsLink(x:DocsLink,v:Ref<DocsLink>)
+	export function unRefDocsLink(v:Ref<DocsLink>):DocsLink
+	export function emptyDownloadMediaResp():DownloadMediaResp
+	export function emptyRefDownloadMediaResp():Ref<DownloadMediaResp>
+	export function refOfDownloadMediaResp(x:DownloadMediaResp,v:Ref<DownloadMediaResp>)
+	export function unRefDownloadMediaResp(v:Ref<DownloadMediaResp>):DownloadMediaResp
+	export function emptyMetaRequest():MetaRequest
+	export function emptyRefMetaRequest():Ref<MetaRequest>
+	export function refOfMetaRequest(x:MetaRequest,v:Ref<MetaRequest>)
+	export function unRefMetaRequest(v:Ref<MetaRequest>):MetaRequest
 }

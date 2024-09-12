@@ -3,9 +3,9 @@
 declare module 'github.com/larksuite/oapi-sdk-go/v3/service/docx/v1'{
 
 	// @ts-ignore
-	import * as context from 'golang/context'
-	// @ts-ignore
 	import * as larkcore from 'github.com/larksuite/oapi-sdk-go/v3/core'
+	// @ts-ignore
+	import * as context from 'golang/context'
 	// @ts-ignore
 	import type {Nothing,int,error,bool,float64,Ref,Struct,Alias} from 'go'
 	export interface AddOns extends Struct<AddOns>{
@@ -467,6 +467,15 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/docx/v1'{
 			displaySetting:Ref<DocumentDisplaySetting>
 			cover:Ref<DocumentCover>
 	}
+	export interface DocumentAuthor extends Struct<DocumentAuthor>{
+
+			userId:Ref<string>
+	}
+	export interface DocumentAuthorBuilder extends Struct<DocumentAuthorBuilder>{
+
+			userId(userId:string):Ref<DocumentAuthorBuilder>
+			build():Ref<DocumentAuthor>
+	}
 	export interface DocumentBuilder extends Struct<DocumentBuilder>{
 
 			documentId(documentId:string):Ref<DocumentBuilder>
@@ -897,6 +906,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/docx/v1'{
 	export function newDepartmentIdBuilder():Ref<DepartmentIdBuilder>
 
 	export function newDiagramBuilder():Ref<DiagramBuilder>
+
+	export function newDocumentAuthorBuilder():Ref<DocumentAuthorBuilder>
 
 	export function newDocumentBuilder():Ref<DocumentBuilder>
 
@@ -1609,110 +1620,330 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/docx/v1'{
 			wikiToken(wikiToken:string):Ref<WikiCatalogBuilder>
 			build():Ref<WikiCatalog>
 	}
-	export function emptyIsv():Isv
-	export function emptyRefIsv():Ref<Isv>
-	export function refOfIsv(x:Isv,v:Ref<Isv>)
-	export function unRefIsv(v:Ref<Isv>):Isv
-	export function emptyRawContentDocumentRespData():RawContentDocumentRespData
-	export function emptyRefRawContentDocumentRespData():Ref<RawContentDocumentRespData>
-	export function refOfRawContentDocumentRespData(x:RawContentDocumentRespData,v:Ref<RawContentDocumentRespData>)
-	export function unRefRawContentDocumentRespData(v:Ref<RawContentDocumentRespData>):RawContentDocumentRespData
-	export function emptyBitable():Bitable
-	export function emptyRefBitable():Ref<Bitable>
-	export function refOfBitable(x:Bitable,v:Ref<Bitable>)
-	export function unRefBitable(v:Ref<Bitable>):Bitable
-	export function emptyCallout():Callout
-	export function emptyRefCallout():Ref<Callout>
-	export function refOfCallout(x:Callout,v:Ref<Callout>)
-	export function unRefCallout(v:Ref<Callout>):Callout
-	export function emptyGetDocumentBlockResp():GetDocumentBlockResp
-	export function emptyRefGetDocumentBlockResp():Ref<GetDocumentBlockResp>
-	export function refOfGetDocumentBlockResp(x:GetDocumentBlockResp,v:Ref<GetDocumentBlockResp>)
-	export function unRefGetDocumentBlockResp(v:Ref<GetDocumentBlockResp>):GetDocumentBlockResp
-	export function emptyGetDocumentBlockChildrenIterator():GetDocumentBlockChildrenIterator
-	export function emptyRefGetDocumentBlockChildrenIterator():Ref<GetDocumentBlockChildrenIterator>
-	export function refOfGetDocumentBlockChildrenIterator(x:GetDocumentBlockChildrenIterator,v:Ref<GetDocumentBlockChildrenIterator>)
-	export function unRefGetDocumentBlockChildrenIterator(v:Ref<GetDocumentBlockChildrenIterator>):GetDocumentBlockChildrenIterator
-	export function emptyPatchDocumentBlockRespData():PatchDocumentBlockRespData
-	export function emptyRefPatchDocumentBlockRespData():Ref<PatchDocumentBlockRespData>
-	export function refOfPatchDocumentBlockRespData(x:PatchDocumentBlockRespData,v:Ref<PatchDocumentBlockRespData>)
-	export function unRefPatchDocumentBlockRespData(v:Ref<PatchDocumentBlockRespData>):PatchDocumentBlockRespData
-	export function emptyUpdateBlockRequest():UpdateBlockRequest
-	export function emptyRefUpdateBlockRequest():Ref<UpdateBlockRequest>
-	export function refOfUpdateBlockRequest(x:UpdateBlockRequest,v:Ref<UpdateBlockRequest>)
-	export function unRefUpdateBlockRequest(v:Ref<UpdateBlockRequest>):UpdateBlockRequest
-	export function emptyGetDocumentBlockChildrenResp():GetDocumentBlockChildrenResp
-	export function emptyRefGetDocumentBlockChildrenResp():Ref<GetDocumentBlockChildrenResp>
-	export function refOfGetDocumentBlockChildrenResp(x:GetDocumentBlockChildrenResp,v:Ref<GetDocumentBlockChildrenResp>)
-	export function unRefGetDocumentBlockChildrenResp(v:Ref<GetDocumentBlockChildrenResp>):GetDocumentBlockChildrenResp
-	export function emptyAgendaItemTitle():AgendaItemTitle
-	export function emptyRefAgendaItemTitle():Ref<AgendaItemTitle>
-	export function refOfAgendaItemTitle(x:AgendaItemTitle,v:Ref<AgendaItemTitle>)
-	export function unRefAgendaItemTitle(v:Ref<AgendaItemTitle>):AgendaItemTitle
-	export function emptyView():View
-	export function emptyRefView():Ref<View>
-	export function refOfView(x:View,v:Ref<View>)
-	export function unRefView(v:Ref<View>):View
-	export function emptyBatchUpdateDocumentBlockResp():BatchUpdateDocumentBlockResp
-	export function emptyRefBatchUpdateDocumentBlockResp():Ref<BatchUpdateDocumentBlockResp>
-	export function refOfBatchUpdateDocumentBlockResp(x:BatchUpdateDocumentBlockResp,v:Ref<BatchUpdateDocumentBlockResp>)
-	export function unRefBatchUpdateDocumentBlockResp(v:Ref<BatchUpdateDocumentBlockResp>):BatchUpdateDocumentBlockResp
-	export function emptyGetDocumentBlockReq():GetDocumentBlockReq
-	export function emptyRefGetDocumentBlockReq():Ref<GetDocumentBlockReq>
-	export function refOfGetDocumentBlockReq(x:GetDocumentBlockReq,v:Ref<GetDocumentBlockReq>)
-	export function unRefGetDocumentBlockReq(v:Ref<GetDocumentBlockReq>):GetDocumentBlockReq
-	export function emptyCreateDocumentBlockChildrenResp():CreateDocumentBlockChildrenResp
-	export function emptyRefCreateDocumentBlockChildrenResp():Ref<CreateDocumentBlockChildrenResp>
-	export function refOfCreateDocumentBlockChildrenResp(x:CreateDocumentBlockChildrenResp,v:Ref<CreateDocumentBlockChildrenResp>)
-	export function unRefCreateDocumentBlockChildrenResp(v:Ref<CreateDocumentBlockChildrenResp>):CreateDocumentBlockChildrenResp
-	export function emptyGetDocumentReq():GetDocumentReq
-	export function emptyRefGetDocumentReq():Ref<GetDocumentReq>
-	export function refOfGetDocumentReq(x:GetDocumentReq,v:Ref<GetDocumentReq>)
-	export function unRefGetDocumentReq(v:Ref<GetDocumentReq>):GetDocumentReq
-	export function emptyInlineBlock():InlineBlock
-	export function emptyRefInlineBlock():Ref<InlineBlock>
-	export function refOfInlineBlock(x:InlineBlock,v:Ref<InlineBlock>)
-	export function unRefInlineBlock(v:Ref<InlineBlock>):InlineBlock
-	export function emptyCreateDocumentBlockChildrenReqBody():CreateDocumentBlockChildrenReqBody
-	export function emptyRefCreateDocumentBlockChildrenReqBody():Ref<CreateDocumentBlockChildrenReqBody>
-	export function refOfCreateDocumentBlockChildrenReqBody(x:CreateDocumentBlockChildrenReqBody,v:Ref<CreateDocumentBlockChildrenReqBody>)
-	export function unRefCreateDocumentBlockChildrenReqBody(v:Ref<CreateDocumentBlockChildrenReqBody>):CreateDocumentBlockChildrenReqBody
-	export function emptySheet():Sheet
-	export function emptyRefSheet():Ref<Sheet>
-	export function refOfSheet(x:Sheet,v:Ref<Sheet>)
-	export function unRefSheet(v:Ref<Sheet>):Sheet
-	export function emptyCreateDocumentReq():CreateDocumentReq
-	export function emptyRefCreateDocumentReq():Ref<CreateDocumentReq>
-	export function refOfCreateDocumentReq(x:CreateDocumentReq,v:Ref<CreateDocumentReq>)
-	export function unRefCreateDocumentReq(v:Ref<CreateDocumentReq>):CreateDocumentReq
-	export function emptyLinkPreview():LinkPreview
-	export function emptyRefLinkPreview():Ref<LinkPreview>
-	export function refOfLinkPreview(x:LinkPreview,v:Ref<LinkPreview>)
-	export function unRefLinkPreview(v:Ref<LinkPreview>):LinkPreview
-	export function emptyAddOns():AddOns
-	export function emptyRefAddOns():Ref<AddOns>
-	export function refOfAddOns(x:AddOns,v:Ref<AddOns>)
-	export function unRefAddOns(v:Ref<AddOns>):AddOns
-	export function emptyBatchDeleteDocumentBlockChildrenResp():BatchDeleteDocumentBlockChildrenResp
-	export function emptyRefBatchDeleteDocumentBlockChildrenResp():Ref<BatchDeleteDocumentBlockChildrenResp>
-	export function refOfBatchDeleteDocumentBlockChildrenResp(x:BatchDeleteDocumentBlockChildrenResp,v:Ref<BatchDeleteDocumentBlockChildrenResp>)
-	export function unRefBatchDeleteDocumentBlockChildrenResp(v:Ref<BatchDeleteDocumentBlockChildrenResp>):BatchDeleteDocumentBlockChildrenResp
-	export function emptyBatchUpdateDocumentBlockReqBody():BatchUpdateDocumentBlockReqBody
-	export function emptyRefBatchUpdateDocumentBlockReqBody():Ref<BatchUpdateDocumentBlockReqBody>
-	export function refOfBatchUpdateDocumentBlockReqBody(x:BatchUpdateDocumentBlockReqBody,v:Ref<BatchUpdateDocumentBlockReqBody>)
-	export function unRefBatchUpdateDocumentBlockReqBody(v:Ref<BatchUpdateDocumentBlockReqBody>):BatchUpdateDocumentBlockReqBody
+	export function emptyTextElementStyle():TextElementStyle
+	export function emptyRefTextElementStyle():Ref<TextElementStyle>
+	export function refOfTextElementStyle(x:TextElementStyle,v:Ref<TextElementStyle>)
+	export function unRefTextElementStyle(v:Ref<TextElementStyle>):TextElementStyle
+	export function emptyMindnote():Mindnote
+	export function emptyRefMindnote():Ref<Mindnote>
+	export function refOfMindnote(x:Mindnote,v:Ref<Mindnote>)
+	export function unRefMindnote(v:Ref<Mindnote>):Mindnote
+	export function emptyTable():Table
+	export function emptyRefTable():Ref<Table>
+	export function refOfTable(x:Table,v:Ref<Table>)
+	export function unRefTable(v:Ref<Table>):Table
+	export function emptyWikiCatalog():WikiCatalog
+	export function emptyRefWikiCatalog():Ref<WikiCatalog>
+	export function refOfWikiCatalog(x:WikiCatalog,v:Ref<WikiCatalog>)
+	export function unRefWikiCatalog(v:Ref<WikiCatalog>):WikiCatalog
+	export function emptyBlockIdRelation():BlockIdRelation
+	export function emptyRefBlockIdRelation():Ref<BlockIdRelation>
+	export function refOfBlockIdRelation(x:BlockIdRelation,v:Ref<BlockIdRelation>)
+	export function unRefBlockIdRelation(v:Ref<BlockIdRelation>):BlockIdRelation
 	export function emptyMentionDoc():MentionDoc
 	export function emptyRefMentionDoc():Ref<MentionDoc>
 	export function refOfMentionDoc(x:MentionDoc,v:Ref<MentionDoc>)
 	export function unRefMentionDoc(v:Ref<MentionDoc>):MentionDoc
+	export function emptyCreateDocumentBlockChildrenReqBody():CreateDocumentBlockChildrenReqBody
+	export function emptyRefCreateDocumentBlockChildrenReqBody():Ref<CreateDocumentBlockChildrenReqBody>
+	export function refOfCreateDocumentBlockChildrenReqBody(x:CreateDocumentBlockChildrenReqBody,v:Ref<CreateDocumentBlockChildrenReqBody>)
+	export function unRefCreateDocumentBlockChildrenReqBody(v:Ref<CreateDocumentBlockChildrenReqBody>):CreateDocumentBlockChildrenReqBody
+	export function emptyGetDocumentBlockRespData():GetDocumentBlockRespData
+	export function emptyRefGetDocumentBlockRespData():Ref<GetDocumentBlockRespData>
+	export function refOfGetDocumentBlockRespData(x:GetDocumentBlockRespData,v:Ref<GetDocumentBlockRespData>)
+	export function unRefGetDocumentBlockRespData(v:Ref<GetDocumentBlockRespData>):GetDocumentBlockRespData
+	export function emptyRawContentDocumentReq():RawContentDocumentReq
+	export function emptyRefRawContentDocumentReq():Ref<RawContentDocumentReq>
+	export function refOfRawContentDocumentReq(x:RawContentDocumentReq,v:Ref<RawContentDocumentReq>)
+	export function unRefRawContentDocumentReq(v:Ref<RawContentDocumentReq>):RawContentDocumentReq
+	export function emptyInlineFile():InlineFile
+	export function emptyRefInlineFile():Ref<InlineFile>
+	export function refOfInlineFile(x:InlineFile,v:Ref<InlineFile>)
+	export function unRefInlineFile(v:Ref<InlineFile>):InlineFile
+	export function emptyGetDocumentResp():GetDocumentResp
+	export function emptyRefGetDocumentResp():Ref<GetDocumentResp>
+	export function refOfGetDocumentResp(x:GetDocumentResp,v:Ref<GetDocumentResp>)
+	export function unRefGetDocumentResp(v:Ref<GetDocumentResp>):GetDocumentResp
+	export function emptyUpdateBlockRequest():UpdateBlockRequest
+	export function emptyRefUpdateBlockRequest():Ref<UpdateBlockRequest>
+	export function refOfUpdateBlockRequest(x:UpdateBlockRequest,v:Ref<UpdateBlockRequest>)
+	export function unRefUpdateBlockRequest(v:Ref<UpdateBlockRequest>):UpdateBlockRequest
+	export function emptyGetDocumentBlockResp():GetDocumentBlockResp
+	export function emptyRefGetDocumentBlockResp():Ref<GetDocumentBlockResp>
+	export function refOfGetDocumentBlockResp(x:GetDocumentBlockResp,v:Ref<GetDocumentBlockResp>)
+	export function unRefGetDocumentBlockResp(v:Ref<GetDocumentBlockResp>):GetDocumentBlockResp
+	export function emptyGetDocumentRespData():GetDocumentRespData
+	export function emptyRefGetDocumentRespData():Ref<GetDocumentRespData>
+	export function refOfGetDocumentRespData(x:GetDocumentRespData,v:Ref<GetDocumentRespData>)
+	export function unRefGetDocumentRespData(v:Ref<GetDocumentRespData>):GetDocumentRespData
+	export function emptyUpdateTextRequest():UpdateTextRequest
+	export function emptyRefUpdateTextRequest():Ref<UpdateTextRequest>
+	export function refOfUpdateTextRequest(x:UpdateTextRequest,v:Ref<UpdateTextRequest>)
+	export function unRefUpdateTextRequest(v:Ref<UpdateTextRequest>):UpdateTextRequest
+	export function emptyDocument():Document
+	export function emptyRefDocument():Ref<Document>
+	export function refOfDocument(x:Document,v:Ref<Document>)
+	export function unRefDocument(v:Ref<Document>):Document
+	export function emptyPatchDocumentBlockReq():PatchDocumentBlockReq
+	export function emptyRefPatchDocumentBlockReq():Ref<PatchDocumentBlockReq>
+	export function refOfPatchDocumentBlockReq(x:PatchDocumentBlockReq,v:Ref<PatchDocumentBlockReq>)
+	export function unRefPatchDocumentBlockReq(v:Ref<PatchDocumentBlockReq>):PatchDocumentBlockReq
+	export function emptyUpdateTaskRequest():UpdateTaskRequest
+	export function emptyRefUpdateTaskRequest():Ref<UpdateTaskRequest>
+	export function refOfUpdateTaskRequest(x:UpdateTaskRequest,v:Ref<UpdateTaskRequest>)
+	export function unRefUpdateTaskRequest(v:Ref<UpdateTaskRequest>):UpdateTaskRequest
 	export function emptyListDocumentBlockResp():ListDocumentBlockResp
 	export function emptyRefListDocumentBlockResp():Ref<ListDocumentBlockResp>
 	export function refOfListDocumentBlockResp(x:ListDocumentBlockResp,v:Ref<ListDocumentBlockResp>)
 	export function unRefListDocumentBlockResp(v:Ref<ListDocumentBlockResp>):ListDocumentBlockResp
+	export function emptyTableMergeInfo():TableMergeInfo
+	export function emptyRefTableMergeInfo():Ref<TableMergeInfo>
+	export function refOfTableMergeInfo(x:TableMergeInfo,v:Ref<TableMergeInfo>)
+	export function unRefTableMergeInfo(v:Ref<TableMergeInfo>):TableMergeInfo
+	export function emptyGetDocumentBlockChildrenResp():GetDocumentBlockChildrenResp
+	export function emptyRefGetDocumentBlockChildrenResp():Ref<GetDocumentBlockChildrenResp>
+	export function refOfGetDocumentBlockChildrenResp(x:GetDocumentBlockChildrenResp,v:Ref<GetDocumentBlockChildrenResp>)
+	export function unRefGetDocumentBlockChildrenResp(v:Ref<GetDocumentBlockChildrenResp>):GetDocumentBlockChildrenResp
+	export function emptyUpdateGridColumnWidthRatioRequest():UpdateGridColumnWidthRatioRequest
+	export function emptyRefUpdateGridColumnWidthRatioRequest():Ref<UpdateGridColumnWidthRatioRequest>
+	export function refOfUpdateGridColumnWidthRatioRequest(x:UpdateGridColumnWidthRatioRequest,v:Ref<UpdateGridColumnWidthRatioRequest>)
+	export function unRefUpdateGridColumnWidthRatioRequest(v:Ref<UpdateGridColumnWidthRatioRequest>):UpdateGridColumnWidthRatioRequest
+	export function emptyIframeComponent():IframeComponent
+	export function emptyRefIframeComponent():Ref<IframeComponent>
+	export function refOfIframeComponent(x:IframeComponent,v:Ref<IframeComponent>)
+	export function unRefIframeComponent(v:Ref<IframeComponent>):IframeComponent
+	export function emptyTextStyle():TextStyle
+	export function emptyRefTextStyle():Ref<TextStyle>
+	export function refOfTextStyle(x:TextStyle,v:Ref<TextStyle>)
+	export function unRefTextStyle(v:Ref<TextStyle>):TextStyle
+	export function emptyUnmergeTableCellsRequest():UnmergeTableCellsRequest
+	export function emptyRefUnmergeTableCellsRequest():Ref<UnmergeTableCellsRequest>
+	export function refOfUnmergeTableCellsRequest(x:UnmergeTableCellsRequest,v:Ref<UnmergeTableCellsRequest>)
+	export function unRefUnmergeTableCellsRequest(v:Ref<UnmergeTableCellsRequest>):UnmergeTableCellsRequest
+	export function emptyCreateDocumentReqBody():CreateDocumentReqBody
+	export function emptyRefCreateDocumentReqBody():Ref<CreateDocumentReqBody>
+	export function refOfCreateDocumentReqBody(x:CreateDocumentReqBody,v:Ref<CreateDocumentReqBody>)
+	export function unRefCreateDocumentReqBody(v:Ref<CreateDocumentReqBody>):CreateDocumentReqBody
 	export function emptyDocumentCover():DocumentCover
 	export function emptyRefDocumentCover():Ref<DocumentCover>
 	export function refOfDocumentCover(x:DocumentCover,v:Ref<DocumentCover>)
 	export function unRefDocumentCover(v:Ref<DocumentCover>):DocumentCover
+	export function emptyImage():Image
+	export function emptyRefImage():Ref<Image>
+	export function refOfImage(x:Image,v:Ref<Image>)
+	export function unRefImage(v:Ref<Image>):Image
+	export function emptyView():View
+	export function emptyRefView():Ref<View>
+	export function refOfView(x:View,v:Ref<View>)
+	export function unRefView(v:Ref<View>):View
+	export function emptyBatchUpdateDocumentBlockRespData():BatchUpdateDocumentBlockRespData
+	export function emptyRefBatchUpdateDocumentBlockRespData():Ref<BatchUpdateDocumentBlockRespData>
+	export function refOfBatchUpdateDocumentBlockRespData(x:BatchUpdateDocumentBlockRespData,v:Ref<BatchUpdateDocumentBlockRespData>)
+	export function unRefBatchUpdateDocumentBlockRespData(v:Ref<BatchUpdateDocumentBlockRespData>):BatchUpdateDocumentBlockRespData
+	export function emptyBatchDeleteDocumentBlockChildrenReq():BatchDeleteDocumentBlockChildrenReq
+	export function emptyRefBatchDeleteDocumentBlockChildrenReq():Ref<BatchDeleteDocumentBlockChildrenReq>
+	export function refOfBatchDeleteDocumentBlockChildrenReq(x:BatchDeleteDocumentBlockChildrenReq,v:Ref<BatchDeleteDocumentBlockChildrenReq>)
+	export function unRefBatchDeleteDocumentBlockChildrenReq(v:Ref<BatchDeleteDocumentBlockChildrenReq>):BatchDeleteDocumentBlockChildrenReq
+	export function emptyBitable():Bitable
+	export function emptyRefBitable():Ref<Bitable>
+	export function refOfBitable(x:Bitable,v:Ref<Bitable>)
+	export function unRefBitable(v:Ref<Bitable>):Bitable
+	export function emptyTextElement():TextElement
+	export function emptyRefTextElement():Ref<TextElement>
+	export function refOfTextElement(x:TextElement,v:Ref<TextElement>)
+	export function unRefTextElement(v:Ref<TextElement>):TextElement
+	export function emptyIsv():Isv
+	export function emptyRefIsv():Ref<Isv>
+	export function refOfIsv(x:Isv,v:Ref<Isv>)
+	export function unRefIsv(v:Ref<Isv>):Isv
+	export function emptyLinkPreview():LinkPreview
+	export function emptyRefLinkPreview():Ref<LinkPreview>
+	export function refOfLinkPreview(x:LinkPreview,v:Ref<LinkPreview>)
+	export function unRefLinkPreview(v:Ref<LinkPreview>):LinkPreview
+	export function emptyRawContentDocumentResp():RawContentDocumentResp
+	export function emptyRefRawContentDocumentResp():Ref<RawContentDocumentResp>
+	export function refOfRawContentDocumentResp(x:RawContentDocumentResp,v:Ref<RawContentDocumentResp>)
+	export function unRefRawContentDocumentResp(v:Ref<RawContentDocumentResp>):RawContentDocumentResp
+	export function emptyBatchDeleteDocumentBlockChildrenRespData():BatchDeleteDocumentBlockChildrenRespData
+	export function emptyRefBatchDeleteDocumentBlockChildrenRespData():Ref<BatchDeleteDocumentBlockChildrenRespData>
+	export function refOfBatchDeleteDocumentBlockChildrenRespData(x:BatchDeleteDocumentBlockChildrenRespData,v:Ref<BatchDeleteDocumentBlockChildrenRespData>)
+	export function unRefBatchDeleteDocumentBlockChildrenRespData(v:Ref<BatchDeleteDocumentBlockChildrenRespData>):BatchDeleteDocumentBlockChildrenRespData
+	export function emptySheet():Sheet
+	export function emptyRefSheet():Ref<Sheet>
+	export function refOfSheet(x:Sheet,v:Ref<Sheet>)
+	export function unRefSheet(v:Ref<Sheet>):Sheet
+	export function emptyInsertTableColumnRequest():InsertTableColumnRequest
+	export function emptyRefInsertTableColumnRequest():Ref<InsertTableColumnRequest>
+	export function refOfInsertTableColumnRequest(x:InsertTableColumnRequest,v:Ref<InsertTableColumnRequest>)
+	export function unRefInsertTableColumnRequest(v:Ref<InsertTableColumnRequest>):InsertTableColumnRequest
+	export function emptyBatchDeleteDocumentBlockChildrenResp():BatchDeleteDocumentBlockChildrenResp
+	export function emptyRefBatchDeleteDocumentBlockChildrenResp():Ref<BatchDeleteDocumentBlockChildrenResp>
+	export function refOfBatchDeleteDocumentBlockChildrenResp(x:BatchDeleteDocumentBlockChildrenResp,v:Ref<BatchDeleteDocumentBlockChildrenResp>)
+	export function unRefBatchDeleteDocumentBlockChildrenResp(v:Ref<BatchDeleteDocumentBlockChildrenResp>):BatchDeleteDocumentBlockChildrenResp
+	export function emptyTask():Task
+	export function emptyRefTask():Ref<Task>
+	export function refOfTask(x:Task,v:Ref<Task>)
+	export function unRefTask(v:Ref<Task>):Task
+	export function emptyListDocumentBlockRespData():ListDocumentBlockRespData
+	export function emptyRefListDocumentBlockRespData():Ref<ListDocumentBlockRespData>
+	export function refOfListDocumentBlockRespData(x:ListDocumentBlockRespData,v:Ref<ListDocumentBlockRespData>)
+	export function unRefListDocumentBlockRespData(v:Ref<ListDocumentBlockRespData>):ListDocumentBlockRespData
+	export function emptyPatchDocumentBlockResp():PatchDocumentBlockResp
+	export function emptyRefPatchDocumentBlockResp():Ref<PatchDocumentBlockResp>
+	export function refOfPatchDocumentBlockResp(x:PatchDocumentBlockResp,v:Ref<PatchDocumentBlockResp>)
+	export function unRefPatchDocumentBlockResp(v:Ref<PatchDocumentBlockResp>):PatchDocumentBlockResp
+	export function emptyDeleteTableColumnsRequest():DeleteTableColumnsRequest
+	export function emptyRefDeleteTableColumnsRequest():Ref<DeleteTableColumnsRequest>
+	export function refOfDeleteTableColumnsRequest(x:DeleteTableColumnsRequest,v:Ref<DeleteTableColumnsRequest>)
+	export function unRefDeleteTableColumnsRequest(v:Ref<DeleteTableColumnsRequest>):DeleteTableColumnsRequest
+	export function emptyBatchUpdateDocumentBlockReqBody():BatchUpdateDocumentBlockReqBody
+	export function emptyRefBatchUpdateDocumentBlockReqBody():Ref<BatchUpdateDocumentBlockReqBody>
+	export function refOfBatchUpdateDocumentBlockReqBody(x:BatchUpdateDocumentBlockReqBody,v:Ref<BatchUpdateDocumentBlockReqBody>)
+	export function unRefBatchUpdateDocumentBlockReqBody(v:Ref<BatchUpdateDocumentBlockReqBody>):BatchUpdateDocumentBlockReqBody
+	export function emptyCreateDocumentBlockChildrenReq():CreateDocumentBlockChildrenReq
+	export function emptyRefCreateDocumentBlockChildrenReq():Ref<CreateDocumentBlockChildrenReq>
+	export function refOfCreateDocumentBlockChildrenReq(x:CreateDocumentBlockChildrenReq,v:Ref<CreateDocumentBlockChildrenReq>)
+	export function unRefCreateDocumentBlockChildrenReq(v:Ref<CreateDocumentBlockChildrenReq>):CreateDocumentBlockChildrenReq
+	export function emptyGetDocumentBlockChildrenIterator():GetDocumentBlockChildrenIterator
+	export function emptyRefGetDocumentBlockChildrenIterator():Ref<GetDocumentBlockChildrenIterator>
+	export function refOfGetDocumentBlockChildrenIterator(x:GetDocumentBlockChildrenIterator,v:Ref<GetDocumentBlockChildrenIterator>)
+	export function unRefGetDocumentBlockChildrenIterator(v:Ref<GetDocumentBlockChildrenIterator>):GetDocumentBlockChildrenIterator
+	export function emptyOkrObjective():OkrObjective
+	export function emptyRefOkrObjective():Ref<OkrObjective>
+	export function refOfOkrObjective(x:OkrObjective,v:Ref<OkrObjective>)
+	export function unRefOkrObjective(v:Ref<OkrObjective>):OkrObjective
+	export function emptyUpdateDocumentRequest():UpdateDocumentRequest
+	export function emptyRefUpdateDocumentRequest():Ref<UpdateDocumentRequest>
+	export function refOfUpdateDocumentRequest(x:UpdateDocumentRequest,v:Ref<UpdateDocumentRequest>)
+	export function unRefUpdateDocumentRequest(v:Ref<UpdateDocumentRequest>):UpdateDocumentRequest
+	export function emptyInsertGridColumnRequest():InsertGridColumnRequest
+	export function emptyRefInsertGridColumnRequest():Ref<InsertGridColumnRequest>
+	export function refOfInsertGridColumnRequest(x:InsertGridColumnRequest,v:Ref<InsertGridColumnRequest>)
+	export function unRefInsertGridColumnRequest(v:Ref<InsertGridColumnRequest>):InsertGridColumnRequest
+	export function emptyOkrVisibleSetting():OkrVisibleSetting
+	export function emptyRefOkrVisibleSetting():Ref<OkrVisibleSetting>
+	export function refOfOkrVisibleSetting(x:OkrVisibleSetting,v:Ref<OkrVisibleSetting>)
+	export function unRefOkrVisibleSetting(v:Ref<OkrVisibleSetting>):OkrVisibleSetting
+	export function emptyUpdateTextStyleRequest():UpdateTextStyleRequest
+	export function emptyRefUpdateTextStyleRequest():Ref<UpdateTextStyleRequest>
+	export function refOfUpdateTextStyleRequest(x:UpdateTextStyleRequest,v:Ref<UpdateTextStyleRequest>)
+	export function unRefUpdateTextStyleRequest(v:Ref<UpdateTextStyleRequest>):UpdateTextStyleRequest
+	export function emptyGetDocumentBlockChildrenRespData():GetDocumentBlockChildrenRespData
+	export function emptyRefGetDocumentBlockChildrenRespData():Ref<GetDocumentBlockChildrenRespData>
+	export function refOfGetDocumentBlockChildrenRespData(x:GetDocumentBlockChildrenRespData,v:Ref<GetDocumentBlockChildrenRespData>)
+	export function unRefGetDocumentBlockChildrenRespData(v:Ref<GetDocumentBlockChildrenRespData>):GetDocumentBlockChildrenRespData
+	export function emptyGrid():Grid
+	export function emptyRefGrid():Ref<Grid>
+	export function refOfGrid(x:Grid,v:Ref<Grid>)
+	export function unRefGrid(v:Ref<Grid>):Grid
+	export function emptyCreateDocumentBlockChildrenRespData():CreateDocumentBlockChildrenRespData
+	export function emptyRefCreateDocumentBlockChildrenRespData():Ref<CreateDocumentBlockChildrenRespData>
+	export function refOfCreateDocumentBlockChildrenRespData(x:CreateDocumentBlockChildrenRespData,v:Ref<CreateDocumentBlockChildrenRespData>)
+	export function unRefCreateDocumentBlockChildrenRespData(v:Ref<CreateDocumentBlockChildrenRespData>):CreateDocumentBlockChildrenRespData
+	export function emptyGetDocumentBlockReq():GetDocumentBlockReq
+	export function emptyRefGetDocumentBlockReq():Ref<GetDocumentBlockReq>
+	export function refOfGetDocumentBlockReq(x:GetDocumentBlockReq,v:Ref<GetDocumentBlockReq>)
+	export function unRefGetDocumentBlockReq(v:Ref<GetDocumentBlockReq>):GetDocumentBlockReq
+	export function emptyBoard():Board
+	export function emptyRefBoard():Ref<Board>
+	export function refOfBoard(x:Board,v:Ref<Board>)
+	export function unRefBoard(v:Ref<Board>):Board
+	export function emptyCallout():Callout
+	export function emptyRefCallout():Ref<Callout>
+	export function refOfCallout(x:Callout,v:Ref<Callout>)
+	export function unRefCallout(v:Ref<Callout>):Callout
+	export function emptyAddOns():AddOns
+	export function emptyRefAddOns():Ref<AddOns>
+	export function refOfAddOns(x:AddOns,v:Ref<AddOns>)
+	export function unRefAddOns(v:Ref<AddOns>):AddOns
+	export function emptyEquation():Equation
+	export function emptyRefEquation():Ref<Equation>
+	export function refOfEquation(x:Equation,v:Ref<Equation>)
+	export function unRefEquation(v:Ref<Equation>):Equation
+	export function emptyLink():Link
+	export function emptyRefLink():Ref<Link>
+	export function refOfLink(x:Link,v:Ref<Link>)
+	export function unRefLink(v:Ref<Link>):Link
+	export function emptyAgendaItemTitle():AgendaItemTitle
+	export function emptyRefAgendaItemTitle():Ref<AgendaItemTitle>
+	export function refOfAgendaItemTitle(x:AgendaItemTitle,v:Ref<AgendaItemTitle>)
+	export function unRefAgendaItemTitle(v:Ref<AgendaItemTitle>):AgendaItemTitle
+	export function emptyCreateDocumentRespData():CreateDocumentRespData
+	export function emptyRefCreateDocumentRespData():Ref<CreateDocumentRespData>
+	export function refOfCreateDocumentRespData(x:CreateDocumentRespData,v:Ref<CreateDocumentRespData>)
+	export function unRefCreateDocumentRespData(v:Ref<CreateDocumentRespData>):CreateDocumentRespData
+	export function emptyInlineBlock():InlineBlock
+	export function emptyRefInlineBlock():Ref<InlineBlock>
+	export function refOfInlineBlock(x:InlineBlock,v:Ref<InlineBlock>)
+	export function unRefInlineBlock(v:Ref<InlineBlock>):InlineBlock
+	export function emptyInsertTableRowRequest():InsertTableRowRequest
+	export function emptyRefInsertTableRowRequest():Ref<InsertTableRowRequest>
+	export function refOfInsertTableRowRequest(x:InsertTableRowRequest,v:Ref<InsertTableRowRequest>)
+	export function unRefInsertTableRowRequest(v:Ref<InsertTableRowRequest>):InsertTableRowRequest
+	export function emptyDeleteGridColumnRequest():DeleteGridColumnRequest
+	export function emptyRefDeleteGridColumnRequest():Ref<DeleteGridColumnRequest>
+	export function refOfDeleteGridColumnRequest(x:DeleteGridColumnRequest,v:Ref<DeleteGridColumnRequest>)
+	export function unRefDeleteGridColumnRequest(v:Ref<DeleteGridColumnRequest>):DeleteGridColumnRequest
+	export function emptyCreateDocumentResp():CreateDocumentResp
+	export function emptyRefCreateDocumentResp():Ref<CreateDocumentResp>
+	export function refOfCreateDocumentResp(x:CreateDocumentResp,v:Ref<CreateDocumentResp>)
+	export function unRefCreateDocumentResp(v:Ref<CreateDocumentResp>):CreateDocumentResp
+	export function emptyV1():V1
+	export function emptyRefV1():Ref<V1>
+	export function refOfV1(x:V1,v:Ref<V1>)
+	export function unRefV1(v:Ref<V1>):V1
+	export function emptyBatchUpdateDocumentBlockReq():BatchUpdateDocumentBlockReq
+	export function emptyRefBatchUpdateDocumentBlockReq():Ref<BatchUpdateDocumentBlockReq>
+	export function refOfBatchUpdateDocumentBlockReq(x:BatchUpdateDocumentBlockReq,v:Ref<BatchUpdateDocumentBlockReq>)
+	export function unRefBatchUpdateDocumentBlockReq(v:Ref<BatchUpdateDocumentBlockReq>):BatchUpdateDocumentBlockReq
+	export function emptyGetDocumentBlockChildrenReq():GetDocumentBlockChildrenReq
+	export function emptyRefGetDocumentBlockChildrenReq():Ref<GetDocumentBlockChildrenReq>
+	export function refOfGetDocumentBlockChildrenReq(x:GetDocumentBlockChildrenReq,v:Ref<GetDocumentBlockChildrenReq>)
+	export function unRefGetDocumentBlockChildrenReq(v:Ref<GetDocumentBlockChildrenReq>):GetDocumentBlockChildrenReq
+	export function emptyReplaceImageRequest():ReplaceImageRequest
+	export function emptyRefReplaceImageRequest():Ref<ReplaceImageRequest>
+	export function refOfReplaceImageRequest(x:ReplaceImageRequest,v:Ref<ReplaceImageRequest>)
+	export function unRefReplaceImageRequest(v:Ref<ReplaceImageRequest>):ReplaceImageRequest
+	export function emptyCreateDocumentBlockChildrenResp():CreateDocumentBlockChildrenResp
+	export function emptyRefCreateDocumentBlockChildrenResp():Ref<CreateDocumentBlockChildrenResp>
+	export function refOfCreateDocumentBlockChildrenResp(x:CreateDocumentBlockChildrenResp,v:Ref<CreateDocumentBlockChildrenResp>)
+	export function unRefCreateDocumentBlockChildrenResp(v:Ref<CreateDocumentBlockChildrenResp>):CreateDocumentBlockChildrenResp
+	export function emptyRawContentDocumentRespData():RawContentDocumentRespData
+	export function emptyRefRawContentDocumentRespData():Ref<RawContentDocumentRespData>
+	export function refOfRawContentDocumentRespData(x:RawContentDocumentRespData,v:Ref<RawContentDocumentRespData>)
+	export function unRefRawContentDocumentRespData(v:Ref<RawContentDocumentRespData>):RawContentDocumentRespData
+	export function emptyOkrKeyResult():OkrKeyResult
+	export function emptyRefOkrKeyResult():Ref<OkrKeyResult>
+	export function refOfOkrKeyResult(x:OkrKeyResult,v:Ref<OkrKeyResult>)
+	export function unRefOkrKeyResult(v:Ref<OkrKeyResult>):OkrKeyResult
+	export function emptyBatchUpdateDocumentBlockResp():BatchUpdateDocumentBlockResp
+	export function emptyRefBatchUpdateDocumentBlockResp():Ref<BatchUpdateDocumentBlockResp>
+	export function refOfBatchUpdateDocumentBlockResp(x:BatchUpdateDocumentBlockResp,v:Ref<BatchUpdateDocumentBlockResp>)
+	export function unRefBatchUpdateDocumentBlockResp(v:Ref<BatchUpdateDocumentBlockResp>):BatchUpdateDocumentBlockResp
+	export function emptyDeleteTableRowsRequest():DeleteTableRowsRequest
+	export function emptyRefDeleteTableRowsRequest():Ref<DeleteTableRowsRequest>
+	export function refOfDeleteTableRowsRequest(x:DeleteTableRowsRequest,v:Ref<DeleteTableRowsRequest>)
+	export function unRefDeleteTableRowsRequest(v:Ref<DeleteTableRowsRequest>):DeleteTableRowsRequest
+	export function emptyMentionUser():MentionUser
+	export function emptyRefMentionUser():Ref<MentionUser>
+	export function refOfMentionUser(x:MentionUser,v:Ref<MentionUser>)
+	export function unRefMentionUser(v:Ref<MentionUser>):MentionUser
+	export function emptyBatchDeleteDocumentBlockChildrenReqBody():BatchDeleteDocumentBlockChildrenReqBody
+	export function emptyRefBatchDeleteDocumentBlockChildrenReqBody():Ref<BatchDeleteDocumentBlockChildrenReqBody>
+	export function refOfBatchDeleteDocumentBlockChildrenReqBody(x:BatchDeleteDocumentBlockChildrenReqBody,v:Ref<BatchDeleteDocumentBlockChildrenReqBody>)
+	export function unRefBatchDeleteDocumentBlockChildrenReqBody(v:Ref<BatchDeleteDocumentBlockChildrenReqBody>):BatchDeleteDocumentBlockChildrenReqBody
+	export function emptyUpdateTablePropertyRequest():UpdateTablePropertyRequest
+	export function emptyRefUpdateTablePropertyRequest():Ref<UpdateTablePropertyRequest>
+	export function refOfUpdateTablePropertyRequest(x:UpdateTablePropertyRequest,v:Ref<UpdateTablePropertyRequest>)
+	export function unRefUpdateTablePropertyRequest(v:Ref<UpdateTablePropertyRequest>):UpdateTablePropertyRequest
+	export function emptyChatCard():ChatCard
+	export function emptyRefChatCard():Ref<ChatCard>
+	export function refOfChatCard(x:ChatCard,v:Ref<ChatCard>)
+	export function unRefChatCard(v:Ref<ChatCard>):ChatCard
+	export function emptyBlock():Block
+	export function emptyRefBlock():Ref<Block>
+	export function refOfBlock(x:Block,v:Ref<Block>)
+	export function unRefBlock(v:Ref<Block>):Block
 	export function emptyIframe():Iframe
 	export function emptyRefIframe():Ref<Iframe>
 	export function refOfIframe(x:Iframe,v:Ref<Iframe>)
@@ -1721,310 +1952,94 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/docx/v1'{
 	export function emptyRefListDocumentBlockReq():Ref<ListDocumentBlockReq>
 	export function refOfListDocumentBlockReq(x:ListDocumentBlockReq,v:Ref<ListDocumentBlockReq>)
 	export function unRefListDocumentBlockReq(v:Ref<ListDocumentBlockReq>):ListDocumentBlockReq
-	export function emptyReplaceFileRequest():ReplaceFileRequest
-	export function emptyRefReplaceFileRequest():Ref<ReplaceFileRequest>
-	export function refOfReplaceFileRequest(x:ReplaceFileRequest,v:Ref<ReplaceFileRequest>)
-	export function unRefReplaceFileRequest(v:Ref<ReplaceFileRequest>):ReplaceFileRequest
-	export function emptyJiraIssue():JiraIssue
-	export function emptyRefJiraIssue():Ref<JiraIssue>
-	export function refOfJiraIssue(x:JiraIssue,v:Ref<JiraIssue>)
-	export function unRefJiraIssue(v:Ref<JiraIssue>):JiraIssue
-	export function emptyCreateDocumentResp():CreateDocumentResp
-	export function emptyRefCreateDocumentResp():Ref<CreateDocumentResp>
-	export function refOfCreateDocumentResp(x:CreateDocumentResp,v:Ref<CreateDocumentResp>)
-	export function unRefCreateDocumentResp(v:Ref<CreateDocumentResp>):CreateDocumentResp
-	export function emptyInlineFile():InlineFile
-	export function emptyRefInlineFile():Ref<InlineFile>
-	export function refOfInlineFile(x:InlineFile,v:Ref<InlineFile>)
-	export function unRefInlineFile(v:Ref<InlineFile>):InlineFile
-	export function emptyMergeTableCellsRequest():MergeTableCellsRequest
-	export function emptyRefMergeTableCellsRequest():Ref<MergeTableCellsRequest>
-	export function refOfMergeTableCellsRequest(x:MergeTableCellsRequest,v:Ref<MergeTableCellsRequest>)
-	export function unRefMergeTableCellsRequest(v:Ref<MergeTableCellsRequest>):MergeTableCellsRequest
-	export function emptyUpdateTablePropertyRequest():UpdateTablePropertyRequest
-	export function emptyRefUpdateTablePropertyRequest():Ref<UpdateTablePropertyRequest>
-	export function refOfUpdateTablePropertyRequest(x:UpdateTablePropertyRequest,v:Ref<UpdateTablePropertyRequest>)
-	export function unRefUpdateTablePropertyRequest(v:Ref<UpdateTablePropertyRequest>):UpdateTablePropertyRequest
-	export function emptyUpdateTextElementsRequest():UpdateTextElementsRequest
-	export function emptyRefUpdateTextElementsRequest():Ref<UpdateTextElementsRequest>
-	export function refOfUpdateTextElementsRequest(x:UpdateTextElementsRequest,v:Ref<UpdateTextElementsRequest>)
-	export function unRefUpdateTextElementsRequest(v:Ref<UpdateTextElementsRequest>):UpdateTextElementsRequest
-	export function emptyListDocumentBlockRespData():ListDocumentBlockRespData
-	export function emptyRefListDocumentBlockRespData():Ref<ListDocumentBlockRespData>
-	export function refOfListDocumentBlockRespData(x:ListDocumentBlockRespData,v:Ref<ListDocumentBlockRespData>)
-	export function unRefListDocumentBlockRespData(v:Ref<ListDocumentBlockRespData>):ListDocumentBlockRespData
-	export function emptyDeleteGridColumnRequest():DeleteGridColumnRequest
-	export function emptyRefDeleteGridColumnRequest():Ref<DeleteGridColumnRequest>
-	export function refOfDeleteGridColumnRequest(x:DeleteGridColumnRequest,v:Ref<DeleteGridColumnRequest>)
-	export function unRefDeleteGridColumnRequest(v:Ref<DeleteGridColumnRequest>):DeleteGridColumnRequest
-	export function emptyImage():Image
-	export function emptyRefImage():Ref<Image>
-	export function refOfImage(x:Image,v:Ref<Image>)
-	export function unRefImage(v:Ref<Image>):Image
-	export function emptyCreateDocumentBlockChildrenReq():CreateDocumentBlockChildrenReq
-	export function emptyRefCreateDocumentBlockChildrenReq():Ref<CreateDocumentBlockChildrenReq>
-	export function refOfCreateDocumentBlockChildrenReq(x:CreateDocumentBlockChildrenReq,v:Ref<CreateDocumentBlockChildrenReq>)
-	export function unRefCreateDocumentBlockChildrenReq(v:Ref<CreateDocumentBlockChildrenReq>):CreateDocumentBlockChildrenReq
-	export function emptyCreateDocumentBlockChildrenRespData():CreateDocumentBlockChildrenRespData
-	export function emptyRefCreateDocumentBlockChildrenRespData():Ref<CreateDocumentBlockChildrenRespData>
-	export function refOfCreateDocumentBlockChildrenRespData(x:CreateDocumentBlockChildrenRespData,v:Ref<CreateDocumentBlockChildrenRespData>)
-	export function unRefCreateDocumentBlockChildrenRespData(v:Ref<CreateDocumentBlockChildrenRespData>):CreateDocumentBlockChildrenRespData
-	export function emptyOkrObjective():OkrObjective
-	export function emptyRefOkrObjective():Ref<OkrObjective>
-	export function refOfOkrObjective(x:OkrObjective,v:Ref<OkrObjective>)
-	export function unRefOkrObjective(v:Ref<OkrObjective>):OkrObjective
-	export function emptyBatchUpdateDocumentBlockRespData():BatchUpdateDocumentBlockRespData
-	export function emptyRefBatchUpdateDocumentBlockRespData():Ref<BatchUpdateDocumentBlockRespData>
-	export function refOfBatchUpdateDocumentBlockRespData(x:BatchUpdateDocumentBlockRespData,v:Ref<BatchUpdateDocumentBlockRespData>)
-	export function unRefBatchUpdateDocumentBlockRespData(v:Ref<BatchUpdateDocumentBlockRespData>):BatchUpdateDocumentBlockRespData
-	export function emptyFile():File
-	export function emptyRefFile():Ref<File>
-	export function refOfFile(x:File,v:Ref<File>)
-	export function unRefFile(v:Ref<File>):File
-	export function emptyPatchDocumentBlockResp():PatchDocumentBlockResp
-	export function emptyRefPatchDocumentBlockResp():Ref<PatchDocumentBlockResp>
-	export function refOfPatchDocumentBlockResp(x:PatchDocumentBlockResp,v:Ref<PatchDocumentBlockResp>)
-	export function unRefPatchDocumentBlockResp(v:Ref<PatchDocumentBlockResp>):PatchDocumentBlockResp
-	export function emptyEquation():Equation
-	export function emptyRefEquation():Ref<Equation>
-	export function refOfEquation(x:Equation,v:Ref<Equation>)
-	export function unRefEquation(v:Ref<Equation>):Equation
-	export function emptyIframeComponent():IframeComponent
-	export function emptyRefIframeComponent():Ref<IframeComponent>
-	export function refOfIframeComponent(x:IframeComponent,v:Ref<IframeComponent>)
-	export function unRefIframeComponent(v:Ref<IframeComponent>):IframeComponent
-	export function emptyInsertTableRowRequest():InsertTableRowRequest
-	export function emptyRefInsertTableRowRequest():Ref<InsertTableRowRequest>
-	export function refOfInsertTableRowRequest(x:InsertTableRowRequest,v:Ref<InsertTableRowRequest>)
-	export function unRefInsertTableRowRequest(v:Ref<InsertTableRowRequest>):InsertTableRowRequest
-	export function emptyObjectiveIdWithKrId():ObjectiveIdWithKrId
-	export function emptyRefObjectiveIdWithKrId():Ref<ObjectiveIdWithKrId>
-	export function refOfObjectiveIdWithKrId(x:ObjectiveIdWithKrId,v:Ref<ObjectiveIdWithKrId>)
-	export function unRefObjectiveIdWithKrId(v:Ref<ObjectiveIdWithKrId>):ObjectiveIdWithKrId
-	export function emptyV1():V1
-	export function emptyRefV1():Ref<V1>
-	export function refOfV1(x:V1,v:Ref<V1>)
-	export function unRefV1(v:Ref<V1>):V1
-	export function emptyBoard():Board
-	export function emptyRefBoard():Ref<Board>
-	export function refOfBoard(x:Board,v:Ref<Board>)
-	export function unRefBoard(v:Ref<Board>):Board
-	export function emptyGridColumn():GridColumn
-	export function emptyRefGridColumn():Ref<GridColumn>
-	export function refOfGridColumn(x:GridColumn,v:Ref<GridColumn>)
-	export function unRefGridColumn(v:Ref<GridColumn>):GridColumn
-	export function emptyText():Text
-	export function emptyRefText():Ref<Text>
-	export function refOfText(x:Text,v:Ref<Text>)
-	export function unRefText(v:Ref<Text>):Text
-	export function emptyTextRun():TextRun
-	export function emptyRefTextRun():Ref<TextRun>
-	export function refOfTextRun(x:TextRun,v:Ref<TextRun>)
-	export function unRefTextRun(v:Ref<TextRun>):TextRun
-	export function emptyReplaceImageRequest():ReplaceImageRequest
-	export function emptyRefReplaceImageRequest():Ref<ReplaceImageRequest>
-	export function refOfReplaceImageRequest(x:ReplaceImageRequest,v:Ref<ReplaceImageRequest>)
-	export function unRefReplaceImageRequest(v:Ref<ReplaceImageRequest>):ReplaceImageRequest
-	export function emptyTask():Task
-	export function emptyRefTask():Ref<Task>
-	export function refOfTask(x:Task,v:Ref<Task>)
-	export function unRefTask(v:Ref<Task>):Task
-	export function emptyTextStyle():TextStyle
-	export function emptyRefTextStyle():Ref<TextStyle>
-	export function refOfTextStyle(x:TextStyle,v:Ref<TextStyle>)
-	export function unRefTextStyle(v:Ref<TextStyle>):TextStyle
-	export function emptyGetDocumentBlockChildrenReq():GetDocumentBlockChildrenReq
-	export function emptyRefGetDocumentBlockChildrenReq():Ref<GetDocumentBlockChildrenReq>
-	export function refOfGetDocumentBlockChildrenReq(x:GetDocumentBlockChildrenReq,v:Ref<GetDocumentBlockChildrenReq>)
-	export function unRefGetDocumentBlockChildrenReq(v:Ref<GetDocumentBlockChildrenReq>):GetDocumentBlockChildrenReq
-	export function emptyGetDocumentBlockRespData():GetDocumentBlockRespData
-	export function emptyRefGetDocumentBlockRespData():Ref<GetDocumentBlockRespData>
-	export function refOfGetDocumentBlockRespData(x:GetDocumentBlockRespData,v:Ref<GetDocumentBlockRespData>)
-	export function unRefGetDocumentBlockRespData(v:Ref<GetDocumentBlockRespData>):GetDocumentBlockRespData
-	export function emptyListDocumentBlockIterator():ListDocumentBlockIterator
-	export function emptyRefListDocumentBlockIterator():Ref<ListDocumentBlockIterator>
-	export function refOfListDocumentBlockIterator(x:ListDocumentBlockIterator,v:Ref<ListDocumentBlockIterator>)
-	export function unRefListDocumentBlockIterator(v:Ref<ListDocumentBlockIterator>):ListDocumentBlockIterator
-	export function emptyBatchUpdateDocumentBlockReq():BatchUpdateDocumentBlockReq
-	export function emptyRefBatchUpdateDocumentBlockReq():Ref<BatchUpdateDocumentBlockReq>
-	export function refOfBatchUpdateDocumentBlockReq(x:BatchUpdateDocumentBlockReq,v:Ref<BatchUpdateDocumentBlockReq>)
-	export function unRefBatchUpdateDocumentBlockReq(v:Ref<BatchUpdateDocumentBlockReq>):BatchUpdateDocumentBlockReq
-	export function emptyGrid():Grid
-	export function emptyRefGrid():Ref<Grid>
-	export function refOfGrid(x:Grid,v:Ref<Grid>)
-	export function unRefGrid(v:Ref<Grid>):Grid
-	export function emptyLink():Link
-	export function emptyRefLink():Ref<Link>
-	export function refOfLink(x:Link,v:Ref<Link>)
-	export function unRefLink(v:Ref<Link>):Link
-	export function emptyChatCard():ChatCard
-	export function emptyRefChatCard():Ref<ChatCard>
-	export function refOfChatCard(x:ChatCard,v:Ref<ChatCard>)
-	export function unRefChatCard(v:Ref<ChatCard>):ChatCard
-	export function emptyUpdateTaskRequest():UpdateTaskRequest
-	export function emptyRefUpdateTaskRequest():Ref<UpdateTaskRequest>
-	export function refOfUpdateTaskRequest(x:UpdateTaskRequest,v:Ref<UpdateTaskRequest>)
-	export function unRefUpdateTaskRequest(v:Ref<UpdateTaskRequest>):UpdateTaskRequest
-	export function emptyBatchDeleteDocumentBlockChildrenReqBody():BatchDeleteDocumentBlockChildrenReqBody
-	export function emptyRefBatchDeleteDocumentBlockChildrenReqBody():Ref<BatchDeleteDocumentBlockChildrenReqBody>
-	export function refOfBatchDeleteDocumentBlockChildrenReqBody(x:BatchDeleteDocumentBlockChildrenReqBody,v:Ref<BatchDeleteDocumentBlockChildrenReqBody>)
-	export function unRefBatchDeleteDocumentBlockChildrenReqBody(v:Ref<BatchDeleteDocumentBlockChildrenReqBody>):BatchDeleteDocumentBlockChildrenReqBody
-	export function emptyGetDocumentResp():GetDocumentResp
-	export function emptyRefGetDocumentResp():Ref<GetDocumentResp>
-	export function refOfGetDocumentResp(x:GetDocumentResp,v:Ref<GetDocumentResp>)
-	export function unRefGetDocumentResp(v:Ref<GetDocumentResp>):GetDocumentResp
-	export function emptyRawContentDocumentReq():RawContentDocumentReq
-	export function emptyRefRawContentDocumentReq():Ref<RawContentDocumentReq>
-	export function refOfRawContentDocumentReq(x:RawContentDocumentReq,v:Ref<RawContentDocumentReq>)
-	export function unRefRawContentDocumentReq(v:Ref<RawContentDocumentReq>):RawContentDocumentReq
-	export function emptyRawContentDocumentResp():RawContentDocumentResp
-	export function emptyRefRawContentDocumentResp():Ref<RawContentDocumentResp>
-	export function refOfRawContentDocumentResp(x:RawContentDocumentResp,v:Ref<RawContentDocumentResp>)
-	export function unRefRawContentDocumentResp(v:Ref<RawContentDocumentResp>):RawContentDocumentResp
-	export function emptyUpdateDocumentRequest():UpdateDocumentRequest
-	export function emptyRefUpdateDocumentRequest():Ref<UpdateDocumentRequest>
-	export function refOfUpdateDocumentRequest(x:UpdateDocumentRequest,v:Ref<UpdateDocumentRequest>)
-	export function unRefUpdateDocumentRequest(v:Ref<UpdateDocumentRequest>):UpdateDocumentRequest
-	export function emptyBatchDeleteDocumentBlockChildrenRespData():BatchDeleteDocumentBlockChildrenRespData
-	export function emptyRefBatchDeleteDocumentBlockChildrenRespData():Ref<BatchDeleteDocumentBlockChildrenRespData>
-	export function refOfBatchDeleteDocumentBlockChildrenRespData(x:BatchDeleteDocumentBlockChildrenRespData,v:Ref<BatchDeleteDocumentBlockChildrenRespData>)
-	export function unRefBatchDeleteDocumentBlockChildrenRespData(v:Ref<BatchDeleteDocumentBlockChildrenRespData>):BatchDeleteDocumentBlockChildrenRespData
-	export function emptyBlock():Block
-	export function emptyRefBlock():Ref<Block>
-	export function refOfBlock(x:Block,v:Ref<Block>)
-	export function unRefBlock(v:Ref<Block>):Block
-	export function emptyDocument():Document
-	export function emptyRefDocument():Ref<Document>
-	export function refOfDocument(x:Document,v:Ref<Document>)
-	export function unRefDocument(v:Ref<Document>):Document
-	export function emptyUpdateTextRequest():UpdateTextRequest
-	export function emptyRefUpdateTextRequest():Ref<UpdateTextRequest>
-	export function refOfUpdateTextRequest(x:UpdateTextRequest,v:Ref<UpdateTextRequest>)
-	export function unRefUpdateTextRequest(v:Ref<UpdateTextRequest>):UpdateTextRequest
-	export function emptyGetDocumentRespData():GetDocumentRespData
-	export function emptyRefGetDocumentRespData():Ref<GetDocumentRespData>
-	export function refOfGetDocumentRespData(x:GetDocumentRespData,v:Ref<GetDocumentRespData>)
-	export function unRefGetDocumentRespData(v:Ref<GetDocumentRespData>):GetDocumentRespData
-	export function emptyWikiCatalog():WikiCatalog
-	export function emptyRefWikiCatalog():Ref<WikiCatalog>
-	export function refOfWikiCatalog(x:WikiCatalog,v:Ref<WikiCatalog>)
-	export function unRefWikiCatalog(v:Ref<WikiCatalog>):WikiCatalog
-	export function emptyTable():Table
-	export function emptyRefTable():Ref<Table>
-	export function refOfTable(x:Table,v:Ref<Table>)
-	export function unRefTable(v:Ref<Table>):Table
-	export function emptyUpdateTextStyleRequest():UpdateTextStyleRequest
-	export function emptyRefUpdateTextStyleRequest():Ref<UpdateTextStyleRequest>
-	export function refOfUpdateTextStyleRequest(x:UpdateTextStyleRequest,v:Ref<UpdateTextStyleRequest>)
-	export function unRefUpdateTextStyleRequest(v:Ref<UpdateTextStyleRequest>):UpdateTextStyleRequest
-	export function emptyCreateDocumentReqBody():CreateDocumentReqBody
-	export function emptyRefCreateDocumentReqBody():Ref<CreateDocumentReqBody>
-	export function refOfCreateDocumentReqBody(x:CreateDocumentReqBody,v:Ref<CreateDocumentReqBody>)
-	export function unRefCreateDocumentReqBody(v:Ref<CreateDocumentReqBody>):CreateDocumentReqBody
 	export function emptyDepartmentId():DepartmentId
 	export function emptyRefDepartmentId():Ref<DepartmentId>
 	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
 	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptyPatchDocumentBlockReq():PatchDocumentBlockReq
-	export function emptyRefPatchDocumentBlockReq():Ref<PatchDocumentBlockReq>
-	export function refOfPatchDocumentBlockReq(x:PatchDocumentBlockReq,v:Ref<PatchDocumentBlockReq>)
-	export function unRefPatchDocumentBlockReq(v:Ref<PatchDocumentBlockReq>):PatchDocumentBlockReq
-	export function emptyMindnote():Mindnote
-	export function emptyRefMindnote():Ref<Mindnote>
-	export function refOfMindnote(x:Mindnote,v:Ref<Mindnote>)
-	export function unRefMindnote(v:Ref<Mindnote>):Mindnote
-	export function emptyAgendaTitleElement():AgendaTitleElement
-	export function emptyRefAgendaTitleElement():Ref<AgendaTitleElement>
-	export function refOfAgendaTitleElement(x:AgendaTitleElement,v:Ref<AgendaTitleElement>)
-	export function unRefAgendaTitleElement(v:Ref<AgendaTitleElement>):AgendaTitleElement
-	export function emptyOkrProgressRate():OkrProgressRate
-	export function emptyRefOkrProgressRate():Ref<OkrProgressRate>
-	export function refOfOkrProgressRate(x:OkrProgressRate,v:Ref<OkrProgressRate>)
-	export function unRefOkrProgressRate(v:Ref<OkrProgressRate>):OkrProgressRate
-	export function emptyOkrVisibleSetting():OkrVisibleSetting
-	export function emptyRefOkrVisibleSetting():Ref<OkrVisibleSetting>
-	export function refOfOkrVisibleSetting(x:OkrVisibleSetting,v:Ref<OkrVisibleSetting>)
-	export function unRefOkrVisibleSetting(v:Ref<OkrVisibleSetting>):OkrVisibleSetting
-	export function emptyTableMergeInfo():TableMergeInfo
-	export function emptyRefTableMergeInfo():Ref<TableMergeInfo>
-	export function refOfTableMergeInfo(x:TableMergeInfo,v:Ref<TableMergeInfo>)
-	export function unRefTableMergeInfo(v:Ref<TableMergeInfo>):TableMergeInfo
-	export function emptyBatchDeleteDocumentBlockChildrenReq():BatchDeleteDocumentBlockChildrenReq
-	export function emptyRefBatchDeleteDocumentBlockChildrenReq():Ref<BatchDeleteDocumentBlockChildrenReq>
-	export function refOfBatchDeleteDocumentBlockChildrenReq(x:BatchDeleteDocumentBlockChildrenReq,v:Ref<BatchDeleteDocumentBlockChildrenReq>)
-	export function unRefBatchDeleteDocumentBlockChildrenReq(v:Ref<BatchDeleteDocumentBlockChildrenReq>):BatchDeleteDocumentBlockChildrenReq
-	export function emptyDeleteTableRowsRequest():DeleteTableRowsRequest
-	export function emptyRefDeleteTableRowsRequest():Ref<DeleteTableRowsRequest>
-	export function refOfDeleteTableRowsRequest(x:DeleteTableRowsRequest,v:Ref<DeleteTableRowsRequest>)
-	export function unRefDeleteTableRowsRequest(v:Ref<DeleteTableRowsRequest>):DeleteTableRowsRequest
-	export function emptyUpdateGridColumnWidthRatioRequest():UpdateGridColumnWidthRatioRequest
-	export function emptyRefUpdateGridColumnWidthRatioRequest():Ref<UpdateGridColumnWidthRatioRequest>
-	export function refOfUpdateGridColumnWidthRatioRequest(x:UpdateGridColumnWidthRatioRequest,v:Ref<UpdateGridColumnWidthRatioRequest>)
-	export function unRefUpdateGridColumnWidthRatioRequest(v:Ref<UpdateGridColumnWidthRatioRequest>):UpdateGridColumnWidthRatioRequest
+	export function emptyObjectiveIdWithKrId():ObjectiveIdWithKrId
+	export function emptyRefObjectiveIdWithKrId():Ref<ObjectiveIdWithKrId>
+	export function refOfObjectiveIdWithKrId(x:ObjectiveIdWithKrId,v:Ref<ObjectiveIdWithKrId>)
+	export function unRefObjectiveIdWithKrId(v:Ref<ObjectiveIdWithKrId>):ObjectiveIdWithKrId
+	export function emptyText():Text
+	export function emptyRefText():Ref<Text>
+	export function refOfText(x:Text,v:Ref<Text>)
+	export function unRefText(v:Ref<Text>):Text
 	export function emptyUpdateCoverRequest():UpdateCoverRequest
 	export function emptyRefUpdateCoverRequest():Ref<UpdateCoverRequest>
 	export function refOfUpdateCoverRequest(x:UpdateCoverRequest,v:Ref<UpdateCoverRequest>)
 	export function unRefUpdateCoverRequest(v:Ref<UpdateCoverRequest>):UpdateCoverRequest
-	export function emptyBlockIdRelation():BlockIdRelation
-	export function emptyRefBlockIdRelation():Ref<BlockIdRelation>
-	export function refOfBlockIdRelation(x:BlockIdRelation,v:Ref<BlockIdRelation>)
-	export function unRefBlockIdRelation(v:Ref<BlockIdRelation>):BlockIdRelation
-	export function emptyGetDocumentBlockChildrenRespData():GetDocumentBlockChildrenRespData
-	export function emptyRefGetDocumentBlockChildrenRespData():Ref<GetDocumentBlockChildrenRespData>
-	export function refOfGetDocumentBlockChildrenRespData(x:GetDocumentBlockChildrenRespData,v:Ref<GetDocumentBlockChildrenRespData>)
-	export function unRefGetDocumentBlockChildrenRespData(v:Ref<GetDocumentBlockChildrenRespData>):GetDocumentBlockChildrenRespData
-	export function emptyMentionUser():MentionUser
-	export function emptyRefMentionUser():Ref<MentionUser>
-	export function refOfMentionUser(x:MentionUser,v:Ref<MentionUser>)
-	export function unRefMentionUser(v:Ref<MentionUser>):MentionUser
-	export function emptyInsertGridColumnRequest():InsertGridColumnRequest
-	export function emptyRefInsertGridColumnRequest():Ref<InsertGridColumnRequest>
-	export function refOfInsertGridColumnRequest(x:InsertGridColumnRequest,v:Ref<InsertGridColumnRequest>)
-	export function unRefInsertGridColumnRequest(v:Ref<InsertGridColumnRequest>):InsertGridColumnRequest
-	export function emptyInsertTableColumnRequest():InsertTableColumnRequest
-	export function emptyRefInsertTableColumnRequest():Ref<InsertTableColumnRequest>
-	export function refOfInsertTableColumnRequest(x:InsertTableColumnRequest,v:Ref<InsertTableColumnRequest>)
-	export function unRefInsertTableColumnRequest(v:Ref<InsertTableColumnRequest>):InsertTableColumnRequest
+	export function emptyGetDocumentReq():GetDocumentReq
+	export function emptyRefGetDocumentReq():Ref<GetDocumentReq>
+	export function refOfGetDocumentReq(x:GetDocumentReq,v:Ref<GetDocumentReq>)
+	export function unRefGetDocumentReq(v:Ref<GetDocumentReq>):GetDocumentReq
 	export function emptyOkr():Okr
 	export function emptyRefOkr():Ref<Okr>
 	export function refOfOkr(x:Okr,v:Ref<Okr>)
 	export function unRefOkr(v:Ref<Okr>):Okr
-	export function emptyCreateDocumentRespData():CreateDocumentRespData
-	export function emptyRefCreateDocumentRespData():Ref<CreateDocumentRespData>
-	export function refOfCreateDocumentRespData(x:CreateDocumentRespData,v:Ref<CreateDocumentRespData>)
-	export function unRefCreateDocumentRespData(v:Ref<CreateDocumentRespData>):CreateDocumentRespData
 	export function emptyDiagram():Diagram
 	export function emptyRefDiagram():Ref<Diagram>
 	export function refOfDiagram(x:Diagram,v:Ref<Diagram>)
 	export function unRefDiagram(v:Ref<Diagram>):Diagram
-	export function emptyOkrKeyResult():OkrKeyResult
-	export function emptyRefOkrKeyResult():Ref<OkrKeyResult>
-	export function refOfOkrKeyResult(x:OkrKeyResult,v:Ref<OkrKeyResult>)
-	export function unRefOkrKeyResult(v:Ref<OkrKeyResult>):OkrKeyResult
-	export function emptyUnmergeTableCellsRequest():UnmergeTableCellsRequest
-	export function emptyRefUnmergeTableCellsRequest():Ref<UnmergeTableCellsRequest>
-	export function refOfUnmergeTableCellsRequest(x:UnmergeTableCellsRequest,v:Ref<UnmergeTableCellsRequest>)
-	export function unRefUnmergeTableCellsRequest(v:Ref<UnmergeTableCellsRequest>):UnmergeTableCellsRequest
+	export function emptyListDocumentBlockIterator():ListDocumentBlockIterator
+	export function emptyRefListDocumentBlockIterator():Ref<ListDocumentBlockIterator>
+	export function refOfListDocumentBlockIterator(x:ListDocumentBlockIterator,v:Ref<ListDocumentBlockIterator>)
+	export function unRefListDocumentBlockIterator(v:Ref<ListDocumentBlockIterator>):ListDocumentBlockIterator
 	export function emptyTableProperty():TableProperty
 	export function emptyRefTableProperty():Ref<TableProperty>
 	export function refOfTableProperty(x:TableProperty,v:Ref<TableProperty>)
 	export function unRefTableProperty(v:Ref<TableProperty>):TableProperty
-	export function emptyTextElement():TextElement
-	export function emptyRefTextElement():Ref<TextElement>
-	export function refOfTextElement(x:TextElement,v:Ref<TextElement>)
-	export function unRefTextElement(v:Ref<TextElement>):TextElement
-	export function emptyTextElementStyle():TextElementStyle
-	export function emptyRefTextElementStyle():Ref<TextElementStyle>
-	export function refOfTextElementStyle(x:TextElementStyle,v:Ref<TextElementStyle>)
-	export function unRefTextElementStyle(v:Ref<TextElementStyle>):TextElementStyle
-	export function emptyDeleteTableColumnsRequest():DeleteTableColumnsRequest
-	export function emptyRefDeleteTableColumnsRequest():Ref<DeleteTableColumnsRequest>
-	export function refOfDeleteTableColumnsRequest(x:DeleteTableColumnsRequest,v:Ref<DeleteTableColumnsRequest>)
-	export function unRefDeleteTableColumnsRequest(v:Ref<DeleteTableColumnsRequest>):DeleteTableColumnsRequest
+	export function emptyUpdateTextElementsRequest():UpdateTextElementsRequest
+	export function emptyRefUpdateTextElementsRequest():Ref<UpdateTextElementsRequest>
+	export function refOfUpdateTextElementsRequest(x:UpdateTextElementsRequest,v:Ref<UpdateTextElementsRequest>)
+	export function unRefUpdateTextElementsRequest(v:Ref<UpdateTextElementsRequest>):UpdateTextElementsRequest
+	export function emptyCreateDocumentReq():CreateDocumentReq
+	export function emptyRefCreateDocumentReq():Ref<CreateDocumentReq>
+	export function refOfCreateDocumentReq(x:CreateDocumentReq,v:Ref<CreateDocumentReq>)
+	export function unRefCreateDocumentReq(v:Ref<CreateDocumentReq>):CreateDocumentReq
+	export function emptyJiraIssue():JiraIssue
+	export function emptyRefJiraIssue():Ref<JiraIssue>
+	export function refOfJiraIssue(x:JiraIssue,v:Ref<JiraIssue>)
+	export function unRefJiraIssue(v:Ref<JiraIssue>):JiraIssue
+	export function emptyMergeTableCellsRequest():MergeTableCellsRequest
+	export function emptyRefMergeTableCellsRequest():Ref<MergeTableCellsRequest>
+	export function refOfMergeTableCellsRequest(x:MergeTableCellsRequest,v:Ref<MergeTableCellsRequest>)
+	export function unRefMergeTableCellsRequest(v:Ref<MergeTableCellsRequest>):MergeTableCellsRequest
+	export function emptyReplaceFileRequest():ReplaceFileRequest
+	export function emptyRefReplaceFileRequest():Ref<ReplaceFileRequest>
+	export function refOfReplaceFileRequest(x:ReplaceFileRequest,v:Ref<ReplaceFileRequest>)
+	export function unRefReplaceFileRequest(v:Ref<ReplaceFileRequest>):ReplaceFileRequest
+	export function emptyOkrProgressRate():OkrProgressRate
+	export function emptyRefOkrProgressRate():Ref<OkrProgressRate>
+	export function refOfOkrProgressRate(x:OkrProgressRate,v:Ref<OkrProgressRate>)
+	export function unRefOkrProgressRate(v:Ref<OkrProgressRate>):OkrProgressRate
+	export function emptyTextRun():TextRun
+	export function emptyRefTextRun():Ref<TextRun>
+	export function refOfTextRun(x:TextRun,v:Ref<TextRun>)
+	export function unRefTextRun(v:Ref<TextRun>):TextRun
+	export function emptyAgendaTitleElement():AgendaTitleElement
+	export function emptyRefAgendaTitleElement():Ref<AgendaTitleElement>
+	export function refOfAgendaTitleElement(x:AgendaTitleElement,v:Ref<AgendaTitleElement>)
+	export function unRefAgendaTitleElement(v:Ref<AgendaTitleElement>):AgendaTitleElement
 	export function emptyDocumentDisplaySetting():DocumentDisplaySetting
 	export function emptyRefDocumentDisplaySetting():Ref<DocumentDisplaySetting>
 	export function refOfDocumentDisplaySetting(x:DocumentDisplaySetting,v:Ref<DocumentDisplaySetting>)
 	export function unRefDocumentDisplaySetting(v:Ref<DocumentDisplaySetting>):DocumentDisplaySetting
+	export function emptyGridColumn():GridColumn
+	export function emptyRefGridColumn():Ref<GridColumn>
+	export function refOfGridColumn(x:GridColumn,v:Ref<GridColumn>)
+	export function unRefGridColumn(v:Ref<GridColumn>):GridColumn
+	export function emptyPatchDocumentBlockRespData():PatchDocumentBlockRespData
+	export function emptyRefPatchDocumentBlockRespData():Ref<PatchDocumentBlockRespData>
+	export function refOfPatchDocumentBlockRespData(x:PatchDocumentBlockRespData,v:Ref<PatchDocumentBlockRespData>)
+	export function unRefPatchDocumentBlockRespData(v:Ref<PatchDocumentBlockRespData>):PatchDocumentBlockRespData
+	export function emptyDocumentAuthor():DocumentAuthor
+	export function emptyRefDocumentAuthor():Ref<DocumentAuthor>
+	export function refOfDocumentAuthor(x:DocumentAuthor,v:Ref<DocumentAuthor>)
+	export function unRefDocumentAuthor(v:Ref<DocumentAuthor>):DocumentAuthor
+	export function emptyFile():File
+	export function emptyRefFile():Ref<File>
+	export function refOfFile(x:File,v:Ref<File>)
+	export function unRefFile(v:Ref<File>):File
 	export function emptyReminder():Reminder
 	export function emptyRefReminder():Ref<Reminder>
 	export function refOfReminder(x:Reminder,v:Ref<Reminder>)

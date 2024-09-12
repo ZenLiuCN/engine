@@ -7,7 +7,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/speech_to_text/v1'{
 	// @ts-ignore
 	import * as context from 'golang/context'
 	// @ts-ignore
-	import type {error,bool,int,Ref,Struct} from 'go'
+	import type {bool,int,Ref,Struct,error} from 'go'
 	export interface DepartmentId extends Struct<DepartmentId>{
 
 			departmentId:Ref<string>
@@ -166,56 +166,56 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/speech_to_text/v1'{
 				streamRecognize(ctx:context.Context,req:Ref<StreamRecognizeSpeechReq>,...options:larkcore.RequestOptionFunc[]):Ref<StreamRecognizeSpeechResp>
 			}>
 	}
-	export function emptyDepartmentId():DepartmentId
-	export function emptyRefDepartmentId():Ref<DepartmentId>
-	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
-	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
 	export function emptyFileConfig():FileConfig
 	export function emptyRefFileConfig():Ref<FileConfig>
 	export function refOfFileConfig(x:FileConfig,v:Ref<FileConfig>)
 	export function unRefFileConfig(v:Ref<FileConfig>):FileConfig
-	export function emptyFileRecognizeSpeechReq():FileRecognizeSpeechReq
-	export function emptyRefFileRecognizeSpeechReq():Ref<FileRecognizeSpeechReq>
-	export function refOfFileRecognizeSpeechReq(x:FileRecognizeSpeechReq,v:Ref<FileRecognizeSpeechReq>)
-	export function unRefFileRecognizeSpeechReq(v:Ref<FileRecognizeSpeechReq>):FileRecognizeSpeechReq
-	export function emptyFileRecognizeSpeechResp():FileRecognizeSpeechResp
-	export function emptyRefFileRecognizeSpeechResp():Ref<FileRecognizeSpeechResp>
-	export function refOfFileRecognizeSpeechResp(x:FileRecognizeSpeechResp,v:Ref<FileRecognizeSpeechResp>)
-	export function unRefFileRecognizeSpeechResp(v:Ref<FileRecognizeSpeechResp>):FileRecognizeSpeechResp
-	export function emptyStreamRecognizeSpeechReqBody():StreamRecognizeSpeechReqBody
-	export function emptyRefStreamRecognizeSpeechReqBody():Ref<StreamRecognizeSpeechReqBody>
-	export function refOfStreamRecognizeSpeechReqBody(x:StreamRecognizeSpeechReqBody,v:Ref<StreamRecognizeSpeechReqBody>)
-	export function unRefStreamRecognizeSpeechReqBody(v:Ref<StreamRecognizeSpeechReqBody>):StreamRecognizeSpeechReqBody
-	export function emptyStreamRecognizeSpeechRespData():StreamRecognizeSpeechRespData
-	export function emptyRefStreamRecognizeSpeechRespData():Ref<StreamRecognizeSpeechRespData>
-	export function refOfStreamRecognizeSpeechRespData(x:StreamRecognizeSpeechRespData,v:Ref<StreamRecognizeSpeechRespData>)
-	export function unRefStreamRecognizeSpeechRespData(v:Ref<StreamRecognizeSpeechRespData>):StreamRecognizeSpeechRespData
 	export function emptyV1():V1
 	export function emptyRefV1():Ref<V1>
 	export function refOfV1(x:V1,v:Ref<V1>)
 	export function unRefV1(v:Ref<V1>):V1
-	export function emptyFileRecognizeSpeechReqBody():FileRecognizeSpeechReqBody
-	export function emptyRefFileRecognizeSpeechReqBody():Ref<FileRecognizeSpeechReqBody>
-	export function refOfFileRecognizeSpeechReqBody(x:FileRecognizeSpeechReqBody,v:Ref<FileRecognizeSpeechReqBody>)
-	export function unRefFileRecognizeSpeechReqBody(v:Ref<FileRecognizeSpeechReqBody>):FileRecognizeSpeechReqBody
-	export function emptyStreamRecognizeSpeechReq():StreamRecognizeSpeechReq
-	export function emptyRefStreamRecognizeSpeechReq():Ref<StreamRecognizeSpeechReq>
-	export function refOfStreamRecognizeSpeechReq(x:StreamRecognizeSpeechReq,v:Ref<StreamRecognizeSpeechReq>)
-	export function unRefStreamRecognizeSpeechReq(v:Ref<StreamRecognizeSpeechReq>):StreamRecognizeSpeechReq
-	export function emptySpeech():Speech
-	export function emptyRefSpeech():Ref<Speech>
-	export function refOfSpeech(x:Speech,v:Ref<Speech>)
-	export function unRefSpeech(v:Ref<Speech>):Speech
-	export function emptyFileRecognizeSpeechRespData():FileRecognizeSpeechRespData
-	export function emptyRefFileRecognizeSpeechRespData():Ref<FileRecognizeSpeechRespData>
-	export function refOfFileRecognizeSpeechRespData(x:FileRecognizeSpeechRespData,v:Ref<FileRecognizeSpeechRespData>)
-	export function unRefFileRecognizeSpeechRespData(v:Ref<FileRecognizeSpeechRespData>):FileRecognizeSpeechRespData
-	export function emptyStreamConfig():StreamConfig
-	export function emptyRefStreamConfig():Ref<StreamConfig>
-	export function refOfStreamConfig(x:StreamConfig,v:Ref<StreamConfig>)
-	export function unRefStreamConfig(v:Ref<StreamConfig>):StreamConfig
 	export function emptyStreamRecognizeSpeechResp():StreamRecognizeSpeechResp
 	export function emptyRefStreamRecognizeSpeechResp():Ref<StreamRecognizeSpeechResp>
 	export function refOfStreamRecognizeSpeechResp(x:StreamRecognizeSpeechResp,v:Ref<StreamRecognizeSpeechResp>)
 	export function unRefStreamRecognizeSpeechResp(v:Ref<StreamRecognizeSpeechResp>):StreamRecognizeSpeechResp
+	export function emptyFileRecognizeSpeechReqBody():FileRecognizeSpeechReqBody
+	export function emptyRefFileRecognizeSpeechReqBody():Ref<FileRecognizeSpeechReqBody>
+	export function refOfFileRecognizeSpeechReqBody(x:FileRecognizeSpeechReqBody,v:Ref<FileRecognizeSpeechReqBody>)
+	export function unRefFileRecognizeSpeechReqBody(v:Ref<FileRecognizeSpeechReqBody>):FileRecognizeSpeechReqBody
+	export function emptyFileRecognizeSpeechRespData():FileRecognizeSpeechRespData
+	export function emptyRefFileRecognizeSpeechRespData():Ref<FileRecognizeSpeechRespData>
+	export function refOfFileRecognizeSpeechRespData(x:FileRecognizeSpeechRespData,v:Ref<FileRecognizeSpeechRespData>)
+	export function unRefFileRecognizeSpeechRespData(v:Ref<FileRecognizeSpeechRespData>):FileRecognizeSpeechRespData
+	export function emptySpeech():Speech
+	export function emptyRefSpeech():Ref<Speech>
+	export function refOfSpeech(x:Speech,v:Ref<Speech>)
+	export function unRefSpeech(v:Ref<Speech>):Speech
+	export function emptyStreamRecognizeSpeechReqBody():StreamRecognizeSpeechReqBody
+	export function emptyRefStreamRecognizeSpeechReqBody():Ref<StreamRecognizeSpeechReqBody>
+	export function refOfStreamRecognizeSpeechReqBody(x:StreamRecognizeSpeechReqBody,v:Ref<StreamRecognizeSpeechReqBody>)
+	export function unRefStreamRecognizeSpeechReqBody(v:Ref<StreamRecognizeSpeechReqBody>):StreamRecognizeSpeechReqBody
+	export function emptyDepartmentId():DepartmentId
+	export function emptyRefDepartmentId():Ref<DepartmentId>
+	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
+	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
+	export function emptyFileRecognizeSpeechResp():FileRecognizeSpeechResp
+	export function emptyRefFileRecognizeSpeechResp():Ref<FileRecognizeSpeechResp>
+	export function refOfFileRecognizeSpeechResp(x:FileRecognizeSpeechResp,v:Ref<FileRecognizeSpeechResp>)
+	export function unRefFileRecognizeSpeechResp(v:Ref<FileRecognizeSpeechResp>):FileRecognizeSpeechResp
+	export function emptyStreamRecognizeSpeechReq():StreamRecognizeSpeechReq
+	export function emptyRefStreamRecognizeSpeechReq():Ref<StreamRecognizeSpeechReq>
+	export function refOfStreamRecognizeSpeechReq(x:StreamRecognizeSpeechReq,v:Ref<StreamRecognizeSpeechReq>)
+	export function unRefStreamRecognizeSpeechReq(v:Ref<StreamRecognizeSpeechReq>):StreamRecognizeSpeechReq
+	export function emptyStreamRecognizeSpeechRespData():StreamRecognizeSpeechRespData
+	export function emptyRefStreamRecognizeSpeechRespData():Ref<StreamRecognizeSpeechRespData>
+	export function refOfStreamRecognizeSpeechRespData(x:StreamRecognizeSpeechRespData,v:Ref<StreamRecognizeSpeechRespData>)
+	export function unRefStreamRecognizeSpeechRespData(v:Ref<StreamRecognizeSpeechRespData>):StreamRecognizeSpeechRespData
+	export function emptyFileRecognizeSpeechReq():FileRecognizeSpeechReq
+	export function emptyRefFileRecognizeSpeechReq():Ref<FileRecognizeSpeechReq>
+	export function refOfFileRecognizeSpeechReq(x:FileRecognizeSpeechReq,v:Ref<FileRecognizeSpeechReq>)
+	export function unRefFileRecognizeSpeechReq(v:Ref<FileRecognizeSpeechReq>):FileRecognizeSpeechReq
+	export function emptyStreamConfig():StreamConfig
+	export function emptyRefStreamConfig():Ref<StreamConfig>
+	export function refOfStreamConfig(x:StreamConfig,v:Ref<StreamConfig>)
+	export function unRefStreamConfig(v:Ref<StreamConfig>):StreamConfig
 }

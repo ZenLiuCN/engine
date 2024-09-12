@@ -7,7 +7,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/translation/v1'{
 	// @ts-ignore
 	import * as context from 'golang/context'
 	// @ts-ignore
-	import type {error,bool,Alias,Nothing,Ref,Struct} from 'go'
+	import type {bool,Alias,Nothing,Ref,Struct,error} from 'go'
 	export interface DepartmentId extends Struct<DepartmentId>{
 
 			departmentId:Ref<string>
@@ -136,6 +136,10 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/translation/v1'{
 				translate(ctx:context.Context,req:Ref<TranslateTextReq>,...options:larkcore.RequestOptionFunc[]):Ref<TranslateTextResp>
 			}>
 	}
+	export function emptyDetectTextReqBody():DetectTextReqBody
+	export function emptyRefDetectTextReqBody():Ref<DetectTextReqBody>
+	export function refOfDetectTextReqBody(x:DetectTextReqBody,v:Ref<DetectTextReqBody>)
+	export function unRefDetectTextReqBody(v:Ref<DetectTextReqBody>):DetectTextReqBody
 	export function emptyTranslateTextReqBody():TranslateTextReqBody
 	export function emptyRefTranslateTextReqBody():Ref<TranslateTextReqBody>
 	export function refOfTranslateTextReqBody(x:TranslateTextReqBody,v:Ref<TranslateTextReqBody>)
@@ -144,18 +148,6 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/translation/v1'{
 	export function emptyRefDetectTextReq():Ref<DetectTextReq>
 	export function refOfDetectTextReq(x:DetectTextReq,v:Ref<DetectTextReq>)
 	export function unRefDetectTextReq(v:Ref<DetectTextReq>):DetectTextReq
-	export function emptyDetectTextReqBody():DetectTextReqBody
-	export function emptyRefDetectTextReqBody():Ref<DetectTextReqBody>
-	export function refOfDetectTextReqBody(x:DetectTextReqBody,v:Ref<DetectTextReqBody>)
-	export function unRefDetectTextReqBody(v:Ref<DetectTextReqBody>):DetectTextReqBody
-	export function emptyDetectTextResp():DetectTextResp
-	export function emptyRefDetectTextResp():Ref<DetectTextResp>
-	export function refOfDetectTextResp(x:DetectTextResp,v:Ref<DetectTextResp>)
-	export function unRefDetectTextResp(v:Ref<DetectTextResp>):DetectTextResp
-	export function emptyTerm():Term
-	export function emptyRefTerm():Ref<Term>
-	export function refOfTerm(x:Term,v:Ref<Term>)
-	export function unRefTerm(v:Ref<Term>):Term
 	export function emptyTranslateTextReq():TranslateTextReq
 	export function emptyRefTranslateTextReq():Ref<TranslateTextReq>
 	export function refOfTranslateTextReq(x:TranslateTextReq,v:Ref<TranslateTextReq>)
@@ -164,14 +156,10 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/translation/v1'{
 	export function emptyRefDepartmentId():Ref<DepartmentId>
 	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
 	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptyTranslateTextResp():TranslateTextResp
-	export function emptyRefTranslateTextResp():Ref<TranslateTextResp>
-	export function refOfTranslateTextResp(x:TranslateTextResp,v:Ref<TranslateTextResp>)
-	export function unRefTranslateTextResp(v:Ref<TranslateTextResp>):TranslateTextResp
-	export function emptyTranslateTextRespData():TranslateTextRespData
-	export function emptyRefTranslateTextRespData():Ref<TranslateTextRespData>
-	export function refOfTranslateTextRespData(x:TranslateTextRespData,v:Ref<TranslateTextRespData>)
-	export function unRefTranslateTextRespData(v:Ref<TranslateTextRespData>):TranslateTextRespData
+	export function emptyDetectTextResp():DetectTextResp
+	export function emptyRefDetectTextResp():Ref<DetectTextResp>
+	export function refOfDetectTextResp(x:DetectTextResp,v:Ref<DetectTextResp>)
+	export function unRefDetectTextResp(v:Ref<DetectTextResp>):DetectTextResp
 	export function emptyV1():V1
 	export function emptyRefV1():Ref<V1>
 	export function refOfV1(x:V1,v:Ref<V1>)
@@ -180,4 +168,16 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/translation/v1'{
 	export function emptyRefDetectTextRespData():Ref<DetectTextRespData>
 	export function refOfDetectTextRespData(x:DetectTextRespData,v:Ref<DetectTextRespData>)
 	export function unRefDetectTextRespData(v:Ref<DetectTextRespData>):DetectTextRespData
+	export function emptyTerm():Term
+	export function emptyRefTerm():Ref<Term>
+	export function refOfTerm(x:Term,v:Ref<Term>)
+	export function unRefTerm(v:Ref<Term>):Term
+	export function emptyTranslateTextResp():TranslateTextResp
+	export function emptyRefTranslateTextResp():Ref<TranslateTextResp>
+	export function refOfTranslateTextResp(x:TranslateTextResp,v:Ref<TranslateTextResp>)
+	export function unRefTranslateTextResp(v:Ref<TranslateTextResp>):TranslateTextResp
+	export function emptyTranslateTextRespData():TranslateTextRespData
+	export function emptyRefTranslateTextRespData():Ref<TranslateTextRespData>
+	export function refOfTranslateTextRespData(x:TranslateTextRespData,v:Ref<TranslateTextRespData>)
+	export function unRefTranslateTextRespData(v:Ref<TranslateTextRespData>):TranslateTextRespData
 }

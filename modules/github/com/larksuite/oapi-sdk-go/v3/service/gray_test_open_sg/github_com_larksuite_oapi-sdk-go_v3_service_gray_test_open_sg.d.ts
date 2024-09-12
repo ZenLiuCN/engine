@@ -7,7 +7,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/gray_test_open_sg'{
 	// @ts-ignore
 	import * as larkgray_test_open_sg from 'github.com/larksuite/oapi-sdk-go/v3/service/gray_test_open_sg/v1'
 	// @ts-ignore
-	import type {Ref,Struct} from 'go'
+	import type {Struct,Ref} from 'go'
 	export function newService(config:Ref<larkcore.Config>):Ref<Service>
 
 	export interface Service extends Struct<Service>{

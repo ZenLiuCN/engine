@@ -207,10 +207,26 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/face_detection/v1'{
 	export function emptyRefDetectFaceAttributesImageRespData():Ref<DetectFaceAttributesImageRespData>
 	export function refOfDetectFaceAttributesImageRespData(x:DetectFaceAttributesImageRespData,v:Ref<DetectFaceAttributesImageRespData>)
 	export function unRefDetectFaceAttributesImageRespData(v:Ref<DetectFaceAttributesImageRespData>):DetectFaceAttributesImageRespData
-	export function emptyFacePose():FacePose
-	export function emptyRefFacePose():Ref<FacePose>
-	export function refOfFacePose(x:FacePose,v:Ref<FacePose>)
-	export function unRefFacePose(v:Ref<FacePose>):FacePose
+	export function emptyImage():Image
+	export function emptyRefImage():Ref<Image>
+	export function refOfImage(x:Image,v:Ref<Image>)
+	export function unRefImage(v:Ref<Image>):Image
+	export function emptyFaceOcclude():FaceOcclude
+	export function emptyRefFaceOcclude():Ref<FaceOcclude>
+	export function refOfFaceOcclude(x:FaceOcclude,v:Ref<FaceOcclude>)
+	export function unRefFaceOcclude(v:Ref<FaceOcclude>):FaceOcclude
+	export function emptyDetectFaceAttributesImageReq():DetectFaceAttributesImageReq
+	export function emptyRefDetectFaceAttributesImageReq():Ref<DetectFaceAttributesImageReq>
+	export function refOfDetectFaceAttributesImageReq(x:DetectFaceAttributesImageReq,v:Ref<DetectFaceAttributesImageReq>)
+	export function unRefDetectFaceAttributesImageReq(v:Ref<DetectFaceAttributesImageReq>):DetectFaceAttributesImageReq
+	export function emptyFaceInfo():FaceInfo
+	export function emptyRefFaceInfo():Ref<FaceInfo>
+	export function refOfFaceInfo(x:FaceInfo,v:Ref<FaceInfo>)
+	export function unRefFaceInfo(v:Ref<FaceInfo>):FaceInfo
+	export function emptyAttributeItem():AttributeItem
+	export function emptyRefAttributeItem():Ref<AttributeItem>
+	export function refOfAttributeItem(x:AttributeItem,v:Ref<AttributeItem>)
+	export function unRefAttributeItem(v:Ref<AttributeItem>):AttributeItem
 	export function emptyFaceDetectionService():FaceDetectionService
 	export function emptyRefFaceDetectionService():Ref<FaceDetectionService>
 	export function refOfFaceDetectionService(x:FaceDetectionService,v:Ref<FaceDetectionService>)
@@ -219,34 +235,14 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/face_detection/v1'{
 	export function emptyRefFacePosition():Ref<FacePosition>
 	export function refOfFacePosition(x:FacePosition,v:Ref<FacePosition>)
 	export function unRefFacePosition(v:Ref<FacePosition>):FacePosition
-	export function emptyAttributeItem():AttributeItem
-	export function emptyRefAttributeItem():Ref<AttributeItem>
-	export function refOfAttributeItem(x:AttributeItem,v:Ref<AttributeItem>)
-	export function unRefAttributeItem(v:Ref<AttributeItem>):AttributeItem
-	export function emptyDetectFaceAttributesImageReq():DetectFaceAttributesImageReq
-	export function emptyRefDetectFaceAttributesImageReq():Ref<DetectFaceAttributesImageReq>
-	export function refOfDetectFaceAttributesImageReq(x:DetectFaceAttributesImageReq,v:Ref<DetectFaceAttributesImageReq>)
-	export function unRefDetectFaceAttributesImageReq(v:Ref<DetectFaceAttributesImageReq>):DetectFaceAttributesImageReq
-	export function emptyFaceAttribute():FaceAttribute
-	export function emptyRefFaceAttribute():Ref<FaceAttribute>
-	export function refOfFaceAttribute(x:FaceAttribute,v:Ref<FaceAttribute>)
-	export function unRefFaceAttribute(v:Ref<FaceAttribute>):FaceAttribute
-	export function emptyFaceOcclude():FaceOcclude
-	export function emptyRefFaceOcclude():Ref<FaceOcclude>
-	export function refOfFaceOcclude(x:FaceOcclude,v:Ref<FaceOcclude>)
-	export function unRefFaceOcclude(v:Ref<FaceOcclude>):FaceOcclude
-	export function emptyImage():Image
-	export function emptyRefImage():Ref<Image>
-	export function refOfImage(x:Image,v:Ref<Image>)
-	export function unRefImage(v:Ref<Image>):Image
-	export function emptyFaceInfo():FaceInfo
-	export function emptyRefFaceInfo():Ref<FaceInfo>
-	export function refOfFaceInfo(x:FaceInfo,v:Ref<FaceInfo>)
-	export function unRefFaceInfo(v:Ref<FaceInfo>):FaceInfo
-	export function emptyFaceQuality():FaceQuality
-	export function emptyRefFaceQuality():Ref<FaceQuality>
-	export function refOfFaceQuality(x:FaceQuality,v:Ref<FaceQuality>)
-	export function unRefFaceQuality(v:Ref<FaceQuality>):FaceQuality
+	export function emptyDetectFaceAttributesImageResp():DetectFaceAttributesImageResp
+	export function emptyRefDetectFaceAttributesImageResp():Ref<DetectFaceAttributesImageResp>
+	export function refOfDetectFaceAttributesImageResp(x:DetectFaceAttributesImageResp,v:Ref<DetectFaceAttributesImageResp>)
+	export function unRefDetectFaceAttributesImageResp(v:Ref<DetectFaceAttributesImageResp>):DetectFaceAttributesImageResp
+	export function emptyFacePose():FacePose
+	export function emptyRefFacePose():Ref<FacePose>
+	export function refOfFacePose(x:FacePose,v:Ref<FacePose>)
+	export function unRefFacePose(v:Ref<FacePose>):FacePose
 	export function emptyPoint():Point
 	export function emptyRefPoint():Ref<Point>
 	export function refOfPoint(x:Point,v:Ref<Point>)
@@ -255,8 +251,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/face_detection/v1'{
 	export function emptyRefDetectFaceAttributesImageReqBody():Ref<DetectFaceAttributesImageReqBody>
 	export function refOfDetectFaceAttributesImageReqBody(x:DetectFaceAttributesImageReqBody,v:Ref<DetectFaceAttributesImageReqBody>)
 	export function unRefDetectFaceAttributesImageReqBody(v:Ref<DetectFaceAttributesImageReqBody>):DetectFaceAttributesImageReqBody
-	export function emptyDetectFaceAttributesImageResp():DetectFaceAttributesImageResp
-	export function emptyRefDetectFaceAttributesImageResp():Ref<DetectFaceAttributesImageResp>
-	export function refOfDetectFaceAttributesImageResp(x:DetectFaceAttributesImageResp,v:Ref<DetectFaceAttributesImageResp>)
-	export function unRefDetectFaceAttributesImageResp(v:Ref<DetectFaceAttributesImageResp>):DetectFaceAttributesImageResp
+	export function emptyFaceAttribute():FaceAttribute
+	export function emptyRefFaceAttribute():Ref<FaceAttribute>
+	export function refOfFaceAttribute(x:FaceAttribute,v:Ref<FaceAttribute>)
+	export function unRefFaceAttribute(v:Ref<FaceAttribute>):FaceAttribute
+	export function emptyFaceQuality():FaceQuality
+	export function emptyRefFaceQuality():Ref<FaceQuality>
+	export function refOfFaceQuality(x:FaceQuality,v:Ref<FaceQuality>)
+	export function unRefFaceQuality(v:Ref<FaceQuality>):FaceQuality
 }

@@ -7,7 +7,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/bitable/v1'{
 	// @ts-ignore
 	import * as context from 'golang/context'
 	// @ts-ignore
-	import type {Alias,bool,Struct,map,float64,int64,error,Ref,int,Nothing} from 'go'
+	import type {Alias,Nothing,int64,error,bool,int,map,Ref,Struct,float64} from 'go'
 	export interface AllowedEditModes extends Struct<AllowedEditModes>{
 
 			manual:Ref<bool>
@@ -404,6 +404,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/bitable/v1'{
 			createdTime:Ref<int64>
 			lastModifiedBy:Ref<Person>
 			lastModifiedTime:Ref<int64>
+			recordUrl:Ref<string>
 			stringField(key:string):Ref<string>
 			listStringField(key:string):string[]
 			boolField(key:string):Ref<bool>
@@ -419,6 +420,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/bitable/v1'{
 			createdTime(createdTime:int64):Ref<AppTableRecordBuilder>
 			lastModifiedBy(lastModifiedBy:Ref<Person>):Ref<AppTableRecordBuilder>
 			lastModifiedTime(lastModifiedTime:int64):Ref<AppTableRecordBuilder>
+			recordUrl(recordUrl:string):Ref<AppTableRecordBuilder>
 			build():Ref<AppTableRecord>
 	}
 	export interface AppTableView extends Struct<AppTableView>{
@@ -725,6 +727,53 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/bitable/v1'{
 			apiResp:Ref<larkcore.ApiResp>
 			codeError:larkcore.CodeError
 			success():bool
+	}
+	export interface BatchGetAppTableRecordPathReqBodyBuilder extends Struct<BatchGetAppTableRecordPathReqBodyBuilder>{
+
+			recordIds(recordIds:string[]):Ref<BatchGetAppTableRecordPathReqBodyBuilder>
+			userIdType(userIdType:string):Ref<BatchGetAppTableRecordPathReqBodyBuilder>
+			withSharedUrl(withSharedUrl:bool):Ref<BatchGetAppTableRecordPathReqBodyBuilder>
+			automaticFields(automaticFields:bool):Ref<BatchGetAppTableRecordPathReqBodyBuilder>
+			build():Ref<BatchGetAppTableRecordReqBody>
+	}
+	export interface BatchGetAppTableRecordReq extends Struct<BatchGetAppTableRecordReq>{
+
+			body:Ref<BatchGetAppTableRecordReqBody>
+	}
+	export interface BatchGetAppTableRecordReqBody extends Struct<BatchGetAppTableRecordReqBody>{
+
+			recordIds:string[]
+			userIdType:Ref<string>
+			withSharedUrl:Ref<bool>
+			automaticFields:Ref<bool>
+	}
+	export interface BatchGetAppTableRecordReqBodyBuilder extends Struct<BatchGetAppTableRecordReqBodyBuilder>{
+
+			recordIds(recordIds:string[]):Ref<BatchGetAppTableRecordReqBodyBuilder>
+			userIdType(userIdType:string):Ref<BatchGetAppTableRecordReqBodyBuilder>
+			withSharedUrl(withSharedUrl:bool):Ref<BatchGetAppTableRecordReqBodyBuilder>
+			automaticFields(automaticFields:bool):Ref<BatchGetAppTableRecordReqBodyBuilder>
+			build():Ref<BatchGetAppTableRecordReqBody>
+	}
+	export interface BatchGetAppTableRecordReqBuilder extends Struct<BatchGetAppTableRecordReqBuilder>{
+
+			appToken(appToken:string):Ref<BatchGetAppTableRecordReqBuilder>
+			tableId(tableId:string):Ref<BatchGetAppTableRecordReqBuilder>
+			body(body:Ref<BatchGetAppTableRecordReqBody>):Ref<BatchGetAppTableRecordReqBuilder>
+			build():Ref<BatchGetAppTableRecordReq>
+	}
+	export interface BatchGetAppTableRecordResp extends Struct<BatchGetAppTableRecordResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<BatchGetAppTableRecordRespData>
+			success():bool
+	}
+	export interface BatchGetAppTableRecordRespData extends Struct<BatchGetAppTableRecordRespData>{
+
+			records:Ref<AppTableRecord>[]
+			forbiddenRecordIds:string[]
+			absentRecordIds:string[]
 	}
 	export interface BatchUpdateAppTableRecordPathReqBodyBuilder extends Struct<BatchUpdateAppTableRecordPathReqBodyBuilder>{
 
@@ -1718,6 +1767,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/bitable/v1'{
 
 	export function newBatchDeleteAppTableReqBuilder():Ref<BatchDeleteAppTableReqBuilder>
 
+	export function newBatchGetAppTableRecordPathReqBodyBuilder():Ref<BatchGetAppTableRecordPathReqBodyBuilder>
+
+	export function newBatchGetAppTableRecordReqBodyBuilder():Ref<BatchGetAppTableRecordReqBodyBuilder>
+
+	export function newBatchGetAppTableRecordReqBuilder():Ref<BatchGetAppTableRecordReqBuilder>
+
 	export function newBatchUpdateAppTableRecordPathReqBodyBuilder():Ref<BatchUpdateAppTableRecordPathReqBodyBuilder>
 
 	export function newBatchUpdateAppTableRecordReqBodyBuilder():Ref<BatchUpdateAppTableRecordReqBodyBuilder>
@@ -2218,6 +2273,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/bitable/v1'{
 	export const UiTypeDateTime:string
 	//"DuplexLink"
 	export const UiTypeDuplexLink:string
+	//"Email"
+	export const UiTypeEmail:string
 	//"Formula"
 	export const UiTypeFormula:string
 	//"GroupChat"
@@ -2264,6 +2321,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/bitable/v1'{
 	export const UiTypeUpdateAppTableFieldDateTime:string
 	//"DuplexLink"
 	export const UiTypeUpdateAppTableFieldDuplexLink:string
+	//"Email"
+	export const UiTypeUpdateAppTableFieldEmail:string
 	//"Formula"
 	export const UiTypeUpdateAppTableFieldFormula:string
 	//"GroupChat"
@@ -2421,6 +2480,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/bitable/v1'{
 	//"user_id"
 	export const UserIdTypeBatchCreateAppTableRecordUserId:string
 	//"open_id"
+	export const UserIdTypeBatchGetAppTableRecordOpenId:string
+	//"union_id"
+	export const UserIdTypeBatchGetAppTableRecordUnionId:string
+	//"user_id"
+	export const UserIdTypeBatchGetAppTableRecordUserId:string
+	//"open_id"
 	export const UserIdTypeBatchUpdateAppTableRecordOpenId:string
 	//"union_id"
 	export const UserIdTypeBatchUpdateAppTableRecordUnionId:string
@@ -2533,6 +2598,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/bitable/v1'{
 			
 				batchCreate(ctx:context.Context,req:Ref<BatchCreateAppTableRecordReq>,...options:larkcore.RequestOptionFunc[]):Ref<BatchCreateAppTableRecordResp>
 				batchDelete(ctx:context.Context,req:Ref<BatchDeleteAppTableRecordReq>,...options:larkcore.RequestOptionFunc[]):Ref<BatchDeleteAppTableRecordResp>
+				batchGet(ctx:context.Context,req:Ref<BatchGetAppTableRecordReq>,...options:larkcore.RequestOptionFunc[]):Ref<BatchGetAppTableRecordResp>
 				batchUpdate(ctx:context.Context,req:Ref<BatchUpdateAppTableRecordReq>,...options:larkcore.RequestOptionFunc[]):Ref<BatchUpdateAppTableRecordResp>
 				create(ctx:context.Context,req:Ref<CreateAppTableRecordReq>,...options:larkcore.RequestOptionFunc[]):Ref<CreateAppTableRecordResp>
 				delete(ctx:context.Context,req:Ref<DeleteAppTableRecordReq>,...options:larkcore.RequestOptionFunc[]):Ref<DeleteAppTableRecordResp>
@@ -2563,42 +2629,30 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/bitable/v1'{
 	export const ViewTypeGrid:string
 	//"kanban"
 	export const ViewTypeKanban:string
-	export function emptyCopyAppDashboardRespData():CopyAppDashboardRespData
-	export function emptyRefCopyAppDashboardRespData():Ref<CopyAppDashboardRespData>
-	export function refOfCopyAppDashboardRespData(x:CopyAppDashboardRespData,v:Ref<CopyAppDashboardRespData>)
-	export function unRefCopyAppDashboardRespData(v:Ref<CopyAppDashboardRespData>):CopyAppDashboardRespData
-	export function emptyDeleteAppTableFieldRespData():DeleteAppTableFieldRespData
-	export function emptyRefDeleteAppTableFieldRespData():Ref<DeleteAppTableFieldRespData>
-	export function refOfDeleteAppTableFieldRespData(x:DeleteAppTableFieldRespData,v:Ref<DeleteAppTableFieldRespData>)
-	export function unRefDeleteAppTableFieldRespData(v:Ref<DeleteAppTableFieldRespData>):DeleteAppTableFieldRespData
+	export function emptyUpdateAppReqBody():UpdateAppReqBody
+	export function emptyRefUpdateAppReqBody():Ref<UpdateAppReqBody>
+	export function refOfUpdateAppReqBody(x:UpdateAppReqBody,v:Ref<UpdateAppReqBody>)
+	export function unRefUpdateAppReqBody(v:Ref<UpdateAppReqBody>):UpdateAppReqBody
 	export function emptyAppRoleTableRoleRecRuleCondition():AppRoleTableRoleRecRuleCondition
 	export function emptyRefAppRoleTableRoleRecRuleCondition():Ref<AppRoleTableRoleRecRuleCondition>
 	export function refOfAppRoleTableRoleRecRuleCondition(x:AppRoleTableRoleRecRuleCondition,v:Ref<AppRoleTableRoleRecRuleCondition>)
 	export function unRefAppRoleTableRoleRecRuleCondition(v:Ref<AppRoleTableRoleRecRuleCondition>):AppRoleTableRoleRecRuleCondition
-	export function emptyPatchAppTableViewReqBody():PatchAppTableViewReqBody
-	export function emptyRefPatchAppTableViewReqBody():Ref<PatchAppTableViewReqBody>
-	export function refOfPatchAppTableViewReqBody(x:PatchAppTableViewReqBody,v:Ref<PatchAppTableViewReqBody>)
-	export function unRefPatchAppTableViewReqBody(v:Ref<PatchAppTableViewReqBody>):PatchAppTableViewReqBody
-	export function emptyListAppTableRecordReq():ListAppTableRecordReq
-	export function emptyRefListAppTableRecordReq():Ref<ListAppTableRecordReq>
-	export function refOfListAppTableRecordReq(x:ListAppTableRecordReq,v:Ref<ListAppTableRecordReq>)
-	export function unRefListAppTableRecordReq(v:Ref<ListAppTableRecordReq>):ListAppTableRecordReq
-	export function emptyListAppTableResp():ListAppTableResp
-	export function emptyRefListAppTableResp():Ref<ListAppTableResp>
-	export function refOfListAppTableResp(x:ListAppTableResp,v:Ref<ListAppTableResp>)
-	export function unRefListAppTableResp(v:Ref<ListAppTableResp>):ListAppTableResp
-	export function emptyAppFieldPropertyLocation():AppFieldPropertyLocation
-	export function emptyRefAppFieldPropertyLocation():Ref<AppFieldPropertyLocation>
-	export function refOfAppFieldPropertyLocation(x:AppFieldPropertyLocation,v:Ref<AppFieldPropertyLocation>)
-	export function unRefAppFieldPropertyLocation(v:Ref<AppFieldPropertyLocation>):AppFieldPropertyLocation
-	export function emptyAppRoleMember():AppRoleMember
-	export function emptyRefAppRoleMember():Ref<AppRoleMember>
-	export function refOfAppRoleMember(x:AppRoleMember,v:Ref<AppRoleMember>)
-	export function unRefAppRoleMember(v:Ref<AppRoleMember>):AppRoleMember
-	export function emptyAppRoleTableRoleRecRule():AppRoleTableRoleRecRule
-	export function emptyRefAppRoleTableRoleRecRule():Ref<AppRoleTableRoleRecRule>
-	export function refOfAppRoleTableRoleRecRule(x:AppRoleTableRoleRecRule,v:Ref<AppRoleTableRoleRecRule>)
-	export function unRefAppRoleTableRoleRecRule(v:Ref<AppRoleTableRoleRecRule>):AppRoleTableRoleRecRule
+	export function emptyBatchGetAppTableRecordResp():BatchGetAppTableRecordResp
+	export function emptyRefBatchGetAppTableRecordResp():Ref<BatchGetAppTableRecordResp>
+	export function refOfBatchGetAppTableRecordResp(x:BatchGetAppTableRecordResp,v:Ref<BatchGetAppTableRecordResp>)
+	export function unRefBatchGetAppTableRecordResp(v:Ref<BatchGetAppTableRecordResp>):BatchGetAppTableRecordResp
+	export function emptyDeleteAppRoleResp():DeleteAppRoleResp
+	export function emptyRefDeleteAppRoleResp():Ref<DeleteAppRoleResp>
+	export function refOfDeleteAppRoleResp(x:DeleteAppRoleResp,v:Ref<DeleteAppRoleResp>)
+	export function unRefDeleteAppRoleResp(v:Ref<DeleteAppRoleResp>):DeleteAppRoleResp
+	export function emptyCondition():Condition
+	export function emptyRefCondition():Ref<Condition>
+	export function refOfCondition(x:Condition,v:Ref<Condition>)
+	export function unRefCondition(v:Ref<Condition>):Condition
+	export function emptyCreateAppRoleRespData():CreateAppRoleRespData
+	export function emptyRefCreateAppRoleRespData():Ref<CreateAppRoleRespData>
+	export function refOfCreateAppRoleRespData(x:CreateAppRoleRespData,v:Ref<CreateAppRoleRespData>)
+	export function unRefCreateAppRoleRespData(v:Ref<CreateAppRoleRespData>):CreateAppRoleRespData
 	export function emptyDeleteAppTableRecordResp():DeleteAppTableRecordResp
 	export function emptyRefDeleteAppTableRecordResp():Ref<DeleteAppTableRecordResp>
 	export function refOfDeleteAppTableRecordResp(x:DeleteAppTableRecordResp,v:Ref<DeleteAppTableRecordResp>)
@@ -2607,562 +2661,418 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/bitable/v1'{
 	export function emptyRefListAppTableViewReq():Ref<ListAppTableViewReq>
 	export function refOfListAppTableViewReq(x:ListAppTableViewReq,v:Ref<ListAppTableViewReq>)
 	export function unRefListAppTableViewReq(v:Ref<ListAppTableViewReq>):ListAppTableViewReq
-	export function emptyAppTableViewPropertyHierarchyConfig():AppTableViewPropertyHierarchyConfig
-	export function emptyRefAppTableViewPropertyHierarchyConfig():Ref<AppTableViewPropertyHierarchyConfig>
-	export function refOfAppTableViewPropertyHierarchyConfig(x:AppTableViewPropertyHierarchyConfig,v:Ref<AppTableViewPropertyHierarchyConfig>)
-	export function unRefAppTableViewPropertyHierarchyConfig(v:Ref<AppTableViewPropertyHierarchyConfig>):AppTableViewPropertyHierarchyConfig
-	export function emptyCreateAppTableRecordReq():CreateAppTableRecordReq
-	export function emptyRefCreateAppTableRecordReq():Ref<CreateAppTableRecordReq>
-	export function refOfCreateAppTableRecordReq(x:CreateAppTableRecordReq,v:Ref<CreateAppTableRecordReq>)
-	export function unRefCreateAppTableRecordReq(v:Ref<CreateAppTableRecordReq>):CreateAppTableRecordReq
-	export function emptyCreateAppTableRespData():CreateAppTableRespData
-	export function emptyRefCreateAppTableRespData():Ref<CreateAppTableRespData>
-	export function refOfCreateAppTableRespData(x:CreateAppTableRespData,v:Ref<CreateAppTableRespData>)
-	export function unRefCreateAppTableRespData(v:Ref<CreateAppTableRespData>):CreateAppTableRespData
-	export function emptyApp():App
-	export function emptyRefApp():Ref<App>
-	export function refOfApp(x:App,v:Ref<App>)
-	export function unRefApp(v:Ref<App>):App
-	export function emptyCreateAppRoleMemberReq():CreateAppRoleMemberReq
-	export function emptyRefCreateAppRoleMemberReq():Ref<CreateAppRoleMemberReq>
-	export function refOfCreateAppRoleMemberReq(x:CreateAppRoleMemberReq,v:Ref<CreateAppRoleMemberReq>)
-	export function unRefCreateAppRoleMemberReq(v:Ref<CreateAppRoleMemberReq>):CreateAppRoleMemberReq
-	export function emptyGetAppTableRecordRespData():GetAppTableRecordRespData
-	export function emptyRefGetAppTableRecordRespData():Ref<GetAppTableRecordRespData>
-	export function refOfGetAppTableRecordRespData(x:GetAppTableRecordRespData,v:Ref<GetAppTableRecordRespData>)
-	export function unRefGetAppTableRecordRespData(v:Ref<GetAppTableRecordRespData>):GetAppTableRecordRespData
-	export function emptyDeleteAppRoleReq():DeleteAppRoleReq
-	export function emptyRefDeleteAppRoleReq():Ref<DeleteAppRoleReq>
-	export function refOfDeleteAppRoleReq(x:DeleteAppRoleReq,v:Ref<DeleteAppRoleReq>)
-	export function unRefDeleteAppRoleReq(v:Ref<DeleteAppRoleReq>):DeleteAppRoleReq
-	export function emptyDepartmentId():DepartmentId
-	export function emptyRefDepartmentId():Ref<DepartmentId>
-	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
-	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptyAppRole():AppRole
-	export function emptyRefAppRole():Ref<AppRole>
-	export function refOfAppRole(x:AppRole,v:Ref<AppRole>)
-	export function unRefAppRole(v:Ref<AppRole>):AppRole
-	export function emptyAppRoleBlockRole():AppRoleBlockRole
-	export function emptyRefAppRoleBlockRole():Ref<AppRoleBlockRole>
-	export function refOfAppRoleBlockRole(x:AppRoleBlockRole,v:Ref<AppRoleBlockRole>)
-	export function unRefAppRoleBlockRole(v:Ref<AppRoleBlockRole>):AppRoleBlockRole
-	export function emptyBatchDeleteAppTableReqBody():BatchDeleteAppTableReqBody
-	export function emptyRefBatchDeleteAppTableReqBody():Ref<BatchDeleteAppTableReqBody>
-	export function refOfBatchDeleteAppTableReqBody(x:BatchDeleteAppTableReqBody,v:Ref<BatchDeleteAppTableReqBody>)
-	export function unRefBatchDeleteAppTableReqBody(v:Ref<BatchDeleteAppTableReqBody>):BatchDeleteAppTableReqBody
-	export function emptyGetAppTableRecordResp():GetAppTableRecordResp
-	export function emptyRefGetAppTableRecordResp():Ref<GetAppTableRecordResp>
-	export function refOfGetAppTableRecordResp(x:GetAppTableRecordResp,v:Ref<GetAppTableRecordResp>)
-	export function unRefGetAppTableRecordResp(v:Ref<GetAppTableRecordResp>):GetAppTableRecordResp
-	export function emptyListAppTableRecordRespData():ListAppTableRecordRespData
-	export function emptyRefListAppTableRecordRespData():Ref<ListAppTableRecordRespData>
-	export function refOfListAppTableRecordRespData(x:ListAppTableRecordRespData,v:Ref<ListAppTableRecordRespData>)
-	export function unRefListAppTableRecordRespData(v:Ref<ListAppTableRecordRespData>):ListAppTableRecordRespData
-	export function emptyListAppTableRespData():ListAppTableRespData
-	export function emptyRefListAppTableRespData():Ref<ListAppTableRespData>
-	export function refOfListAppTableRespData(x:ListAppTableRespData,v:Ref<ListAppTableRespData>)
-	export function unRefListAppTableRespData(v:Ref<ListAppTableRespData>):ListAppTableRespData
-	export function emptyAppTableCreateHeader():AppTableCreateHeader
-	export function emptyRefAppTableCreateHeader():Ref<AppTableCreateHeader>
-	export function refOfAppTableCreateHeader(x:AppTableCreateHeader,v:Ref<AppTableCreateHeader>)
-	export function unRefAppTableCreateHeader(v:Ref<AppTableCreateHeader>):AppTableCreateHeader
-	export function emptyAppTableViewPropertyFilterInfo():AppTableViewPropertyFilterInfo
-	export function emptyRefAppTableViewPropertyFilterInfo():Ref<AppTableViewPropertyFilterInfo>
-	export function refOfAppTableViewPropertyFilterInfo(x:AppTableViewPropertyFilterInfo,v:Ref<AppTableViewPropertyFilterInfo>)
-	export function unRefAppTableViewPropertyFilterInfo(v:Ref<AppTableViewPropertyFilterInfo>):AppTableViewPropertyFilterInfo
-	export function emptyAppTableViewPropertyFilterInfoCondition():AppTableViewPropertyFilterInfoCondition
-	export function emptyRefAppTableViewPropertyFilterInfoCondition():Ref<AppTableViewPropertyFilterInfoCondition>
-	export function refOfAppTableViewPropertyFilterInfoCondition(x:AppTableViewPropertyFilterInfoCondition,v:Ref<AppTableViewPropertyFilterInfoCondition>)
-	export function unRefAppTableViewPropertyFilterInfoCondition(v:Ref<AppTableViewPropertyFilterInfoCondition>):AppTableViewPropertyFilterInfoCondition
-	export function emptyCreateAppTableResp():CreateAppTableResp
-	export function emptyRefCreateAppTableResp():Ref<CreateAppTableResp>
-	export function refOfCreateAppTableResp(x:CreateAppTableResp,v:Ref<CreateAppTableResp>)
-	export function unRefCreateAppTableResp(v:Ref<CreateAppTableResp>):CreateAppTableResp
-	export function emptyGroup():Group
-	export function emptyRefGroup():Ref<Group>
-	export function refOfGroup(x:Group,v:Ref<Group>)
-	export function unRefGroup(v:Ref<Group>):Group
-	export function emptyUpdateAppTableRecordResp():UpdateAppTableRecordResp
-	export function emptyRefUpdateAppTableRecordResp():Ref<UpdateAppTableRecordResp>
-	export function refOfUpdateAppTableRecordResp(x:UpdateAppTableRecordResp,v:Ref<UpdateAppTableRecordResp>)
-	export function unRefUpdateAppTableRecordResp(v:Ref<UpdateAppTableRecordResp>):UpdateAppTableRecordResp
-	export function emptyCreateAppRoleMemberResp():CreateAppRoleMemberResp
-	export function emptyRefCreateAppRoleMemberResp():Ref<CreateAppRoleMemberResp>
-	export function refOfCreateAppRoleMemberResp(x:CreateAppRoleMemberResp,v:Ref<CreateAppRoleMemberResp>)
-	export function unRefCreateAppRoleMemberResp(v:Ref<CreateAppRoleMemberResp>):CreateAppRoleMemberResp
-	export function emptyBatchUpdateAppTableRecordReqBody():BatchUpdateAppTableRecordReqBody
-	export function emptyRefBatchUpdateAppTableRecordReqBody():Ref<BatchUpdateAppTableRecordReqBody>
-	export function refOfBatchUpdateAppTableRecordReqBody(x:BatchUpdateAppTableRecordReqBody,v:Ref<BatchUpdateAppTableRecordReqBody>)
-	export function unRefBatchUpdateAppTableRecordReqBody(v:Ref<BatchUpdateAppTableRecordReqBody>):BatchUpdateAppTableRecordReqBody
-	export function emptyListAppRoleResp():ListAppRoleResp
-	export function emptyRefListAppRoleResp():Ref<ListAppRoleResp>
-	export function refOfListAppRoleResp(x:ListAppRoleResp,v:Ref<ListAppRoleResp>)
-	export function unRefListAppRoleResp(v:Ref<ListAppRoleResp>):ListAppRoleResp
-	export function emptyCreateAppTableFieldResp():CreateAppTableFieldResp
-	export function emptyRefCreateAppTableFieldResp():Ref<CreateAppTableFieldResp>
-	export function refOfCreateAppTableFieldResp(x:CreateAppTableFieldResp,v:Ref<CreateAppTableFieldResp>)
-	export function unRefCreateAppTableFieldResp(v:Ref<CreateAppTableFieldResp>):CreateAppTableFieldResp
-	export function emptyReqTable():ReqTable
-	export function emptyRefReqTable():Ref<ReqTable>
-	export function refOfReqTable(x:ReqTable,v:Ref<ReqTable>)
-	export function unRefReqTable(v:Ref<ReqTable>):ReqTable
 	export function emptySearchAppTableRecordResp():SearchAppTableRecordResp
 	export function emptyRefSearchAppTableRecordResp():Ref<SearchAppTableRecordResp>
 	export function refOfSearchAppTableRecordResp(x:SearchAppTableRecordResp,v:Ref<SearchAppTableRecordResp>)
 	export function unRefSearchAppTableRecordResp(v:Ref<SearchAppTableRecordResp>):SearchAppTableRecordResp
-	export function emptyBatchCreateAppRoleMemberReq():BatchCreateAppRoleMemberReq
-	export function emptyRefBatchCreateAppRoleMemberReq():Ref<BatchCreateAppRoleMemberReq>
-	export function refOfBatchCreateAppRoleMemberReq(x:BatchCreateAppRoleMemberReq,v:Ref<BatchCreateAppRoleMemberReq>)
-	export function unRefBatchCreateAppRoleMemberReq(v:Ref<BatchCreateAppRoleMemberReq>):BatchCreateAppRoleMemberReq
-	export function emptyBatchCreateAppTableResp():BatchCreateAppTableResp
-	export function emptyRefBatchCreateAppTableResp():Ref<BatchCreateAppTableResp>
-	export function refOfBatchCreateAppTableResp(x:BatchCreateAppTableResp,v:Ref<BatchCreateAppTableResp>)
-	export function unRefBatchCreateAppTableResp(v:Ref<BatchCreateAppTableResp>):BatchCreateAppTableResp
-	export function emptyGetAppTableViewRespData():GetAppTableViewRespData
-	export function emptyRefGetAppTableViewRespData():Ref<GetAppTableViewRespData>
-	export function refOfGetAppTableViewRespData(x:GetAppTableViewRespData,v:Ref<GetAppTableViewRespData>)
-	export function unRefGetAppTableViewRespData(v:Ref<GetAppTableViewRespData>):GetAppTableViewRespData
-	export function emptyListAppRoleMemberIterator():ListAppRoleMemberIterator
-	export function emptyRefListAppRoleMemberIterator():Ref<ListAppRoleMemberIterator>
-	export function refOfListAppRoleMemberIterator(x:ListAppRoleMemberIterator,v:Ref<ListAppRoleMemberIterator>)
-	export function unRefListAppRoleMemberIterator(v:Ref<ListAppRoleMemberIterator>):ListAppRoleMemberIterator
-	export function emptyPatchAppTableViewRespData():PatchAppTableViewRespData
-	export function emptyRefPatchAppTableViewRespData():Ref<PatchAppTableViewRespData>
-	export function refOfPatchAppTableViewRespData(x:PatchAppTableViewRespData,v:Ref<PatchAppTableViewRespData>)
-	export function unRefPatchAppTableViewRespData(v:Ref<PatchAppTableViewRespData>):PatchAppTableViewRespData
-	export function emptyBatchDeleteAppTableRecordRespData():BatchDeleteAppTableRecordRespData
-	export function emptyRefBatchDeleteAppTableRecordRespData():Ref<BatchDeleteAppTableRecordRespData>
-	export function refOfBatchDeleteAppTableRecordRespData(x:BatchDeleteAppTableRecordRespData,v:Ref<BatchDeleteAppTableRecordRespData>)
-	export function unRefBatchDeleteAppTableRecordRespData(v:Ref<BatchDeleteAppTableRecordRespData>):BatchDeleteAppTableRecordRespData
-	export function emptySearchAppTableRecordIterator():SearchAppTableRecordIterator
-	export function emptyRefSearchAppTableRecordIterator():Ref<SearchAppTableRecordIterator>
-	export function refOfSearchAppTableRecordIterator(x:SearchAppTableRecordIterator,v:Ref<SearchAppTableRecordIterator>)
-	export function unRefSearchAppTableRecordIterator(v:Ref<SearchAppTableRecordIterator>):SearchAppTableRecordIterator
 	export function emptyBatchUpdateAppTableRecordResp():BatchUpdateAppTableRecordResp
 	export function emptyRefBatchUpdateAppTableRecordResp():Ref<BatchUpdateAppTableRecordResp>
 	export function refOfBatchUpdateAppTableRecordResp(x:BatchUpdateAppTableRecordResp,v:Ref<BatchUpdateAppTableRecordResp>)
 	export function unRefBatchUpdateAppTableRecordResp(v:Ref<BatchUpdateAppTableRecordResp>):BatchUpdateAppTableRecordResp
-	export function emptyDeleteAppTableFieldResp():DeleteAppTableFieldResp
-	export function emptyRefDeleteAppTableFieldResp():Ref<DeleteAppTableFieldResp>
-	export function refOfDeleteAppTableFieldResp(x:DeleteAppTableFieldResp,v:Ref<DeleteAppTableFieldResp>)
-	export function unRefDeleteAppTableFieldResp(v:Ref<DeleteAppTableFieldResp>):DeleteAppTableFieldResp
-	export function emptyGetAppTableViewReq():GetAppTableViewReq
-	export function emptyRefGetAppTableViewReq():Ref<GetAppTableViewReq>
-	export function refOfGetAppTableViewReq(x:GetAppTableViewReq,v:Ref<GetAppTableViewReq>)
-	export function unRefGetAppTableViewReq(v:Ref<GetAppTableViewReq>):GetAppTableViewReq
-	export function emptyUpdateAppTableRecordRespData():UpdateAppTableRecordRespData
-	export function emptyRefUpdateAppTableRecordRespData():Ref<UpdateAppTableRecordRespData>
-	export function refOfUpdateAppTableRecordRespData(x:UpdateAppTableRecordRespData,v:Ref<UpdateAppTableRecordRespData>)
-	export function unRefUpdateAppTableRecordRespData(v:Ref<UpdateAppTableRecordRespData>):UpdateAppTableRecordRespData
-	export function emptyDeleteAppTableViewReq():DeleteAppTableViewReq
-	export function emptyRefDeleteAppTableViewReq():Ref<DeleteAppTableViewReq>
-	export function refOfDeleteAppTableViewReq(x:DeleteAppTableViewReq,v:Ref<DeleteAppTableViewReq>)
-	export function unRefDeleteAppTableViewReq(v:Ref<DeleteAppTableViewReq>):DeleteAppTableViewReq
-	export function emptyDeleteRecord():DeleteRecord
-	export function emptyRefDeleteRecord():Ref<DeleteRecord>
-	export function refOfDeleteRecord(x:DeleteRecord,v:Ref<DeleteRecord>)
-	export function unRefDeleteRecord(v:Ref<DeleteRecord>):DeleteRecord
-	export function emptyAppTableView():AppTableView
-	export function emptyRefAppTableView():Ref<AppTableView>
-	export function refOfAppTableView(x:AppTableView,v:Ref<AppTableView>)
-	export function unRefAppTableView(v:Ref<AppTableView>):AppTableView
-	export function emptyCopyAppDashboardResp():CopyAppDashboardResp
-	export function emptyRefCopyAppDashboardResp():Ref<CopyAppDashboardResp>
-	export function refOfCopyAppDashboardResp(x:CopyAppDashboardResp,v:Ref<CopyAppDashboardResp>)
-	export function unRefCopyAppDashboardResp(v:Ref<CopyAppDashboardResp>):CopyAppDashboardResp
-	export function emptyAppTableForm():AppTableForm
-	export function emptyRefAppTableForm():Ref<AppTableForm>
-	export function refOfAppTableForm(x:AppTableForm,v:Ref<AppTableForm>)
-	export function unRefAppTableForm(v:Ref<AppTableForm>):AppTableForm
-	export function emptyChildrenFilter():ChildrenFilter
-	export function emptyRefChildrenFilter():Ref<ChildrenFilter>
-	export function refOfChildrenFilter(x:ChildrenFilter,v:Ref<ChildrenFilter>)
-	export function unRefChildrenFilter(v:Ref<ChildrenFilter>):ChildrenFilter
-	export function emptyAppDashboard():AppDashboard
-	export function emptyRefAppDashboard():Ref<AppDashboard>
-	export function refOfAppDashboard(x:AppDashboard,v:Ref<AppDashboard>)
-	export function unRefAppDashboard(v:Ref<AppDashboard>):AppDashboard
-	export function emptyAppTableFieldForList():AppTableFieldForList
-	export function emptyRefAppTableFieldForList():Ref<AppTableFieldForList>
-	export function refOfAppTableFieldForList(x:AppTableFieldForList,v:Ref<AppTableFieldForList>)
-	export function unRefAppTableFieldForList(v:Ref<AppTableFieldForList>):AppTableFieldForList
-	export function emptyBatchDeleteAppRoleMemberReqBody():BatchDeleteAppRoleMemberReqBody
-	export function emptyRefBatchDeleteAppRoleMemberReqBody():Ref<BatchDeleteAppRoleMemberReqBody>
-	export function refOfBatchDeleteAppRoleMemberReqBody(x:BatchDeleteAppRoleMemberReqBody,v:Ref<BatchDeleteAppRoleMemberReqBody>)
-	export function unRefBatchDeleteAppRoleMemberReqBody(v:Ref<BatchDeleteAppRoleMemberReqBody>):BatchDeleteAppRoleMemberReqBody
-	export function emptyCreateAppReq():CreateAppReq
-	export function emptyRefCreateAppReq():Ref<CreateAppReq>
-	export function refOfCreateAppReq(x:CreateAppReq,v:Ref<CreateAppReq>)
-	export function unRefCreateAppReq(v:Ref<CreateAppReq>):CreateAppReq
-	export function emptyGetAppRespData():GetAppRespData
-	export function emptyRefGetAppRespData():Ref<GetAppRespData>
-	export function refOfGetAppRespData(x:GetAppRespData,v:Ref<GetAppRespData>)
-	export function unRefGetAppRespData(v:Ref<GetAppRespData>):GetAppRespData
-	export function emptyAttachment():Attachment
-	export function emptyRefAttachment():Ref<Attachment>
-	export function refOfAttachment(x:Attachment,v:Ref<Attachment>)
-	export function unRefAttachment(v:Ref<Attachment>):Attachment
-	export function emptyBatchDeleteAppTableRecordResp():BatchDeleteAppTableRecordResp
-	export function emptyRefBatchDeleteAppTableRecordResp():Ref<BatchDeleteAppTableRecordResp>
-	export function refOfBatchDeleteAppTableRecordResp(x:BatchDeleteAppTableRecordResp,v:Ref<BatchDeleteAppTableRecordResp>)
-	export function unRefBatchDeleteAppTableRecordResp(v:Ref<BatchDeleteAppTableRecordResp>):BatchDeleteAppTableRecordResp
-	export function emptyAppRoleMemberId():AppRoleMemberId
-	export function emptyRefAppRoleMemberId():Ref<AppRoleMemberId>
-	export function refOfAppRoleMemberId(x:AppRoleMemberId,v:Ref<AppRoleMemberId>)
-	export function unRefAppRoleMemberId(v:Ref<AppRoleMemberId>):AppRoleMemberId
-	export function emptyAppWorkflow():AppWorkflow
-	export function emptyRefAppWorkflow():Ref<AppWorkflow>
-	export function refOfAppWorkflow(x:AppWorkflow,v:Ref<AppWorkflow>)
-	export function unRefAppWorkflow(v:Ref<AppWorkflow>):AppWorkflow
-	export function emptyListAppRoleReq():ListAppRoleReq
-	export function emptyRefListAppRoleReq():Ref<ListAppRoleReq>
-	export function refOfListAppRoleReq(x:ListAppRoleReq,v:Ref<ListAppRoleReq>)
-	export function unRefListAppRoleReq(v:Ref<ListAppRoleReq>):ListAppRoleReq
-	export function emptyPerson():Person
-	export function emptyRefPerson():Ref<Person>
-	export function refOfPerson(x:Person,v:Ref<Person>)
-	export function unRefPerson(v:Ref<Person>):Person
-	export function emptyCopyAppReqBody():CopyAppReqBody
-	export function emptyRefCopyAppReqBody():Ref<CopyAppReqBody>
-	export function refOfCopyAppReqBody(x:CopyAppReqBody,v:Ref<CopyAppReqBody>)
-	export function unRefCopyAppReqBody(v:Ref<CopyAppReqBody>):CopyAppReqBody
-	export function emptyCreateAppRoleResp():CreateAppRoleResp
-	export function emptyRefCreateAppRoleResp():Ref<CreateAppRoleResp>
-	export function refOfCreateAppRoleResp(x:CreateAppRoleResp,v:Ref<CreateAppRoleResp>)
-	export function unRefCreateAppRoleResp(v:Ref<CreateAppRoleResp>):CreateAppRoleResp
-	export function emptyCopyAppRespData():CopyAppRespData
-	export function emptyRefCopyAppRespData():Ref<CopyAppRespData>
-	export function refOfCopyAppRespData(x:CopyAppRespData,v:Ref<CopyAppRespData>)
-	export function unRefCopyAppRespData(v:Ref<CopyAppRespData>):CopyAppRespData
-	export function emptyPatchAppTableViewReq():PatchAppTableViewReq
-	export function emptyRefPatchAppTableViewReq():Ref<PatchAppTableViewReq>
-	export function refOfPatchAppTableViewReq(x:PatchAppTableViewReq,v:Ref<PatchAppTableViewReq>)
-	export function unRefPatchAppTableViewReq(v:Ref<PatchAppTableViewReq>):PatchAppTableViewReq
-	export function emptyV1():V1
-	export function emptyRefV1():Ref<V1>
-	export function refOfV1(x:V1,v:Ref<V1>)
-	export function unRefV1(v:Ref<V1>):V1
-	export function emptyCreateAppTableFieldReq():CreateAppTableFieldReq
-	export function emptyRefCreateAppTableFieldReq():Ref<CreateAppTableFieldReq>
-	export function refOfCreateAppTableFieldReq(x:CreateAppTableFieldReq,v:Ref<CreateAppTableFieldReq>)
-	export function unRefCreateAppTableFieldReq(v:Ref<CreateAppTableFieldReq>):CreateAppTableFieldReq
-	export function emptyUpdateAppRoleResp():UpdateAppRoleResp
-	export function emptyRefUpdateAppRoleResp():Ref<UpdateAppRoleResp>
-	export function refOfUpdateAppRoleResp(x:UpdateAppRoleResp,v:Ref<UpdateAppRoleResp>)
-	export function unRefUpdateAppRoleResp(v:Ref<UpdateAppRoleResp>):UpdateAppRoleResp
-	export function emptyUpdateAppTableFieldResp():UpdateAppTableFieldResp
-	export function emptyRefUpdateAppTableFieldResp():Ref<UpdateAppTableFieldResp>
-	export function refOfUpdateAppTableFieldResp(x:UpdateAppTableFieldResp,v:Ref<UpdateAppTableFieldResp>)
-	export function unRefUpdateAppTableFieldResp(v:Ref<UpdateAppTableFieldResp>):UpdateAppTableFieldResp
-	export function emptyDeleteAppTableResp():DeleteAppTableResp
-	export function emptyRefDeleteAppTableResp():Ref<DeleteAppTableResp>
-	export function refOfDeleteAppTableResp(x:DeleteAppTableResp,v:Ref<DeleteAppTableResp>)
-	export function unRefDeleteAppTableResp(v:Ref<DeleteAppTableResp>):DeleteAppTableResp
-	export function emptyListAppTableFieldIterator():ListAppTableFieldIterator
-	export function emptyRefListAppTableFieldIterator():Ref<ListAppTableFieldIterator>
-	export function refOfListAppTableFieldIterator(x:ListAppTableFieldIterator,v:Ref<ListAppTableFieldIterator>)
-	export function unRefListAppTableFieldIterator(v:Ref<ListAppTableFieldIterator>):ListAppTableFieldIterator
-	export function emptyAppTableFieldPropertyOption():AppTableFieldPropertyOption
-	export function emptyRefAppTableFieldPropertyOption():Ref<AppTableFieldPropertyOption>
-	export function refOfAppTableFieldPropertyOption(x:AppTableFieldPropertyOption,v:Ref<AppTableFieldPropertyOption>)
-	export function unRefAppTableFieldPropertyOption(v:Ref<AppTableFieldPropertyOption>):AppTableFieldPropertyOption
-	export function emptyBatchCreateAppTableReqBody():BatchCreateAppTableReqBody
-	export function emptyRefBatchCreateAppTableReqBody():Ref<BatchCreateAppTableReqBody>
-	export function refOfBatchCreateAppTableReqBody(x:BatchCreateAppTableReqBody,v:Ref<BatchCreateAppTableReqBody>)
-	export function unRefBatchCreateAppTableReqBody(v:Ref<BatchCreateAppTableReqBody>):BatchCreateAppTableReqBody
-	export function emptyUpdateAppReqBody():UpdateAppReqBody
-	export function emptyRefUpdateAppReqBody():Ref<UpdateAppReqBody>
-	export function refOfUpdateAppReqBody(x:UpdateAppReqBody,v:Ref<UpdateAppReqBody>)
-	export function unRefUpdateAppReqBody(v:Ref<UpdateAppReqBody>):UpdateAppReqBody
-	export function emptyUrl():Url
-	export function emptyRefUrl():Ref<Url>
-	export function refOfUrl(x:Url,v:Ref<Url>)
-	export function unRefUrl(v:Ref<Url>):Url
-	export function emptyCopyAppResp():CopyAppResp
-	export function emptyRefCopyAppResp():Ref<CopyAppResp>
-	export function refOfCopyAppResp(x:CopyAppResp,v:Ref<CopyAppResp>)
-	export function unRefCopyAppResp(v:Ref<CopyAppResp>):CopyAppResp
-	export function emptyListAppTableFieldResp():ListAppTableFieldResp
-	export function emptyRefListAppTableFieldResp():Ref<ListAppTableFieldResp>
-	export function refOfListAppTableFieldResp(x:ListAppTableFieldResp,v:Ref<ListAppTableFieldResp>)
-	export function unRefListAppTableFieldResp(v:Ref<ListAppTableFieldResp>):ListAppTableFieldResp
-	export function emptyPatchAppTableFormFieldRespData():PatchAppTableFormFieldRespData
-	export function emptyRefPatchAppTableFormFieldRespData():Ref<PatchAppTableFormFieldRespData>
-	export function refOfPatchAppTableFormFieldRespData(x:PatchAppTableFormFieldRespData,v:Ref<PatchAppTableFormFieldRespData>)
-	export function unRefPatchAppTableFormFieldRespData(v:Ref<PatchAppTableFormFieldRespData>):PatchAppTableFormFieldRespData
-	export function emptyPatchAppTableFormResp():PatchAppTableFormResp
-	export function emptyRefPatchAppTableFormResp():Ref<PatchAppTableFormResp>
-	export function refOfPatchAppTableFormResp(x:PatchAppTableFormResp,v:Ref<PatchAppTableFormResp>)
-	export function unRefPatchAppTableFormResp(v:Ref<PatchAppTableFormResp>):PatchAppTableFormResp
-	export function emptyCreateAppTableReq():CreateAppTableReq
-	export function emptyRefCreateAppTableReq():Ref<CreateAppTableReq>
-	export function refOfCreateAppTableReq(x:CreateAppTableReq,v:Ref<CreateAppTableReq>)
-	export function unRefCreateAppTableReq(v:Ref<CreateAppTableReq>):CreateAppTableReq
-	export function emptyRating():Rating
-	export function emptyRefRating():Ref<Rating>
-	export function refOfRating(x:Rating,v:Ref<Rating>)
-	export function unRefRating(v:Ref<Rating>):Rating
-	export function emptyListAppRoleRespData():ListAppRoleRespData
-	export function emptyRefListAppRoleRespData():Ref<ListAppRoleRespData>
-	export function refOfListAppRoleRespData(x:ListAppRoleRespData,v:Ref<ListAppRoleRespData>)
-	export function unRefListAppRoleRespData(v:Ref<ListAppRoleRespData>):ListAppRoleRespData
-	export function emptyListAppTableIterator():ListAppTableIterator
-	export function emptyRefListAppTableIterator():Ref<ListAppTableIterator>
-	export function refOfListAppTableIterator(x:ListAppTableIterator,v:Ref<ListAppTableIterator>)
-	export function unRefListAppTableIterator(v:Ref<ListAppTableIterator>):ListAppTableIterator
-	export function emptyListAppTableViewResp():ListAppTableViewResp
-	export function emptyRefListAppTableViewResp():Ref<ListAppTableViewResp>
-	export function refOfListAppTableViewResp(x:ListAppTableViewResp,v:Ref<ListAppTableViewResp>)
-	export function unRefListAppTableViewResp(v:Ref<ListAppTableViewResp>):ListAppTableViewResp
-	export function emptyUpdateAppResp():UpdateAppResp
-	export function emptyRefUpdateAppResp():Ref<UpdateAppResp>
-	export function refOfUpdateAppResp(x:UpdateAppResp,v:Ref<UpdateAppResp>)
-	export function unRefUpdateAppResp(v:Ref<UpdateAppResp>):UpdateAppResp
-	export function emptyAppTableField():AppTableField
-	export function emptyRefAppTableField():Ref<AppTableField>
-	export function refOfAppTableField(x:AppTableField,v:Ref<AppTableField>)
-	export function unRefAppTableField(v:Ref<AppTableField>):AppTableField
-	export function emptyCreateAppRoleRespData():CreateAppRoleRespData
-	export function emptyRefCreateAppRoleRespData():Ref<CreateAppRoleRespData>
-	export function refOfCreateAppRoleRespData(x:CreateAppRoleRespData,v:Ref<CreateAppRoleRespData>)
-	export function unRefCreateAppRoleRespData(v:Ref<CreateAppRoleRespData>):CreateAppRoleRespData
-	export function emptyDeleteAppTableFieldReq():DeleteAppTableFieldReq
-	export function emptyRefDeleteAppTableFieldReq():Ref<DeleteAppTableFieldReq>
-	export function refOfDeleteAppTableFieldReq(x:DeleteAppTableFieldReq,v:Ref<DeleteAppTableFieldReq>)
-	export function unRefDeleteAppTableFieldReq(v:Ref<DeleteAppTableFieldReq>):DeleteAppTableFieldReq
-	export function emptyListAppTableFieldReq():ListAppTableFieldReq
-	export function emptyRefListAppTableFieldReq():Ref<ListAppTableFieldReq>
-	export function refOfListAppTableFieldReq(x:ListAppTableFieldReq,v:Ref<ListAppTableFieldReq>)
-	export function unRefListAppTableFieldReq(v:Ref<ListAppTableFieldReq>):ListAppTableFieldReq
-	export function emptyGetAppReq():GetAppReq
-	export function emptyRefGetAppReq():Ref<GetAppReq>
-	export function refOfGetAppReq(x:GetAppReq,v:Ref<GetAppReq>)
-	export function unRefGetAppReq(v:Ref<GetAppReq>):GetAppReq
-	export function emptyGetAppResp():GetAppResp
-	export function emptyRefGetAppResp():Ref<GetAppResp>
-	export function refOfGetAppResp(x:GetAppResp,v:Ref<GetAppResp>)
-	export function unRefGetAppResp(v:Ref<GetAppResp>):GetAppResp
-	export function emptyPatchAppTableFormFieldReq():PatchAppTableFormFieldReq
-	export function emptyRefPatchAppTableFormFieldReq():Ref<PatchAppTableFormFieldReq>
-	export function refOfPatchAppTableFormFieldReq(x:PatchAppTableFormFieldReq,v:Ref<PatchAppTableFormFieldReq>)
-	export function unRefPatchAppTableFormFieldReq(v:Ref<PatchAppTableFormFieldReq>):PatchAppTableFormFieldReq
-	export function emptyAppTableFieldDescription():AppTableFieldDescription
-	export function emptyRefAppTableFieldDescription():Ref<AppTableFieldDescription>
-	export function refOfAppTableFieldDescription(x:AppTableFieldDescription,v:Ref<AppTableFieldDescription>)
-	export function unRefAppTableFieldDescription(v:Ref<AppTableFieldDescription>):AppTableFieldDescription
-	export function emptyDeleteAppRoleMemberResp():DeleteAppRoleMemberResp
-	export function emptyRefDeleteAppRoleMemberResp():Ref<DeleteAppRoleMemberResp>
-	export function refOfDeleteAppRoleMemberResp(x:DeleteAppRoleMemberResp,v:Ref<DeleteAppRoleMemberResp>)
-	export function unRefDeleteAppRoleMemberResp(v:Ref<DeleteAppRoleMemberResp>):DeleteAppRoleMemberResp
-	export function emptyListAppRoleMemberRespData():ListAppRoleMemberRespData
-	export function emptyRefListAppRoleMemberRespData():Ref<ListAppRoleMemberRespData>
-	export function refOfListAppRoleMemberRespData(x:ListAppRoleMemberRespData,v:Ref<ListAppRoleMemberRespData>)
-	export function unRefListAppRoleMemberRespData(v:Ref<ListAppRoleMemberRespData>):ListAppRoleMemberRespData
-	export function emptyAllowedEditModes():AllowedEditModes
-	export function emptyRefAllowedEditModes():Ref<AllowedEditModes>
-	export function refOfAllowedEditModes(x:AllowedEditModes,v:Ref<AllowedEditModes>)
-	export function unRefAllowedEditModes(v:Ref<AllowedEditModes>):AllowedEditModes
-	export function emptyBatchCreateAppTableRecordRespData():BatchCreateAppTableRecordRespData
-	export function emptyRefBatchCreateAppTableRecordRespData():Ref<BatchCreateAppTableRecordRespData>
-	export function refOfBatchCreateAppTableRecordRespData(x:BatchCreateAppTableRecordRespData,v:Ref<BatchCreateAppTableRecordRespData>)
-	export function unRefBatchCreateAppTableRecordRespData(v:Ref<BatchCreateAppTableRecordRespData>):BatchCreateAppTableRecordRespData
-	export function emptyListAppTableFormFieldRespData():ListAppTableFormFieldRespData
-	export function emptyRefListAppTableFormFieldRespData():Ref<ListAppTableFormFieldRespData>
-	export function refOfListAppTableFormFieldRespData(x:ListAppTableFormFieldRespData,v:Ref<ListAppTableFormFieldRespData>)
-	export function unRefListAppTableFormFieldRespData(v:Ref<ListAppTableFormFieldRespData>):ListAppTableFormFieldRespData
-	export function emptyBatchUpdateAppTableRecordReq():BatchUpdateAppTableRecordReq
-	export function emptyRefBatchUpdateAppTableRecordReq():Ref<BatchUpdateAppTableRecordReq>
-	export function refOfBatchUpdateAppTableRecordReq(x:BatchUpdateAppTableRecordReq,v:Ref<BatchUpdateAppTableRecordReq>)
-	export function unRefBatchUpdateAppTableRecordReq(v:Ref<BatchUpdateAppTableRecordReq>):BatchUpdateAppTableRecordReq
-	export function emptyBatchUpdateAppTableRecordRespData():BatchUpdateAppTableRecordRespData
-	export function emptyRefBatchUpdateAppTableRecordRespData():Ref<BatchUpdateAppTableRecordRespData>
-	export function refOfBatchUpdateAppTableRecordRespData(x:BatchUpdateAppTableRecordRespData,v:Ref<BatchUpdateAppTableRecordRespData>)
-	export function unRefBatchUpdateAppTableRecordRespData(v:Ref<BatchUpdateAppTableRecordRespData>):BatchUpdateAppTableRecordRespData
-	export function emptyAppTableFormPatchedField():AppTableFormPatchedField
-	export function emptyRefAppTableFormPatchedField():Ref<AppTableFormPatchedField>
-	export function refOfAppTableFormPatchedField(x:AppTableFormPatchedField,v:Ref<AppTableFormPatchedField>)
-	export function unRefAppTableFormPatchedField(v:Ref<AppTableFormPatchedField>):AppTableFormPatchedField
-	export function emptyCreateAppResp():CreateAppResp
-	export function emptyRefCreateAppResp():Ref<CreateAppResp>
-	export function refOfCreateAppResp(x:CreateAppResp,v:Ref<CreateAppResp>)
-	export function unRefCreateAppResp(v:Ref<CreateAppResp>):CreateAppResp
-	export function emptyListAppDashboardRespData():ListAppDashboardRespData
-	export function emptyRefListAppDashboardRespData():Ref<ListAppDashboardRespData>
-	export function refOfListAppDashboardRespData(x:ListAppDashboardRespData,v:Ref<ListAppDashboardRespData>)
-	export function unRefListAppDashboardRespData(v:Ref<ListAppDashboardRespData>):ListAppDashboardRespData
-	export function emptyPatchAppTableResp():PatchAppTableResp
-	export function emptyRefPatchAppTableResp():Ref<PatchAppTableResp>
-	export function refOfPatchAppTableResp(x:PatchAppTableResp,v:Ref<PatchAppTableResp>)
-	export function unRefPatchAppTableResp(v:Ref<PatchAppTableResp>):PatchAppTableResp
-	export function emptySort():Sort
-	export function emptyRefSort():Ref<Sort>
-	export function refOfSort(x:Sort,v:Ref<Sort>)
-	export function unRefSort(v:Ref<Sort>):Sort
-	export function emptyListAppDashboardResp():ListAppDashboardResp
-	export function emptyRefListAppDashboardResp():Ref<ListAppDashboardResp>
-	export function refOfListAppDashboardResp(x:ListAppDashboardResp,v:Ref<ListAppDashboardResp>)
-	export function unRefListAppDashboardResp(v:Ref<ListAppDashboardResp>):ListAppDashboardResp
-	export function emptyGetAppTableFormRespData():GetAppTableFormRespData
-	export function emptyRefGetAppTableFormRespData():Ref<GetAppTableFormRespData>
-	export function refOfGetAppTableFormRespData(x:GetAppTableFormRespData,v:Ref<GetAppTableFormRespData>)
-	export function unRefGetAppTableFormRespData(v:Ref<GetAppTableFormRespData>):GetAppTableFormRespData
-	export function emptyDeleteAppTableReq():DeleteAppTableReq
-	export function emptyRefDeleteAppTableReq():Ref<DeleteAppTableReq>
-	export function refOfDeleteAppTableReq(x:DeleteAppTableReq,v:Ref<DeleteAppTableReq>)
-	export function unRefDeleteAppTableReq(v:Ref<DeleteAppTableReq>):DeleteAppTableReq
-	export function emptyGetAppTableFormResp():GetAppTableFormResp
-	export function emptyRefGetAppTableFormResp():Ref<GetAppTableFormResp>
-	export function refOfGetAppTableFormResp(x:GetAppTableFormResp,v:Ref<GetAppTableFormResp>)
-	export function unRefGetAppTableFormResp(v:Ref<GetAppTableFormResp>):GetAppTableFormResp
-	export function emptyCopyAppDashboardReq():CopyAppDashboardReq
-	export function emptyRefCopyAppDashboardReq():Ref<CopyAppDashboardReq>
-	export function refOfCopyAppDashboardReq(x:CopyAppDashboardReq,v:Ref<CopyAppDashboardReq>)
-	export function unRefCopyAppDashboardReq(v:Ref<CopyAppDashboardReq>):CopyAppDashboardReq
-	export function emptyDisplayAppV2():DisplayAppV2
-	export function emptyRefDisplayAppV2():Ref<DisplayAppV2>
-	export function refOfDisplayAppV2(x:DisplayAppV2,v:Ref<DisplayAppV2>)
-	export function unRefDisplayAppV2(v:Ref<DisplayAppV2>):DisplayAppV2
-	export function emptyListAppTableFormFieldIterator():ListAppTableFormFieldIterator
-	export function emptyRefListAppTableFormFieldIterator():Ref<ListAppTableFormFieldIterator>
-	export function refOfListAppTableFormFieldIterator(x:ListAppTableFormFieldIterator,v:Ref<ListAppTableFormFieldIterator>)
-	export function unRefListAppTableFormFieldIterator(v:Ref<ListAppTableFormFieldIterator>):ListAppTableFormFieldIterator
-	export function emptySearchAppTableRecordReqBody():SearchAppTableRecordReqBody
-	export function emptyRefSearchAppTableRecordReqBody():Ref<SearchAppTableRecordReqBody>
-	export function refOfSearchAppTableRecordReqBody(x:SearchAppTableRecordReqBody,v:Ref<SearchAppTableRecordReqBody>)
-	export function unRefSearchAppTableRecordReqBody(v:Ref<SearchAppTableRecordReqBody>):SearchAppTableRecordReqBody
-	export function emptyCondition():Condition
-	export function emptyRefCondition():Ref<Condition>
-	export function refOfCondition(x:Condition,v:Ref<Condition>)
-	export function unRefCondition(v:Ref<Condition>):Condition
-	export function emptyListAppTableFieldRespData():ListAppTableFieldRespData
-	export function emptyRefListAppTableFieldRespData():Ref<ListAppTableFieldRespData>
-	export function refOfListAppTableFieldRespData(x:ListAppTableFieldRespData,v:Ref<ListAppTableFieldRespData>)
-	export function unRefListAppTableFieldRespData(v:Ref<ListAppTableFieldRespData>):ListAppTableFieldRespData
-	export function emptyBatchDeleteAppTableRecordReq():BatchDeleteAppTableRecordReq
-	export function emptyRefBatchDeleteAppTableRecordReq():Ref<BatchDeleteAppTableRecordReq>
-	export function refOfBatchDeleteAppTableRecordReq(x:BatchDeleteAppTableRecordReq,v:Ref<BatchDeleteAppTableRecordReq>)
-	export function unRefBatchDeleteAppTableRecordReq(v:Ref<BatchDeleteAppTableRecordReq>):BatchDeleteAppTableRecordReq
-	export function emptyBatchCreateAppTableReq():BatchCreateAppTableReq
-	export function emptyRefBatchCreateAppTableReq():Ref<BatchCreateAppTableReq>
-	export function refOfBatchCreateAppTableReq(x:BatchCreateAppTableReq,v:Ref<BatchCreateAppTableReq>)
-	export function unRefBatchCreateAppTableReq(v:Ref<BatchCreateAppTableReq>):BatchCreateAppTableReq
-	export function emptyPatchAppTableRespData():PatchAppTableRespData
-	export function emptyRefPatchAppTableRespData():Ref<PatchAppTableRespData>
-	export function refOfPatchAppTableRespData(x:PatchAppTableRespData,v:Ref<PatchAppTableRespData>)
-	export function unRefPatchAppTableRespData(v:Ref<PatchAppTableRespData>):PatchAppTableRespData
-	export function emptyAppTable():AppTable
-	export function emptyRefAppTable():Ref<AppTable>
-	export function refOfAppTable(x:AppTable,v:Ref<AppTable>)
-	export function unRefAppTable(v:Ref<AppTable>):AppTable
-	export function emptyDeleteAppRoleResp():DeleteAppRoleResp
-	export function emptyRefDeleteAppRoleResp():Ref<DeleteAppRoleResp>
-	export function refOfDeleteAppRoleResp(x:DeleteAppRoleResp,v:Ref<DeleteAppRoleResp>)
-	export function unRefDeleteAppRoleResp(v:Ref<DeleteAppRoleResp>):DeleteAppRoleResp
-	export function emptyAppFieldPropertyAutoSerial():AppFieldPropertyAutoSerial
-	export function emptyRefAppFieldPropertyAutoSerial():Ref<AppFieldPropertyAutoSerial>
-	export function refOfAppFieldPropertyAutoSerial(x:AppFieldPropertyAutoSerial,v:Ref<AppFieldPropertyAutoSerial>)
-	export function unRefAppFieldPropertyAutoSerial(v:Ref<AppFieldPropertyAutoSerial>):AppFieldPropertyAutoSerial
-	export function emptyAppFieldPropertyAutoSerialOptions():AppFieldPropertyAutoSerialOptions
-	export function emptyRefAppFieldPropertyAutoSerialOptions():Ref<AppFieldPropertyAutoSerialOptions>
-	export function refOfAppFieldPropertyAutoSerialOptions(x:AppFieldPropertyAutoSerialOptions,v:Ref<AppFieldPropertyAutoSerialOptions>)
-	export function unRefAppFieldPropertyAutoSerialOptions(v:Ref<AppFieldPropertyAutoSerialOptions>):AppFieldPropertyAutoSerialOptions
-	export function emptyUpdateAppTableFieldReq():UpdateAppTableFieldReq
-	export function emptyRefUpdateAppTableFieldReq():Ref<UpdateAppTableFieldReq>
-	export function refOfUpdateAppTableFieldReq(x:UpdateAppTableFieldReq,v:Ref<UpdateAppTableFieldReq>)
-	export function unRefUpdateAppTableFieldReq(v:Ref<UpdateAppTableFieldReq>):UpdateAppTableFieldReq
-	export function emptyCreateAppTableFieldRespData():CreateAppTableFieldRespData
-	export function emptyRefCreateAppTableFieldRespData():Ref<CreateAppTableFieldRespData>
-	export function refOfCreateAppTableFieldRespData(x:CreateAppTableFieldRespData,v:Ref<CreateAppTableFieldRespData>)
-	export function unRefCreateAppTableFieldRespData(v:Ref<CreateAppTableFieldRespData>):CreateAppTableFieldRespData
-	export function emptyAppTableRecord():AppTableRecord
-	export function emptyRefAppTableRecord():Ref<AppTableRecord>
-	export function refOfAppTableRecord(x:AppTableRecord,v:Ref<AppTableRecord>)
-	export function unRefAppTableRecord(v:Ref<AppTableRecord>):AppTableRecord
-	export function emptyBatchCreateAppRoleMemberReqBody():BatchCreateAppRoleMemberReqBody
-	export function emptyRefBatchCreateAppRoleMemberReqBody():Ref<BatchCreateAppRoleMemberReqBody>
-	export function refOfBatchCreateAppRoleMemberReqBody(x:BatchCreateAppRoleMemberReqBody,v:Ref<BatchCreateAppRoleMemberReqBody>)
-	export function unRefBatchCreateAppRoleMemberReqBody(v:Ref<BatchCreateAppRoleMemberReqBody>):BatchCreateAppRoleMemberReqBody
-	export function emptyUpdateAppReq():UpdateAppReq
-	export function emptyRefUpdateAppReq():Ref<UpdateAppReq>
-	export function refOfUpdateAppReq(x:UpdateAppReq,v:Ref<UpdateAppReq>)
-	export function unRefUpdateAppReq(v:Ref<UpdateAppReq>):UpdateAppReq
-	export function emptyBatchCreateAppRoleMemberResp():BatchCreateAppRoleMemberResp
-	export function emptyRefBatchCreateAppRoleMemberResp():Ref<BatchCreateAppRoleMemberResp>
-	export function refOfBatchCreateAppRoleMemberResp(x:BatchCreateAppRoleMemberResp,v:Ref<BatchCreateAppRoleMemberResp>)
-	export function unRefBatchCreateAppRoleMemberResp(v:Ref<BatchCreateAppRoleMemberResp>):BatchCreateAppRoleMemberResp
-	export function emptyDeleteAppTableViewResp():DeleteAppTableViewResp
-	export function emptyRefDeleteAppTableViewResp():Ref<DeleteAppTableViewResp>
-	export function refOfDeleteAppTableViewResp(x:DeleteAppTableViewResp,v:Ref<DeleteAppTableViewResp>)
-	export function unRefDeleteAppTableViewResp(v:Ref<DeleteAppTableViewResp>):DeleteAppTableViewResp
 	export function emptyCreateAppTableViewRespData():CreateAppTableViewRespData
 	export function emptyRefCreateAppTableViewRespData():Ref<CreateAppTableViewRespData>
 	export function refOfCreateAppTableViewRespData(x:CreateAppTableViewRespData,v:Ref<CreateAppTableViewRespData>)
 	export function unRefCreateAppTableViewRespData(v:Ref<CreateAppTableViewRespData>):CreateAppTableViewRespData
-	export function emptyListAppTableViewRespData():ListAppTableViewRespData
-	export function emptyRefListAppTableViewRespData():Ref<ListAppTableViewRespData>
-	export function refOfListAppTableViewRespData(x:ListAppTableViewRespData,v:Ref<ListAppTableViewRespData>)
-	export function unRefListAppTableViewRespData(v:Ref<ListAppTableViewRespData>):ListAppTableViewRespData
-	export function emptyAppTableFieldProperty():AppTableFieldProperty
-	export function emptyRefAppTableFieldProperty():Ref<AppTableFieldProperty>
-	export function refOfAppTableFieldProperty(x:AppTableFieldProperty,v:Ref<AppTableFieldProperty>)
-	export function unRefAppTableFieldProperty(v:Ref<AppTableFieldProperty>):AppTableFieldProperty
-	export function emptyBatchDeleteAppTableReq():BatchDeleteAppTableReq
-	export function emptyRefBatchDeleteAppTableReq():Ref<BatchDeleteAppTableReq>
-	export function refOfBatchDeleteAppTableReq(x:BatchDeleteAppTableReq,v:Ref<BatchDeleteAppTableReq>)
-	export function unRefBatchDeleteAppTableReq(v:Ref<BatchDeleteAppTableReq>):BatchDeleteAppTableReq
-	export function emptyFilterInfo():FilterInfo
-	export function emptyRefFilterInfo():Ref<FilterInfo>
-	export function refOfFilterInfo(x:FilterInfo,v:Ref<FilterInfo>)
-	export function unRefFilterInfo(v:Ref<FilterInfo>):FilterInfo
-	export function emptyUpdateAppRoleRespData():UpdateAppRoleRespData
-	export function emptyRefUpdateAppRoleRespData():Ref<UpdateAppRoleRespData>
-	export function refOfUpdateAppRoleRespData(x:UpdateAppRoleRespData,v:Ref<UpdateAppRoleRespData>)
-	export function unRefUpdateAppRoleRespData(v:Ref<UpdateAppRoleRespData>):UpdateAppRoleRespData
-	export function emptyCreateAppRoleReq():CreateAppRoleReq
-	export function emptyRefCreateAppRoleReq():Ref<CreateAppRoleReq>
-	export function refOfCreateAppRoleReq(x:CreateAppRoleReq,v:Ref<CreateAppRoleReq>)
-	export function unRefCreateAppRoleReq(v:Ref<CreateAppRoleReq>):CreateAppRoleReq
-	export function emptyCreateAppTableReqBody():CreateAppTableReqBody
-	export function emptyRefCreateAppTableReqBody():Ref<CreateAppTableReqBody>
-	export function refOfCreateAppTableReqBody(x:CreateAppTableReqBody,v:Ref<CreateAppTableReqBody>)
-	export function unRefCreateAppTableReqBody(v:Ref<CreateAppTableReqBody>):CreateAppTableReqBody
-	export function emptyReqApp():ReqApp
-	export function emptyRefReqApp():Ref<ReqApp>
-	export function refOfReqApp(x:ReqApp,v:Ref<ReqApp>)
-	export function unRefReqApp(v:Ref<ReqApp>):ReqApp
-	export function emptyBatchCreateAppTableRecordResp():BatchCreateAppTableRecordResp
-	export function emptyRefBatchCreateAppTableRecordResp():Ref<BatchCreateAppTableRecordResp>
-	export function refOfBatchCreateAppTableRecordResp(x:BatchCreateAppTableRecordResp,v:Ref<BatchCreateAppTableRecordResp>)
-	export function unRefBatchCreateAppTableRecordResp(v:Ref<BatchCreateAppTableRecordResp>):BatchCreateAppTableRecordResp
-	export function emptyGetAppTableViewResp():GetAppTableViewResp
-	export function emptyRefGetAppTableViewResp():Ref<GetAppTableViewResp>
-	export function refOfGetAppTableViewResp(x:GetAppTableViewResp,v:Ref<GetAppTableViewResp>)
-	export function unRefGetAppTableViewResp(v:Ref<GetAppTableViewResp>):GetAppTableViewResp
-	export function emptyPatchAppTableFormRespData():PatchAppTableFormRespData
-	export function emptyRefPatchAppTableFormRespData():Ref<PatchAppTableFormRespData>
-	export function refOfPatchAppTableFormRespData(x:PatchAppTableFormRespData,v:Ref<PatchAppTableFormRespData>)
-	export function unRefPatchAppTableFormRespData(v:Ref<PatchAppTableFormRespData>):PatchAppTableFormRespData
-	export function emptyGetAppTableRecordReq():GetAppTableRecordReq
-	export function emptyRefGetAppTableRecordReq():Ref<GetAppTableRecordReq>
-	export function refOfGetAppTableRecordReq(x:GetAppTableRecordReq,v:Ref<GetAppTableRecordReq>)
-	export function unRefGetAppTableRecordReq(v:Ref<GetAppTableRecordReq>):GetAppTableRecordReq
+	export function emptyGetAppResp():GetAppResp
+	export function emptyRefGetAppResp():Ref<GetAppResp>
+	export function refOfGetAppResp(x:GetAppResp,v:Ref<GetAppResp>)
+	export function unRefGetAppResp(v:Ref<GetAppResp>):GetAppResp
+	export function emptyListAppTableFieldIterator():ListAppTableFieldIterator
+	export function emptyRefListAppTableFieldIterator():Ref<ListAppTableFieldIterator>
+	export function refOfListAppTableFieldIterator(x:ListAppTableFieldIterator,v:Ref<ListAppTableFieldIterator>)
+	export function unRefListAppTableFieldIterator(v:Ref<ListAppTableFieldIterator>):ListAppTableFieldIterator
+	export function emptyCreateAppResp():CreateAppResp
+	export function emptyRefCreateAppResp():Ref<CreateAppResp>
+	export function refOfCreateAppResp(x:CreateAppResp,v:Ref<CreateAppResp>)
+	export function unRefCreateAppResp(v:Ref<CreateAppResp>):CreateAppResp
+	export function emptyCreateAppTableFieldRespData():CreateAppTableFieldRespData
+	export function emptyRefCreateAppTableFieldRespData():Ref<CreateAppTableFieldRespData>
+	export function refOfCreateAppTableFieldRespData(x:CreateAppTableFieldRespData,v:Ref<CreateAppTableFieldRespData>)
+	export function unRefCreateAppTableFieldRespData(v:Ref<CreateAppTableFieldRespData>):CreateAppTableFieldRespData
+	export function emptyBatchCreateAppTableRecordReq():BatchCreateAppTableRecordReq
+	export function emptyRefBatchCreateAppTableRecordReq():Ref<BatchCreateAppTableRecordReq>
+	export function refOfBatchCreateAppTableRecordReq(x:BatchCreateAppTableRecordReq,v:Ref<BatchCreateAppTableRecordReq>)
+	export function unRefBatchCreateAppTableRecordReq(v:Ref<BatchCreateAppTableRecordReq>):BatchCreateAppTableRecordReq
+	export function emptyBatchUpdateAppTableRecordReq():BatchUpdateAppTableRecordReq
+	export function emptyRefBatchUpdateAppTableRecordReq():Ref<BatchUpdateAppTableRecordReq>
+	export function refOfBatchUpdateAppTableRecordReq(x:BatchUpdateAppTableRecordReq,v:Ref<BatchUpdateAppTableRecordReq>)
+	export function unRefBatchUpdateAppTableRecordReq(v:Ref<BatchUpdateAppTableRecordReq>):BatchUpdateAppTableRecordReq
+	export function emptyDeleteAppTableFieldReq():DeleteAppTableFieldReq
+	export function emptyRefDeleteAppTableFieldReq():Ref<DeleteAppTableFieldReq>
+	export function refOfDeleteAppTableFieldReq(x:DeleteAppTableFieldReq,v:Ref<DeleteAppTableFieldReq>)
+	export function unRefDeleteAppTableFieldReq(v:Ref<DeleteAppTableFieldReq>):DeleteAppTableFieldReq
+	export function emptyListAppRoleRespData():ListAppRoleRespData
+	export function emptyRefListAppRoleRespData():Ref<ListAppRoleRespData>
+	export function refOfListAppRoleRespData(x:ListAppRoleRespData,v:Ref<ListAppRoleRespData>)
+	export function unRefListAppRoleRespData(v:Ref<ListAppRoleRespData>):ListAppRoleRespData
+	export function emptyListAppTableViewResp():ListAppTableViewResp
+	export function emptyRefListAppTableViewResp():Ref<ListAppTableViewResp>
+	export function refOfListAppTableViewResp(x:ListAppTableViewResp,v:Ref<ListAppTableViewResp>)
+	export function unRefListAppTableViewResp(v:Ref<ListAppTableViewResp>):ListAppTableViewResp
 	export function emptyReqView():ReqView
 	export function emptyRefReqView():Ref<ReqView>
 	export function refOfReqView(x:ReqView,v:Ref<ReqView>)
 	export function unRefReqView(v:Ref<ReqView>):ReqView
-	export function emptyPatchAppTableViewResp():PatchAppTableViewResp
-	export function emptyRefPatchAppTableViewResp():Ref<PatchAppTableViewResp>
-	export function refOfPatchAppTableViewResp(x:PatchAppTableViewResp,v:Ref<PatchAppTableViewResp>)
-	export function unRefPatchAppTableViewResp(v:Ref<PatchAppTableViewResp>):PatchAppTableViewResp
+	export function emptySort():Sort
+	export function emptyRefSort():Ref<Sort>
+	export function refOfSort(x:Sort,v:Ref<Sort>)
+	export function unRefSort(v:Ref<Sort>):Sort
+	export function emptyAppRoleTableRoleRecRule():AppRoleTableRoleRecRule
+	export function emptyRefAppRoleTableRoleRecRule():Ref<AppRoleTableRoleRecRule>
+	export function refOfAppRoleTableRoleRecRule(x:AppRoleTableRoleRecRule,v:Ref<AppRoleTableRoleRecRule>)
+	export function unRefAppRoleTableRoleRecRule(v:Ref<AppRoleTableRoleRecRule>):AppRoleTableRoleRecRule
+	export function emptyAppTableRecord():AppTableRecord
+	export function emptyRefAppTableRecord():Ref<AppTableRecord>
+	export function refOfAppTableRecord(x:AppTableRecord,v:Ref<AppTableRecord>)
+	export function unRefAppTableRecord(v:Ref<AppTableRecord>):AppTableRecord
+	export function emptyGetAppTableFormResp():GetAppTableFormResp
+	export function emptyRefGetAppTableFormResp():Ref<GetAppTableFormResp>
+	export function refOfGetAppTableFormResp(x:GetAppTableFormResp,v:Ref<GetAppTableFormResp>)
+	export function unRefGetAppTableFormResp(v:Ref<GetAppTableFormResp>):GetAppTableFormResp
+	export function emptyDeleteAppTableReq():DeleteAppTableReq
+	export function emptyRefDeleteAppTableReq():Ref<DeleteAppTableReq>
+	export function refOfDeleteAppTableReq(x:DeleteAppTableReq,v:Ref<DeleteAppTableReq>)
+	export function unRefDeleteAppTableReq(v:Ref<DeleteAppTableReq>):DeleteAppTableReq
+	export function emptyPatchAppTableViewReqBody():PatchAppTableViewReqBody
+	export function emptyRefPatchAppTableViewReqBody():Ref<PatchAppTableViewReqBody>
+	export function refOfPatchAppTableViewReqBody(x:PatchAppTableViewReqBody,v:Ref<PatchAppTableViewReqBody>)
+	export function unRefPatchAppTableViewReqBody(v:Ref<PatchAppTableViewReqBody>):PatchAppTableViewReqBody
+	export function emptyBatchCreateAppTableReqBody():BatchCreateAppTableReqBody
+	export function emptyRefBatchCreateAppTableReqBody():Ref<BatchCreateAppTableReqBody>
+	export function refOfBatchCreateAppTableReqBody(x:BatchCreateAppTableReqBody,v:Ref<BatchCreateAppTableReqBody>)
+	export function unRefBatchCreateAppTableReqBody(v:Ref<BatchCreateAppTableReqBody>):BatchCreateAppTableReqBody
+	export function emptyDisplayAppV2():DisplayAppV2
+	export function emptyRefDisplayAppV2():Ref<DisplayAppV2>
+	export function refOfDisplayAppV2(x:DisplayAppV2,v:Ref<DisplayAppV2>)
+	export function unRefDisplayAppV2(v:Ref<DisplayAppV2>):DisplayAppV2
+	export function emptyListAppTableFieldRespData():ListAppTableFieldRespData
+	export function emptyRefListAppTableFieldRespData():Ref<ListAppTableFieldRespData>
+	export function refOfListAppTableFieldRespData(x:ListAppTableFieldRespData,v:Ref<ListAppTableFieldRespData>)
+	export function unRefListAppTableFieldRespData(v:Ref<ListAppTableFieldRespData>):ListAppTableFieldRespData
+	export function emptyUpdateAppRoleResp():UpdateAppRoleResp
+	export function emptyRefUpdateAppRoleResp():Ref<UpdateAppRoleResp>
+	export function refOfUpdateAppRoleResp(x:UpdateAppRoleResp,v:Ref<UpdateAppRoleResp>)
+	export function unRefUpdateAppRoleResp(v:Ref<UpdateAppRoleResp>):UpdateAppRoleResp
+	export function emptyBatchCreateAppTableRecordReqBody():BatchCreateAppTableRecordReqBody
+	export function emptyRefBatchCreateAppTableRecordReqBody():Ref<BatchCreateAppTableRecordReqBody>
+	export function refOfBatchCreateAppTableRecordReqBody(x:BatchCreateAppTableRecordReqBody,v:Ref<BatchCreateAppTableRecordReqBody>)
+	export function unRefBatchCreateAppTableRecordReqBody(v:Ref<BatchCreateAppTableRecordReqBody>):BatchCreateAppTableRecordReqBody
+	export function emptyBatchGetAppTableRecordRespData():BatchGetAppTableRecordRespData
+	export function emptyRefBatchGetAppTableRecordRespData():Ref<BatchGetAppTableRecordRespData>
+	export function refOfBatchGetAppTableRecordRespData(x:BatchGetAppTableRecordRespData,v:Ref<BatchGetAppTableRecordRespData>)
+	export function unRefBatchGetAppTableRecordRespData(v:Ref<BatchGetAppTableRecordRespData>):BatchGetAppTableRecordRespData
+	export function emptyUpdateAppResp():UpdateAppResp
+	export function emptyRefUpdateAppResp():Ref<UpdateAppResp>
+	export function refOfUpdateAppResp(x:UpdateAppResp,v:Ref<UpdateAppResp>)
+	export function unRefUpdateAppResp(v:Ref<UpdateAppResp>):UpdateAppResp
+	export function emptyAppRoleTableRole():AppRoleTableRole
+	export function emptyRefAppRoleTableRole():Ref<AppRoleTableRole>
+	export function refOfAppRoleTableRole(x:AppRoleTableRole,v:Ref<AppRoleTableRole>)
+	export function unRefAppRoleTableRole(v:Ref<AppRoleTableRole>):AppRoleTableRole
+	export function emptyDeleteAppRoleMemberResp():DeleteAppRoleMemberResp
+	export function emptyRefDeleteAppRoleMemberResp():Ref<DeleteAppRoleMemberResp>
+	export function refOfDeleteAppRoleMemberResp(x:DeleteAppRoleMemberResp,v:Ref<DeleteAppRoleMemberResp>)
+	export function unRefDeleteAppRoleMemberResp(v:Ref<DeleteAppRoleMemberResp>):DeleteAppRoleMemberResp
+	export function emptyDepartmentId():DepartmentId
+	export function emptyRefDepartmentId():Ref<DepartmentId>
+	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
+	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
+	export function emptyGetAppTableFormReq():GetAppTableFormReq
+	export function emptyRefGetAppTableFormReq():Ref<GetAppTableFormReq>
+	export function refOfGetAppTableFormReq(x:GetAppTableFormReq,v:Ref<GetAppTableFormReq>)
+	export function unRefGetAppTableFormReq(v:Ref<GetAppTableFormReq>):GetAppTableFormReq
+	export function emptySearchAppTableRecordReqBody():SearchAppTableRecordReqBody
+	export function emptyRefSearchAppTableRecordReqBody():Ref<SearchAppTableRecordReqBody>
+	export function refOfSearchAppTableRecordReqBody(x:SearchAppTableRecordReqBody,v:Ref<SearchAppTableRecordReqBody>)
+	export function unRefSearchAppTableRecordReqBody(v:Ref<SearchAppTableRecordReqBody>):SearchAppTableRecordReqBody
+	export function emptyPatchAppTableFormResp():PatchAppTableFormResp
+	export function emptyRefPatchAppTableFormResp():Ref<PatchAppTableFormResp>
+	export function refOfPatchAppTableFormResp(x:PatchAppTableFormResp,v:Ref<PatchAppTableFormResp>)
+	export function unRefPatchAppTableFormResp(v:Ref<PatchAppTableFormResp>):PatchAppTableFormResp
+	export function emptyPatchAppTableFormFieldRespData():PatchAppTableFormFieldRespData
+	export function emptyRefPatchAppTableFormFieldRespData():Ref<PatchAppTableFormFieldRespData>
+	export function refOfPatchAppTableFormFieldRespData(x:PatchAppTableFormFieldRespData,v:Ref<PatchAppTableFormFieldRespData>)
+	export function unRefPatchAppTableFormFieldRespData(v:Ref<PatchAppTableFormFieldRespData>):PatchAppTableFormFieldRespData
+	export function emptyUpdateAppRoleRespData():UpdateAppRoleRespData
+	export function emptyRefUpdateAppRoleRespData():Ref<UpdateAppRoleRespData>
+	export function refOfUpdateAppRoleRespData(x:UpdateAppRoleRespData,v:Ref<UpdateAppRoleRespData>)
+	export function unRefUpdateAppRoleRespData(v:Ref<UpdateAppRoleRespData>):UpdateAppRoleRespData
+	export function emptyUpdateAppTableFieldResp():UpdateAppTableFieldResp
+	export function emptyRefUpdateAppTableFieldResp():Ref<UpdateAppTableFieldResp>
+	export function refOfUpdateAppTableFieldResp(x:UpdateAppTableFieldResp,v:Ref<UpdateAppTableFieldResp>)
+	export function unRefUpdateAppTableFieldResp(v:Ref<UpdateAppTableFieldResp>):UpdateAppTableFieldResp
 	export function emptyBatchDeleteAppRoleMemberReq():BatchDeleteAppRoleMemberReq
 	export function emptyRefBatchDeleteAppRoleMemberReq():Ref<BatchDeleteAppRoleMemberReq>
 	export function refOfBatchDeleteAppRoleMemberReq(x:BatchDeleteAppRoleMemberReq,v:Ref<BatchDeleteAppRoleMemberReq>)
 	export function unRefBatchDeleteAppRoleMemberReq(v:Ref<BatchDeleteAppRoleMemberReq>):BatchDeleteAppRoleMemberReq
+	export function emptyListAppRoleMemberResp():ListAppRoleMemberResp
+	export function emptyRefListAppRoleMemberResp():Ref<ListAppRoleMemberResp>
+	export function refOfListAppRoleMemberResp(x:ListAppRoleMemberResp,v:Ref<ListAppRoleMemberResp>)
+	export function unRefListAppRoleMemberResp(v:Ref<ListAppRoleMemberResp>):ListAppRoleMemberResp
+	export function emptyDeleteAppTableFieldResp():DeleteAppTableFieldResp
+	export function emptyRefDeleteAppTableFieldResp():Ref<DeleteAppTableFieldResp>
+	export function refOfDeleteAppTableFieldResp(x:DeleteAppTableFieldResp,v:Ref<DeleteAppTableFieldResp>)
+	export function unRefDeleteAppTableFieldResp(v:Ref<DeleteAppTableFieldResp>):DeleteAppTableFieldResp
+	export function emptyListAppTableViewRespData():ListAppTableViewRespData
+	export function emptyRefListAppTableViewRespData():Ref<ListAppTableViewRespData>
+	export function refOfListAppTableViewRespData(x:ListAppTableViewRespData,v:Ref<ListAppTableViewRespData>)
+	export function unRefListAppTableViewRespData(v:Ref<ListAppTableViewRespData>):ListAppTableViewRespData
+	export function emptyListAppRoleMemberIterator():ListAppRoleMemberIterator
+	export function emptyRefListAppRoleMemberIterator():Ref<ListAppRoleMemberIterator>
+	export function refOfListAppRoleMemberIterator(x:ListAppRoleMemberIterator,v:Ref<ListAppRoleMemberIterator>)
+	export function unRefListAppRoleMemberIterator(v:Ref<ListAppRoleMemberIterator>):ListAppRoleMemberIterator
+	export function emptyPatchAppTableFormFieldReq():PatchAppTableFormFieldReq
+	export function emptyRefPatchAppTableFormFieldReq():Ref<PatchAppTableFormFieldReq>
+	export function refOfPatchAppTableFormFieldReq(x:PatchAppTableFormFieldReq,v:Ref<PatchAppTableFormFieldReq>)
+	export function unRefPatchAppTableFormFieldReq(v:Ref<PatchAppTableFormFieldReq>):PatchAppTableFormFieldReq
+	export function emptyBatchCreateAppTableReq():BatchCreateAppTableReq
+	export function emptyRefBatchCreateAppTableReq():Ref<BatchCreateAppTableReq>
+	export function refOfBatchCreateAppTableReq(x:BatchCreateAppTableReq,v:Ref<BatchCreateAppTableReq>)
+	export function unRefBatchCreateAppTableReq(v:Ref<BatchCreateAppTableReq>):BatchCreateAppTableReq
+	export function emptyCopyAppDashboardResp():CopyAppDashboardResp
+	export function emptyRefCopyAppDashboardResp():Ref<CopyAppDashboardResp>
+	export function refOfCopyAppDashboardResp(x:CopyAppDashboardResp,v:Ref<CopyAppDashboardResp>)
+	export function unRefCopyAppDashboardResp(v:Ref<CopyAppDashboardResp>):CopyAppDashboardResp
+	export function emptyGetAppTableRecordResp():GetAppTableRecordResp
+	export function emptyRefGetAppTableRecordResp():Ref<GetAppTableRecordResp>
+	export function refOfGetAppTableRecordResp(x:GetAppTableRecordResp,v:Ref<GetAppTableRecordResp>)
+	export function unRefGetAppTableRecordResp(v:Ref<GetAppTableRecordResp>):GetAppTableRecordResp
+	export function emptyCreateAppTableReqBody():CreateAppTableReqBody
+	export function emptyRefCreateAppTableReqBody():Ref<CreateAppTableReqBody>
+	export function refOfCreateAppTableReqBody(x:CreateAppTableReqBody,v:Ref<CreateAppTableReqBody>)
+	export function unRefCreateAppTableReqBody(v:Ref<CreateAppTableReqBody>):CreateAppTableReqBody
+	export function emptyPatchAppTableFormRespData():PatchAppTableFormRespData
+	export function emptyRefPatchAppTableFormRespData():Ref<PatchAppTableFormRespData>
+	export function refOfPatchAppTableFormRespData(x:PatchAppTableFormRespData,v:Ref<PatchAppTableFormRespData>)
+	export function unRefPatchAppTableFormRespData(v:Ref<PatchAppTableFormRespData>):PatchAppTableFormRespData
+	export function emptyBatchDeleteAppTableRecordResp():BatchDeleteAppTableRecordResp
+	export function emptyRefBatchDeleteAppTableRecordResp():Ref<BatchDeleteAppTableRecordResp>
+	export function refOfBatchDeleteAppTableRecordResp(x:BatchDeleteAppTableRecordResp,v:Ref<BatchDeleteAppTableRecordResp>)
+	export function unRefBatchDeleteAppTableRecordResp(v:Ref<BatchDeleteAppTableRecordResp>):BatchDeleteAppTableRecordResp
+	export function emptyCopyAppReqBody():CopyAppReqBody
+	export function emptyRefCopyAppReqBody():Ref<CopyAppReqBody>
+	export function refOfCopyAppReqBody(x:CopyAppReqBody,v:Ref<CopyAppReqBody>)
+	export function unRefCopyAppReqBody(v:Ref<CopyAppReqBody>):CopyAppReqBody
+	export function emptyCreateAppTableFieldReq():CreateAppTableFieldReq
+	export function emptyRefCreateAppTableFieldReq():Ref<CreateAppTableFieldReq>
+	export function refOfCreateAppTableFieldReq(x:CreateAppTableFieldReq,v:Ref<CreateAppTableFieldReq>)
+	export function unRefCreateAppTableFieldReq(v:Ref<CreateAppTableFieldReq>):CreateAppTableFieldReq
+	export function emptyAppTableFormPatchedField():AppTableFormPatchedField
+	export function emptyRefAppTableFormPatchedField():Ref<AppTableFormPatchedField>
+	export function refOfAppTableFormPatchedField(x:AppTableFormPatchedField,v:Ref<AppTableFormPatchedField>)
+	export function unRefAppTableFormPatchedField(v:Ref<AppTableFormPatchedField>):AppTableFormPatchedField
+	export function emptyAppWorkflow():AppWorkflow
+	export function emptyRefAppWorkflow():Ref<AppWorkflow>
+	export function refOfAppWorkflow(x:AppWorkflow,v:Ref<AppWorkflow>)
+	export function unRefAppWorkflow(v:Ref<AppWorkflow>):AppWorkflow
+	export function emptyRating():Rating
+	export function emptyRefRating():Ref<Rating>
+	export function refOfRating(x:Rating,v:Ref<Rating>)
+	export function unRefRating(v:Ref<Rating>):Rating
+	export function emptyBatchDeleteAppTableRecordReqBody():BatchDeleteAppTableRecordReqBody
+	export function emptyRefBatchDeleteAppTableRecordReqBody():Ref<BatchDeleteAppTableRecordReqBody>
+	export function refOfBatchDeleteAppTableRecordReqBody(x:BatchDeleteAppTableRecordReqBody,v:Ref<BatchDeleteAppTableRecordReqBody>)
+	export function unRefBatchDeleteAppTableRecordReqBody(v:Ref<BatchDeleteAppTableRecordReqBody>):BatchDeleteAppTableRecordReqBody
+	export function emptyAppRoleMemberId():AppRoleMemberId
+	export function emptyRefAppRoleMemberId():Ref<AppRoleMemberId>
+	export function refOfAppRoleMemberId(x:AppRoleMemberId,v:Ref<AppRoleMemberId>)
+	export function unRefAppRoleMemberId(v:Ref<AppRoleMemberId>):AppRoleMemberId
+	export function emptyBatchDeleteAppTableRecordReq():BatchDeleteAppTableRecordReq
+	export function emptyRefBatchDeleteAppTableRecordReq():Ref<BatchDeleteAppTableRecordReq>
+	export function refOfBatchDeleteAppTableRecordReq(x:BatchDeleteAppTableRecordReq,v:Ref<BatchDeleteAppTableRecordReq>)
+	export function unRefBatchDeleteAppTableRecordReq(v:Ref<BatchDeleteAppTableRecordReq>):BatchDeleteAppTableRecordReq
+	export function emptyAppTableViewPropertyFilterInfoCondition():AppTableViewPropertyFilterInfoCondition
+	export function emptyRefAppTableViewPropertyFilterInfoCondition():Ref<AppTableViewPropertyFilterInfoCondition>
+	export function refOfAppTableViewPropertyFilterInfoCondition(x:AppTableViewPropertyFilterInfoCondition,v:Ref<AppTableViewPropertyFilterInfoCondition>)
+	export function unRefAppTableViewPropertyFilterInfoCondition(v:Ref<AppTableViewPropertyFilterInfoCondition>):AppTableViewPropertyFilterInfoCondition
+	export function emptyAttachment():Attachment
+	export function emptyRefAttachment():Ref<Attachment>
+	export function refOfAttachment(x:Attachment,v:Ref<Attachment>)
+	export function unRefAttachment(v:Ref<Attachment>):Attachment
+	export function emptyPatchAppTableViewResp():PatchAppTableViewResp
+	export function emptyRefPatchAppTableViewResp():Ref<PatchAppTableViewResp>
+	export function refOfPatchAppTableViewResp(x:PatchAppTableViewResp,v:Ref<PatchAppTableViewResp>)
+	export function unRefPatchAppTableViewResp(v:Ref<PatchAppTableViewResp>):PatchAppTableViewResp
+	export function emptyGetAppTableViewRespData():GetAppTableViewRespData
+	export function emptyRefGetAppTableViewRespData():Ref<GetAppTableViewRespData>
+	export function refOfGetAppTableViewRespData(x:GetAppTableViewRespData,v:Ref<GetAppTableViewRespData>)
+	export function unRefGetAppTableViewRespData(v:Ref<GetAppTableViewRespData>):GetAppTableViewRespData
+	export function emptyAppTableFieldForList():AppTableFieldForList
+	export function emptyRefAppTableFieldForList():Ref<AppTableFieldForList>
+	export function refOfAppTableFieldForList(x:AppTableFieldForList,v:Ref<AppTableFieldForList>)
+	export function unRefAppTableFieldForList(v:Ref<AppTableFieldForList>):AppTableFieldForList
+	export function emptyBatchCreateAppRoleMemberReqBody():BatchCreateAppRoleMemberReqBody
+	export function emptyRefBatchCreateAppRoleMemberReqBody():Ref<BatchCreateAppRoleMemberReqBody>
+	export function refOfBatchCreateAppRoleMemberReqBody(x:BatchCreateAppRoleMemberReqBody,v:Ref<BatchCreateAppRoleMemberReqBody>)
+	export function unRefBatchCreateAppRoleMemberReqBody(v:Ref<BatchCreateAppRoleMemberReqBody>):BatchCreateAppRoleMemberReqBody
+	export function emptyCreateAppTableResp():CreateAppTableResp
+	export function emptyRefCreateAppTableResp():Ref<CreateAppTableResp>
+	export function refOfCreateAppTableResp(x:CreateAppTableResp,v:Ref<CreateAppTableResp>)
+	export function unRefCreateAppTableResp(v:Ref<CreateAppTableResp>):CreateAppTableResp
+	export function emptyAppFieldPropertyAutoSerial():AppFieldPropertyAutoSerial
+	export function emptyRefAppFieldPropertyAutoSerial():Ref<AppFieldPropertyAutoSerial>
+	export function refOfAppFieldPropertyAutoSerial(x:AppFieldPropertyAutoSerial,v:Ref<AppFieldPropertyAutoSerial>)
+	export function unRefAppFieldPropertyAutoSerial(v:Ref<AppFieldPropertyAutoSerial>):AppFieldPropertyAutoSerial
+	export function emptySearchAppTableRecordReq():SearchAppTableRecordReq
+	export function emptyRefSearchAppTableRecordReq():Ref<SearchAppTableRecordReq>
+	export function refOfSearchAppTableRecordReq(x:SearchAppTableRecordReq,v:Ref<SearchAppTableRecordReq>)
+	export function unRefSearchAppTableRecordReq(v:Ref<SearchAppTableRecordReq>):SearchAppTableRecordReq
+	export function emptyBatchCreateAppTableRecordRespData():BatchCreateAppTableRecordRespData
+	export function emptyRefBatchCreateAppTableRecordRespData():Ref<BatchCreateAppTableRecordRespData>
+	export function refOfBatchCreateAppTableRecordRespData(x:BatchCreateAppTableRecordRespData,v:Ref<BatchCreateAppTableRecordRespData>)
+	export function unRefBatchCreateAppTableRecordRespData(v:Ref<BatchCreateAppTableRecordRespData>):BatchCreateAppTableRecordRespData
+	export function emptyBatchGetAppTableRecordReqBody():BatchGetAppTableRecordReqBody
+	export function emptyRefBatchGetAppTableRecordReqBody():Ref<BatchGetAppTableRecordReqBody>
+	export function refOfBatchGetAppTableRecordReqBody(x:BatchGetAppTableRecordReqBody,v:Ref<BatchGetAppTableRecordReqBody>)
+	export function unRefBatchGetAppTableRecordReqBody(v:Ref<BatchGetAppTableRecordReqBody>):BatchGetAppTableRecordReqBody
+	export function emptyCreateAppRespData():CreateAppRespData
+	export function emptyRefCreateAppRespData():Ref<CreateAppRespData>
+	export function refOfCreateAppRespData(x:CreateAppRespData,v:Ref<CreateAppRespData>)
+	export function unRefCreateAppRespData(v:Ref<CreateAppRespData>):CreateAppRespData
+	export function emptyAppFieldPropertyAutoSerialOptions():AppFieldPropertyAutoSerialOptions
+	export function emptyRefAppFieldPropertyAutoSerialOptions():Ref<AppFieldPropertyAutoSerialOptions>
+	export function refOfAppFieldPropertyAutoSerialOptions(x:AppFieldPropertyAutoSerialOptions,v:Ref<AppFieldPropertyAutoSerialOptions>)
+	export function unRefAppFieldPropertyAutoSerialOptions(v:Ref<AppFieldPropertyAutoSerialOptions>):AppFieldPropertyAutoSerialOptions
+	export function emptyCreateAppTableRecordReq():CreateAppTableRecordReq
+	export function emptyRefCreateAppTableRecordReq():Ref<CreateAppTableRecordReq>
+	export function refOfCreateAppTableRecordReq(x:CreateAppTableRecordReq,v:Ref<CreateAppTableRecordReq>)
+	export function unRefCreateAppTableRecordReq(v:Ref<CreateAppTableRecordReq>):CreateAppTableRecordReq
+	export function emptyPatchAppTableResp():PatchAppTableResp
+	export function emptyRefPatchAppTableResp():Ref<PatchAppTableResp>
+	export function refOfPatchAppTableResp(x:PatchAppTableResp,v:Ref<PatchAppTableResp>)
+	export function unRefPatchAppTableResp(v:Ref<PatchAppTableResp>):PatchAppTableResp
+	export function emptyBatchCreateAppTableRecordResp():BatchCreateAppTableRecordResp
+	export function emptyRefBatchCreateAppTableRecordResp():Ref<BatchCreateAppTableRecordResp>
+	export function refOfBatchCreateAppTableRecordResp(x:BatchCreateAppTableRecordResp,v:Ref<BatchCreateAppTableRecordResp>)
+	export function unRefBatchCreateAppTableRecordResp(v:Ref<BatchCreateAppTableRecordResp>):BatchCreateAppTableRecordResp
+	export function emptyAppTableFieldDescription():AppTableFieldDescription
+	export function emptyRefAppTableFieldDescription():Ref<AppTableFieldDescription>
+	export function refOfAppTableFieldDescription(x:AppTableFieldDescription,v:Ref<AppTableFieldDescription>)
+	export function unRefAppTableFieldDescription(v:Ref<AppTableFieldDescription>):AppTableFieldDescription
+	export function emptyReqTable():ReqTable
+	export function emptyRefReqTable():Ref<ReqTable>
+	export function refOfReqTable(x:ReqTable,v:Ref<ReqTable>)
+	export function unRefReqTable(v:Ref<ReqTable>):ReqTable
+	export function emptyPatchAppTableFormReq():PatchAppTableFormReq
+	export function emptyRefPatchAppTableFormReq():Ref<PatchAppTableFormReq>
+	export function refOfPatchAppTableFormReq(x:PatchAppTableFormReq,v:Ref<PatchAppTableFormReq>)
+	export function unRefPatchAppTableFormReq(v:Ref<PatchAppTableFormReq>):PatchAppTableFormReq
+	export function emptyPatchAppTableViewRespData():PatchAppTableViewRespData
+	export function emptyRefPatchAppTableViewRespData():Ref<PatchAppTableViewRespData>
+	export function refOfPatchAppTableViewRespData(x:PatchAppTableViewRespData,v:Ref<PatchAppTableViewRespData>)
+	export function unRefPatchAppTableViewRespData(v:Ref<PatchAppTableViewRespData>):PatchAppTableViewRespData
+	export function emptyListAppRoleResp():ListAppRoleResp
+	export function emptyRefListAppRoleResp():Ref<ListAppRoleResp>
+	export function refOfListAppRoleResp(x:ListAppRoleResp,v:Ref<ListAppRoleResp>)
+	export function unRefListAppRoleResp(v:Ref<ListAppRoleResp>):ListAppRoleResp
+	export function emptyDeleteRecord():DeleteRecord
+	export function emptyRefDeleteRecord():Ref<DeleteRecord>
+	export function refOfDeleteRecord(x:DeleteRecord,v:Ref<DeleteRecord>)
+	export function unRefDeleteRecord(v:Ref<DeleteRecord>):DeleteRecord
+	export function emptyListAppTableFieldReq():ListAppTableFieldReq
+	export function emptyRefListAppTableFieldReq():Ref<ListAppTableFieldReq>
+	export function refOfListAppTableFieldReq(x:ListAppTableFieldReq,v:Ref<ListAppTableFieldReq>)
+	export function unRefListAppTableFieldReq(v:Ref<ListAppTableFieldReq>):ListAppTableFieldReq
+	export function emptyListAppTableFormFieldRespData():ListAppTableFormFieldRespData
+	export function emptyRefListAppTableFormFieldRespData():Ref<ListAppTableFormFieldRespData>
+	export function refOfListAppTableFormFieldRespData(x:ListAppTableFormFieldRespData,v:Ref<ListAppTableFormFieldRespData>)
+	export function unRefListAppTableFormFieldRespData(v:Ref<ListAppTableFormFieldRespData>):ListAppTableFormFieldRespData
+	export function emptyCreateAppTableRecordRespData():CreateAppTableRecordRespData
+	export function emptyRefCreateAppTableRecordRespData():Ref<CreateAppTableRecordRespData>
+	export function refOfCreateAppTableRecordRespData(x:CreateAppTableRecordRespData,v:Ref<CreateAppTableRecordRespData>)
+	export function unRefCreateAppTableRecordRespData(v:Ref<CreateAppTableRecordRespData>):CreateAppTableRecordRespData
+	export function emptyPatchAppTableViewReq():PatchAppTableViewReq
+	export function emptyRefPatchAppTableViewReq():Ref<PatchAppTableViewReq>
+	export function refOfPatchAppTableViewReq(x:PatchAppTableViewReq,v:Ref<PatchAppTableViewReq>)
+	export function unRefPatchAppTableViewReq(v:Ref<PatchAppTableViewReq>):PatchAppTableViewReq
+	export function emptyDeleteAppRoleMemberReq():DeleteAppRoleMemberReq
+	export function emptyRefDeleteAppRoleMemberReq():Ref<DeleteAppRoleMemberReq>
+	export function refOfDeleteAppRoleMemberReq(x:DeleteAppRoleMemberReq,v:Ref<DeleteAppRoleMemberReq>)
+	export function unRefDeleteAppRoleMemberReq(v:Ref<DeleteAppRoleMemberReq>):DeleteAppRoleMemberReq
+	export function emptyDeleteAppTableRecordRespData():DeleteAppTableRecordRespData
+	export function emptyRefDeleteAppTableRecordRespData():Ref<DeleteAppTableRecordRespData>
+	export function refOfDeleteAppTableRecordRespData(x:DeleteAppTableRecordRespData,v:Ref<DeleteAppTableRecordRespData>)
+	export function unRefDeleteAppTableRecordRespData(v:Ref<DeleteAppTableRecordRespData>):DeleteAppTableRecordRespData
+	export function emptyFilterInfo():FilterInfo
+	export function emptyRefFilterInfo():Ref<FilterInfo>
+	export function refOfFilterInfo(x:FilterInfo,v:Ref<FilterInfo>)
+	export function unRefFilterInfo(v:Ref<FilterInfo>):FilterInfo
+	export function emptyAppTableFieldPropertyOption():AppTableFieldPropertyOption
+	export function emptyRefAppTableFieldPropertyOption():Ref<AppTableFieldPropertyOption>
+	export function refOfAppTableFieldPropertyOption(x:AppTableFieldPropertyOption,v:Ref<AppTableFieldPropertyOption>)
+	export function unRefAppTableFieldPropertyOption(v:Ref<AppTableFieldPropertyOption>):AppTableFieldPropertyOption
+	export function emptyBatchDeleteAppRoleMemberReqBody():BatchDeleteAppRoleMemberReqBody
+	export function emptyRefBatchDeleteAppRoleMemberReqBody():Ref<BatchDeleteAppRoleMemberReqBody>
+	export function refOfBatchDeleteAppRoleMemberReqBody(x:BatchDeleteAppRoleMemberReqBody,v:Ref<BatchDeleteAppRoleMemberReqBody>)
+	export function unRefBatchDeleteAppRoleMemberReqBody(v:Ref<BatchDeleteAppRoleMemberReqBody>):BatchDeleteAppRoleMemberReqBody
+	export function emptyCreateAppRoleMemberResp():CreateAppRoleMemberResp
+	export function emptyRefCreateAppRoleMemberResp():Ref<CreateAppRoleMemberResp>
+	export function refOfCreateAppRoleMemberResp(x:CreateAppRoleMemberResp,v:Ref<CreateAppRoleMemberResp>)
+	export function unRefCreateAppRoleMemberResp(v:Ref<CreateAppRoleMemberResp>):CreateAppRoleMemberResp
+	export function emptyCreateAppTableReq():CreateAppTableReq
+	export function emptyRefCreateAppTableReq():Ref<CreateAppTableReq>
+	export function refOfCreateAppTableReq(x:CreateAppTableReq,v:Ref<CreateAppTableReq>)
+	export function unRefCreateAppTableReq(v:Ref<CreateAppTableReq>):CreateAppTableReq
+	export function emptyListAppDashboardResp():ListAppDashboardResp
+	export function emptyRefListAppDashboardResp():Ref<ListAppDashboardResp>
+	export function refOfListAppDashboardResp(x:ListAppDashboardResp,v:Ref<ListAppDashboardResp>)
+	export function unRefListAppDashboardResp(v:Ref<ListAppDashboardResp>):ListAppDashboardResp
+	export function emptyListAppRoleMemberRespData():ListAppRoleMemberRespData
+	export function emptyRefListAppRoleMemberRespData():Ref<ListAppRoleMemberRespData>
+	export function refOfListAppRoleMemberRespData(x:ListAppRoleMemberRespData,v:Ref<ListAppRoleMemberRespData>)
+	export function unRefListAppRoleMemberRespData(v:Ref<ListAppRoleMemberRespData>):ListAppRoleMemberRespData
+	export function emptyPatchAppTableReq():PatchAppTableReq
+	export function emptyRefPatchAppTableReq():Ref<PatchAppTableReq>
+	export function refOfPatchAppTableReq(x:PatchAppTableReq,v:Ref<PatchAppTableReq>)
+	export function unRefPatchAppTableReq(v:Ref<PatchAppTableReq>):PatchAppTableReq
+	export function emptyDeleteAppTableRecordReq():DeleteAppTableRecordReq
+	export function emptyRefDeleteAppTableRecordReq():Ref<DeleteAppTableRecordReq>
+	export function refOfDeleteAppTableRecordReq(x:DeleteAppTableRecordReq,v:Ref<DeleteAppTableRecordReq>)
+	export function unRefDeleteAppTableRecordReq(v:Ref<DeleteAppTableRecordReq>):DeleteAppTableRecordReq
+	export function emptyGetAppReq():GetAppReq
+	export function emptyRefGetAppReq():Ref<GetAppReq>
+	export function refOfGetAppReq(x:GetAppReq,v:Ref<GetAppReq>)
+	export function unRefGetAppReq(v:Ref<GetAppReq>):GetAppReq
+	export function emptyAppTableCreateHeader():AppTableCreateHeader
+	export function emptyRefAppTableCreateHeader():Ref<AppTableCreateHeader>
+	export function refOfAppTableCreateHeader(x:AppTableCreateHeader,v:Ref<AppTableCreateHeader>)
+	export function unRefAppTableCreateHeader(v:Ref<AppTableCreateHeader>):AppTableCreateHeader
+	export function emptyBatchCreateAppRoleMemberReq():BatchCreateAppRoleMemberReq
+	export function emptyRefBatchCreateAppRoleMemberReq():Ref<BatchCreateAppRoleMemberReq>
+	export function refOfBatchCreateAppRoleMemberReq(x:BatchCreateAppRoleMemberReq,v:Ref<BatchCreateAppRoleMemberReq>)
+	export function unRefBatchCreateAppRoleMemberReq(v:Ref<BatchCreateAppRoleMemberReq>):BatchCreateAppRoleMemberReq
+	export function emptyAllowedEditModes():AllowedEditModes
+	export function emptyRefAllowedEditModes():Ref<AllowedEditModes>
+	export function refOfAllowedEditModes(x:AllowedEditModes,v:Ref<AllowedEditModes>)
+	export function unRefAllowedEditModes(v:Ref<AllowedEditModes>):AllowedEditModes
 	export function emptyDisplayApp():DisplayApp
 	export function emptyRefDisplayApp():Ref<DisplayApp>
 	export function refOfDisplayApp(x:DisplayApp,v:Ref<DisplayApp>)
 	export function unRefDisplayApp(v:Ref<DisplayApp>):DisplayApp
+	export function emptyUpdateAppTableFieldRespData():UpdateAppTableFieldRespData
+	export function emptyRefUpdateAppTableFieldRespData():Ref<UpdateAppTableFieldRespData>
+	export function refOfUpdateAppTableFieldRespData(x:UpdateAppTableFieldRespData,v:Ref<UpdateAppTableFieldRespData>)
+	export function unRefUpdateAppTableFieldRespData(v:Ref<UpdateAppTableFieldRespData>):UpdateAppTableFieldRespData
+	export function emptyAppRoleMember():AppRoleMember
+	export function emptyRefAppRoleMember():Ref<AppRoleMember>
+	export function refOfAppRoleMember(x:AppRoleMember,v:Ref<AppRoleMember>)
+	export function unRefAppRoleMember(v:Ref<AppRoleMember>):AppRoleMember
+	export function emptyCreateAppTableRespData():CreateAppTableRespData
+	export function emptyRefCreateAppTableRespData():Ref<CreateAppTableRespData>
+	export function refOfCreateAppTableRespData(x:CreateAppTableRespData,v:Ref<CreateAppTableRespData>)
+	export function unRefCreateAppTableRespData(v:Ref<CreateAppTableRespData>):CreateAppTableRespData
+	export function emptyAppTableViewPropertyFilterInfo():AppTableViewPropertyFilterInfo
+	export function emptyRefAppTableViewPropertyFilterInfo():Ref<AppTableViewPropertyFilterInfo>
+	export function refOfAppTableViewPropertyFilterInfo(x:AppTableViewPropertyFilterInfo,v:Ref<AppTableViewPropertyFilterInfo>)
+	export function unRefAppTableViewPropertyFilterInfo(v:Ref<AppTableViewPropertyFilterInfo>):AppTableViewPropertyFilterInfo
+	export function emptySearchAppTableRecordIterator():SearchAppTableRecordIterator
+	export function emptyRefSearchAppTableRecordIterator():Ref<SearchAppTableRecordIterator>
+	export function refOfSearchAppTableRecordIterator(x:SearchAppTableRecordIterator,v:Ref<SearchAppTableRecordIterator>)
+	export function unRefSearchAppTableRecordIterator(v:Ref<SearchAppTableRecordIterator>):SearchAppTableRecordIterator
+	export function emptyListAppTableRespData():ListAppTableRespData
+	export function emptyRefListAppTableRespData():Ref<ListAppTableRespData>
+	export function refOfListAppTableRespData(x:ListAppTableRespData,v:Ref<ListAppTableRespData>)
+	export function unRefListAppTableRespData(v:Ref<ListAppTableRespData>):ListAppTableRespData
 	export function emptyUpdateAppRoleReq():UpdateAppRoleReq
 	export function emptyRefUpdateAppRoleReq():Ref<UpdateAppRoleReq>
 	export function refOfUpdateAppRoleReq(x:UpdateAppRoleReq,v:Ref<UpdateAppRoleReq>)
@@ -3171,34 +3081,146 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/bitable/v1'{
 	export function emptyRefAppTableViewProperty():Ref<AppTableViewProperty>
 	export function refOfAppTableViewProperty(x:AppTableViewProperty,v:Ref<AppTableViewProperty>)
 	export function unRefAppTableViewProperty(v:Ref<AppTableViewProperty>):AppTableViewProperty
-	export function emptyListAppRoleMemberResp():ListAppRoleMemberResp
-	export function emptyRefListAppRoleMemberResp():Ref<ListAppRoleMemberResp>
-	export function refOfListAppRoleMemberResp(x:ListAppRoleMemberResp,v:Ref<ListAppRoleMemberResp>)
-	export function unRefListAppRoleMemberResp(v:Ref<ListAppRoleMemberResp>):ListAppRoleMemberResp
-	export function emptyDeleteAppTableRecordReq():DeleteAppTableRecordReq
-	export function emptyRefDeleteAppTableRecordReq():Ref<DeleteAppTableRecordReq>
-	export function refOfDeleteAppTableRecordReq(x:DeleteAppTableRecordReq,v:Ref<DeleteAppTableRecordReq>)
-	export function unRefDeleteAppTableRecordReq(v:Ref<DeleteAppTableRecordReq>):DeleteAppTableRecordReq
-	export function emptyUpdateAppTableFieldRespData():UpdateAppTableFieldRespData
-	export function emptyRefUpdateAppTableFieldRespData():Ref<UpdateAppTableFieldRespData>
-	export function refOfUpdateAppTableFieldRespData(x:UpdateAppTableFieldRespData,v:Ref<UpdateAppTableFieldRespData>)
-	export function unRefUpdateAppTableFieldRespData(v:Ref<UpdateAppTableFieldRespData>):UpdateAppTableFieldRespData
-	export function emptyCopyAppDashboardReqBody():CopyAppDashboardReqBody
-	export function emptyRefCopyAppDashboardReqBody():Ref<CopyAppDashboardReqBody>
-	export function refOfCopyAppDashboardReqBody(x:CopyAppDashboardReqBody,v:Ref<CopyAppDashboardReqBody>)
-	export function unRefCopyAppDashboardReqBody(v:Ref<CopyAppDashboardReqBody>):CopyAppDashboardReqBody
+	export function emptyListAppTableRecordReq():ListAppTableRecordReq
+	export function emptyRefListAppTableRecordReq():Ref<ListAppTableRecordReq>
+	export function refOfListAppTableRecordReq(x:ListAppTableRecordReq,v:Ref<ListAppTableRecordReq>)
+	export function unRefListAppTableRecordReq(v:Ref<ListAppTableRecordReq>):ListAppTableRecordReq
+	export function emptyUpdateAppReq():UpdateAppReq
+	export function emptyRefUpdateAppReq():Ref<UpdateAppReq>
+	export function refOfUpdateAppReq(x:UpdateAppReq,v:Ref<UpdateAppReq>)
+	export function unRefUpdateAppReq(v:Ref<UpdateAppReq>):UpdateAppReq
+	export function emptyListAppDashboardRespData():ListAppDashboardRespData
+	export function emptyRefListAppDashboardRespData():Ref<ListAppDashboardRespData>
+	export function refOfListAppDashboardRespData(x:ListAppDashboardRespData,v:Ref<ListAppDashboardRespData>)
+	export function unRefListAppDashboardRespData(v:Ref<ListAppDashboardRespData>):ListAppDashboardRespData
+	export function emptyListAppTableFormFieldReq():ListAppTableFormFieldReq
+	export function emptyRefListAppTableFormFieldReq():Ref<ListAppTableFormFieldReq>
+	export function refOfListAppTableFormFieldReq(x:ListAppTableFormFieldReq,v:Ref<ListAppTableFormFieldReq>)
+	export function unRefListAppTableFormFieldReq(v:Ref<ListAppTableFormFieldReq>):ListAppTableFormFieldReq
+	export function emptyPatchAppTableFormFieldResp():PatchAppTableFormFieldResp
+	export function emptyRefPatchAppTableFormFieldResp():Ref<PatchAppTableFormFieldResp>
+	export function refOfPatchAppTableFormFieldResp(x:PatchAppTableFormFieldResp,v:Ref<PatchAppTableFormFieldResp>)
+	export function unRefPatchAppTableFormFieldResp(v:Ref<PatchAppTableFormFieldResp>):PatchAppTableFormFieldResp
+	export function emptyAppFieldPropertyLocation():AppFieldPropertyLocation
+	export function emptyRefAppFieldPropertyLocation():Ref<AppFieldPropertyLocation>
+	export function refOfAppFieldPropertyLocation(x:AppFieldPropertyLocation,v:Ref<AppFieldPropertyLocation>)
+	export function unRefAppFieldPropertyLocation(v:Ref<AppFieldPropertyLocation>):AppFieldPropertyLocation
+	export function emptyGroup():Group
+	export function emptyRefGroup():Ref<Group>
+	export function refOfGroup(x:Group,v:Ref<Group>)
+	export function unRefGroup(v:Ref<Group>):Group
+	export function emptyCopyAppDashboardReq():CopyAppDashboardReq
+	export function emptyRefCopyAppDashboardReq():Ref<CopyAppDashboardReq>
+	export function refOfCopyAppDashboardReq(x:CopyAppDashboardReq,v:Ref<CopyAppDashboardReq>)
+	export function unRefCopyAppDashboardReq(v:Ref<CopyAppDashboardReq>):CopyAppDashboardReq
+	export function emptyCopyAppReq():CopyAppReq
+	export function emptyRefCopyAppReq():Ref<CopyAppReq>
+	export function refOfCopyAppReq(x:CopyAppReq,v:Ref<CopyAppReq>)
+	export function unRefCopyAppReq(v:Ref<CopyAppReq>):CopyAppReq
+	export function emptyCreateAppRoleMemberReq():CreateAppRoleMemberReq
+	export function emptyRefCreateAppRoleMemberReq():Ref<CreateAppRoleMemberReq>
+	export function refOfCreateAppRoleMemberReq(x:CreateAppRoleMemberReq,v:Ref<CreateAppRoleMemberReq>)
+	export function unRefCreateAppRoleMemberReq(v:Ref<CreateAppRoleMemberReq>):CreateAppRoleMemberReq
+	export function emptyAppDashboard():AppDashboard
+	export function emptyRefAppDashboard():Ref<AppDashboard>
+	export function refOfAppDashboard(x:AppDashboard,v:Ref<AppDashboard>)
+	export function unRefAppDashboard(v:Ref<AppDashboard>):AppDashboard
+	export function emptyAppRole():AppRole
+	export function emptyRefAppRole():Ref<AppRole>
+	export function refOfAppRole(x:AppRole,v:Ref<AppRole>)
+	export function unRefAppRole(v:Ref<AppRole>):AppRole
+	export function emptyAppTable():AppTable
+	export function emptyRefAppTable():Ref<AppTable>
+	export function refOfAppTable(x:AppTable,v:Ref<AppTable>)
+	export function unRefAppTable(v:Ref<AppTable>):AppTable
+	export function emptyDeleteAppTableResp():DeleteAppTableResp
+	export function emptyRefDeleteAppTableResp():Ref<DeleteAppTableResp>
+	export function refOfDeleteAppTableResp(x:DeleteAppTableResp,v:Ref<DeleteAppTableResp>)
+	export function unRefDeleteAppTableResp(v:Ref<DeleteAppTableResp>):DeleteAppTableResp
+	export function emptyGetAppRespData():GetAppRespData
+	export function emptyRefGetAppRespData():Ref<GetAppRespData>
+	export function refOfGetAppRespData(x:GetAppRespData,v:Ref<GetAppRespData>)
+	export function unRefGetAppRespData(v:Ref<GetAppRespData>):GetAppRespData
+	export function emptySearchAppTableRecordRespData():SearchAppTableRecordRespData
+	export function emptyRefSearchAppTableRecordRespData():Ref<SearchAppTableRecordRespData>
+	export function refOfSearchAppTableRecordRespData(x:SearchAppTableRecordRespData,v:Ref<SearchAppTableRecordRespData>)
+	export function unRefSearchAppTableRecordRespData(v:Ref<SearchAppTableRecordRespData>):SearchAppTableRecordRespData
+	export function emptyUpdateAppTableRecordRespData():UpdateAppTableRecordRespData
+	export function emptyRefUpdateAppTableRecordRespData():Ref<UpdateAppTableRecordRespData>
+	export function refOfUpdateAppTableRecordRespData(x:UpdateAppTableRecordRespData,v:Ref<UpdateAppTableRecordRespData>)
+	export function unRefUpdateAppTableRecordRespData(v:Ref<UpdateAppTableRecordRespData>):UpdateAppTableRecordRespData
+	export function emptyAppTableFormField():AppTableFormField
+	export function emptyRefAppTableFormField():Ref<AppTableFormField>
+	export function refOfAppTableFormField(x:AppTableFormField,v:Ref<AppTableFormField>)
+	export function unRefAppTableFormField(v:Ref<AppTableFormField>):AppTableFormField
+	export function emptyCreateAppReq():CreateAppReq
+	export function emptyRefCreateAppReq():Ref<CreateAppReq>
+	export function refOfCreateAppReq(x:CreateAppReq,v:Ref<CreateAppReq>)
+	export function unRefCreateAppReq(v:Ref<CreateAppReq>):CreateAppReq
+	export function emptyListAppTableReq():ListAppTableReq
+	export function emptyRefListAppTableReq():Ref<ListAppTableReq>
+	export function refOfListAppTableReq(x:ListAppTableReq,v:Ref<ListAppTableReq>)
+	export function unRefListAppTableReq(v:Ref<ListAppTableReq>):ListAppTableReq
+	export function emptyListAppTableResp():ListAppTableResp
+	export function emptyRefListAppTableResp():Ref<ListAppTableResp>
+	export function refOfListAppTableResp(x:ListAppTableResp,v:Ref<ListAppTableResp>)
+	export function unRefListAppTableResp(v:Ref<ListAppTableResp>):ListAppTableResp
+	export function emptyAppTableView():AppTableView
+	export function emptyRefAppTableView():Ref<AppTableView>
+	export function refOfAppTableView(x:AppTableView,v:Ref<AppTableView>)
+	export function unRefAppTableView(v:Ref<AppTableView>):AppTableView
+	export function emptyListAppTableFieldResp():ListAppTableFieldResp
+	export function emptyRefListAppTableFieldResp():Ref<ListAppTableFieldResp>
+	export function refOfListAppTableFieldResp(x:ListAppTableFieldResp,v:Ref<ListAppTableFieldResp>)
+	export function unRefListAppTableFieldResp(v:Ref<ListAppTableFieldResp>):ListAppTableFieldResp
+	export function emptyPerson():Person
+	export function emptyRefPerson():Ref<Person>
+	export function refOfPerson(x:Person,v:Ref<Person>)
+	export function unRefPerson(v:Ref<Person>):Person
+	export function emptyBatchUpdateAppTableRecordReqBody():BatchUpdateAppTableRecordReqBody
+	export function emptyRefBatchUpdateAppTableRecordReqBody():Ref<BatchUpdateAppTableRecordReqBody>
+	export function refOfBatchUpdateAppTableRecordReqBody(x:BatchUpdateAppTableRecordReqBody,v:Ref<BatchUpdateAppTableRecordReqBody>)
+	export function unRefBatchUpdateAppTableRecordReqBody(v:Ref<BatchUpdateAppTableRecordReqBody>):BatchUpdateAppTableRecordReqBody
+	export function emptyChildrenFilter():ChildrenFilter
+	export function emptyRefChildrenFilter():Ref<ChildrenFilter>
+	export function refOfChildrenFilter(x:ChildrenFilter,v:Ref<ChildrenFilter>)
+	export function unRefChildrenFilter(v:Ref<ChildrenFilter>):ChildrenFilter
 	export function emptyCreateAppTableRecordResp():CreateAppTableRecordResp
 	export function emptyRefCreateAppTableRecordResp():Ref<CreateAppTableRecordResp>
 	export function refOfCreateAppTableRecordResp(x:CreateAppTableRecordResp,v:Ref<CreateAppTableRecordResp>)
 	export function unRefCreateAppTableRecordResp(v:Ref<CreateAppTableRecordResp>):CreateAppTableRecordResp
-	export function emptyDeleteAppTableRecordRespData():DeleteAppTableRecordRespData
-	export function emptyRefDeleteAppTableRecordRespData():Ref<DeleteAppTableRecordRespData>
-	export function refOfDeleteAppTableRecordRespData(x:DeleteAppTableRecordRespData,v:Ref<DeleteAppTableRecordRespData>)
-	export function unRefDeleteAppTableRecordRespData(v:Ref<DeleteAppTableRecordRespData>):DeleteAppTableRecordRespData
-	export function emptyListAppDashboardReq():ListAppDashboardReq
-	export function emptyRefListAppDashboardReq():Ref<ListAppDashboardReq>
-	export function refOfListAppDashboardReq(x:ListAppDashboardReq,v:Ref<ListAppDashboardReq>)
-	export function unRefListAppDashboardReq(v:Ref<ListAppDashboardReq>):ListAppDashboardReq
+	export function emptyCopyAppDashboardReqBody():CopyAppDashboardReqBody
+	export function emptyRefCopyAppDashboardReqBody():Ref<CopyAppDashboardReqBody>
+	export function refOfCopyAppDashboardReqBody(x:CopyAppDashboardReqBody,v:Ref<CopyAppDashboardReqBody>)
+	export function unRefCopyAppDashboardReqBody(v:Ref<CopyAppDashboardReqBody>):CopyAppDashboardReqBody
+	export function emptyListAppRoleMemberReq():ListAppRoleMemberReq
+	export function emptyRefListAppRoleMemberReq():Ref<ListAppRoleMemberReq>
+	export function refOfListAppRoleMemberReq(x:ListAppRoleMemberReq,v:Ref<ListAppRoleMemberReq>)
+	export function unRefListAppRoleMemberReq(v:Ref<ListAppRoleMemberReq>):ListAppRoleMemberReq
+	export function emptyPatchAppTableRespData():PatchAppTableRespData
+	export function emptyRefPatchAppTableRespData():Ref<PatchAppTableRespData>
+	export function refOfPatchAppTableRespData(x:PatchAppTableRespData,v:Ref<PatchAppTableRespData>)
+	export function unRefPatchAppTableRespData(v:Ref<PatchAppTableRespData>):PatchAppTableRespData
+	export function emptyReqApp():ReqApp
+	export function emptyRefReqApp():Ref<ReqApp>
+	export function refOfReqApp(x:ReqApp,v:Ref<ReqApp>)
+	export function unRefReqApp(v:Ref<ReqApp>):ReqApp
+	export function emptyCopyAppRespData():CopyAppRespData
+	export function emptyRefCopyAppRespData():Ref<CopyAppRespData>
+	export function refOfCopyAppRespData(x:CopyAppRespData,v:Ref<CopyAppRespData>)
+	export function unRefCopyAppRespData(v:Ref<CopyAppRespData>):CopyAppRespData
+	export function emptyCreateAppTableFieldResp():CreateAppTableFieldResp
+	export function emptyRefCreateAppTableFieldResp():Ref<CreateAppTableFieldResp>
+	export function refOfCreateAppTableFieldResp(x:CreateAppTableFieldResp,v:Ref<CreateAppTableFieldResp>)
+	export function unRefCreateAppTableFieldResp(v:Ref<CreateAppTableFieldResp>):CreateAppTableFieldResp
+	export function emptyDeleteAppRoleReq():DeleteAppRoleReq
+	export function emptyRefDeleteAppRoleReq():Ref<DeleteAppRoleReq>
+	export function refOfDeleteAppRoleReq(x:DeleteAppRoleReq,v:Ref<DeleteAppRoleReq>)
+	export function unRefDeleteAppRoleReq(v:Ref<DeleteAppRoleReq>):DeleteAppRoleReq
+	export function emptyListAppTableViewIterator():ListAppTableViewIterator
+	export function emptyRefListAppTableViewIterator():Ref<ListAppTableViewIterator>
+	export function refOfListAppTableViewIterator(x:ListAppTableViewIterator,v:Ref<ListAppTableViewIterator>)
+	export function unRefListAppTableViewIterator(v:Ref<ListAppTableViewIterator>):ListAppTableViewIterator
 	export function emptyBatchCreateAppTableRespData():BatchCreateAppTableRespData
 	export function emptyRefBatchCreateAppTableRespData():Ref<BatchCreateAppTableRespData>
 	export function refOfBatchCreateAppTableRespData(x:BatchCreateAppTableRespData,v:Ref<BatchCreateAppTableRespData>)
@@ -3207,128 +3229,188 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/bitable/v1'{
 	export function emptyRefListAppTableRecordIterator():Ref<ListAppTableRecordIterator>
 	export function refOfListAppTableRecordIterator(x:ListAppTableRecordIterator,v:Ref<ListAppTableRecordIterator>)
 	export function unRefListAppTableRecordIterator(v:Ref<ListAppTableRecordIterator>):ListAppTableRecordIterator
-	export function emptyPatchAppTableReqBody():PatchAppTableReqBody
-	export function emptyRefPatchAppTableReqBody():Ref<PatchAppTableReqBody>
-	export function refOfPatchAppTableReqBody(x:PatchAppTableReqBody,v:Ref<PatchAppTableReqBody>)
-	export function unRefPatchAppTableReqBody(v:Ref<PatchAppTableReqBody>):PatchAppTableReqBody
-	export function emptyBatchDeleteAppRoleMemberResp():BatchDeleteAppRoleMemberResp
-	export function emptyRefBatchDeleteAppRoleMemberResp():Ref<BatchDeleteAppRoleMemberResp>
-	export function refOfBatchDeleteAppRoleMemberResp(x:BatchDeleteAppRoleMemberResp,v:Ref<BatchDeleteAppRoleMemberResp>)
-	export function unRefBatchDeleteAppRoleMemberResp(v:Ref<BatchDeleteAppRoleMemberResp>):BatchDeleteAppRoleMemberResp
-	export function emptySearchAppTableRecordRespData():SearchAppTableRecordRespData
-	export function emptyRefSearchAppTableRecordRespData():Ref<SearchAppTableRecordRespData>
-	export function refOfSearchAppTableRecordRespData(x:SearchAppTableRecordRespData,v:Ref<SearchAppTableRecordRespData>)
-	export function unRefSearchAppTableRecordRespData(v:Ref<SearchAppTableRecordRespData>):SearchAppTableRecordRespData
-	export function emptyBatchCreateAppTableRecordReqBody():BatchCreateAppTableRecordReqBody
-	export function emptyRefBatchCreateAppTableRecordReqBody():Ref<BatchCreateAppTableRecordReqBody>
-	export function refOfBatchCreateAppTableRecordReqBody(x:BatchCreateAppTableRecordReqBody,v:Ref<BatchCreateAppTableRecordReqBody>)
-	export function unRefBatchCreateAppTableRecordReqBody(v:Ref<BatchCreateAppTableRecordReqBody>):BatchCreateAppTableRecordReqBody
-	export function emptySearchAppTableRecordReq():SearchAppTableRecordReq
-	export function emptyRefSearchAppTableRecordReq():Ref<SearchAppTableRecordReq>
-	export function refOfSearchAppTableRecordReq(x:SearchAppTableRecordReq,v:Ref<SearchAppTableRecordReq>)
-	export function unRefSearchAppTableRecordReq(v:Ref<SearchAppTableRecordReq>):SearchAppTableRecordReq
-	export function emptyListAppTableFormFieldReq():ListAppTableFormFieldReq
-	export function emptyRefListAppTableFormFieldReq():Ref<ListAppTableFormFieldReq>
-	export function refOfListAppTableFormFieldReq(x:ListAppTableFormFieldReq,v:Ref<ListAppTableFormFieldReq>)
-	export function unRefListAppTableFormFieldReq(v:Ref<ListAppTableFormFieldReq>):ListAppTableFormFieldReq
-	export function emptyListAppTableFormFieldResp():ListAppTableFormFieldResp
-	export function emptyRefListAppTableFormFieldResp():Ref<ListAppTableFormFieldResp>
-	export function refOfListAppTableFormFieldResp(x:ListAppTableFormFieldResp,v:Ref<ListAppTableFormFieldResp>)
-	export function unRefListAppTableFormFieldResp(v:Ref<ListAppTableFormFieldResp>):ListAppTableFormFieldResp
 	export function emptyLocation():Location
 	export function emptyRefLocation():Ref<Location>
 	export function refOfLocation(x:Location,v:Ref<Location>)
 	export function unRefLocation(v:Ref<Location>):Location
-	export function emptyCreateAppRespData():CreateAppRespData
-	export function emptyRefCreateAppRespData():Ref<CreateAppRespData>
-	export function refOfCreateAppRespData(x:CreateAppRespData,v:Ref<CreateAppRespData>)
-	export function unRefCreateAppRespData(v:Ref<CreateAppRespData>):CreateAppRespData
-	export function emptyListAppRoleMemberReq():ListAppRoleMemberReq
-	export function emptyRefListAppRoleMemberReq():Ref<ListAppRoleMemberReq>
-	export function refOfListAppRoleMemberReq(x:ListAppRoleMemberReq,v:Ref<ListAppRoleMemberReq>)
-	export function unRefListAppRoleMemberReq(v:Ref<ListAppRoleMemberReq>):ListAppRoleMemberReq
-	export function emptyListAppTableViewIterator():ListAppTableViewIterator
-	export function emptyRefListAppTableViewIterator():Ref<ListAppTableViewIterator>
-	export function refOfListAppTableViewIterator(x:ListAppTableViewIterator,v:Ref<ListAppTableViewIterator>)
-	export function unRefListAppTableViewIterator(v:Ref<ListAppTableViewIterator>):ListAppTableViewIterator
-	export function emptyPatchAppTableReq():PatchAppTableReq
-	export function emptyRefPatchAppTableReq():Ref<PatchAppTableReq>
-	export function refOfPatchAppTableReq(x:PatchAppTableReq,v:Ref<PatchAppTableReq>)
-	export function unRefPatchAppTableReq(v:Ref<PatchAppTableReq>):PatchAppTableReq
-	export function emptyListAppDashboardIterator():ListAppDashboardIterator
-	export function emptyRefListAppDashboardIterator():Ref<ListAppDashboardIterator>
-	export function refOfListAppDashboardIterator(x:ListAppDashboardIterator,v:Ref<ListAppDashboardIterator>)
-	export function unRefListAppDashboardIterator(v:Ref<ListAppDashboardIterator>):ListAppDashboardIterator
-	export function emptyGetAppTableFormReq():GetAppTableFormReq
-	export function emptyRefGetAppTableFormReq():Ref<GetAppTableFormReq>
-	export function refOfGetAppTableFormReq(x:GetAppTableFormReq,v:Ref<GetAppTableFormReq>)
-	export function unRefGetAppTableFormReq(v:Ref<GetAppTableFormReq>):GetAppTableFormReq
-	export function emptyListAppTableReq():ListAppTableReq
-	export function emptyRefListAppTableReq():Ref<ListAppTableReq>
-	export function refOfListAppTableReq(x:ListAppTableReq,v:Ref<ListAppTableReq>)
-	export function unRefListAppTableReq(v:Ref<ListAppTableReq>):ListAppTableReq
-	export function emptyCopyAppReq():CopyAppReq
-	export function emptyRefCopyAppReq():Ref<CopyAppReq>
-	export function refOfCopyAppReq(x:CopyAppReq,v:Ref<CopyAppReq>)
-	export function unRefCopyAppReq(v:Ref<CopyAppReq>):CopyAppReq
-	export function emptyCreateAppTableRecordRespData():CreateAppTableRecordRespData
-	export function emptyRefCreateAppTableRecordRespData():Ref<CreateAppTableRecordRespData>
-	export function refOfCreateAppTableRecordRespData(x:CreateAppTableRecordRespData,v:Ref<CreateAppTableRecordRespData>)
-	export function unRefCreateAppTableRecordRespData(v:Ref<CreateAppTableRecordRespData>):CreateAppTableRecordRespData
-	export function emptyCreateAppTableViewReq():CreateAppTableViewReq
-	export function emptyRefCreateAppTableViewReq():Ref<CreateAppTableViewReq>
-	export function refOfCreateAppTableViewReq(x:CreateAppTableViewReq,v:Ref<CreateAppTableViewReq>)
-	export function unRefCreateAppTableViewReq(v:Ref<CreateAppTableViewReq>):CreateAppTableViewReq
-	export function emptyCreateAppTableViewResp():CreateAppTableViewResp
-	export function emptyRefCreateAppTableViewResp():Ref<CreateAppTableViewResp>
-	export function refOfCreateAppTableViewResp(x:CreateAppTableViewResp,v:Ref<CreateAppTableViewResp>)
-	export function unRefCreateAppTableViewResp(v:Ref<CreateAppTableViewResp>):CreateAppTableViewResp
-	export function emptyAppTableFormField():AppTableFormField
-	export function emptyRefAppTableFormField():Ref<AppTableFormField>
-	export function refOfAppTableFormField(x:AppTableFormField,v:Ref<AppTableFormField>)
-	export function unRefAppTableFormField(v:Ref<AppTableFormField>):AppTableFormField
-	export function emptyBatchDeleteAppTableResp():BatchDeleteAppTableResp
-	export function emptyRefBatchDeleteAppTableResp():Ref<BatchDeleteAppTableResp>
-	export function refOfBatchDeleteAppTableResp(x:BatchDeleteAppTableResp,v:Ref<BatchDeleteAppTableResp>)
-	export function unRefBatchDeleteAppTableResp(v:Ref<BatchDeleteAppTableResp>):BatchDeleteAppTableResp
-	export function emptyUpdateAppRespData():UpdateAppRespData
-	export function emptyRefUpdateAppRespData():Ref<UpdateAppRespData>
-	export function refOfUpdateAppRespData(x:UpdateAppRespData,v:Ref<UpdateAppRespData>)
-	export function unRefUpdateAppRespData(v:Ref<UpdateAppRespData>):UpdateAppRespData
-	export function emptyAppRoleTableRole():AppRoleTableRole
-	export function emptyRefAppRoleTableRole():Ref<AppRoleTableRole>
-	export function refOfAppRoleTableRole(x:AppRoleTableRole,v:Ref<AppRoleTableRole>)
-	export function unRefAppRoleTableRole(v:Ref<AppRoleTableRole>):AppRoleTableRole
-	export function emptyBatchCreateAppTableRecordReq():BatchCreateAppTableRecordReq
-	export function emptyRefBatchCreateAppTableRecordReq():Ref<BatchCreateAppTableRecordReq>
-	export function refOfBatchCreateAppTableRecordReq(x:BatchCreateAppTableRecordReq,v:Ref<BatchCreateAppTableRecordReq>)
-	export function unRefBatchCreateAppTableRecordReq(v:Ref<BatchCreateAppTableRecordReq>):BatchCreateAppTableRecordReq
+	export function emptyUpdateAppTableRecordResp():UpdateAppTableRecordResp
+	export function emptyRefUpdateAppTableRecordResp():Ref<UpdateAppTableRecordResp>
+	export function refOfUpdateAppTableRecordResp(x:UpdateAppTableRecordResp,v:Ref<UpdateAppTableRecordResp>)
+	export function unRefUpdateAppTableRecordResp(v:Ref<UpdateAppTableRecordResp>):UpdateAppTableRecordResp
+	export function emptyListAppTableFormFieldIterator():ListAppTableFormFieldIterator
+	export function emptyRefListAppTableFormFieldIterator():Ref<ListAppTableFormFieldIterator>
+	export function refOfListAppTableFormFieldIterator(x:ListAppTableFormFieldIterator,v:Ref<ListAppTableFormFieldIterator>)
+	export function unRefListAppTableFormFieldIterator(v:Ref<ListAppTableFormFieldIterator>):ListAppTableFormFieldIterator
+	export function emptyListAppTableIterator():ListAppTableIterator
+	export function emptyRefListAppTableIterator():Ref<ListAppTableIterator>
+	export function refOfListAppTableIterator(x:ListAppTableIterator,v:Ref<ListAppTableIterator>)
+	export function unRefListAppTableIterator(v:Ref<ListAppTableIterator>):ListAppTableIterator
 	export function emptyListAppTableRecordResp():ListAppTableRecordResp
 	export function emptyRefListAppTableRecordResp():Ref<ListAppTableRecordResp>
 	export function refOfListAppTableRecordResp(x:ListAppTableRecordResp,v:Ref<ListAppTableRecordResp>)
 	export function unRefListAppTableRecordResp(v:Ref<ListAppTableRecordResp>):ListAppTableRecordResp
-	export function emptyPatchAppTableFormFieldResp():PatchAppTableFormFieldResp
-	export function emptyRefPatchAppTableFormFieldResp():Ref<PatchAppTableFormFieldResp>
-	export function refOfPatchAppTableFormFieldResp(x:PatchAppTableFormFieldResp,v:Ref<PatchAppTableFormFieldResp>)
-	export function unRefPatchAppTableFormFieldResp(v:Ref<PatchAppTableFormFieldResp>):PatchAppTableFormFieldResp
+	export function emptyUpdateAppRespData():UpdateAppRespData
+	export function emptyRefUpdateAppRespData():Ref<UpdateAppRespData>
+	export function refOfUpdateAppRespData(x:UpdateAppRespData,v:Ref<UpdateAppRespData>)
+	export function unRefUpdateAppRespData(v:Ref<UpdateAppRespData>):UpdateAppRespData
+	export function emptyV1():V1
+	export function emptyRefV1():Ref<V1>
+	export function refOfV1(x:V1,v:Ref<V1>)
+	export function unRefV1(v:Ref<V1>):V1
+	export function emptyCopyAppResp():CopyAppResp
+	export function emptyRefCopyAppResp():Ref<CopyAppResp>
+	export function refOfCopyAppResp(x:CopyAppResp,v:Ref<CopyAppResp>)
+	export function unRefCopyAppResp(v:Ref<CopyAppResp>):CopyAppResp
+	export function emptyGetAppTableRecordReq():GetAppTableRecordReq
+	export function emptyRefGetAppTableRecordReq():Ref<GetAppTableRecordReq>
+	export function refOfGetAppTableRecordReq(x:GetAppTableRecordReq,v:Ref<GetAppTableRecordReq>)
+	export function unRefGetAppTableRecordReq(v:Ref<GetAppTableRecordReq>):GetAppTableRecordReq
+	export function emptyUrl():Url
+	export function emptyRefUrl():Ref<Url>
+	export function refOfUrl(x:Url,v:Ref<Url>)
+	export function unRefUrl(v:Ref<Url>):Url
+	export function emptyCreateAppTableViewReq():CreateAppTableViewReq
+	export function emptyRefCreateAppTableViewReq():Ref<CreateAppTableViewReq>
+	export function refOfCreateAppTableViewReq(x:CreateAppTableViewReq,v:Ref<CreateAppTableViewReq>)
+	export function unRefCreateAppTableViewReq(v:Ref<CreateAppTableViewReq>):CreateAppTableViewReq
 	export function emptyUpdateAppTableRecordReq():UpdateAppTableRecordReq
 	export function emptyRefUpdateAppTableRecordReq():Ref<UpdateAppTableRecordReq>
 	export function refOfUpdateAppTableRecordReq(x:UpdateAppTableRecordReq,v:Ref<UpdateAppTableRecordReq>)
 	export function unRefUpdateAppTableRecordReq(v:Ref<UpdateAppTableRecordReq>):UpdateAppTableRecordReq
-	export function emptyBatchDeleteAppTableRecordReqBody():BatchDeleteAppTableRecordReqBody
-	export function emptyRefBatchDeleteAppTableRecordReqBody():Ref<BatchDeleteAppTableRecordReqBody>
-	export function refOfBatchDeleteAppTableRecordReqBody(x:BatchDeleteAppTableRecordReqBody,v:Ref<BatchDeleteAppTableRecordReqBody>)
-	export function unRefBatchDeleteAppTableRecordReqBody(v:Ref<BatchDeleteAppTableRecordReqBody>):BatchDeleteAppTableRecordReqBody
-	export function emptyPatchAppTableFormReq():PatchAppTableFormReq
-	export function emptyRefPatchAppTableFormReq():Ref<PatchAppTableFormReq>
-	export function refOfPatchAppTableFormReq(x:PatchAppTableFormReq,v:Ref<PatchAppTableFormReq>)
-	export function unRefPatchAppTableFormReq(v:Ref<PatchAppTableFormReq>):PatchAppTableFormReq
+	export function emptyDeleteAppTableViewReq():DeleteAppTableViewReq
+	export function emptyRefDeleteAppTableViewReq():Ref<DeleteAppTableViewReq>
+	export function refOfDeleteAppTableViewReq(x:DeleteAppTableViewReq,v:Ref<DeleteAppTableViewReq>)
+	export function unRefDeleteAppTableViewReq(v:Ref<DeleteAppTableViewReq>):DeleteAppTableViewReq
+	export function emptyListAppRoleReq():ListAppRoleReq
+	export function emptyRefListAppRoleReq():Ref<ListAppRoleReq>
+	export function refOfListAppRoleReq(x:ListAppRoleReq,v:Ref<ListAppRoleReq>)
+	export function unRefListAppRoleReq(v:Ref<ListAppRoleReq>):ListAppRoleReq
+	export function emptyGetAppTableViewReq():GetAppTableViewReq
+	export function emptyRefGetAppTableViewReq():Ref<GetAppTableViewReq>
+	export function refOfGetAppTableViewReq(x:GetAppTableViewReq,v:Ref<GetAppTableViewReq>)
+	export function unRefGetAppTableViewReq(v:Ref<GetAppTableViewReq>):GetAppTableViewReq
+	export function emptyGetAppTableViewResp():GetAppTableViewResp
+	export function emptyRefGetAppTableViewResp():Ref<GetAppTableViewResp>
+	export function refOfGetAppTableViewResp(x:GetAppTableViewResp,v:Ref<GetAppTableViewResp>)
+	export function unRefGetAppTableViewResp(v:Ref<GetAppTableViewResp>):GetAppTableViewResp
+	export function emptyAppTableViewPropertyHierarchyConfig():AppTableViewPropertyHierarchyConfig
+	export function emptyRefAppTableViewPropertyHierarchyConfig():Ref<AppTableViewPropertyHierarchyConfig>
+	export function refOfAppTableViewPropertyHierarchyConfig(x:AppTableViewPropertyHierarchyConfig,v:Ref<AppTableViewPropertyHierarchyConfig>)
+	export function unRefAppTableViewPropertyHierarchyConfig(v:Ref<AppTableViewPropertyHierarchyConfig>):AppTableViewPropertyHierarchyConfig
+	export function emptyBatchDeleteAppTableRecordRespData():BatchDeleteAppTableRecordRespData
+	export function emptyRefBatchDeleteAppTableRecordRespData():Ref<BatchDeleteAppTableRecordRespData>
+	export function refOfBatchDeleteAppTableRecordRespData(x:BatchDeleteAppTableRecordRespData,v:Ref<BatchDeleteAppTableRecordRespData>)
+	export function unRefBatchDeleteAppTableRecordRespData(v:Ref<BatchDeleteAppTableRecordRespData>):BatchDeleteAppTableRecordRespData
+	export function emptyCreateAppRoleReq():CreateAppRoleReq
+	export function emptyRefCreateAppRoleReq():Ref<CreateAppRoleReq>
+	export function refOfCreateAppRoleReq(x:CreateAppRoleReq,v:Ref<CreateAppRoleReq>)
+	export function unRefCreateAppRoleReq(v:Ref<CreateAppRoleReq>):CreateAppRoleReq
+	export function emptyListAppDashboardIterator():ListAppDashboardIterator
+	export function emptyRefListAppDashboardIterator():Ref<ListAppDashboardIterator>
+	export function refOfListAppDashboardIterator(x:ListAppDashboardIterator,v:Ref<ListAppDashboardIterator>)
+	export function unRefListAppDashboardIterator(v:Ref<ListAppDashboardIterator>):ListAppDashboardIterator
+	export function emptyListAppDashboardReq():ListAppDashboardReq
+	export function emptyRefListAppDashboardReq():Ref<ListAppDashboardReq>
+	export function refOfListAppDashboardReq(x:ListAppDashboardReq,v:Ref<ListAppDashboardReq>)
+	export function unRefListAppDashboardReq(v:Ref<ListAppDashboardReq>):ListAppDashboardReq
+	export function emptyBatchCreateAppRoleMemberResp():BatchCreateAppRoleMemberResp
+	export function emptyRefBatchCreateAppRoleMemberResp():Ref<BatchCreateAppRoleMemberResp>
+	export function refOfBatchCreateAppRoleMemberResp(x:BatchCreateAppRoleMemberResp,v:Ref<BatchCreateAppRoleMemberResp>)
+	export function unRefBatchCreateAppRoleMemberResp(v:Ref<BatchCreateAppRoleMemberResp>):BatchCreateAppRoleMemberResp
+	export function emptyBatchUpdateAppTableRecordRespData():BatchUpdateAppTableRecordRespData
+	export function emptyRefBatchUpdateAppTableRecordRespData():Ref<BatchUpdateAppTableRecordRespData>
+	export function refOfBatchUpdateAppTableRecordRespData(x:BatchUpdateAppTableRecordRespData,v:Ref<BatchUpdateAppTableRecordRespData>)
+	export function unRefBatchUpdateAppTableRecordRespData(v:Ref<BatchUpdateAppTableRecordRespData>):BatchUpdateAppTableRecordRespData
+	export function emptyCopyAppDashboardRespData():CopyAppDashboardRespData
+	export function emptyRefCopyAppDashboardRespData():Ref<CopyAppDashboardRespData>
+	export function refOfCopyAppDashboardRespData(x:CopyAppDashboardRespData,v:Ref<CopyAppDashboardRespData>)
+	export function unRefCopyAppDashboardRespData(v:Ref<CopyAppDashboardRespData>):CopyAppDashboardRespData
+	export function emptyBatchDeleteAppTableReqBody():BatchDeleteAppTableReqBody
+	export function emptyRefBatchDeleteAppTableReqBody():Ref<BatchDeleteAppTableReqBody>
+	export function refOfBatchDeleteAppTableReqBody(x:BatchDeleteAppTableReqBody,v:Ref<BatchDeleteAppTableReqBody>)
+	export function unRefBatchDeleteAppTableReqBody(v:Ref<BatchDeleteAppTableReqBody>):BatchDeleteAppTableReqBody
+	export function emptyBatchGetAppTableRecordReq():BatchGetAppTableRecordReq
+	export function emptyRefBatchGetAppTableRecordReq():Ref<BatchGetAppTableRecordReq>
+	export function refOfBatchGetAppTableRecordReq(x:BatchGetAppTableRecordReq,v:Ref<BatchGetAppTableRecordReq>)
+	export function unRefBatchGetAppTableRecordReq(v:Ref<BatchGetAppTableRecordReq>):BatchGetAppTableRecordReq
+	export function emptyDeleteAppTableViewResp():DeleteAppTableViewResp
+	export function emptyRefDeleteAppTableViewResp():Ref<DeleteAppTableViewResp>
+	export function refOfDeleteAppTableViewResp(x:DeleteAppTableViewResp,v:Ref<DeleteAppTableViewResp>)
+	export function unRefDeleteAppTableViewResp(v:Ref<DeleteAppTableViewResp>):DeleteAppTableViewResp
 	export function emptyListAppRoleIterator():ListAppRoleIterator
 	export function emptyRefListAppRoleIterator():Ref<ListAppRoleIterator>
 	export function refOfListAppRoleIterator(x:ListAppRoleIterator,v:Ref<ListAppRoleIterator>)
 	export function unRefListAppRoleIterator(v:Ref<ListAppRoleIterator>):ListAppRoleIterator
-	export function emptyDeleteAppRoleMemberReq():DeleteAppRoleMemberReq
-	export function emptyRefDeleteAppRoleMemberReq():Ref<DeleteAppRoleMemberReq>
-	export function refOfDeleteAppRoleMemberReq(x:DeleteAppRoleMemberReq,v:Ref<DeleteAppRoleMemberReq>)
-	export function unRefDeleteAppRoleMemberReq(v:Ref<DeleteAppRoleMemberReq>):DeleteAppRoleMemberReq
+	export function emptyListAppTableFormFieldResp():ListAppTableFormFieldResp
+	export function emptyRefListAppTableFormFieldResp():Ref<ListAppTableFormFieldResp>
+	export function refOfListAppTableFormFieldResp(x:ListAppTableFormFieldResp,v:Ref<ListAppTableFormFieldResp>)
+	export function unRefListAppTableFormFieldResp(v:Ref<ListAppTableFormFieldResp>):ListAppTableFormFieldResp
+	export function emptyBatchDeleteAppRoleMemberResp():BatchDeleteAppRoleMemberResp
+	export function emptyRefBatchDeleteAppRoleMemberResp():Ref<BatchDeleteAppRoleMemberResp>
+	export function refOfBatchDeleteAppRoleMemberResp(x:BatchDeleteAppRoleMemberResp,v:Ref<BatchDeleteAppRoleMemberResp>)
+	export function unRefBatchDeleteAppRoleMemberResp(v:Ref<BatchDeleteAppRoleMemberResp>):BatchDeleteAppRoleMemberResp
+	export function emptyUpdateAppTableFieldReq():UpdateAppTableFieldReq
+	export function emptyRefUpdateAppTableFieldReq():Ref<UpdateAppTableFieldReq>
+	export function refOfUpdateAppTableFieldReq(x:UpdateAppTableFieldReq,v:Ref<UpdateAppTableFieldReq>)
+	export function unRefUpdateAppTableFieldReq(v:Ref<UpdateAppTableFieldReq>):UpdateAppTableFieldReq
+	export function emptyApp():App
+	export function emptyRefApp():Ref<App>
+	export function refOfApp(x:App,v:Ref<App>)
+	export function unRefApp(v:Ref<App>):App
+	export function emptyBatchDeleteAppTableReq():BatchDeleteAppTableReq
+	export function emptyRefBatchDeleteAppTableReq():Ref<BatchDeleteAppTableReq>
+	export function refOfBatchDeleteAppTableReq(x:BatchDeleteAppTableReq,v:Ref<BatchDeleteAppTableReq>)
+	export function unRefBatchDeleteAppTableReq(v:Ref<BatchDeleteAppTableReq>):BatchDeleteAppTableReq
+	export function emptyCreateAppTableViewResp():CreateAppTableViewResp
+	export function emptyRefCreateAppTableViewResp():Ref<CreateAppTableViewResp>
+	export function refOfCreateAppTableViewResp(x:CreateAppTableViewResp,v:Ref<CreateAppTableViewResp>)
+	export function unRefCreateAppTableViewResp(v:Ref<CreateAppTableViewResp>):CreateAppTableViewResp
+	export function emptyPatchAppTableReqBody():PatchAppTableReqBody
+	export function emptyRefPatchAppTableReqBody():Ref<PatchAppTableReqBody>
+	export function refOfPatchAppTableReqBody(x:PatchAppTableReqBody,v:Ref<PatchAppTableReqBody>)
+	export function unRefPatchAppTableReqBody(v:Ref<PatchAppTableReqBody>):PatchAppTableReqBody
+	export function emptyAppRoleBlockRole():AppRoleBlockRole
+	export function emptyRefAppRoleBlockRole():Ref<AppRoleBlockRole>
+	export function refOfAppRoleBlockRole(x:AppRoleBlockRole,v:Ref<AppRoleBlockRole>)
+	export function unRefAppRoleBlockRole(v:Ref<AppRoleBlockRole>):AppRoleBlockRole
+	export function emptyAppTableForm():AppTableForm
+	export function emptyRefAppTableForm():Ref<AppTableForm>
+	export function refOfAppTableForm(x:AppTableForm,v:Ref<AppTableForm>)
+	export function unRefAppTableForm(v:Ref<AppTableForm>):AppTableForm
+	export function emptyGetAppTableRecordRespData():GetAppTableRecordRespData
+	export function emptyRefGetAppTableRecordRespData():Ref<GetAppTableRecordRespData>
+	export function refOfGetAppTableRecordRespData(x:GetAppTableRecordRespData,v:Ref<GetAppTableRecordRespData>)
+	export function unRefGetAppTableRecordRespData(v:Ref<GetAppTableRecordRespData>):GetAppTableRecordRespData
+	export function emptyAppTableField():AppTableField
+	export function emptyRefAppTableField():Ref<AppTableField>
+	export function refOfAppTableField(x:AppTableField,v:Ref<AppTableField>)
+	export function unRefAppTableField(v:Ref<AppTableField>):AppTableField
+	export function emptyBatchCreateAppTableResp():BatchCreateAppTableResp
+	export function emptyRefBatchCreateAppTableResp():Ref<BatchCreateAppTableResp>
+	export function refOfBatchCreateAppTableResp(x:BatchCreateAppTableResp,v:Ref<BatchCreateAppTableResp>)
+	export function unRefBatchCreateAppTableResp(v:Ref<BatchCreateAppTableResp>):BatchCreateAppTableResp
+	export function emptyDeleteAppTableFieldRespData():DeleteAppTableFieldRespData
+	export function emptyRefDeleteAppTableFieldRespData():Ref<DeleteAppTableFieldRespData>
+	export function refOfDeleteAppTableFieldRespData(x:DeleteAppTableFieldRespData,v:Ref<DeleteAppTableFieldRespData>)
+	export function unRefDeleteAppTableFieldRespData(v:Ref<DeleteAppTableFieldRespData>):DeleteAppTableFieldRespData
+	export function emptyCreateAppRoleResp():CreateAppRoleResp
+	export function emptyRefCreateAppRoleResp():Ref<CreateAppRoleResp>
+	export function refOfCreateAppRoleResp(x:CreateAppRoleResp,v:Ref<CreateAppRoleResp>)
+	export function unRefCreateAppRoleResp(v:Ref<CreateAppRoleResp>):CreateAppRoleResp
+	export function emptyGetAppTableFormRespData():GetAppTableFormRespData
+	export function emptyRefGetAppTableFormRespData():Ref<GetAppTableFormRespData>
+	export function refOfGetAppTableFormRespData(x:GetAppTableFormRespData,v:Ref<GetAppTableFormRespData>)
+	export function unRefGetAppTableFormRespData(v:Ref<GetAppTableFormRespData>):GetAppTableFormRespData
+	export function emptyListAppTableRecordRespData():ListAppTableRecordRespData
+	export function emptyRefListAppTableRecordRespData():Ref<ListAppTableRecordRespData>
+	export function refOfListAppTableRecordRespData(x:ListAppTableRecordRespData,v:Ref<ListAppTableRecordRespData>)
+	export function unRefListAppTableRecordRespData(v:Ref<ListAppTableRecordRespData>):ListAppTableRecordRespData
+	export function emptyAppTableFieldProperty():AppTableFieldProperty
+	export function emptyRefAppTableFieldProperty():Ref<AppTableFieldProperty>
+	export function refOfAppTableFieldProperty(x:AppTableFieldProperty,v:Ref<AppTableFieldProperty>)
+	export function unRefAppTableFieldProperty(v:Ref<AppTableFieldProperty>):AppTableFieldProperty
+	export function emptyBatchDeleteAppTableResp():BatchDeleteAppTableResp
+	export function emptyRefBatchDeleteAppTableResp():Ref<BatchDeleteAppTableResp>
+	export function refOfBatchDeleteAppTableResp(x:BatchDeleteAppTableResp,v:Ref<BatchDeleteAppTableResp>)
+	export function unRefBatchDeleteAppTableResp(v:Ref<BatchDeleteAppTableResp>):BatchDeleteAppTableResp
 }

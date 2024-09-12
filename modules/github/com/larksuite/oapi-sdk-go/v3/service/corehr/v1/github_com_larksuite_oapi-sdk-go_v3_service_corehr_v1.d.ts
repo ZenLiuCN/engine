@@ -3,15 +3,94 @@
 declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 
 	// @ts-ignore
-	import * as larkevent from 'github.com/larksuite/oapi-sdk-go/v3/event'
-	// @ts-ignore
 	import * as larkcore from 'github.com/larksuite/oapi-sdk-go/v3/core'
 	// @ts-ignore
 	import * as io from 'golang/io'
 	// @ts-ignore
 	import * as context from 'golang/context'
 	// @ts-ignore
-	import type {Nothing,float64,Ref,bool,Struct,int,error,Alias} from 'go'
+	import * as larkevent from 'github.com/larksuite/oapi-sdk-go/v3/event'
+	// @ts-ignore
+	import type {bool,int,Alias,Nothing,float64,Struct,Ref,error} from 'go'
+	export interface AddEnumOptionCommonDataMetaDataPathReqBodyBuilder extends Struct<AddEnumOptionCommonDataMetaDataPathReqBodyBuilder>{
+
+			objectApiName(objectApiName:string):Ref<AddEnumOptionCommonDataMetaDataPathReqBodyBuilder>
+			enumFieldApiName(enumFieldApiName:string):Ref<AddEnumOptionCommonDataMetaDataPathReqBodyBuilder>
+			enumFieldOptions(enumFieldOptions:Ref<EnumFieldOption>[]):Ref<AddEnumOptionCommonDataMetaDataPathReqBodyBuilder>
+			build():Ref<AddEnumOptionCommonDataMetaDataReqBody>
+	}
+	export interface AddEnumOptionCommonDataMetaDataReq extends Struct<AddEnumOptionCommonDataMetaDataReq>{
+
+			body:Ref<AddEnumOptionCommonDataMetaDataReqBody>
+	}
+	export interface AddEnumOptionCommonDataMetaDataReqBody extends Struct<AddEnumOptionCommonDataMetaDataReqBody>{
+
+			objectApiName:Ref<string>
+			enumFieldApiName:Ref<string>
+			enumFieldOptions:Ref<EnumFieldOption>[]
+	}
+	export interface AddEnumOptionCommonDataMetaDataReqBodyBuilder extends Struct<AddEnumOptionCommonDataMetaDataReqBodyBuilder>{
+
+			objectApiName(objectApiName:string):Ref<AddEnumOptionCommonDataMetaDataReqBodyBuilder>
+			enumFieldApiName(enumFieldApiName:string):Ref<AddEnumOptionCommonDataMetaDataReqBodyBuilder>
+			enumFieldOptions(enumFieldOptions:Ref<EnumFieldOption>[]):Ref<AddEnumOptionCommonDataMetaDataReqBodyBuilder>
+			build():Ref<AddEnumOptionCommonDataMetaDataReqBody>
+	}
+	export interface AddEnumOptionCommonDataMetaDataReqBuilder extends Struct<AddEnumOptionCommonDataMetaDataReqBuilder>{
+
+			clientToken(clientToken:string):Ref<AddEnumOptionCommonDataMetaDataReqBuilder>
+			body(body:Ref<AddEnumOptionCommonDataMetaDataReqBody>):Ref<AddEnumOptionCommonDataMetaDataReqBuilder>
+			build():Ref<AddEnumOptionCommonDataMetaDataReq>
+	}
+	export interface AddEnumOptionCommonDataMetaDataResp extends Struct<AddEnumOptionCommonDataMetaDataResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<AddEnumOptionCommonDataMetaDataRespData>
+			success():bool
+	}
+	export interface AddEnumOptionCommonDataMetaDataRespData extends Struct<AddEnumOptionCommonDataMetaDataRespData>{
+
+			enumFieldApiName:Ref<string>
+			enumFieldOptions:Ref<EnumFieldOption>[]
+	}
+	export interface AddRoleAssignAuthorizationPathReqBodyBuilder extends Struct<AddRoleAssignAuthorizationPathReqBodyBuilder>{
+
+			assignedOrganizationItems(assignedOrganizationItems:Ref<AssignedOrganizationWithCode>[][]):Ref<AddRoleAssignAuthorizationPathReqBodyBuilder>
+			build():Ref<AddRoleAssignAuthorizationReqBody>
+	}
+	export interface AddRoleAssignAuthorizationReq extends Struct<AddRoleAssignAuthorizationReq>{
+
+			body:Ref<AddRoleAssignAuthorizationReqBody>
+	}
+	export interface AddRoleAssignAuthorizationReqBody extends Struct<AddRoleAssignAuthorizationReqBody>{
+
+			assignedOrganizationItems:Ref<AssignedOrganizationWithCode>[][]
+	}
+	export interface AddRoleAssignAuthorizationReqBodyBuilder extends Struct<AddRoleAssignAuthorizationReqBodyBuilder>{
+
+			assignedOrganizationItems(assignedOrganizationItems:Ref<AssignedOrganizationWithCode>[][]):Ref<AddRoleAssignAuthorizationReqBodyBuilder>
+			build():Ref<AddRoleAssignAuthorizationReqBody>
+	}
+	export interface AddRoleAssignAuthorizationReqBuilder extends Struct<AddRoleAssignAuthorizationReqBuilder>{
+
+			employmentId(employmentId:string):Ref<AddRoleAssignAuthorizationReqBuilder>
+			userIdType(userIdType:string):Ref<AddRoleAssignAuthorizationReqBuilder>
+			roleId(roleId:string):Ref<AddRoleAssignAuthorizationReqBuilder>
+			body(body:Ref<AddRoleAssignAuthorizationReqBody>):Ref<AddRoleAssignAuthorizationReqBuilder>
+			build():Ref<AddRoleAssignAuthorizationReq>
+	}
+	export interface AddRoleAssignAuthorizationResp extends Struct<AddRoleAssignAuthorizationResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<AddRoleAssignAuthorizationRespData>
+			success():bool
+	}
+	export interface AddRoleAssignAuthorizationRespData extends Struct<AddRoleAssignAuthorizationRespData>{
+
+			assignId:Ref<string>
+	}
 	export interface Address extends Struct<Address>{
 
 			fullAddressLocalScript:Ref<string>
@@ -21,8 +100,15 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 			regionId:Ref<string>
 			cityId:Ref<string>
 			distinctId:Ref<string>
-			cityIdV2:Ref<string>
-			districtIdV2:Ref<string>
+			addressLine1:Ref<string>
+			addressLine2:Ref<string>
+			addressLine3:Ref<string>
+			addressLine4:Ref<string>
+			addressLine5:Ref<string>
+			addressLine6:Ref<string>
+			addressLine7:Ref<string>
+			addressLine8:Ref<string>
+			addressLine9:Ref<string>
 			localAddressLine1:Ref<string>
 			localAddressLine2:Ref<string>
 			localAddressLine3:Ref<string>
@@ -47,8 +133,15 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 			regionId(regionId:string):Ref<AddressBuilder>
 			cityId(cityId:string):Ref<AddressBuilder>
 			distinctId(distinctId:string):Ref<AddressBuilder>
-			cityIdV2(cityIdV2:string):Ref<AddressBuilder>
-			districtIdV2(districtIdV2:string):Ref<AddressBuilder>
+			addressLine1(addressLine1:string):Ref<AddressBuilder>
+			addressLine2(addressLine2:string):Ref<AddressBuilder>
+			addressLine3(addressLine3:string):Ref<AddressBuilder>
+			addressLine4(addressLine4:string):Ref<AddressBuilder>
+			addressLine5(addressLine5:string):Ref<AddressBuilder>
+			addressLine6(addressLine6:string):Ref<AddressBuilder>
+			addressLine7(addressLine7:string):Ref<AddressBuilder>
+			addressLine8(addressLine8:string):Ref<AddressBuilder>
+			addressLine9(addressLine9:string):Ref<AddressBuilder>
 			localAddressLine1(localAddressLine1:string):Ref<AddressBuilder>
 			localAddressLine2(localAddressLine2:string):Ref<AddressBuilder>
 			localAddressLine3(localAddressLine3:string):Ref<AddressBuilder>
@@ -348,6 +441,9 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 			contractEndDate:Ref<string>
 			contractNumber:Ref<string>
 			signingType:Ref<Enum>
+			contractStatus:Ref<Enum>
+			renewalStatus:Ref<Enum>
+			signingTimes:Ref<int>
 	}
 	export interface ContractBuilder extends Struct<ContractBuilder>{
 
@@ -363,6 +459,9 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 			contractEndDate(contractEndDate:string):Ref<ContractBuilder>
 			contractNumber(contractNumber:string):Ref<ContractBuilder>
 			signingType(signingType:Ref<Enum>):Ref<ContractBuilder>
+			contractStatus(contractStatus:Ref<Enum>):Ref<ContractBuilder>
+			renewalStatus(renewalStatus:Ref<Enum>):Ref<ContractBuilder>
+			signingTimes(signingTimes:int):Ref<ContractBuilder>
 			build():Ref<Contract>
 	}
 	export interface ConvertCommonDataIdPathReqBodyBuilder extends Struct<ConvertCommonDataIdPathReqBodyBuilder>{
@@ -936,6 +1035,27 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 
 			nationalIdType:Ref<NationalIdType>
 	}
+	export interface CreatePersonReq extends Struct<CreatePersonReq>{
+
+			person:Ref<Person>
+	}
+	export interface CreatePersonReqBuilder extends Struct<CreatePersonReqBuilder>{
+
+			clientToken(clientToken:string):Ref<CreatePersonReqBuilder>
+			person(person:Ref<Person>):Ref<CreatePersonReqBuilder>
+			build():Ref<CreatePersonReq>
+	}
+	export interface CreatePersonResp extends Struct<CreatePersonResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<CreatePersonRespData>
+			success():bool
+	}
+	export interface CreatePersonRespData extends Struct<CreatePersonRespData>{
+
+			person:Ref<Person>
+	}
 	export interface CreateWorkingHoursTypeReq extends Struct<CreateWorkingHoursTypeReq>{
 
 			workingHoursType:Ref<WorkingHoursType>
@@ -1437,6 +1557,48 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 			apiName(apiName:string):Ref<DimensionValueBuilder>
 			valueList(valueList:string[]):Ref<DimensionValueBuilder>
 			build():Ref<DimensionValue>
+	}
+	export interface EditEnumOptionCommonDataMetaDataPathReqBodyBuilder extends Struct<EditEnumOptionCommonDataMetaDataPathReqBodyBuilder>{
+
+			objectApiName(objectApiName:string):Ref<EditEnumOptionCommonDataMetaDataPathReqBodyBuilder>
+			enumFieldApiName(enumFieldApiName:string):Ref<EditEnumOptionCommonDataMetaDataPathReqBodyBuilder>
+			enumFieldOption(enumFieldOption:Ref<EnumFieldOption>):Ref<EditEnumOptionCommonDataMetaDataPathReqBodyBuilder>
+			build():Ref<EditEnumOptionCommonDataMetaDataReqBody>
+	}
+	export interface EditEnumOptionCommonDataMetaDataReq extends Struct<EditEnumOptionCommonDataMetaDataReq>{
+
+			body:Ref<EditEnumOptionCommonDataMetaDataReqBody>
+	}
+	export interface EditEnumOptionCommonDataMetaDataReqBody extends Struct<EditEnumOptionCommonDataMetaDataReqBody>{
+
+			objectApiName:Ref<string>
+			enumFieldApiName:Ref<string>
+			enumFieldOption:Ref<EnumFieldOption>
+	}
+	export interface EditEnumOptionCommonDataMetaDataReqBodyBuilder extends Struct<EditEnumOptionCommonDataMetaDataReqBodyBuilder>{
+
+			objectApiName(objectApiName:string):Ref<EditEnumOptionCommonDataMetaDataReqBodyBuilder>
+			enumFieldApiName(enumFieldApiName:string):Ref<EditEnumOptionCommonDataMetaDataReqBodyBuilder>
+			enumFieldOption(enumFieldOption:Ref<EnumFieldOption>):Ref<EditEnumOptionCommonDataMetaDataReqBodyBuilder>
+			build():Ref<EditEnumOptionCommonDataMetaDataReqBody>
+	}
+	export interface EditEnumOptionCommonDataMetaDataReqBuilder extends Struct<EditEnumOptionCommonDataMetaDataReqBuilder>{
+
+			clientToken(clientToken:string):Ref<EditEnumOptionCommonDataMetaDataReqBuilder>
+			body(body:Ref<EditEnumOptionCommonDataMetaDataReqBody>):Ref<EditEnumOptionCommonDataMetaDataReqBuilder>
+			build():Ref<EditEnumOptionCommonDataMetaDataReq>
+	}
+	export interface EditEnumOptionCommonDataMetaDataResp extends Struct<EditEnumOptionCommonDataMetaDataResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<EditEnumOptionCommonDataMetaDataRespData>
+			success():bool
+	}
+	export interface EditEnumOptionCommonDataMetaDataRespData extends Struct<EditEnumOptionCommonDataMetaDataRespData>{
+
+			enumFieldApiName:Ref<string>
+			enumFieldOptions:Ref<EnumFieldOption>[]
 	}
 	export interface Education extends Struct<Education>{
 
@@ -2038,13 +2200,33 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 			objectValue(objectValue:Ref<FormFieldVariableObjectValue>):Ref<FormVariableValueInfoExampleBuilder>
 			build():Ref<FormVariableValueInfoExample>
 	}
+	export interface GetByParamAuthorizationReq extends Struct<GetByParamAuthorizationReq>{
+
+	}
+	export interface GetByParamAuthorizationReqBuilder extends Struct<GetByParamAuthorizationReqBuilder>{
+
+			employmentId(employmentId:string):Ref<GetByParamAuthorizationReqBuilder>
+			userIdType(userIdType:string):Ref<GetByParamAuthorizationReqBuilder>
+			build():Ref<GetByParamAuthorizationReq>
+	}
+	export interface GetByParamAuthorizationResp extends Struct<GetByParamAuthorizationResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<GetByParamAuthorizationRespData>
+			success():bool
+	}
+	export interface GetByParamAuthorizationRespData extends Struct<GetByParamAuthorizationRespData>{
+
+			roleAuthorization:Ref<RoleAuthorization>
+	}
 	export interface GetByParamCustomFieldReq extends Struct<GetByParamCustomFieldReq>{
 
 	}
 	export interface GetByParamCustomFieldReqBuilder extends Struct<GetByParamCustomFieldReqBuilder>{
 
-			customApiName(customApiName:string):Ref<GetByParamCustomFieldReqBuilder>
 			objectApiName(objectApiName:string):Ref<GetByParamCustomFieldReqBuilder>
+			customApiName(customApiName:string):Ref<GetByParamCustomFieldReqBuilder>
 			build():Ref<GetByParamCustomFieldReq>
 	}
 	export interface GetByParamCustomFieldResp extends Struct<GetByParamCustomFieldResp>{
@@ -3546,6 +3728,18 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 	}
 	export function New(config:Ref<larkcore.Config>):Ref<V1>
 
+	export function newAddEnumOptionCommonDataMetaDataPathReqBodyBuilder():Ref<AddEnumOptionCommonDataMetaDataPathReqBodyBuilder>
+
+	export function newAddEnumOptionCommonDataMetaDataReqBodyBuilder():Ref<AddEnumOptionCommonDataMetaDataReqBodyBuilder>
+
+	export function newAddEnumOptionCommonDataMetaDataReqBuilder():Ref<AddEnumOptionCommonDataMetaDataReqBuilder>
+
+	export function newAddRoleAssignAuthorizationPathReqBodyBuilder():Ref<AddRoleAssignAuthorizationPathReqBodyBuilder>
+
+	export function newAddRoleAssignAuthorizationReqBodyBuilder():Ref<AddRoleAssignAuthorizationReqBodyBuilder>
+
+	export function newAddRoleAssignAuthorizationReqBuilder():Ref<AddRoleAssignAuthorizationReqBuilder>
+
 	export function newAddressBuilder():Ref<AddressBuilder>
 
 	export function newApplicationInfoBuilder():Ref<ApplicationInfoBuilder>
@@ -3640,6 +3834,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 
 	export function newCreateNationalIdTypeReqBuilder():Ref<CreateNationalIdTypeReqBuilder>
 
+	export function newCreatePersonReqBuilder():Ref<CreatePersonReqBuilder>
+
 	export function newCreateWorkingHoursTypeReqBuilder():Ref<CreateWorkingHoursTypeReqBuilder>
 
 	export function newCurrencyBuilder():Ref<CurrencyBuilder>
@@ -3691,6 +3887,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 	export function newDependentBuilder():Ref<DependentBuilder>
 
 	export function newDimensionValueBuilder():Ref<DimensionValueBuilder>
+
+	export function newEditEnumOptionCommonDataMetaDataPathReqBodyBuilder():Ref<EditEnumOptionCommonDataMetaDataPathReqBodyBuilder>
+
+	export function newEditEnumOptionCommonDataMetaDataReqBodyBuilder():Ref<EditEnumOptionCommonDataMetaDataReqBodyBuilder>
+
+	export function newEditEnumOptionCommonDataMetaDataReqBuilder():Ref<EditEnumOptionCommonDataMetaDataReqBuilder>
 
 	export function newEducationBuilder():Ref<EducationBuilder>
 
@@ -3761,6 +3963,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 	export function newFormVariableValueInfoBuilder():Ref<FormVariableValueInfoBuilder>
 
 	export function newFormVariableValueInfoExampleBuilder():Ref<FormVariableValueInfoExampleBuilder>
+
+	export function newGetByParamAuthorizationReqBuilder():Ref<GetByParamAuthorizationReqBuilder>
 
 	export function newGetByParamCustomFieldReqBuilder():Ref<GetByParamCustomFieldReqBuilder>
 
@@ -3914,6 +4118,14 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 
 	export function newOffboardingReasonBuilder():Ref<OffboardingReasonBuilder>
 
+	export function newOperationLogEntityBuilder():Ref<OperationLogEntityBuilder>
+
+	export function newOperationLogEntityFieldBuilder():Ref<OperationLogEntityFieldBuilder>
+
+	export function newOperationLogListReqBuilder():Ref<OperationLogListReqBuilder>
+
+	export function newOperationLogListRespItemBuilder():Ref<OperationLogListRespItemBuilder>
+
 	export function newOrgTruncationBuilder():Ref<OrgTruncationBuilder>
 
 	export function newP2ContractCreatedV1Handler(v1:(v2:context.Context,v1:Ref<P2ContractCreatedV1>)=>void/*error*/):Ref<P2ContractCreatedV1Handler>
@@ -3982,6 +4194,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 
 	export function newPatchNationalIdTypeReqBuilder():Ref<PatchNationalIdTypeReqBuilder>
 
+	export function newPatchPersonReqBuilder():Ref<PatchPersonReqBuilder>
+
 	export function newPatchPreHireReqBuilder():Ref<PatchPreHireReqBuilder>
 
 	export function newPatchWorkingHoursTypeReqBuilder():Ref<PatchWorkingHoursTypeReqBuilder>
@@ -4012,6 +4226,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 
 	export function newProcessBuilder():Ref<ProcessBuilder>
 
+	export function newQueryAuthorizationReqBuilder():Ref<QueryAuthorizationReqBuilder>
+
 	export function newQueryCustomFieldReqBuilder():Ref<QueryCustomFieldReqBuilder>
 
 	export function newQueryOffboardingPathReqBodyBuilder():Ref<QueryOffboardingPathReqBodyBuilder>
@@ -4031,6 +4247,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 	export function newQueryTransferTypeReqBuilder():Ref<QueryTransferTypeReqBuilder>
 
 	export function newReferenceObjectBuilder():Ref<ReferenceObjectBuilder>
+
+	export function newRemoveRoleAssignAuthorizationReqBuilder():Ref<RemoveRoleAssignAuthorizationReqBuilder>
 
 	export function newResidentTaxBuilder():Ref<ResidentTaxBuilder>
 
@@ -4077,6 +4295,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 	export function newTransferReasonBuilder():Ref<TransferReasonBuilder>
 
 	export function newTransferTypeBuilder():Ref<TransferTypeBuilder>
+
+	export function newUpdateRoleAssignAuthorizationPathReqBodyBuilder():Ref<UpdateRoleAssignAuthorizationPathReqBodyBuilder>
+
+	export function newUpdateRoleAssignAuthorizationReqBodyBuilder():Ref<UpdateRoleAssignAuthorizationReqBodyBuilder>
+
+	export function newUpdateRoleAssignAuthorizationReqBuilder():Ref<UpdateRoleAssignAuthorizationReqBuilder>
 
 	export function newUploadPersonPathReqBodyBuilder():Ref<UploadPersonPathReqBodyBuilder>
 
@@ -4259,6 +4483,62 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 			updatedTime(updatedTime:string):Ref<OffboardingReasonBuilder>
 			build():Ref<OffboardingReason>
 	}
+	export interface OperationLogEntity extends Struct<OperationLogEntity>{
+
+			optType:Ref<string>
+			fields:Ref<OperationLogEntityField>[]
+			employmentId:Ref<string>
+	}
+	export interface OperationLogEntityBuilder extends Struct<OperationLogEntityBuilder>{
+
+			optType(optType:string):Ref<OperationLogEntityBuilder>
+			fields(fields:Ref<OperationLogEntityField>[]):Ref<OperationLogEntityBuilder>
+			employmentId(employmentId:string):Ref<OperationLogEntityBuilder>
+			build():Ref<OperationLogEntity>
+	}
+	export interface OperationLogEntityField extends Struct<OperationLogEntityField>{
+
+			field:Ref<string>
+			before:Ref<string>
+			after:Ref<string>
+	}
+	export interface OperationLogEntityFieldBuilder extends Struct<OperationLogEntityFieldBuilder>{
+
+			field(field:string):Ref<OperationLogEntityFieldBuilder>
+			before(before:string):Ref<OperationLogEntityFieldBuilder>
+			after(after:string):Ref<OperationLogEntityFieldBuilder>
+			build():Ref<OperationLogEntityField>
+	}
+	export interface OperationLogListReq extends Struct<OperationLogListReq>{
+
+			startTime:Ref<string>
+			endTime:Ref<string>
+			operatorIds:string[]
+			employmentId:Ref<string>
+			filterFields:string[]
+	}
+	export interface OperationLogListReqBuilder extends Struct<OperationLogListReqBuilder>{
+
+			startTime(startTime:string):Ref<OperationLogListReqBuilder>
+			endTime(endTime:string):Ref<OperationLogListReqBuilder>
+			operatorIds(operatorIds:string[]):Ref<OperationLogListReqBuilder>
+			employmentId(employmentId:string):Ref<OperationLogListReqBuilder>
+			filterFields(filterFields:string[]):Ref<OperationLogListReqBuilder>
+			build():Ref<OperationLogListReq>
+	}
+	export interface OperationLogListRespItem extends Struct<OperationLogListRespItem>{
+
+			operatorId:Ref<string>
+			optTime:Ref<string>
+			entities:Ref<OperationLogEntity>[]
+	}
+	export interface OperationLogListRespItemBuilder extends Struct<OperationLogListRespItemBuilder>{
+
+			operatorId(operatorId:string):Ref<OperationLogListRespItemBuilder>
+			optTime(optTime:string):Ref<OperationLogListRespItemBuilder>
+			entities(entities:Ref<OperationLogEntity>[]):Ref<OperationLogListRespItemBuilder>
+			build():Ref<OperationLogListRespItem>
+	}
 	export interface OrgTruncation extends Struct<OrgTruncation>{
 
 			orgKey:Ref<string>
@@ -4346,8 +4626,9 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 	export interface P2DepartmentDeletedV1Data extends Struct<P2DepartmentDeletedV1Data>{
 
 			departmentId:Ref<string>
+			code:Ref<string>
 	}
-	export interface P2DepartmentDeletedV1Handler extends Struct<P2DepartmentDeletedV1Handler>,larkevent.EventHandler{
+	export interface P2DepartmentDeletedV1Handler extends larkevent.EventHandler,Struct<P2DepartmentDeletedV1Handler>{
 
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
@@ -4380,7 +4661,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 
 			employmentId:Ref<string>
 	}
-	export interface P2EmploymentConvertedV1Handler extends larkevent.EventHandler,Struct<P2EmploymentConvertedV1Handler>{
+	export interface P2EmploymentConvertedV1Handler extends Struct<P2EmploymentConvertedV1Handler>,larkevent.EventHandler{
 
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
@@ -4419,7 +4700,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
 	}
-	export interface P2EmploymentResignedV1 extends larkevent.EventHandlerModel,Struct<P2EmploymentResignedV1>{
+	export interface P2EmploymentResignedV1 extends Struct<P2EmploymentResignedV1>,larkevent.EventHandlerModel{
 
 			eventV2Base:Ref<larkevent.EventV2Base>
 			eventReq:Ref<larkevent.EventReq>
@@ -4430,7 +4711,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 
 			employmentId:Ref<string>
 	}
-	export interface P2EmploymentResignedV1Handler extends larkevent.EventHandler,Struct<P2EmploymentResignedV1Handler>{
+	export interface P2EmploymentResignedV1Handler extends Struct<P2EmploymentResignedV1Handler>,larkevent.EventHandler{
 
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
@@ -4453,7 +4734,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
 	}
-	export interface P2JobChangeUpdatedV1 extends larkevent.EventHandlerModel,Struct<P2JobChangeUpdatedV1>{
+	export interface P2JobChangeUpdatedV1 extends Struct<P2JobChangeUpdatedV1>,larkevent.EventHandlerModel{
 
 			eventV2Base:Ref<larkevent.EventV2Base>
 			eventReq:Ref<larkevent.EventReq>
@@ -4507,12 +4788,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 			employmentId:Ref<string>
 			targetUserId:Ref<UserId>
 	}
-	export interface P2JobDataChangedV1Handler extends Struct<P2JobDataChangedV1Handler>,larkevent.EventHandler{
+	export interface P2JobDataChangedV1Handler extends larkevent.EventHandler,Struct<P2JobDataChangedV1Handler>{
 
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
 	}
-	export interface P2JobDataEmployedV1 extends larkevent.EventHandlerModel,Struct<P2JobDataEmployedV1>{
+	export interface P2JobDataEmployedV1 extends Struct<P2JobDataEmployedV1>,larkevent.EventHandlerModel{
 
 			eventV2Base:Ref<larkevent.EventV2Base>
 			eventReq:Ref<larkevent.EventReq>
@@ -4541,7 +4822,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 
 			jobId:Ref<string>
 	}
-	export interface P2JobDeletedV1Handler extends larkevent.EventHandler,Struct<P2JobDeletedV1Handler>{
+	export interface P2JobDeletedV1Handler extends Struct<P2JobDeletedV1Handler>,larkevent.EventHandler{
 
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
@@ -4557,7 +4838,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 
 			jobId:Ref<string>
 	}
-	export interface P2JobUpdatedV1Handler extends Struct<P2JobUpdatedV1Handler>,larkevent.EventHandler{
+	export interface P2JobUpdatedV1Handler extends larkevent.EventHandler,Struct<P2JobUpdatedV1Handler>{
 
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
@@ -4616,7 +4897,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
 	}
-	export interface P2PersonDeletedV1 extends Struct<P2PersonDeletedV1>,larkevent.EventHandlerModel{
+	export interface P2PersonDeletedV1 extends larkevent.EventHandlerModel,Struct<P2PersonDeletedV1>{
 
 			eventV2Base:Ref<larkevent.EventV2Base>
 			eventReq:Ref<larkevent.EventReq>
@@ -4649,7 +4930,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 			event():any
 			handle(ctx:context.Context,event:any)/*error*/
 	}
-	export interface P2PreHireUpdatedV1 extends Struct<P2PreHireUpdatedV1>,larkevent.EventHandlerModel{
+	export interface P2PreHireUpdatedV1 extends larkevent.EventHandlerModel,Struct<P2PreHireUpdatedV1>{
 
 			eventV2Base:Ref<larkevent.EventV2Base>
 			eventReq:Ref<larkevent.EventReq>
@@ -4891,6 +5172,28 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 	export interface PatchNationalIdTypeRespData extends Struct<PatchNationalIdTypeRespData>{
 
 			nationalIdType:Ref<NationalIdType>
+	}
+	export interface PatchPersonReq extends Struct<PatchPersonReq>{
+
+			person:Ref<Person>
+	}
+	export interface PatchPersonReqBuilder extends Struct<PatchPersonReqBuilder>{
+
+			personId(personId:string):Ref<PatchPersonReqBuilder>
+			clientToken(clientToken:string):Ref<PatchPersonReqBuilder>
+			person(person:Ref<Person>):Ref<PatchPersonReqBuilder>
+			build():Ref<PatchPersonReq>
+	}
+	export interface PatchPersonResp extends Struct<PatchPersonResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<PatchPersonRespData>
+			success():bool
+	}
+	export interface PatchPersonRespData extends Struct<PatchPersonRespData>{
+
+			person:Ref<Person>
 	}
 	export interface PatchPreHireReq extends Struct<PatchPreHireReq>{
 
@@ -5271,6 +5574,31 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 			id(id:string):Ref<ProcessBuilder>
 			build():Ref<Process>
 	}
+	export interface QueryAuthorizationReq extends Struct<QueryAuthorizationReq>{
+
+	}
+	export interface QueryAuthorizationReqBuilder extends Struct<QueryAuthorizationReqBuilder>{
+
+			employmentIdList(employmentIdList:string[]):Ref<QueryAuthorizationReqBuilder>
+			roleIdList(roleIdList:string[]):Ref<QueryAuthorizationReqBuilder>
+			pageToken(pageToken:string):Ref<QueryAuthorizationReqBuilder>
+			pageSize(pageSize:string):Ref<QueryAuthorizationReqBuilder>
+			userIdType(userIdType:string):Ref<QueryAuthorizationReqBuilder>
+			build():Ref<QueryAuthorizationReq>
+	}
+	export interface QueryAuthorizationResp extends Struct<QueryAuthorizationResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<QueryAuthorizationRespData>
+			success():bool
+	}
+	export interface QueryAuthorizationRespData extends Struct<QueryAuthorizationRespData>{
+
+			items:Ref<RoleAuthorization>[]
+			hasMore:Ref<bool>
+			pageToken:Ref<string>
+	}
 	export interface QueryCustomFieldReq extends Struct<QueryCustomFieldReq>{
 
 	}
@@ -5422,6 +5750,27 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 			apiName(apiName:string):Ref<ReferenceObjectBuilder>
 			id(id:string):Ref<ReferenceObjectBuilder>
 			build():Ref<ReferenceObject>
+	}
+	export interface RemoveRoleAssignAuthorizationReq extends Struct<RemoveRoleAssignAuthorizationReq>{
+
+	}
+	export interface RemoveRoleAssignAuthorizationReqBuilder extends Struct<RemoveRoleAssignAuthorizationReqBuilder>{
+
+			employmentId(employmentId:string):Ref<RemoveRoleAssignAuthorizationReqBuilder>
+			userIdType(userIdType:string):Ref<RemoveRoleAssignAuthorizationReqBuilder>
+			roleId(roleId:string):Ref<RemoveRoleAssignAuthorizationReqBuilder>
+			build():Ref<RemoveRoleAssignAuthorizationReq>
+	}
+	export interface RemoveRoleAssignAuthorizationResp extends Struct<RemoveRoleAssignAuthorizationResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<RemoveRoleAssignAuthorizationRespData>
+			success():bool
+	}
+	export interface RemoveRoleAssignAuthorizationRespData extends Struct<RemoveRoleAssignAuthorizationRespData>{
+
+			assignId:Ref<string>
 	}
 	export interface ResidentTax extends Struct<ResidentTax>{
 
@@ -5836,6 +6185,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 			targetCompensationType:Ref<string>
 			originalServiceCompany:Ref<string>
 			targetServiceCompany:Ref<string>
+			originalPosition:Ref<string>
+			targetPosition:Ref<string>
 	}
 	export interface TransferInfoBuilder extends Struct<TransferInfoBuilder>{
 
@@ -5893,6 +6244,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 			targetCompensationType(targetCompensationType:string):Ref<TransferInfoBuilder>
 			originalServiceCompany(originalServiceCompany:string):Ref<TransferInfoBuilder>
 			targetServiceCompany(targetServiceCompany:string):Ref<TransferInfoBuilder>
+			originalPosition(originalPosition:string):Ref<TransferInfoBuilder>
+			targetPosition(targetPosition:string):Ref<TransferInfoBuilder>
 			build():Ref<TransferInfo>
 	}
 	//1
@@ -5938,6 +6291,43 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 			createdTime(createdTime:string):Ref<TransferTypeBuilder>
 			updatedTime(updatedTime:string):Ref<TransferTypeBuilder>
 			build():Ref<TransferType>
+	}
+	export interface UpdateRoleAssignAuthorizationPathReqBodyBuilder extends Struct<UpdateRoleAssignAuthorizationPathReqBodyBuilder>{
+
+			assignedOrganizationItems(assignedOrganizationItems:Ref<AssignedOrganizationWithCode>[][]):Ref<UpdateRoleAssignAuthorizationPathReqBodyBuilder>
+			build():Ref<UpdateRoleAssignAuthorizationReqBody>
+	}
+	export interface UpdateRoleAssignAuthorizationReq extends Struct<UpdateRoleAssignAuthorizationReq>{
+
+			body:Ref<UpdateRoleAssignAuthorizationReqBody>
+	}
+	export interface UpdateRoleAssignAuthorizationReqBody extends Struct<UpdateRoleAssignAuthorizationReqBody>{
+
+			assignedOrganizationItems:Ref<AssignedOrganizationWithCode>[][]
+	}
+	export interface UpdateRoleAssignAuthorizationReqBodyBuilder extends Struct<UpdateRoleAssignAuthorizationReqBodyBuilder>{
+
+			assignedOrganizationItems(assignedOrganizationItems:Ref<AssignedOrganizationWithCode>[][]):Ref<UpdateRoleAssignAuthorizationReqBodyBuilder>
+			build():Ref<UpdateRoleAssignAuthorizationReqBody>
+	}
+	export interface UpdateRoleAssignAuthorizationReqBuilder extends Struct<UpdateRoleAssignAuthorizationReqBuilder>{
+
+			employmentId(employmentId:string):Ref<UpdateRoleAssignAuthorizationReqBuilder>
+			userIdType(userIdType:string):Ref<UpdateRoleAssignAuthorizationReqBuilder>
+			roleId(roleId:string):Ref<UpdateRoleAssignAuthorizationReqBuilder>
+			body(body:Ref<UpdateRoleAssignAuthorizationReqBody>):Ref<UpdateRoleAssignAuthorizationReqBuilder>
+			build():Ref<UpdateRoleAssignAuthorizationReq>
+	}
+	export interface UpdateRoleAssignAuthorizationResp extends Struct<UpdateRoleAssignAuthorizationResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<UpdateRoleAssignAuthorizationRespData>
+			success():bool
+	}
+	export interface UpdateRoleAssignAuthorizationRespData extends Struct<UpdateRoleAssignAuthorizationRespData>{
+
+			assignId:Ref<string>
 	}
 	export interface UploadPersonPathReqBodyBuilder extends Struct<UploadPersonPathReqBodyBuilder>{
 
@@ -5990,6 +6380,14 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 			build():Ref<UserId>
 	}
 	//"open_id"
+	export const UserIdTypeAddRoleAssignAuthorizationOpenId:string
+	//"people_corehr_id"
+	export const UserIdTypeAddRoleAssignAuthorizationPeopleCorehrId:string
+	//"union_id"
+	export const UserIdTypeAddRoleAssignAuthorizationUnionId:string
+	//"user_id"
+	export const UserIdTypeAddRoleAssignAuthorizationUserId:string
+	//"open_id"
 	export const UserIdTypeCreateDepartmentOpenId:string
 	//"people_corehr_id"
 	export const UserIdTypeCreateDepartmentPeopleCorehrId:string
@@ -6031,6 +6429,14 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 	export const UserIdTypeDeleteEmploymentUnionId:string
 	//"user_id"
 	export const UserIdTypeDeleteEmploymentUserId:string
+	//"open_id"
+	export const UserIdTypeGetByParamAuthorizationOpenId:string
+	//"people_corehr_id"
+	export const UserIdTypeGetByParamAuthorizationPeopleCorehrId:string
+	//"union_id"
+	export const UserIdTypeGetByParamAuthorizationUnionId:string
+	//"user_id"
+	export const UserIdTypeGetByParamAuthorizationUserId:string
 	//"open_id"
 	export const UserIdTypeGetDepartmentOpenId:string
 	//"people_corehr_id"
@@ -6126,6 +6532,22 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 	//"people_corehr_id"
 	export const UserIdTypePeopleCorehrId:string
 	//"open_id"
+	export const UserIdTypeQueryAuthorizationOpenId:string
+	//"people_corehr_id"
+	export const UserIdTypeQueryAuthorizationPeopleCorehrId:string
+	//"union_id"
+	export const UserIdTypeQueryAuthorizationUnionId:string
+	//"user_id"
+	export const UserIdTypeQueryAuthorizationUserId:string
+	//"open_id"
+	export const UserIdTypeRemoveRoleAssignAuthorizationOpenId:string
+	//"people_corehr_id"
+	export const UserIdTypeRemoveRoleAssignAuthorizationPeopleCorehrId:string
+	//"union_id"
+	export const UserIdTypeRemoveRoleAssignAuthorizationUnionId:string
+	//"user_id"
+	export const UserIdTypeRemoveRoleAssignAuthorizationUserId:string
+	//"open_id"
 	export const UserIdTypeSearchOffboardingOpenId:string
 	//"people_corehr_id"
 	export const UserIdTypeSearchOffboardingPeopleCorehrId:string
@@ -6143,6 +6565,14 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 	export const UserIdTypeSubmitOffboardingUserId:string
 	//"union_id"
 	export const UserIdTypeUnionId:string
+	//"open_id"
+	export const UserIdTypeUpdateRoleAssignAuthorizationOpenId:string
+	//"people_corehr_id"
+	export const UserIdTypeUpdateRoleAssignAuthorizationPeopleCorehrId:string
+	//"union_id"
+	export const UserIdTypeUpdateRoleAssignAuthorizationUnionId:string
+	//"user_id"
+	export const UserIdTypeUpdateRoleAssignAuthorizationUserId:string
 	//"user_id"
 	export const UserIdTypeUserId:string
 	export interface V1 extends Struct<V1>{
@@ -6151,9 +6581,22 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 			
 				search(ctx:context.Context,req:Ref<SearchAssignedUserReq>,...options:larkcore.RequestOptionFunc[]):Ref<SearchAssignedUserResp>
 			}>
+			authorization:Ref<{
+			
+				addRoleAssign(ctx:context.Context,req:Ref<AddRoleAssignAuthorizationReq>,...options:larkcore.RequestOptionFunc[]):Ref<AddRoleAssignAuthorizationResp>
+				getByParam(ctx:context.Context,req:Ref<GetByParamAuthorizationReq>,...options:larkcore.RequestOptionFunc[]):Ref<GetByParamAuthorizationResp>
+				query(ctx:context.Context,req:Ref<QueryAuthorizationReq>,...options:larkcore.RequestOptionFunc[]):Ref<QueryAuthorizationResp>
+				removeRoleAssign(ctx:context.Context,req:Ref<RemoveRoleAssignAuthorizationReq>,...options:larkcore.RequestOptionFunc[]):Ref<RemoveRoleAssignAuthorizationResp>
+				updateRoleAssign(ctx:context.Context,req:Ref<UpdateRoleAssignAuthorizationReq>,...options:larkcore.RequestOptionFunc[]):Ref<UpdateRoleAssignAuthorizationResp>
+			}>
 			commonDataId:Ref<{
 			
 				convert(ctx:context.Context,req:Ref<ConvertCommonDataIdReq>,...options:larkcore.RequestOptionFunc[]):Ref<ConvertCommonDataIdResp>
+			}>
+			commonDataMetaData:Ref<{
+			
+				addEnumOption(ctx:context.Context,req:Ref<AddEnumOptionCommonDataMetaDataReq>,...options:larkcore.RequestOptionFunc[]):Ref<AddEnumOptionCommonDataMetaDataResp>
+				editEnumOption(ctx:context.Context,req:Ref<EditEnumOptionCommonDataMetaDataReq>,...options:larkcore.RequestOptionFunc[]):Ref<EditEnumOptionCommonDataMetaDataResp>
 			}>
 			company:Ref<{
 			
@@ -6288,8 +6731,10 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 			}>
 			person:Ref<{
 			
+				create(ctx:context.Context,req:Ref<CreatePersonReq>,...options:larkcore.RequestOptionFunc[]):Ref<CreatePersonResp>
 				delete(ctx:context.Context,req:Ref<DeletePersonReq>,...options:larkcore.RequestOptionFunc[]):Ref<DeletePersonResp>
 				get(ctx:context.Context,req:Ref<GetPersonReq>,...options:larkcore.RequestOptionFunc[]):Ref<GetPersonResp>
+				patch(ctx:context.Context,req:Ref<PatchPersonReq>,...options:larkcore.RequestOptionFunc[]):Ref<PatchPersonResp>
 				upload(ctx:context.Context,req:Ref<UploadPersonReq>,...options:larkcore.RequestOptionFunc[]):Ref<UploadPersonResp>
 			}>
 			preHire:Ref<{
@@ -6431,438 +6876,594 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 			customFields(customFields:Ref<ObjectFieldData>[]):Ref<WorkingHoursTypeBuilder>
 			build():Ref<WorkingHoursType>
 	}
+	export function emptyCreateJobResp():CreateJobResp
+	export function emptyRefCreateJobResp():Ref<CreateJobResp>
+	export function refOfCreateJobResp(x:CreateJobResp,v:Ref<CreateJobResp>)
+	export function unRefCreateJobResp(v:Ref<CreateJobResp>):CreateJobResp
 	export function emptyDeleteJobReq():DeleteJobReq
 	export function emptyRefDeleteJobReq():Ref<DeleteJobReq>
 	export function refOfDeleteJobReq(x:DeleteJobReq,v:Ref<DeleteJobReq>)
 	export function unRefDeleteJobReq(v:Ref<DeleteJobReq>):DeleteJobReq
-	export function emptyGetPersonReq():GetPersonReq
-	export function emptyRefGetPersonReq():Ref<GetPersonReq>
-	export function refOfGetPersonReq(x:GetPersonReq,v:Ref<GetPersonReq>)
-	export function unRefGetPersonReq(v:Ref<GetPersonReq>):GetPersonReq
-	export function emptyManagementScope():ManagementScope
-	export function emptyRefManagementScope():Ref<ManagementScope>
-	export function refOfManagementScope(x:ManagementScope,v:Ref<ManagementScope>)
-	export function unRefManagementScope(v:Ref<ManagementScope>):ManagementScope
-	export function emptyConvertCommonDataIdRespData():ConvertCommonDataIdRespData
-	export function emptyRefConvertCommonDataIdRespData():Ref<ConvertCommonDataIdRespData>
-	export function refOfConvertCommonDataIdRespData(x:ConvertCommonDataIdRespData,v:Ref<ConvertCommonDataIdRespData>)
-	export function unRefConvertCommonDataIdRespData(v:Ref<ConvertCommonDataIdRespData>):ConvertCommonDataIdRespData
-	export function emptyDepartmentCreate():DepartmentCreate
-	export function emptyRefDepartmentCreate():Ref<DepartmentCreate>
-	export function refOfDepartmentCreate(x:DepartmentCreate,v:Ref<DepartmentCreate>)
-	export function unRefDepartmentCreate(v:Ref<DepartmentCreate>):DepartmentCreate
-	export function emptyListSubregionRespData():ListSubregionRespData
-	export function emptyRefListSubregionRespData():Ref<ListSubregionRespData>
-	export function refOfListSubregionRespData(x:ListSubregionRespData,v:Ref<ListSubregionRespData>)
-	export function unRefListSubregionRespData(v:Ref<ListSubregionRespData>):ListSubregionRespData
-	export function emptyPatchCompanyRespData():PatchCompanyRespData
-	export function emptyRefPatchCompanyRespData():Ref<PatchCompanyRespData>
-	export function refOfPatchCompanyRespData(x:PatchCompanyRespData,v:Ref<PatchCompanyRespData>)
-	export function unRefPatchCompanyRespData(v:Ref<PatchCompanyRespData>):PatchCompanyRespData
-	export function emptyPatchEmploymentRespData():PatchEmploymentRespData
-	export function emptyRefPatchEmploymentRespData():Ref<PatchEmploymentRespData>
-	export function refOfPatchEmploymentRespData(x:PatchEmploymentRespData,v:Ref<PatchEmploymentRespData>)
-	export function unRefPatchEmploymentRespData(v:Ref<PatchEmploymentRespData>):PatchEmploymentRespData
-	export function emptyP2JobUpdatedV1Data():P2JobUpdatedV1Data
-	export function emptyRefP2JobUpdatedV1Data():Ref<P2JobUpdatedV1Data>
-	export function refOfP2JobUpdatedV1Data(x:P2JobUpdatedV1Data,v:Ref<P2JobUpdatedV1Data>)
-	export function unRefP2JobUpdatedV1Data(v:Ref<P2JobUpdatedV1Data>):P2JobUpdatedV1Data
-	export function emptyPatchWorkingHoursTypeReq():PatchWorkingHoursTypeReq
-	export function emptyRefPatchWorkingHoursTypeReq():Ref<PatchWorkingHoursTypeReq>
-	export function refOfPatchWorkingHoursTypeReq(x:PatchWorkingHoursTypeReq,v:Ref<PatchWorkingHoursTypeReq>)
-	export function unRefPatchWorkingHoursTypeReq(v:Ref<PatchWorkingHoursTypeReq>):PatchWorkingHoursTypeReq
-	export function emptyCreateLeaveGrantingRecordRespData():CreateLeaveGrantingRecordRespData
-	export function emptyRefCreateLeaveGrantingRecordRespData():Ref<CreateLeaveGrantingRecordRespData>
-	export function refOfCreateLeaveGrantingRecordRespData(x:CreateLeaveGrantingRecordRespData,v:Ref<CreateLeaveGrantingRecordRespData>)
-	export function unRefCreateLeaveGrantingRecordRespData(v:Ref<CreateLeaveGrantingRecordRespData>):CreateLeaveGrantingRecordRespData
-	export function emptyListLocationResp():ListLocationResp
-	export function emptyRefListLocationResp():Ref<ListLocationResp>
-	export function refOfListLocationResp(x:ListLocationResp,v:Ref<ListLocationResp>)
-	export function unRefListLocationResp(v:Ref<ListLocationResp>):ListLocationResp
-	export function emptyPatchJobDataResp():PatchJobDataResp
-	export function emptyRefPatchJobDataResp():Ref<PatchJobDataResp>
-	export function refOfPatchJobDataResp(x:PatchJobDataResp,v:Ref<PatchJobDataResp>)
-	export function unRefPatchJobDataResp(v:Ref<PatchJobDataResp>):PatchJobDataResp
-	export function emptySecurityGroup():SecurityGroup
-	export function emptyRefSecurityGroup():Ref<SecurityGroup>
-	export function refOfSecurityGroup(x:SecurityGroup,v:Ref<SecurityGroup>)
-	export function unRefSecurityGroup(v:Ref<SecurityGroup>):SecurityGroup
-	export function emptyCreateJobChangeReq():CreateJobChangeReq
-	export function emptyRefCreateJobChangeReq():Ref<CreateJobChangeReq>
-	export function refOfCreateJobChangeReq(x:CreateJobChangeReq,v:Ref<CreateJobChangeReq>)
-	export function unRefCreateJobChangeReq(v:Ref<CreateJobChangeReq>):CreateJobChangeReq
-	export function emptyDeleteWorkingHoursTypeResp():DeleteWorkingHoursTypeResp
-	export function emptyRefDeleteWorkingHoursTypeResp():Ref<DeleteWorkingHoursTypeResp>
-	export function refOfDeleteWorkingHoursTypeResp(x:DeleteWorkingHoursTypeResp,v:Ref<DeleteWorkingHoursTypeResp>)
-	export function unRefDeleteWorkingHoursTypeResp(v:Ref<DeleteWorkingHoursTypeResp>):DeleteWorkingHoursTypeResp
-	export function emptyFormFieldVariableListValue():FormFieldVariableListValue
-	export function emptyRefFormFieldVariableListValue():Ref<FormFieldVariableListValue>
-	export function refOfFormFieldVariableListValue(x:FormFieldVariableListValue,v:Ref<FormFieldVariableListValue>)
-	export function unRefFormFieldVariableListValue(v:Ref<FormFieldVariableListValue>):FormFieldVariableListValue
-	export function emptyDateTimeFieldSetting():DateTimeFieldSetting
-	export function emptyRefDateTimeFieldSetting():Ref<DateTimeFieldSetting>
-	export function refOfDateTimeFieldSetting(x:DateTimeFieldSetting,v:Ref<DateTimeFieldSetting>)
-	export function unRefDateTimeFieldSetting(v:Ref<DateTimeFieldSetting>):DateTimeFieldSetting
-	export function emptyGetSubdivisionReq():GetSubdivisionReq
-	export function emptyRefGetSubdivisionReq():Ref<GetSubdivisionReq>
-	export function refOfGetSubdivisionReq(x:GetSubdivisionReq,v:Ref<GetSubdivisionReq>)
-	export function unRefGetSubdivisionReq(v:Ref<GetSubdivisionReq>):GetSubdivisionReq
-	export function emptyFormFieldVariableDateValue():FormFieldVariableDateValue
-	export function emptyRefFormFieldVariableDateValue():Ref<FormFieldVariableDateValue>
-	export function refOfFormFieldVariableDateValue(x:FormFieldVariableDateValue,v:Ref<FormFieldVariableDateValue>)
-	export function unRefFormFieldVariableDateValue(v:Ref<FormFieldVariableDateValue>):FormFieldVariableDateValue
-	export function emptyGetCurrencyReq():GetCurrencyReq
-	export function emptyRefGetCurrencyReq():Ref<GetCurrencyReq>
-	export function refOfGetCurrencyReq(x:GetCurrencyReq,v:Ref<GetCurrencyReq>)
-	export function unRefGetCurrencyReq(v:Ref<GetCurrencyReq>):GetCurrencyReq
-	export function emptyCreateWorkingHoursTypeReq():CreateWorkingHoursTypeReq
-	export function emptyRefCreateWorkingHoursTypeReq():Ref<CreateWorkingHoursTypeReq>
-	export function refOfCreateWorkingHoursTypeReq(x:CreateWorkingHoursTypeReq,v:Ref<CreateWorkingHoursTypeReq>)
-	export function unRefCreateWorkingHoursTypeReq(v:Ref<CreateWorkingHoursTypeReq>):CreateWorkingHoursTypeReq
-	export function emptyObjectFieldData():ObjectFieldData
-	export function emptyRefObjectFieldData():Ref<ObjectFieldData>
-	export function refOfObjectFieldData(x:ObjectFieldData,v:Ref<ObjectFieldData>)
-	export function unRefObjectFieldData(v:Ref<ObjectFieldData>):ObjectFieldData
-	export function emptyP2DepartmentCreatedV1Data():P2DepartmentCreatedV1Data
-	export function emptyRefP2DepartmentCreatedV1Data():Ref<P2DepartmentCreatedV1Data>
-	export function refOfP2DepartmentCreatedV1Data(x:P2DepartmentCreatedV1Data,v:Ref<P2DepartmentCreatedV1Data>)
-	export function unRefP2DepartmentCreatedV1Data(v:Ref<P2DepartmentCreatedV1Data>):P2DepartmentCreatedV1Data
-	export function emptyPatchDepartmentRespData():PatchDepartmentRespData
-	export function emptyRefPatchDepartmentRespData():Ref<PatchDepartmentRespData>
-	export function refOfPatchDepartmentRespData(x:PatchDepartmentRespData,v:Ref<PatchDepartmentRespData>)
-	export function unRefPatchDepartmentRespData(v:Ref<PatchDepartmentRespData>):PatchDepartmentRespData
-	export function emptyPatchJobFamilyResp():PatchJobFamilyResp
-	export function emptyRefPatchJobFamilyResp():Ref<PatchJobFamilyResp>
-	export function refOfPatchJobFamilyResp(x:PatchJobFamilyResp,v:Ref<PatchJobFamilyResp>)
-	export function unRefPatchJobFamilyResp(v:Ref<PatchJobFamilyResp>):PatchJobFamilyResp
-	export function emptyGetProcessFormVariableDataRespData():GetProcessFormVariableDataRespData
-	export function emptyRefGetProcessFormVariableDataRespData():Ref<GetProcessFormVariableDataRespData>
-	export function refOfGetProcessFormVariableDataRespData(x:GetProcessFormVariableDataRespData,v:Ref<GetProcessFormVariableDataRespData>)
-	export function unRefGetProcessFormVariableDataRespData(v:Ref<GetProcessFormVariableDataRespData>):GetProcessFormVariableDataRespData
-	export function emptyLeaveRequestHistoryLeaveReq():LeaveRequestHistoryLeaveReq
-	export function emptyRefLeaveRequestHistoryLeaveReq():Ref<LeaveRequestHistoryLeaveReq>
-	export function refOfLeaveRequestHistoryLeaveReq(x:LeaveRequestHistoryLeaveReq,v:Ref<LeaveRequestHistoryLeaveReq>)
-	export function unRefLeaveRequestHistoryLeaveReq(v:Ref<LeaveRequestHistoryLeaveReq>):LeaveRequestHistoryLeaveReq
-	export function emptyListJobReq():ListJobReq
-	export function emptyRefListJobReq():Ref<ListJobReq>
-	export function refOfListJobReq(x:ListJobReq,v:Ref<ListJobReq>)
-	export function unRefListJobReq(v:Ref<ListJobReq>):ListJobReq
-	export function emptyP2EmploymentConvertedV1():P2EmploymentConvertedV1
-	export function emptyRefP2EmploymentConvertedV1():Ref<P2EmploymentConvertedV1>
-	export function refOfP2EmploymentConvertedV1(x:P2EmploymentConvertedV1,v:Ref<P2EmploymentConvertedV1>)
-	export function unRefP2EmploymentConvertedV1(v:Ref<P2EmploymentConvertedV1>):P2EmploymentConvertedV1
-	export function emptyGetJobDataReq():GetJobDataReq
-	export function emptyRefGetJobDataReq():Ref<GetJobDataReq>
-	export function refOfGetJobDataReq(x:GetJobDataReq,v:Ref<GetJobDataReq>)
-	export function unRefGetJobDataReq(v:Ref<GetJobDataReq>):GetJobDataReq
-	export function emptyName():Name
-	export function emptyRefName():Ref<Name>
-	export function refOfName(x:Name,v:Ref<Name>)
-	export function unRefName(v:Ref<Name>):Name
-	export function emptyP2DepartmentUpdatedV1():P2DepartmentUpdatedV1
-	export function emptyRefP2DepartmentUpdatedV1():Ref<P2DepartmentUpdatedV1>
-	export function refOfP2DepartmentUpdatedV1(x:P2DepartmentUpdatedV1,v:Ref<P2DepartmentUpdatedV1>)
-	export function unRefP2DepartmentUpdatedV1(v:Ref<P2DepartmentUpdatedV1>):P2DepartmentUpdatedV1
-	export function emptyCreateWorkingHoursTypeResp():CreateWorkingHoursTypeResp
-	export function emptyRefCreateWorkingHoursTypeResp():Ref<CreateWorkingHoursTypeResp>
-	export function refOfCreateWorkingHoursTypeResp(x:CreateWorkingHoursTypeResp,v:Ref<CreateWorkingHoursTypeResp>)
-	export function unRefCreateWorkingHoursTypeResp(v:Ref<CreateWorkingHoursTypeResp>):CreateWorkingHoursTypeResp
-	export function emptyDeleteDepartmentResp():DeleteDepartmentResp
-	export function emptyRefDeleteDepartmentResp():Ref<DeleteDepartmentResp>
-	export function refOfDeleteDepartmentResp(x:DeleteDepartmentResp,v:Ref<DeleteDepartmentResp>)
-	export function unRefDeleteDepartmentResp(v:Ref<DeleteDepartmentResp>):DeleteDepartmentResp
-	export function emptyListJobDataResp():ListJobDataResp
-	export function emptyRefListJobDataResp():Ref<ListJobDataResp>
-	export function refOfListJobDataResp(x:ListJobDataResp,v:Ref<ListJobDataResp>)
-	export function unRefListJobDataResp(v:Ref<ListJobDataResp>):ListJobDataResp
-	export function emptyPatchContractReq():PatchContractReq
-	export function emptyRefPatchContractReq():Ref<PatchContractReq>
-	export function refOfPatchContractReq(x:PatchContractReq,v:Ref<PatchContractReq>)
-	export function unRefPatchContractReq(v:Ref<PatchContractReq>):PatchContractReq
-	export function emptyCreateJobDataRespData():CreateJobDataRespData
-	export function emptyRefCreateJobDataRespData():Ref<CreateJobDataRespData>
-	export function refOfCreateJobDataRespData(x:CreateJobDataRespData,v:Ref<CreateJobDataRespData>)
-	export function unRefCreateJobDataRespData(v:Ref<CreateJobDataRespData>):CreateJobDataRespData
-	export function emptyP2JobDeletedV1():P2JobDeletedV1
-	export function emptyRefP2JobDeletedV1():Ref<P2JobDeletedV1>
-	export function refOfP2JobDeletedV1(x:P2JobDeletedV1,v:Ref<P2JobDeletedV1>)
-	export function unRefP2JobDeletedV1(v:Ref<P2JobDeletedV1>):P2JobDeletedV1
-	export function emptySearchAssignedUserResp():SearchAssignedUserResp
-	export function emptyRefSearchAssignedUserResp():Ref<SearchAssignedUserResp>
-	export function refOfSearchAssignedUserResp(x:SearchAssignedUserResp,v:Ref<SearchAssignedUserResp>)
-	export function unRefSearchAssignedUserResp(v:Ref<SearchAssignedUserResp>):SearchAssignedUserResp
-	export function emptyBackgroundCheckCity():BackgroundCheckCity
-	export function emptyRefBackgroundCheckCity():Ref<BackgroundCheckCity>
-	export function refOfBackgroundCheckCity(x:BackgroundCheckCity,v:Ref<BackgroundCheckCity>)
-	export function unRefBackgroundCheckCity(v:Ref<BackgroundCheckCity>):BackgroundCheckCity
-	export function emptyConvertCommonDataIdReq():ConvertCommonDataIdReq
-	export function emptyRefConvertCommonDataIdReq():Ref<ConvertCommonDataIdReq>
-	export function refOfConvertCommonDataIdReq(x:ConvertCommonDataIdReq,v:Ref<ConvertCommonDataIdReq>)
-	export function unRefConvertCommonDataIdReq(v:Ref<ConvertCommonDataIdReq>):ConvertCommonDataIdReq
-	export function emptyLeaveGrantingRecord():LeaveGrantingRecord
-	export function emptyRefLeaveGrantingRecord():Ref<LeaveGrantingRecord>
-	export function refOfLeaveGrantingRecord(x:LeaveGrantingRecord,v:Ref<LeaveGrantingRecord>)
-	export function unRefLeaveGrantingRecord(v:Ref<LeaveGrantingRecord>):LeaveGrantingRecord
-	export function emptyPatchWorkingHoursTypeResp():PatchWorkingHoursTypeResp
-	export function emptyRefPatchWorkingHoursTypeResp():Ref<PatchWorkingHoursTypeResp>
-	export function refOfPatchWorkingHoursTypeResp(x:PatchWorkingHoursTypeResp,v:Ref<PatchWorkingHoursTypeResp>)
-	export function unRefPatchWorkingHoursTypeResp(v:Ref<PatchWorkingHoursTypeResp>):PatchWorkingHoursTypeResp
-	export function emptyPatchJobFamilyRespData():PatchJobFamilyRespData
-	export function emptyRefPatchJobFamilyRespData():Ref<PatchJobFamilyRespData>
-	export function refOfPatchJobFamilyRespData(x:PatchJobFamilyRespData,v:Ref<PatchJobFamilyRespData>)
-	export function unRefPatchJobFamilyRespData(v:Ref<PatchJobFamilyRespData>):PatchJobFamilyRespData
-	export function emptyEmployeeDateType():EmployeeDateType
-	export function emptyRefEmployeeDateType():Ref<EmployeeDateType>
-	export function refOfEmployeeDateType(x:EmployeeDateType,v:Ref<EmployeeDateType>)
-	export function unRefEmployeeDateType(v:Ref<EmployeeDateType>):EmployeeDateType
-	export function emptyLeaveRequestDetail():LeaveRequestDetail
-	export function emptyRefLeaveRequestDetail():Ref<LeaveRequestDetail>
-	export function refOfLeaveRequestDetail(x:LeaveRequestDetail,v:Ref<LeaveRequestDetail>)
-	export function unRefLeaveRequestDetail(v:Ref<LeaveRequestDetail>):LeaveRequestDetail
-	export function emptyNationalId():NationalId
-	export function emptyRefNationalId():Ref<NationalId>
-	export function refOfNationalId(x:NationalId,v:Ref<NationalId>)
-	export function unRefNationalId(v:Ref<NationalId>):NationalId
-	export function emptyPreHire():PreHire
-	export function emptyRefPreHire():Ref<PreHire>
-	export function refOfPreHire(x:PreHire,v:Ref<PreHire>)
-	export function unRefPreHire(v:Ref<PreHire>):PreHire
-	export function emptyTransferReason():TransferReason
-	export function emptyRefTransferReason():Ref<TransferReason>
-	export function refOfTransferReason(x:TransferReason,v:Ref<TransferReason>)
-	export function unRefTransferReason(v:Ref<TransferReason>):TransferReason
-	export function emptyCreateContractReq():CreateContractReq
-	export function emptyRefCreateContractReq():Ref<CreateContractReq>
-	export function refOfCreateContractReq(x:CreateContractReq,v:Ref<CreateContractReq>)
-	export function unRefCreateContractReq(v:Ref<CreateContractReq>):CreateContractReq
-	export function emptyCreateNationalIdTypeResp():CreateNationalIdTypeResp
-	export function emptyRefCreateNationalIdTypeResp():Ref<CreateNationalIdTypeResp>
-	export function refOfCreateNationalIdTypeResp(x:CreateNationalIdTypeResp,v:Ref<CreateNationalIdTypeResp>)
-	export function unRefCreateNationalIdTypeResp(v:Ref<CreateNationalIdTypeResp>):CreateNationalIdTypeResp
-	export function emptyDeleteLocationResp():DeleteLocationResp
-	export function emptyRefDeleteLocationResp():Ref<DeleteLocationResp>
-	export function refOfDeleteLocationResp(x:DeleteLocationResp,v:Ref<DeleteLocationResp>)
-	export function unRefDeleteLocationResp(v:Ref<DeleteLocationResp>):DeleteLocationResp
-	export function emptyOffboarding():Offboarding
-	export function emptyRefOffboarding():Ref<Offboarding>
-	export function refOfOffboarding(x:Offboarding,v:Ref<Offboarding>)
-	export function unRefOffboarding(v:Ref<Offboarding>):Offboarding
-	export function emptySubmitOffboardingResp():SubmitOffboardingResp
-	export function emptyRefSubmitOffboardingResp():Ref<SubmitOffboardingResp>
-	export function refOfSubmitOffboardingResp(x:SubmitOffboardingResp,v:Ref<SubmitOffboardingResp>)
-	export function unRefSubmitOffboardingResp(v:Ref<SubmitOffboardingResp>):SubmitOffboardingResp
-	export function emptyListJobResp():ListJobResp
-	export function emptyRefListJobResp():Ref<ListJobResp>
-	export function refOfListJobResp(x:ListJobResp,v:Ref<ListJobResp>)
-	export function unRefListJobResp(v:Ref<ListJobResp>):ListJobResp
-	export function emptyP2JobDeletedV1Data():P2JobDeletedV1Data
-	export function emptyRefP2JobDeletedV1Data():Ref<P2JobDeletedV1Data>
-	export function refOfP2JobDeletedV1Data(x:P2JobDeletedV1Data,v:Ref<P2JobDeletedV1Data>)
-	export function unRefP2JobDeletedV1Data(v:Ref<P2JobDeletedV1Data>):P2JobDeletedV1Data
-	export function emptySubregion():Subregion
-	export function emptyRefSubregion():Ref<Subregion>
-	export function refOfSubregion(x:Subregion,v:Ref<Subregion>)
-	export function unRefSubregion(v:Ref<Subregion>):Subregion
-	export function emptyWkOption():WkOption
-	export function emptyRefWkOption():Ref<WkOption>
-	export function refOfWkOption(x:WkOption,v:Ref<WkOption>)
-	export function unRefWkOption(v:Ref<WkOption>):WkOption
-	export function emptyCreateEmployeeTypeReq():CreateEmployeeTypeReq
-	export function emptyRefCreateEmployeeTypeReq():Ref<CreateEmployeeTypeReq>
-	export function refOfCreateEmployeeTypeReq(x:CreateEmployeeTypeReq,v:Ref<CreateEmployeeTypeReq>)
-	export function unRefCreateEmployeeTypeReq(v:Ref<CreateEmployeeTypeReq>):CreateEmployeeTypeReq
-	export function emptyDeleteContractReq():DeleteContractReq
-	export function emptyRefDeleteContractReq():Ref<DeleteContractReq>
-	export function refOfDeleteContractReq(x:DeleteContractReq,v:Ref<DeleteContractReq>)
-	export function unRefDeleteContractReq(v:Ref<DeleteContractReq>):DeleteContractReq
-	export function emptyP2DepartmentDeletedV1():P2DepartmentDeletedV1
-	export function emptyRefP2DepartmentDeletedV1():Ref<P2DepartmentDeletedV1>
-	export function refOfP2DepartmentDeletedV1(x:P2DepartmentDeletedV1,v:Ref<P2DepartmentDeletedV1>)
-	export function unRefP2DepartmentDeletedV1(v:Ref<P2DepartmentDeletedV1>):P2DepartmentDeletedV1
-	export function emptyP2EmploymentDeletedV1():P2EmploymentDeletedV1
-	export function emptyRefP2EmploymentDeletedV1():Ref<P2EmploymentDeletedV1>
-	export function refOfP2EmploymentDeletedV1(x:P2EmploymentDeletedV1,v:Ref<P2EmploymentDeletedV1>)
-	export function unRefP2EmploymentDeletedV1(v:Ref<P2EmploymentDeletedV1>):P2EmploymentDeletedV1
-	export function emptySearchAssignedUserRespData():SearchAssignedUserRespData
-	export function emptyRefSearchAssignedUserRespData():Ref<SearchAssignedUserRespData>
-	export function refOfSearchAssignedUserRespData(x:SearchAssignedUserRespData,v:Ref<SearchAssignedUserRespData>)
-	export function unRefSearchAssignedUserRespData(v:Ref<SearchAssignedUserRespData>):SearchAssignedUserRespData
-	export function emptySearchOffboardingRespData():SearchOffboardingRespData
-	export function emptyRefSearchOffboardingRespData():Ref<SearchOffboardingRespData>
-	export function refOfSearchOffboardingRespData(x:SearchOffboardingRespData,v:Ref<SearchOffboardingRespData>)
-	export function unRefSearchOffboardingRespData(v:Ref<SearchOffboardingRespData>):SearchOffboardingRespData
-	export function emptyJobCategory():JobCategory
-	export function emptyRefJobCategory():Ref<JobCategory>
-	export function refOfJobCategory(x:JobCategory,v:Ref<JobCategory>)
-	export function unRefJobCategory(v:Ref<JobCategory>):JobCategory
-	export function emptyListSubregionResp():ListSubregionResp
-	export function emptyRefListSubregionResp():Ref<ListSubregionResp>
-	export function refOfListSubregionResp(x:ListSubregionResp,v:Ref<ListSubregionResp>)
-	export function unRefListSubregionResp(v:Ref<ListSubregionResp>):ListSubregionResp
-	export function emptySortOption():SortOption
-	export function emptyRefSortOption():Ref<SortOption>
-	export function refOfSortOption(x:SortOption,v:Ref<SortOption>)
-	export function unRefSortOption(v:Ref<SortOption>):SortOption
-	export function emptyQueryOffboardingRespData():QueryOffboardingRespData
-	export function emptyRefQueryOffboardingRespData():Ref<QueryOffboardingRespData>
-	export function refOfQueryOffboardingRespData(x:QueryOffboardingRespData,v:Ref<QueryOffboardingRespData>)
-	export function unRefQueryOffboardingRespData(v:Ref<QueryOffboardingRespData>):QueryOffboardingRespData
-	export function emptyBackgroundCheck():BackgroundCheck
-	export function emptyRefBackgroundCheck():Ref<BackgroundCheck>
-	export function refOfBackgroundCheck(x:BackgroundCheck,v:Ref<BackgroundCheck>)
-	export function unRefBackgroundCheck(v:Ref<BackgroundCheck>):BackgroundCheck
-	export function emptyCreateDepartmentRespData():CreateDepartmentRespData
-	export function emptyRefCreateDepartmentRespData():Ref<CreateDepartmentRespData>
-	export function refOfCreateDepartmentRespData(x:CreateDepartmentRespData,v:Ref<CreateDepartmentRespData>)
-	export function unRefCreateDepartmentRespData(v:Ref<CreateDepartmentRespData>):CreateDepartmentRespData
-	export function emptyCreateJobRespData():CreateJobRespData
-	export function emptyRefCreateJobRespData():Ref<CreateJobRespData>
-	export function refOfCreateJobRespData(x:CreateJobRespData,v:Ref<CreateJobRespData>)
-	export function unRefCreateJobRespData(v:Ref<CreateJobRespData>):CreateJobRespData
-	export function emptyGetCurrencyRespData():GetCurrencyRespData
-	export function emptyRefGetCurrencyRespData():Ref<GetCurrencyRespData>
-	export function refOfGetCurrencyRespData(x:GetCurrencyRespData,v:Ref<GetCurrencyRespData>)
-	export function unRefGetCurrencyRespData(v:Ref<GetCurrencyRespData>):GetCurrencyRespData
-	export function emptyP2EmploymentConvertedV1Data():P2EmploymentConvertedV1Data
-	export function emptyRefP2EmploymentConvertedV1Data():Ref<P2EmploymentConvertedV1Data>
-	export function refOfP2EmploymentConvertedV1Data(x:P2EmploymentConvertedV1Data,v:Ref<P2EmploymentConvertedV1Data>)
-	export function unRefP2EmploymentConvertedV1Data(v:Ref<P2EmploymentConvertedV1Data>):P2EmploymentConvertedV1Data
-	export function emptyGetContractResp():GetContractResp
-	export function emptyRefGetContractResp():Ref<GetContractResp>
-	export function refOfGetContractResp(x:GetContractResp,v:Ref<GetContractResp>)
-	export function unRefGetContractResp(v:Ref<GetContractResp>):GetContractResp
-	export function emptyPatchCompanyResp():PatchCompanyResp
-	export function emptyRefPatchCompanyResp():Ref<PatchCompanyResp>
-	export function refOfPatchCompanyResp(x:PatchCompanyResp,v:Ref<PatchCompanyResp>)
-	export function unRefPatchCompanyResp(v:Ref<PatchCompanyResp>):PatchCompanyResp
-	export function emptyCreateJobDataResp():CreateJobDataResp
-	export function emptyRefCreateJobDataResp():Ref<CreateJobDataResp>
-	export function refOfCreateJobDataResp(x:CreateJobDataResp,v:Ref<CreateJobDataResp>)
-	export function unRefCreateJobDataResp(v:Ref<CreateJobDataResp>):CreateJobDataResp
-	export function emptyListContractResp():ListContractResp
-	export function emptyRefListContractResp():Ref<ListContractResp>
-	export function refOfListContractResp(x:ListContractResp,v:Ref<ListContractResp>)
-	export function unRefListContractResp(v:Ref<ListContractResp>):ListContractResp
-	export function emptyUploadPersonReq():UploadPersonReq
-	export function emptyRefUploadPersonReq():Ref<UploadPersonReq>
-	export function refOfUploadPersonReq(x:UploadPersonReq,v:Ref<UploadPersonReq>)
-	export function unRefUploadPersonReq(v:Ref<UploadPersonReq>):UploadPersonReq
-	export function emptyQueryOffboardingResp():QueryOffboardingResp
-	export function emptyRefQueryOffboardingResp():Ref<QueryOffboardingResp>
-	export function refOfQueryOffboardingResp(x:QueryOffboardingResp,v:Ref<QueryOffboardingResp>)
-	export function unRefQueryOffboardingResp(v:Ref<QueryOffboardingResp>):QueryOffboardingResp
-	export function emptyP2JobCreatedV1():P2JobCreatedV1
-	export function emptyRefP2JobCreatedV1():Ref<P2JobCreatedV1>
-	export function refOfP2JobCreatedV1(x:P2JobCreatedV1,v:Ref<P2JobCreatedV1>)
-	export function unRefP2JobCreatedV1(v:Ref<P2JobCreatedV1>):P2JobCreatedV1
-	export function emptyCreateJobLevelReq():CreateJobLevelReq
-	export function emptyRefCreateJobLevelReq():Ref<CreateJobLevelReq>
-	export function refOfCreateJobLevelReq(x:CreateJobLevelReq,v:Ref<CreateJobLevelReq>)
-	export function unRefCreateJobLevelReq(v:Ref<CreateJobLevelReq>):CreateJobLevelReq
-	export function emptyCustomField():CustomField
-	export function emptyRefCustomField():Ref<CustomField>
-	export function refOfCustomField(x:CustomField,v:Ref<CustomField>)
-	export function unRefCustomField(v:Ref<CustomField>):CustomField
-	export function emptyListCurrencyRespData():ListCurrencyRespData
-	export function emptyRefListCurrencyRespData():Ref<ListCurrencyRespData>
-	export function refOfListCurrencyRespData(x:ListCurrencyRespData,v:Ref<ListCurrencyRespData>)
-	export function unRefListCurrencyRespData(v:Ref<ListCurrencyRespData>):ListCurrencyRespData
-	export function emptyListJobFamilyResp():ListJobFamilyResp
-	export function emptyRefListJobFamilyResp():Ref<ListJobFamilyResp>
-	export function refOfListJobFamilyResp(x:ListJobFamilyResp,v:Ref<ListJobFamilyResp>)
-	export function unRefListJobFamilyResp(v:Ref<ListJobFamilyResp>):ListJobFamilyResp
-	export function emptyListNationalIdTypeResp():ListNationalIdTypeResp
-	export function emptyRefListNationalIdTypeResp():Ref<ListNationalIdTypeResp>
-	export function refOfListNationalIdTypeResp(x:ListNationalIdTypeResp,v:Ref<ListNationalIdTypeResp>)
-	export function unRefListNationalIdTypeResp(v:Ref<ListNationalIdTypeResp>):ListNationalIdTypeResp
-	export function emptyCurrency():Currency
-	export function emptyRefCurrency():Ref<Currency>
-	export function refOfCurrency(x:Currency,v:Ref<Currency>)
-	export function unRefCurrency(v:Ref<Currency>):Currency
-	export function emptyGetWorkingHoursTypeResp():GetWorkingHoursTypeResp
-	export function emptyRefGetWorkingHoursTypeResp():Ref<GetWorkingHoursTypeResp>
-	export function refOfGetWorkingHoursTypeResp(x:GetWorkingHoursTypeResp,v:Ref<GetWorkingHoursTypeResp>)
-	export function unRefGetWorkingHoursTypeResp(v:Ref<GetWorkingHoursTypeResp>):GetWorkingHoursTypeResp
-	export function emptyListCurrencyReq():ListCurrencyReq
-	export function emptyRefListCurrencyReq():Ref<ListCurrencyReq>
-	export function refOfListCurrencyReq(x:ListCurrencyReq,v:Ref<ListCurrencyReq>)
-	export function unRefListCurrencyReq(v:Ref<ListCurrencyReq>):ListCurrencyReq
-	export function emptyP2PersonDeletedV1Data():P2PersonDeletedV1Data
-	export function emptyRefP2PersonDeletedV1Data():Ref<P2PersonDeletedV1Data>
-	export function refOfP2PersonDeletedV1Data(x:P2PersonDeletedV1Data,v:Ref<P2PersonDeletedV1Data>)
-	export function unRefP2PersonDeletedV1Data(v:Ref<P2PersonDeletedV1Data>):P2PersonDeletedV1Data
-	export function emptyDeleteLocationReq():DeleteLocationReq
-	export function emptyRefDeleteLocationReq():Ref<DeleteLocationReq>
-	export function refOfDeleteLocationReq(x:DeleteLocationReq,v:Ref<DeleteLocationReq>)
-	export function unRefDeleteLocationReq(v:Ref<DeleteLocationReq>):DeleteLocationReq
-	export function emptyDeletePersonReq():DeletePersonReq
-	export function emptyRefDeletePersonReq():Ref<DeletePersonReq>
-	export function refOfDeletePersonReq(x:DeletePersonReq,v:Ref<DeletePersonReq>)
-	export function unRefDeletePersonReq(v:Ref<DeletePersonReq>):DeletePersonReq
 	export function emptyGetCompanyReq():GetCompanyReq
 	export function emptyRefGetCompanyReq():Ref<GetCompanyReq>
 	export function refOfGetCompanyReq(x:GetCompanyReq,v:Ref<GetCompanyReq>)
 	export function unRefGetCompanyReq(v:Ref<GetCompanyReq>):GetCompanyReq
-	export function emptyGetCountryRegionReq():GetCountryRegionReq
-	export function emptyRefGetCountryRegionReq():Ref<GetCountryRegionReq>
-	export function refOfGetCountryRegionReq(x:GetCountryRegionReq,v:Ref<GetCountryRegionReq>)
-	export function unRefGetCountryRegionReq(v:Ref<GetCountryRegionReq>):GetCountryRegionReq
-	export function emptyMatchCompensationStandardRespData():MatchCompensationStandardRespData
-	export function emptyRefMatchCompensationStandardRespData():Ref<MatchCompensationStandardRespData>
-	export function refOfMatchCompensationStandardRespData(x:MatchCompensationStandardRespData,v:Ref<MatchCompensationStandardRespData>)
-	export function unRefMatchCompensationStandardRespData(v:Ref<MatchCompensationStandardRespData>):MatchCompensationStandardRespData
-	export function emptyWorkCalendarDetail():WorkCalendarDetail
-	export function emptyRefWorkCalendarDetail():Ref<WorkCalendarDetail>
-	export function refOfWorkCalendarDetail(x:WorkCalendarDetail,v:Ref<WorkCalendarDetail>)
-	export function unRefWorkCalendarDetail(v:Ref<WorkCalendarDetail>):WorkCalendarDetail
-	export function emptyCostCenterQuery():CostCenterQuery
-	export function emptyRefCostCenterQuery():Ref<CostCenterQuery>
-	export function refOfCostCenterQuery(x:CostCenterQuery,v:Ref<CostCenterQuery>)
-	export function unRefCostCenterQuery(v:Ref<CostCenterQuery>):CostCenterQuery
-	export function emptyCreateCompanyRespData():CreateCompanyRespData
-	export function emptyRefCreateCompanyRespData():Ref<CreateCompanyRespData>
-	export function refOfCreateCompanyRespData(x:CreateCompanyRespData,v:Ref<CreateCompanyRespData>)
-	export function unRefCreateCompanyRespData(v:Ref<CreateCompanyRespData>):CreateCompanyRespData
-	export function emptyGetJobDataRespData():GetJobDataRespData
-	export function emptyRefGetJobDataRespData():Ref<GetJobDataRespData>
-	export function refOfGetJobDataRespData(x:GetJobDataRespData,v:Ref<GetJobDataRespData>)
-	export function unRefGetJobDataRespData(v:Ref<GetJobDataRespData>):GetJobDataRespData
-	export function emptyP2ContractUpdatedV1():P2ContractUpdatedV1
-	export function emptyRefP2ContractUpdatedV1():Ref<P2ContractUpdatedV1>
-	export function refOfP2ContractUpdatedV1(x:P2ContractUpdatedV1,v:Ref<P2ContractUpdatedV1>)
-	export function unRefP2ContractUpdatedV1(v:Ref<P2ContractUpdatedV1>):P2ContractUpdatedV1
-	export function emptyP2OffboardingUpdatedV1Data():P2OffboardingUpdatedV1Data
-	export function emptyRefP2OffboardingUpdatedV1Data():Ref<P2OffboardingUpdatedV1Data>
-	export function refOfP2OffboardingUpdatedV1Data(x:P2OffboardingUpdatedV1Data,v:Ref<P2OffboardingUpdatedV1Data>)
-	export function unRefP2OffboardingUpdatedV1Data(v:Ref<P2OffboardingUpdatedV1Data>):P2OffboardingUpdatedV1Data
-	export function emptyGetJobFamilyResp():GetJobFamilyResp
-	export function emptyRefGetJobFamilyResp():Ref<GetJobFamilyResp>
-	export function refOfGetJobFamilyResp(x:GetJobFamilyResp,v:Ref<GetJobFamilyResp>)
-	export function unRefGetJobFamilyResp(v:Ref<GetJobFamilyResp>):GetJobFamilyResp
-	export function emptyListSecurityGroupRespData():ListSecurityGroupRespData
-	export function emptyRefListSecurityGroupRespData():Ref<ListSecurityGroupRespData>
-	export function refOfListSecurityGroupRespData(x:ListSecurityGroupRespData,v:Ref<ListSecurityGroupRespData>)
-	export function unRefListSecurityGroupRespData(v:Ref<ListSecurityGroupRespData>):ListSecurityGroupRespData
+	export function emptyCreateContractReq():CreateContractReq
+	export function emptyRefCreateContractReq():Ref<CreateContractReq>
+	export function refOfCreateContractReq(x:CreateContractReq,v:Ref<CreateContractReq>)
+	export function unRefCreateContractReq(v:Ref<CreateContractReq>):CreateContractReq
+	export function emptyPatchJobResp():PatchJobResp
+	export function emptyRefPatchJobResp():Ref<PatchJobResp>
+	export function refOfPatchJobResp(x:PatchJobResp,v:Ref<PatchJobResp>)
+	export function unRefPatchJobResp(v:Ref<PatchJobResp>):PatchJobResp
+	export function emptyQueryTransferTypeResp():QueryTransferTypeResp
+	export function emptyRefQueryTransferTypeResp():Ref<QueryTransferTypeResp>
+	export function refOfQueryTransferTypeResp(x:QueryTransferTypeResp,v:Ref<QueryTransferTypeResp>)
+	export function unRefQueryTransferTypeResp(v:Ref<QueryTransferTypeResp>):QueryTransferTypeResp
+	export function emptyListCountryRegionResp():ListCountryRegionResp
+	export function emptyRefListCountryRegionResp():Ref<ListCountryRegionResp>
+	export function refOfListCountryRegionResp(x:ListCountryRegionResp,v:Ref<ListCountryRegionResp>)
+	export function unRefListCountryRegionResp(v:Ref<ListCountryRegionResp>):ListCountryRegionResp
+	export function emptyCreateEmployeeTypeReq():CreateEmployeeTypeReq
+	export function emptyRefCreateEmployeeTypeReq():Ref<CreateEmployeeTypeReq>
+	export function refOfCreateEmployeeTypeReq(x:CreateEmployeeTypeReq,v:Ref<CreateEmployeeTypeReq>)
+	export function unRefCreateEmployeeTypeReq(v:Ref<CreateEmployeeTypeReq>):CreateEmployeeTypeReq
+	export function emptyLeaveRequest():LeaveRequest
+	export function emptyRefLeaveRequest():Ref<LeaveRequest>
+	export function refOfLeaveRequest(x:LeaveRequest,v:Ref<LeaveRequest>)
+	export function unRefLeaveRequest(v:Ref<LeaveRequest>):LeaveRequest
+	export function emptyNationalId():NationalId
+	export function emptyRefNationalId():Ref<NationalId>
+	export function refOfNationalId(x:NationalId,v:Ref<NationalId>)
+	export function unRefNationalId(v:Ref<NationalId>):NationalId
+	export function emptyOffboardingChecklist():OffboardingChecklist
+	export function emptyRefOffboardingChecklist():Ref<OffboardingChecklist>
+	export function refOfOffboardingChecklist(x:OffboardingChecklist,v:Ref<OffboardingChecklist>)
+	export function unRefOffboardingChecklist(v:Ref<OffboardingChecklist>):OffboardingChecklist
+	export function emptyPatchCompanyRespData():PatchCompanyRespData
+	export function emptyRefPatchCompanyRespData():Ref<PatchCompanyRespData>
+	export function refOfPatchCompanyRespData(x:PatchCompanyRespData,v:Ref<PatchCompanyRespData>)
+	export function unRefPatchCompanyRespData(v:Ref<PatchCompanyRespData>):PatchCompanyRespData
+	export function emptyQueryTransferReasonRespData():QueryTransferReasonRespData
+	export function emptyRefQueryTransferReasonRespData():Ref<QueryTransferReasonRespData>
+	export function refOfQueryTransferReasonRespData(x:QueryTransferReasonRespData,v:Ref<QueryTransferReasonRespData>)
+	export function unRefQueryTransferReasonRespData(v:Ref<QueryTransferReasonRespData>):QueryTransferReasonRespData
+	export function emptyName():Name
+	export function emptyRefName():Ref<Name>
+	export function refOfName(x:Name,v:Ref<Name>)
+	export function unRefName(v:Ref<Name>):Name
+	export function emptyAssignedOrganizationWithCode():AssignedOrganizationWithCode
+	export function emptyRefAssignedOrganizationWithCode():Ref<AssignedOrganizationWithCode>
+	export function refOfAssignedOrganizationWithCode(x:AssignedOrganizationWithCode,v:Ref<AssignedOrganizationWithCode>)
+	export function unRefAssignedOrganizationWithCode(v:Ref<AssignedOrganizationWithCode>):AssignedOrganizationWithCode
+	export function emptyOffboarding():Offboarding
+	export function emptyRefOffboarding():Ref<Offboarding>
+	export function refOfOffboarding(x:Offboarding,v:Ref<Offboarding>)
+	export function unRefOffboarding(v:Ref<Offboarding>):Offboarding
+	export function emptyListPreHireRespData():ListPreHireRespData
+	export function emptyRefListPreHireRespData():Ref<ListPreHireRespData>
+	export function refOfListPreHireRespData(x:ListPreHireRespData,v:Ref<ListPreHireRespData>)
+	export function unRefListPreHireRespData(v:Ref<ListPreHireRespData>):ListPreHireRespData
+	export function emptyFormFieldVariable():FormFieldVariable
+	export function emptyRefFormFieldVariable():Ref<FormFieldVariable>
+	export function refOfFormFieldVariable(x:FormFieldVariable,v:Ref<FormFieldVariable>)
+	export function unRefFormFieldVariable(v:Ref<FormFieldVariable>):FormFieldVariable
+	export function emptyAddRoleAssignAuthorizationReqBody():AddRoleAssignAuthorizationReqBody
+	export function emptyRefAddRoleAssignAuthorizationReqBody():Ref<AddRoleAssignAuthorizationReqBody>
+	export function refOfAddRoleAssignAuthorizationReqBody(x:AddRoleAssignAuthorizationReqBody,v:Ref<AddRoleAssignAuthorizationReqBody>)
+	export function unRefAddRoleAssignAuthorizationReqBody(v:Ref<AddRoleAssignAuthorizationReqBody>):AddRoleAssignAuthorizationReqBody
+	export function emptyListCurrencyRespData():ListCurrencyRespData
+	export function emptyRefListCurrencyRespData():Ref<ListCurrencyRespData>
+	export function refOfListCurrencyRespData(x:ListCurrencyRespData,v:Ref<ListCurrencyRespData>)
+	export function unRefListCurrencyRespData(v:Ref<ListCurrencyRespData>):ListCurrencyRespData
+	export function emptyPatchJobFamilyRespData():PatchJobFamilyRespData
+	export function emptyRefPatchJobFamilyRespData():Ref<PatchJobFamilyRespData>
+	export function refOfPatchJobFamilyRespData(x:PatchJobFamilyRespData,v:Ref<PatchJobFamilyRespData>)
+	export function unRefPatchJobFamilyRespData(v:Ref<PatchJobFamilyRespData>):PatchJobFamilyRespData
+	export function emptyConvertCommonDataIdRespData():ConvertCommonDataIdRespData
+	export function emptyRefConvertCommonDataIdRespData():Ref<ConvertCommonDataIdRespData>
+	export function refOfConvertCommonDataIdRespData(x:ConvertCommonDataIdRespData,v:Ref<ConvertCommonDataIdRespData>)
+	export function unRefConvertCommonDataIdRespData(v:Ref<ConvertCommonDataIdRespData>):ConvertCommonDataIdRespData
+	export function emptyDepartment():Department
+	export function emptyRefDepartment():Ref<Department>
+	export function refOfDepartment(x:Department,v:Ref<Department>)
+	export function unRefDepartment(v:Ref<Department>):Department
+	export function emptyQueryCustomFieldReq():QueryCustomFieldReq
+	export function emptyRefQueryCustomFieldReq():Ref<QueryCustomFieldReq>
+	export function refOfQueryCustomFieldReq(x:QueryCustomFieldReq,v:Ref<QueryCustomFieldReq>)
+	export function unRefQueryCustomFieldReq(v:Ref<QueryCustomFieldReq>):QueryCustomFieldReq
+	export function emptyLeaveTypesLeaveReq():LeaveTypesLeaveReq
+	export function emptyRefLeaveTypesLeaveReq():Ref<LeaveTypesLeaveReq>
+	export function refOfLeaveTypesLeaveReq(x:LeaveTypesLeaveReq,v:Ref<LeaveTypesLeaveReq>)
+	export function unRefLeaveTypesLeaveReq(v:Ref<LeaveTypesLeaveReq>):LeaveTypesLeaveReq
+	export function emptyCommonSchemaOption():CommonSchemaOption
+	export function emptyRefCommonSchemaOption():Ref<CommonSchemaOption>
+	export function refOfCommonSchemaOption(x:CommonSchemaOption,v:Ref<CommonSchemaOption>)
+	export function unRefCommonSchemaOption(v:Ref<CommonSchemaOption>):CommonSchemaOption
+	export function emptyJobCategory():JobCategory
+	export function emptyRefJobCategory():Ref<JobCategory>
+	export function refOfJobCategory(x:JobCategory,v:Ref<JobCategory>)
+	export function unRefJobCategory(v:Ref<JobCategory>):JobCategory
+	export function emptyUploadPersonRespData():UploadPersonRespData
+	export function emptyRefUploadPersonRespData():Ref<UploadPersonRespData>
+	export function refOfUploadPersonRespData(x:UploadPersonRespData,v:Ref<UploadPersonRespData>)
+	export function unRefUploadPersonRespData(v:Ref<UploadPersonRespData>):UploadPersonRespData
+	export function emptyDeleteWorkingHoursTypeResp():DeleteWorkingHoursTypeResp
+	export function emptyRefDeleteWorkingHoursTypeResp():Ref<DeleteWorkingHoursTypeResp>
+	export function refOfDeleteWorkingHoursTypeResp(x:DeleteWorkingHoursTypeResp,v:Ref<DeleteWorkingHoursTypeResp>)
+	export function unRefDeleteWorkingHoursTypeResp(v:Ref<DeleteWorkingHoursTypeResp>):DeleteWorkingHoursTypeResp
+	export function emptyListJobDataRespData():ListJobDataRespData
+	export function emptyRefListJobDataRespData():Ref<ListJobDataRespData>
+	export function refOfListJobDataRespData(x:ListJobDataRespData,v:Ref<ListJobDataRespData>)
+	export function unRefListJobDataRespData(v:Ref<ListJobDataRespData>):ListJobDataRespData
+	export function emptyListJobReq():ListJobReq
+	export function emptyRefListJobReq():Ref<ListJobReq>
+	export function refOfListJobReq(x:ListJobReq,v:Ref<ListJobReq>)
+	export function unRefListJobReq(v:Ref<ListJobReq>):ListJobReq
+	export function emptyGetCurrencyResp():GetCurrencyResp
+	export function emptyRefGetCurrencyResp():Ref<GetCurrencyResp>
+	export function refOfGetCurrencyResp(x:GetCurrencyResp,v:Ref<GetCurrencyResp>)
+	export function unRefGetCurrencyResp(v:Ref<GetCurrencyResp>):GetCurrencyResp
+	export function emptyGetEmployeeTypeResp():GetEmployeeTypeResp
+	export function emptyRefGetEmployeeTypeResp():Ref<GetEmployeeTypeResp>
+	export function refOfGetEmployeeTypeResp(x:GetEmployeeTypeResp,v:Ref<GetEmployeeTypeResp>)
+	export function unRefGetEmployeeTypeResp(v:Ref<GetEmployeeTypeResp>):GetEmployeeTypeResp
+	export function emptyEmploymentCostCenter():EmploymentCostCenter
+	export function emptyRefEmploymentCostCenter():Ref<EmploymentCostCenter>
+	export function refOfEmploymentCostCenter(x:EmploymentCostCenter,v:Ref<EmploymentCostCenter>)
+	export function unRefEmploymentCostCenter(v:Ref<EmploymentCostCenter>):EmploymentCostCenter
+	export function emptyGetPersonResp():GetPersonResp
+	export function emptyRefGetPersonResp():Ref<GetPersonResp>
+	export function refOfGetPersonResp(x:GetPersonResp,v:Ref<GetPersonResp>)
+	export function unRefGetPersonResp(v:Ref<GetPersonResp>):GetPersonResp
+	export function emptyAddEnumOptionCommonDataMetaDataResp():AddEnumOptionCommonDataMetaDataResp
+	export function emptyRefAddEnumOptionCommonDataMetaDataResp():Ref<AddEnumOptionCommonDataMetaDataResp>
+	export function refOfAddEnumOptionCommonDataMetaDataResp(x:AddEnumOptionCommonDataMetaDataResp,v:Ref<AddEnumOptionCommonDataMetaDataResp>)
+	export function unRefAddEnumOptionCommonDataMetaDataResp(v:Ref<AddEnumOptionCommonDataMetaDataResp>):AddEnumOptionCommonDataMetaDataResp
+	export function emptyGetJobLevelReq():GetJobLevelReq
+	export function emptyRefGetJobLevelReq():Ref<GetJobLevelReq>
+	export function refOfGetJobLevelReq(x:GetJobLevelReq,v:Ref<GetJobLevelReq>)
+	export function unRefGetJobLevelReq(v:Ref<GetJobLevelReq>):GetJobLevelReq
+	export function emptyListDepartmentRespData():ListDepartmentRespData
+	export function emptyRefListDepartmentRespData():Ref<ListDepartmentRespData>
+	export function refOfListDepartmentRespData(x:ListDepartmentRespData,v:Ref<ListDepartmentRespData>)
+	export function unRefListDepartmentRespData(v:Ref<ListDepartmentRespData>):ListDepartmentRespData
 	export function emptyListJobFamilyRespData():ListJobFamilyRespData
 	export function emptyRefListJobFamilyRespData():Ref<ListJobFamilyRespData>
 	export function refOfListJobFamilyRespData(x:ListJobFamilyRespData,v:Ref<ListJobFamilyRespData>)
 	export function unRefListJobFamilyRespData(v:Ref<ListJobFamilyRespData>):ListJobFamilyRespData
-	export function emptyListJobLevelRespData():ListJobLevelRespData
-	export function emptyRefListJobLevelRespData():Ref<ListJobLevelRespData>
-	export function refOfListJobLevelRespData(x:ListJobLevelRespData,v:Ref<ListJobLevelRespData>)
-	export function unRefListJobLevelRespData(v:Ref<ListJobLevelRespData>):ListJobLevelRespData
-	export function emptyListNationalIdTypeReq():ListNationalIdTypeReq
-	export function emptyRefListNationalIdTypeReq():Ref<ListNationalIdTypeReq>
-	export function refOfListNationalIdTypeReq(x:ListNationalIdTypeReq,v:Ref<ListNationalIdTypeReq>)
-	export function unRefListNationalIdTypeReq(v:Ref<ListNationalIdTypeReq>):ListNationalIdTypeReq
-	export function emptyPatchEmploymentResp():PatchEmploymentResp
-	export function emptyRefPatchEmploymentResp():Ref<PatchEmploymentResp>
-	export function refOfPatchEmploymentResp(x:PatchEmploymentResp,v:Ref<PatchEmploymentResp>)
-	export function unRefPatchEmploymentResp(v:Ref<PatchEmploymentResp>):PatchEmploymentResp
-	export function emptyCreateEmployeeTypeResp():CreateEmployeeTypeResp
-	export function emptyRefCreateEmployeeTypeResp():Ref<CreateEmployeeTypeResp>
-	export function refOfCreateEmployeeTypeResp(x:CreateEmployeeTypeResp,v:Ref<CreateEmployeeTypeResp>)
-	export function unRefCreateEmployeeTypeResp(v:Ref<CreateEmployeeTypeResp>):CreateEmployeeTypeResp
+	export function emptyGetJobRespData():GetJobRespData
+	export function emptyRefGetJobRespData():Ref<GetJobRespData>
+	export function refOfGetJobRespData(x:GetJobRespData,v:Ref<GetJobRespData>)
+	export function unRefGetJobRespData(v:Ref<GetJobRespData>):GetJobRespData
+	export function emptyGetPreHireRespData():GetPreHireRespData
+	export function emptyRefGetPreHireRespData():Ref<GetPreHireRespData>
+	export function refOfGetPreHireRespData(x:GetPreHireRespData,v:Ref<GetPreHireRespData>)
+	export function unRefGetPreHireRespData(v:Ref<GetPreHireRespData>):GetPreHireRespData
+	export function emptyTranferEmploymentInfo():TranferEmploymentInfo
+	export function emptyRefTranferEmploymentInfo():Ref<TranferEmploymentInfo>
+	export function refOfTranferEmploymentInfo(x:TranferEmploymentInfo,v:Ref<TranferEmploymentInfo>)
+	export function unRefTranferEmploymentInfo(v:Ref<TranferEmploymentInfo>):TranferEmploymentInfo
+	export function emptyP2DepartmentDeletedV1():P2DepartmentDeletedV1
+	export function emptyRefP2DepartmentDeletedV1():Ref<P2DepartmentDeletedV1>
+	export function refOfP2DepartmentDeletedV1(x:P2DepartmentDeletedV1,v:Ref<P2DepartmentDeletedV1>)
+	export function unRefP2DepartmentDeletedV1(v:Ref<P2DepartmentDeletedV1>):P2DepartmentDeletedV1
+	export function emptyP2PersonUpdatedV1():P2PersonUpdatedV1
+	export function emptyRefP2PersonUpdatedV1():Ref<P2PersonUpdatedV1>
+	export function refOfP2PersonUpdatedV1(x:P2PersonUpdatedV1,v:Ref<P2PersonUpdatedV1>)
+	export function unRefP2PersonUpdatedV1(v:Ref<P2PersonUpdatedV1>):P2PersonUpdatedV1
+	export function emptyDeleteContractReq():DeleteContractReq
+	export function emptyRefDeleteContractReq():Ref<DeleteContractReq>
+	export function refOfDeleteContractReq(x:DeleteContractReq,v:Ref<DeleteContractReq>)
+	export function unRefDeleteContractReq(v:Ref<DeleteContractReq>):DeleteContractReq
+	export function emptyListSubdivisionResp():ListSubdivisionResp
+	export function emptyRefListSubdivisionResp():Ref<ListSubdivisionResp>
+	export function refOfListSubdivisionResp(x:ListSubdivisionResp,v:Ref<ListSubdivisionResp>)
+	export function unRefListSubdivisionResp(v:Ref<ListSubdivisionResp>):ListSubdivisionResp
+	export function emptyP2EmploymentConvertedV1Data():P2EmploymentConvertedV1Data
+	export function emptyRefP2EmploymentConvertedV1Data():Ref<P2EmploymentConvertedV1Data>
+	export function refOfP2EmploymentConvertedV1Data(x:P2EmploymentConvertedV1Data,v:Ref<P2EmploymentConvertedV1Data>)
+	export function unRefP2EmploymentConvertedV1Data(v:Ref<P2EmploymentConvertedV1Data>):P2EmploymentConvertedV1Data
+	export function emptyP2PersonDeletedV1():P2PersonDeletedV1
+	export function emptyRefP2PersonDeletedV1():Ref<P2PersonDeletedV1>
+	export function refOfP2PersonDeletedV1(x:P2PersonDeletedV1,v:Ref<P2PersonDeletedV1>)
+	export function unRefP2PersonDeletedV1(v:Ref<P2PersonDeletedV1>):P2PersonDeletedV1
+	export function emptyQueryAuthorizationResp():QueryAuthorizationResp
+	export function emptyRefQueryAuthorizationResp():Ref<QueryAuthorizationResp>
+	export function refOfQueryAuthorizationResp(x:QueryAuthorizationResp,v:Ref<QueryAuthorizationResp>)
+	export function unRefQueryAuthorizationResp(v:Ref<QueryAuthorizationResp>):QueryAuthorizationResp
+	export function emptyGetContractReq():GetContractReq
+	export function emptyRefGetContractReq():Ref<GetContractReq>
+	export function refOfGetContractReq(x:GetContractReq,v:Ref<GetContractReq>)
+	export function unRefGetContractReq(v:Ref<GetContractReq>):GetContractReq
+	export function emptyGetNationalIdTypeResp():GetNationalIdTypeResp
+	export function emptyRefGetNationalIdTypeResp():Ref<GetNationalIdTypeResp>
+	export function refOfGetNationalIdTypeResp(x:GetNationalIdTypeResp,v:Ref<GetNationalIdTypeResp>)
+	export function unRefGetNationalIdTypeResp(v:Ref<GetNationalIdTypeResp>):GetNationalIdTypeResp
+	export function emptyGetSubregionResp():GetSubregionResp
+	export function emptyRefGetSubregionResp():Ref<GetSubregionResp>
+	export function refOfGetSubregionResp(x:GetSubregionResp,v:Ref<GetSubregionResp>)
+	export function unRefGetSubregionResp(v:Ref<GetSubregionResp>):GetSubregionResp
+	export function emptyListSubregionRespData():ListSubregionRespData
+	export function emptyRefListSubregionRespData():Ref<ListSubregionRespData>
+	export function refOfListSubregionRespData(x:ListSubregionRespData,v:Ref<ListSubregionRespData>)
+	export function unRefListSubregionRespData(v:Ref<ListSubregionRespData>):ListSubregionRespData
+	export function emptyP2JobDeletedV1():P2JobDeletedV1
+	export function emptyRefP2JobDeletedV1():Ref<P2JobDeletedV1>
+	export function refOfP2JobDeletedV1(x:P2JobDeletedV1,v:Ref<P2JobDeletedV1>)
+	export function unRefP2JobDeletedV1(v:Ref<P2JobDeletedV1>):P2JobDeletedV1
+	export function emptyPermissionDetail():PermissionDetail
+	export function emptyRefPermissionDetail():Ref<PermissionDetail>
+	export function refOfPermissionDetail(x:PermissionDetail,v:Ref<PermissionDetail>)
+	export function unRefPermissionDetail(v:Ref<PermissionDetail>):PermissionDetail
+	export function emptyUpdateRoleAssignAuthorizationReq():UpdateRoleAssignAuthorizationReq
+	export function emptyRefUpdateRoleAssignAuthorizationReq():Ref<UpdateRoleAssignAuthorizationReq>
+	export function refOfUpdateRoleAssignAuthorizationReq(x:UpdateRoleAssignAuthorizationReq,v:Ref<UpdateRoleAssignAuthorizationReq>)
+	export function unRefUpdateRoleAssignAuthorizationReq(v:Ref<UpdateRoleAssignAuthorizationReq>):UpdateRoleAssignAuthorizationReq
+	export function emptyWorkingHoursType():WorkingHoursType
+	export function emptyRefWorkingHoursType():Ref<WorkingHoursType>
+	export function refOfWorkingHoursType(x:WorkingHoursType,v:Ref<WorkingHoursType>)
+	export function unRefWorkingHoursType(v:Ref<WorkingHoursType>):WorkingHoursType
+	export function emptyPatchPreHireReq():PatchPreHireReq
+	export function emptyRefPatchPreHireReq():Ref<PatchPreHireReq>
+	export function refOfPatchPreHireReq(x:PatchPreHireReq,v:Ref<PatchPreHireReq>)
+	export function unRefPatchPreHireReq(v:Ref<PatchPreHireReq>):PatchPreHireReq
+	export function emptyDeleteNationalIdTypeReq():DeleteNationalIdTypeReq
+	export function emptyRefDeleteNationalIdTypeReq():Ref<DeleteNationalIdTypeReq>
+	export function refOfDeleteNationalIdTypeReq(x:DeleteNationalIdTypeReq,v:Ref<DeleteNationalIdTypeReq>)
+	export function unRefDeleteNationalIdTypeReq(v:Ref<DeleteNationalIdTypeReq>):DeleteNationalIdTypeReq
+	export function emptyBankAccount():BankAccount
+	export function emptyRefBankAccount():Ref<BankAccount>
+	export function refOfBankAccount(x:BankAccount,v:Ref<BankAccount>)
+	export function unRefBankAccount(v:Ref<BankAccount>):BankAccount
+	export function emptyFilterCondition():FilterCondition
+	export function emptyRefFilterCondition():Ref<FilterCondition>
+	export function refOfFilterCondition(x:FilterCondition,v:Ref<FilterCondition>)
+	export function unRefFilterCondition(v:Ref<FilterCondition>):FilterCondition
+	export function emptyPatchWorkingHoursTypeResp():PatchWorkingHoursTypeResp
+	export function emptyRefPatchWorkingHoursTypeResp():Ref<PatchWorkingHoursTypeResp>
+	export function refOfPatchWorkingHoursTypeResp(x:PatchWorkingHoursTypeResp,v:Ref<PatchWorkingHoursTypeResp>)
+	export function unRefPatchWorkingHoursTypeResp(v:Ref<PatchWorkingHoursTypeResp>):PatchWorkingHoursTypeResp
+	export function emptyDepartmentId():DepartmentId
+	export function emptyRefDepartmentId():Ref<DepartmentId>
+	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
+	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
+	export function emptyDepartmentCreate():DepartmentCreate
+	export function emptyRefDepartmentCreate():Ref<DepartmentCreate>
+	export function refOfDepartmentCreate(x:DepartmentCreate,v:Ref<DepartmentCreate>)
+	export function unRefDepartmentCreate(v:Ref<DepartmentCreate>):DepartmentCreate
+	export function emptyGetNationalIdTypeReq():GetNationalIdTypeReq
+	export function emptyRefGetNationalIdTypeReq():Ref<GetNationalIdTypeReq>
+	export function refOfGetNationalIdTypeReq(x:GetNationalIdTypeReq,v:Ref<GetNationalIdTypeReq>)
+	export function unRefGetNationalIdTypeReq(v:Ref<GetNationalIdTypeReq>):GetNationalIdTypeReq
+	export function emptyTemp():Temp
+	export function emptyRefTemp():Ref<Temp>
+	export function refOfTemp(x:Temp,v:Ref<Temp>)
+	export function unRefTemp(v:Ref<Temp>):Temp
+	export function emptyGetJobDataResp():GetJobDataResp
+	export function emptyRefGetJobDataResp():Ref<GetJobDataResp>
+	export function refOfGetJobDataResp(x:GetJobDataResp,v:Ref<GetJobDataResp>)
+	export function unRefGetJobDataResp(v:Ref<GetJobDataResp>):GetJobDataResp
+	export function emptyCreateLocationRespData():CreateLocationRespData
+	export function emptyRefCreateLocationRespData():Ref<CreateLocationRespData>
+	export function refOfCreateLocationRespData(x:CreateLocationRespData,v:Ref<CreateLocationRespData>)
+	export function unRefCreateLocationRespData(v:Ref<CreateLocationRespData>):CreateLocationRespData
+	export function emptyCreateWorkingHoursTypeResp():CreateWorkingHoursTypeResp
+	export function emptyRefCreateWorkingHoursTypeResp():Ref<CreateWorkingHoursTypeResp>
+	export function refOfCreateWorkingHoursTypeResp(x:CreateWorkingHoursTypeResp,v:Ref<CreateWorkingHoursTypeResp>)
+	export function unRefCreateWorkingHoursTypeResp(v:Ref<CreateWorkingHoursTypeResp>):CreateWorkingHoursTypeResp
+	export function emptyCreateEmploymentRespData():CreateEmploymentRespData
+	export function emptyRefCreateEmploymentRespData():Ref<CreateEmploymentRespData>
+	export function refOfCreateEmploymentRespData(x:CreateEmploymentRespData,v:Ref<CreateEmploymentRespData>)
+	export function unRefCreateEmploymentRespData(v:Ref<CreateEmploymentRespData>):CreateEmploymentRespData
+	export function emptyListSecurityGroupResp():ListSecurityGroupResp
+	export function emptyRefListSecurityGroupResp():Ref<ListSecurityGroupResp>
+	export function refOfListSecurityGroupResp(x:ListSecurityGroupResp,v:Ref<ListSecurityGroupResp>)
+	export function unRefListSecurityGroupResp(v:Ref<ListSecurityGroupResp>):ListSecurityGroupResp
+	export function emptyCpstBandWidth():CpstBandWidth
+	export function emptyRefCpstBandWidth():Ref<CpstBandWidth>
+	export function refOfCpstBandWidth(x:CpstBandWidth,v:Ref<CpstBandWidth>)
+	export function unRefCpstBandWidth(v:Ref<CpstBandWidth>):CpstBandWidth
+	export function emptyCreateNationalIdTypeResp():CreateNationalIdTypeResp
+	export function emptyRefCreateNationalIdTypeResp():Ref<CreateNationalIdTypeResp>
+	export function refOfCreateNationalIdTypeResp(x:CreateNationalIdTypeResp,v:Ref<CreateNationalIdTypeResp>)
+	export function unRefCreateNationalIdTypeResp(v:Ref<CreateNationalIdTypeResp>):CreateNationalIdTypeResp
+	export function emptyListCountryRegionRespData():ListCountryRegionRespData
+	export function emptyRefListCountryRegionRespData():Ref<ListCountryRegionRespData>
+	export function refOfListCountryRegionRespData(x:ListCountryRegionRespData,v:Ref<ListCountryRegionRespData>)
+	export function unRefListCountryRegionRespData(v:Ref<ListCountryRegionRespData>):ListCountryRegionRespData
+	export function emptyAddEnumOptionCommonDataMetaDataRespData():AddEnumOptionCommonDataMetaDataRespData
+	export function emptyRefAddEnumOptionCommonDataMetaDataRespData():Ref<AddEnumOptionCommonDataMetaDataRespData>
+	export function refOfAddEnumOptionCommonDataMetaDataRespData(x:AddEnumOptionCommonDataMetaDataRespData,v:Ref<AddEnumOptionCommonDataMetaDataRespData>)
+	export function unRefAddEnumOptionCommonDataMetaDataRespData(v:Ref<AddEnumOptionCommonDataMetaDataRespData>):AddEnumOptionCommonDataMetaDataRespData
+	export function emptyCreateCompanyRespData():CreateCompanyRespData
+	export function emptyRefCreateCompanyRespData():Ref<CreateCompanyRespData>
+	export function refOfCreateCompanyRespData(x:CreateCompanyRespData,v:Ref<CreateCompanyRespData>)
+	export function unRefCreateCompanyRespData(v:Ref<CreateCompanyRespData>):CreateCompanyRespData
+	export function emptyPatchEmploymentRespData():PatchEmploymentRespData
+	export function emptyRefPatchEmploymentRespData():Ref<PatchEmploymentRespData>
+	export function refOfPatchEmploymentRespData(x:PatchEmploymentRespData,v:Ref<PatchEmploymentRespData>)
+	export function unRefPatchEmploymentRespData(v:Ref<PatchEmploymentRespData>):PatchEmploymentRespData
+	export function emptyP2PersonCreatedV1Data():P2PersonCreatedV1Data
+	export function emptyRefP2PersonCreatedV1Data():Ref<P2PersonCreatedV1Data>
+	export function refOfP2PersonCreatedV1Data(x:P2PersonCreatedV1Data,v:Ref<P2PersonCreatedV1Data>)
+	export function unRefP2PersonCreatedV1Data(v:Ref<P2PersonCreatedV1Data>):P2PersonCreatedV1Data
+	export function emptyPatchWorkingHoursTypeRespData():PatchWorkingHoursTypeRespData
+	export function emptyRefPatchWorkingHoursTypeRespData():Ref<PatchWorkingHoursTypeRespData>
+	export function refOfPatchWorkingHoursTypeRespData(x:PatchWorkingHoursTypeRespData,v:Ref<PatchWorkingHoursTypeRespData>)
+	export function unRefPatchWorkingHoursTypeRespData(v:Ref<PatchWorkingHoursTypeRespData>):PatchWorkingHoursTypeRespData
+	export function emptyBpRoleOrganization():BpRoleOrganization
+	export function emptyRefBpRoleOrganization():Ref<BpRoleOrganization>
+	export function refOfBpRoleOrganization(x:BpRoleOrganization,v:Ref<BpRoleOrganization>)
+	export function unRefBpRoleOrganization(v:Ref<BpRoleOrganization>):BpRoleOrganization
+	export function emptyDeleteJobDataResp():DeleteJobDataResp
+	export function emptyRefDeleteJobDataResp():Ref<DeleteJobDataResp>
+	export function refOfDeleteJobDataResp(x:DeleteJobDataResp,v:Ref<DeleteJobDataResp>)
+	export function unRefDeleteJobDataResp(v:Ref<DeleteJobDataResp>):DeleteJobDataResp
+	export function emptyGetJobFamilyRespData():GetJobFamilyRespData
+	export function emptyRefGetJobFamilyRespData():Ref<GetJobFamilyRespData>
+	export function refOfGetJobFamilyRespData(x:GetJobFamilyRespData,v:Ref<GetJobFamilyRespData>)
+	export function unRefGetJobFamilyRespData(v:Ref<GetJobFamilyRespData>):GetJobFamilyRespData
+	export function emptyTextFieldSetting():TextFieldSetting
+	export function emptyRefTextFieldSetting():Ref<TextFieldSetting>
+	export function refOfTextFieldSetting(x:TextFieldSetting,v:Ref<TextFieldSetting>)
+	export function unRefTextFieldSetting(v:Ref<TextFieldSetting>):TextFieldSetting
+	export function emptyCreateCompanyResp():CreateCompanyResp
+	export function emptyRefCreateCompanyResp():Ref<CreateCompanyResp>
+	export function refOfCreateCompanyResp(x:CreateCompanyResp,v:Ref<CreateCompanyResp>)
+	export function unRefCreateCompanyResp(v:Ref<CreateCompanyResp>):CreateCompanyResp
+	export function emptyQueryCustomFieldRespData():QueryCustomFieldRespData
+	export function emptyRefQueryCustomFieldRespData():Ref<QueryCustomFieldRespData>
+	export function refOfQueryCustomFieldRespData(x:QueryCustomFieldRespData,v:Ref<QueryCustomFieldRespData>)
+	export function unRefQueryCustomFieldRespData(v:Ref<QueryCustomFieldRespData>):QueryCustomFieldRespData
+	export function emptySupportCostCenterItem():SupportCostCenterItem
+	export function emptyRefSupportCostCenterItem():Ref<SupportCostCenterItem>
+	export function refOfSupportCostCenterItem(x:SupportCostCenterItem,v:Ref<SupportCostCenterItem>)
+	export function unRefSupportCostCenterItem(v:Ref<SupportCostCenterItem>):SupportCostCenterItem
+	export function emptyFormVariableValueInfo():FormVariableValueInfo
+	export function emptyRefFormVariableValueInfo():Ref<FormVariableValueInfo>
+	export function refOfFormVariableValueInfo(x:FormVariableValueInfo,v:Ref<FormVariableValueInfo>)
+	export function unRefFormVariableValueInfo(v:Ref<FormVariableValueInfo>):FormVariableValueInfo
+	export function emptySubmitOffboardingReqBody():SubmitOffboardingReqBody
+	export function emptyRefSubmitOffboardingReqBody():Ref<SubmitOffboardingReqBody>
+	export function refOfSubmitOffboardingReqBody(x:SubmitOffboardingReqBody,v:Ref<SubmitOffboardingReqBody>)
+	export function unRefSubmitOffboardingReqBody(v:Ref<SubmitOffboardingReqBody>):SubmitOffboardingReqBody
+	export function emptyWorkCalendarDetail():WorkCalendarDetail
+	export function emptyRefWorkCalendarDetail():Ref<WorkCalendarDetail>
+	export function refOfWorkCalendarDetail(x:WorkCalendarDetail,v:Ref<WorkCalendarDetail>)
+	export function unRefWorkCalendarDetail(v:Ref<WorkCalendarDetail>):WorkCalendarDetail
+	export function emptyConvertCommonDataIdResp():ConvertCommonDataIdResp
+	export function emptyRefConvertCommonDataIdResp():Ref<ConvertCommonDataIdResp>
+	export function refOfConvertCommonDataIdResp(x:ConvertCommonDataIdResp,v:Ref<ConvertCommonDataIdResp>)
+	export function unRefConvertCommonDataIdResp(v:Ref<ConvertCommonDataIdResp>):ConvertCommonDataIdResp
+	export function emptyCustomField():CustomField
+	export function emptyRefCustomField():Ref<CustomField>
+	export function refOfCustomField(x:CustomField,v:Ref<CustomField>)
+	export function unRefCustomField(v:Ref<CustomField>):CustomField
+	export function emptyUpdateRoleAssignAuthorizationReqBody():UpdateRoleAssignAuthorizationReqBody
+	export function emptyRefUpdateRoleAssignAuthorizationReqBody():Ref<UpdateRoleAssignAuthorizationReqBody>
+	export function refOfUpdateRoleAssignAuthorizationReqBody(x:UpdateRoleAssignAuthorizationReqBody,v:Ref<UpdateRoleAssignAuthorizationReqBody>)
+	export function unRefUpdateRoleAssignAuthorizationReqBody(v:Ref<UpdateRoleAssignAuthorizationReqBody>):UpdateRoleAssignAuthorizationReqBody
+	export function emptyFormFieldVariableDepartmentValue():FormFieldVariableDepartmentValue
+	export function emptyRefFormFieldVariableDepartmentValue():Ref<FormFieldVariableDepartmentValue>
+	export function refOfFormFieldVariableDepartmentValue(x:FormFieldVariableDepartmentValue,v:Ref<FormFieldVariableDepartmentValue>)
+	export function unRefFormFieldVariableDepartmentValue(v:Ref<FormFieldVariableDepartmentValue>):FormFieldVariableDepartmentValue
+	export function emptyListContractResp():ListContractResp
+	export function emptyRefListContractResp():Ref<ListContractResp>
+	export function refOfListContractResp(x:ListContractResp,v:Ref<ListContractResp>)
+	export function unRefListContractResp(v:Ref<ListContractResp>):ListContractResp
+	export function emptyQueryTransferTypeRespData():QueryTransferTypeRespData
+	export function emptyRefQueryTransferTypeRespData():Ref<QueryTransferTypeRespData>
+	export function refOfQueryTransferTypeRespData(x:QueryTransferTypeRespData,v:Ref<QueryTransferTypeRespData>)
+	export function unRefQueryTransferTypeRespData(v:Ref<QueryTransferTypeRespData>):QueryTransferTypeRespData
+	export function emptyUploadPersonReq():UploadPersonReq
+	export function emptyRefUploadPersonReq():Ref<UploadPersonReq>
+	export function refOfUploadPersonReq(x:UploadPersonReq,v:Ref<UploadPersonReq>)
+	export function unRefUploadPersonReq(v:Ref<UploadPersonReq>):UploadPersonReq
+	export function emptyWkCalendarI18n():WkCalendarI18n
+	export function emptyRefWkCalendarI18n():Ref<WkCalendarI18n>
+	export function refOfWkCalendarI18n(x:WkCalendarI18n,v:Ref<WkCalendarI18n>)
+	export function unRefWkCalendarI18n(v:Ref<WkCalendarI18n>):WkCalendarI18n
+	export function emptyAddEnumOptionCommonDataMetaDataReq():AddEnumOptionCommonDataMetaDataReq
+	export function emptyRefAddEnumOptionCommonDataMetaDataReq():Ref<AddEnumOptionCommonDataMetaDataReq>
+	export function refOfAddEnumOptionCommonDataMetaDataReq(x:AddEnumOptionCommonDataMetaDataReq,v:Ref<AddEnumOptionCommonDataMetaDataReq>)
+	export function unRefAddEnumOptionCommonDataMetaDataReq(v:Ref<AddEnumOptionCommonDataMetaDataReq>):AddEnumOptionCommonDataMetaDataReq
+	export function emptyManagementScope():ManagementScope
+	export function emptyRefManagementScope():Ref<ManagementScope>
+	export function refOfManagementScope(x:ManagementScope,v:Ref<ManagementScope>)
+	export function unRefManagementScope(v:Ref<ManagementScope>):ManagementScope
+	export function emptyP2JobChangeUpdatedV1():P2JobChangeUpdatedV1
+	export function emptyRefP2JobChangeUpdatedV1():Ref<P2JobChangeUpdatedV1>
+	export function refOfP2JobChangeUpdatedV1(x:P2JobChangeUpdatedV1,v:Ref<P2JobChangeUpdatedV1>)
+	export function unRefP2JobChangeUpdatedV1(v:Ref<P2JobChangeUpdatedV1>):P2JobChangeUpdatedV1
+	export function emptyPatchEmployeeTypeResp():PatchEmployeeTypeResp
+	export function emptyRefPatchEmployeeTypeResp():Ref<PatchEmployeeTypeResp>
+	export function refOfPatchEmployeeTypeResp(x:PatchEmployeeTypeResp,v:Ref<PatchEmployeeTypeResp>)
+	export function unRefPatchEmployeeTypeResp(v:Ref<PatchEmployeeTypeResp>):PatchEmployeeTypeResp
+	export function emptySearchOffboardingRespData():SearchOffboardingRespData
+	export function emptyRefSearchOffboardingRespData():Ref<SearchOffboardingRespData>
+	export function refOfSearchOffboardingRespData(x:SearchOffboardingRespData,v:Ref<SearchOffboardingRespData>)
+	export function unRefSearchOffboardingRespData(v:Ref<SearchOffboardingRespData>):SearchOffboardingRespData
+	export function emptyUpdateRoleAssignAuthorizationResp():UpdateRoleAssignAuthorizationResp
+	export function emptyRefUpdateRoleAssignAuthorizationResp():Ref<UpdateRoleAssignAuthorizationResp>
+	export function refOfUpdateRoleAssignAuthorizationResp(x:UpdateRoleAssignAuthorizationResp,v:Ref<UpdateRoleAssignAuthorizationResp>)
+	export function unRefUpdateRoleAssignAuthorizationResp(v:Ref<UpdateRoleAssignAuthorizationResp>):UpdateRoleAssignAuthorizationResp
+	export function emptyDeletePersonResp():DeletePersonResp
+	export function emptyRefDeletePersonResp():Ref<DeletePersonResp>
+	export function refOfDeletePersonResp(x:DeletePersonResp,v:Ref<DeletePersonResp>)
+	export function unRefDeletePersonResp(v:Ref<DeletePersonResp>):DeletePersonResp
+	export function emptyLeaveRequestDetail():LeaveRequestDetail
+	export function emptyRefLeaveRequestDetail():Ref<LeaveRequestDetail>
+	export function refOfLeaveRequestDetail(x:LeaveRequestDetail,v:Ref<LeaveRequestDetail>)
+	export function unRefLeaveRequestDetail(v:Ref<LeaveRequestDetail>):LeaveRequestDetail
+	export function emptySearchOffboardingIterator():SearchOffboardingIterator
+	export function emptyRefSearchOffboardingIterator():Ref<SearchOffboardingIterator>
+	export function refOfSearchOffboardingIterator(x:SearchOffboardingIterator,v:Ref<SearchOffboardingIterator>)
+	export function unRefSearchOffboardingIterator(v:Ref<SearchOffboardingIterator>):SearchOffboardingIterator
+	export function emptyMatchCompensationStandardReq():MatchCompensationStandardReq
+	export function emptyRefMatchCompensationStandardReq():Ref<MatchCompensationStandardReq>
+	export function refOfMatchCompensationStandardReq(x:MatchCompensationStandardReq,v:Ref<MatchCompensationStandardReq>)
+	export function unRefMatchCompensationStandardReq(v:Ref<MatchCompensationStandardReq>):MatchCompensationStandardReq
+	export function emptyCreateLeaveGrantingRecordResp():CreateLeaveGrantingRecordResp
+	export function emptyRefCreateLeaveGrantingRecordResp():Ref<CreateLeaveGrantingRecordResp>
+	export function refOfCreateLeaveGrantingRecordResp(x:CreateLeaveGrantingRecordResp,v:Ref<CreateLeaveGrantingRecordResp>)
+	export function unRefCreateLeaveGrantingRecordResp(v:Ref<CreateLeaveGrantingRecordResp>):CreateLeaveGrantingRecordResp
+	export function emptyRemoveRoleAssignAuthorizationResp():RemoveRoleAssignAuthorizationResp
+	export function emptyRefRemoveRoleAssignAuthorizationResp():Ref<RemoveRoleAssignAuthorizationResp>
+	export function refOfRemoveRoleAssignAuthorizationResp(x:RemoveRoleAssignAuthorizationResp,v:Ref<RemoveRoleAssignAuthorizationResp>)
+	export function unRefRemoveRoleAssignAuthorizationResp(v:Ref<RemoveRoleAssignAuthorizationResp>):RemoveRoleAssignAuthorizationResp
+	export function emptyP2EmploymentCreatedV1Data():P2EmploymentCreatedV1Data
+	export function emptyRefP2EmploymentCreatedV1Data():Ref<P2EmploymentCreatedV1Data>
+	export function refOfP2EmploymentCreatedV1Data(x:P2EmploymentCreatedV1Data,v:Ref<P2EmploymentCreatedV1Data>)
+	export function unRefP2EmploymentCreatedV1Data(v:Ref<P2EmploymentCreatedV1Data>):P2EmploymentCreatedV1Data
+	export function emptyCpstGrade():CpstGrade
+	export function emptyRefCpstGrade():Ref<CpstGrade>
+	export function refOfCpstGrade(x:CpstGrade,v:Ref<CpstGrade>)
+	export function unRefCpstGrade(v:Ref<CpstGrade>):CpstGrade
+	export function emptyCreateEmployeeTypeRespData():CreateEmployeeTypeRespData
+	export function emptyRefCreateEmployeeTypeRespData():Ref<CreateEmployeeTypeRespData>
+	export function refOfCreateEmployeeTypeRespData(x:CreateEmployeeTypeRespData,v:Ref<CreateEmployeeTypeRespData>)
+	export function unRefCreateEmployeeTypeRespData(v:Ref<CreateEmployeeTypeRespData>):CreateEmployeeTypeRespData
+	export function emptyFormFieldVariableDateValue():FormFieldVariableDateValue
+	export function emptyRefFormFieldVariableDateValue():Ref<FormFieldVariableDateValue>
+	export function refOfFormFieldVariableDateValue(x:FormFieldVariableDateValue,v:Ref<FormFieldVariableDateValue>)
+	export function unRefFormFieldVariableDateValue(v:Ref<FormFieldVariableDateValue>):FormFieldVariableDateValue
+	export function emptyP2DepartmentUpdatedV1Data():P2DepartmentUpdatedV1Data
+	export function emptyRefP2DepartmentUpdatedV1Data():Ref<P2DepartmentUpdatedV1Data>
+	export function refOfP2DepartmentUpdatedV1Data(x:P2DepartmentUpdatedV1Data,v:Ref<P2DepartmentUpdatedV1Data>)
+	export function unRefP2DepartmentUpdatedV1Data(v:Ref<P2DepartmentUpdatedV1Data>):P2DepartmentUpdatedV1Data
+	export function emptyBackgroundCheckCountry():BackgroundCheckCountry
+	export function emptyRefBackgroundCheckCountry():Ref<BackgroundCheckCountry>
+	export function refOfBackgroundCheckCountry(x:BackgroundCheckCountry,v:Ref<BackgroundCheckCountry>)
+	export function unRefBackgroundCheckCountry(v:Ref<BackgroundCheckCountry>):BackgroundCheckCountry
+	export function emptyCreateContractResp():CreateContractResp
+	export function emptyRefCreateContractResp():Ref<CreateContractResp>
+	export function refOfCreateContractResp(x:CreateContractResp,v:Ref<CreateContractResp>)
+	export function unRefCreateContractResp(v:Ref<CreateContractResp>):CreateContractResp
+	export function emptyCreateWorkingHoursTypeReq():CreateWorkingHoursTypeReq
+	export function emptyRefCreateWorkingHoursTypeReq():Ref<CreateWorkingHoursTypeReq>
+	export function refOfCreateWorkingHoursTypeReq(x:CreateWorkingHoursTypeReq,v:Ref<CreateWorkingHoursTypeReq>)
+	export function unRefCreateWorkingHoursTypeReq(v:Ref<CreateWorkingHoursTypeReq>):CreateWorkingHoursTypeReq
+	export function emptyPatchPreHireRespData():PatchPreHireRespData
+	export function emptyRefPatchPreHireRespData():Ref<PatchPreHireRespData>
+	export function refOfPatchPreHireRespData(x:PatchPreHireRespData,v:Ref<PatchPreHireRespData>)
+	export function unRefPatchPreHireRespData(v:Ref<PatchPreHireRespData>):PatchPreHireRespData
+	export function emptyCpstMatchItem():CpstMatchItem
+	export function emptyRefCpstMatchItem():Ref<CpstMatchItem>
+	export function refOfCpstMatchItem(x:CpstMatchItem,v:Ref<CpstMatchItem>)
+	export function unRefCpstMatchItem(v:Ref<CpstMatchItem>):CpstMatchItem
+	export function emptyCreateJobRespData():CreateJobRespData
+	export function emptyRefCreateJobRespData():Ref<CreateJobRespData>
+	export function refOfCreateJobRespData(x:CreateJobRespData,v:Ref<CreateJobRespData>)
+	export function unRefCreateJobRespData(v:Ref<CreateJobRespData>):CreateJobRespData
+	export function emptyGetByParamCustomFieldReq():GetByParamCustomFieldReq
+	export function emptyRefGetByParamCustomFieldReq():Ref<GetByParamCustomFieldReq>
+	export function refOfGetByParamCustomFieldReq(x:GetByParamCustomFieldReq,v:Ref<GetByParamCustomFieldReq>)
+	export function unRefGetByParamCustomFieldReq(v:Ref<GetByParamCustomFieldReq>):GetByParamCustomFieldReq
+	export function emptyListCompanyResp():ListCompanyResp
+	export function emptyRefListCompanyResp():Ref<ListCompanyResp>
+	export function refOfListCompanyResp(x:ListCompanyResp,v:Ref<ListCompanyResp>)
+	export function unRefListCompanyResp(v:Ref<ListCompanyResp>):ListCompanyResp
+	export function emptyP2PersonCreatedV1():P2PersonCreatedV1
+	export function emptyRefP2PersonCreatedV1():Ref<P2PersonCreatedV1>
+	export function refOfP2PersonCreatedV1(x:P2PersonCreatedV1,v:Ref<P2PersonCreatedV1>)
+	export function unRefP2PersonCreatedV1(v:Ref<P2PersonCreatedV1>):P2PersonCreatedV1
+	export function emptyP2DepartmentUpdatedV1():P2DepartmentUpdatedV1
+	export function emptyRefP2DepartmentUpdatedV1():Ref<P2DepartmentUpdatedV1>
+	export function refOfP2DepartmentUpdatedV1(x:P2DepartmentUpdatedV1,v:Ref<P2DepartmentUpdatedV1>)
+	export function unRefP2DepartmentUpdatedV1(v:Ref<P2DepartmentUpdatedV1>):P2DepartmentUpdatedV1
+	export function emptyPatchJobLevelResp():PatchJobLevelResp
+	export function emptyRefPatchJobLevelResp():Ref<PatchJobLevelResp>
+	export function refOfPatchJobLevelResp(x:PatchJobLevelResp,v:Ref<PatchJobLevelResp>)
+	export function unRefPatchJobLevelResp(v:Ref<PatchJobLevelResp>):PatchJobLevelResp
+	export function emptyWorkCalendarFilter():WorkCalendarFilter
+	export function emptyRefWorkCalendarFilter():Ref<WorkCalendarFilter>
+	export function refOfWorkCalendarFilter(x:WorkCalendarFilter,v:Ref<WorkCalendarFilter>)
+	export function unRefWorkCalendarFilter(v:Ref<WorkCalendarFilter>):WorkCalendarFilter
+	export function emptyGetDepartmentRespData():GetDepartmentRespData
+	export function emptyRefGetDepartmentRespData():Ref<GetDepartmentRespData>
+	export function refOfGetDepartmentRespData(x:GetDepartmentRespData,v:Ref<GetDepartmentRespData>)
+	export function unRefGetDepartmentRespData(v:Ref<GetDepartmentRespData>):GetDepartmentRespData
+	export function emptyP2JobChangeUpdatedV1Data():P2JobChangeUpdatedV1Data
+	export function emptyRefP2JobChangeUpdatedV1Data():Ref<P2JobChangeUpdatedV1Data>
+	export function refOfP2JobChangeUpdatedV1Data(x:P2JobChangeUpdatedV1Data,v:Ref<P2JobChangeUpdatedV1Data>)
+	export function unRefP2JobChangeUpdatedV1Data(v:Ref<P2JobChangeUpdatedV1Data>):P2JobChangeUpdatedV1Data
+	export function emptyGetPersonReq():GetPersonReq
+	export function emptyRefGetPersonReq():Ref<GetPersonReq>
+	export function refOfGetPersonReq(x:GetPersonReq,v:Ref<GetPersonReq>)
+	export function unRefGetPersonReq(v:Ref<GetPersonReq>):GetPersonReq
+	export function emptyPatchJobRespData():PatchJobRespData
+	export function emptyRefPatchJobRespData():Ref<PatchJobRespData>
+	export function refOfPatchJobRespData(x:PatchJobRespData,v:Ref<PatchJobRespData>)
+	export function unRefPatchJobRespData(v:Ref<PatchJobRespData>):PatchJobRespData
+	export function emptyApplicationInfo():ApplicationInfo
+	export function emptyRefApplicationInfo():Ref<ApplicationInfo>
+	export function refOfApplicationInfo(x:ApplicationInfo,v:Ref<ApplicationInfo>)
+	export function unRefApplicationInfo(v:Ref<ApplicationInfo>):ApplicationInfo
+	export function emptyGetJobDataReq():GetJobDataReq
+	export function emptyRefGetJobDataReq():Ref<GetJobDataReq>
+	export function refOfGetJobDataReq(x:GetJobDataReq,v:Ref<GetJobDataReq>)
+	export function unRefGetJobDataReq(v:Ref<GetJobDataReq>):GetJobDataReq
+	export function emptySubmitOffboardingRespData():SubmitOffboardingRespData
+	export function emptyRefSubmitOffboardingRespData():Ref<SubmitOffboardingRespData>
+	export function refOfSubmitOffboardingRespData(x:SubmitOffboardingRespData,v:Ref<SubmitOffboardingRespData>)
+	export function unRefSubmitOffboardingRespData(v:Ref<SubmitOffboardingRespData>):SubmitOffboardingRespData
+	export function emptyGetEmployeeTypeReq():GetEmployeeTypeReq
+	export function emptyRefGetEmployeeTypeReq():Ref<GetEmployeeTypeReq>
+	export function refOfGetEmployeeTypeReq(x:GetEmployeeTypeReq,v:Ref<GetEmployeeTypeReq>)
+	export function unRefGetEmployeeTypeReq(v:Ref<GetEmployeeTypeReq>):GetEmployeeTypeReq
+	export function emptyConvertCommonDataIdReq():ConvertCommonDataIdReq
+	export function emptyRefConvertCommonDataIdReq():Ref<ConvertCommonDataIdReq>
+	export function refOfConvertCommonDataIdReq(x:ConvertCommonDataIdReq,v:Ref<ConvertCommonDataIdReq>)
+	export function unRefConvertCommonDataIdReq(v:Ref<ConvertCommonDataIdReq>):ConvertCommonDataIdReq
+	export function emptyCustomFieldData():CustomFieldData
+	export function emptyRefCustomFieldData():Ref<CustomFieldData>
+	export function refOfCustomFieldData(x:CustomFieldData,v:Ref<CustomFieldData>)
+	export function unRefCustomFieldData(v:Ref<CustomFieldData>):CustomFieldData
+	export function emptyEnum():Enum
+	export function emptyRefEnum():Ref<Enum>
+	export function refOfEnum(x:Enum,v:Ref<Enum>)
+	export function unRefEnum(v:Ref<Enum>):Enum
+	export function emptyFormFieldVariableFileValue():FormFieldVariableFileValue
+	export function emptyRefFormFieldVariableFileValue():Ref<FormFieldVariableFileValue>
+	export function refOfFormFieldVariableFileValue(x:FormFieldVariableFileValue,v:Ref<FormFieldVariableFileValue>)
+	export function unRefFormFieldVariableFileValue(v:Ref<FormFieldVariableFileValue>):FormFieldVariableFileValue
+	export function emptyEnumFieldOption():EnumFieldOption
+	export function emptyRefEnumFieldOption():Ref<EnumFieldOption>
+	export function refOfEnumFieldOption(x:EnumFieldOption,v:Ref<EnumFieldOption>)
+	export function unRefEnumFieldOption(v:Ref<EnumFieldOption>):EnumFieldOption
+	export function emptyFormFieldVariableEnumValue():FormFieldVariableEnumValue
+	export function emptyRefFormFieldVariableEnumValue():Ref<FormFieldVariableEnumValue>
+	export function refOfFormFieldVariableEnumValue(x:FormFieldVariableEnumValue,v:Ref<FormFieldVariableEnumValue>)
+	export function unRefFormFieldVariableEnumValue(v:Ref<FormFieldVariableEnumValue>):FormFieldVariableEnumValue
+	export function emptyListDepartmentResp():ListDepartmentResp
+	export function emptyRefListDepartmentResp():Ref<ListDepartmentResp>
+	export function refOfListDepartmentResp(x:ListDepartmentResp,v:Ref<ListDepartmentResp>)
+	export function unRefListDepartmentResp(v:Ref<ListDepartmentResp>):ListDepartmentResp
+	export function emptyCountryRegion():CountryRegion
+	export function emptyRefCountryRegion():Ref<CountryRegion>
+	export function refOfCountryRegion(x:CountryRegion,v:Ref<CountryRegion>)
+	export function unRefCountryRegion(v:Ref<CountryRegion>):CountryRegion
+	export function emptyP2EmploymentUpdatedV1():P2EmploymentUpdatedV1
+	export function emptyRefP2EmploymentUpdatedV1():Ref<P2EmploymentUpdatedV1>
+	export function refOfP2EmploymentUpdatedV1(x:P2EmploymentUpdatedV1,v:Ref<P2EmploymentUpdatedV1>)
+	export function unRefP2EmploymentUpdatedV1(v:Ref<P2EmploymentUpdatedV1>):P2EmploymentUpdatedV1
+	export function emptySearchOffboardingReqBody():SearchOffboardingReqBody
+	export function emptyRefSearchOffboardingReqBody():Ref<SearchOffboardingReqBody>
+	export function refOfSearchOffboardingReqBody(x:SearchOffboardingReqBody,v:Ref<SearchOffboardingReqBody>)
+	export function unRefSearchOffboardingReqBody(v:Ref<SearchOffboardingReqBody>):SearchOffboardingReqBody
+	export function emptyTransferType():TransferType
+	export function emptyRefTransferType():Ref<TransferType>
+	export function refOfTransferType(x:TransferType,v:Ref<TransferType>)
+	export function unRefTransferType(v:Ref<TransferType>):TransferType
+	export function emptyDeleteLocationResp():DeleteLocationResp
+	export function emptyRefDeleteLocationResp():Ref<DeleteLocationResp>
+	export function refOfDeleteLocationResp(x:DeleteLocationResp,v:Ref<DeleteLocationResp>)
+	export function unRefDeleteLocationResp(v:Ref<DeleteLocationResp>):DeleteLocationResp
+	export function emptyFormFieldVariableListValue():FormFieldVariableListValue
+	export function emptyRefFormFieldVariableListValue():Ref<FormFieldVariableListValue>
+	export function refOfFormFieldVariableListValue(x:FormFieldVariableListValue,v:Ref<FormFieldVariableListValue>)
+	export function unRefFormFieldVariableListValue(v:Ref<FormFieldVariableListValue>):FormFieldVariableListValue
 	export function emptyLookupFieldSetting():LookupFieldSetting
 	export function emptyRefLookupFieldSetting():Ref<LookupFieldSetting>
 	export function refOfLookupFieldSetting(x:LookupFieldSetting,v:Ref<LookupFieldSetting>)
@@ -6871,1412 +7472,1396 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/corehr/v1'{
 	export function emptyRefP2ContractCreatedV1():Ref<P2ContractCreatedV1>
 	export function refOfP2ContractCreatedV1(x:P2ContractCreatedV1,v:Ref<P2ContractCreatedV1>)
 	export function unRefP2ContractCreatedV1(v:Ref<P2ContractCreatedV1>):P2ContractCreatedV1
-	export function emptyCreateJobResp():CreateJobResp
-	export function emptyRefCreateJobResp():Ref<CreateJobResp>
-	export function refOfCreateJobResp(x:CreateJobResp,v:Ref<CreateJobResp>)
-	export function unRefCreateJobResp(v:Ref<CreateJobResp>):CreateJobResp
-	export function emptyCreateWorkingHoursTypeRespData():CreateWorkingHoursTypeRespData
-	export function emptyRefCreateWorkingHoursTypeRespData():Ref<CreateWorkingHoursTypeRespData>
-	export function refOfCreateWorkingHoursTypeRespData(x:CreateWorkingHoursTypeRespData,v:Ref<CreateWorkingHoursTypeRespData>)
-	export function unRefCreateWorkingHoursTypeRespData(v:Ref<CreateWorkingHoursTypeRespData>):CreateWorkingHoursTypeRespData
-	export function emptyGetPreHireResp():GetPreHireResp
-	export function emptyRefGetPreHireResp():Ref<GetPreHireResp>
-	export function refOfGetPreHireResp(x:GetPreHireResp,v:Ref<GetPreHireResp>)
-	export function unRefGetPreHireResp(v:Ref<GetPreHireResp>):GetPreHireResp
-	export function emptyQueryCustomFieldReq():QueryCustomFieldReq
-	export function emptyRefQueryCustomFieldReq():Ref<QueryCustomFieldReq>
-	export function refOfQueryCustomFieldReq(x:QueryCustomFieldReq,v:Ref<QueryCustomFieldReq>)
-	export function unRefQueryCustomFieldReq(v:Ref<QueryCustomFieldReq>):QueryCustomFieldReq
-	export function emptyLeaveType():LeaveType
-	export function emptyRefLeaveType():Ref<LeaveType>
-	export function refOfLeaveType(x:LeaveType,v:Ref<LeaveType>)
-	export function unRefLeaveType(v:Ref<LeaveType>):LeaveType
-	export function emptyListJobFamilyReq():ListJobFamilyReq
-	export function emptyRefListJobFamilyReq():Ref<ListJobFamilyReq>
-	export function refOfListJobFamilyReq(x:ListJobFamilyReq,v:Ref<ListJobFamilyReq>)
-	export function unRefListJobFamilyReq(v:Ref<ListJobFamilyReq>):ListJobFamilyReq
-	export function emptyApplicationInfo():ApplicationInfo
-	export function emptyRefApplicationInfo():Ref<ApplicationInfo>
-	export function refOfApplicationInfo(x:ApplicationInfo,v:Ref<ApplicationInfo>)
-	export function unRefApplicationInfo(v:Ref<ApplicationInfo>):ApplicationInfo
-	export function emptyListSecurityGroupReq():ListSecurityGroupReq
-	export function emptyRefListSecurityGroupReq():Ref<ListSecurityGroupReq>
-	export function refOfListSecurityGroupReq(x:ListSecurityGroupReq,v:Ref<ListSecurityGroupReq>)
-	export function unRefListSecurityGroupReq(v:Ref<ListSecurityGroupReq>):ListSecurityGroupReq
-	export function emptyP2JobChangeUpdatedV1Data():P2JobChangeUpdatedV1Data
-	export function emptyRefP2JobChangeUpdatedV1Data():Ref<P2JobChangeUpdatedV1Data>
-	export function refOfP2JobChangeUpdatedV1Data(x:P2JobChangeUpdatedV1Data,v:Ref<P2JobChangeUpdatedV1Data>)
-	export function unRefP2JobChangeUpdatedV1Data(v:Ref<P2JobChangeUpdatedV1Data>):P2JobChangeUpdatedV1Data
-	export function emptyCreateEmploymentRespData():CreateEmploymentRespData
-	export function emptyRefCreateEmploymentRespData():Ref<CreateEmploymentRespData>
-	export function refOfCreateEmploymentRespData(x:CreateEmploymentRespData,v:Ref<CreateEmploymentRespData>)
-	export function unRefCreateEmploymentRespData(v:Ref<CreateEmploymentRespData>):CreateEmploymentRespData
-	export function emptyGetProcessFormVariableDataReq():GetProcessFormVariableDataReq
-	export function emptyRefGetProcessFormVariableDataReq():Ref<GetProcessFormVariableDataReq>
-	export function refOfGetProcessFormVariableDataReq(x:GetProcessFormVariableDataReq,v:Ref<GetProcessFormVariableDataReq>)
-	export function unRefGetProcessFormVariableDataReq(v:Ref<GetProcessFormVariableDataReq>):GetProcessFormVariableDataReq
-	export function emptyGetPersonRespData():GetPersonRespData
-	export function emptyRefGetPersonRespData():Ref<GetPersonRespData>
-	export function refOfGetPersonRespData(x:GetPersonRespData,v:Ref<GetPersonRespData>)
-	export function unRefGetPersonRespData(v:Ref<GetPersonRespData>):GetPersonRespData
-	export function emptyP2EmploymentDeletedV1Data():P2EmploymentDeletedV1Data
-	export function emptyRefP2EmploymentDeletedV1Data():Ref<P2EmploymentDeletedV1Data>
-	export function refOfP2EmploymentDeletedV1Data(x:P2EmploymentDeletedV1Data,v:Ref<P2EmploymentDeletedV1Data>)
-	export function unRefP2EmploymentDeletedV1Data(v:Ref<P2EmploymentDeletedV1Data>):P2EmploymentDeletedV1Data
-	export function emptySubdivision():Subdivision
-	export function emptyRefSubdivision():Ref<Subdivision>
-	export function refOfSubdivision(x:Subdivision,v:Ref<Subdivision>)
-	export function unRefSubdivision(v:Ref<Subdivision>):Subdivision
-	export function emptyWkCalendarI18n():WkCalendarI18n
-	export function emptyRefWkCalendarI18n():Ref<WkCalendarI18n>
-	export function refOfWkCalendarI18n(x:WkCalendarI18n,v:Ref<WkCalendarI18n>)
-	export function unRefWkCalendarI18n(v:Ref<WkCalendarI18n>):WkCalendarI18n
-	export function emptyBackgroundCheckReportObject():BackgroundCheckReportObject
-	export function emptyRefBackgroundCheckReportObject():Ref<BackgroundCheckReportObject>
-	export function refOfBackgroundCheckReportObject(x:BackgroundCheckReportObject,v:Ref<BackgroundCheckReportObject>)
-	export function unRefBackgroundCheckReportObject(v:Ref<BackgroundCheckReportObject>):BackgroundCheckReportObject
-	export function emptyDeleteJobDataReq():DeleteJobDataReq
-	export function emptyRefDeleteJobDataReq():Ref<DeleteJobDataReq>
-	export function refOfDeleteJobDataReq(x:DeleteJobDataReq,v:Ref<DeleteJobDataReq>)
-	export function unRefDeleteJobDataReq(v:Ref<DeleteJobDataReq>):DeleteJobDataReq
-	export function emptyFilterCondition():FilterCondition
-	export function emptyRefFilterCondition():Ref<FilterCondition>
-	export function refOfFilterCondition(x:FilterCondition,v:Ref<FilterCondition>)
-	export function unRefFilterCondition(v:Ref<FilterCondition>):FilterCondition
-	export function emptyPermissionDetail():PermissionDetail
-	export function emptyRefPermissionDetail():Ref<PermissionDetail>
-	export function refOfPermissionDetail(x:PermissionDetail,v:Ref<PermissionDetail>)
-	export function unRefPermissionDetail(v:Ref<PermissionDetail>):PermissionDetail
-	export function emptyCreateLocationResp():CreateLocationResp
-	export function emptyRefCreateLocationResp():Ref<CreateLocationResp>
-	export function refOfCreateLocationResp(x:CreateLocationResp,v:Ref<CreateLocationResp>)
-	export function unRefCreateLocationResp(v:Ref<CreateLocationResp>):CreateLocationResp
-	export function emptyJobDataCostCenter():JobDataCostCenter
-	export function emptyRefJobDataCostCenter():Ref<JobDataCostCenter>
-	export function refOfJobDataCostCenter(x:JobDataCostCenter,v:Ref<JobDataCostCenter>)
-	export function unRefJobDataCostCenter(v:Ref<JobDataCostCenter>):JobDataCostCenter
-	export function emptyListPreHireResp():ListPreHireResp
-	export function emptyRefListPreHireResp():Ref<ListPreHireResp>
-	export function refOfListPreHireResp(x:ListPreHireResp,v:Ref<ListPreHireResp>)
-	export function unRefListPreHireResp(v:Ref<ListPreHireResp>):ListPreHireResp
-	export function emptyTranferEmploymentInfo():TranferEmploymentInfo
-	export function emptyRefTranferEmploymentInfo():Ref<TranferEmploymentInfo>
-	export function refOfTranferEmploymentInfo(x:TranferEmploymentInfo,v:Ref<TranferEmploymentInfo>)
-	export function unRefTranferEmploymentInfo(v:Ref<TranferEmploymentInfo>):TranferEmploymentInfo
-	export function emptyCpstGrade():CpstGrade
-	export function emptyRefCpstGrade():Ref<CpstGrade>
-	export function refOfCpstGrade(x:CpstGrade,v:Ref<CpstGrade>)
-	export function unRefCpstGrade(v:Ref<CpstGrade>):CpstGrade
-	export function emptyCreateEmploymentReq():CreateEmploymentReq
-	export function emptyRefCreateEmploymentReq():Ref<CreateEmploymentReq>
-	export function refOfCreateEmploymentReq(x:CreateEmploymentReq,v:Ref<CreateEmploymentReq>)
-	export function unRefCreateEmploymentReq(v:Ref<CreateEmploymentReq>):CreateEmploymentReq
-	export function emptyFormFieldVariableEmploymentValue():FormFieldVariableEmploymentValue
-	export function emptyRefFormFieldVariableEmploymentValue():Ref<FormFieldVariableEmploymentValue>
-	export function refOfFormFieldVariableEmploymentValue(x:FormFieldVariableEmploymentValue,v:Ref<FormFieldVariableEmploymentValue>)
-	export function unRefFormFieldVariableEmploymentValue(v:Ref<FormFieldVariableEmploymentValue>):FormFieldVariableEmploymentValue
-	export function emptyP2JobCreatedV1Data():P2JobCreatedV1Data
-	export function emptyRefP2JobCreatedV1Data():Ref<P2JobCreatedV1Data>
-	export function refOfP2JobCreatedV1Data(x:P2JobCreatedV1Data,v:Ref<P2JobCreatedV1Data>)
-	export function unRefP2JobCreatedV1Data(v:Ref<P2JobCreatedV1Data>):P2JobCreatedV1Data
-	export function emptySubmitOffboardingReqBody():SubmitOffboardingReqBody
-	export function emptyRefSubmitOffboardingReqBody():Ref<SubmitOffboardingReqBody>
-	export function refOfSubmitOffboardingReqBody(x:SubmitOffboardingReqBody,v:Ref<SubmitOffboardingReqBody>)
-	export function unRefSubmitOffboardingReqBody(v:Ref<SubmitOffboardingReqBody>):SubmitOffboardingReqBody
-	export function emptyCreateJobChangeRespData():CreateJobChangeRespData
-	export function emptyRefCreateJobChangeRespData():Ref<CreateJobChangeRespData>
-	export function refOfCreateJobChangeRespData(x:CreateJobChangeRespData,v:Ref<CreateJobChangeRespData>)
-	export function unRefCreateJobChangeRespData(v:Ref<CreateJobChangeRespData>):CreateJobChangeRespData
-	export function emptyDeletePreHireReq():DeletePreHireReq
-	export function emptyRefDeletePreHireReq():Ref<DeletePreHireReq>
-	export function refOfDeletePreHireReq(x:DeletePreHireReq,v:Ref<DeletePreHireReq>)
-	export function unRefDeletePreHireReq(v:Ref<DeletePreHireReq>):DeletePreHireReq
-	export function emptyGetCountryRegionResp():GetCountryRegionResp
-	export function emptyRefGetCountryRegionResp():Ref<GetCountryRegionResp>
-	export function refOfGetCountryRegionResp(x:GetCountryRegionResp,v:Ref<GetCountryRegionResp>)
-	export function unRefGetCountryRegionResp(v:Ref<GetCountryRegionResp>):GetCountryRegionResp
-	export function emptyGetLocationReq():GetLocationReq
-	export function emptyRefGetLocationReq():Ref<GetLocationReq>
-	export function refOfGetLocationReq(x:GetLocationReq,v:Ref<GetLocationReq>)
-	export function unRefGetLocationReq(v:Ref<GetLocationReq>):GetLocationReq
-	export function emptyListLocationRespData():ListLocationRespData
-	export function emptyRefListLocationRespData():Ref<ListLocationRespData>
-	export function refOfListLocationRespData(x:ListLocationRespData,v:Ref<ListLocationRespData>)
-	export function unRefListLocationRespData(v:Ref<ListLocationRespData>):ListLocationRespData
-	export function emptyResidentTax():ResidentTax
-	export function emptyRefResidentTax():Ref<ResidentTax>
-	export function refOfResidentTax(x:ResidentTax,v:Ref<ResidentTax>)
-	export function unRefResidentTax(v:Ref<ResidentTax>):ResidentTax
-	export function emptyRuleDimension():RuleDimension
-	export function emptyRefRuleDimension():Ref<RuleDimension>
-	export function refOfRuleDimension(x:RuleDimension,v:Ref<RuleDimension>)
-	export function unRefRuleDimension(v:Ref<RuleDimension>):RuleDimension
-	export function emptyCreateJobFamilyResp():CreateJobFamilyResp
-	export function emptyRefCreateJobFamilyResp():Ref<CreateJobFamilyResp>
-	export function refOfCreateJobFamilyResp(x:CreateJobFamilyResp,v:Ref<CreateJobFamilyResp>)
-	export function unRefCreateJobFamilyResp(v:Ref<CreateJobFamilyResp>):CreateJobFamilyResp
-	export function emptyGetJobReq():GetJobReq
-	export function emptyRefGetJobReq():Ref<GetJobReq>
-	export function refOfGetJobReq(x:GetJobReq,v:Ref<GetJobReq>)
-	export function unRefGetJobReq(v:Ref<GetJobReq>):GetJobReq
-	export function emptyGetJobResp():GetJobResp
-	export function emptyRefGetJobResp():Ref<GetJobResp>
-	export function refOfGetJobResp(x:GetJobResp,v:Ref<GetJobResp>)
-	export function unRefGetJobResp(v:Ref<GetJobResp>):GetJobResp
-	export function emptyFile():File
-	export function emptyRefFile():Ref<File>
-	export function refOfFile(x:File,v:Ref<File>)
-	export function unRefFile(v:Ref<File>):File
-	export function emptyLeaveBalancesLeaveResp():LeaveBalancesLeaveResp
-	export function emptyRefLeaveBalancesLeaveResp():Ref<LeaveBalancesLeaveResp>
-	export function refOfLeaveBalancesLeaveResp(x:LeaveBalancesLeaveResp,v:Ref<LeaveBalancesLeaveResp>)
-	export function unRefLeaveBalancesLeaveResp(v:Ref<LeaveBalancesLeaveResp>):LeaveBalancesLeaveResp
-	export function emptyListObjectApiNameCustomFieldReq():ListObjectApiNameCustomFieldReq
-	export function emptyRefListObjectApiNameCustomFieldReq():Ref<ListObjectApiNameCustomFieldReq>
-	export function refOfListObjectApiNameCustomFieldReq(x:ListObjectApiNameCustomFieldReq,v:Ref<ListObjectApiNameCustomFieldReq>)
-	export function unRefListObjectApiNameCustomFieldReq(v:Ref<ListObjectApiNameCustomFieldReq>):ListObjectApiNameCustomFieldReq
-	export function emptyListPreHireRespData():ListPreHireRespData
-	export function emptyRefListPreHireRespData():Ref<ListPreHireRespData>
-	export function refOfListPreHireRespData(x:ListPreHireRespData,v:Ref<ListPreHireRespData>)
-	export function unRefListPreHireRespData(v:Ref<ListPreHireRespData>):ListPreHireRespData
-	export function emptyDeleteEmployeeTypeResp():DeleteEmployeeTypeResp
-	export function emptyRefDeleteEmployeeTypeResp():Ref<DeleteEmployeeTypeResp>
-	export function refOfDeleteEmployeeTypeResp(x:DeleteEmployeeTypeResp,v:Ref<DeleteEmployeeTypeResp>)
-	export function unRefDeleteEmployeeTypeResp(v:Ref<DeleteEmployeeTypeResp>):DeleteEmployeeTypeResp
-	export function emptyDeleteJobLevelReq():DeleteJobLevelReq
-	export function emptyRefDeleteJobLevelReq():Ref<DeleteJobLevelReq>
-	export function refOfDeleteJobLevelReq(x:DeleteJobLevelReq,v:Ref<DeleteJobLevelReq>)
-	export function unRefDeleteJobLevelReq(v:Ref<DeleteJobLevelReq>):DeleteJobLevelReq
-	export function emptyAddress():Address
-	export function emptyRefAddress():Ref<Address>
-	export function refOfAddress(x:Address,v:Ref<Address>)
-	export function unRefAddress(v:Ref<Address>):Address
-	export function emptyUploadPersonRespData():UploadPersonRespData
-	export function emptyRefUploadPersonRespData():Ref<UploadPersonRespData>
-	export function refOfUploadPersonRespData(x:UploadPersonRespData,v:Ref<UploadPersonRespData>)
-	export function unRefUploadPersonRespData(v:Ref<UploadPersonRespData>):UploadPersonRespData
-	export function emptyListSecurityGroupResp():ListSecurityGroupResp
-	export function emptyRefListSecurityGroupResp():Ref<ListSecurityGroupResp>
-	export function refOfListSecurityGroupResp(x:ListSecurityGroupResp,v:Ref<ListSecurityGroupResp>)
-	export function unRefListSecurityGroupResp(v:Ref<ListSecurityGroupResp>):ListSecurityGroupResp
-	export function emptyCreateJobFamilyReq():CreateJobFamilyReq
-	export function emptyRefCreateJobFamilyReq():Ref<CreateJobFamilyReq>
-	export function refOfCreateJobFamilyReq(x:CreateJobFamilyReq,v:Ref<CreateJobFamilyReq>)
-	export function unRefCreateJobFamilyReq(v:Ref<CreateJobFamilyReq>):CreateJobFamilyReq
-	export function emptyDependent():Dependent
-	export function emptyRefDependent():Ref<Dependent>
-	export function refOfDependent(x:Dependent,v:Ref<Dependent>)
-	export function unRefDependent(v:Ref<Dependent>):Dependent
-	export function emptyFormFieldVariableTextValue():FormFieldVariableTextValue
-	export function emptyRefFormFieldVariableTextValue():Ref<FormFieldVariableTextValue>
-	export function refOfFormFieldVariableTextValue(x:FormFieldVariableTextValue,v:Ref<FormFieldVariableTextValue>)
-	export function unRefFormFieldVariableTextValue(v:Ref<FormFieldVariableTextValue>):FormFieldVariableTextValue
-	export function emptyGetContractReq():GetContractReq
-	export function emptyRefGetContractReq():Ref<GetContractReq>
-	export function refOfGetContractReq(x:GetContractReq,v:Ref<GetContractReq>)
-	export function unRefGetContractReq(v:Ref<GetContractReq>):GetContractReq
-	export function emptyJobFamily():JobFamily
-	export function emptyRefJobFamily():Ref<JobFamily>
-	export function refOfJobFamily(x:JobFamily,v:Ref<JobFamily>)
-	export function unRefJobFamily(v:Ref<JobFamily>):JobFamily
-	export function emptyListObjectApiNameCustomFieldRespData():ListObjectApiNameCustomFieldRespData
-	export function emptyRefListObjectApiNameCustomFieldRespData():Ref<ListObjectApiNameCustomFieldRespData>
-	export function refOfListObjectApiNameCustomFieldRespData(x:ListObjectApiNameCustomFieldRespData,v:Ref<ListObjectApiNameCustomFieldRespData>)
-	export function unRefListObjectApiNameCustomFieldRespData(v:Ref<ListObjectApiNameCustomFieldRespData>):ListObjectApiNameCustomFieldRespData
-	export function emptyProcess():Process
-	export function emptyRefProcess():Ref<Process>
-	export function refOfProcess(x:Process,v:Ref<Process>)
-	export function unRefProcess(v:Ref<Process>):Process
-	export function emptyListCompanyResp():ListCompanyResp
-	export function emptyRefListCompanyResp():Ref<ListCompanyResp>
-	export function refOfListCompanyResp(x:ListCompanyResp,v:Ref<ListCompanyResp>)
-	export function unRefListCompanyResp(v:Ref<ListCompanyResp>):ListCompanyResp
-	export function emptyUserId():UserId
-	export function emptyRefUserId():Ref<UserId>
-	export function refOfUserId(x:UserId,v:Ref<UserId>)
-	export function unRefUserId(v:Ref<UserId>):UserId
-	export function emptyListJobLevelReq():ListJobLevelReq
-	export function emptyRefListJobLevelReq():Ref<ListJobLevelReq>
-	export function refOfListJobLevelReq(x:ListJobLevelReq,v:Ref<ListJobLevelReq>)
-	export function unRefListJobLevelReq(v:Ref<ListJobLevelReq>):ListJobLevelReq
-	export function emptyP2DepartmentCreatedV1():P2DepartmentCreatedV1
-	export function emptyRefP2DepartmentCreatedV1():Ref<P2DepartmentCreatedV1>
-	export function refOfP2DepartmentCreatedV1(x:P2DepartmentCreatedV1,v:Ref<P2DepartmentCreatedV1>)
-	export function unRefP2DepartmentCreatedV1(v:Ref<P2DepartmentCreatedV1>):P2DepartmentCreatedV1
-	export function emptyCreateJobChangeReqBody():CreateJobChangeReqBody
-	export function emptyRefCreateJobChangeReqBody():Ref<CreateJobChangeReqBody>
-	export function refOfCreateJobChangeReqBody(x:CreateJobChangeReqBody,v:Ref<CreateJobChangeReqBody>)
-	export function unRefCreateJobChangeReqBody(v:Ref<CreateJobChangeReqBody>):CreateJobChangeReqBody
-	export function emptyGetFileReq():GetFileReq
-	export function emptyRefGetFileReq():Ref<GetFileReq>
-	export function refOfGetFileReq(x:GetFileReq,v:Ref<GetFileReq>)
-	export function unRefGetFileReq(v:Ref<GetFileReq>):GetFileReq
-	export function emptyP2JobDataChangedV1Data():P2JobDataChangedV1Data
-	export function emptyRefP2JobDataChangedV1Data():Ref<P2JobDataChangedV1Data>
-	export function refOfP2JobDataChangedV1Data(x:P2JobDataChangedV1Data,v:Ref<P2JobDataChangedV1Data>)
-	export function unRefP2JobDataChangedV1Data(v:Ref<P2JobDataChangedV1Data>):P2JobDataChangedV1Data
-	export function emptyPersonName():PersonName
-	export function emptyRefPersonName():Ref<PersonName>
-	export function refOfPersonName(x:PersonName,v:Ref<PersonName>)
-	export function unRefPersonName(v:Ref<PersonName>):PersonName
-	export function emptyFormFieldVariableDepartmentValue():FormFieldVariableDepartmentValue
-	export function emptyRefFormFieldVariableDepartmentValue():Ref<FormFieldVariableDepartmentValue>
-	export function refOfFormFieldVariableDepartmentValue(x:FormFieldVariableDepartmentValue,v:Ref<FormFieldVariableDepartmentValue>)
-	export function unRefFormFieldVariableDepartmentValue(v:Ref<FormFieldVariableDepartmentValue>):FormFieldVariableDepartmentValue
-	export function emptyGetNationalIdTypeResp():GetNationalIdTypeResp
-	export function emptyRefGetNationalIdTypeResp():Ref<GetNationalIdTypeResp>
-	export function refOfGetNationalIdTypeResp(x:GetNationalIdTypeResp,v:Ref<GetNationalIdTypeResp>)
-	export function unRefGetNationalIdTypeResp(v:Ref<GetNationalIdTypeResp>):GetNationalIdTypeResp
-	export function emptyQuerySecurityGroupReq():QuerySecurityGroupReq
-	export function emptyRefQuerySecurityGroupReq():Ref<QuerySecurityGroupReq>
-	export function refOfQuerySecurityGroupReq(x:QuerySecurityGroupReq,v:Ref<QuerySecurityGroupReq>)
-	export function unRefQuerySecurityGroupReq(v:Ref<QuerySecurityGroupReq>):QuerySecurityGroupReq
-	export function emptyI18n():I18n
-	export function emptyRefI18n():Ref<I18n>
-	export function refOfI18n(x:I18n,v:Ref<I18n>)
-	export function unRefI18n(v:Ref<I18n>):I18n
-	export function emptyListCountryRegionRespData():ListCountryRegionRespData
-	export function emptyRefListCountryRegionRespData():Ref<ListCountryRegionRespData>
-	export function refOfListCountryRegionRespData(x:ListCountryRegionRespData,v:Ref<ListCountryRegionRespData>)
-	export function unRefListCountryRegionRespData(v:Ref<ListCountryRegionRespData>):ListCountryRegionRespData
-	export function emptyOffboardingChecklist():OffboardingChecklist
-	export function emptyRefOffboardingChecklist():Ref<OffboardingChecklist>
-	export function refOfOffboardingChecklist(x:OffboardingChecklist,v:Ref<OffboardingChecklist>)
-	export function unRefOffboardingChecklist(v:Ref<OffboardingChecklist>):OffboardingChecklist
-	export function emptyQueryTransferReasonReq():QueryTransferReasonReq
-	export function emptyRefQueryTransferReasonReq():Ref<QueryTransferReasonReq>
-	export function refOfQueryTransferReasonReq(x:QueryTransferReasonReq,v:Ref<QueryTransferReasonReq>)
-	export function unRefQueryTransferReasonReq(v:Ref<QueryTransferReasonReq>):QueryTransferReasonReq
-	export function emptyDeleteNationalIdTypeReq():DeleteNationalIdTypeReq
-	export function emptyRefDeleteNationalIdTypeReq():Ref<DeleteNationalIdTypeReq>
-	export function refOfDeleteNationalIdTypeReq(x:DeleteNationalIdTypeReq,v:Ref<DeleteNationalIdTypeReq>)
-	export function unRefDeleteNationalIdTypeReq(v:Ref<DeleteNationalIdTypeReq>):DeleteNationalIdTypeReq
-	export function emptyGetCompanyRespData():GetCompanyRespData
-	export function emptyRefGetCompanyRespData():Ref<GetCompanyRespData>
-	export function refOfGetCompanyRespData(x:GetCompanyRespData,v:Ref<GetCompanyRespData>)
-	export function unRefGetCompanyRespData(v:Ref<GetCompanyRespData>):GetCompanyRespData
-	export function emptyGetNationalIdTypeRespData():GetNationalIdTypeRespData
-	export function emptyRefGetNationalIdTypeRespData():Ref<GetNationalIdTypeRespData>
-	export function refOfGetNationalIdTypeRespData(x:GetNationalIdTypeRespData,v:Ref<GetNationalIdTypeRespData>)
-	export function unRefGetNationalIdTypeRespData(v:Ref<GetNationalIdTypeRespData>):GetNationalIdTypeRespData
-	export function emptyGetNationalIdTypeReq():GetNationalIdTypeReq
-	export function emptyRefGetNationalIdTypeReq():Ref<GetNationalIdTypeReq>
-	export function refOfGetNationalIdTypeReq(x:GetNationalIdTypeReq,v:Ref<GetNationalIdTypeReq>)
-	export function unRefGetNationalIdTypeReq(v:Ref<GetNationalIdTypeReq>):GetNationalIdTypeReq
-	export function emptyQueryCustomFieldResp():QueryCustomFieldResp
-	export function emptyRefQueryCustomFieldResp():Ref<QueryCustomFieldResp>
-	export function refOfQueryCustomFieldResp(x:QueryCustomFieldResp,v:Ref<QueryCustomFieldResp>)
-	export function unRefQueryCustomFieldResp(v:Ref<QueryCustomFieldResp>):QueryCustomFieldResp
-	export function emptyTransferInfo():TransferInfo
-	export function emptyRefTransferInfo():Ref<TransferInfo>
-	export function refOfTransferInfo(x:TransferInfo,v:Ref<TransferInfo>)
-	export function unRefTransferInfo(v:Ref<TransferInfo>):TransferInfo
-	export function emptyP2DepartmentUpdatedV1Data():P2DepartmentUpdatedV1Data
-	export function emptyRefP2DepartmentUpdatedV1Data():Ref<P2DepartmentUpdatedV1Data>
-	export function refOfP2DepartmentUpdatedV1Data(x:P2DepartmentUpdatedV1Data,v:Ref<P2DepartmentUpdatedV1Data>)
-	export function unRefP2DepartmentUpdatedV1Data(v:Ref<P2DepartmentUpdatedV1Data>):P2DepartmentUpdatedV1Data
-	export function emptyBpRoleOrganization():BpRoleOrganization
-	export function emptyRefBpRoleOrganization():Ref<BpRoleOrganization>
-	export function refOfBpRoleOrganization(x:BpRoleOrganization,v:Ref<BpRoleOrganization>)
-	export function unRefBpRoleOrganization(v:Ref<BpRoleOrganization>):BpRoleOrganization
-	export function emptyDeletePreHireResp():DeletePreHireResp
-	export function emptyRefDeletePreHireResp():Ref<DeletePreHireResp>
-	export function refOfDeletePreHireResp(x:DeletePreHireResp,v:Ref<DeletePreHireResp>)
-	export function unRefDeletePreHireResp(v:Ref<DeletePreHireResp>):DeletePreHireResp
-	export function emptyDepartmentId():DepartmentId
-	export function emptyRefDepartmentId():Ref<DepartmentId>
-	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
-	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptyP2ContractCreatedV1Data():P2ContractCreatedV1Data
-	export function emptyRefP2ContractCreatedV1Data():Ref<P2ContractCreatedV1Data>
-	export function refOfP2ContractCreatedV1Data(x:P2ContractCreatedV1Data,v:Ref<P2ContractCreatedV1Data>)
-	export function unRefP2ContractCreatedV1Data(v:Ref<P2ContractCreatedV1Data>):P2ContractCreatedV1Data
-	export function emptyP2EmploymentCreatedV1Data():P2EmploymentCreatedV1Data
-	export function emptyRefP2EmploymentCreatedV1Data():Ref<P2EmploymentCreatedV1Data>
-	export function refOfP2EmploymentCreatedV1Data(x:P2EmploymentCreatedV1Data,v:Ref<P2EmploymentCreatedV1Data>)
-	export function unRefP2EmploymentCreatedV1Data(v:Ref<P2EmploymentCreatedV1Data>):P2EmploymentCreatedV1Data
-	export function emptyPatchJobLevelReq():PatchJobLevelReq
-	export function emptyRefPatchJobLevelReq():Ref<PatchJobLevelReq>
-	export function refOfPatchJobLevelReq(x:PatchJobLevelReq,v:Ref<PatchJobLevelReq>)
-	export function unRefPatchJobLevelReq(v:Ref<PatchJobLevelReq>):PatchJobLevelReq
-	export function emptyFormFieldVariableEnumValue():FormFieldVariableEnumValue
-	export function emptyRefFormFieldVariableEnumValue():Ref<FormFieldVariableEnumValue>
-	export function refOfFormFieldVariableEnumValue(x:FormFieldVariableEnumValue,v:Ref<FormFieldVariableEnumValue>)
-	export function unRefFormFieldVariableEnumValue(v:Ref<FormFieldVariableEnumValue>):FormFieldVariableEnumValue
-	export function emptyGetEmployeeTypeRespData():GetEmployeeTypeRespData
-	export function emptyRefGetEmployeeTypeRespData():Ref<GetEmployeeTypeRespData>
-	export function refOfGetEmployeeTypeRespData(x:GetEmployeeTypeRespData,v:Ref<GetEmployeeTypeRespData>)
-	export function unRefGetEmployeeTypeRespData(v:Ref<GetEmployeeTypeRespData>):GetEmployeeTypeRespData
-	export function emptyLeaveTypesLeaveReq():LeaveTypesLeaveReq
-	export function emptyRefLeaveTypesLeaveReq():Ref<LeaveTypesLeaveReq>
-	export function refOfLeaveTypesLeaveReq(x:LeaveTypesLeaveReq,v:Ref<LeaveTypesLeaveReq>)
-	export function unRefLeaveTypesLeaveReq(v:Ref<LeaveTypesLeaveReq>):LeaveTypesLeaveReq
-	export function emptyP2ContractDeletedV1Data():P2ContractDeletedV1Data
-	export function emptyRefP2ContractDeletedV1Data():Ref<P2ContractDeletedV1Data>
-	export function refOfP2ContractDeletedV1Data(x:P2ContractDeletedV1Data,v:Ref<P2ContractDeletedV1Data>)
-	export function unRefP2ContractDeletedV1Data(v:Ref<P2ContractDeletedV1Data>):P2ContractDeletedV1Data
-	export function emptyCreateEmploymentResp():CreateEmploymentResp
-	export function emptyRefCreateEmploymentResp():Ref<CreateEmploymentResp>
-	export function refOfCreateEmploymentResp(x:CreateEmploymentResp,v:Ref<CreateEmploymentResp>)
-	export function unRefCreateEmploymentResp(v:Ref<CreateEmploymentResp>):CreateEmploymentResp
-	export function emptyEmail():Email
-	export function emptyRefEmail():Ref<Email>
-	export function refOfEmail(x:Email,v:Ref<Email>)
-	export function unRefEmail(v:Ref<Email>):Email
-	export function emptyDeleteLeaveGrantingRecordReq():DeleteLeaveGrantingRecordReq
-	export function emptyRefDeleteLeaveGrantingRecordReq():Ref<DeleteLeaveGrantingRecordReq>
-	export function refOfDeleteLeaveGrantingRecordReq(x:DeleteLeaveGrantingRecordReq,v:Ref<DeleteLeaveGrantingRecordReq>)
-	export function unRefDeleteLeaveGrantingRecordReq(v:Ref<DeleteLeaveGrantingRecordReq>):DeleteLeaveGrantingRecordReq
-	export function emptyPatchEmployeeTypeRespData():PatchEmployeeTypeRespData
-	export function emptyRefPatchEmployeeTypeRespData():Ref<PatchEmployeeTypeRespData>
-	export function refOfPatchEmployeeTypeRespData(x:PatchEmployeeTypeRespData,v:Ref<PatchEmployeeTypeRespData>)
-	export function unRefPatchEmployeeTypeRespData(v:Ref<PatchEmployeeTypeRespData>):PatchEmployeeTypeRespData
-	export function emptyWorkingHoursType():WorkingHoursType
-	export function emptyRefWorkingHoursType():Ref<WorkingHoursType>
-	export function refOfWorkingHoursType(x:WorkingHoursType,v:Ref<WorkingHoursType>)
-	export function unRefWorkingHoursType(v:Ref<WorkingHoursType>):WorkingHoursType
-	export function emptyFormFieldVariableObjectValue():FormFieldVariableObjectValue
-	export function emptyRefFormFieldVariableObjectValue():Ref<FormFieldVariableObjectValue>
-	export function refOfFormFieldVariableObjectValue(x:FormFieldVariableObjectValue,v:Ref<FormFieldVariableObjectValue>)
-	export function unRefFormFieldVariableObjectValue(v:Ref<FormFieldVariableObjectValue>):FormFieldVariableObjectValue
-	export function emptyLeaveSubtype():LeaveSubtype
-	export function emptyRefLeaveSubtype():Ref<LeaveSubtype>
-	export function refOfLeaveSubtype(x:LeaveSubtype,v:Ref<LeaveSubtype>)
-	export function unRefLeaveSubtype(v:Ref<LeaveSubtype>):LeaveSubtype
-	export function emptyPatchNationalIdTypeResp():PatchNationalIdTypeResp
-	export function emptyRefPatchNationalIdTypeResp():Ref<PatchNationalIdTypeResp>
-	export function refOfPatchNationalIdTypeResp(x:PatchNationalIdTypeResp,v:Ref<PatchNationalIdTypeResp>)
-	export function unRefPatchNationalIdTypeResp(v:Ref<PatchNationalIdTypeResp>):PatchNationalIdTypeResp
-	export function emptyPatchNationalIdTypeRespData():PatchNationalIdTypeRespData
-	export function emptyRefPatchNationalIdTypeRespData():Ref<PatchNationalIdTypeRespData>
-	export function refOfPatchNationalIdTypeRespData(x:PatchNationalIdTypeRespData,v:Ref<PatchNationalIdTypeRespData>)
-	export function unRefPatchNationalIdTypeRespData(v:Ref<PatchNationalIdTypeRespData>):PatchNationalIdTypeRespData
-	export function emptyJobData():JobData
-	export function emptyRefJobData():Ref<JobData>
-	export function refOfJobData(x:JobData,v:Ref<JobData>)
-	export function unRefJobData(v:Ref<JobData>):JobData
-	export function emptyPatchDepartmentResp():PatchDepartmentResp
-	export function emptyRefPatchDepartmentResp():Ref<PatchDepartmentResp>
-	export function refOfPatchDepartmentResp(x:PatchDepartmentResp,v:Ref<PatchDepartmentResp>)
-	export function unRefPatchDepartmentResp(v:Ref<PatchDepartmentResp>):PatchDepartmentResp
-	export function emptyDeleteEmployeeTypeReq():DeleteEmployeeTypeReq
-	export function emptyRefDeleteEmployeeTypeReq():Ref<DeleteEmployeeTypeReq>
-	export function refOfDeleteEmployeeTypeReq(x:DeleteEmployeeTypeReq,v:Ref<DeleteEmployeeTypeReq>)
-	export function unRefDeleteEmployeeTypeReq(v:Ref<DeleteEmployeeTypeReq>):DeleteEmployeeTypeReq
-	export function emptyDeleteJobFamilyReq():DeleteJobFamilyReq
-	export function emptyRefDeleteJobFamilyReq():Ref<DeleteJobFamilyReq>
-	export function refOfDeleteJobFamilyReq(x:DeleteJobFamilyReq,v:Ref<DeleteJobFamilyReq>)
-	export function unRefDeleteJobFamilyReq(v:Ref<DeleteJobFamilyReq>):DeleteJobFamilyReq
-	export function emptyConvertCommonDataIdReqBody():ConvertCommonDataIdReqBody
-	export function emptyRefConvertCommonDataIdReqBody():Ref<ConvertCommonDataIdReqBody>
-	export function refOfConvertCommonDataIdReqBody(x:ConvertCommonDataIdReqBody,v:Ref<ConvertCommonDataIdReqBody>)
-	export function unRefConvertCommonDataIdReqBody(v:Ref<ConvertCommonDataIdReqBody>):ConvertCommonDataIdReqBody
-	export function emptyCreateLeaveGrantingRecordReq():CreateLeaveGrantingRecordReq
-	export function emptyRefCreateLeaveGrantingRecordReq():Ref<CreateLeaveGrantingRecordReq>
-	export function refOfCreateLeaveGrantingRecordReq(x:CreateLeaveGrantingRecordReq,v:Ref<CreateLeaveGrantingRecordReq>)
-	export function unRefCreateLeaveGrantingRecordReq(v:Ref<CreateLeaveGrantingRecordReq>):CreateLeaveGrantingRecordReq
-	export function emptyPatchPreHireReq():PatchPreHireReq
-	export function emptyRefPatchPreHireReq():Ref<PatchPreHireReq>
-	export function refOfPatchPreHireReq(x:PatchPreHireReq,v:Ref<PatchPreHireReq>)
-	export function unRefPatchPreHireReq(v:Ref<PatchPreHireReq>):PatchPreHireReq
-	export function emptyGetDepartmentRespData():GetDepartmentRespData
-	export function emptyRefGetDepartmentRespData():Ref<GetDepartmentRespData>
-	export function refOfGetDepartmentRespData(x:GetDepartmentRespData,v:Ref<GetDepartmentRespData>)
-	export function unRefGetDepartmentRespData(v:Ref<GetDepartmentRespData>):GetDepartmentRespData
-	export function emptyListJobDataReq():ListJobDataReq
-	export function emptyRefListJobDataReq():Ref<ListJobDataReq>
-	export function refOfListJobDataReq(x:ListJobDataReq,v:Ref<ListJobDataReq>)
-	export function unRefListJobDataReq(v:Ref<ListJobDataReq>):ListJobDataReq
-	export function emptyP2PersonUpdatedV1Data():P2PersonUpdatedV1Data
-	export function emptyRefP2PersonUpdatedV1Data():Ref<P2PersonUpdatedV1Data>
-	export function refOfP2PersonUpdatedV1Data(x:P2PersonUpdatedV1Data,v:Ref<P2PersonUpdatedV1Data>)
-	export function unRefP2PersonUpdatedV1Data(v:Ref<P2PersonUpdatedV1Data>):P2PersonUpdatedV1Data
-	export function emptyQuerySecurityGroupRespData():QuerySecurityGroupRespData
-	export function emptyRefQuerySecurityGroupRespData():Ref<QuerySecurityGroupRespData>
-	export function refOfQuerySecurityGroupRespData(x:QuerySecurityGroupRespData,v:Ref<QuerySecurityGroupRespData>)
-	export function unRefQuerySecurityGroupRespData(v:Ref<QuerySecurityGroupRespData>):QuerySecurityGroupRespData
-	export function emptyGetJobDataResp():GetJobDataResp
-	export function emptyRefGetJobDataResp():Ref<GetJobDataResp>
-	export function refOfGetJobDataResp(x:GetJobDataResp,v:Ref<GetJobDataResp>)
-	export function unRefGetJobDataResp(v:Ref<GetJobDataResp>):GetJobDataResp
-	export function emptyQueryTransferTypeResp():QueryTransferTypeResp
-	export function emptyRefQueryTransferTypeResp():Ref<QueryTransferTypeResp>
-	export function refOfQueryTransferTypeResp(x:QueryTransferTypeResp,v:Ref<QueryTransferTypeResp>)
-	export function unRefQueryTransferTypeResp(v:Ref<QueryTransferTypeResp>):QueryTransferTypeResp
-	export function emptyGetSubdivisionRespData():GetSubdivisionRespData
-	export function emptyRefGetSubdivisionRespData():Ref<GetSubdivisionRespData>
-	export function refOfGetSubdivisionRespData(x:GetSubdivisionRespData,v:Ref<GetSubdivisionRespData>)
-	export function unRefGetSubdivisionRespData(v:Ref<GetSubdivisionRespData>):GetSubdivisionRespData
-	export function emptyCpstStandardType():CpstStandardType
-	export function emptyRefCpstStandardType():Ref<CpstStandardType>
-	export function refOfCpstStandardType(x:CpstStandardType,v:Ref<CpstStandardType>)
-	export function unRefCpstStandardType(v:Ref<CpstStandardType>):CpstStandardType
-	export function emptyDimensionValue():DimensionValue
-	export function emptyRefDimensionValue():Ref<DimensionValue>
-	export function refOfDimensionValue(x:DimensionValue,v:Ref<DimensionValue>)
-	export function unRefDimensionValue(v:Ref<DimensionValue>):DimensionValue
-	export function emptyGetContractRespData():GetContractRespData
-	export function emptyRefGetContractRespData():Ref<GetContractRespData>
-	export function refOfGetContractRespData(x:GetContractRespData,v:Ref<GetContractRespData>)
-	export function unRefGetContractRespData(v:Ref<GetContractRespData>):GetContractRespData
-	export function emptyListDepartmentResp():ListDepartmentResp
-	export function emptyRefListDepartmentResp():Ref<ListDepartmentResp>
-	export function refOfListDepartmentResp(x:ListDepartmentResp,v:Ref<ListDepartmentResp>)
-	export function unRefListDepartmentResp(v:Ref<ListDepartmentResp>):ListDepartmentResp
-	export function emptyEmergencyContact():EmergencyContact
-	export function emptyRefEmergencyContact():Ref<EmergencyContact>
-	export function refOfEmergencyContact(x:EmergencyContact,v:Ref<EmergencyContact>)
-	export function unRefEmergencyContact(v:Ref<EmergencyContact>):EmergencyContact
-	export function emptyEmploymentLeaveBalance():EmploymentLeaveBalance
-	export function emptyRefEmploymentLeaveBalance():Ref<EmploymentLeaveBalance>
-	export function refOfEmploymentLeaveBalance(x:EmploymentLeaveBalance,v:Ref<EmploymentLeaveBalance>)
-	export function unRefEmploymentLeaveBalance(v:Ref<EmploymentLeaveBalance>):EmploymentLeaveBalance
-	export function emptyGetLocationRespData():GetLocationRespData
-	export function emptyRefGetLocationRespData():Ref<GetLocationRespData>
-	export function refOfGetLocationRespData(x:GetLocationRespData,v:Ref<GetLocationRespData>)
-	export function unRefGetLocationRespData(v:Ref<GetLocationRespData>):GetLocationRespData
-	export function emptyP2JobChangeUpdatedV1():P2JobChangeUpdatedV1
-	export function emptyRefP2JobChangeUpdatedV1():Ref<P2JobChangeUpdatedV1>
-	export function refOfP2JobChangeUpdatedV1(x:P2JobChangeUpdatedV1,v:Ref<P2JobChangeUpdatedV1>)
-	export function unRefP2JobChangeUpdatedV1(v:Ref<P2JobChangeUpdatedV1>):P2JobChangeUpdatedV1
-	export function emptyPatchJobDataRespData():PatchJobDataRespData
-	export function emptyRefPatchJobDataRespData():Ref<PatchJobDataRespData>
-	export function refOfPatchJobDataRespData(x:PatchJobDataRespData,v:Ref<PatchJobDataRespData>)
-	export function unRefPatchJobDataRespData(v:Ref<PatchJobDataRespData>):PatchJobDataRespData
-	export function emptyCreateLeaveGrantingRecordReqBody():CreateLeaveGrantingRecordReqBody
-	export function emptyRefCreateLeaveGrantingRecordReqBody():Ref<CreateLeaveGrantingRecordReqBody>
-	export function refOfCreateLeaveGrantingRecordReqBody(x:CreateLeaveGrantingRecordReqBody,v:Ref<CreateLeaveGrantingRecordReqBody>)
-	export function unRefCreateLeaveGrantingRecordReqBody(v:Ref<CreateLeaveGrantingRecordReqBody>):CreateLeaveGrantingRecordReqBody
-	export function emptyGetEmployeeTypeResp():GetEmployeeTypeResp
-	export function emptyRefGetEmployeeTypeResp():Ref<GetEmployeeTypeResp>
-	export function refOfGetEmployeeTypeResp(x:GetEmployeeTypeResp,v:Ref<GetEmployeeTypeResp>)
-	export function unRefGetEmployeeTypeResp(v:Ref<GetEmployeeTypeResp>):GetEmployeeTypeResp
-	export function emptyGetJobFamilyRespData():GetJobFamilyRespData
-	export function emptyRefGetJobFamilyRespData():Ref<GetJobFamilyRespData>
-	export function refOfGetJobFamilyRespData(x:GetJobFamilyRespData,v:Ref<GetJobFamilyRespData>)
-	export function unRefGetJobFamilyRespData(v:Ref<GetJobFamilyRespData>):GetJobFamilyRespData
-	export function emptyGetProcessFormVariableDataResp():GetProcessFormVariableDataResp
-	export function emptyRefGetProcessFormVariableDataResp():Ref<GetProcessFormVariableDataResp>
-	export function refOfGetProcessFormVariableDataResp(x:GetProcessFormVariableDataResp,v:Ref<GetProcessFormVariableDataResp>)
-	export function unRefGetProcessFormVariableDataResp(v:Ref<GetProcessFormVariableDataResp>):GetProcessFormVariableDataResp
-	export function emptyPatchJobDataReq():PatchJobDataReq
-	export function emptyRefPatchJobDataReq():Ref<PatchJobDataReq>
-	export function refOfPatchJobDataReq(x:PatchJobDataReq,v:Ref<PatchJobDataReq>)
-	export function unRefPatchJobDataReq(v:Ref<PatchJobDataReq>):PatchJobDataReq
-	export function emptyContract():Contract
-	export function emptyRefContract():Ref<Contract>
-	export function refOfContract(x:Contract,v:Ref<Contract>)
-	export function unRefContract(v:Ref<Contract>):Contract
-	export function emptyGetWorkingHoursTypeReq():GetWorkingHoursTypeReq
-	export function emptyRefGetWorkingHoursTypeReq():Ref<GetWorkingHoursTypeReq>
-	export function refOfGetWorkingHoursTypeReq(x:GetWorkingHoursTypeReq,v:Ref<GetWorkingHoursTypeReq>)
-	export function unRefGetWorkingHoursTypeReq(v:Ref<GetWorkingHoursTypeReq>):GetWorkingHoursTypeReq
-	export function emptySearchOffboardingIterator():SearchOffboardingIterator
-	export function emptyRefSearchOffboardingIterator():Ref<SearchOffboardingIterator>
-	export function refOfSearchOffboardingIterator(x:SearchOffboardingIterator,v:Ref<SearchOffboardingIterator>)
-	export function unRefSearchOffboardingIterator(v:Ref<SearchOffboardingIterator>):SearchOffboardingIterator
-	export function emptyListEmployeeTypeRespData():ListEmployeeTypeRespData
-	export function emptyRefListEmployeeTypeRespData():Ref<ListEmployeeTypeRespData>
-	export function refOfListEmployeeTypeRespData(x:ListEmployeeTypeRespData,v:Ref<ListEmployeeTypeRespData>)
-	export function unRefListEmployeeTypeRespData(v:Ref<ListEmployeeTypeRespData>):ListEmployeeTypeRespData
-	export function emptyCpstCurrency():CpstCurrency
-	export function emptyRefCpstCurrency():Ref<CpstCurrency>
-	export function refOfCpstCurrency(x:CpstCurrency,v:Ref<CpstCurrency>)
-	export function unRefCpstCurrency(v:Ref<CpstCurrency>):CpstCurrency
-	export function emptyDeleteEmploymentResp():DeleteEmploymentResp
-	export function emptyRefDeleteEmploymentResp():Ref<DeleteEmploymentResp>
-	export function refOfDeleteEmploymentResp(x:DeleteEmploymentResp,v:Ref<DeleteEmploymentResp>)
-	export function unRefDeleteEmploymentResp(v:Ref<DeleteEmploymentResp>):DeleteEmploymentResp
-	export function emptyEnumFieldOption():EnumFieldOption
-	export function emptyRefEnumFieldOption():Ref<EnumFieldOption>
-	export function refOfEnumFieldOption(x:EnumFieldOption,v:Ref<EnumFieldOption>)
-	export function unRefEnumFieldOption(v:Ref<EnumFieldOption>):EnumFieldOption
-	export function emptyListLocationReq():ListLocationReq
-	export function emptyRefListLocationReq():Ref<ListLocationReq>
-	export function refOfListLocationReq(x:ListLocationReq,v:Ref<ListLocationReq>)
-	export function unRefListLocationReq(v:Ref<ListLocationReq>):ListLocationReq
-	export function emptyPatchJobFamilyReq():PatchJobFamilyReq
-	export function emptyRefPatchJobFamilyReq():Ref<PatchJobFamilyReq>
-	export function refOfPatchJobFamilyReq(x:PatchJobFamilyReq,v:Ref<PatchJobFamilyReq>)
-	export function unRefPatchJobFamilyReq(v:Ref<PatchJobFamilyReq>):PatchJobFamilyReq
-	export function emptyPerson():Person
-	export function emptyRefPerson():Ref<Person>
-	export function refOfPerson(x:Person,v:Ref<Person>)
-	export function unRefPerson(v:Ref<Person>):Person
-	export function emptyPersonInfoMys():PersonInfoMys
-	export function emptyRefPersonInfoMys():Ref<PersonInfoMys>
-	export function refOfPersonInfoMys(x:PersonInfoMys,v:Ref<PersonInfoMys>)
-	export function unRefPersonInfoMys(v:Ref<PersonInfoMys>):PersonInfoMys
-	export function emptyDeleteJobLevelResp():DeleteJobLevelResp
-	export function emptyRefDeleteJobLevelResp():Ref<DeleteJobLevelResp>
-	export function refOfDeleteJobLevelResp(x:DeleteJobLevelResp,v:Ref<DeleteJobLevelResp>)
-	export function unRefDeleteJobLevelResp(v:Ref<DeleteJobLevelResp>):DeleteJobLevelResp
-	export function emptyQueryTransferReasonRespData():QueryTransferReasonRespData
-	export function emptyRefQueryTransferReasonRespData():Ref<QueryTransferReasonRespData>
-	export function refOfQueryTransferReasonRespData(x:QueryTransferReasonRespData,v:Ref<QueryTransferReasonRespData>)
-	export function unRefQueryTransferReasonRespData(v:Ref<QueryTransferReasonRespData>):QueryTransferReasonRespData
-	export function emptyFormFieldVariable():FormFieldVariable
-	export function emptyRefFormFieldVariable():Ref<FormFieldVariable>
-	export function refOfFormFieldVariable(x:FormFieldVariable,v:Ref<FormFieldVariable>)
-	export function unRefFormFieldVariable(v:Ref<FormFieldVariable>):FormFieldVariable
-	export function emptyFormFieldVariableRecordValue():FormFieldVariableRecordValue
-	export function emptyRefFormFieldVariableRecordValue():Ref<FormFieldVariableRecordValue>
-	export function refOfFormFieldVariableRecordValue(x:FormFieldVariableRecordValue,v:Ref<FormFieldVariableRecordValue>)
-	export function unRefFormFieldVariableRecordValue(v:Ref<FormFieldVariableRecordValue>):FormFieldVariableRecordValue
-	export function emptyGetDepartmentResp():GetDepartmentResp
-	export function emptyRefGetDepartmentResp():Ref<GetDepartmentResp>
-	export function refOfGetDepartmentResp(x:GetDepartmentResp,v:Ref<GetDepartmentResp>)
-	export function unRefGetDepartmentResp(v:Ref<GetDepartmentResp>):GetDepartmentResp
-	export function emptyListWorkingHoursTypeResp():ListWorkingHoursTypeResp
-	export function emptyRefListWorkingHoursTypeResp():Ref<ListWorkingHoursTypeResp>
-	export function refOfListWorkingHoursTypeResp(x:ListWorkingHoursTypeResp,v:Ref<ListWorkingHoursTypeResp>)
-	export function unRefListWorkingHoursTypeResp(v:Ref<ListWorkingHoursTypeResp>):ListWorkingHoursTypeResp
-	export function emptyCreateDepartmentResp():CreateDepartmentResp
-	export function emptyRefCreateDepartmentResp():Ref<CreateDepartmentResp>
-	export function refOfCreateDepartmentResp(x:CreateDepartmentResp,v:Ref<CreateDepartmentResp>)
-	export function unRefCreateDepartmentResp(v:Ref<CreateDepartmentResp>):CreateDepartmentResp
-	export function emptyListCountryRegionResp():ListCountryRegionResp
-	export function emptyRefListCountryRegionResp():Ref<ListCountryRegionResp>
-	export function refOfListCountryRegionResp(x:ListCountryRegionResp,v:Ref<ListCountryRegionResp>)
-	export function unRefListCountryRegionResp(v:Ref<ListCountryRegionResp>):ListCountryRegionResp
-	export function emptyListEmployeeTypeResp():ListEmployeeTypeResp
-	export function emptyRefListEmployeeTypeResp():Ref<ListEmployeeTypeResp>
-	export function refOfListEmployeeTypeResp(x:ListEmployeeTypeResp,v:Ref<ListEmployeeTypeResp>)
-	export function unRefListEmployeeTypeResp(v:Ref<ListEmployeeTypeResp>):ListEmployeeTypeResp
-	export function emptyPatchContractRespData():PatchContractRespData
-	export function emptyRefPatchContractRespData():Ref<PatchContractRespData>
-	export function refOfPatchContractRespData(x:PatchContractRespData,v:Ref<PatchContractRespData>)
-	export function unRefPatchContractRespData(v:Ref<PatchContractRespData>):PatchContractRespData
-	export function emptyQueryTransferTypeRespData():QueryTransferTypeRespData
-	export function emptyRefQueryTransferTypeRespData():Ref<QueryTransferTypeRespData>
-	export function refOfQueryTransferTypeRespData(x:QueryTransferTypeRespData,v:Ref<QueryTransferTypeRespData>)
-	export function unRefQueryTransferTypeRespData(v:Ref<QueryTransferTypeRespData>):QueryTransferTypeRespData
-	export function emptyFormFieldVariableBoolValue():FormFieldVariableBoolValue
-	export function emptyRefFormFieldVariableBoolValue():Ref<FormFieldVariableBoolValue>
-	export function refOfFormFieldVariableBoolValue(x:FormFieldVariableBoolValue,v:Ref<FormFieldVariableBoolValue>)
-	export function unRefFormFieldVariableBoolValue(v:Ref<FormFieldVariableBoolValue>):FormFieldVariableBoolValue
 	export function emptyGetJobLevelResp():GetJobLevelResp
 	export function emptyRefGetJobLevelResp():Ref<GetJobLevelResp>
 	export function refOfGetJobLevelResp(x:GetJobLevelResp,v:Ref<GetJobLevelResp>)
 	export function unRefGetJobLevelResp(v:Ref<GetJobLevelResp>):GetJobLevelResp
-	export function emptyListSubregionReq():ListSubregionReq
-	export function emptyRefListSubregionReq():Ref<ListSubregionReq>
-	export function refOfListSubregionReq(x:ListSubregionReq,v:Ref<ListSubregionReq>)
-	export function unRefListSubregionReq(v:Ref<ListSubregionReq>):ListSubregionReq
-	export function emptyObjectData():ObjectData
-	export function emptyRefObjectData():Ref<ObjectData>
-	export function refOfObjectData(x:ObjectData,v:Ref<ObjectData>)
-	export function unRefObjectData(v:Ref<ObjectData>):ObjectData
-	export function emptyP2ContractUpdatedV1Data():P2ContractUpdatedV1Data
-	export function emptyRefP2ContractUpdatedV1Data():Ref<P2ContractUpdatedV1Data>
-	export function refOfP2ContractUpdatedV1Data(x:P2ContractUpdatedV1Data,v:Ref<P2ContractUpdatedV1Data>)
-	export function unRefP2ContractUpdatedV1Data(v:Ref<P2ContractUpdatedV1Data>):P2ContractUpdatedV1Data
-	export function emptyP2EmploymentCreatedV1():P2EmploymentCreatedV1
-	export function emptyRefP2EmploymentCreatedV1():Ref<P2EmploymentCreatedV1>
-	export function refOfP2EmploymentCreatedV1(x:P2EmploymentCreatedV1,v:Ref<P2EmploymentCreatedV1>)
-	export function unRefP2EmploymentCreatedV1(v:Ref<P2EmploymentCreatedV1>):P2EmploymentCreatedV1
-	export function emptyGetDepartmentReq():GetDepartmentReq
-	export function emptyRefGetDepartmentReq():Ref<GetDepartmentReq>
-	export function refOfGetDepartmentReq(x:GetDepartmentReq,v:Ref<GetDepartmentReq>)
-	export function unRefGetDepartmentReq(v:Ref<GetDepartmentReq>):GetDepartmentReq
-	export function emptyListJobDataRespData():ListJobDataRespData
-	export function emptyRefListJobDataRespData():Ref<ListJobDataRespData>
-	export function refOfListJobDataRespData(x:ListJobDataRespData,v:Ref<ListJobDataRespData>)
-	export function unRefListJobDataRespData(v:Ref<ListJobDataRespData>):ListJobDataRespData
-	export function emptyPatchEmployeeTypeReq():PatchEmployeeTypeReq
-	export function emptyRefPatchEmployeeTypeReq():Ref<PatchEmployeeTypeReq>
-	export function refOfPatchEmployeeTypeReq(x:PatchEmployeeTypeReq,v:Ref<PatchEmployeeTypeReq>)
-	export function unRefPatchEmployeeTypeReq(v:Ref<PatchEmployeeTypeReq>):PatchEmployeeTypeReq
-	export function emptyPatchEmployeeTypeResp():PatchEmployeeTypeResp
-	export function emptyRefPatchEmployeeTypeResp():Ref<PatchEmployeeTypeResp>
-	export function refOfPatchEmployeeTypeResp(x:PatchEmployeeTypeResp,v:Ref<PatchEmployeeTypeResp>)
-	export function unRefPatchEmployeeTypeResp(v:Ref<PatchEmployeeTypeResp>):PatchEmployeeTypeResp
-	export function emptyCreateCompanyResp():CreateCompanyResp
-	export function emptyRefCreateCompanyResp():Ref<CreateCompanyResp>
-	export function refOfCreateCompanyResp(x:CreateCompanyResp,v:Ref<CreateCompanyResp>)
-	export function unRefCreateCompanyResp(v:Ref<CreateCompanyResp>):CreateCompanyResp
-	export function emptyJobChange():JobChange
-	export function emptyRefJobChange():Ref<JobChange>
-	export function refOfJobChange(x:JobChange,v:Ref<JobChange>)
-	export function unRefJobChange(v:Ref<JobChange>):JobChange
-	export function emptyObject():Object
-	export function emptyRefObject():Ref<Object>
-	export function refOfObject(x:Object,v:Ref<Object>)
-	export function unRefObject(v:Ref<Object>):Object
-	export function emptyListCompanyRespData():ListCompanyRespData
-	export function emptyRefListCompanyRespData():Ref<ListCompanyRespData>
-	export function refOfListCompanyRespData(x:ListCompanyRespData,v:Ref<ListCompanyRespData>)
-	export function unRefListCompanyRespData(v:Ref<ListCompanyRespData>):ListCompanyRespData
-	export function emptyCreateJobLevelResp():CreateJobLevelResp
-	export function emptyRefCreateJobLevelResp():Ref<CreateJobLevelResp>
-	export function refOfCreateJobLevelResp(x:CreateJobLevelResp,v:Ref<CreateJobLevelResp>)
-	export function unRefCreateJobLevelResp(v:Ref<CreateJobLevelResp>):CreateJobLevelResp
-	export function emptyDeleteEmploymentReq():DeleteEmploymentReq
-	export function emptyRefDeleteEmploymentReq():Ref<DeleteEmploymentReq>
-	export function refOfDeleteEmploymentReq(x:DeleteEmploymentReq,v:Ref<DeleteEmploymentReq>)
-	export function unRefDeleteEmploymentReq(v:Ref<DeleteEmploymentReq>):DeleteEmploymentReq
-	export function emptyDeleteJobResp():DeleteJobResp
-	export function emptyRefDeleteJobResp():Ref<DeleteJobResp>
-	export function refOfDeleteJobResp(x:DeleteJobResp,v:Ref<DeleteJobResp>)
-	export function unRefDeleteJobResp(v:Ref<DeleteJobResp>):DeleteJobResp
-	export function emptyGetFileResp():GetFileResp
-	export function emptyRefGetFileResp():Ref<GetFileResp>
-	export function refOfGetFileResp(x:GetFileResp,v:Ref<GetFileResp>)
-	export function unRefGetFileResp(v:Ref<GetFileResp>):GetFileResp
-	export function emptyGetSubregionReq():GetSubregionReq
-	export function emptyRefGetSubregionReq():Ref<GetSubregionReq>
-	export function refOfGetSubregionReq(x:GetSubregionReq,v:Ref<GetSubregionReq>)
-	export function unRefGetSubregionReq(v:Ref<GetSubregionReq>):GetSubregionReq
-	export function emptyLeaveBalancesLeaveReq():LeaveBalancesLeaveReq
-	export function emptyRefLeaveBalancesLeaveReq():Ref<LeaveBalancesLeaveReq>
-	export function refOfLeaveBalancesLeaveReq(x:LeaveBalancesLeaveReq,v:Ref<LeaveBalancesLeaveReq>)
-	export function unRefLeaveBalancesLeaveReq(v:Ref<LeaveBalancesLeaveReq>):LeaveBalancesLeaveReq
-	export function emptyListDepartmentRespData():ListDepartmentRespData
-	export function emptyRefListDepartmentRespData():Ref<ListDepartmentRespData>
-	export function refOfListDepartmentRespData(x:ListDepartmentRespData,v:Ref<ListDepartmentRespData>)
-	export function unRefListDepartmentRespData(v:Ref<ListDepartmentRespData>):ListDepartmentRespData
-	export function emptyP2JobDataEmployedV1Data():P2JobDataEmployedV1Data
-	export function emptyRefP2JobDataEmployedV1Data():Ref<P2JobDataEmployedV1Data>
-	export function refOfP2JobDataEmployedV1Data(x:P2JobDataEmployedV1Data,v:Ref<P2JobDataEmployedV1Data>)
-	export function unRefP2JobDataEmployedV1Data(v:Ref<P2JobDataEmployedV1Data>):P2JobDataEmployedV1Data
-	export function emptyPatchCompanyReq():PatchCompanyReq
-	export function emptyRefPatchCompanyReq():Ref<PatchCompanyReq>
-	export function refOfPatchCompanyReq(x:PatchCompanyReq,v:Ref<PatchCompanyReq>)
-	export function unRefPatchCompanyReq(v:Ref<PatchCompanyReq>):PatchCompanyReq
-	export function emptyPatchWorkingHoursTypeRespData():PatchWorkingHoursTypeRespData
-	export function emptyRefPatchWorkingHoursTypeRespData():Ref<PatchWorkingHoursTypeRespData>
-	export function refOfPatchWorkingHoursTypeRespData(x:PatchWorkingHoursTypeRespData,v:Ref<PatchWorkingHoursTypeRespData>)
-	export function unRefPatchWorkingHoursTypeRespData(v:Ref<PatchWorkingHoursTypeRespData>):PatchWorkingHoursTypeRespData
-	export function emptyEmploymentCostCenter():EmploymentCostCenter
-	export function emptyRefEmploymentCostCenter():Ref<EmploymentCostCenter>
-	export function refOfEmploymentCostCenter(x:EmploymentCostCenter,v:Ref<EmploymentCostCenter>)
-	export function unRefEmploymentCostCenter(v:Ref<EmploymentCostCenter>):EmploymentCostCenter
-	export function emptyOffboardingData():OffboardingData
-	export function emptyRefOffboardingData():Ref<OffboardingData>
-	export function refOfOffboardingData(x:OffboardingData,v:Ref<OffboardingData>)
-	export function unRefOffboardingData(v:Ref<OffboardingData>):OffboardingData
-	export function emptyP2EmploymentUpdatedV1():P2EmploymentUpdatedV1
-	export function emptyRefP2EmploymentUpdatedV1():Ref<P2EmploymentUpdatedV1>
-	export function refOfP2EmploymentUpdatedV1(x:P2EmploymentUpdatedV1,v:Ref<P2EmploymentUpdatedV1>)
-	export function unRefP2EmploymentUpdatedV1(v:Ref<P2EmploymentUpdatedV1>):P2EmploymentUpdatedV1
-	export function emptyP2PreHireUpdatedV1():P2PreHireUpdatedV1
-	export function emptyRefP2PreHireUpdatedV1():Ref<P2PreHireUpdatedV1>
-	export function refOfP2PreHireUpdatedV1(x:P2PreHireUpdatedV1,v:Ref<P2PreHireUpdatedV1>)
-	export function unRefP2PreHireUpdatedV1(v:Ref<P2PreHireUpdatedV1>):P2PreHireUpdatedV1
-	export function emptyFilterRuleValue():FilterRuleValue
-	export function emptyRefFilterRuleValue():Ref<FilterRuleValue>
-	export function refOfFilterRuleValue(x:FilterRuleValue,v:Ref<FilterRuleValue>)
-	export function unRefFilterRuleValue(v:Ref<FilterRuleValue>):FilterRuleValue
-	export function emptyPersonInfoChn():PersonInfoChn
-	export function emptyRefPersonInfoChn():Ref<PersonInfoChn>
-	export function refOfPersonInfoChn(x:PersonInfoChn,v:Ref<PersonInfoChn>)
-	export function unRefPersonInfoChn(v:Ref<PersonInfoChn>):PersonInfoChn
-	export function emptyP2DepartmentDeletedV1Data():P2DepartmentDeletedV1Data
-	export function emptyRefP2DepartmentDeletedV1Data():Ref<P2DepartmentDeletedV1Data>
-	export function refOfP2DepartmentDeletedV1Data(x:P2DepartmentDeletedV1Data,v:Ref<P2DepartmentDeletedV1Data>)
-	export function unRefP2DepartmentDeletedV1Data(v:Ref<P2DepartmentDeletedV1Data>):P2DepartmentDeletedV1Data
-	export function emptyBpmDataengineI18n():BpmDataengineI18n
-	export function emptyRefBpmDataengineI18n():Ref<BpmDataengineI18n>
-	export function refOfBpmDataengineI18n(x:BpmDataengineI18n,v:Ref<BpmDataengineI18n>)
-	export function unRefBpmDataengineI18n(v:Ref<BpmDataengineI18n>):BpmDataengineI18n
-	export function emptyCpstGradeStandardValue():CpstGradeStandardValue
-	export function emptyRefCpstGradeStandardValue():Ref<CpstGradeStandardValue>
-	export function refOfCpstGradeStandardValue(x:CpstGradeStandardValue,v:Ref<CpstGradeStandardValue>)
-	export function unRefCpstGradeStandardValue(v:Ref<CpstGradeStandardValue>):CpstGradeStandardValue
-	export function emptyDeleteContractResp():DeleteContractResp
-	export function emptyRefDeleteContractResp():Ref<DeleteContractResp>
-	export function refOfDeleteContractResp(x:DeleteContractResp,v:Ref<DeleteContractResp>)
-	export function unRefDeleteContractResp(v:Ref<DeleteContractResp>):DeleteContractResp
-	export function emptyEnumFieldSetting():EnumFieldSetting
-	export function emptyRefEnumFieldSetting():Ref<EnumFieldSetting>
-	export function refOfEnumFieldSetting(x:EnumFieldSetting,v:Ref<EnumFieldSetting>)
-	export function unRefEnumFieldSetting(v:Ref<EnumFieldSetting>):EnumFieldSetting
-	export function emptyGetByParamCustomFieldReq():GetByParamCustomFieldReq
-	export function emptyRefGetByParamCustomFieldReq():Ref<GetByParamCustomFieldReq>
-	export function refOfGetByParamCustomFieldReq(x:GetByParamCustomFieldReq,v:Ref<GetByParamCustomFieldReq>)
-	export function unRefGetByParamCustomFieldReq(v:Ref<GetByParamCustomFieldReq>):GetByParamCustomFieldReq
-	export function emptyBankAccount():BankAccount
-	export function emptyRefBankAccount():Ref<BankAccount>
-	export function refOfBankAccount(x:BankAccount,v:Ref<BankAccount>)
-	export function unRefBankAccount(v:Ref<BankAccount>):BankAccount
-	export function emptyCustomName():CustomName
-	export function emptyRefCustomName():Ref<CustomName>
-	export function refOfCustomName(x:CustomName,v:Ref<CustomName>)
-	export function unRefCustomName(v:Ref<CustomName>):CustomName
-	export function emptyQueryOffboardingReq():QueryOffboardingReq
-	export function emptyRefQueryOffboardingReq():Ref<QueryOffboardingReq>
-	export function refOfQueryOffboardingReq(x:QueryOffboardingReq,v:Ref<QueryOffboardingReq>)
-	export function unRefQueryOffboardingReq(v:Ref<QueryOffboardingReq>):QueryOffboardingReq
-	export function emptyGetPreHireRespData():GetPreHireRespData
-	export function emptyRefGetPreHireRespData():Ref<GetPreHireRespData>
-	export function refOfGetPreHireRespData(x:GetPreHireRespData,v:Ref<GetPreHireRespData>)
-	export function unRefGetPreHireRespData(v:Ref<GetPreHireRespData>):GetPreHireRespData
-	export function emptySupportCostCenterItem():SupportCostCenterItem
-	export function emptyRefSupportCostCenterItem():Ref<SupportCostCenterItem>
-	export function refOfSupportCostCenterItem(x:SupportCostCenterItem,v:Ref<SupportCostCenterItem>)
-	export function unRefSupportCostCenterItem(v:Ref<SupportCostCenterItem>):SupportCostCenterItem
-	export function emptyTextFieldSetting():TextFieldSetting
-	export function emptyRefTextFieldSetting():Ref<TextFieldSetting>
-	export function refOfTextFieldSetting(x:TextFieldSetting,v:Ref<TextFieldSetting>)
-	export function unRefTextFieldSetting(v:Ref<TextFieldSetting>):TextFieldSetting
-	export function emptyPatchContractResp():PatchContractResp
-	export function emptyRefPatchContractResp():Ref<PatchContractResp>
-	export function refOfPatchContractResp(x:PatchContractResp,v:Ref<PatchContractResp>)
-	export function unRefPatchContractResp(v:Ref<PatchContractResp>):PatchContractResp
-	export function emptyDeleteJobFamilyResp():DeleteJobFamilyResp
-	export function emptyRefDeleteJobFamilyResp():Ref<DeleteJobFamilyResp>
-	export function refOfDeleteJobFamilyResp(x:DeleteJobFamilyResp,v:Ref<DeleteJobFamilyResp>)
-	export function unRefDeleteJobFamilyResp(v:Ref<DeleteJobFamilyResp>):DeleteJobFamilyResp
-	export function emptyDepartment():Department
-	export function emptyRefDepartment():Ref<Department>
-	export function refOfDepartment(x:Department,v:Ref<Department>)
-	export function unRefDepartment(v:Ref<Department>):Department
-	export function emptyGetCountryRegionRespData():GetCountryRegionRespData
-	export function emptyRefGetCountryRegionRespData():Ref<GetCountryRegionRespData>
-	export function refOfGetCountryRegionRespData(x:GetCountryRegionRespData,v:Ref<GetCountryRegionRespData>)
-	export function unRefGetCountryRegionRespData(v:Ref<GetCountryRegionRespData>):GetCountryRegionRespData
-	export function emptyGetEmployeeTypeReq():GetEmployeeTypeReq
-	export function emptyRefGetEmployeeTypeReq():Ref<GetEmployeeTypeReq>
-	export function refOfGetEmployeeTypeReq(x:GetEmployeeTypeReq,v:Ref<GetEmployeeTypeReq>)
-	export function unRefGetEmployeeTypeReq(v:Ref<GetEmployeeTypeReq>):GetEmployeeTypeReq
-	export function emptyListWorkingHoursTypeRespData():ListWorkingHoursTypeRespData
-	export function emptyRefListWorkingHoursTypeRespData():Ref<ListWorkingHoursTypeRespData>
-	export function refOfListWorkingHoursTypeRespData(x:ListWorkingHoursTypeRespData,v:Ref<ListWorkingHoursTypeRespData>)
-	export function unRefListWorkingHoursTypeRespData(v:Ref<ListWorkingHoursTypeRespData>):ListWorkingHoursTypeRespData
-	export function emptySearchAssignedUserReqBody():SearchAssignedUserReqBody
-	export function emptyRefSearchAssignedUserReqBody():Ref<SearchAssignedUserReqBody>
-	export function refOfSearchAssignedUserReqBody(x:SearchAssignedUserReqBody,v:Ref<SearchAssignedUserReqBody>)
-	export function unRefSearchAssignedUserReqBody(v:Ref<SearchAssignedUserReqBody>):SearchAssignedUserReqBody
-	export function emptyCreateCompanyReq():CreateCompanyReq
-	export function emptyRefCreateCompanyReq():Ref<CreateCompanyReq>
-	export function refOfCreateCompanyReq(x:CreateCompanyReq,v:Ref<CreateCompanyReq>)
-	export function unRefCreateCompanyReq(v:Ref<CreateCompanyReq>):CreateCompanyReq
-	export function emptyCustomFieldData():CustomFieldData
-	export function emptyRefCustomFieldData():Ref<CustomFieldData>
-	export function refOfCustomFieldData(x:CustomFieldData,v:Ref<CustomFieldData>)
-	export function unRefCustomFieldData(v:Ref<CustomFieldData>):CustomFieldData
-	export function emptyGetWorkingHoursTypeRespData():GetWorkingHoursTypeRespData
-	export function emptyRefGetWorkingHoursTypeRespData():Ref<GetWorkingHoursTypeRespData>
-	export function refOfGetWorkingHoursTypeRespData(x:GetWorkingHoursTypeRespData,v:Ref<GetWorkingHoursTypeRespData>)
-	export function unRefGetWorkingHoursTypeRespData(v:Ref<GetWorkingHoursTypeRespData>):GetWorkingHoursTypeRespData
-	export function emptyListObjectApiNameCustomFieldResp():ListObjectApiNameCustomFieldResp
-	export function emptyRefListObjectApiNameCustomFieldResp():Ref<ListObjectApiNameCustomFieldResp>
-	export function refOfListObjectApiNameCustomFieldResp(x:ListObjectApiNameCustomFieldResp,v:Ref<ListObjectApiNameCustomFieldResp>)
-	export function unRefListObjectApiNameCustomFieldResp(v:Ref<ListObjectApiNameCustomFieldResp>):ListObjectApiNameCustomFieldResp
-	export function emptyCreateJobReq():CreateJobReq
-	export function emptyRefCreateJobReq():Ref<CreateJobReq>
-	export function refOfCreateJobReq(x:CreateJobReq,v:Ref<CreateJobReq>)
-	export function unRefCreateJobReq(v:Ref<CreateJobReq>):CreateJobReq
-	export function emptyCreateContractResp():CreateContractResp
-	export function emptyRefCreateContractResp():Ref<CreateContractResp>
-	export function refOfCreateContractResp(x:CreateContractResp,v:Ref<CreateContractResp>)
-	export function unRefCreateContractResp(v:Ref<CreateContractResp>):CreateContractResp
-	export function emptyDeleteCompanyResp():DeleteCompanyResp
-	export function emptyRefDeleteCompanyResp():Ref<DeleteCompanyResp>
-	export function refOfDeleteCompanyResp(x:DeleteCompanyResp,v:Ref<DeleteCompanyResp>)
-	export function unRefDeleteCompanyResp(v:Ref<DeleteCompanyResp>):DeleteCompanyResp
-	export function emptyLeaveBalancesLeaveRespData():LeaveBalancesLeaveRespData
-	export function emptyRefLeaveBalancesLeaveRespData():Ref<LeaveBalancesLeaveRespData>
-	export function refOfLeaveBalancesLeaveRespData(x:LeaveBalancesLeaveRespData,v:Ref<LeaveBalancesLeaveRespData>)
-	export function unRefLeaveBalancesLeaveRespData(v:Ref<LeaveBalancesLeaveRespData>):LeaveBalancesLeaveRespData
-	export function emptyWorkCalendarFilter():WorkCalendarFilter
-	export function emptyRefWorkCalendarFilter():Ref<WorkCalendarFilter>
-	export function refOfWorkCalendarFilter(x:WorkCalendarFilter,v:Ref<WorkCalendarFilter>)
-	export function unRefWorkCalendarFilter(v:Ref<WorkCalendarFilter>):WorkCalendarFilter
-	export function emptyDeleteWorkingHoursTypeReq():DeleteWorkingHoursTypeReq
-	export function emptyRefDeleteWorkingHoursTypeReq():Ref<DeleteWorkingHoursTypeReq>
-	export function refOfDeleteWorkingHoursTypeReq(x:DeleteWorkingHoursTypeReq,v:Ref<DeleteWorkingHoursTypeReq>)
-	export function unRefDeleteWorkingHoursTypeReq(v:Ref<DeleteWorkingHoursTypeReq>):DeleteWorkingHoursTypeReq
-	export function emptyGetByParamCustomFieldResp():GetByParamCustomFieldResp
-	export function emptyRefGetByParamCustomFieldResp():Ref<GetByParamCustomFieldResp>
-	export function refOfGetByParamCustomFieldResp(x:GetByParamCustomFieldResp,v:Ref<GetByParamCustomFieldResp>)
-	export function unRefGetByParamCustomFieldResp(v:Ref<GetByParamCustomFieldResp>):GetByParamCustomFieldResp
-	export function emptyListEmployeeTypeReq():ListEmployeeTypeReq
-	export function emptyRefListEmployeeTypeReq():Ref<ListEmployeeTypeReq>
-	export function refOfListEmployeeTypeReq(x:ListEmployeeTypeReq,v:Ref<ListEmployeeTypeReq>)
-	export function unRefListEmployeeTypeReq(v:Ref<ListEmployeeTypeReq>):ListEmployeeTypeReq
-	export function emptyNationalIdType():NationalIdType
-	export function emptyRefNationalIdType():Ref<NationalIdType>
-	export function refOfNationalIdType(x:NationalIdType,v:Ref<NationalIdType>)
-	export function unRefNationalIdType(v:Ref<NationalIdType>):NationalIdType
-	export function emptyP2JobDataEmployedV1():P2JobDataEmployedV1
-	export function emptyRefP2JobDataEmployedV1():Ref<P2JobDataEmployedV1>
-	export function refOfP2JobDataEmployedV1(x:P2JobDataEmployedV1,v:Ref<P2JobDataEmployedV1>)
-	export function unRefP2JobDataEmployedV1(v:Ref<P2JobDataEmployedV1>):P2JobDataEmployedV1
-	export function emptyGetSubregionResp():GetSubregionResp
-	export function emptyRefGetSubregionResp():Ref<GetSubregionResp>
-	export function refOfGetSubregionResp(x:GetSubregionResp,v:Ref<GetSubregionResp>)
-	export function unRefGetSubregionResp(v:Ref<GetSubregionResp>):GetSubregionResp
-	export function emptyListContractRespData():ListContractRespData
-	export function emptyRefListContractRespData():Ref<ListContractRespData>
-	export function refOfListContractRespData(x:ListContractRespData,v:Ref<ListContractRespData>)
-	export function unRefListContractRespData(v:Ref<ListContractRespData>):ListContractRespData
-	export function emptyP2ContractDeletedV1():P2ContractDeletedV1
-	export function emptyRefP2ContractDeletedV1():Ref<P2ContractDeletedV1>
-	export function refOfP2ContractDeletedV1(x:P2ContractDeletedV1,v:Ref<P2ContractDeletedV1>)
-	export function unRefP2ContractDeletedV1(v:Ref<P2ContractDeletedV1>):P2ContractDeletedV1
-	export function emptyRoleAuthorization():RoleAuthorization
-	export function emptyRefRoleAuthorization():Ref<RoleAuthorization>
-	export function refOfRoleAuthorization(x:RoleAuthorization,v:Ref<RoleAuthorization>)
-	export function unRefRoleAuthorization(v:Ref<RoleAuthorization>):RoleAuthorization
-	export function emptyGetByParamCustomFieldRespData():GetByParamCustomFieldRespData
-	export function emptyRefGetByParamCustomFieldRespData():Ref<GetByParamCustomFieldRespData>
-	export function refOfGetByParamCustomFieldRespData(x:GetByParamCustomFieldRespData,v:Ref<GetByParamCustomFieldRespData>)
-	export function unRefGetByParamCustomFieldRespData(v:Ref<GetByParamCustomFieldRespData>):GetByParamCustomFieldRespData
-	export function emptyGetPreHireReq():GetPreHireReq
-	export function emptyRefGetPreHireReq():Ref<GetPreHireReq>
-	export function refOfGetPreHireReq(x:GetPreHireReq,v:Ref<GetPreHireReq>)
-	export function unRefGetPreHireReq(v:Ref<GetPreHireReq>):GetPreHireReq
-	export function emptyManageRelation():ManageRelation
-	export function emptyRefManageRelation():Ref<ManageRelation>
-	export function refOfManageRelation(x:ManageRelation,v:Ref<ManageRelation>)
-	export function unRefManageRelation(v:Ref<ManageRelation>):ManageRelation
-	export function emptyP2EmploymentResignedV1Data():P2EmploymentResignedV1Data
-	export function emptyRefP2EmploymentResignedV1Data():Ref<P2EmploymentResignedV1Data>
-	export function refOfP2EmploymentResignedV1Data(x:P2EmploymentResignedV1Data,v:Ref<P2EmploymentResignedV1Data>)
-	export function unRefP2EmploymentResignedV1Data(v:Ref<P2EmploymentResignedV1Data>):P2EmploymentResignedV1Data
-	export function emptyEmployeeType():EmployeeType
-	export function emptyRefEmployeeType():Ref<EmployeeType>
-	export function refOfEmployeeType(x:EmployeeType,v:Ref<EmployeeType>)
-	export function unRefEmployeeType(v:Ref<EmployeeType>):EmployeeType
-	export function emptyListCompanyReq():ListCompanyReq
-	export function emptyRefListCompanyReq():Ref<ListCompanyReq>
-	export function refOfListCompanyReq(x:ListCompanyReq,v:Ref<ListCompanyReq>)
-	export function unRefListCompanyReq(v:Ref<ListCompanyReq>):ListCompanyReq
-	export function emptyListSubdivisionReq():ListSubdivisionReq
-	export function emptyRefListSubdivisionReq():Ref<ListSubdivisionReq>
-	export function refOfListSubdivisionReq(x:ListSubdivisionReq,v:Ref<ListSubdivisionReq>)
-	export function unRefListSubdivisionReq(v:Ref<ListSubdivisionReq>):ListSubdivisionReq
-	export function emptyPatchDepartmentReq():PatchDepartmentReq
-	export function emptyRefPatchDepartmentReq():Ref<PatchDepartmentReq>
-	export function refOfPatchDepartmentReq(x:PatchDepartmentReq,v:Ref<PatchDepartmentReq>)
-	export function unRefPatchDepartmentReq(v:Ref<PatchDepartmentReq>):PatchDepartmentReq
-	export function emptyCpstI18n():CpstI18n
-	export function emptyRefCpstI18n():Ref<CpstI18n>
-	export function refOfCpstI18n(x:CpstI18n,v:Ref<CpstI18n>)
-	export function unRefCpstI18n(v:Ref<CpstI18n>):CpstI18n
-	export function emptyCreateLocationRespData():CreateLocationRespData
-	export function emptyRefCreateLocationRespData():Ref<CreateLocationRespData>
-	export function refOfCreateLocationRespData(x:CreateLocationRespData,v:Ref<CreateLocationRespData>)
-	export function unRefCreateLocationRespData(v:Ref<CreateLocationRespData>):CreateLocationRespData
-	export function emptyFormFieldVariableI18nValue():FormFieldVariableI18nValue
-	export function emptyRefFormFieldVariableI18nValue():Ref<FormFieldVariableI18nValue>
-	export function refOfFormFieldVariableI18nValue(x:FormFieldVariableI18nValue,v:Ref<FormFieldVariableI18nValue>)
-	export function unRefFormFieldVariableI18nValue(v:Ref<FormFieldVariableI18nValue>):FormFieldVariableI18nValue
-	export function emptyLeaveTypesLeaveRespData():LeaveTypesLeaveRespData
-	export function emptyRefLeaveTypesLeaveRespData():Ref<LeaveTypesLeaveRespData>
-	export function refOfLeaveTypesLeaveRespData(x:LeaveTypesLeaveRespData,v:Ref<LeaveTypesLeaveRespData>)
-	export function unRefLeaveTypesLeaveRespData(v:Ref<LeaveTypesLeaveRespData>):LeaveTypesLeaveRespData
-	export function emptyPhone():Phone
-	export function emptyRefPhone():Ref<Phone>
-	export function refOfPhone(x:Phone,v:Ref<Phone>)
-	export function unRefPhone(v:Ref<Phone>):Phone
-	export function emptySearchOffboardingReq():SearchOffboardingReq
-	export function emptyRefSearchOffboardingReq():Ref<SearchOffboardingReq>
-	export function refOfSearchOffboardingReq(x:SearchOffboardingReq,v:Ref<SearchOffboardingReq>)
-	export function unRefSearchOffboardingReq(v:Ref<SearchOffboardingReq>):SearchOffboardingReq
-	export function emptyFormVariableData():FormVariableData
-	export function emptyRefFormVariableData():Ref<FormVariableData>
-	export function refOfFormVariableData(x:FormVariableData,v:Ref<FormVariableData>)
-	export function unRefFormVariableData(v:Ref<FormVariableData>):FormVariableData
-	export function emptyListDepartmentReq():ListDepartmentReq
-	export function emptyRefListDepartmentReq():Ref<ListDepartmentReq>
-	export function refOfListDepartmentReq(x:ListDepartmentReq,v:Ref<ListDepartmentReq>)
-	export function unRefListDepartmentReq(v:Ref<ListDepartmentReq>):ListDepartmentReq
-	export function emptyPatchJobReq():PatchJobReq
-	export function emptyRefPatchJobReq():Ref<PatchJobReq>
-	export function refOfPatchJobReq(x:PatchJobReq,v:Ref<PatchJobReq>)
-	export function unRefPatchJobReq(v:Ref<PatchJobReq>):PatchJobReq
-	export function emptyBackgroundCheckCountry():BackgroundCheckCountry
-	export function emptyRefBackgroundCheckCountry():Ref<BackgroundCheckCountry>
-	export function refOfBackgroundCheckCountry(x:BackgroundCheckCountry,v:Ref<BackgroundCheckCountry>)
-	export function unRefBackgroundCheckCountry(v:Ref<BackgroundCheckCountry>):BackgroundCheckCountry
-	export function emptyHiberarchyCommon():HiberarchyCommon
-	export function emptyRefHiberarchyCommon():Ref<HiberarchyCommon>
-	export function refOfHiberarchyCommon(x:HiberarchyCommon,v:Ref<HiberarchyCommon>)
-	export function unRefHiberarchyCommon(v:Ref<HiberarchyCommon>):HiberarchyCommon
-	export function emptyListNationalIdTypeRespData():ListNationalIdTypeRespData
-	export function emptyRefListNationalIdTypeRespData():Ref<ListNationalIdTypeRespData>
-	export function refOfListNationalIdTypeRespData(x:ListNationalIdTypeRespData,v:Ref<ListNationalIdTypeRespData>)
-	export function unRefListNationalIdTypeRespData(v:Ref<ListNationalIdTypeRespData>):ListNationalIdTypeRespData
-	export function emptyP2PersonDeletedV1():P2PersonDeletedV1
-	export function emptyRefP2PersonDeletedV1():Ref<P2PersonDeletedV1>
-	export function refOfP2PersonDeletedV1(x:P2PersonDeletedV1,v:Ref<P2PersonDeletedV1>)
-	export function unRefP2PersonDeletedV1(v:Ref<P2PersonDeletedV1>):P2PersonDeletedV1
-	export function emptyQuerySecurityGroupResp():QuerySecurityGroupResp
-	export function emptyRefQuerySecurityGroupResp():Ref<QuerySecurityGroupResp>
-	export function refOfQuerySecurityGroupResp(x:QuerySecurityGroupResp,v:Ref<QuerySecurityGroupResp>)
-	export function unRefQuerySecurityGroupResp(v:Ref<QuerySecurityGroupResp>):QuerySecurityGroupResp
-	export function emptyQuerySecurityGroupReqBody():QuerySecurityGroupReqBody
-	export function emptyRefQuerySecurityGroupReqBody():Ref<QuerySecurityGroupReqBody>
-	export function refOfQuerySecurityGroupReqBody(x:QuerySecurityGroupReqBody,v:Ref<QuerySecurityGroupReqBody>)
-	export function unRefQuerySecurityGroupReqBody(v:Ref<QuerySecurityGroupReqBody>):QuerySecurityGroupReqBody
-	export function emptyGetPersonResp():GetPersonResp
-	export function emptyRefGetPersonResp():Ref<GetPersonResp>
-	export function refOfGetPersonResp(x:GetPersonResp,v:Ref<GetPersonResp>)
-	export function unRefGetPersonResp(v:Ref<GetPersonResp>):GetPersonResp
-	export function emptyListSubdivisionResp():ListSubdivisionResp
-	export function emptyRefListSubdivisionResp():Ref<ListSubdivisionResp>
-	export function refOfListSubdivisionResp(x:ListSubdivisionResp,v:Ref<ListSubdivisionResp>)
-	export function unRefListSubdivisionResp(v:Ref<ListSubdivisionResp>):ListSubdivisionResp
-	export function emptyPatchPreHireRespData():PatchPreHireRespData
-	export function emptyRefPatchPreHireRespData():Ref<PatchPreHireRespData>
-	export function refOfPatchPreHireRespData(x:PatchPreHireRespData,v:Ref<PatchPreHireRespData>)
-	export function unRefPatchPreHireRespData(v:Ref<PatchPreHireRespData>):PatchPreHireRespData
-	export function emptyV1():V1
-	export function emptyRefV1():Ref<V1>
-	export function refOfV1(x:V1,v:Ref<V1>)
-	export function unRefV1(v:Ref<V1>):V1
-	export function emptyCreateLeaveGrantingRecordResp():CreateLeaveGrantingRecordResp
-	export function emptyRefCreateLeaveGrantingRecordResp():Ref<CreateLeaveGrantingRecordResp>
-	export function refOfCreateLeaveGrantingRecordResp(x:CreateLeaveGrantingRecordResp,v:Ref<CreateLeaveGrantingRecordResp>)
-	export function unRefCreateLeaveGrantingRecordResp(v:Ref<CreateLeaveGrantingRecordResp>):CreateLeaveGrantingRecordResp
-	export function emptyUploadPersonReqBody():UploadPersonReqBody
-	export function emptyRefUploadPersonReqBody():Ref<UploadPersonReqBody>
-	export function refOfUploadPersonReqBody(x:UploadPersonReqBody,v:Ref<UploadPersonReqBody>)
-	export function unRefUploadPersonReqBody(v:Ref<UploadPersonReqBody>):UploadPersonReqBody
-	export function emptyCreateDepartmentReq():CreateDepartmentReq
-	export function emptyRefCreateDepartmentReq():Ref<CreateDepartmentReq>
-	export function refOfCreateDepartmentReq(x:CreateDepartmentReq,v:Ref<CreateDepartmentReq>)
-	export function unRefCreateDepartmentReq(v:Ref<CreateDepartmentReq>):CreateDepartmentReq
-	export function emptyDeleteNationalIdTypeResp():DeleteNationalIdTypeResp
-	export function emptyRefDeleteNationalIdTypeResp():Ref<DeleteNationalIdTypeResp>
-	export function refOfDeleteNationalIdTypeResp(x:DeleteNationalIdTypeResp,v:Ref<DeleteNationalIdTypeResp>)
-	export function unRefDeleteNationalIdTypeResp(v:Ref<DeleteNationalIdTypeResp>):DeleteNationalIdTypeResp
-	export function emptyListCountryRegionReq():ListCountryRegionReq
-	export function emptyRefListCountryRegionReq():Ref<ListCountryRegionReq>
-	export function refOfListCountryRegionReq(x:ListCountryRegionReq,v:Ref<ListCountryRegionReq>)
-	export function unRefListCountryRegionReq(v:Ref<ListCountryRegionReq>):ListCountryRegionReq
-	export function emptyOrgTruncation():OrgTruncation
-	export function emptyRefOrgTruncation():Ref<OrgTruncation>
-	export function refOfOrgTruncation(x:OrgTruncation,v:Ref<OrgTruncation>)
-	export function unRefOrgTruncation(v:Ref<OrgTruncation>):OrgTruncation
-	export function emptyQueryTransferTypeReq():QueryTransferTypeReq
-	export function emptyRefQueryTransferTypeReq():Ref<QueryTransferTypeReq>
-	export function refOfQueryTransferTypeReq(x:QueryTransferTypeReq,v:Ref<QueryTransferTypeReq>)
-	export function unRefQueryTransferTypeReq(v:Ref<QueryTransferTypeReq>):QueryTransferTypeReq
-	export function emptySubmitOffboardingReq():SubmitOffboardingReq
-	export function emptyRefSubmitOffboardingReq():Ref<SubmitOffboardingReq>
-	export function refOfSubmitOffboardingReq(x:SubmitOffboardingReq,v:Ref<SubmitOffboardingReq>)
-	export function unRefSubmitOffboardingReq(v:Ref<SubmitOffboardingReq>):SubmitOffboardingReq
-	export function emptyCreateNationalIdTypeRespData():CreateNationalIdTypeRespData
-	export function emptyRefCreateNationalIdTypeRespData():Ref<CreateNationalIdTypeRespData>
-	export function refOfCreateNationalIdTypeRespData(x:CreateNationalIdTypeRespData,v:Ref<CreateNationalIdTypeRespData>)
-	export function unRefCreateNationalIdTypeRespData(v:Ref<CreateNationalIdTypeRespData>):CreateNationalIdTypeRespData
-	export function emptyFormFieldVariableDatetimeValue():FormFieldVariableDatetimeValue
-	export function emptyRefFormFieldVariableDatetimeValue():Ref<FormFieldVariableDatetimeValue>
-	export function refOfFormFieldVariableDatetimeValue(x:FormFieldVariableDatetimeValue,v:Ref<FormFieldVariableDatetimeValue>)
-	export function unRefFormFieldVariableDatetimeValue(v:Ref<FormFieldVariableDatetimeValue>):FormFieldVariableDatetimeValue
-	export function emptyPatchJobLevelResp():PatchJobLevelResp
-	export function emptyRefPatchJobLevelResp():Ref<PatchJobLevelResp>
-	export function refOfPatchJobLevelResp(x:PatchJobLevelResp,v:Ref<PatchJobLevelResp>)
-	export function unRefPatchJobLevelResp(v:Ref<PatchJobLevelResp>):PatchJobLevelResp
-	export function emptyTemp():Temp
-	export function emptyRefTemp():Ref<Temp>
-	export function refOfTemp(x:Temp,v:Ref<Temp>)
-	export function unRefTemp(v:Ref<Temp>):Temp
-	export function emptyListPreHireReq():ListPreHireReq
-	export function emptyRefListPreHireReq():Ref<ListPreHireReq>
-	export function refOfListPreHireReq(x:ListPreHireReq,v:Ref<ListPreHireReq>)
-	export function unRefListPreHireReq(v:Ref<ListPreHireReq>):ListPreHireReq
-	export function emptySearchOffboardingReqBody():SearchOffboardingReqBody
-	export function emptyRefSearchOffboardingReqBody():Ref<SearchOffboardingReqBody>
-	export function refOfSearchOffboardingReqBody(x:SearchOffboardingReqBody,v:Ref<SearchOffboardingReqBody>)
-	export function unRefSearchOffboardingReqBody(v:Ref<SearchOffboardingReqBody>):SearchOffboardingReqBody
-	export function emptyAssignedOrganizationWithCode():AssignedOrganizationWithCode
-	export function emptyRefAssignedOrganizationWithCode():Ref<AssignedOrganizationWithCode>
-	export function refOfAssignedOrganizationWithCode(x:AssignedOrganizationWithCode,v:Ref<AssignedOrganizationWithCode>)
-	export function unRefAssignedOrganizationWithCode(v:Ref<AssignedOrganizationWithCode>):AssignedOrganizationWithCode
-	export function emptyHrbp():Hrbp
-	export function emptyRefHrbp():Ref<Hrbp>
-	export function refOfHrbp(x:Hrbp,v:Ref<Hrbp>)
-	export function unRefHrbp(v:Ref<Hrbp>):Hrbp
-	export function emptyListWorkingHoursTypeReq():ListWorkingHoursTypeReq
-	export function emptyRefListWorkingHoursTypeReq():Ref<ListWorkingHoursTypeReq>
-	export function refOfListWorkingHoursTypeReq(x:ListWorkingHoursTypeReq,v:Ref<ListWorkingHoursTypeReq>)
-	export function unRefListWorkingHoursTypeReq(v:Ref<ListWorkingHoursTypeReq>):ListWorkingHoursTypeReq
-	export function emptyJob():Job
-	export function emptyRefJob():Ref<Job>
-	export function refOfJob(x:Job,v:Ref<Job>)
-	export function unRefJob(v:Ref<Job>):Job
-	export function emptyListJobRespData():ListJobRespData
-	export function emptyRefListJobRespData():Ref<ListJobRespData>
-	export function refOfListJobRespData(x:ListJobRespData,v:Ref<ListJobRespData>)
-	export function unRefListJobRespData(v:Ref<ListJobRespData>):ListJobRespData
-	export function emptyLocation():Location
-	export function emptyRefLocation():Ref<Location>
-	export function refOfLocation(x:Location,v:Ref<Location>)
-	export function unRefLocation(v:Ref<Location>):Location
-	export function emptyP2EmploymentUpdatedV1Data():P2EmploymentUpdatedV1Data
-	export function emptyRefP2EmploymentUpdatedV1Data():Ref<P2EmploymentUpdatedV1Data>
-	export function refOfP2EmploymentUpdatedV1Data(x:P2EmploymentUpdatedV1Data,v:Ref<P2EmploymentUpdatedV1Data>)
-	export function unRefP2EmploymentUpdatedV1Data(v:Ref<P2EmploymentUpdatedV1Data>):P2EmploymentUpdatedV1Data
-	export function emptyPersonalProfile():PersonalProfile
-	export function emptyRefPersonalProfile():Ref<PersonalProfile>
-	export function refOfPersonalProfile(x:PersonalProfile,v:Ref<PersonalProfile>)
-	export function unRefPersonalProfile(v:Ref<PersonalProfile>):PersonalProfile
-	export function emptyConvertCommonDataIdResp():ConvertCommonDataIdResp
-	export function emptyRefConvertCommonDataIdResp():Ref<ConvertCommonDataIdResp>
-	export function refOfConvertCommonDataIdResp(x:ConvertCommonDataIdResp,v:Ref<ConvertCommonDataIdResp>)
-	export function unRefConvertCommonDataIdResp(v:Ref<ConvertCommonDataIdResp>):ConvertCommonDataIdResp
-	export function emptyDeleteCompanyReq():DeleteCompanyReq
-	export function emptyRefDeleteCompanyReq():Ref<DeleteCompanyReq>
-	export function refOfDeleteCompanyReq(x:DeleteCompanyReq,v:Ref<DeleteCompanyReq>)
-	export function unRefDeleteCompanyReq(v:Ref<DeleteCompanyReq>):DeleteCompanyReq
-	export function emptySearchAssignedUserReq():SearchAssignedUserReq
-	export function emptyRefSearchAssignedUserReq():Ref<SearchAssignedUserReq>
-	export function refOfSearchAssignedUserReq(x:SearchAssignedUserReq,v:Ref<SearchAssignedUserReq>)
-	export function unRefSearchAssignedUserReq(v:Ref<SearchAssignedUserReq>):SearchAssignedUserReq
-	export function emptyCreateJobChangeResp():CreateJobChangeResp
-	export function emptyRefCreateJobChangeResp():Ref<CreateJobChangeResp>
-	export function refOfCreateJobChangeResp(x:CreateJobChangeResp,v:Ref<CreateJobChangeResp>)
-	export function unRefCreateJobChangeResp(v:Ref<CreateJobChangeResp>):CreateJobChangeResp
-	export function emptyDeleteJobDataResp():DeleteJobDataResp
-	export function emptyRefDeleteJobDataResp():Ref<DeleteJobDataResp>
-	export function refOfDeleteJobDataResp(x:DeleteJobDataResp,v:Ref<DeleteJobDataResp>)
-	export function unRefDeleteJobDataResp(v:Ref<DeleteJobDataResp>):DeleteJobDataResp
-	export function emptyEducation():Education
-	export function emptyRefEducation():Ref<Education>
-	export function refOfEducation(x:Education,v:Ref<Education>)
-	export function unRefEducation(v:Ref<Education>):Education
-	export function emptyGetJobRespData():GetJobRespData
-	export function emptyRefGetJobRespData():Ref<GetJobRespData>
-	export function refOfGetJobRespData(x:GetJobRespData,v:Ref<GetJobRespData>)
-	export function unRefGetJobRespData(v:Ref<GetJobRespData>):GetJobRespData
-	export function emptyGetLocationResp():GetLocationResp
-	export function emptyRefGetLocationResp():Ref<GetLocationResp>
-	export function refOfGetLocationResp(x:GetLocationResp,v:Ref<GetLocationResp>)
-	export function unRefGetLocationResp(v:Ref<GetLocationResp>):GetLocationResp
-	export function emptyListContractReq():ListContractReq
-	export function emptyRefListContractReq():Ref<ListContractReq>
-	export function refOfListContractReq(x:ListContractReq,v:Ref<ListContractReq>)
-	export function unRefListContractReq(v:Ref<ListContractReq>):ListContractReq
-	export function emptyWorkExperience():WorkExperience
-	export function emptyRefWorkExperience():Ref<WorkExperience>
-	export function refOfWorkExperience(x:WorkExperience,v:Ref<WorkExperience>)
-	export function unRefWorkExperience(v:Ref<WorkExperience>):WorkExperience
-	export function emptyAttachmentFieldSetting():AttachmentFieldSetting
-	export function emptyRefAttachmentFieldSetting():Ref<AttachmentFieldSetting>
-	export function refOfAttachmentFieldSetting(x:AttachmentFieldSetting,v:Ref<AttachmentFieldSetting>)
-	export function unRefAttachmentFieldSetting(v:Ref<AttachmentFieldSetting>):AttachmentFieldSetting
-	export function emptyEmploymentCreate():EmploymentCreate
-	export function emptyRefEmploymentCreate():Ref<EmploymentCreate>
-	export function refOfEmploymentCreate(x:EmploymentCreate,v:Ref<EmploymentCreate>)
-	export function unRefEmploymentCreate(v:Ref<EmploymentCreate>):EmploymentCreate
-	export function emptyEnum():Enum
-	export function emptyRefEnum():Ref<Enum>
-	export function refOfEnum(x:Enum,v:Ref<Enum>)
-	export function unRefEnum(v:Ref<Enum>):Enum
-	export function emptyGetJobLevelReq():GetJobLevelReq
-	export function emptyRefGetJobLevelReq():Ref<GetJobLevelReq>
-	export function refOfGetJobLevelReq(x:GetJobLevelReq,v:Ref<GetJobLevelReq>)
-	export function unRefGetJobLevelReq(v:Ref<GetJobLevelReq>):GetJobLevelReq
-	export function emptyListSubdivisionRespData():ListSubdivisionRespData
-	export function emptyRefListSubdivisionRespData():Ref<ListSubdivisionRespData>
-	export function refOfListSubdivisionRespData(x:ListSubdivisionRespData,v:Ref<ListSubdivisionRespData>)
-	export function unRefListSubdivisionRespData(v:Ref<ListSubdivisionRespData>):ListSubdivisionRespData
-	export function emptyP2PersonCreatedV1Data():P2PersonCreatedV1Data
-	export function emptyRefP2PersonCreatedV1Data():Ref<P2PersonCreatedV1Data>
-	export function refOfP2PersonCreatedV1Data(x:P2PersonCreatedV1Data,v:Ref<P2PersonCreatedV1Data>)
-	export function unRefP2PersonCreatedV1Data(v:Ref<P2PersonCreatedV1Data>):P2PersonCreatedV1Data
 	export function emptyGetSubregionRespData():GetSubregionRespData
 	export function emptyRefGetSubregionRespData():Ref<GetSubregionRespData>
 	export function refOfGetSubregionRespData(x:GetSubregionRespData,v:Ref<GetSubregionRespData>)
 	export function unRefGetSubregionRespData(v:Ref<GetSubregionRespData>):GetSubregionRespData
-	export function emptyNumberFieldSetting():NumberFieldSetting
-	export function emptyRefNumberFieldSetting():Ref<NumberFieldSetting>
-	export function refOfNumberFieldSetting(x:NumberFieldSetting,v:Ref<NumberFieldSetting>)
-	export function unRefNumberFieldSetting(v:Ref<NumberFieldSetting>):NumberFieldSetting
-	export function emptyQueryTransferReasonResp():QueryTransferReasonResp
-	export function emptyRefQueryTransferReasonResp():Ref<QueryTransferReasonResp>
-	export function refOfQueryTransferReasonResp(x:QueryTransferReasonResp,v:Ref<QueryTransferReasonResp>)
-	export function unRefQueryTransferReasonResp(v:Ref<QueryTransferReasonResp>):QueryTransferReasonResp
-	export function emptyCommonSchemaOption():CommonSchemaOption
-	export function emptyRefCommonSchemaOption():Ref<CommonSchemaOption>
-	export function refOfCommonSchemaOption(x:CommonSchemaOption,v:Ref<CommonSchemaOption>)
-	export function unRefCommonSchemaOption(v:Ref<CommonSchemaOption>):CommonSchemaOption
-	export function emptyLeaveRequestHistoryLeaveResp():LeaveRequestHistoryLeaveResp
-	export function emptyRefLeaveRequestHistoryLeaveResp():Ref<LeaveRequestHistoryLeaveResp>
-	export function refOfLeaveRequestHistoryLeaveResp(x:LeaveRequestHistoryLeaveResp,v:Ref<LeaveRequestHistoryLeaveResp>)
-	export function unRefLeaveRequestHistoryLeaveResp(v:Ref<LeaveRequestHistoryLeaveResp>):LeaveRequestHistoryLeaveResp
-	export function emptyListCurrencyResp():ListCurrencyResp
-	export function emptyRefListCurrencyResp():Ref<ListCurrencyResp>
-	export function refOfListCurrencyResp(x:ListCurrencyResp,v:Ref<ListCurrencyResp>)
-	export function unRefListCurrencyResp(v:Ref<ListCurrencyResp>):ListCurrencyResp
-	export function emptyP2PersonCreatedV1():P2PersonCreatedV1
-	export function emptyRefP2PersonCreatedV1():Ref<P2PersonCreatedV1>
-	export function refOfP2PersonCreatedV1(x:P2PersonCreatedV1,v:Ref<P2PersonCreatedV1>)
-	export function unRefP2PersonCreatedV1(v:Ref<P2PersonCreatedV1>):P2PersonCreatedV1
-	export function emptyPatchJobRespData():PatchJobRespData
-	export function emptyRefPatchJobRespData():Ref<PatchJobRespData>
-	export function refOfPatchJobRespData(x:PatchJobRespData,v:Ref<PatchJobRespData>)
-	export function unRefPatchJobRespData(v:Ref<PatchJobRespData>):PatchJobRespData
-	export function emptyGetCompanyResp():GetCompanyResp
-	export function emptyRefGetCompanyResp():Ref<GetCompanyResp>
-	export function refOfGetCompanyResp(x:GetCompanyResp,v:Ref<GetCompanyResp>)
-	export function unRefGetCompanyResp(v:Ref<GetCompanyResp>):GetCompanyResp
-	export function emptyCommonSchemaConfig():CommonSchemaConfig
-	export function emptyRefCommonSchemaConfig():Ref<CommonSchemaConfig>
-	export function refOfCommonSchemaConfig(x:CommonSchemaConfig,v:Ref<CommonSchemaConfig>)
-	export function unRefCommonSchemaConfig(v:Ref<CommonSchemaConfig>):CommonSchemaConfig
-	export function emptyDeletePersonResp():DeletePersonResp
-	export function emptyRefDeletePersonResp():Ref<DeletePersonResp>
-	export function refOfDeletePersonResp(x:DeletePersonResp,v:Ref<DeletePersonResp>)
-	export function unRefDeletePersonResp(v:Ref<DeletePersonResp>):DeletePersonResp
-	export function emptyGetSubdivisionResp():GetSubdivisionResp
-	export function emptyRefGetSubdivisionResp():Ref<GetSubdivisionResp>
-	export function refOfGetSubdivisionResp(x:GetSubdivisionResp,v:Ref<GetSubdivisionResp>)
-	export function unRefGetSubdivisionResp(v:Ref<GetSubdivisionResp>):GetSubdivisionResp
-	export function emptyImageFieldSetting():ImageFieldSetting
-	export function emptyRefImageFieldSetting():Ref<ImageFieldSetting>
-	export function refOfImageFieldSetting(x:ImageFieldSetting,v:Ref<ImageFieldSetting>)
-	export function unRefImageFieldSetting(v:Ref<ImageFieldSetting>):ImageFieldSetting
-	export function emptyOffboardingReason():OffboardingReason
-	export function emptyRefOffboardingReason():Ref<OffboardingReason>
-	export function refOfOffboardingReason(x:OffboardingReason,v:Ref<OffboardingReason>)
-	export function unRefOffboardingReason(v:Ref<OffboardingReason>):OffboardingReason
-	export function emptyP2PersonUpdatedV1():P2PersonUpdatedV1
-	export function emptyRefP2PersonUpdatedV1():Ref<P2PersonUpdatedV1>
-	export function refOfP2PersonUpdatedV1(x:P2PersonUpdatedV1,v:Ref<P2PersonUpdatedV1>)
-	export function unRefP2PersonUpdatedV1(v:Ref<P2PersonUpdatedV1>):P2PersonUpdatedV1
-	export function emptyEmployment():Employment
-	export function emptyRefEmployment():Ref<Employment>
-	export function refOfEmployment(x:Employment,v:Ref<Employment>)
-	export function unRefEmployment(v:Ref<Employment>):Employment
-	export function emptyGetCurrencyResp():GetCurrencyResp
-	export function emptyRefGetCurrencyResp():Ref<GetCurrencyResp>
-	export function refOfGetCurrencyResp(x:GetCurrencyResp,v:Ref<GetCurrencyResp>)
-	export function unRefGetCurrencyResp(v:Ref<GetCurrencyResp>):GetCurrencyResp
-	export function emptyGetJobFamilyReq():GetJobFamilyReq
-	export function emptyRefGetJobFamilyReq():Ref<GetJobFamilyReq>
-	export function refOfGetJobFamilyReq(x:GetJobFamilyReq,v:Ref<GetJobFamilyReq>)
-	export function unRefGetJobFamilyReq(v:Ref<GetJobFamilyReq>):GetJobFamilyReq
-	export function emptyPatchJobLevelRespData():PatchJobLevelRespData
-	export function emptyRefPatchJobLevelRespData():Ref<PatchJobLevelRespData>
-	export function refOfPatchJobLevelRespData(x:PatchJobLevelRespData,v:Ref<PatchJobLevelRespData>)
-	export function unRefPatchJobLevelRespData(v:Ref<PatchJobLevelRespData>):PatchJobLevelRespData
-	export function emptyPhoneNumberAndAreaCode():PhoneNumberAndAreaCode
-	export function emptyRefPhoneNumberAndAreaCode():Ref<PhoneNumberAndAreaCode>
-	export function refOfPhoneNumberAndAreaCode(x:PhoneNumberAndAreaCode,v:Ref<PhoneNumberAndAreaCode>)
-	export function unRefPhoneNumberAndAreaCode(v:Ref<PhoneNumberAndAreaCode>):PhoneNumberAndAreaCode
-	export function emptyCpstBandWidth():CpstBandWidth
-	export function emptyRefCpstBandWidth():Ref<CpstBandWidth>
-	export function refOfCpstBandWidth(x:CpstBandWidth,v:Ref<CpstBandWidth>)
-	export function unRefCpstBandWidth(v:Ref<CpstBandWidth>):CpstBandWidth
-	export function emptyCreateJobDataReq():CreateJobDataReq
-	export function emptyRefCreateJobDataReq():Ref<CreateJobDataReq>
-	export function refOfCreateJobDataReq(x:CreateJobDataReq,v:Ref<CreateJobDataReq>)
-	export function unRefCreateJobDataReq(v:Ref<CreateJobDataReq>):CreateJobDataReq
-	export function emptyIdInfo():IdInfo
-	export function emptyRefIdInfo():Ref<IdInfo>
-	export function refOfIdInfo(x:IdInfo,v:Ref<IdInfo>)
-	export function unRefIdInfo(v:Ref<IdInfo>):IdInfo
-	export function emptyDeleteLeaveGrantingRecordResp():DeleteLeaveGrantingRecordResp
-	export function emptyRefDeleteLeaveGrantingRecordResp():Ref<DeleteLeaveGrantingRecordResp>
-	export function refOfDeleteLeaveGrantingRecordResp(x:DeleteLeaveGrantingRecordResp,v:Ref<DeleteLeaveGrantingRecordResp>)
-	export function unRefDeleteLeaveGrantingRecordResp(v:Ref<DeleteLeaveGrantingRecordResp>):DeleteLeaveGrantingRecordResp
-	export function emptyFormFieldVariableListObject():FormFieldVariableListObject
-	export function emptyRefFormFieldVariableListObject():Ref<FormFieldVariableListObject>
-	export function refOfFormFieldVariableListObject(x:FormFieldVariableListObject,v:Ref<FormFieldVariableListObject>)
-	export function unRefFormFieldVariableListObject(v:Ref<FormFieldVariableListObject>):FormFieldVariableListObject
-	export function emptyFormFieldVariableNumberValue():FormFieldVariableNumberValue
-	export function emptyRefFormFieldVariableNumberValue():Ref<FormFieldVariableNumberValue>
-	export function refOfFormFieldVariableNumberValue(x:FormFieldVariableNumberValue,v:Ref<FormFieldVariableNumberValue>)
-	export function unRefFormFieldVariableNumberValue(v:Ref<FormFieldVariableNumberValue>):FormFieldVariableNumberValue
-	export function emptyPatchEmploymentReq():PatchEmploymentReq
-	export function emptyRefPatchEmploymentReq():Ref<PatchEmploymentReq>
-	export function refOfPatchEmploymentReq(x:PatchEmploymentReq,v:Ref<PatchEmploymentReq>)
-	export function unRefPatchEmploymentReq(v:Ref<PatchEmploymentReq>):PatchEmploymentReq
-	export function emptyPatchJobResp():PatchJobResp
-	export function emptyRefPatchJobResp():Ref<PatchJobResp>
-	export function refOfPatchJobResp(x:PatchJobResp,v:Ref<PatchJobResp>)
-	export function unRefPatchJobResp(v:Ref<PatchJobResp>):PatchJobResp
-	export function emptyPreviousEmployer():PreviousEmployer
-	export function emptyRefPreviousEmployer():Ref<PreviousEmployer>
-	export function refOfPreviousEmployer(x:PreviousEmployer,v:Ref<PreviousEmployer>)
-	export function unRefPreviousEmployer(v:Ref<PreviousEmployer>):PreviousEmployer
-	export function emptyCountryRegion():CountryRegion
-	export function emptyRefCountryRegion():Ref<CountryRegion>
-	export function refOfCountryRegion(x:CountryRegion,v:Ref<CountryRegion>)
-	export function unRefCountryRegion(v:Ref<CountryRegion>):CountryRegion
-	export function emptyFilterExpression():FilterExpression
-	export function emptyRefFilterExpression():Ref<FilterExpression>
-	export function refOfFilterExpression(x:FilterExpression,v:Ref<FilterExpression>)
-	export function unRefFilterExpression(v:Ref<FilterExpression>):FilterExpression
-	export function emptyPermissionSecurityGroup():PermissionSecurityGroup
-	export function emptyRefPermissionSecurityGroup():Ref<PermissionSecurityGroup>
-	export function refOfPermissionSecurityGroup(x:PermissionSecurityGroup,v:Ref<PermissionSecurityGroup>)
-	export function unRefPermissionSecurityGroup(v:Ref<PermissionSecurityGroup>):PermissionSecurityGroup
-	export function emptyBackgroundCheckTarget():BackgroundCheckTarget
-	export function emptyRefBackgroundCheckTarget():Ref<BackgroundCheckTarget>
-	export function refOfBackgroundCheckTarget(x:BackgroundCheckTarget,v:Ref<BackgroundCheckTarget>)
-	export function unRefBackgroundCheckTarget(v:Ref<BackgroundCheckTarget>):BackgroundCheckTarget
-	export function emptyCreateJobLevelRespData():CreateJobLevelRespData
-	export function emptyRefCreateJobLevelRespData():Ref<CreateJobLevelRespData>
-	export function refOfCreateJobLevelRespData(x:CreateJobLevelRespData,v:Ref<CreateJobLevelRespData>)
-	export function unRefCreateJobLevelRespData(v:Ref<CreateJobLevelRespData>):CreateJobLevelRespData
-	export function emptyDeleteDepartmentReq():DeleteDepartmentReq
-	export function emptyRefDeleteDepartmentReq():Ref<DeleteDepartmentReq>
-	export function refOfDeleteDepartmentReq(x:DeleteDepartmentReq,v:Ref<DeleteDepartmentReq>)
-	export function unRefDeleteDepartmentReq(v:Ref<DeleteDepartmentReq>):DeleteDepartmentReq
-	export function emptyJobLevel():JobLevel
-	export function emptyRefJobLevel():Ref<JobLevel>
-	export function refOfJobLevel(x:JobLevel,v:Ref<JobLevel>)
-	export function unRefJobLevel(v:Ref<JobLevel>):JobLevel
-	export function emptyMatchCompensationStandardReq():MatchCompensationStandardReq
-	export function emptyRefMatchCompensationStandardReq():Ref<MatchCompensationStandardReq>
-	export function refOfMatchCompensationStandardReq(x:MatchCompensationStandardReq,v:Ref<MatchCompensationStandardReq>)
-	export function unRefMatchCompensationStandardReq(v:Ref<MatchCompensationStandardReq>):MatchCompensationStandardReq
-	export function emptyP2JobDataChangedV1():P2JobDataChangedV1
-	export function emptyRefP2JobDataChangedV1():Ref<P2JobDataChangedV1>
-	export function refOfP2JobDataChangedV1(x:P2JobDataChangedV1,v:Ref<P2JobDataChangedV1>)
-	export function unRefP2JobDataChangedV1(v:Ref<P2JobDataChangedV1>):P2JobDataChangedV1
-	export function emptyCompany():Company
-	export function emptyRefCompany():Ref<Company>
-	export function refOfCompany(x:Company,v:Ref<Company>)
-	export function unRefCompany(v:Ref<Company>):Company
-	export function emptyOffboardingInfo():OffboardingInfo
-	export function emptyRefOffboardingInfo():Ref<OffboardingInfo>
-	export function refOfOffboardingInfo(x:OffboardingInfo,v:Ref<OffboardingInfo>)
-	export function unRefOffboardingInfo(v:Ref<OffboardingInfo>):OffboardingInfo
-	export function emptyP2OrgRoleAuthorizationUpdatedV1():P2OrgRoleAuthorizationUpdatedV1
-	export function emptyRefP2OrgRoleAuthorizationUpdatedV1():Ref<P2OrgRoleAuthorizationUpdatedV1>
-	export function refOfP2OrgRoleAuthorizationUpdatedV1(x:P2OrgRoleAuthorizationUpdatedV1,v:Ref<P2OrgRoleAuthorizationUpdatedV1>)
-	export function unRefP2OrgRoleAuthorizationUpdatedV1(v:Ref<P2OrgRoleAuthorizationUpdatedV1>):P2OrgRoleAuthorizationUpdatedV1
-	export function emptyAssignedOrganization():AssignedOrganization
-	export function emptyRefAssignedOrganization():Ref<AssignedOrganization>
-	export function refOfAssignedOrganization(x:AssignedOrganization,v:Ref<AssignedOrganization>)
-	export function unRefAssignedOrganization(v:Ref<AssignedOrganization>):AssignedOrganization
-	export function emptyCostCenter():CostCenter
-	export function emptyRefCostCenter():Ref<CostCenter>
-	export function refOfCostCenter(x:CostCenter,v:Ref<CostCenter>)
-	export function unRefCostCenter(v:Ref<CostCenter>):CostCenter
-	export function emptyFormVariableValueInfo():FormVariableValueInfo
-	export function emptyRefFormVariableValueInfo():Ref<FormVariableValueInfo>
-	export function refOfFormVariableValueInfo(x:FormVariableValueInfo,v:Ref<FormVariableValueInfo>)
-	export function unRefFormVariableValueInfo(v:Ref<FormVariableValueInfo>):FormVariableValueInfo
+	export function emptyPatchEmployeeTypeReq():PatchEmployeeTypeReq
+	export function emptyRefPatchEmployeeTypeReq():Ref<PatchEmployeeTypeReq>
+	export function refOfPatchEmployeeTypeReq(x:PatchEmployeeTypeReq,v:Ref<PatchEmployeeTypeReq>)
+	export function unRefPatchEmployeeTypeReq(v:Ref<PatchEmployeeTypeReq>):PatchEmployeeTypeReq
+	export function emptyDeleteJobDataReq():DeleteJobDataReq
+	export function emptyRefDeleteJobDataReq():Ref<DeleteJobDataReq>
+	export function refOfDeleteJobDataReq(x:DeleteJobDataReq,v:Ref<DeleteJobDataReq>)
+	export function unRefDeleteJobDataReq(v:Ref<DeleteJobDataReq>):DeleteJobDataReq
+	export function emptyListLocationResp():ListLocationResp
+	export function emptyRefListLocationResp():Ref<ListLocationResp>
+	export function refOfListLocationResp(x:ListLocationResp,v:Ref<ListLocationResp>)
+	export function unRefListLocationResp(v:Ref<ListLocationResp>):ListLocationResp
+	export function emptyListSubdivisionRespData():ListSubdivisionRespData
+	export function emptyRefListSubdivisionRespData():Ref<ListSubdivisionRespData>
+	export function refOfListSubdivisionRespData(x:ListSubdivisionRespData,v:Ref<ListSubdivisionRespData>)
+	export function unRefListSubdivisionRespData(v:Ref<ListSubdivisionRespData>):ListSubdivisionRespData
+	export function emptyResidentTax():ResidentTax
+	export function emptyRefResidentTax():Ref<ResidentTax>
+	export function refOfResidentTax(x:ResidentTax,v:Ref<ResidentTax>)
+	export function unRefResidentTax(v:Ref<ResidentTax>):ResidentTax
+	export function emptyGetJobDataRespData():GetJobDataRespData
+	export function emptyRefGetJobDataRespData():Ref<GetJobDataRespData>
+	export function refOfGetJobDataRespData(x:GetJobDataRespData,v:Ref<GetJobDataRespData>)
+	export function unRefGetJobDataRespData(v:Ref<GetJobDataRespData>):GetJobDataRespData
+	export function emptyListSecurityGroupReq():ListSecurityGroupReq
+	export function emptyRefListSecurityGroupReq():Ref<ListSecurityGroupReq>
+	export function refOfListSecurityGroupReq(x:ListSecurityGroupReq,v:Ref<ListSecurityGroupReq>)
+	export function unRefListSecurityGroupReq(v:Ref<ListSecurityGroupReq>):ListSecurityGroupReq
 	export function emptyP2EmploymentResignedV1():P2EmploymentResignedV1
 	export function emptyRefP2EmploymentResignedV1():Ref<P2EmploymentResignedV1>
 	export function refOfP2EmploymentResignedV1(x:P2EmploymentResignedV1,v:Ref<P2EmploymentResignedV1>)
 	export function unRefP2EmploymentResignedV1(v:Ref<P2EmploymentResignedV1>):P2EmploymentResignedV1
-	export function emptyPreHireQuery():PreHireQuery
-	export function emptyRefPreHireQuery():Ref<PreHireQuery>
-	export function refOfPreHireQuery(x:PreHireQuery,v:Ref<PreHireQuery>)
-	export function unRefPreHireQuery(v:Ref<PreHireQuery>):PreHireQuery
-	export function emptySubmitOffboardingRespData():SubmitOffboardingRespData
-	export function emptyRefSubmitOffboardingRespData():Ref<SubmitOffboardingRespData>
-	export function refOfSubmitOffboardingRespData(x:SubmitOffboardingRespData,v:Ref<SubmitOffboardingRespData>)
-	export function unRefSubmitOffboardingRespData(v:Ref<SubmitOffboardingRespData>):SubmitOffboardingRespData
-	export function emptyCpstMatchItem():CpstMatchItem
-	export function emptyRefCpstMatchItem():Ref<CpstMatchItem>
-	export function refOfCpstMatchItem(x:CpstMatchItem,v:Ref<CpstMatchItem>)
-	export function unRefCpstMatchItem(v:Ref<CpstMatchItem>):CpstMatchItem
-	export function emptyCreateNationalIdTypeReq():CreateNationalIdTypeReq
-	export function emptyRefCreateNationalIdTypeReq():Ref<CreateNationalIdTypeReq>
-	export function refOfCreateNationalIdTypeReq(x:CreateNationalIdTypeReq,v:Ref<CreateNationalIdTypeReq>)
-	export function unRefCreateNationalIdTypeReq(v:Ref<CreateNationalIdTypeReq>):CreateNationalIdTypeReq
-	export function emptyGetJobLevelRespData():GetJobLevelRespData
-	export function emptyRefGetJobLevelRespData():Ref<GetJobLevelRespData>
-	export function refOfGetJobLevelRespData(x:GetJobLevelRespData,v:Ref<GetJobLevelRespData>)
-	export function unRefGetJobLevelRespData(v:Ref<GetJobLevelRespData>):GetJobLevelRespData
-	export function emptyLeaveRequestHistoryLeaveRespData():LeaveRequestHistoryLeaveRespData
-	export function emptyRefLeaveRequestHistoryLeaveRespData():Ref<LeaveRequestHistoryLeaveRespData>
-	export function refOfLeaveRequestHistoryLeaveRespData(x:LeaveRequestHistoryLeaveRespData,v:Ref<LeaveRequestHistoryLeaveRespData>)
-	export function unRefLeaveRequestHistoryLeaveRespData(v:Ref<LeaveRequestHistoryLeaveRespData>):LeaveRequestHistoryLeaveRespData
-	export function emptyReferenceObject():ReferenceObject
-	export function emptyRefReferenceObject():Ref<ReferenceObject>
-	export function refOfReferenceObject(x:ReferenceObject,v:Ref<ReferenceObject>)
-	export function unRefReferenceObject(v:Ref<ReferenceObject>):ReferenceObject
-	export function emptyLeaveBalance():LeaveBalance
-	export function emptyRefLeaveBalance():Ref<LeaveBalance>
-	export function refOfLeaveBalance(x:LeaveBalance,v:Ref<LeaveBalance>)
-	export function unRefLeaveBalance(v:Ref<LeaveBalance>):LeaveBalance
-	export function emptyQueryCustomFieldRespData():QueryCustomFieldRespData
-	export function emptyRefQueryCustomFieldRespData():Ref<QueryCustomFieldRespData>
-	export function refOfQueryCustomFieldRespData(x:QueryCustomFieldRespData,v:Ref<QueryCustomFieldRespData>)
-	export function unRefQueryCustomFieldRespData(v:Ref<QueryCustomFieldRespData>):QueryCustomFieldRespData
-	export function emptyFormFieldVariableFileValue():FormFieldVariableFileValue
-	export function emptyRefFormFieldVariableFileValue():Ref<FormFieldVariableFileValue>
-	export function refOfFormFieldVariableFileValue(x:FormFieldVariableFileValue,v:Ref<FormFieldVariableFileValue>)
-	export function unRefFormFieldVariableFileValue(v:Ref<FormFieldVariableFileValue>):FormFieldVariableFileValue
-	export function emptyPatchPreHireResp():PatchPreHireResp
-	export function emptyRefPatchPreHireResp():Ref<PatchPreHireResp>
-	export function refOfPatchPreHireResp(x:PatchPreHireResp,v:Ref<PatchPreHireResp>)
-	export function unRefPatchPreHireResp(v:Ref<PatchPreHireResp>):PatchPreHireResp
+	export function emptyGetContractResp():GetContractResp
+	export function emptyRefGetContractResp():Ref<GetContractResp>
+	export function refOfGetContractResp(x:GetContractResp,v:Ref<GetContractResp>)
+	export function unRefGetContractResp(v:Ref<GetContractResp>):GetContractResp
+	export function emptyP2JobDataEmployedV1Data():P2JobDataEmployedV1Data
+	export function emptyRefP2JobDataEmployedV1Data():Ref<P2JobDataEmployedV1Data>
+	export function refOfP2JobDataEmployedV1Data(x:P2JobDataEmployedV1Data,v:Ref<P2JobDataEmployedV1Data>)
+	export function unRefP2JobDataEmployedV1Data(v:Ref<P2JobDataEmployedV1Data>):P2JobDataEmployedV1Data
+	export function emptyDeleteCompanyResp():DeleteCompanyResp
+	export function emptyRefDeleteCompanyResp():Ref<DeleteCompanyResp>
+	export function refOfDeleteCompanyResp(x:DeleteCompanyResp,v:Ref<DeleteCompanyResp>)
+	export function unRefDeleteCompanyResp(v:Ref<DeleteCompanyResp>):DeleteCompanyResp
+	export function emptyP2ContractDeletedV1Data():P2ContractDeletedV1Data
+	export function emptyRefP2ContractDeletedV1Data():Ref<P2ContractDeletedV1Data>
+	export function refOfP2ContractDeletedV1Data(x:P2ContractDeletedV1Data,v:Ref<P2ContractDeletedV1Data>)
+	export function unRefP2ContractDeletedV1Data(v:Ref<P2ContractDeletedV1Data>):P2ContractDeletedV1Data
+	export function emptyPatchDepartmentRespData():PatchDepartmentRespData
+	export function emptyRefPatchDepartmentRespData():Ref<PatchDepartmentRespData>
+	export function refOfPatchDepartmentRespData(x:PatchDepartmentRespData,v:Ref<PatchDepartmentRespData>)
+	export function unRefPatchDepartmentRespData(v:Ref<PatchDepartmentRespData>):PatchDepartmentRespData
+	export function emptyGetCompanyResp():GetCompanyResp
+	export function emptyRefGetCompanyResp():Ref<GetCompanyResp>
+	export function refOfGetCompanyResp(x:GetCompanyResp,v:Ref<GetCompanyResp>)
+	export function unRefGetCompanyResp(v:Ref<GetCompanyResp>):GetCompanyResp
+	export function emptyGetContractRespData():GetContractRespData
+	export function emptyRefGetContractRespData():Ref<GetContractRespData>
+	export function refOfGetContractRespData(x:GetContractRespData,v:Ref<GetContractRespData>)
+	export function unRefGetContractRespData(v:Ref<GetContractRespData>):GetContractRespData
+	export function emptyP2ContractCreatedV1Data():P2ContractCreatedV1Data
+	export function emptyRefP2ContractCreatedV1Data():Ref<P2ContractCreatedV1Data>
+	export function refOfP2ContractCreatedV1Data(x:P2ContractCreatedV1Data,v:Ref<P2ContractCreatedV1Data>)
+	export function unRefP2ContractCreatedV1Data(v:Ref<P2ContractCreatedV1Data>):P2ContractCreatedV1Data
 	export function emptyUploadPersonResp():UploadPersonResp
 	export function emptyRefUploadPersonResp():Ref<UploadPersonResp>
 	export function refOfUploadPersonResp(x:UploadPersonResp,v:Ref<UploadPersonResp>)
 	export function unRefUploadPersonResp(v:Ref<UploadPersonResp>):UploadPersonResp
-	export function emptyCreateLocationReq():CreateLocationReq
-	export function emptyRefCreateLocationReq():Ref<CreateLocationReq>
-	export function refOfCreateLocationReq(x:CreateLocationReq,v:Ref<CreateLocationReq>)
-	export function unRefCreateLocationReq(v:Ref<CreateLocationReq>):CreateLocationReq
-	export function emptyFormFieldVariableRecordValueExample():FormFieldVariableRecordValueExample
-	export function emptyRefFormFieldVariableRecordValueExample():Ref<FormFieldVariableRecordValueExample>
-	export function refOfFormFieldVariableRecordValueExample(x:FormFieldVariableRecordValueExample,v:Ref<FormFieldVariableRecordValueExample>)
-	export function unRefFormFieldVariableRecordValueExample(v:Ref<FormFieldVariableRecordValueExample>):FormFieldVariableRecordValueExample
-	export function emptyLeaveTypesLeaveResp():LeaveTypesLeaveResp
-	export function emptyRefLeaveTypesLeaveResp():Ref<LeaveTypesLeaveResp>
-	export function refOfLeaveTypesLeaveResp(x:LeaveTypesLeaveResp,v:Ref<LeaveTypesLeaveResp>)
-	export function unRefLeaveTypesLeaveResp(v:Ref<LeaveTypesLeaveResp>):LeaveTypesLeaveResp
-	export function emptyP2OffboardingUpdatedV1():P2OffboardingUpdatedV1
-	export function emptyRefP2OffboardingUpdatedV1():Ref<P2OffboardingUpdatedV1>
-	export function refOfP2OffboardingUpdatedV1(x:P2OffboardingUpdatedV1,v:Ref<P2OffboardingUpdatedV1>)
-	export function unRefP2OffboardingUpdatedV1(v:Ref<P2OffboardingUpdatedV1>):P2OffboardingUpdatedV1
-	export function emptyTransferType():TransferType
-	export function emptyRefTransferType():Ref<TransferType>
-	export function refOfTransferType(x:TransferType,v:Ref<TransferType>)
-	export function unRefTransferType(v:Ref<TransferType>):TransferType
-	export function emptyCreateEmployeeTypeRespData():CreateEmployeeTypeRespData
-	export function emptyRefCreateEmployeeTypeRespData():Ref<CreateEmployeeTypeRespData>
-	export function refOfCreateEmployeeTypeRespData(x:CreateEmployeeTypeRespData,v:Ref<CreateEmployeeTypeRespData>)
-	export function unRefCreateEmployeeTypeRespData(v:Ref<CreateEmployeeTypeRespData>):CreateEmployeeTypeRespData
+	export function emptyCreateLeaveGrantingRecordReq():CreateLeaveGrantingRecordReq
+	export function emptyRefCreateLeaveGrantingRecordReq():Ref<CreateLeaveGrantingRecordReq>
+	export function refOfCreateLeaveGrantingRecordReq(x:CreateLeaveGrantingRecordReq,v:Ref<CreateLeaveGrantingRecordReq>)
+	export function unRefCreateLeaveGrantingRecordReq(v:Ref<CreateLeaveGrantingRecordReq>):CreateLeaveGrantingRecordReq
+	export function emptyGetJobLevelRespData():GetJobLevelRespData
+	export function emptyRefGetJobLevelRespData():Ref<GetJobLevelRespData>
+	export function refOfGetJobLevelRespData(x:GetJobLevelRespData,v:Ref<GetJobLevelRespData>)
+	export function unRefGetJobLevelRespData(v:Ref<GetJobLevelRespData>):GetJobLevelRespData
+	export function emptyPatchJobLevelReq():PatchJobLevelReq
+	export function emptyRefPatchJobLevelReq():Ref<PatchJobLevelReq>
+	export function refOfPatchJobLevelReq(x:PatchJobLevelReq,v:Ref<PatchJobLevelReq>)
+	export function unRefPatchJobLevelReq(v:Ref<PatchJobLevelReq>):PatchJobLevelReq
+	export function emptySubdivision():Subdivision
+	export function emptyRefSubdivision():Ref<Subdivision>
+	export function refOfSubdivision(x:Subdivision,v:Ref<Subdivision>)
+	export function unRefSubdivision(v:Ref<Subdivision>):Subdivision
+	export function emptyRemoveRoleAssignAuthorizationReq():RemoveRoleAssignAuthorizationReq
+	export function emptyRefRemoveRoleAssignAuthorizationReq():Ref<RemoveRoleAssignAuthorizationReq>
+	export function refOfRemoveRoleAssignAuthorizationReq(x:RemoveRoleAssignAuthorizationReq,v:Ref<RemoveRoleAssignAuthorizationReq>)
+	export function unRefRemoveRoleAssignAuthorizationReq(v:Ref<RemoveRoleAssignAuthorizationReq>):RemoveRoleAssignAuthorizationReq
+	export function emptyCreateLeaveGrantingRecordReqBody():CreateLeaveGrantingRecordReqBody
+	export function emptyRefCreateLeaveGrantingRecordReqBody():Ref<CreateLeaveGrantingRecordReqBody>
+	export function refOfCreateLeaveGrantingRecordReqBody(x:CreateLeaveGrantingRecordReqBody,v:Ref<CreateLeaveGrantingRecordReqBody>)
+	export function unRefCreateLeaveGrantingRecordReqBody(v:Ref<CreateLeaveGrantingRecordReqBody>):CreateLeaveGrantingRecordReqBody
+	export function emptyGetSubdivisionResp():GetSubdivisionResp
+	export function emptyRefGetSubdivisionResp():Ref<GetSubdivisionResp>
+	export function refOfGetSubdivisionResp(x:GetSubdivisionResp,v:Ref<GetSubdivisionResp>)
+	export function unRefGetSubdivisionResp(v:Ref<GetSubdivisionResp>):GetSubdivisionResp
+	export function emptyCreateEmployeeTypeResp():CreateEmployeeTypeResp
+	export function emptyRefCreateEmployeeTypeResp():Ref<CreateEmployeeTypeResp>
+	export function refOfCreateEmployeeTypeResp(x:CreateEmployeeTypeResp,v:Ref<CreateEmployeeTypeResp>)
+	export function unRefCreateEmployeeTypeResp(v:Ref<CreateEmployeeTypeResp>):CreateEmployeeTypeResp
+	export function emptySearchAssignedUserReq():SearchAssignedUserReq
+	export function emptyRefSearchAssignedUserReq():Ref<SearchAssignedUserReq>
+	export function refOfSearchAssignedUserReq(x:SearchAssignedUserReq,v:Ref<SearchAssignedUserReq>)
+	export function unRefSearchAssignedUserReq(v:Ref<SearchAssignedUserReq>):SearchAssignedUserReq
+	export function emptyCreateJobFamilyReq():CreateJobFamilyReq
+	export function emptyRefCreateJobFamilyReq():Ref<CreateJobFamilyReq>
+	export function refOfCreateJobFamilyReq(x:CreateJobFamilyReq,v:Ref<CreateJobFamilyReq>)
+	export function unRefCreateJobFamilyReq(v:Ref<CreateJobFamilyReq>):CreateJobFamilyReq
+	export function emptyP2DepartmentCreatedV1():P2DepartmentCreatedV1
+	export function emptyRefP2DepartmentCreatedV1():Ref<P2DepartmentCreatedV1>
+	export function refOfP2DepartmentCreatedV1(x:P2DepartmentCreatedV1,v:Ref<P2DepartmentCreatedV1>)
+	export function unRefP2DepartmentCreatedV1(v:Ref<P2DepartmentCreatedV1>):P2DepartmentCreatedV1
+	export function emptyP2PersonDeletedV1Data():P2PersonDeletedV1Data
+	export function emptyRefP2PersonDeletedV1Data():Ref<P2PersonDeletedV1Data>
+	export function refOfP2PersonDeletedV1Data(x:P2PersonDeletedV1Data,v:Ref<P2PersonDeletedV1Data>)
+	export function unRefP2PersonDeletedV1Data(v:Ref<P2PersonDeletedV1Data>):P2PersonDeletedV1Data
+	export function emptyV1():V1
+	export function emptyRefV1():Ref<V1>
+	export function refOfV1(x:V1,v:Ref<V1>)
+	export function unRefV1(v:Ref<V1>):V1
 	export function emptyPatchNationalIdTypeReq():PatchNationalIdTypeReq
 	export function emptyRefPatchNationalIdTypeReq():Ref<PatchNationalIdTypeReq>
 	export function refOfPatchNationalIdTypeReq(x:PatchNationalIdTypeReq,v:Ref<PatchNationalIdTypeReq>)
 	export function unRefPatchNationalIdTypeReq(v:Ref<PatchNationalIdTypeReq>):PatchNationalIdTypeReq
-	export function emptySearchOffboardingResp():SearchOffboardingResp
-	export function emptyRefSearchOffboardingResp():Ref<SearchOffboardingResp>
-	export function refOfSearchOffboardingResp(x:SearchOffboardingResp,v:Ref<SearchOffboardingResp>)
-	export function unRefSearchOffboardingResp(v:Ref<SearchOffboardingResp>):SearchOffboardingResp
-	export function emptyLeaveRequest():LeaveRequest
-	export function emptyRefLeaveRequest():Ref<LeaveRequest>
-	export function refOfLeaveRequest(x:LeaveRequest,v:Ref<LeaveRequest>)
-	export function unRefLeaveRequest(v:Ref<LeaveRequest>):LeaveRequest
-	export function emptyP2JobUpdatedV1():P2JobUpdatedV1
-	export function emptyRefP2JobUpdatedV1():Ref<P2JobUpdatedV1>
-	export function refOfP2JobUpdatedV1(x:P2JobUpdatedV1,v:Ref<P2JobUpdatedV1>)
-	export function unRefP2JobUpdatedV1(v:Ref<P2JobUpdatedV1>):P2JobUpdatedV1
-	export function emptyP2OrgRoleAuthorizationUpdatedV1Data():P2OrgRoleAuthorizationUpdatedV1Data
-	export function emptyRefP2OrgRoleAuthorizationUpdatedV1Data():Ref<P2OrgRoleAuthorizationUpdatedV1Data>
-	export function refOfP2OrgRoleAuthorizationUpdatedV1Data(x:P2OrgRoleAuthorizationUpdatedV1Data,v:Ref<P2OrgRoleAuthorizationUpdatedV1Data>)
-	export function unRefP2OrgRoleAuthorizationUpdatedV1Data(v:Ref<P2OrgRoleAuthorizationUpdatedV1Data>):P2OrgRoleAuthorizationUpdatedV1Data
-	export function emptyQueryOffboardingReqBody():QueryOffboardingReqBody
-	export function emptyRefQueryOffboardingReqBody():Ref<QueryOffboardingReqBody>
-	export function refOfQueryOffboardingReqBody(x:QueryOffboardingReqBody,v:Ref<QueryOffboardingReqBody>)
-	export function unRefQueryOffboardingReqBody(v:Ref<QueryOffboardingReqBody>):QueryOffboardingReqBody
-	export function emptyP2PreHireUpdatedV1Data():P2PreHireUpdatedV1Data
-	export function emptyRefP2PreHireUpdatedV1Data():Ref<P2PreHireUpdatedV1Data>
-	export function refOfP2PreHireUpdatedV1Data(x:P2PreHireUpdatedV1Data,v:Ref<P2PreHireUpdatedV1Data>)
-	export function unRefP2PreHireUpdatedV1Data(v:Ref<P2PreHireUpdatedV1Data>):P2PreHireUpdatedV1Data
-	export function emptyCreateContractRespData():CreateContractRespData
-	export function emptyRefCreateContractRespData():Ref<CreateContractRespData>
-	export function refOfCreateContractRespData(x:CreateContractRespData,v:Ref<CreateContractRespData>)
-	export function unRefCreateContractRespData(v:Ref<CreateContractRespData>):CreateContractRespData
-	export function emptyListJobLevelResp():ListJobLevelResp
-	export function emptyRefListJobLevelResp():Ref<ListJobLevelResp>
-	export function refOfListJobLevelResp(x:ListJobLevelResp,v:Ref<ListJobLevelResp>)
-	export function unRefListJobLevelResp(v:Ref<ListJobLevelResp>):ListJobLevelResp
+	export function emptyCurrency():Currency
+	export function emptyRefCurrency():Ref<Currency>
+	export function refOfCurrency(x:Currency,v:Ref<Currency>)
+	export function unRefCurrency(v:Ref<Currency>):Currency
+	export function emptyPhoneNumberAndAreaCode():PhoneNumberAndAreaCode
+	export function emptyRefPhoneNumberAndAreaCode():Ref<PhoneNumberAndAreaCode>
+	export function refOfPhoneNumberAndAreaCode(x:PhoneNumberAndAreaCode,v:Ref<PhoneNumberAndAreaCode>)
+	export function unRefPhoneNumberAndAreaCode(v:Ref<PhoneNumberAndAreaCode>):PhoneNumberAndAreaCode
+	export function emptyCreateJobChangeReqBody():CreateJobChangeReqBody
+	export function emptyRefCreateJobChangeReqBody():Ref<CreateJobChangeReqBody>
+	export function refOfCreateJobChangeReqBody(x:CreateJobChangeReqBody,v:Ref<CreateJobChangeReqBody>)
+	export function unRefCreateJobChangeReqBody(v:Ref<CreateJobChangeReqBody>):CreateJobChangeReqBody
+	export function emptyOperationLogEntityField():OperationLogEntityField
+	export function emptyRefOperationLogEntityField():Ref<OperationLogEntityField>
+	export function refOfOperationLogEntityField(x:OperationLogEntityField,v:Ref<OperationLogEntityField>)
+	export function unRefOperationLogEntityField(v:Ref<OperationLogEntityField>):OperationLogEntityField
+	export function emptyP2JobDeletedV1Data():P2JobDeletedV1Data
+	export function emptyRefP2JobDeletedV1Data():Ref<P2JobDeletedV1Data>
+	export function refOfP2JobDeletedV1Data(x:P2JobDeletedV1Data,v:Ref<P2JobDeletedV1Data>)
+	export function unRefP2JobDeletedV1Data(v:Ref<P2JobDeletedV1Data>):P2JobDeletedV1Data
+	export function emptyPatchJobDataRespData():PatchJobDataRespData
+	export function emptyRefPatchJobDataRespData():Ref<PatchJobDataRespData>
+	export function refOfPatchJobDataRespData(x:PatchJobDataRespData,v:Ref<PatchJobDataRespData>)
+	export function unRefPatchJobDataRespData(v:Ref<PatchJobDataRespData>):PatchJobDataRespData
+	export function emptyListCountryRegionReq():ListCountryRegionReq
+	export function emptyRefListCountryRegionReq():Ref<ListCountryRegionReq>
+	export function refOfListCountryRegionReq(x:ListCountryRegionReq,v:Ref<ListCountryRegionReq>)
+	export function unRefListCountryRegionReq(v:Ref<ListCountryRegionReq>):ListCountryRegionReq
+	export function emptyCreateJobLevelResp():CreateJobLevelResp
+	export function emptyRefCreateJobLevelResp():Ref<CreateJobLevelResp>
+	export function refOfCreateJobLevelResp(x:CreateJobLevelResp,v:Ref<CreateJobLevelResp>)
+	export function unRefCreateJobLevelResp(v:Ref<CreateJobLevelResp>):CreateJobLevelResp
+	export function emptyListJobResp():ListJobResp
+	export function emptyRefListJobResp():Ref<ListJobResp>
+	export function refOfListJobResp(x:ListJobResp,v:Ref<ListJobResp>)
+	export function unRefListJobResp(v:Ref<ListJobResp>):ListJobResp
+	export function emptyCpstI18n():CpstI18n
+	export function emptyRefCpstI18n():Ref<CpstI18n>
+	export function refOfCpstI18n(x:CpstI18n,v:Ref<CpstI18n>)
+	export function unRefCpstI18n(v:Ref<CpstI18n>):CpstI18n
+	export function emptyDeleteJobLevelReq():DeleteJobLevelReq
+	export function emptyRefDeleteJobLevelReq():Ref<DeleteJobLevelReq>
+	export function refOfDeleteJobLevelReq(x:DeleteJobLevelReq,v:Ref<DeleteJobLevelReq>)
+	export function unRefDeleteJobLevelReq(v:Ref<DeleteJobLevelReq>):DeleteJobLevelReq
+	export function emptyP2ContractUpdatedV1():P2ContractUpdatedV1
+	export function emptyRefP2ContractUpdatedV1():Ref<P2ContractUpdatedV1>
+	export function refOfP2ContractUpdatedV1(x:P2ContractUpdatedV1,v:Ref<P2ContractUpdatedV1>)
+	export function unRefP2ContractUpdatedV1(v:Ref<P2ContractUpdatedV1>):P2ContractUpdatedV1
+	export function emptyP2OrgRoleAuthorizationUpdatedV1():P2OrgRoleAuthorizationUpdatedV1
+	export function emptyRefP2OrgRoleAuthorizationUpdatedV1():Ref<P2OrgRoleAuthorizationUpdatedV1>
+	export function refOfP2OrgRoleAuthorizationUpdatedV1(x:P2OrgRoleAuthorizationUpdatedV1,v:Ref<P2OrgRoleAuthorizationUpdatedV1>)
+	export function unRefP2OrgRoleAuthorizationUpdatedV1(v:Ref<P2OrgRoleAuthorizationUpdatedV1>):P2OrgRoleAuthorizationUpdatedV1
+	export function emptyUserId():UserId
+	export function emptyRefUserId():Ref<UserId>
+	export function refOfUserId(x:UserId,v:Ref<UserId>)
+	export function unRefUserId(v:Ref<UserId>):UserId
+	export function emptyContract():Contract
+	export function emptyRefContract():Ref<Contract>
+	export function refOfContract(x:Contract,v:Ref<Contract>)
+	export function unRefContract(v:Ref<Contract>):Contract
+	export function emptyCpstCurrency():CpstCurrency
+	export function emptyRefCpstCurrency():Ref<CpstCurrency>
+	export function refOfCpstCurrency(x:CpstCurrency,v:Ref<CpstCurrency>)
+	export function unRefCpstCurrency(v:Ref<CpstCurrency>):CpstCurrency
+	export function emptyTransferReason():TransferReason
+	export function emptyRefTransferReason():Ref<TransferReason>
+	export function refOfTransferReason(x:TransferReason,v:Ref<TransferReason>)
+	export function unRefTransferReason(v:Ref<TransferReason>):TransferReason
+	export function emptyEmergencyContact():EmergencyContact
+	export function emptyRefEmergencyContact():Ref<EmergencyContact>
+	export function refOfEmergencyContact(x:EmergencyContact,v:Ref<EmergencyContact>)
+	export function unRefEmergencyContact(v:Ref<EmergencyContact>):EmergencyContact
+	export function emptyGetJobReq():GetJobReq
+	export function emptyRefGetJobReq():Ref<GetJobReq>
+	export function refOfGetJobReq(x:GetJobReq,v:Ref<GetJobReq>)
+	export function unRefGetJobReq(v:Ref<GetJobReq>):GetJobReq
+	export function emptyObjectData():ObjectData
+	export function emptyRefObjectData():Ref<ObjectData>
+	export function refOfObjectData(x:ObjectData,v:Ref<ObjectData>)
+	export function unRefObjectData(v:Ref<ObjectData>):ObjectData
+	export function emptyPreviousEmployer():PreviousEmployer
+	export function emptyRefPreviousEmployer():Ref<PreviousEmployer>
+	export function refOfPreviousEmployer(x:PreviousEmployer,v:Ref<PreviousEmployer>)
+	export function unRefPreviousEmployer(v:Ref<PreviousEmployer>):PreviousEmployer
+	export function emptyDeleteNationalIdTypeResp():DeleteNationalIdTypeResp
+	export function emptyRefDeleteNationalIdTypeResp():Ref<DeleteNationalIdTypeResp>
+	export function refOfDeleteNationalIdTypeResp(x:DeleteNationalIdTypeResp,v:Ref<DeleteNationalIdTypeResp>)
+	export function unRefDeleteNationalIdTypeResp(v:Ref<DeleteNationalIdTypeResp>):DeleteNationalIdTypeResp
 	export function emptyCreateJobFamilyRespData():CreateJobFamilyRespData
 	export function emptyRefCreateJobFamilyRespData():Ref<CreateJobFamilyRespData>
 	export function refOfCreateJobFamilyRespData(x:CreateJobFamilyRespData,v:Ref<CreateJobFamilyRespData>)
 	export function unRefCreateJobFamilyRespData(v:Ref<CreateJobFamilyRespData>):CreateJobFamilyRespData
+	export function emptyGetFileReq():GetFileReq
+	export function emptyRefGetFileReq():Ref<GetFileReq>
+	export function refOfGetFileReq(x:GetFileReq,v:Ref<GetFileReq>)
+	export function unRefGetFileReq(v:Ref<GetFileReq>):GetFileReq
+	export function emptyListPreHireReq():ListPreHireReq
+	export function emptyRefListPreHireReq():Ref<ListPreHireReq>
+	export function refOfListPreHireReq(x:ListPreHireReq,v:Ref<ListPreHireReq>)
+	export function unRefListPreHireReq(v:Ref<ListPreHireReq>):ListPreHireReq
+	export function emptyGetEmployeeTypeRespData():GetEmployeeTypeRespData
+	export function emptyRefGetEmployeeTypeRespData():Ref<GetEmployeeTypeRespData>
+	export function refOfGetEmployeeTypeRespData(x:GetEmployeeTypeRespData,v:Ref<GetEmployeeTypeRespData>)
+	export function unRefGetEmployeeTypeRespData(v:Ref<GetEmployeeTypeRespData>):GetEmployeeTypeRespData
+	export function emptyLeaveGrantingRecord():LeaveGrantingRecord
+	export function emptyRefLeaveGrantingRecord():Ref<LeaveGrantingRecord>
+	export function refOfLeaveGrantingRecord(x:LeaveGrantingRecord,v:Ref<LeaveGrantingRecord>)
+	export function unRefLeaveGrantingRecord(v:Ref<LeaveGrantingRecord>):LeaveGrantingRecord
+	export function emptyListSubdivisionReq():ListSubdivisionReq
+	export function emptyRefListSubdivisionReq():Ref<ListSubdivisionReq>
+	export function refOfListSubdivisionReq(x:ListSubdivisionReq,v:Ref<ListSubdivisionReq>)
+	export function unRefListSubdivisionReq(v:Ref<ListSubdivisionReq>):ListSubdivisionReq
+	export function emptyBackgroundCheckCity():BackgroundCheckCity
+	export function emptyRefBackgroundCheckCity():Ref<BackgroundCheckCity>
+	export function refOfBackgroundCheckCity(x:BackgroundCheckCity,v:Ref<BackgroundCheckCity>)
+	export function unRefBackgroundCheckCity(v:Ref<BackgroundCheckCity>):BackgroundCheckCity
+	export function emptyListContractRespData():ListContractRespData
+	export function emptyRefListContractRespData():Ref<ListContractRespData>
+	export function refOfListContractRespData(x:ListContractRespData,v:Ref<ListContractRespData>)
+	export function unRefListContractRespData(v:Ref<ListContractRespData>):ListContractRespData
+	export function emptyP2JobUpdatedV1():P2JobUpdatedV1
+	export function emptyRefP2JobUpdatedV1():Ref<P2JobUpdatedV1>
+	export function refOfP2JobUpdatedV1(x:P2JobUpdatedV1,v:Ref<P2JobUpdatedV1>)
+	export function unRefP2JobUpdatedV1(v:Ref<P2JobUpdatedV1>):P2JobUpdatedV1
+	export function emptyPatchEmployeeTypeRespData():PatchEmployeeTypeRespData
+	export function emptyRefPatchEmployeeTypeRespData():Ref<PatchEmployeeTypeRespData>
+	export function refOfPatchEmployeeTypeRespData(x:PatchEmployeeTypeRespData,v:Ref<PatchEmployeeTypeRespData>)
+	export function unRefPatchEmployeeTypeRespData(v:Ref<PatchEmployeeTypeRespData>):PatchEmployeeTypeRespData
+	export function emptyCreateJobDataRespData():CreateJobDataRespData
+	export function emptyRefCreateJobDataRespData():Ref<CreateJobDataRespData>
+	export function refOfCreateJobDataRespData(x:CreateJobDataRespData,v:Ref<CreateJobDataRespData>)
+	export function unRefCreateJobDataRespData(v:Ref<CreateJobDataRespData>):CreateJobDataRespData
+	export function emptyPatchPersonResp():PatchPersonResp
+	export function emptyRefPatchPersonResp():Ref<PatchPersonResp>
+	export function refOfPatchPersonResp(x:PatchPersonResp,v:Ref<PatchPersonResp>)
+	export function unRefPatchPersonResp(v:Ref<PatchPersonResp>):PatchPersonResp
+	export function emptyDeleteDepartmentResp():DeleteDepartmentResp
+	export function emptyRefDeleteDepartmentResp():Ref<DeleteDepartmentResp>
+	export function refOfDeleteDepartmentResp(x:DeleteDepartmentResp,v:Ref<DeleteDepartmentResp>)
+	export function unRefDeleteDepartmentResp(v:Ref<DeleteDepartmentResp>):DeleteDepartmentResp
+	export function emptyJobDataCostCenter():JobDataCostCenter
+	export function emptyRefJobDataCostCenter():Ref<JobDataCostCenter>
+	export function refOfJobDataCostCenter(x:JobDataCostCenter,v:Ref<JobDataCostCenter>)
+	export function unRefJobDataCostCenter(v:Ref<JobDataCostCenter>):JobDataCostCenter
+	export function emptyLeaveBalance():LeaveBalance
+	export function emptyRefLeaveBalance():Ref<LeaveBalance>
+	export function refOfLeaveBalance(x:LeaveBalance,v:Ref<LeaveBalance>)
+	export function unRefLeaveBalance(v:Ref<LeaveBalance>):LeaveBalance
+	export function emptyCreateJobChangeRespData():CreateJobChangeRespData
+	export function emptyRefCreateJobChangeRespData():Ref<CreateJobChangeRespData>
+	export function refOfCreateJobChangeRespData(x:CreateJobChangeRespData,v:Ref<CreateJobChangeRespData>)
+	export function unRefCreateJobChangeRespData(v:Ref<CreateJobChangeRespData>):CreateJobChangeRespData
+	export function emptyDeleteEmployeeTypeResp():DeleteEmployeeTypeResp
+	export function emptyRefDeleteEmployeeTypeResp():Ref<DeleteEmployeeTypeResp>
+	export function refOfDeleteEmployeeTypeResp(x:DeleteEmployeeTypeResp,v:Ref<DeleteEmployeeTypeResp>)
+	export function unRefDeleteEmployeeTypeResp(v:Ref<DeleteEmployeeTypeResp>):DeleteEmployeeTypeResp
+	export function emptyEmployeeType():EmployeeType
+	export function emptyRefEmployeeType():Ref<EmployeeType>
+	export function refOfEmployeeType(x:EmployeeType,v:Ref<EmployeeType>)
+	export function unRefEmployeeType(v:Ref<EmployeeType>):EmployeeType
+	export function emptyAddRoleAssignAuthorizationReq():AddRoleAssignAuthorizationReq
+	export function emptyRefAddRoleAssignAuthorizationReq():Ref<AddRoleAssignAuthorizationReq>
+	export function refOfAddRoleAssignAuthorizationReq(x:AddRoleAssignAuthorizationReq,v:Ref<AddRoleAssignAuthorizationReq>)
+	export function unRefAddRoleAssignAuthorizationReq(v:Ref<AddRoleAssignAuthorizationReq>):AddRoleAssignAuthorizationReq
+	export function emptyListObjectApiNameCustomFieldResp():ListObjectApiNameCustomFieldResp
+	export function emptyRefListObjectApiNameCustomFieldResp():Ref<ListObjectApiNameCustomFieldResp>
+	export function refOfListObjectApiNameCustomFieldResp(x:ListObjectApiNameCustomFieldResp,v:Ref<ListObjectApiNameCustomFieldResp>)
+	export function unRefListObjectApiNameCustomFieldResp(v:Ref<ListObjectApiNameCustomFieldResp>):ListObjectApiNameCustomFieldResp
+	export function emptyPatchJobReq():PatchJobReq
+	export function emptyRefPatchJobReq():Ref<PatchJobReq>
+	export function refOfPatchJobReq(x:PatchJobReq,v:Ref<PatchJobReq>)
+	export function unRefPatchJobReq(v:Ref<PatchJobReq>):PatchJobReq
+	export function emptyLeaveBalancesLeaveRespData():LeaveBalancesLeaveRespData
+	export function emptyRefLeaveBalancesLeaveRespData():Ref<LeaveBalancesLeaveRespData>
+	export function refOfLeaveBalancesLeaveRespData(x:LeaveBalancesLeaveRespData,v:Ref<LeaveBalancesLeaveRespData>)
+	export function unRefLeaveBalancesLeaveRespData(v:Ref<LeaveBalancesLeaveRespData>):LeaveBalancesLeaveRespData
+	export function emptyPatchCompanyReq():PatchCompanyReq
+	export function emptyRefPatchCompanyReq():Ref<PatchCompanyReq>
+	export function refOfPatchCompanyReq(x:PatchCompanyReq,v:Ref<PatchCompanyReq>)
+	export function unRefPatchCompanyReq(v:Ref<PatchCompanyReq>):PatchCompanyReq
+	export function emptyPatchContractReq():PatchContractReq
+	export function emptyRefPatchContractReq():Ref<PatchContractReq>
+	export function refOfPatchContractReq(x:PatchContractReq,v:Ref<PatchContractReq>)
+	export function unRefPatchContractReq(v:Ref<PatchContractReq>):PatchContractReq
+	export function emptyListSubregionReq():ListSubregionReq
+	export function emptyRefListSubregionReq():Ref<ListSubregionReq>
+	export function refOfListSubregionReq(x:ListSubregionReq,v:Ref<ListSubregionReq>)
+	export function unRefListSubregionReq(v:Ref<ListSubregionReq>):ListSubregionReq
+	export function emptyJobFamily():JobFamily
+	export function emptyRefJobFamily():Ref<JobFamily>
+	export function refOfJobFamily(x:JobFamily,v:Ref<JobFamily>)
+	export function unRefJobFamily(v:Ref<JobFamily>):JobFamily
+	export function emptyFormFieldVariableNumberValue():FormFieldVariableNumberValue
+	export function emptyRefFormFieldVariableNumberValue():Ref<FormFieldVariableNumberValue>
+	export function refOfFormFieldVariableNumberValue(x:FormFieldVariableNumberValue,v:Ref<FormFieldVariableNumberValue>)
+	export function unRefFormFieldVariableNumberValue(v:Ref<FormFieldVariableNumberValue>):FormFieldVariableNumberValue
+	export function emptyListJobDataReq():ListJobDataReq
+	export function emptyRefListJobDataReq():Ref<ListJobDataReq>
+	export function refOfListJobDataReq(x:ListJobDataReq,v:Ref<ListJobDataReq>)
+	export function unRefListJobDataReq(v:Ref<ListJobDataReq>):ListJobDataReq
+	export function emptyQuerySecurityGroupResp():QuerySecurityGroupResp
+	export function emptyRefQuerySecurityGroupResp():Ref<QuerySecurityGroupResp>
+	export function refOfQuerySecurityGroupResp(x:QuerySecurityGroupResp,v:Ref<QuerySecurityGroupResp>)
+	export function unRefQuerySecurityGroupResp(v:Ref<QuerySecurityGroupResp>):QuerySecurityGroupResp
+	export function emptyP2DepartmentCreatedV1Data():P2DepartmentCreatedV1Data
+	export function emptyRefP2DepartmentCreatedV1Data():Ref<P2DepartmentCreatedV1Data>
+	export function refOfP2DepartmentCreatedV1Data(x:P2DepartmentCreatedV1Data,v:Ref<P2DepartmentCreatedV1Data>)
+	export function unRefP2DepartmentCreatedV1Data(v:Ref<P2DepartmentCreatedV1Data>):P2DepartmentCreatedV1Data
+	export function emptyCreateDepartmentRespData():CreateDepartmentRespData
+	export function emptyRefCreateDepartmentRespData():Ref<CreateDepartmentRespData>
+	export function refOfCreateDepartmentRespData(x:CreateDepartmentRespData,v:Ref<CreateDepartmentRespData>)
+	export function unRefCreateDepartmentRespData(v:Ref<CreateDepartmentRespData>):CreateDepartmentRespData
+	export function emptyGetByParamAuthorizationResp():GetByParamAuthorizationResp
+	export function emptyRefGetByParamAuthorizationResp():Ref<GetByParamAuthorizationResp>
+	export function refOfGetByParamAuthorizationResp(x:GetByParamAuthorizationResp,v:Ref<GetByParamAuthorizationResp>)
+	export function unRefGetByParamAuthorizationResp(v:Ref<GetByParamAuthorizationResp>):GetByParamAuthorizationResp
+	export function emptyJobLevel():JobLevel
+	export function emptyRefJobLevel():Ref<JobLevel>
+	export function refOfJobLevel(x:JobLevel,v:Ref<JobLevel>)
+	export function unRefJobLevel(v:Ref<JobLevel>):JobLevel
+	export function emptyListObjectApiNameCustomFieldReq():ListObjectApiNameCustomFieldReq
+	export function emptyRefListObjectApiNameCustomFieldReq():Ref<ListObjectApiNameCustomFieldReq>
+	export function refOfListObjectApiNameCustomFieldReq(x:ListObjectApiNameCustomFieldReq,v:Ref<ListObjectApiNameCustomFieldReq>)
+	export function unRefListObjectApiNameCustomFieldReq(v:Ref<ListObjectApiNameCustomFieldReq>):ListObjectApiNameCustomFieldReq
+	export function emptyPermissionSecurityGroup():PermissionSecurityGroup
+	export function emptyRefPermissionSecurityGroup():Ref<PermissionSecurityGroup>
+	export function refOfPermissionSecurityGroup(x:PermissionSecurityGroup,v:Ref<PermissionSecurityGroup>)
+	export function unRefPermissionSecurityGroup(v:Ref<PermissionSecurityGroup>):PermissionSecurityGroup
+	export function emptyCreateJobChangeReq():CreateJobChangeReq
+	export function emptyRefCreateJobChangeReq():Ref<CreateJobChangeReq>
+	export function refOfCreateJobChangeReq(x:CreateJobChangeReq,v:Ref<CreateJobChangeReq>)
+	export function unRefCreateJobChangeReq(v:Ref<CreateJobChangeReq>):CreateJobChangeReq
+	export function emptyDeleteLeaveGrantingRecordResp():DeleteLeaveGrantingRecordResp
+	export function emptyRefDeleteLeaveGrantingRecordResp():Ref<DeleteLeaveGrantingRecordResp>
+	export function refOfDeleteLeaveGrantingRecordResp(x:DeleteLeaveGrantingRecordResp,v:Ref<DeleteLeaveGrantingRecordResp>)
+	export function unRefDeleteLeaveGrantingRecordResp(v:Ref<DeleteLeaveGrantingRecordResp>):DeleteLeaveGrantingRecordResp
+	export function emptyP2JobCreatedV1():P2JobCreatedV1
+	export function emptyRefP2JobCreatedV1():Ref<P2JobCreatedV1>
+	export function refOfP2JobCreatedV1(x:P2JobCreatedV1,v:Ref<P2JobCreatedV1>)
+	export function unRefP2JobCreatedV1(v:Ref<P2JobCreatedV1>):P2JobCreatedV1
+	export function emptyFormFieldVariableI18nValue():FormFieldVariableI18nValue
+	export function emptyRefFormFieldVariableI18nValue():Ref<FormFieldVariableI18nValue>
+	export function refOfFormFieldVariableI18nValue(x:FormFieldVariableI18nValue,v:Ref<FormFieldVariableI18nValue>)
+	export function unRefFormFieldVariableI18nValue(v:Ref<FormFieldVariableI18nValue>):FormFieldVariableI18nValue
+	export function emptyListCurrencyResp():ListCurrencyResp
+	export function emptyRefListCurrencyResp():Ref<ListCurrencyResp>
+	export function refOfListCurrencyResp(x:ListCurrencyResp,v:Ref<ListCurrencyResp>)
+	export function unRefListCurrencyResp(v:Ref<ListCurrencyResp>):ListCurrencyResp
+	export function emptyListEmployeeTypeRespData():ListEmployeeTypeRespData
+	export function emptyRefListEmployeeTypeRespData():Ref<ListEmployeeTypeRespData>
+	export function refOfListEmployeeTypeRespData(x:ListEmployeeTypeRespData,v:Ref<ListEmployeeTypeRespData>)
+	export function unRefListEmployeeTypeRespData(v:Ref<ListEmployeeTypeRespData>):ListEmployeeTypeRespData
+	export function emptyCreateCompanyReq():CreateCompanyReq
+	export function emptyRefCreateCompanyReq():Ref<CreateCompanyReq>
+	export function refOfCreateCompanyReq(x:CreateCompanyReq,v:Ref<CreateCompanyReq>)
+	export function unRefCreateCompanyReq(v:Ref<CreateCompanyReq>):CreateCompanyReq
+	export function emptyP2PreHireUpdatedV1Data():P2PreHireUpdatedV1Data
+	export function emptyRefP2PreHireUpdatedV1Data():Ref<P2PreHireUpdatedV1Data>
+	export function refOfP2PreHireUpdatedV1Data(x:P2PreHireUpdatedV1Data,v:Ref<P2PreHireUpdatedV1Data>)
+	export function unRefP2PreHireUpdatedV1Data(v:Ref<P2PreHireUpdatedV1Data>):P2PreHireUpdatedV1Data
+	export function emptyDeleteCompanyReq():DeleteCompanyReq
+	export function emptyRefDeleteCompanyReq():Ref<DeleteCompanyReq>
+	export function refOfDeleteCompanyReq(x:DeleteCompanyReq,v:Ref<DeleteCompanyReq>)
+	export function unRefDeleteCompanyReq(v:Ref<DeleteCompanyReq>):DeleteCompanyReq
+	export function emptyCreateLocationResp():CreateLocationResp
+	export function emptyRefCreateLocationResp():Ref<CreateLocationResp>
+	export function refOfCreateLocationResp(x:CreateLocationResp,v:Ref<CreateLocationResp>)
+	export function unRefCreateLocationResp(v:Ref<CreateLocationResp>):CreateLocationResp
+	export function emptyListJobLevelResp():ListJobLevelResp
+	export function emptyRefListJobLevelResp():Ref<ListJobLevelResp>
+	export function refOfListJobLevelResp(x:ListJobLevelResp,v:Ref<ListJobLevelResp>)
+	export function unRefListJobLevelResp(v:Ref<ListJobLevelResp>):ListJobLevelResp
+	export function emptyPatchPersonReq():PatchPersonReq
+	export function emptyRefPatchPersonReq():Ref<PatchPersonReq>
+	export function refOfPatchPersonReq(x:PatchPersonReq,v:Ref<PatchPersonReq>)
+	export function unRefPatchPersonReq(v:Ref<PatchPersonReq>):PatchPersonReq
+	export function emptyCostCenter():CostCenter
+	export function emptyRefCostCenter():Ref<CostCenter>
+	export function refOfCostCenter(x:CostCenter,v:Ref<CostCenter>)
+	export function unRefCostCenter(v:Ref<CostCenter>):CostCenter
+	export function emptyDeletePersonReq():DeletePersonReq
+	export function emptyRefDeletePersonReq():Ref<DeletePersonReq>
+	export function refOfDeletePersonReq(x:DeletePersonReq,v:Ref<DeletePersonReq>)
+	export function unRefDeletePersonReq(v:Ref<DeletePersonReq>):DeletePersonReq
+	export function emptyQueryAuthorizationRespData():QueryAuthorizationRespData
+	export function emptyRefQueryAuthorizationRespData():Ref<QueryAuthorizationRespData>
+	export function refOfQueryAuthorizationRespData(x:QueryAuthorizationRespData,v:Ref<QueryAuthorizationRespData>)
+	export function unRefQueryAuthorizationRespData(v:Ref<QueryAuthorizationRespData>):QueryAuthorizationRespData
+	export function emptyCreateJobChangeResp():CreateJobChangeResp
+	export function emptyRefCreateJobChangeResp():Ref<CreateJobChangeResp>
+	export function refOfCreateJobChangeResp(x:CreateJobChangeResp,v:Ref<CreateJobChangeResp>)
+	export function unRefCreateJobChangeResp(v:Ref<CreateJobChangeResp>):CreateJobChangeResp
+	export function emptyCreateLocationReq():CreateLocationReq
+	export function emptyRefCreateLocationReq():Ref<CreateLocationReq>
+	export function refOfCreateLocationReq(x:CreateLocationReq,v:Ref<CreateLocationReq>)
+	export function unRefCreateLocationReq(v:Ref<CreateLocationReq>):CreateLocationReq
+	export function emptyAttachmentFieldSetting():AttachmentFieldSetting
+	export function emptyRefAttachmentFieldSetting():Ref<AttachmentFieldSetting>
+	export function refOfAttachmentFieldSetting(x:AttachmentFieldSetting,v:Ref<AttachmentFieldSetting>)
+	export function unRefAttachmentFieldSetting(v:Ref<AttachmentFieldSetting>):AttachmentFieldSetting
+	export function emptyCreateEmploymentReq():CreateEmploymentReq
+	export function emptyRefCreateEmploymentReq():Ref<CreateEmploymentReq>
+	export function refOfCreateEmploymentReq(x:CreateEmploymentReq,v:Ref<CreateEmploymentReq>)
+	export function unRefCreateEmploymentReq(v:Ref<CreateEmploymentReq>):CreateEmploymentReq
+	export function emptyGetSubdivisionRespData():GetSubdivisionRespData
+	export function emptyRefGetSubdivisionRespData():Ref<GetSubdivisionRespData>
+	export function refOfGetSubdivisionRespData(x:GetSubdivisionRespData,v:Ref<GetSubdivisionRespData>)
+	export function unRefGetSubdivisionRespData(v:Ref<GetSubdivisionRespData>):GetSubdivisionRespData
+	export function emptyPatchJobDataReq():PatchJobDataReq
+	export function emptyRefPatchJobDataReq():Ref<PatchJobDataReq>
+	export function refOfPatchJobDataReq(x:PatchJobDataReq,v:Ref<PatchJobDataReq>)
+	export function unRefPatchJobDataReq(v:Ref<PatchJobDataReq>):PatchJobDataReq
+	export function emptySearchOffboardingReq():SearchOffboardingReq
+	export function emptyRefSearchOffboardingReq():Ref<SearchOffboardingReq>
+	export function refOfSearchOffboardingReq(x:SearchOffboardingReq,v:Ref<SearchOffboardingReq>)
+	export function unRefSearchOffboardingReq(v:Ref<SearchOffboardingReq>):SearchOffboardingReq
+	export function emptyListJobLevelReq():ListJobLevelReq
+	export function emptyRefListJobLevelReq():Ref<ListJobLevelReq>
+	export function refOfListJobLevelReq(x:ListJobLevelReq,v:Ref<ListJobLevelReq>)
+	export function unRefListJobLevelReq(v:Ref<ListJobLevelReq>):ListJobLevelReq
+	export function emptyListWorkingHoursTypeRespData():ListWorkingHoursTypeRespData
+	export function emptyRefListWorkingHoursTypeRespData():Ref<ListWorkingHoursTypeRespData>
+	export function refOfListWorkingHoursTypeRespData(x:ListWorkingHoursTypeRespData,v:Ref<ListWorkingHoursTypeRespData>)
+	export function unRefListWorkingHoursTypeRespData(v:Ref<ListWorkingHoursTypeRespData>):ListWorkingHoursTypeRespData
+	export function emptyCreateContractRespData():CreateContractRespData
+	export function emptyRefCreateContractRespData():Ref<CreateContractRespData>
+	export function refOfCreateContractRespData(x:CreateContractRespData,v:Ref<CreateContractRespData>)
+	export function unRefCreateContractRespData(v:Ref<CreateContractRespData>):CreateContractRespData
+	export function emptyImageFieldSetting():ImageFieldSetting
+	export function emptyRefImageFieldSetting():Ref<ImageFieldSetting>
+	export function refOfImageFieldSetting(x:ImageFieldSetting,v:Ref<ImageFieldSetting>)
+	export function unRefImageFieldSetting(v:Ref<ImageFieldSetting>):ImageFieldSetting
+	export function emptyLeaveRequestHistoryLeaveResp():LeaveRequestHistoryLeaveResp
+	export function emptyRefLeaveRequestHistoryLeaveResp():Ref<LeaveRequestHistoryLeaveResp>
+	export function refOfLeaveRequestHistoryLeaveResp(x:LeaveRequestHistoryLeaveResp,v:Ref<LeaveRequestHistoryLeaveResp>)
+	export function unRefLeaveRequestHistoryLeaveResp(v:Ref<LeaveRequestHistoryLeaveResp>):LeaveRequestHistoryLeaveResp
+	export function emptyCpstGradeStandardValue():CpstGradeStandardValue
+	export function emptyRefCpstGradeStandardValue():Ref<CpstGradeStandardValue>
+	export function refOfCpstGradeStandardValue(x:CpstGradeStandardValue,v:Ref<CpstGradeStandardValue>)
+	export function unRefCpstGradeStandardValue(v:Ref<CpstGradeStandardValue>):CpstGradeStandardValue
+	export function emptyCompany():Company
+	export function emptyRefCompany():Ref<Company>
+	export function refOfCompany(x:Company,v:Ref<Company>)
+	export function unRefCompany(v:Ref<Company>):Company
+	export function emptyP2EmploymentCreatedV1():P2EmploymentCreatedV1
+	export function emptyRefP2EmploymentCreatedV1():Ref<P2EmploymentCreatedV1>
+	export function refOfP2EmploymentCreatedV1(x:P2EmploymentCreatedV1,v:Ref<P2EmploymentCreatedV1>)
+	export function unRefP2EmploymentCreatedV1(v:Ref<P2EmploymentCreatedV1>):P2EmploymentCreatedV1
+	export function emptyP2JobUpdatedV1Data():P2JobUpdatedV1Data
+	export function emptyRefP2JobUpdatedV1Data():Ref<P2JobUpdatedV1Data>
+	export function refOfP2JobUpdatedV1Data(x:P2JobUpdatedV1Data,v:Ref<P2JobUpdatedV1Data>)
+	export function unRefP2JobUpdatedV1Data(v:Ref<P2JobUpdatedV1Data>):P2JobUpdatedV1Data
+	export function emptyPersonalProfile():PersonalProfile
+	export function emptyRefPersonalProfile():Ref<PersonalProfile>
+	export function refOfPersonalProfile(x:PersonalProfile,v:Ref<PersonalProfile>)
+	export function unRefPersonalProfile(v:Ref<PersonalProfile>):PersonalProfile
+	export function emptyI18n():I18n
+	export function emptyRefI18n():Ref<I18n>
+	export function refOfI18n(x:I18n,v:Ref<I18n>)
+	export function unRefI18n(v:Ref<I18n>):I18n
+	export function emptyQueryCustomFieldResp():QueryCustomFieldResp
+	export function emptyRefQueryCustomFieldResp():Ref<QueryCustomFieldResp>
+	export function refOfQueryCustomFieldResp(x:QueryCustomFieldResp,v:Ref<QueryCustomFieldResp>)
+	export function unRefQueryCustomFieldResp(v:Ref<QueryCustomFieldResp>):QueryCustomFieldResp
+	export function emptyWorkExperience():WorkExperience
+	export function emptyRefWorkExperience():Ref<WorkExperience>
+	export function refOfWorkExperience(x:WorkExperience,v:Ref<WorkExperience>)
+	export function unRefWorkExperience(v:Ref<WorkExperience>):WorkExperience
+	export function emptyDeleteEmployeeTypeReq():DeleteEmployeeTypeReq
+	export function emptyRefDeleteEmployeeTypeReq():Ref<DeleteEmployeeTypeReq>
+	export function refOfDeleteEmployeeTypeReq(x:DeleteEmployeeTypeReq,v:Ref<DeleteEmployeeTypeReq>)
+	export function unRefDeleteEmployeeTypeReq(v:Ref<DeleteEmployeeTypeReq>):DeleteEmployeeTypeReq
+	export function emptyP2OrgRoleAuthorizationUpdatedV1Data():P2OrgRoleAuthorizationUpdatedV1Data
+	export function emptyRefP2OrgRoleAuthorizationUpdatedV1Data():Ref<P2OrgRoleAuthorizationUpdatedV1Data>
+	export function refOfP2OrgRoleAuthorizationUpdatedV1Data(x:P2OrgRoleAuthorizationUpdatedV1Data,v:Ref<P2OrgRoleAuthorizationUpdatedV1Data>)
+	export function unRefP2OrgRoleAuthorizationUpdatedV1Data(v:Ref<P2OrgRoleAuthorizationUpdatedV1Data>):P2OrgRoleAuthorizationUpdatedV1Data
+	export function emptySecurityGroup():SecurityGroup
+	export function emptyRefSecurityGroup():Ref<SecurityGroup>
+	export function refOfSecurityGroup(x:SecurityGroup,v:Ref<SecurityGroup>)
+	export function unRefSecurityGroup(v:Ref<SecurityGroup>):SecurityGroup
+	export function emptyEnumFieldSetting():EnumFieldSetting
+	export function emptyRefEnumFieldSetting():Ref<EnumFieldSetting>
+	export function refOfEnumFieldSetting(x:EnumFieldSetting,v:Ref<EnumFieldSetting>)
+	export function unRefEnumFieldSetting(v:Ref<EnumFieldSetting>):EnumFieldSetting
+	export function emptyGetCurrencyReq():GetCurrencyReq
+	export function emptyRefGetCurrencyReq():Ref<GetCurrencyReq>
+	export function refOfGetCurrencyReq(x:GetCurrencyReq,v:Ref<GetCurrencyReq>)
+	export function unRefGetCurrencyReq(v:Ref<GetCurrencyReq>):GetCurrencyReq
+	export function emptyOperationLogListRespItem():OperationLogListRespItem
+	export function emptyRefOperationLogListRespItem():Ref<OperationLogListRespItem>
+	export function refOfOperationLogListRespItem(x:OperationLogListRespItem,v:Ref<OperationLogListRespItem>)
+	export function unRefOperationLogListRespItem(v:Ref<OperationLogListRespItem>):OperationLogListRespItem
+	export function emptyP2JobCreatedV1Data():P2JobCreatedV1Data
+	export function emptyRefP2JobCreatedV1Data():Ref<P2JobCreatedV1Data>
+	export function refOfP2JobCreatedV1Data(x:P2JobCreatedV1Data,v:Ref<P2JobCreatedV1Data>)
+	export function unRefP2JobCreatedV1Data(v:Ref<P2JobCreatedV1Data>):P2JobCreatedV1Data
+	export function emptyP2EmploymentResignedV1Data():P2EmploymentResignedV1Data
+	export function emptyRefP2EmploymentResignedV1Data():Ref<P2EmploymentResignedV1Data>
+	export function refOfP2EmploymentResignedV1Data(x:P2EmploymentResignedV1Data,v:Ref<P2EmploymentResignedV1Data>)
+	export function unRefP2EmploymentResignedV1Data(v:Ref<P2EmploymentResignedV1Data>):P2EmploymentResignedV1Data
+	export function emptyFormFieldVariableEmploymentValue():FormFieldVariableEmploymentValue
+	export function emptyRefFormFieldVariableEmploymentValue():Ref<FormFieldVariableEmploymentValue>
+	export function refOfFormFieldVariableEmploymentValue(x:FormFieldVariableEmploymentValue,v:Ref<FormFieldVariableEmploymentValue>)
+	export function unRefFormFieldVariableEmploymentValue(v:Ref<FormFieldVariableEmploymentValue>):FormFieldVariableEmploymentValue
+	export function emptyGetJobFamilyReq():GetJobFamilyReq
+	export function emptyRefGetJobFamilyReq():Ref<GetJobFamilyReq>
+	export function refOfGetJobFamilyReq(x:GetJobFamilyReq,v:Ref<GetJobFamilyReq>)
+	export function unRefGetJobFamilyReq(v:Ref<GetJobFamilyReq>):GetJobFamilyReq
+	export function emptyPreHireQuery():PreHireQuery
+	export function emptyRefPreHireQuery():Ref<PreHireQuery>
+	export function refOfPreHireQuery(x:PreHireQuery,v:Ref<PreHireQuery>)
+	export function unRefPreHireQuery(v:Ref<PreHireQuery>):PreHireQuery
+	export function emptyReferenceObject():ReferenceObject
+	export function emptyRefReferenceObject():Ref<ReferenceObject>
+	export function refOfReferenceObject(x:ReferenceObject,v:Ref<ReferenceObject>)
+	export function unRefReferenceObject(v:Ref<ReferenceObject>):ReferenceObject
+	export function emptyCreateDepartmentResp():CreateDepartmentResp
+	export function emptyRefCreateDepartmentResp():Ref<CreateDepartmentResp>
+	export function refOfCreateDepartmentResp(x:CreateDepartmentResp,v:Ref<CreateDepartmentResp>)
+	export function unRefCreateDepartmentResp(v:Ref<CreateDepartmentResp>):CreateDepartmentResp
+	export function emptyDeleteLocationReq():DeleteLocationReq
+	export function emptyRefDeleteLocationReq():Ref<DeleteLocationReq>
+	export function refOfDeleteLocationReq(x:DeleteLocationReq,v:Ref<DeleteLocationReq>)
+	export function unRefDeleteLocationReq(v:Ref<DeleteLocationReq>):DeleteLocationReq
+	export function emptyEmployeeDateType():EmployeeDateType
+	export function emptyRefEmployeeDateType():Ref<EmployeeDateType>
+	export function refOfEmployeeDateType(x:EmployeeDateType,v:Ref<EmployeeDateType>)
+	export function unRefEmployeeDateType(v:Ref<EmployeeDateType>):EmployeeDateType
+	export function emptyListNationalIdTypeResp():ListNationalIdTypeResp
+	export function emptyRefListNationalIdTypeResp():Ref<ListNationalIdTypeResp>
+	export function refOfListNationalIdTypeResp(x:ListNationalIdTypeResp,v:Ref<ListNationalIdTypeResp>)
+	export function unRefListNationalIdTypeResp(v:Ref<ListNationalIdTypeResp>):ListNationalIdTypeResp
+	export function emptyEditEnumOptionCommonDataMetaDataReq():EditEnumOptionCommonDataMetaDataReq
+	export function emptyRefEditEnumOptionCommonDataMetaDataReq():Ref<EditEnumOptionCommonDataMetaDataReq>
+	export function refOfEditEnumOptionCommonDataMetaDataReq(x:EditEnumOptionCommonDataMetaDataReq,v:Ref<EditEnumOptionCommonDataMetaDataReq>)
+	export function unRefEditEnumOptionCommonDataMetaDataReq(v:Ref<EditEnumOptionCommonDataMetaDataReq>):EditEnumOptionCommonDataMetaDataReq
+	export function emptyP2OffboardingUpdatedV1():P2OffboardingUpdatedV1
+	export function emptyRefP2OffboardingUpdatedV1():Ref<P2OffboardingUpdatedV1>
+	export function refOfP2OffboardingUpdatedV1(x:P2OffboardingUpdatedV1,v:Ref<P2OffboardingUpdatedV1>)
+	export function unRefP2OffboardingUpdatedV1(v:Ref<P2OffboardingUpdatedV1>):P2OffboardingUpdatedV1
+	export function emptyJob():Job
+	export function emptyRefJob():Ref<Job>
+	export function refOfJob(x:Job,v:Ref<Job>)
+	export function unRefJob(v:Ref<Job>):Job
+	export function emptyP2EmploymentUpdatedV1Data():P2EmploymentUpdatedV1Data
+	export function emptyRefP2EmploymentUpdatedV1Data():Ref<P2EmploymentUpdatedV1Data>
+	export function refOfP2EmploymentUpdatedV1Data(x:P2EmploymentUpdatedV1Data,v:Ref<P2EmploymentUpdatedV1Data>)
+	export function unRefP2EmploymentUpdatedV1Data(v:Ref<P2EmploymentUpdatedV1Data>):P2EmploymentUpdatedV1Data
+	export function emptyP2OffboardingUpdatedV1Data():P2OffboardingUpdatedV1Data
+	export function emptyRefP2OffboardingUpdatedV1Data():Ref<P2OffboardingUpdatedV1Data>
+	export function refOfP2OffboardingUpdatedV1Data(x:P2OffboardingUpdatedV1Data,v:Ref<P2OffboardingUpdatedV1Data>)
+	export function unRefP2OffboardingUpdatedV1Data(v:Ref<P2OffboardingUpdatedV1Data>):P2OffboardingUpdatedV1Data
+	export function emptyQueryOffboardingRespData():QueryOffboardingRespData
+	export function emptyRefQueryOffboardingRespData():Ref<QueryOffboardingRespData>
+	export function refOfQueryOffboardingRespData(x:QueryOffboardingRespData,v:Ref<QueryOffboardingRespData>)
+	export function unRefQueryOffboardingRespData(v:Ref<QueryOffboardingRespData>):QueryOffboardingRespData
+	export function emptyUpdateRoleAssignAuthorizationRespData():UpdateRoleAssignAuthorizationRespData
+	export function emptyRefUpdateRoleAssignAuthorizationRespData():Ref<UpdateRoleAssignAuthorizationRespData>
+	export function refOfUpdateRoleAssignAuthorizationRespData(x:UpdateRoleAssignAuthorizationRespData,v:Ref<UpdateRoleAssignAuthorizationRespData>)
+	export function unRefUpdateRoleAssignAuthorizationRespData(v:Ref<UpdateRoleAssignAuthorizationRespData>):UpdateRoleAssignAuthorizationRespData
+	export function emptyEmploymentLeaveBalance():EmploymentLeaveBalance
+	export function emptyRefEmploymentLeaveBalance():Ref<EmploymentLeaveBalance>
+	export function refOfEmploymentLeaveBalance(x:EmploymentLeaveBalance,v:Ref<EmploymentLeaveBalance>)
+	export function unRefEmploymentLeaveBalance(v:Ref<EmploymentLeaveBalance>):EmploymentLeaveBalance
+	export function emptyListJobDataResp():ListJobDataResp
+	export function emptyRefListJobDataResp():Ref<ListJobDataResp>
+	export function refOfListJobDataResp(x:ListJobDataResp,v:Ref<ListJobDataResp>)
+	export function unRefListJobDataResp(v:Ref<ListJobDataResp>):ListJobDataResp
+	export function emptyPatchDepartmentReq():PatchDepartmentReq
+	export function emptyRefPatchDepartmentReq():Ref<PatchDepartmentReq>
+	export function refOfPatchDepartmentReq(x:PatchDepartmentReq,v:Ref<PatchDepartmentReq>)
+	export function unRefPatchDepartmentReq(v:Ref<PatchDepartmentReq>):PatchDepartmentReq
+	export function emptyGetByParamCustomFieldResp():GetByParamCustomFieldResp
+	export function emptyRefGetByParamCustomFieldResp():Ref<GetByParamCustomFieldResp>
+	export function refOfGetByParamCustomFieldResp(x:GetByParamCustomFieldResp,v:Ref<GetByParamCustomFieldResp>)
+	export function unRefGetByParamCustomFieldResp(v:Ref<GetByParamCustomFieldResp>):GetByParamCustomFieldResp
+	export function emptyBackgroundCheckTarget():BackgroundCheckTarget
+	export function emptyRefBackgroundCheckTarget():Ref<BackgroundCheckTarget>
+	export function refOfBackgroundCheckTarget(x:BackgroundCheckTarget,v:Ref<BackgroundCheckTarget>)
+	export function unRefBackgroundCheckTarget(v:Ref<BackgroundCheckTarget>):BackgroundCheckTarget
+	export function emptyGetLocationReq():GetLocationReq
+	export function emptyRefGetLocationReq():Ref<GetLocationReq>
+	export function refOfGetLocationReq(x:GetLocationReq,v:Ref<GetLocationReq>)
+	export function unRefGetLocationReq(v:Ref<GetLocationReq>):GetLocationReq
+	export function emptyPatchEmploymentReq():PatchEmploymentReq
+	export function emptyRefPatchEmploymentReq():Ref<PatchEmploymentReq>
+	export function refOfPatchEmploymentReq(x:PatchEmploymentReq,v:Ref<PatchEmploymentReq>)
+	export function unRefPatchEmploymentReq(v:Ref<PatchEmploymentReq>):PatchEmploymentReq
+	export function emptyAddRoleAssignAuthorizationRespData():AddRoleAssignAuthorizationRespData
+	export function emptyRefAddRoleAssignAuthorizationRespData():Ref<AddRoleAssignAuthorizationRespData>
+	export function refOfAddRoleAssignAuthorizationRespData(x:AddRoleAssignAuthorizationRespData,v:Ref<AddRoleAssignAuthorizationRespData>)
+	export function unRefAddRoleAssignAuthorizationRespData(v:Ref<AddRoleAssignAuthorizationRespData>):AddRoleAssignAuthorizationRespData
+	export function emptyCreatePersonRespData():CreatePersonRespData
+	export function emptyRefCreatePersonRespData():Ref<CreatePersonRespData>
+	export function refOfCreatePersonRespData(x:CreatePersonRespData,v:Ref<CreatePersonRespData>)
+	export function unRefCreatePersonRespData(v:Ref<CreatePersonRespData>):CreatePersonRespData
+	export function emptyGetCompanyRespData():GetCompanyRespData
+	export function emptyRefGetCompanyRespData():Ref<GetCompanyRespData>
+	export function refOfGetCompanyRespData(x:GetCompanyRespData,v:Ref<GetCompanyRespData>)
+	export function unRefGetCompanyRespData(v:Ref<GetCompanyRespData>):GetCompanyRespData
+	export function emptyHiberarchyCommon():HiberarchyCommon
+	export function emptyRefHiberarchyCommon():Ref<HiberarchyCommon>
+	export function refOfHiberarchyCommon(x:HiberarchyCommon,v:Ref<HiberarchyCommon>)
+	export function unRefHiberarchyCommon(v:Ref<HiberarchyCommon>):HiberarchyCommon
+	export function emptyListCompanyReq():ListCompanyReq
+	export function emptyRefListCompanyReq():Ref<ListCompanyReq>
+	export function refOfListCompanyReq(x:ListCompanyReq,v:Ref<ListCompanyReq>)
+	export function unRefListCompanyReq(v:Ref<ListCompanyReq>):ListCompanyReq
+	export function emptyLeaveSubtype():LeaveSubtype
+	export function emptyRefLeaveSubtype():Ref<LeaveSubtype>
+	export function refOfLeaveSubtype(x:LeaveSubtype,v:Ref<LeaveSubtype>)
+	export function unRefLeaveSubtype(v:Ref<LeaveSubtype>):LeaveSubtype
+	export function emptyGetCountryRegionRespData():GetCountryRegionRespData
+	export function emptyRefGetCountryRegionRespData():Ref<GetCountryRegionRespData>
+	export function refOfGetCountryRegionRespData(x:GetCountryRegionRespData,v:Ref<GetCountryRegionRespData>)
+	export function unRefGetCountryRegionRespData(v:Ref<GetCountryRegionRespData>):GetCountryRegionRespData
+	export function emptyBackgroundCheckReportObject():BackgroundCheckReportObject
+	export function emptyRefBackgroundCheckReportObject():Ref<BackgroundCheckReportObject>
+	export function refOfBackgroundCheckReportObject(x:BackgroundCheckReportObject,v:Ref<BackgroundCheckReportObject>)
+	export function unRefBackgroundCheckReportObject(v:Ref<BackgroundCheckReportObject>):BackgroundCheckReportObject
+	export function emptyCreateJobFamilyResp():CreateJobFamilyResp
+	export function emptyRefCreateJobFamilyResp():Ref<CreateJobFamilyResp>
+	export function refOfCreateJobFamilyResp(x:CreateJobFamilyResp,v:Ref<CreateJobFamilyResp>)
+	export function unRefCreateJobFamilyResp(v:Ref<CreateJobFamilyResp>):CreateJobFamilyResp
+	export function emptyDeleteJobFamilyResp():DeleteJobFamilyResp
+	export function emptyRefDeleteJobFamilyResp():Ref<DeleteJobFamilyResp>
+	export function refOfDeleteJobFamilyResp(x:DeleteJobFamilyResp,v:Ref<DeleteJobFamilyResp>)
+	export function unRefDeleteJobFamilyResp(v:Ref<DeleteJobFamilyResp>):DeleteJobFamilyResp
+	export function emptySearchOffboardingResp():SearchOffboardingResp
+	export function emptyRefSearchOffboardingResp():Ref<SearchOffboardingResp>
+	export function refOfSearchOffboardingResp(x:SearchOffboardingResp,v:Ref<SearchOffboardingResp>)
+	export function unRefSearchOffboardingResp(v:Ref<SearchOffboardingResp>):SearchOffboardingResp
+	export function emptyQueryTransferReasonResp():QueryTransferReasonResp
+	export function emptyRefQueryTransferReasonResp():Ref<QueryTransferReasonResp>
+	export function refOfQueryTransferReasonResp(x:QueryTransferReasonResp,v:Ref<QueryTransferReasonResp>)
+	export function unRefQueryTransferReasonResp(v:Ref<QueryTransferReasonResp>):QueryTransferReasonResp
+	export function emptyGetSubdivisionReq():GetSubdivisionReq
+	export function emptyRefGetSubdivisionReq():Ref<GetSubdivisionReq>
+	export function refOfGetSubdivisionReq(x:GetSubdivisionReq,v:Ref<GetSubdivisionReq>)
+	export function unRefGetSubdivisionReq(v:Ref<GetSubdivisionReq>):GetSubdivisionReq
+	export function emptyPatchNationalIdTypeResp():PatchNationalIdTypeResp
+	export function emptyRefPatchNationalIdTypeResp():Ref<PatchNationalIdTypeResp>
+	export function refOfPatchNationalIdTypeResp(x:PatchNationalIdTypeResp,v:Ref<PatchNationalIdTypeResp>)
+	export function unRefPatchNationalIdTypeResp(v:Ref<PatchNationalIdTypeResp>):PatchNationalIdTypeResp
+	export function emptyQueryAuthorizationReq():QueryAuthorizationReq
+	export function emptyRefQueryAuthorizationReq():Ref<QueryAuthorizationReq>
+	export function refOfQueryAuthorizationReq(x:QueryAuthorizationReq,v:Ref<QueryAuthorizationReq>)
+	export function unRefQueryAuthorizationReq(v:Ref<QueryAuthorizationReq>):QueryAuthorizationReq
+	export function emptySearchAssignedUserRespData():SearchAssignedUserRespData
+	export function emptyRefSearchAssignedUserRespData():Ref<SearchAssignedUserRespData>
+	export function refOfSearchAssignedUserRespData(x:SearchAssignedUserRespData,v:Ref<SearchAssignedUserRespData>)
+	export function unRefSearchAssignedUserRespData(v:Ref<SearchAssignedUserRespData>):SearchAssignedUserRespData
+	export function emptyCreateLeaveGrantingRecordRespData():CreateLeaveGrantingRecordRespData
+	export function emptyRefCreateLeaveGrantingRecordRespData():Ref<CreateLeaveGrantingRecordRespData>
+	export function refOfCreateLeaveGrantingRecordRespData(x:CreateLeaveGrantingRecordRespData,v:Ref<CreateLeaveGrantingRecordRespData>)
+	export function unRefCreateLeaveGrantingRecordRespData(v:Ref<CreateLeaveGrantingRecordRespData>):CreateLeaveGrantingRecordRespData
+	export function emptyGetWorkingHoursTypeReq():GetWorkingHoursTypeReq
+	export function emptyRefGetWorkingHoursTypeReq():Ref<GetWorkingHoursTypeReq>
+	export function refOfGetWorkingHoursTypeReq(x:GetWorkingHoursTypeReq,v:Ref<GetWorkingHoursTypeReq>)
+	export function unRefGetWorkingHoursTypeReq(v:Ref<GetWorkingHoursTypeReq>):GetWorkingHoursTypeReq
+	export function emptyOffboardingData():OffboardingData
+	export function emptyRefOffboardingData():Ref<OffboardingData>
+	export function refOfOffboardingData(x:OffboardingData,v:Ref<OffboardingData>)
+	export function unRefOffboardingData(v:Ref<OffboardingData>):OffboardingData
+	export function emptyPersonName():PersonName
+	export function emptyRefPersonName():Ref<PersonName>
+	export function refOfPersonName(x:PersonName,v:Ref<PersonName>)
+	export function unRefPersonName(v:Ref<PersonName>):PersonName
+	export function emptyGetByParamAuthorizationReq():GetByParamAuthorizationReq
+	export function emptyRefGetByParamAuthorizationReq():Ref<GetByParamAuthorizationReq>
+	export function refOfGetByParamAuthorizationReq(x:GetByParamAuthorizationReq,v:Ref<GetByParamAuthorizationReq>)
+	export function unRefGetByParamAuthorizationReq(v:Ref<GetByParamAuthorizationReq>):GetByParamAuthorizationReq
+	export function emptyGetByParamCustomFieldRespData():GetByParamCustomFieldRespData
+	export function emptyRefGetByParamCustomFieldRespData():Ref<GetByParamCustomFieldRespData>
+	export function refOfGetByParamCustomFieldRespData(x:GetByParamCustomFieldRespData,v:Ref<GetByParamCustomFieldRespData>)
+	export function unRefGetByParamCustomFieldRespData(v:Ref<GetByParamCustomFieldRespData>):GetByParamCustomFieldRespData
+	export function emptyObject():Object
+	export function emptyRefObject():Ref<Object>
+	export function refOfObject(x:Object,v:Ref<Object>)
+	export function unRefObject(v:Ref<Object>):Object
+	export function emptyEmployment():Employment
+	export function emptyRefEmployment():Ref<Employment>
+	export function refOfEmployment(x:Employment,v:Ref<Employment>)
+	export function unRefEmployment(v:Ref<Employment>):Employment
+	export function emptyFile():File
+	export function emptyRefFile():Ref<File>
+	export function refOfFile(x:File,v:Ref<File>)
+	export function unRefFile(v:Ref<File>):File
+	export function emptyP2JobDataEmployedV1():P2JobDataEmployedV1
+	export function emptyRefP2JobDataEmployedV1():Ref<P2JobDataEmployedV1>
+	export function refOfP2JobDataEmployedV1(x:P2JobDataEmployedV1,v:Ref<P2JobDataEmployedV1>)
+	export function unRefP2JobDataEmployedV1(v:Ref<P2JobDataEmployedV1>):P2JobDataEmployedV1
+	export function emptyPersonInfoChn():PersonInfoChn
+	export function emptyRefPersonInfoChn():Ref<PersonInfoChn>
+	export function refOfPersonInfoChn(x:PersonInfoChn,v:Ref<PersonInfoChn>)
+	export function unRefPersonInfoChn(v:Ref<PersonInfoChn>):PersonInfoChn
+	export function emptyQueryOffboardingResp():QueryOffboardingResp
+	export function emptyRefQueryOffboardingResp():Ref<QueryOffboardingResp>
+	export function refOfQueryOffboardingResp(x:QueryOffboardingResp,v:Ref<QueryOffboardingResp>)
+	export function unRefQueryOffboardingResp(v:Ref<QueryOffboardingResp>):QueryOffboardingResp
+	export function emptyGetDepartmentResp():GetDepartmentResp
+	export function emptyRefGetDepartmentResp():Ref<GetDepartmentResp>
+	export function refOfGetDepartmentResp(x:GetDepartmentResp,v:Ref<GetDepartmentResp>)
+	export function unRefGetDepartmentResp(v:Ref<GetDepartmentResp>):GetDepartmentResp
+	export function emptyLeaveRequestHistoryLeaveRespData():LeaveRequestHistoryLeaveRespData
+	export function emptyRefLeaveRequestHistoryLeaveRespData():Ref<LeaveRequestHistoryLeaveRespData>
+	export function refOfLeaveRequestHistoryLeaveRespData(x:LeaveRequestHistoryLeaveRespData,v:Ref<LeaveRequestHistoryLeaveRespData>)
+	export function unRefLeaveRequestHistoryLeaveRespData(v:Ref<LeaveRequestHistoryLeaveRespData>):LeaveRequestHistoryLeaveRespData
+	export function emptyDeleteEmploymentResp():DeleteEmploymentResp
+	export function emptyRefDeleteEmploymentResp():Ref<DeleteEmploymentResp>
+	export function refOfDeleteEmploymentResp(x:DeleteEmploymentResp,v:Ref<DeleteEmploymentResp>)
+	export function unRefDeleteEmploymentResp(v:Ref<DeleteEmploymentResp>):DeleteEmploymentResp
+	export function emptyGetWorkingHoursTypeRespData():GetWorkingHoursTypeRespData
+	export function emptyRefGetWorkingHoursTypeRespData():Ref<GetWorkingHoursTypeRespData>
+	export function refOfGetWorkingHoursTypeRespData(x:GetWorkingHoursTypeRespData,v:Ref<GetWorkingHoursTypeRespData>)
+	export function unRefGetWorkingHoursTypeRespData(v:Ref<GetWorkingHoursTypeRespData>):GetWorkingHoursTypeRespData
+	export function emptyLocation():Location
+	export function emptyRefLocation():Ref<Location>
+	export function refOfLocation(x:Location,v:Ref<Location>)
+	export function unRefLocation(v:Ref<Location>):Location
+	export function emptyQueryOffboardingReqBody():QueryOffboardingReqBody
+	export function emptyRefQueryOffboardingReqBody():Ref<QueryOffboardingReqBody>
+	export function refOfQueryOffboardingReqBody(x:QueryOffboardingReqBody,v:Ref<QueryOffboardingReqBody>)
+	export function unRefQueryOffboardingReqBody(v:Ref<QueryOffboardingReqBody>):QueryOffboardingReqBody
+	export function emptyCreateJobDataResp():CreateJobDataResp
+	export function emptyRefCreateJobDataResp():Ref<CreateJobDataResp>
+	export function refOfCreateJobDataResp(x:CreateJobDataResp,v:Ref<CreateJobDataResp>)
+	export function unRefCreateJobDataResp(v:Ref<CreateJobDataResp>):CreateJobDataResp
+	export function emptyListWorkingHoursTypeReq():ListWorkingHoursTypeReq
+	export function emptyRefListWorkingHoursTypeReq():Ref<ListWorkingHoursTypeReq>
+	export function refOfListWorkingHoursTypeReq(x:ListWorkingHoursTypeReq,v:Ref<ListWorkingHoursTypeReq>)
+	export function unRefListWorkingHoursTypeReq(v:Ref<ListWorkingHoursTypeReq>):ListWorkingHoursTypeReq
+	export function emptyCpstStandardType():CpstStandardType
+	export function emptyRefCpstStandardType():Ref<CpstStandardType>
+	export function refOfCpstStandardType(x:CpstStandardType,v:Ref<CpstStandardType>)
+	export function unRefCpstStandardType(v:Ref<CpstStandardType>):CpstStandardType
+	export function emptyGetLocationResp():GetLocationResp
+	export function emptyRefGetLocationResp():Ref<GetLocationResp>
+	export function refOfGetLocationResp(x:GetLocationResp,v:Ref<GetLocationResp>)
+	export function unRefGetLocationResp(v:Ref<GetLocationResp>):GetLocationResp
+	export function emptyGetWorkingHoursTypeResp():GetWorkingHoursTypeResp
+	export function emptyRefGetWorkingHoursTypeResp():Ref<GetWorkingHoursTypeResp>
+	export function refOfGetWorkingHoursTypeResp(x:GetWorkingHoursTypeResp,v:Ref<GetWorkingHoursTypeResp>)
+	export function unRefGetWorkingHoursTypeResp(v:Ref<GetWorkingHoursTypeResp>):GetWorkingHoursTypeResp
+	export function emptyManageRelation():ManageRelation
+	export function emptyRefManageRelation():Ref<ManageRelation>
+	export function refOfManageRelation(x:ManageRelation,v:Ref<ManageRelation>)
+	export function unRefManageRelation(v:Ref<ManageRelation>):ManageRelation
+	export function emptySubmitOffboardingResp():SubmitOffboardingResp
+	export function emptyRefSubmitOffboardingResp():Ref<SubmitOffboardingResp>
+	export function refOfSubmitOffboardingResp(x:SubmitOffboardingResp,v:Ref<SubmitOffboardingResp>)
+	export function unRefSubmitOffboardingResp(v:Ref<SubmitOffboardingResp>):SubmitOffboardingResp
+	export function emptyDependent():Dependent
+	export function emptyRefDependent():Ref<Dependent>
+	export function refOfDependent(x:Dependent,v:Ref<Dependent>)
+	export function unRefDependent(v:Ref<Dependent>):Dependent
+	export function emptyP2EmploymentDeletedV1Data():P2EmploymentDeletedV1Data
+	export function emptyRefP2EmploymentDeletedV1Data():Ref<P2EmploymentDeletedV1Data>
+	export function refOfP2EmploymentDeletedV1Data(x:P2EmploymentDeletedV1Data,v:Ref<P2EmploymentDeletedV1Data>)
+	export function unRefP2EmploymentDeletedV1Data(v:Ref<P2EmploymentDeletedV1Data>):P2EmploymentDeletedV1Data
+	export function emptyPatchContractRespData():PatchContractRespData
+	export function emptyRefPatchContractRespData():Ref<PatchContractRespData>
+	export function refOfPatchContractRespData(x:PatchContractRespData,v:Ref<PatchContractRespData>)
+	export function unRefPatchContractRespData(v:Ref<PatchContractRespData>):PatchContractRespData
+	export function emptyAssignedOrganization():AssignedOrganization
+	export function emptyRefAssignedOrganization():Ref<AssignedOrganization>
+	export function refOfAssignedOrganization(x:AssignedOrganization,v:Ref<AssignedOrganization>)
+	export function unRefAssignedOrganization(v:Ref<AssignedOrganization>):AssignedOrganization
+	export function emptyCreateNationalIdTypeRespData():CreateNationalIdTypeRespData
+	export function emptyRefCreateNationalIdTypeRespData():Ref<CreateNationalIdTypeRespData>
+	export function refOfCreateNationalIdTypeRespData(x:CreateNationalIdTypeRespData,v:Ref<CreateNationalIdTypeRespData>)
+	export function unRefCreateNationalIdTypeRespData(v:Ref<CreateNationalIdTypeRespData>):CreateNationalIdTypeRespData
+	export function emptyJobChange():JobChange
+	export function emptyRefJobChange():Ref<JobChange>
+	export function refOfJobChange(x:JobChange,v:Ref<JobChange>)
+	export function unRefJobChange(v:Ref<JobChange>):JobChange
+	export function emptyGetCountryRegionResp():GetCountryRegionResp
+	export function emptyRefGetCountryRegionResp():Ref<GetCountryRegionResp>
+	export function refOfGetCountryRegionResp(x:GetCountryRegionResp,v:Ref<GetCountryRegionResp>)
+	export function unRefGetCountryRegionResp(v:Ref<GetCountryRegionResp>):GetCountryRegionResp
+	export function emptyListPreHireResp():ListPreHireResp
+	export function emptyRefListPreHireResp():Ref<ListPreHireResp>
+	export function refOfListPreHireResp(x:ListPreHireResp,v:Ref<ListPreHireResp>)
+	export function unRefListPreHireResp(v:Ref<ListPreHireResp>):ListPreHireResp
+	export function emptyFormFieldVariableRecordValueExample():FormFieldVariableRecordValueExample
+	export function emptyRefFormFieldVariableRecordValueExample():Ref<FormFieldVariableRecordValueExample>
+	export function refOfFormFieldVariableRecordValueExample(x:FormFieldVariableRecordValueExample,v:Ref<FormFieldVariableRecordValueExample>)
+	export function unRefFormFieldVariableRecordValueExample(v:Ref<FormFieldVariableRecordValueExample>):FormFieldVariableRecordValueExample
+	export function emptyListNationalIdTypeRespData():ListNationalIdTypeRespData
+	export function emptyRefListNationalIdTypeRespData():Ref<ListNationalIdTypeRespData>
+	export function refOfListNationalIdTypeRespData(x:ListNationalIdTypeRespData,v:Ref<ListNationalIdTypeRespData>)
+	export function unRefListNationalIdTypeRespData(v:Ref<ListNationalIdTypeRespData>):ListNationalIdTypeRespData
+	export function emptyP2ContractDeletedV1():P2ContractDeletedV1
+	export function emptyRefP2ContractDeletedV1():Ref<P2ContractDeletedV1>
+	export function refOfP2ContractDeletedV1(x:P2ContractDeletedV1,v:Ref<P2ContractDeletedV1>)
+	export function unRefP2ContractDeletedV1(v:Ref<P2ContractDeletedV1>):P2ContractDeletedV1
+	export function emptySearchAssignedUserResp():SearchAssignedUserResp
+	export function emptyRefSearchAssignedUserResp():Ref<SearchAssignedUserResp>
+	export function refOfSearchAssignedUserResp(x:SearchAssignedUserResp,v:Ref<SearchAssignedUserResp>)
+	export function unRefSearchAssignedUserResp(v:Ref<SearchAssignedUserResp>):SearchAssignedUserResp
+	export function emptyCreateWorkingHoursTypeRespData():CreateWorkingHoursTypeRespData
+	export function emptyRefCreateWorkingHoursTypeRespData():Ref<CreateWorkingHoursTypeRespData>
+	export function refOfCreateWorkingHoursTypeRespData(x:CreateWorkingHoursTypeRespData,v:Ref<CreateWorkingHoursTypeRespData>)
+	export function unRefCreateWorkingHoursTypeRespData(v:Ref<CreateWorkingHoursTypeRespData>):CreateWorkingHoursTypeRespData
+	export function emptySearchAssignedUserReqBody():SearchAssignedUserReqBody
+	export function emptyRefSearchAssignedUserReqBody():Ref<SearchAssignedUserReqBody>
+	export function refOfSearchAssignedUserReqBody(x:SearchAssignedUserReqBody,v:Ref<SearchAssignedUserReqBody>)
+	export function unRefSearchAssignedUserReqBody(v:Ref<SearchAssignedUserReqBody>):SearchAssignedUserReqBody
+	export function emptyEditEnumOptionCommonDataMetaDataResp():EditEnumOptionCommonDataMetaDataResp
+	export function emptyRefEditEnumOptionCommonDataMetaDataResp():Ref<EditEnumOptionCommonDataMetaDataResp>
+	export function refOfEditEnumOptionCommonDataMetaDataResp(x:EditEnumOptionCommonDataMetaDataResp,v:Ref<EditEnumOptionCommonDataMetaDataResp>)
+	export function unRefEditEnumOptionCommonDataMetaDataResp(v:Ref<EditEnumOptionCommonDataMetaDataResp>):EditEnumOptionCommonDataMetaDataResp
+	export function emptyPatchWorkingHoursTypeReq():PatchWorkingHoursTypeReq
+	export function emptyRefPatchWorkingHoursTypeReq():Ref<PatchWorkingHoursTypeReq>
+	export function refOfPatchWorkingHoursTypeReq(x:PatchWorkingHoursTypeReq,v:Ref<PatchWorkingHoursTypeReq>)
+	export function unRefPatchWorkingHoursTypeReq(v:Ref<PatchWorkingHoursTypeReq>):PatchWorkingHoursTypeReq
+	export function emptyDeleteJobFamilyReq():DeleteJobFamilyReq
+	export function emptyRefDeleteJobFamilyReq():Ref<DeleteJobFamilyReq>
+	export function refOfDeleteJobFamilyReq(x:DeleteJobFamilyReq,v:Ref<DeleteJobFamilyReq>)
+	export function unRefDeleteJobFamilyReq(v:Ref<DeleteJobFamilyReq>):DeleteJobFamilyReq
+	export function emptyPatchJobFamilyResp():PatchJobFamilyResp
+	export function emptyRefPatchJobFamilyResp():Ref<PatchJobFamilyResp>
+	export function refOfPatchJobFamilyResp(x:PatchJobFamilyResp,v:Ref<PatchJobFamilyResp>)
+	export function unRefPatchJobFamilyResp(v:Ref<PatchJobFamilyResp>):PatchJobFamilyResp
+	export function emptyPatchPersonRespData():PatchPersonRespData
+	export function emptyRefPatchPersonRespData():Ref<PatchPersonRespData>
+	export function refOfPatchPersonRespData(x:PatchPersonRespData,v:Ref<PatchPersonRespData>)
+	export function unRefPatchPersonRespData(v:Ref<PatchPersonRespData>):PatchPersonRespData
+	export function emptyGetPreHireReq():GetPreHireReq
+	export function emptyRefGetPreHireReq():Ref<GetPreHireReq>
+	export function refOfGetPreHireReq(x:GetPreHireReq,v:Ref<GetPreHireReq>)
+	export function unRefGetPreHireReq(v:Ref<GetPreHireReq>):GetPreHireReq
+	export function emptyPatchJobFamilyReq():PatchJobFamilyReq
+	export function emptyRefPatchJobFamilyReq():Ref<PatchJobFamilyReq>
+	export function refOfPatchJobFamilyReq(x:PatchJobFamilyReq,v:Ref<PatchJobFamilyReq>)
+	export function unRefPatchJobFamilyReq(v:Ref<PatchJobFamilyReq>):PatchJobFamilyReq
+	export function emptyListLocationReq():ListLocationReq
+	export function emptyRefListLocationReq():Ref<ListLocationReq>
+	export function refOfListLocationReq(x:ListLocationReq,v:Ref<ListLocationReq>)
+	export function unRefListLocationReq(v:Ref<ListLocationReq>):ListLocationReq
+	export function emptyP2ContractUpdatedV1Data():P2ContractUpdatedV1Data
+	export function emptyRefP2ContractUpdatedV1Data():Ref<P2ContractUpdatedV1Data>
+	export function refOfP2ContractUpdatedV1Data(x:P2ContractUpdatedV1Data,v:Ref<P2ContractUpdatedV1Data>)
+	export function unRefP2ContractUpdatedV1Data(v:Ref<P2ContractUpdatedV1Data>):P2ContractUpdatedV1Data
+	export function emptyCreateJobReq():CreateJobReq
+	export function emptyRefCreateJobReq():Ref<CreateJobReq>
+	export function refOfCreateJobReq(x:CreateJobReq,v:Ref<CreateJobReq>)
+	export function unRefCreateJobReq(v:Ref<CreateJobReq>):CreateJobReq
+	export function emptyFormFieldVariableTextValue():FormFieldVariableTextValue
+	export function emptyRefFormFieldVariableTextValue():Ref<FormFieldVariableTextValue>
+	export function refOfFormFieldVariableTextValue(x:FormFieldVariableTextValue,v:Ref<FormFieldVariableTextValue>)
+	export function unRefFormFieldVariableTextValue(v:Ref<FormFieldVariableTextValue>):FormFieldVariableTextValue
+	export function emptyP2EmploymentDeletedV1():P2EmploymentDeletedV1
+	export function emptyRefP2EmploymentDeletedV1():Ref<P2EmploymentDeletedV1>
+	export function refOfP2EmploymentDeletedV1(x:P2EmploymentDeletedV1,v:Ref<P2EmploymentDeletedV1>)
+	export function unRefP2EmploymentDeletedV1(v:Ref<P2EmploymentDeletedV1>):P2EmploymentDeletedV1
+	export function emptyBackgroundCheck():BackgroundCheck
+	export function emptyRefBackgroundCheck():Ref<BackgroundCheck>
+	export function refOfBackgroundCheck(x:BackgroundCheck,v:Ref<BackgroundCheck>)
+	export function unRefBackgroundCheck(v:Ref<BackgroundCheck>):BackgroundCheck
+	export function emptyGetProcessFormVariableDataReq():GetProcessFormVariableDataReq
+	export function emptyRefGetProcessFormVariableDataReq():Ref<GetProcessFormVariableDataReq>
+	export function refOfGetProcessFormVariableDataReq(x:GetProcessFormVariableDataReq,v:Ref<GetProcessFormVariableDataReq>)
+	export function unRefGetProcessFormVariableDataReq(v:Ref<GetProcessFormVariableDataReq>):GetProcessFormVariableDataReq
+	export function emptyLeaveRequestHistoryLeaveReq():LeaveRequestHistoryLeaveReq
+	export function emptyRefLeaveRequestHistoryLeaveReq():Ref<LeaveRequestHistoryLeaveReq>
+	export function refOfLeaveRequestHistoryLeaveReq(x:LeaveRequestHistoryLeaveReq,v:Ref<LeaveRequestHistoryLeaveReq>)
+	export function unRefLeaveRequestHistoryLeaveReq(v:Ref<LeaveRequestHistoryLeaveReq>):LeaveRequestHistoryLeaveReq
+	export function emptyFilterRuleValue():FilterRuleValue
+	export function emptyRefFilterRuleValue():Ref<FilterRuleValue>
+	export function refOfFilterRuleValue(x:FilterRuleValue,v:Ref<FilterRuleValue>)
+	export function unRefFilterRuleValue(v:Ref<FilterRuleValue>):FilterRuleValue
+	export function emptyFormFieldVariableDatetimeValue():FormFieldVariableDatetimeValue
+	export function emptyRefFormFieldVariableDatetimeValue():Ref<FormFieldVariableDatetimeValue>
+	export function refOfFormFieldVariableDatetimeValue(x:FormFieldVariableDatetimeValue,v:Ref<FormFieldVariableDatetimeValue>)
+	export function unRefFormFieldVariableDatetimeValue(v:Ref<FormFieldVariableDatetimeValue>):FormFieldVariableDatetimeValue
+	export function emptyListWorkingHoursTypeResp():ListWorkingHoursTypeResp
+	export function emptyRefListWorkingHoursTypeResp():Ref<ListWorkingHoursTypeResp>
+	export function refOfListWorkingHoursTypeResp(x:ListWorkingHoursTypeResp,v:Ref<ListWorkingHoursTypeResp>)
+	export function unRefListWorkingHoursTypeResp(v:Ref<ListWorkingHoursTypeResp>):ListWorkingHoursTypeResp
+	export function emptyDeleteEmploymentReq():DeleteEmploymentReq
+	export function emptyRefDeleteEmploymentReq():Ref<DeleteEmploymentReq>
+	export function refOfDeleteEmploymentReq(x:DeleteEmploymentReq,v:Ref<DeleteEmploymentReq>)
+	export function unRefDeleteEmploymentReq(v:Ref<DeleteEmploymentReq>):DeleteEmploymentReq
+	export function emptyP2DepartmentDeletedV1Data():P2DepartmentDeletedV1Data
+	export function emptyRefP2DepartmentDeletedV1Data():Ref<P2DepartmentDeletedV1Data>
+	export function refOfP2DepartmentDeletedV1Data(x:P2DepartmentDeletedV1Data,v:Ref<P2DepartmentDeletedV1Data>)
+	export function unRefP2DepartmentDeletedV1Data(v:Ref<P2DepartmentDeletedV1Data>):P2DepartmentDeletedV1Data
+	export function emptyCreatePersonResp():CreatePersonResp
+	export function emptyRefCreatePersonResp():Ref<CreatePersonResp>
+	export function refOfCreatePersonResp(x:CreatePersonResp,v:Ref<CreatePersonResp>)
+	export function unRefCreatePersonResp(v:Ref<CreatePersonResp>):CreatePersonResp
+	export function emptyGetJobResp():GetJobResp
+	export function emptyRefGetJobResp():Ref<GetJobResp>
+	export function refOfGetJobResp(x:GetJobResp,v:Ref<GetJobResp>)
+	export function unRefGetJobResp(v:Ref<GetJobResp>):GetJobResp
+	export function emptyGetPreHireResp():GetPreHireResp
+	export function emptyRefGetPreHireResp():Ref<GetPreHireResp>
+	export function refOfGetPreHireResp(x:GetPreHireResp,v:Ref<GetPreHireResp>)
+	export function unRefGetPreHireResp(v:Ref<GetPreHireResp>):GetPreHireResp
+	export function emptyListSubregionResp():ListSubregionResp
+	export function emptyRefListSubregionResp():Ref<ListSubregionResp>
+	export function refOfListSubregionResp(x:ListSubregionResp,v:Ref<ListSubregionResp>)
+	export function unRefListSubregionResp(v:Ref<ListSubregionResp>):ListSubregionResp
+	export function emptyP2EmploymentConvertedV1():P2EmploymentConvertedV1
+	export function emptyRefP2EmploymentConvertedV1():Ref<P2EmploymentConvertedV1>
+	export function refOfP2EmploymentConvertedV1(x:P2EmploymentConvertedV1,v:Ref<P2EmploymentConvertedV1>)
+	export function unRefP2EmploymentConvertedV1(v:Ref<P2EmploymentConvertedV1>):P2EmploymentConvertedV1
+	export function emptyNationalIdType():NationalIdType
+	export function emptyRefNationalIdType():Ref<NationalIdType>
+	export function refOfNationalIdType(x:NationalIdType,v:Ref<NationalIdType>)
+	export function unRefNationalIdType(v:Ref<NationalIdType>):NationalIdType
+	export function emptyQueryTransferReasonReq():QueryTransferReasonReq
+	export function emptyRefQueryTransferReasonReq():Ref<QueryTransferReasonReq>
+	export function refOfQueryTransferReasonReq(x:QueryTransferReasonReq,v:Ref<QueryTransferReasonReq>)
+	export function unRefQueryTransferReasonReq(v:Ref<QueryTransferReasonReq>):QueryTransferReasonReq
+	export function emptySortOption():SortOption
+	export function emptyRefSortOption():Ref<SortOption>
+	export function refOfSortOption(x:SortOption,v:Ref<SortOption>)
+	export function unRefSortOption(v:Ref<SortOption>):SortOption
+	export function emptyListEmployeeTypeReq():ListEmployeeTypeReq
+	export function emptyRefListEmployeeTypeReq():Ref<ListEmployeeTypeReq>
+	export function refOfListEmployeeTypeReq(x:ListEmployeeTypeReq,v:Ref<ListEmployeeTypeReq>)
+	export function unRefListEmployeeTypeReq(v:Ref<ListEmployeeTypeReq>):ListEmployeeTypeReq
+	export function emptyJobData():JobData
+	export function emptyRefJobData():Ref<JobData>
+	export function refOfJobData(x:JobData,v:Ref<JobData>)
+	export function unRefJobData(v:Ref<JobData>):JobData
+	export function emptyCreateJobLevelRespData():CreateJobLevelRespData
+	export function emptyRefCreateJobLevelRespData():Ref<CreateJobLevelRespData>
+	export function refOfCreateJobLevelRespData(x:CreateJobLevelRespData,v:Ref<CreateJobLevelRespData>)
+	export function unRefCreateJobLevelRespData(v:Ref<CreateJobLevelRespData>):CreateJobLevelRespData
+	export function emptyListObjectApiNameCustomFieldRespData():ListObjectApiNameCustomFieldRespData
+	export function emptyRefListObjectApiNameCustomFieldRespData():Ref<ListObjectApiNameCustomFieldRespData>
+	export function refOfListObjectApiNameCustomFieldRespData(x:ListObjectApiNameCustomFieldRespData,v:Ref<ListObjectApiNameCustomFieldRespData>)
+	export function unRefListObjectApiNameCustomFieldRespData(v:Ref<ListObjectApiNameCustomFieldRespData>):ListObjectApiNameCustomFieldRespData
+	export function emptyPreHire():PreHire
+	export function emptyRefPreHire():Ref<PreHire>
+	export function refOfPreHire(x:PreHire,v:Ref<PreHire>)
+	export function unRefPreHire(v:Ref<PreHire>):PreHire
+	export function emptyCustomName():CustomName
+	export function emptyRefCustomName():Ref<CustomName>
+	export function refOfCustomName(x:CustomName,v:Ref<CustomName>)
+	export function unRefCustomName(v:Ref<CustomName>):CustomName
+	export function emptyGetDepartmentReq():GetDepartmentReq
+	export function emptyRefGetDepartmentReq():Ref<GetDepartmentReq>
+	export function refOfGetDepartmentReq(x:GetDepartmentReq,v:Ref<GetDepartmentReq>)
+	export function unRefGetDepartmentReq(v:Ref<GetDepartmentReq>):GetDepartmentReq
+	export function emptyGetProcessFormVariableDataResp():GetProcessFormVariableDataResp
+	export function emptyRefGetProcessFormVariableDataResp():Ref<GetProcessFormVariableDataResp>
+	export function refOfGetProcessFormVariableDataResp(x:GetProcessFormVariableDataResp,v:Ref<GetProcessFormVariableDataResp>)
+	export function unRefGetProcessFormVariableDataResp(v:Ref<GetProcessFormVariableDataResp>):GetProcessFormVariableDataResp
+	export function emptyPatchDepartmentResp():PatchDepartmentResp
+	export function emptyRefPatchDepartmentResp():Ref<PatchDepartmentResp>
+	export function refOfPatchDepartmentResp(x:PatchDepartmentResp,v:Ref<PatchDepartmentResp>)
+	export function unRefPatchDepartmentResp(v:Ref<PatchDepartmentResp>):PatchDepartmentResp
+	export function emptyProcess():Process
+	export function emptyRefProcess():Ref<Process>
+	export function refOfProcess(x:Process,v:Ref<Process>)
+	export function unRefProcess(v:Ref<Process>):Process
+	export function emptyDimensionValue():DimensionValue
+	export function emptyRefDimensionValue():Ref<DimensionValue>
+	export function refOfDimensionValue(x:DimensionValue,v:Ref<DimensionValue>)
+	export function unRefDimensionValue(v:Ref<DimensionValue>):DimensionValue
+	export function emptyIdInfo():IdInfo
+	export function emptyRefIdInfo():Ref<IdInfo>
+	export function refOfIdInfo(x:IdInfo,v:Ref<IdInfo>)
+	export function unRefIdInfo(v:Ref<IdInfo>):IdInfo
+	export function emptyDateTimeFieldSetting():DateTimeFieldSetting
+	export function emptyRefDateTimeFieldSetting():Ref<DateTimeFieldSetting>
+	export function refOfDateTimeFieldSetting(x:DateTimeFieldSetting,v:Ref<DateTimeFieldSetting>)
+	export function unRefDateTimeFieldSetting(v:Ref<DateTimeFieldSetting>):DateTimeFieldSetting
+	export function emptyGetNationalIdTypeRespData():GetNationalIdTypeRespData
+	export function emptyRefGetNationalIdTypeRespData():Ref<GetNationalIdTypeRespData>
+	export function refOfGetNationalIdTypeRespData(x:GetNationalIdTypeRespData,v:Ref<GetNationalIdTypeRespData>)
+	export function unRefGetNationalIdTypeRespData(v:Ref<GetNationalIdTypeRespData>):GetNationalIdTypeRespData
+	export function emptyOperationLogEntity():OperationLogEntity
+	export function emptyRefOperationLogEntity():Ref<OperationLogEntity>
+	export function refOfOperationLogEntity(x:OperationLogEntity,v:Ref<OperationLogEntity>)
+	export function unRefOperationLogEntity(v:Ref<OperationLogEntity>):OperationLogEntity
+	export function emptyEmploymentCreate():EmploymentCreate
+	export function emptyRefEmploymentCreate():Ref<EmploymentCreate>
+	export function refOfEmploymentCreate(x:EmploymentCreate,v:Ref<EmploymentCreate>)
+	export function unRefEmploymentCreate(v:Ref<EmploymentCreate>):EmploymentCreate
+	export function emptyFormFieldVariableObjectValue():FormFieldVariableObjectValue
+	export function emptyRefFormFieldVariableObjectValue():Ref<FormFieldVariableObjectValue>
+	export function refOfFormFieldVariableObjectValue(x:FormFieldVariableObjectValue,v:Ref<FormFieldVariableObjectValue>)
+	export function unRefFormFieldVariableObjectValue(v:Ref<FormFieldVariableObjectValue>):FormFieldVariableObjectValue
+	export function emptyListContractReq():ListContractReq
+	export function emptyRefListContractReq():Ref<ListContractReq>
+	export function refOfListContractReq(x:ListContractReq,v:Ref<ListContractReq>)
+	export function unRefListContractReq(v:Ref<ListContractReq>):ListContractReq
+	export function emptyOperationLogListReq():OperationLogListReq
+	export function emptyRefOperationLogListReq():Ref<OperationLogListReq>
+	export function refOfOperationLogListReq(x:OperationLogListReq,v:Ref<OperationLogListReq>)
+	export function unRefOperationLogListReq(v:Ref<OperationLogListReq>):OperationLogListReq
+	export function emptyDeleteDepartmentReq():DeleteDepartmentReq
+	export function emptyRefDeleteDepartmentReq():Ref<DeleteDepartmentReq>
+	export function refOfDeleteDepartmentReq(x:DeleteDepartmentReq,v:Ref<DeleteDepartmentReq>)
+	export function unRefDeleteDepartmentReq(v:Ref<DeleteDepartmentReq>):DeleteDepartmentReq
+	export function emptyRoleAuthorization():RoleAuthorization
+	export function emptyRefRoleAuthorization():Ref<RoleAuthorization>
+	export function refOfRoleAuthorization(x:RoleAuthorization,v:Ref<RoleAuthorization>)
+	export function unRefRoleAuthorization(v:Ref<RoleAuthorization>):RoleAuthorization
+	export function emptyGetProcessFormVariableDataRespData():GetProcessFormVariableDataRespData
+	export function emptyRefGetProcessFormVariableDataRespData():Ref<GetProcessFormVariableDataRespData>
+	export function refOfGetProcessFormVariableDataRespData(x:GetProcessFormVariableDataRespData,v:Ref<GetProcessFormVariableDataRespData>)
+	export function unRefGetProcessFormVariableDataRespData(v:Ref<GetProcessFormVariableDataRespData>):GetProcessFormVariableDataRespData
+	export function emptyListJobFamilyResp():ListJobFamilyResp
+	export function emptyRefListJobFamilyResp():Ref<ListJobFamilyResp>
+	export function refOfListJobFamilyResp(x:ListJobFamilyResp,v:Ref<ListJobFamilyResp>)
+	export function unRefListJobFamilyResp(v:Ref<ListJobFamilyResp>):ListJobFamilyResp
+	export function emptyPatchContractResp():PatchContractResp
+	export function emptyRefPatchContractResp():Ref<PatchContractResp>
+	export function refOfPatchContractResp(x:PatchContractResp,v:Ref<PatchContractResp>)
+	export function unRefPatchContractResp(v:Ref<PatchContractResp>):PatchContractResp
+	export function emptyPatchNationalIdTypeRespData():PatchNationalIdTypeRespData
+	export function emptyRefPatchNationalIdTypeRespData():Ref<PatchNationalIdTypeRespData>
+	export function refOfPatchNationalIdTypeRespData(x:PatchNationalIdTypeRespData,v:Ref<PatchNationalIdTypeRespData>)
+	export function unRefPatchNationalIdTypeRespData(v:Ref<PatchNationalIdTypeRespData>):PatchNationalIdTypeRespData
+	export function emptyEditEnumOptionCommonDataMetaDataRespData():EditEnumOptionCommonDataMetaDataRespData
+	export function emptyRefEditEnumOptionCommonDataMetaDataRespData():Ref<EditEnumOptionCommonDataMetaDataRespData>
+	export function refOfEditEnumOptionCommonDataMetaDataRespData(x:EditEnumOptionCommonDataMetaDataRespData,v:Ref<EditEnumOptionCommonDataMetaDataRespData>)
+	export function unRefEditEnumOptionCommonDataMetaDataRespData(v:Ref<EditEnumOptionCommonDataMetaDataRespData>):EditEnumOptionCommonDataMetaDataRespData
+	export function emptyPatchJobDataResp():PatchJobDataResp
+	export function emptyRefPatchJobDataResp():Ref<PatchJobDataResp>
+	export function refOfPatchJobDataResp(x:PatchJobDataResp,v:Ref<PatchJobDataResp>)
+	export function unRefPatchJobDataResp(v:Ref<PatchJobDataResp>):PatchJobDataResp
+	export function emptyConvertCommonDataIdReqBody():ConvertCommonDataIdReqBody
+	export function emptyRefConvertCommonDataIdReqBody():Ref<ConvertCommonDataIdReqBody>
+	export function refOfConvertCommonDataIdReqBody(x:ConvertCommonDataIdReqBody,v:Ref<ConvertCommonDataIdReqBody>)
+	export function unRefConvertCommonDataIdReqBody(v:Ref<ConvertCommonDataIdReqBody>):ConvertCommonDataIdReqBody
+	export function emptyCreateJobLevelReq():CreateJobLevelReq
+	export function emptyRefCreateJobLevelReq():Ref<CreateJobLevelReq>
+	export function refOfCreateJobLevelReq(x:CreateJobLevelReq,v:Ref<CreateJobLevelReq>)
+	export function unRefCreateJobLevelReq(v:Ref<CreateJobLevelReq>):CreateJobLevelReq
+	export function emptyEducation():Education
+	export function emptyRefEducation():Ref<Education>
+	export function refOfEducation(x:Education,v:Ref<Education>)
+	export function unRefEducation(v:Ref<Education>):Education
+	export function emptyFormFieldVariableListObject():FormFieldVariableListObject
+	export function emptyRefFormFieldVariableListObject():Ref<FormFieldVariableListObject>
+	export function refOfFormFieldVariableListObject(x:FormFieldVariableListObject,v:Ref<FormFieldVariableListObject>)
+	export function unRefFormFieldVariableListObject(v:Ref<FormFieldVariableListObject>):FormFieldVariableListObject
+	export function emptyPersonInfoMys():PersonInfoMys
+	export function emptyRefPersonInfoMys():Ref<PersonInfoMys>
+	export function refOfPersonInfoMys(x:PersonInfoMys,v:Ref<PersonInfoMys>)
+	export function unRefPersonInfoMys(v:Ref<PersonInfoMys>):PersonInfoMys
+	export function emptyCreateJobDataReq():CreateJobDataReq
+	export function emptyRefCreateJobDataReq():Ref<CreateJobDataReq>
+	export function refOfCreateJobDataReq(x:CreateJobDataReq,v:Ref<CreateJobDataReq>)
+	export function unRefCreateJobDataReq(v:Ref<CreateJobDataReq>):CreateJobDataReq
+	export function emptyLeaveTypesLeaveResp():LeaveTypesLeaveResp
+	export function emptyRefLeaveTypesLeaveResp():Ref<LeaveTypesLeaveResp>
+	export function refOfLeaveTypesLeaveResp(x:LeaveTypesLeaveResp,v:Ref<LeaveTypesLeaveResp>)
+	export function unRefLeaveTypesLeaveResp(v:Ref<LeaveTypesLeaveResp>):LeaveTypesLeaveResp
+	export function emptyRemoveRoleAssignAuthorizationRespData():RemoveRoleAssignAuthorizationRespData
+	export function emptyRefRemoveRoleAssignAuthorizationRespData():Ref<RemoveRoleAssignAuthorizationRespData>
+	export function refOfRemoveRoleAssignAuthorizationRespData(x:RemoveRoleAssignAuthorizationRespData,v:Ref<RemoveRoleAssignAuthorizationRespData>)
+	export function unRefRemoveRoleAssignAuthorizationRespData(v:Ref<RemoveRoleAssignAuthorizationRespData>):RemoveRoleAssignAuthorizationRespData
+	export function emptyCostCenterQuery():CostCenterQuery
+	export function emptyRefCostCenterQuery():Ref<CostCenterQuery>
+	export function refOfCostCenterQuery(x:CostCenterQuery,v:Ref<CostCenterQuery>)
+	export function unRefCostCenterQuery(v:Ref<CostCenterQuery>):CostCenterQuery
+	export function emptyGetCountryRegionReq():GetCountryRegionReq
+	export function emptyRefGetCountryRegionReq():Ref<GetCountryRegionReq>
+	export function refOfGetCountryRegionReq(x:GetCountryRegionReq,v:Ref<GetCountryRegionReq>)
+	export function unRefGetCountryRegionReq(v:Ref<GetCountryRegionReq>):GetCountryRegionReq
+	export function emptyLeaveTypesLeaveRespData():LeaveTypesLeaveRespData
+	export function emptyRefLeaveTypesLeaveRespData():Ref<LeaveTypesLeaveRespData>
+	export function refOfLeaveTypesLeaveRespData(x:LeaveTypesLeaveRespData,v:Ref<LeaveTypesLeaveRespData>)
+	export function unRefLeaveTypesLeaveRespData(v:Ref<LeaveTypesLeaveRespData>):LeaveTypesLeaveRespData
+	export function emptyAddRoleAssignAuthorizationResp():AddRoleAssignAuthorizationResp
+	export function emptyRefAddRoleAssignAuthorizationResp():Ref<AddRoleAssignAuthorizationResp>
+	export function refOfAddRoleAssignAuthorizationResp(x:AddRoleAssignAuthorizationResp,v:Ref<AddRoleAssignAuthorizationResp>)
+	export function unRefAddRoleAssignAuthorizationResp(v:Ref<AddRoleAssignAuthorizationResp>):AddRoleAssignAuthorizationResp
+	export function emptyGetCurrencyRespData():GetCurrencyRespData
+	export function emptyRefGetCurrencyRespData():Ref<GetCurrencyRespData>
+	export function refOfGetCurrencyRespData(x:GetCurrencyRespData,v:Ref<GetCurrencyRespData>)
+	export function unRefGetCurrencyRespData(v:Ref<GetCurrencyRespData>):GetCurrencyRespData
+	export function emptyNumberFieldSetting():NumberFieldSetting
+	export function emptyRefNumberFieldSetting():Ref<NumberFieldSetting>
+	export function refOfNumberFieldSetting(x:NumberFieldSetting,v:Ref<NumberFieldSetting>)
+	export function unRefNumberFieldSetting(v:Ref<NumberFieldSetting>):NumberFieldSetting
+	export function emptyAddress():Address
+	export function emptyRefAddress():Ref<Address>
+	export function refOfAddress(x:Address,v:Ref<Address>)
+	export function unRefAddress(v:Ref<Address>):Address
+	export function emptyListNationalIdTypeReq():ListNationalIdTypeReq
+	export function emptyRefListNationalIdTypeReq():Ref<ListNationalIdTypeReq>
+	export function refOfListNationalIdTypeReq(x:ListNationalIdTypeReq,v:Ref<ListNationalIdTypeReq>)
+	export function unRefListNationalIdTypeReq(v:Ref<ListNationalIdTypeReq>):ListNationalIdTypeReq
+	export function emptyGetByParamAuthorizationRespData():GetByParamAuthorizationRespData
+	export function emptyRefGetByParamAuthorizationRespData():Ref<GetByParamAuthorizationRespData>
+	export function refOfGetByParamAuthorizationRespData(x:GetByParamAuthorizationRespData,v:Ref<GetByParamAuthorizationRespData>)
+	export function unRefGetByParamAuthorizationRespData(v:Ref<GetByParamAuthorizationRespData>):GetByParamAuthorizationRespData
+	export function emptyGetSubregionReq():GetSubregionReq
+	export function emptyRefGetSubregionReq():Ref<GetSubregionReq>
+	export function refOfGetSubregionReq(x:GetSubregionReq,v:Ref<GetSubregionReq>)
+	export function unRefGetSubregionReq(v:Ref<GetSubregionReq>):GetSubregionReq
+	export function emptyListJobLevelRespData():ListJobLevelRespData
+	export function emptyRefListJobLevelRespData():Ref<ListJobLevelRespData>
+	export function refOfListJobLevelRespData(x:ListJobLevelRespData,v:Ref<ListJobLevelRespData>)
+	export function unRefListJobLevelRespData(v:Ref<ListJobLevelRespData>):ListJobLevelRespData
+	export function emptyP2JobDataChangedV1():P2JobDataChangedV1
+	export function emptyRefP2JobDataChangedV1():Ref<P2JobDataChangedV1>
+	export function refOfP2JobDataChangedV1(x:P2JobDataChangedV1,v:Ref<P2JobDataChangedV1>)
+	export function unRefP2JobDataChangedV1(v:Ref<P2JobDataChangedV1>):P2JobDataChangedV1
+	export function emptyAddEnumOptionCommonDataMetaDataReqBody():AddEnumOptionCommonDataMetaDataReqBody
+	export function emptyRefAddEnumOptionCommonDataMetaDataReqBody():Ref<AddEnumOptionCommonDataMetaDataReqBody>
+	export function refOfAddEnumOptionCommonDataMetaDataReqBody(x:AddEnumOptionCommonDataMetaDataReqBody,v:Ref<AddEnumOptionCommonDataMetaDataReqBody>)
+	export function unRefAddEnumOptionCommonDataMetaDataReqBody(v:Ref<AddEnumOptionCommonDataMetaDataReqBody>):AddEnumOptionCommonDataMetaDataReqBody
+	export function emptyDeleteContractResp():DeleteContractResp
+	export function emptyRefDeleteContractResp():Ref<DeleteContractResp>
+	export function refOfDeleteContractResp(x:DeleteContractResp,v:Ref<DeleteContractResp>)
+	export function unRefDeleteContractResp(v:Ref<DeleteContractResp>):DeleteContractResp
+	export function emptyHrbp():Hrbp
+	export function emptyRefHrbp():Ref<Hrbp>
+	export function refOfHrbp(x:Hrbp,v:Ref<Hrbp>)
+	export function unRefHrbp(v:Ref<Hrbp>):Hrbp
+	export function emptyListCompanyRespData():ListCompanyRespData
+	export function emptyRefListCompanyRespData():Ref<ListCompanyRespData>
+	export function refOfListCompanyRespData(x:ListCompanyRespData,v:Ref<ListCompanyRespData>)
+	export function unRefListCompanyRespData(v:Ref<ListCompanyRespData>):ListCompanyRespData
+	export function emptyLeaveType():LeaveType
+	export function emptyRefLeaveType():Ref<LeaveType>
+	export function refOfLeaveType(x:LeaveType,v:Ref<LeaveType>)
+	export function unRefLeaveType(v:Ref<LeaveType>):LeaveType
+	export function emptyCreateDepartmentReq():CreateDepartmentReq
+	export function emptyRefCreateDepartmentReq():Ref<CreateDepartmentReq>
+	export function refOfCreateDepartmentReq(x:CreateDepartmentReq,v:Ref<CreateDepartmentReq>)
+	export function unRefCreateDepartmentReq(v:Ref<CreateDepartmentReq>):CreateDepartmentReq
+	export function emptyDeleteJobLevelResp():DeleteJobLevelResp
+	export function emptyRefDeleteJobLevelResp():Ref<DeleteJobLevelResp>
+	export function refOfDeleteJobLevelResp(x:DeleteJobLevelResp,v:Ref<DeleteJobLevelResp>)
+	export function unRefDeleteJobLevelResp(v:Ref<DeleteJobLevelResp>):DeleteJobLevelResp
+	export function emptyCreateNationalIdTypeReq():CreateNationalIdTypeReq
+	export function emptyRefCreateNationalIdTypeReq():Ref<CreateNationalIdTypeReq>
+	export function refOfCreateNationalIdTypeReq(x:CreateNationalIdTypeReq,v:Ref<CreateNationalIdTypeReq>)
+	export function unRefCreateNationalIdTypeReq(v:Ref<CreateNationalIdTypeReq>):CreateNationalIdTypeReq
+	export function emptyFormFieldVariableBoolValue():FormFieldVariableBoolValue
+	export function emptyRefFormFieldVariableBoolValue():Ref<FormFieldVariableBoolValue>
+	export function refOfFormFieldVariableBoolValue(x:FormFieldVariableBoolValue,v:Ref<FormFieldVariableBoolValue>)
+	export function unRefFormFieldVariableBoolValue(v:Ref<FormFieldVariableBoolValue>):FormFieldVariableBoolValue
+	export function emptyListSecurityGroupRespData():ListSecurityGroupRespData
+	export function emptyRefListSecurityGroupRespData():Ref<ListSecurityGroupRespData>
+	export function refOfListSecurityGroupRespData(x:ListSecurityGroupRespData,v:Ref<ListSecurityGroupRespData>)
+	export function unRefListSecurityGroupRespData(v:Ref<ListSecurityGroupRespData>):ListSecurityGroupRespData
+	export function emptyMatchCompensationStandardRespData():MatchCompensationStandardRespData
+	export function emptyRefMatchCompensationStandardRespData():Ref<MatchCompensationStandardRespData>
+	export function refOfMatchCompensationStandardRespData(x:MatchCompensationStandardRespData,v:Ref<MatchCompensationStandardRespData>)
+	export function unRefMatchCompensationStandardRespData(v:Ref<MatchCompensationStandardRespData>):MatchCompensationStandardRespData
+	export function emptyQueryTransferTypeReq():QueryTransferTypeReq
+	export function emptyRefQueryTransferTypeReq():Ref<QueryTransferTypeReq>
+	export function refOfQueryTransferTypeReq(x:QueryTransferTypeReq,v:Ref<QueryTransferTypeReq>)
+	export function unRefQueryTransferTypeReq(v:Ref<QueryTransferTypeReq>):QueryTransferTypeReq
+	export function emptyPhone():Phone
+	export function emptyRefPhone():Ref<Phone>
+	export function refOfPhone(x:Phone,v:Ref<Phone>)
+	export function unRefPhone(v:Ref<Phone>):Phone
+	export function emptyEditEnumOptionCommonDataMetaDataReqBody():EditEnumOptionCommonDataMetaDataReqBody
+	export function emptyRefEditEnumOptionCommonDataMetaDataReqBody():Ref<EditEnumOptionCommonDataMetaDataReqBody>
+	export function refOfEditEnumOptionCommonDataMetaDataReqBody(x:EditEnumOptionCommonDataMetaDataReqBody,v:Ref<EditEnumOptionCommonDataMetaDataReqBody>)
+	export function unRefEditEnumOptionCommonDataMetaDataReqBody(v:Ref<EditEnumOptionCommonDataMetaDataReqBody>):EditEnumOptionCommonDataMetaDataReqBody
 	export function emptyMatchCompensationStandardResp():MatchCompensationStandardResp
 	export function emptyRefMatchCompensationStandardResp():Ref<MatchCompensationStandardResp>
 	export function refOfMatchCompensationStandardResp(x:MatchCompensationStandardResp,v:Ref<MatchCompensationStandardResp>)
 	export function unRefMatchCompensationStandardResp(v:Ref<MatchCompensationStandardResp>):MatchCompensationStandardResp
+	export function emptyWkOption():WkOption
+	export function emptyRefWkOption():Ref<WkOption>
+	export function refOfWkOption(x:WkOption,v:Ref<WkOption>)
+	export function unRefWkOption(v:Ref<WkOption>):WkOption
 	export function emptyFormVariableValueInfoExample():FormVariableValueInfoExample
 	export function emptyRefFormVariableValueInfoExample():Ref<FormVariableValueInfoExample>
 	export function refOfFormVariableValueInfoExample(x:FormVariableValueInfoExample,v:Ref<FormVariableValueInfoExample>)
 	export function unRefFormVariableValueInfoExample(v:Ref<FormVariableValueInfoExample>):FormVariableValueInfoExample
+	export function emptyLeaveBalancesLeaveReq():LeaveBalancesLeaveReq
+	export function emptyRefLeaveBalancesLeaveReq():Ref<LeaveBalancesLeaveReq>
+	export function refOfLeaveBalancesLeaveReq(x:LeaveBalancesLeaveReq,v:Ref<LeaveBalancesLeaveReq>)
+	export function unRefLeaveBalancesLeaveReq(v:Ref<LeaveBalancesLeaveReq>):LeaveBalancesLeaveReq
+	export function emptyObjectFieldData():ObjectFieldData
+	export function emptyRefObjectFieldData():Ref<ObjectFieldData>
+	export function refOfObjectFieldData(x:ObjectFieldData,v:Ref<ObjectFieldData>)
+	export function unRefObjectFieldData(v:Ref<ObjectFieldData>):ObjectFieldData
+	export function emptyOrgTruncation():OrgTruncation
+	export function emptyRefOrgTruncation():Ref<OrgTruncation>
+	export function refOfOrgTruncation(x:OrgTruncation,v:Ref<OrgTruncation>)
+	export function unRefOrgTruncation(v:Ref<OrgTruncation>):OrgTruncation
+	export function emptyP2PreHireUpdatedV1():P2PreHireUpdatedV1
+	export function emptyRefP2PreHireUpdatedV1():Ref<P2PreHireUpdatedV1>
+	export function refOfP2PreHireUpdatedV1(x:P2PreHireUpdatedV1,v:Ref<P2PreHireUpdatedV1>)
+	export function unRefP2PreHireUpdatedV1(v:Ref<P2PreHireUpdatedV1>):P2PreHireUpdatedV1
+	export function emptyCommonSchemaConfig():CommonSchemaConfig
+	export function emptyRefCommonSchemaConfig():Ref<CommonSchemaConfig>
+	export function refOfCommonSchemaConfig(x:CommonSchemaConfig,v:Ref<CommonSchemaConfig>)
+	export function unRefCommonSchemaConfig(v:Ref<CommonSchemaConfig>):CommonSchemaConfig
+	export function emptyFormVariableData():FormVariableData
+	export function emptyRefFormVariableData():Ref<FormVariableData>
+	export function refOfFormVariableData(x:FormVariableData,v:Ref<FormVariableData>)
+	export function unRefFormVariableData(v:Ref<FormVariableData>):FormVariableData
+	export function emptyGetFileResp():GetFileResp
+	export function emptyRefGetFileResp():Ref<GetFileResp>
+	export function refOfGetFileResp(x:GetFileResp,v:Ref<GetFileResp>)
+	export function unRefGetFileResp(v:Ref<GetFileResp>):GetFileResp
+	export function emptyP2JobDataChangedV1Data():P2JobDataChangedV1Data
+	export function emptyRefP2JobDataChangedV1Data():Ref<P2JobDataChangedV1Data>
+	export function refOfP2JobDataChangedV1Data(x:P2JobDataChangedV1Data,v:Ref<P2JobDataChangedV1Data>)
+	export function unRefP2JobDataChangedV1Data(v:Ref<P2JobDataChangedV1Data>):P2JobDataChangedV1Data
+	export function emptyPerson():Person
+	export function emptyRefPerson():Ref<Person>
+	export function refOfPerson(x:Person,v:Ref<Person>)
+	export function unRefPerson(v:Ref<Person>):Person
+	export function emptyCreatePersonReq():CreatePersonReq
+	export function emptyRefCreatePersonReq():Ref<CreatePersonReq>
+	export function refOfCreatePersonReq(x:CreatePersonReq,v:Ref<CreatePersonReq>)
+	export function unRefCreatePersonReq(v:Ref<CreatePersonReq>):CreatePersonReq
+	export function emptyDeleteWorkingHoursTypeReq():DeleteWorkingHoursTypeReq
+	export function emptyRefDeleteWorkingHoursTypeReq():Ref<DeleteWorkingHoursTypeReq>
+	export function refOfDeleteWorkingHoursTypeReq(x:DeleteWorkingHoursTypeReq,v:Ref<DeleteWorkingHoursTypeReq>)
+	export function unRefDeleteWorkingHoursTypeReq(v:Ref<DeleteWorkingHoursTypeReq>):DeleteWorkingHoursTypeReq
+	export function emptyPatchJobLevelRespData():PatchJobLevelRespData
+	export function emptyRefPatchJobLevelRespData():Ref<PatchJobLevelRespData>
+	export function refOfPatchJobLevelRespData(x:PatchJobLevelRespData,v:Ref<PatchJobLevelRespData>)
+	export function unRefPatchJobLevelRespData(v:Ref<PatchJobLevelRespData>):PatchJobLevelRespData
+	export function emptyListEmployeeTypeResp():ListEmployeeTypeResp
+	export function emptyRefListEmployeeTypeResp():Ref<ListEmployeeTypeResp>
+	export function refOfListEmployeeTypeResp(x:ListEmployeeTypeResp,v:Ref<ListEmployeeTypeResp>)
+	export function unRefListEmployeeTypeResp(v:Ref<ListEmployeeTypeResp>):ListEmployeeTypeResp
+	export function emptyListJobRespData():ListJobRespData
+	export function emptyRefListJobRespData():Ref<ListJobRespData>
+	export function refOfListJobRespData(x:ListJobRespData,v:Ref<ListJobRespData>)
+	export function unRefListJobRespData(v:Ref<ListJobRespData>):ListJobRespData
+	export function emptySubmitOffboardingReq():SubmitOffboardingReq
+	export function emptyRefSubmitOffboardingReq():Ref<SubmitOffboardingReq>
+	export function refOfSubmitOffboardingReq(x:SubmitOffboardingReq,v:Ref<SubmitOffboardingReq>)
+	export function unRefSubmitOffboardingReq(v:Ref<SubmitOffboardingReq>):SubmitOffboardingReq
+	export function emptyDeleteJobResp():DeleteJobResp
+	export function emptyRefDeleteJobResp():Ref<DeleteJobResp>
+	export function refOfDeleteJobResp(x:DeleteJobResp,v:Ref<DeleteJobResp>)
+	export function unRefDeleteJobResp(v:Ref<DeleteJobResp>):DeleteJobResp
+	export function emptyDeleteLeaveGrantingRecordReq():DeleteLeaveGrantingRecordReq
+	export function emptyRefDeleteLeaveGrantingRecordReq():Ref<DeleteLeaveGrantingRecordReq>
+	export function refOfDeleteLeaveGrantingRecordReq(x:DeleteLeaveGrantingRecordReq,v:Ref<DeleteLeaveGrantingRecordReq>)
+	export function unRefDeleteLeaveGrantingRecordReq(v:Ref<DeleteLeaveGrantingRecordReq>):DeleteLeaveGrantingRecordReq
+	export function emptyGetPersonRespData():GetPersonRespData
+	export function emptyRefGetPersonRespData():Ref<GetPersonRespData>
+	export function refOfGetPersonRespData(x:GetPersonRespData,v:Ref<GetPersonRespData>)
+	export function unRefGetPersonRespData(v:Ref<GetPersonRespData>):GetPersonRespData
+	export function emptyGetLocationRespData():GetLocationRespData
+	export function emptyRefGetLocationRespData():Ref<GetLocationRespData>
+	export function refOfGetLocationRespData(x:GetLocationRespData,v:Ref<GetLocationRespData>)
+	export function unRefGetLocationRespData(v:Ref<GetLocationRespData>):GetLocationRespData
+	export function emptyPatchEmploymentResp():PatchEmploymentResp
+	export function emptyRefPatchEmploymentResp():Ref<PatchEmploymentResp>
+	export function refOfPatchEmploymentResp(x:PatchEmploymentResp,v:Ref<PatchEmploymentResp>)
+	export function unRefPatchEmploymentResp(v:Ref<PatchEmploymentResp>):PatchEmploymentResp
+	export function emptyListJobFamilyReq():ListJobFamilyReq
+	export function emptyRefListJobFamilyReq():Ref<ListJobFamilyReq>
+	export function refOfListJobFamilyReq(x:ListJobFamilyReq,v:Ref<ListJobFamilyReq>)
+	export function unRefListJobFamilyReq(v:Ref<ListJobFamilyReq>):ListJobFamilyReq
+	export function emptyOffboardingInfo():OffboardingInfo
+	export function emptyRefOffboardingInfo():Ref<OffboardingInfo>
+	export function refOfOffboardingInfo(x:OffboardingInfo,v:Ref<OffboardingInfo>)
+	export function unRefOffboardingInfo(v:Ref<OffboardingInfo>):OffboardingInfo
+	export function emptyListDepartmentReq():ListDepartmentReq
+	export function emptyRefListDepartmentReq():Ref<ListDepartmentReq>
+	export function refOfListDepartmentReq(x:ListDepartmentReq,v:Ref<ListDepartmentReq>)
+	export function unRefListDepartmentReq(v:Ref<ListDepartmentReq>):ListDepartmentReq
+	export function emptySubregion():Subregion
+	export function emptyRefSubregion():Ref<Subregion>
+	export function refOfSubregion(x:Subregion,v:Ref<Subregion>)
+	export function unRefSubregion(v:Ref<Subregion>):Subregion
+	export function emptyListCurrencyReq():ListCurrencyReq
+	export function emptyRefListCurrencyReq():Ref<ListCurrencyReq>
+	export function refOfListCurrencyReq(x:ListCurrencyReq,v:Ref<ListCurrencyReq>)
+	export function unRefListCurrencyReq(v:Ref<ListCurrencyReq>):ListCurrencyReq
+	export function emptyTransferInfo():TransferInfo
+	export function emptyRefTransferInfo():Ref<TransferInfo>
+	export function refOfTransferInfo(x:TransferInfo,v:Ref<TransferInfo>)
+	export function unRefTransferInfo(v:Ref<TransferInfo>):TransferInfo
+	export function emptyDeletePreHireResp():DeletePreHireResp
+	export function emptyRefDeletePreHireResp():Ref<DeletePreHireResp>
+	export function refOfDeletePreHireResp(x:DeletePreHireResp,v:Ref<DeletePreHireResp>)
+	export function unRefDeletePreHireResp(v:Ref<DeletePreHireResp>):DeletePreHireResp
+	export function emptyP2PersonUpdatedV1Data():P2PersonUpdatedV1Data
+	export function emptyRefP2PersonUpdatedV1Data():Ref<P2PersonUpdatedV1Data>
+	export function refOfP2PersonUpdatedV1Data(x:P2PersonUpdatedV1Data,v:Ref<P2PersonUpdatedV1Data>)
+	export function unRefP2PersonUpdatedV1Data(v:Ref<P2PersonUpdatedV1Data>):P2PersonUpdatedV1Data
+	export function emptyPatchCompanyResp():PatchCompanyResp
+	export function emptyRefPatchCompanyResp():Ref<PatchCompanyResp>
+	export function refOfPatchCompanyResp(x:PatchCompanyResp,v:Ref<PatchCompanyResp>)
+	export function unRefPatchCompanyResp(v:Ref<PatchCompanyResp>):PatchCompanyResp
+	export function emptyEmail():Email
+	export function emptyRefEmail():Ref<Email>
+	export function refOfEmail(x:Email,v:Ref<Email>)
+	export function unRefEmail(v:Ref<Email>):Email
+	export function emptyGetJobFamilyResp():GetJobFamilyResp
+	export function emptyRefGetJobFamilyResp():Ref<GetJobFamilyResp>
+	export function refOfGetJobFamilyResp(x:GetJobFamilyResp,v:Ref<GetJobFamilyResp>)
+	export function unRefGetJobFamilyResp(v:Ref<GetJobFamilyResp>):GetJobFamilyResp
+	export function emptyOffboardingReason():OffboardingReason
+	export function emptyRefOffboardingReason():Ref<OffboardingReason>
+	export function refOfOffboardingReason(x:OffboardingReason,v:Ref<OffboardingReason>)
+	export function unRefOffboardingReason(v:Ref<OffboardingReason>):OffboardingReason
+	export function emptyBpmDataengineI18n():BpmDataengineI18n
+	export function emptyRefBpmDataengineI18n():Ref<BpmDataengineI18n>
+	export function refOfBpmDataengineI18n(x:BpmDataengineI18n,v:Ref<BpmDataengineI18n>)
+	export function unRefBpmDataengineI18n(v:Ref<BpmDataengineI18n>):BpmDataengineI18n
+	export function emptyPatchPreHireResp():PatchPreHireResp
+	export function emptyRefPatchPreHireResp():Ref<PatchPreHireResp>
+	export function refOfPatchPreHireResp(x:PatchPreHireResp,v:Ref<PatchPreHireResp>)
+	export function unRefPatchPreHireResp(v:Ref<PatchPreHireResp>):PatchPreHireResp
+	export function emptyDeletePreHireReq():DeletePreHireReq
+	export function emptyRefDeletePreHireReq():Ref<DeletePreHireReq>
+	export function refOfDeletePreHireReq(x:DeletePreHireReq,v:Ref<DeletePreHireReq>)
+	export function unRefDeletePreHireReq(v:Ref<DeletePreHireReq>):DeletePreHireReq
+	export function emptyFilterExpression():FilterExpression
+	export function emptyRefFilterExpression():Ref<FilterExpression>
+	export function refOfFilterExpression(x:FilterExpression,v:Ref<FilterExpression>)
+	export function unRefFilterExpression(v:Ref<FilterExpression>):FilterExpression
+	export function emptyQuerySecurityGroupRespData():QuerySecurityGroupRespData
+	export function emptyRefQuerySecurityGroupRespData():Ref<QuerySecurityGroupRespData>
+	export function refOfQuerySecurityGroupRespData(x:QuerySecurityGroupRespData,v:Ref<QuerySecurityGroupRespData>)
+	export function unRefQuerySecurityGroupRespData(v:Ref<QuerySecurityGroupRespData>):QuerySecurityGroupRespData
+	export function emptyRuleDimension():RuleDimension
+	export function emptyRefRuleDimension():Ref<RuleDimension>
+	export function refOfRuleDimension(x:RuleDimension,v:Ref<RuleDimension>)
+	export function unRefRuleDimension(v:Ref<RuleDimension>):RuleDimension
+	export function emptyCreateEmploymentResp():CreateEmploymentResp
+	export function emptyRefCreateEmploymentResp():Ref<CreateEmploymentResp>
+	export function refOfCreateEmploymentResp(x:CreateEmploymentResp,v:Ref<CreateEmploymentResp>)
+	export function unRefCreateEmploymentResp(v:Ref<CreateEmploymentResp>):CreateEmploymentResp
+	export function emptyFormFieldVariableRecordValue():FormFieldVariableRecordValue
+	export function emptyRefFormFieldVariableRecordValue():Ref<FormFieldVariableRecordValue>
+	export function refOfFormFieldVariableRecordValue(x:FormFieldVariableRecordValue,v:Ref<FormFieldVariableRecordValue>)
+	export function unRefFormFieldVariableRecordValue(v:Ref<FormFieldVariableRecordValue>):FormFieldVariableRecordValue
+	export function emptyListLocationRespData():ListLocationRespData
+	export function emptyRefListLocationRespData():Ref<ListLocationRespData>
+	export function refOfListLocationRespData(x:ListLocationRespData,v:Ref<ListLocationRespData>)
+	export function unRefListLocationRespData(v:Ref<ListLocationRespData>):ListLocationRespData
+	export function emptyQueryOffboardingReq():QueryOffboardingReq
+	export function emptyRefQueryOffboardingReq():Ref<QueryOffboardingReq>
+	export function refOfQueryOffboardingReq(x:QueryOffboardingReq,v:Ref<QueryOffboardingReq>)
+	export function unRefQueryOffboardingReq(v:Ref<QueryOffboardingReq>):QueryOffboardingReq
+	export function emptyQuerySecurityGroupReqBody():QuerySecurityGroupReqBody
+	export function emptyRefQuerySecurityGroupReqBody():Ref<QuerySecurityGroupReqBody>
+	export function refOfQuerySecurityGroupReqBody(x:QuerySecurityGroupReqBody,v:Ref<QuerySecurityGroupReqBody>)
+	export function unRefQuerySecurityGroupReqBody(v:Ref<QuerySecurityGroupReqBody>):QuerySecurityGroupReqBody
+	export function emptyUploadPersonReqBody():UploadPersonReqBody
+	export function emptyRefUploadPersonReqBody():Ref<UploadPersonReqBody>
+	export function refOfUploadPersonReqBody(x:UploadPersonReqBody,v:Ref<UploadPersonReqBody>)
+	export function unRefUploadPersonReqBody(v:Ref<UploadPersonReqBody>):UploadPersonReqBody
+	export function emptyLeaveBalancesLeaveResp():LeaveBalancesLeaveResp
+	export function emptyRefLeaveBalancesLeaveResp():Ref<LeaveBalancesLeaveResp>
+	export function refOfLeaveBalancesLeaveResp(x:LeaveBalancesLeaveResp,v:Ref<LeaveBalancesLeaveResp>)
+	export function unRefLeaveBalancesLeaveResp(v:Ref<LeaveBalancesLeaveResp>):LeaveBalancesLeaveResp
+	export function emptyQuerySecurityGroupReq():QuerySecurityGroupReq
+	export function emptyRefQuerySecurityGroupReq():Ref<QuerySecurityGroupReq>
+	export function refOfQuerySecurityGroupReq(x:QuerySecurityGroupReq,v:Ref<QuerySecurityGroupReq>)
+	export function unRefQuerySecurityGroupReq(v:Ref<QuerySecurityGroupReq>):QuerySecurityGroupReq
 }

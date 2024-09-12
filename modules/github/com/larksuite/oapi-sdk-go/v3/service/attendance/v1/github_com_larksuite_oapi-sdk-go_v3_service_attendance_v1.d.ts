@@ -3,13 +3,13 @@
 declare module 'github.com/larksuite/oapi-sdk-go/v3/service/attendance/v1'{
 
 	// @ts-ignore
-	import * as larkcore from 'github.com/larksuite/oapi-sdk-go/v3/core'
-	// @ts-ignore
 	import * as io from 'golang/io'
 	// @ts-ignore
 	import * as context from 'golang/context'
 	// @ts-ignore
-	import type {Ref,int,Struct,error,bool,float64,map} from 'go'
+	import * as larkcore from 'github.com/larksuite/oapi-sdk-go/v3/core'
+	// @ts-ignore
+	import type {map,Ref,int,Struct,error,bool,float64} from 'go'
 	export interface ApprovalInfo extends Struct<ApprovalInfo>{
 
 			approvalId:Ref<string>
@@ -746,6 +746,9 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/attendance/v1'{
 			overtimeRule:Ref<OvertimeRule>[]
 			dayType:Ref<int>
 			overtimeRestTimeRule:Ref<RestRule>[]
+			lateMinutesAsSeriousLate:Ref<int>
+			shiftMiddleTimeRule:Ref<ShiftMiddleTimeRule>
+			lateOffLateOnSetting:Ref<LateOffLateOnSetting>
 	}
 	export interface GetUserFlowReq extends Struct<GetUserFlowReq>{
 
@@ -780,6 +783,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/attendance/v1'{
 			deviceId:Ref<string>
 			checkResult:Ref<string>
 			externalId:Ref<string>
+			idempotentId:Ref<string>
 	}
 	export interface Group extends Struct<Group>{
 
@@ -1000,6 +1004,17 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/attendance/v1'{
 			lateOnMinutes(lateOnMinutes:int):Ref<LateOffLateOnRuleBuilder>
 			build():Ref<LateOffLateOnRule>
 	}
+	export interface LateOffLateOnSetting extends Struct<LateOffLateOnSetting>{
+
+			lateOffBaseOnTimeType:Ref<int>
+			lateOnBaseOnTimeType:Ref<int>
+	}
+	export interface LateOffLateOnSettingBuilder extends Struct<LateOffLateOnSettingBuilder>{
+
+			lateOffBaseOnTimeType(lateOffBaseOnTimeType:int):Ref<LateOffLateOnSettingBuilder>
+			lateOnBaseOnTimeType(lateOnBaseOnTimeType:int):Ref<LateOffLateOnSettingBuilder>
+			build():Ref<LateOffLateOnSetting>
+	}
 	export interface LeaveAccrualRecord extends Struct<LeaveAccrualRecord>{
 
 			id:Ref<string>
@@ -1082,6 +1097,35 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/attendance/v1'{
 			earlyMinutesAsEarly(earlyMinutesAsEarly:int):Ref<LeaveNeedPunchCfgBuilder>
 			earlyMinutesAsLack(earlyMinutesAsLack:int):Ref<LeaveNeedPunchCfgBuilder>
 			build():Ref<LeaveNeedPunchCfg>
+	}
+	export interface ListArchiveRuleIterator extends Struct<ListArchiveRuleIterator>{
+
+			next():[bool,Ref<ArchiveReportMeta>]
+			nextPageToken():Ref<string>
+	}
+	export interface ListArchiveRuleReq extends Struct<ListArchiveRuleReq>{
+
+			limit:int
+	}
+	export interface ListArchiveRuleReqBuilder extends Struct<ListArchiveRuleReqBuilder>{
+
+			limit(limit:int):Ref<ListArchiveRuleReqBuilder>
+			pageSize(pageSize:int):Ref<ListArchiveRuleReqBuilder>
+			pageToken(pageToken:string):Ref<ListArchiveRuleReqBuilder>
+			build():Ref<ListArchiveRuleReq>
+	}
+	export interface ListArchiveRuleResp extends Struct<ListArchiveRuleResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<ListArchiveRuleRespData>
+			success():bool
+	}
+	export interface ListArchiveRuleRespData extends Struct<ListArchiveRuleRespData>{
+
+			items:Ref<ArchiveReportMeta>[]
+			pageToken:Ref<string>
+			hasMore:Ref<bool>
 	}
 	export interface ListGroupIterator extends Struct<ListGroupIterator>{
 
@@ -1405,11 +1449,15 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/attendance/v1'{
 
 	export function newLateOffLateOnRuleBuilder():Ref<LateOffLateOnRuleBuilder>
 
+	export function newLateOffLateOnSettingBuilder():Ref<LateOffLateOnSettingBuilder>
+
 	export function newLeaveAccrualRecordBuilder():Ref<LeaveAccrualRecordBuilder>
 
 	export function newLeaveEmployExpireRecordBuilder():Ref<LeaveEmployExpireRecordBuilder>
 
 	export function newLeaveNeedPunchCfgBuilder():Ref<LeaveNeedPunchCfgBuilder>
+
+	export function newListArchiveRuleReqBuilder():Ref<ListArchiveRuleReqBuilder>
 
 	export function newListGroupReqBuilder():Ref<ListGroupReqBuilder>
 
@@ -1553,6 +1601,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/attendance/v1'{
 
 	export function newShiftGroupUserBuilder():Ref<ShiftGroupUserBuilder>
 
+	export function newShiftMiddleTimeRuleBuilder():Ref<ShiftMiddleTimeRuleBuilder>
+
 	export function newStatisticsFieldBuilder():Ref<StatisticsFieldBuilder>
 
 	export function newStatusChangeBuilder():Ref<StatusChangeBuilder>
@@ -1597,9 +1647,17 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/attendance/v1'{
 
 	export function newUserStatsDataCellBuilder():Ref<UserStatsDataCellBuilder>
 
+	export function newUserStatsDataDurationBuilder():Ref<UserStatsDataDurationBuilder>
+
 	export function newUserStatsDataFeatureBuilder():Ref<UserStatsDataFeatureBuilder>
 
 	export function newUserStatsFieldBuilder():Ref<UserStatsFieldBuilder>
+
+	export function newUserStatsFieldsQueryArchiveRulePathReqBodyBuilder():Ref<UserStatsFieldsQueryArchiveRulePathReqBodyBuilder>
+
+	export function newUserStatsFieldsQueryArchiveRuleReqBodyBuilder():Ref<UserStatsFieldsQueryArchiveRuleReqBodyBuilder>
+
+	export function newUserStatsFieldsQueryArchiveRuleReqBuilder():Ref<UserStatsFieldsQueryArchiveRuleReqBuilder>
 
 	export function newUserStatsViewBuilder():Ref<UserStatsViewBuilder>
 
@@ -1845,6 +1903,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/attendance/v1'{
 			earlyMinutesAsLack:Ref<int>
 			offDelayMinutes:Ref<int>
 			lateMinutesAsSeriousLate:Ref<int>
+			noNeedOn:Ref<bool>
+			noNeedOff:Ref<bool>
 	}
 	export interface PunchTimeRuleBuilder extends Struct<PunchTimeRuleBuilder>{
 
@@ -1857,6 +1917,8 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/attendance/v1'{
 			earlyMinutesAsLack(earlyMinutesAsLack:int):Ref<PunchTimeRuleBuilder>
 			offDelayMinutes(offDelayMinutes:int):Ref<PunchTimeRuleBuilder>
 			lateMinutesAsSeriousLate(lateMinutesAsSeriousLate:int):Ref<PunchTimeRuleBuilder>
+			noNeedOn(noNeedOn:bool):Ref<PunchTimeRuleBuilder>
+			noNeedOff(noNeedOff:bool):Ref<PunchTimeRuleBuilder>
 			build():Ref<PunchTimeRule>
 	}
 	export interface PunchTimeSimpleRule extends Struct<PunchTimeSimpleRule>{
@@ -1901,6 +1963,9 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/attendance/v1'{
 			overtimeRule:Ref<OvertimeRule>[]
 			dayType:Ref<int>
 			overtimeRestTimeRule:Ref<RestRule>[]
+			lateMinutesAsSeriousLate:Ref<int>
+			shiftMiddleTimeRule:Ref<ShiftMiddleTimeRule>
+			lateOffLateOnSetting:Ref<LateOffLateOnSetting>
 	}
 	export interface QueryUserAllowedRemedysUserTaskRemedyPathReqBodyBuilder extends Struct<QueryUserAllowedRemedysUserTaskRemedyPathReqBodyBuilder>{
 
@@ -2493,6 +2558,9 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/attendance/v1'{
 			overtimeRule:Ref<OvertimeRule>[]
 			dayType:Ref<int>
 			overtimeRestTimeRule:Ref<RestRule>[]
+			lateMinutesAsSeriousLate:Ref<int>
+			shiftMiddleTimeRule:Ref<ShiftMiddleTimeRule>
+			lateOffLateOnSetting:Ref<LateOffLateOnSetting>
 	}
 	export interface ShiftBuilder extends Struct<ShiftBuilder>{
 
@@ -2510,6 +2578,9 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/attendance/v1'{
 			overtimeRule(overtimeRule:Ref<OvertimeRule>[]):Ref<ShiftBuilder>
 			dayType(dayType:int):Ref<ShiftBuilder>
 			overtimeRestTimeRule(overtimeRestTimeRule:Ref<RestRule>[]):Ref<ShiftBuilder>
+			lateMinutesAsSeriousLate(lateMinutesAsSeriousLate:int):Ref<ShiftBuilder>
+			shiftMiddleTimeRule(shiftMiddleTimeRule:Ref<ShiftMiddleTimeRule>):Ref<ShiftBuilder>
+			lateOffLateOnSetting(lateOffLateOnSetting:Ref<LateOffLateOnSetting>):Ref<ShiftBuilder>
 			build():Ref<Shift>
 	}
 	export interface ShiftGroupUser extends Struct<ShiftGroupUser>{
@@ -2522,6 +2593,17 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/attendance/v1'{
 			shiftGroupId(shiftGroupId:string):Ref<ShiftGroupUserBuilder>
 			userId(userId:string):Ref<ShiftGroupUserBuilder>
 			build():Ref<ShiftGroupUser>
+	}
+	export interface ShiftMiddleTimeRule extends Struct<ShiftMiddleTimeRule>{
+
+			middleTimeType:Ref<int>
+			fixedMiddleTime:Ref<string>
+	}
+	export interface ShiftMiddleTimeRuleBuilder extends Struct<ShiftMiddleTimeRuleBuilder>{
+
+			middleTimeType(middleTimeType:int):Ref<ShiftMiddleTimeRuleBuilder>
+			fixedMiddleTime(fixedMiddleTime:string):Ref<ShiftMiddleTimeRuleBuilder>
+			build():Ref<ShiftMiddleTimeRule>
 	}
 	export interface StatisticsField extends Struct<StatisticsField>{
 
@@ -2760,6 +2842,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/attendance/v1'{
 			deviceId:Ref<string>
 			checkResult:Ref<string>
 			externalId:Ref<string>
+			idempotentId:Ref<string>
 	}
 	export interface UserFlowBuilder extends Struct<UserFlowBuilder>{
 
@@ -2778,6 +2861,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/attendance/v1'{
 			deviceId(deviceId:string):Ref<UserFlowBuilder>
 			checkResult(checkResult:string):Ref<UserFlowBuilder>
 			externalId(externalId:string):Ref<UserFlowBuilder>
+			idempotentId(idempotentId:string):Ref<UserFlowBuilder>
 			build():Ref<UserFlow>
 	}
 	export interface UserId extends Struct<UserId>{
@@ -2822,6 +2906,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/attendance/v1'{
 			reason:Ref<string>
 			approvePassTime:Ref<string>
 			approveApplyTime:Ref<string>
+			idempotentId:Ref<string>
 	}
 	export interface UserLeaveBuilder extends Struct<UserLeaveBuilder>{
 
@@ -2836,6 +2921,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/attendance/v1'{
 			reason(reason:string):Ref<UserLeaveBuilder>
 			approvePassTime(approvePassTime:string):Ref<UserLeaveBuilder>
 			approveApplyTime(approveApplyTime:string):Ref<UserLeaveBuilder>
+			idempotentId(idempotentId:string):Ref<UserLeaveBuilder>
 			build():Ref<UserLeave>
 	}
 	export interface UserOut extends Struct<UserOut>{
@@ -2851,6 +2937,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/attendance/v1'{
 			reason:Ref<string>
 			approvePassTime:Ref<string>
 			approveApplyTime:Ref<string>
+			idempotentId:Ref<string>
 	}
 	export interface UserOutBuilder extends Struct<UserOutBuilder>{
 
@@ -2865,6 +2952,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/attendance/v1'{
 			reason(reason:string):Ref<UserOutBuilder>
 			approvePassTime(approvePassTime:string):Ref<UserOutBuilder>
 			approveApplyTime(approveApplyTime:string):Ref<UserOutBuilder>
+			idempotentId(idempotentId:string):Ref<UserOutBuilder>
 			build():Ref<UserOut>
 	}
 	export interface UserOvertimeWork extends Struct<UserOvertimeWork>{
@@ -2877,6 +2965,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/attendance/v1'{
 			startTime:Ref<string>
 			endTime:Ref<string>
 			reason:Ref<string>
+			idempotentId:Ref<string>
 	}
 	export interface UserOvertimeWorkBuilder extends Struct<UserOvertimeWorkBuilder>{
 
@@ -2888,6 +2977,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/attendance/v1'{
 			startTime(startTime:string):Ref<UserOvertimeWorkBuilder>
 			endTime(endTime:string):Ref<UserOvertimeWorkBuilder>
 			reason(reason:string):Ref<UserOvertimeWorkBuilder>
+			idempotentId(idempotentId:string):Ref<UserOvertimeWorkBuilder>
 			build():Ref<UserOvertimeWork>
 	}
 	export interface UserSetting extends Struct<UserSetting>{
@@ -2937,6 +3027,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/attendance/v1'{
 			value:Ref<string>
 			features:Ref<UserStatsDataFeature>[]
 			title:Ref<string>
+			durationNum:Ref<UserStatsDataDuration>
 	}
 	export interface UserStatsDataCellBuilder extends Struct<UserStatsDataCellBuilder>{
 
@@ -2944,7 +3035,25 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/attendance/v1'{
 			value(value:string):Ref<UserStatsDataCellBuilder>
 			features(features:Ref<UserStatsDataFeature>[]):Ref<UserStatsDataCellBuilder>
 			title(title:string):Ref<UserStatsDataCellBuilder>
+			durationNum(durationNum:Ref<UserStatsDataDuration>):Ref<UserStatsDataCellBuilder>
 			build():Ref<UserStatsDataCell>
+	}
+	export interface UserStatsDataDuration extends Struct<UserStatsDataDuration>{
+
+			day:Ref<string>
+			halfDay:Ref<string>
+			hour:Ref<string>
+			halfHour:Ref<string>
+			minute:Ref<string>
+	}
+	export interface UserStatsDataDurationBuilder extends Struct<UserStatsDataDurationBuilder>{
+
+			day(day:string):Ref<UserStatsDataDurationBuilder>
+			halfDay(halfDay:string):Ref<UserStatsDataDurationBuilder>
+			hour(hour:string):Ref<UserStatsDataDurationBuilder>
+			halfHour(halfHour:string):Ref<UserStatsDataDurationBuilder>
+			minute(minute:string):Ref<UserStatsDataDurationBuilder>
+			build():Ref<UserStatsDataDuration>
 	}
 	export interface UserStatsDataFeature extends Struct<UserStatsDataFeature>{
 
@@ -2969,6 +3078,50 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/attendance/v1'{
 			userId(userId:string):Ref<UserStatsFieldBuilder>
 			fields(fields:Ref<Field>[]):Ref<UserStatsFieldBuilder>
 			build():Ref<UserStatsField>
+	}
+	export interface UserStatsFieldsQueryArchiveRulePathReqBodyBuilder extends Struct<UserStatsFieldsQueryArchiveRulePathReqBodyBuilder>{
+
+			locale(locale:string):Ref<UserStatsFieldsQueryArchiveRulePathReqBodyBuilder>
+			month(month:string):Ref<UserStatsFieldsQueryArchiveRulePathReqBodyBuilder>
+			archiveRuleId(archiveRuleId:string):Ref<UserStatsFieldsQueryArchiveRulePathReqBodyBuilder>
+			operatorId(operatorId:string):Ref<UserStatsFieldsQueryArchiveRulePathReqBodyBuilder>
+			build():Ref<UserStatsFieldsQueryArchiveRuleReqBody>
+	}
+	export interface UserStatsFieldsQueryArchiveRuleReq extends Struct<UserStatsFieldsQueryArchiveRuleReq>{
+
+			body:Ref<UserStatsFieldsQueryArchiveRuleReqBody>
+	}
+	export interface UserStatsFieldsQueryArchiveRuleReqBody extends Struct<UserStatsFieldsQueryArchiveRuleReqBody>{
+
+			locale:Ref<string>
+			month:Ref<string>
+			archiveRuleId:Ref<string>
+			operatorId:Ref<string>
+	}
+	export interface UserStatsFieldsQueryArchiveRuleReqBodyBuilder extends Struct<UserStatsFieldsQueryArchiveRuleReqBodyBuilder>{
+
+			locale(locale:string):Ref<UserStatsFieldsQueryArchiveRuleReqBodyBuilder>
+			month(month:string):Ref<UserStatsFieldsQueryArchiveRuleReqBodyBuilder>
+			archiveRuleId(archiveRuleId:string):Ref<UserStatsFieldsQueryArchiveRuleReqBodyBuilder>
+			operatorId(operatorId:string):Ref<UserStatsFieldsQueryArchiveRuleReqBodyBuilder>
+			build():Ref<UserStatsFieldsQueryArchiveRuleReqBody>
+	}
+	export interface UserStatsFieldsQueryArchiveRuleReqBuilder extends Struct<UserStatsFieldsQueryArchiveRuleReqBuilder>{
+
+			employeeType(employeeType:string):Ref<UserStatsFieldsQueryArchiveRuleReqBuilder>
+			body(body:Ref<UserStatsFieldsQueryArchiveRuleReqBody>):Ref<UserStatsFieldsQueryArchiveRuleReqBuilder>
+			build():Ref<UserStatsFieldsQueryArchiveRuleReq>
+	}
+	export interface UserStatsFieldsQueryArchiveRuleResp extends Struct<UserStatsFieldsQueryArchiveRuleResp>{
+
+			apiResp:Ref<larkcore.ApiResp>
+			codeError:larkcore.CodeError
+			data:Ref<UserStatsFieldsQueryArchiveRuleRespData>
+			success():bool
+	}
+	export interface UserStatsFieldsQueryArchiveRuleRespData extends Struct<UserStatsFieldsQueryArchiveRuleRespData>{
+
+			archiveReportFields:Ref<ArchiveField>[]
 	}
 	export interface UserStatsView extends Struct<UserStatsView>{
 
@@ -3062,6 +3215,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/attendance/v1'{
 			reason:Ref<string>
 			approvePassTime:Ref<string>
 			approveApplyTime:Ref<string>
+			idempotentId:Ref<string>
 	}
 	export interface UserTripBuilder extends Struct<UserTripBuilder>{
 
@@ -3071,6 +3225,7 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/attendance/v1'{
 			reason(reason:string):Ref<UserTripBuilder>
 			approvePassTime(approvePassTime:string):Ref<UserTripBuilder>
 			approveApplyTime(approveApplyTime:string):Ref<UserTripBuilder>
+			idempotentId(idempotentId:string):Ref<UserTripBuilder>
 			build():Ref<UserTrip>
 	}
 	export interface V1 extends Struct<V1>{
@@ -3078,6 +3233,12 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/attendance/v1'{
 			approvalInfo:Ref<{
 			
 				process(ctx:context.Context,req:Ref<ProcessApprovalInfoReq>,...options:larkcore.RequestOptionFunc[]):Ref<ProcessApprovalInfoResp>
+			}>
+			archiveRule:Ref<{
+			
+				list(ctx:context.Context,req:Ref<ListArchiveRuleReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListArchiveRuleResp>
+				listByIterator(ctx:context.Context,req:Ref<ListArchiveRuleReq>,...options:larkcore.RequestOptionFunc[]):Ref<ListArchiveRuleIterator>
+				userStatsFieldsQuery(ctx:context.Context,req:Ref<UserStatsFieldsQueryArchiveRuleReq>,...options:larkcore.RequestOptionFunc[]):Ref<UserStatsFieldsQueryArchiveRuleResp>
 			}>
 			file:Ref<{
 			
@@ -3179,770 +3340,446 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/attendance/v1'{
 			lastbssid(lastbssid:string):Ref<WifiInfoEventBuilder>
 			build():Ref<WifiInfoEvent>
 	}
-	export function emptyQueryUserFlowReqBody():QueryUserFlowReqBody
-	export function emptyRefQueryUserFlowReqBody():Ref<QueryUserFlowReqBody>
-	export function refOfQueryUserFlowReqBody(x:QueryUserFlowReqBody,v:Ref<QueryUserFlowReqBody>)
-	export function unRefQueryUserFlowReqBody(v:Ref<QueryUserFlowReqBody>):QueryUserFlowReqBody
-	export function emptyArchiveField():ArchiveField
-	export function emptyRefArchiveField():Ref<ArchiveField>
-	export function refOfArchiveField(x:ArchiveField,v:Ref<ArchiveField>)
-	export function unRefArchiveField(v:Ref<ArchiveField>):ArchiveField
-	export function emptyGetLeaveEmployExpireRecordReqBody():GetLeaveEmployExpireRecordReqBody
-	export function emptyRefGetLeaveEmployExpireRecordReqBody():Ref<GetLeaveEmployExpireRecordReqBody>
-	export function refOfGetLeaveEmployExpireRecordReqBody(x:GetLeaveEmployExpireRecordReqBody,v:Ref<GetLeaveEmployExpireRecordReqBody>)
-	export function unRefGetLeaveEmployExpireRecordReqBody(v:Ref<GetLeaveEmployExpireRecordReqBody>):GetLeaveEmployExpireRecordReqBody
-	export function emptyGetShiftReq():GetShiftReq
-	export function emptyRefGetShiftReq():Ref<GetShiftReq>
-	export function refOfGetShiftReq(x:GetShiftReq,v:Ref<GetShiftReq>)
-	export function unRefGetShiftReq(v:Ref<GetShiftReq>):GetShiftReq
-	export function emptyLocationRecord():LocationRecord
-	export function emptyRefLocationRecord():Ref<LocationRecord>
-	export function refOfLocationRecord(x:LocationRecord,v:Ref<LocationRecord>)
-	export function unRefLocationRecord(v:Ref<LocationRecord>):LocationRecord
-	export function emptyQueryUserDailyShiftReqBody():QueryUserDailyShiftReqBody
-	export function emptyRefQueryUserDailyShiftReqBody():Ref<QueryUserDailyShiftReqBody>
-	export function refOfQueryUserDailyShiftReqBody(x:QueryUserDailyShiftReqBody,v:Ref<QueryUserDailyShiftReqBody>)
-	export function unRefQueryUserDailyShiftReqBody(v:Ref<QueryUserDailyShiftReqBody>):QueryUserDailyShiftReqBody
-	export function emptyBatchCreateUserDailyShiftRespData():BatchCreateUserDailyShiftRespData
-	export function emptyRefBatchCreateUserDailyShiftRespData():Ref<BatchCreateUserDailyShiftRespData>
-	export function refOfBatchCreateUserDailyShiftRespData(x:BatchCreateUserDailyShiftRespData,v:Ref<BatchCreateUserDailyShiftRespData>)
-	export function unRefBatchCreateUserDailyShiftRespData(v:Ref<BatchCreateUserDailyShiftRespData>):BatchCreateUserDailyShiftRespData
-	export function emptyCreateGroupReq():CreateGroupReq
-	export function emptyRefCreateGroupReq():Ref<CreateGroupReq>
-	export function refOfCreateGroupReq(x:CreateGroupReq,v:Ref<CreateGroupReq>)
-	export function unRefCreateGroupReq(v:Ref<CreateGroupReq>):CreateGroupReq
-	export function emptyQueryUserAllowedRemedysUserTaskRemedyRespData():QueryUserAllowedRemedysUserTaskRemedyRespData
-	export function emptyRefQueryUserAllowedRemedysUserTaskRemedyRespData():Ref<QueryUserAllowedRemedysUserTaskRemedyRespData>
-	export function refOfQueryUserAllowedRemedysUserTaskRemedyRespData(x:QueryUserAllowedRemedysUserTaskRemedyRespData,v:Ref<QueryUserAllowedRemedysUserTaskRemedyRespData>)
-	export function unRefQueryUserAllowedRemedysUserTaskRemedyRespData(v:Ref<QueryUserAllowedRemedysUserTaskRemedyRespData>):QueryUserAllowedRemedysUserTaskRemedyRespData
-	export function emptySearchGroupResp():SearchGroupResp
-	export function emptyRefSearchGroupResp():Ref<SearchGroupResp>
-	export function refOfSearchGroupResp(x:SearchGroupResp,v:Ref<SearchGroupResp>)
-	export function unRefSearchGroupResp(v:Ref<SearchGroupResp>):SearchGroupResp
-	export function emptyQueryUserApprovalReq():QueryUserApprovalReq
-	export function emptyRefQueryUserApprovalReq():Ref<QueryUserApprovalReq>
-	export function refOfQueryUserApprovalReq(x:QueryUserApprovalReq,v:Ref<QueryUserApprovalReq>)
-	export function unRefQueryUserApprovalReq(v:Ref<QueryUserApprovalReq>):QueryUserApprovalReq
-	export function emptyBatchCreateUserFlowRespData():BatchCreateUserFlowRespData
-	export function emptyRefBatchCreateUserFlowRespData():Ref<BatchCreateUserFlowRespData>
-	export function refOfBatchCreateUserFlowRespData(x:BatchCreateUserFlowRespData,v:Ref<BatchCreateUserFlowRespData>)
-	export function unRefBatchCreateUserFlowRespData(v:Ref<BatchCreateUserFlowRespData>):BatchCreateUserFlowRespData
-	export function emptyDeleteShiftResp():DeleteShiftResp
-	export function emptyRefDeleteShiftResp():Ref<DeleteShiftResp>
-	export function refOfDeleteShiftResp(x:DeleteShiftResp,v:Ref<DeleteShiftResp>)
-	export function unRefDeleteShiftResp(v:Ref<DeleteShiftResp>):DeleteShiftResp
-	export function emptyScanWifiInfo():ScanWifiInfo
-	export function emptyRefScanWifiInfo():Ref<ScanWifiInfo>
-	export function refOfScanWifiInfo(x:ScanWifiInfo,v:Ref<ScanWifiInfo>)
-	export function unRefScanWifiInfo(v:Ref<ScanWifiInfo>):ScanWifiInfo
-	export function emptyGetUserFlowResp():GetUserFlowResp
-	export function emptyRefGetUserFlowResp():Ref<GetUserFlowResp>
-	export function refOfGetUserFlowResp(x:GetUserFlowResp,v:Ref<GetUserFlowResp>)
-	export function unRefGetUserFlowResp(v:Ref<GetUserFlowResp>):GetUserFlowResp
-	export function emptyOvertimeTimeRange():OvertimeTimeRange
-	export function emptyRefOvertimeTimeRange():Ref<OvertimeTimeRange>
-	export function refOfOvertimeTimeRange(x:OvertimeTimeRange,v:Ref<OvertimeTimeRange>)
-	export function unRefOvertimeTimeRange(v:Ref<OvertimeTimeRange>):OvertimeTimeRange
-	export function emptyUserLeave():UserLeave
-	export function emptyRefUserLeave():Ref<UserLeave>
-	export function refOfUserLeave(x:UserLeave,v:Ref<UserLeave>)
-	export function unRefUserLeave(v:Ref<UserLeave>):UserLeave
-	export function emptyListShiftIterator():ListShiftIterator
-	export function emptyRefListShiftIterator():Ref<ListShiftIterator>
-	export function refOfListShiftIterator(x:ListShiftIterator,v:Ref<ListShiftIterator>)
-	export function unRefListShiftIterator(v:Ref<ListShiftIterator>):ListShiftIterator
-	export function emptyListShiftRespData():ListShiftRespData
-	export function emptyRefListShiftRespData():Ref<ListShiftRespData>
-	export function refOfListShiftRespData(x:ListShiftRespData,v:Ref<ListShiftRespData>)
-	export function unRefListShiftRespData(v:Ref<ListShiftRespData>):ListShiftRespData
-	export function emptyQueryUserStatsDataReq():QueryUserStatsDataReq
-	export function emptyRefQueryUserStatsDataReq():Ref<QueryUserStatsDataReq>
-	export function refOfQueryUserStatsDataReq(x:QueryUserStatsDataReq,v:Ref<QueryUserStatsDataReq>)
-	export function unRefQueryUserStatsDataReq(v:Ref<QueryUserStatsDataReq>):QueryUserStatsDataReq
-	export function emptyCreateUserTaskRemedyRespData():CreateUserTaskRemedyRespData
-	export function emptyRefCreateUserTaskRemedyRespData():Ref<CreateUserTaskRemedyRespData>
-	export function refOfCreateUserTaskRemedyRespData(x:CreateUserTaskRemedyRespData,v:Ref<CreateUserTaskRemedyRespData>)
-	export function unRefCreateUserTaskRemedyRespData(v:Ref<CreateUserTaskRemedyRespData>):CreateUserTaskRemedyRespData
-	export function emptyI18nMap():I18nMap
-	export function emptyRefI18nMap():Ref<I18nMap>
-	export function refOfI18nMap(x:I18nMap,v:Ref<I18nMap>)
-	export function unRefI18nMap(v:Ref<I18nMap>):I18nMap
-	export function emptyQueryUserStatsFieldReq():QueryUserStatsFieldReq
-	export function emptyRefQueryUserStatsFieldReq():Ref<QueryUserStatsFieldReq>
-	export function refOfQueryUserStatsFieldReq(x:QueryUserStatsFieldReq,v:Ref<QueryUserStatsFieldReq>)
-	export function unRefQueryUserStatsFieldReq(v:Ref<QueryUserStatsFieldReq>):QueryUserStatsFieldReq
-	export function emptyFilterItem():FilterItem
-	export function emptyRefFilterItem():Ref<FilterItem>
-	export function refOfFilterItem(x:FilterItem,v:Ref<FilterItem>)
-	export function unRefFilterItem(v:Ref<FilterItem>):FilterItem
-	export function emptyGroupMeta():GroupMeta
-	export function emptyRefGroupMeta():Ref<GroupMeta>
-	export function refOfGroupMeta(x:GroupMeta,v:Ref<GroupMeta>)
-	export function unRefGroupMeta(v:Ref<GroupMeta>):GroupMeta
-	export function emptySearchGroupReq():SearchGroupReq
-	export function emptyRefSearchGroupReq():Ref<SearchGroupReq>
-	export function refOfSearchGroupReq(x:SearchGroupReq,v:Ref<SearchGroupReq>)
-	export function unRefSearchGroupReq(v:Ref<SearchGroupReq>):SearchGroupReq
-	export function emptyUserStatsData():UserStatsData
-	export function emptyRefUserStatsData():Ref<UserStatsData>
-	export function refOfUserStatsData(x:UserStatsData,v:Ref<UserStatsData>)
-	export function unRefUserStatsData(v:Ref<UserStatsData>):UserStatsData
-	export function emptyGetLeaveEmployExpireRecordResp():GetLeaveEmployExpireRecordResp
-	export function emptyRefGetLeaveEmployExpireRecordResp():Ref<GetLeaveEmployExpireRecordResp>
-	export function refOfGetLeaveEmployExpireRecordResp(x:GetLeaveEmployExpireRecordResp,v:Ref<GetLeaveEmployExpireRecordResp>)
-	export function unRefGetLeaveEmployExpireRecordResp(v:Ref<GetLeaveEmployExpireRecordResp>):GetLeaveEmployExpireRecordResp
-	export function emptyQueryUserSettingRespData():QueryUserSettingRespData
-	export function emptyRefQueryUserSettingRespData():Ref<QueryUserSettingRespData>
-	export function refOfQueryUserSettingRespData(x:QueryUserSettingRespData,v:Ref<QueryUserSettingRespData>)
-	export function unRefQueryUserSettingRespData(v:Ref<QueryUserSettingRespData>):QueryUserSettingRespData
-	export function emptyQueryUserTaskRemedyReqBody():QueryUserTaskRemedyReqBody
-	export function emptyRefQueryUserTaskRemedyReqBody():Ref<QueryUserTaskRemedyReqBody>
-	export function refOfQueryUserTaskRemedyReqBody(x:QueryUserTaskRemedyReqBody,v:Ref<QueryUserTaskRemedyReqBody>)
-	export function unRefQueryUserTaskRemedyReqBody(v:Ref<QueryUserTaskRemedyReqBody>):QueryUserTaskRemedyReqBody
-	export function emptyUserStatsField():UserStatsField
-	export function emptyRefUserStatsField():Ref<UserStatsField>
-	export function refOfUserStatsField(x:UserStatsField,v:Ref<UserStatsField>)
-	export function unRefUserStatsField(v:Ref<UserStatsField>):UserStatsField
-	export function emptyProcessApprovalInfoReqBody():ProcessApprovalInfoReqBody
-	export function emptyRefProcessApprovalInfoReqBody():Ref<ProcessApprovalInfoReqBody>
-	export function refOfProcessApprovalInfoReqBody(x:ProcessApprovalInfoReqBody,v:Ref<ProcessApprovalInfoReqBody>)
-	export function unRefProcessApprovalInfoReqBody(v:Ref<ProcessApprovalInfoReqBody>):ProcessApprovalInfoReqBody
-	export function emptyQueryUserStatsDataReqBody():QueryUserStatsDataReqBody
-	export function emptyRefQueryUserStatsDataReqBody():Ref<QueryUserStatsDataReqBody>
-	export function refOfQueryUserStatsDataReqBody(x:QueryUserStatsDataReqBody,v:Ref<QueryUserStatsDataReqBody>)
-	export function unRefQueryUserStatsDataReqBody(v:Ref<QueryUserStatsDataReqBody>):QueryUserStatsDataReqBody
-	export function emptyStatusChange():StatusChange
-	export function emptyRefStatusChange():Ref<StatusChange>
-	export function refOfStatusChange(x:StatusChange,v:Ref<StatusChange>)
-	export function unRefStatusChange(v:Ref<StatusChange>):StatusChange
-	export function emptyDownloadFileResp():DownloadFileResp
-	export function emptyRefDownloadFileResp():Ref<DownloadFileResp>
-	export function refOfDownloadFileResp(x:DownloadFileResp,v:Ref<DownloadFileResp>)
-	export function unRefDownloadFileResp(v:Ref<DownloadFileResp>):DownloadFileResp
-	export function emptyListGroupRespData():ListGroupRespData
-	export function emptyRefListGroupRespData():Ref<ListGroupRespData>
-	export function refOfListGroupRespData(x:ListGroupRespData,v:Ref<ListGroupRespData>)
-	export function unRefListGroupRespData(v:Ref<ListGroupRespData>):ListGroupRespData
-	export function emptyUploadFileRespData():UploadFileRespData
-	export function emptyRefUploadFileRespData():Ref<UploadFileRespData>
-	export function refOfUploadFileRespData(x:UploadFileRespData,v:Ref<UploadFileRespData>)
-	export function unRefUploadFileRespData(v:Ref<UploadFileRespData>):UploadFileRespData
-	export function emptyUserAllowedRemedy():UserAllowedRemedy
-	export function emptyRefUserAllowedRemedy():Ref<UserAllowedRemedy>
-	export function refOfUserAllowedRemedy(x:UserAllowedRemedy,v:Ref<UserAllowedRemedy>)
-	export function unRefUserAllowedRemedy(v:Ref<UserAllowedRemedy>):UserAllowedRemedy
-	export function emptyUserDailyShift():UserDailyShift
-	export function emptyRefUserDailyShift():Ref<UserDailyShift>
-	export function refOfUserDailyShift(x:UserDailyShift,v:Ref<UserDailyShift>)
-	export function unRefUserDailyShift(v:Ref<UserDailyShift>):UserDailyShift
-	export function emptyCreateGroupResp():CreateGroupResp
-	export function emptyRefCreateGroupResp():Ref<CreateGroupResp>
-	export function refOfCreateGroupResp(x:CreateGroupResp,v:Ref<CreateGroupResp>)
-	export function unRefCreateGroupResp(v:Ref<CreateGroupResp>):CreateGroupResp
-	export function emptyProcessApprovalInfoResp():ProcessApprovalInfoResp
-	export function emptyRefProcessApprovalInfoResp():Ref<ProcessApprovalInfoResp>
-	export function refOfProcessApprovalInfoResp(x:ProcessApprovalInfoResp,v:Ref<ProcessApprovalInfoResp>)
-	export function unRefProcessApprovalInfoResp(v:Ref<ProcessApprovalInfoResp>):ProcessApprovalInfoResp
-	export function emptyPunchTimeRule():PunchTimeRule
-	export function emptyRefPunchTimeRule():Ref<PunchTimeRule>
-	export function refOfPunchTimeRule(x:PunchTimeRule,v:Ref<PunchTimeRule>)
-	export function unRefPunchTimeRule(v:Ref<PunchTimeRule>):PunchTimeRule
-	export function emptyQueryUserTaskReq():QueryUserTaskReq
-	export function emptyRefQueryUserTaskReq():Ref<QueryUserTaskReq>
-	export function refOfQueryUserTaskReq(x:QueryUserTaskReq,v:Ref<QueryUserTaskReq>)
-	export function unRefQueryUserTaskReq(v:Ref<QueryUserTaskReq>):QueryUserTaskReq
-	export function emptyLocationInfoEvent():LocationInfoEvent
-	export function emptyRefLocationInfoEvent():Ref<LocationInfoEvent>
-	export function refOfLocationInfoEvent(x:LocationInfoEvent,v:Ref<LocationInfoEvent>)
-	export function unRefLocationInfoEvent(v:Ref<LocationInfoEvent>):LocationInfoEvent
-	export function emptyLateOffLateOnRule():LateOffLateOnRule
-	export function emptyRefLateOffLateOnRule():Ref<LateOffLateOnRule>
-	export function refOfLateOffLateOnRule(x:LateOffLateOnRule,v:Ref<LateOffLateOnRule>)
-	export function unRefLateOffLateOnRule(v:Ref<LateOffLateOnRule>):LateOffLateOnRule
-	export function emptyListGroupReq():ListGroupReq
-	export function emptyRefListGroupReq():Ref<ListGroupReq>
-	export function refOfListGroupReq(x:ListGroupReq,v:Ref<ListGroupReq>)
-	export function unRefListGroupReq(v:Ref<ListGroupReq>):ListGroupReq
-	export function emptyListShiftResp():ListShiftResp
-	export function emptyRefListShiftResp():Ref<ListShiftResp>
-	export function refOfListShiftResp(x:ListShiftResp,v:Ref<ListShiftResp>)
-	export function unRefListShiftResp(v:Ref<ListShiftResp>):ListShiftResp
-	export function emptyBatchCreateUserDailyShiftReqBody():BatchCreateUserDailyShiftReqBody
-	export function emptyRefBatchCreateUserDailyShiftReqBody():Ref<BatchCreateUserDailyShiftReqBody>
-	export function refOfBatchCreateUserDailyShiftReqBody(x:BatchCreateUserDailyShiftReqBody,v:Ref<BatchCreateUserDailyShiftReqBody>)
-	export function unRefBatchCreateUserDailyShiftReqBody(v:Ref<BatchCreateUserDailyShiftReqBody>):BatchCreateUserDailyShiftReqBody
-	export function emptyDownloadFileReq():DownloadFileReq
-	export function emptyRefDownloadFileReq():Ref<DownloadFileReq>
-	export function refOfDownloadFileReq(x:DownloadFileReq,v:Ref<DownloadFileReq>)
-	export function unRefDownloadFileReq(v:Ref<DownloadFileReq>):DownloadFileReq
-	export function emptyLocationSetting():LocationSetting
-	export function emptyRefLocationSetting():Ref<LocationSetting>
-	export function refOfLocationSetting(x:LocationSetting,v:Ref<LocationSetting>)
-	export function unRefLocationSetting(v:Ref<LocationSetting>):LocationSetting
-	export function emptyQueryUserStatsViewReqBody():QueryUserStatsViewReqBody
-	export function emptyRefQueryUserStatsViewReqBody():Ref<QueryUserStatsViewReqBody>
-	export function refOfQueryUserStatsViewReqBody(x:QueryUserStatsViewReqBody,v:Ref<QueryUserStatsViewReqBody>)
-	export function unRefQueryUserStatsViewReqBody(v:Ref<QueryUserStatsViewReqBody>):QueryUserStatsViewReqBody
-	export function emptyUploadFileReq():UploadFileReq
-	export function emptyRefUploadFileReq():Ref<UploadFileReq>
-	export function refOfUploadFileReq(x:UploadFileReq,v:Ref<UploadFileReq>)
-	export function unRefUploadFileReq(v:Ref<UploadFileReq>):UploadFileReq
-	export function emptyPatchLeaveAccrualRecordResp():PatchLeaveAccrualRecordResp
-	export function emptyRefPatchLeaveAccrualRecordResp():Ref<PatchLeaveAccrualRecordResp>
-	export function refOfPatchLeaveAccrualRecordResp(x:PatchLeaveAccrualRecordResp,v:Ref<PatchLeaveAccrualRecordResp>)
-	export function unRefPatchLeaveAccrualRecordResp(v:Ref<PatchLeaveAccrualRecordResp>):PatchLeaveAccrualRecordResp
-	export function emptyLocation():Location
-	export function emptyRefLocation():Ref<Location>
-	export function refOfLocation(x:Location,v:Ref<Location>)
-	export function unRefLocation(v:Ref<Location>):Location
-	export function emptyLocationInfo():LocationInfo
-	export function emptyRefLocationInfo():Ref<LocationInfo>
-	export function refOfLocationInfo(x:LocationInfo,v:Ref<LocationInfo>)
-	export function unRefLocationInfo(v:Ref<LocationInfo>):LocationInfo
-	export function emptyPatchLeaveAccrualRecordRespData():PatchLeaveAccrualRecordRespData
-	export function emptyRefPatchLeaveAccrualRecordRespData():Ref<PatchLeaveAccrualRecordRespData>
-	export function refOfPatchLeaveAccrualRecordRespData(x:PatchLeaveAccrualRecordRespData,v:Ref<PatchLeaveAccrualRecordRespData>)
-	export function unRefPatchLeaveAccrualRecordRespData(v:Ref<PatchLeaveAccrualRecordRespData>):PatchLeaveAccrualRecordRespData
-	export function emptyBatchCreateUserFlowResp():BatchCreateUserFlowResp
-	export function emptyRefBatchCreateUserFlowResp():Ref<BatchCreateUserFlowResp>
-	export function refOfBatchCreateUserFlowResp(x:BatchCreateUserFlowResp,v:Ref<BatchCreateUserFlowResp>)
-	export function unRefBatchCreateUserFlowResp(v:Ref<BatchCreateUserFlowResp>):BatchCreateUserFlowResp
-	export function emptyChildField():ChildField
-	export function emptyRefChildField():Ref<ChildField>
-	export function refOfChildField(x:ChildField,v:Ref<ChildField>)
-	export function unRefChildField(v:Ref<ChildField>):ChildField
-	export function emptyGetLeaveEmployExpireRecordReq():GetLeaveEmployExpireRecordReq
-	export function emptyRefGetLeaveEmployExpireRecordReq():Ref<GetLeaveEmployExpireRecordReq>
-	export function refOfGetLeaveEmployExpireRecordReq(x:GetLeaveEmployExpireRecordReq,v:Ref<GetLeaveEmployExpireRecordReq>)
-	export function unRefGetLeaveEmployExpireRecordReq(v:Ref<GetLeaveEmployExpireRecordReq>):GetLeaveEmployExpireRecordReq
-	export function emptyQueryUserFlowRespData():QueryUserFlowRespData
-	export function emptyRefQueryUserFlowRespData():Ref<QueryUserFlowRespData>
-	export function refOfQueryUserFlowRespData(x:QueryUserFlowRespData,v:Ref<QueryUserFlowRespData>)
-	export function unRefQueryUserFlowRespData(v:Ref<QueryUserFlowRespData>):QueryUserFlowRespData
-	export function emptyDeleteGroupResp():DeleteGroupResp
-	export function emptyRefDeleteGroupResp():Ref<DeleteGroupResp>
-	export function refOfDeleteGroupResp(x:DeleteGroupResp,v:Ref<DeleteGroupResp>)
-	export function unRefDeleteGroupResp(v:Ref<DeleteGroupResp>):DeleteGroupResp
-	export function emptyPunchTimeSimpleRule():PunchTimeSimpleRule
-	export function emptyRefPunchTimeSimpleRule():Ref<PunchTimeSimpleRule>
-	export function refOfPunchTimeSimpleRule(x:PunchTimeSimpleRule,v:Ref<PunchTimeSimpleRule>)
-	export function unRefPunchTimeSimpleRule(v:Ref<PunchTimeSimpleRule>):PunchTimeSimpleRule
-	export function emptyQueryShiftResp():QueryShiftResp
-	export function emptyRefQueryShiftResp():Ref<QueryShiftResp>
-	export function refOfQueryShiftResp(x:QueryShiftResp,v:Ref<QueryShiftResp>)
-	export function unRefQueryShiftResp(v:Ref<QueryShiftResp>):QueryShiftResp
-	export function emptySearchGroupReqBody():SearchGroupReqBody
-	export function emptyRefSearchGroupReqBody():Ref<SearchGroupReqBody>
-	export function refOfSearchGroupReqBody(x:SearchGroupReqBody,v:Ref<SearchGroupReqBody>)
-	export function unRefSearchGroupReqBody(v:Ref<SearchGroupReqBody>):SearchGroupReqBody
-	export function emptyQueryUserStatsFieldRespData():QueryUserStatsFieldRespData
-	export function emptyRefQueryUserStatsFieldRespData():Ref<QueryUserStatsFieldRespData>
-	export function refOfQueryUserStatsFieldRespData(x:QueryUserStatsFieldRespData,v:Ref<QueryUserStatsFieldRespData>)
-	export function unRefQueryUserStatsFieldRespData(v:Ref<QueryUserStatsFieldRespData>):QueryUserStatsFieldRespData
-	export function emptyChildItem():ChildItem
-	export function emptyRefChildItem():Ref<ChildItem>
-	export function refOfChildItem(x:ChildItem,v:Ref<ChildItem>)
-	export function unRefChildItem(v:Ref<ChildItem>):ChildItem
-	export function emptyCreateUserTaskRemedyReq():CreateUserTaskRemedyReq
-	export function emptyRefCreateUserTaskRemedyReq():Ref<CreateUserTaskRemedyReq>
-	export function refOfCreateUserTaskRemedyReq(x:CreateUserTaskRemedyReq,v:Ref<CreateUserTaskRemedyReq>)
-	export function unRefCreateUserTaskRemedyReq(v:Ref<CreateUserTaskRemedyReq>):CreateUserTaskRemedyReq
-	export function emptyQueryUserTaskRemedyReq():QueryUserTaskRemedyReq
-	export function emptyRefQueryUserTaskRemedyReq():Ref<QueryUserTaskRemedyReq>
-	export function refOfQueryUserTaskRemedyReq(x:QueryUserTaskRemedyReq,v:Ref<QueryUserTaskRemedyReq>)
-	export function unRefQueryUserTaskRemedyReq(v:Ref<QueryUserTaskRemedyReq>):QueryUserTaskRemedyReq
-	export function emptyUserStatsDataCell():UserStatsDataCell
-	export function emptyRefUserStatsDataCell():Ref<UserStatsDataCell>
-	export function refOfUserStatsDataCell(x:UserStatsDataCell,v:Ref<UserStatsDataCell>)
-	export function unRefUserStatsDataCell(v:Ref<UserStatsDataCell>):UserStatsDataCell
-	export function emptyUserTaskRemedy():UserTaskRemedy
-	export function emptyRefUserTaskRemedy():Ref<UserTaskRemedy>
-	export function refOfUserTaskRemedy(x:UserTaskRemedy,v:Ref<UserTaskRemedy>)
-	export function unRefUserTaskRemedy(v:Ref<UserTaskRemedy>):UserTaskRemedy
-	export function emptyModifyUserSettingReq():ModifyUserSettingReq
-	export function emptyRefModifyUserSettingReq():Ref<ModifyUserSettingReq>
-	export function refOfModifyUserSettingReq(x:ModifyUserSettingReq,v:Ref<ModifyUserSettingReq>)
-	export function unRefModifyUserSettingReq(v:Ref<ModifyUserSettingReq>):ModifyUserSettingReq
-	export function emptyQueryUserApprovalResp():QueryUserApprovalResp
-	export function emptyRefQueryUserApprovalResp():Ref<QueryUserApprovalResp>
-	export function refOfQueryUserApprovalResp(x:QueryUserApprovalResp,v:Ref<QueryUserApprovalResp>)
-	export function unRefQueryUserApprovalResp(v:Ref<QueryUserApprovalResp>):QueryUserApprovalResp
-	export function emptyArchiveReportMeta():ArchiveReportMeta
-	export function emptyRefArchiveReportMeta():Ref<ArchiveReportMeta>
-	export function refOfArchiveReportMeta(x:ArchiveReportMeta,v:Ref<ArchiveReportMeta>)
-	export function unRefArchiveReportMeta(v:Ref<ArchiveReportMeta>):ArchiveReportMeta
-	export function emptyBatchCreateUserFlowReqBody():BatchCreateUserFlowReqBody
-	export function emptyRefBatchCreateUserFlowReqBody():Ref<BatchCreateUserFlowReqBody>
-	export function refOfBatchCreateUserFlowReqBody(x:BatchCreateUserFlowReqBody,v:Ref<BatchCreateUserFlowReqBody>)
-	export function unRefBatchCreateUserFlowReqBody(v:Ref<BatchCreateUserFlowReqBody>):BatchCreateUserFlowReqBody
-	export function emptyQueryUserTaskRemedyRespData():QueryUserTaskRemedyRespData
-	export function emptyRefQueryUserTaskRemedyRespData():Ref<QueryUserTaskRemedyRespData>
-	export function refOfQueryUserTaskRemedyRespData(x:QueryUserTaskRemedyRespData,v:Ref<QueryUserTaskRemedyRespData>)
-	export function unRefQueryUserTaskRemedyRespData(v:Ref<QueryUserTaskRemedyRespData>):QueryUserTaskRemedyRespData
-	export function emptyListShiftReq():ListShiftReq
-	export function emptyRefListShiftReq():Ref<ListShiftReq>
-	export function refOfListShiftReq(x:ListShiftReq,v:Ref<ListShiftReq>)
-	export function unRefListShiftReq(v:Ref<ListShiftReq>):ListShiftReq
-	export function emptyPatchLeaveAccrualRecordReqBody():PatchLeaveAccrualRecordReqBody
-	export function emptyRefPatchLeaveAccrualRecordReqBody():Ref<PatchLeaveAccrualRecordReqBody>
-	export function refOfPatchLeaveAccrualRecordReqBody(x:PatchLeaveAccrualRecordReqBody,v:Ref<PatchLeaveAccrualRecordReqBody>)
-	export function unRefPatchLeaveAccrualRecordReqBody(v:Ref<PatchLeaveAccrualRecordReqBody>):PatchLeaveAccrualRecordReqBody
-	export function emptyCreateUserApprovalReqBody():CreateUserApprovalReqBody
-	export function emptyRefCreateUserApprovalReqBody():Ref<CreateUserApprovalReqBody>
-	export function refOfCreateUserApprovalReqBody(x:CreateUserApprovalReqBody,v:Ref<CreateUserApprovalReqBody>)
-	export function unRefCreateUserApprovalReqBody(v:Ref<CreateUserApprovalReqBody>):CreateUserApprovalReqBody
-	export function emptyOvertimeClockCfg():OvertimeClockCfg
-	export function emptyRefOvertimeClockCfg():Ref<OvertimeClockCfg>
-	export function refOfOvertimeClockCfg(x:OvertimeClockCfg,v:Ref<OvertimeClockCfg>)
-	export function unRefOvertimeClockCfg(v:Ref<OvertimeClockCfg>):OvertimeClockCfg
-	export function emptyArea():Area
-	export function emptyRefArea():Ref<Area>
-	export function refOfArea(x:Area,v:Ref<Area>)
-	export function unRefArea(v:Ref<Area>):Area
-	export function emptyQueryUserDailyShiftReq():QueryUserDailyShiftReq
-	export function emptyRefQueryUserDailyShiftReq():Ref<QueryUserDailyShiftReq>
-	export function refOfQueryUserDailyShiftReq(x:QueryUserDailyShiftReq,v:Ref<QueryUserDailyShiftReq>)
-	export function unRefQueryUserDailyShiftReq(v:Ref<QueryUserDailyShiftReq>):QueryUserDailyShiftReq
-	export function emptyGetUserFlowReq():GetUserFlowReq
-	export function emptyRefGetUserFlowReq():Ref<GetUserFlowReq>
-	export function refOfGetUserFlowReq(x:GetUserFlowReq,v:Ref<GetUserFlowReq>)
-	export function unRefGetUserFlowReq(v:Ref<GetUserFlowReq>):GetUserFlowReq
-	export function emptyPatchLeaveAccrualRecordReq():PatchLeaveAccrualRecordReq
-	export function emptyRefPatchLeaveAccrualRecordReq():Ref<PatchLeaveAccrualRecordReq>
-	export function refOfPatchLeaveAccrualRecordReq(x:PatchLeaveAccrualRecordReq,v:Ref<PatchLeaveAccrualRecordReq>)
-	export function unRefPatchLeaveAccrualRecordReq(v:Ref<PatchLeaveAccrualRecordReq>):PatchLeaveAccrualRecordReq
-	export function emptyPunchMember():PunchMember
-	export function emptyRefPunchMember():Ref<PunchMember>
-	export function refOfPunchMember(x:PunchMember,v:Ref<PunchMember>)
-	export function unRefPunchMember(v:Ref<PunchMember>):PunchMember
-	export function emptyQueryShiftReq():QueryShiftReq
-	export function emptyRefQueryShiftReq():Ref<QueryShiftReq>
-	export function refOfQueryShiftReq(x:QueryShiftReq,v:Ref<QueryShiftReq>)
-	export function unRefQueryShiftReq(v:Ref<QueryShiftReq>):QueryShiftReq
-	export function emptyUpdateUserStatsViewRespData():UpdateUserStatsViewRespData
-	export function emptyRefUpdateUserStatsViewRespData():Ref<UpdateUserStatsViewRespData>
-	export function refOfUpdateUserStatsViewRespData(x:UpdateUserStatsViewRespData,v:Ref<UpdateUserStatsViewRespData>)
-	export function unRefUpdateUserStatsViewRespData(v:Ref<UpdateUserStatsViewRespData>):UpdateUserStatsViewRespData
-	export function emptyFreePunchCfg():FreePunchCfg
-	export function emptyRefFreePunchCfg():Ref<FreePunchCfg>
-	export function refOfFreePunchCfg(x:FreePunchCfg,v:Ref<FreePunchCfg>)
-	export function unRefFreePunchCfg(v:Ref<FreePunchCfg>):FreePunchCfg
-	export function emptyQueryUserStatsViewReq():QueryUserStatsViewReq
-	export function emptyRefQueryUserStatsViewReq():Ref<QueryUserStatsViewReq>
-	export function refOfQueryUserStatsViewReq(x:QueryUserStatsViewReq,v:Ref<QueryUserStatsViewReq>)
-	export function unRefQueryUserStatsViewReq(v:Ref<QueryUserStatsViewReq>):QueryUserStatsViewReq
-	export function emptyWifiInfo():WifiInfo
-	export function emptyRefWifiInfo():Ref<WifiInfo>
-	export function refOfWifiInfo(x:WifiInfo,v:Ref<WifiInfo>)
-	export function unRefWifiInfo(v:Ref<WifiInfo>):WifiInfo
-	export function emptyQueryUserApprovalRespData():QueryUserApprovalRespData
-	export function emptyRefQueryUserApprovalRespData():Ref<QueryUserApprovalRespData>
-	export function refOfQueryUserApprovalRespData(x:QueryUserApprovalRespData,v:Ref<QueryUserApprovalRespData>)
-	export function unRefQueryUserApprovalRespData(v:Ref<QueryUserApprovalRespData>):QueryUserApprovalRespData
-	export function emptyQueryUserDailyShiftResp():QueryUserDailyShiftResp
-	export function emptyRefQueryUserDailyShiftResp():Ref<QueryUserDailyShiftResp>
-	export function refOfQueryUserDailyShiftResp(x:QueryUserDailyShiftResp,v:Ref<QueryUserDailyShiftResp>)
-	export function unRefQueryUserDailyShiftResp(v:Ref<QueryUserDailyShiftResp>):QueryUserDailyShiftResp
-	export function emptyShiftGroupUser():ShiftGroupUser
-	export function emptyRefShiftGroupUser():Ref<ShiftGroupUser>
-	export function refOfShiftGroupUser(x:ShiftGroupUser,v:Ref<ShiftGroupUser>)
-	export function unRefShiftGroupUser(v:Ref<ShiftGroupUser>):ShiftGroupUser
-	export function emptyArchiveReportData():ArchiveReportData
-	export function emptyRefArchiveReportData():Ref<ArchiveReportData>
-	export function refOfArchiveReportData(x:ArchiveReportData,v:Ref<ArchiveReportData>)
-	export function unRefArchiveReportData(v:Ref<ArchiveReportData>):ArchiveReportData
-	export function emptyBatchCreateUserFlowReq():BatchCreateUserFlowReq
-	export function emptyRefBatchCreateUserFlowReq():Ref<BatchCreateUserFlowReq>
-	export function refOfBatchCreateUserFlowReq(x:BatchCreateUserFlowReq,v:Ref<BatchCreateUserFlowReq>)
-	export function unRefBatchCreateUserFlowReq(v:Ref<BatchCreateUserFlowReq>):BatchCreateUserFlowReq
-	export function emptyDepartmentId():DepartmentId
-	export function emptyRefDepartmentId():Ref<DepartmentId>
-	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
-	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
-	export function emptyFlexibleRule():FlexibleRule
-	export function emptyRefFlexibleRule():Ref<FlexibleRule>
-	export function refOfFlexibleRule(x:FlexibleRule,v:Ref<FlexibleRule>)
-	export function unRefFlexibleRule(v:Ref<FlexibleRule>):FlexibleRule
-	export function emptyGroup():Group
-	export function emptyRefGroup():Ref<Group>
-	export function refOfGroup(x:Group,v:Ref<Group>)
-	export function unRefGroup(v:Ref<Group>):Group
-	export function emptyQueryUserStatsFieldResp():QueryUserStatsFieldResp
-	export function emptyRefQueryUserStatsFieldResp():Ref<QueryUserStatsFieldResp>
-	export function refOfQueryUserStatsFieldResp(x:QueryUserStatsFieldResp,v:Ref<QueryUserStatsFieldResp>)
-	export function unRefQueryUserStatsFieldResp(v:Ref<QueryUserStatsFieldResp>):QueryUserStatsFieldResp
-	export function emptyRestRule():RestRule
-	export function emptyRefRestRule():Ref<RestRule>
-	export function refOfRestRule(x:RestRule,v:Ref<RestRule>)
-	export function unRefRestRule(v:Ref<RestRule>):RestRule
-	export function emptyCreateGroupRespData():CreateGroupRespData
-	export function emptyRefCreateGroupRespData():Ref<CreateGroupRespData>
-	export function refOfCreateGroupRespData(x:CreateGroupRespData,v:Ref<CreateGroupRespData>)
-	export function unRefCreateGroupRespData(v:Ref<CreateGroupRespData>):CreateGroupRespData
-	export function emptyCreateUserApprovalResp():CreateUserApprovalResp
-	export function emptyRefCreateUserApprovalResp():Ref<CreateUserApprovalResp>
-	export function refOfCreateUserApprovalResp(x:CreateUserApprovalResp,v:Ref<CreateUserApprovalResp>)
-	export function unRefCreateUserApprovalResp(v:Ref<CreateUserApprovalResp>):CreateUserApprovalResp
-	export function emptyOvertimeRule():OvertimeRule
-	export function emptyRefOvertimeRule():Ref<OvertimeRule>
-	export function refOfOvertimeRule(x:OvertimeRule,v:Ref<OvertimeRule>)
-	export function unRefOvertimeRule(v:Ref<OvertimeRule>):OvertimeRule
-	export function emptyQueryUserStatsFieldReqBody():QueryUserStatsFieldReqBody
-	export function emptyRefQueryUserStatsFieldReqBody():Ref<QueryUserStatsFieldReqBody>
-	export function refOfQueryUserStatsFieldReqBody(x:QueryUserStatsFieldReqBody,v:Ref<QueryUserStatsFieldReqBody>)
-	export function unRefQueryUserStatsFieldReqBody(v:Ref<QueryUserStatsFieldReqBody>):QueryUserStatsFieldReqBody
-	export function emptyUserTmpDailyShift():UserTmpDailyShift
-	export function emptyRefUserTmpDailyShift():Ref<UserTmpDailyShift>
-	export function refOfUserTmpDailyShift(x:UserTmpDailyShift,v:Ref<UserTmpDailyShift>)
-	export function unRefUserTmpDailyShift(v:Ref<UserTmpDailyShift>):UserTmpDailyShift
 	export function emptyArchiveFieldData():ArchiveFieldData
 	export function emptyRefArchiveFieldData():Ref<ArchiveFieldData>
 	export function refOfArchiveFieldData(x:ArchiveFieldData,v:Ref<ArchiveFieldData>)
 	export function unRefArchiveFieldData(v:Ref<ArchiveFieldData>):ArchiveFieldData
-	export function emptyListGroupResp():ListGroupResp
-	export function emptyRefListGroupResp():Ref<ListGroupResp>
-	export function refOfListGroupResp(x:ListGroupResp,v:Ref<ListGroupResp>)
-	export function unRefListGroupResp(v:Ref<ListGroupResp>):ListGroupResp
-	export function emptyQueryUserDailyShiftRespData():QueryUserDailyShiftRespData
-	export function emptyRefQueryUserDailyShiftRespData():Ref<QueryUserDailyShiftRespData>
-	export function refOfQueryUserDailyShiftRespData(x:QueryUserDailyShiftRespData,v:Ref<QueryUserDailyShiftRespData>)
-	export function unRefQueryUserDailyShiftRespData(v:Ref<QueryUserDailyShiftRespData>):QueryUserDailyShiftRespData
-	export function emptyReportData():ReportData
-	export function emptyRefReportData():Ref<ReportData>
-	export function refOfReportData(x:ReportData,v:Ref<ReportData>)
-	export function unRefReportData(v:Ref<ReportData>):ReportData
-	export function emptyQueryUserTaskResp():QueryUserTaskResp
-	export function emptyRefQueryUserTaskResp():Ref<QueryUserTaskResp>
-	export function refOfQueryUserTaskResp(x:QueryUserTaskResp,v:Ref<QueryUserTaskResp>)
-	export function unRefQueryUserTaskResp(v:Ref<QueryUserTaskResp>):QueryUserTaskResp
-	export function emptyReportValue():ReportValue
-	export function emptyRefReportValue():Ref<ReportValue>
-	export function refOfReportValue(x:ReportValue,v:Ref<ReportValue>)
-	export function unRefReportValue(v:Ref<ReportValue>):ReportValue
-	export function emptyCreateGroupReqBody():CreateGroupReqBody
-	export function emptyRefCreateGroupReqBody():Ref<CreateGroupReqBody>
-	export function refOfCreateGroupReqBody(x:CreateGroupReqBody,v:Ref<CreateGroupReqBody>)
-	export function unRefCreateGroupReqBody(v:Ref<CreateGroupReqBody>):CreateGroupReqBody
-	export function emptyProcessApprovalInfoRespData():ProcessApprovalInfoRespData
-	export function emptyRefProcessApprovalInfoRespData():Ref<ProcessApprovalInfoRespData>
-	export function refOfProcessApprovalInfoRespData(x:ProcessApprovalInfoRespData,v:Ref<ProcessApprovalInfoRespData>)
-	export function unRefProcessApprovalInfoRespData(v:Ref<ProcessApprovalInfoRespData>):ProcessApprovalInfoRespData
-	export function emptyQueryUserStatsDataRespData():QueryUserStatsDataRespData
-	export function emptyRefQueryUserStatsDataRespData():Ref<QueryUserStatsDataRespData>
-	export function refOfQueryUserStatsDataRespData(x:QueryUserStatsDataRespData,v:Ref<QueryUserStatsDataRespData>)
-	export function unRefQueryUserStatsDataRespData(v:Ref<QueryUserStatsDataRespData>):QueryUserStatsDataRespData
-	export function emptyUpdateUserStatsViewReqBody():UpdateUserStatsViewReqBody
-	export function emptyRefUpdateUserStatsViewReqBody():Ref<UpdateUserStatsViewReqBody>
-	export function refOfUpdateUserStatsViewReqBody(x:UpdateUserStatsViewReqBody,v:Ref<UpdateUserStatsViewReqBody>)
-	export function unRefUpdateUserStatsViewReqBody(v:Ref<UpdateUserStatsViewReqBody>):UpdateUserStatsViewReqBody
-	export function emptyFile():File
-	export function emptyRefFile():Ref<File>
-	export function refOfFile(x:File,v:Ref<File>)
-	export function unRefFile(v:Ref<File>):File
-	export function emptyUploadFileResp():UploadFileResp
-	export function emptyRefUploadFileResp():Ref<UploadFileResp>
-	export function refOfUploadFileResp(x:UploadFileResp,v:Ref<UploadFileResp>)
-	export function unRefUploadFileResp(v:Ref<UploadFileResp>):UploadFileResp
-	export function emptyCreateUserApprovalReq():CreateUserApprovalReq
-	export function emptyRefCreateUserApprovalReq():Ref<CreateUserApprovalReq>
-	export function refOfCreateUserApprovalReq(x:CreateUserApprovalReq,v:Ref<CreateUserApprovalReq>)
-	export function unRefCreateUserApprovalReq(v:Ref<CreateUserApprovalReq>):CreateUserApprovalReq
-	export function emptySchedule():Schedule
-	export function emptyRefSchedule():Ref<Schedule>
-	export function refOfSchedule(x:Schedule,v:Ref<Schedule>)
-	export function unRefSchedule(v:Ref<Schedule>):Schedule
-	export function emptyLeaveNeedPunchCfg():LeaveNeedPunchCfg
-	export function emptyRefLeaveNeedPunchCfg():Ref<LeaveNeedPunchCfg>
-	export function refOfLeaveNeedPunchCfg(x:LeaveNeedPunchCfg,v:Ref<LeaveNeedPunchCfg>)
-	export function unRefLeaveNeedPunchCfg(v:Ref<LeaveNeedPunchCfg>):LeaveNeedPunchCfg
-	export function emptyQueryUserStatsViewRespData():QueryUserStatsViewRespData
-	export function emptyRefQueryUserStatsViewRespData():Ref<QueryUserStatsViewRespData>
-	export function refOfQueryUserStatsViewRespData(x:QueryUserStatsViewRespData,v:Ref<QueryUserStatsViewRespData>)
-	export function unRefQueryUserStatsViewRespData(v:Ref<QueryUserStatsViewRespData>):QueryUserStatsViewRespData
-	export function emptyBatchCreateUserDailyShiftResp():BatchCreateUserDailyShiftResp
-	export function emptyRefBatchCreateUserDailyShiftResp():Ref<BatchCreateUserDailyShiftResp>
-	export function refOfBatchCreateUserDailyShiftResp(x:BatchCreateUserDailyShiftResp,v:Ref<BatchCreateUserDailyShiftResp>)
-	export function unRefBatchCreateUserDailyShiftResp(v:Ref<BatchCreateUserDailyShiftResp>):BatchCreateUserDailyShiftResp
-	export function emptyCreateUserApprovalRespData():CreateUserApprovalRespData
-	export function emptyRefCreateUserApprovalRespData():Ref<CreateUserApprovalRespData>
-	export function refOfCreateUserApprovalRespData(x:CreateUserApprovalRespData,v:Ref<CreateUserApprovalRespData>)
-	export function unRefCreateUserApprovalRespData(v:Ref<CreateUserApprovalRespData>):CreateUserApprovalRespData
-	export function emptyUserId():UserId
-	export function emptyRefUserId():Ref<UserId>
-	export function refOfUserId(x:UserId,v:Ref<UserId>)
-	export function unRefUserId(v:Ref<UserId>):UserId
-	export function emptyQueryUserApprovalReqBody():QueryUserApprovalReqBody
-	export function emptyRefQueryUserApprovalReqBody():Ref<QueryUserApprovalReqBody>
-	export function refOfQueryUserApprovalReqBody(x:QueryUserApprovalReqBody,v:Ref<QueryUserApprovalReqBody>)
-	export function unRefQueryUserApprovalReqBody(v:Ref<QueryUserApprovalReqBody>):QueryUserApprovalReqBody
-	export function emptyCreateShiftRespData():CreateShiftRespData
-	export function emptyRefCreateShiftRespData():Ref<CreateShiftRespData>
-	export function refOfCreateShiftRespData(x:CreateShiftRespData,v:Ref<CreateShiftRespData>)
-	export function unRefCreateShiftRespData(v:Ref<CreateShiftRespData>):CreateShiftRespData
-	export function emptyWifiInfoEvent():WifiInfoEvent
-	export function emptyRefWifiInfoEvent():Ref<WifiInfoEvent>
-	export function refOfWifiInfoEvent(x:WifiInfoEvent,v:Ref<WifiInfoEvent>)
-	export function unRefWifiInfoEvent(v:Ref<WifiInfoEvent>):WifiInfoEvent
-	export function emptyQueryUserSettingReq():QueryUserSettingReq
-	export function emptyRefQueryUserSettingReq():Ref<QueryUserSettingReq>
-	export function refOfQueryUserSettingReq(x:QueryUserSettingReq,v:Ref<QueryUserSettingReq>)
-	export function unRefQueryUserSettingReq(v:Ref<QueryUserSettingReq>):QueryUserSettingReq
-	export function emptyUserOut():UserOut
-	export function emptyRefUserOut():Ref<UserOut>
-	export function refOfUserOut(x:UserOut,v:Ref<UserOut>)
-	export function unRefUserOut(v:Ref<UserOut>):UserOut
-	export function emptyUserStatsDataFeature():UserStatsDataFeature
-	export function emptyRefUserStatsDataFeature():Ref<UserStatsDataFeature>
-	export function refOfUserStatsDataFeature(x:UserStatsDataFeature,v:Ref<UserStatsDataFeature>)
-	export function unRefUserStatsDataFeature(v:Ref<UserStatsDataFeature>):UserStatsDataFeature
-	export function emptyUpdateUserStatsViewResp():UpdateUserStatsViewResp
-	export function emptyRefUpdateUserStatsViewResp():Ref<UpdateUserStatsViewResp>
-	export function refOfUpdateUserStatsViewResp(x:UpdateUserStatsViewResp,v:Ref<UpdateUserStatsViewResp>)
-	export function unRefUpdateUserStatsViewResp(v:Ref<UpdateUserStatsViewResp>):UpdateUserStatsViewResp
-	export function emptyUserOvertimeWork():UserOvertimeWork
-	export function emptyRefUserOvertimeWork():Ref<UserOvertimeWork>
-	export function refOfUserOvertimeWork(x:UserOvertimeWork,v:Ref<UserOvertimeWork>)
-	export function unRefUserOvertimeWork(v:Ref<UserOvertimeWork>):UserOvertimeWork
-	export function emptyUserFlow():UserFlow
-	export function emptyRefUserFlow():Ref<UserFlow>
-	export function refOfUserFlow(x:UserFlow,v:Ref<UserFlow>)
-	export function unRefUserFlow(v:Ref<UserFlow>):UserFlow
-	export function emptyModifyUserSettingReqBody():ModifyUserSettingReqBody
-	export function emptyRefModifyUserSettingReqBody():Ref<ModifyUserSettingReqBody>
-	export function refOfModifyUserSettingReqBody(x:ModifyUserSettingReqBody,v:Ref<ModifyUserSettingReqBody>)
-	export function unRefModifyUserSettingReqBody(v:Ref<ModifyUserSettingReqBody>):ModifyUserSettingReqBody
-	export function emptyQueryUserAllowedRemedysUserTaskRemedyReq():QueryUserAllowedRemedysUserTaskRemedyReq
-	export function emptyRefQueryUserAllowedRemedysUserTaskRemedyReq():Ref<QueryUserAllowedRemedysUserTaskRemedyReq>
-	export function refOfQueryUserAllowedRemedysUserTaskRemedyReq(x:QueryUserAllowedRemedysUserTaskRemedyReq,v:Ref<QueryUserAllowedRemedysUserTaskRemedyReq>)
-	export function unRefQueryUserAllowedRemedysUserTaskRemedyReq(v:Ref<QueryUserAllowedRemedysUserTaskRemedyReq>):QueryUserAllowedRemedysUserTaskRemedyReq
-	export function emptyQueryUserStatsDataResp():QueryUserStatsDataResp
-	export function emptyRefQueryUserStatsDataResp():Ref<QueryUserStatsDataResp>
-	export function refOfQueryUserStatsDataResp(x:QueryUserStatsDataResp,v:Ref<QueryUserStatsDataResp>)
-	export function unRefQueryUserStatsDataResp(v:Ref<QueryUserStatsDataResp>):QueryUserStatsDataResp
-	export function emptyI18nNames():I18nNames
-	export function emptyRefI18nNames():Ref<I18nNames>
-	export function refOfI18nNames(x:I18nNames,v:Ref<I18nNames>)
-	export function unRefI18nNames(v:Ref<I18nNames>):I18nNames
-	export function emptyOvertimeApplyDetail():OvertimeApplyDetail
-	export function emptyRefOvertimeApplyDetail():Ref<OvertimeApplyDetail>
-	export function refOfOvertimeApplyDetail(x:OvertimeApplyDetail,v:Ref<OvertimeApplyDetail>)
-	export function unRefOvertimeApplyDetail(v:Ref<OvertimeApplyDetail>):OvertimeApplyDetail
-	export function emptyTaskResult():TaskResult
-	export function emptyRefTaskResult():Ref<TaskResult>
-	export function refOfTaskResult(x:TaskResult,v:Ref<TaskResult>)
-	export function unRefTaskResult(v:Ref<TaskResult>):TaskResult
-	export function emptyUploadFileReqBody():UploadFileReqBody
-	export function emptyRefUploadFileReqBody():Ref<UploadFileReqBody>
-	export function refOfUploadFileReqBody(x:UploadFileReqBody,v:Ref<UploadFileReqBody>)
-	export function unRefUploadFileReqBody(v:Ref<UploadFileReqBody>):UploadFileReqBody
-	export function emptyGetGroupReq():GetGroupReq
-	export function emptyRefGetGroupReq():Ref<GetGroupReq>
-	export function refOfGetGroupReq(x:GetGroupReq,v:Ref<GetGroupReq>)
-	export function unRefGetGroupReq(v:Ref<GetGroupReq>):GetGroupReq
-	export function emptyListGroupIterator():ListGroupIterator
-	export function emptyRefListGroupIterator():Ref<ListGroupIterator>
-	export function refOfListGroupIterator(x:ListGroupIterator,v:Ref<ListGroupIterator>)
-	export function unRefListGroupIterator(v:Ref<ListGroupIterator>):ListGroupIterator
-	export function emptyOvertimeDetail():OvertimeDetail
-	export function emptyRefOvertimeDetail():Ref<OvertimeDetail>
-	export function refOfOvertimeDetail(x:OvertimeDetail,v:Ref<OvertimeDetail>)
-	export function unRefOvertimeDetail(v:Ref<OvertimeDetail>):OvertimeDetail
-	export function emptyGetShiftRespData():GetShiftRespData
-	export function emptyRefGetShiftRespData():Ref<GetShiftRespData>
-	export function refOfGetShiftRespData(x:GetShiftRespData,v:Ref<GetShiftRespData>)
-	export function unRefGetShiftRespData(v:Ref<GetShiftRespData>):GetShiftRespData
-	export function emptyLeaveEmployExpireRecord():LeaveEmployExpireRecord
-	export function emptyRefLeaveEmployExpireRecord():Ref<LeaveEmployExpireRecord>
-	export function refOfLeaveEmployExpireRecord(x:LeaveEmployExpireRecord,v:Ref<LeaveEmployExpireRecord>)
-	export function unRefLeaveEmployExpireRecord(v:Ref<LeaveEmployExpireRecord>):LeaveEmployExpireRecord
-	export function emptyModifyUserSettingResp():ModifyUserSettingResp
-	export function emptyRefModifyUserSettingResp():Ref<ModifyUserSettingResp>
-	export function refOfModifyUserSettingResp(x:ModifyUserSettingResp,v:Ref<ModifyUserSettingResp>)
-	export function unRefModifyUserSettingResp(v:Ref<ModifyUserSettingResp>):ModifyUserSettingResp
-	export function emptyQueryUserAllowedRemedysUserTaskRemedyReqBody():QueryUserAllowedRemedysUserTaskRemedyReqBody
-	export function emptyRefQueryUserAllowedRemedysUserTaskRemedyReqBody():Ref<QueryUserAllowedRemedysUserTaskRemedyReqBody>
-	export function refOfQueryUserAllowedRemedysUserTaskRemedyReqBody(x:QueryUserAllowedRemedysUserTaskRemedyReqBody,v:Ref<QueryUserAllowedRemedysUserTaskRemedyReqBody>)
-	export function unRefQueryUserAllowedRemedysUserTaskRemedyReqBody(v:Ref<QueryUserAllowedRemedysUserTaskRemedyReqBody>):QueryUserAllowedRemedysUserTaskRemedyReqBody
-	export function emptyQueryUserTaskReqBody():QueryUserTaskReqBody
-	export function emptyRefQueryUserTaskReqBody():Ref<QueryUserTaskReqBody>
-	export function refOfQueryUserTaskReqBody(x:QueryUserTaskReqBody,v:Ref<QueryUserTaskReqBody>)
-	export function unRefQueryUserTaskReqBody(v:Ref<QueryUserTaskReqBody>):QueryUserTaskReqBody
-	export function emptyDeleteGroupReq():DeleteGroupReq
-	export function emptyRefDeleteGroupReq():Ref<DeleteGroupReq>
-	export function refOfDeleteGroupReq(x:DeleteGroupReq,v:Ref<DeleteGroupReq>)
-	export function unRefDeleteGroupReq(v:Ref<DeleteGroupReq>):DeleteGroupReq
-	export function emptyDeleteShiftReq():DeleteShiftReq
-	export function emptyRefDeleteShiftReq():Ref<DeleteShiftReq>
-	export function refOfDeleteShiftReq(x:DeleteShiftReq,v:Ref<DeleteShiftReq>)
-	export function unRefDeleteShiftReq(v:Ref<DeleteShiftReq>):DeleteShiftReq
-	export function emptyGetLeaveEmployExpireRecordRespData():GetLeaveEmployExpireRecordRespData
-	export function emptyRefGetLeaveEmployExpireRecordRespData():Ref<GetLeaveEmployExpireRecordRespData>
-	export function refOfGetLeaveEmployExpireRecordRespData(x:GetLeaveEmployExpireRecordRespData,v:Ref<GetLeaveEmployExpireRecordRespData>)
-	export function unRefGetLeaveEmployExpireRecordRespData(v:Ref<GetLeaveEmployExpireRecordRespData>):GetLeaveEmployExpireRecordRespData
-	export function emptyModifyUserSettingRespData():ModifyUserSettingRespData
-	export function emptyRefModifyUserSettingRespData():Ref<ModifyUserSettingRespData>
-	export function refOfModifyUserSettingRespData(x:ModifyUserSettingRespData,v:Ref<ModifyUserSettingRespData>)
-	export function unRefModifyUserSettingRespData(v:Ref<ModifyUserSettingRespData>):ModifyUserSettingRespData
-	export function emptyQueryUserTaskRemedyResp():QueryUserTaskRemedyResp
-	export function emptyRefQueryUserTaskRemedyResp():Ref<QueryUserTaskRemedyResp>
-	export function refOfQueryUserTaskRemedyResp(x:QueryUserTaskRemedyResp,v:Ref<QueryUserTaskRemedyResp>)
-	export function unRefQueryUserTaskRemedyResp(v:Ref<QueryUserTaskRemedyResp>):QueryUserTaskRemedyResp
-	export function emptyCreateShiftResp():CreateShiftResp
-	export function emptyRefCreateShiftResp():Ref<CreateShiftResp>
-	export function refOfCreateShiftResp(x:CreateShiftResp,v:Ref<CreateShiftResp>)
-	export function unRefCreateShiftResp(v:Ref<CreateShiftResp>):CreateShiftResp
-	export function emptyField():Field
-	export function emptyRefField():Ref<Field>
-	export function refOfField(x:Field,v:Ref<Field>)
-	export function unRefField(v:Ref<Field>):Field
-	export function emptyUserSetting():UserSetting
-	export function emptyRefUserSetting():Ref<UserSetting>
-	export function refOfUserSetting(x:UserSetting,v:Ref<UserSetting>)
-	export function unRefUserSetting(v:Ref<UserSetting>):UserSetting
-	export function emptyV1():V1
-	export function emptyRefV1():Ref<V1>
-	export function refOfV1(x:V1,v:Ref<V1>)
-	export function unRefV1(v:Ref<V1>):V1
-	export function emptyUpdateUserStatsViewReq():UpdateUserStatsViewReq
-	export function emptyRefUpdateUserStatsViewReq():Ref<UpdateUserStatsViewReq>
-	export function refOfUpdateUserStatsViewReq(x:UpdateUserStatsViewReq,v:Ref<UpdateUserStatsViewReq>)
-	export function unRefUpdateUserStatsViewReq(v:Ref<UpdateUserStatsViewReq>):UpdateUserStatsViewReq
-	export function emptyUserArrangeShiftGroup():UserArrangeShiftGroup
-	export function emptyRefUserArrangeShiftGroup():Ref<UserArrangeShiftGroup>
-	export function refOfUserArrangeShiftGroup(x:UserArrangeShiftGroup,v:Ref<UserArrangeShiftGroup>)
-	export function unRefUserArrangeShiftGroup(v:Ref<UserArrangeShiftGroup>):UserArrangeShiftGroup
-	export function emptyUserShiftGroupsList():UserShiftGroupsList
-	export function emptyRefUserShiftGroupsList():Ref<UserShiftGroupsList>
-	export function refOfUserShiftGroupsList(x:UserShiftGroupsList,v:Ref<UserShiftGroupsList>)
-	export function unRefUserShiftGroupsList(v:Ref<UserShiftGroupsList>):UserShiftGroupsList
-	export function emptyGetShiftResp():GetShiftResp
-	export function emptyRefGetShiftResp():Ref<GetShiftResp>
-	export function refOfGetShiftResp(x:GetShiftResp,v:Ref<GetShiftResp>)
-	export function unRefGetShiftResp(v:Ref<GetShiftResp>):GetShiftResp
-	export function emptyMemberStatusChange():MemberStatusChange
-	export function emptyRefMemberStatusChange():Ref<MemberStatusChange>
-	export function refOfMemberStatusChange(x:MemberStatusChange,v:Ref<MemberStatusChange>)
-	export function unRefMemberStatusChange(v:Ref<MemberStatusChange>):MemberStatusChange
-	export function emptyQueryUserFlowReq():QueryUserFlowReq
-	export function emptyRefQueryUserFlowReq():Ref<QueryUserFlowReq>
-	export function refOfQueryUserFlowReq(x:QueryUserFlowReq,v:Ref<QueryUserFlowReq>)
-	export function unRefQueryUserFlowReq(v:Ref<QueryUserFlowReq>):QueryUserFlowReq
-	export function emptyUserTrip():UserTrip
-	export function emptyRefUserTrip():Ref<UserTrip>
-	export function refOfUserTrip(x:UserTrip,v:Ref<UserTrip>)
-	export function unRefUserTrip(v:Ref<UserTrip>):UserTrip
-	export function emptyLeaveAccrualRecord():LeaveAccrualRecord
-	export function emptyRefLeaveAccrualRecord():Ref<LeaveAccrualRecord>
-	export function refOfLeaveAccrualRecord(x:LeaveAccrualRecord,v:Ref<LeaveAccrualRecord>)
-	export function unRefLeaveAccrualRecord(v:Ref<LeaveAccrualRecord>):LeaveAccrualRecord
-	export function emptyPunchSpecialDateShift():PunchSpecialDateShift
-	export function emptyRefPunchSpecialDateShift():Ref<PunchSpecialDateShift>
-	export function refOfPunchSpecialDateShift(x:PunchSpecialDateShift,v:Ref<PunchSpecialDateShift>)
-	export function unRefPunchSpecialDateShift(v:Ref<PunchSpecialDateShift>):PunchSpecialDateShift
-	export function emptyItem():Item
-	export function emptyRefItem():Ref<Item>
-	export function refOfItem(x:Item,v:Ref<Item>)
-	export function unRefItem(v:Ref<Item>):Item
-	export function emptyLangText():LangText
-	export function emptyRefLangText():Ref<LangText>
-	export function refOfLangText(x:LangText,v:Ref<LangText>)
-	export function unRefLangText(v:Ref<LangText>):LangText
-	export function emptyArrangeShiftGroup():ArrangeShiftGroup
-	export function emptyRefArrangeShiftGroup():Ref<ArrangeShiftGroup>
-	export function refOfArrangeShiftGroup(x:ArrangeShiftGroup,v:Ref<ArrangeShiftGroup>)
-	export function unRefArrangeShiftGroup(v:Ref<ArrangeShiftGroup>):ArrangeShiftGroup
+	export function emptyLocationInfoEvent():LocationInfoEvent
+	export function emptyRefLocationInfoEvent():Ref<LocationInfoEvent>
+	export function refOfLocationInfoEvent(x:LocationInfoEvent,v:Ref<LocationInfoEvent>)
+	export function unRefLocationInfoEvent(v:Ref<LocationInfoEvent>):LocationInfoEvent
+	export function emptyPatchLeaveAccrualRecordReqBody():PatchLeaveAccrualRecordReqBody
+	export function emptyRefPatchLeaveAccrualRecordReqBody():Ref<PatchLeaveAccrualRecordReqBody>
+	export function refOfPatchLeaveAccrualRecordReqBody(x:PatchLeaveAccrualRecordReqBody,v:Ref<PatchLeaveAccrualRecordReqBody>)
+	export function unRefPatchLeaveAccrualRecordReqBody(v:Ref<PatchLeaveAccrualRecordReqBody>):PatchLeaveAccrualRecordReqBody
+	export function emptyQueryUserStatsFieldReq():QueryUserStatsFieldReq
+	export function emptyRefQueryUserStatsFieldReq():Ref<QueryUserStatsFieldReq>
+	export function refOfQueryUserStatsFieldReq(x:QueryUserStatsFieldReq,v:Ref<QueryUserStatsFieldReq>)
+	export function unRefQueryUserStatsFieldReq(v:Ref<QueryUserStatsFieldReq>):QueryUserStatsFieldReq
+	export function emptyArchiveField():ArchiveField
+	export function emptyRefArchiveField():Ref<ArchiveField>
+	export function refOfArchiveField(x:ArchiveField,v:Ref<ArchiveField>)
+	export function unRefArchiveField(v:Ref<ArchiveField>):ArchiveField
+	export function emptyDeleteShiftResp():DeleteShiftResp
+	export function emptyRefDeleteShiftResp():Ref<DeleteShiftResp>
+	export function refOfDeleteShiftResp(x:DeleteShiftResp,v:Ref<DeleteShiftResp>)
+	export function unRefDeleteShiftResp(v:Ref<DeleteShiftResp>):DeleteShiftResp
 	export function emptyGetUserFlowRespData():GetUserFlowRespData
 	export function emptyRefGetUserFlowRespData():Ref<GetUserFlowRespData>
 	export function refOfGetUserFlowRespData(x:GetUserFlowRespData,v:Ref<GetUserFlowRespData>)
 	export function unRefGetUserFlowRespData(v:Ref<GetUserFlowRespData>):GetUserFlowRespData
-	export function emptyQueryUserFlowResp():QueryUserFlowResp
-	export function emptyRefQueryUserFlowResp():Ref<QueryUserFlowResp>
-	export function refOfQueryUserFlowResp(x:QueryUserFlowResp,v:Ref<QueryUserFlowResp>)
-	export function unRefQueryUserFlowResp(v:Ref<QueryUserFlowResp>):QueryUserFlowResp
-	export function emptyShift():Shift
-	export function emptyRefShift():Ref<Shift>
-	export function refOfShift(x:Shift,v:Ref<Shift>)
-	export function unRefShift(v:Ref<Shift>):Shift
-	export function emptyApprovalInfo():ApprovalInfo
-	export function emptyRefApprovalInfo():Ref<ApprovalInfo>
-	export function refOfApprovalInfo(x:ApprovalInfo,v:Ref<ApprovalInfo>)
-	export function unRefApprovalInfo(v:Ref<ApprovalInfo>):ApprovalInfo
-	export function emptyGetGroupResp():GetGroupResp
-	export function emptyRefGetGroupResp():Ref<GetGroupResp>
-	export function refOfGetGroupResp(x:GetGroupResp,v:Ref<GetGroupResp>)
-	export function unRefGetGroupResp(v:Ref<GetGroupResp>):GetGroupResp
-	export function emptyScopeGroup():ScopeGroup
-	export function emptyRefScopeGroup():Ref<ScopeGroup>
-	export function refOfScopeGroup(x:ScopeGroup,v:Ref<ScopeGroup>)
-	export function unRefScopeGroup(v:Ref<ScopeGroup>):ScopeGroup
-	export function emptyCoordinate():Coordinate
-	export function emptyRefCoordinate():Ref<Coordinate>
-	export function refOfCoordinate(x:Coordinate,v:Ref<Coordinate>)
-	export function unRefCoordinate(v:Ref<Coordinate>):Coordinate
-	export function emptyQueryUserSettingResp():QueryUserSettingResp
-	export function emptyRefQueryUserSettingResp():Ref<QueryUserSettingResp>
-	export function refOfQueryUserSettingResp(x:QueryUserSettingResp,v:Ref<QueryUserSettingResp>)
-	export function unRefQueryUserSettingResp(v:Ref<QueryUserSettingResp>):QueryUserSettingResp
-	export function emptyCreateShiftReq():CreateShiftReq
-	export function emptyRefCreateShiftReq():Ref<CreateShiftReq>
-	export function refOfCreateShiftReq(x:CreateShiftReq,v:Ref<CreateShiftReq>)
-	export function unRefCreateShiftReq(v:Ref<CreateShiftReq>):CreateShiftReq
-	export function emptyGetGroupRespData():GetGroupRespData
-	export function emptyRefGetGroupRespData():Ref<GetGroupRespData>
-	export function refOfGetGroupRespData(x:GetGroupRespData,v:Ref<GetGroupRespData>)
-	export function unRefGetGroupRespData(v:Ref<GetGroupRespData>):GetGroupRespData
-	export function emptyQueryUserAllowedRemedysUserTaskRemedyResp():QueryUserAllowedRemedysUserTaskRemedyResp
-	export function emptyRefQueryUserAllowedRemedysUserTaskRemedyResp():Ref<QueryUserAllowedRemedysUserTaskRemedyResp>
-	export function refOfQueryUserAllowedRemedysUserTaskRemedyResp(x:QueryUserAllowedRemedysUserTaskRemedyResp,v:Ref<QueryUserAllowedRemedysUserTaskRemedyResp>)
-	export function unRefQueryUserAllowedRemedysUserTaskRemedyResp(v:Ref<QueryUserAllowedRemedysUserTaskRemedyResp>):QueryUserAllowedRemedysUserTaskRemedyResp
-	export function emptyStatisticsField():StatisticsField
-	export function emptyRefStatisticsField():Ref<StatisticsField>
-	export function refOfStatisticsField(x:StatisticsField,v:Ref<StatisticsField>)
-	export function unRefStatisticsField(v:Ref<StatisticsField>):StatisticsField
-	export function emptyUserTask():UserTask
-	export function emptyRefUserTask():Ref<UserTask>
-	export function refOfUserTask(x:UserTask,v:Ref<UserTask>)
-	export function unRefUserTask(v:Ref<UserTask>):UserTask
-	export function emptyQueryShiftRespData():QueryShiftRespData
-	export function emptyRefQueryShiftRespData():Ref<QueryShiftRespData>
-	export function refOfQueryShiftRespData(x:QueryShiftRespData,v:Ref<QueryShiftRespData>)
-	export function unRefQueryShiftRespData(v:Ref<QueryShiftRespData>):QueryShiftRespData
-	export function emptyMachine():Machine
-	export function emptyRefMachine():Ref<Machine>
-	export function refOfMachine(x:Machine,v:Ref<Machine>)
-	export function unRefMachine(v:Ref<Machine>):Machine
-	export function emptyUserApproval():UserApproval
-	export function emptyRefUserApproval():Ref<UserApproval>
-	export function refOfUserApproval(x:UserApproval,v:Ref<UserApproval>)
-	export function unRefUserApproval(v:Ref<UserApproval>):UserApproval
-	export function emptyQueryUserSettingReqBody():QueryUserSettingReqBody
-	export function emptyRefQueryUserSettingReqBody():Ref<QueryUserSettingReqBody>
-	export function refOfQueryUserSettingReqBody(x:QueryUserSettingReqBody,v:Ref<QueryUserSettingReqBody>)
-	export function unRefQueryUserSettingReqBody(v:Ref<QueryUserSettingReqBody>):QueryUserSettingReqBody
-	export function emptyQueryUserStatsViewResp():QueryUserStatsViewResp
-	export function emptyRefQueryUserStatsViewResp():Ref<QueryUserStatsViewResp>
-	export function refOfQueryUserStatsViewResp(x:QueryUserStatsViewResp,v:Ref<QueryUserStatsViewResp>)
-	export function unRefQueryUserStatsViewResp(v:Ref<QueryUserStatsViewResp>):QueryUserStatsViewResp
+	export function emptyQueryShiftResp():QueryShiftResp
+	export function emptyRefQueryShiftResp():Ref<QueryShiftResp>
+	export function refOfQueryShiftResp(x:QueryShiftResp,v:Ref<QueryShiftResp>)
+	export function unRefQueryShiftResp(v:Ref<QueryShiftResp>):QueryShiftResp
 	export function emptyQueryUserTaskRespData():QueryUserTaskRespData
 	export function emptyRefQueryUserTaskRespData():Ref<QueryUserTaskRespData>
 	export function refOfQueryUserTaskRespData(x:QueryUserTaskRespData,v:Ref<QueryUserTaskRespData>)
 	export function unRefQueryUserTaskRespData(v:Ref<QueryUserTaskRespData>):QueryUserTaskRespData
-	export function emptyCreateUserTaskRemedyResp():CreateUserTaskRemedyResp
-	export function emptyRefCreateUserTaskRemedyResp():Ref<CreateUserTaskRemedyResp>
-	export function refOfCreateUserTaskRemedyResp(x:CreateUserTaskRemedyResp,v:Ref<CreateUserTaskRemedyResp>)
-	export function unRefCreateUserTaskRemedyResp(v:Ref<CreateUserTaskRemedyResp>):CreateUserTaskRemedyResp
-	export function emptyOpenApplyTimeRange():OpenApplyTimeRange
-	export function emptyRefOpenApplyTimeRange():Ref<OpenApplyTimeRange>
-	export function refOfOpenApplyTimeRange(x:OpenApplyTimeRange,v:Ref<OpenApplyTimeRange>)
-	export function unRefOpenApplyTimeRange(v:Ref<OpenApplyTimeRange>):OpenApplyTimeRange
+	export function emptyUserFlow():UserFlow
+	export function emptyRefUserFlow():Ref<UserFlow>
+	export function refOfUserFlow(x:UserFlow,v:Ref<UserFlow>)
+	export function unRefUserFlow(v:Ref<UserFlow>):UserFlow
+	export function emptyFile():File
+	export function emptyRefFile():Ref<File>
+	export function refOfFile(x:File,v:Ref<File>)
+	export function unRefFile(v:Ref<File>):File
+	export function emptyGetLeaveEmployExpireRecordReq():GetLeaveEmployExpireRecordReq
+	export function emptyRefGetLeaveEmployExpireRecordReq():Ref<GetLeaveEmployExpireRecordReq>
+	export function refOfGetLeaveEmployExpireRecordReq(x:GetLeaveEmployExpireRecordReq,v:Ref<GetLeaveEmployExpireRecordReq>)
+	export function unRefGetLeaveEmployExpireRecordReq(v:Ref<GetLeaveEmployExpireRecordReq>):GetLeaveEmployExpireRecordReq
+	export function emptyListShiftRespData():ListShiftRespData
+	export function emptyRefListShiftRespData():Ref<ListShiftRespData>
+	export function refOfListShiftRespData(x:ListShiftRespData,v:Ref<ListShiftRespData>)
+	export function unRefListShiftRespData(v:Ref<ListShiftRespData>):ListShiftRespData
+	export function emptyModifyUserSettingReq():ModifyUserSettingReq
+	export function emptyRefModifyUserSettingReq():Ref<ModifyUserSettingReq>
+	export function refOfModifyUserSettingReq(x:ModifyUserSettingReq,v:Ref<ModifyUserSettingReq>)
+	export function unRefModifyUserSettingReq(v:Ref<ModifyUserSettingReq>):ModifyUserSettingReq
+	export function emptyModifyUserSettingReqBody():ModifyUserSettingReqBody
+	export function emptyRefModifyUserSettingReqBody():Ref<ModifyUserSettingReqBody>
+	export function refOfModifyUserSettingReqBody(x:ModifyUserSettingReqBody,v:Ref<ModifyUserSettingReqBody>)
+	export function unRefModifyUserSettingReqBody(v:Ref<ModifyUserSettingReqBody>):ModifyUserSettingReqBody
+	export function emptyQueryUserApprovalReqBody():QueryUserApprovalReqBody
+	export function emptyRefQueryUserApprovalReqBody():Ref<QueryUserApprovalReqBody>
+	export function refOfQueryUserApprovalReqBody(x:QueryUserApprovalReqBody,v:Ref<QueryUserApprovalReqBody>)
+	export function unRefQueryUserApprovalReqBody(v:Ref<QueryUserApprovalReqBody>):QueryUserApprovalReqBody
+	export function emptyUserId():UserId
+	export function emptyRefUserId():Ref<UserId>
+	export function refOfUserId(x:UserId,v:Ref<UserId>)
+	export function unRefUserId(v:Ref<UserId>):UserId
+	export function emptyScopeGroup():ScopeGroup
+	export function emptyRefScopeGroup():Ref<ScopeGroup>
+	export function refOfScopeGroup(x:ScopeGroup,v:Ref<ScopeGroup>)
+	export function unRefScopeGroup(v:Ref<ScopeGroup>):ScopeGroup
+	export function emptyUserLeave():UserLeave
+	export function emptyRefUserLeave():Ref<UserLeave>
+	export function refOfUserLeave(x:UserLeave,v:Ref<UserLeave>)
+	export function unRefUserLeave(v:Ref<UserLeave>):UserLeave
+	export function emptyWifiInfo():WifiInfo
+	export function emptyRefWifiInfo():Ref<WifiInfo>
+	export function refOfWifiInfo(x:WifiInfo,v:Ref<WifiInfo>)
+	export function unRefWifiInfo(v:Ref<WifiInfo>):WifiInfo
+	export function emptyBatchCreateUserFlowRespData():BatchCreateUserFlowRespData
+	export function emptyRefBatchCreateUserFlowRespData():Ref<BatchCreateUserFlowRespData>
+	export function refOfBatchCreateUserFlowRespData(x:BatchCreateUserFlowRespData,v:Ref<BatchCreateUserFlowRespData>)
+	export function unRefBatchCreateUserFlowRespData(v:Ref<BatchCreateUserFlowRespData>):BatchCreateUserFlowRespData
 	export function emptySearchGroupRespData():SearchGroupRespData
 	export function emptyRefSearchGroupRespData():Ref<SearchGroupRespData>
 	export function refOfSearchGroupRespData(x:SearchGroupRespData,v:Ref<SearchGroupRespData>)
 	export function unRefSearchGroupRespData(v:Ref<SearchGroupRespData>):SearchGroupRespData
-	export function emptyProcessApprovalInfoReq():ProcessApprovalInfoReq
-	export function emptyRefProcessApprovalInfoReq():Ref<ProcessApprovalInfoReq>
-	export function refOfProcessApprovalInfoReq(x:ProcessApprovalInfoReq,v:Ref<ProcessApprovalInfoReq>)
-	export function unRefProcessApprovalInfoReq(v:Ref<ProcessApprovalInfoReq>):ProcessApprovalInfoReq
+	export function emptyUserApproval():UserApproval
+	export function emptyRefUserApproval():Ref<UserApproval>
+	export function refOfUserApproval(x:UserApproval,v:Ref<UserApproval>)
+	export function unRefUserApproval(v:Ref<UserApproval>):UserApproval
+	export function emptySearchGroupReq():SearchGroupReq
+	export function emptyRefSearchGroupReq():Ref<SearchGroupReq>
+	export function refOfSearchGroupReq(x:SearchGroupReq,v:Ref<SearchGroupReq>)
+	export function unRefSearchGroupReq(v:Ref<SearchGroupReq>):SearchGroupReq
+	export function emptyLeaveEmployExpireRecord():LeaveEmployExpireRecord
+	export function emptyRefLeaveEmployExpireRecord():Ref<LeaveEmployExpireRecord>
+	export function refOfLeaveEmployExpireRecord(x:LeaveEmployExpireRecord,v:Ref<LeaveEmployExpireRecord>)
+	export function unRefLeaveEmployExpireRecord(v:Ref<LeaveEmployExpireRecord>):LeaveEmployExpireRecord
+	export function emptyLeaveNeedPunchCfg():LeaveNeedPunchCfg
+	export function emptyRefLeaveNeedPunchCfg():Ref<LeaveNeedPunchCfg>
+	export function refOfLeaveNeedPunchCfg(x:LeaveNeedPunchCfg,v:Ref<LeaveNeedPunchCfg>)
+	export function unRefLeaveNeedPunchCfg(v:Ref<LeaveNeedPunchCfg>):LeaveNeedPunchCfg
+	export function emptyPatchLeaveAccrualRecordReq():PatchLeaveAccrualRecordReq
+	export function emptyRefPatchLeaveAccrualRecordReq():Ref<PatchLeaveAccrualRecordReq>
+	export function refOfPatchLeaveAccrualRecordReq(x:PatchLeaveAccrualRecordReq,v:Ref<PatchLeaveAccrualRecordReq>)
+	export function unRefPatchLeaveAccrualRecordReq(v:Ref<PatchLeaveAccrualRecordReq>):PatchLeaveAccrualRecordReq
+	export function emptyQueryUserFlowRespData():QueryUserFlowRespData
+	export function emptyRefQueryUserFlowRespData():Ref<QueryUserFlowRespData>
+	export function refOfQueryUserFlowRespData(x:QueryUserFlowRespData,v:Ref<QueryUserFlowRespData>)
+	export function unRefQueryUserFlowRespData(v:Ref<QueryUserFlowRespData>):QueryUserFlowRespData
+	export function emptyStatusChange():StatusChange
+	export function emptyRefStatusChange():Ref<StatusChange>
+	export function refOfStatusChange(x:StatusChange,v:Ref<StatusChange>)
+	export function unRefStatusChange(v:Ref<StatusChange>):StatusChange
+	export function emptyUserOvertimeWork():UserOvertimeWork
+	export function emptyRefUserOvertimeWork():Ref<UserOvertimeWork>
+	export function refOfUserOvertimeWork(x:UserOvertimeWork,v:Ref<UserOvertimeWork>)
+	export function unRefUserOvertimeWork(v:Ref<UserOvertimeWork>):UserOvertimeWork
+	export function emptyCoordinate():Coordinate
+	export function emptyRefCoordinate():Ref<Coordinate>
+	export function refOfCoordinate(x:Coordinate,v:Ref<Coordinate>)
+	export function unRefCoordinate(v:Ref<Coordinate>):Coordinate
+	export function emptyLateOffLateOnSetting():LateOffLateOnSetting
+	export function emptyRefLateOffLateOnSetting():Ref<LateOffLateOnSetting>
+	export function refOfLateOffLateOnSetting(x:LateOffLateOnSetting,v:Ref<LateOffLateOnSetting>)
+	export function unRefLateOffLateOnSetting(v:Ref<LateOffLateOnSetting>):LateOffLateOnSetting
+	export function emptyListShiftResp():ListShiftResp
+	export function emptyRefListShiftResp():Ref<ListShiftResp>
+	export function refOfListShiftResp(x:ListShiftResp,v:Ref<ListShiftResp>)
+	export function unRefListShiftResp(v:Ref<ListShiftResp>):ListShiftResp
+	export function emptyQueryUserStatsViewReqBody():QueryUserStatsViewReqBody
+	export function emptyRefQueryUserStatsViewReqBody():Ref<QueryUserStatsViewReqBody>
+	export function refOfQueryUserStatsViewReqBody(x:QueryUserStatsViewReqBody,v:Ref<QueryUserStatsViewReqBody>)
+	export function unRefQueryUserStatsViewReqBody(v:Ref<QueryUserStatsViewReqBody>):QueryUserStatsViewReqBody
+	export function emptyBatchCreateUserDailyShiftReq():BatchCreateUserDailyShiftReq
+	export function emptyRefBatchCreateUserDailyShiftReq():Ref<BatchCreateUserDailyShiftReq>
+	export function refOfBatchCreateUserDailyShiftReq(x:BatchCreateUserDailyShiftReq,v:Ref<BatchCreateUserDailyShiftReq>)
+	export function unRefBatchCreateUserDailyShiftReq(v:Ref<BatchCreateUserDailyShiftReq>):BatchCreateUserDailyShiftReq
+	export function emptyCreateShiftRespData():CreateShiftRespData
+	export function emptyRefCreateShiftRespData():Ref<CreateShiftRespData>
+	export function refOfCreateShiftRespData(x:CreateShiftRespData,v:Ref<CreateShiftRespData>)
+	export function unRefCreateShiftRespData(v:Ref<CreateShiftRespData>):CreateShiftRespData
+	export function emptyGetLeaveEmployExpireRecordResp():GetLeaveEmployExpireRecordResp
+	export function emptyRefGetLeaveEmployExpireRecordResp():Ref<GetLeaveEmployExpireRecordResp>
+	export function refOfGetLeaveEmployExpireRecordResp(x:GetLeaveEmployExpireRecordResp,v:Ref<GetLeaveEmployExpireRecordResp>)
+	export function unRefGetLeaveEmployExpireRecordResp(v:Ref<GetLeaveEmployExpireRecordResp>):GetLeaveEmployExpireRecordResp
+	export function emptyPunchMember():PunchMember
+	export function emptyRefPunchMember():Ref<PunchMember>
+	export function refOfPunchMember(x:PunchMember,v:Ref<PunchMember>)
+	export function unRefPunchMember(v:Ref<PunchMember>):PunchMember
+	export function emptySchedule():Schedule
+	export function emptyRefSchedule():Ref<Schedule>
+	export function refOfSchedule(x:Schedule,v:Ref<Schedule>)
+	export function unRefSchedule(v:Ref<Schedule>):Schedule
+	export function emptyQueryUserStatsViewReq():QueryUserStatsViewReq
+	export function emptyRefQueryUserStatsViewReq():Ref<QueryUserStatsViewReq>
+	export function refOfQueryUserStatsViewReq(x:QueryUserStatsViewReq,v:Ref<QueryUserStatsViewReq>)
+	export function unRefQueryUserStatsViewReq(v:Ref<QueryUserStatsViewReq>):QueryUserStatsViewReq
+	export function emptyReportData():ReportData
+	export function emptyRefReportData():Ref<ReportData>
+	export function refOfReportData(x:ReportData,v:Ref<ReportData>)
+	export function unRefReportData(v:Ref<ReportData>):ReportData
+	export function emptyUserTask():UserTask
+	export function emptyRefUserTask():Ref<UserTask>
+	export function refOfUserTask(x:UserTask,v:Ref<UserTask>)
+	export function unRefUserTask(v:Ref<UserTask>):UserTask
+	export function emptyUserTaskRemedy():UserTaskRemedy
+	export function emptyRefUserTaskRemedy():Ref<UserTaskRemedy>
+	export function refOfUserTaskRemedy(x:UserTaskRemedy,v:Ref<UserTaskRemedy>)
+	export function unRefUserTaskRemedy(v:Ref<UserTaskRemedy>):UserTaskRemedy
+	export function emptyCreateUserTaskRemedyRespData():CreateUserTaskRemedyRespData
+	export function emptyRefCreateUserTaskRemedyRespData():Ref<CreateUserTaskRemedyRespData>
+	export function refOfCreateUserTaskRemedyRespData(x:CreateUserTaskRemedyRespData,v:Ref<CreateUserTaskRemedyRespData>)
+	export function unRefCreateUserTaskRemedyRespData(v:Ref<CreateUserTaskRemedyRespData>):CreateUserTaskRemedyRespData
+	export function emptyListArchiveRuleRespData():ListArchiveRuleRespData
+	export function emptyRefListArchiveRuleRespData():Ref<ListArchiveRuleRespData>
+	export function refOfListArchiveRuleRespData(x:ListArchiveRuleRespData,v:Ref<ListArchiveRuleRespData>)
+	export function unRefListArchiveRuleRespData(v:Ref<ListArchiveRuleRespData>):ListArchiveRuleRespData
+	export function emptyQueryUserAllowedRemedysUserTaskRemedyResp():QueryUserAllowedRemedysUserTaskRemedyResp
+	export function emptyRefQueryUserAllowedRemedysUserTaskRemedyResp():Ref<QueryUserAllowedRemedysUserTaskRemedyResp>
+	export function refOfQueryUserAllowedRemedysUserTaskRemedyResp(x:QueryUserAllowedRemedysUserTaskRemedyResp,v:Ref<QueryUserAllowedRemedysUserTaskRemedyResp>)
+	export function unRefQueryUserAllowedRemedysUserTaskRemedyResp(v:Ref<QueryUserAllowedRemedysUserTaskRemedyResp>):QueryUserAllowedRemedysUserTaskRemedyResp
+	export function emptyShiftGroupUser():ShiftGroupUser
+	export function emptyRefShiftGroupUser():Ref<ShiftGroupUser>
+	export function refOfShiftGroupUser(x:ShiftGroupUser,v:Ref<ShiftGroupUser>)
+	export function unRefShiftGroupUser(v:Ref<ShiftGroupUser>):ShiftGroupUser
+	export function emptyQueryUserSettingReq():QueryUserSettingReq
+	export function emptyRefQueryUserSettingReq():Ref<QueryUserSettingReq>
+	export function refOfQueryUserSettingReq(x:QueryUserSettingReq,v:Ref<QueryUserSettingReq>)
+	export function unRefQueryUserSettingReq(v:Ref<QueryUserSettingReq>):QueryUserSettingReq
+	export function emptyQueryUserStatsDataReqBody():QueryUserStatsDataReqBody
+	export function emptyRefQueryUserStatsDataReqBody():Ref<QueryUserStatsDataReqBody>
+	export function refOfQueryUserStatsDataReqBody(x:QueryUserStatsDataReqBody,v:Ref<QueryUserStatsDataReqBody>)
+	export function unRefQueryUserStatsDataReqBody(v:Ref<QueryUserStatsDataReqBody>):QueryUserStatsDataReqBody
+	export function emptyQueryUserTaskRemedyResp():QueryUserTaskRemedyResp
+	export function emptyRefQueryUserTaskRemedyResp():Ref<QueryUserTaskRemedyResp>
+	export function refOfQueryUserTaskRemedyResp(x:QueryUserTaskRemedyResp,v:Ref<QueryUserTaskRemedyResp>)
+	export function unRefQueryUserTaskRemedyResp(v:Ref<QueryUserTaskRemedyResp>):QueryUserTaskRemedyResp
+	export function emptyStatisticsField():StatisticsField
+	export function emptyRefStatisticsField():Ref<StatisticsField>
+	export function refOfStatisticsField(x:StatisticsField,v:Ref<StatisticsField>)
+	export function unRefStatisticsField(v:Ref<StatisticsField>):StatisticsField
+	export function emptyBatchCreateUserDailyShiftReqBody():BatchCreateUserDailyShiftReqBody
+	export function emptyRefBatchCreateUserDailyShiftReqBody():Ref<BatchCreateUserDailyShiftReqBody>
+	export function refOfBatchCreateUserDailyShiftReqBody(x:BatchCreateUserDailyShiftReqBody,v:Ref<BatchCreateUserDailyShiftReqBody>)
+	export function unRefBatchCreateUserDailyShiftReqBody(v:Ref<BatchCreateUserDailyShiftReqBody>):BatchCreateUserDailyShiftReqBody
+	export function emptyListArchiveRuleResp():ListArchiveRuleResp
+	export function emptyRefListArchiveRuleResp():Ref<ListArchiveRuleResp>
+	export function refOfListArchiveRuleResp(x:ListArchiveRuleResp,v:Ref<ListArchiveRuleResp>)
+	export function unRefListArchiveRuleResp(v:Ref<ListArchiveRuleResp>):ListArchiveRuleResp
+	export function emptyQueryUserAllowedRemedysUserTaskRemedyReq():QueryUserAllowedRemedysUserTaskRemedyReq
+	export function emptyRefQueryUserAllowedRemedysUserTaskRemedyReq():Ref<QueryUserAllowedRemedysUserTaskRemedyReq>
+	export function refOfQueryUserAllowedRemedysUserTaskRemedyReq(x:QueryUserAllowedRemedysUserTaskRemedyReq,v:Ref<QueryUserAllowedRemedysUserTaskRemedyReq>)
+	export function unRefQueryUserAllowedRemedysUserTaskRemedyReq(v:Ref<QueryUserAllowedRemedysUserTaskRemedyReq>):QueryUserAllowedRemedysUserTaskRemedyReq
+	export function emptyQueryUserAllowedRemedysUserTaskRemedyRespData():QueryUserAllowedRemedysUserTaskRemedyRespData
+	export function emptyRefQueryUserAllowedRemedysUserTaskRemedyRespData():Ref<QueryUserAllowedRemedysUserTaskRemedyRespData>
+	export function refOfQueryUserAllowedRemedysUserTaskRemedyRespData(x:QueryUserAllowedRemedysUserTaskRemedyRespData,v:Ref<QueryUserAllowedRemedysUserTaskRemedyRespData>)
+	export function unRefQueryUserAllowedRemedysUserTaskRemedyRespData(v:Ref<QueryUserAllowedRemedysUserTaskRemedyRespData>):QueryUserAllowedRemedysUserTaskRemedyRespData
+	export function emptyUserStatsDataFeature():UserStatsDataFeature
+	export function emptyRefUserStatsDataFeature():Ref<UserStatsDataFeature>
+	export function refOfUserStatsDataFeature(x:UserStatsDataFeature,v:Ref<UserStatsDataFeature>)
+	export function unRefUserStatsDataFeature(v:Ref<UserStatsDataFeature>):UserStatsDataFeature
+	export function emptyQueryShiftReq():QueryShiftReq
+	export function emptyRefQueryShiftReq():Ref<QueryShiftReq>
+	export function refOfQueryShiftReq(x:QueryShiftReq,v:Ref<QueryShiftReq>)
+	export function unRefQueryShiftReq(v:Ref<QueryShiftReq>):QueryShiftReq
+	export function emptyUserStatsDataCell():UserStatsDataCell
+	export function emptyRefUserStatsDataCell():Ref<UserStatsDataCell>
+	export function refOfUserStatsDataCell(x:UserStatsDataCell,v:Ref<UserStatsDataCell>)
+	export function unRefUserStatsDataCell(v:Ref<UserStatsDataCell>):UserStatsDataCell
+	export function emptyUserStatsField():UserStatsField
+	export function emptyRefUserStatsField():Ref<UserStatsField>
+	export function refOfUserStatsField(x:UserStatsField,v:Ref<UserStatsField>)
+	export function unRefUserStatsField(v:Ref<UserStatsField>):UserStatsField
+	export function emptyCreateUserTaskRemedyReq():CreateUserTaskRemedyReq
+	export function emptyRefCreateUserTaskRemedyReq():Ref<CreateUserTaskRemedyReq>
+	export function refOfCreateUserTaskRemedyReq(x:CreateUserTaskRemedyReq,v:Ref<CreateUserTaskRemedyReq>)
+	export function unRefCreateUserTaskRemedyReq(v:Ref<CreateUserTaskRemedyReq>):CreateUserTaskRemedyReq
+	export function emptyCreateUserTaskRemedyResp():CreateUserTaskRemedyResp
+	export function emptyRefCreateUserTaskRemedyResp():Ref<CreateUserTaskRemedyResp>
+	export function refOfCreateUserTaskRemedyResp(x:CreateUserTaskRemedyResp,v:Ref<CreateUserTaskRemedyResp>)
+	export function unRefCreateUserTaskRemedyResp(v:Ref<CreateUserTaskRemedyResp>):CreateUserTaskRemedyResp
+	export function emptyLeaveAccrualRecord():LeaveAccrualRecord
+	export function emptyRefLeaveAccrualRecord():Ref<LeaveAccrualRecord>
+	export function refOfLeaveAccrualRecord(x:LeaveAccrualRecord,v:Ref<LeaveAccrualRecord>)
+	export function unRefLeaveAccrualRecord(v:Ref<LeaveAccrualRecord>):LeaveAccrualRecord
+	export function emptyQueryUserStatsFieldRespData():QueryUserStatsFieldRespData
+	export function emptyRefQueryUserStatsFieldRespData():Ref<QueryUserStatsFieldRespData>
+	export function refOfQueryUserStatsFieldRespData(x:QueryUserStatsFieldRespData,v:Ref<QueryUserStatsFieldRespData>)
+	export function unRefQueryUserStatsFieldRespData(v:Ref<QueryUserStatsFieldRespData>):QueryUserStatsFieldRespData
+	export function emptyQueryUserStatsViewRespData():QueryUserStatsViewRespData
+	export function emptyRefQueryUserStatsViewRespData():Ref<QueryUserStatsViewRespData>
+	export function refOfQueryUserStatsViewRespData(x:QueryUserStatsViewRespData,v:Ref<QueryUserStatsViewRespData>)
+	export function unRefQueryUserStatsViewRespData(v:Ref<QueryUserStatsViewRespData>):QueryUserStatsViewRespData
+	export function emptyDeleteGroupReq():DeleteGroupReq
+	export function emptyRefDeleteGroupReq():Ref<DeleteGroupReq>
+	export function refOfDeleteGroupReq(x:DeleteGroupReq,v:Ref<DeleteGroupReq>)
+	export function unRefDeleteGroupReq(v:Ref<DeleteGroupReq>):DeleteGroupReq
+	export function emptyLocation():Location
+	export function emptyRefLocation():Ref<Location>
+	export function refOfLocation(x:Location,v:Ref<Location>)
+	export function unRefLocation(v:Ref<Location>):Location
+	export function emptyQueryUserFlowResp():QueryUserFlowResp
+	export function emptyRefQueryUserFlowResp():Ref<QueryUserFlowResp>
+	export function refOfQueryUserFlowResp(x:QueryUserFlowResp,v:Ref<QueryUserFlowResp>)
+	export function unRefQueryUserFlowResp(v:Ref<QueryUserFlowResp>):QueryUserFlowResp
+	export function emptyUserStatsFieldsQueryArchiveRuleReq():UserStatsFieldsQueryArchiveRuleReq
+	export function emptyRefUserStatsFieldsQueryArchiveRuleReq():Ref<UserStatsFieldsQueryArchiveRuleReq>
+	export function refOfUserStatsFieldsQueryArchiveRuleReq(x:UserStatsFieldsQueryArchiveRuleReq,v:Ref<UserStatsFieldsQueryArchiveRuleReq>)
+	export function unRefUserStatsFieldsQueryArchiveRuleReq(v:Ref<UserStatsFieldsQueryArchiveRuleReq>):UserStatsFieldsQueryArchiveRuleReq
+	export function emptyUserShiftGroupsList():UserShiftGroupsList
+	export function emptyRefUserShiftGroupsList():Ref<UserShiftGroupsList>
+	export function refOfUserShiftGroupsList(x:UserShiftGroupsList,v:Ref<UserShiftGroupsList>)
+	export function unRefUserShiftGroupsList(v:Ref<UserShiftGroupsList>):UserShiftGroupsList
+	export function emptyDeleteShiftReq():DeleteShiftReq
+	export function emptyRefDeleteShiftReq():Ref<DeleteShiftReq>
+	export function refOfDeleteShiftReq(x:DeleteShiftReq,v:Ref<DeleteShiftReq>)
+	export function unRefDeleteShiftReq(v:Ref<DeleteShiftReq>):DeleteShiftReq
+	export function emptyLangText():LangText
+	export function emptyRefLangText():Ref<LangText>
+	export function refOfLangText(x:LangText,v:Ref<LangText>)
+	export function unRefLangText(v:Ref<LangText>):LangText
+	export function emptyMemberStatusChange():MemberStatusChange
+	export function emptyRefMemberStatusChange():Ref<MemberStatusChange>
+	export function refOfMemberStatusChange(x:MemberStatusChange,v:Ref<MemberStatusChange>)
+	export function unRefMemberStatusChange(v:Ref<MemberStatusChange>):MemberStatusChange
+	export function emptyPunchSpecialDateShift():PunchSpecialDateShift
+	export function emptyRefPunchSpecialDateShift():Ref<PunchSpecialDateShift>
+	export function refOfPunchSpecialDateShift(x:PunchSpecialDateShift,v:Ref<PunchSpecialDateShift>)
+	export function unRefPunchSpecialDateShift(v:Ref<PunchSpecialDateShift>):PunchSpecialDateShift
+	export function emptyQueryUserSettingResp():QueryUserSettingResp
+	export function emptyRefQueryUserSettingResp():Ref<QueryUserSettingResp>
+	export function refOfQueryUserSettingResp(x:QueryUserSettingResp,v:Ref<QueryUserSettingResp>)
+	export function unRefQueryUserSettingResp(v:Ref<QueryUserSettingResp>):QueryUserSettingResp
+	export function emptySearchGroupReqBody():SearchGroupReqBody
+	export function emptyRefSearchGroupReqBody():Ref<SearchGroupReqBody>
+	export function refOfSearchGroupReqBody(x:SearchGroupReqBody,v:Ref<SearchGroupReqBody>)
+	export function unRefSearchGroupReqBody(v:Ref<SearchGroupReqBody>):SearchGroupReqBody
+	export function emptyQueryShiftRespData():QueryShiftRespData
+	export function emptyRefQueryShiftRespData():Ref<QueryShiftRespData>
+	export function refOfQueryShiftRespData(x:QueryShiftRespData,v:Ref<QueryShiftRespData>)
+	export function unRefQueryShiftRespData(v:Ref<QueryShiftRespData>):QueryShiftRespData
+	export function emptyWifiInfoEvent():WifiInfoEvent
+	export function emptyRefWifiInfoEvent():Ref<WifiInfoEvent>
+	export function refOfWifiInfoEvent(x:WifiInfoEvent,v:Ref<WifiInfoEvent>)
+	export function unRefWifiInfoEvent(v:Ref<WifiInfoEvent>):WifiInfoEvent
+	export function emptyItem():Item
+	export function emptyRefItem():Ref<Item>
+	export function refOfItem(x:Item,v:Ref<Item>)
+	export function unRefItem(v:Ref<Item>):Item
+	export function emptyDownloadFileReq():DownloadFileReq
+	export function emptyRefDownloadFileReq():Ref<DownloadFileReq>
+	export function refOfDownloadFileReq(x:DownloadFileReq,v:Ref<DownloadFileReq>)
+	export function unRefDownloadFileReq(v:Ref<DownloadFileReq>):DownloadFileReq
+	export function emptyGetShiftResp():GetShiftResp
+	export function emptyRefGetShiftResp():Ref<GetShiftResp>
+	export function refOfGetShiftResp(x:GetShiftResp,v:Ref<GetShiftResp>)
+	export function unRefGetShiftResp(v:Ref<GetShiftResp>):GetShiftResp
+	export function emptyBatchCreateUserFlowReqBody():BatchCreateUserFlowReqBody
+	export function emptyRefBatchCreateUserFlowReqBody():Ref<BatchCreateUserFlowReqBody>
+	export function refOfBatchCreateUserFlowReqBody(x:BatchCreateUserFlowReqBody,v:Ref<BatchCreateUserFlowReqBody>)
+	export function unRefBatchCreateUserFlowReqBody(v:Ref<BatchCreateUserFlowReqBody>):BatchCreateUserFlowReqBody
+	export function emptyCreateShiftReq():CreateShiftReq
+	export function emptyRefCreateShiftReq():Ref<CreateShiftReq>
+	export function refOfCreateShiftReq(x:CreateShiftReq,v:Ref<CreateShiftReq>)
+	export function unRefCreateShiftReq(v:Ref<CreateShiftReq>):CreateShiftReq
+	export function emptyUpdateUserStatsViewResp():UpdateUserStatsViewResp
+	export function emptyRefUpdateUserStatsViewResp():Ref<UpdateUserStatsViewResp>
+	export function refOfUpdateUserStatsViewResp(x:UpdateUserStatsViewResp,v:Ref<UpdateUserStatsViewResp>)
+	export function unRefUpdateUserStatsViewResp(v:Ref<UpdateUserStatsViewResp>):UpdateUserStatsViewResp
+	export function emptyI18nMap():I18nMap
+	export function emptyRefI18nMap():Ref<I18nMap>
+	export function refOfI18nMap(x:I18nMap,v:Ref<I18nMap>)
+	export function unRefI18nMap(v:Ref<I18nMap>):I18nMap
+	export function emptyListShiftIterator():ListShiftIterator
+	export function emptyRefListShiftIterator():Ref<ListShiftIterator>
+	export function refOfListShiftIterator(x:ListShiftIterator,v:Ref<ListShiftIterator>)
+	export function unRefListShiftIterator(v:Ref<ListShiftIterator>):ListShiftIterator
+	export function emptyOpenApplyTimeRange():OpenApplyTimeRange
+	export function emptyRefOpenApplyTimeRange():Ref<OpenApplyTimeRange>
+	export function refOfOpenApplyTimeRange(x:OpenApplyTimeRange,v:Ref<OpenApplyTimeRange>)
+	export function unRefOpenApplyTimeRange(v:Ref<OpenApplyTimeRange>):OpenApplyTimeRange
+	export function emptyPatchLeaveAccrualRecordRespData():PatchLeaveAccrualRecordRespData
+	export function emptyRefPatchLeaveAccrualRecordRespData():Ref<PatchLeaveAccrualRecordRespData>
+	export function refOfPatchLeaveAccrualRecordRespData(x:PatchLeaveAccrualRecordRespData,v:Ref<PatchLeaveAccrualRecordRespData>)
+	export function unRefPatchLeaveAccrualRecordRespData(v:Ref<PatchLeaveAccrualRecordRespData>):PatchLeaveAccrualRecordRespData
+	export function emptyUserStatsView():UserStatsView
+	export function emptyRefUserStatsView():Ref<UserStatsView>
+	export function refOfUserStatsView(x:UserStatsView,v:Ref<UserStatsView>)
+	export function unRefUserStatsView(v:Ref<UserStatsView>):UserStatsView
+	export function emptyBatchCreateUserFlowReq():BatchCreateUserFlowReq
+	export function emptyRefBatchCreateUserFlowReq():Ref<BatchCreateUserFlowReq>
+	export function refOfBatchCreateUserFlowReq(x:BatchCreateUserFlowReq,v:Ref<BatchCreateUserFlowReq>)
+	export function unRefBatchCreateUserFlowReq(v:Ref<BatchCreateUserFlowReq>):BatchCreateUserFlowReq
+	export function emptyDownloadFileResp():DownloadFileResp
+	export function emptyRefDownloadFileResp():Ref<DownloadFileResp>
+	export function refOfDownloadFileResp(x:DownloadFileResp,v:Ref<DownloadFileResp>)
+	export function unRefDownloadFileResp(v:Ref<DownloadFileResp>):DownloadFileResp
+	export function emptyLateOffLateOnRule():LateOffLateOnRule
+	export function emptyRefLateOffLateOnRule():Ref<LateOffLateOnRule>
+	export function refOfLateOffLateOnRule(x:LateOffLateOnRule,v:Ref<LateOffLateOnRule>)
+	export function unRefLateOffLateOnRule(v:Ref<LateOffLateOnRule>):LateOffLateOnRule
+	export function emptyListGroupIterator():ListGroupIterator
+	export function emptyRefListGroupIterator():Ref<ListGroupIterator>
+	export function refOfListGroupIterator(x:ListGroupIterator,v:Ref<ListGroupIterator>)
+	export function unRefListGroupIterator(v:Ref<ListGroupIterator>):ListGroupIterator
+	export function emptyCreateGroupResp():CreateGroupResp
+	export function emptyRefCreateGroupResp():Ref<CreateGroupResp>
+	export function refOfCreateGroupResp(x:CreateGroupResp,v:Ref<CreateGroupResp>)
+	export function unRefCreateGroupResp(v:Ref<CreateGroupResp>):CreateGroupResp
+	export function emptyI18nNames():I18nNames
+	export function emptyRefI18nNames():Ref<I18nNames>
+	export function refOfI18nNames(x:I18nNames,v:Ref<I18nNames>)
+	export function unRefI18nNames(v:Ref<I18nNames>):I18nNames
+	export function emptyUpdateUserStatsViewRespData():UpdateUserStatsViewRespData
+	export function emptyRefUpdateUserStatsViewRespData():Ref<UpdateUserStatsViewRespData>
+	export function refOfUpdateUserStatsViewRespData(x:UpdateUserStatsViewRespData,v:Ref<UpdateUserStatsViewRespData>)
+	export function unRefUpdateUserStatsViewRespData(v:Ref<UpdateUserStatsViewRespData>):UpdateUserStatsViewRespData
+	export function emptyDepartmentId():DepartmentId
+	export function emptyRefDepartmentId():Ref<DepartmentId>
+	export function refOfDepartmentId(x:DepartmentId,v:Ref<DepartmentId>)
+	export function unRefDepartmentId(v:Ref<DepartmentId>):DepartmentId
+	export function emptyProcessApprovalInfoReqBody():ProcessApprovalInfoReqBody
+	export function emptyRefProcessApprovalInfoReqBody():Ref<ProcessApprovalInfoReqBody>
+	export function refOfProcessApprovalInfoReqBody(x:ProcessApprovalInfoReqBody,v:Ref<ProcessApprovalInfoReqBody>)
+	export function unRefProcessApprovalInfoReqBody(v:Ref<ProcessApprovalInfoReqBody>):ProcessApprovalInfoReqBody
+	export function emptyArea():Area
+	export function emptyRefArea():Ref<Area>
+	export function refOfArea(x:Area,v:Ref<Area>)
+	export function unRefArea(v:Ref<Area>):Area
+	export function emptyProcessApprovalInfoRespData():ProcessApprovalInfoRespData
+	export function emptyRefProcessApprovalInfoRespData():Ref<ProcessApprovalInfoRespData>
+	export function refOfProcessApprovalInfoRespData(x:ProcessApprovalInfoRespData,v:Ref<ProcessApprovalInfoRespData>)
+	export function unRefProcessApprovalInfoRespData(v:Ref<ProcessApprovalInfoRespData>):ProcessApprovalInfoRespData
+	export function emptyQueryUserStatsFieldResp():QueryUserStatsFieldResp
+	export function emptyRefQueryUserStatsFieldResp():Ref<QueryUserStatsFieldResp>
+	export function refOfQueryUserStatsFieldResp(x:QueryUserStatsFieldResp,v:Ref<QueryUserStatsFieldResp>)
+	export function unRefQueryUserStatsFieldResp(v:Ref<QueryUserStatsFieldResp>):QueryUserStatsFieldResp
+	export function emptyCreateGroupReq():CreateGroupReq
+	export function emptyRefCreateGroupReq():Ref<CreateGroupReq>
+	export function refOfCreateGroupReq(x:CreateGroupReq,v:Ref<CreateGroupReq>)
+	export function unRefCreateGroupReq(v:Ref<CreateGroupReq>):CreateGroupReq
+	export function emptyListShiftReq():ListShiftReq
+	export function emptyRefListShiftReq():Ref<ListShiftReq>
+	export function refOfListShiftReq(x:ListShiftReq,v:Ref<ListShiftReq>)
+	export function unRefListShiftReq(v:Ref<ListShiftReq>):ListShiftReq
+	export function emptyCreateUserApprovalResp():CreateUserApprovalResp
+	export function emptyRefCreateUserApprovalResp():Ref<CreateUserApprovalResp>
+	export function refOfCreateUserApprovalResp(x:CreateUserApprovalResp,v:Ref<CreateUserApprovalResp>)
+	export function unRefCreateUserApprovalResp(v:Ref<CreateUserApprovalResp>):CreateUserApprovalResp
+	export function emptyCreateUserApprovalRespData():CreateUserApprovalRespData
+	export function emptyRefCreateUserApprovalRespData():Ref<CreateUserApprovalRespData>
+	export function refOfCreateUserApprovalRespData(x:CreateUserApprovalRespData,v:Ref<CreateUserApprovalRespData>)
+	export function unRefCreateUserApprovalRespData(v:Ref<CreateUserApprovalRespData>):CreateUserApprovalRespData
+	export function emptyFlexibleRule():FlexibleRule
+	export function emptyRefFlexibleRule():Ref<FlexibleRule>
+	export function refOfFlexibleRule(x:FlexibleRule,v:Ref<FlexibleRule>)
+	export function unRefFlexibleRule(v:Ref<FlexibleRule>):FlexibleRule
+	export function emptyFreePunchCfg():FreePunchCfg
+	export function emptyRefFreePunchCfg():Ref<FreePunchCfg>
+	export function refOfFreePunchCfg(x:FreePunchCfg,v:Ref<FreePunchCfg>)
+	export function unRefFreePunchCfg(v:Ref<FreePunchCfg>):FreePunchCfg
+	export function emptyProcessApprovalInfoResp():ProcessApprovalInfoResp
+	export function emptyRefProcessApprovalInfoResp():Ref<ProcessApprovalInfoResp>
+	export function refOfProcessApprovalInfoResp(x:ProcessApprovalInfoResp,v:Ref<ProcessApprovalInfoResp>)
+	export function unRefProcessApprovalInfoResp(v:Ref<ProcessApprovalInfoResp>):ProcessApprovalInfoResp
+	export function emptyRestRule():RestRule
+	export function emptyRefRestRule():Ref<RestRule>
+	export function refOfRestRule(x:RestRule,v:Ref<RestRule>)
+	export function unRefRestRule(v:Ref<RestRule>):RestRule
+	export function emptyQueryUserApprovalRespData():QueryUserApprovalRespData
+	export function emptyRefQueryUserApprovalRespData():Ref<QueryUserApprovalRespData>
+	export function refOfQueryUserApprovalRespData(x:QueryUserApprovalRespData,v:Ref<QueryUserApprovalRespData>)
+	export function unRefQueryUserApprovalRespData(v:Ref<QueryUserApprovalRespData>):QueryUserApprovalRespData
+	export function emptyUserSetting():UserSetting
+	export function emptyRefUserSetting():Ref<UserSetting>
+	export function refOfUserSetting(x:UserSetting,v:Ref<UserSetting>)
+	export function unRefUserSetting(v:Ref<UserSetting>):UserSetting
 	export function emptyScopeValue():ScopeValue
 	export function emptyRefScopeValue():Ref<ScopeValue>
 	export function refOfScopeValue(x:ScopeValue,v:Ref<ScopeValue>)
@@ -3951,12 +3788,380 @@ declare module 'github.com/larksuite/oapi-sdk-go/v3/service/attendance/v1'{
 	export function emptyRefDurationItem():Ref<DurationItem>
 	export function refOfDurationItem(x:DurationItem,v:Ref<DurationItem>)
 	export function unRefDurationItem(v:Ref<DurationItem>):DurationItem
-	export function emptyUserStatsView():UserStatsView
-	export function emptyRefUserStatsView():Ref<UserStatsView>
-	export function refOfUserStatsView(x:UserStatsView,v:Ref<UserStatsView>)
-	export function unRefUserStatsView(v:Ref<UserStatsView>):UserStatsView
-	export function emptyBatchCreateUserDailyShiftReq():BatchCreateUserDailyShiftReq
-	export function emptyRefBatchCreateUserDailyShiftReq():Ref<BatchCreateUserDailyShiftReq>
-	export function refOfBatchCreateUserDailyShiftReq(x:BatchCreateUserDailyShiftReq,v:Ref<BatchCreateUserDailyShiftReq>)
-	export function unRefBatchCreateUserDailyShiftReq(v:Ref<BatchCreateUserDailyShiftReq>):BatchCreateUserDailyShiftReq
+	export function emptyQueryUserApprovalReq():QueryUserApprovalReq
+	export function emptyRefQueryUserApprovalReq():Ref<QueryUserApprovalReq>
+	export function refOfQueryUserApprovalReq(x:QueryUserApprovalReq,v:Ref<QueryUserApprovalReq>)
+	export function unRefQueryUserApprovalReq(v:Ref<QueryUserApprovalReq>):QueryUserApprovalReq
+	export function emptyQueryUserTaskRemedyReqBody():QueryUserTaskRemedyReqBody
+	export function emptyRefQueryUserTaskRemedyReqBody():Ref<QueryUserTaskRemedyReqBody>
+	export function refOfQueryUserTaskRemedyReqBody(x:QueryUserTaskRemedyReqBody,v:Ref<QueryUserTaskRemedyReqBody>)
+	export function unRefQueryUserTaskRemedyReqBody(v:Ref<QueryUserTaskRemedyReqBody>):QueryUserTaskRemedyReqBody
+	export function emptyQueryUserTaskRemedyRespData():QueryUserTaskRemedyRespData
+	export function emptyRefQueryUserTaskRemedyRespData():Ref<QueryUserTaskRemedyRespData>
+	export function refOfQueryUserTaskRemedyRespData(x:QueryUserTaskRemedyRespData,v:Ref<QueryUserTaskRemedyRespData>)
+	export function unRefQueryUserTaskRemedyRespData(v:Ref<QueryUserTaskRemedyRespData>):QueryUserTaskRemedyRespData
+	export function emptyArchiveReportMeta():ArchiveReportMeta
+	export function emptyRefArchiveReportMeta():Ref<ArchiveReportMeta>
+	export function refOfArchiveReportMeta(x:ArchiveReportMeta,v:Ref<ArchiveReportMeta>)
+	export function unRefArchiveReportMeta(v:Ref<ArchiveReportMeta>):ArchiveReportMeta
+	export function emptyFilterItem():FilterItem
+	export function emptyRefFilterItem():Ref<FilterItem>
+	export function refOfFilterItem(x:FilterItem,v:Ref<FilterItem>)
+	export function unRefFilterItem(v:Ref<FilterItem>):FilterItem
+	export function emptyGroupMeta():GroupMeta
+	export function emptyRefGroupMeta():Ref<GroupMeta>
+	export function refOfGroupMeta(x:GroupMeta,v:Ref<GroupMeta>)
+	export function unRefGroupMeta(v:Ref<GroupMeta>):GroupMeta
+	export function emptyShift():Shift
+	export function emptyRefShift():Ref<Shift>
+	export function refOfShift(x:Shift,v:Ref<Shift>)
+	export function unRefShift(v:Ref<Shift>):Shift
+	export function emptyUserOut():UserOut
+	export function emptyRefUserOut():Ref<UserOut>
+	export function refOfUserOut(x:UserOut,v:Ref<UserOut>)
+	export function unRefUserOut(v:Ref<UserOut>):UserOut
+	export function emptyModifyUserSettingRespData():ModifyUserSettingRespData
+	export function emptyRefModifyUserSettingRespData():Ref<ModifyUserSettingRespData>
+	export function refOfModifyUserSettingRespData(x:ModifyUserSettingRespData,v:Ref<ModifyUserSettingRespData>)
+	export function unRefModifyUserSettingRespData(v:Ref<ModifyUserSettingRespData>):ModifyUserSettingRespData
+	export function emptyTaskResult():TaskResult
+	export function emptyRefTaskResult():Ref<TaskResult>
+	export function refOfTaskResult(x:TaskResult,v:Ref<TaskResult>)
+	export function unRefTaskResult(v:Ref<TaskResult>):TaskResult
+	export function emptyLocationInfo():LocationInfo
+	export function emptyRefLocationInfo():Ref<LocationInfo>
+	export function refOfLocationInfo(x:LocationInfo,v:Ref<LocationInfo>)
+	export function unRefLocationInfo(v:Ref<LocationInfo>):LocationInfo
+	export function emptyQueryUserDailyShiftRespData():QueryUserDailyShiftRespData
+	export function emptyRefQueryUserDailyShiftRespData():Ref<QueryUserDailyShiftRespData>
+	export function refOfQueryUserDailyShiftRespData(x:QueryUserDailyShiftRespData,v:Ref<QueryUserDailyShiftRespData>)
+	export function unRefQueryUserDailyShiftRespData(v:Ref<QueryUserDailyShiftRespData>):QueryUserDailyShiftRespData
+	export function emptyListGroupRespData():ListGroupRespData
+	export function emptyRefListGroupRespData():Ref<ListGroupRespData>
+	export function refOfListGroupRespData(x:ListGroupRespData,v:Ref<ListGroupRespData>)
+	export function unRefListGroupRespData(v:Ref<ListGroupRespData>):ListGroupRespData
+	export function emptyQueryUserApprovalResp():QueryUserApprovalResp
+	export function emptyRefQueryUserApprovalResp():Ref<QueryUserApprovalResp>
+	export function refOfQueryUserApprovalResp(x:QueryUserApprovalResp,v:Ref<QueryUserApprovalResp>)
+	export function unRefQueryUserApprovalResp(v:Ref<QueryUserApprovalResp>):QueryUserApprovalResp
+	export function emptyQueryUserDailyShiftResp():QueryUserDailyShiftResp
+	export function emptyRefQueryUserDailyShiftResp():Ref<QueryUserDailyShiftResp>
+	export function refOfQueryUserDailyShiftResp(x:QueryUserDailyShiftResp,v:Ref<QueryUserDailyShiftResp>)
+	export function unRefQueryUserDailyShiftResp(v:Ref<QueryUserDailyShiftResp>):QueryUserDailyShiftResp
+	export function emptyQueryUserTaskRemedyReq():QueryUserTaskRemedyReq
+	export function emptyRefQueryUserTaskRemedyReq():Ref<QueryUserTaskRemedyReq>
+	export function refOfQueryUserTaskRemedyReq(x:QueryUserTaskRemedyReq,v:Ref<QueryUserTaskRemedyReq>)
+	export function unRefQueryUserTaskRemedyReq(v:Ref<QueryUserTaskRemedyReq>):QueryUserTaskRemedyReq
+	export function emptyUserTrip():UserTrip
+	export function emptyRefUserTrip():Ref<UserTrip>
+	export function refOfUserTrip(x:UserTrip,v:Ref<UserTrip>)
+	export function unRefUserTrip(v:Ref<UserTrip>):UserTrip
+	export function emptyListArchiveRuleIterator():ListArchiveRuleIterator
+	export function emptyRefListArchiveRuleIterator():Ref<ListArchiveRuleIterator>
+	export function refOfListArchiveRuleIterator(x:ListArchiveRuleIterator,v:Ref<ListArchiveRuleIterator>)
+	export function unRefListArchiveRuleIterator(v:Ref<ListArchiveRuleIterator>):ListArchiveRuleIterator
+	export function emptyQueryUserStatsDataRespData():QueryUserStatsDataRespData
+	export function emptyRefQueryUserStatsDataRespData():Ref<QueryUserStatsDataRespData>
+	export function refOfQueryUserStatsDataRespData(x:QueryUserStatsDataRespData,v:Ref<QueryUserStatsDataRespData>)
+	export function unRefQueryUserStatsDataRespData(v:Ref<QueryUserStatsDataRespData>):QueryUserStatsDataRespData
+	export function emptySearchGroupResp():SearchGroupResp
+	export function emptyRefSearchGroupResp():Ref<SearchGroupResp>
+	export function refOfSearchGroupResp(x:SearchGroupResp,v:Ref<SearchGroupResp>)
+	export function unRefSearchGroupResp(v:Ref<SearchGroupResp>):SearchGroupResp
+	export function emptyUserTmpDailyShift():UserTmpDailyShift
+	export function emptyRefUserTmpDailyShift():Ref<UserTmpDailyShift>
+	export function refOfUserTmpDailyShift(x:UserTmpDailyShift,v:Ref<UserTmpDailyShift>)
+	export function unRefUserTmpDailyShift(v:Ref<UserTmpDailyShift>):UserTmpDailyShift
+	export function emptyUpdateUserStatsViewReq():UpdateUserStatsViewReq
+	export function emptyRefUpdateUserStatsViewReq():Ref<UpdateUserStatsViewReq>
+	export function refOfUpdateUserStatsViewReq(x:UpdateUserStatsViewReq,v:Ref<UpdateUserStatsViewReq>)
+	export function unRefUpdateUserStatsViewReq(v:Ref<UpdateUserStatsViewReq>):UpdateUserStatsViewReq
+	export function emptyUploadFileReqBody():UploadFileReqBody
+	export function emptyRefUploadFileReqBody():Ref<UploadFileReqBody>
+	export function refOfUploadFileReqBody(x:UploadFileReqBody,v:Ref<UploadFileReqBody>)
+	export function unRefUploadFileReqBody(v:Ref<UploadFileReqBody>):UploadFileReqBody
+	export function emptyBatchCreateUserDailyShiftRespData():BatchCreateUserDailyShiftRespData
+	export function emptyRefBatchCreateUserDailyShiftRespData():Ref<BatchCreateUserDailyShiftRespData>
+	export function refOfBatchCreateUserDailyShiftRespData(x:BatchCreateUserDailyShiftRespData,v:Ref<BatchCreateUserDailyShiftRespData>)
+	export function unRefBatchCreateUserDailyShiftRespData(v:Ref<BatchCreateUserDailyShiftRespData>):BatchCreateUserDailyShiftRespData
+	export function emptyCreateShiftResp():CreateShiftResp
+	export function emptyRefCreateShiftResp():Ref<CreateShiftResp>
+	export function refOfCreateShiftResp(x:CreateShiftResp,v:Ref<CreateShiftResp>)
+	export function unRefCreateShiftResp(v:Ref<CreateShiftResp>):CreateShiftResp
+	export function emptyField():Field
+	export function emptyRefField():Ref<Field>
+	export function refOfField(x:Field,v:Ref<Field>)
+	export function unRefField(v:Ref<Field>):Field
+	export function emptyQueryUserTaskResp():QueryUserTaskResp
+	export function emptyRefQueryUserTaskResp():Ref<QueryUserTaskResp>
+	export function refOfQueryUserTaskResp(x:QueryUserTaskResp,v:Ref<QueryUserTaskResp>)
+	export function unRefQueryUserTaskResp(v:Ref<QueryUserTaskResp>):QueryUserTaskResp
+	export function emptyBatchCreateUserFlowResp():BatchCreateUserFlowResp
+	export function emptyRefBatchCreateUserFlowResp():Ref<BatchCreateUserFlowResp>
+	export function refOfBatchCreateUserFlowResp(x:BatchCreateUserFlowResp,v:Ref<BatchCreateUserFlowResp>)
+	export function unRefBatchCreateUserFlowResp(v:Ref<BatchCreateUserFlowResp>):BatchCreateUserFlowResp
+	export function emptyChildItem():ChildItem
+	export function emptyRefChildItem():Ref<ChildItem>
+	export function refOfChildItem(x:ChildItem,v:Ref<ChildItem>)
+	export function unRefChildItem(v:Ref<ChildItem>):ChildItem
+	export function emptyCreateGroupReqBody():CreateGroupReqBody
+	export function emptyRefCreateGroupReqBody():Ref<CreateGroupReqBody>
+	export function refOfCreateGroupReqBody(x:CreateGroupReqBody,v:Ref<CreateGroupReqBody>)
+	export function unRefCreateGroupReqBody(v:Ref<CreateGroupReqBody>):CreateGroupReqBody
+	export function emptyCreateUserApprovalReqBody():CreateUserApprovalReqBody
+	export function emptyRefCreateUserApprovalReqBody():Ref<CreateUserApprovalReqBody>
+	export function refOfCreateUserApprovalReqBody(x:CreateUserApprovalReqBody,v:Ref<CreateUserApprovalReqBody>)
+	export function unRefCreateUserApprovalReqBody(v:Ref<CreateUserApprovalReqBody>):CreateUserApprovalReqBody
+	export function emptyPatchLeaveAccrualRecordResp():PatchLeaveAccrualRecordResp
+	export function emptyRefPatchLeaveAccrualRecordResp():Ref<PatchLeaveAccrualRecordResp>
+	export function refOfPatchLeaveAccrualRecordResp(x:PatchLeaveAccrualRecordResp,v:Ref<PatchLeaveAccrualRecordResp>)
+	export function unRefPatchLeaveAccrualRecordResp(v:Ref<PatchLeaveAccrualRecordResp>):PatchLeaveAccrualRecordResp
+	export function emptyQueryUserStatsViewResp():QueryUserStatsViewResp
+	export function emptyRefQueryUserStatsViewResp():Ref<QueryUserStatsViewResp>
+	export function refOfQueryUserStatsViewResp(x:QueryUserStatsViewResp,v:Ref<QueryUserStatsViewResp>)
+	export function unRefQueryUserStatsViewResp(v:Ref<QueryUserStatsViewResp>):QueryUserStatsViewResp
+	export function emptyPunchTimeRule():PunchTimeRule
+	export function emptyRefPunchTimeRule():Ref<PunchTimeRule>
+	export function refOfPunchTimeRule(x:PunchTimeRule,v:Ref<PunchTimeRule>)
+	export function unRefPunchTimeRule(v:Ref<PunchTimeRule>):PunchTimeRule
+	export function emptyGetGroupResp():GetGroupResp
+	export function emptyRefGetGroupResp():Ref<GetGroupResp>
+	export function refOfGetGroupResp(x:GetGroupResp,v:Ref<GetGroupResp>)
+	export function unRefGetGroupResp(v:Ref<GetGroupResp>):GetGroupResp
+	export function emptyQueryUserStatsDataResp():QueryUserStatsDataResp
+	export function emptyRefQueryUserStatsDataResp():Ref<QueryUserStatsDataResp>
+	export function refOfQueryUserStatsDataResp(x:QueryUserStatsDataResp,v:Ref<QueryUserStatsDataResp>)
+	export function unRefQueryUserStatsDataResp(v:Ref<QueryUserStatsDataResp>):QueryUserStatsDataResp
+	export function emptyQueryUserTaskReq():QueryUserTaskReq
+	export function emptyRefQueryUserTaskReq():Ref<QueryUserTaskReq>
+	export function refOfQueryUserTaskReq(x:QueryUserTaskReq,v:Ref<QueryUserTaskReq>)
+	export function unRefQueryUserTaskReq(v:Ref<QueryUserTaskReq>):QueryUserTaskReq
+	export function emptyQueryUserTaskReqBody():QueryUserTaskReqBody
+	export function emptyRefQueryUserTaskReqBody():Ref<QueryUserTaskReqBody>
+	export function refOfQueryUserTaskReqBody(x:QueryUserTaskReqBody,v:Ref<QueryUserTaskReqBody>)
+	export function unRefQueryUserTaskReqBody(v:Ref<QueryUserTaskReqBody>):QueryUserTaskReqBody
+	export function emptyQueryUserDailyShiftReqBody():QueryUserDailyShiftReqBody
+	export function emptyRefQueryUserDailyShiftReqBody():Ref<QueryUserDailyShiftReqBody>
+	export function refOfQueryUserDailyShiftReqBody(x:QueryUserDailyShiftReqBody,v:Ref<QueryUserDailyShiftReqBody>)
+	export function unRefQueryUserDailyShiftReqBody(v:Ref<QueryUserDailyShiftReqBody>):QueryUserDailyShiftReqBody
+	export function emptyQueryUserSettingReqBody():QueryUserSettingReqBody
+	export function emptyRefQueryUserSettingReqBody():Ref<QueryUserSettingReqBody>
+	export function refOfQueryUserSettingReqBody(x:QueryUserSettingReqBody,v:Ref<QueryUserSettingReqBody>)
+	export function unRefQueryUserSettingReqBody(v:Ref<QueryUserSettingReqBody>):QueryUserSettingReqBody
+	export function emptyUploadFileRespData():UploadFileRespData
+	export function emptyRefUploadFileRespData():Ref<UploadFileRespData>
+	export function refOfUploadFileRespData(x:UploadFileRespData,v:Ref<UploadFileRespData>)
+	export function unRefUploadFileRespData(v:Ref<UploadFileRespData>):UploadFileRespData
+	export function emptyArrangeShiftGroup():ArrangeShiftGroup
+	export function emptyRefArrangeShiftGroup():Ref<ArrangeShiftGroup>
+	export function refOfArrangeShiftGroup(x:ArrangeShiftGroup,v:Ref<ArrangeShiftGroup>)
+	export function unRefArrangeShiftGroup(v:Ref<ArrangeShiftGroup>):ArrangeShiftGroup
+	export function emptyGetUserFlowReq():GetUserFlowReq
+	export function emptyRefGetUserFlowReq():Ref<GetUserFlowReq>
+	export function refOfGetUserFlowReq(x:GetUserFlowReq,v:Ref<GetUserFlowReq>)
+	export function unRefGetUserFlowReq(v:Ref<GetUserFlowReq>):GetUserFlowReq
+	export function emptyLocationRecord():LocationRecord
+	export function emptyRefLocationRecord():Ref<LocationRecord>
+	export function refOfLocationRecord(x:LocationRecord,v:Ref<LocationRecord>)
+	export function unRefLocationRecord(v:Ref<LocationRecord>):LocationRecord
+	export function emptyPunchTimeSimpleRule():PunchTimeSimpleRule
+	export function emptyRefPunchTimeSimpleRule():Ref<PunchTimeSimpleRule>
+	export function refOfPunchTimeSimpleRule(x:PunchTimeSimpleRule,v:Ref<PunchTimeSimpleRule>)
+	export function unRefPunchTimeSimpleRule(v:Ref<PunchTimeSimpleRule>):PunchTimeSimpleRule
+	export function emptyQueryUserAllowedRemedysUserTaskRemedyReqBody():QueryUserAllowedRemedysUserTaskRemedyReqBody
+	export function emptyRefQueryUserAllowedRemedysUserTaskRemedyReqBody():Ref<QueryUserAllowedRemedysUserTaskRemedyReqBody>
+	export function refOfQueryUserAllowedRemedysUserTaskRemedyReqBody(x:QueryUserAllowedRemedysUserTaskRemedyReqBody,v:Ref<QueryUserAllowedRemedysUserTaskRemedyReqBody>)
+	export function unRefQueryUserAllowedRemedysUserTaskRemedyReqBody(v:Ref<QueryUserAllowedRemedysUserTaskRemedyReqBody>):QueryUserAllowedRemedysUserTaskRemedyReqBody
+	export function emptyChildField():ChildField
+	export function emptyRefChildField():Ref<ChildField>
+	export function refOfChildField(x:ChildField,v:Ref<ChildField>)
+	export function unRefChildField(v:Ref<ChildField>):ChildField
+	export function emptyCreateGroupRespData():CreateGroupRespData
+	export function emptyRefCreateGroupRespData():Ref<CreateGroupRespData>
+	export function refOfCreateGroupRespData(x:CreateGroupRespData,v:Ref<CreateGroupRespData>)
+	export function unRefCreateGroupRespData(v:Ref<CreateGroupRespData>):CreateGroupRespData
+	export function emptyDeleteGroupResp():DeleteGroupResp
+	export function emptyRefDeleteGroupResp():Ref<DeleteGroupResp>
+	export function refOfDeleteGroupResp(x:DeleteGroupResp,v:Ref<DeleteGroupResp>)
+	export function unRefDeleteGroupResp(v:Ref<DeleteGroupResp>):DeleteGroupResp
+	export function emptyListArchiveRuleReq():ListArchiveRuleReq
+	export function emptyRefListArchiveRuleReq():Ref<ListArchiveRuleReq>
+	export function refOfListArchiveRuleReq(x:ListArchiveRuleReq,v:Ref<ListArchiveRuleReq>)
+	export function unRefListArchiveRuleReq(v:Ref<ListArchiveRuleReq>):ListArchiveRuleReq
+	export function emptyQueryUserStatsDataReq():QueryUserStatsDataReq
+	export function emptyRefQueryUserStatsDataReq():Ref<QueryUserStatsDataReq>
+	export function refOfQueryUserStatsDataReq(x:QueryUserStatsDataReq,v:Ref<QueryUserStatsDataReq>)
+	export function unRefQueryUserStatsDataReq(v:Ref<QueryUserStatsDataReq>):QueryUserStatsDataReq
+	export function emptyQueryUserStatsFieldReqBody():QueryUserStatsFieldReqBody
+	export function emptyRefQueryUserStatsFieldReqBody():Ref<QueryUserStatsFieldReqBody>
+	export function refOfQueryUserStatsFieldReqBody(x:QueryUserStatsFieldReqBody,v:Ref<QueryUserStatsFieldReqBody>)
+	export function unRefQueryUserStatsFieldReqBody(v:Ref<QueryUserStatsFieldReqBody>):QueryUserStatsFieldReqBody
+	export function emptyUserStatsFieldsQueryArchiveRuleReqBody():UserStatsFieldsQueryArchiveRuleReqBody
+	export function emptyRefUserStatsFieldsQueryArchiveRuleReqBody():Ref<UserStatsFieldsQueryArchiveRuleReqBody>
+	export function refOfUserStatsFieldsQueryArchiveRuleReqBody(x:UserStatsFieldsQueryArchiveRuleReqBody,v:Ref<UserStatsFieldsQueryArchiveRuleReqBody>)
+	export function unRefUserStatsFieldsQueryArchiveRuleReqBody(v:Ref<UserStatsFieldsQueryArchiveRuleReqBody>):UserStatsFieldsQueryArchiveRuleReqBody
+	export function emptyUserStatsFieldsQueryArchiveRuleResp():UserStatsFieldsQueryArchiveRuleResp
+	export function emptyRefUserStatsFieldsQueryArchiveRuleResp():Ref<UserStatsFieldsQueryArchiveRuleResp>
+	export function refOfUserStatsFieldsQueryArchiveRuleResp(x:UserStatsFieldsQueryArchiveRuleResp,v:Ref<UserStatsFieldsQueryArchiveRuleResp>)
+	export function unRefUserStatsFieldsQueryArchiveRuleResp(v:Ref<UserStatsFieldsQueryArchiveRuleResp>):UserStatsFieldsQueryArchiveRuleResp
+	export function emptyUserDailyShift():UserDailyShift
+	export function emptyRefUserDailyShift():Ref<UserDailyShift>
+	export function refOfUserDailyShift(x:UserDailyShift,v:Ref<UserDailyShift>)
+	export function unRefUserDailyShift(v:Ref<UserDailyShift>):UserDailyShift
+	export function emptyArchiveReportData():ArchiveReportData
+	export function emptyRefArchiveReportData():Ref<ArchiveReportData>
+	export function refOfArchiveReportData(x:ArchiveReportData,v:Ref<ArchiveReportData>)
+	export function unRefArchiveReportData(v:Ref<ArchiveReportData>):ArchiveReportData
+	export function emptyCreateUserApprovalReq():CreateUserApprovalReq
+	export function emptyRefCreateUserApprovalReq():Ref<CreateUserApprovalReq>
+	export function refOfCreateUserApprovalReq(x:CreateUserApprovalReq,v:Ref<CreateUserApprovalReq>)
+	export function unRefCreateUserApprovalReq(v:Ref<CreateUserApprovalReq>):CreateUserApprovalReq
+	export function emptyShiftMiddleTimeRule():ShiftMiddleTimeRule
+	export function emptyRefShiftMiddleTimeRule():Ref<ShiftMiddleTimeRule>
+	export function refOfShiftMiddleTimeRule(x:ShiftMiddleTimeRule,v:Ref<ShiftMiddleTimeRule>)
+	export function unRefShiftMiddleTimeRule(v:Ref<ShiftMiddleTimeRule>):ShiftMiddleTimeRule
+	export function emptyGetGroupReq():GetGroupReq
+	export function emptyRefGetGroupReq():Ref<GetGroupReq>
+	export function refOfGetGroupReq(x:GetGroupReq,v:Ref<GetGroupReq>)
+	export function unRefGetGroupReq(v:Ref<GetGroupReq>):GetGroupReq
+	export function emptyUpdateUserStatsViewReqBody():UpdateUserStatsViewReqBody
+	export function emptyRefUpdateUserStatsViewReqBody():Ref<UpdateUserStatsViewReqBody>
+	export function refOfUpdateUserStatsViewReqBody(x:UpdateUserStatsViewReqBody,v:Ref<UpdateUserStatsViewReqBody>)
+	export function unRefUpdateUserStatsViewReqBody(v:Ref<UpdateUserStatsViewReqBody>):UpdateUserStatsViewReqBody
+	export function emptyGetUserFlowResp():GetUserFlowResp
+	export function emptyRefGetUserFlowResp():Ref<GetUserFlowResp>
+	export function refOfGetUserFlowResp(x:GetUserFlowResp,v:Ref<GetUserFlowResp>)
+	export function unRefGetUserFlowResp(v:Ref<GetUserFlowResp>):GetUserFlowResp
+	export function emptyLocationSetting():LocationSetting
+	export function emptyRefLocationSetting():Ref<LocationSetting>
+	export function refOfLocationSetting(x:LocationSetting,v:Ref<LocationSetting>)
+	export function unRefLocationSetting(v:Ref<LocationSetting>):LocationSetting
+	export function emptyOvertimeApplyDetail():OvertimeApplyDetail
+	export function emptyRefOvertimeApplyDetail():Ref<OvertimeApplyDetail>
+	export function refOfOvertimeApplyDetail(x:OvertimeApplyDetail,v:Ref<OvertimeApplyDetail>)
+	export function unRefOvertimeApplyDetail(v:Ref<OvertimeApplyDetail>):OvertimeApplyDetail
+	export function emptyApprovalInfo():ApprovalInfo
+	export function emptyRefApprovalInfo():Ref<ApprovalInfo>
+	export function refOfApprovalInfo(x:ApprovalInfo,v:Ref<ApprovalInfo>)
+	export function unRefApprovalInfo(v:Ref<ApprovalInfo>):ApprovalInfo
+	export function emptyGroup():Group
+	export function emptyRefGroup():Ref<Group>
+	export function refOfGroup(x:Group,v:Ref<Group>)
+	export function unRefGroup(v:Ref<Group>):Group
+	export function emptyListGroupResp():ListGroupResp
+	export function emptyRefListGroupResp():Ref<ListGroupResp>
+	export function refOfListGroupResp(x:ListGroupResp,v:Ref<ListGroupResp>)
+	export function unRefListGroupResp(v:Ref<ListGroupResp>):ListGroupResp
+	export function emptyUploadFileResp():UploadFileResp
+	export function emptyRefUploadFileResp():Ref<UploadFileResp>
+	export function refOfUploadFileResp(x:UploadFileResp,v:Ref<UploadFileResp>)
+	export function unRefUploadFileResp(v:Ref<UploadFileResp>):UploadFileResp
+	export function emptyOvertimeTimeRange():OvertimeTimeRange
+	export function emptyRefOvertimeTimeRange():Ref<OvertimeTimeRange>
+	export function refOfOvertimeTimeRange(x:OvertimeTimeRange,v:Ref<OvertimeTimeRange>)
+	export function unRefOvertimeTimeRange(v:Ref<OvertimeTimeRange>):OvertimeTimeRange
+	export function emptyQueryUserDailyShiftReq():QueryUserDailyShiftReq
+	export function emptyRefQueryUserDailyShiftReq():Ref<QueryUserDailyShiftReq>
+	export function refOfQueryUserDailyShiftReq(x:QueryUserDailyShiftReq,v:Ref<QueryUserDailyShiftReq>)
+	export function unRefQueryUserDailyShiftReq(v:Ref<QueryUserDailyShiftReq>):QueryUserDailyShiftReq
+	export function emptyQueryUserFlowReqBody():QueryUserFlowReqBody
+	export function emptyRefQueryUserFlowReqBody():Ref<QueryUserFlowReqBody>
+	export function refOfQueryUserFlowReqBody(x:QueryUserFlowReqBody,v:Ref<QueryUserFlowReqBody>)
+	export function unRefQueryUserFlowReqBody(v:Ref<QueryUserFlowReqBody>):QueryUserFlowReqBody
+	export function emptyReportValue():ReportValue
+	export function emptyRefReportValue():Ref<ReportValue>
+	export function refOfReportValue(x:ReportValue,v:Ref<ReportValue>)
+	export function unRefReportValue(v:Ref<ReportValue>):ReportValue
+	export function emptyUserStatsDataDuration():UserStatsDataDuration
+	export function emptyRefUserStatsDataDuration():Ref<UserStatsDataDuration>
+	export function refOfUserStatsDataDuration(x:UserStatsDataDuration,v:Ref<UserStatsDataDuration>)
+	export function unRefUserStatsDataDuration(v:Ref<UserStatsDataDuration>):UserStatsDataDuration
+	export function emptyGetShiftRespData():GetShiftRespData
+	export function emptyRefGetShiftRespData():Ref<GetShiftRespData>
+	export function refOfGetShiftRespData(x:GetShiftRespData,v:Ref<GetShiftRespData>)
+	export function unRefGetShiftRespData(v:Ref<GetShiftRespData>):GetShiftRespData
+	export function emptyGetLeaveEmployExpireRecordRespData():GetLeaveEmployExpireRecordRespData
+	export function emptyRefGetLeaveEmployExpireRecordRespData():Ref<GetLeaveEmployExpireRecordRespData>
+	export function refOfGetLeaveEmployExpireRecordRespData(x:GetLeaveEmployExpireRecordRespData,v:Ref<GetLeaveEmployExpireRecordRespData>)
+	export function unRefGetLeaveEmployExpireRecordRespData(v:Ref<GetLeaveEmployExpireRecordRespData>):GetLeaveEmployExpireRecordRespData
+	export function emptyOvertimeDetail():OvertimeDetail
+	export function emptyRefOvertimeDetail():Ref<OvertimeDetail>
+	export function refOfOvertimeDetail(x:OvertimeDetail,v:Ref<OvertimeDetail>)
+	export function unRefOvertimeDetail(v:Ref<OvertimeDetail>):OvertimeDetail
+	export function emptyMachine():Machine
+	export function emptyRefMachine():Ref<Machine>
+	export function refOfMachine(x:Machine,v:Ref<Machine>)
+	export function unRefMachine(v:Ref<Machine>):Machine
+	export function emptyOvertimeRule():OvertimeRule
+	export function emptyRefOvertimeRule():Ref<OvertimeRule>
+	export function refOfOvertimeRule(x:OvertimeRule,v:Ref<OvertimeRule>)
+	export function unRefOvertimeRule(v:Ref<OvertimeRule>):OvertimeRule
+	export function emptyQueryUserFlowReq():QueryUserFlowReq
+	export function emptyRefQueryUserFlowReq():Ref<QueryUserFlowReq>
+	export function refOfQueryUserFlowReq(x:QueryUserFlowReq,v:Ref<QueryUserFlowReq>)
+	export function unRefQueryUserFlowReq(v:Ref<QueryUserFlowReq>):QueryUserFlowReq
+	export function emptyQueryUserSettingRespData():QueryUserSettingRespData
+	export function emptyRefQueryUserSettingRespData():Ref<QueryUserSettingRespData>
+	export function refOfQueryUserSettingRespData(x:QueryUserSettingRespData,v:Ref<QueryUserSettingRespData>)
+	export function unRefQueryUserSettingRespData(v:Ref<QueryUserSettingRespData>):QueryUserSettingRespData
+	export function emptyUserAllowedRemedy():UserAllowedRemedy
+	export function emptyRefUserAllowedRemedy():Ref<UserAllowedRemedy>
+	export function refOfUserAllowedRemedy(x:UserAllowedRemedy,v:Ref<UserAllowedRemedy>)
+	export function unRefUserAllowedRemedy(v:Ref<UserAllowedRemedy>):UserAllowedRemedy
+	export function emptyGetShiftReq():GetShiftReq
+	export function emptyRefGetShiftReq():Ref<GetShiftReq>
+	export function refOfGetShiftReq(x:GetShiftReq,v:Ref<GetShiftReq>)
+	export function unRefGetShiftReq(v:Ref<GetShiftReq>):GetShiftReq
+	export function emptyBatchCreateUserDailyShiftResp():BatchCreateUserDailyShiftResp
+	export function emptyRefBatchCreateUserDailyShiftResp():Ref<BatchCreateUserDailyShiftResp>
+	export function refOfBatchCreateUserDailyShiftResp(x:BatchCreateUserDailyShiftResp,v:Ref<BatchCreateUserDailyShiftResp>)
+	export function unRefBatchCreateUserDailyShiftResp(v:Ref<BatchCreateUserDailyShiftResp>):BatchCreateUserDailyShiftResp
+	export function emptyUserStatsFieldsQueryArchiveRuleRespData():UserStatsFieldsQueryArchiveRuleRespData
+	export function emptyRefUserStatsFieldsQueryArchiveRuleRespData():Ref<UserStatsFieldsQueryArchiveRuleRespData>
+	export function refOfUserStatsFieldsQueryArchiveRuleRespData(x:UserStatsFieldsQueryArchiveRuleRespData,v:Ref<UserStatsFieldsQueryArchiveRuleRespData>)
+	export function unRefUserStatsFieldsQueryArchiveRuleRespData(v:Ref<UserStatsFieldsQueryArchiveRuleRespData>):UserStatsFieldsQueryArchiveRuleRespData
+	export function emptyUserArrangeShiftGroup():UserArrangeShiftGroup
+	export function emptyRefUserArrangeShiftGroup():Ref<UserArrangeShiftGroup>
+	export function refOfUserArrangeShiftGroup(x:UserArrangeShiftGroup,v:Ref<UserArrangeShiftGroup>)
+	export function unRefUserArrangeShiftGroup(v:Ref<UserArrangeShiftGroup>):UserArrangeShiftGroup
+	export function emptyModifyUserSettingResp():ModifyUserSettingResp
+	export function emptyRefModifyUserSettingResp():Ref<ModifyUserSettingResp>
+	export function refOfModifyUserSettingResp(x:ModifyUserSettingResp,v:Ref<ModifyUserSettingResp>)
+	export function unRefModifyUserSettingResp(v:Ref<ModifyUserSettingResp>):ModifyUserSettingResp
+	export function emptyOvertimeClockCfg():OvertimeClockCfg
+	export function emptyRefOvertimeClockCfg():Ref<OvertimeClockCfg>
+	export function refOfOvertimeClockCfg(x:OvertimeClockCfg,v:Ref<OvertimeClockCfg>)
+	export function unRefOvertimeClockCfg(v:Ref<OvertimeClockCfg>):OvertimeClockCfg
+	export function emptyProcessApprovalInfoReq():ProcessApprovalInfoReq
+	export function emptyRefProcessApprovalInfoReq():Ref<ProcessApprovalInfoReq>
+	export function refOfProcessApprovalInfoReq(x:ProcessApprovalInfoReq,v:Ref<ProcessApprovalInfoReq>)
+	export function unRefProcessApprovalInfoReq(v:Ref<ProcessApprovalInfoReq>):ProcessApprovalInfoReq
+	export function emptyUploadFileReq():UploadFileReq
+	export function emptyRefUploadFileReq():Ref<UploadFileReq>
+	export function refOfUploadFileReq(x:UploadFileReq,v:Ref<UploadFileReq>)
+	export function unRefUploadFileReq(v:Ref<UploadFileReq>):UploadFileReq
+	export function emptyUserStatsData():UserStatsData
+	export function emptyRefUserStatsData():Ref<UserStatsData>
+	export function refOfUserStatsData(x:UserStatsData,v:Ref<UserStatsData>)
+	export function unRefUserStatsData(v:Ref<UserStatsData>):UserStatsData
+	export function emptyGetGroupRespData():GetGroupRespData
+	export function emptyRefGetGroupRespData():Ref<GetGroupRespData>
+	export function refOfGetGroupRespData(x:GetGroupRespData,v:Ref<GetGroupRespData>)
+	export function unRefGetGroupRespData(v:Ref<GetGroupRespData>):GetGroupRespData
+	export function emptyGetLeaveEmployExpireRecordReqBody():GetLeaveEmployExpireRecordReqBody
+	export function emptyRefGetLeaveEmployExpireRecordReqBody():Ref<GetLeaveEmployExpireRecordReqBody>
+	export function refOfGetLeaveEmployExpireRecordReqBody(x:GetLeaveEmployExpireRecordReqBody,v:Ref<GetLeaveEmployExpireRecordReqBody>)
+	export function unRefGetLeaveEmployExpireRecordReqBody(v:Ref<GetLeaveEmployExpireRecordReqBody>):GetLeaveEmployExpireRecordReqBody
+	export function emptyListGroupReq():ListGroupReq
+	export function emptyRefListGroupReq():Ref<ListGroupReq>
+	export function refOfListGroupReq(x:ListGroupReq,v:Ref<ListGroupReq>)
+	export function unRefListGroupReq(v:Ref<ListGroupReq>):ListGroupReq
+	export function emptyScanWifiInfo():ScanWifiInfo
+	export function emptyRefScanWifiInfo():Ref<ScanWifiInfo>
+	export function refOfScanWifiInfo(x:ScanWifiInfo,v:Ref<ScanWifiInfo>)
+	export function unRefScanWifiInfo(v:Ref<ScanWifiInfo>):ScanWifiInfo
+	export function emptyV1():V1
+	export function emptyRefV1():Ref<V1>
+	export function refOfV1(x:V1,v:Ref<V1>)
+	export function unRefV1(v:Ref<V1>):V1
 }

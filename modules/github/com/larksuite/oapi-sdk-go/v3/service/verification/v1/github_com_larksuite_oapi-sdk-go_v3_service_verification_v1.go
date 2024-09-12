@@ -14,22 +14,23 @@ var (
 	//go:embed github_com_larksuite_oapi-sdk-go_v3_service_verification_v1.d.ts
 	GithubComLarksuiteOapiSdkGo3ServiceVerification1Define   []byte
 	GithubComLarksuiteOapiSdkGo3ServiceVerification1Declared = map[string]any{
-		"New":                    larkverification.New,
-		"newDepartmentIdBuilder": larkverification.NewDepartmentIdBuilder,
-		"newVerificationBuilder": larkverification.NewVerificationBuilder,
+		"New":                          larkverification.New,
+		"newDepartmentIdBuilder":       larkverification.NewDepartmentIdBuilder,
+		"newVerificationBuilder":       larkverification.NewVerificationBuilder,
+		"newVerificationDetailBuilder": larkverification.NewVerificationDetailBuilder,
 
-		"emptyVerification":               engine.Empty[larkverification.Verification],
-		"emptyRefVerification":            engine.EmptyRefer[larkverification.Verification],
-		"refOfVerification":               engine.ReferOf[larkverification.Verification],
-		"unRefVerification":               engine.UnRefer[larkverification.Verification],
-		"emptyDepartmentId":               engine.Empty[larkverification.DepartmentId],
-		"emptyRefDepartmentId":            engine.EmptyRefer[larkverification.DepartmentId],
-		"refOfDepartmentId":               engine.ReferOf[larkverification.DepartmentId],
-		"unRefDepartmentId":               engine.UnRefer[larkverification.DepartmentId],
 		"emptyGetVerificationResp":        engine.Empty[larkverification.GetVerificationResp],
 		"emptyRefGetVerificationResp":     engine.EmptyRefer[larkverification.GetVerificationResp],
 		"refOfGetVerificationResp":        engine.ReferOf[larkverification.GetVerificationResp],
 		"unRefGetVerificationResp":        engine.UnRefer[larkverification.GetVerificationResp],
+		"emptyVerificationDetail":         engine.Empty[larkverification.VerificationDetail],
+		"emptyRefVerificationDetail":      engine.EmptyRefer[larkverification.VerificationDetail],
+		"refOfVerificationDetail":         engine.ReferOf[larkverification.VerificationDetail],
+		"unRefVerificationDetail":         engine.UnRefer[larkverification.VerificationDetail],
+		"emptyDepartmentId":               engine.Empty[larkverification.DepartmentId],
+		"emptyRefDepartmentId":            engine.EmptyRefer[larkverification.DepartmentId],
+		"refOfDepartmentId":               engine.ReferOf[larkverification.DepartmentId],
+		"unRefDepartmentId":               engine.UnRefer[larkverification.DepartmentId],
 		"emptyGetVerificationRespData":    engine.Empty[larkverification.GetVerificationRespData],
 		"emptyRefGetVerificationRespData": engine.EmptyRefer[larkverification.GetVerificationRespData],
 		"refOfGetVerificationRespData":    engine.ReferOf[larkverification.GetVerificationRespData],
@@ -37,7 +38,11 @@ var (
 		"emptyV1":                         engine.Empty[larkverification.V1],
 		"emptyRefV1":                      engine.EmptyRefer[larkverification.V1],
 		"refOfV1":                         engine.ReferOf[larkverification.V1],
-		"unRefV1":                         engine.UnRefer[larkverification.V1]}
+		"unRefV1":                         engine.UnRefer[larkverification.V1],
+		"emptyVerification":               engine.Empty[larkverification.Verification],
+		"emptyRefVerification":            engine.EmptyRefer[larkverification.Verification],
+		"refOfVerification":               engine.ReferOf[larkverification.Verification],
+		"unRefVerification":               engine.UnRefer[larkverification.Verification]}
 )
 
 func init() {
