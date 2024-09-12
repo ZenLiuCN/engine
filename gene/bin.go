@@ -24,8 +24,8 @@ func main() {
 	app.Usage = "Generate engine define from go source"
 	app.Flags = []cli.Flag{
 		&cli.StringFlag{
-			Name:    "packages",
-			Usage:   "root packages",
+			Name:    "pkg",
+			Usage:   "root package path",
 			Aliases: []string{"rt"},
 		},
 		&cli.StringFlag{
