@@ -1,5 +1,3 @@
-
-
 declare module "go/unit" {
 
 
@@ -124,18 +122,23 @@ declare module "go/unit" {
     export function chdir(path: string)
 
     export function pwd(): string
+
     export function mkdirAll(path: string, perm: number)
 
     export function rename(path, newPath: string)
 
-    export function cp(fromFile, toFile: string)
+
+
     export function userCacheDir(): string
 
     export function userConfigDir(): string
 
     export function userHomeDir(): string
+
     export function chown(path: string, uid, gid: number)
+
     export function chmod(path: string, flag: number)
+
     export function getUID(): number
 
     export function getGID(): number
@@ -151,11 +154,13 @@ declare module "go/unit" {
     export function hostname(): string
 
     export function tempDir(): string
+
     export function ls(path?: string): Array<{
         name: string,
         mode: string,
         size: number,
-        modified: string }>
+        modified: string
+    }>
 
     export function stat(path: string): undefined | {
         name: string
@@ -321,6 +326,37 @@ declare module "go/unit" {
     export function exec(option: ExecOption)
 
     export function proc(option: ProcOption): SubProc
+
+    export function isDir(path: string): boolean
+
+    export function isFile(path: string): boolean
+
+    export function isSymlink(path: string): boolean
+
+    /**
+     * move from src to dest (file or directory)
+     * @param src
+     * @param dest
+     * @param force
+     */
+
+    export function mv(src: string, dest: string, force?: boolean): boolean
+
+    /**
+     * copy from src to dest, file or directory
+     * @param src
+     * @param dest
+     * @param force
+     */
+    export function cp(src: string, dest: string, force?: boolean): boolean
+
+    /**
+     * create soft link from src to dest
+     * @param src
+     * @param dest
+     */
+    export function ln(src: string, dest: string)
+    export function readlink(src: string): string
 
     /**
      * eval script file

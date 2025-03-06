@@ -49,21 +49,6 @@ var (
 		"userHomeDir":       os.UserHomeDir,
 		"hostname":          os.Hostname,
 		"tempDir":           os.TempDir,
-		"cp": func(from, to string) (err error) {
-			var f, f1 *os.File
-			f, err = os.OpenFile(engine.EnvExpand(from), os.O_RDONLY, os.ModePerm)
-			if err != nil {
-				return
-			}
-			defer f.Close()
-			f1, err = os.OpenFile(engine.EnvExpand(to), os.O_WRONLY|os.O_TRUNC|os.O_CREATE, os.ModePerm)
-			if err != nil {
-				return
-			}
-			defer f1.Close()
-			_, err = io.Copy(f1, f)
-			return
-		},
 		"mkdirALL": func(path string, perm string) error {
 			return os.MkdirAll(engine.EnvExpand(path), os.FileMode(fn.Panic1(strconv.ParseInt(perm, 8, 32))))
 		},
@@ -120,6 +105,14 @@ var (
 			}
 			return &SubProc{s: s}, nil
 		},
+		//! since v0.6.3
+		"isDir":     engine.IsDir,
+		"isFile":    engine.IsFile,
+		"isSymlink": engine.IsSymlink,
+		"mv":        engine.FileMove,
+		"cp":        engine.FileCopy,
+		"readlink":  engine.ReadSymlink,
+		"ln":        engine.CreateSymlink,
 	}
 )
 
