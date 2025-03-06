@@ -1,4 +1,4 @@
-//go:build ((duckdb && sqlx) || all) && !no_duckdb
+//go:build (all || (duckdb && sqlx)) && !no_duckdb
 
 package modules
 

@@ -10,7 +10,6 @@ import (
 	"github.com/ZenLiuCN/engine"
 	"github.com/ZenLiuCN/engine/modules/go/sqlx"
 	"github.com/ZenLiuCN/fn"
-	//"github.com/ZenLiuCN/go-duckdb"
 	"github.com/marcboeker/go-duckdb"
 	//"github.com/ZenLiuCN/go-duckdb"
 	//_ "github.com/ZenLiuCN/go-duckdb"

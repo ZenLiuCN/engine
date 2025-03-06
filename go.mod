@@ -11,15 +11,15 @@ require (
 	github.com/chromedp/chromedp v0.9.5
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.3.0
 	github.com/dop251/goja v0.0.0-20240731150404-c665f0b58f6e
-	github.com/dslipak/pdf v0.0.2
+	//github.com/dslipak/pdf v0.0.2
 	github.com/evanw/esbuild v0.23.0
 	github.com/fsnotify/fsnotify v1.7.0
 	github.com/gabriel-vasile/mimetype v1.4.3
 	github.com/go-ego/gse v0.80.2
 	github.com/jackc/pgx/v5 v5.5.5
 	github.com/jmoiron/sqlx v1.4.0
-	github.com/larksuite/base-sdk-go/v3 v3.0.2
-	github.com/larksuite/oapi-sdk-go/v3 v3.3.0
+	//github.com/larksuite/base-sdk-go/v3 v3.0.2
+	//github.com/larksuite/oapi-sdk-go/v3 v3.3.0
 	github.com/marcboeker/go-duckdb v1.8.0
 	github.com/mattn/go-colorable v0.1.13
 	github.com/tdewolff/minify/v2 v2.20.20
