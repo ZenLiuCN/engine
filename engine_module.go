@@ -20,6 +20,12 @@ type (
 		ExportsWithEngine(eng *Engine) map[string]any
 	}
 )
+type BaseInitializeModule struct {
+}
+
+func (s *BaseInitializeModule) Exports() map[string]any {
+	panic("not a static Module")
+}
 
 var (
 	goRegistry = map[string]Module{}
