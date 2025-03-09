@@ -40,34 +40,6 @@ var (
 			}()
 			return CompileTs(js, entry), nil
 		},
-		"compileJsWithMapping": func(js string, entry bool) (s string, m SourceMapping, err error) {
-			defer func() {
-				if r := recover(); r != nil {
-					switch v := r.(type) {
-					case error:
-						err = v
-					default:
-						err = fmt.Errorf("%s", v)
-					}
-				}
-			}()
-			s, m = CompileJsWithMapping(js, entry)
-			return
-		},
-		"compileTsWithMapping": func(js string, entry bool) (s string, m SourceMapping, err error) {
-			defer func() {
-				if r := recover(); r != nil {
-					switch v := r.(type) {
-					case error:
-						err = v
-					default:
-						err = fmt.Errorf("%s", v)
-					}
-				}
-			}()
-			s, m = CompileTsWithMapping(js, entry)
-			return
-		},
 		"compileTsCode": func(src string, entry bool) (c *Code, err error) {
 			defer func() {
 				if r := recover(); r != nil {
@@ -93,34 +65,6 @@ var (
 				}
 			}()
 			return CompileSource(src, false, entry), nil
-		},
-		"compileTsCodeWithMapping": func(src string, entry bool) (c *Code, m SourceMapping, err error) {
-			defer func() {
-				if r := recover(); r != nil {
-					switch v := r.(type) {
-					case error:
-						err = v
-					default:
-						err = fmt.Errorf("%s", v)
-					}
-				}
-			}()
-			c, m = CompileSourceWithMapping(src, true, entry)
-			return
-		},
-		"compileJsCodeWithMapping": func(src string, entry bool) (c *Code, m SourceMapping, err error) {
-			defer func() {
-				if r := recover(); r != nil {
-					switch v := r.(type) {
-					case error:
-						err = v
-					default:
-						err = fmt.Errorf("%s", v)
-					}
-				}
-			}()
-			c, m = CompileSourceWithMapping(src, false, entry)
-			return
 		},
 	}
 )
@@ -217,7 +161,7 @@ func CompileTs(ts string, entry bool) string {
 	return string(res.Code)
 }
 
-func CompileJsWithMapping(js string, entry bool) (string, SourceMapping) {
+func CompileJsWithMapping(file string, js string, entry bool) (string, *SourceMap, []byte) {
 	format := api.FormatDefault
 	if strings.Contains(js, "import ") {
 		format = api.FormatCommonJS
@@ -235,11 +179,12 @@ func CompileJsWithMapping(js string, entry bool) (string, SourceMapping) {
 		KeepNames:   true,
 		TreeShaking: api.TreeShakingTrue,
 
-		Target:    api.ES2022,
-		Platform:  api.PlatformBrowser,
-		Format:    format,
-		Sourcemap: api.SourceMapExternal,
-		Loader:    api.LoaderJS,
+		Target:     api.ES2022,
+		Platform:   api.PlatformBrowser,
+		Format:     format,
+		Sourcemap:  api.SourceMapExternal,
+		Loader:     api.LoaderJS,
+		Sourcefile: file,
 	})
 	if res.Errors != nil {
 		panic(errors.New("Compile JS error\n" + fn.SliceJoinRune(res.Errors, '\n', func(m api.Message) string {
@@ -250,13 +195,13 @@ func CompileJsWithMapping(js string, entry bool) (string, SourceMapping) {
 	if entry && format == api.FormatCommonJS {
 		idx := bytes.Index(res.Code, []byte("module.exports=__toCommonJS(stdin_exports);"))
 		if idx >= 0 {
-			return string(res.Code[idx+43:]), sm
+			return string(res.Code[idx+43:]), sm, res.Map
 		}
-		return string(res.Code), sm
+		return string(res.Code), sm, res.Map
 	}
-	return string(res.Code), sm
+	return string(res.Code), sm, res.Map
 }
-func CompileTsWithMapping(ts string, entry bool) (string, SourceMapping) {
+func CompileTsWithMapping(file, ts string, entry bool) (string, *SourceMap, []byte) {
 	format := api.FormatDefault
 	if strings.Contains(ts, "import ") {
 		format = api.FormatCommonJS
@@ -273,11 +218,12 @@ func CompileTsWithMapping(ts string, entry bool) (string, SourceMapping) {
 		KeepNames:   true,
 		TreeShaking: api.TreeShakingTrue,
 
-		Target:    api.ES2022,
-		Platform:  api.PlatformBrowser,
-		Format:    format,
-		Sourcemap: api.SourceMapExternal,
-		Loader:    api.LoaderTS,
+		Target:     api.ES2022,
+		Platform:   api.PlatformBrowser,
+		Format:     format,
+		Sourcemap:  api.SourceMapExternal,
+		Loader:     api.LoaderTS,
+		Sourcefile: file,
 	})
 	if res.Errors != nil {
 		panic(errors.New("Compile TS error\n" + fn.SliceJoinRune(res.Errors, '\n', func(m api.Message) string {
@@ -288,9 +234,9 @@ func CompileTsWithMapping(ts string, entry bool) (string, SourceMapping) {
 	if entry && format == api.FormatCommonJS {
 		idx := bytes.Index(res.Code, []byte("module.exports=__toCommonJS(stdin_exports);"))
 		if idx >= 0 {
-			return string(res.Code[idx+43:]), sm
+			return string(res.Code[idx+43:]), sm, res.Map
 		}
-		return string(res.Code), sm
+		return string(res.Code), sm, res.Map
 	}
-	return string(res.Code), sm
+	return string(res.Code), sm, res.Map
 }

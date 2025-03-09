@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"github.com/ZenLiuCN/fn"
 	"github.com/dop251/goja"
+	"github.com/dop251/goja/parser"
 	"os"
+	"path/filepath"
 	"strings"
 )
 
@@ -42,35 +44,44 @@ func CompileFileSource(path, source string, ts, entry bool) *Code {
 	}
 }
 
-func CompileFileWithMapping(path string, entry bool) (*Code, SourceMapping) {
+func CompileFileWithMapping(path string, entry bool) (*Code, *SourceMap, string) {
 	if len(path) > 3 && (strings.EqualFold(path[len(path)-3:], ".js") || strings.EqualFold(path[len(path)-3:], ".cjs") || strings.EqualFold(path[len(path)-3:], ".mjs")) {
 		data := string(fn.Panic1(os.ReadFile(path)))
-		s, m := CompileJsWithMapping(data, entry)
-		return &Code{Path: path, Program: fn.Panic1(goja.Compile(path, s, true))}, m
+		base := filepath.Base(path)
+		s, m, b := CompileJsWithMapping(base, data, entry)
+		return &Code{Path: path, Program: compile(base, s, b)}, m, base
 	}
 	if len(path) > 3 && strings.EqualFold(path[len(path)-3:], ".ts") {
 		data := string(fn.Panic1(os.ReadFile(path)))
-		s, m := CompileTsWithMapping(data, entry)
-		return &Code{Path: path, Program: fn.Panic1(goja.Compile(path, s, true))}, m
+		base := filepath.Base(path)
+		s, m, b := CompileTsWithMapping(base, data, entry)
+		return &Code{Path: path, Program: compile(base, s, b)}, m, base
 	}
 	panic(fmt.Errorf(`unsupported file %s`, path))
 }
 
-func CompileSourceWithMapping(source string, ts, entry bool) (*Code, SourceMapping) {
+func CompileSourceWithMapping(file, source string, ts, entry bool) (*Code, *SourceMap) {
 	if !ts {
-		s, m := CompileJsWithMapping(source, entry)
-		return &Code{Path: "", Program: fn.Panic1(goja.Compile("", s, false))}, m
+		s, m, b := CompileJsWithMapping(file, source, entry)
+		return &Code{Path: "", Program: compile(file, s, b)}, m
 	} else {
-		s, m := CompileTsWithMapping(source, entry)
-		return &Code{Path: "", Program: fn.Panic1(goja.Compile("", s, false))}, m
+		s, m, b := CompileTsWithMapping(file, source, entry)
+		return &Code{Path: "", Program: compile(file, s, b)}, m
 	}
 }
-func CompileFileSourceWithMapping(path, source string, ts, entry bool) (*Code, SourceMapping) {
+func CompileFileSourceWithMapping(path, source string, ts, entry bool) (*Code, *SourceMap) {
+	name := filepath.Base(path)
 	if !ts {
-		s, m := CompileJsWithMapping(source, entry)
-		return &Code{Path: path, Program: fn.Panic1(goja.Compile(path, s, false))}, m
+		s, m, b := CompileJsWithMapping(name, source, entry)
+		return &Code{Path: path, Program: compile(name, s, b)}, m
 	} else {
-		s, m := CompileTsWithMapping(source, entry)
-		return &Code{Path: path, Program: fn.Panic1(goja.Compile(path, s, false))}, m
+		s, m, b := CompileTsWithMapping(name, source, entry)
+		return &Code{Path: path, Program: compile(name, s, b)}, m
 	}
+}
+func compile(name, source string, m []byte) *goja.Program {
+	p := fn.Panic1(goja.Parse(name, source, parser.WithSourceMapLoader(func(path string) ([]byte, error) {
+		return m, nil
+	})))
+	return fn.Panic1(goja.CompileAST(p, false))
 }

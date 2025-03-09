@@ -142,7 +142,7 @@ func executeStdIn(c *Context, ts bool, warm time.Duration, timeout time.Duration
 
 		} else {
 			if dbg {
-				c, m := engine.CompileSourceWithMapping(src, ts, true)
+				c, m, b := engine.CompileSourceWithMapping("input.src", src, ts, true)
 				vm.Debug = true
 				vm.SourceMap = m
 				v = fn.Panic1(vm.RunCodeContext(c, warm, ctx))

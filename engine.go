@@ -3,8 +3,10 @@ package engine
 import (
 	cx "context"
 	"errors"
+	"fmt"
 	"github.com/ZenLiuCN/fn"
 	. "github.com/dop251/goja"
+	"github.com/dop251/goja/parser"
 	"io"
 	"path/filepath"
 	"strings"
@@ -18,7 +20,7 @@ type Engine struct {
 	require           *Require
 	scriptRootHandler func(p string)
 	Debug             bool
-	SourceMap         SourceMapping
+	SourceMap         *SourceMapping
 }
 
 // Register register mods
@@ -87,7 +89,7 @@ func (s *Engine) RunString(src string) (v Value, err error) {
 	return
 }
 
-// RunTs execute typescript code. Should manual control the execution, for a automatic timeout control see  RunTsTimeout.
+// RunTs execute typescript code. Should manually control the execution, for a automatic timeout control see  RunTsTimeout.
 func (s *Engine) RunTs(src string) (v Value, err error) {
 	s.TryStartEventLoop()
 	defer func() {
@@ -97,7 +99,8 @@ func (s *Engine) RunTs(src string) (v Value, err error) {
 		s.SourceMap = nil
 	}()
 	if s.Debug {
-		src, s.SourceMap = CompileTsWithMapping(src, true)
+		s.useMapping()
+		src = s.compileWithMapping(src, true)
 		v, err = s.Runtime.RunString(src)
 	} else {
 		v, err = s.Runtime.RunString(CompileTs(src, true))
@@ -108,17 +111,18 @@ func (s *Engine) RunTs(src string) (v Value, err error) {
 	return
 }
 
-// RunJs execute javascript code. Should manual control the execution, for a automatic timeout control see  RunJsTimeout.
+// RunJs execute javascript code. Should manually control the execution, for a automatic timeout control see  RunJsTimeout.
 func (s *Engine) RunJs(src string) (v Value, err error) {
 	s.TryStartEventLoop()
 	defer func() {
 		if r := recover(); r != nil {
 			err = s.parse(r)
 		}
-		s.SourceMap = nil
 	}()
 	if s.Debug {
-		src, s.SourceMap = CompileJsWithMapping(src, true)
+		var b []byte
+		src, s.SourceMap, b = CompileJsWithMapping("source.js", src, true)
+
 		v, err = s.Runtime.RunString(src)
 	} else {
 		v, err = s.Runtime.RunString(CompileJs(src, true))
@@ -176,7 +180,7 @@ func (s *Engine) RunCodeContext(code *Code, warm time.Duration, ctx cx.Context) 
 // with context. If context closed early, the value will be HaltJobs, the error will be ErrTimeout.
 func (s *Engine) RunJsContext(src string, warm time.Duration, ctx cx.Context) (v Value, err error) {
 	if s.Debug {
-		code, mapping := CompileSourceWithMapping(src, false, true)
+		code, mapping := CompileSourceWithMapping("source.js", src, false, true)
 		s.SetScriptPath(computeCodeDir(code.Path))
 		s.SourceMap = mapping
 		return s.awaiting(code.Program, warm, ctx)
@@ -190,7 +194,7 @@ func (s *Engine) RunJsContext(src string, warm time.Duration, ctx cx.Context) (v
 // with context. If context closed early, the value will be HaltJobs, the error will be ErrTimeout.
 func (s *Engine) RunTsContext(src string, warm time.Duration, ctx cx.Context) (v Value, err error) {
 	if s.Debug {
-		code, mapping := CompileSourceWithMapping(src, true, true)
+		code, mapping := CompileSourceWithMapping("source.ts", src, true, true)
 		s.SetScriptPath(computeCodeDir(code.Path))
 		s.SourceMap = mapping
 		return s.awaiting(code.Program, warm, ctx)
@@ -241,6 +245,28 @@ func (s *Engine) awaiting(act *Program, warm time.Duration, ctx cx.Context) (v V
 	}
 	return r.Value, r.Error
 }
+func (s *Engine) registerMapping(m *SourceMap, raw []byte) string {
+	if s.SourceMap == nil {
+		s.SourceMap = make(SourceMapping)
+	}
+	for _, source := range m.Sources {
+		s.SourceMap[source] = m
+	}
+	if s.MappingBuffer == nil {
+		s.MappingBuffer = make(map[string][]byte)
+	}
+	name := fmt.Sprintf("%d.map", len(s.MappingBuffer))
+	s.MappingBuffer[name] = raw
+	return "//# sourceMappingURL=" + name
+}
+func (s *Engine) loadMapping(path string) ([]byte, error) {
+	if s.MappingBuffer != nil {
+		if b, ok := s.MappingBuffer[path]; ok {
+			return b, nil
+		}
+	}
+	return nil, nil
+}
 func computeCodeDir(s string) string {
 	if s == "" {
 		return ""
@@ -270,6 +296,7 @@ func NewEngine(modules ...Mod) (r *Engine) {
 		r.RemoveResources(closer)
 		return closer
 	})
+	r.Runtime.SetParserOptions(parser.WithSourceMapLoader(r.loadMapping))
 	return
 }
 func NewRawEngine(modules ...Mod) (r *Engine) {
@@ -281,5 +308,6 @@ func NewRawEngine(modules ...Mod) (r *Engine) {
 		r.RegisterResources(closer)
 		return closer
 	})
+	r.Runtime.SetParserOptions(parser.WithSourceMapLoader(r.loadMapping))
 	return
 }
