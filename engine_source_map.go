@@ -59,6 +59,13 @@ func (s SourceMapping) dump(b *bytes.Buffer, stacks []goja.StackFrame) {
 	}
 }
 
+func (s SourceMapping) one() *SourceMap {
+	for _, sourceMap := range s {
+		return sourceMap
+	}
+	return nil
+}
+
 type SourceMap struct {
 	File           string   `json:"file"`
 	SourceRoot     string   `json:"sourceRoot"`

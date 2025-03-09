@@ -261,8 +261,9 @@ type (
 		Exports() *goja.Object
 	}
 	cjs struct {
-		prg *Code
-		url *url.URL
+		prg     *Code
+		url     *url.URL
+		mapping *SourceMap
 	}
 	cjsModule struct {
 		mod    *cjs
@@ -279,6 +280,9 @@ func (c *cjs) Instance(engine *Engine) JsModuleInstance {
 	}
 }
 func (c *cjsModule) Execute() error {
+	if c.Engine.Debug && c.mod.mapping != nil {
+		c.Engine.SourceMap.register(c.mod.mapping)
+	}
 	exports := c.Engine.NewObject()
 	c.obj = c.Engine.NewObject()
 	err := c.obj.Set("exports", exports)
@@ -333,7 +337,7 @@ type (
 		err error
 	}
 	ModResolver interface {
-		Resolve(basePWD *url.URL, arg string) (JsModule, error)
+		Resolve(basePWD *url.URL, arg string, debug bool) (JsModule, error)
 	}
 	BaseModResolver struct {
 		cache map[string]ModCache
@@ -344,7 +348,7 @@ var (
 	ModLoader ModResolver = &BaseModResolver{cache: map[string]ModCache{}}
 )
 
-func (s *BaseModResolver) Resolve(basePWD *url.URL, arg string) (JsModule, error) {
+func (s *BaseModResolver) Resolve(basePWD *url.URL, arg string, debug bool) (JsModule, error) {
 	if cached, ok := s.cache[arg]; ok {
 		return cached.mod, cached.err
 	}
@@ -361,21 +365,21 @@ func (s *BaseModResolver) Resolve(basePWD *url.URL, arg string) (JsModule, error
 		s.cache[specifier.String()] = ModCache{err: err}
 		return nil, err
 	}
-	mod, err := CompileCJS(data)
+	mod, err := CompileCJS(data, debug)
 	s.cache[specifier.String()] = ModCache{mod: mod, err: err}
 	return mod, err
 }
 
-func CompileCJS(data *Source) (m JsModule, err error) {
+func CompileCJS(data *Source, debug bool) (m JsModule, err error) {
 	if strings.HasSuffix(data.Path, ".ts") || strings.HasSuffix(data.URL.String(), ".ts") {
-		m, err = compileTs(data)
+		m, err = compileTs(data, debug)
 		if err == nil {
 			return
 		}
 	}
-	return compileJs(data)
+	return compileJs(data, debug)
 }
-func compileTs(data *Source) (m JsModule, err error) {
+func compileTs(data *Source, debug bool) (m JsModule, err error) {
 	defer func() {
 		if r := recover(); r != nil {
 			switch er := r.(type) {
@@ -388,13 +392,21 @@ func compileTs(data *Source) (m JsModule, err error) {
 			}
 		}
 	}()
+	if debug {
+		p, m := CompileFileSourceWithMapping(data.ResolvePath(), string(data.Data), true, false)
+		return &cjs{
+			prg:     p,
+			url:     data.URL,
+			mapping: m.one(),
+		}, nil
+	}
 	p := CompileFileSource(data.ResolvePath(), string(data.Data), true, false)
 	return &cjs{
 		prg: p,
 		url: data.URL,
 	}, nil
 }
-func compileJs(data *Source) (m JsModule, err error) {
+func compileJs(data *Source, debug bool) (m JsModule, err error) {
 	defer func() {
 		if r := recover(); r != nil {
 			switch er := r.(type) {
@@ -407,6 +419,14 @@ func compileJs(data *Source) (m JsModule, err error) {
 			}
 		}
 	}()
+	if debug {
+		p, m := CompileFileSourceWithMapping(data.ResolvePath(), string(data.Data), true, false)
+		return &cjs{
+			prg:     p,
+			url:     data.URL,
+			mapping: m.one(),
+		}, nil
+	}
 	p := CompileFileSource(data.ResolvePath(), string(data.Data), false, false)
 	return &cjs{
 		prg: p,

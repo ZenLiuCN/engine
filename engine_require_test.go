@@ -5,6 +5,7 @@ import (
 	"github.com/ZenLiuCN/fn"
 	"os"
 	"strconv"
+	"strings"
 	"testing"
 )
 
@@ -19,6 +20,7 @@ func validate(im, msg string) {
 		}
 	}()
 	e := NewEngine()
+	e.Debug = true
 	defer e.Free()
 	call := fn.Panic1(e.RunJs(
 		//language=javascript
@@ -61,5 +63,25 @@ export function Some(){
 	validate("func_/", "pwd with index")
 	validate("func_/index", "pwd with index")
 	validate("func_/func", "pwd with filename")
+
+}
+func TestRequireWithFailure(t *testing.T) {
+
+	e := NewEngine()
+	e.Debug = true
+	defer e.Free()
+	_, err := e.RunJs(
+		//language=javascript
+		fmt.Sprintf(`
+import {Some,v} from '%s'
+console.log('import')
+console.log(Some())
+const x=()=>v
+x()
+`, "func"))
+	e.Await()
+	if err == nil || !strings.HasSuffix(err.Error(), "vm.js[2:21]\timport {Some,v} from ♦'func'") {
+		panic(err)
+	}
 
 }
