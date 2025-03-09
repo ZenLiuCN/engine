@@ -40,7 +40,7 @@ var (
 			}()
 			return CompileTs(js, entry), nil
 		},
-		"compileJsWithMapping": func(js string, entry bool) (s string, m SourceMapping, err error) {
+		"compileJsWithMapping": func(js string, entry bool) (s string, m SourceMapping, b []byte, err error) {
 			defer func() {
 				if r := recover(); r != nil {
 					switch v := r.(type) {
@@ -51,10 +51,10 @@ var (
 					}
 				}
 			}()
-			s, m = CompileJsWithMapping(js, entry)
+			s, m, b = CompileJsWithMapping("vm.js", js, entry)
 			return
 		},
-		"compileTsWithMapping": func(js string, entry bool) (s string, m SourceMapping, err error) {
+		"compileTsWithMapping": func(js string, entry bool) (s string, m SourceMapping, b []byte, err error) {
 			defer func() {
 				if r := recover(); r != nil {
 					switch v := r.(type) {
@@ -65,7 +65,7 @@ var (
 					}
 				}
 			}()
-			s, m = CompileTsWithMapping(js, entry)
+			s, m, b = CompileTsWithMapping("vm.ts", js, entry)
 			return
 		},
 		"compileTsCode": func(src string, entry bool) (c *Code, err error) {
@@ -105,7 +105,7 @@ var (
 					}
 				}
 			}()
-			c, m = CompileSourceWithMapping(src, true, entry)
+			c, m = CompileSourceWithMapping("vm.ts", src, true, entry)
 			return
 		},
 		"compileJsCodeWithMapping": func(src string, entry bool) (c *Code, m SourceMapping, err error) {
@@ -119,7 +119,7 @@ var (
 					}
 				}
 			}()
-			c, m = CompileSourceWithMapping(src, false, entry)
+			c, m = CompileSourceWithMapping("vm.js", src, false, entry)
 			return
 		},
 	}
@@ -217,7 +217,7 @@ func CompileTs(ts string, entry bool) string {
 	return string(res.Code)
 }
 
-func CompileJsWithMapping(js string, entry bool) (string, SourceMapping) {
+func CompileJsWithMapping(name, js string, entry bool) (string, SourceMapping, []byte) {
 	format := api.FormatDefault
 	if strings.Contains(js, "import ") {
 		format = api.FormatCommonJS
@@ -235,11 +235,12 @@ func CompileJsWithMapping(js string, entry bool) (string, SourceMapping) {
 		KeepNames:   true,
 		TreeShaking: api.TreeShakingTrue,
 
-		Target:    api.ES2022,
-		Platform:  api.PlatformBrowser,
-		Format:    format,
-		Sourcemap: api.SourceMapExternal,
-		Loader:    api.LoaderJS,
+		Target:     api.ES2022,
+		Platform:   api.PlatformBrowser,
+		Format:     format,
+		Sourcemap:  api.SourceMapExternal,
+		Loader:     api.LoaderJS,
+		Sourcefile: name,
 	})
 	if res.Errors != nil {
 		panic(errors.New("Compile JS error\n" + fn.SliceJoinRune(res.Errors, '\n', func(m api.Message) string {
@@ -250,13 +251,13 @@ func CompileJsWithMapping(js string, entry bool) (string, SourceMapping) {
 	if entry && format == api.FormatCommonJS {
 		idx := bytes.Index(res.Code, []byte("module.exports=__toCommonJS(stdin_exports);"))
 		if idx >= 0 {
-			return string(res.Code[idx+43:]), sm
+			return string(res.Code[idx+43:]), sm, res.Map
 		}
-		return string(res.Code), sm
+		return string(res.Code), sm, res.Map
 	}
-	return string(res.Code), sm
+	return string(res.Code), sm, res.Map
 }
-func CompileTsWithMapping(ts string, entry bool) (string, SourceMapping) {
+func CompileTsWithMapping(name, ts string, entry bool) (string, SourceMapping, []byte) {
 	format := api.FormatDefault
 	if strings.Contains(ts, "import ") {
 		format = api.FormatCommonJS
@@ -273,11 +274,12 @@ func CompileTsWithMapping(ts string, entry bool) (string, SourceMapping) {
 		KeepNames:   true,
 		TreeShaking: api.TreeShakingTrue,
 
-		Target:    api.ES2022,
-		Platform:  api.PlatformBrowser,
-		Format:    format,
-		Sourcemap: api.SourceMapExternal,
-		Loader:    api.LoaderTS,
+		Target:     api.ES2022,
+		Platform:   api.PlatformBrowser,
+		Format:     format,
+		Sourcemap:  api.SourceMapExternal,
+		Loader:     api.LoaderTS,
+		Sourcefile: name,
 	})
 	if res.Errors != nil {
 		panic(errors.New("Compile TS error\n" + fn.SliceJoinRune(res.Errors, '\n', func(m api.Message) string {
@@ -288,9 +290,9 @@ func CompileTsWithMapping(ts string, entry bool) (string, SourceMapping) {
 	if entry && format == api.FormatCommonJS {
 		idx := bytes.Index(res.Code, []byte("module.exports=__toCommonJS(stdin_exports);"))
 		if idx >= 0 {
-			return string(res.Code[idx+43:]), sm
+			return string(res.Code[idx+43:]), sm, res.Map
 		}
-		return string(res.Code), sm
+		return string(res.Code), sm, res.Map
 	}
-	return string(res.Code), sm
+	return string(res.Code), sm, res.Map
 }

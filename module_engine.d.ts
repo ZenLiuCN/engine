@@ -1,6 +1,6 @@
 declare module "go/engine" {
     // @ts-ignore
-    export type Mapping = Map<Location, Source>
+    export type Mapping = any
 
     export interface Source {
         readonly location: Location

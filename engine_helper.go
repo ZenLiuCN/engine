@@ -201,20 +201,6 @@ func (s *Engine) parse(r any) (err error) {
 
 var (
 	DumpFrameLastN = 5
-	DumpMode       = LineAdjustMode
-)
-
-type FrameDumpMode int
-
-const (
-	// LineAdjustMode  only minus line for 1
-	LineAdjustMode FrameDumpMode = iota
-	// FullAdjustMode minus line for 1 and column for 1
-	FullAdjustMode
-	// RawMode must match the original Location of goja
-	RawMode
-	// AutoAdjustMode any condition match
-	AutoAdjustMode
 )
 
 func dumpMappingFrame(stacks []StackFrame, m SourceMapping, b *bytes.Buffer) {
@@ -227,76 +213,8 @@ func dumpMappingFrame(stacks []StackFrame, m SourceMapping, b *bytes.Buffer) {
 			b.WriteRune('\n')
 			stack.Write(b)
 		}
-	}
-	switch DumpMode {
-	case AutoAdjustMode:
-		for _, stack := range stacks {
-			loc := stack.Position()
-			if o, ok := m[Location{loc.Line - 1, loc.Column - 1}]; ok {
-				b.WriteString("\n")
-				b.WriteString(o.Source)
-				b.WriteString("\t")
-				b.WriteString(o.Content)
-			} else if o, ok = m[Location{loc.Line - 1, loc.Column}]; ok {
-				b.WriteString("\n")
-				b.WriteString(o.Source)
-				b.WriteString("\t")
-				b.WriteString(o.Content)
-			} else if o, ok = m[Location{loc.Line, loc.Column}]; ok {
-				b.WriteString("\n")
-				b.WriteString(o.Source)
-				b.WriteString("\t")
-				b.WriteString(o.Content)
-			} else if o, ok = m[Location{loc.Line, loc.Column - 1}]; ok {
-				b.WriteString("\n")
-				b.WriteString(o.Source)
-				b.WriteString("\t")
-				b.WriteString(o.Content)
-			} else {
-				b.WriteByte('\n')
-				stack.Write(b)
-			}
-		}
-
-	case FullAdjustMode:
-		for _, stack := range stacks {
-			loc := stack.Position()
-			if o, ok := m[Location{loc.Line - 1, loc.Column - 1}]; ok {
-				b.WriteString("\n")
-				b.WriteString(o.Source)
-				b.WriteString("\t")
-				b.WriteString(o.Content)
-			} else {
-				b.WriteByte('\n')
-				stack.Write(b)
-			}
-		}
-	case LineAdjustMode:
-		for _, stack := range stacks {
-			loc := stack.Position()
-			if o, ok := m[Location{loc.Line - 1, loc.Column}]; ok {
-				b.WriteString("\n")
-				b.WriteString(o.Source)
-				b.WriteString("\t")
-				b.WriteString(o.Content)
-			} else {
-				b.WriteByte('\n')
-				stack.Write(b)
-			}
-		}
-	case RawMode:
-		for _, stack := range stacks {
-			loc := stack.Position()
-			if o, ok := m[Location{loc.Line, loc.Column}]; ok {
-				b.WriteString("\n")
-				b.WriteString(o.Source)
-				b.WriteString("\t")
-				b.WriteString(o.Content)
-			} else {
-				b.WriteByte('\n')
-				stack.Write(b)
-			}
-		}
+	} else {
+		m.dump(b, stacks)
 	}
 
 }

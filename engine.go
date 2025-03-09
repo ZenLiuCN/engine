@@ -87,18 +87,19 @@ func (s *Engine) RunString(src string) (v Value, err error) {
 	return
 }
 
-// RunTs execute typescript code. Should manual control the execution, for a automatic timeout control see  RunTsTimeout.
+// RunTs execute typescript code. Should manually control the execution, for a automatic timeout control see  RunTsTimeout.
 func (s *Engine) RunTs(src string) (v Value, err error) {
 	s.TryStartEventLoop()
 	defer func() {
 		if r := recover(); r != nil {
 			err = s.parse(r)
 		}
-		s.SourceMap = nil
+		s.freeMapping()
 	}()
 	if s.Debug {
-		src, s.SourceMap = CompileTsWithMapping(src, true)
-		v, err = s.Runtime.RunString(src)
+		var b []byte
+		src, s.SourceMap, b = CompileTsWithMapping("vm.ts", src, true)
+		v, err = s.Runtime.RunScript("vm.ts", src+s.useMapping(b))
 	} else {
 		v, err = s.Runtime.RunString(CompileTs(src, true))
 	}
@@ -115,11 +116,12 @@ func (s *Engine) RunJs(src string) (v Value, err error) {
 		if r := recover(); r != nil {
 			err = s.parse(r)
 		}
-		s.SourceMap = nil
+		s.freeMapping()
 	}()
 	if s.Debug {
-		src, s.SourceMap = CompileJsWithMapping(src, true)
-		v, err = s.Runtime.RunString(src)
+		var b []byte
+		src, s.SourceMap, b = CompileJsWithMapping("vm.js", src, true)
+		v, err = s.Runtime.RunScript("vm.js", src+s.useMapping(b))
 	} else {
 		v, err = s.Runtime.RunString(CompileJs(src, true))
 	}
@@ -176,7 +178,7 @@ func (s *Engine) RunCodeContext(code *Code, warm time.Duration, ctx cx.Context) 
 // with context. If context closed early, the value will be HaltJobs, the error will be ErrTimeout.
 func (s *Engine) RunJsContext(src string, warm time.Duration, ctx cx.Context) (v Value, err error) {
 	if s.Debug {
-		code, mapping := CompileSourceWithMapping(src, false, true)
+		code, mapping := CompileSourceWithMapping("vm.js", src, false, true)
 		s.SetScriptPath(computeCodeDir(code.Path))
 		s.SourceMap = mapping
 		return s.awaiting(code.Program, warm, ctx)
@@ -190,7 +192,7 @@ func (s *Engine) RunJsContext(src string, warm time.Duration, ctx cx.Context) (v
 // with context. If context closed early, the value will be HaltJobs, the error will be ErrTimeout.
 func (s *Engine) RunTsContext(src string, warm time.Duration, ctx cx.Context) (v Value, err error) {
 	if s.Debug {
-		code, mapping := CompileSourceWithMapping(src, true, true)
+		code, mapping := CompileSourceWithMapping("vm.ts", src, true, true)
 		s.SetScriptPath(computeCodeDir(code.Path))
 		s.SourceMap = mapping
 		return s.awaiting(code.Program, warm, ctx)
@@ -223,6 +225,7 @@ func (s *Engine) awaiting(act *Program, warm time.Duration, ctx cx.Context) (v V
 		if r := recover(); r != nil {
 			err = s.parse(r)
 		}
+		s.SourceMap = nil
 	}()
 	ch := make(chan Maybe[Value])
 	defer close(ch)
@@ -241,6 +244,7 @@ func (s *Engine) awaiting(act *Program, warm time.Duration, ctx cx.Context) (v V
 	}
 	return r.Value, r.Error
 }
+
 func computeCodeDir(s string) string {
 	if s == "" {
 		return ""

@@ -5,13 +5,13 @@ declare module "go/compiler" {
 
     export function compileJs(src: string, entry: boolean): [Code, Error]
 
-    export function compileJsWithMapping(src: string, entry: boolean): [string, Mapping, Error]
+    export function compileJsWithMapping(src: string, entry: boolean): [string, Mapping,Uint8Array, Error]
 
     export function compileJsCode(src: string, entry: boolean): [Code, Error]
 
     export function compileTs(src: string, entry: boolean): [Code, Error]
 
-    export function compileTsWithMapping(src: string, entry: boolean): [string, Mapping, Error]
+    export function compileTsWithMapping(src: string, entry: boolean): [string, Mapping,Uint8Array, Error]
 
     export function compileTsCode(src: string, entry: boolean): [Code, Error]
 }

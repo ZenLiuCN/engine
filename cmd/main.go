@@ -132,7 +132,7 @@ func executeStdIn(c *Context, ts bool, warm time.Duration, timeout time.Duration
 			cx, cc := context.WithTimeout(ctx, timeout)
 			defer cc()
 			if dbg {
-				c, m := engine.CompileSourceWithMapping(src, ts, true)
+				c, m := engine.CompileSourceWithMapping("vm.js", src, ts, true)
 				vm.Debug = true
 				vm.SourceMap = m
 				v = fn.Panic1(vm.RunCodeContext(c, warm, cx))
@@ -142,7 +142,7 @@ func executeStdIn(c *Context, ts bool, warm time.Duration, timeout time.Duration
 
 		} else {
 			if dbg {
-				c, m := engine.CompileSourceWithMapping(src, ts, true)
+				c, m := engine.CompileSourceWithMapping("vm.ts", src, ts, true)
 				vm.Debug = true
 				vm.SourceMap = m
 				v = fn.Panic1(vm.RunCodeContext(c, warm, ctx))
