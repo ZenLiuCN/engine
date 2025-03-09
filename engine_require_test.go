@@ -85,3 +85,37 @@ x()
 	}
 
 }
+func TestRequireWithFailure2(t *testing.T) {
+	code := []byte(
+		//language=javascript
+		`
+import {Some as s1,v} from 'func/some'
+export function Some(){
+    console.log("run",v)
+    s1()
+    return v++
+}
+`)
+	_ = os.WriteFile("func.js", code, os.ModePerm)
+	defer func() {
+		_ = os.Remove("func.js")
+	}()
+	e := NewEngine()
+	e.Debug = true
+	defer e.Free()
+	_, err := e.RunJs(
+		//language=javascript
+		fmt.Sprintf(`
+import {Some,v} from '%s'
+console.log('import')
+console.log(Some())
+const x=()=>v
+x()
+`, "func"))
+	e.Await()
+
+	if err == nil || !strings.HasSuffix(err.Error(), "vm.js[2:21]\timport {Some,v} from ♦'func'") {
+		panic(err)
+	}
+
+}
