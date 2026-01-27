@@ -2,8 +2,6 @@ module github.com/ZenLiuCN/engine
 
 go 1.23.0
 
-toolchain go1.23.6
-
 require (
 	github.com/ZenLiuCN/fn v0.1.34
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.4.0

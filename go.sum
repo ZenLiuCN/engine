@@ -1,4 +1,5 @@
 github.com/Masterminds/semver/v3 v3.2.1 h1:RN9w6+7QoMeJVGyfmbcgs28Br8cvmnucEXnY0rYXWg0=
+github.com/Masterminds/semver/v3 v3.2.1/go.mod h1:qvl/7zhW3nngYb5+80sSMF+FG2BjYrf8m9wsX0PNOMQ=
 github.com/ZenLiuCN/fn v0.1.34 h1:Ffmg2xGaIDCJnKmOHrXafTsDDA+F9eVZFz9Kmk/WD1U=
 github.com/ZenLiuCN/fn v0.1.34/go.mod h1:Gw/weeQg/6cKvK88d9PeS0E6Zd9NXC30ogKJobJ8190=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
