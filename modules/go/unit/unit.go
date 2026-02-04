@@ -3,12 +3,16 @@ package unit
 import (
 	_ "embed"
 	"fmt"
-	"github.com/ZenLiuCN/engine"
-	"github.com/ZenLiuCN/fn"
 	"io"
 	"maps"
 	"os"
+	"path/filepath"
 	"strconv"
+	"strings"
+	"time"
+
+	"github.com/ZenLiuCN/engine"
+	"github.com/ZenLiuCN/fn"
 )
 
 var (
@@ -30,25 +34,39 @@ var (
 		"setp":              engine.EnvSetPath,
 		"put":               engine.EnvPut,
 		"putp":              engine.EnvPutPath,
-		"variable":          engine.EnvVar,
-		"mkdir":             engine.Mkdir,
-		"mkdirAll":          engine.MkdirAll,
-		"exists":            engine.FileExists,
-		"write":             engine.WriteBinaryFile,
-		"writeText":         engine.WriteTextFile,
-		"read":              engine.ReadBinaryFile,
-		"readText":          engine.ReadTextFile,
-		"chdir":             engine.Chdir,
-		"pwd":               engine.Pwd,
-		"getGID":            os.Geteuid,
-		"getUID":            os.Geteuid,
-		"getPagesize":       os.Getpagesize,
-		"getPid":            os.Getpid,
-		"userCacheDir":      os.UserCacheDir,
-		"userConfigDir":     os.UserConfigDir,
-		"userHomeDir":       os.UserHomeDir,
-		"hostname":          os.Hostname,
-		"tempDir":           os.TempDir,
+		"toggle": func(f string, v bool) {
+			if v {
+				// 设为 true 时，存入字符串 "true"
+				_ = os.Setenv(f, "true")
+			} else {
+				// 设为 false 时，直接从环境变量中移除键值对
+				// 这样下次用 os.Getenv(f) 获取到的就是空字符串
+				_ = os.Unsetenv(f)
+			}
+		},
+		"isSet": func(f string) bool {
+			val := strings.ToLower(os.Getenv(f))
+			return val != "" && val != "false"
+		},
+		"get":           engine.EnvVar,
+		"mkdir":         engine.Mkdir,
+		"mkdirAll":      engine.MkdirAll,
+		"exists":        engine.FileExists,
+		"write":         engine.WriteBinaryFile,
+		"writeText":     engine.WriteTextFile,
+		"read":          engine.ReadBinaryFile,
+		"readText":      engine.ReadTextFile,
+		"chdir":         engine.Chdir,
+		"pwd":           engine.Pwd,
+		"getGID":        os.Geteuid,
+		"getUID":        os.Geteuid,
+		"getPagesize":   os.Getpagesize,
+		"getPid":        os.Getpid,
+		"userCacheDir":  os.UserCacheDir,
+		"userConfigDir": os.UserConfigDir,
+		"userHomeDir":   os.UserHomeDir,
+		"hostname":      os.Hostname,
+		"tempDir":       os.TempDir,
 		"mkdirALL": func(path string, perm string) error {
 			return os.MkdirAll(engine.EnvExpand(path), os.FileMode(fn.Panic1(strconv.ParseInt(perm, 8, 32))))
 		},
@@ -113,6 +131,19 @@ var (
 		"cp":        engine.FileCopy,
 		"readlink":  engine.ReadSymlink,
 		"ln":        engine.CreateSymlink,
+		"match": func(pattern, name string) (bool, error) {
+			// 同样对 pattern 和 name 进行环境展开，确保变量路径也能匹配
+			p := engine.EnvExpand(pattern)
+			n := engine.EnvExpand(name)
+			return filepath.Match(p, n)
+		},
+		"duration": func(d string) (float64, error) {
+			dur, err := time.ParseDuration(d)
+			if err != nil {
+				return 0, err
+			}
+			return dur.Seconds(), nil
+		},
 	}
 )
 

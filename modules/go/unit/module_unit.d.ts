@@ -62,6 +62,18 @@ declare module "go/unit" {
     export function set(name: string, ...values: string[])
 
     /**
+     * set an flag environment variable
+     * @param name
+     * @param on
+     */
+    export function toggle(name: string, on:boolean)
+    /**
+     * get an flag environment variable
+     * @param name
+     */
+    export function isSet(name: string):boolean
+
+    /**
      * set path to environment variable, override exists one
      * @see os.expand
      * @param name variable name
@@ -89,7 +101,7 @@ declare module "go/unit" {
      * @param name the name
      * @returns empty string if not exists one
      */
-    export function variable(name: string): string
+    export function get(name: string): string
 
     /**
      * eval script file
@@ -135,7 +147,7 @@ declare module "go/unit" {
 
     export function userHomeDir(): string
 
-    export function chown(path: string, uid, gid: number)
+    export function chown(path: string, uid:number, gid: number)
 
     export function chmod(path: string, flag: number)
 
@@ -357,18 +369,13 @@ declare module "go/unit" {
      */
     export function ln(src: string, dest: string)
     export function readlink(src: string): string
+    /**
+     * Match filename with pattern (e.g. *.vhdx)
+     */
+    export function match(pattern: string, name: string): boolean
 
     /**
-     * eval script file
-     * @see os.expand
-     * @param path of typescript file or javascript file
+     * Convert duration string (e.g. "5s", "1h") to seconds
      */
-    export function evalFile(path: string): any
-
-    /**
-     * eval script files
-     * @see os.expand
-     * @param paths of typescript files or javascript files
-     */
-    export function evalFiles(...paths: string[]): any[]
+    export function duration(d: string): number
 }
